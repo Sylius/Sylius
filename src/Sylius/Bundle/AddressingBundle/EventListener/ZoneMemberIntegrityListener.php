@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 final class ZoneMemberIntegrityListener
 {
     public function __construct(
-        private RequestStack $requestStack,
+        private SessionInterface|RequestStack $sessionOrRequestStack,
         private ZoneDeletionCheckerInterface $zoneDeletionChecker,
         private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ) {
@@ -39,7 +39,7 @@ final class ZoneMemberIntegrityListener
 
         if (!$this->zoneDeletionChecker->isDeletable($zone)) {
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->requestStack->getSession()->getBag('flashes');
+            $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
                 'parameters' => ['%resource%' => 'zone'],
@@ -57,7 +57,7 @@ final class ZoneMemberIntegrityListener
 
         if (!$this->countryProvincesDeletionChecker->isDeletable($country)) {
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->requestStack->getSession()->getBag('flashes');
+            $flashes = $this->getSession()->getBag('flashes');
             $flashes->add('error', [
                 'message' => 'sylius.resource.delete_error',
                 'parameters' => ['%resource%' => 'province'],
@@ -65,5 +65,12 @@ final class ZoneMemberIntegrityListener
 
             $event->stopPropagation();
         }
+    }
+
+    private function getSession(): SessionInterface
+    {
+        return $this->sessionOrRequestStack instanceof SessionInterface ?
+            $this->sessionOrRequestStack :
+            $this->sessionOrRequestStack->getSession();
     }
 }

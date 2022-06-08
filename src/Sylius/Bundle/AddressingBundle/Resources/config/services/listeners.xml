@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.listener.zone_member_integrity" class="Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener">
-            <argument type="service" id="request_stack" />
+            <argument type="service" id="session" />
             <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
             <argument type="service" id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
             <tag name="kernel.event_listener" event="sylius.zone.pre_delete" method="protectFromRemovingZone" />
