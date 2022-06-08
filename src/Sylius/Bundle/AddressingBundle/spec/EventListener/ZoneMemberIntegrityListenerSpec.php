@@ -50,7 +50,9 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
-        $requestStack->getSession()->willReturn($session);
+        if (method_exists($session, 'getSession')) {
+            $requestStack->getSession()->willReturn($session);
+        }
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -78,7 +80,9 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
-        $requestStack->getSession()->willReturn($session);
+        if (method_exists($session, 'getSession')) {
+            $requestStack->getSession()->willReturn($session);
+        }
 
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();
@@ -108,7 +112,9 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
-        $requestStack->getSession()->willReturn($session);
+        if (method_exists($session, 'getSession')) {
+            $requestStack->getSession()->willReturn($session);
+        }
 
         $session->getBag('flashes')->willReturn($flashes);
 
