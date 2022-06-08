@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\AddressingBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -27,11 +26,16 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 {
     function let(
+        SessionInterface $session,
         RequestStack $requestStack,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
+        if (method_exists($session, 'getSession')) {
+            $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
+        } else {
+            $this->beConstructedWith($session, $zoneDeletionChecker, $countryProvincesDeletionChecker);
+        }
     }
 
     function it_does_not_allow_to_remove_zone_if_it_exists_as_a_zone_member(
