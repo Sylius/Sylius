@@ -143,6 +143,12 @@
             </errorLevel>
         </UndefinedDocblockClass>
 
+        <UndefinedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getSession" />
+            </errorLevel>
+        </UndefinedMethod>
+
         <MissingReturnType errorLevel="info" />
 
         <PropertyNotSetInConstructor errorLevel="info" />
