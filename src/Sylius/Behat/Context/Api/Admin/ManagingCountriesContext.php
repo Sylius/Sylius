@@ -75,6 +75,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When /^I want to edit (this country)$/
+     * @When /^I am editing (this country)$/
      * @When /^I want to create a new province in (country "([^"]+)")$/
      */
     public function iWantToEditThisCountry(CountryInterface $country): void
@@ -218,6 +219,16 @@ final class ManagingCountriesContext implements Context
             'code',
             $province->getCode()
         ));
+    }
+
+    /**
+     * @Then /^(this country) should(?:| still) have the ("[^"]*" and "[^"]*" provinces)$/
+     */
+    public function theCountryShouldHaveTheProvinceAndProvince(CountryInterface $country, array $provinces): void
+    {
+        foreach ($provinces as $province) {
+            $this->theCountryShouldHaveTheProvince($country, $province);
+        }
     }
 
     /**

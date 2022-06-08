@@ -45,6 +45,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When /^I want to edit (this country)$/
+     * @When /^I am editing (this country)$/
      */
     public function iWantToEditThisCountry(CountryInterface $country)
     {
@@ -158,13 +159,16 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Then /^(this country) should(?:| still) have the "([^"]*)" province$/
+     * @Then /^(this country) should(?:| still) have the "([^"]*)" and "([^"]*)" provinces$/
      * @Then /^the (country "[^"]*") should(?:| still) have the "([^"]*)" province$/
      */
-    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
+    public function countryShouldHaveProvince(CountryInterface $country, string ...$provinceNames)
     {
         $this->iWantToEditThisCountry($country);
 
-        Assert::true($this->updatePage->isThereProvince($provinceName));
+        foreach ($provinceNames as $provinceName) {
+            Assert::true($this->updatePage->isThereProvince($provinceName));
+        }
     }
 
     /**

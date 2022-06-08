@@ -123,6 +123,19 @@ final class ZoneContext implements Context
     }
 
     /**
+     * @Given /^(the "([^"]*)" (?:country|province|zone) member) has been removed from (this zone)$/
+     */
+    public function theZoneMemberHasBeenRemoved(
+        ZoneMemberInterface $zoneMember,
+        string $zoneMemberName,
+        ZoneInterface $zone
+    ): void {
+        $zone->removeMember($zoneMember);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(it) has the ("[^"]+" province) member$/
      * @Given /^(it) also has the ("[^"]+" province) member$/
      */
