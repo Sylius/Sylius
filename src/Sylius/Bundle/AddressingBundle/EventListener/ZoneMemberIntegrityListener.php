@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 final class ZoneMemberIntegrityListener
 {
     public function __construct(
-        private SessionInterface|RequestStack $sessionOrRequestStack,
+        private RequestStack $requestStack,
         private ZoneDeletionCheckerInterface $zoneDeletionChecker,
         private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ) {
@@ -69,8 +69,11 @@ final class ZoneMemberIntegrityListener
 
     private function getSession(): SessionInterface
     {
-        return $this->sessionOrRequestStack instanceof SessionInterface ?
-            $this->sessionOrRequestStack :
-            $this->sessionOrRequestStack->getSession();
+        // bc-layer for Symfony 4
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            return $this->requestStack->getMasterRequest()->getSession();
+        }
+
+        return $this->requestStack->getSession();
     }
 }

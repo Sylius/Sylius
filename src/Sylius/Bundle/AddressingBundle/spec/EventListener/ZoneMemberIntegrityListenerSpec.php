@@ -19,6 +19,7 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -26,16 +27,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 {
     function let(
-        SessionInterface $session,
         RequestStack $requestStack,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
     ): void {
-        if (method_exists($requestStack, 'getSession')) {
-            $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
-        } else {
-            $this->beConstructedWith($session, $zoneDeletionChecker, $countryProvincesDeletionChecker);
-        }
+        $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
     }
 
     function it_does_not_allow_to_remove_zone_if_it_exists_as_a_zone_member(
@@ -44,13 +40,17 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
         ZoneInterface $zone,
-        FlashBagInterface $flashes
+        FlashBagInterface $flashes,
+        Request $request,
     ): void {
         $event->getSubject()->willReturn($zone);
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
-        if (method_exists($requestStack, 'getSession')) {
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            $requestStack->getMasterRequest()->willReturn($request);
+            $request->getSession()->willReturn($session);
+        } else {
             $requestStack->getSession()->willReturn($session);
         }
 
@@ -74,15 +74,20 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         SessionInterface $session,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
         GenericEvent $event,
-        ZoneInterface $zone
+        ZoneInterface $zone,
+        Request $request,
     ): void {
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            $requestStack->getMasterRequest()->willReturn($request);
+            $request->getSession()->willReturn($session);
+        } else {
+            $requestStack->getSession()->willReturn($session);
+        }
+
         $event->getSubject()->willReturn($zone);
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
-        if (method_exists($requestStack, 'getSession')) {
-            $requestStack->getSession()->willReturn($session);
-        }
 
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();
@@ -106,13 +111,17 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
         GenericEvent $event,
         CountryInterface $country,
-        FlashBagInterface $flashes
+        FlashBagInterface $flashes,
+        Request $request,
     ): void {
         $event->getSubject()->willReturn($country);
 
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
-        if (method_exists($session, 'getSession')) {
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            $requestStack->getMasterRequest()->willReturn($request);
+            $request->getSession()->willReturn($session);
+        } else {
             $requestStack->getSession()->willReturn($session);
         }
 
