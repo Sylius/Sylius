@@ -33,6 +33,9 @@ final class CountryChoiceTypeTest extends TypeTestCase
     /** @var ProphecyInterface|CountryInterface */
     private $poland;
 
+    /** @var ProphecyInterface|CountryInterface */
+    private $austria;
+
     protected function setUp(): void
     {
         $this->countryRepository = $this->prophesize(RepositoryInterface::class);
@@ -49,6 +52,13 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $poland->getName()->willReturn('Poland');
         $this->poland = $poland;
 
+        /** @var ProphecyInterface|CountryInterface $austria */
+        $austria = $this->prophesize(CountryInterface::class);
+        $austria->getCode()->willReturn('AT');
+        $austria->getName()->willReturn('Austria');
+        $austria->isEnabled()->willReturn(false);
+        $this->austria = $austria;
+
         parent::setUp();
     }
 
@@ -61,9 +71,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_only_enabled_countries_by_default(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([
@@ -74,23 +82,20 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['France', 'Poland']);
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_all_countries(): void
+    /** @test */
+    public function it_returns_all_countries_when_option_enabled_is_false(): void
     {
         $this->countryRepository->findAll()->willReturn([
             $this->france->reveal(),
             $this->poland->reveal(),
+            $this->austria->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['France', 'Poland'], ['enabled' => null]);
+        $this->assertChoicesLabels(['Austria','France', 'Poland'], ['enabled' => false]);
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_countries_in_an_alphabetical_order(): void
+    /** @test */
+    public function it_returns_enabled_countries_in_an_alphabetical_order(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([
             $this->poland->reveal(),
@@ -100,10 +105,32 @@ final class CountryChoiceTypeTest extends TypeTestCase
         $this->assertChoicesLabels(['France', 'Poland']);
     }
 
-    /**
-     * @test
-     */
-    public function it_returns_filtered_out_countries(): void
+    /** @test */
+    public function it_returns_all_countries_in_an_alphabetical_order(): void
+    {
+        $this->countryRepository->findAll()->willReturn([
+            $this->poland->reveal(),
+            $this->france->reveal(),
+            $this->austria->reveal(),
+        ]);
+
+        $this->assertChoicesLabels(['Austria', 'France', 'Poland'], ['enabled' => false]);
+    }
+
+    /** @test */
+    public function it_returns_all_filtered_out_countries(): void
+    {
+        $this->countryRepository->findAll()->willReturn([
+            $this->france->reveal(),
+            $this->poland->reveal(),
+            $this->austria->reveal(),
+        ]);
+
+        $this->assertChoicesLabels(['Poland'], ['choice_filter' => static fn (?CountryInterface $country): bool => $country !== null && $country->getName() === 'Poland', 'enabled' => false]);
+    }
+
+    /** @test */
+    public function it_returns_enabled_filtered_out_countries(): void
     {
         $this->countryRepository->findBy(['enabled' => true])->willReturn([
             $this->france->reveal(),
