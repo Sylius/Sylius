@@ -175,6 +175,11 @@ class User implements UserInterface, \Stringable
         $this->usernameCanonical = $usernameCanonical;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->usernameCanonical;
+    }
+
     public function getSalt(): string
     {
         return $this->salt;
