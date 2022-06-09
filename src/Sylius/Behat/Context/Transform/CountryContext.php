@@ -54,6 +54,17 @@ final class CountryContext implements Context
     }
 
     /**
+     * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country$/
+     */
+    public function getCountriesByNames(string ...$countryNames): array
+    {
+        $countryCodes = $countryNames;
+        array_walk($countryCodes, fn (&$item) => $item = $this->countryNameConverter->convertToCode($item));
+
+        return $this->countryRepository->findBy(['code' => $countryCodes]);
+    }
+
+    /**
      * @Transform :countryCode
      */
     public function getCountryCodeByName(string $countryName): string
