@@ -25,7 +25,7 @@ Feature: Editing a zone
         Then I should be notified that it has been successfully edited
         And this zone should have only the "France" country member
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Removing and adding countries to a zone
         Given the store has a zone "European Union" with code "EU"
         And it has the "Belgium", "France" and "Germany" country members
