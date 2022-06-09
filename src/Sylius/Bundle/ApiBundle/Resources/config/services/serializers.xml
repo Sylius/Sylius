@@ -79,6 +79,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer">
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="date_time_normalizer" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer">
             <argument type="collection">
                 <argument key="datetime_format">Y-m-d H:i:s</argument>
