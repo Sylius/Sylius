@@ -181,11 +181,21 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I remove the :country country member
+     * @When /^I(?:| also) remove the ("([^"]+)" country) member$/
      */
     public function iRemoveTheCountryMember(CountryInterface $country): void
     {
         $this->removeZoneMember($country);
+    }
+
+    /**
+     * @When /^I(?:| also) remove the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/
+     */
+    public function iRemoveCountryMembers(array $countries): void
+    {
+        foreach ($countries as $country) {
+            $this->removeZoneMember($country);
+        }
     }
 
     /**

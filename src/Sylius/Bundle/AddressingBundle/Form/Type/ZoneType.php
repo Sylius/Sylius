@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildZoneFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -80,6 +81,8 @@ final class ZoneType extends AbstractResourceType
                 'delete_empty' => true,
             ]);
         });
+
+        $builder->addEventSubscriber(new BuildZoneFormSubscriber());
     }
 
     public function getBlockPrefix(): string

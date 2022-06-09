@@ -54,6 +54,17 @@ final class ZoneMemberContext implements Context
     }
 
     /**
+     * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country members$/
+     */
+    public function getCountryTypeZoneMembersByNames(string ...$name): array
+    {
+        $codes = $name;
+        array_walk($codes, fn (&$item) => $item = $this->countryNameConverter->convertToCode($item));
+
+        return $this->getZoneMembersByCodes($codes);
+    }
+
+    /**
      * @Transform the :name province member
      */
     public function getProvinceTypeZoneMemberByName($name)
@@ -89,6 +100,11 @@ final class ZoneMemberContext implements Context
         );
 
         return $zoneMember;
+    }
+
+    private function getZoneMembersByCodes(array $codes): array
+    {
+        return $this->zoneMemberRepository->findBy(['code' => $codes]);
     }
 
     /**
