@@ -16,8 +16,8 @@ namespace Sylius\Bundle\UserBundle\Provider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class AbstractUserProvider implements UserProviderInterface
