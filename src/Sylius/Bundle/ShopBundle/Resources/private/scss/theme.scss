@@ -749,14 +749,16 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table tbody td,
-[data-route="sylius_shop_checkout_complete"] form table tbody td {
+[data-route="sylius_shop_checkout_complete"] form table tbody td,
+[data-route="sylius_shop_account_order_show"] table tbody td {
     border: 0 !important;
     border-bottom: 1px solid #eee !important;
     padding: 24px 0 14px 0 !important;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table thead th,
-[data-route="sylius_shop_checkout_complete"] form table thead th {
+[data-route="sylius_shop_checkout_complete"] form table thead th,
+[data-route="sylius_shop_account_order_show"] table thead th {
     border: none !important;
     border-bottom: 2px solid #eee !important;
     white-space: nowrap;
@@ -767,38 +769,45 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 [data-route="sylius_shop_cart_summary"] .column:first-child .table th:nth-child(2),
 [data-route="sylius_shop_cart_summary"] .column:first-child .table td:nth-child(2),
 [data-route="sylius_shop_checkout_complete"] form table th:nth-child(2),
-[data-route="sylius_shop_checkout_complete"] form table td:nth-child(2) {
+[data-route="sylius_shop_checkout_complete"] form table td:nth-child(2),
+[data-route="sylius_shop_account_order_show"] table th:nth-child(2),
+[data-route="sylius_shop_account_order_show"] table td:nth-child(2) {
     text-align: right;
     padding-right: 20px !important;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table th:nth-child(3),
-[data-route="sylius_shop_checkout_complete"] form table th:nth-child(3) {
+[data-route="sylius_shop_checkout_complete"] form table th:nth-child(3),
+[data-route="sylius_shop_account_order_show"] table th:nth-child(3) {
     text-align: left !important;
     width: 60px;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table th:nth-child(4),
-[data-route="sylius_shop_checkout_complete"] form table th:nth-child(4) {
+[data-route="sylius_shop_checkout_complete"] form table th:nth-child(4),
+[data-route="sylius_shop_account_order_show"] table th:nth-child(4) {
     text-align: right !important;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sylius-product-name,
-[data-route="sylius_shop_checkout_complete"] form table .sylius-product-name {
+[data-route="sylius_shop_checkout_complete"] form table .sylius-product-name,
+[data-route="sylius_shop_account_order_show"] table .sylius-product-name {
     font-size: 0.9em !important;
     color: #3f3f3f !important;
     font-weight: 700;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .image,
-[data-route="sylius_shop_checkout_complete"] form table .image {
+[data-route="sylius_shop_checkout_complete"] form table .image,
+[data-route="sylius_shop_account_order_show"] table .image {
     width: 100px !important;
     border-radius: 5px;
     margin-right: 15px;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sub.header,
-[data-route="sylius_shop_checkout_complete"] form table .sub.header {
+[data-route="sylius_shop_checkout_complete"] form table .sub.header,
+[data-route="sylius_shop_account_order_show"] table .sub.header {
     color: #adadad !important;
 }
 
@@ -923,7 +932,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
     margin-top: 0;
 }
 
-[data-route^="sylius_shop_account_"] .ui.container .ui.grid > .column:last-child {
+[data-route^="sylius_shop_account_"] .ui.container .ui.grid > .twelve.wide.column:last-child {
     padding-left: 60px;
 }
 
@@ -1000,38 +1009,51 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
     background: #eee !important;
 }
 
-[data-route="sylius_shop_checkout_complete"] form > .segment {
-    padding: 30px;
-    margin-bottom: 40px;
+[data-route="sylius_shop_checkout_complete"] form > .segment,
+[data-route="sylius_shop_account_order_show"] .segment {
+    padding: 30px !important;
+    margin-bottom: 40px !important;
 }
 
-[data-route="sylius_shop_checkout_complete"] form > .segment .header {
+[data-route="sylius_shop_account_order_show"] .ui.container .ui.grid .column:last-child .ui.segment {
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15) !important;
+    border: 1px solid rgba(34,36,38,.15) !important;
+}
+
+[data-route="sylius_shop_checkout_complete"] form > .segment .header,
+[data-route="sylius_shop_account_order_show"] .segment .header {
     border: 0;
     font-size: 18px;
 }
 
-[data-route="sylius_shop_checkout_complete"] .table {
+[data-route="sylius_shop_checkout_complete"] .table,
+[data-route="sylius_shop_account_order_show"] .table {
     border: 0;
 }
 
 [data-route="sylius_shop_checkout_complete"] .table tfoot td,
-[data-route="sylius_shop_checkout_complete"] .table tfoot th {
+[data-route="sylius_shop_checkout_complete"] .table tfoot th,
+[data-route="sylius_shop_account_order_show"] .table tfoot td,
+[data-route="sylius_shop_account_order_show"] .table tfoot th {
     padding: 20px 0 !important;
     background: transparent;
 }
 
-[data-route="sylius_shop_checkout_complete"] .table tfoot tr:last-child td {
+[data-route="sylius_shop_checkout_complete"] .table tfoot tr:last-child td,
+[data-route="sylius_shop_account_order_show"] .table tfoot tr:last-child td {
     font-weight: 700;
 }
 
-[data-route="sylius_shop_checkout_complete"] .table + .grid .message {
+[data-route="sylius_shop_checkout_complete"] .table + .grid .message,
+[data-route="sylius_shop_account_order_show"] .table + .grid .message {
     background: #f3f4f5;
     box-shadow: none !important;
     border: 1px solid #e0e0e0;
     padding: 30px;
 }
 
-[data-route="sylius_shop_checkout_complete"] .segment .ui.huge.primary.fluid.icon.labeled.button {
+[data-route="sylius_shop_checkout_complete"] .segment .ui.huge.primary.fluid.icon.labeled.button,
+[data-route="sylius_shop_account_order_show"] .segment .ui.huge.primary.fluid.icon.labeled.button {
     display: block !important;
     max-width: 500px !important;
     height: 60px;
