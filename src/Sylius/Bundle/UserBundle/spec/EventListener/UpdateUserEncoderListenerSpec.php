@@ -21,6 +21,7 @@ use Sylius\Bundle\UserBundle\spec\Fixture\FixtureUserInterface;
 use Sylius\Component\User\Model\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 final class UpdateUserEncoderListenerSpec extends ObjectBehavior
@@ -33,10 +34,9 @@ final class UpdateUserEncoderListenerSpec extends ObjectBehavior
     function it_does_nothing_if_user_does_not_implement_user_interface(
         ObjectManager $objectManager,
         Request $request,
-        TokenInterface $token
+        TokenInterface $token,
+        UserInterface $user,
     ): void {
-        $user = new \stdClass();
-
         $token->getUser()->willReturn($user);
 
         $objectManager->persist($user)->shouldNotBeCalled();
