@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UserBundle\Authentication;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
@@ -37,9 +38,14 @@ final class AuthenticationSuccessHandlerSpec extends ObjectBehavior
         $this->shouldImplement(AuthenticationSuccessHandlerInterface::class);
     }
 
-    function it_returns_json_response_if_request_is_xml_based(Request $request, TokenInterface $token): void
-    {
+    function it_returns_json_response_if_request_is_xml_based(
+        Request $request,
+        TokenInterface $token,
+        UserInterface $user,
+    ): void {
         $request->isXmlHttpRequest()->willReturn(true);
+
+        $token->getUser()->willReturn($user);
 
         $this->onAuthenticationSuccess($request, $token);
     }
