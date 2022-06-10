@@ -25,14 +25,12 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
-/**
- * @experimental
- */
+/** @experimental */
 final class ZoneDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'sylius_command_denormalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_zone_denormalizer_already_called';
 
     public function __construct(private IriConverterInterface $iriConverter)
     {
