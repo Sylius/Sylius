@@ -217,11 +217,15 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
     display: inline-block;
 }
 
+.promotion_label {
+    background-color: #22b99a !important;
+    color: #fff !important;
+}
+
 .card .content .promotion_label {
     position: absolute;
     top: 10px;
     right: 20px;
-    background-color: #22b99a !important;
 }
 
 .button {
@@ -1197,4 +1201,8 @@ select.ui.dropdown {
 address {
     font-style: normal;
     line-height: 1.6;
+}
+
+.text-teal {
+    color: #22b99a;
 }
