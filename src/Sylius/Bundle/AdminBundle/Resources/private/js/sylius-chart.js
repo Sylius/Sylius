@@ -41,8 +41,10 @@ const drawChart = function drawChart(canvas, labels = [], values = [], currency)
       },
       responsive: true,
       maintainAspectRatio: false,
-      legend: {
-        display: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
       },
     },
   });
