@@ -1228,3 +1228,72 @@ address {
 .text-teal {
     color: #22b99a;
 }
+
+.address-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1500px) {
+    .address-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.address-card--default {
+    margin-bottom: 20px;
+}
+
+.address-card-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    border: 1px solid rgba(34, 36, 38, 0.1);
+    box-shadow: 0 2px 4px 0 rgba(34, 36, 38, 0.03) !important;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.address-card-content.default {
+    border-color: #22b99a;
+}
+
+.address-card .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.address-label {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #22b99a;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 0 0 0 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.address-card .buttons .ui.button,
+.address-card .buttons .ui.basic.button,
+.address-card .buttons .ui.labeled.button,
+.address-card .buttons .ui.labeled.icon.button,
+.address-card .buttons .buttons .ui.labeled.icon.button {
+    padding: 6px 10px 6px 0 !important;
+}
+
+.address-card .buttons .ui.button .icon,
+.address-card .buttons .ui.basic.button .icon,
+.address-card .buttons .ui.labeled.button .icon,
+.address-card .buttons .ui.labeled.icon.button .icon,
+.address-card .buttons .buttons .ui.labeled.icon.button .icon {
+    position: relative !important;
+    width: 30px !important;
+    padding: 7px 0 !important;
+}
