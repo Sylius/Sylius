@@ -56,9 +56,9 @@ final class ZoneMemberContext implements Context
     /**
      * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country members$/
      */
-    public function getCountryTypeZoneMembersByNames(string ...$name): array
+    public function getCountryTypeZoneMembersByNames(string ...$names): array
     {
-        $codes = $name;
+        $codes = $names;
         array_walk($codes, fn (&$item) => $item = $this->countryNameConverter->convertToCode($item));
 
         return $this->getZoneMembersByCodes($codes);

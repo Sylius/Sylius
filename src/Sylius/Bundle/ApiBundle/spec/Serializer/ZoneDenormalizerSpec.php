@@ -86,8 +86,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
         ZoneMemberInterface $germanyZone,
         ZoneMemberInterface $franceZone,
         DenormalizerInterface $denormalizer,
-    ): void
-    {
+    ): void {
         $belgiumZone->getCode()->willReturn('EU-BE');
         $germanyZone->getCode()->willReturn('EU-DE');
         $franceZone->getCode()->willReturn('EU-FR');
@@ -114,7 +113,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             null,
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
-                'sylius_command_denormalizer_already_called' => true,
+                'sylius_zone_denormalizer_already_called' => true,
             ]
         )->shouldBeCalled();
 
@@ -163,7 +162,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             null,
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
-                'sylius_command_denormalizer_already_called' => true,
+                'sylius_zone_denormalizer_already_called' => true,
             ]
         )->shouldBeCalled();
 
