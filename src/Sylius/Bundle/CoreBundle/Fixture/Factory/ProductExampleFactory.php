@@ -137,6 +137,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
 
             ->setDefault('variant_selection_method', ProductInterface::VARIANT_SELECTION_MATCH)
+            ->setAllowedTypes('variant_selection_method', 'string')
             ->setAllowedValues('variant_selection_method', [ProductInterface::VARIANT_SELECTION_MATCH, ProductInterface::VARIANT_SELECTION_CHOICE])
 
             ->setDefault('product_attributes', [])

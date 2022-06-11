@@ -108,6 +108,15 @@ final class ProductFixtureTest extends TestCase
     /**
      * @test
      */
+    public function product_variant_selection_method_is_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['variant_selection_method' => 'custom']]]], 'custom.*.variant_selection_method');
+        $this->assertConfigurationIsValid([['custom' => [['variant_selection_method' => 'match']]]], 'custom.*.variant_selection_method');
+    }
+
+    /**
+     * @test
+     */
     public function product_product_options_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['product_options' => ['OPT-1', 'OPT-2']]]]], 'custom.*.product_options');
