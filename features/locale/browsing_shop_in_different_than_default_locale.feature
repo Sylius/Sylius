@@ -8,7 +8,7 @@ Feature: Browsing shop in different than default locale
         Given the store operates on a channel named "Web" with hostname "web"
         And that channel allows to shop using "English (United States)", "Polish (Poland)" and "Chinese (Simplified, China)" locales
         And it uses the "English (United States)" locale by default
-        And the store has a product "T-shirt banana"
+        And the store has a product "T-Shirt banana"
         And this product is named "Koszulka bananowa" in the "Polish (Poland)" locale
         And this product is named "香蕉T恤" in the "Chinese (Simplified, China)" locale
 

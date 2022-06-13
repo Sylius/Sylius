@@ -7,7 +7,7 @@ Feature: Viewing orders on my account page
     Background:
         Given the store operates on a single channel in "United States"
         And the store has "Angel T-Shirt" and "Green Arrow" products
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is another customer "oliver@teamarrow.com" that placed an order "#00000999"
         And the customer bought a single "Green Arrow"

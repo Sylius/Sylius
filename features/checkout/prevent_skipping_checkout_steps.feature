@@ -10,8 +10,8 @@ Feature: Prevent skipping checkout steps
         And the store has a product "Paganini T-Shirt" priced at "$10.00"
         And there is a promotion "Holiday promotion"
         And the promotion gives "$29.99" discount to every order with quantity at least 2
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @no-api

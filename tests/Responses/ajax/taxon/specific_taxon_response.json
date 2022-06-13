@@ -1,82 +1,42 @@
 [
   {
-    "name":"Men T-Shirts",
-    "hasChildren":false,
-    "fullname":"Categories \/ T-Shirts \/ Men T-Shirts",
-    "id":@integer@,
-    "code":"men",
-    "root":{
-      "name":"Categories",
-      "hasChildren":true,
-      "fullname":"Categories",
-      "id":@integer@,
-      "code":"category",
-      "level":0
+    "name": "Women T-Shirts",
+    "hasChildren": false,
+    "fullname": "Categories / T-Shirts / Women T-Shirts",
+    "id": @integer@,
+    "code": "women",
+    "root": {
+      "name": "Categories",
+      "hasChildren": true,
+      "fullname": "Categories",
+      "id": @integer@,
+      "code": "category",
+      "level": 0
     },
-    "parent":{
-      "name":"T-Shirts",
-      "hasChildren":true,
-      "fullname":"Categories \/ T-Shirts",
-      "id":@integer@,
-      "code":"t-shirts",
-      "root":{
-        "name":"Categories",
-        "hasChildren":true,
-        "fullname":"Categories",
-        "id":@integer@,
-        "code":"category",
-        "level":0
+    "parent": {
+      "name": "T-Shirts",
+      "hasChildren": true,
+      "fullname": "Categories / T-Shirts",
+      "id": @integer@,
+      "code": "t-shirts",
+      "root": {
+        "name": "Categories",
+        "hasChildren": true,
+        "fullname": "Categories",
+        "id": @integer@,
+        "code": "category",
+        "level": 0
       },
-      "parent":{
-        "name":"Categories",
-        "hasChildren":true,
-        "fullname":"Categories",
-        "id":@integer@,
-        "code":"category",
-        "level":0
+      "parent": {
+        "name": "Categories",
+        "hasChildren": true,
+        "fullname": "Categories",
+        "id": @integer@,
+        "code": "category",
+        "level": 0
       },
-      "level":1
+      "level": 1
     },
-    "level":2
-  },
-  {
-    "name":"Women T-Shirts",
-    "hasChildren":false,
-    "fullname":"Categories \/ T-Shirts \/ Women T-Shirts",
-    "id":@integer@,
-    "code":"women",
-    "root":{
-      "name":"Categories",
-      "hasChildren":true,
-      "fullname":"Categories",
-      "id":@integer@,
-      "code":"category",
-      "level":0
-    },
-    "parent":{
-      "name":"T-Shirts",
-      "hasChildren":true,
-      "fullname":"Categories \/ T-Shirts",
-      "id":@integer@,
-      "code":"t-shirts",
-      "root":{
-        "name":"Categories",
-        "hasChildren":true,
-        "fullname":"Categories",
-        "id":@integer@,
-        "code":"category",
-        "level":0
-      },
-      "parent":{
-        "name":"Categories",
-        "hasChildren":true,
-        "fullname":"Categories",
-        "id":@integer@,
-        "code":"category",
-        "level":0
-      },
-      "level":1
-    },
-    "level":2
+    "level": 2
   }
 ]

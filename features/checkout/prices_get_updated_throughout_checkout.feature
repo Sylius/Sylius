@@ -9,7 +9,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And that channel allows to shop using the "GBP" currency
         And the store has a product "The Pug Mug" priced at "$10.00"
         And the store has "Pigeon Mail" shipping method with "$5.00" fee
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
         And I have product "The Pug Mug" in the cart
         And I switch to the "GBP" currency

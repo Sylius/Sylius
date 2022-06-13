@@ -8,7 +8,7 @@ Feature: Redirecting to the default locale
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "English (United States)" and "French (France)" locales
         And it uses the "English (United States)" locale by default
-        And the store has a product "PHP T-shirt"
+        And the store has a product "PHP T-Shirt"
 
     @ui @api
     Scenario: Staying on the current locale if it is available

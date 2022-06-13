@@ -10,8 +10,8 @@ Feature: Preventing from claiming cart of a wrong user
         And the store has a product "Kotlin T-Shirt" priced at "$30.00"
         And the store has a product "Symfony T-Shirt" priced at "$100.00"
         And the store has a product "Sylius T-Shirt" priced at "$150.00"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
     @ui @no-api

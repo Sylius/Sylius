@@ -8,7 +8,7 @@ Feature: Accessing order right after completing checkout
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store allows paying "Cash on delivery"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And there is a user "john@example.com"
         And I am logged in as "john@example.com"
 

@@ -50,9 +50,9 @@ Feature: Editing catalog promotion
 
     @api @ui @javascript
     Scenario: Editing catalog promotion variant scope
-        When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-shirt" variant
+        When I edit "Christmas sale" catalog promotion to be applied on "Kotlin T-Shirt" variant
         Then I should be notified that it has been successfully edited
-        And this catalog promotion should be applied on "Kotlin T-shirt" variant
+        And this catalog promotion should be applied on "Kotlin T-Shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
     @api @ui @javascript
@@ -60,7 +60,7 @@ Feature: Editing catalog promotion
         When I edit "Christmas sale" catalog promotion to be applied on "Clothes" taxon
         Then I should be notified that it has been successfully edited
         And this catalog promotion should be applied on "Clothes" taxon
-        And this catalog promotion should not be applied on "Kotlin T-shirt" variant
+        And this catalog promotion should not be applied on "Kotlin T-Shirt" variant
         And this catalog promotion should not be applied on "PHP T-Shirt" variant
 
     @api @ui @javascript

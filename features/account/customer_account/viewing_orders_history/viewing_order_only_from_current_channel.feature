@@ -15,7 +15,7 @@ Feature: Viewing orders only from current channel
         And the store has a product "Angel T-Shirt" priced at "$100" in "Web-US" channel
         And this product is also priced at "£200" in "Web-UK" channel
         And the store ships everywhere for free for all channels
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And there is a customer "John Hancock" identified by an email "hancock@superheronope.com" and a password "superPower"
         And this customer has started checkout on a channel "Web-US"
         And the customer bought a single "Angel T-Shirt"

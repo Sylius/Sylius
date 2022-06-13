@@ -7,7 +7,7 @@ Feature: Returning from payment step to one of previous steps
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Hulk Mug" priced at "$6.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Paypal Express Checkout"
         And I am a logged in customer
 

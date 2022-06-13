@@ -7,9 +7,9 @@ Feature: Changing checkout steps
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has "Raven Post" shipping method with "$10.00" fee
-        And the store allows paying offline
+        And the store allows paying Offline
         And the store allows paying "PayPal Express Checkout"
         And I am a logged in customer
 

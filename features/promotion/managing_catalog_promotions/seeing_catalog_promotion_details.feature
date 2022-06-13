@@ -8,7 +8,7 @@ Feature: Seeing catalog promotion's details
         Given the store operates on a channel named "Web-US"
         And the store has a "T-Shirt" configurable product
         And this product has "PHP T-Shirt" variant priced at "$20.00" in "Web-US" channel
-        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
         And it applies also on "T-Shirt" product
         And it reduces also price by fixed "$10.00" in the "Web-US" channel
         And the catalog promotion "Winter sale" operates between "2021-11-10" and "2022-01-08"

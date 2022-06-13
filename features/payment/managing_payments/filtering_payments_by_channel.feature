@@ -8,7 +8,7 @@ Feature: Filtering payments by channel
         Given the store operates on a single channel in "United States"
         And the store operates on another channel named "Canada" in "CAD" currency
         And the store ships everywhere for free for all channels
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And the store has a product "Apple" priced at "$100.00" in "United States" channel
         And the store has a product "Orange" priced at "$150.00" in "Canada" channel
         And there is an "#00000001" order with "Apple" product in "United States" channel

@@ -11,7 +11,7 @@ Feature: Seeing orders' total in their currency
         And the store has a zone "United States" with code "US"
         And this zone has the "United States" country member
         And the store ships everywhere for free for all channels
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And the store has a product "Angel T-Shirt" priced at "$20.00" available in channel "United States" and channel "Great Britain"
         And there is an administrator "sylius@example.com" identified by "sylius"
         And there is a customer account "customer@example.com" identified by "sylius"

@@ -8,7 +8,7 @@ Feature: Seeing detailed shipping fee on selecting shipping method page
         Given the store operates on a single channel in "United States"
         And the store has a product "The Sorting Hat" priced at "$19.99"
         And the store has a product "No-Face god" priced at "$19.99"
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui @api

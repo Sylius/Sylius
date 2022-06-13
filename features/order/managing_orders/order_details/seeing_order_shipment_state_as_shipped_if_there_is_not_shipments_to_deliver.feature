@@ -8,7 +8,7 @@ Feature: Seeing shipping states of an order as shipped if there are no shipments
         Given the store operates on a single channel in "United States"
         And the store has a "Guards! Guards!" configurable product
         And this product has "Guards! Guards! - ebook" variant priced at "$12.55" which does not require shipping
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Guards! Guards! - ebook" variant of product "Guards! Guards!"

@@ -15,7 +15,7 @@ Feature: Seeing applied catalog promotions on products list
         And this product has "The Witcher T-Shirt" variant priced at "$30.00"
         And this product has "LotR T-Shirt" variant priced at "$50.00"
         And this product belongs to "T-Shirts"
-        And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
 
     @ui @no-api
     Scenario: Seeing applied catalog promotion on products list

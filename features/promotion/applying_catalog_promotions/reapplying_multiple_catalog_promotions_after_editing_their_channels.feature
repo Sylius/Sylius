@@ -11,8 +11,8 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         And this product has "PHP T-Shirt" variant priced at "$100.00" in "Web-US" channel
         And "PHP T-Shirt" variant priced at "$100.00" in "Web-GB" channel
         And this product is available in "Web-US" channel and "Web-GB" channel
-        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-shirt" variant
-        And there is another catalog promotion "Christmas sale" available in "Web-US" channel and "Web-GB" channel that reduces price by "50%" and applies on "PHP T-shirt" variant
+        And there is a catalog promotion "Winter sale" available in "Web-US" channel that reduces price by "30%" and applies on "PHP T-Shirt" variant
+        And there is another catalog promotion "Christmas sale" available in "Web-US" channel and "Web-GB" channel that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
     @api @ui

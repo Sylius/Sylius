@@ -57,14 +57,14 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
             new \DateTime('2021-10-12 00:00:02'),
         ];
 
-        $actualDateTimes = [];
+        $actualDateTimes = array_map(
+            fn (CatalogPromotionInterface $eligibleCatalogPromotion) => $eligibleCatalogPromotion->getStartDate(),
+            $eligibleCatalogPromotions
+        );
 
-        /** @var CatalogPromotionInterface $eligibleCatalogPromotion */
-        foreach ($eligibleCatalogPromotions as $eligibleCatalogPromotion) {
-            $actualDateTimes[] = $eligibleCatalogPromotion->getStartDate();
+        foreach ($actualDateTimes as $actualDateTime) {
+            $this->assertTrue(in_array($actualDateTime, $expectedDateTimes));
         }
-
-        $this->assertTrue(($expectedDateTimes == $actualDateTimes));
 
         unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
     }

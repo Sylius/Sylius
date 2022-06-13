@@ -7,11 +7,11 @@ Feature: Skipping payment selection when order total is zero after applying coup
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$10.00"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has "SHL" shipping method with "$5.00" fee
         And the store has promotion "Holiday promotion" with coupon "HOLIDAYPROMO"
         And the promotion gives "$10.00" discount to every order with quantity at least 1
-        And the store allows paying offline
+        And the store allows paying Offline
         And I am a logged in customer
 
     @ui

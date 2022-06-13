@@ -12,7 +12,7 @@ Feature: Viewing available payment methods based on current channel
         And this zone has the "United States" country member
         And the store allows paying with "Bank of America" in "United States" channel
         And the store allows paying with "Bank of Poland" in "Poland" channel
-        And the store allows paying offline for all channels
+        And the store allows paying Offline for all channels
         And the store allows paying "Bank of Universe"
         And this payment method has been disabled
         And the store has a product "PHP T-Shirt" priced at "$19.99" in "United States" channel

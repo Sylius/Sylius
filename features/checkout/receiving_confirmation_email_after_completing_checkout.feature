@@ -8,8 +8,8 @@ Feature: Receiving confirmation email after finalizing checkout
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a product "Sig Sauer P226" priced at "$499.99"
-        And the store ships everywhere for free
-        And the store allows paying offline
+        And the store ships everywhere for Free
+        And the store allows paying Offline
 
     @ui @email @api
     Scenario: Receiving confirmation email after finalizing checkout

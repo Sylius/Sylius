@@ -12,10 +12,10 @@ Feature: Adding a new text product attribute
     Scenario: Adding a new text product attribute
         When I want to create a new text product attribute
         And I specify its code as "t_shirt_brand"
-        And I name it "T-shirt brand" in "English (United States)"
+        And I name it "T-Shirt brand" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And the text attribute "T-shirt brand" should appear in the store
+        And the text attribute "T-Shirt brand" should appear in the store
 
     @ui
     Scenario: Seeing disabled type field while adding text a product attribute

@@ -6,7 +6,7 @@ Feature: Filtering payments by state
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And the store has a product "Apple"
         And the store allows paying with "Cash on Delivery"
         And there is a "New" "#00000001" order with "Apple" product
@@ -20,7 +20,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "New"
         When I browse payments
-        And I choose "New" as a payment state
+        And I choose "new" as a payment state
         And I filter
         Then I should see "3" payments in the list
         And I should see the payment of the "#00000001" order
@@ -31,7 +31,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "Completed"
         When I browse payments
-        And I choose "Completed" as a payment state
+        And I choose "completed" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000002" order
@@ -40,7 +40,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "Processing"
         When I browse payments
-        And I choose "Processing" as a payment state
+        And I choose "processing" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000003" order
@@ -49,7 +49,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "Refunded"
         When I browse payments
-        And I choose "Refunded" as a payment state
+        And I choose "refunded" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000004" order
@@ -58,7 +58,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "Cancelled"
         When I browse payments
-        And I choose "Cancelled" as a payment state
+        And I choose "cancelled" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000005" order
@@ -67,7 +67,7 @@ Feature: Filtering payments by state
     @ui @api
     Scenario: Filtering payments in state "Failed"
         When I browse payments
-        And I choose "Failed" as a payment state
+        And I choose "failed" as a payment state
         And I filter
         Then I should see a single payment in the list
         And I should see the payment of the "#00000006" order

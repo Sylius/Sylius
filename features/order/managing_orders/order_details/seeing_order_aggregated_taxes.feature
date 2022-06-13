@@ -16,7 +16,7 @@ Feature: Seeing aggregated taxes of an order
         And it belongs to "Lowered US services" tax category
         And the store has "DHL" shipping method with "$10.00" fee within the "US" zone
         And shipping method "DHL" belongs to "Standard US services" tax category
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "charles.the.great@medieval.com" that placed an order "#00000001"
         And I am logged in as an administrator
 

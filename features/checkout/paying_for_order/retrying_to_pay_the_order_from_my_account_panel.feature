@@ -8,7 +8,7 @@ Feature: Retrying to pay the order from my account panel
         Given the store operates on a single channel in "United States"
         And there is a user "john@example.com" identified by "password123"
         And the store allows paying "PayPal Express Checkout"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And I have one unpaid order #000001 with total $29.99
 
     @todo

@@ -8,7 +8,7 @@ Feature: Apply correct taxes for products with different tax rates for different
         Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
         And the store ships to "Germany"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         And default tax zone is "US"
         And the store has "No tax" tax rate of 0% for "Clothes" within the "US" zone
         And the store has "Low VAT" tax rate of 5% for "Mugs" within the "US" zone

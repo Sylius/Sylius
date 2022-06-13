@@ -12,7 +12,7 @@ Feature: Seeing taxes of an order
         And it belongs to "Clothes" tax category
         And the store has "DHL" shipping method with "$10.00" fee within the "US" zone
         And shipping method "DHL" belongs to "Shipping Services" tax category
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 

@@ -7,9 +7,9 @@ Feature: Filtering shipments by a shipping method
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Audi A6 allroad quattro"
-        And the store ships everywhere for free
+        And the store ships everywhere for Free
         But the store has "DHL" shipping method with "$10.00" fee
-        And the store allows paying offline
+        And the store allows paying Offline
         And there is a customer "jack@teambiz.com" that placed an order "#000001337"
         And the customer bought a single "Audi A6 allroad quattro"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
