@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Obsah'
-            subject: 'Žiadosť'
         order_confirmation:
             subject: 'Potvrdenie objednávky'
             view_order_or_change_payment_method: 'Zobraziť objednávku alebo zmeniť spôsob platby'

@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Содержимое'
-            subject: 'Новый контактный запрос'
         order_confirmation:
             has_been_successfully_placed: 'успешно кикнут!'
             subject: 'Подтверждение заказа'

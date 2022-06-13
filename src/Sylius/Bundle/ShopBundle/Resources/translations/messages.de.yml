@@ -3,10 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Inhalt'
-            message_from: 'Nachricht von'
-            subject: 'Kontaktanfrage'
         order_confirmation:
             has_been_successfully_placed: 'wurde erfolgreich platziert.'
             subject: 'Bestellbestätigung'

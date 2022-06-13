@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            message_from: 'Ziņa no'
-            subject: 'Kontaktu pieprasījums'
         password_reset:
             reset_your_password: 'Atjaunot paroli'
             subject: 'Atjaunot paroli'
