@@ -24,6 +24,5 @@ final class SyliusApiBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CommandDataTransformerPass());
-        $container->addCompilerPass(new ReflectionExtractorHotfixPass());
     }
 }
