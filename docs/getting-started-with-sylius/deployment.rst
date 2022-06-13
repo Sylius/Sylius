@@ -17,7 +17,7 @@ Check it out!
 Learn more about the deployment platforms
 -----------------------------------------
 
-    - `Platform.sh <https://docs.platform.sh>`_
-    - `Symfony Cloud <https://symfony.com/cloud/>`_
-    - `Artifakt.com <https://docs.artifakt.com/>`_
-    - `Cloudways PHP Hosting <https://support.cloudways.com/en/>`_
+* `Platform.sh <https://docs.platform.sh>`_
+* `Symfony Cloud <https://symfony.com/cloud/>`_
+* `Artifakt.com <https://docs.artifakt.com/>`_
+* `Cloudways PHP Hosting <https://support.cloudways.com/en/>`_
