@@ -46,7 +46,7 @@
         "sylius/currency-bundle": "^1.6",
         "sylius/customer-bundle": "^1.6",
         "sylius/fixtures-bundle": "^1.6.1",
-        "sylius/grid-bundle": "^1.8",
+        "sylius/grid-bundle": "^1.11 || ^1.12@alpha",
         "sylius/inventory-bundle": "^1.6",
         "sylius/locale-bundle": "^1.6",
         "sylius/money-bundle": "^1.6",
@@ -55,7 +55,7 @@
         "sylius/payum-bundle": "^1.6",
         "sylius/product-bundle": "^1.6",
         "sylius/promotion-bundle": "^1.6",
-        "sylius/resource-bundle": "^1.7",
+        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "sylius/review-bundle": "^1.6",
         "sylius/shipping-bundle": "^1.6",
         "sylius/taxation-bundle": "^1.6",
@@ -67,7 +67,7 @@
         "symfony/intl": "^5.4 || ^6.0",
         "symfony/messenger": "^5.4 || ^6.0",
         "symfony/templating": "^5.4 || ^6.0",
-        "winzou/state-machine-bundle": "^0.5"
+        "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
