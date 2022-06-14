@@ -18,7 +18,7 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
-final class UserPasswordHasher implements UserPasswordEncoderInterface
+final class UserPasswordHasher implements UserPasswordEncoderInterface, UserPasswordHasherInterface
 {
     public function __construct(private PasswordHasherFactoryInterface $passwordHasherFactory)
     {

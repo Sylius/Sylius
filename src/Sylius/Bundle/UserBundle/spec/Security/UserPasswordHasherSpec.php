@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\UserBundle\Security;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
+use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 
@@ -29,6 +30,11 @@ final class UserPasswordHasherSpec extends ObjectBehavior
     function it_implements_user_password_encoder_interface(): void
     {
         $this->shouldImplement(UserPasswordEncoderInterface::class);
+    }
+
+    function it_implements_user_password_hasher_interface(): void
+    {
+        $this->shouldImplement(UserPasswordHasherInterface::class);
     }
 
     function it_hashes_password(
