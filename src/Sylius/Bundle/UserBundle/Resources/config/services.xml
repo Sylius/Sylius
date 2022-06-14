@@ -54,10 +54,14 @@
         <service id="sylius.security.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
             <argument type="service" id="security.encoder_factory" />
         </service>
-        <service id="Sylius\Bundle\UserBundle\Security\UserPasswordEncoderInterface" alias="sylius.security.password_encoder" />
+        <service id="Sylius\Component\User\Security\UserPasswordEncoderInterface" alias="sylius.security.password_hasher" />
+
+        <service id="sylius.security.password_hasher" class="Sylius\Bundle\UserBundle\Security\UserPasswordHasher">
+            <argument type="service" id="security.password_hasher_factory" />
+        </service>
 
         <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.security.password_encoder" />
+            <argument type="service" id="sylius.security.password_hasher" />
         </service>
         <service id="Sylius\Component\User\Security\PasswordUpdaterInterface" alias="sylius.security.password_updater" />
 

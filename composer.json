@@ -102,6 +102,7 @@
         "symfony/messenger": "^5.4",
         "symfony/monolog-bundle": "^3.5",
         "symfony/options-resolver": "^5.4",
+        "symfony/password-hasher": "^5.4",
         "symfony/polyfill-iconv": "^1.17",
         "symfony/polyfill-intl-icu": "^1.22",
         "symfony/polyfill-mbstring": "^1.17",
