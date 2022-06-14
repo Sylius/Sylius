@@ -310,4 +310,23 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_given_valid_state(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        FactoryInterface $shipmentFactory,
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory, $shippingMethodsResolver, OrderInterface::STATE_NEW);
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $order->isEmpty()->shouldNotBeCalled();
+        $order->getItems()->shouldNotBeCalled();
+        $order->isShippingRequired()->shouldNotBeCalled();
+        $order->hasShipments()->shouldNotBeCalled();
+        $order->getShipments()->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

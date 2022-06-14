@@ -22,8 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    public function __construct(private ProductVariantPriceCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
-    {
+    public function __construct(
+        private ProductVariantPriceCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        private string $validState = OrderInterface::STATE_CART
+    ) {
         if ($this->productVariantPriceCalculator instanceof ProductVariantPriceCalculatorInterface) {
             @trigger_error(
                 sprintf('Passing a "Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" instead.', self::class),
@@ -37,7 +39,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 

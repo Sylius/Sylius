@@ -49,4 +49,17 @@ final class OrderPromotionProcessorSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_given_valid_state(
+        PromotionProcessorInterface $promotionProcessor,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($promotionProcessor, OrderInterface::STATE_NEW);
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $promotionProcessor->process($order)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

@@ -27,6 +27,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
         private string $targetState = PaymentInterface::STATE_CART,
+        private string $invalidOrderState = OrderInterface::STATE_CANCELLED,
     ) {
     }
 
@@ -35,7 +36,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CANCELLED === $order->getState()) {
+        if ($this->invalidOrderState === $order->getState()) {
             return;
         }
 

@@ -100,4 +100,19 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_given_valid_state(
+        FactoryInterface $adjustmentFactory,
+        DelegatingCalculatorInterface $calculator,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($adjustmentFactory, $calculator, OrderInterface::STATE_NEW);
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $order->getShipments()->shouldNotBeCalled();
+        $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

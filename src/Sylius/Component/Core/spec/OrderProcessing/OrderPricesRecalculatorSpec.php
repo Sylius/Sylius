@@ -92,4 +92,18 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_given_valid_state(
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($productVariantPriceCalculator, OrderInterface::STATE_CANCELLED);
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $order->getChannel()->shouldNotBeCalled();
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

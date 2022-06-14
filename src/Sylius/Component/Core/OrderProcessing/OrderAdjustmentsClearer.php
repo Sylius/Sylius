@@ -21,8 +21,10 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
 {
     private array $adjustmentsToRemove;
 
-    public function __construct(array $adjustmentsToRemove = [])
-    {
+    public function __construct(
+        array $adjustmentsToRemove = [],
+        private string $validState = OrderInterface::STATE_CART
+    ) {
         if (0 === func_num_args()) {
             @trigger_error(
                 'Not passing adjustments types explicitly is deprecated since 1.2 and will be prohibited in 2.0',
@@ -43,7 +45,7 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
 
     public function process(OrderInterface $order): void
     {
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 

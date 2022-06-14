@@ -65,4 +65,22 @@ final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_given_valid_state(OrderInterface $order): void
+    {
+        $this->beConstructedWith(
+            [
+                AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+                AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+            ],
+            OrderInterface::STATE_NEW
+        );
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldNotBeCalled();
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

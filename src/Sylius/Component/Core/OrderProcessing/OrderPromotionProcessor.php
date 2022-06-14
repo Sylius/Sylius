@@ -21,8 +21,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderPromotionProcessor implements OrderProcessorInterface
 {
-    public function __construct(private PromotionProcessorInterface $promotionProcessor)
-    {
+    public function __construct(
+        private PromotionProcessorInterface $promotionProcessor,
+        private string $validState = OrderInterface::STATE_CART
+    ) {
     }
 
     public function process(BaseOrderInterface $order): void
@@ -30,7 +32,7 @@ final class OrderPromotionProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 

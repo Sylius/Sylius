@@ -162,4 +162,25 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
 
         $this->process($order);
     }
+
+    function it_does_nothing_if_the_order_is_in_a_state_different_than_provided_valid_state(
+        ZoneProviderInterface $defaultTaxZoneProvider,
+        ZoneMatcherInterface $zoneMatcher,
+        PrioritizedServiceRegistryInterface $strategyRegistry,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry, null, OrderInterface::STATE_CANCELLED);
+
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+
+        $order->getItems()->shouldNotBeCalled();
+        $order->getShipments()->shouldNotBeCalled();
+        $order->isEmpty()->shouldNotBeCalled();
+        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldNotBeCalled();
+
+        $defaultTaxZoneProvider->getZone($order)->shouldNotBeCalled();
+        $strategyRegistry->all()->shouldNotBeCalled();
+
+        $this->process($order);
+    }
 }

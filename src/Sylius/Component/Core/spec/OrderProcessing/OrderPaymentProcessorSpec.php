@@ -73,6 +73,18 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
+    function it_does_nothing_if_the_order_is_in_invalid_state(
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        OrderInterface $order
+    ): void {
+        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, OrderInterface::STATE_FULFILLED);
+
+        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
+        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
     function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
         OrderInterface $order,
         PaymentInterface $payment,

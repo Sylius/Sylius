@@ -29,6 +29,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         private FactoryInterface $shipmentFactory,
         private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null,
+        private string $validState = OrderInterface::STATE_CART,
     ) {
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
             @trigger_error(
@@ -43,7 +44,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 

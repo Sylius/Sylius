@@ -35,6 +35,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         private ZoneMatcherInterface $zoneMatcher,
         private PrioritizedServiceRegistryInterface $strategyRegistry,
         private ?TaxationAddressResolverInterface $taxationAddressResolver = null,
+        private string $validState = OrderInterface::STATE_CART,
     ) {
         if ($this->taxationAddressResolver === null) {
             @trigger_error(sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
@@ -46,7 +47,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 

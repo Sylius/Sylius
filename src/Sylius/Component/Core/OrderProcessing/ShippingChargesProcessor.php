@@ -24,8 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class ShippingChargesProcessor implements OrderProcessorInterface
 {
-    public function __construct(private FactoryInterface $adjustmentFactory, private DelegatingCalculatorInterface $shippingChargesCalculator)
-    {
+    public function __construct(
+        private FactoryInterface $adjustmentFactory,
+        private DelegatingCalculatorInterface $shippingChargesCalculator,
+        private string $validState = OrderInterface::STATE_CART
+    ) {
     }
 
     public function process(BaseOrderInterface $order): void
@@ -33,7 +36,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if ($this->validState !== $order->getState()) {
             return;
         }
 
