@@ -216,6 +216,7 @@
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />
                 <referencedFunction name="Doctrine\ORM\Query\Expr::orX" />
+                <referencedFunction name="Symfony\Component\PasswordHasher\PasswordHasherInterface::hash" />
             </errorLevel>
         </TooManyArguments>
 

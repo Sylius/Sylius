@@ -46,6 +46,7 @@
         "sylius/resource-bundle": "^1.7",
         "sylius/user": "^1.6",
         "symfony/framework-bundle": "^5.4",
+        "symfony/password-hasher": "^5.4",
         "webmozart/assert": "^1.8"
     },
     "conflict": {

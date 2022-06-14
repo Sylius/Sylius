@@ -17,6 +17,8 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
+trigger_deprecation('sylius/user-bundle', '1.12', 'The "%s" class is deprecated, use "%s" instead.', UserPasswordEncoder::class, UserPasswordHasher::class);
+
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {
     public function __construct(private EncoderFactoryInterface $encoderFactory)
