@@ -1,0 +1,5 @@
+/docs                   export-ignore
+/.docker                export-ignore
+/.github                export-ignore
+/adr                    export-ignore
+docker-compose.*.yml    export-ignore
