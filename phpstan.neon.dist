@@ -9,7 +9,7 @@ parameters:
     paths:
         - 'src/'
 
-    excludes_analyse:
+    excludePaths:
         # Test dependencies
         - '**/spec/**.php'
         - '**/Bundle/*/test/**.php'
@@ -24,10 +24,6 @@ parameters:
 
         # Deprecated classes
         - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
-
-        # Symfony 5.1+ hotfixes
-        - 'src/Sylius/Bundle/ApiBundle/DependencyInjection/Compiler/ReflectionExtractorHotfixPass.php'
-        - 'src/Sylius/Bundle/ApiBundle/PropertyInfo/Extractor/ReflectionExtractor.php'
 
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
