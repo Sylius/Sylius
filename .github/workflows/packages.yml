@@ -117,7 +117,7 @@ jobs:
             -
                 name: Remove Specifications not supported on Symfony >= 6.0
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                if: ${{ true != contains( matrix.symfony, '^5.4' ) && matrix.package == 'Bundle/UserBundle }}
+                if: ${{ true != contains( matrix.symfony, '^5.4' ) && matrix.package == 'Bundle/UserBundle' }}
                 run: |
                     rm spec/Security/UserPasswordEncoderSpec
 
