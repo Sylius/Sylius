@@ -115,6 +115,13 @@ jobs:
                 if: always() && matrix.package == 'Bundle/ApiBundle'
 
             -
+                name: Remove Specifications not supported on Symfony >= 6.0
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: ${{ true != contains( matrix.symfony, '^5.4' ) && matrix.package == 'Bundle/UserBundle }}
+                run: |
+                    rm spec/Security/UserPasswordEncoderSpec
+
+            -
                 name: Run PHPSpec
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
