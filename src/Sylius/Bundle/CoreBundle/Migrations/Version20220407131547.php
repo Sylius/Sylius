@@ -27,9 +27,19 @@ final class Version20220407131547 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        if ($schema->hasTable('messenger_messages')) {
-            $this->addSql('ALTER TABLE messenger_messages CHANGE queue_name queue_name VARCHAR(190) NOT NULL');
+        if (!$schema->hasTable('messenger_messages')) {
+            return;
+        }
+
+        $existingIndexes = $this->getExistingIndexesNames('messenger_messages');
+
+        $this->addSql('ALTER TABLE messenger_messages CHANGE queue_name queue_name VARCHAR(190) NOT NULL');
+
+        if (!in_array('IDX_75EA56E0FB7336F0', $existingIndexes)) {
             $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
+        }
+
+        if (!in_array('IDX_75EA56E0E3BD61CE', $existingIndexes)) {
             $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
         }
     }
@@ -43,5 +53,17 @@ final class Version20220407131547 extends AbstractMigration
             $this->addSql('DROP INDEX IDX_75EA56E0E3BD61CE ON messenger_messages');
             $this->addSql('ALTER TABLE messenger_messages CHANGE queue_name queue_name VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
         }
+    }
+
+    private function getExistingIndexesNames(string $tableName): array
+    {
+        $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
+        $indexesNames = [];
+
+        foreach ($indexes as $index) {
+            $indexesNames[] = $index->getName();
+        }
+
+        return $indexesNames;
     }
 }
