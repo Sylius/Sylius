@@ -119,7 +119,7 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: ${{ true != contains( matrix.symfony, '^5.4' ) && matrix.package == 'Bundle/UserBundle' }}
                 run: |
-                    rm spec/Security/UserPasswordEncoderSpec
+                    rm spec/Security/UserPasswordEncoderSpec.php
 
             -
                 name: Run PHPSpec
