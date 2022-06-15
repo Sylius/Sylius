@@ -9,7 +9,7 @@ parameters:
     paths:
         - 'src/'
 
-    excludes_analyse:
+    excludePaths:
         # Test dependencies
         - '**/spec/**.php'
         - '**/Bundle/*/test/**.php'
