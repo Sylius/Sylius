@@ -145,9 +145,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
     {
         return array_reduce(
             $this->getUnits()->toArray(),
-            function (int $subtotal, BaseOrderItemUnitInterface $unit) {
-                return $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-            },
+            fn (int $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
             0
         );
     }

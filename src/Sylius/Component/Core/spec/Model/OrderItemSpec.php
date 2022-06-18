@@ -99,29 +99,25 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(10000);
     }
 
-    function its_subtotal_consist_of_sum_of_units_discounted_price(): void
-    {
+    function its_subtotal_consists_of_sum_of_units_discounted_price(
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
+    ): void {
         $this->setUnitPrice(10000);
 
-        $firstUnit = new OrderItemUnit($this->getWrappedObject());
-        $adjustment1 = new Adjustment();
-        $adjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-        $adjustment1->setAmount(-1667);
-        $firstUnit->addAdjustment($adjustment1);
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-1667);
+        $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
-        $secondUnit = new OrderItemUnit($this->getWrappedObject());
-        $adjustment2 = new Adjustment();
-        $adjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-        $adjustment2->setAmount(-1667);
-        $secondUnit->addAdjustment($adjustment2);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(400);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-3333);
+        $secondUnit->getTotal()->willReturn(10000);
+        $secondUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
-        $secondUnit = new OrderItemUnit($this->getWrappedObject());
-        $adjustment3 = new Adjustment();
-        $adjustment3->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-        $adjustment3->setAmount(-1666);
-        $secondUnit->addAdjustment($adjustment3);
+        $this->addUnit($firstUnit->getWrappedObject());
+        $this->addUnit($secondUnit->getWrappedObject());
 
-        $this->getSubtotal()->shouldReturn(25000);
+        $this->getSubtotal()->shouldReturn(15000);
     }
 
     function it_has_no_variant_by_default(): void
