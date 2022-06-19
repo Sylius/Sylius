@@ -64,6 +64,10 @@ Installing Sylius Plus as a plugin to a Sylius application
     # ...
         - { resource: "@SyliusPlusPlugin/Resources/config/config.yaml" }
 
+.. warning::
+
+    Make sure you are importing Sylius Plus configuration as the last resource. You can encounter problems with customization when it is not the last imported resource. Especially when Invoicing Plugin or Refund Plugin is installed.
+
 **5.** Configure Shop, Admin and Admin API routing:
 
 .. code-block:: yaml
