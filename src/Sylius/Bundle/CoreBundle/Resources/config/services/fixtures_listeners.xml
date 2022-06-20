@@ -22,5 +22,11 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
             <tag name="sylius_fixtures.listener" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener" public="false">
+            <argument type="service" id="filesystem" />
+            <argument>%sylius_core.images_dir%</argument>
+            <tag name="sylius_fixtures.listener" />
+        </service>
     </services>
 </container>
