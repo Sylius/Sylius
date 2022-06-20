@@ -3,10 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Агуулга'
-            message_from: 'Ирсэн зурвас'
-            subject: 'Холбоо барих хүсэлт'
         order_confirmation:
             has_been_successfully_placed: 'амжилттай байрлууллаа.'
             subject: 'Захиалгын баталгаажуулалт'
