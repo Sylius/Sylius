@@ -25,6 +25,7 @@ $.fn.extend({
           search: 250,
         },
         forceSelection: false,
+        saveRemoteData: false,
         apiSettings: {
           dataType: 'JSON',
           cache: false,
