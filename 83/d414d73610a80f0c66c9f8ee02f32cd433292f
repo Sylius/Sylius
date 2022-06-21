@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2022-06-20T08:39:57Z
+
+> 👍 but the problem is we already have a [.gitkeep file](https://github.com/Sylius/Sylius/blob/master/public/media/image/.gitkeep) placed in `public/media/image/` directory, which will also be removed after running the fixtures and therefore would result in changed in the repository 💃 Maybe it would be better to remove all the things (files and catalogues) from the inside of images directory omitting the `.gitkeep` file? 🤔
+
+I've refactored this code by removing all files from the given directory and creating the `.gitkeep` file after that, as it seems to be the simplest solution to resolve the issue you mentioned, wdyt?
+
+---------------------------------------------------------------------------
+
+by AdamKasp at 2022-06-21T05:44:19Z
+
+Thanks, Grzegorz! :tada:
