@@ -36,7 +36,7 @@ final class RemoveUserPasswordEncoderPassTest extends AbstractCompilerPassTestCa
     }
 
     /** @test */
-    public function it_does_removes_user_password_encoder_definition_on_symfony_lower_than_6(): void
+    public function it_does_not_remove_user_password_encoder_definition_on_symfony_lower_than_6(): void
     {
         if (!interface_exists(EncoderFactoryInterface::class)) {
             $this->markTestSkipped('Password encoder should be removed on Symfony >= 6');
