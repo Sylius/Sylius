@@ -27,6 +27,7 @@ imports:
 
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
+    sylius_core.images_dir: "%sylius_core.public_dir%/media/image"
 
 doctrine:
     orm:
@@ -47,7 +48,7 @@ knp_gaufrette:
     adapters:
         sylius_image:
             local:
-                directory: "%sylius_core.public_dir%/media/image"
+                directory: "%sylius_core.images_dir%"
                 create: true
     filesystems:
         sylius_image:
@@ -57,7 +58,7 @@ liip_imagine:
     loaders:
         default:
             filesystem:
-                data_root: "%sylius_core.public_dir%/media/image"
+                data_root: "%sylius_core.images_dir%"
     resolvers:
         default:
             web_path:

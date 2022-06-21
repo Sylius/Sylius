@@ -6,6 +6,7 @@ sylius_fixtures:
         default:
             listeners:
                 orm_purger: ~
+                images_purger: ~
                 logger: ~
 
             fixtures:
