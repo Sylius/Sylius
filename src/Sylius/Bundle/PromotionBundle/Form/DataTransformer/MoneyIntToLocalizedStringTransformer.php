@@ -19,11 +19,9 @@ final class MoneyIntToLocalizedStringTransformer extends MoneyToLocalizedStringT
 {
     public function reverseTransform($value)
     {
-        if (!is_numeric($value)) {
-            return;
-        }
+        $result = parent::reverseTransform($value);
 
-        return (int) parent::reverseTransform($value);
+        return null !== $result ? (int) $result : null;
     }
 
     public function transform($value)
