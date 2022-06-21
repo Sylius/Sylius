@@ -1,34 +1,17 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
-{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
-
 <div class="ui middle aligned center aligned grid">
     <div class="column">
         {{ sylius_template_event('sylius.admin.login.before_form', {'form': form}) }}
 
-        {% if paths.logo is defined %}
-            <div style="max-width: 270px; margin: 0 auto; margin-bottom: 40px;">
-                <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
-            </div>
-        {% endif %}
+        {{ sylius_template_event('sylius.admin.login.logo', _context) }}
 
-        {% if last_error %}
-            <div class="ui left aligned basic segment">
-                {{ messages.error(last_error.messageKey) }}
-            </div>
-        {% endif %}
+        {{ sylius_template_event('sylius.admin.login.error', _context) }}
 
         {{ form_start(form, {'action': action|default('/'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
             <div class="ui left aligned very padded segment">
-                {{ form_row(form._username, {'value': last_username|default('')}) }}
-                {{ form_row(form._password) }}
-                {{ form_row(form._remember_me) }}
-                <input type="hidden" name="_csrf_admin_security_token" value="{{ csrf_token('admin_authenticate') }}">
-                <button type="submit" class="ui fluid large primary submit button">Login</button>
+                {{ sylius_template_event('sylius.admin.login.form.content', _context) }}
             </div>
-
-            {{ sylius_template_event('sylius.admin.login.form', {'form': form}) }}
-
-        {{ form_end(form, {'render_rest': false}) }}
+        {{ form_end(form) }}
     </div>
 </div>

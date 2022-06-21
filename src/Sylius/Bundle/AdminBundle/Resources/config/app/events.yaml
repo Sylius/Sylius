@@ -235,6 +235,33 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.layout.topbar_right
+                        
+        sylius.admin.grid.filters:
+            blocks:
+                title:
+                    template: "@SyliusUi/Grid/Filter/_title.html.twig"
+                    priority: 20
+                content:
+                    template: "@SyliusUi/Grid/Filter/_content.html.twig"
+                    priority: 10
+
+        sylius.admin.grid.content:
+            blocks:
+                content:
+                    template: "@SyliusUi/Grid/_content.html.twig"
+                    priority: 10
+
+        sylius.admin.grid.body:
+            blocks:
+                navigation:
+                    template: "@SyliusUi/Grid/_navigation.html.twig"
+                    priority: 30
+                table:
+                    template: "@SyliusUi/Grid/_table.html.twig"
+                    priority: 20
+                pagination:
+                    template: "@SyliusUi/Grid/_pagination.html.twig"
+                    priority: 10
 
         sylius.admin.order.update.form:
             blocks:
@@ -332,6 +359,27 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.login.after_content
+                        
+        sylius.admin.login.logo:
+            blocks:
+                logo: 
+                    template: "@SyliusUi/Security/_logo.html.twig"
+                    priority: 10
+                        
+        sylius.admin.login.error:
+            blocks:
+                logo: 
+                    template: "@SyliusUi/Security/_error.html.twig"
+                    priority: 10
+                        
+        sylius.admin.login.form.content:
+            blocks:
+                credentials:
+                    template: "@SyliusUi/Security/Form/_credentials.html.twig"
+                    priority: 20
+                submit:
+                    template: "@SyliusUi/Security/Form/_submit.html.twig"
+                    priority: 10
 
         sylius.admin.dashboard.header.content:
             blocks:

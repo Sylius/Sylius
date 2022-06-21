@@ -1,0 +1,21 @@
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+
+<div class="sylius-grid-nav">
+    {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+        <div class="sylius-grid-nav__bulk">
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="sylius-grid-nav__pagination">
+        {{ pagination.simple(data) }}
+    </div>
+    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+        <div class="sylius-grid-nav__perpage">
+            <div class="ui fluid one menu sylius-paginate">
+                {{ pagination.perPage(data, definition.limits) }}
+            </div>
+        </div>
+    {% endif %}
+</div>
