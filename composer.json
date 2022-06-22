@@ -121,7 +121,6 @@
         "symfony/string": "^5.4",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^5.4",
-        "symfony/thanks": "^1.2",
         "symfony/translation": "^5.4",
         "symfony/translation-contracts": "^2.5",
         "symfony/twig-bundle": "^5.4",
@@ -244,7 +243,11 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        }
     },
     "extra": {
         "branch-alias": {
