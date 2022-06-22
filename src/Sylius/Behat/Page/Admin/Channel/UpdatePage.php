@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -97,7 +99,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function getMenuTaxon(): string
     {
-        return $this->getElement('menu_taxon')->getParent()->find('css', '.search > .text')->getText();
+        $element = $this->getElement('menu_taxon');
+
+        if (
+            $this->getDriver() instanceof Selenium2Driver ||
+            $this->getDriver() instanceof ChromeDriver
+        ) {
+            $this->getDocument()->waitFor(1, function () use ($element) {
+                return $element->getText() !== '';
+            });
+        }
+
+        return $element->getText();
     }
 
     public function getUsedTheme(): string
@@ -125,7 +138,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
-            'menu_taxon' => '#sylius_channel_menuTaxon',
+            'menu_taxon' => '#sylius_channel_menuTaxon ~ .text',
             'name' => '#sylius_channel_name',
             'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
         ]);
