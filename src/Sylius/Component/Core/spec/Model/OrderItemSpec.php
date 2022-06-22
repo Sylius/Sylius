@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Model\VersionedInterface;
 
@@ -97,24 +99,25 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(10000);
     }
 
-    function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
+    function its_subtotal_consists_of_sum_of_units_discounted_price(
         OrderItemUnitInterface $firstUnit,
-        OrderItemUnitInterface $secondUnit
+        OrderItemUnitInterface $secondUnit,
     ): void {
         $this->setUnitPrice(10000);
 
-        $firstUnit->getOrderItem()->willReturn($this);
-        $firstUnit->getTotal()->willReturn(9000);
-        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-1667);
+        $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
-        $secondUnit->getOrderItem()->willReturn($this);
-        $secondUnit->getTotal()->willReturn(9000);
-        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(400);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-3333);
+        $secondUnit->getTotal()->willReturn(10000);
+        $secondUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
-        $this->addUnit($firstUnit);
-        $this->addUnit($secondUnit);
+        $this->addUnit($firstUnit->getWrappedObject());
+        $this->addUnit($secondUnit->getWrappedObject());
 
-        $this->getSubtotal()->shouldReturn(19000);
+        $this->getSubtotal()->shouldReturn(15000);
     }
 
     function it_has_no_variant_by_default(): void
