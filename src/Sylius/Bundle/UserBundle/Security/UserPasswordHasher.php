@@ -32,7 +32,7 @@ final class UserPasswordHasher implements UserPasswordEncoderInterface, UserPass
     public function hash(CredentialsHolderInterface $user): string
     {
         /** @psalm-suppress InvalidArgument */
-        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user);
+        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
 
         return $passwordHasher->hash($user->getPlainPassword(), $user->getSalt());
     }
