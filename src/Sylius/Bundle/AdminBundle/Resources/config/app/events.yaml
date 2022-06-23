@@ -238,9 +238,6 @@ sylius_ui:
                         
         sylius.admin.grid.filters:
             blocks:
-                title:
-                    template: "@SyliusUi/Grid/Filter/_title.html.twig"
-                    priority: 20
                 content:
                     template: "@SyliusUi/Grid/Filter/_content.html.twig"
                     priority: 10
