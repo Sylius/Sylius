@@ -288,8 +288,15 @@ sylius_ui:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 30
                     context:
                         event: sylius.admin.login.before_form
+                logo:
+                    template: "@SyliusUi/Security/_logo.html.twig"
+                    priority: 20
+                error:
+                    template: "@SyliusUi/Security/_error.html.twig"
+                    priority: 10
 
         sylius.admin.login.form:
             blocks:
@@ -359,18 +366,6 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.login.after_content
-                        
-        sylius.admin.login.logo:
-            blocks:
-                logo: 
-                    template: "@SyliusUi/Security/_logo.html.twig"
-                    priority: 10
-                        
-        sylius.admin.login.error:
-            blocks:
-                logo: 
-                    template: "@SyliusUi/Security/_error.html.twig"
-                    priority: 10
                         
         sylius.admin.login.form.content:
             blocks:

@@ -2,11 +2,7 @@
 
 <div class="ui middle aligned center aligned grid">
     <div class="column">
-        {{ sylius_template_event('sylius.admin.login.before_form', {'form': form}) }}
-
-        {{ sylius_template_event('sylius.admin.login.logo', _context) }}
-
-        {{ sylius_template_event('sylius.admin.login.error', _context) }}
+        {{ sylius_template_event('sylius.admin.login.before_form', _context) }}
 
         {{ form_start(form, {'action': action|default('/'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
             <div class="ui left aligned very padded segment">
