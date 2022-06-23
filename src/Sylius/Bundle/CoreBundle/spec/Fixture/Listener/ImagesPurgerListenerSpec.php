@@ -27,7 +27,8 @@ final class ImagesPurgerListenerSpec extends ObjectBehavior
 
     public function it_removes_images_before_fixture_suite(Filesystem $filesystem, SuiteInterface $suite): void
     {
-        $filesystem->remove('/media/*')->shouldBeCalled();
+        $filesystem->remove('/media')->shouldBeCalled();
+        $filesystem->mkdir('/media')->shouldBeCalled();
         $filesystem->touch('/media/.gitkeep')->shouldBeCalled();
 
         $this->beforeSuite(new SuiteEvent($suite->getWrappedObject()), []);
