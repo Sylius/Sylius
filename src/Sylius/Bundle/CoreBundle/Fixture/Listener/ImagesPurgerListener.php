@@ -26,7 +26,8 @@ final class ImagesPurgerListener extends AbstractListener implements BeforeSuite
 
     public function beforeSuite(SuiteEvent $suiteEvent, array $options): void
     {
-        $this->filesystem->remove($this->imagesDirectoryPath . '/*');
+        $this->filesystem->remove($this->imagesDirectoryPath);
+        $this->filesystem->mkdir($this->imagesDirectoryPath);
         $this->filesystem->touch($this->imagesDirectoryPath . '/.gitkeep');
     }
 
