@@ -4,9 +4,9 @@
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 {% set criteria = app.request.query.get('criteria') %}
 
-{{ sylius_template_event('sylius.admin.grid.filters', _context) }}
+{{ sylius_template_event('sylius.grid.filters', _context) }}
 
 <div class="ui hidden divider"></div>
 <div class="sylius-grid-wrapper">
-    {{ sylius_template_event('sylius.admin.grid.body', _context) }}
+    {{ sylius_template_event('sylius.grid.body', _context) }}
 </div>

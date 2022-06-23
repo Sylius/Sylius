@@ -8,6 +8,8 @@
             <div class="ui left aligned very padded segment">
                 {{ sylius_template_event('sylius.admin.login.form.content', _context) }}
             </div>
-        {{ form_end(form) }}
+
+            {{ sylius_template_event('sylius.admin.login.form', _context) }}
+        {{ form_end(form, {'render_rest': false}) }}
     </div>
 </div>
