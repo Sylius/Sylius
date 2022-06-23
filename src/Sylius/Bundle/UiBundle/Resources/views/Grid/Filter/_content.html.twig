@@ -1,0 +1,25 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% if definition.enabledFilters|length > 0 %}
+    <div class="ui hidden divider"></div>
+    <div class="ui styled fluid accordion">
+        <div class="title {% if criteria is not null %}active{% endif %}">
+            <i class="dropdown icon"></i>
+            <i class="filter icon"></i>
+            {{ 'sylius.ui.filters'|trans }}
+        </div>
+        <div class="content {% if criteria is not null %}active{% endif %}">
+            <form method="get" action="{{ path }}" class="ui loadable form" novalidate>
+                <div class="sylius-filters">
+                    {% for filter in definition.enabledFilters|filter(filter => filter.enabled)|sort_by('position') %}
+                        <div class="sylius-filters__field">
+                            {{ sylius_grid_render_filter(grid, filter) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ buttons.filter() }}
+                {{ buttons.resetFilters(path) }}
+            </form>
+        </div>
+    </div>
+{% endif %}

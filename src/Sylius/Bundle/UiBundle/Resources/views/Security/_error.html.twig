@@ -1,0 +1,7 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% if last_error %}
+    <div class="ui left aligned basic segment">
+        {{ messages.error(last_error.messageKey) }}
+    </div>
+{% endif %}
