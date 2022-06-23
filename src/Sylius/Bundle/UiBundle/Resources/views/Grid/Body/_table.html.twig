@@ -1,0 +1,21 @@
+{% import '@SyliusUi/Macro/table.html.twig' as table %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% if data|length > 0 %}
+    <div class="ui segment spaceless sylius-grid-table-wrapper">
+        <table class="ui sortable stackable very basic celled table" {{ sylius_test_html_attribute('grid-table') }}>
+            <thead>
+            <tr>
+                {{ table.headers(grid, definition, app.request.attributes) }}
+            </tr>
+            </thead>
+            <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
+            {% for row in data %}
+                {{ table.row(grid, definition, row) }}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}
