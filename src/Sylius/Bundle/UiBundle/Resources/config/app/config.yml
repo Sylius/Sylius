@@ -1,3 +1,6 @@
+imports:
+    - { resource: "@SyliusUiBundle/Resources/config/app/events.yaml" }
+
 sylius_grid:
     templates:
         action:
