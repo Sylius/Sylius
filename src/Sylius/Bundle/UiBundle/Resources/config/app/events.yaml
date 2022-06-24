@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_ui:
+    events:
+        sylius.grid:
+            blocks:
+                content:
+                    template: "@SyliusUi/Grid/_content.html.twig"
+                    priority: 10
+
+        sylius.grid.body:
+            blocks:
+                navigation:
+                    template: "@SyliusUi/Grid/Body/_navigation.html.twig"
+                    priority: 30
+                table:
+                    template: "@SyliusUi/Grid/Body/_table.html.twig"
+                    priority: 20
+                pagination:
+                    template: "@SyliusUi/Grid/Body/_pagination.html.twig"
+                    priority: 10
+        
+        sylius.grid.filters:
+            blocks:
+                content:
+                    template: "@SyliusUi/Grid/Filter/_content.html.twig"
+                    priority: 10
