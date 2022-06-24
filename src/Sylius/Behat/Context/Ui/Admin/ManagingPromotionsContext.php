@@ -196,8 +196,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
         string $actionType,
+        string $percentage,
         string $channelName,
-        string $percentage = null
     ): void {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
