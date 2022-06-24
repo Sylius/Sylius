@@ -26,28 +26,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingZonesContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
-    private string $zoneMemberClass;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter,
-        string $zoneMemberClass
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
+        private string $zoneMemberClass
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
-        $this->zoneMemberClass = $zoneMemberClass;
     }
 
     /**
@@ -465,10 +450,7 @@ final class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @param CountryInterface|ZoneInterface|ProvinceInterface $objectToRemove
-     */
-    private function removeZoneMember($objectToRemove): void
+    private function removeZoneMember(CountryInterface|ProvinceInterface|ZoneInterface $objectToRemove): void
     {
         $iri = $this->iriConverter->getItemIriFromResourceClass($this->zoneMemberClass, ['code' => $objectToRemove->getCode()]);
 

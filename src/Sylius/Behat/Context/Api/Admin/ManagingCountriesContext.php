@@ -25,28 +25,13 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCountriesContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $provincesClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $provincesClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ApiClientInterface $provincesClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter
     ) {
-        $this->client = $client;
-        $this->provincesClient = $provincesClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
-        $this->iriConverter = $iriConverter;
     }
 
     /**
@@ -157,7 +142,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass(get_class($province), ['code' => $province->getCode()]);
+        $iri = $this->iriConverter->getItemIriFromResourceClass($province::class, ['code' => $province->getCode()]);
 
         $provinces = $this->responseChecker->getValue($this->client->show($country->getCode()), 'provinces');
         foreach ($provinces as $countryProvince) {

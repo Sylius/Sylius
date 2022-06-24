@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class CatalogPromotionContext implements Context
 {
-    private RepositoryInterface $catalogPromotionRepository;
-
-    public function __construct(RepositoryInterface $catalogPromotionRepository)
+    public function __construct(private RepositoryInterface $catalogPromotionRepository)
     {
-        $this->catalogPromotionRepository = $catalogPromotionRepository;
     }
 
     /**

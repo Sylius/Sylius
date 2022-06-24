@@ -19,19 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 {
-    private AbstractBrowser $client;
-
-    private string $section;
-
-    private SharedStorageInterface $sharedStorage;
-
     private array $request = [];
 
-    public function __construct(AbstractBrowser $client, string $section, SharedStorageInterface $sharedStorage)
-    {
-        $this->client = $client;
-        $this->section = $section;
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(
+        private AbstractBrowser $client,
+        private string $section,
+        private SharedStorageInterface $sharedStorage
+    ) {
     }
 
     public function prepareLoginRequest(): void

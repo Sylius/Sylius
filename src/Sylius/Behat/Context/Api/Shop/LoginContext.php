@@ -30,34 +30,16 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    private ApiSecurityClientInterface $apiSecurityClient;
-
-    private ApiClientInterface $apiClient;
-
-    private IriConverterInterface $iriConverter;
-
-    private AbstractBrowser $shopAuthenticationTokenClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     private ?RequestInterface $request = null;
 
     public function __construct(
-        ApiSecurityClientInterface $apiSecurityClient,
-        ApiClientInterface $apiClient,
-        IriConverterInterface $iriConverter,
-        AbstractBrowser $shopAuthenticationTokenClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiSecurityClientInterface $apiSecurityClient,
+        private ApiClientInterface $apiClient,
+        private IriConverterInterface $iriConverter,
+        private AbstractBrowser $shopAuthenticationTokenClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->apiSecurityClient = $apiSecurityClient;
-        $this->apiClient = $apiClient;
-        $this->iriConverter = $iriConverter;
-        $this->shopAuthenticationTokenClient = $shopAuthenticationTokenClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

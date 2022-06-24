@@ -23,24 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomerGroupsContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private IndexPageInterface $indexPage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private UpdatePageInterface $updatePage;
-
     public function __construct(
-        CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
-        CurrentPageResolverInterface $currentPageResolver,
-        UpdatePageInterface $updatePage
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private UpdatePageInterface $updatePage
     ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->updatePage = $updatePage;
     }
 
     /**

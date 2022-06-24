@@ -30,32 +30,14 @@ final class ManagingProductsContext implements Context
 {
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $adminUsersClient;
-
-    private ApiClientInterface $productReviewsClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $adminUsersClient,
-        ApiClientInterface $productReviewsClient,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ApiClientInterface $adminUsersClient,
+        private ApiClientInterface $productReviewsClient,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
-        $this->adminUsersClient = $adminUsersClient;
-        $this->productReviewsClient = $productReviewsClient;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

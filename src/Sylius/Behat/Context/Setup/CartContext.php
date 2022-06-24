@@ -31,24 +31,12 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartContext implements Context
 {
-    private MessageBusInterface $commandBus;
-
-    private ProductVariantResolverInterface $productVariantResolver;
-
-    private RandomnessGeneratorInterface $generator;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        MessageBusInterface $commandBus,
-        ProductVariantResolverInterface $productVariantResolver,
-        RandomnessGeneratorInterface $generator,
-        SharedStorageInterface $sharedStorage
+        private MessageBusInterface $commandBus,
+        private ProductVariantResolverInterface $productVariantResolver,
+        private RandomnessGeneratorInterface $generator,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->commandBus = $commandBus;
-        $this->productVariantResolver = $productVariantResolver;
-        $this->generator = $generator;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

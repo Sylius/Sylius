@@ -22,14 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class AjaxContext implements Context
 {
-    private AbstractBrowser $client;
-
-    private SessionInterface $session;
-
-    public function __construct(AbstractBrowser $client, SessionInterface $session)
-    {
-        $this->client = $client;
-        $this->session = $session;
+    public function __construct(
+        private AbstractBrowser $client,
+        private SessionInterface $session
+    ) {
     }
 
     /**

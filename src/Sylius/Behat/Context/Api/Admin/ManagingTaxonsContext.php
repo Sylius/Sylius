@@ -23,17 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
-    private AbstractBrowser $client;
-
-    private SessionInterface $session;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    public function __construct(AbstractBrowser $client, SessionInterface $session, ResponseCheckerInterface $responseChecker)
-    {
-        $this->client = $client;
-        $this->session = $session;
-        $this->responseChecker = $responseChecker;
+    public function __construct(
+        private AbstractBrowser $client,
+        private SessionInterface $session,
+        private ResponseCheckerInterface $responseChecker
+    ) {
     }
 
     /**

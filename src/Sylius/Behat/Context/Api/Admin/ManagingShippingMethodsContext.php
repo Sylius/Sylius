@@ -29,28 +29,13 @@ final class ManagingShippingMethodsContext implements Context
 {
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
-    private ApiClientInterface $client;
-
-    private ApiClientInterface $adminUsersClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ApiClientInterface $adminUsersClient,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ApiClientInterface $adminUsersClient,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
-        $this->adminUsersClient = $adminUsersClient;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

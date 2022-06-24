@@ -27,32 +27,14 @@ use Webmozart\Assert\Assert;
 
 final class PaymentContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
-    private ExampleFactoryInterface $paymentMethodExampleFactory;
-
-    private FactoryInterface $paymentMethodTranslationFactory;
-
-    private ObjectManager $paymentMethodManager;
-
-    private array $gatewayFactories;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ExampleFactoryInterface $paymentMethodExampleFactory,
-        FactoryInterface $paymentMethodTranslationFactory,
-        ObjectManager $paymentMethodManager,
-        array $gatewayFactories
+        private SharedStorageInterface $sharedStorage,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ExampleFactoryInterface $paymentMethodExampleFactory,
+        private FactoryInterface $paymentMethodTranslationFactory,
+        private ObjectManager $paymentMethodManager,
+        private array $gatewayFactories
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->paymentMethodRepository = $paymentMethodRepository;
-        $this->paymentMethodExampleFactory = $paymentMethodExampleFactory;
-        $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
-        $this->paymentMethodManager = $paymentMethodManager;
-        $this->gatewayFactories = $gatewayFactories;
     }
 
     /**

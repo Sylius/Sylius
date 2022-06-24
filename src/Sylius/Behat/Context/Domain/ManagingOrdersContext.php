@@ -27,40 +27,16 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private RepositoryInterface $orderItemRepository;
-
-    private RepositoryInterface $addressRepository;
-
-    private RepositoryInterface $adjustmentRepository;
-
-    private ObjectManager $orderManager;
-
-    private ProductVariantResolverInterface $variantResolver;
-
-    private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        OrderRepositoryInterface $orderRepository,
-        RepositoryInterface $orderItemRepository,
-        RepositoryInterface $addressRepository,
-        RepositoryInterface $adjustmentRepository,
-        ObjectManager $orderManager,
-        ProductVariantResolverInterface $variantResolver,
-        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
+        private SharedStorageInterface $sharedStorage,
+        private OrderRepositoryInterface $orderRepository,
+        private RepositoryInterface $orderItemRepository,
+        private RepositoryInterface $addressRepository,
+        private RepositoryInterface $adjustmentRepository,
+        private ObjectManager $orderManager,
+        private ProductVariantResolverInterface $variantResolver,
+        private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->orderRepository = $orderRepository;
-        $this->orderItemRepository = $orderItemRepository;
-        $this->addressRepository = $addressRepository;
-        $this->adjustmentRepository = $adjustmentRepository;
-        $this->orderManager = $orderManager;
-        $this->variantResolver = $variantResolver;
-        $this->unpaidOrdersStateUpdater = $unpaidOrdersStateUpdater;
     }
 
     /**

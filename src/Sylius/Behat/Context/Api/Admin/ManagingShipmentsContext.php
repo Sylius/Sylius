@@ -31,24 +31,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingShipmentsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ApiIriClientInterface $iriClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
     public function __construct(
-        ApiClientInterface $client,
-        ApiIriClientInterface $iriClient,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        private ApiClientInterface $client,
+        private ApiIriClientInterface $iriClient,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter
     ) {
-        $this->client = $client;
-        $this->iriClient = $iriClient;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
     }
 
     /**

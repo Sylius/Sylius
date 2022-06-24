@@ -23,20 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutShippingContext implements Context
 {
-    private SelectShippingPageInterface $selectShippingPage;
-
-    private SelectPaymentPageInterface $selectPaymentPage;
-
-    private CompletePageInterface $completePage;
-
     public function __construct(
-        SelectShippingPageInterface $selectShippingPage,
-        SelectPaymentPageInterface $selectPaymentPage,
-        CompletePageInterface $completePage
+        private SelectShippingPageInterface $selectShippingPage,
+        private SelectPaymentPageInterface $selectPaymentPage,
+        private CompletePageInterface $completePage
     ) {
-        $this->selectShippingPage = $selectShippingPage;
-        $this->selectPaymentPage = $selectPaymentPage;
-        $this->completePage = $completePage;
     }
 
     /**
@@ -214,7 +205,7 @@ final class CheckoutShippingContext implements Context
 
         try {
             $this->selectShippingPage->nextStep();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

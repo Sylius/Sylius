@@ -20,11 +20,8 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ManagingProductVariantsPricesContext implements Context
 {
-    private UpdatePageInterface $updatePage;
-
-    public function __construct(UpdatePageInterface $updatePage)
+    public function __construct(private UpdatePageInterface $updatePage)
     {
-        $this->updatePage = $updatePage;
     }
 
     /**

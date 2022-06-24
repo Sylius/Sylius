@@ -39,64 +39,22 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private CreateSimpleProductPageInterface $createSimpleProductPage;
-
-    private CreateConfigurableProductPageInterface $createConfigurableProductPage;
-
-    private IndexPageInterface $indexPage;
-
-    private UpdateSimpleProductPageInterface $updateSimpleProductPage;
-
-    private UpdateConfigurableProductPageInterface $updateConfigurableProductPage;
-
-    private ProductReviewIndexPageInterface $productReviewIndexPage;
-
-    private IndexPerTaxonPageInterface $indexPerTaxonPage;
-
-    private VariantCreatePageInterface $variantCreatePage;
-
-    private GeneratePageInterface $variantGeneratePage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private VariantUpdatePageInterface $variantUpdatePage;
-
-    private JavaScriptTestHelperInterface $testHelper;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        CreateSimpleProductPageInterface $createSimpleProductPage,
-        CreateConfigurableProductPageInterface $createConfigurableProductPage,
-        IndexPageInterface $indexPage,
-        UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
-        ProductReviewIndexPageInterface $productReviewIndexPage,
-        IndexPerTaxonPageInterface $indexPerTaxonPage,
-        VariantCreatePageInterface $variantCreatePage,
-        GeneratePageInterface $variantGeneratePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker,
-        VariantUpdatePageInterface $variantUpdatePage,
-        JavaScriptTestHelperInterface $testHelper
+        private SharedStorageInterface $sharedStorage,
+        private CreateSimpleProductPageInterface $createSimpleProductPage,
+        private CreateConfigurableProductPageInterface $createConfigurableProductPage,
+        private IndexPageInterface $indexPage,
+        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
+        private UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
+        private ProductReviewIndexPageInterface $productReviewIndexPage,
+        private IndexPerTaxonPageInterface $indexPerTaxonPage,
+        private VariantCreatePageInterface $variantCreatePage,
+        private GeneratePageInterface $variantGeneratePage,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private NotificationCheckerInterface $notificationChecker,
+        private VariantUpdatePageInterface $variantUpdatePage,
+        private JavaScriptTestHelperInterface $testHelper
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->createSimpleProductPage = $createSimpleProductPage;
-        $this->createConfigurableProductPage = $createConfigurableProductPage;
-        $this->indexPage = $indexPage;
-        $this->updateSimpleProductPage = $updateSimpleProductPage;
-        $this->updateConfigurableProductPage = $updateConfigurableProductPage;
-        $this->productReviewIndexPage = $productReviewIndexPage;
-        $this->indexPerTaxonPage = $indexPerTaxonPage;
-        $this->variantCreatePage = $variantCreatePage;
-        $this->variantGeneratePage = $variantGeneratePage;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
-        $this->variantUpdatePage = $variantUpdatePage;
-        $this->testHelper = $testHelper;
     }
 
     /**
@@ -1209,10 +1167,7 @@ final class ManagingProductsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
 
-    /**
-     * @return IndexPageInterface|IndexPerTaxonPageInterface|CreateSimpleProductPageInterface|CreateConfigurableProductPageInterface|UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface
-     */
-    private function resolveCurrentPage()
+    private function resolveCurrentPage(): CreateConfigurableProductPageInterface|CreateSimpleProductPageInterface|\Sylius\Behat\Page\Admin\Product\IndexPageInterface|IndexPerTaxonPageInterface|UpdateConfigurableProductPageInterface|UpdateSimpleProductPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->indexPage,

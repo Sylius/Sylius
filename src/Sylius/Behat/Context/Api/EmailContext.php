@@ -23,20 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private EmailCheckerInterface $emailChecker;
-
-    private TranslatorInterface $translator;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        EmailCheckerInterface $emailChecker,
-        TranslatorInterface $translator
+        private SharedStorageInterface $sharedStorage,
+        private EmailCheckerInterface $emailChecker,
+        private TranslatorInterface $translator
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->emailChecker = $emailChecker;
-        $this->translator = $translator;
     }
 
     /**

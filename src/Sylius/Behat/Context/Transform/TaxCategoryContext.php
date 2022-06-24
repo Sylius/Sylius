@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class TaxCategoryContext implements Context
 {
-    private TaxCategoryRepositoryInterface $taxCategoryRepository;
-
-    public function __construct(TaxCategoryRepositoryInterface $taxCategoryRepository)
+    public function __construct(private TaxCategoryRepositoryInterface $taxCategoryRepository)
     {
-        $this->taxCategoryRepository = $taxCategoryRepository;
     }
 
     /**

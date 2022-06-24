@@ -24,28 +24,13 @@ use Webmozart\Assert\Assert;
 
 final class AddressContext implements Context
 {
-    private ApiClientInterface $addressClient;
-
-    private ApiClientInterface $customerClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private IriConverterInterface $iriConverter;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $addressClient,
-        ApiClientInterface $customerClient,
-        ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $addressClient,
+        private ApiClientInterface $customerClient,
+        private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->addressClient = $addressClient;
-        $this->customerClient = $customerClient;
-        $this->responseChecker = $responseChecker;
-        $this->iriConverter = $iriConverter;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

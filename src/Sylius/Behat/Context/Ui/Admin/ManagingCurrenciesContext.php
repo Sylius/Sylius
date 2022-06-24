@@ -22,20 +22,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCurrenciesContext implements Context
 {
-    private IndexPageInterface $indexPage;
-
-    private CreatePageInterface $createPage;
-
-    private UpdatePageInterface $updatePage;
-
     public function __construct(
-        IndexPageInterface $indexPage,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage
+        private IndexPageInterface $indexPage,
+        private CreatePageInterface $createPage,
+        private UpdatePageInterface $updatePage
     ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
     }
 
     /**

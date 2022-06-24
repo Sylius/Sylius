@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 class ShippingCategoryContext implements Context
 {
-    private RepositoryInterface $shippingCategoryRepository;
-
-    public function __construct(RepositoryInterface $shippingCategoryRepository)
+    public function __construct(private RepositoryInterface $shippingCategoryRepository)
     {
-        $this->shippingCategoryRepository = $shippingCategoryRepository;
     }
 
     /**

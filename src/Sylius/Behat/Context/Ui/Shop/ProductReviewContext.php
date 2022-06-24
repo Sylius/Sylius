@@ -22,16 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
 {
-    private CreatePageInterface $createPage;
-
-    private NotificationCheckerInterface $notificationChecker;
-
     public function __construct(
-        CreatePageInterface $createPage,
-        NotificationCheckerInterface $notificationChecker
+        private CreatePageInterface $createPage,
+        private NotificationCheckerInterface $notificationChecker
     ) {
-        $this->createPage = $createPage;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**

@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class LocaleContext implements Context
 {
-    private HomePageInterface $homePage;
-
-    public function __construct(HomePageInterface $homePage)
+    public function __construct(private HomePageInterface $homePage)
     {
-        $this->homePage = $homePage;
     }
 
     /**
@@ -89,7 +86,7 @@ final class LocaleContext implements Context
             $this->homePage->tryToOpen();
 
             throw new \Exception('The page should not be able to open.');
-        } catch (LocaleNotFoundException $e) {
+        } catch (LocaleNotFoundException) {
         }
     }
 }

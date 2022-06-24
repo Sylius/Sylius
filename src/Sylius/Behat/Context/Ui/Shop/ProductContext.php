@@ -29,32 +29,14 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ShowPageInterface $showPage;
-
-    private IndexPageInterface $indexPage;
-
-    private ProductReviewIndexPageInterface $productReviewsIndexPage;
-
-    private ErrorPageInterface $errorPage;
-
-    private VerticalMenuElementInterface $verticalMenuElement;
-
-    private ChannelContextSetterInterface $channelContextSetter;
-
     public function __construct(
-        ShowPageInterface $showPage,
-        IndexPageInterface $indexPage,
-        ProductReviewIndexPageInterface $productReviewsIndexPage,
-        ErrorPageInterface $errorPage,
-        VerticalMenuElementInterface $verticalMenuElement,
-        ChannelContextSetterInterface $channelContextSetter
+        private ShowPageInterface $showPage,
+        private IndexPageInterface $indexPage,
+        private ProductReviewIndexPageInterface $productReviewsIndexPage,
+        private ErrorPageInterface $errorPage,
+        private VerticalMenuElementInterface $verticalMenuElement,
+        private ChannelContextSetterInterface $channelContextSetter
     ) {
-        $this->showPage = $showPage;
-        $this->indexPage = $indexPage;
-        $this->productReviewsIndexPage = $productReviewsIndexPage;
-        $this->errorPage = $errorPage;
-        $this->verticalMenuElement = $verticalMenuElement;
-        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**

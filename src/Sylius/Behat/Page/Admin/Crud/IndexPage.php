@@ -23,21 +23,14 @@ use Webmozart\Assert\Assert;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    private TableAccessorInterface $tableAccessor;
-
-    private string $routeName;
-
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        TableAccessorInterface $tableAccessor,
-        string $routeName
+        private TableAccessorInterface $tableAccessor,
+        private string $routeName
     ) {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->tableAccessor = $tableAccessor;
-        $this->routeName = $routeName;
     }
 
     public function isSingleResourceOnPage(array $parameters): bool
@@ -46,9 +39,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
             return 1 === count($rows);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return false;
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
     }
@@ -76,9 +69,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             }
 
             return null !== $rows[0]->find('css', $element);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return false;
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
     }
@@ -87,7 +80,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         try {
             return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return 0;
         }
     }

@@ -20,11 +20,8 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 final class ManagingProductTaxonsContext implements Context
 {
-    private UpdateSimpleProductPageInterface $updateSimpleProductPage;
-
-    public function __construct(UpdateSimpleProductPageInterface $updateSimpleProductPage)
+    public function __construct(private UpdateSimpleProductPageInterface $updateSimpleProductPage)
     {
-        $this->updateSimpleProductPage = $updateSimpleProductPage;
     }
 
     /**

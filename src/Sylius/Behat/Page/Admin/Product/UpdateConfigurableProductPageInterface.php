@@ -34,9 +34,6 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function isImageWithTypeDisplayed(string $type): bool;
 
-    /**
-     * @param string $type
-     */
     public function attachImage(string $path, string $type = null): void;
 
     public function changeImageWithType(string $type, string $path): void;

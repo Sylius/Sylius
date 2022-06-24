@@ -21,20 +21,11 @@ use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
 {
-    private ApiClientInterface $productsClient;
-
-    private ApiClientInterface $taxonsClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
     public function __construct(
-        ApiClientInterface $productsClient,
-        ApiClientInterface $taxonsClient,
-        ResponseCheckerInterface $responseChecker
+        private ApiClientInterface $productsClient,
+        private ApiClientInterface $taxonsClient,
+        private ResponseCheckerInterface $responseChecker
     ) {
-        $this->productsClient = $productsClient;
-        $this->taxonsClient = $taxonsClient;
-        $this->responseChecker = $responseChecker;
     }
 
     /**

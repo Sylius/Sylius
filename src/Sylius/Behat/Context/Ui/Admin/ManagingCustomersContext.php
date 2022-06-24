@@ -25,35 +25,17 @@ use Webmozart\Assert\Assert;
 
 final class ManagingCustomersContext implements Context
 {
-    private CustomerIndexPageInterface $indexPage;
-
-    private CreatePageInterface $createPage;
-
-    private UpdatePageInterface $updatePage;
-
-    private ShowPageInterface $showPage;
-
-    private \Sylius\Behat\Page\Admin\Crud\IndexPageInterface $ordersIndexPage;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
     /**
      * @param CustomerIndexPageInterface $indexPage
      */
     public function __construct(
-        CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        ShowPageInterface $showPage,
-        IndexPageInterface $ordersIndexPage,
-        CurrentPageResolverInterface $currentPageResolver
+        private CreatePageInterface $createPage,
+        private IndexPageInterface $indexPage,
+        private UpdatePageInterface $updatePage,
+        private ShowPageInterface $showPage,
+        private IndexPageInterface $ordersIndexPage,
+        private CurrentPageResolverInterface $currentPageResolver
     ) {
-        $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
-        $this->updatePage = $updatePage;
-        $this->showPage = $showPage;
-        $this->ordersIndexPage = $ordersIndexPage;
-        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**

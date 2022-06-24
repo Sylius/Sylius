@@ -22,10 +22,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityService implements SecurityServiceInterface
 {
-    private SessionInterface $session;
-
-    private CookieSetterInterface $cookieSetter;
-
     private string $sessionTokenVariable;
 
     private string $firewallContextName;
@@ -33,10 +29,11 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * @param string $firewallContextName
      */
-    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, $firewallContextName)
-    {
-        $this->session = $session;
-        $this->cookieSetter = $cookieSetter;
+    public function __construct(
+        private SessionInterface $session,
+        private CookieSetterInterface $cookieSetter,
+        $firewallContextName
+    ) {
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
     }

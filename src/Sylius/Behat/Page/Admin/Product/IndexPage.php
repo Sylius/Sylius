@@ -21,19 +21,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends CrudIndexPage implements IndexPageInterface
 {
-    private ImageExistenceCheckerInterface $imageExistenceChecker;
-
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        ImageExistenceCheckerInterface $imageExistenceChecker
+        private ImageExistenceCheckerInterface $imageExistenceChecker
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
-
-        $this->imageExistenceChecker = $imageExistenceChecker;
     }
 
     public function filter(): void

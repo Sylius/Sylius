@@ -21,11 +21,8 @@ use Webmozart\Assert\Assert;
 
 final class BrowsingProductContext implements Context
 {
-    private ShowPageInterface $showPage;
-
-    public function __construct(ShowPageInterface $showPage)
+    public function __construct(private ShowPageInterface $showPage)
     {
-        $this->showPage = $showPage;
     }
 
     /**

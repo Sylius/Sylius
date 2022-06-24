@@ -25,24 +25,12 @@ use Webmozart\Assert\Assert;
 
 final class OrderItemContext implements Context
 {
-    private ApiClientInterface $orderItemsClient;
-
-    private ApiClientInterface $orderItemUnitsClient;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $orderItemsClient,
-        ApiClientInterface $orderItemUnitsClient,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $orderItemsClient,
+        private ApiClientInterface $orderItemUnitsClient,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->orderItemsClient = $orderItemsClient;
-        $this->orderItemUnitsClient = $orderItemUnitsClient;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**

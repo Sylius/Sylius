@@ -23,17 +23,14 @@ use Webmozart\Assert\Assert;
 
 final class ShowingAvailablePluginsContext implements Context
 {
-    private KernelInterface $kernel;
-
     private ?Application $application = null;
 
     private ?CommandTester $tester = null;
 
     private ?Command $command = null;
 
-    public function __construct(KernelInterface $kernel)
+    public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**

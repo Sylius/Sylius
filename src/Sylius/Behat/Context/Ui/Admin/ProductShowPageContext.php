@@ -32,56 +32,20 @@ use Webmozart\Assert\Assert;
 
 final class ProductShowPageContext implements Context
 {
-    private IndexPageInterface $indexPage;
-
-    private ShowPageInterface $productShowPage;
-
-    private AssociationsElementInterface $associationsElement;
-
-    private AttributesElementInterface $attributesElement;
-
-    private DetailsElementInterface $detailsElement;
-
-    private MediaElementInterface $mediaElement;
-
-    private MoreDetailsElementInterface $moreDetailsElement;
-
-    private PricingElementInterface $pricingElement;
-
-    private ShippingElementInterface $shippingElement;
-
-    private TaxonomyElementInterface $taxonomyElement;
-
-    private OptionsElementInterface $optionsElement;
-
-    private VariantsElementInterface $variantsElement;
-
     public function __construct(
-        IndexPageInterface $indexPage,
-        ShowPageInterface $productShowPage,
-        AssociationsElementInterface $associationsElement,
-        AttributesElementInterface $attributesElement,
-        DetailsElementInterface $detailsElement,
-        MediaElementInterface $mediaElement,
-        MoreDetailsElementInterface $moreDetailsElement,
-        PricingElementInterface $pricingElement,
-        ShippingElementInterface $shippingElement,
-        TaxonomyElementInterface $taxonomyElement,
-        OptionsElementInterface $optionsElement,
-        VariantsElementInterface $variantsElement
+        private IndexPageInterface $indexPage,
+        private ShowPageInterface $productShowPage,
+        private AssociationsElementInterface $associationsElement,
+        private AttributesElementInterface $attributesElement,
+        private DetailsElementInterface $detailsElement,
+        private MediaElementInterface $mediaElement,
+        private MoreDetailsElementInterface $moreDetailsElement,
+        private PricingElementInterface $pricingElement,
+        private ShippingElementInterface $shippingElement,
+        private TaxonomyElementInterface $taxonomyElement,
+        private OptionsElementInterface $optionsElement,
+        private VariantsElementInterface $variantsElement
     ) {
-        $this->indexPage = $indexPage;
-        $this->productShowPage = $productShowPage;
-        $this->associationsElement = $associationsElement;
-        $this->attributesElement = $attributesElement;
-        $this->detailsElement = $detailsElement;
-        $this->mediaElement = $mediaElement;
-        $this->moreDetailsElement = $moreDetailsElement;
-        $this->pricingElement = $pricingElement;
-        $this->shippingElement = $shippingElement;
-        $this->taxonomyElement = $taxonomyElement;
-        $this->optionsElement = $optionsElement;
-        $this->variantsElement = $variantsElement;
     }
 
     /**

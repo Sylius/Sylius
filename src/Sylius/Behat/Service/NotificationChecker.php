@@ -20,18 +20,15 @@ use Webmozart\Assert\Assert;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {
-    private NotificationAccessorInterface $notificationAccessor;
-
-    public function __construct(NotificationAccessorInterface $notificationAccessor)
+    public function __construct(private NotificationAccessorInterface $notificationAccessor)
     {
-        $this->notificationAccessor = $notificationAccessor;
     }
 
     public function checkNotification(string $message, NotificationType $type): void
     {
         foreach ($this->notificationAccessor->getMessageElements() as $messageElement) {
             if (
-                false !== strpos($messageElement->getText(), $message) &&
+                str_contains($messageElement->getText(), $message) &&
                 $messageElement->hasClass($this->resolveClass($type))
             ) {
                 return;

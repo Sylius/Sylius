@@ -22,16 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private PromotionRepositoryInterface $promotionRepository;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        PromotionRepositoryInterface $promotionRepository
+        private SharedStorageInterface $sharedStorage,
+        private PromotionRepositoryInterface $promotionRepository
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->promotionRepository = $promotionRepository;
     }
 
     /**

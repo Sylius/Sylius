@@ -27,28 +27,13 @@ use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private SummaryPageInterface $summaryPage;
-
-    private ShowPageInterface $productShowPage;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private SessionManagerInterface $sessionManager;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        SummaryPageInterface $summaryPage,
-        ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker,
-        SessionManagerInterface $sessionManager
+        private SharedStorageInterface $sharedStorage,
+        private SummaryPageInterface $summaryPage,
+        private ShowPageInterface $productShowPage,
+        private NotificationCheckerInterface $notificationChecker,
+        private SessionManagerInterface $sessionManager
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->summaryPage = $summaryPage;
-        $this->productShowPage = $productShowPage;
-        $this->notificationChecker = $notificationChecker;
-        $this->sessionManager = $sessionManager;
     }
 
     /**
@@ -203,7 +188,7 @@ final class CartContext implements Context
 
         try {
             $this->summaryPage->getShippingTotal();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 
@@ -219,7 +204,7 @@ final class CartContext implements Context
 
         try {
             $this->summaryPage->getPromotionTotal();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

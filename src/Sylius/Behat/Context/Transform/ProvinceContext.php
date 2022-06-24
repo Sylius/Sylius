@@ -20,11 +20,8 @@ use Webmozart\Assert\Assert;
 
 final class ProvinceContext implements Context
 {
-    private RepositoryInterface $provinceRepository;
-
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(private RepositoryInterface $provinceRepository)
     {
-        $this->provinceRepository = $provinceRepository;
     }
 
     /**

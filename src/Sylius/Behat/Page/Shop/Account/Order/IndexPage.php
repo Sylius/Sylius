@@ -21,17 +21,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    private TableAccessorInterface $tableAccessor;
-
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        TableAccessorInterface $tableAccessor
+        private TableAccessorInterface $tableAccessor
     ) {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->tableAccessor = $tableAccessor;
     }
 
     public function getRouteName(): string
@@ -64,7 +60,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             );
 
             return 1 === count($rows);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
     }
