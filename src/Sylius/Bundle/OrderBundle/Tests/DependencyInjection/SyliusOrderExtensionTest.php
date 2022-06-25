@@ -17,7 +17,11 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
+use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Order\Attribute\AsCartContext;
+use Sylius\Component\Order\Attribute\AsOrderProcessor;
 use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -65,8 +69,98 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /** @test */
+    public function it_autoconfigures_cart_contexts_with_attribute(): void
+    {
+        $this->container->register(
+            'acme.cart_context_autoconfigured',
+            DummyCartContext::class
+        )->setAutoconfigured(true);
+
+        $this->container->register(
+            'acme.prioritized_cart_context_autoconfigured',
+            PrioritizedDummyCartContext::class
+        )->setAutoconfigured(true);
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.cart_context_autoconfigured',
+            RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.prioritized_cart_context_autoconfigured',
+            RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG,
+            ['priority' => 256]
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_order_processors_with_attribute(): void
+    {
+        $this->container->register(
+            'acme.order_processor_autoconfigured',
+            DummyOrderProcessor::class
+        )->setAutoconfigured(true);
+
+        $this->container->register(
+            'acme.prioritized_order_processor_autoconfigured',
+            PrioritizedDummyOrderProcessor::class
+        )->setAutoconfigured(true);
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.order_processor_autoconfigured',
+            RegisterProcessorsPass::PROCESSOR_SERVICE_TAG
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.prioritized_order_processor_autoconfigured',
+            RegisterProcessorsPass::PROCESSOR_SERVICE_TAG,
+            ['priority' => 256]
+        );
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusOrderExtension()];
+    }
+}
+
+#[AsCartContext]
+class DummyCartContext implements CartContextInterface
+{
+    public function getCart(): OrderInterface
+    {
+        return new Order();
+    }
+}
+
+#[AsCartContext(priority: 256)]
+class PrioritizedDummyCartContext implements CartContextInterface
+{
+    public function getCart(): OrderInterface
+    {
+        return new Order();
+    }
+}
+
+#[AsOrderProcessor]
+class DummyOrderProcessor implements OrderProcessorInterface
+{
+    public function process(OrderInterface $order): void
+    {
+    }
+}
+
+#[AsOrderProcessor(priority: 256)]
+class PrioritizedDummyOrderProcessor implements OrderProcessorInterface
+{
+    public function process(OrderInterface $order): void
+    {
     }
 }

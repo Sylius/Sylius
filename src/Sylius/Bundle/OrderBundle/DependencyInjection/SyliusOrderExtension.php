@@ -16,9 +16,12 @@ namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Order\Attribute\AsCartContext;
+use Sylius\Component\Order\Attribute\AsOrderProcessor;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -42,9 +45,37 @@ final class SyliusOrderExtension extends AbstractResourceExtension
             ->registerForAutoconfiguration(CartContextInterface::class)
             ->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG)
         ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsCartContext::class,
+            static function (ChildDefinition $definition, AsCartContext $attribute) {
+                $definition->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG, [
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
+
         $container
             ->registerForAutoconfiguration(OrderProcessorInterface::class)
             ->addTag(RegisterProcessorsPass::PROCESSOR_SERVICE_TAG)
         ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrderProcessor::class,
+            static function (ChildDefinition $definition, AsOrderProcessor $attribute) {
+                $definition->addTag(RegisterProcessorsPass::PROCESSOR_SERVICE_TAG, [
+                    'priority' => $attribute->priority,
+                ]
+            );
+        });
+
+        $container->registerAttributeForAutoconfiguration(
+            AsOrderProcessor::class,
+            static function (ChildDefinition $definition, AsOrderProcessor $attribute) {
+                $definition->addTag(RegisterProcessorsPass::PROCESSOR_SERVICE_TAG, [
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
     }
 }
