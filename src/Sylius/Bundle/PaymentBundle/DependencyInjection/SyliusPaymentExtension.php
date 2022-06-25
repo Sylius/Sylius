@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Payment\Attribute\AsPaymentMethodResolver;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -30,5 +32,16 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
+
+        $container->registerAttributeForAutoconfiguration(
+            AsPaymentMethodResolver::class,
+            static function (ChildDefinition $definition, AsPaymentMethodResolver $attribute) {
+                $definition->addTag('sylius.payment_method_resolver', [
+                    'type' => $attribute->type,
+                    'label' => $attribute->label,
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
     }
 }
