@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Payum\Attribute\AsGatewayConfigurationType;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -29,6 +31,17 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $container->registerAttributeForAutoconfiguration(
+            AsGatewayConfigurationType::class,
+            static function (ChildDefinition $definition, AsGatewayConfigurationType $attribute) {
+                $definition->addTag('sylius.gateway_configuration_type', [
+                    'type' => $attribute->type,
+                    'label' => $attribute->label,
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
