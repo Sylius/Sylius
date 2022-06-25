@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Core\Attribute\AsTaxCalculationStrategy;
+use Sylius\Component\Core\Attribute\AsUriBasedSectionResolver;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -69,6 +73,30 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
             );
         }
+
+        $container->registerAttributeForAutoconfiguration(
+            AsTaxCalculationStrategy::class,
+            static function (ChildDefinition $definition, AsTaxCalculationStrategy $attribute) {
+                $definition->addTag('sylius.taxation.calculation_strategy', [
+                    'type' => $attribute->type,
+                    'label' => $attribute->label,
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
+
+        $container->registerForAutoconfiguration(UriBasedSectionResolverInterface::class)
+            ->addTag('sylius.uri_based_section_resolver')
+        ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsUriBasedSectionResolver::class,
+            static function (ChildDefinition $definition, AsUriBasedSectionResolver $attribute) {
+                $definition->addTag('sylius.uri_based_section_resolver', [
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
     }
 
     public function prepend(ContainerBuilder $container): void

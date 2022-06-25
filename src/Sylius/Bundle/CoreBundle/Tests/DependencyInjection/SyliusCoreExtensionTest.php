@@ -17,7 +17,15 @@ use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExten
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
+use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionResolverInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Attribute\AsTaxCalculationStrategy;
+use Sylius\Component\Core\Attribute\AsUriBasedSectionResolver;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 {
@@ -160,6 +168,101 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->assertEmpty($syliusLabsDoctrineMigrationsExtraExtensionConfig);
     }
 
+    /** @test */
+    public function it_autoconfigures_tax_calculation_strategy_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->container->register(
+            'acme.tax_calculation_strategy_autoconfigured',
+            DummyTaxCalculationStrategy::class
+        )->setAutoconfigured(true);
+
+        $this->container->register(
+            'acme.prioritized_tax_calculation_strategy_autoconfigured',
+            PrioritizedDummyTaxCalculationStrategy::class
+        )->setAutoconfigured(true);
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.tax_calculation_strategy_autoconfigured',
+            'sylius.taxation.calculation_strategy',
+            [
+                'type' => 'dummy',
+                'label' => 'dummy',
+                'priority' => 0
+            ]
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.prioritized_tax_calculation_strategy_autoconfigured',
+            'sylius.taxation.calculation_strategy',
+            [
+                'type' => 'dummy',
+                'label' => 'dummy',
+                'priority' => 128
+            ]
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_uri_based_section_resolver_with_attribute(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->container->register(
+            'acme.uri_based_section_resolver_autoconfigured',
+            DummyUriBasedSectionResolver::class
+        )->setAutoconfigured(true);
+
+        $this->container->register(
+            'acme.prioritized_uri_based_section_resolver_autoconfigured',
+            PrioritizedDummyUriBasedSectionResolver::class
+        )->setAutoconfigured(true);
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.uri_based_section_resolver_autoconfigured',
+            'sylius.uri_based_section_resolver',
+            [
+                'priority' => 0
+            ]
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.prioritized_uri_based_section_resolver_autoconfigured',
+            'sylius.uri_based_section_resolver',
+            [
+                'priority' => 128
+            ]
+        );
+    }
+
+    /** @test */
+    public function it_autoconfigures_uri_based_section_resolver(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->container->setDefinition(
+            'acme.uri_based_section_resolver_autoconfigured',
+            (new Definition())
+                ->setClass(self::getMockClass(UriBasedSectionResolverInterface::class))
+                ->setAutoconfigured(true)
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.uri_based_section_resolver_autoconfigured',
+            'sylius.uri_based_section_resolver'
+        );
+    }
+
     private function configureContainer(string $env): void
     {
         $this->container->setParameter('kernel.environment', $env);
@@ -169,3 +272,61 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->container->registerExtension(new SyliusLabsDoctrineMigrationsExtraExtension());
     }
 }
+
+
+#[AsTaxCalculationStrategy(type: 'dummy', label: 'dummy')]
+class DummyTaxCalculationStrategy implements TaxCalculationStrategyInterface
+{
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
+    {
+        return;
+    }
+
+    public function getType(): string
+    {
+        return 'dummy';
+    }
+
+    public function supports(OrderInterface $order, ZoneInterface $zone): bool
+    {
+        return true;
+    }
+}
+
+#[AsTaxCalculationStrategy(type: 'dummy', label: 'dummy', priority: 128)]
+class PrioritizedDummyTaxCalculationStrategy implements TaxCalculationStrategyInterface
+{
+    public function applyTaxes(OrderInterface $order, ZoneInterface $zone): void
+    {
+        return;
+    }
+
+    public function getType(): string
+    {
+        return 'dummy';
+    }
+
+    public function supports(OrderInterface $order, ZoneInterface $zone): bool
+    {
+        return true;
+    }
+}
+
+#[AsUriBasedSectionResolver()]
+class DummyUriBasedSectionResolver implements UriBasedSectionResolverInterface
+{
+    public function getSection(string $uri): SectionInterface
+    {
+        return new class implements SectionInterface {};
+    }
+}
+
+#[AsUriBasedSectionResolver(priority: 128)]
+class PrioritizedDummyUriBasedSectionResolver implements UriBasedSectionResolverInterface
+{
+    public function getSection(string $uri): SectionInterface
+    {
+        return new class implements SectionInterface {};
+    }
+}
+
