@@ -14,7 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ChannelBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Channel\Attribute\AsChannelContext;
+use Sylius\Component\Channel\Attribute\AsChannelContextRequestResolver;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -38,5 +43,31 @@ final class SyliusChannelExtension extends AbstractResourceExtension
         }
 
         $container->getDefinition('sylius.repository.channel')->setLazy(true);
+
+        $container->registerForAutoconfiguration(ChannelContextInterface::class)
+            ->addTag('sylius.context.channel')
+        ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsChannelContext::class,
+            static function (ChildDefinition $definition, AsChannelContext $attribute) {
+                $definition->addTag('sylius.context.channel', [
+                    'priority' => $attribute->priority,
+                ]
+            );
+        });
+
+        $container->registerForAutoconfiguration(RequestResolverInterface::class)
+            ->addTag('sylius.context.channel.request_based.resolver')
+        ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsChannelContextRequestResolver::class,
+            static function (ChildDefinition $definition, AsChannelContextRequestResolver $attribute) {
+                $definition->addTag('sylius.context.channel.request_based.resolver', [
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
     }
 }
