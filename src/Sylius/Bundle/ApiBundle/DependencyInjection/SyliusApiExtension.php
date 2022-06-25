@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
+use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -38,5 +39,9 @@ final class SyliusApiExtension extends Extension
         if ($container->hasParameter('api_platform.enable_swagger_ui') && $container->getParameter('api_platform.enable_swagger_ui')) {
             $loader->load('integrations/swagger.xml');
         }
+
+        $container->registerForAutoconfiguration(CommandDataTransformerInterface::class)
+            ->addTag('sylius.api.command_data_transformer')
+        ;
     }
 }

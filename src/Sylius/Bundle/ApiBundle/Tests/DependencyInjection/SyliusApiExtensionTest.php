@@ -15,7 +15,9 @@ namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction;
+use Sylius\Bundle\ApiBundle\DataTransformer\CommandDataTransformerInterface;
 use Sylius\Bundle\ApiBundle\DependencyInjection\SyliusApiExtension;
+use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusApiExtensionTest extends AbstractExtensionTestCase
 {
@@ -96,6 +98,25 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasParameter('sylius_api.filter_eager_loading_extension.restricted_resources', []);
+    }
+
+    /** @test */
+    public function it_autoconfigures_command_api_data_transformer(): void
+    {
+        $this->container->setDefinition(
+            'acme.api_command_data_transformer_autoconfigured',
+            (new Definition())
+                ->setClass(self::getMockClass(CommandDataTransformerInterface::class))
+                ->setAutoconfigured(true)
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'acme.api_command_data_transformer_autoconfigured',
+            'sylius.api.command_data_transformer'
+        );
     }
 
     protected function getContainerExtensions(): array
