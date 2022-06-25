@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Attribute\Attribute\AsAttributeType;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -28,6 +30,18 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
+
+        $container->registerAttributeForAutoconfiguration(
+            AsAttributeType::class,
+            static function (ChildDefinition $definition, AsAttributeType $attribute) {
+                $definition->addTag('sylius.attribute.type', [
+                    'attribute_type' => $attribute->attributeType,
+                    'label' => $attribute->label,
+                    'form_type' => $attribute->formType,
+                    'configuration_form_type' => $attribute->configurationFormType
+                ]);
+            }
+        );
     }
 
     private function resolveResources(array $resources, ContainerBuilder $container): array
