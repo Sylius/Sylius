@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\TaxationBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Taxation\Attribute\AsTaxCalculator;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -30,5 +32,14 @@ final class SyliusTaxationExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $container->registerAttributeForAutoconfiguration(
+            AsTaxCalculator::class,
+            static function (ChildDefinition $definition, AsTaxCalculator $attribute) {
+                $definition->addTag('sylius.tax_calculator', [
+                    'calculator' => $attribute->calculator,
+                ]);
+            }
+        );
     }
 }
