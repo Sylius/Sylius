@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Component\Currency\Attribute\AsCurrencyContext;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -30,5 +33,18 @@ final class SyliusCurrencyExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $container->registerForAutoconfiguration(CurrencyContextInterface::class)
+            ->addTag('sylius.context.currency')
+        ;
+
+        $container->registerAttributeForAutoconfiguration(
+            AsCurrencyContext::class,
+            static function (ChildDefinition $definition, AsCurrencyContext $attribute) {
+                $definition->addTag('sylius.context.currency', [
+                    'priority' => $attribute->priority,
+                ]);
+            }
+        );
     }
 }
