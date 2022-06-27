@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.6" --no-update
+    composer require "sylius/plus:^1.0.0-ALPHA.7" --no-update
     composer update --no-scripts
     composer sync-recipes
 
@@ -90,7 +90,19 @@ Installing Sylius Plus as a plugin to a Sylius application
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
 
-**6.** Add traits that enhance Sylius models:
+**6.** Update security providers in ``config/packages/security.yaml``:
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+    providers:
+        # ...
+        sylius_shop_user_provider:
+            id: Sylius\Plus\CustomerPools\Infrastructure\Provider\UsernameAndCustomerPoolProvider
+        sylius_api_shop_user_provider:
+            id: Sylius\Plus\CustomerPools\Infrastructure\Provider\UsernameAndCustomerPoolProvider
+
+**7.** Add traits that enhance Sylius models:
 
 * AdminUser
 * Channel
@@ -283,7 +295,7 @@ Installing Sylius Plus as a plugin to a Sylius application
         use InventorySourceAwareTrait;
     }
 
-**7.** Install wkhtmltopdf binary:
+**8.** Install wkhtmltopdf binary:
 
 Default configuration assumes enabled PDF file generator. If you don't want to use that feature change your app configuration:
 
@@ -318,13 +330,13 @@ your application's ``.env`` file:
     WKHTMLTOPDF_PATH=/your-path
     ###< knplabs/knp-snappy-bundle ###
 
-**8.** Update the database using migrations:
+**9.** Update the database using migrations:
 
 .. code-block:: bash
 
     bin/console doctrine:migrations:migrate
 
-**9.** Install Sylius with Sylius Plus fixtures:
+**10.** Install Sylius with Sylius Plus fixtures:
 
 .. code-block:: bash
 
@@ -338,13 +350,13 @@ your application's ``.env`` file:
 
         bin/console sylius:install -s plus -n
 
-**10.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
+**11.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
 
 .. code-block:: bash
 
     cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
 
-**11.** Install JS libraries using Yarn:
+**12.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
@@ -352,14 +364,14 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**12.** Rebuild cache for proper display of all translations:
+**13.** Rebuild cache for proper display of all translations:
 
 .. code-block:: bash
 
     bin/console cache:clear
     bin/console cache:warmup
 
-**13.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**14.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_
