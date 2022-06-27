@@ -31,7 +31,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     {
         $thankYouMessage = $this->getElement('thank_you')->getText();
 
-        return false !== strpos($thankYouMessage, 'Thank you!');
+        return str_contains($thankYouMessage, 'Thank you!');
     }
 
     public function getInstructions(): string

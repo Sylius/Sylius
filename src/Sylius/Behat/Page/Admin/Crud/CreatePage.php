@@ -21,13 +21,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
 {
-    private string $routeName;
-
-    public function __construct(Session $session, $minkParameters, RouterInterface $router, string $routeName)
-    {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        private string $routeName
+    ) {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->routeName = $routeName;
     }
 
     public function create(): void

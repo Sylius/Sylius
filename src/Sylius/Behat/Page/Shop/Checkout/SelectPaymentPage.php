@@ -41,7 +41,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     {
         try {
             $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethodName]);
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
 

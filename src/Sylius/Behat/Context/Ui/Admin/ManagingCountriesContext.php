@@ -142,7 +142,7 @@ final class ManagingCountriesContext implements Context
     {
         try {
             $this->createPage->chooseName($name);
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

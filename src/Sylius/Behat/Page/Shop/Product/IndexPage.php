@@ -66,7 +66,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         try {
             $this->getElement('product_name', ['%productName%' => $productName]);
-        } catch (ElementNotFoundException $e) {
+        } catch (ElementNotFoundException) {
             return false;
         }
 
@@ -75,7 +75,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isEmpty(): bool
     {
-        return false !== strpos($this->getElement('validation_message')->getText(), 'There are no results to display');
+        return str_contains($this->getElement('validation_message')->getText(), 'There are no results to display');
     }
 
     public function getProductPrice(string $productName): string

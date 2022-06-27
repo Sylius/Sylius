@@ -36,7 +36,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $reviewsContainerText = $this->getElement('reviews')->getText();
 
-        return false !== strpos($reviewsContainerText, 'There are no reviews');
+        return str_contains($reviewsContainerText, 'There are no reviews');
     }
 
     protected function getDefinedElements(): array

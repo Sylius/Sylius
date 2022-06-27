@@ -36,9 +36,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function specifySlug(string $slug, string $languageCode): void;
 
-    /**
-     * @param string $type
-     */
     public function attachImage(string $path, string $type = null): void;
 
     /**

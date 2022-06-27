@@ -31,40 +31,16 @@ use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
 {
-    private DashboardPageInterface $dashboardPage;
-
-    private ProfileUpdatePageInterface $profileUpdatePage;
-
-    private ChangePasswordPageInterface $changePasswordPage;
-
-    private IndexPageInterface $orderIndexPage;
-
-    private ShowPageInterface $orderShowPage;
-
-    private LoginPageInterface $loginPage;
-
-    private NotificationCheckerInterface $notificationChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        DashboardPageInterface $dashboardPage,
-        ProfileUpdatePageInterface $profileUpdatePage,
-        ChangePasswordPageInterface $changePasswordPage,
-        IndexPageInterface $orderIndexPage,
-        ShowPageInterface $orderShowPage,
-        LoginPageInterface $loginPage,
-        NotificationCheckerInterface $notificationChecker,
-        SharedStorageInterface $sharedStorage
+        private DashboardPageInterface $dashboardPage,
+        private ProfileUpdatePageInterface $profileUpdatePage,
+        private ChangePasswordPageInterface $changePasswordPage,
+        private IndexPageInterface $orderIndexPage,
+        private ShowPageInterface $orderShowPage,
+        private LoginPageInterface $loginPage,
+        private NotificationCheckerInterface $notificationChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->dashboardPage = $dashboardPage;
-        $this->profileUpdatePage = $profileUpdatePage;
-        $this->changePasswordPage = $changePasswordPage;
-        $this->orderIndexPage = $orderIndexPage;
-        $this->orderShowPage = $orderShowPage;
-        $this->loginPage = $loginPage;
-        $this->notificationChecker = $notificationChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -518,7 +494,7 @@ final class AccountContext implements Context
     {
         try {
             $this->dashboardPage->open();
-        } catch (UnexpectedPageException $exception) {
+        } catch (UnexpectedPageException) {
             return;
         }
 

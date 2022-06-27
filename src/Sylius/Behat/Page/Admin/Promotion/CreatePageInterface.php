@@ -29,7 +29,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string|string[] $value
      */
-    public function selectAutocompleteRuleOption(string $option, $value, bool $multiple = false): void;
+    public function selectAutocompleteRuleOption(string $option, array|string $value, bool $multiple = false): void;
 
     public function fillRuleOption(string $option, string $value): void;
 
@@ -65,7 +65,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string|string[] $value
      */
-    public function selectAutoCompleteFilterOption(string $option, $value, bool $multiple = false): void;
+    public function selectAutoCompleteFilterOption(string $option, array|string $value, bool $multiple = false): void;
 
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 

@@ -20,17 +20,11 @@ final class SessionManager implements SessionManagerInterface
 {
     private const SESSION_CHROME_HEADLESS_SECOND = 'chrome_headless_second_session';
 
-    private Mink $mink;
-
-    private SharedStorageInterface $sharedStorage;
-
-    private SecurityServiceInterface $securityService;
-
-    public function __construct(Mink $mink, SharedStorageInterface $sharedStorage, SecurityServiceInterface $securityService)
-    {
-        $this->mink = $mink;
-        $this->sharedStorage = $sharedStorage;
-        $this->securityService = $securityService;
+    public function __construct(
+        private Mink $mink,
+        private SharedStorageInterface $sharedStorage,
+        private SecurityServiceInterface $securityService
+    ) {
     }
 
     public function changeSession(): void
@@ -70,7 +64,7 @@ final class SessionManager implements SessionManagerInterface
         try {
             $token = $this->securityService->getCurrentToken();
             $this->sharedStorage->set($this->getKeyForToken($previousSessionName), $token);
-        } catch (TokenNotFoundException $exception) {
+        } catch (TokenNotFoundException) {
         }
 
         $this->mink->setDefaultSessionName($newSessionName);

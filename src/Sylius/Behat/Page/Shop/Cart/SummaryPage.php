@@ -56,7 +56,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         try {
             $this->getElement('no_taxes');
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return true;
         }
 
@@ -186,14 +186,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
 
         try {
             return $this->getElement('validation_errors')->getText() === $message;
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return false;
         }
     }
 
     public function isEmpty(): bool
     {
-        return false !== strpos($this->getElement('flash_message')->getText(), 'Your cart is empty');
+        return str_contains($this->getElement('flash_message')->getText(), 'Your cart is empty');
     }
 
     public function getQuantity(string $productName): int
@@ -205,7 +205,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $cartTotalText = $this->getElement('cart_total')->getText();
 
-        if (strpos($cartTotalText, ',') !== false) {
+        if (str_contains($cartTotalText, ',')) {
             return strstr($cartTotalText, ',', true);
         }
 
@@ -264,11 +264,9 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
-     * @param string|array $selector
-     *
      * @throws ElementNotFoundException
      */
-    private function hasItemWith(string $attributeName, $selector): bool
+    private function hasItemWith(string $attributeName, array|string $selector): bool
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 

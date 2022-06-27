@@ -188,7 +188,7 @@ final class CartContext implements Context
 
         try {
             $this->summaryPage->getShippingTotal();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 
@@ -204,7 +204,7 @@ final class CartContext implements Context
 
         try {
             $this->summaryPage->getPromotionTotal();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

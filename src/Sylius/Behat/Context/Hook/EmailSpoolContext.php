@@ -21,12 +21,11 @@ final class EmailSpoolContext implements Context
 {
     private string $spoolDirectory;
 
-    private Filesystem $filesystem;
-
-    public function __construct(EmailCheckerInterface $emailChecker, Filesystem $filesystem)
-    {
+    public function __construct(
+        EmailCheckerInterface $emailChecker,
+        private Filesystem $filesystem
+    ) {
         $this->spoolDirectory = $emailChecker->getSpoolDirectory();
-        $this->filesystem = $filesystem;
     }
 
     /**

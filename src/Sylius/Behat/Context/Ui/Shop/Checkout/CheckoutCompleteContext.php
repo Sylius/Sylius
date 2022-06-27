@@ -31,20 +31,11 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutCompleteContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private CompletePageInterface $completePage;
-
-    private NotificationCheckerInterface $notificationChecker;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        CompletePageInterface $completePage,
-        NotificationCheckerInterface $notificationChecker
+        private SharedStorageInterface $sharedStorage,
+        private CompletePageInterface $completePage,
+        private NotificationCheckerInterface $notificationChecker
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->completePage = $completePage;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -371,7 +362,7 @@ final class CheckoutCompleteContext implements Context
 
         try {
             $this->completePage->confirmOrder();
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 

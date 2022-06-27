@@ -43,9 +43,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    /** @var array */
-    private $minkParameters;
-
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ProductRepositoryInterface $productRepository,
@@ -62,17 +59,8 @@ final class ProductContext implements Context
         private ProductVariantResolverInterface $defaultVariantResolver,
         private ImageUploaderInterface $imageUploader,
         private SlugGeneratorInterface $slugGenerator,
-        $minkParameters
+        private \ArrayAccess $minkParameters
     ) {
-        if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException(sprintf(
-                '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
-                self::class,
-                \ArrayAccess::class
-            ));
-        }
-
-        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -662,7 +650,7 @@ final class ProductContext implements Context
             }
 
             $this->productVariantGenerator->generate($product);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             /** @var ProductVariantInterface $productVariant */
             $productVariant = $this->productVariantFactory->createNew();
 
@@ -1138,7 +1126,6 @@ final class ProductContext implements Context
      * @param string $productVariantName
      * @param int $price
      * @param string $code
-     * @param ChannelInterface $channel
      * @param int $position
      * @param bool $shippingRequired
      *

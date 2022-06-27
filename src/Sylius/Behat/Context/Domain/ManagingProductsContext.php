@@ -23,24 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductsContext implements Context
 {
-    private SharedStorageInterface $sharedStorage;
-
-    private RepositoryInterface $productRepository;
-
-    private RepositoryInterface $productVariantRepository;
-
-    private RepositoryInterface $productReviewRepository;
-
     public function __construct(
-        SharedStorageInterface $sharedStorage,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository,
-        RepositoryInterface $productReviewRepository
+        private SharedStorageInterface $sharedStorage,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $productVariantRepository,
+        private RepositoryInterface $productReviewRepository
     ) {
-        $this->sharedStorage = $sharedStorage;
-        $this->productRepository = $productRepository;
-        $this->productVariantRepository = $productVariantRepository;
-        $this->productReviewRepository = $productReviewRepository;
     }
 
     /**

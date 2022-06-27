@@ -62,7 +62,7 @@ final class CheckoutContext implements Context
         private SharedStorageInterface $sharedStorage,
         private RequestFactoryInterface $requestFactory,
         private string $paymentMethodClass,
-        private string $shippingMethodClass
+        private string $shippingMethodClass,
     ) {
     }
 
@@ -1082,8 +1082,10 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_POST,
             'items'
         );
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
         $request->setContent([
-            'productVariant' => $this->iriConverter->getItemIriFromResourceClass(\get_class($product->getVariants()->first()), ['code' => $code]),
+            'productVariant' => $this->iriConverter->getItemIriFromResourceClass($variant::class, ['code' => $code]),
             'quantity' => 1,
         ]);
 

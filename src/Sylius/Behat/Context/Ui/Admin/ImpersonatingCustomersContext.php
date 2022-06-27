@@ -23,24 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class ImpersonatingCustomersContext implements Context
 {
-    private ShowPageInterface $customerShowPage;
-
-    private DashboardPageInterface $dashboardPage;
-
-    private HomePageInterface $homePage;
-
-    private ImpersonateUserPageInterface $impersonateUserPage;
-
     public function __construct(
-        ShowPageInterface $customerShowPage,
-        DashboardPageInterface $dashboardPage,
-        HomePageInterface $homePage,
-        ImpersonateUserPageInterface $impersonateUserPage
+        private ShowPageInterface $customerShowPage,
+        private DashboardPageInterface $dashboardPage,
+        private HomePageInterface $homePage,
+        private ImpersonateUserPageInterface $impersonateUserPage
     ) {
-        $this->customerShowPage = $customerShowPage;
-        $this->dashboardPage = $dashboardPage;
-        $this->homePage = $homePage;
-        $this->impersonateUserPage = $impersonateUserPage;
     }
 
     /**

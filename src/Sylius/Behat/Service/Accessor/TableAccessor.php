@@ -125,7 +125,7 @@ final class TableAccessor implements TableAccessorInterface
             $searchedValue = (string) $searchedValue;
             $searchedValue = trim($searchedValue);
 
-            if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
+            if (str_starts_with($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
                 $searchedValue = substr($searchedValue, 1, -2);
             }
 

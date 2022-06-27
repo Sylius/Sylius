@@ -31,7 +31,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
 
     public function checkGenerationValidation(string $message): bool
     {
-        return false !== strpos($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
+        return str_contains($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
     }
 
     public function generate(): void

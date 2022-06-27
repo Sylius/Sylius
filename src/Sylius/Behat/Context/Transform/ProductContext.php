@@ -19,14 +19,10 @@ use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
 {
-    private ProductRepositoryInterface $productRepository;
-
-    private string $locale;
-
-    public function __construct(ProductRepositoryInterface $productRepository, string $locale = 'en_US')
-    {
-        $this->productRepository = $productRepository;
-        $this->locale = $locale;
+    public function __construct(
+        private ProductRepositoryInterface $productRepository,
+        private string $locale = 'en_US'
+    ) {
     }
 
     /**

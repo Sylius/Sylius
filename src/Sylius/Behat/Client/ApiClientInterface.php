@@ -54,18 +54,15 @@ interface ApiClientInterface
 
     public function setRequestData(array $data): void;
 
-    /** @param string|int $value */
-    public function addParameter(string $key, $value): void;
+    public function addParameter(string $key, int|string $value): void;
 
-    /** @param string|int $value */
-    public function addFilter(string $key, $value): void;
+    public function addFilter(string $key, int|string|bool $value): void;
 
     public function clearParameters(): void;
 
     public function addFile(string $key, UploadedFile $file): void;
 
-    /** @param string|int|bool|array $value */
-    public function addRequestData(string $key, mixed $value): void;
+    public function addRequestData(string $key, string|int|bool|array $value): void;
 
     public function setSubResourceData(string $key, array $data): void;
 

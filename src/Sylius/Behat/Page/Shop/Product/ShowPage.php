@@ -29,13 +29,13 @@ use Webmozart\Assert\Assert;
 
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    private SummaryPageInterface $summaryPage;
-
-    public function __construct(Session $session, $minkParameters, RouterInterface $router, SummaryPageInterface $summaryPage)
-    {
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        private SummaryPageInterface $summaryPage
+    ) {
         parent::__construct($session, $minkParameters, $router);
-
-        $this->summaryPage = $summaryPage;
     }
 
     public function getRouteName(): string
@@ -88,7 +88,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
                 if (!$attributesTab->hasAttribute('[data-test-active]')) {
                     $attributesTab->click();
                 }
-            } catch (ElementNotFoundException $exception) {
+            } catch (ElementNotFoundException) {
                 return null;
             }
         }
@@ -189,7 +189,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         if (
             $originalPrice->getAttribute('style') !== null &&
-            strpos($originalPrice->getAttribute('style'), 'display: none') !== false
+            str_contains($originalPrice->getAttribute('style'), 'display: none')
         ) {
             return null;
         }
@@ -201,7 +201,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         try {
             return null !== $this->getElement('product_original_price')->find('css', 'del');
-        } catch (ElementNotFoundException $elementNotFoundException) {
+        } catch (ElementNotFoundException) {
             return false;
         }
     }
@@ -219,7 +219,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         try {
             $this->getElement('association', ['%associationName%' => $productAssociationName]);
-        } catch (ElementNotFoundException $e) {
+        } catch (ElementNotFoundException) {
             return false;
         }
 
@@ -250,7 +250,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         try {
             $element = $this->getElement('reviews_comment', ['%title%' => $title]);
-        } catch (ElementNotFoundException $e) {
+        } catch (ElementNotFoundException) {
             return false;
         }
 
@@ -291,7 +291,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         try {
             $variantRadio = $this->getElement('variant_radio', ['%variantName%' => $variantName]);
-        } catch (ElementNotFoundException $exception) {
+        } catch (ElementNotFoundException) {
             return;
         }
 
@@ -319,7 +319,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             try {
                 parent::open($urlParameters);
                 $isOpen = true;
-            } catch (UnexpectedPageException $exception) {
+            } catch (UnexpectedPageException) {
                 $isOpen = false;
                 sleep(1);
             }

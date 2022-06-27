@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductAssociationTypeContext implements Context
 {
-    private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository;
-
-    public function __construct(ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository)
+    public function __construct(private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository)
     {
-        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
     }
 
     /**

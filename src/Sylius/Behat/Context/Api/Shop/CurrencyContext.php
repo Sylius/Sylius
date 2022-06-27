@@ -20,16 +20,10 @@ use Sylius\Behat\Context\Api\Resources;
 
 final class CurrencyContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
     }
 
     /**

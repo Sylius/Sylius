@@ -22,14 +22,10 @@ use Webmozart\Assert\Assert;
 
 final class ManagingTaxCategoriesContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    public function __construct(ApiClientInterface $client, ResponseCheckerInterface $responseChecker)
-    {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker
+    ) {
     }
 
     /**

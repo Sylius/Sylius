@@ -19,11 +19,8 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SharedSecurityService implements SharedSecurityServiceInterface
 {
-    private SecurityServiceInterface $adminSecurityService;
-
-    public function __construct(SecurityServiceInterface $adminSecurityService)
+    public function __construct(private SecurityServiceInterface $adminSecurityService)
     {
-        $this->adminSecurityService = $adminSecurityService;
     }
 
     public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action)
@@ -35,7 +32,7 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
     {
         try {
             $token = $securityService->getCurrentToken();
-        } catch (TokenNotFoundException $exception) {
+        } catch (TokenNotFoundException) {
             $token = null;
         }
 

@@ -19,11 +19,8 @@ use Webmozart\Assert\Assert;
 
 final class ChannelContext implements Context
 {
-    private ChannelRepositoryInterface $channelRepository;
-
-    public function __construct(ChannelRepositoryInterface $channelRepository)
+    public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
-        $this->channelRepository = $channelRepository;
     }
 
     /**

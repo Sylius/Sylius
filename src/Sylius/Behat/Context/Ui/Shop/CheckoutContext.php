@@ -30,48 +30,18 @@ use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
-    private AddressPageInterface $addressPage;
-
-    private SelectPaymentPageInterface $selectPaymentPage;
-
-    private SelectShippingPageInterface $selectShippingPage;
-
-    private CompletePageInterface $completePage;
-
-    private RegisterPageInterface $registerPage;
-
-    private RegisterElementInterface $registerElement;
-
-    private CurrentPageResolverInterface $currentPageResolver;
-
-    private CheckoutAddressingContext $addressingContext;
-
-    private CheckoutShippingContext $shippingContext;
-
-    private CheckoutPaymentContext $paymentContext;
-
     public function __construct(
-        AddressPageInterface $addressPage,
-        SelectPaymentPageInterface $selectPaymentPage,
-        SelectShippingPageInterface $selectShippingPage,
-        CompletePageInterface $completePage,
-        RegisterPageInterface $registerPage,
-        RegisterElementInterface $registerElement,
-        CurrentPageResolverInterface $currentPageResolver,
-        CheckoutAddressingContext $addressingContext,
-        CheckoutShippingContext $shippingContext,
-        CheckoutPaymentContext $paymentContext
+        private AddressPageInterface $addressPage,
+        private SelectPaymentPageInterface $selectPaymentPage,
+        private SelectShippingPageInterface $selectShippingPage,
+        private CompletePageInterface $completePage,
+        private RegisterPageInterface $registerPage,
+        private RegisterElementInterface $registerElement,
+        private CurrentPageResolverInterface $currentPageResolver,
+        private CheckoutAddressingContext $addressingContext,
+        private CheckoutShippingContext $shippingContext,
+        private CheckoutPaymentContext $paymentContext
     ) {
-        $this->addressPage = $addressPage;
-        $this->selectPaymentPage = $selectPaymentPage;
-        $this->selectShippingPage = $selectShippingPage;
-        $this->completePage = $completePage;
-        $this->registerPage = $registerPage;
-        $this->registerElement = $registerElement;
-        $this->currentPageResolver = $currentPageResolver;
-        $this->addressingContext = $addressingContext;
-        $this->shippingContext = $shippingContext;
-        $this->paymentContext = $paymentContext;
     }
 
     /**

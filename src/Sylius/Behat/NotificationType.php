@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat;
 
-final class NotificationType
+final class NotificationType implements \Stringable
 {
-    private string $value;
-
     private static array $types = [];
 
-    private function __construct(string $value)
+    private function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     public function __toString(): string

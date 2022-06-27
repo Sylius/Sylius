@@ -23,20 +23,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context
 {
-    private ApiClientInterface $client;
-
-    private ResponseCheckerInterface $responseChecker;
-
-    private SharedStorageInterface $sharedStorage;
-
     public function __construct(
-        ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage
     ) {
-        $this->client = $client;
-        $this->responseChecker = $responseChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
@@ -225,8 +216,7 @@ final class ManagingProductReviewsContext implements Context
         return $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_REVIEWS), $property, $value);
     }
 
-    /** @param string|int $value */
-    private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, $value): void
+    private function assertIfReviewHasElementWithValue(ReviewInterface $productReview, string $element, int|string $value): void
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::PRODUCT_REVIEWS, (string) $productReview->getId()), $element, $value),
