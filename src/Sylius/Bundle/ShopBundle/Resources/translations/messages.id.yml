@@ -3,10 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Konten'
-            message_from: 'Pesan dari'
-            subject: 'Permintaan kontak'
         order_confirmation:
             subject: 'Konfirmasi pesanan'
             view_order_or_change_payment_method: 'Lihat perintah atau metode pembayaran perubahan'

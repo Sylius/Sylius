@@ -3,8 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Contingut'
         order_confirmation:
             subject: 'Confirmació de la comanda'
     homepage:
