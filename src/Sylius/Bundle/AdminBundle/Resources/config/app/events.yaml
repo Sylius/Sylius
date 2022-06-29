@@ -257,20 +257,6 @@ sylius_ui:
                     context:
                         event: sylius.admin.promotion_coupon.generate.form
 
-        sylius.admin.login.before_form:
-            blocks:
-                legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 30
-                    context:
-                        event: sylius.admin.login.before_form
-                logo:
-                    template: "@SyliusUi/Security/_logo.html.twig"
-                    priority: 20
-                error:
-                    template: "@SyliusUi/Security/_error.html.twig"
-                    priority: 10
-
         sylius.admin.login.form:
             blocks:
                 legacy:
@@ -339,15 +325,6 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.login.after_content
-                        
-        sylius.admin.login.form.content:
-            blocks:
-                credentials:
-                    template: "@SyliusUi/Security/Form/_credentials.html.twig"
-                    priority: 20
-                submit:
-                    template: "@SyliusUi/Security/Form/_submit.html.twig"
-                    priority: 10
 
         sylius.admin.dashboard.header.content:
             blocks:
