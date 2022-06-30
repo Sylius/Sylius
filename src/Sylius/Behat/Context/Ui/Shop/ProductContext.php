@@ -937,11 +937,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should not be able to click disabled main taxon :mainTaxon
+     * @Then I should not be able to click disabled main taxon :taxonName in the breadcrumb
      */
-    public function iShouldNotBeAbleToClickDisabledMainTaxon(string $mainTaxon): void
+    public function iShouldNotBeAbleToClickDisabledMainTaxonInTheBreacrumb(string $taxonName): void
     {
-        Assert::false($this->showPage->hasBreadcrumbLink($mainTaxon));
+        Assert::false($this->showPage->hasBreadcrumbLink($taxonName));
     }
 
     /**

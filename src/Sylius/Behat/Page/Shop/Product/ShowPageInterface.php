@@ -94,5 +94,5 @@ interface ShowPageInterface extends PageInterface
 
     public function getDescription(): string;
 
-    public function hasBreadcrumbLink(string $taxon): bool;
+    public function hasBreadcrumbLink(string $taxonName): bool;
 }

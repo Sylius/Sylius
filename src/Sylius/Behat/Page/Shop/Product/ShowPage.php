@@ -357,6 +357,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
+            'breadcrumb' => '.breadcrumb',
             'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
@@ -376,7 +377,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'validation_errors' => '[data-test-cart-validation-error]',
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
-            'breadcrumb' => '.breadcrumb',
         ]);
     }
 
@@ -388,8 +388,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
     }
 
-    public function hasBreadcrumbLink(string $taxon): bool
+    public function hasBreadcrumbLink(string $taxonName): bool
     {
-        return $this->getElement('breadcrumb')->findLink($taxon) != null;
+        return $this->getElement('breadcrumb')->findLink($taxonName) != null;
     }
 }
