@@ -225,23 +225,12 @@ class Product implements ProductInterface, \Stringable
 
     public function hasAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): bool
     {
-        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
-
-        foreach ($this->attributes as $attribute) {
-            if ($attribute->getAttribute()->getCode() === $attributeCode &&
-                ($attribute->getLocaleCode() === $localeCode || null === $attribute->getLocaleCode())) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->getAttributeByCodeAndLocale($attributeCode, $localeCode) !== null;
     }
 
     public function getAttributeByCodeAndLocale(string $attributeCode, ?string $localeCode = null): ?AttributeValueInterface
     {
-        if (null === $localeCode) {
-            $localeCode = $this->getTranslation()->getLocale();
-        }
+        $localeCode = $localeCode ?: $this->getTranslation()->getLocale();
 
         foreach ($this->attributes as $attribute) {
             if ($attribute->getAttribute()->getCode() === $attributeCode &&
