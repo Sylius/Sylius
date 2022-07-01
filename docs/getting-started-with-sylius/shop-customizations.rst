@@ -25,7 +25,7 @@ The first step is to detect which template is responsible for displaying the log
 to customize a logo image.
 
 It's placed in **SyliusShopBundle**, at ``Resources/views/Layout/Header/_logo.html.twig`` path, so to override it,
-you should create the ``templates/shop/Layout/Header/_logo.html.twig`` file and copy the original file content.
+you should create the ``templates/bundles/SyliusShopBundle/Layout/Header/_logo.html.twig`` file and copy the original file content.
 Next, replace the ``img`` element source with a link to the logo or properly imported asset image (take a look at
 `Symfony assets documentation <https://symfony.com/doc/current/best_practices/web-assets.html>`_ for more info).
 
@@ -41,7 +41,7 @@ Add the configuration to the file that stores your sylius template event setting
         events:
             sylius.shop.layout.header.grid:
                 blocks:
-                    logo: 'bundles/SyliusShopBundle/Layout/Header/_logo.html.twig'
+                    logo: 'shop/Layout/Header/_logo.html.twig'
 
 If you want to learn more about template customization with sylius template events - click :doc:`here</customization/template>`.
 
