@@ -3,6 +3,9 @@ name: Docker Based Pipeline
 on:
     push:
 
+permissions:
+  contents: read
+
 jobs:
     static-analyze:
         name: Execute Static Analyze on Docker Compose
