@@ -56,7 +56,7 @@ services:
             BLACKFIRE_SERVER_TOKEN: ~
             BLACKFIRE_CLIENT_ID: ~
             BLACKFIRE_CLIENT_TOKEN: ~
-            BLACKFIRE_DISABLE_LEGACY_PORT: true
+            BLACKFIRE_DISABLE_LEGACY_PORT: 1
         ports:
             - 8307:8307
         networks:
