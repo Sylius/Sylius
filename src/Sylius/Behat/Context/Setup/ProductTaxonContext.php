@@ -45,6 +45,7 @@ final class ProductTaxonContext implements Context
 
     /**
      * @Given the product :product has a main taxon :taxon
+     * @Given /^(this product) has a main (taxon "[^"]+")$/
      */
     public function productHasMainTaxon(ProductInterface $product, TaxonInterface $taxon): void
     {
