@@ -95,4 +95,6 @@ interface ShowPageInterface extends PageInterface
     public function getOptionValues(string $optionName): array;
 
     public function getDescription(): string;
+
+    public function hasBreadcrumbLink(string $taxonName): bool;
 }

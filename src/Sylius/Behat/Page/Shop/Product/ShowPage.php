@@ -364,6 +364,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '[data-test-product-association="%associationName%"]',
             'attributes' => '[data-test-product-attributes]',
             'average_rating' => '[data-test-average-rating]',
+            'breadcrumb' => '.breadcrumb',
             'catalog_promotion' => '.promotion_label',
             'current_variant_input' => '[data-test-product-variants] td input:checked',
             'details' => '[data-tab="details"]',
@@ -392,5 +393,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
             $this->getDocument()->waitFor(3, fn (): bool => $this->summaryPage->isOpen());
         }
+    }
+
+    public function hasBreadcrumbLink(string $taxonName): bool
+    {
+        return $this->getElement('breadcrumb')->findLink($taxonName) != null;
     }
 }
