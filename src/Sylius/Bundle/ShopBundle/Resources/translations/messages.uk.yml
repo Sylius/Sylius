@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Вміст'
-            message_from: 'Повідомлення від'
         order_confirmation:
             has_been_successfully_placed: 'було успішно розміщено.'
             subject: 'Підтвердження замовлення'
