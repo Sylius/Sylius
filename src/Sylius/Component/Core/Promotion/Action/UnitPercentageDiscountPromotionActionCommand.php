@@ -29,7 +29,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         FactoryInterface $adjustmentFactory,
         private FilterInterface $priceRangeFilter,
         private FilterInterface $taxonFilter,
-        private FilterInterface $productFilter
+        private FilterInterface $productFilter,
     ) {
         parent::__construct($adjustmentFactory);
     }
@@ -47,7 +47,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 
         $filteredItems = $this->priceRangeFilter->filter(
             $subject->getItems()->toArray(),
-            array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode])
+            array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode]),
         );
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
@@ -67,7 +67,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     private function setUnitsAdjustments(
         OrderItemInterface $item,
         int $promotionAmount,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);

@@ -31,7 +31,7 @@ final class UploadAvatarImageAction
         private FactoryInterface $avatarImageFactory,
         private AvatarImageRepositoryInterface $avatarImageRepository,
         private ImageUploaderInterface $imageUploader,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
     }
 

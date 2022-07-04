@@ -38,7 +38,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
                 {
                     return MissingConstructorArgumentsException::class;
                 }
-            }
+            },
         )->shouldReturn(true);
     }
 
@@ -71,7 +71,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
                     }
                 },
                 null,
-                ['sylius_command_normalizer_already_called' => true]
+                ['sylius_command_normalizer_already_called' => true],
             )
             ->shouldReturn(false)
         ;
@@ -84,7 +84,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
 
     function it_normalizes_response_for_missing_constructor_arguments_exception(
         NormalizerInterface $baseNormalizer,
-        \stdClass $object
+        \stdClass $object,
     ): void {
         $baseNormalizer
             ->normalize($object, null, ['sylius_command_normalizer_already_called' => true])

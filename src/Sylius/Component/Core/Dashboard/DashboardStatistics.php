@@ -24,7 +24,7 @@ class DashboardStatistics
         private int $totalSales,
         private int $numberOfNewOrders,
         private int $numberOfNewCustomers,
-        private ?ChannelInterface $channel = null
+        private ?ChannelInterface $channel = null,
     ) {
     }
 

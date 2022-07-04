@@ -43,7 +43,7 @@ final class CurrencyFixtureTest extends TestCase
     {
         return new CurrencyFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),
-            $this->getMockBuilder(ObjectManager::class)->getMock()
+            $this->getMockBuilder(ObjectManager::class)->getMock(),
         );
     }
 }

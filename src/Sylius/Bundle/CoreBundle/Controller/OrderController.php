@@ -46,7 +46,7 @@ class OrderController extends BaseOrderController
             [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ]
+            ],
         );
     }
 
@@ -62,7 +62,7 @@ class OrderController extends BaseOrderController
             return $this->redirectHandler->redirectToRoute(
                 $configuration,
                 $options['route'] ?? 'sylius_shop_homepage',
-                $options['parameters'] ?? []
+                $options['parameters'] ?? [],
             );
         }
 
@@ -74,7 +74,7 @@ class OrderController extends BaseOrderController
             $configuration->getParameters()->get('template'),
             [
                 'order' => $order,
-            ]
+            ],
         );
     }
 }

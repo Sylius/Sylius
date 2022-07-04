@@ -28,7 +28,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null
+        string $operationName = null,
     ): void {
         if ('order' !== $property || !isset($value['price'])) {
             return;
@@ -56,8 +56,8 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
             ->andWhere(
                 $queryBuilder->expr()->in(
                     'variant.position',
-                    str_replace(sprintf(':%s', $productIdParameterName), sprintf('%s.id', $rootAlias), $subQuery->getDQL())
-                )
+                    str_replace(sprintf(':%s', $productIdParameterName), sprintf('%s.id', $rootAlias), $subQuery->getDQL()),
+                ),
             )
             ->orderBy('channelPricing.price', $value['price'])
             ->setParameter($enabledParameterName, true)

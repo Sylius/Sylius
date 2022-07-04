@@ -29,13 +29,13 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         FactoryInterface $productReviewFactory,
         RepositoryInterface $productReviewRepository,
         ProductRepositoryInterface $productRepository,
-        CustomerProviderInterface $customerProvider
+        CustomerProviderInterface $customerProvider,
     ): void {
         $this->beConstructedWith(
             $productReviewFactory,
             $productReviewRepository,
             $productRepository,
-            $customerProvider
+            $customerProvider,
         );
     }
 
@@ -46,7 +46,7 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         ProductInterface $product,
         CustomerInterface $customer,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $productRepository->findOneByCode('winter_cap')->willReturn($product);
 
@@ -69,13 +69,13 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
             5,
             'Really good stuff',
             'winter_cap',
-            'mark@example.com'
+            'mark@example.com',
         ));
     }
 
     function it_throws_an_exception_if_email_has_not_been_found(
         ProductRepositoryInterface $productRepository,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $productRepository->findOneByCode('winter_cap')->willReturn($product);
 
@@ -86,7 +86,7 @@ final class AddProductReviewHandlerSpec extends ObjectBehavior
                     'Good stuff',
                     5,
                     'Really good stuff',
-                    'winter_cap'
+                    'winter_cap',
                 ),
             ])
         ;

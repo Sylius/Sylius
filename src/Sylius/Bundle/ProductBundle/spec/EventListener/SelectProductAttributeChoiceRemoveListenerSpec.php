@@ -37,7 +37,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         EntityManagerInterface $entityManager,
         ProductAttributeValueRepositoryInterface $productAttributeValueRepository,
         ProductAttributeInterface $productAttribute,
-        ProductAttributeValueInterface $productAttributeValue
+        ProductAttributeValueInterface $productAttributeValue,
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -83,7 +83,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_added_new_choice(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        ProductAttributeInterface $productAttribute
+        ProductAttributeInterface $productAttribute,
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -114,7 +114,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_does_not_remove_select_product_attribute_choices_if_there_is_only_changed_value(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        ProductAttributeInterface $productAttribute
+        ProductAttributeInterface $productAttribute,
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $event->getEntityManager()->willReturn($entityManager);
@@ -145,7 +145,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
 
     function it_does_nothing_if_an_entity_is_not_a_product_attribute(
         EntityManagerInterface $entityManager,
-        LifecycleEventArgs $event
+        LifecycleEventArgs $event,
     ): void {
         $event->getEntity()->willReturn('wrongObject');
 
@@ -159,7 +159,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
     function it_does_nothing_if_a_product_attribute_has_not_a_select_type(
         LifecycleEventArgs $event,
         EntityManagerInterface $entityManager,
-        ProductAttributeInterface $productAttribute
+        ProductAttributeInterface $productAttribute,
     ): void {
         $event->getEntity()->willReturn($productAttribute);
         $productAttribute->getType()->willReturn('wrongType');

@@ -28,7 +28,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
     function let(
         HttpUtils $httpUtils,
         ChannelContextInterface $channelContext,
-        CartStorageInterface $cartStorage
+        CartStorageInterface $cartStorage,
     ): void {
         $this->beConstructedWith($httpUtils, '/', $channelContext, $cartStorage);
     }
@@ -49,7 +49,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         HttpUtils $httpUtils,
         Request $request,
         Response $response,
-        CartStorageInterface $cartStorage
+        CartStorageInterface $cartStorage,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 

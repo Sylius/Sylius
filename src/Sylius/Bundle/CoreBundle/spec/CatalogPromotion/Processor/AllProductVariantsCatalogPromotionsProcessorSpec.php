@@ -21,14 +21,14 @@ final class AllProductVariantsCatalogPromotionsProcessorSpec extends ObjectBehav
 {
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ): void {
         $this->beConstructedWith($productVariantRepository, $commandDispatcher);
     }
 
     function it_clears_and_processes_catalog_promotions(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ): void {
         $productVariantRepository->getCodesOfAllVariants()->willReturn(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE']);
 

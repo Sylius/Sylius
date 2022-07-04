@@ -43,7 +43,7 @@ final class CatalogPromotionScopeTypeExtension extends AbstractTypeExtension
                     return [
                         'data-configuration' => $this->twig->render(
                             '@SyliusAdmin/CatalogPromotion/Scope/' . $type . '.html.twig',
-                            ['field' => $builder->create('configuration', $this->scopeConfigurationTypes[$type])->getForm()->createView()]
+                            ['field' => $builder->create('configuration', $this->scopeConfigurationTypes[$type])->getForm()->createView()],
                         ),
                     ];
                 },

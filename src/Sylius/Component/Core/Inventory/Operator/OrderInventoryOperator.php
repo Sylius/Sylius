@@ -25,7 +25,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
         if (in_array(
             $order->getPaymentState(),
             [OrderPaymentStates::STATE_PAID, OrderPaymentStates::STATE_REFUNDED],
-            true
+            true,
         )) {
             $this->giveBack($order);
 
@@ -64,8 +64,8 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 0,
                 sprintf(
                     'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName()
-                )
+                    $variant->getName(),
+                ),
             );
 
             Assert::greaterThanEq(
@@ -73,8 +73,8 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 0,
                 sprintf(
                     'Not enough units to decrease on hand quantity from the inventory of a variant "%s".',
-                    $variant->getName()
-                )
+                    $variant->getName(),
+                ),
             );
 
             $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());
@@ -100,8 +100,8 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
                 0,
                 sprintf(
                     'Not enough units to decrease on hold quantity from the inventory of a variant "%s".',
-                    $variant->getName()
-                )
+                    $variant->getName(),
+                ),
             );
 
             $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());

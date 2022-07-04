@@ -29,7 +29,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
     function let(
         RequestStack $requestStack,
         ZoneDeletionCheckerInterface $zoneDeletionChecker,
-        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ): void {
         $this->beConstructedWith($requestStack, $zoneDeletionChecker, $countryProvincesDeletionChecker);
     }
@@ -88,7 +88,6 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(true);
 
-
         $session->getBag('flashes')->shouldNotBeCalled();
         $event->stopPropagation()->shouldNotBeCalled();
 
@@ -144,7 +143,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         SessionInterface $session,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
         GenericEvent $event,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $event->getSubject()->willReturn($country);
 

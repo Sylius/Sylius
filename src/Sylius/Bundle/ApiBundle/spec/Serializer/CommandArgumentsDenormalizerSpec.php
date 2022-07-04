@@ -25,7 +25,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function let(
         DenormalizerInterface $objectNormalizer,
         IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer
+        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $this->beConstructedWith(
             $objectNormalizer,
@@ -43,7 +43,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
                 new AddProductReview('Cap', 5, 'ok', 'cap_code', 'john@example.com'),
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn(true)
         ;
@@ -58,7 +58,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
                 new Order(),
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn(false)
         ;
@@ -67,7 +67,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
     function it_denormalizes_add_product_review_and_transforms_product_field_from_iri_to_code(
         DenormalizerInterface $objectNormalizer,
         iriToIdentifierConverterInterface $iriToIdentifierConverter,
-        DataTransformerInterface $commandAwareInputDataTransformer
+        DataTransformerInterface $commandAwareInputDataTransformer,
     ): void {
         $context['input']['class'] = AddProductReview::class;
 
@@ -91,7 +91,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
             ],
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->willReturn($addProductReview)
         ;
@@ -116,7 +116,7 @@ final class CommandArgumentsDenormalizerSpec extends ObjectBehavior
             ],
                 AddProductReview::class,
                 null,
-                $context
+                $context,
             )
             ->shouldReturn($addProductReview)
         ;

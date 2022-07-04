@@ -36,7 +36,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
     function it_should_assign_current_and_default_locale_to_given_translatable_entity(
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
-        TranslatableInterface $translatableEntity
+        TranslatableInterface $translatableEntity,
     ): void {
         $localeContext->getLocaleCode()->willReturn('de_DE');
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
@@ -51,7 +51,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity,
-        CLIContextCheckerInterface $commandBasedContextChecker
+        CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
         $localeContext->getLocaleCode()->willReturn('de_DE');
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');
@@ -68,7 +68,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity,
-        CLIContextCheckerInterface $commandBasedContextChecker
+        CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
         $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
 
@@ -87,7 +87,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
         TranslatableInterface $translatableEntity,
-        CLIContextCheckerInterface $commandBasedContextChecker
+        CLIContextCheckerInterface $commandBasedContextChecker,
     ): void {
         $this->beConstructedWith($localeContext, $translationLocaleProvider, $commandBasedContextChecker);
 
@@ -105,7 +105,7 @@ final class TranslatableEntityLocaleAssignerSpec extends ObjectBehavior
     function it_should_use_default_locale_as_current_if_could_not_resolve_the_current_locale(
         LocaleContextInterface $localeContext,
         TranslationLocaleProviderInterface $translationLocaleProvider,
-        TranslatableInterface $translatableEntity
+        TranslatableInterface $translatableEntity,
     ): void {
         $localeContext->getLocaleCode()->willThrow(new LocaleNotFoundException());
         $translationLocaleProvider->getDefaultLocaleCode()->willReturn('en_US');

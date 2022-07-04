@@ -32,12 +32,12 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
     function let(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         OrderRepositoryInterface $orderRepository,
-        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker
+        AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
     ): void {
         $this->beConstructedWith(
             $promotionCouponRepository,
             $orderRepository,
-            $appliedCouponEligibilityChecker
+            $appliedCouponEligibilityChecker,
         );
     }
 
@@ -60,7 +60,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         PromotionCouponInterface $promotionCoupon,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();
@@ -87,7 +87,7 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $this->initialize($executionContext);
         $constraint = new PromotionCouponEligibility();

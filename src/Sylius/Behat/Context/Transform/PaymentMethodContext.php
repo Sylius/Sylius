@@ -34,7 +34,7 @@ final class PaymentMethodContext implements Context
         Assert::eq(
             count($paymentMethods),
             1,
-            sprintf('%d payment methods has been found with name "%s".', count($paymentMethods), $paymentMethodName)
+            sprintf('%d payment methods has been found with name "%s".', count($paymentMethods), $paymentMethodName),
         );
 
         return $paymentMethods[0];

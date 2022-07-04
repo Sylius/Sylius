@@ -29,7 +29,7 @@ final class DeleteOrderItemAction
     {
         $command = new RemoveItemFromCart(
             $request->attributes->get('tokenValue'),
-            $request->attributes->get('itemId')
+            $request->attributes->get('itemId'),
         );
 
         $this->commandBus->dispatch($command);

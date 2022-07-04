@@ -40,7 +40,7 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
 
     function it_strips_locale_from_the_generated_url_if_locale_is_the_same_as_the_one_from_context(
         RouterInterface $decoratedRouter,
-        LocaleContextInterface $localeContext
+        LocaleContextInterface $localeContext,
     ): void {
         $localeContext->getLocaleCode()->willReturn('pl_PL');
 
@@ -50,7 +50,7 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
                 'http://generated.url/?_locale=pl_PL',
                 'http://generated.url/?foo=bar&_locale=pl_PL',
                 'http://generated.url/?_locale=pl_PL&foo=bar',
-                'http://generated.url/?bar=foo&_locale=pl_PL&foo=bar'
+                'http://generated.url/?bar=foo&_locale=pl_PL&foo=bar',
             )
         ;
 
@@ -62,7 +62,7 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
 
     function it_does_not_strip_locale_from_the_generated_url_if_locale_is_different_than_the_one_from_context(
         RouterInterface $decoratedRouter,
-        LocaleContextInterface $localeContext
+        LocaleContextInterface $localeContext,
     ): void {
         $localeContext->getLocaleCode()->willReturn('en_US');
 
@@ -75,7 +75,7 @@ final class LocaleStrippingRouterSpec extends ObjectBehavior
     }
 
     function it_does_not_stirp_locale_from_the_generated_url_if_there_is_no_locale_parameter(
-        RouterInterface $decoratedRouter
+        RouterInterface $decoratedRouter,
     ): void {
         $decoratedRouter
             ->generate('route_name', [], UrlGeneratorInterface::ABSOLUTE_PATH)

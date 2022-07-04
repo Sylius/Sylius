@@ -30,7 +30,7 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         private FactoryInterface $productReviewFactory,
         private RepositoryInterface $productReviewRepository,
         private ProductRepositoryInterface $productRepository,
-        private CustomerProviderInterface $customerProvider
+        private CustomerProviderInterface $customerProvider,
     ) {
     }
 

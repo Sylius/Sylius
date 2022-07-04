@@ -32,7 +32,7 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
         string $label,
         int $amount,
         bool $neutral = false,
-        array $details = []
+        array $details = [],
     ): AdjustmentInterface {
         $adjustment = $this->createNew();
         $adjustment->setType($type);

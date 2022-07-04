@@ -23,7 +23,7 @@ final class OrderContext implements Context
 {
     public function __construct(
         private CustomerRepositoryInterface $customerRepository,
-        private OrderRepositoryInterface $orderRepository
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 

@@ -40,7 +40,7 @@ final class AttributeFactorySpec extends ObjectBehavior
 
     function it_creates_untyped_attribute(
         FactoryInterface $factory,
-        Attribute $untypedAttribute
+        Attribute $untypedAttribute,
     ): void {
         $factory->createNew()->willReturn($untypedAttribute);
 
@@ -51,7 +51,7 @@ final class AttributeFactorySpec extends ObjectBehavior
         Attribute $typedAttribute,
         AttributeTypeInterface $attributeType,
         FactoryInterface $factory,
-        ServiceRegistryInterface $attributeTypesRegistry
+        ServiceRegistryInterface $attributeTypesRegistry,
     ): void {
         $factory->createNew()->willReturn($typedAttribute);
 

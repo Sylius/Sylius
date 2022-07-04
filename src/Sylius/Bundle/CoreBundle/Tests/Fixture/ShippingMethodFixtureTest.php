@@ -107,7 +107,7 @@ final class ShippingMethodFixtureTest extends TestCase
     {
         return new ShippingMethodFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

@@ -23,7 +23,7 @@ final class CheckoutOrderDetailsContext implements Context
 {
     public function __construct(
         private ShowPageInterface $orderDetails,
-        private ThankYouPageInterface $thankYouPage
+        private ThankYouPageInterface $thankYouPage,
     ) {
     }
 

@@ -38,7 +38,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
     function it_calculates_the_total_with_the_per_unit_amount_configured_on_the_method(
         ShipmentInterface $shipment,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -52,7 +52,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $shipment->getMethod()->willReturn($shippingMethod);

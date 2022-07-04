@@ -35,7 +35,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'PATCH',
                     'path' => 'admin/path/patch',
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_get' => [
@@ -50,7 +50,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'PATCH',
                     'path' => 'admin/path/patch',
                 ],
-            ]
+            ],
         );
     }
 
@@ -71,14 +71,14 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                 'admin_get' => [
                     'enabled' => false,
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_post' => [
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
     }
 
@@ -100,7 +100,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_get' => [
@@ -111,7 +111,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         );
     }
 
@@ -134,7 +134,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_get' => [
@@ -145,7 +145,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         );
     }
 
@@ -167,7 +167,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 [
@@ -182,7 +182,7 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path-new',
                 ],
-            ]
+            ],
         );
     }
 
@@ -194,12 +194,12 @@ final class ApiResourceConfigurationMergerSpec extends ObjectBehavior
             ],
             [
                 'test_config_two' => 'test_value_two',
-            ]
+            ],
         )->shouldReturn(
             [
                 'test_config_one' => 'test_value_one',
                 'test_config_two' => 'test_value_two',
-            ]
+            ],
         );
     }
 }

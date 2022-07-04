@@ -35,7 +35,7 @@ final class FixedDiscountActionConfigurationType extends AbstractType
             ->resetViewTransformers()
             ->resetModelTransformers()
             ->addViewTransformer(new MoneyIntToLocalizedStringTransformer(
-                divisor: $options['divisor']
+                divisor: $options['divisor'],
             ))
         ;
     }

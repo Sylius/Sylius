@@ -24,7 +24,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
     public function __construct(
         private AbstractBrowser $client,
         private string $section,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -52,7 +52,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode($this->request['body'])
+            json_encode($this->request['body']),
         );
 
         $response = $this->client->getResponse();

@@ -33,7 +33,7 @@ final class TaxRateContext implements Context
 
         Assert::notNull(
             $taxRate,
-            sprintf('Tax rate with name "%s" does not exist', $taxRateName)
+            sprintf('Tax rate with name "%s" does not exist', $taxRateName),
         );
 
         return $taxRate;

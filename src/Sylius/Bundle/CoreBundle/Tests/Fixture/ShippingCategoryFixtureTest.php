@@ -60,7 +60,7 @@ final class ShippingCategoryFixtureTest extends TestCase
     {
         return new ShippingCategoryFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

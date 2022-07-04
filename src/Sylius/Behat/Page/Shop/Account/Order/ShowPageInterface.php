@@ -25,7 +25,7 @@ interface ShowPageInterface extends SymfonyPageInterface
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ): bool;
 
     public function hasBillingAddress(
@@ -33,7 +33,7 @@ interface ShowPageInterface extends SymfonyPageInterface
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ): bool;
 
     public function choosePaymentMethod(PaymentMethodInterface $paymentMethod): void;

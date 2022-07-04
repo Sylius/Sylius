@@ -39,7 +39,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
@@ -64,7 +64,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(10000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
@@ -88,7 +88,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $payment->getAmount()->willReturn(10000);
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
@@ -108,7 +108,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
     function it_marks_an_order_as_paid_if_it_does_not_have_any_payments(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
-        OrderInterface $order
+        OrderInterface $order,
     ) {
         $order->getPayments()->willReturn(new ArrayCollection([]));
         $order->getTotal()->willReturn(0);
@@ -125,7 +125,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(10000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
@@ -149,7 +149,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
@@ -174,7 +174,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
@@ -199,7 +199,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
@@ -224,7 +224,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_AUTHORIZED);
@@ -249,7 +249,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         OrderInterface $order,
         PaymentInterface $firstPayment,
-        PaymentInterface $secondPayment
+        PaymentInterface $secondPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
@@ -273,7 +273,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        PaymentInterface $firstPayment
+        PaymentInterface $firstPayment,
     ): void {
         $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);

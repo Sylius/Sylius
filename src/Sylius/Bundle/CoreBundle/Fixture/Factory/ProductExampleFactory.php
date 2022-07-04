@@ -62,7 +62,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $localeRepository,
         private ?RepositoryInterface $taxCategoryRepository = null,
-        private ?FileLocatorInterface $fileLocator = null
+        private ?FileLocatorInterface $fileLocator = null,
     ) {
         if ($this->taxCategoryRepository === null) {
             @trigger_error(sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
@@ -237,7 +237,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 @trigger_error(
                     'It is deprecated since Sylius 1.3 to pass indexed array as an image definition. ' .
                     'Please use associative array with "path" and "type" keys instead.',
-                    \E_USER_DEPRECATED
+                    \E_USER_DEPRECATED,
                 );
 
                 $imagePath = array_shift($image);
@@ -343,7 +343,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                     if ($productAttribute->getConfiguration()['multiple']) {
                         return $this->faker->randomElements(
                             array_keys($productAttribute->getConfiguration()['choices']),
-                            $this->faker->numberBetween(1, count($productAttribute->getConfiguration()['choices']))
+                            $this->faker->numberBetween(1, count($productAttribute->getConfiguration()['choices'])),
                         );
                     }
 
@@ -360,7 +360,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         return trim(array_reduce(
             $variant->getOptionValues()->toArray(),
             static fn (?string $variantName, ProductOptionValueInterface $variantOption) => $variantName . sprintf('%s ', $variantOption->getValue()),
-            ''
+            '',
         ));
     }
 }

@@ -20,7 +20,7 @@ final class BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher implements 
 {
     public function __construct(
         private MessageBusInterface $messageBus,
-        private int $size
+        private int $size,
     ) {
     }
 

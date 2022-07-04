@@ -34,7 +34,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
         ZoneMatcherInterface $zoneMatcher,
-        PrioritizedServiceRegistryInterface $strategyRegistry
+        PrioritizedServiceRegistryInterface $strategyRegistry,
     ): void {
         $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
     }
@@ -53,7 +53,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         AddressInterface $address,
         ZoneInterface $zone,
         TaxCalculationStrategyInterface $strategyOne,
-        TaxCalculationStrategyInterface $strategyTwo
+        TaxCalculationStrategyInterface $strategyTwo,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
@@ -84,7 +84,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         AddressInterface $address,
         ZoneInterface $zone,
-        TaxCalculationStrategyInterface $strategy
+        TaxCalculationStrategyInterface $strategy,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
@@ -124,7 +124,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
@@ -148,7 +148,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(
         ZoneProviderInterface $defaultTaxZoneProvider,
         PrioritizedServiceRegistryInterface $strategyRegistry,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
 

@@ -47,11 +47,11 @@ final class ShippingMethodRulesEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodRuleInterface $firstRule,
         ShippingMethodRuleInterface $secondRule,
         ShippingSubjectInterface $subject,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shippingMethod->hasRules()->willReturn(true);
         $shippingMethod->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');
@@ -76,11 +76,11 @@ final class ShippingMethodRulesEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodRuleInterface $firstRule,
         ShippingMethodRuleInterface $secondRule,
         ShippingSubjectInterface $subject,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shippingMethod->hasRules()->willReturn(true);
         $shippingMethod->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');
@@ -105,11 +105,11 @@ final class ShippingMethodRulesEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodRuleInterface $firstRule,
         ShippingMethodRuleInterface $secondRule,
         ShippingMethodInterface $shippingMethod,
-        ShippingSubjectInterface $subject
+        ShippingSubjectInterface $subject,
     ): void {
         $shippingMethod->hasRules()->willReturn(true);
         $shippingMethod->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');

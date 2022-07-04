@@ -60,7 +60,7 @@ final class CustomerGroupFixtureTest extends TestCase
     {
         return new CustomerGroupFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

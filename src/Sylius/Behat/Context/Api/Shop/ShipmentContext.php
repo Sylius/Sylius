@@ -27,7 +27,7 @@ final class ShipmentContext implements Context
     public function __construct(
         private ApiClientInterface $shipmentsClient,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

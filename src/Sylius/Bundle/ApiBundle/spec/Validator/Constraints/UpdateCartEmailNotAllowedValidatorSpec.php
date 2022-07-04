@@ -83,7 +83,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         UserInterface $user,
         ExecutionContextInterface $executionContext,
-        UserContextInterface $userContext
+        UserContextInterface $userContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -102,7 +102,7 @@ final class UpdateCartEmailNotAllowedValidatorSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         ExecutionContextInterface $executionContext,
-        UserContextInterface $userContext
+        UserContextInterface $userContext,
     ): void {
         $this->initialize($executionContext);
 

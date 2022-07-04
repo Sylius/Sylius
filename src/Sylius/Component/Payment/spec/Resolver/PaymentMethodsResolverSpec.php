@@ -35,7 +35,7 @@ final class PaymentMethodsResolverSpec extends ObjectBehavior
         RepositoryInterface $methodRepository,
         PaymentInterface $payment,
         PaymentMethodInterface $method1,
-        PaymentMethodInterface $method2
+        PaymentMethodInterface $method2,
     ): void {
         $methodRepository->findBy(['enabled' => true])->willReturn([$method1, $method2]);
 

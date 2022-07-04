@@ -32,7 +32,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_not_eligible_if_a_subject_total_is_less_then_configured(
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectTotal()->willReturn(400);
 
@@ -40,7 +40,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_greater_then_configured(
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectTotal()->willReturn(600);
 
@@ -48,7 +48,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_equal_with_configured(
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectTotal()->willReturn(500);
 

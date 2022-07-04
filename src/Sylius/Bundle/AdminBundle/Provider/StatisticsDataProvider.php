@@ -25,7 +25,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
     public function __construct(
         private DashboardStatisticsProviderInterface $statisticsProvider,
         private SalesDataProviderInterface $salesDataProvider,
-        private MoneyFormatterInterface $moneyFormatter
+        private MoneyFormatterInterface $moneyFormatter,
     ) {
     }
 
@@ -38,7 +38,7 @@ class StatisticsDataProvider implements StatisticsDataProviderInterface
             $channel,
             $startDate,
             $endDate,
-            Interval::{$interval}()
+            Interval::{$interval}(),
         );
 
         /** @var string $currencyCode */

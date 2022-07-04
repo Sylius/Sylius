@@ -27,7 +27,7 @@ final class RegisterCartContextsPass extends PrioritizedCompositeServicePass
             'sylius.context.cart',
             'sylius.context.cart.composite',
             self::CART_CONTEXT_SERVICE_TAG,
-            'addContext'
+            'addContext',
         );
     }
 

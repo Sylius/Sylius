@@ -36,7 +36,7 @@ final class OrderEmailManagerSpec extends ObjectBehavior
         SenderInterface $sender,
         OrderInterface $order,
         ChannelInterface $channel,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $order->getChannel()->willReturn($channel);
         $order->getLocaleCode()->willReturn('en_US');

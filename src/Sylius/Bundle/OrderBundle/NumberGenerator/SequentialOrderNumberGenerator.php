@@ -24,7 +24,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
         private RepositoryInterface $sequenceRepository,
         private FactoryInterface $sequenceFactory,
         private int $startNumber = 1,
-        private int $numberLength = 9
+        private int $numberLength = 9,
     ) {
     }
 

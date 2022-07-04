@@ -26,7 +26,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
     function let(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
     ): void {
         $this->beConstructedWith($channelContext, $localeStorage, $localeProvider);
     }
@@ -40,7 +40,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -55,7 +55,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 

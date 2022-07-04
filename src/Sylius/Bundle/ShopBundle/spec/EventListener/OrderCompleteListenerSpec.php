@@ -28,7 +28,7 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
     function it_sends_a_confirmation_email(
         OrderEmailManagerInterface $orderEmailManager,
         GenericEvent $event,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $event->getSubject()->willReturn($order);
 
@@ -39,7 +39,7 @@ final class OrderCompleteListenerSpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_if_an_event_subject_is_not_an_order_instance(
         GenericEvent $event,
-        \stdClass $order
+        \stdClass $order,
     ): void {
         $event->getSubject()->willReturn($order);
 

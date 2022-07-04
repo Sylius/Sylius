@@ -23,7 +23,7 @@ final class MergeRecursiveExtension extends AbstractExtension
         return [
             new TwigFilter(
                 'sylius_merge_recursive',
-                fn (array $firstArray, array $secondArray): array => array_merge_recursive($firstArray, $secondArray)
+                fn (array $firstArray, array $secondArray): array => array_merge_recursive($firstArray, $secondArray),
             ),
         ];
     }

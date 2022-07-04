@@ -31,7 +31,7 @@ final class ManagingAdministratorsContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
-        private \ArrayAccess $minkParameters
+        private \ArrayAccess $minkParameters,
     ) {
     }
 
@@ -181,7 +181,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
-            sprintf('Administrator with email %s does not exist', $email)
+            sprintf('Administrator with email %s does not exist', $email),
         );
     }
 
@@ -192,7 +192,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'email', $email),
-            sprintf('Administrator with email %s exists, but it should not', $email)
+            sprintf('Administrator with email %s exists, but it should not', $email),
         );
     }
 
@@ -204,7 +204,7 @@ final class ManagingAdministratorsContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'email', $email),
             1,
-            sprintf('There is more than one administrator with email %s', $email)
+            sprintf('There is more than one administrator with email %s', $email),
         );
     }
 
@@ -217,7 +217,7 @@ final class ManagingAdministratorsContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'username', $username),
             1,
-            sprintf('There is more than one administrator with username %s', $username)
+            sprintf('There is more than one administrator with username %s', $username),
         );
     }
 
@@ -228,7 +228,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Administrator could not be created'
+            'Administrator could not be created',
         );
     }
 
@@ -239,7 +239,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Administrator could not be edited'
+            'Administrator could not be edited',
         );
     }
 
@@ -250,7 +250,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Administrator could not be deleted'
+            'Administrator could not be deleted',
         );
     }
 
@@ -261,7 +261,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'email: This email is already used.'
+            'email: This email is already used.',
         );
     }
 
@@ -272,7 +272,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'username: This username is already used.'
+            'username: This username is already used.',
         );
     }
 
@@ -283,7 +283,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('Please enter your %s.', $elementName)
+            sprintf('Please enter your %s.', $elementName),
         );
     }
 
@@ -294,7 +294,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'email: This email is invalid.'
+            'email: This email is invalid.',
         );
     }
 
@@ -305,11 +305,11 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::false(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Administrator could be deleted'
+            'Administrator could be deleted',
         );
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot remove currently logged in user.'
+            'Cannot remove currently logged in user.',
         );
     }
 
@@ -321,7 +321,7 @@ final class ManagingAdministratorsContext implements Context
         Assert::true($this->responseChecker->hasValue(
             $this->client->show((string) $administrator->getId()),
             'avatar',
-            $this->sharedStorage->get(StringInflector::nameToCode($avatar))
+            $this->sharedStorage->get(StringInflector::nameToCode($avatar)),
         ));
     }
 
@@ -336,7 +336,7 @@ final class ManagingAdministratorsContext implements Context
         Assert::true($this->responseChecker->hasValue(
             $this->client->show((string) $administrator->getId()),
             'avatar',
-            null
+            null,
         ));
     }
 

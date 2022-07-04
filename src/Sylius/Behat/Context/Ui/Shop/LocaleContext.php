@@ -72,7 +72,7 @@ final class LocaleContext implements Context
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
                 $locale,
-                implode('", "', $this->homePage->getAvailableLocales())
+                implode('", "', $this->homePage->getAvailableLocales()),
             ));
         }
     }

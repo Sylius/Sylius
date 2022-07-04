@@ -24,7 +24,7 @@ final class KernelRequestEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private bool $apiEnabled,
-        private string $apiRoute
+        private string $apiRoute,
     ) {
     }
 

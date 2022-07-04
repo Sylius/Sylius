@@ -42,7 +42,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_when_there_is_no_user_in_the_token(
         TokenStorageInterface $tokenStorage,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $token->getUser()->willReturn(null);
         $tokenStorage->getToken()->willReturn($token);
@@ -53,7 +53,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
     function it_throws_locale_not_found_exception_when_the_user_taken_from_token_is_not_an_admin(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $token->getUser()->willReturn($user);
         $tokenStorage->getToken()->willReturn($token);
@@ -64,7 +64,7 @@ final class AdminBasedLocaleContextSpec extends ObjectBehavior
     function it_returns_locale_of_currently_logged_admin_user(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
-        AdminUserInterface $admin
+        AdminUserInterface $admin,
     ): void {
         $admin->getLocaleCode()->willReturn('en_US');
         $token->getUser()->willreturn($admin);

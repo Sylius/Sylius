@@ -26,7 +26,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     function let(
         ExecutionContextInterface $executionContext,
         ScopeValidatorInterface $forTaxonsValidator,
-        ScopeValidatorInterface $forVariantsValidator
+        ScopeValidatorInterface $forVariantsValidator,
     ): void {
         $this->beConstructedWith(
             [
@@ -36,7 +36,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
             [
                 'for_taxons' => $forTaxonsValidator,
                 'for_variants' => $forVariantsValidator,
-            ]
+            ],
         );
 
         $this->initialize($executionContext);
@@ -50,7 +50,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_invalid_type(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionScopeInterface $scope
+        CatalogPromotionScopeInterface $scope,
     ): void {
         $scope->getType()->willReturn('wrong_type');
 
@@ -64,7 +64,7 @@ final class CatalogPromotionScopeValidatorSpec extends ObjectBehavior
     function it_calls_a_proper_validator_to_validate_the_configuration(
         ExecutionContextInterface $executionContext,
         CatalogPromotionScopeInterface $scope,
-        ScopeValidatorInterface $forVariantsValidator
+        ScopeValidatorInterface $forVariantsValidator,
     ): void {
         $constraint = new CatalogPromotionScope();
 

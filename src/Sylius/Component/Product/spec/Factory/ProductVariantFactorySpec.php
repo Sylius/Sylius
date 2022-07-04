@@ -46,7 +46,7 @@ final class ProductVariantFactorySpec extends ObjectBehavior
     function it_creates_a_variant_and_assigns_a_product_to_it(
         FactoryInterface $factory,
         ProductInterface $product,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $factory->createNew()->willReturn($variant);
         $variant->setProduct($product)->shouldBeCalled();

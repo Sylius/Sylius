@@ -34,7 +34,7 @@ class ExchangeRateRepository extends EntityRepository implements ExchangeRateRep
             ->innerJoin('o.targetCurrency', 'targetCurrency')
             ->andWhere($expr->orX(
                 'sourceCurrency.code = :firstCurrency AND targetCurrency.code = :secondCurrency',
-                'targetCurrency.code = :firstCurrency AND sourceCurrency.code = :secondCurrency'
+                'targetCurrency.code = :firstCurrency AND sourceCurrency.code = :secondCurrency',
             ))
             ->setParameter('firstCurrency', $firstCurrencyCode)
             ->setParameter('secondCurrency', $secondCurrencyCode)

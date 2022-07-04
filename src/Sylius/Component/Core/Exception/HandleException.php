@@ -21,10 +21,10 @@ final class HandleException extends \RuntimeException
             sprintf(
                 '%s was unable to handle this request. %s',
                 $handlerName,
-                $message
+                $message,
             ),
             0,
-            $previousException
+            $previousException,
         );
     }
 }

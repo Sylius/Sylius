@@ -22,7 +22,7 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
     public function __construct(
         private DenormalizerInterface $objectNormalizer,
         private string $classType,
-        private string $interfaceType
+        private string $interfaceType,
     ) {
     }
 
@@ -32,7 +32,7 @@ final class AddressDenormalizer implements ContextAwareDenormalizerInterface
             $data,
             $this->classType,
             $format,
-            $context
+            $context,
         );
     }
 

@@ -32,7 +32,7 @@ final class VariantResolverHelperSpec extends ObjectBehavior
 
     function it_returns_null_if_product_has_no_variants(
         ProductVariantResolverInterface $productVariantResolver,
-        ProductInterface $product
+        ProductInterface $product,
     ) {
         $productVariantResolver->getVariant($product)->willReturn(null);
 

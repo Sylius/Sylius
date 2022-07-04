@@ -47,7 +47,7 @@ final class ReviewFactorySpec extends ObjectBehavior
     function it_creates_a_review_with_subject(
         FactoryInterface $factory,
         ReviewableInterface $subject,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $factory->createNew()->willReturn($review);
         $review->setReviewSubject($subject)->shouldBeCalled();
@@ -59,7 +59,7 @@ final class ReviewFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         ReviewableInterface $subject,
         ReviewInterface $review,
-        ReviewerInterface $reviewer
+        ReviewerInterface $reviewer,
     ): void {
         $factory->createNew()->willReturn($review);
         $review->setReviewSubject($subject)->shouldBeCalled();

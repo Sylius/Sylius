@@ -26,7 +26,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
     function let(
         RequestStack $requestStack,
         UriBasedSectionResolverInterface $firstSectionResolver,
-        UriBasedSectionResolverInterface $secondSectionResolver
+        UriBasedSectionResolverInterface $secondSectionResolver,
     ): void {
         $this->beConstructedWith($requestStack, [$firstSectionResolver, $secondSectionResolver]);
     }
@@ -40,7 +40,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
         RequestStack $requestStack,
         Request $request,
         UriBasedSectionResolverInterface $firstSectionResolver,
-        SectionInterface $section
+        SectionInterface $section,
     ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 
@@ -56,7 +56,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
         Request $request,
         UriBasedSectionResolverInterface $firstSectionResolver,
         UriBasedSectionResolverInterface $secondSectionResolver,
-        SectionInterface $section
+        SectionInterface $section,
     ): void {
         $requestStack->getMasterRequest()->willReturn($request);
 

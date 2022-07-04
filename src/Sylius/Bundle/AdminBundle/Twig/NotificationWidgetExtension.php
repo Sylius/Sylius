@@ -33,7 +33,7 @@ final class NotificationWidgetExtension extends AbstractExtension
                 [
                     'needs_environment' => true,
                     'is_safe' => ['html'],
-                ]
+                ],
             ),
         ];
     }

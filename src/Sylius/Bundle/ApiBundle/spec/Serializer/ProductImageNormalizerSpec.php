@@ -33,7 +33,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
             'prefix',
             '/prefix',
             '/prefix/',
-            'prefix/'
+            'prefix/',
         );
     }
 
@@ -52,7 +52,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ProductImageInterface $productImage,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -69,7 +69,7 @@ final class ProductImageNormalizerSpec extends ObjectBehavior
         ProductImageInterface $productImage,
         RequestStack $requestStack,
         Request $request,
-        CacheManager $cacheManager
+        CacheManager $cacheManager,
     ): void {
         $this->setNormalizer($normalizer);
 

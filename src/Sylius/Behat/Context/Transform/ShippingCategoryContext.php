@@ -36,7 +36,7 @@ class ShippingCategoryContext implements Context
         Assert::eq(
             count($shippingCategories),
             1,
-            sprintf('%d shipping category has been found with name "%s".', count($shippingCategories), $shippingCategoryName)
+            sprintf('%d shipping category has been found with name "%s".', count($shippingCategories), $shippingCategoryName),
         );
 
         return $shippingCategories[0];

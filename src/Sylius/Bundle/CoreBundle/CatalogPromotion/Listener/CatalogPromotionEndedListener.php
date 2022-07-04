@@ -23,7 +23,7 @@ final class CatalogPromotionEndedListener
     public function __construct(
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         private RepositoryInterface $catalogPromotionRepository,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 

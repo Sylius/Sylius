@@ -13,18 +13,11 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Addressing\Checker;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ZoneDeletionCheckerSpec extends ObjectBehavior
 {

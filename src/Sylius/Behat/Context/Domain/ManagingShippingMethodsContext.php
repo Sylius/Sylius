@@ -23,7 +23,7 @@ final class ManagingShippingMethodsContext implements Context
 {
     public function __construct(
         private RepositoryInterface $shippingMethodRepository,
-        private ObjectManager $shippingMethodManager
+        private ObjectManager $shippingMethodManager,
     ) {
     }
 

@@ -28,7 +28,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodsResolverInterface $paymentMethodsResolver
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
     ): void {
         $this->beConstructedWith($orderRepository, $paymentRepository, $paymentMethodsResolver);
     }
@@ -51,14 +51,14 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
             ->supports(
                 PaymentMethodInterface::class,
                 Request::METHOD_GET,
-                $context
+                $context,
             )
             ->shouldReturn(true)
         ;
     }
 
     function it_throws_an_exception_if_cart_does_not_exist(
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
@@ -79,7 +79,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
         OrderInterface $order,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
@@ -103,7 +103,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
         OrderInterface $order,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
@@ -127,7 +127,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentRepositoryInterface $paymentRepository,
         OrderInterface $order,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
@@ -153,7 +153,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $paymentMethodsResolver,
         OrderInterface $order,
         PaymentInterface $payment,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => '69', 'payments' => '420'];
 
@@ -170,7 +170,7 @@ final class CartPaymentMethodsSubresourceDataProviderSpec extends ObjectBehavior
                 PaymentMethodInterface::class,
                 [],
                 $context,
-                Request::METHOD_GET
+                Request::METHOD_GET,
             )
             ->shouldReturn([$paymentMethod])
         ;

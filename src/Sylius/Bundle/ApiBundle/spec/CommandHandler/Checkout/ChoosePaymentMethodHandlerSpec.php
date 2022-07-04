@@ -35,14 +35,14 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentRepositoryInterface $paymentRepository,
         FactoryInterface $stateMachineFactory,
-        PaymentMethodChangerInterface $paymentMethodChanger
+        PaymentMethodChangerInterface $paymentMethodChanger,
     ): void {
         $this->beConstructedWith(
             $orderRepository,
             $paymentMethodRepository,
             $paymentRepository,
             $stateMachineFactory,
-            $paymentMethodChanger
+            $paymentMethodChanger,
         );
     }
 
@@ -54,7 +54,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -83,7 +83,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -105,7 +105,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         StateMachineInterface $stateMachine,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -134,7 +134,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         StateMachineInterface $stateMachine,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -164,7 +164,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         PaymentMethodInterface $paymentMethod,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -197,7 +197,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         PaymentRepositoryInterface $paymentRepository,
         OrderInterface $cart,
         PaymentInterface $payment,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -225,7 +225,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodChangerInterface $paymentMethodChanger,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $choosePaymentMethod = new ChoosePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $choosePaymentMethod->setOrderTokenValue('ORDERTOKEN');

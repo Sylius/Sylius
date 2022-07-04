@@ -23,7 +23,7 @@ final class PromotionProcessor implements PromotionProcessorInterface
     public function __construct(
         private PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         private PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
-        private PromotionApplicatorInterface $promotionApplicator
+        private PromotionApplicatorInterface $promotionApplicator,
     ) {
     }
 

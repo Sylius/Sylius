@@ -21,7 +21,7 @@ final class ProductContext implements Context
 {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private string $locale = 'en_US'
+        private string $locale = 'en_US',
     ) {
     }
 
@@ -38,7 +38,7 @@ final class ProductContext implements Context
         Assert::eq(
             count($products),
             1,
-            sprintf('%d products has been found with name "%s".', count($products), $productName)
+            sprintf('%d products has been found with name "%s".', count($products), $productName),
         );
 
         return $products[0];

@@ -30,7 +30,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
     function let(
         ShipmentRepositoryInterface $shipmentRepository,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        MessageBusInterface $eventBus,
     ): void {
         $this->beConstructedWith($shipmentRepository, $stateMachineFactory, $eventBus);
     }
@@ -40,7 +40,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        MessageBusInterface $eventBus,
     ): void {
         $shipShipment = new ShipShipment();
         $shipShipment->setShipmentId(123);
@@ -70,7 +70,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         StateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
         FactoryInterface $stateMachineFactory,
-        MessageBusInterface $eventBus
+        MessageBusInterface $eventBus,
     ): void {
         $shipShipment = new ShipShipment('TRACK');
         $shipShipment->setShipmentId(123);
@@ -96,7 +96,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_shipment_does_not_exist(
-        ShipmentRepositoryInterface $shipmentRepository
+        ShipmentRepositoryInterface $shipmentRepository,
     ): void {
         $shipShipment = new ShipShipment('TRACK');
         $shipShipment->setShipmentId(123);
@@ -113,7 +113,7 @@ final class ShipShipmentHandlerSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         StateMachineInterface $stateMachine,
         ShipmentInterface $shipment,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $shipShipment = new ShipShipment('TRACK');
         $shipShipment->setShipmentId(123);

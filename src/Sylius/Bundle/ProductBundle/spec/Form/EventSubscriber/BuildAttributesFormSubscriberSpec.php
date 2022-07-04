@@ -45,7 +45,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ProductInterface $product,
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValue,
-        ProductAttributeValueInterface $newAttributeValue
+        ProductAttributeValueInterface $newAttributeValue,
     ): void {
         $event->getData()->willReturn($product);
 
@@ -74,7 +74,7 @@ final class BuildAttributesFormSubscriberSpec extends ObjectBehavior
         ProductInterface $product,
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValue,
-        ProductAttributeValueInterface $attributeValue2
+        ProductAttributeValueInterface $attributeValue2,
     ): void {
         $event->getData()->willReturn($product);
 

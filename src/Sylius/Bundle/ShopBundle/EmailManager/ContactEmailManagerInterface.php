@@ -21,6 +21,6 @@ interface ContactEmailManagerInterface
         array $data,
         array $recipients,
         ?ChannelInterface $channel = null,
-        ?string $localeCode = null
+        ?string $localeCode = null,
     ): void;
 }

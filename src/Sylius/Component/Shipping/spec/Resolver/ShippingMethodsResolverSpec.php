@@ -24,7 +24,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ObjectRepository $methodRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ): void {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
     }
@@ -40,7 +40,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $method1,
         ShippingMethodInterface $method2,
-        ShippingMethodInterface $method3
+        ShippingMethodInterface $method3,
     ): void {
         $methods = [$method1, $method2, $method3];
         $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);

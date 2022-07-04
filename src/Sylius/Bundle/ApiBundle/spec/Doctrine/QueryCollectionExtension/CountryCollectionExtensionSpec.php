@@ -34,7 +34,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -47,7 +47,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -65,7 +65,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -74,7 +74,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -98,7 +98,7 @@ final class CountryCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 }

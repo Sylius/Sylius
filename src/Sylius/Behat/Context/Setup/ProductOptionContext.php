@@ -29,7 +29,7 @@ final class ProductOptionContext implements Context
         private ProductOptionRepositoryInterface $productOptionRepository,
         private FactoryInterface $productOptionFactory,
         private FactoryInterface $productOptionValueFactory,
-        private ObjectManager $objectManager
+        private ObjectManager $objectManager,
     ) {
     }
 
@@ -58,7 +58,7 @@ final class ProductOptionContext implements Context
     public function thisProductOptionHasTheOptionValueWithCode(
         ProductOptionInterface $productOption,
         $productOptionValueName,
-        $productOptionValueCode
+        $productOptionValueCode,
     ) {
         $productOptionValue = $this->createProductOptionValue($productOptionValueName, $productOptionValueCode);
         $productOption->addValue($productOptionValue);

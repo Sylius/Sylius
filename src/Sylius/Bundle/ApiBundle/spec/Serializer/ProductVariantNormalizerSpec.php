@@ -36,7 +36,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         AvailabilityCheckerInterface $availabilityChecker,
         SectionProviderInterface $sectionProvider,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ): void {
         $this->beConstructedWith($pricesCalculator, $channelContext, $availabilityChecker, $sectionProvider, $iriConverter);
     }
@@ -50,7 +50,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     function it_supports_normalization_if_section_is_not_admin_get(
         ProductVariantInterface $variant,
         SectionProviderInterface $sectionProvider,
-        ShopApiSection $shopApiSection
+        ShopApiSection $shopApiSection,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
         $this->supportsNormalization($variant)->shouldReturn(true);
@@ -59,7 +59,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
     function it_does_not_support_if_section_is_admin_get(
         ProductVariantInterface $variant,
         SectionProviderInterface $sectionProvider,
-        AdminApiSection $adminApiSection
+        AdminApiSection $adminApiSection,
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
         $this->supportsNormalization($variant)->shouldReturn(false);
@@ -79,7 +79,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -102,7 +102,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -127,7 +127,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         ChannelInterface $channel,
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -149,7 +149,8 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
                 'originalPrice' => 1000,
                 'appliedPromotions' => ['/api/v2/shop/catalog-promotions/winter_sale'],
                 'inStock' => true,
-            ]);
+            ])
+        ;
     }
 
     function it_doesnt_return_prices_if_channel_is_not_found(
@@ -158,7 +159,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         NormalizerInterface $normalizer,
         ChannelInterface $channel,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -177,7 +178,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(
         NormalizerInterface $normalizer,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->setNormalizer($normalizer);
 

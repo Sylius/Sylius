@@ -33,7 +33,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     function it_assigns_a_number_to_an_order(
         OrderInterface $order,
-        OrderNumberGeneratorInterface $numberGenerator
+        OrderNumberGeneratorInterface $numberGenerator,
     ): void {
         $order->getNumber()->willReturn(null);
 
@@ -45,7 +45,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     function it_does_not_assign_a_number_to_an_order_with_number(
         OrderInterface $order,
-        OrderNumberGeneratorInterface $numberGenerator
+        OrderNumberGeneratorInterface $numberGenerator,
     ): void {
         $order->getNumber()->willReturn('00000007');
 

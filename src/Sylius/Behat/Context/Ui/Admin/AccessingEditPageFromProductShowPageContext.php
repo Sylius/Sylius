@@ -24,7 +24,7 @@ final class AccessingEditPageFromProductShowPageContext implements Context
 {
     public function __construct(
         private UpdateSimpleProductPageInterface $updateSimpleProductPage,
-        private UpdatePageInterface $updateVariantProductPage
+        private UpdatePageInterface $updateVariantProductPage,
     ) {
     }
 

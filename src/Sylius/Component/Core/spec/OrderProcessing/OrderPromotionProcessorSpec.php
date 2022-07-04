@@ -41,7 +41,7 @@ final class OrderPromotionProcessorSpec extends ObjectBehavior
 
     function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(
         PromotionProcessorInterface $promotionProcessor,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
 

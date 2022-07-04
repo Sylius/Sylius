@@ -65,7 +65,7 @@ final class ProductAssociationFixtureTest extends TestCase
             [[
                 'custom' => [['associated_products' => ['product-1', 'product-2']]],
             ]],
-            'custom.*.associated_products'
+            'custom.*.associated_products',
         )
         ;
     }
@@ -74,7 +74,7 @@ final class ProductAssociationFixtureTest extends TestCase
     {
         return new ProductAssociationFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

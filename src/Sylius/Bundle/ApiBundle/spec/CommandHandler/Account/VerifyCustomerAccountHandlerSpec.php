@@ -34,7 +34,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 
     function it_verifies_shop_user(
         RepositoryInterface $shopUserRepository,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn($user);
 
@@ -46,7 +46,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_error_if_user_does_not_exist(
-        RepositoryInterface $shopUserRepository
+        RepositoryInterface $shopUserRepository,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn(null);
 

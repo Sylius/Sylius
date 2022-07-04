@@ -29,7 +29,7 @@ final class OrderItemContext implements Context
         private ApiClientInterface $orderItemsClient,
         private ApiClientInterface $orderItemUnitsClient,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

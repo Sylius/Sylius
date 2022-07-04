@@ -38,7 +38,7 @@ final class CurrencyNotFoundException extends \RuntimeException
         return new self(sprintf(
             'Currency "%s" is not available! The available ones are: "%s".',
             $currencyCode,
-            implode('", "', $availableCurrenciesCodes)
+            implode('", "', $availableCurrenciesCodes),
         ));
     }
 }

@@ -40,13 +40,13 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
 
         $isStockSufficient = $this->availabilityChecker->isStockSufficient(
             $cartItem->getVariant(),
-            $cartItem->getQuantity() + $this->getExistingCartItemQuantityFromCart($value->getCart(), $cartItem)
+            $cartItem->getQuantity() + $this->getExistingCartItemQuantityFromCart($value->getCart(), $cartItem),
         );
 
         if (!$isStockSufficient) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%itemName%' => $cartItem->getVariant()->getInventoryName()]
+                ['%itemName%' => $cartItem->getVariant()->getInventoryName()],
             );
         }
     }

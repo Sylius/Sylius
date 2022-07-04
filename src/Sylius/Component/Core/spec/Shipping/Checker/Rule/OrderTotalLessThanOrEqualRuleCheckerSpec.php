@@ -41,7 +41,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     public function it_recognizes_subject_if_order_total_is_less_than_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -58,7 +58,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     public function it_recognizes_subject_if_order_total_is_equal_to_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -75,7 +75,7 @@ final class OrderTotalLessThanOrEqualRuleCheckerSpec extends ObjectBehavior
     public function it_denies_subject_if_order_total_is_greater_than_configured_amount(
         ShipmentInterface $subject,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $subject->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);

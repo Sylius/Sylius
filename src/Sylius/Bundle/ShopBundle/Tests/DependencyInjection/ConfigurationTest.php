@@ -29,7 +29,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['locale_switcher' => 'url'],
-            'locale_switcher'
+            'locale_switcher',
         );
     }
 
@@ -71,7 +71,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['firewall_context_name' => 'shop'],
-            'firewall_context_name'
+            'firewall_context_name',
         );
     }
 
@@ -87,7 +87,7 @@ final class ConfigurationTest extends TestCase
                     'pattern' => '/checkout/.+',
                     'route_map' => [],
             ]],
-            'checkout_resolver'
+            'checkout_resolver',
         );
     }
 
@@ -144,7 +144,7 @@ final class ConfigurationTest extends TestCase
                     ],
                 ],
             ]],
-            'checkout_resolver'
+            'checkout_resolver',
         );
     }
 

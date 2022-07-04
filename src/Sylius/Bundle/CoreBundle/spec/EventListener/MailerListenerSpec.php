@@ -31,7 +31,7 @@ final class MailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         ChannelContextInterface $channelContext,
         LocaleContextInterface $localeContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->beConstructedWith($emailSender, $channelContext, $localeContext);
 
@@ -41,7 +41,7 @@ final class MailerListenerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
         GenericEvent $event,
-        \stdClass $customer
+        \stdClass $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
 
@@ -51,7 +51,7 @@ final class MailerListenerSpec extends ObjectBehavior
     function it_does_not_send_the_email_confirmation_if_the_customer_user_is_null(
         SenderInterface $emailSender,
         GenericEvent $event,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
@@ -65,7 +65,7 @@ final class MailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -81,7 +81,7 @@ final class MailerListenerSpec extends ObjectBehavior
         ChannelInterface $channel,
         GenericEvent $event,
         CustomerInterface $customer,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -102,7 +102,7 @@ final class MailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         ChannelInterface $channel,
         GenericEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getSubject()->willReturn($user);
 
@@ -121,7 +121,7 @@ final class MailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         ChannelInterface $channel,
         GenericEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getSubject()->willReturn($user);
 

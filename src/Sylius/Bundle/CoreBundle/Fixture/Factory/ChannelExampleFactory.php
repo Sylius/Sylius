@@ -48,7 +48,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         private RepositoryInterface $currencyRepository,
         private RepositoryInterface $zoneRepository,
         ?TaxonRepositoryInterface $taxonRepository = null,
-        ?FactoryInterface $shopBillingDataFactory = null
+        ?FactoryInterface $shopBillingDataFactory = null,
     ) {
         if (null === $taxonRepository) {
             @trigger_error('Passing RouterInterface as the fifth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
@@ -136,12 +136,12 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('account_verification_required', 'bool')
             ->setDefault(
                 'default_tax_zone',
-                LazyOption::randomOneOrNull($this->zoneRepository, 100, ['scope' => [Scope::TAX, AddressingScope::ALL]])
+                LazyOption::randomOneOrNull($this->zoneRepository, 100, ['scope' => [Scope::TAX, AddressingScope::ALL]]),
             )
             ->setAllowedTypes('default_tax_zone', ['null', 'string', ZoneInterface::class])
             ->setNormalizer(
                 'default_tax_zone',
-                LazyOption::findOneBy($this->zoneRepository, 'code', ['scope' => [Scope::TAX, AddressingScope::ALL]])
+                LazyOption::findOneBy($this->zoneRepository, 'code', ['scope' => [Scope::TAX, AddressingScope::ALL]]),
             )
             ->setDefault('tax_calculation_strategy', 'order_items_based')
             ->setAllowedTypes('tax_calculation_strategy', 'string')

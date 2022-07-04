@@ -34,7 +34,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private ShipmentRepositoryInterface $shipmentRepository,
-        private ServiceRegistryInterface $shippingCalculators
+        private ServiceRegistryInterface $shippingCalculators,
     ) {
     }
 

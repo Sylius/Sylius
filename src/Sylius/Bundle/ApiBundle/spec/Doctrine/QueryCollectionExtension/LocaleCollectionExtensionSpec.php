@@ -33,7 +33,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -46,7 +46,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -64,7 +64,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -73,7 +73,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $queryNameGenerator->generateParameterName('locales')->shouldBeCalled()->willReturn('locales');
         $queryBuilder->getRootAliases()->willReturn(['o']);
@@ -96,7 +96,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 }

@@ -32,12 +32,12 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
     function let(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
     ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
-            $stateMachineFactory
+            $stateMachineFactory,
         );
     }
 
@@ -54,7 +54,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
@@ -84,7 +84,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
@@ -114,7 +114,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
         StateMachineFactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');
@@ -142,13 +142,13 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $newPayment,
         PaymentMethodInterface $paymentMethod,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
     ): void {
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
             $stateMachineFactory,
-            PaymentInterface::STATE_CART
+            PaymentInterface::STATE_CART,
         );
 
         $order->getTotal()->willReturn(1000);
@@ -174,7 +174,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $lastFailedPayment,
-        PaymentInterface $newPayment
+        PaymentInterface $newPayment,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getCurrencyCode()->willReturn('USD');

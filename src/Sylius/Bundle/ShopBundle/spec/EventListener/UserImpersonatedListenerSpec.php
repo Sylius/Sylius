@@ -29,7 +29,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
     function let(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $this->beConstructedWith($cartStorage, $channelContext, $orderRepository);
     }
@@ -42,7 +42,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         ChannelInterface $channel,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $event->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -63,7 +63,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
         UserEvent $event,
         ShopUserInterface $user,
         CustomerInterface $customer,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $event->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -79,7 +79,7 @@ final class UserImpersonatedListenerSpec extends ObjectBehavior
 
     function it_does_nothing_when_the_user_is_not_a_shop_user_type(
         UserEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getUser()->willReturn($user);
 

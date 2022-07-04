@@ -72,7 +72,7 @@ final class ShipmentSpec extends ObjectBehavior
 
     function it_does_not_remove_adjustment_when_it_is_locked(
         AdjustmentInterface $adjustment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->setOrder($order);
 
@@ -95,7 +95,7 @@ final class ShipmentSpec extends ObjectBehavior
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
         AdjustmentInterface $adjustment4,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->setOrder($order);
 

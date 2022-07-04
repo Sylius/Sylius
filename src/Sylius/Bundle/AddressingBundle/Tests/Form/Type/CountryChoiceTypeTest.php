@@ -91,7 +91,7 @@ final class CountryChoiceTypeTest extends TypeTestCase
             $this->austria->reveal(),
         ]);
 
-        $this->assertChoicesLabels(['Austria','France', 'Poland'], ['enabled' => false]);
+        $this->assertChoicesLabels(['Austria', 'France', 'Poland'], ['enabled' => false]);
     }
 
     /** @test */

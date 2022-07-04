@@ -28,7 +28,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
     function it_uses_announcer_to_dispatch_catalog_promotion_created_event_after_creating_catalog_promotion(
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         GenericEvent $event,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $event->getSubject()->willReturn($catalogPromotion);
 
@@ -40,7 +40,7 @@ final class CatalogPromotionEventListenerSpec extends ObjectBehavior
     function it_uses_announcer_to_dispatch_catalog_promotion_updated_event_after_updating_catalog_promotion(
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         GenericEvent $event,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $event->getSubject()->willReturn($catalogPromotion);
 

@@ -30,7 +30,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
         GenericEvent $event,
         UserInterface $user,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -43,7 +43,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
 
     function it_does_not_update_password_if_subject_is_not_instance_of_customer_interface(
         GenericEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getSubject()->willReturn($user);
 
@@ -53,7 +53,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
     function it_does_not_update_password_if_customer_does_not_have_user(
         PasswordUpdaterInterface $passwordUpdater,
         GenericEvent $event,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);

@@ -33,7 +33,7 @@ final class PaymentDescriptionProvider implements PaymentDescriptionProviderInte
             [
                 '%items%' => $order->getItems()->count(),
                 '%total%' => round($payment->getAmount() / 100, 2),
-            ]
+            ],
         );
     }
 }

@@ -28,7 +28,7 @@ final class ResourceMetadataPropertyValueResolver implements ResourceMetadataPro
     public function resolve(
         string $propertyName,
         ResourceMetadata $parentResourceMetadata,
-        array $childResourceMetadata
+        array $childResourceMetadata,
     ) {
         $parentPropertyValue = $parentResourceMetadata->{'get' . ucfirst($propertyName)}();
 

@@ -28,7 +28,7 @@ final class OrderLocaleAssignerSpec extends ObjectBehavior
     function it_assigns_locale_to_an_order(
         LocaleContextInterface $localeContext,
         OrderInterface $order,
-        ResourceControllerEvent $event
+        ResourceControllerEvent $event,
     ): void {
         $event->getSubject()->willReturn($order);
         $localeContext->getLocaleCode()->willReturn('pl_PL');

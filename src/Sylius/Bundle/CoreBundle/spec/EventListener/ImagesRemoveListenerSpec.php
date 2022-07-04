@@ -43,7 +43,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         UnitOfWork $unitOfWork,
         ImageInterface $image,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $event->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
@@ -64,7 +64,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         UnitOfWork $unitOfWork,
         ImageInterface $image,
         ProductInterface $product,
-        FilterConfiguration $filterConfiguration
+        FilterConfiguration $filterConfiguration,
     ): void {
         $onFlushEvent->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
@@ -94,7 +94,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         UnitOfWork $unitOfWork,
         ImageInterface $image,
         ProductInterface $product,
-        FilterConfiguration $filterConfiguration
+        FilterConfiguration $filterConfiguration,
     ): void {
         $onFlushEvent->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);

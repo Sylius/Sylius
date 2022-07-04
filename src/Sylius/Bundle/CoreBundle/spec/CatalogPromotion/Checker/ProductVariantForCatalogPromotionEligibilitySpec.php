@@ -41,7 +41,7 @@ final class ProductVariantForCatalogPromotionEligibilitySpec extends ObjectBehav
         ProductVariantInterface $variant,
         ServiceLocator $locator,
         CatalogPromotionScopeInterface $forVariantsScope,
-        VariantInScopeCheckerInterface $forVariantsChecker
+        VariantInScopeCheckerInterface $forVariantsChecker,
     ): void {
         $promotion->getScopes()->willReturn(new ArrayCollection([$forVariantsScope->getWrappedObject()]));
 
@@ -59,7 +59,7 @@ final class ProductVariantForCatalogPromotionEligibilitySpec extends ObjectBehav
         ProductVariantInterface $variant,
         ServiceLocator $locator,
         CatalogPromotionScopeInterface $forTaxonsScope,
-        VariantInScopeCheckerInterface $forTaxonsChecker
+        VariantInScopeCheckerInterface $forTaxonsChecker,
     ): void {
         $promotion->getScopes()->willReturn(new ArrayCollection([$forTaxonsScope->getWrappedObject()]));
 

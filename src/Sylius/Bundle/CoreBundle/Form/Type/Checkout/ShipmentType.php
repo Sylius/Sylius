@@ -39,7 +39,8 @@ final class ShipmentType extends AbstractType
                     'subject' => $shipment,
                     'expanded' => true,
                 ]);
-            });
+            })
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

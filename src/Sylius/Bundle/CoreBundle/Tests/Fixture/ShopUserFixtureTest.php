@@ -100,7 +100,7 @@ final class ShopUserFixtureTest extends TestCase
     {
         return new ShopUserFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

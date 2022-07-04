@@ -21,6 +21,6 @@ interface SalesDataProviderInterface
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        Interval $interval
+        Interval $interval,
     ): SalesSummaryInterface;
 }

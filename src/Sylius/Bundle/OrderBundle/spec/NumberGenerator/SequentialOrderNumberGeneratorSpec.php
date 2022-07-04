@@ -35,7 +35,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     function it_generates_an_order_number(
         EntityRepository $sequenceRepository,
         OrderSequenceInterface $sequence,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $sequence->getIndex()->willReturn(6);
         $sequenceRepository->findOneBy([])->willReturn($sequence);
@@ -49,7 +49,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
         OrderSequenceInterface $sequence,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $sequence->getIndex()->willReturn(0);
 

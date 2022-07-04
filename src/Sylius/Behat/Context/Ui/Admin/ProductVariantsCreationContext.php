@@ -32,7 +32,7 @@ final class ProductVariantsCreationContext implements Context
         string $name,
         string $price,
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->createPage->open(['productId' => $product->getId()]);
 

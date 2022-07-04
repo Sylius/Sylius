@@ -34,7 +34,7 @@ final class PriceHelperSpec extends ObjectBehavior
     function it_returns_variant_price_for_channel_given_in_context(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['channel' => $channel];
 
@@ -45,7 +45,7 @@ final class PriceHelperSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context(
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['lennahc' => ''];
 
@@ -57,7 +57,7 @@ final class PriceHelperSpec extends ObjectBehavior
     function it_returns_variant_original_price_for_channel_given_in_context(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['channel' => $channel];
 
@@ -68,7 +68,7 @@ final class PriceHelperSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context_when_getting_original_price(
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['lennahc' => ''];
 
@@ -80,7 +80,7 @@ final class PriceHelperSpec extends ObjectBehavior
     function it_returns_true_if_variant_is_discounted_for_channel_given_in_context(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['channel' => $channel];
 
@@ -93,7 +93,7 @@ final class PriceHelperSpec extends ObjectBehavior
     function it_returns_false_if_variant_is_not_discounted_for_channel_given_in_context(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['channel' => $channel];
 
@@ -105,7 +105,7 @@ final class PriceHelperSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context_when_checking_if_variant_is_discounted(
         ProductVariantInterface $productVariant,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $context = ['lennahc' => ''];
 

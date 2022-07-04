@@ -30,7 +30,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
             'custom_calc',
             (new Definition())
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
-                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2'])
+                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2']),
         );
 
         $this->compile();
@@ -38,12 +38,12 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.shipping_calculator',
             'register',
-            ['calc1', new Reference('custom_calc')]
+            ['calc1', new Reference('custom_calc')],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.shipping_calculator',
             'register',
-            ['calc2', new Reference('custom_calc')]
+            ['calc2', new Reference('custom_calc')],
         );
     }
 
@@ -56,7 +56,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
             'custom_calc',
             (new Definition())
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
-                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2', 'form_type' => 'FQCN'])
+                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2', 'form_type' => 'FQCN']),
         );
 
         $this->compile();
@@ -64,7 +64,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.shipping_calculator',
             'add',
-            ['calc2', 'default', 'FQCN']
+            ['calc2', 'default', 'FQCN'],
         );
     }
 
@@ -77,14 +77,14 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
             'custom_calc',
             (new Definition())
                 ->addTag('sylius.shipping_calculator', ['calculator' => 'calc1', 'label' => 'Calc 1'])
-                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2'])
+                ->addTag('sylius.shipping_calculator', ['calculator' => 'calc2', 'label' => 'Calc 2']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.shipping_calculators',
-            ['calc1' => 'Calc 1', 'calc2' => 'Calc 2']
+            ['calc1' => 'Calc 1', 'calc2' => 'Calc 2'],
         );
     }
 

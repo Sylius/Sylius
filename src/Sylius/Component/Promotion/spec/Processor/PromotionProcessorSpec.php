@@ -27,7 +27,7 @@ final class PromotionProcessorSpec extends ObjectBehavior
     function let(
         PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider,
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
-        PromotionApplicatorInterface $promotionApplicator
+        PromotionApplicatorInterface $promotionApplicator,
     ): void {
         $this->beConstructedWith($preQualifiedPromotionsProvider, $promotionEligibilityChecker, $promotionApplicator);
     }
@@ -42,7 +42,7 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
@@ -61,7 +61,7 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);
@@ -81,7 +81,7 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        PromotionInterface $exclusivePromotion
+        PromotionInterface $exclusivePromotion,
     ): void {
         $subject->getPromotions()->willReturn(new ArrayCollection([]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion, $exclusivePromotion]);
@@ -104,7 +104,7 @@ final class PromotionProcessorSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $promotionEligibilityChecker,
         PromotionApplicatorInterface $promotionApplicator,
         PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $subject->getPromotions()->willReturn(new ArrayCollection([$promotion->getWrappedObject()]));
         $preQualifiedPromotionsProvider->getPromotions($subject)->willReturn([$promotion]);

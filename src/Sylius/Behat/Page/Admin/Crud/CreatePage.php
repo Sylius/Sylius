@@ -25,7 +25,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName
+        private string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

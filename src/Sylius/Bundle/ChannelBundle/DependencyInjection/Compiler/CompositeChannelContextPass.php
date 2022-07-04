@@ -23,7 +23,7 @@ final class CompositeChannelContextPass extends PrioritizedCompositeServicePass
             'sylius.context.channel',
             'sylius.context.channel.composite',
             'sylius.context.channel',
-            'addContext'
+            'addContext',
         );
     }
 }
