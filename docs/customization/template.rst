@@ -124,7 +124,20 @@ Done! If you do not see any changes on the ``/admin/countries/new`` url, clear y
 How to customize templates via events?
 --------------------------------------
 
-Sylius uses the Events mechanism provided by the `SonataBlockBundle <https://sonata-project.org/bundles/block/master/doc/reference/events.html>`_.
+Sylius uses its own event mechanism called Sylius Template Events which implementation is based purely on Twig.
+This (compared to the legacy way of using SonataBlockBundle) leads to:
+
+* better performance - as it is no longer based on EventListeners
+* less boilerplate code - no need to register more Listeners
+* easier variable pass - now you just need to add it to configuration file
+* extended configuration - now you can change if block is enabled, change its template, or even priority
+
+.. note::
+
+    If you want to read more about the Sylius Template Events from developers/architectural perspective
+    check the [Github Issue](https://github.com/Sylius/Sylius/issues/10997) referring this feature.
+
+We will now guide you through a simple way of customizing your template with Sylius Template Events.
 
 How to locate template events?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +158,7 @@ on the create action of Resources, at the bottom of the page (after the content 
     {% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create' %}
 
     {# And then the slot name is appended to the event_prefix #}
-    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resource': resource}) }}
+    {{ sylius_template_event([event_prefix, 'sylius.admin.create'], _context) }}
 
 .. note::
 
@@ -155,8 +168,38 @@ on the create action of Resources, at the bottom of the page (after the content 
 
 .. tip::
 
-    In order to find events in Sylius templates you can simply search for the ``sonata_block_render_event`` phrase in your
+    In order to find events in Sylius templates you can simply search for the ``sylius_template_event`` phrase in your
     project's directory.
+
+How to locate rendered template event?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With DevTools in your browser
+"""""""""""""""""""""""""""""
+
+If you want to search easier for the event name you want to modify, the Sylius Template Events can be easily
+found in your browser with the debug tools it provides.
+Just use the ``explore`` (in Chrome browser) or its equivalent in other browsers to check the HTML code of your webpage.
+Here you will be able to see commented blocks where the name of the template as well as the event name will be shown:
+
+.. image:: /_images/sylius_event_debug.png
+
+In the example above we were looking for the HTML responsible for rendering of the Sylius Logo. Mentioned markup is surrounded
+by statements of where the event, as well as block, started.
+What is more, we can see which twig template is responsible for rendering this block and what the priority of this rendering is.
+
+.. image:: /_images/sylius_logo_locate.png
+
+This will have all the necessary information that you need for further customization.
+
+With Symfony Profiler
+"""""""""""""""""""""
+
+The ``Template events`` section in Symfony Profiler gives you the list of events used to render the page with their blocks.
+Besides all information about blocks mentioned in the above section, you will see one more especially beneficial when it
+comes to optimization which is ``Duration``.
+
+.. image:: /_images/sylius_template_events_metrics.png
 
 How to use template events for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -194,6 +237,83 @@ That's it. Your new block should appear in the view.
 .. tip::
 
     Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
+
+What more can I do with the Sylius Template Events?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You might think that this is the only way of customisation with the events, but you can also do more.
+
+1. Disabling blocks:
+    You can now disable some blocks that do not fit your usage, just put in config:
+
+    .. code-block:: yaml
+
+        sylius_ui:
+            events:
+                sylius.shop.layout.event_with_ugly_block:
+                    blocks:
+                        the_block_i_dont_like:
+                            enabled: false
+
+2. Change the priority of blocks:
+    In order to override the templates from vendor, or maybe you are developing plugin you can change the priority of a block:
+
+    .. code-block:: yaml
+
+        sylius_ui:
+            events:
+                sylius.shop.layout.vendor_block:
+                    blocks:
+                        my_important_block:
+                            priority: 1
+
+3. Pass variables:
+    You can access variables by using the function:
+
+    .. code-block:: html
+
+        {{ dump() }}
+
+    You can also access the resources and entities (in the correct views) variables:
+
+    .. code-block:: html
+
+        # for example in products show view
+        {{ dump(product) }}
+
+    Or you can pass any variable from the template to the block and access it with function:
+
+    .. code-block:: html
+
+        # Parent html
+        ...
+            {{ sylius_template_event('sylius.shop.product.show', {'customVariable': variable}) }}
+        ...
+
+    .. code-block:: html
+
+        # Template html
+        ...
+            {{ dump(customVariable) }}
+        ...
+
+4. Override block templates:
+    You can override the existing blocks by changing the config:
+
+    .. code-block:: yaml
+
+        # config.yaml
+        sylius_ui:
+            events:
+                sylius.shop.layout.header.grid:
+                    blocks:
+                        logo: 'logo.html.twig'
+
+    And adding your own template into `templates/logo.html.twig` folder.
+
+    .. note::
+
+        Check out the full example of overriding the template in :doc:`Shop Customizations </getting-started-with-sylius/shop-customizations>`
 
 How to use themes for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
