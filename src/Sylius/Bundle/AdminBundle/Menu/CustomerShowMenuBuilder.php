@@ -40,7 +40,7 @@ final class CustomerShowMenuBuilder
 
         $this->eventDispatcher->dispatch(
             new CustomerShowMenuBuilderEvent($this->factory, $menu, $customer),
-            self::EVENT_NAME
+            self::EVENT_NAME,
         );
 
         return $menu;

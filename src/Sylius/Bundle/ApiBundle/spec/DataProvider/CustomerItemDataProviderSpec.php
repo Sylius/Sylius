@@ -39,7 +39,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         AdminUserInterface $user,
         CustomerRepositoryInterface $customerRepository,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -51,7 +51,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
                 CustomerInterface::class,
                 '1',
                 Request::METHOD_PUT,
-                []
+                [],
             )
             ->shouldReturn($customer)
         ;
@@ -61,7 +61,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -74,7 +74,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
                 CustomerInterface::class,
                 '1',
                 Request::METHOD_PUT,
-                []
+                [],
             )
             ->shouldReturn($customer)
         ;
@@ -84,7 +84,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -97,7 +97,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
                 CustomerInterface::class,
                 '2',
                 Request::METHOD_PUT,
-                []
+                [],
             )
             ->shouldReturn(null)
         ;
@@ -107,7 +107,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $user,
         CustomerInterface $customer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -120,7 +120,7 @@ final class CustomerItemDataProviderSpec extends ObjectBehavior
                 CustomerInterface::class,
                 '1',
                 'shop_verify_customer_account',
-                []
+                [],
             )
             ->shouldReturn($customer)
         ;

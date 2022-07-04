@@ -25,7 +25,7 @@ final class CustomerProviderSpec extends ObjectBehavior
     function let(
         CanonicalizerInterface $canonicalizer,
         FactoryInterface $customerFactory,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $this->beConstructedWith($canonicalizer, $customerFactory, $customerRepository);
     }
@@ -39,7 +39,7 @@ final class CustomerProviderSpec extends ObjectBehavior
         CanonicalizerInterface $canonicalizer,
         FactoryInterface $customerFactory,
         CustomerRepositoryInterface $customerRepository,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $canonicalizer->canonicalize('WILL.SMITH@example.com')->willReturn('will.smith@example.com');
         $customerRepository->findOneBy(['emailCanonical' => 'will.smith@example.com'])->willReturn(null);
@@ -54,7 +54,7 @@ final class CustomerProviderSpec extends ObjectBehavior
         CanonicalizerInterface $canonicalizer,
         FactoryInterface $customerFactory,
         CustomerRepositoryInterface $customerRepository,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $canonicalizer->canonicalize('WILL.SMITH@example.com')->willReturn('will.smith@example.com');
         $customerRepository->findOneBy(['emailCanonical' => 'will.smith@example.com'])->willReturn($customer);

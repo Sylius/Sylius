@@ -34,7 +34,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -47,7 +47,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $userContext->getUser()->willReturn($admin);
         $admin->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -62,7 +62,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -71,7 +71,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $userContext->getUser()->willReturn($admin);
         $admin->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -87,7 +87,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -98,7 +98,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         Expr $expr,
-        Expr\Orx $exprOrx
+        Expr\Orx $exprOrx,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -123,7 +123,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -134,7 +134,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         Expr $expr,
-        Expr\Orx $exprOrx
+        Expr\Orx $exprOrx,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -160,7 +160,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 }

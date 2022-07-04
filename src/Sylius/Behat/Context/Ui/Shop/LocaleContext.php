@@ -24,7 +24,7 @@ final class LocaleContext implements Context
 {
     public function __construct(
         private HomePageInterface $homePage,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -78,7 +78,7 @@ final class LocaleContext implements Context
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
                 $locale,
-                implode('", "', $this->homePage->getAvailableLocales())
+                implode('", "', $this->homePage->getAvailableLocales()),
             ));
         }
     }

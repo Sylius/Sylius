@@ -33,7 +33,7 @@ final class ProductAssociationContext implements Context
         private FactoryInterface $productAssociationFactory,
         private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
         private RepositoryInterface $productAssociationRepository,
-        private ObjectManager $objectManager
+        private ObjectManager $objectManager,
     ) {
     }
 
@@ -77,7 +77,7 @@ final class ProductAssociationContext implements Context
     public function theProductHasAnAssociationWithProduct(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
-        ProductInterface $associatedProduct
+        ProductInterface $associatedProduct,
     ) {
         $this->createProductAssociation($product, $productAssociationType, [$associatedProduct]);
     }
@@ -88,7 +88,7 @@ final class ProductAssociationContext implements Context
     public function theProductHasAnAssociationWithProducts(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
-        array $associatedProducts
+        array $associatedProducts,
     ) {
         $this->createProductAssociation($product, $productAssociationType, $associatedProducts);
     }
@@ -119,7 +119,7 @@ final class ProductAssociationContext implements Context
     private function createProductAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
-        array $associatedProducts
+        array $associatedProducts,
     ) {
         /** @var ProductAssociationInterface $productAssociation */
         $productAssociation = $this->productAssociationFactory->createNew();
@@ -137,7 +137,7 @@ final class ProductAssociationContext implements Context
     private function addProductAssociationTypeTranslation(
         ProductAssociationTypeInterface $productAssociationType,
         string $name,
-        string $locale
+        string $locale,
     ) {
         /** @var ProductAssociationTypeTranslationInterface $translation */
         $translation = $this->productAssociationTypeTranslationFactory->createNew();

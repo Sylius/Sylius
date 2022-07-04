@@ -26,7 +26,7 @@ final class ResetPasswordHandler implements MessageHandlerInterface
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private PasswordUpdaterInterface $passwordUpdater,
-        private string $tokenTtl
+        private string $tokenTtl,
     ) {
     }
 

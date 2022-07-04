@@ -30,7 +30,7 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
 
     function it_supports_only_shop_user_id_commands(
         ShopUserIdAwareInterface $shopUserIdAware,
-        CommandAwareDataTransformerInterface $commandAwareDataTransformer
+        CommandAwareDataTransformerInterface $commandAwareDataTransformer,
     ): void {
         $this->supportsTransformation($shopUserIdAware)->shouldReturn(true);
         $this->supportsTransformation($commandAwareDataTransformer)->shouldReturn(false);
@@ -39,7 +39,7 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
     function it_sets_current_shop_user_email(
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
-        ShopUserIdAwareInterface $shopUserIdAwareCommand
+        ShopUserIdAwareInterface $shopUserIdAwareCommand,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -53,7 +53,7 @@ final class LoggedInShopUserIdAwareCommandDataTransformerSpec extends ObjectBeha
     function it_does_nothing_if_logged_in_user_is_not_shop_user(
         UserContextInterface $userContext,
         UserInterface $user,
-        ShopUserIdAwareInterface $shopUserIdAwareCommand
+        ShopUserIdAwareInterface $shopUserIdAwareCommand,
     ): void {
         $userContext->getUser()->willReturn($user);
 

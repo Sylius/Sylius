@@ -31,7 +31,7 @@ class ProductAssociationTypeExampleFactory extends AbstractExampleFactory implem
 
     public function __construct(
         private FactoryInterface $productAssociationTypeFactory,
-        private RepositoryInterface $localeRepository
+        private RepositoryInterface $localeRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

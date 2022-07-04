@@ -35,7 +35,7 @@ final class AddressBookContext implements Context
         private CreatePageInterface $addressBookCreatePage,
         private UpdatePageInterface $addressBookUpdatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -376,6 +376,7 @@ final class AddressBookContext implements Context
             ->getCurrentPageWithForm([
                 $this->addressBookCreatePage,
                 $this->addressBookUpdatePage,
-        ]);
+        ])
+        ;
     }
 }

@@ -37,7 +37,7 @@ final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
     function it_sets_base_currency_as_disabled_when_channel_is_not_new(
         FormEvent $event,
         ChannelInterface $channel,
-        FormInterface $form
+        FormInterface $form,
     ): void {
         $event->getData()->willReturn($channel);
         $event->getForm()->willReturn($form);
@@ -55,7 +55,7 @@ final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
     function it_does_not_set_base_currency_as_enabled_when_channel_is_new(
         FormEvent $event,
         ChannelInterface $channel,
-        FormInterface $form
+        FormInterface $form,
     ): void {
         $event->getData()->willReturn($channel);
         $event->getForm()->willReturn($form);
@@ -72,7 +72,7 @@ final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 
     function it_throws_unexpected_type_exception_when_resource_does_not_implements_channel_interface(
         FormEvent $event,
-        $resource
+        $resource,
     ): void {
         $event->getData()->willReturn($resource);
         $this->shouldThrow(UnexpectedTypeException::class)->during('preSetData', [$event]);

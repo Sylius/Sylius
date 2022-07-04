@@ -77,7 +77,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_returns_a_list_of_ancestors(
         TaxonInterface $categoryTaxon,
-        TaxonInterface $tshirtsTaxon
+        TaxonInterface $tshirtsTaxon,
     ): void {
         $tshirtsTaxon->getParent()->willReturn($categoryTaxon);
 
@@ -220,7 +220,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_returns_enabled_children(
         TaxonInterface $enabledChildTaxon,
-        TaxonInterface $disabledChildTaxon
+        TaxonInterface $disabledChildTaxon,
     ): void {
         $enabledChildTaxon->isEnabled()->willReturn(true);
         $enabledChildTaxon->getParent()->willReturn(null);

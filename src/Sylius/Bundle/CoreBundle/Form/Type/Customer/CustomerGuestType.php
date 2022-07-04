@@ -28,7 +28,7 @@ final class CustomerGuestType extends AbstractResourceType
         string $dataClass,
         array $validationGroups,
         private RepositoryInterface $customerRepository,
-        private FactoryInterface $customerFactory
+        private FactoryInterface $customerFactory,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }

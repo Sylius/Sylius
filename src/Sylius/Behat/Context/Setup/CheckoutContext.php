@@ -38,7 +38,7 @@ final class CheckoutContext implements Context
         private RepositoryInterface $paymentMethodRepository,
         private MessageBusInterface $commandBus,
         private FactoryInterface $addressFactory,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -97,7 +97,7 @@ final class CheckoutContext implements Context
      */
     public function iHaveProceededWithSelectingPaymentMethod(
         ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ): void {
         $cartToken = $this->sharedStorage->get('cart_token');
 
@@ -126,7 +126,7 @@ final class CheckoutContext implements Context
     private function completeCheckout(
         OrderInterface $order,
         ShippingMethodInterface $shippingMethod = null,
-        PaymentMethodInterface $paymentMethod = null
+        PaymentMethodInterface $paymentMethod = null,
     ): void {
         $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
 

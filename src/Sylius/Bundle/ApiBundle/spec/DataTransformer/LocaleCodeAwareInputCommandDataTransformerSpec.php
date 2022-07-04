@@ -27,7 +27,7 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
 
     function it_supports_only_locale_code_aware_interface(
         LocaleCodeAwareInterface $localeCodeAware,
-        ResourceInterface $resource
+        ResourceInterface $resource,
     ): void {
         $this->supportsTransformation($localeCodeAware)->shouldReturn(true);
         $this->supportsTransformation($resource)->shouldReturn(false);
@@ -35,7 +35,7 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
 
     function it_adds_locale_code_to_object(
         LocaleContextInterface $localeContext,
-        LocaleCodeAwareInterface $command
+        LocaleCodeAwareInterface $command,
     ): void {
         $command->getLocaleCode()->willReturn(null);
 
@@ -47,7 +47,7 @@ final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavio
     }
 
     function it_does_nothing_if_object_has_locale_code(
-        LocaleCodeAwareInterface $command
+        LocaleCodeAwareInterface $command,
     ): void {
         $command->getLocaleCode()->willReturn('en_US');
 

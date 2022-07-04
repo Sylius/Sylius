@@ -25,7 +25,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $this->beConstructedWith($userRepository, $passwordUpdater, 'P5D');
     }
@@ -38,7 +38,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_resets_password(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
 
@@ -62,7 +62,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_token_is_expired(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
 
@@ -87,7 +87,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_tokens_are_not_exact(
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
 

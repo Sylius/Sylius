@@ -41,7 +41,7 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
         ;
 
         $builder->get('taxon')->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->taxonRepository, 'code'))
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->taxonRepository, 'code')),
         );
     }
 

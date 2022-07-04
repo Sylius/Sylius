@@ -37,7 +37,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker,
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotion->isCouponBased()->willReturn(true);
 
@@ -51,7 +51,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_subject_is_not_coupon_aware(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->isCouponBased()->willReturn(true);
 
@@ -60,7 +60,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_subject_has_no_coupon(
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->isCouponBased()->willReturn(true);
 
@@ -73,7 +73,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
         PromotionInterface $otherPromotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotion->isCouponBased()->willReturn(true);
 
@@ -87,7 +87,7 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker,
         PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotion->isCouponBased()->willReturn(true);
 

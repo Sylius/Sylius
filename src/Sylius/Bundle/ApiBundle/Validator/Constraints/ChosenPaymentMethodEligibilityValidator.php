@@ -28,7 +28,7 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
-        private PaymentMethodsResolverInterface $paymentMethodsResolver
+        private PaymentMethodsResolverInterface $paymentMethodsResolver,
     ) {
     }
 

@@ -39,7 +39,7 @@ final class ShipmentAlreadyShippedValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_shipment_status_is_shipped(
         ShipmentRepositoryInterface $shipmentRepository,
         ShipmentInterface $shipment,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShipmentAlreadyShipped();
         $shipShipment = new ShipShipment();
@@ -57,7 +57,7 @@ final class ShipmentAlreadyShippedValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_shipment_status_is_different_than_shipped(
         ShipmentRepositoryInterface $shipmentRepository,
         ShipmentInterface $shipment,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShipmentAlreadyShipped();
         $shipShipment = new ShipShipment();

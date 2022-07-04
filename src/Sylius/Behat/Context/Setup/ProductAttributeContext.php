@@ -36,7 +36,7 @@ final class ProductAttributeContext implements Context
         private RepositoryInterface $productAttributeRepository,
         private AttributeFactoryInterface $productAttributeFactory,
         private FactoryInterface $productAttributeValueFactory,
-        private ObjectManager $objectManager
+        private ObjectManager $objectManager,
     ) {
         $this->faker = Factory::create();
     }
@@ -88,7 +88,7 @@ final class ProductAttributeContext implements Context
     public function thisProductAttributeHasAValueInLocale(
         ProductAttributeInterface $productAttribute,
         string $value,
-        string $localeCode
+        string $localeCode,
     ): void {
         $choices = [
             $this->faker->uuid => [
@@ -111,7 +111,7 @@ final class ProductAttributeContext implements Context
         string $firstValue,
         string $firstLocaleCode,
         string $secondValue,
-        string $secondLocaleCode
+        string $secondLocaleCode,
     ): void {
         $choices = [
             $this->faker->uuid => [
@@ -174,7 +174,7 @@ final class ProductAttributeContext implements Context
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
         string $productAttributeName,
-        string ...$productAttributeValues
+        string ...$productAttributeValues,
     ): void {
         $this->createSelectProductAttributeValue($product, $productAttributeName, $productAttributeValues);
     }
@@ -186,7 +186,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         string $productAttributeName,
         string $productAttributeValue,
-        string $localeCode
+        string $localeCode,
     ): void {
         $this->createSelectProductAttributeValue($product, $productAttributeName, [$productAttributeValue], $localeCode);
     }
@@ -200,7 +200,7 @@ final class ProductAttributeContext implements Context
         string $productAttributeType,
         string $productAttributeName,
         string $value,
-        string $language = 'en_US'
+        string $language = 'en_US',
     ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute, $language);
@@ -217,7 +217,7 @@ final class ProductAttributeContext implements Context
         string $productAttributeType,
         string $productAttributeName,
         string $value,
-        string $language = 'en_US'
+        string $language = 'en_US',
     ): void {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute, $language, false);
@@ -257,7 +257,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         $productAttributeType,
         $productAttributeName,
-        $value
+        $value,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
@@ -274,7 +274,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         string $productAttributeType,
         string $productAttributeName,
-        $value
+        $value,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
@@ -290,7 +290,7 @@ final class ProductAttributeContext implements Context
     public function thisProductHasPercentAttributeWithValueAtPosition(
         ProductInterface $product,
         $productAttributeName,
-        $position
+        $position,
     ) {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
         $attribute->setPosition((int) $position);
@@ -308,7 +308,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         $productAttributeType,
         $productAttributeName,
-        $date
+        $date,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
@@ -325,7 +325,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         string $productAttributeType,
         string $productAttributeName,
-        $date
+        $date,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute, 'en_US', false);
@@ -339,7 +339,7 @@ final class ProductAttributeContext implements Context
         string $type,
         string $name,
         ?string $code = null,
-        bool $translatable = true
+        bool $translatable = true,
     ): ProductAttributeInterface {
         /** @var ProductAttributeInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($type);
@@ -380,7 +380,7 @@ final class ProductAttributeContext implements Context
         $value,
         ProductAttributeInterface $attribute,
         ?string $localeCode = 'en_US',
-        bool $translatable = true
+        bool $translatable = true,
     ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attribute->setTranslatable($translatable);
@@ -406,7 +406,7 @@ final class ProductAttributeContext implements Context
         ProductInterface $product,
         string $productAttributeName,
         array $values,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $attribute = $this->provideProductAttribute(SelectAttributeType::TYPE, $productAttributeName);
 

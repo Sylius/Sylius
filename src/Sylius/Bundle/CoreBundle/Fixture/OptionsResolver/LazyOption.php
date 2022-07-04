@@ -54,7 +54,7 @@ final class LazyOption
     public static function randomOneOrNull(
         RepositoryInterface $repository,
         int $chanceOfRandomOne = 100,
-        array $criteria = []
+        array $criteria = [],
     ): \Closure {
         return function (Options $options) use ($repository, $chanceOfRandomOne, $criteria): ?object {
             if (random_int(1, 100) > $chanceOfRandomOne) {
@@ -157,8 +157,8 @@ final class LazyOption
                             'The %s resource for field %s with value %s was not found',
                             $repository->getClassName(),
                             $field,
-                            $previousValue
-                        )
+                            $previousValue,
+                        ),
                     );
                 }
 

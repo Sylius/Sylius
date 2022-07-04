@@ -33,7 +33,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
-        RouterInterface $router
+        RouterInterface $router,
     ): void {
         $this->beConstructedWith($authenticationUtils, $formFactory, $templatingEngine, $authorizationChecker, $router);
     }
@@ -47,7 +47,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         FormView $formView,
         Environment $templatingEngine,
         AuthorizationCheckerInterface $authorizationChecker,
-        Response $response
+        Response $response,
     ): void {
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(false);
 
@@ -79,7 +79,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         Request $request,
         ParameterBag $requestAttributes,
         AuthorizationCheckerInterface $authorizationChecker,
-        RouterInterface $router
+        RouterInterface $router,
     ): void {
         $request->attributes = $requestAttributes;
         $requestAttributes->get('_sylius')->willReturn(['logged_in_route' => 'foo_bar']);
@@ -93,13 +93,15 @@ final class SecurityControllerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the check path to be handled by the firewall.'))
-            ->during('checkAction', [$request]);
+            ->during('checkAction', [$request])
+        ;
     }
 
     function it_throws_an_exception_when_logout_action_is_accessed(Request $request): void
     {
         $this
             ->shouldThrow(new \RuntimeException('You must configure the logout path to be handled by the firewall.'))
-            ->during('logoutAction', [$request]);
+            ->during('logoutAction', [$request])
+        ;
     }
 }

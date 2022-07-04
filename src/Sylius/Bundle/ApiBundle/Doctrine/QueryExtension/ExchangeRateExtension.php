@@ -35,7 +35,7 @@ final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensio
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, ExchangeRate::class, true)) {
             return;
@@ -56,8 +56,8 @@ final class ExchangeRateExtension implements ContextAwareQueryCollectionExtensio
             ->andWhere(
                 $queryBuilder->expr()->orX(
                     sprintf('%s.sourceCurrency = :%s', $rootAlias, $currencyParameterName),
-                    sprintf('%s.targetCurrency = :%s', $rootAlias, $currencyParameterName)
-                )
+                    sprintf('%s.targetCurrency = :%s', $rootAlias, $currencyParameterName),
+                ),
             )
             ->setParameter($currencyParameterName, $channel->getBaseCurrency())
         ;

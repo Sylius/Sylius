@@ -51,7 +51,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['second_event' => []]],
             ],
             ['events' => ['first_event' => ['blocks' => []], 'second_event' => ['blocks' => []]]],
-            'events'
+            'events',
         );
     }
 
@@ -60,7 +60,7 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['events' => ['event_name' => ['blocks' => ['block_name' => ['template' => 'block.html.twig']]]]]],
-            'events'
+            'events',
         );
     }
 
@@ -72,7 +72,7 @@ final class ConfigurationTest extends TestCase
                 'first_block' => ['template' => 'block.html.twig'],
                 'second_block' => ['template' => 'block.html.twig'],
             ]]]]],
-            'events'
+            'events',
         );
     }
 
@@ -82,7 +82,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => []]]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['priority' => 0]]]]],
-            'events.*.blocks.*.priority'
+            'events.*.blocks.*.priority',
         );
     }
 
@@ -92,7 +92,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => ['priority' => 100]]]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['priority' => 100]]]]],
-            'events.*.blocks.*.priority'
+            'events.*.blocks.*.priority',
         );
     }
 
@@ -102,7 +102,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => []]]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => null]]]]],
-            'events.*.blocks.*.enabled'
+            'events.*.blocks.*.enabled',
         );
     }
 
@@ -112,7 +112,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => false]]]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => false]]]]],
-            'events.*.blocks.*.enabled'
+            'events.*.blocks.*.enabled',
         );
     }
 
@@ -122,7 +122,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => 'template.html.twig']]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['template' => 'template.html.twig']]]]],
-            'events.*.blocks.*.template'
+            'events.*.blocks.*.template',
         );
     }
 
@@ -135,7 +135,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['event_name' => ['blocks' => ['block_name' => ['template' => 'another_template.html.twig']]]]],
             ],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['template' => 'another_template.html.twig']]]]],
-            'events.*.blocks.*.template'
+            'events.*.blocks.*.template',
         );
     }
 
@@ -148,7 +148,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['event_name' => ['blocks' => ['block_name' => ['priority' => 13]]]]],
             ],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['priority' => 13]]]]],
-            'events.*.blocks.*.priority'
+            'events.*.blocks.*.priority',
         );
     }
 
@@ -161,7 +161,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => false]]]]],
             ],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['enabled' => false]]]]],
-            'events.*.blocks.*.enabled'
+            'events.*.blocks.*.enabled',
         );
     }
 
@@ -177,7 +177,7 @@ final class ConfigurationTest extends TestCase
                 'first_block' => ['template' => 'first.html.twig'],
                 'second_block' => ['template' => 'second.html.twig'],
             ]]]],
-            'events.*.blocks.*.template'
+            'events.*.blocks.*.template',
         );
     }
 
@@ -187,7 +187,7 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar']]]]]]],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar']]]]]],
-            'events.*.blocks.*.context'
+            'events.*.blocks.*.context',
         );
     }
 
@@ -200,7 +200,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['bar' => 'baz']]]]]],
             ],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => 'bar', 'bar' => 'baz']]]]]],
-            'events.*.blocks.*.context'
+            'events.*.blocks.*.context',
         );
 
         $this->assertProcessedConfigurationEquals(
@@ -209,7 +209,7 @@ final class ConfigurationTest extends TestCase
                 ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => ['baz']]]]]]],
             ],
             ['events' => ['event_name' => ['blocks' => ['block_name' => ['context' => ['foo' => ['baz']]]]]]],
-            'events.*.blocks.*.context'
+            'events.*.blocks.*.context',
         );
     }
 

@@ -34,7 +34,7 @@ final class LocaleCollectionExtension implements ContextAwareQueryCollectionExte
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, LocaleInterface::class, true)) {
             return;
@@ -54,7 +54,8 @@ final class LocaleCollectionExtension implements ContextAwareQueryCollectionExte
             $rootAlias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
                 ->andWhere(sprintf('%s.id in (:%s)', $rootAlias, $localesParameterName))
-                ->setParameter($localesParameterName, $channel->getLocales());
+                ->setParameter($localesParameterName, $channel->getLocales())
+            ;
         }
     }
 }

@@ -27,7 +27,7 @@ final class ReviewerReviewsRemoverSpec extends ObjectBehavior
     function let(
         EntityRepository $reviewRepository,
         ObjectManager $reviewManager,
-        ReviewableRatingUpdaterInterface $averageRatingUpdater
+        ReviewableRatingUpdaterInterface $averageRatingUpdater,
     ): void {
         $this->beConstructedWith($reviewRepository, $reviewManager, $averageRatingUpdater);
     }
@@ -43,7 +43,7 @@ final class ReviewerReviewsRemoverSpec extends ObjectBehavior
         $reviewManager,
         ReviewerInterface $author,
         ReviewableInterface $reviewSubject,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $reviewRepository->findBy(['author' => $author])->willReturn([$review]);
         $review->getReviewSubject()->willReturn($reviewSubject);

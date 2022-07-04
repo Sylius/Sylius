@@ -29,7 +29,7 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
     function it_calculates_average_price(
         ReviewableInterface $reviewable,
         ReviewInterface $review1,
-        ReviewInterface $review2
+        ReviewInterface $review2,
     ): void {
         $reviewable->getReviews()->willReturn(new ArrayCollection([$review1->getWrappedObject(), $review2->getWrappedObject()]));
 
@@ -51,7 +51,7 @@ final class AverageRatingCalculatorSpec extends ObjectBehavior
 
     function it_returns_zero_if_given_reviewable_object_has_reviews_but_none_of_them_is_accepted(
         ReviewableInterface $reviewable,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $reviewable->getReviews()->willReturn(new ArrayCollection([$review->getWrappedObject()]));
         $review->getStatus()->willReturn(ReviewInterface::STATUS_NEW);

@@ -24,7 +24,7 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
     function let(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CriteriaInterface $firstCriterion,
-        CriteriaInterface $secondCriterion
+        CriteriaInterface $secondCriterion,
     ): void {
         $this->beConstructedWith($catalogPromotionRepository, [$firstCriterion, $secondCriterion]);
     }
@@ -39,7 +39,7 @@ final class EligibleCatalogPromotionsProviderSpec extends ObjectBehavior
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion,
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        CatalogPromotionInterface $secondCatalogPromotion,
     ): void {
         $catalogPromotionRepository
             ->findByCriteria([$firstCriterion, $secondCriterion])

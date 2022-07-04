@@ -32,7 +32,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
-        ShippableInterface $shippable
+        ShippableInterface $shippable,
     ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
@@ -45,7 +45,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 
     function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shippingMethod->getCategory()->willReturn(null);
 
@@ -57,7 +57,7 @@ final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
         ShippingCategoryInterface $shippingCategory2,
-        ShippableInterface $shippable
+        ShippableInterface $shippable,
     ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->willReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);

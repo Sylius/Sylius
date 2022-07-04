@@ -26,7 +26,7 @@ class CurrencyNameConverter implements CurrencyNameConverterInterface
             throw new \InvalidArgumentException(sprintf(
                 'Currency "%s" not found! Available names: %s.',
                 $name,
-                implode(', ', $names)
+                implode(', ', $names),
             ));
         }
 

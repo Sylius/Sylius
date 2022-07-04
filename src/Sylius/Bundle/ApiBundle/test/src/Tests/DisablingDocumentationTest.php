@@ -32,7 +32,7 @@ class DisablingDocumentationTest extends ApiTestCase
     {
         static::createClient()->request(
             'GET',
-            'api/v2/docs'
+            'api/v2/docs',
         );
 
         self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);

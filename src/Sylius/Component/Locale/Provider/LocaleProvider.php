@@ -30,7 +30,7 @@ final class LocaleProvider implements LocaleProviderInterface
             function (LocaleInterface $locale) {
                 return (string) $locale->getCode();
             },
-            $locales
+            $locales,
         );
     }
 

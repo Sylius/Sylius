@@ -23,7 +23,7 @@ final class ZoneDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
-        private ZoneDeletionCheckerInterface $zoneDeletionChecker
+        private ZoneDeletionCheckerInterface $zoneDeletionChecker,
     ) {
     }
 

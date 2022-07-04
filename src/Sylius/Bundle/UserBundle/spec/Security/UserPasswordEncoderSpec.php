@@ -34,7 +34,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
     function it_encodes_password(
         EncoderFactoryInterface $encoderFactory,
         PasswordEncoderInterface $passwordEncoder,
-        CredentialsHolderInterface $user
+        CredentialsHolderInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');

@@ -48,7 +48,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             SlugGenerationHelper::waitForSlugGeneration(
                 $this->getSession(),
-                $this->getElement('slug', ['%language%' => $languageCode])
+                $this->getElement('slug', ['%language%' => $languageCode]),
             );
         }
     }
@@ -92,7 +92,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return SlugGenerationHelper::isSlugReadonly(
             $this->getSession(),
-            $this->getElement('slug', ['%language%' => $languageCode])
+            $this->getElement('slug', ['%language%' => $languageCode]),
         );
     }
 
@@ -116,7 +116,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if (null !== $imageTypeElement && null !== $imageSourceElement) {
             $this->saveImageUrlForType(
                 $imageTypeElement->getValue(),
-                $imageSourceElement->getAttribute('src')
+                $imageSourceElement->getAttribute('src'),
             );
         }
 
@@ -127,7 +127,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         SlugGenerationHelper::enableSlugModification(
             $this->getSession(),
-            $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode])
+            $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode]),
         );
     }
 

@@ -34,7 +34,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/foo-sylius-resources',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();
@@ -86,7 +86,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         static::createClient()->request(
             'POST',
             'api/v2/foo-sylius-resources',
-            ['json' => ['name' => 'FooSyliusResourcePost']]
+            ['json' => ['name' => 'FooSyliusResourcePost']],
         );
 
         $this->assertResponseIsSuccessful();
@@ -109,7 +109,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             $fooSyliusResourceIri,
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();

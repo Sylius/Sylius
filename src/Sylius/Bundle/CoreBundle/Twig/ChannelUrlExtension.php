@@ -30,7 +30,7 @@ final class ChannelUrlExtension extends AbstractExtension
     public function __construct(
         ChannelContextInterface $channelContext,
         UrlHelper $urlHelper,
-        bool $unsecuredUrls = false
+        bool $unsecuredUrls = false,
     ) {
         $this->channelContext = $channelContext;
         $this->urlHelper = $urlHelper;

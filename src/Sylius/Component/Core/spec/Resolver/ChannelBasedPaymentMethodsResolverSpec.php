@@ -40,7 +40,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         ChannelInterface $channel,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $firstPaymentMethod,
-        PaymentMethodInterface $secondPaymentMethod
+        PaymentMethodInterface $secondPaymentMethod,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -57,7 +57,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order,
         ChannelInterface $channel,
-        PaymentMethodRepositoryInterface $paymentMethodRepository
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -73,7 +73,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
     function it_supports_shipments_with_order_and_its_shipping_address_defined(
         PaymentInterface $payment,
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -83,7 +83,7 @@ final class ChannelBasedPaymentMethodsResolverSpec extends ObjectBehavior
 
     function it_does_not_support_payments_for_order_with_not_assigned_channel(
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn(null);

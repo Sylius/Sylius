@@ -35,7 +35,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     function let(
         RepositoryInterface $orderItemRepository,
         OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
     ): void {
         $this->beConstructedWith($orderItemRepository, $orderRepository, $availabilityChecker);
     }
@@ -49,7 +49,8 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()]);
+            ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()])
+        ;
     }
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_changed_item_quantity_in_cart(): void
@@ -67,7 +68,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_product_variant_does_not_exist(
         RepositoryInterface $orderItemRepository,
         ExecutionContextInterface $executionContext,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $this->initialize($executionContext);
 
@@ -82,7 +83,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 
@@ -91,7 +92,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->initialize($executionContext);
 
@@ -112,7 +113,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 
@@ -121,7 +122,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->initialize($executionContext);
 
@@ -144,7 +145,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 
@@ -154,7 +155,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
         AvailabilityCheckerInterface $availabilityChecker,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->initialize($executionContext);
 
@@ -179,7 +180,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('token', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 
@@ -192,7 +193,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         ProductInterface $product,
         ChannelInterface $channel,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $this->initialize($executionContext);
 
@@ -224,7 +225,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 
@@ -237,7 +238,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         ProductInterface $product,
         ChannelInterface $channel,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $this->initialize($executionContext);
 
@@ -277,7 +278,7 @@ final class ChangedItemQuantityInCartValidatorSpec extends ObjectBehavior
 
         $this->validate(
             ChangeItemQuantityInCart::createFromData('TOKEN', '11', 2),
-            new ChangedItemQuantityInCart()
+            new ChangedItemQuantityInCart(),
         );
     }
 }

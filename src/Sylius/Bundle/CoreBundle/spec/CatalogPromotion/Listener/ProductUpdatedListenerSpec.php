@@ -26,7 +26,7 @@ final class ProductUpdatedListenerSpec extends ObjectBehavior
     function let(
         ProductRepositoryInterface $productRepository,
         ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ): void {
         $this->beConstructedWith($productRepository, $productCatalogPromotionsProcessor, $entityManager);
     }
@@ -35,7 +35,7 @@ final class ProductUpdatedListenerSpec extends ObjectBehavior
         ProductRepositoryInterface $productRepository,
         ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $productRepository->findOneBy(['code' => 'MUG'])->willReturn($product);
 
@@ -48,7 +48,7 @@ final class ProductUpdatedListenerSpec extends ObjectBehavior
     function it_does_nothing_if_there_is_no_product_with_given_code(
         ProductRepositoryInterface $productRepository,
         ProductCatalogPromotionsProcessorInterface $productCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ): void {
         $productRepository->findOneBy(['code' => 'MUG'])->willReturn(null);
 

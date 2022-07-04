@@ -30,7 +30,7 @@ final class CompositeLocaleContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_locale_not_found_exception_if_none_of_nested_locale_contexts_returned_a_locale(
-        LocaleContextInterface $localeContext
+        LocaleContextInterface $localeContext,
     ): void {
         $localeContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
 
@@ -42,7 +42,7 @@ final class CompositeLocaleContextSpec extends ObjectBehavior
     function it_returns_first_result_returned_by_nested_request_resolvers(
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
-        LocaleContextInterface $thirdLocaleContext
+        LocaleContextInterface $thirdLocaleContext,
     ): void {
         $firstLocaleContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
         $secondLocaleContext->getLocaleCode()->willReturn('en_US');
@@ -58,7 +58,7 @@ final class CompositeLocaleContextSpec extends ObjectBehavior
     function its_nested_request_resolvers_can_have_priority(
         LocaleContextInterface $firstLocaleContext,
         LocaleContextInterface $secondLocaleContext,
-        LocaleContextInterface $thirdLocaleContext
+        LocaleContextInterface $thirdLocaleContext,
     ): void {
         $firstLocaleContext->getLocaleCode()->shouldNotBeCalled();
         $secondLocaleContext->getLocaleCode()->willReturn('pl_PL');

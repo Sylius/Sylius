@@ -26,7 +26,7 @@ final class OrderIntegrityChecker
     public function __construct(
         private RouterInterface $router,
         private ObjectManager $manager,
-        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 
@@ -43,7 +43,7 @@ final class OrderIntegrityChecker
             $event->stop(
                 'sylius.order.promotion_integrity',
                 ResourceControllerEvent::TYPE_ERROR,
-                ['%promotionName%' => $promotion->getName()]
+                ['%promotionName%' => $promotion->getName()],
             );
 
             $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));

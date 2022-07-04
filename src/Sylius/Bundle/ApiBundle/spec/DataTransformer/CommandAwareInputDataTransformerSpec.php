@@ -42,9 +42,10 @@ final class CommandAwareInputDataTransformerSpec extends ObjectBehavior
             ->transform(
                 $object,
                 CommandAwareDataTransformerInterface::class,
-                $this::$CONTEXT
+                $this::$CONTEXT,
             )
-            ->shouldReturn($object);
+            ->shouldReturn($object)
+        ;
     }
 
     function it_supports_only_command_aware_data_transformer_type(): void
@@ -58,7 +59,7 @@ final class CommandAwareInputDataTransformerSpec extends ObjectBehavior
             ->supportsTransformation(
                 new PickupCart(),
                 CommandAwareDataTransformerInterface::class,
-                ['input' => ['class' => Order::class]]
+                ['input' => ['class' => Order::class]],
             )
             ->shouldReturn(false)
         ;

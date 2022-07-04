@@ -25,7 +25,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
     public function __construct(
         private DenormalizerInterface $objectNormalizer,
         private IriToIdentifierConverterInterface $iriToIdentifierConverter,
-        private DataTransformerInterface $commandAwareInputDataTransformer
+        private DataTransformerInterface $commandAwareInputDataTransformer,
     ) {
     }
 

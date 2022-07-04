@@ -27,7 +27,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_promotion_has_no_usage_limit(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getUsageLimit()->willReturn(null);
 
@@ -36,7 +36,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_usage_limit_has_not_been_exceeded(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(5);
@@ -46,7 +46,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_usage_limit_has_been_exceeded(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(15);

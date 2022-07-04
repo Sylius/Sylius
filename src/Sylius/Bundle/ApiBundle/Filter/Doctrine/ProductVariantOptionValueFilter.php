@@ -31,7 +31,7 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
         ?RequestStack $requestStack = null,
         LoggerInterface $logger = null,
         array $properties = null,
-        NameConverterInterface $nameConverter = null
+        NameConverterInterface $nameConverter = null,
     ) {
         parent::__construct($managerRegistry, $requestStack, $logger, $properties, $nameConverter);
     }
@@ -42,7 +42,7 @@ final class ProductVariantOptionValueFilter extends AbstractContextAwareFilter
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null
+        string $operationName = null,
     ): void {
         if ($property !== 'optionValues') {
             return;

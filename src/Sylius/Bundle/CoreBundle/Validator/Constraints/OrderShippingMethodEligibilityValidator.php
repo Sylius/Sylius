@@ -45,7 +45,7 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
             if (!$this->methodEligibilityChecker->isEligible($shipment, $shipment->getMethod())) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%shippingMethodName%' => $shipment->getMethod()->getName()]
+                    ['%shippingMethodName%' => $shipment->getMethod()->getName()],
                 );
             }
         }

@@ -34,7 +34,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_transforms_array_of_taxons_codes_to_taxons_collection(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows,
-        TaxonInterface $swords
+        TaxonInterface $swords,
     ): void {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows, $swords]);
 
@@ -43,7 +43,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
     function it_transforms_only_existing_taxons(
         TaxonRepositoryInterface $taxonRepository,
-        TaxonInterface $bows
+        TaxonInterface $bows,
     ): void {
         $taxonRepository->findBy(['code' => ['bows', 'swords']])->willReturn([$bows]);
 
@@ -65,7 +65,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
     function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
-        TaxonInterface $shields
+        TaxonInterface $shields,
     ): void {
         $axes->getCode()->willReturn('axes');
         $shields->getCode()->willReturn('shields');

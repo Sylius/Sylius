@@ -40,7 +40,7 @@ final class UserPasswordHasherSpec extends ObjectBehavior
     function it_hashes_password(
         PasswordHasherFactoryInterface $passwordHasherFactory,
         PasswordHasherInterface $passwordHasher,
-        CredentialsHolderInterface $user
+        CredentialsHolderInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');

@@ -36,7 +36,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
     function it_returns_the_currency_code_from_decorated_context_if_it_is_available_in_current_channel(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $eur = new Currency();
         $eur->setCode('EUR');
@@ -55,7 +55,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
     function it_returns_the_channels_base_currency_if_the_one_from_context_is_not_available(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $eur = new Currency();
         $eur->setCode('EUR');
@@ -72,7 +72,7 @@ final class ChannelAwareCurrencyContextSpec extends ObjectBehavior
     function it_returns_the_channels_base_currency_if_currency_was_not_found(
         CurrencyContextInterface $currencyContext,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $eur = new Currency();
         $eur->setCode('EUR');

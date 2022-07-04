@@ -29,7 +29,7 @@ final class CheckoutResolver implements EventSubscriberInterface
         private CartContextInterface $cartContext,
         private CheckoutStateUrlGeneratorInterface $urlGenerator,
         private RequestMatcherInterface $requestMatcher,
-        private FactoryInterface $stateMachineFactory
+        private FactoryInterface $stateMachineFactory,
     ) {
     }
 

@@ -28,7 +28,7 @@ final class ApiPlatformClient implements ApiClientInterface
         private SharedStorageInterface $sharedStorage,
         private RequestFactoryInterface $requestFactory,
         private string $authorizationHeader,
-        private ?string $section = null
+        private ?string $section = null,
     ) {
     }
 
@@ -63,8 +63,8 @@ final class ApiPlatformClient implements ApiClientInterface
                 $resource,
                 $id,
                 $this->authorizationHeader,
-                $this->getToken()
-            )
+                $this->getToken(),
+            ),
         );
     }
 
@@ -91,8 +91,8 @@ final class ApiPlatformClient implements ApiClientInterface
                 $resource,
                 $id,
                 $this->authorizationHeader,
-                $this->getToken()
-            )
+                $this->getToken(),
+            ),
         );
     }
 
@@ -154,7 +154,7 @@ final class ApiPlatformClient implements ApiClientInterface
             $resource,
             $id,
             $this->authorizationHeader,
-            $this->getToken()
+            $this->getToken(),
         );
         $this->request->setContent(json_decode($this->client->getResponse()->getContent(), true));
     }
@@ -166,7 +166,7 @@ final class ApiPlatformClient implements ApiClientInterface
             $resource,
             sprintf('%s/%s', $id, $customSuffix),
             $this->authorizationHeader,
-            $this->getToken()
+            $this->getToken(),
         );
     }
 
@@ -248,7 +248,7 @@ final class ApiPlatformClient implements ApiClientInterface
             $request->parameters(),
             $request->files(),
             $request->headers(),
-            $request->content() ?? null
+            $request->content() ?? null,
         );
 
         return $this->getLastResponse();

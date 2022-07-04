@@ -36,7 +36,7 @@ final class TaxonomyContext implements Context
         private ObjectManager $objectManager,
         private ImageUploaderInterface $imageUploader,
         private TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        private \ArrayAccess $minkParameters
+        private \ArrayAccess $minkParameters,
     ) {
     }
 

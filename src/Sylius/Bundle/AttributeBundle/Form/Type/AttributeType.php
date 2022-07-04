@@ -29,7 +29,7 @@ abstract class AttributeType extends AbstractResourceType
         string $dataClass,
         array $validationGroups,
         protected string $attributeTranslationType,
-        protected FormTypeRegistryInterface $formTypeRegistry
+        protected FormTypeRegistryInterface $formTypeRegistry,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }

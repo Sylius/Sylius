@@ -24,7 +24,7 @@ final class ManagingCustomerGroupsContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -104,7 +104,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::CUSTOMER_GROUPS), 'code', $customerGroup->getCode()),
-            sprintf('Customer group with code %s does not exist', $customerGroup->getCode())
+            sprintf('Customer group with code %s does not exist', $customerGroup->getCode()),
         );
     }
 
@@ -116,7 +116,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::CUSTOMER_GROUPS), 'name', $name),
-            sprintf('Customer group with name %s does not exist', $name)
+            sprintf('Customer group with name %s does not exist', $name),
         );
     }
 
@@ -136,7 +136,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::CUSTOMER_GROUPS, $customerGroup->getCode()), 'name', $name),
-            'Customer groups name is not ' . $name
+            'Customer groups name is not ' . $name,
         );
     }
 
@@ -147,7 +147,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'name: Please enter a customer group name.'
+            'name: Please enter a customer group name.',
         );
     }
 
@@ -158,7 +158,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Customer group code has to be unique.'
+            'Customer group code has to be unique.',
         );
     }
 
@@ -179,7 +179,7 @@ final class ManagingCustomerGroupsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
-            'The code field with value NEW_CODE exist'
+            'The code field with value NEW_CODE exist',
         );
     }
 
@@ -199,7 +199,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Customer group could not be created'
+            'Customer group could not be created',
         );
     }
 
@@ -210,7 +210,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Customer group could not be edited'
+            'Customer group could not be edited',
         );
     }
 
@@ -221,9 +221,9 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful(
-                $this->client->getLastResponse()
+                $this->client->getLastResponse(),
             ),
-            'Customer group could not be deleted'
+            'Customer group could not be deleted',
         );
     }
 

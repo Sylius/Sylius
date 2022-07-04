@@ -37,7 +37,7 @@ final class SessionManagerSpec extends ObjectBehavior
         Mink $mink,
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $mink->getDefaultSessionName()->willReturn('default_session');
         $securityService->getCurrentToken()->willReturn($token);
@@ -62,7 +62,7 @@ final class SessionManagerSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
         TokenInterface $token,
-        TokenInterface $previousToken
+        TokenInterface $previousToken,
     ): void {
         $mink->getDefaultSessionName()->willReturn('default_session');
         $securityService->getCurrentToken()->willReturn($token);
@@ -88,7 +88,7 @@ final class SessionManagerSpec extends ObjectBehavior
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
         TokenInterface $token,
-        TokenInterface $defaultToken
+        TokenInterface $defaultToken,
     ): void {
         $sharedStorage->has('behat_previous_session_name')->willReturn(true);
         $sharedStorage->get('behat_previous_session_name')->willReturn('previous_session');
@@ -114,7 +114,7 @@ final class SessionManagerSpec extends ObjectBehavior
         Mink $mink,
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $sharedStorage->has('behat_previous_session_name')->willReturn(false);
 

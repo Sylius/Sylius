@@ -32,7 +32,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
@@ -42,7 +42,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotion->getWrappedObject()
+            $catalogPromotion->getWrappedObject(),
         ));
     }
 
@@ -50,7 +50,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_PUT);
 
@@ -60,14 +60,14 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotion->getWrappedObject()
+            $catalogPromotion->getWrappedObject(),
         ));
     }
 
     function it_does_nothing_after_writing_other_entity(
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent(Argument::any())->shouldNotBeCalled();
 
@@ -75,7 +75,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            new \stdClass()
+            new \stdClass(),
         ));
     }
 
@@ -83,7 +83,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
         CatalogPromotionAnnouncerInterface $catalogPromotionAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_GET);
 
@@ -93,7 +93,7 @@ final class CatalogPromotionEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $catalogPromotion->getWrappedObject()
+            $catalogPromotion->getWrappedObject(),
         ));
     }
 }

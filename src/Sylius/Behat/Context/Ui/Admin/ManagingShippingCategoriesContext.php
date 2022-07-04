@@ -25,7 +25,7 @@ class ManagingShippingCategoriesContext implements Context
     public function __construct(
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
-        private UpdatePageInterface $updatePage
+        private UpdatePageInterface $updatePage,
     ) {
     }
 
@@ -78,7 +78,7 @@ class ManagingShippingCategoriesContext implements Context
     {
         Assert::same(
             $this->updatePage->getValidationMessage($element),
-            sprintf('Please enter shipping category %s.', $element)
+            sprintf('Please enter shipping category %s.', $element),
         );
     }
 
@@ -208,7 +208,7 @@ class ManagingShippingCategoriesContext implements Context
     {
         Assert::same(
             $this->createPage->getValidationMessage('code'),
-            'The shipping category with given code already exists.'
+            'The shipping category with given code already exists.',
         );
     }
 

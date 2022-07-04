@@ -30,7 +30,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $name,
         string $code,
         string $price,
-        string $currentStock
+        string $currentStock,
     ): bool {
         /** @var NodeElement $variantRow */
         $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
@@ -52,14 +52,14 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $name,
         string $code,
         string $price,
-        string $currentStock
+        string $currentStock,
     ): bool {
         $variantContent = $variant->getParent()->find(
             'css',
             sprintf(
                 '.variants-accordion__content.%s',
-                explode(' ', $variant->getAttribute('class'))[1]
-            )
+                explode(' ', $variant->getAttribute('class'))[1],
+            ),
         );
 
         if (

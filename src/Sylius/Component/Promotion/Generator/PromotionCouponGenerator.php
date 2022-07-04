@@ -27,13 +27,13 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         private FactoryInterface $couponFactory,
         private PromotionCouponRepositoryInterface $couponRepository,
         private ObjectManager $objectManager,
-        private GenerationPolicyInterface $generationPolicy
+        private GenerationPolicyInterface $generationPolicy,
     ) {
     }
 
     public function generate(
         PromotionInterface $promotion,
-        PromotionCouponGeneratorInstructionInterface $instruction
+        PromotionCouponGeneratorInstructionInterface $instruction,
     ): array {
         $generatedCoupons = [];
 
@@ -43,7 +43,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
                 $instruction->getCodeLength(),
                 $generatedCoupons,
                 $instruction->getPrefix(),
-                $instruction->getSuffix()
+                $instruction->getSuffix(),
             );
 
             /** @var PromotionCouponInterface $coupon */
@@ -70,7 +70,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         int $codeLength,
         array $generatedCoupons,
         ?string $prefix,
-        ?string $suffix
+        ?string $suffix,
     ): string {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 

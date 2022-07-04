@@ -59,7 +59,7 @@ class AddProductReview implements IriToIdentifierConversionAwareInterface, Custo
         ?int $rating,
         ?string $comment,
         string $productCode,
-        ?string $email = null
+        ?string $email = null,
     ) {
         $this->title = $title;
         $this->rating = $rating;

@@ -30,7 +30,7 @@ final class SecurityController
         private FormFactoryInterface $formFactory,
         private Environment $templatingEngine,
         private AuthorizationCheckerInterface $authorizationChecker,
-        private RouterInterface $router
+        private RouterInterface $router,
     ) {
     }
 

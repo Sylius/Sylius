@@ -33,7 +33,7 @@ final class AddItemToCartHandler implements MessageHandlerInterface
         private ProductVariantRepositoryInterface $productVariantRepository,
         private OrderModifierInterface $orderModifier,
         private CartItemFactoryInterface $cartItemFactory,
-        private OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier,
     ) {
     }
 

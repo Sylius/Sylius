@@ -29,7 +29,7 @@ final class OrderStateMachineTransitionApplicatorSpec extends ObjectBehavior
     function it_cancels_order(
         StateMachineFactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachine $stateMachine
+        StateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($order, OrderTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();

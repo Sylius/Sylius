@@ -39,7 +39,7 @@ final class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
         ChannelInterface $channel,
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
-        OrderInterface $subject
+        OrderInterface $subject,
     ): void {
         $subject->getChannel()->willReturn($channel);
         $promotionRepository->findActiveByChannel($channel)->willReturn([$promotion1, $promotion2]);

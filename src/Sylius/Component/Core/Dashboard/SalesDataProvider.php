@@ -30,7 +30,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
-        Interval $interval
+        Interval $interval,
     ): SalesSummaryInterface {
         $queryBuilder = $this->orderRepository->createQueryBuilder('o')
             ->select('SUM(o.total) AS total')
@@ -67,7 +67,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth AND MONTH(o.checkoutCompletedAt) <= :endMonth',
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) >= :startMonth',
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) <= :endMonth',
-                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
@@ -92,7 +92,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) = :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek AND WEEK(o.checkoutCompletedAt) <= :endWeek',
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND WEEK(o.checkoutCompletedAt) >= :startWeek',
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND WEEK(o.checkoutCompletedAt) <= :endWeek',
-                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startWeek', (ltrim($startDate->format('W'), '0') ?: '0'))
@@ -124,7 +124,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :startYear AND YEAR(o.checkoutCompletedAt) != :endYear AND MONTH(o.checkoutCompletedAt) > :startMonth',
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) = :endMonth AND DAY(o.checkoutCompletedAt) <= :endDay',
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) < :endMonth',
-                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear'
+                        'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
                     ->setParameter('startYear', $startDate->format('Y'))
                     ->setParameter('startMonth', $startDate->format('n'))
@@ -162,7 +162,7 @@ final class SalesDataProvider implements SalesDataProviderInterface
             static function (int $total): string {
                 return number_format(abs($total / 100), 2, '.', '');
             },
-            $salesData
+            $salesData,
         );
 
         return new SalesSummary($salesData);

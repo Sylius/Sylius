@@ -24,7 +24,7 @@ final class BrowsingProductVariantsContext implements Context
 {
     public function __construct(
         private IndexPageInterface $indexPage,
-        private ProductVariantResolverInterface $defaultProductVariantResolver
+        private ProductVariantResolverInterface $defaultProductVariantResolver,
     ) {
     }
 
@@ -137,7 +137,7 @@ final class BrowsingProductVariantsContext implements Context
     {
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $productVariantName],
-            sprintf('td > div.ui.label:contains("%s")', $quantity)
+            sprintf('td > div.ui.label:contains("%s")', $quantity),
         ));
     }
 
@@ -150,7 +150,7 @@ final class BrowsingProductVariantsContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
             ['name' => $productVariantName],
-            sprintf('td > div.ui.label:contains("%s")', $quantity)
+            sprintf('td > div.ui.label:contains("%s")', $quantity),
         ));
     }
 
@@ -291,8 +291,8 @@ final class BrowsingProductVariantsContext implements Context
                 'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
                 $variant->getName(),
                 $expectedAmount,
-                $actualAmount
-            )
+                $actualAmount,
+            ),
         );
     }
 

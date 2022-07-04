@@ -24,7 +24,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        protected TableAccessorInterface $tableAccessor
+        protected TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

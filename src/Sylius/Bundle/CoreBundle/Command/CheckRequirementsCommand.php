@@ -39,7 +39,7 @@ EOT
 
         if (!$fulfilled) {
             throw new RuntimeException(
-                'Some system requirements are not fulfilled. Please check output messages and fix them.'
+                'Some system requirements are not fulfilled. Please check output messages and fix them.',
             );
         }
 

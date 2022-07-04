@@ -41,7 +41,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -58,7 +58,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);

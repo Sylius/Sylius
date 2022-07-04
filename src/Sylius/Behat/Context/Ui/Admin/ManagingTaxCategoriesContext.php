@@ -27,7 +27,7 @@ final class ManagingTaxCategoriesContext implements Context
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver
+        private CurrentPageResolverInterface $currentPageResolver,
     ) {
     }
 

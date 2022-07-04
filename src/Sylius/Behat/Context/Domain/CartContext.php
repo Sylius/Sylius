@@ -23,7 +23,7 @@ final class CartContext implements Context
 {
     public function __construct(
         private ObjectManager $orderManager,
-        private ExpiredCartsRemoverInterface $expiredCartsRemover
+        private ExpiredCartsRemoverInterface $expiredCartsRemover,
     ) {
     }
 

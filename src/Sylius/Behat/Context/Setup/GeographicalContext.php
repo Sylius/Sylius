@@ -30,7 +30,7 @@ final class GeographicalContext implements Context
         private FactoryInterface $provinceFactory,
         private RepositoryInterface $countryRepository,
         private CountryNameConverterInterface $countryNameConverter,
-        private ObjectManager $countryManager
+        private ObjectManager $countryManager,
     ) {
     }
 

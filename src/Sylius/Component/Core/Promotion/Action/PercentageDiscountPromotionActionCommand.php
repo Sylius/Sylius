@@ -29,7 +29,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     public function __construct(
         private ProportionalIntegerDistributorInterface $distributor,
         private UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        private ?MinimumPriceDistributorInterface $minimumPriceDistributor = null
+        private ?MinimumPriceDistributorInterface $minimumPriceDistributor = null,
     ) {
     }
 

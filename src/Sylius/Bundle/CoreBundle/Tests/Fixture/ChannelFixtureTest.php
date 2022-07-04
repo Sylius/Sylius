@@ -95,7 +95,7 @@ final class ChannelFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['custom' => [['contact_email' => 'contact@example.com']]]],
-            'custom.*.contact_email'
+            'custom.*.contact_email',
         );
     }
 
@@ -111,7 +111,7 @@ final class ChannelFixtureTest extends TestCase
     {
         return new ChannelFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

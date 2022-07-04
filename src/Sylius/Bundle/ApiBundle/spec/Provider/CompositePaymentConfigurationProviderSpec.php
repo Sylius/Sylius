@@ -28,7 +28,7 @@ final class CompositePaymentConfigurationProviderSpec extends ObjectBehavior
     function it_provides_payment_data_if_payment_is_supported(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        PaymentConfigurationProviderInterface $apiPaymentMethod
+        PaymentConfigurationProviderInterface $apiPaymentMethod,
     ): void {
         $payment->getMethod()->willReturn($paymentMethod);
 
@@ -42,7 +42,7 @@ final class CompositePaymentConfigurationProviderSpec extends ObjectBehavior
     function it_returns_empty_array_if_payment_is_not_supported(
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        PaymentConfigurationProviderInterface $apiPaymentMethod
+        PaymentConfigurationProviderInterface $apiPaymentMethod,
     ): void {
         $payment->getMethod()->willReturn($paymentMethod);
 
@@ -57,7 +57,7 @@ final class CompositePaymentConfigurationProviderSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
         PaymentConfigurationProviderInterface $apiPaymentMethodOne,
-        PaymentConfigurationProviderInterface $apiPaymentMethodTwo
+        PaymentConfigurationProviderInterface $apiPaymentMethodTwo,
     ): void {
         $this->beConstructedWith([$apiPaymentMethodOne, $apiPaymentMethodTwo]);
 

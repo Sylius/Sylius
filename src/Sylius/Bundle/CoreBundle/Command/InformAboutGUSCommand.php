@@ -43,7 +43,7 @@ final class InformAboutGUSCommand extends Command
                 'If you do not consent please follow this cookbook article:',
                 'https://docs.sylius.com/en/latest/cookbook/configuration/disabling-admin-notifications.html',
                 'That being said, every time we get a notification about a new site deployed with Sylius, it brings a huge smile to our face and motivates us to continue our Open Source work.',
-            ]
+            ],
         );
 
         return 0;

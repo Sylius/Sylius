@@ -160,7 +160,7 @@ class Taxon implements TaxonInterface, \Stringable
         return $this->children->filter(
             function (TaxonInterface $childTaxon) {
                 return $childTaxon->isEnabled();
-            }
+            },
         );
     }
 
@@ -184,7 +184,7 @@ class Taxon implements TaxonInterface, \Stringable
             '%s%s%s',
             $this->getParent()->getFullname($pathDelimiter),
             $pathDelimiter,
-            $this->getName()
+            $this->getName(),
         );
     }
 

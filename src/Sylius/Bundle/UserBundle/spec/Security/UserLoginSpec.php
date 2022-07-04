@@ -43,7 +43,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->willThrow(DisabledException::class);
@@ -58,7 +58,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
@@ -74,7 +74,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn([]);
         $userChecker->checkPreAuth($user)->shouldBeCalled();
@@ -90,7 +90,7 @@ final class UserLoginSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         UserCheckerInterface $userChecker,
         EventDispatcherInterface $eventDispatcher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $user->getRoles()->willReturn(['ROLE_TEST']);
 

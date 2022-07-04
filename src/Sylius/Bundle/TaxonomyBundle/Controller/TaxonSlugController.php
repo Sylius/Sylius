@@ -26,7 +26,7 @@ final class TaxonSlugController
     public function __construct(
         private TaxonSlugGeneratorInterface $taxonSlugGenerator,
         private RepositoryInterface $taxonRepository,
-        private FactoryInterface $taxonFactory
+        private FactoryInterface $taxonFactory,
     ) {
     }
 

@@ -27,7 +27,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
 {
     function let(
         ActionValidatorInterface $baseActionValidator,
-        SectionProviderInterface $sectionProvider
+        SectionProviderInterface $sectionProvider,
     ): void {
         $this->beConstructedWith($baseActionValidator, $sectionProvider);
     }
@@ -40,7 +40,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
     function it_just_fallbacks_to_base_validator_if_it_is_not_admin_api_section_it(
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new CatalogPromotionAction();
 
@@ -57,7 +57,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -74,7 +74,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -89,7 +89,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -106,7 +106,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new CatalogPromotionAction();
 
@@ -125,7 +125,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new CatalogPromotionAction();
 
@@ -140,14 +140,14 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         $this->validate(
             ['channel' => ['amount' => 'wrong_value'], 'second_channel' => ['amount' => 'wrong_value']],
             $constraint,
-            $executionContext
+            $executionContext,
         );
     }
 
     function it_does_nothing_if_the_provided_configuration_is_valid(
         ActionValidatorInterface $baseActionValidator,
         SectionProviderInterface $sectionProvider,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new CatalogPromotionAction();
 

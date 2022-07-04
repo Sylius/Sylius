@@ -38,7 +38,7 @@ final class SelectAttributeType implements AttributeTypeInterface
     public function validate(
         AttributeValueInterface $attributeValue,
         ExecutionContextInterface $context,
-        array $configuration
+        array $configuration,
     ): void {
         if (!isset($configuration['required']) && !isset($configuration['multiple'])) {
             return;
@@ -58,7 +58,7 @@ final class SelectAttributeType implements AttributeTypeInterface
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?array $value,
-        array $validationConfiguration
+        array $validationConfiguration,
     ): ConstraintViolationListInterface {
         $validator = $context->getValidator();
 

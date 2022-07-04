@@ -27,7 +27,7 @@ final class AddressContext implements Context
     public function __construct(
         private AddressRepositoryInterface $addressRepository,
         private ObjectManager $customerManager,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

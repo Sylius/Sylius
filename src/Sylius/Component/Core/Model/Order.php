@@ -407,7 +407,7 @@ class Order extends BaseOrder implements OrderInterface
         return array_reduce(
             $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
             static fn (int $total, BaseAdjustmentInterface $adjustment) => !$adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
-            0
+            0,
         );
     }
 
@@ -416,7 +416,7 @@ class Order extends BaseOrder implements OrderInterface
         return array_reduce(
             $this->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
             static fn (int $total, BaseAdjustmentInterface $adjustment) => $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
-            0
+            0,
         );
     }
 

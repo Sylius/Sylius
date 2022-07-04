@@ -22,7 +22,7 @@ final class ProductImageDocumentationNormalizer implements NormalizerInterface
     public function __construct(
         private NormalizerInterface $decoratedNormalizer,
         private ProductImageFilterProviderInterface $filterProvider,
-        private string $apiRoute
+        private string $apiRoute,
     ) {
     }
 

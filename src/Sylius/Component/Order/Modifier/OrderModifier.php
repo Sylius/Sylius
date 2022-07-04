@@ -21,7 +21,7 @@ final class OrderModifier implements OrderModifierInterface
 {
     public function __construct(
         private OrderProcessorInterface $orderProcessor,
-        private OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        private OrderItemQuantityModifierInterface $orderItemQuantityModifier,
     ) {
     }
 
@@ -44,7 +44,7 @@ final class OrderModifier implements OrderModifierInterface
             if ($item->equals($existingItem)) {
                 $this->orderItemQuantityModifier->modify(
                     $existingItem,
-                    $existingItem->getQuantity() + $item->getQuantity()
+                    $existingItem->getQuantity() + $item->getQuantity(),
                 );
 
                 return;

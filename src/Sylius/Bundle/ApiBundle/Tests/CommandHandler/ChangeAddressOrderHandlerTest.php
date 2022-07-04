@@ -67,14 +67,14 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
             ],
             [],
             [],
-            PurgeMode::createDeleteMode()
+            PurgeMode::createDeleteMode(),
         );
 
         $updateCartHandler = new UpdateCartHandler(
             $orderRepository,
             $orderAddressModifier,
             $orderPromoCodeAssigner,
-            $customerProvider
+            $customerProvider,
         );
 
         $newBillingAddress = $address = new Address();

@@ -29,7 +29,7 @@ final class CatalogPromotionStateChangedListenerSpec extends ObjectBehavior
     }
 
     function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_created(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
         $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
@@ -38,7 +38,7 @@ final class CatalogPromotionStateChangedListenerSpec extends ObjectBehavior
     }
 
     function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_updated(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
         $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();
@@ -47,7 +47,7 @@ final class CatalogPromotionStateChangedListenerSpec extends ObjectBehavior
     }
 
     function it_dispatches_update_state_command_of_catalog_promotion_that_has_just_been_ended(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $command = new UpdateCatalogPromotionState('WINTER_MUGS_SALE');
         $messageBus->dispatch($command)->willReturn(new Envelope($command))->shouldBeCalled();

@@ -26,7 +26,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
 {
     function let(
         StateMachineFactoryInterface $stateMachineFactory,
-        AddressMapperInterface $addressMapper
+        AddressMapperInterface $addressMapper,
     ) {
         $this->beConstructedWith($stateMachineFactory, $addressMapper);
     }
@@ -35,7 +35,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         StateMachineFactoryInterface $stateMachineFactory,
         AddressInterface $billingAddress,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
 
@@ -57,7 +57,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
 
@@ -81,7 +81,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $oldBillingAddress,
         AddressInterface $oldShippingAddress,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getTokenValue()->willReturn('ORDERTOKEN');
 
@@ -106,7 +106,7 @@ final class OrderAddressModifierSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderCheckoutTransitions::TRANSITION_ADDRESS)->willReturn(false);

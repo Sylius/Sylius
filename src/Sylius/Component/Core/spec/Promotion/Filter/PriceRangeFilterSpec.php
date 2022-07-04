@@ -40,7 +40,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
         ProductVariantInterface $item3Variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
@@ -65,7 +65,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         OrderItemInterface $item2,
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
@@ -88,7 +88,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         OrderItemInterface $item2,
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
@@ -113,7 +113,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
         ProductVariantInterface $item3Variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
@@ -138,7 +138,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         OrderItemInterface $item2,
         ProductVariantInterface $item1Variant,
         ProductVariantInterface $item2Variant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
@@ -158,7 +158,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
     function it_returns_all_items_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderItemInterface $item1,
-        OrderItemInterface $item2
+        OrderItemInterface $item2,
     ): void {
         $this->filter([$item1, $item2], [])->shouldReturn([$item1, $item2]);
         $this->filter([$item1, $item2], [
@@ -169,7 +169,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
 
     function it_throws_exception_if_channel_is_not_configured(
         OrderItemInterface $item1,
-        OrderItemInterface $item2
+        OrderItemInterface $item2,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

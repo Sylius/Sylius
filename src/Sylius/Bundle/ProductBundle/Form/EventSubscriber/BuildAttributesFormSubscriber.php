@@ -28,7 +28,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private FactoryInterface $attributeValueFactory,
-        private TranslationLocaleProviderInterface $localeProvider
+        private TranslationLocaleProviderInterface $localeProvider,
     ) {
     }
 
@@ -53,7 +53,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         $defaultLocaleCode = $this->localeProvider->getDefaultLocaleCode();
 
         $attributes = $product->getAttributes()->filter(
-            fn (ProductAttributeValueInterface $attribute) => $attribute->getLocaleCode() === $defaultLocaleCode
+            fn (ProductAttributeValueInterface $attribute) => $attribute->getLocaleCode() === $defaultLocaleCode,
         );
 
         /** @var ProductAttributeValueInterface $attribute */
@@ -94,7 +94,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
 
     private function createProductAttributeValue(
         ProductAttributeInterface $attribute,
-        string $localeCode
+        string $localeCode,
     ): ProductAttributeValueInterface {
         /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->attributeValueFactory->createNew();

@@ -84,7 +84,7 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
-                'The option have not been created yet so you cannot access proxy methods.'
+                'The option have not been created yet so you cannot access proxy methods.',
             );
         }
 
@@ -98,7 +98,7 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
-                'The option have not been created yet so you cannot access proxy methods.'
+                'The option have not been created yet so you cannot access proxy methods.',
             );
         }
 

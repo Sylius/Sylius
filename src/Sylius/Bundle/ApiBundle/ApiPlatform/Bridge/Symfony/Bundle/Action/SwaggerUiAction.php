@@ -65,7 +65,7 @@ final class SwaggerUiAction
         private bool $graphqlEnabled = false,
         private bool $graphiQlEnabled = false,
         private bool $graphQlPlaygroundEnabled = false,
-        private array $swaggerVersions = [2, 3]
+        private array $swaggerVersions = [2, 3],
     ) {
         if (\is_array($formats)) {
             $this->formats = $formats;
@@ -76,7 +76,7 @@ final class SwaggerUiAction
         @trigger_error(sprintf(
             'Passing an array or an instance of "%s" as 5th parameter of the constructor of "%s" is deprecated since API Platform 2.5, pass an array instead',
             FormatsProviderInterface::class,
-            __CLASS__
+            __CLASS__,
         ), \E_USER_DEPRECATED);
         $this->formatsProvider = $formats;
     }

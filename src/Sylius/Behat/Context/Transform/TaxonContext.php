@@ -21,7 +21,7 @@ final class TaxonContext implements Context
 {
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
-        private string $locale
+        private string $locale,
     ) {
     }
 
@@ -44,7 +44,7 @@ final class TaxonContext implements Context
         Assert::eq(
             count($taxons),
             1,
-            sprintf('%d taxons has been found with name "%s".', count($taxons), $name)
+            sprintf('%d taxons has been found with name "%s".', count($taxons), $name),
         );
 
         return $taxons[0];

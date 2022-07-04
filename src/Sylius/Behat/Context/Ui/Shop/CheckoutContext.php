@@ -40,7 +40,7 @@ final class CheckoutContext implements Context
         private CurrentPageResolverInterface $currentPageResolver,
         private CheckoutAddressingContext $addressingContext,
         private CheckoutShippingContext $shippingContext,
-        private CheckoutPaymentContext $paymentContext
+        private CheckoutPaymentContext $paymentContext,
     ) {
     }
 
@@ -103,7 +103,7 @@ final class CheckoutContext implements Context
      */
     public function iProceedSelectingBillingCountryAndShippingMethod(
         CountryInterface $shippingCountry = null,
-        ?string $shippingMethodName = null
+        ?string $shippingMethodName = null,
     ): void {
         $this->addressingContext->iProceedSelectingBillingCountry($shippingCountry);
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethodName ?: 'Free');

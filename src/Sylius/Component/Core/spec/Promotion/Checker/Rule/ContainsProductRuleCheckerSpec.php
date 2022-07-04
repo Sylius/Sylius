@@ -42,7 +42,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $firstOrderItem,
         OrderItemInterface $secondOrderItem,
         ProductInterface $shaft,
-        ProductInterface $head
+        ProductInterface $head,
     ): void {
         $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);
@@ -58,7 +58,7 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $firstOrderItem,
         OrderItemInterface $secondOrderItem,
         ProductInterface $shaft,
-        ProductInterface $head
+        ProductInterface $head,
     ): void {
         $subject->getItems()->willReturn(new ArrayCollection([$firstOrderItem->getWrappedObject(), $secondOrderItem->getWrappedObject()]));
         $firstOrderItem->getProduct()->willReturn($head);

@@ -30,7 +30,7 @@ final class LoggedInCustomerEmailAwareCommandDataTransformerSpec extends ObjectB
         UserContextInterface $userContext,
         CustomerEmailAwareInterface $command,
         ShopUserInterface $shopUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -42,13 +42,13 @@ final class LoggedInCustomerEmailAwareCommandDataTransformerSpec extends ObjectB
         $this->transform(
             $command,
             'Sylius\Component\Core\Model\ProductReview',
-            []
+            [],
         );
     }
 
     function it_does_not_add_email_to_customer_email_aware_for_visitor(
         UserContextInterface $userContext,
-        CustomerEmailAwareInterface $command
+        CustomerEmailAwareInterface $command,
     ): void {
         $userContext->getUser()->willReturn(null);
 
@@ -57,7 +57,7 @@ final class LoggedInCustomerEmailAwareCommandDataTransformerSpec extends ObjectB
         $this->transform(
             $command,
             'Sylius\Component\Core\Model\ProductReview',
-            []
+            [],
         );
     }
 

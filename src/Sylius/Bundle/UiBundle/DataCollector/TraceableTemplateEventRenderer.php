@@ -23,7 +23,7 @@ final class TraceableTemplateEventRenderer implements TemplateEventRendererInter
 {
     public function __construct(
         private TemplateEventRendererInterface $templateEventRenderer,
-        private TemplateBlockRenderingHistory $templateBlockRenderingHistory
+        private TemplateBlockRenderingHistory $templateBlockRenderingHistory,
     ) {
     }
 

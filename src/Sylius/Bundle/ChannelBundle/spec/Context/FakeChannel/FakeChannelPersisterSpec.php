@@ -36,7 +36,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::SUB_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 
@@ -44,7 +44,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
         HttpKernelInterface $kernel,
         Request $request,
-        Response $response
+        Response $response,
     ): void {
         $fakeHostnameProvider->getCode($request)->willReturn(null);
 
@@ -52,7 +52,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 
@@ -61,7 +61,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         HttpKernelInterface $kernel,
         Request $request,
         Response $response,
-        ResponseHeaderBag $responseHeaderBag
+        ResponseHeaderBag $responseHeaderBag,
     ): void {
         $fakeHostnameProvider->getCode($request)->willReturn('fake_channel_code');
 
@@ -75,7 +75,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 }

@@ -24,7 +24,7 @@ final class CatalogPromotionPriceCalculatorSpec extends ObjectBehavior
 {
     function let(
         ActionBasedPriceCalculatorInterface $fixedDiscountCalculator,
-        ActionBasedPriceCalculatorInterface $percentageDiscountCalculator
+        ActionBasedPriceCalculatorInterface $percentageDiscountCalculator,
     ): void {
         $this->beConstructedWith([$fixedDiscountCalculator, $percentageDiscountCalculator]);
     }
@@ -38,7 +38,7 @@ final class CatalogPromotionPriceCalculatorSpec extends ObjectBehavior
         ActionBasedPriceCalculatorInterface $fixedDiscountCalculator,
         ActionBasedPriceCalculatorInterface $percentageDiscountCalculator,
         CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $fixedDiscountCalculator->supports($action)->willReturn(false);
         $percentageDiscountCalculator->supports($action)->willReturn(true);
@@ -52,7 +52,7 @@ final class CatalogPromotionPriceCalculatorSpec extends ObjectBehavior
         ActionBasedPriceCalculatorInterface $fixedDiscountCalculator,
         ActionBasedPriceCalculatorInterface $percentageDiscountCalculator,
         CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $fixedDiscountCalculator->supports($action)->willReturn(false);
         $percentageDiscountCalculator->supports($action)->willReturn(false);

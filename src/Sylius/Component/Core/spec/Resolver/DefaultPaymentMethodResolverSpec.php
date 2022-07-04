@@ -36,7 +36,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
     }
 
     function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
@@ -45,7 +45,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         CorePaymentInterface $payment,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -63,7 +63,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod,
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);

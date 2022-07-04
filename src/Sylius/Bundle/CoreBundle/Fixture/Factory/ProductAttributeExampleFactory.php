@@ -32,7 +32,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
         private RepositoryInterface $localeRepository,
-        private array $attributeTypes
+        private array $attributeTypes,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

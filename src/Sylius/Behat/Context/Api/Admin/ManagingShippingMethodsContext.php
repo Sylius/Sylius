@@ -34,7 +34,7 @@ final class ManagingShippingMethodsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -312,7 +312,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
-            sprintf('Shipping method with name %s does not exists', $name)
+            sprintf('Shipping method with name %s does not exists', $name),
         );
     }
 
@@ -325,7 +325,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::true(
             $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
-            sprintf('Shipping method with name %s does not exists', $name)
+            sprintf('Shipping method with name %s does not exists', $name),
         );
     }
 
@@ -336,7 +336,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Shipping method could not be deleted'
+            'Shipping method could not be deleted',
         );
     }
 
@@ -349,7 +349,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $shippingMethodName),
-            sprintf('Shipping method with name %s does not exists', $shippingMethodName)
+            sprintf('Shipping method with name %s does not exists', $shippingMethodName),
         );
     }
 
@@ -360,7 +360,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Shipping method could not be created'
+            'Shipping method could not be created',
         );
     }
 
@@ -381,9 +381,9 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel)
+                $this->iriConverter->getIriFromItem($channel),
             ),
-            sprintf('Shipping method is not assigned to %s channel', $channel->getName())
+            sprintf('Shipping method is not assigned to %s channel', $channel->getName()),
         );
     }
 
@@ -398,9 +398,9 @@ final class ManagingShippingMethodsContext implements Context
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'en_US',
                 'name',
-                $name
+                $name,
             ),
-            'Shipping method name has not been changed'
+            'Shipping method name has not been changed',
         );
     }
 
@@ -413,9 +413,9 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValue(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'enabled',
-                false
+                false,
             ),
-            'Shipping method name is not disabled'
+            'Shipping method name is not disabled',
         );
     }
 
@@ -428,9 +428,9 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValue(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'enabled',
-                true
+                true,
             ),
-            'Shipping method name is not disabled'
+            'Shipping method name is not disabled',
         );
     }
 
@@ -443,7 +443,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
-            'The code field with value NEW_CODE exist'
+            'The code field with value NEW_CODE exist',
         );
     }
 
@@ -454,7 +454,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping method could not be edited'
+            'Shipping method could not be edited',
         );
     }
 
@@ -466,11 +466,11 @@ final class ManagingShippingMethodsContext implements Context
         $response = $this->client->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Shipping method  has been created successfully, but it should not'
+            'Shipping method  has been created successfully, but it should not',
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'code: The shipping method with given code already exists.'
+            'code: The shipping method with given code already exists.',
         );
     }
 
@@ -518,7 +518,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Cannot delete, the shipping method is in use.'
+            'Cannot delete, the shipping method is in use.',
         );
     }
 
@@ -529,7 +529,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter shipping method %s.', $element, $element)
+            sprintf('%s: Please enter shipping method %s.', $element, $element),
         );
     }
 
@@ -540,7 +540,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'zone: Please select shipping method zone.'
+            'zone: Please select shipping method zone.',
         );
     }
 
@@ -551,7 +551,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::SHIPPING_METHODS), $element, $value),
-            sprintf('Shipping method should not have %s "%s", but it does,', $element, $value)
+            sprintf('Shipping method should not have %s "%s", but it does,', $element, $value),
         );
     }
 

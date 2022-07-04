@@ -30,7 +30,7 @@ final class LocaleNotFoundException extends \RuntimeException
         return new self(sprintf(
             'Locale "%s" is not available! The available ones are: "%s".',
             $localeCode,
-            implode('", "', $availableLocalesCodes)
+            implode('", "', $availableLocalesCodes),
         ));
     }
 }
