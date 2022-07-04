@@ -171,8 +171,11 @@ on the create action of Resources, at the bottom of the page (after the content 
     In order to find events in Sylius templates you can simply search for the ``sylius_template_event`` phrase in your
     project's directory.
 
-How to locate event in browser?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+How to locate rendered template event?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With DevTools in your browser
+"""""""""""""""""""""""""""""
 
 If you want to search easier for the event name you want to modify, the Sylius Template Events can be easily
 found in your browser with the debug tools it provides.
@@ -188,6 +191,15 @@ What is more, we can see which twig template is responsible for rendering this b
 .. image:: /_images/sylius_logo_locate.png
 
 This will have all the necessary information that you need for further customization.
+
+With Symfony Profiler
+"""""""""""""""""""""
+
+The ``Template events`` section in Symfony Profiler gives you the list of events used to render the page with their blocks.
+Besides all information about blocks mentioned in the above section, you will see one more especially beneficial when it
+comes to optimization which is ``Duration``.
+
+.. image:: /_images/sylius_template_events_metrics.png
 
 How to use template events for customizations?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
