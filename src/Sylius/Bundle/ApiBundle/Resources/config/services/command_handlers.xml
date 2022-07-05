@@ -225,5 +225,23 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Admin\RequestResetPasswordEmailHandler">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.admin_user.token_generator.password_reset" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="messenger.default_bus" />
+
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Admin\SendResetPasswordEmailHandler">
+            <argument type="service" id="sylius.repository.admin_user"/>
+            <argument type="service" id="sylius.email_sender"/>
+
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>
