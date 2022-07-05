@@ -14,13 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\RequestInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
-    public function __construct(private ApiSecurityClientInterface $client)
-    {
+    private ?RequestInterface $request = null;
+
+    public function __construct(
+        private ApiSecurityClientInterface $apiSecurityClient,
+        private ApiClientInterface $client,
+        private RequestFactoryInterface $requestFactory,
+        private ResponseCheckerInterface $responseChecker,
+        private string $apiUrlPrefix
+    ) {
     }
 
     /**
@@ -53,6 +65,31 @@ final class LoginContext implements Context
     public function iLogIn(): void
     {
         $this->client->call();
+    }
+
+    /**
+     * @When I want to reset password
+     */
+    public function iWantToResetPassword(): void
+    {
+        $this->request = $this->requestFactory->create('admin', 'reset-password-requests', 'Bearer');
+    }
+
+    /**
+     * @When I specify email as :email
+     */
+    public function iSpecifyEmailAs(string $email): void
+    {
+        $this->request->updateContent(['email' => $email]);
+    }
+
+    /**
+     * @When I reset it
+     * @When I try to reset it
+     */
+    public function iResetIt(): void
+    {
+        $this->client->executeCustomRequest($this->request);
     }
 
     /**
@@ -95,6 +132,14 @@ final class LoginContext implements Context
     {
         $this->logIn($username, $password);
         $this->iShouldNotBeLoggedIn();
+    }
+
+    /**
+     * @Then I should be notified that email with reset instruction has been sent
+     */
+    public function iShouldBeNotifiedThatEmailResetInstructionHasBeenSent(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_ACCEPTED);
     }
 
     private function logIn(string $username, string $password): void

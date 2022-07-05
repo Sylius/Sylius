@@ -7,13 +7,13 @@ Feature: Resetting an administrator's password
     Background:
         Given there is an administrator "sylius@example.com" identified by "sylius"
 
-    @todo
+    @email @api
     Scenario: Sending an administrator's password reset request
         When I want to reset password
         And I specify email as "sylius@example.com"
         And I reset it
         Then I should be notified that email with reset instruction has been sent
-        And an email with instructions on how to reset the password should be sent to "sylius@example.com"
+        And an email with instructions on how to reset the administrator's password should be sent to "sylius@example.com"
 
     @todo
     Scenario: Changing my administrator's password
