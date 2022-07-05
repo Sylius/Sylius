@@ -18,7 +18,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
-use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -30,8 +29,6 @@ final class LoginContext implements Context
         private ApiSecurityClientInterface $apiSecurityClient,
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
-        private ResponseCheckerInterface $responseChecker,
-        private string $apiUrlPrefix
     ) {
     }
 

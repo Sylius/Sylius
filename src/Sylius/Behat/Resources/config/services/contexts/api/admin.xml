@@ -28,7 +28,6 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_administrators" class="Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext">
