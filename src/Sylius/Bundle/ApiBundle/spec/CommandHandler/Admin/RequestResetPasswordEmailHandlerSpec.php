@@ -67,8 +67,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalledOnce();
 
-        $requestResetPasswordEmail = new RequestResetPasswordEmail('admin@example.com');
-        $this($requestResetPasswordEmail);
+        $this(new RequestResetPasswordEmail('admin@example.com'));
     }
 
     public function it_throws_exception_while_handling_if_user_doesnt_exist(
@@ -76,7 +75,8 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $requestResetPasswordEmail = new RequestResetPasswordEmail('admin@example.com');
-        $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$requestResetPasswordEmail]);
+        $this->shouldThrow(\InvalidArgumentException::class)
+            ->during('__invoke', [new RequestResetPasswordEmail('admin@example.com')])
+        ;
     }
 }
