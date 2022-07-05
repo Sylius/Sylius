@@ -37,7 +37,7 @@ final class LoginContext implements Context
      */
     public function iWantToLogIn(): void
     {
-        $this->client->prepareLoginRequest();
+        $this->apiSecurityClient->prepareLoginRequest();
     }
 
     /**
@@ -45,7 +45,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyTheUsername(string $username): void
     {
-        $this->client->setEmail($username);
+        $this->apiSecurityClient->setEmail($username);
     }
 
     /**
@@ -53,7 +53,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyThePasswordAs(string $password): void
     {
-        $this->client->setPassword($password);
+        $this->apiSecurityClient->setPassword($password);
     }
 
     /**
@@ -61,7 +61,7 @@ final class LoginContext implements Context
      */
     public function iLogIn(): void
     {
-        $this->client->call();
+        $this->apiSecurityClient->call();
     }
 
     /**
@@ -94,7 +94,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeLoggedIn(): void
     {
-        Assert::true($this->client->isLoggedIn(), 'Admin should be logged in, but they are not.');
+        Assert::true($this->apiSecurityClient->isLoggedIn(), 'Admin should be logged in, but they are not.');
     }
 
     /**
@@ -102,7 +102,7 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->client->isLoggedIn(), 'Admin should not be logged in, but they are.');
+        Assert::false($this->apiSecurityClient->isLoggedIn(), 'Admin should not be logged in, but they are.');
     }
 
     /**
@@ -110,7 +110,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutBadCredentials(): void
     {
-        Assert::same($this->client->getErrorMessage(), 'Invalid credentials.');
+        Assert::same($this->apiSecurityClient->getErrorMessage(), 'Invalid credentials.');
     }
 
     /**
