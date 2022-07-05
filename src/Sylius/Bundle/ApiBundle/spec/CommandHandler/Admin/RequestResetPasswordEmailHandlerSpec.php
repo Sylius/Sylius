@@ -18,7 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Admin\RequestResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\Command\Admin\SendResetPasswordEmail;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Envelope;
@@ -51,7 +51,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         DateTimeProviderInterface $calendar,
         MessageBusInterface $messageBus,
-        UserInterface $adminUser
+        AdminUserInterface $adminUser
     ): void {
         $userRepository->findOneByEmail(self::SAMPLE_EMAIL)->willReturn($adminUser);
 
@@ -60,6 +60,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         $calendar->now()->willReturn(new \DateTime());
 
         $adminUser->getEmail()->willReturn(self::SAMPLE_EMAIL);
+        $adminUser->getLocaleCode()->willReturn(self::SAMPLE_LOCALE_CODE);
         $adminUser->setPasswordResetToken('sometoken')->shouldBeCalledOnce();
         $adminUser->setPasswordRequestedAt(Argument::type(\DateTime::class))->shouldBeCalledOnce();
 
@@ -71,7 +72,6 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalledOnce();
 
         $requestResetPasswordEmail = new RequestResetPasswordEmail(self::SAMPLE_EMAIL);
-        $requestResetPasswordEmail->setLocaleCode(self::SAMPLE_LOCALE_CODE);
         $this($requestResetPasswordEmail);
     }
 
