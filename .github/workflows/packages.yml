@@ -95,7 +95,7 @@ jobs:
 
             -
                 name: Install dependencies
-                run: composer install --ansi --no-interaction
+                run: composer update --no-interaction --no-scripts
                 env:
                     COMPOSER_ROOT_VERSION: dev-master
                 working-directory: "src/Sylius/${{ matrix.package }}"
