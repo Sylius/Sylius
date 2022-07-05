@@ -41,6 +41,7 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/log_in_admin_response', Response::HTTP_OK);
     }
 
+    /** @test */
     public function it_sends_administrator_password_reset_email(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -53,12 +54,10 @@ final class AdminUsersTest extends JsonApiTestCase
             self::CONTENT_TYPE_HEADER,
             json_encode([
                 'email' => 'api@example.com',
-                'locale' => 'pl_PL',
             ])
         );
 
         $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'admin/reset_password_request_response', Response::HTTP_CREATED);
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
     }
 }
