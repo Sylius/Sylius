@@ -60,6 +60,11 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/validator": "^4.4 || ^5.2"
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

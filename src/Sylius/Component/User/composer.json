@@ -46,6 +46,11 @@
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

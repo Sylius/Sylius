@@ -49,6 +49,11 @@
         "doctrine/doctrine-bundle": "2.3.0",
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.7-dev"
