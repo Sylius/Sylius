@@ -2,7 +2,7 @@ Installation
 ============
 
 So you want to try creating an online shop with Sylius? Great! The first step is the most important one, so let's start
-with the Sylius project installation via Composer. We will be using the latest stable version of Sylius - ``1.7``.
+with the Sylius project installation via Composer. We will be using the latest stable version of Sylius - ``1.11``.
 
 Before installation
 -------------------
@@ -27,6 +27,10 @@ The easiest way to install Sylius on your local machine is to use the following 
     composer create-project sylius/sylius-standard MyFirstShop
 
 It will create a ``MyFirstShop`` directory with a brand new Sylius application inside.
+
+.. note::
+
+    Are you familiar with Docker? Check out the :doc:`Sylius Installation Guide with Docker </book/installation/installation_with_docker>`
 
 .. warning::
 
