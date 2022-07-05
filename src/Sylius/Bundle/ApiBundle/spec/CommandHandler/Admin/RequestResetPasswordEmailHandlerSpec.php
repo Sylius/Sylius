@@ -28,10 +28,6 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
-    private const SAMPLE_EMAIL = 'admin@example.com';
-
-    private const SAMPLE_LOCALE_CODE = 'en_US';
-
     public function let(
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
@@ -53,34 +49,34 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         MessageBusInterface $messageBus,
         AdminUserInterface $adminUser
     ): void {
-        $userRepository->findOneByEmail(self::SAMPLE_EMAIL)->willReturn($adminUser);
+        $userRepository->findOneByEmail('admin@example.com')->willReturn($adminUser);
 
         $generator->generate()->willReturn('sometoken');
 
         $calendar->now()->willReturn(new \DateTime());
 
-        $adminUser->getEmail()->willReturn(self::SAMPLE_EMAIL);
-        $adminUser->getLocaleCode()->willReturn(self::SAMPLE_LOCALE_CODE);
+        $adminUser->getEmail()->willReturn('admin@example.com');
+        $adminUser->getLocaleCode()->willReturn('en_US');
         $adminUser->setPasswordResetToken('sometoken')->shouldBeCalledOnce();
         $adminUser->setPasswordRequestedAt(Argument::type(\DateTime::class))->shouldBeCalledOnce();
 
-        $sendResetPasswordEmail = new SendResetPasswordEmail(self::SAMPLE_EMAIL, self::SAMPLE_LOCALE_CODE);
+        $sendResetPasswordEmail = new SendResetPasswordEmail('admin@example.com', 'en_US');
 
         $messageBus->dispatch(
             $sendResetPasswordEmail,
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalledOnce();
 
-        $requestResetPasswordEmail = new RequestResetPasswordEmail(self::SAMPLE_EMAIL);
+        $requestResetPasswordEmail = new RequestResetPasswordEmail('admin@example.com');
         $this($requestResetPasswordEmail);
     }
 
     public function it_throws_exception_while_handling_if_user_doesnt_exist(
         UserRepositoryInterface $userRepository
     ): void {
-        $userRepository->findOneByEmail(self::SAMPLE_EMAIL)->willReturn(null);
+        $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $requestResetPasswordEmail = new RequestResetPasswordEmail(self::SAMPLE_EMAIL);
+        $requestResetPasswordEmail = new RequestResetPasswordEmail('admin@example.com');
         $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$requestResetPasswordEmail]);
     }
 }

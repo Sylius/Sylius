@@ -23,10 +23,6 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
-    private const SAMPLE_EMAIL = 'admin@example.com';
-
-    private const SAMPLE_LOCALE_CODE = 'en_US';
-
     public function let(
         UserRepositoryInterface $userRepository,
         SenderInterface $sender
@@ -44,27 +40,27 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
         SenderInterface $sender,
         AdminUserInterface $adminUser,
     ): void {
-        $userRepository->findOneByEmail(self::SAMPLE_EMAIL)->willReturn($adminUser);
+        $userRepository->findOneByEmail('admin@example.com')->willReturn($adminUser);
 
         $sender->send(
             Emails::ADMIN_PASSWORD_RESET,
-            [self::SAMPLE_EMAIL],
+            ['admin@example.com'],
             [
                 'adminUser' => $adminUser,
-                'localeCode' => self::SAMPLE_LOCALE_CODE,
+                'localeCode' => 'en_US',
             ]
         )->shouldBeCalledOnce();
 
-        $sendResetPasswordEmail = new SendResetPasswordEmail(self::SAMPLE_EMAIL, self::SAMPLE_LOCALE_CODE);
+        $sendResetPasswordEmail = new SendResetPasswordEmail('admin@example.com', 'en_US');
         $this->__invoke($sendResetPasswordEmail);
     }
 
     public function it_throws_exception_while_handling_if_user_doesnt_exist(
         UserRepositoryInterface $userRepository
     ): void {
-        $userRepository->findOneByEmail(self::SAMPLE_EMAIL)->willReturn(null);
+        $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $sendResetPasswordEmail = new SendResetPasswordEmail(self::SAMPLE_EMAIL, self::SAMPLE_LOCALE_CODE);
+        $sendResetPasswordEmail = new SendResetPasswordEmail('admin@example.com', 'en_US');
         $this->shouldThrow(\InvalidArgumentException::class)->during('__invoke', [$sendResetPasswordEmail]);
     }
 }
