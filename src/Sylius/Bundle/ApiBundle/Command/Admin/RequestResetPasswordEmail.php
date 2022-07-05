@@ -14,12 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command\Admin;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-class RequestResetPasswordEmail implements LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class RequestResetPasswordEmail implements IriToIdentifierConversionAwareInterface
 {
-    private ?string $locale;
-
     public function __construct(private string $email)
     {
     }
@@ -33,15 +30,4 @@ class RequestResetPasswordEmail implements LocaleCodeAwareInterface, IriToIdenti
     {
         $this->email = $email;
     }
-
-    public function getLocaleCode(): ?string
-    {
-        return $this->locale;
-    }
-
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->locale = $localeCode;
-    }
-
 }

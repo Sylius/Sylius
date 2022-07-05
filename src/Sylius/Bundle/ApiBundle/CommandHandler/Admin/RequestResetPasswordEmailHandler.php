@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Admin;
 use Sylius\Bundle\ApiBundle\Command\Admin\RequestResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\Command\Admin\SendResetPasswordEmail;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -35,6 +36,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
 
     public function __invoke(RequestResetPasswordEmail $requestResetPasswordEmail)
     {
+        /** @var AdminUserInterface $adminUser */
         $adminUser = $this->userRepository->findOneByEmail($requestResetPasswordEmail->getEmail());
         Assert::notNull($adminUser);
 
@@ -42,7 +44,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
         $adminUser->setPasswordRequestedAt($this->calendar->now());
 
         $this->commandBus->dispatch(
-            new SendResetPasswordEmail($adminUser->getEmail(), $requestResetPasswordEmail->getLocaleCode()),
+            new SendResetPasswordEmail($adminUser->getEmail(), $adminUser->getLocaleCode()),
             [new DispatchAfterCurrentBusStamp()]
         );
     }
