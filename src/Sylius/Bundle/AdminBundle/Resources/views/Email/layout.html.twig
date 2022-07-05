@@ -1,1 +1,19 @@
-{% extends '@SyliusCore/Email/layout.html.twig' %}
+{% block body %}
+    {% autoescape false %}
+        <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
+            <div style="max-width: 600px; margin: 20px auto;">
+                <div style="margin-bottom: 30px; text-align: center;">
+                    <img src="{{ absolute_url(asset('assets/admin/img/logo.png')) }}" alt="Sylius" style="width: 170px">
+                </div>
+
+                <div style="background: #fff; padding: 40px 30px;">
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div style="text-align: center; padding: 20px 0;">
+                    <a href="https://sylius.com" target="_blank" style="color: #1abb9c; text-decoration: none;">sylius.com</a>
+                </div>
+            </div>
+        </div>
+    {% endautoescape %}
+{% endblock %}

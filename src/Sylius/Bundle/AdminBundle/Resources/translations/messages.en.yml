@@ -6,6 +6,11 @@ sylius:
             thank_you_for_transaction: 'Thank you for a successful transaction.'
             you_can_check_its_location_with_the_tracking_code: 'You can check it''s location with the %tracking_code% tracking code.'
             your_order_with_number: 'Your order with number'
+        admin_password_reset:
+            hello: 'Hello'
+            subject: 'Administrator password reset'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
     menu:
         admin:
             main:
@@ -50,7 +55,7 @@ sylius:
         channel_pricings: Channel pricings
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
-        original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price. 
+        original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
         gateway:
