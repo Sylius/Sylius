@@ -84,7 +84,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
-                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
                 working-directory: "src/Sylius/${{ matrix.package }}"
 
