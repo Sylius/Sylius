@@ -29,4 +29,4 @@ Feature: Resetting an administrator's password
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
         Given I already reset my administrator's password
         When I try to reset my password again using the same email
-        Then I should not be able to change my password again without sending a new password reset request
+        Then I should not be able to change it again without sending a new password reset request
