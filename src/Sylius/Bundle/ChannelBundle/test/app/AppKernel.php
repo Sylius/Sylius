@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -37,7 +37,7 @@ class AppKernel extends Kernel
         $loader->load(__DIR__ . '/config/config.yml');
     }
 
-    protected function getContainerBaseClass()
+    protected function getContainerBaseClass(): string
     {
         if (str_starts_with($this->environment, 'test')) {
             return MockerContainer::class;
