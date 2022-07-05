@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Admin;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
+/** @experimental */
 class SendResetPasswordEmail implements LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
 {
     public function __construct(private string $email, private string $localeCode)

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Admin;
 
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
+/** @experimental */
 class RequestResetPasswordEmail implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(private string $email)
