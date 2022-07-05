@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Admin;
 
+use DateTimeInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Admin\RequestResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\Command\Admin\SendResetPasswordEmail;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
@@ -47,18 +47,19 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         GeneratorInterface $generator,
         DateTimeProviderInterface $calendar,
         MessageBusInterface $messageBus,
-        AdminUserInterface $adminUser
+        AdminUserInterface $adminUser,
+        DateTimeInterface $now
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn($adminUser);
 
         $generator->generate()->willReturn('sometoken');
 
-        $calendar->now()->willReturn(new \DateTime());
+        $calendar->now()->willReturn($now);
 
         $adminUser->getEmail()->willReturn('admin@example.com');
         $adminUser->getLocaleCode()->willReturn('en_US');
         $adminUser->setPasswordResetToken('sometoken')->shouldBeCalledOnce();
-        $adminUser->setPasswordRequestedAt(Argument::type(\DateTime::class))->shouldBeCalledOnce();
+        $adminUser->setPasswordRequestedAt($now)->shouldBeCalledOnce();
 
         $sendResetPasswordEmail = new SendResetPasswordEmail('admin@example.com', 'en_US');
 
