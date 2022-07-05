@@ -27,9 +27,6 @@ Feature: Resetting an administrator's password
 
     @todo
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
-        Given I have already received an administrator's password resetting email
-        When I reset my password using the received instructions
-        And I specify my new password as "newp@ssw0rd"
-        And I confirm my new password as "newp@ssw0rd"
-        And I reset it
+        Given I already reset my administrator's password
+        When I try to reset my password again using the same email
         Then I should not be able to change my password again without sending a new password reset request
