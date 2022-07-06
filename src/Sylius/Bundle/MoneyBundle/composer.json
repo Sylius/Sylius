@@ -46,6 +46,11 @@
         "symfony/form": "^5.4",
         "twig/twig": "^2.12"
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

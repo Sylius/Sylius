@@ -59,6 +59,11 @@
         "phpspec/phpspec": "^7.2",
         "symfony/property-access": "^5.4"
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"

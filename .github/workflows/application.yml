@@ -57,6 +57,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
@@ -103,7 +104,7 @@ jobs:
                 run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
 
-            -   
+            -
                 name: Generate composer diff
                 uses: IonBazan/composer-diff-action@v1
                 if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
@@ -200,6 +201,7 @@ jobs:
             -   name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
             -   name: Get Composer cache directory
@@ -258,6 +260,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
@@ -365,6 +368,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
@@ -415,7 +419,7 @@ jobs:
             -
                 name: Validate Database Schema
                 run: bin/console doctrine:schema:validate -vvv
-            
+
             -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
@@ -505,6 +509,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
@@ -557,7 +562,7 @@ jobs:
                 run: |
                     bin/console doctrine:migrations:migrate first --no-interaction
                     bin/console doctrine:migrations:migrate latest --no-interaction
-            
+
             -
                 name: Validate Database Schema
                 run: bin/console doctrine:schema:validate -vvv
@@ -641,6 +646,7 @@ jobs:
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
