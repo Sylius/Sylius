@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
+use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -29,6 +30,7 @@ final class LoginContext implements Context
         private ApiSecurityClientInterface $apiSecurityClient,
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -90,6 +92,30 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When /^I follow the instructions to reset my password$/
+     */
+    public function iResetMyPasswordUsingTheReceivedInstructions(): void
+    {
+        $this->request = $this->requestFactory->create('admin', 'reset-password-requests', 'Bearer');
+    }
+
+    /**
+     * @When I specify my new password as :password
+     */
+    public function iSpecifyMyNewPassword(?string $password = null): void
+    {
+        $this->request->updateContent(['newPassword' => $password]);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     */
+    public function iConfirmMyNewPassword(?string $password = null): void
+    {
+        $this->request->updateContent(['confirmNewPassword' => $password]);
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn(): void
@@ -137,6 +163,26 @@ final class LoginContext implements Context
     public function iShouldBeNotifiedThatEmailResetInstructionHasBeenSent(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->client->executeCustomRequest($this->request);
+
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        Assert::startsWith($message, 'No user found with reset token: ');
     }
 
     private function logIn(string $username, string $password): void
