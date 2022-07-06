@@ -31,15 +31,15 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
 
     public function __invoke(SendResetPasswordEmail $sendResetPasswordEmail): void
     {
-        $adminUser = $this->userRepository->findOneByEmail($sendResetPasswordEmail->getEmail());
+        $adminUser = $this->userRepository->findOneByEmail($sendResetPasswordEmail->email);
         Assert::notNull($adminUser);
 
         $this->sender->send(
             Emails::ADMIN_PASSWORD_RESET,
-            [$sendResetPasswordEmail->getEmail()],
+            [$sendResetPasswordEmail->email],
             [
                 'adminUser' => $adminUser,
-                'localeCode' => $sendResetPasswordEmail->getLocaleCode(),
+                'localeCode' => $sendResetPasswordEmail->localeCode,
             ]
         );
     }

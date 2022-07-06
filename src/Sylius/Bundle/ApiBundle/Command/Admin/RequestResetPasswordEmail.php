@@ -13,22 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Admin;
 
-use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
-
 /** @experimental */
-class RequestResetPasswordEmail implements IriToIdentifierConversionAwareInterface
+class RequestResetPasswordEmail
 {
-    public function __construct(private string $email)
+    public function __construct(public string $email)
     {
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
     }
 }

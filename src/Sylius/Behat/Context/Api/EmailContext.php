@@ -152,12 +152,11 @@ final class EmailContext implements Context
 
     /**
      * @Then an email with instructions on how to reset the administrator's password should be sent to :recipient
-     * @Then an email with instructions on how to reset the administrator's password should be sent to :recipient in :localeCode locale
      */
-    public function anEmailWithInstructionsOnHowToResetTheAdministratorsPasswordShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
+    public function anEmailWithInstructionsOnHowToResetTheAdministratorsPasswordShouldBeSentTo(string $recipient): void
     {
         $this->assertEmailContainsMessageTo(
-            $this->translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, $localeCode),
+            $this->translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'),
             $recipient
         );
     }

@@ -63,10 +63,14 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
 
         $sendResetPasswordEmail = new SendResetPasswordEmail('admin@example.com', 'en_US');
 
-        $messageBus->dispatch(
-            $sendResetPasswordEmail,
-            [new DispatchAfterCurrentBusStamp()]
-        )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalledOnce();
+        $messageBus
+            ->dispatch(
+                $sendResetPasswordEmail,
+                [new DispatchAfterCurrentBusStamp()]
+            )
+            ->willReturn(new Envelope($sendResetPasswordEmail))
+            ->shouldBeCalledOnce()
+        ;
 
         $this(new RequestResetPasswordEmail('admin@example.com'));
     }
@@ -76,7 +80,8 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $this->shouldThrow(\InvalidArgumentException::class)
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [new RequestResetPasswordEmail('admin@example.com')])
         ;
     }

@@ -37,8 +37,8 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
 
     public function __invoke(RequestResetPasswordEmail $requestResetPasswordEmail)
     {
-        /** @var AdminUserInterface $adminUser */
-        $adminUser = $this->userRepository->findOneByEmail($requestResetPasswordEmail->getEmail());
+        /** @var AdminUserInterface|null $adminUser */
+        $adminUser = $this->userRepository->findOneByEmail($requestResetPasswordEmail->email);
         Assert::notNull($adminUser);
 
         $adminUser->setPasswordResetToken($this->generator->generate());
