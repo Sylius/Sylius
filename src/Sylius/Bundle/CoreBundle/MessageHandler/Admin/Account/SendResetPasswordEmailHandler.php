@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Admin;
+namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
-use Sylius\Bundle\ApiBundle\Command\Admin\SendResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

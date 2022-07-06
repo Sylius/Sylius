@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Admin;
+namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
 use DateTime;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Admin\RequestResetPasswordEmail;
-use Sylius\Bundle\ApiBundle\Command\Admin\SendResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;

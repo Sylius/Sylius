@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Admin;
+namespace Sylius\Bundle\CoreBundle\Message\Admin\Account;
 
 /** @experimental */
-class RequestResetPasswordEmail
+class SendResetPasswordEmail
 {
-    public function __construct(public string $email)
+    public function __construct(public string $email, public string $localeCode)
     {
     }
 }
