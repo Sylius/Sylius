@@ -1,22 +1,41 @@
 services:
-    app:
+    php:
         build:
-            context: .docker/dev
+            context: .
+            target: php
         environment:
             APP_ENV: "dev"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"
 #            DATABASE_URL: "pgsql://root:postgres@postgres/sylius_%kernel.environment%?charset=utf8" # When using postgres
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
-            PHP_XDEBUG_IDEKEY: "PHPSTORM"
             MAILER_URL: "smtp://mailhog:1025"
         volumes:
             - ./:/app:delegated
-            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
-            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
-        ports:
-            - 80:80
         depends_on:
             - mysql
+        networks:
+            - sylius
+
+    node:
+        build:
+            context: .
+            target: node
+        volumes:
+            - ./:/app:delegated
+        ports:
+            - 35729:35729
+        networks:
+            - sylius
+    
+    nginx:
+        build:
+            context: .
+            target: nginx
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/dev/nginx.conf:/etc/nginx/conf.d/default.conf:delegated
+        ports:
+            - 80:80
         networks:
             - sylius
 

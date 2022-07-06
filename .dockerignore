@@ -1,0 +1,26 @@
+# Reverse ignore. Ignore everything and point what you need.
+
+*
+
+!/.docker
+!/bin
+!/config
+!/features
+!/public
+!/src
+!/templates
+!/tests
+!/translations
+
+!/.babelrc
+!/.env
+!/.env.*
+!/composer.json
+!/composer.lock
+!/gulpfile.babel.js
+!/Makefile
+!/package.json
+!/symfony.lock
+!/webpack.config.js
+!/yarn.lock
+

@@ -23,12 +23,18 @@ install:
 	composer install --no-interaction --no-scripts
 
 backend:
+	composer install --no-interaction --no-scripts
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 
 frontend:
 	yarn install --pure-lockfile
 	GULP_ENV=prod yarn build
+
+docker:
+	docker compose up -d --build
+	docker compose exec node make frontend
+	docker compose exec php make backend
 
 behat: behat-cli behat-non-js behat-js
 
