@@ -54,7 +54,6 @@ use SyliusLabs\DoctrineMigrationsExtraBundle\SyliusLabsDoctrineMigrationsExtraBu
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
-use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -72,7 +71,6 @@ final class TestKernel extends BaseKernel
         return [
             new FrameworkBundle(),
             new SecurityBundle(),
-            new SwiftmailerBundle(),
             new TwigBundle(),
             new DoctrineBundle(),
             new SyliusCalendarBundle(),
