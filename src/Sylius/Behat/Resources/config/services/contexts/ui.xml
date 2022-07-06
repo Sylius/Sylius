@@ -28,6 +28,8 @@
         <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="sylius.behat.page.admin.login" />
+            <argument type="service" id="sylius.behat.page.admin.request_password_reset" />
+            <argument type="service" id="sylius.behat.notification_checker"/>
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_administrators" class="Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext">
