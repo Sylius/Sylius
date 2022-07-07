@@ -6,6 +6,9 @@ sylius_mailer:
         name: Example.com
         address: no-reply@example.com
     emails:
+        admin_password_reset:
+            subject: sylius.emails.admin_password_reset.subject
+            template: "@SyliusCore/Email/adminPasswordReset.html.twig"
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
             template: "@SyliusCore/Email/orderConfirmation.html.twig"
