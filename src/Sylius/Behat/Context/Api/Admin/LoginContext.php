@@ -20,6 +20,7 @@ use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -32,6 +33,7 @@ final class LoginContext implements Context
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
+        private string $apiUrlPrefix
     ) {
     }
 
@@ -95,10 +97,12 @@ final class LoginContext implements Context
     /**
      * @When /^(I) follow the instructions to reset my password$/
      */
-    public function iResetMyPasswordUsingTheReceivedInstructions(AdminUserInterface $administrator): void
+    public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
-        $this->iWantToResetPassword();
-        $this->iSpecifyEmailAs($administrator->getEmailCanonical());
+        $this->request = $this->requestFactory->custom(
+            sprintf('%s/admin/reset-password-requests/%s', $this->apiUrlPrefix, $admin->getPasswordResetToken()),
+            HttpRequest::METHOD_PATCH,
+        );
     }
 
     /**
@@ -182,7 +186,7 @@ final class LoginContext implements Context
     {
         $this->client->executeCustomRequest($this->request);
 
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
         Assert::startsWith($message, 'No user found with reset token: ');
     }

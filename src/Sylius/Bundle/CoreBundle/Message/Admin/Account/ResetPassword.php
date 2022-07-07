@@ -18,8 +18,6 @@ final class ResetPassword
 {
     public ?string $newPassword = null;
     public ?string $confirmNewPassword = null;
+    public string $resetPasswordToken;
 
-    public function __construct(public string $resetPasswordToken = '')
-    {
-    }
 }

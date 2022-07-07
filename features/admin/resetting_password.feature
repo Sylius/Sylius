@@ -17,7 +17,7 @@ Feature: Resetting an administrator's password
 
     @api
     Scenario: Changing my administrator's password
-        Given I have already received an administrator's password resetting email
+        Given I have already received a resetting password email
         When I follow the instructions to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
@@ -28,7 +28,7 @@ Feature: Resetting an administrator's password
     @api
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
         Given I have already received an administrator's password resetting email
-        When I follow link on my email to reset my password
+        When I follow the instructions to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
