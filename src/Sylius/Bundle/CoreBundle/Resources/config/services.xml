@@ -268,5 +268,17 @@
         <service id="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface" class="Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityChecker">
             <argument type="service" id="sylius.order_processing.order_processor" />
         </service>
+
+        <service id="sylius.user_password_resetter.admin" class="Sylius\Bundle\CoreBundle\Security\UserPasswordResetter">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+        </service>
+
+        <service id="sylius.user_password_resetter.shop" class="Sylius\Bundle\CoreBundle\Security\UserPasswordResetter">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
+        </service>
     </services>
 </container>

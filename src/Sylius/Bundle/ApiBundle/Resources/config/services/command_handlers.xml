@@ -167,9 +167,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler">
-            <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="sylius.security.password_updater" />
-            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
+            <argument type="service" id="sylius.user_password_resetter.shop" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -191,10 +189,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Admin\ResetPasswordHandler">
-            <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
-            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
-
+            <argument type="service" id="sylius.user_password_resetter.admin" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
