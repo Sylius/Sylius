@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -92,11 +93,12 @@ final class LoginContext implements Context
     }
 
     /**
-     * @When /^I follow the instructions to reset my password$/
+     * @When /^(I) follow the instructions to reset my password$/
      */
-    public function iResetMyPasswordUsingTheReceivedInstructions(): void
+    public function iResetMyPasswordUsingTheReceivedInstructions(AdminUserInterface $administrator): void
     {
-        $this->request = $this->requestFactory->create('admin', 'reset-password-requests', 'Bearer');
+        $this->iWantToResetPassword();
+        $this->iSpecifyEmailAs($administrator->getEmailCanonical());
     }
 
     /**

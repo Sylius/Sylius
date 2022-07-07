@@ -100,11 +100,10 @@ final class AdminUserContext implements Context
     }
 
     /**
-     * @Given /^I have already received an administrator's password resetting email$/
+     * @Given /^(I) have already received an administrator's password resetting email$/
      */
-    public function iHaveAlreadyReceivedAnAdministratorsPasswordResettingEmail(): void
+    public function iHaveAlreadyReceivedAnAdministratorsPasswordResettingEmail(AdminUserInterface $administrator): void
     {
-        $administrator = $this->sharedStorage->get('administrator');
         $administrator->setPasswordResetToken('token');
         $administrator->setPasswordRequestedAt(new \DateTime());
 
