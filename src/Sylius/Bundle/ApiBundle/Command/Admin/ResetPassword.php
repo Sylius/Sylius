@@ -11,13 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Message\Admin\Account;
+namespace Sylius\Bundle\ApiBundle\Command\Admin;
 
 /** @experimental */
-final class ResetPassword
+class ResetPassword
 {
     public ?string $newPassword = null;
-    public ?string $confirmNewPassword = null;
-    public string $resetPasswordToken;
 
+    public ?string $confirmNewPassword = null;
+
+    public function __construct(public string $resetPasswordToken)
+    {
+    }
 }

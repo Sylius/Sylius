@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Admin;
 
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\ApiBundle\Command\Admin\ResetPassword;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -47,5 +47,6 @@ final class ResetPasswordHandler implements MessageHandlerInterface
 
         $this->passwordUpdater->updatePassword($user);
         $user->setPasswordResetToken(null);
+        $user->setPasswordRequestedAt(null);
     }
 }

@@ -16,17 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 /** @experimental */
 class ResetPassword
 {
-    /** @var string|null */
-    public $newPassword;
+    public ?string $newPassword = null;
 
-    /** @var string|null */
-    public $confirmNewPassword;
+    public ?string $confirmNewPassword = null;
 
-    /** @var string */
-    public $resetPasswordToken;
-
-    public function __construct(string $resetPasswordToken)
+    public function __construct(public string $resetPasswordToken)
     {
-        $this->resetPasswordToken = $resetPasswordToken;
     }
 }

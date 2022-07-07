@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Component\Core\Model\AddressInterface;
 
-final class ResetPasswordItemDataProviderSpec extends ObjectBehavior
+final class AccountResetPasswordItemDataProviderSpec extends ObjectBehavior
 {
     function it_supports_only_reset_password(): void
     {

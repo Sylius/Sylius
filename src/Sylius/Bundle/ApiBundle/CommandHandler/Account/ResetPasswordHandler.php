@@ -47,5 +47,6 @@ final class ResetPasswordHandler implements MessageHandlerInterface
 
         $this->passwordUpdater->updatePassword($user);
         $user->setPasswordResetToken(null);
+        $user->setPasswordRequestedAt(null);
     }
 }

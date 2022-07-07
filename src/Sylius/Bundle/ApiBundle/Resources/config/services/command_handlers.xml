@@ -190,6 +190,15 @@
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Admin\ResetPasswordHandler">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler">
             <argument type="service" id="sylius.email_sender" />
             <argument type="service" id="sylius.repository.order" />

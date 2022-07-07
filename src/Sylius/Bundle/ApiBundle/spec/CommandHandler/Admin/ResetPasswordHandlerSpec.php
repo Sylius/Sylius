@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
+namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Admin;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\ApiBundle\Command\Admin\ResetPassword;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -42,16 +42,16 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($adminUser);
 
-        $adminUser
-            ->isPasswordRequestNonExpired(Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'))
-            ->willReturn(true)
-        ;
+        $adminUser->isPasswordRequestNonExpired(
+            Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'
+        ))->willReturn(true);
 
         $adminUser->getPasswordResetToken()->willReturn('TOKEN');
 
         $adminUser->setPlainPassword('newPassword')->shouldBeCalled();
         $passwordUpdater->updatePassword($adminUser)->shouldBeCalled();
         $adminUser->setPasswordResetToken(null)->shouldBeCalled();
+        $adminUser->setPasswordRequestedAt(null)->shouldBeCalled();
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
@@ -68,12 +68,13 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($adminUser);
 
         $adminUser->isPasswordRequestNonExpired(
-            Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5')
-        )->willReturn(false);
+            Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'
+        ))->willReturn(false);
 
         $adminUser->getPasswordResetToken()->willReturn('TOKEN');
         $adminUser->setPlainPassword('newPassword')->shouldNotBeCalled();
         $passwordUpdater->updatePassword($adminUser)->shouldNotBeCalled();
+        $adminUser->setPasswordRequestedAt(null)->shouldNotBeCalled();
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
@@ -92,14 +93,14 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($adminUser);
 
-        $adminUser
-            ->isPasswordRequestNonExpired(Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'))
-            ->willReturn(false)
-        ;
+        $adminUser->isPasswordRequestNonExpired(
+            Argument::that(fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'
+        ))->willReturn(false);
 
         $adminUser->getPasswordResetToken()->willReturn('BADTOKEN');
         $adminUser->setPlainPassword('newPassword')->shouldNotBeCalled();
         $passwordUpdater->updatePassword($adminUser)->shouldNotBeCalled();
+        $adminUser->setPasswordRequestedAt(null)->shouldNotBeCalled();
 
         $command = new ResetPassword('TOKEN');
         $command->newPassword = 'newPassword';
