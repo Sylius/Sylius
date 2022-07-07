@@ -1299,6 +1299,9 @@ sylius_ui:
                 header:
                     template: "@SyliusAdmin/Security/_logo.html.twig"
                     priority: 30
+                flashes:
+                    template: "@SyliusUi/_flashes.html.twig"
+                    priority: 20
 
         sylius.admin.request_password_reset.form.content:
             blocks:

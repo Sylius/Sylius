@@ -24,11 +24,11 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
 
     public function specifyEmail(string $email): void
     {
-        $this->getDocument()->fillField('email', $email);
+        $this->getDocument()->fillField('Email', $email);
     }
 
     public function resetPassword(): void
     {
-        $this->getDocument()->pressButton('Reset');
+        $this->getDocument()->pressButton('Reset password');
     }
 }

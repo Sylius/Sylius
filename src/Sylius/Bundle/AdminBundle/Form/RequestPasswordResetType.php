@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Form;
 
+use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RequestPasswordResetType extends AbstractType
 {
@@ -27,6 +29,14 @@ final class RequestPasswordResetType extends AbstractType
                 'required' => true,
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => PasswordResetRequest::class,
+            'csrf_token_id' => 'reset_password',
+        ]);
     }
 
     public function getBlockPrefix(): string
