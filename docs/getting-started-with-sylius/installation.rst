@@ -2,7 +2,7 @@ Installation
 ============
 
 So you want to try creating an online shop with Sylius? Great! The first step is the most important one, so let's start
-with the Sylius project installation via Composer. We will be using the latest stable version of Sylius - ``1.11``.
+with the Sylius project installation via Composer. We will be using the latest stable version of Sylius.
 
 Before installation
 -------------------
