@@ -39,8 +39,8 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ): void {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
-        $form->add('createUser', Argument::type('string'), Argument::type('array'))->shouldBeCalled();
+        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->willReturn($form)->shouldBeCalled();
+        $form->add('createUser', Argument::type('string'), Argument::type('array'))->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -64,8 +64,8 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $customer->setUser(null)->shouldBeCalled();
         $event->setData($customer)->shouldBeCalled();
 
-        $form->remove('user')->shouldBeCalled();
-        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
+        $form->remove('user')->willReturn($form)->shouldBeCalled();
+        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->willReturn($form)->shouldBeCalled();
 
         $this->submit($event);
     }
