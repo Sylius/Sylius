@@ -29,7 +29,7 @@ final class UriBasedSectionProvider implements SectionProviderInterface
 
     public function getSection(): ?SectionInterface
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
         if (null === $request) {
             return null;
         }
