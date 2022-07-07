@@ -37,7 +37,7 @@
             <tag name="payum.action" factory="offline" alias="sylius.offline.status"/>
         </service>
         <service id="sylus.payum_action.offline.status" alias="sylius.payum_action.offline.status">
-            <deprecated>"%alias_id%" service is deprecated since Sylius 1.8 and will be removed in 2.0. Use "sylius.payum_action.offline.status" instead.</deprecated>
+            <deprecated package="sylius/payum-bundle" version="2.0">"%alias_id%" service is deprecated since Sylius 1.8 and will be removed in 2.0. Use "sylius.payum_action.offline.status" instead.</deprecated>
         </service>
         <service id="sylius.payum_action.offline.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.resolve_next_route" />

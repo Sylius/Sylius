@@ -262,8 +262,6 @@
             <argument type="service" id="sylius.email_sender" />
         </service>
 
-        <service id="security.authentication_manager" alias="security.authentication.manager" />
-
         <service id="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolverInterface" class="Sylius\Component\Core\Cart\Resolver\CreatedByGuestFlagResolver">
             <argument type="service" id="security.token_storage" />
         </service>

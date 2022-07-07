@@ -135,9 +135,7 @@ final class TestKernel extends BaseKernel
 
         $containerBuilder->loadFromExtension('security', [
             'firewalls' => [
-                'main' => [
-                    'anonymous' => true,
-                ],
+                'main' => [],
             ],
         ]);
 
@@ -147,15 +145,6 @@ final class TestKernel extends BaseKernel
                 'server_version' => '5.7',
                 'charset' => 'UTF8',
                 'url' => 'sqlite:///%kernel.project_dir%/var/data.db',
-            ],
-        ]);
-
-        $containerBuilder->loadFromExtension('swiftmailer', [
-            'disable_delivery' => true,
-            'logging' => true,
-            'spool' => [
-                'type' => 'file',
-                'path' => '%kernel.cache_dir%/spool',
             ],
         ]);
 
