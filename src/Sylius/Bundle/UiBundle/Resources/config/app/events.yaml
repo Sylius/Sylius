@@ -20,7 +20,7 @@ sylius_ui:
                 pagination:
                     template: "@SyliusUi/Grid/Body/_pagination.html.twig"
                     priority: 10
-        
+
         sylius.grid.filters:
             blocks:
                 content:
@@ -40,6 +40,9 @@ sylius_ui:
                 error:
                     template: "@SyliusUi/Security/_error.html.twig"
                     priority: 10
+                flashes:
+                    template: "@SyliusUi/_flashes.html.twig"
+                    priority: 0
 
         sylius.admin.login.form.content:
             blocks:
@@ -49,3 +52,9 @@ sylius_ui:
                 submit:
                     template: "@SyliusUi/Security/Form/_submit.html.twig"
                     priority: 10
+                divider:
+                    template: "@SyliusAdmin/_divider.html.twig"
+                    priority: 0
+                request_password_reset:
+                    template: "@SyliusAdmin/Security/Form/_requestPasswordResetButton.html.twig"
+                    priority: 0
