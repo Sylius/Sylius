@@ -59,7 +59,8 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $this->shouldThrow(\InvalidArgumentException::class)
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('__invoke', [new SendResetPasswordEmail('admin@example.com', 'en_US')])
         ;
     }
