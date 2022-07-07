@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class CustomerContextSpec extends ObjectBehavior
 {
@@ -53,7 +54,7 @@ final class CustomerContextSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         TokenInterface $token,
-        \stdClass $user
+        UserInterface $user
     ): void {
         $tokenStorage->getToken()->willReturn($token);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);

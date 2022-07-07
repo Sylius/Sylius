@@ -42,7 +42,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
         UriBasedSectionResolverInterface $firstSectionResolver,
         SectionInterface $section
     ): void {
-        $requestStack->getMasterRequest()->willReturn($request);
+        $requestStack->getMainRequest()->willReturn($request);
 
         $request->getPathInfo()->willReturn('/something');
 
@@ -58,7 +58,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
         UriBasedSectionResolverInterface $secondSectionResolver,
         SectionInterface $section
     ): void {
-        $requestStack->getMasterRequest()->willReturn($request);
+        $requestStack->getMainRequest()->willReturn($request);
 
         $request->getPathInfo()->willReturn('/something');
 
@@ -70,7 +70,7 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
 
     function it_return_null_if_master_request_has_not_been_resolved(RequestStack $requestStack): void
     {
-        $requestStack->getMasterRequest()->willReturn(null);
+        $requestStack->getMainRequest()->willReturn(null);
 
         $this->getSection()->shouldReturn(null);
     }
