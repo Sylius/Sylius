@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-07-05T14:19:19Z
+
+Hey Andrea!
+
+thanks for the proposal. You are right, thanks for the fix :) Can you, however, open a PR to 1.11 branch and resolve conflict?
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-07-07T13:51:22Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-1"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-07-07T14:38:24Z
+
+Thanks, Andrea! :tada:
