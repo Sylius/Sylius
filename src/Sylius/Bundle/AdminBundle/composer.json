@@ -35,7 +35,9 @@
         "sylius/ui-bundle": "^1.6",
         "symfony/framework-bundle": "^5.4",
         "twig/intl-extra": "^2.12",
-        "twig/twig": "^2.12"
+        "twig/twig": "^2.12",
+        "knplabs/knp-menu": "^3.1",
+        "knplabs/knp-menu-bundle": "^3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
@@ -54,7 +56,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Sylius\\Bundle\\AdminBundle\\": ""
+            "Sylius\\Bundle\\AdminBundle\\": "",
+            "Sylius\\Bundle\\AdminBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\AdminBundle\\Application\\": "test/src/"
         }
     },
     "repositories": [
