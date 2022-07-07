@@ -39,6 +39,11 @@
             <argument type="service" id="session" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\GetRequestPasswordResetAction" public="true">
+            <argument type="service" id="twig"/>
+            <argument type="service" id="form.factory"/>
+        </service>
+
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="twig" />

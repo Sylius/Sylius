@@ -235,7 +235,7 @@ sylius_ui:
                     priority: 5
                     context:
                         event: sylius.admin.layout.topbar_right
-                        
+
         sylius.admin.order.update.form:
             blocks:
                 legacy:
@@ -1287,3 +1287,24 @@ sylius_ui:
                 shipment_units:
                     template: '@SyliusAdmin/Shipment/Show/_shipmentUnits.html.twig'
                     priority: 10
+
+        sylius.admin.request_password_reset.content:
+            blocks:
+                form:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_form.html.twig'
+                    priority: 30
+
+        sylius.admin.request_password_reset.before_form:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/Security/_logo.html.twig"
+                    priority: 30
+
+        sylius.admin.request_password_reset.form.content:
+            blocks:
+                email:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_email.html.twig'
+                    priority: 30
+                submit:
+                    template: '@SyliusAdmin/Security/RequestPasswordReset/_submit.html.twig'
+                    priority: 20
