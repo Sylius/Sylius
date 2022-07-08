@@ -70,7 +70,9 @@ Here is how the response looks like:
    Now when we do not provide parameters in response it returns all available `paymentMethods` in channel.
    Wrong parameters otherwise cause empty array `[]` in response and correct parameters return `paymentMethods` available for your `payment`.
 
-1. The 2nd parameter `MetadataInterface` has been removed from `src/Sylius/Bundle/ApiBundle/CommandHandler/Account/ResetPasswordHandler` and replaced by `Sylius\Component\User\Security\PasswordUpdaterInterface` (previously 3rd parameter). From now on a token TTL value must be used instead as the 3rd parameter.
+1. All arguments of `src/Sylius/Bundle/ApiBundle/CommandHandler/Account/ResetPasswordHandler` have been removed and substituted with `Sylius\Bundle\CoreBundle\Security\UserPasswordResetter`.
+
+1. The file `src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/ResetPassword.xml` has been renamed to `src/Sylius/Bundle/ApiBundle/Resources/config/api_resources/AccountResetPassword.xml` and its short name has been changed from `ResetPasswordRequest` to `AccountResetPasswordRequest`.
 
 1. Constructor of `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler` has been extended with `Sylius\Calendar\Provider\DateTimeProviderInterface` argument:
 
