@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,7 +45,8 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         RouterInterface $router,
         FormInterface $form,
-        Request $request
+        Request $request,
+        ParameterBagInterface $attributesBag
     ): void
     {
         $formFactory
@@ -68,6 +70,41 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         ;
 
         $flashBag->set('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
+
+        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
+            'redirect' => 'my_custom_route'
+        ]);
+        $request->attributes = $attributesBag->getWrappedObject();
+
+        $router->generate('my_custom_route')->shouldBeCalled()->willReturn('/login');
+
+        $response = $this->__invoke($request);
+        $response->shouldBeAnInstanceOf(RedirectResponse::class);
+        $response->getTargetUrl()->shouldReturn('/login');
+    }
+
+    public function it_should_redirect_to_default_route_if_custom_one_is_not_defined(
+        FormFactoryInterface $formFactory,
+        MessageBusInterface $messageBus,
+        RouterInterface $router,
+        FormInterface $form,
+        Request $request,
+        ParameterBagInterface $attributesBag
+    ): void {
+        $formFactory->create(RequestPasswordResetType::class, Argument::type(PasswordResetRequest::class))->willReturn($form);
+
+        $form->handleRequest($request)->willReturn();
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+
+        $passwordResetRequest = new PasswordResetRequest();
+        $passwordResetRequest->setEmail('sylius@example.com');
+        $form->getData()->shouldBeCalled()->willReturn($passwordResetRequest);
+
+        $messageBus->dispatch(Argument::type(RequestResetPasswordEmail::class))->willReturn(new Envelope(new \stdClass()));
+
+        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn(null);
+        $request->attributes = $attributesBag->getWrappedObject();
 
         $router->generate('sylius_admin_login')->shouldBeCalled()->willReturn('/login');
 

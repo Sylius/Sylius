@@ -51,6 +51,7 @@ final class RequestPasswordResetAction
 
         $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
 
-        return new RedirectResponse($this->router->generate('sylius_admin_login'));
+        $options = $request->attributes->get('_sylius');
+        return new RedirectResponse($this->router->generate($options['redirect'] ?? 'sylius_admin_login'));
     }
 }

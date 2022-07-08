@@ -27,3 +27,6 @@ sylius_admin_request_password_reset:
     path: /forgotten-password
     methods: [POST]
     controller: Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction
+    defaults:
+        _sylius:
+            redirect: sylius_admin_login
