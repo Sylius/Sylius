@@ -19,6 +19,13 @@
     <services>
         <defaults public="true" />
 
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction" public="true">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="twig" />
+            <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />

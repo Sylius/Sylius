@@ -37,5 +37,9 @@
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

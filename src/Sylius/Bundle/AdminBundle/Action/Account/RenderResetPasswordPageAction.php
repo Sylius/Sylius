@@ -1,0 +1,56 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\AdminBundle\Action\Account;
+
+use Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Environment;
+
+final class RenderResetPasswordPageAction
+{
+    public function __construct(
+        private UserRepositoryInterface $userRepository,
+        private FormFactoryInterface $formFactory,
+        private Environment $twig,
+        private string $tokenTtl,
+    ) {
+    }
+
+    public function __invoke(string $token): Response
+    {
+        /** @var AdminUserInterface|null $admin */
+        $admin = $this->userRepository->findOneBy(['passwordResetToken' => $token]);
+        if (null === $admin) {
+            throw new NotFoundHttpException('Token not found');
+        }
+
+        $lifetime = new \DateInterval($this->tokenTtl);
+
+        if (!$admin->isPasswordRequestNonExpired($lifetime)) {
+            throw new \InvalidArgumentException('Password reset token has expired');
+        }
+
+        $form = $this->formFactory->create(ResetPasswordType::class);
+
+        return new Response(
+            $this->twig->render('@SyliusAdmin/Security/resetPassword.html.twig', [
+                'form' => $form->createView(),
+            ]),
+        );
+    }
+}

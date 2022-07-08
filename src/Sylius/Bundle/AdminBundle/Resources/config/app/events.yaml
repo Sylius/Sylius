@@ -1311,3 +1311,24 @@ sylius_ui:
                 submit:
                     template: '@SyliusAdmin/Security/RequestPasswordReset/_submit.html.twig'
                     priority: 10
+
+        sylius.admin.reset_password.before_form:
+            blocks:
+                logo:
+                    template: '@SyliusAdmin/Security/_logo.html.twig'
+                    priority: 10
+
+        sylius.admin.reset_password.content:
+            blocks:
+                form:
+                    template: '@SyliusAdmin/Security/ResetPassword/_form.html.twig'
+                    priority: 10
+
+        sylius.admin.reset_password.form.content:
+            blocks:
+                passwords:
+                    template: '@SyliusAdmin/Security/ResetPassword/_passwords.html.twig'
+                    priority: 20
+                submit:
+                    template: '@SyliusAdmin/Security/ResetPassword/_submit.html.twig'
+                    priority: 10
