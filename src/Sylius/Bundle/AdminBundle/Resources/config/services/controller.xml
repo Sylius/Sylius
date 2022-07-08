@@ -39,18 +39,16 @@
             <argument type="service" id="session" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Action\Account\GetRequestPasswordResetAction" public="true">
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\GetRequestPasswordResetAction">
             <argument type="service" id="twig"/>
             <argument type="service" id="form.factory"/>
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Action\Account\PostRequestPasswordResetAction" public="true">
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\PostRequestPasswordResetAction">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="sylius.command_bus"/>
             <argument type="service" id="session.flash_bag"/>
             <argument type="service" id="router"/>
-
-            <tag name="controller.service_arguments" />
         </service>
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">
