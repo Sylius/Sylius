@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class PostRequestPasswordResetAction
+final class RequestPasswordResetAction
 {
     public function __construct(
         private FormFactoryInterface $formFactory,

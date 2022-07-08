@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class GetRequestPasswordResetActionSpec extends ObjectBehavior
+final class RenderResetPasswordPageActionSpec extends ObjectBehavior
 {
     public function let(
         Environment $twig,

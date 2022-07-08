@@ -4,7 +4,7 @@
     <div class="column">
         {{ sylius_template_event('sylius.admin.request_password_reset.before_form') }}
 
-        {{ form_start(form, {action: path('sylius_admin_request_password_reset_post'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {action: path('sylius_admin_request_password_reset'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
 
             <div class="ui left aligned very padded segment">
                 {{ sylius_template_event('sylius.admin.request_password_reset.form.content', _context) }}

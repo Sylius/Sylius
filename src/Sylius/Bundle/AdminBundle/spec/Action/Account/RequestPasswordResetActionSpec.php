@@ -27,7 +27,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-final class PostRequestPasswordResetActionSpec extends ObjectBehavior
+final class RequestPasswordResetActionSpec extends ObjectBehavior
 {
     public function let(
         FormFactoryInterface $formFactory,

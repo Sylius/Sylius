@@ -18,12 +18,12 @@ sylius_admin_logout:
     path: /logout
     methods: [GET]
 
-sylius_admin_request_password_reset:
+sylius_admin_render_reset_password_page:
     path: /forgotten-password
     methods: [GET]
-    controller: Sylius\Bundle\AdminBundle\Action\Account\GetRequestPasswordResetAction
+    controller: Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction
 
-sylius_admin_request_password_reset_post:
+sylius_admin_request_password_reset:
     path: /forgotten-password
     methods: [POST]
-    controller: Sylius\Bundle\AdminBundle\Action\Account\PostRequestPasswordResetAction
+    controller: Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction
