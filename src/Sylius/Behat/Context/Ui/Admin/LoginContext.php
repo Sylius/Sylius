@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
-use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
