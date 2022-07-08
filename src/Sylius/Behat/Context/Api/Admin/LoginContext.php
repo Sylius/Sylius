@@ -108,7 +108,7 @@ final class LoginContext implements Context
     /**
      * @When I specify my new password as :password
      */
-    public function iSpecifyMyNewPassword(?string $password = null): void
+    public function iSpecifyMyNewPassword(string $password): void
     {
         $this->request->updateContent(['newPassword' => $password]);
     }
@@ -116,7 +116,7 @@ final class LoginContext implements Context
     /**
      * @When I confirm my new password as :password
      */
-    public function iConfirmMyNewPassword(?string $password = null): void
+    public function iConfirmMyNewPassword(string $password): void
     {
         $this->request->updateContent(['confirmNewPassword' => $password]);
     }
@@ -186,8 +186,10 @@ final class LoginContext implements Context
     {
         $this->client->executeCustomRequest($this->request);
 
-        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
-        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        $lastResponse = $this->client->getLastResponse();
+
+        Assert::same($lastResponse->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        $message = $this->responseChecker->getError($lastResponse);
         Assert::startsWith($message, 'No user found with reset token: ');
     }
 

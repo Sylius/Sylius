@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -16,11 +16,10 @@ namespace Sylius\Bundle\ApiBundle\Command\Admin;
 /** @experimental */
 class ResetPassword
 {
-    public ?string $newPassword = null;
-
-    public ?string $confirmNewPassword = null;
-
-    public function __construct(public string $resetPasswordToken)
-    {
+    public function __construct(
+        public string $resetPasswordToken,
+        public ?string $newPassword = null,
+        public ?string $confirmNewPassword = null,
+    ) {
     }
 }

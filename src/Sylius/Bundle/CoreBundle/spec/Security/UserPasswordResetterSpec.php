@@ -35,13 +35,13 @@ final class UserPasswordResetterSpec extends ObjectBehavior
     function it_resets_password(
         UserRepositoryInterface $userRepository,
         UserInterface $user,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($user);
 
         $user->isPasswordRequestNonExpired(
-            Argument::that(static fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'
-        ))->willReturn(true);
+            Argument::that(static fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'),
+        )->willReturn(true);
 
         $user->getPasswordResetToken()->willReturn('TOKEN');
 
@@ -55,7 +55,7 @@ final class UserPasswordResetterSpec extends ObjectBehavior
 
     function it_throws_exception_if_no_user_has_been_found_for_token(
         UserRepositoryInterface $userRepository,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn(null);
 
@@ -70,13 +70,13 @@ final class UserPasswordResetterSpec extends ObjectBehavior
     function it_throws_exception_if_token_is_expired(
         UserRepositoryInterface $userRepository,
         UserInterface $user,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($user);
 
         $user->isPasswordRequestNonExpired(
-            Argument::that(static fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'
-        ))->willReturn(false);
+            Argument::that(static fn (\DateInterval $dateInterval) => $dateInterval->format('%d') === '5'),
+        )->willReturn(false);
 
         $user->getPasswordResetToken()->willReturn('TOKEN');
         $user->setPlainPassword('newPassword')->shouldNotBeCalled();
