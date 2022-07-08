@@ -23,7 +23,7 @@ Feature: Resetting an administrator's password
         Then I should be notified that email with reset instruction has been sent
         But "does-not-exist@example.com" should receive no emails
 
-    @api
+    @ui @api
     Scenario: Changing my administrator's password
         Given I have already received a resetting password email
         When I follow the instructions to reset my password
@@ -33,7 +33,7 @@ Feature: Resetting an administrator's password
         Then I should be notified that my password has been successfully changed
         And I should be able to log in as "sylius@example.com" authenticated by "newp@ssw0rd" password
 
-    @api
+    @ui @api
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
         Given I have already received an administrator's password resetting email
         When I follow the instructions to reset my password

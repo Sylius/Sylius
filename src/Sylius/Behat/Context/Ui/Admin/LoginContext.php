@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
+use Sylius\Behat\Page\Admin\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -28,7 +29,8 @@ final class LoginContext implements Context
         private DashboardPageInterface $dashboardPage,
         private LoginPageInterface $loginPage,
         private RequestPasswordResetPage $requestPasswordResetPage,
-        private NotificationCheckerInterface $notificationChecker
+        private ResetPasswordPageInterface $resetPasswordPage,
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -87,6 +89,38 @@ final class LoginContext implements Context
     public function iResetIt(): void
     {
         $this->requestPasswordResetPage->resetPassword();
+    }
+
+    /**
+     * @When I reset it
+     */
+    public function iResetIt(): void
+    {
+        $this->resetPasswordPage->reset();
+    }
+
+    /**
+     * @When /^(I) follow the instructions to reset my password$/
+     */
+    public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
+    {
+        $this->resetPasswordPage->open(['token' => $admin->getPasswordResetToken()]);
+    }
+
+    /**
+     * @When I specify my new password as :password
+     */
+    public function iSpecifyMyNewPassword(string $password): void
+    {
+        $this->resetPasswordPage->specifyNewPassword($password);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     */
+    public function iConfirmMyNewPassword(string $password): void
+    {
+        $this->resetPasswordPage->specifyPasswordConfirmation($password);
     }
 
     /**
@@ -159,6 +193,24 @@ final class LoginContext implements Context
             'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
             NotificationType::success()
         );
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
+    {
+        $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
+    }
+
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
+
+        Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }
 
     /**
