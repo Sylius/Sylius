@@ -21,8 +21,7 @@ services:
             - sylius
 
     mysql:
-        image: mysql:5.7
-        platform: linux/amd64
+        image: mysql:8.0
         environment:
             MYSQL_ROOT_PASSWORD: mysql
         ports:
@@ -39,6 +38,15 @@ services:
 #            - 5432:5432
 #        networks:
 #            - sylius
+
+    chrome:
+        image: zenika/alpine-chrome
+        shm_size: "4gb"
+        command: "--enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --remote-debugging-address=0.0.0.0 --window-size=1920,1080 --proxy-server='direct://' --proxy-bypass-list='*'"
+        volumes:
+            - ./:/app:cached
+        networks:
+            - sylius
 
     mailhog:
         image: mailhog/mailhog

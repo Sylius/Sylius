@@ -23,6 +23,8 @@ services:
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
             MESSENGER_TRANSPORT_DSN: "sync://"
+            SYLIUS_BEHAT_BASE_URL: "http://192.168.16.2"
+            SYLIUS_BEHAT_API_URL: "http://192.168.16.8:9222"
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
@@ -31,16 +33,52 @@ services:
             - mysql
         networks:
             - sylius
+    
+    app:
+        image: sylius/standard:1.11-traditional
+        profiles: ["js"]
+        environment:
+            APP_ENV: "test_cached"
+            DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
+            PHP_DATE_TIMEZONE: "Europe/Warsaw"
+            MESSENGER_TRANSPORT_DSN: "sync://"
+            SYLIUS_BEHAT_BASE_URL: "http://192.168.16.2"
+            SYLIUS_BEHAT_API_URL: "http://192.168.16.8:9222"
+        volumes:
+            - ./:/app:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
+            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+        depends_on:
+            - mysql
+            - chrome
+        networks:
+            sylius:
+                ipv4_address: 192.168.16.2
 
     mysql:
-        image: mysql:5.7
-        profiles: ["integration"]
-        platform: linux/amd64
+        image: mysql:8.0
+        profiles: ["integration", "js"]
         environment:
             MYSQL_ROOT_PASSWORD: mysql
         networks:
-            - sylius
+            sylius:
+                ipv4_address: 192.168.16.4
+    
+    chrome:
+        image: zenika/alpine-chrome
+        profiles: ["js"]
+        shm_size: "4gb"
+        command: "--enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --remote-debugging-address=0.0.0.0 --window-size=1920,1080 --proxy-server='direct://' --proxy-bypass-list='*' --disable-dev-shm-usage --disable-software-rasterizer"
+        volumes:
+            - ./:/app:rw,delegated
+        networks:
+            sylius:
+                ipv4_address: 192.168.16.8
 
 networks:
     sylius:
         driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 192.168.16.0/24

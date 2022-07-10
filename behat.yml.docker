@@ -1,0 +1,68 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - src/Sylius/Behat/Resources/config/suites.yml
+
+default:
+    formatters:
+        pretty:
+            verbose: true
+            paths: false
+            snippets: false
+
+    extensions:
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+
+        FriendsOfBehat\MinkDebugExtension:
+            directory: etc/build
+            clean_start: false
+            screenshot: true
+
+        Behat\MinkExtension:
+            files_path: "%paths.base%/src/Sylius/Behat/Resources/fixtures/"
+            base_url: "%env(SYLIUS_BEHAT_BASE_URL)%"
+            default_session: symfony
+            javascript_session: chrome_headless
+            sessions:
+                symfony:
+                    symfony: ~
+                chrome_headless:
+                    chrome:
+                        api_url: "%env(SYLIUS_BEHAT_API_URL)%"
+                        validate_certificate: false
+                chrome_headless_second_session:
+                    chrome:
+                        api_url: "%env(SYLIUS_BEHAT_API_URL)%"
+                        validate_certificate: false
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                            extra_capabilities:
+                                acceptSslCerts: true
+                                acceptInsecureCerts: true
+                                unexpectedAlertBehaviour: accept
+                                goog:chromeOptions:
+                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
+                firefox:
+                    selenium2:
+                        browser: firefox
+            show_auto: false
+
+        FriendsOfBehat\SymfonyExtension: ~
+
+        FriendsOfBehat\VariadicExtension: ~
+
+    gherkin:
+        filters:
+            tags: "~@todo&&~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors

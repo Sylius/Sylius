@@ -16,31 +16,44 @@ jobs:
     static-analyze:
         name: Execute Static Analyze on Docker Compose
         runs-on: ubuntu-latest
-        env:
-            COMPOSE_FILE: docker-compose.test.yml
-
         steps:
             -
                 name: Checkout Code
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Run PHPUnit, PHPSpec and Psalm
-                # docker-compose -f docker-compose.test.yml --profile static-analyze run static
-                run: docker compose --profile static-analyze run static
+                run: docker-compose -f docker-compose.test.yml --profile static-analyze run static
 
     integration:
         name: Execute Behat Tests on Docker Compose
         runs-on: ubuntu-latest
-        env:
-            COMPOSE_FILE: docker-compose.test.yml
-        
         steps:
             -
                 name: Checkout Code
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
+                
+            -
+                name: Behat Configuration
+                run: mv behat.yml.docker behat.yml
 
             -
                 name: Run Behat
-                # docker-compose -f docker-compose.test.yml --profile integration run behat
-                run: docker-compose --profile integration run behat
+                run: docker compose -f docker-compose.test.yml --profile integration run behat
+
+    javascript:
+        name: Execute JS Behat Tests on Docker Compose
+        runs-on: ubuntu-latest
+        if: false
+        steps:
+            -   name: Checkout Code
+                uses: actions/checkout@v3
+
+            -   name: Behat Configuration
+                run: cp behat.yml.docker behat.yml
+
+            -   name: Run Behat
+                run: |
+                    docker compose -f docker-compose.test.yml --profile js up -d
+                    docker compose -f docker-compose.test.yml --profile js exec app make init
+                    docker compose -f docker-compose.test.yml --profile js exec app make behat-js

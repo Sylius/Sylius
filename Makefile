@@ -23,7 +23,7 @@ install:
 	composer install --no-interaction --no-scripts
 
 backend:
-	bin/console doctrine:database:create --no-interaction
+	bin/console doctrine:database:create --no-interaction --if-not-exists
 	bin/console sylius:install --no-interaction
 	bin/console sylius:fixtures:load default --no-interaction
 
