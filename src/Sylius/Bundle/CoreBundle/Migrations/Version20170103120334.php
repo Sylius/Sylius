@@ -22,7 +22,7 @@ class Version20170103120334 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_product_attribute_value ADD json_value LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
+        $this->addSql('ALTER TABLE sylius_product_attribute_value ADD json_value LONGTEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void

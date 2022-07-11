@@ -36,8 +36,8 @@ final class Version20211018130725 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE sylius_payment CHANGE details details LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
-        $this->addSql('ALTER TABLE sylius_product_attribute_value CHANGE json_value json_value LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
-        $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config LONGTEXT NOT NULL COMMENT \'(DC2Type:json_array)\'');
+        $this->addSql('ALTER TABLE sylius_payment CHANGE details details LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_product_attribute_value CHANGE json_value json_value LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config LONGTEXT NOT NULL');
     }
 }
