@@ -6,6 +6,12 @@ sylius:
             thank_you_for_transaction: 'Thank you for a successful transaction.'
             you_can_check_its_location_with_the_tracking_code: 'You can check it''s location with the %tracking_code% tracking code.'
             your_order_with_number: 'Your order with number'
+    form:
+        admin:
+            reset_password:
+                password:
+                    label: New password
+                    confirmation: Confirm new password
     menu:
         admin:
             main:

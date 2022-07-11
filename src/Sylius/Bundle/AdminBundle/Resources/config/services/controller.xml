@@ -26,6 +26,13 @@
             <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="router" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Action\RemoveAvatarAction" public="true">
             <argument type='service' id="sylius.repository.avatar_image" />
             <argument type="service" id="router" />
