@@ -107,11 +107,11 @@ To make our new field available in Admin panel, a form extension is required:
         }
     }
 
-Translation keys placed in ``src/Resources/translations/message.{locale}.yml`` will be resolved automatically.
+Translation keys placed in ``src/Resources/translations/messages.{locale}.yml`` will be resolved automatically.
 
 .. code-block:: yaml
 
-    # src/Resources/translations/message.en.yml
+    # src/Resources/translations/messages.en.yml
 
     iron_man_sylius_product_on_demand_plugin:
         ui:
