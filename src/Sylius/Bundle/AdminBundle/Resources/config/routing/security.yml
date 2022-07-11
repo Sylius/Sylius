@@ -36,3 +36,9 @@ sylius_admin_render_password_reset:
     methods: [GET]
     defaults:
         _controller: Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction
+
+sylius_admin_password_reset:
+    path: /forgotten-password/{token}
+    methods: [POST]
+    defaults:
+        _controller: Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction

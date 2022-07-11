@@ -5,7 +5,8 @@ Feature: Resetting an administrator's password
     I want to be able to reset my password
 
     Background:
-        Given there is an administrator "sylius@example.com" identified by "sylius"
+        Given the store operates on a single channel in "United States"
+        And there is an administrator "sylius@example.com" identified by "sylius"
 
     @email @api @ui
     Scenario: Sending an administrator's password reset request

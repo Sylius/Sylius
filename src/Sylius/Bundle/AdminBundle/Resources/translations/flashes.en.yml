@@ -5,6 +5,8 @@ sylius:
     admin:
         request_reset_password:
             success: 'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.'
+        reset_password:
+            success: 'Your password has been changed successfully!'
     email:
         order_confirmation_resent: 'Order confirmation has been successfully resent to the customer.'
         shipment_confirmation_resent: 'Shipment confirmation has been successfully resent to the customer.'
