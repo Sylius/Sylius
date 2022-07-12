@@ -35,8 +35,7 @@ final class RequestPasswordResetAction
 
     public function __invoke(Request $request): RedirectResponse
     {
-        $requestPasswordReset = new PasswordResetRequest();
-        $form = $this->formFactory->create(RequestPasswordResetType::class, $requestPasswordReset);
+        $form = $this->formFactory->create(RequestPasswordResetType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,6 +51,15 @@ final class RequestPasswordResetAction
         $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
 
         $options = $request->attributes->get('_sylius');
-        return new RedirectResponse($this->router->generate($options['redirect'] ?? 'sylius_admin_login'));
+        $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
+
+        if (is_array($redirectRoute)) {
+            return new RedirectResponse($this->router->generate(
+                $redirectRoute['route'] ?? 'sylius_admin_login',
+                $redirectRoute['params'] ?? []
+            ));
+        }
+
+        return new RedirectResponse($this->router->generate($redirectRoute));
     }
 }

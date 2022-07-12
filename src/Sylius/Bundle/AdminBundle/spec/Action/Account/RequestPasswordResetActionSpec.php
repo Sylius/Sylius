@@ -50,7 +50,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     ): void
     {
         $formFactory
-            ->create(RequestPasswordResetType::class, Argument::type(PasswordResetRequest::class))
+            ->create(RequestPasswordResetType::class)
             ->shouldBeCalled()
             ->willReturn($form)
         ;
@@ -83,7 +83,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $response->getTargetUrl()->shouldReturn('/login');
     }
 
-    public function it_should_redirect_to_default_route_if_custom_one_is_not_defined(
+    public function it_is_able_to_send_reset_password_request_when_sylius_redirect_parameter_is_an_array(
         FormFactoryInterface $formFactory,
         MessageBusInterface $messageBus,
         RouterInterface $router,
@@ -91,7 +91,46 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         Request $request,
         ParameterBagInterface $attributesBag
     ): void {
-        $formFactory->create(RequestPasswordResetType::class, Argument::type(PasswordResetRequest::class))->willReturn($form);
+        $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
+
+        $form->handleRequest($request)->willReturn();
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+
+        $passwordResetRequest = new PasswordResetRequest();
+        $passwordResetRequest->setEmail('sylius@example.com');
+        $form->getData()->shouldBeCalled()->willReturn($passwordResetRequest);
+
+        $messageBus->dispatch(Argument::type(RequestResetPasswordEmail::class))->willReturn(new Envelope(new \stdClass()));
+
+        $route = 'my_custom_route';
+        $parameters = [
+            'my_parameter' => 'my_value',
+        ];
+        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
+            'redirect' => [
+                'route' => $route,
+                'params' => $parameters,
+            ]
+        ]);
+        $request->attributes = $attributesBag->getWrappedObject();
+
+        $router->generate('my_custom_route', ['my_parameter' => 'my_value'])->shouldBeCalled()->willReturn('/login');
+
+        $response = $this->__invoke($request);
+        $response->shouldBeAnInstanceOf(RedirectResponse::class);
+        $response->getTargetUrl()->shouldReturn('/login');
+    }
+
+    public function it_redirects_to_default_route_if_custom_one_is_not_defined(
+        FormFactoryInterface $formFactory,
+        MessageBusInterface $messageBus,
+        RouterInterface $router,
+        FormInterface $form,
+        Request $request,
+        ParameterBagInterface $attributesBag
+    ): void {
+        $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
         $form->handleRequest($request)->willReturn();
         $form->isSubmitted()->willReturn(true);

@@ -35,7 +35,6 @@ final class RequestPasswordResetType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PasswordResetRequest::class,
-            'csrf_token_id' => 'reset_password',
         ]);
     }
 
