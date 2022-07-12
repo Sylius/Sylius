@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-final class RenderResetPasswordPageAction
+final class RenderRequestPasswordResetPageAction
 {
     public function __construct(
         private Environment $twig,
