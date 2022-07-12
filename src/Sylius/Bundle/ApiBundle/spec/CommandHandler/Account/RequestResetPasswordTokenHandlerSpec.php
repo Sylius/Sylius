@@ -70,17 +70,18 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         $this($requestResetPasswordToken);
     }
 
-    function it_throws_exception_if_shop_user_has_not_been_found(UserRepositoryInterface $userRepository): void
-    {
+    function it_does_nothing_when_shop_user_has_not_been_found(
+        UserRepositoryInterface $userRepository,
+        MessageBusInterface $messageBus,
+    ): void {
         $userRepository->findOneByEmail('test@email.com')->willReturn(null);
+
+        $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
 
         $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');
         $requestResetPasswordToken->setChannelCode('WEB');
         $requestResetPasswordToken->setLocaleCode('en_US');
 
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [$requestResetPasswordToken])
-        ;
+        $this($requestResetPasswordToken);
     }
 }
