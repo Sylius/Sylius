@@ -79,8 +79,9 @@ final class LoginContext implements Context
 
     /**
      * @When I specify email as :email
+     * @When I do not specify an email
      */
-    public function iSpecifyEmailAs(string $email): void
+    public function iSpecifyEmailAs(string $email = ''): void
     {
         $this->request->updateContent(['email' => $email]);
     }
@@ -191,6 +192,28 @@ final class LoginContext implements Context
         Assert::same($lastResponse->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
         $message = $this->responseChecker->getError($lastResponse);
         Assert::startsWith($message, 'No user found with reset token: ');
+    }
+
+    /**
+     * @Then I should be notified that the email is required
+     */
+    public function iShouldBeNotifiedThatTheEmailIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Please enter an email.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the email is not valid
+     */
+    public function iShouldBeNotifiedThatTheEmailIsNotValid(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'This email is not valid.'
+        );
     }
 
     private function logIn(string $username, string $password): void

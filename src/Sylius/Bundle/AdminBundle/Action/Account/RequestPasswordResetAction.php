@@ -19,9 +19,11 @@ use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
 final class RequestPasswordResetAction
 {
@@ -29,11 +31,12 @@ final class RequestPasswordResetAction
         private FormFactoryInterface $formFactory,
         private MessageBusInterface $messageBus,
         private FlashBagInterface $flashBag,
-        private RouterInterface $router
+        private RouterInterface $router,
+        private Environment $twig,
     ) {
     }
 
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(Request $request): Response
     {
         $form = $this->formFactory->create(RequestPasswordResetType::class);
 
@@ -42,24 +45,30 @@ final class RequestPasswordResetAction
             /** @var PasswordResetRequest $formData */
             $formData = $form->getData();
             $requestPasswordResetMessage = new RequestResetPasswordEmail(
-                $formData->getEmail()
+                $formData->getEmail(),
             );
 
             $this->messageBus->dispatch($requestPasswordResetMessage);
+
+            $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
+
+            $options = $request->attributes->get('_sylius');
+            $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
+
+            if (is_array($redirectRoute)) {
+                return new RedirectResponse($this->router->generate(
+                    $redirectRoute['route'] ?? 'sylius_admin_login',
+                    $redirectRoute['params'] ?? [],
+                ));
+            }
+
+            return new RedirectResponse($this->router->generate($redirectRoute));
         }
 
-        $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
-
-        $options = $request->attributes->get('_sylius');
-        $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
-
-        if (is_array($redirectRoute)) {
-            return new RedirectResponse($this->router->generate(
-                $redirectRoute['route'] ?? 'sylius_admin_login',
-                $redirectRoute['params'] ?? []
-            ));
-        }
-
-        return new RedirectResponse($this->router->generate($redirectRoute));
+        return new Response(
+            $this->twig->render('@SyliusAdmin/Security/requestPasswordReset.html.twig', [
+                'form' => $form->createView(),
+            ])
+        );
     }
 }

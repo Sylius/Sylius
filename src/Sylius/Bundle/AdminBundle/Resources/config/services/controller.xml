@@ -49,6 +49,7 @@
             <argument type="service" id="sylius.command_bus"/>
             <argument type="service" id="session.flash_bag"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="twig" />
         </service>
 
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController" public="true">

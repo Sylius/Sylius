@@ -75,14 +75,15 @@ final class LoginContext implements Context
 
     /**
      * @When I specify email as :email
+     * @When I do not specify an email
      */
-    public function iSpecifyEmailAs(string $email): void
+    public function iSpecifyEmailAs(string $email = ''): void
     {
         $this->requestPasswordResetPage->specifyEmail($email);
     }
 
     /**
-     * @When I reset it
+     * @When /^I(?:| try to) reset it$/
      */
     public function iResetIt(): void
     {
@@ -158,6 +159,28 @@ final class LoginContext implements Context
         $this->notificationChecker->checkNotification(
             'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
             NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then I should be notified that the email is required
+     */
+    public function iShouldBeNotifiedThatTheEmailIsRequired(): void
+    {
+        Assert::same(
+            $this->requestPasswordResetPage->getEmailValidationMessage(),
+            'Please enter an email.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the email is not valid
+     */
+    public function iShouldBeNotifiedThatTheEmailIsNotValid(): void
+    {
+        Assert::same(
+            $this->requestPasswordResetPage->getEmailValidationMessage(),
+            'This email is not valid.',
         );
     }
 

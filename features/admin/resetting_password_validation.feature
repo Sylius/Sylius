@@ -7,12 +7,19 @@ Feature: Resetting an administrator's password validation
     Background:
         Given there is an administrator "sylius@example.com" identified by "sylius"
 
-    @todo
+    @ui @api
     Scenario: Trying to reset my administrator's password without specifying email
         When I want to reset password
-        And I do not specify email
+        And I do not specify an email
         And I try to reset it
         Then I should be notified that the email is required
+
+    @ui @api
+    Scenario: Trying to reset my administrator's password with an invalid email
+        When I want to reset password
+        And I specify email as "sylius@examplecom"
+        And I try to reset it
+        Then I should be notified that the email is not valid
 
     @todo
     Scenario: Trying to reset my administrator's password with a wrong confirmation password
