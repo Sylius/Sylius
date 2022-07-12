@@ -20,4 +20,6 @@ interface ResetPasswordPageInterface extends SymfonyPageInterface
     public function specifyNewPassword(string $password): void;
 
     public function specifyPasswordConfirmation(string $password): void;
+
+    public function getValidationMessageFor(string $element): string;
 }

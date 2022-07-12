@@ -58,25 +58,27 @@ final class ResettingPasswordContext implements Context
     }
 
     /**
-     * @When /^(I) follow the instructions to reset my password$/
+     * @When /^(I)(?:| try to) follow the instructions to reset my password$/
      */
     public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
-        $this->resetPasswordPage->open(['token' => $admin->getPasswordResetToken()]);
+        $this->resetPasswordPage->tryToOpen(['token' => $admin->getPasswordResetToken()]);
     }
 
     /**
      * @When I specify my new password as :password
+     * @When I do not specify my new password
      */
-    public function iSpecifyMyNewPassword(string $password): void
+    public function iSpecifyMyNewPassword(string $password = ''): void
     {
         $this->resetPasswordPage->specifyNewPassword($password);
     }
 
     /**
      * @When I confirm my new password as :password
+     * @When I do not confirm my new password
      */
-    public function iConfirmMyNewPassword(string $password): void
+    public function iConfirmMyNewPassword(string $password = ''): void
     {
         $this->resetPasswordPage->specifyPasswordConfirmation($password);
     }
@@ -130,5 +132,46 @@ final class ResettingPasswordContext implements Context
         $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
 
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
+    }
+
+    /**
+     * @Then I should be notified that the password reset token has expired
+     */
+    public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
+    {
+        $this->notificationChecker->checkNotification('has expired', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that the new password is required
+     */
+    public function iShouldBeNotifiedThatTheNewPasswordIsRequired(): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            'Please enter the password.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            'The entered passwords do not match.',
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the password should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            $validationMessage,
+        );
     }
 }

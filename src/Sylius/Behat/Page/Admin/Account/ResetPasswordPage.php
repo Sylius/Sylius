@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Account;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
@@ -25,6 +26,17 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     public function specifyPasswordConfirmation(string $password): void
     {
         $this->getElement('confirm_new_password')->setValue($password);
+    }
+
+    public function getValidationMessageFor(string $element): string
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+        }
+
+        return $errorLabel->getText();
     }
 
     public function getRouteName(): string

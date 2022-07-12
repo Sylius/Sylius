@@ -53,6 +53,14 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When /^(this administrator) logs in using "([^"]+)" password$/
+     */
+    public function theyLogIn(AdminUserInterface $adminUser, $password)
+    {
+        $this->logInAgain($adminUser->getUsername(), $password);
+    }
+
+    /**
      * @When I log in
      */
     public function iLogIn()
@@ -99,14 +107,6 @@ final class LoginContext implements Context
     {
         $this->logInAgain($username, $password);
         $this->iShouldBeLoggedIn();
-    }
-
-    /**
-     * @When /^(this administrator) logs in using "([^"]+)" password$/
-     */
-    public function theyLogIn(AdminUserInterface $adminUser, $password)
-    {
-        $this->logInAgain($adminUser->getUsername(), $password);
     }
 
     /**
