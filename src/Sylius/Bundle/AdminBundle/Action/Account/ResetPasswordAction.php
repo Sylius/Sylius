@@ -45,7 +45,7 @@ final class ResetPasswordAction
             $this->resetPasswordDispatcher->dispatch($token, $passwordReset->getPassword());
         }
 
-        $this->flashBag->add('success', 'sylius.admin.reset_password.success');
+        $this->flashBag->add('success', 'sylius.admin.password_reset.success');
 
         $attributes = $request->attributes->get('_sylius');
         $redirect = $attributes['redirect'] ?? 'sylius_admin_login';

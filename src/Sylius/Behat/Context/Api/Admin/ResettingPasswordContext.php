@@ -139,4 +139,13 @@ final class ResettingPasswordContext implements Context
             'This email is not valid.'
         );
     }
+
+    /**
+     * @Then I should be notified that the password reset token has expired
+     */
+    public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
+    {
+        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        Assert::same($message, 'The password reset token has expired.');
+    }
 }
