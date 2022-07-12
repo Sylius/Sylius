@@ -20,7 +20,7 @@ class Version20170120164250 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_payment DROP FOREIGN KEY FK_D9191BD47048FD0F');
         $this->addSql('DROP TABLE sylius_credit_card');
@@ -30,7 +30,7 @@ class Version20170120164250 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE sylius_credit_card (id INT AUTO_INCREMENT NOT NULL, token VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, type VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, cardholder_name VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, number VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, security_code VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci, expiry_month INT DEFAULT NULL, expiry_year INT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE sylius_payment ADD credit_card_id INT DEFAULT NULL');

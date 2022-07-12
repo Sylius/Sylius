@@ -115,7 +115,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getSchemaManager(): AbstractSchemaManager
     {
-        return $this->getEntityManager()->getConnection()->getSchemaManager();
+        return $this->getEntityManager()->getConnection()->createSchemaManager();
     }
 
     private function getEntityManager(): EntityManagerInterface

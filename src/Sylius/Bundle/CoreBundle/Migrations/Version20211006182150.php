@@ -28,14 +28,14 @@ final class Version20211006182150 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_catalog_promotion ADD start_date DATETIME DEFAULT NULL, ADD end_date DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_catalog_promotion DROP start_date, DROP end_date');
     }

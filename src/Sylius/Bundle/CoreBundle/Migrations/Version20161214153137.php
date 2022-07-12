@@ -29,7 +29,7 @@ class Version20161214153137 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $defaultLocale = $this->container->getParameter('locale');
 
@@ -43,7 +43,7 @@ class Version20161214153137 extends AbstractMigration implements ContainerAwareI
     {
         $defaultLocale = $this->container->getParameter('locale');
 
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_variant ADD name VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci');
         $this->addSql('UPDATE sylius_product_variant SET name = (SELECT name FROM sylius_product_variant_translation WHERE sylius_product_variant_translation.translatable_id = sylius_product_variant.id AND sylius_product_variant_translation.locale = "' . $defaultLocale . '")');

@@ -25,7 +25,7 @@ final class Version20220407131547 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         if (!$schema->hasTable('messenger_messages')) {
             return;
@@ -46,7 +46,7 @@ final class Version20220407131547 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         if ($schema->hasTable('messenger_messages')) {
             $this->addSql('DROP INDEX IDX_75EA56E0FB7336F0 ON messenger_messages');
@@ -57,7 +57,7 @@ final class Version20220407131547 extends AbstractMigration
 
     private function getExistingIndexesNames(string $tableName): array
     {
-        $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
+        $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
         $indexesNames = [];
 
         foreach ($indexes as $index) {

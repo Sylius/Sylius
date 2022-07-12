@@ -20,7 +20,7 @@ class Version20170201094058 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP INDEX product_image_code_idx ON sylius_product_image');
         $this->addSql('DROP INDEX taxon_image_code_idx ON sylius_taxon_image');
@@ -30,7 +30,7 @@ class Version20170201094058 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_image CHANGE `type` code VARCHAR(255) NOT NULL');
         $this->addSql('ALTER TABLE sylius_taxon_image CHANGE `type` code VARCHAR(255) NOT NULL');

@@ -20,7 +20,7 @@ class Version20170711151342 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
 
         // Check if foreign key with correct name exists. If so, this indicates all other foreign keys are correct as well
         foreach ($schema->getTable('sylius_admin_api_access_token')->getForeignKeys() as $key) {
