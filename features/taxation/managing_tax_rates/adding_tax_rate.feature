@@ -22,6 +22,19 @@ Feature: Adding a new tax rate
         Then I should be notified that it has been successfully created
         And the tax rate "United States Sales Tax" should appear in the registry
 
+    @ui
+    Scenario: Adding a zero tax rate
+        When I want to create a new tax rate
+        And I specify its code as "US_SALES_TAX"
+        And I name it "United States Sales Tax"
+        And I define it for the "United States" zone
+        And I make it applicable for the "Food and Beverage" tax category
+        And I specify its amount as 0%
+        And I choose the default tax calculator
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the tax rate "United States Sales Tax" should appear in the registry
+
     @ui @javascript
     Scenario: Adding a new tax rate which will be included in product price
         When I want to create a new tax rate
