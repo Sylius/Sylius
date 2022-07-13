@@ -15,12 +15,13 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20161209095131 extends AbstractMigration implements ContainerAwareInterface
+class Version20161209095131 extends AbstractMySqlMigration implements ContainerAwareInterface
 {
     private ?ContainerInterface $container = null;
 

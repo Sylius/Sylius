@@ -14,21 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-class Version20170824124122 extends AbstractMigration
+class Version20170824124122 extends AbstractMySqlMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_order CHANGE notes notes LONGTEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_order CHANGE notes notes VARCHAR(1000) DEFAULT NULL COLLATE utf8_unicode_ci');
     }
 }

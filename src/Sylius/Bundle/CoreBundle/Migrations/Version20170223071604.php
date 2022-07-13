@@ -14,14 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-class Version20170223071604 extends AbstractMigration
+class Version20170223071604 extends AbstractMySqlMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_channel_pricing ADD channel_code VARCHAR(255) NOT NULL;');
         $this->addSql('UPDATE sylius_channel_pricing, sylius_channel SET sylius_channel_pricing.channel_code = sylius_channel.code WHERE sylius_channel.id = sylius_channel_pricing.channel_id');
 
@@ -34,8 +32,6 @@ class Version20170223071604 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('DROP INDEX product_variant_channel_idx ON sylius_channel_pricing');
         $this->addSql('ALTER TABLE sylius_channel_pricing ADD channel_id INT NOT NULL');
         $this->addSql('UPDATE sylius_channel_pricing, sylius_channel SET sylius_channel_pricing.channel_id = sylius_channel.id WHERE sylius_channel.code = sylius_channel_pricing.channel_code');

@@ -15,20 +15,17 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-class Version20180102140039 extends AbstractMigration
+class Version20180102140039 extends AbstractMySqlMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('CREATE INDEX IDX_16C8119EE551C011 ON sylius_channel (hostname)');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('DROP INDEX IDX_16C8119EE551C011 ON sylius_channel');
     }
 }

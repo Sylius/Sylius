@@ -14,22 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-class Version20170401200415 extends AbstractMigration
+class Version20170401200415 extends AbstractMySqlMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_channel ADD skipping_payment_step_allowed TINYINT(1) NOT NULL');
         $this->addSql('UPDATE sylius_channel SET skipping_payment_step_allowed = 0');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_channel DROP skipping_payment_step_allowed');
     }
 }

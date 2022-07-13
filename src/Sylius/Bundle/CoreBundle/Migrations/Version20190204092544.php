@@ -15,23 +15,20 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190204092544 extends AbstractMigration
+final class Version20190204092544 extends AbstractMySqlMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('CREATE INDEX IDX_6196A1F9A393D2FB43625D9F ON sylius_order (state, updated_at)');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('DROP INDEX IDX_6196A1F9A393D2FB43625D9F ON sylius_order');
     }
 }

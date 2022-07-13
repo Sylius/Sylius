@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20211125122631 extends AbstractMigration
+final class Version20211125122631 extends AbstractMySqlMigration
 {
     public function getDescription(): string
     {
@@ -28,15 +28,11 @@ final class Version20211125122631 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_promotion ADD applies_to_discounted TINYINT(1) DEFAULT \'1\' NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_promotion DROP applies_to_discounted');
     }
 }

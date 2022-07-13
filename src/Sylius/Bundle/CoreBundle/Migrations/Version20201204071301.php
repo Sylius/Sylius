@@ -15,8 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-final class Version20201204071301 extends AbstractMigration
+final class Version20201204071301 extends AbstractMySqlMigration
 {
     public function getDescription(): string
     {
@@ -25,8 +26,6 @@ final class Version20201204071301 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $adjustmentTable = $schema->getTable('sylius_adjustment');
         if ($adjustmentTable->hasColumn('details')) {
             return;
@@ -37,8 +36,6 @@ final class Version20201204071301 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $adjustmentTable = $schema->getTable('sylius_adjustment');
         if (!$adjustmentTable->hasColumn('details')) {
             return;

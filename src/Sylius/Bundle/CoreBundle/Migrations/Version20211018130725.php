@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-final class Version20211018130725 extends AbstractMigration
+final class Version20211018130725 extends AbstractMySqlMigration
 {
     public function getDescription(): string
     {
@@ -25,8 +25,6 @@ final class Version20211018130725 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_payment CHANGE details details JSON NOT NULL');
         $this->addSql('ALTER TABLE sylius_product_attribute_value CHANGE json_value json_value JSON DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config JSON NOT NULL');
@@ -34,8 +32,6 @@ final class Version20211018130725 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('ALTER TABLE sylius_payment CHANGE details details LONGTEXT DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_product_attribute_value CHANGE json_value json_value LONGTEXT DEFAULT NULL');
         $this->addSql('ALTER TABLE sylius_gateway_config CHANGE config config LONGTEXT NOT NULL');

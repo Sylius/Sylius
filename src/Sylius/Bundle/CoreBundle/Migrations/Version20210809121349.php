@@ -15,8 +15,9 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
 
-final class Version20210809121349 extends AbstractMigration
+final class Version20210809121349 extends AbstractMySqlMigration
 {
     public function getDescription(): string
     {
@@ -25,15 +26,11 @@ final class Version20210809121349 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('CREATE INDEX created_at_index ON sylius_customer (created_at DESC)');
     }
 
     public function down(Schema $schema): void
     {
-        $this->abortIf(!is_a($this->connection->getDatabasePlatform(), \Doctrine\DBAL\Platforms\MySqlPlatform::class, true), 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql('DROP INDEX created_at_index ON sylius_customer');
     }
 }
