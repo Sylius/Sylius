@@ -7,7 +7,7 @@ default:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
-                - sylius.behat.context.transform.user
+                - sylius.behat.context.transform.admin
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.admin_security

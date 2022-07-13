@@ -98,4 +98,15 @@ final class AdminUserContext implements Context
 
         $this->sharedStorage->set($avatarPath, $avatar->getPath());
     }
+
+    /**
+     * @Given /^(I) have already received an administrator's password resetting email$/
+     */
+    public function iHaveAlreadyReceivedAnAdministratorsPasswordResettingEmail(AdminUserInterface $administrator): void
+    {
+        $administrator->setPasswordResetToken('token');
+        $administrator->setPasswordRequestedAt(new \DateTime());
+
+        $this->objectManager->flush();
+    }
 }

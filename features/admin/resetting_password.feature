@@ -15,18 +15,21 @@ Feature: Resetting an administrator's password
         Then I should be notified that email with reset instruction has been sent
         And an email with instructions on how to reset the administrator's password should be sent to "sylius@example.com"
 
-    @todo
+    @api
     Scenario: Changing my administrator's password
-        Given I have already received an administrator's password resetting email
-        When I reset my password using the received instructions
+        Given I have already received a resetting password email
+        When I follow the instructions to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
         Then I should be notified that my password has been successfully changed
-        And I should be able to log in as "sylius@example.com" with "newp@ssw0rd" password
+        And I should be able to log in as "sylius@example.com" authenticated by "newp@ssw0rd" password
 
-    @todo
+    @api
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
-        Given I already reset my administrator's password
-        When I try to reset my password again using the same email
-        Then I should not be able to change it again without sending a new password reset request
+        Given I have already received an administrator's password resetting email
+        When I follow the instructions to reset my password
+        And I specify my new password as "newp@ssw0rd"
+        And I confirm my new password as "newp@ssw0rd"
+        And I reset it
+        Then I should not be able to change my password again with the same token

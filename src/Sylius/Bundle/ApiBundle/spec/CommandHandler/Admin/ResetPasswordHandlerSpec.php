@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
+namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Admin;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
+use Sylius\Bundle\ApiBundle\Command\Admin\ResetPassword;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
