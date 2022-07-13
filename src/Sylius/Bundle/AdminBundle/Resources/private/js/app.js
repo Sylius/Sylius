@@ -121,6 +121,9 @@ $(document).ready(() => {
     if ($(event.target).find('.ui.accordion').length > 0) {
       $(event.target).find('.ui.accordion').accordion();
     }
+    if ($(event.target).find('.ui.tabular.menu').length > 0) {
+      $(event.target).find('.ui.tabular.menu .item').tab();
+    }
   });
 
   const taxonomyTree = new SyliusTaxonomyTree();
