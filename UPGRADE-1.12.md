@@ -19,6 +19,15 @@ and should be used only this way.
       )
     ```
 
+4. To allow administrator reset their password, add in `config/packages/security.yaml` file the following entry
+   ```yaml
+           - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
+   ```
+   above
+   ```yaml
+           - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
+   ```
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
