@@ -15,20 +15,19 @@ namespace Sylius\Bundle\AdminBundle\Action\Account;
 
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordReset;
 use Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType;
-use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
+use Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class ResetPasswordAction
 {
     public function __construct(
         private FormFactoryInterface $formFactory,
-        private MessageBusInterface $messageBus,
+        private ResetPasswordDispatcherInterface $resetPasswordDispatcher,
         private FlashBagInterface $flashBag,
         private RouterInterface $router
     ) {
@@ -40,14 +39,10 @@ final class ResetPasswordAction
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var PasswordReset $formData */
-            $formData = $form->getData();
-            $resetPasswordCommand = new ResetPassword(
-                $token,
-                $formData->getPassword(),
-            );
+            /** @var PasswordReset $passwordReset */
+            $passwordReset = $form->getData();
 
-            $this->messageBus->dispatch($resetPasswordCommand);
+            $this->resetPasswordDispatcher->dispatch($token, $passwordReset->getPassword());
         }
 
         $this->flashBag->add('success', 'sylius.admin.reset_password.success');
