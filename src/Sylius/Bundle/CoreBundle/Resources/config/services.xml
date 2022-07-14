@@ -280,5 +280,9 @@
             <argument type="service" id="Sylius\Component\User\Security\PasswordUpdaterInterface" />
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher">
+            <argument type="service" id="sylius.command_bus" />
+        </service>
     </services>
 </container>
