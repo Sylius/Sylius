@@ -97,7 +97,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
     {
-        $this->logIn($username, $password);
+        $this->logInAgain($username, $password);
         $this->iShouldBeLoggedIn();
     }
 
@@ -128,16 +128,21 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->isOpen());
     }
 
-    private function logInAgain(string $username, string $password): void
+    /**
+     * @Then I should be on the login page
+     */
+    public function iShouldBeOnTheLoginPage(): void
     {
-        $this->dashboardPage->open();
-        $this->dashboardPage->logOut();
-
-        $this->logIn($username, $password);
+        Assert::true($this->loginPage->isOpen());
     }
 
-    private function logIn(string $username, string $password): void
+    private function logInAgain(string $username, string $password): void
     {
+        $this->dashboardPage->tryToOpen();
+        if ($this->dashboardPage->isOpen()) {
+            $this->dashboardPage->logOut();
+        }
+
         $this->loginPage->open();
         $this->loginPage->specifyUsername($username);
         $this->loginPage->specifyPassword($password);
