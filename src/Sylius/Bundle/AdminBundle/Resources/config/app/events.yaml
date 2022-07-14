@@ -1292,22 +1292,22 @@ sylius_ui:
             blocks:
                 form:
                     template: '@SyliusAdmin/Security/RequestPasswordReset/_form.html.twig'
-                    priority: 30
+                    priority: 10
 
         sylius.admin.request_password_reset.before_form:
             blocks:
                 header:
                     template: "@SyliusAdmin/Security/_logo.html.twig"
-                    priority: 30
+                    priority: 20
                 flashes:
                     template: "@SyliusUi/_flashes.html.twig"
-                    priority: 20
+                    priority: 10
 
         sylius.admin.request_password_reset.form.content:
             blocks:
                 email:
                     template: '@SyliusAdmin/Security/RequestPasswordReset/_email.html.twig'
-                    priority: 30
+                    priority: 20
                 submit:
                     template: '@SyliusAdmin/Security/RequestPasswordReset/_submit.html.twig'
-                    priority: 20
+                    priority: 10
