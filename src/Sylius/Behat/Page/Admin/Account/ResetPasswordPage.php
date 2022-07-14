@@ -24,12 +24,12 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
 
     public function specifyNewPassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('new_password')->setValue($password);
     }
 
     public function specifyPasswordConfirmation(string $password): void
     {
-        $this->getElement('password_confirmation')->setValue($password);
+        $this->getElement('confirm_new_password')->setValue($password);
     }
 
     public function getRouteName(): string
@@ -40,8 +40,8 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'password' => '[data-test-new-password]',
-            'password_confirmation' => '[data-test-new-password-confirmation]',
+            'confirm_new_password' => '[data-test-confirm-new-password]',
+            'new_password' => '[data-test-new-password]',
         ]);
     }
 }
