@@ -29,8 +29,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "payum/payum": "^1.6",
-        "payum/payum-bundle": "^2.4",
+        "payum/payum": "^1.7.2",
+        "payum/payum-bundle": "^2.5",
         "php-http/guzzle6-adapter": "^2.0",
         "sylius/core": "^1.6",
         "sylius/currency": "^1.6",
