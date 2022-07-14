@@ -133,11 +133,11 @@ jobs:
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
 
-            -
-                name: Run PHPUnit
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
-                run: vendor/bin/phpunit --colors=always
+#            -
+#                name: Run PHPUnit
+#                working-directory: "src/Sylius/${{ matrix.package }}"
+#                if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
+#                run: vendor/bin/phpunit --colors=always
 
     notify-about-build-failure:
         runs-on: ubuntu-latest

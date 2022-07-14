@@ -15,10 +15,10 @@ jobs:
                 name: Checkout Code
                 uses: actions/checkout@v2
 
-            -
-                name: Run PHPUnit, PHPSpec and Psalm
-                # docker-compose -f docker-compose.test.yml --profile static-analyze run static
-                run: docker compose --profile static-analyze run static
+#            -
+#                name: Run PHPUnit, PHPSpec and Psalm
+#                # docker-compose -f docker-compose.test.yml --profile static-analyze run static
+#                run: docker compose --profile static-analyze run static
 
     integration:
         name: Execute Behat Tests on Docker Compose

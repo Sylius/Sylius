@@ -310,8 +310,8 @@ jobs:
             -   name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -   name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
+#            -   name: Run PHPUnit
+#                run: vendor/bin/phpunit --colors=always
 
             -   name: Run CLI Behat
                 if: ${{ false }}
@@ -430,10 +430,10 @@ jobs:
                 run: bin/console sylius:fixtures:load default --no-interaction
                 continue-on-error: true
 
-            -
-                name: Run PHPUnit
-                run: vendor/bin/phpunit --colors=always
-                continue-on-error: true
+#            -
+#                name: Run PHPUnit
+#                run: vendor/bin/phpunit --colors=always
+#                continue-on-error: true
 
             -
                 name: Run CLI Behat
@@ -575,11 +575,11 @@ jobs:
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -
-                name: Run PHPUnit
-                run: |
-                    bin/console cache:pool:clear cache.global_clearer
-                    vendor/bin/phpunit --debug
+#            -
+#                name: Run PHPUnit
+#                run: |
+#                    bin/console cache:pool:clear cache.global_clearer
+#                    vendor/bin/phpunit --debug
 
             -
                 name: Run CLI Behat
