@@ -256,4 +256,11 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
     }
+
+    private function getHostnameFromUrl(string $url): ?string
+    {
+        $parsedUrl = parse_url($url);
+
+        return $parsedUrl['host'] ?? null;
+    }
 }

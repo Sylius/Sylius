@@ -80,17 +80,9 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @When I visit the homepage
+     * @Then I should see :channel shop
      */
-    public function iVisitTheHomepage(): void
-    {
-        $this->homePage->open();
-    }
-
-    /**
-     * @Then I should be on channel :channel
-     */
-    public function iShouldBeOnChannel(ChannelInterface $channel): void
+    public function iShouldSeeShop(ChannelInterface $channel): void
     {
         Assert::eq($this->homePage->getMetaTitle(), $channel->getName());
     }
