@@ -77,8 +77,24 @@ You can get the current channel from the channel context.
 
 .. note::
 
+   Thanks to autoconfigure, you don't need to manually tag services that implement
+   ``Sylius\Component\Channel\Context\ChannelContextInterface``.
+   Also the ``AsChannelContext`` attribute can be used.
+
+.. note::
+
    Moreover if the channel depends mainly on the request you can implement the ``Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface``
    with its ``findChannel(Request $request)`` method and register it under the ``sylius.context.channel.request_based.resolver`` tag.
+
+.. note::
+
+   Thanks to autoconfigure, you don't need to manually tag services that implement
+   ``Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface``.
+   Also the ``AsChannelContextRequestResolver`` attribute can be used.
+
+.. versionadded 1.12
+
+   The attributes and autoconfiguration support were added in 1.12.
 
 Shop Billing Data
 -----------------
