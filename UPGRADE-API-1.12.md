@@ -102,3 +102,11 @@ Here is how the response looks like:
 1. The 2nd parameter `localeCode` has been removed from `src/Sylius/Bundle/ApiBundle/Command/Cart/PickupCart.php` and now is set automatically by `src/Sylius/Bundle/ApiBundle/DataTransformer/LocaleCodeAwareInputCommandDataTransformer.php`.
 
 1. The responses of endpoints `/api/v2/admin/products` and `/api/v2/admin/products/{code}` have been changed in such a way that the field `defaultVariant` has been removed.
+
+1. The configuration of `config/packages/security.yaml` has to be updated:
+
+    ```diff
+        security:
+            access_control:
+    +           - { path: "%sylius.security.new_api_admin_route%/reset-password-requests", role: IS_AUTHENTICATED_ANONYMOUSLY }
+    ```
