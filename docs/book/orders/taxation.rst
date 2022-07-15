@@ -148,7 +148,17 @@ Calculators
 For calculating Taxes **Sylius** is using the `DefaultCalculator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Taxation/Calculator/DefaultCalculator.php>`_.
 You can create your custom calculator for taxes by creating a class that implements
 the `CalculatorInterface <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Taxation/Calculator/CalculatorInterface.php>`_
-and registering it as a ``sylius.tax_calculator.your_calculator_name`` service.
+and registering it as a ``sylius.tax_calculator.your_calculator_name`` service and tagging it with the ``sylius.tax_calculator`` tag.
+Alternatively, you can use the ``AsTaxCalculator`` Attribute in your custom class.
+
+.. note::
+
+   Thanks to autoconfigure, you don't need to manually tag services that implement
+   ``Sylius\Component\Taxation\Calculator\CalculatorInterface``.
+
+.. versionadded:: 1.12
+
+   The attribute support was added in 1.12.
 
 Learn more
 ----------
