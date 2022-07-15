@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-final class Version20220407131547 extends AbstractMySqlMigration
+final class Version20220407131547 extends AbstractMigration
 {
     public function getDescription(): string
     {

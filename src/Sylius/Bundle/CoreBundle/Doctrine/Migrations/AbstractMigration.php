@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Doctrine\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration as BaseAbstractMigration;
 
-abstract class AbstractMySqlMigration extends AbstractMigration
+abstract class AbstractMigration extends BaseAbstractMigration
 {
     public function preUp(Schema $schema): void
     {

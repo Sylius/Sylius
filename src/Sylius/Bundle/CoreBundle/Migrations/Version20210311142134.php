@@ -14,13 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
-use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210311142134 extends AbstractMySqlMigration
+final class Version20210311142134 extends AbstractMigration
 {
     public function getDescription(): string
     {

@@ -16,12 +16,12 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMySqlMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class Version20171003103916 extends AbstractMySqlMigration implements ContainerAwareInterface
+class Version20171003103916 extends AbstractMigration implements ContainerAwareInterface
 {
     private ?ContainerInterface $container = null;
 
