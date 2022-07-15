@@ -1,4 +1,4 @@
-.. note:: 
+.. note::
 
     In order to add a new locale to your store you have to assign it to a channel.
 
@@ -38,6 +38,17 @@ To manage the currently used language, we use the **LocaleContext**. You can alw
     }
 
 The locale context can be injected into any of your services and give you access to the currently used locale.
+
+.. note::
+
+    You can add your own **LocaleContext** implementation (you may want to ensure a higher priority).
+    To do so, create a class that implements ``Sylius\Component\Locale\Context\LocaleContextInterface``.
+    You don't need to tag it with the ``sylius.context.locale`` tag thanks to Symfony service autoconfiguration.
+    Also the ``AsLocaleContext`` attribute can be used.
+
+.. versionadded 1.12
+
+   The attributes and autoconfiguration support were added in 1.12.
 
 Available Locales Provider
 --------------------------
