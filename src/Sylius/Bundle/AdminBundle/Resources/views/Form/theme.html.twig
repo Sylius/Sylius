@@ -28,29 +28,21 @@
 {% endblock %}
 
 {% block sylius_channel_collection_widget %}
-    {% set formName = form.vars.full_name %}
-    <div class="sylius-tabular-form">
-        <div class="ui top attached tabular menu">
-            {% for channelCode, channelBasedForm in form %}
-                {% set channelName = channelBasedForm.vars.label %}
-                {% set tabName = formName ~ '[' ~ channelCode ~ ']' %}
-                {% if loop.index0 == 0 %}
-                    <a class="item active" data-tab="{{ tabName }}">{{ channelName }}</a>
-                {% else %}
-                    <a class="item" data-tab="{{ tabName }}">{{ channelName }}</a>
+    {% set channelsErrorCount = form.vars.channels_errors_count %}
+    <div class="ui top attached tabular menu">
+        {% for channelCode, channelForm in form %}
+            {% set channelErrorCount = channelsErrorCount[channelCode] ?? 0 %}
+            <a class="item{% if loop.first %} active{% endif %}" data-tab="{{ channelForm.vars.full_name }}">
+                {{ channelForm.vars.label }}
+                {% if channelErrorCount > 0 %}
+                    <span class="ui small horizontal circular label" style="background-color: #DB2828">{{ channelErrorCount }}</span>
                 {% endif %}
-            {% endfor %}
-        </div>
-        {% for channelCode, channelBasedForm in form %}
-        {% set tabName = formName ~ '[' ~ channelCode ~ ']' %}
-            {% if loop.index0 == 0 %}
-                <div class="ui bottom attached active tab segment" data-tab="{{ tabName }}">
-            {% else %}
-                <div class="ui bottom attached tab segment" data-tab="{{ tabName }}">
-            {% endif %}
-
-            {{ form_row(channelBasedForm, {'label': false}) }}
-            </div>
+            </a>
         {% endfor %}
     </div>
+    {% for channelCode, channelForm in form %}
+        <div class="ui bottom attached tab segment{% if loop.first %} active{% endif %}" data-tab="{{ channelForm.vars.full_name }}">
+            {{ form_row(channelForm, {'label': false}) }}
+        </div>
+    {% endfor %}
 {% endblock %}
