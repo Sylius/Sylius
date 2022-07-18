@@ -26,11 +26,6 @@ final class ResetPasswordDispatcherSpec extends ObjectBehavior
         $this->beConstructedWith($messageBus);
     }
 
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(ResetPasswordDispatcher::class);
-    }
-
     function it_dispatches_a_reset_password_message(MessageBusInterface $messageBus): void
     {
         $message = new ResetPassword('token', 'password');

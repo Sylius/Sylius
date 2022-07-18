@@ -31,12 +31,12 @@ sylius_ui:
             blocks:
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 40
+                    priority: 30
                     context:
                         event: sylius.admin.login.before_form
                 logo:
                     template: "@SyliusUi/Security/_logo.html.twig"
-                    priority: 30
+                    priority: 20
                 error:
                     template: "@SyliusUi/Security/_error.html.twig"
                     priority: 10
