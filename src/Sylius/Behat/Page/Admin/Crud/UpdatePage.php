@@ -36,6 +36,11 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         $this->getDocument()->pressButton('sylius_save_changes_button');
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getDocument()->clickLink('sylius_cancel_changes_button');
+    }
+
     public function getValidationMessage(string $element): string
     {
         $foundElement = $this->getFieldElement($element);

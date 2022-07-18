@@ -212,6 +212,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->indexPage->chooseEnabledFilter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
@@ -433,6 +441,16 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->saveChanges();
+    }
+
+    /**
+     * @When I cancel my changes
+     */
+    public function iCancelChanges()
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->cancelChanges();
     }
 
     /**
@@ -1136,6 +1154,14 @@ final class ManagingProductsContext implements Context
     public function theLastProductOnTheListShouldNotHaveName(): void
     {
         Assert::true($this->indexPage->checkLastProductHasDataAttribute('data-test-missing-translation-paragraph'));
+    }
+
+    /**
+     * @Then I should be redirected to the previous filtered page with enabled filter
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter()
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
     }
 
     /**

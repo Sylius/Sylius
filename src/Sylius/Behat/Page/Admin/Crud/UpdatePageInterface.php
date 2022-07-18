@@ -30,5 +30,7 @@ interface UpdatePageInterface extends SymfonyPageInterface
 
     public function saveChanges(): void;
 
+    public function cancelChanges(): void;
+
     public function getMessageInvalidForm(): string;
 }

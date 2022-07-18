@@ -1,4 +1,4 @@
-@admin_dashboard
+@admin_panel
 Feature: Redirecting to previous filtered page
     In order to have proper filtered page
     As an Administrator
@@ -6,22 +6,33 @@ Feature: Redirecting to previous filtered page
 
     Background:
         Given the store operates on a channel named "Poland"
+        And the store classifies its products as "Clothes"
+        And the store has a product "FC Barcelona T-Shirt"
+        And the store has a product "FC Barcelona Home T-Shirt"
         And I am logged in as an administrator
-        And I am browsing products
 
-    @ui
+    @ui @todo
     Scenario: Redirecting to previous filtered page after delete product
-        Given I have only disabled products filtered out
-        And I am on page 3
-        When I delete one of the products
-        And I am returned to the products index
-        Then I should be on page number 3 of the disabled products index
+        When I browse products
+        And I choose enabled filter
+        And I filter
+        And I delete the "FC Barcelona T-Shirt" product
+        Then I should be redirected to the previous filtered page with enabled filter
 
     @ui
     Scenario: Redirecting to previous filtered page after cancelling editing product
-        Given I have only disabled products filtered out
-        And I am on page 3
-        When I edit one of the products
-        And I cancel the edit
-        And I am returned to the products index
-        Then I should be on page number 3 of the disabled products index
+        When I browse products
+        And I choose enabled filter
+        And I filter
+        And I want to modify the "FC Barcelona T-Shirt" product
+        And I cancel my changes
+        Then I should be redirected to the previous filtered page with enabled filter
+
+    @ui @javascript
+    Scenario: Redirecting to previous filtered page after cancelling editing product after creating new product
+        When I browse products
+        And I choose enabled filter
+        And I filter
+        And I create a new simple product "FC Barcelona Away T-Shirt" priced at "$20.00" with "Clothes" taxon in the "Poland" channel
+        And I cancel my changes
+        Then I should be redirected to the previous filtered page with enabled filter

@@ -47,6 +47,11 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->getElement('channel_filter')->selectOption($channelName);
     }
 
+    public function chooseEnabledFilter(): void
+    {
+        $this->getElement('enabled_filter')->selectOption('Yes');
+    }
+
     public function hasProductAccessibleImage(string $productCode): bool
     {
         $productRow = $this->getTableAccessor()->getRowWithFields($this->getElement('table'), ['code' => $productCode]);
@@ -74,13 +79,19 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
     }
 
+    public function isEnabledFilterApplied(): bool
+    {
+        return $this->getElement('enabled_filter')->getValue() === 'true';
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'channel_filter' => '#criteria_channel',
-            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
+            'enabled_filter' => '#criteria_enabled',
             'first_product' => '.table > tbody > tr:first-child',
             'last_product' => '.table > tbody > tr:last-child',
+            'taxon_filter' => '.sylius-tree__item a:contains("%taxon%")',
         ]);
     }
 }
