@@ -110,6 +110,8 @@ security:
         - { path: "%sylius.security.shop_regex%/_partial", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
         - { path: "%sylius.security.shop_regex%/_partial", role: ROLE_NO_ACCESS }
 
+        - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
+
         - { path: "%sylius.security.admin_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "%sylius.security.shop_regex%/login", role: IS_AUTHENTICATED_ANONYMOUSLY }
 

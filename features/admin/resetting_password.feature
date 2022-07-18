@@ -7,7 +7,7 @@ Feature: Resetting an administrator's password
     Background:
         Given there is an administrator "sylius@example.com" identified by "sylius"
 
-    @email @api
+    @email @api @ui
     Scenario: Sending an administrator's password reset request
         When I want to reset password
         And I specify email as "sylius@example.com"

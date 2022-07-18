@@ -17,3 +17,16 @@ sylius_admin_login_check:
 sylius_admin_logout:
     path: /logout
     methods: [GET]
+
+sylius_admin_render_reset_password_page:
+    path: /forgotten-password
+    methods: [GET]
+    controller: Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction
+
+sylius_admin_request_password_reset:
+    path: /forgotten-password
+    methods: [POST]
+    controller: Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction
+    defaults:
+        _sylius:
+            redirect: sylius_admin_login

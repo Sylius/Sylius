@@ -54,6 +54,7 @@ sylius:
         administration: 'Administration'
         administration_dashboard: 'Administration dashboard'
         administration_panel_login: 'Administration panel login'
+        administration_reset_password: 'Administration reset password'
         all: 'All'
         all_your_addresses: 'All your addresses'
         amount: 'Amount'

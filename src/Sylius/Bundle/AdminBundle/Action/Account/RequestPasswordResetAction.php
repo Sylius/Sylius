@@ -1,0 +1,65 @@
+<?php
+
+/*
+ *  This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\AdminBundle\Action\Account;
+
+use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
+use Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\RouterInterface;
+
+final class RequestPasswordResetAction
+{
+    public function __construct(
+        private FormFactoryInterface $formFactory,
+        private MessageBusInterface $messageBus,
+        private FlashBagInterface $flashBag,
+        private RouterInterface $router
+    ) {
+    }
+
+    public function __invoke(Request $request): RedirectResponse
+    {
+        $form = $this->formFactory->create(RequestPasswordResetType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var PasswordResetRequest $formData */
+            $formData = $form->getData();
+            $requestPasswordResetMessage = new RequestResetPasswordEmail(
+                $formData->getEmail()
+            );
+
+            $this->messageBus->dispatch($requestPasswordResetMessage);
+        }
+
+        $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
+
+        $options = $request->attributes->get('_sylius');
+        $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
+
+        if (is_array($redirectRoute)) {
+            return new RedirectResponse($this->router->generate(
+                $redirectRoute['route'] ?? 'sylius_admin_login',
+                $redirectRoute['params'] ?? []
+            ));
+        }
+
+        return new RedirectResponse($this->router->generate($redirectRoute));
+    }
+}
