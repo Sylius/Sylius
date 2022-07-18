@@ -1,3 +1,10 @@
+# UPGRADE FROM `v1.11.6` TO `v1.11.7`
+
+1. Method `Sylius\Component\Channel\Repository\ChannelRepository::findOneByHostname` has become deprecated, use
+`Sylius\Component\Channel\Repository\ChannelRepository::findOneEnabledByHostname` instead. Simultaneously with this change
+`Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver::findChannel` will start selecting only a channel from a range
+of enabled channels.
+
 # UPGRADE FROM `v1.11.2` TO `v1.11.3`
 
 1. Order Processors' priorities have changed and `sylius.order_processing.order_prices_recalculator` has now a higher priority than `sylius.order_processing.order_shipment_processor`.

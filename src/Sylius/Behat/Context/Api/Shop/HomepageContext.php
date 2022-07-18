@@ -40,6 +40,34 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should see :productName product
+     */
+    public function iShouldSeeProduct(string $productName): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->productsClient->getLastResponse(),
+                'name',
+                $productName
+            )
+        );
+    }
+
+    /**
+     * @Then I should not see :productName product
+     */
+    public function iShouldNotSeeProduct(string $productName): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue(
+                $this->productsClient->getLastResponse(),
+                'name',
+                $productName
+            )
+        );
+    }
+
+    /**
      * @When I check available taxons
      */
     public function iCheckAvailableTaxons(): void
