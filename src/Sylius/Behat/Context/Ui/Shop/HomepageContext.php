@@ -52,6 +52,22 @@ final class HomepageContext implements Context
     }
 
     /**
+     * @Then I should see :productName product
+     */
+    public function iShouldSeeProduct(string $productName): void
+    {
+        Assert::inArray($productName, $this->homePage->getLatestProductsNames());
+    }
+
+    /**
+     * @Then I should not see :productName product
+     */
+    public function iShouldNotSeeProduct(string $productName): void
+    {
+        Assert::true(!in_array($productName, $this->homePage->getLatestProductsNames()));
+    }
+
+    /**
      * @Then I should see :firstMenuItem in the menu
      * @Then I should see :firstMenuItem and :secondMenuItem in the menu
      */
