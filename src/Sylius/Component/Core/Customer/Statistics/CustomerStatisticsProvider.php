@@ -44,7 +44,7 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
             $perChannelCustomerStatisticsArray[] = new PerChannelCustomerStatistics(
                 count($channelOrders),
                 $this->getOrdersSummedTotal($channelOrders),
-                $channel
+                $channel,
             );
         }
 
@@ -59,7 +59,7 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
         return array_sum(
             array_map(function (OrderInterface $order) {
                 return $order->getTotal();
-            }, $orders)
+            }, $orders),
         );
     }
 

@@ -44,16 +44,17 @@ final class CachedRouteNameResolverTest extends TestCase
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated->getRouteName('AppBundle\Entity\User', OperationType::ITEM, [])
             ->willThrow(
-                new InvalidArgumentException('No item route associated with the type "AppBundle\Entity\User".')
+                new InvalidArgumentException('No item route associated with the type "AppBundle\Entity\User".'),
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $pathPrefixProvider = $this->prophesize(PathPrefixProviderInterface::class);
 
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
         $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', OperationType::ITEM);
     }
@@ -82,17 +83,17 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
 
         $this->assertSame(
             'certain_item_route',
-            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', false)
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', false),
         );
         $this->assertSame(
             'certain_item_route',
             $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', false),
-            'Trigger the local cache'
+            'Trigger the local cache',
         );
     }
 
@@ -117,23 +118,23 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
 
         $this->assertSame(
             'certain_item_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::ITEM
-            )
+                OperationType::ITEM,
+            ),
         );
         $this->assertSame(
             'certain_item_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::ITEM
+                OperationType::ITEM,
             ),
-            'Trigger the local cache'
+            'Trigger the local cache',
         );
     }
 
@@ -157,8 +158,8 @@ final class CachedRouteNameResolverTest extends TestCase
             ->getRouteName('AppBundle\Entity\User', OperationType::COLLECTION, [])
             ->willThrow(
                 new InvalidArgumentException(
-                    'No collection route associated with the type "AppBundle\Entity\User".'
-                )
+                    'No collection route associated with the type "AppBundle\Entity\User".',
+                ),
             )
             ->shouldBeCalled()
         ;
@@ -168,11 +169,11 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
         $cachedRouteNameResolver->getRouteName(
             'AppBundle\Entity\User',
-            OperationType::COLLECTION
+            OperationType::COLLECTION,
         );
     }
 
@@ -200,17 +201,17 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
 
         $this->assertSame(
             'certain_collection_route',
-            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', true)
+            $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', true),
         );
         $this->assertSame(
             'certain_collection_route',
             $cachedRouteNameResolver->getRouteName('AppBundle\Entity\User', true),
-            'Trigger the local cache'
+            'Trigger the local cache',
         );
     }
 
@@ -235,23 +236,23 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
 
         $this->assertSame(
             'certain_collection_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::COLLECTION
-            )
+                OperationType::COLLECTION,
+            ),
         );
         $this->assertSame(
             'certain_collection_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::COLLECTION
+                OperationType::COLLECTION,
             ),
-            'Trigger the local cache'
+            'Trigger the local cache',
         );
     }
 
@@ -264,7 +265,8 @@ final class CachedRouteNameResolverTest extends TestCase
         $cacheItemPool
             ->getItem(Argument::type('string'))
             ->shouldBeCalledTimes(1)
-            ->willThrow(new CacheException());
+            ->willThrow(new CacheException())
+        ;
 
         $decorated = $this->prophesize(RouteNameResolverInterface::class);
         $decorated
@@ -277,23 +279,23 @@ final class CachedRouteNameResolverTest extends TestCase
         $cachedRouteNameResolver = new CachedRouteNameResolver(
             $cacheItemPool->reveal(),
             $decorated->reveal(),
-            $pathPrefixProvider->reveal()
+            $pathPrefixProvider->reveal(),
         );
 
         $this->assertSame(
             'certain_item_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::ITEM
-            )
+                OperationType::ITEM,
+            ),
         );
         $this->assertSame(
             'certain_item_route',
             $cachedRouteNameResolver->getRouteName(
                 'AppBundle\Entity\User',
-                OperationType::ITEM
+                OperationType::ITEM,
             ),
-            'Trigger the local cache'
+            'Trigger the local cache',
         );
     }
 }

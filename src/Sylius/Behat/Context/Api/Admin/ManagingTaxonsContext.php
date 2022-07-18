@@ -26,7 +26,7 @@ final class ManagingTaxonsContext implements Context
     public function __construct(
         private AbstractBrowser $client,
         private SessionInterface $session,
-        private ResponseCheckerInterface $responseChecker
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 

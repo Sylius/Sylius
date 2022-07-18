@@ -29,7 +29,7 @@ final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
     {
         return $this->twig->render(
             $templateBlock->getTemplate(),
-            array_replace($templateBlock->getContext(), $context)
+            array_replace($templateBlock->getContext(), $context),
         );
     }
 }

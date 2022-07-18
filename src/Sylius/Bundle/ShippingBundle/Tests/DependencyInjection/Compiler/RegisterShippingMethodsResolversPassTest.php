@@ -29,7 +29,7 @@ final class RegisterShippingMethodsResolversPassTest extends AbstractCompilerPas
             'res',
             (new Definition())
                 ->addTag('sylius.shipping_method_resolver', ['type' => 'res1', 'label' => 'Res 1'])
-                ->addTag('sylius.shipping_method_resolver', ['type' => 'res2', 'label' => 'Res 2', 'priority' => 5])
+                ->addTag('sylius.shipping_method_resolver', ['type' => 'res2', 'label' => 'Res 2', 'priority' => 5]),
         );
 
         $this->compile();
@@ -37,12 +37,12 @@ final class RegisterShippingMethodsResolversPassTest extends AbstractCompilerPas
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.shipping_methods_resolver',
             'register',
-            [new Reference('res'), 0]
+            [new Reference('res'), 0],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.shipping_methods_resolver',
             'register',
-            [new Reference('res'), 5]
+            [new Reference('res'), 5],
         );
     }
 
@@ -54,14 +54,14 @@ final class RegisterShippingMethodsResolversPassTest extends AbstractCompilerPas
             'res',
             (new Definition())
                 ->addTag('sylius.shipping_method_resolver', ['type' => 'res1', 'label' => 'Res 1'])
-                ->addTag('sylius.shipping_method_resolver', ['type' => 'res2', 'label' => 'Res 2'])
+                ->addTag('sylius.shipping_method_resolver', ['type' => 'res2', 'label' => 'Res 2']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.shipping_method_resolvers',
-            ['res1' => 'Res 1', 'res2' => 'Res 2']
+            ['res1' => 'Res 1', 'res2' => 'Res 2'],
         );
     }
 

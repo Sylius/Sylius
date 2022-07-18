@@ -36,7 +36,7 @@ final class ProductCatalogPromotionsProcessorSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $firstVariant,
         ProductVariantInterface $secondVariant,
-        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ): void {
         $product->getVariants()->willReturn(new ArrayCollection([
             $firstVariant->getWrappedObject(),

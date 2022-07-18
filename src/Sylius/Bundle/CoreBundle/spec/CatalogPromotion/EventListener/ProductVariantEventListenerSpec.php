@@ -31,7 +31,7 @@ final class ProductVariantEventListenerSpec extends ObjectBehavior
     function it_dispatches_product_variant_created_after_creating_product_variant(
         MessageBusInterface $eventBus,
         GenericEvent $event,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $event->getSubject()->willReturn($variant);
 
@@ -46,7 +46,7 @@ final class ProductVariantEventListenerSpec extends ObjectBehavior
     function it_dispatches_product_variant_updated_after_updating_product_variant(
         MessageBusInterface $eventBus,
         GenericEvent $event,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $event->getSubject()->willReturn($variant);
 

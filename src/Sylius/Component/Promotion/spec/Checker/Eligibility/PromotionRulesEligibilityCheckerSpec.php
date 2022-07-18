@@ -36,7 +36,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_eligible_if_a_promotion_has_no_rules(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $promotion->hasRules()->willReturn(false);
 
@@ -50,11 +50,11 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $firstRule,
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');
@@ -79,11 +79,11 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $firstRule,
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');
@@ -108,11 +108,11 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         PromotionRuleInterface $firstRule,
         PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn(
-            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()])
+            new ArrayCollection([$firstRule->getWrappedObject(), $secondRule->getWrappedObject()]),
         );
 
         $firstRule->getType()->willReturn('first_rule');

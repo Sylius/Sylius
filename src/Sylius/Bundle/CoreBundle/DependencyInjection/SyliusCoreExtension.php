@@ -65,7 +65,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         if ($config['process_shipments_before_recalculating_prices']) {
             $this->switchOrderProcessorsPriorities(
                 $container->getDefinition('sylius.order_processing.order_shipment_processor'),
-                $container->getDefinition('sylius.order_processing.order_prices_recalculator')
+                $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
             );
         }
     }
@@ -149,7 +149,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
     private function switchOrderProcessorsPriorities(
         Definition $firstServiceDefinition,
-        Definition $secondServiceDefinition
+        Definition $secondServiceDefinition,
     ) {
         $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
         $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
@@ -159,11 +159,11 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $firstServiceDefinition->addTag(
             'sylius.order_processor',
-            ['priority' => $secondServicePriority]
+            ['priority' => $secondServicePriority],
         );
         $secondServiceDefinition->addTag(
             'sylius.order_processor',
-            ['priority' => $firstServicePriority]
+            ['priority' => $firstServicePriority],
         );
     }
 }

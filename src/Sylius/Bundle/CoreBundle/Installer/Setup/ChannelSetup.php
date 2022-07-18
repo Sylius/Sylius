@@ -25,7 +25,7 @@ final class ChannelSetup implements ChannelSetupInterface
     public function __construct(
         private RepositoryInterface $channelRepository,
         private FactoryInterface $channelFactory,
-        private ObjectManager $channelManager
+        private ObjectManager $channelManager,
     ) {
     }
 

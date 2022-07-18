@@ -38,7 +38,7 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new CatalogPromotionScope();
 
@@ -57,7 +57,7 @@ final class ForTaxonsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new CatalogPromotionScope();
 

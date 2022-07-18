@@ -33,7 +33,7 @@ final class SingleChannelContextSpec extends ObjectBehavior
 
     function it_returns_a_channel_if_it_is_the_only_one_defined(
         ChannelRepositoryInterface $channelRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelRepository->findAll()->willReturn([$channel]);
 
@@ -41,7 +41,7 @@ final class SingleChannelContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_channel_not_found_exception_if_there_are_no_channels_defined(
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
     ): void {
         $channelRepository->findAll()->willReturn([]);
 
@@ -51,7 +51,7 @@ final class SingleChannelContextSpec extends ObjectBehavior
     function it_throws_a_channel_not_found_exception_if_there_are_many_channels_defined(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $channelRepository->findAll()->willReturn([$firstChannel, $secondChannel]);
 

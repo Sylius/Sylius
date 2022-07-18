@@ -31,7 +31,7 @@ final class ImagesRemoveListener
     public function __construct(
         private ImageUploaderInterface $imageUploader,
         private CacheManager $cacheManager,
-        private FilterManager $filterManager
+        private FilterManager $filterManager,
     ) {
     }
 

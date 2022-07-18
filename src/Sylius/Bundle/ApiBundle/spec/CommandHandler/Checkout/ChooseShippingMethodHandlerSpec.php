@@ -35,14 +35,14 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $this->beConstructedWith(
             $orderRepository,
             $shippingMethodRepository,
             $shipmentRepository,
             $eligibilityChecker,
-            $stateMachineFactory
+            $stateMachineFactory,
         );
     }
 
@@ -55,7 +55,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -91,7 +91,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
         ShipmentInterface $shipment,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -123,7 +123,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -144,7 +144,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         StateMachineInterface $stateMachine,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -170,7 +170,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         StateMachineInterface $stateMachine,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');
@@ -199,7 +199,7 @@ final class ChooseShippingMethodHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         OrderInterface $cart,
         ShippingMethodInterface $shippingMethod,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $chooseShippingMethod = new ChooseShippingMethod('DHL_SHIPPING_METHOD');
         $chooseShippingMethod->setOrderTokenValue('ORDERTOKEN');

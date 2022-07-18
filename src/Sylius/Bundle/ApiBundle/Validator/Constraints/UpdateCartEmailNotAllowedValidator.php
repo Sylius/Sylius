@@ -27,7 +27,7 @@ final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

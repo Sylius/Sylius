@@ -36,7 +36,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
     function it_returns_fake_channel_code_from_cookie_if_there_is_none_in_query_string(
         Request $request,
         ParameterBag $queryBag,
-        ParameterBag $cookiesBag
+        ParameterBag $cookiesBag,
     ): void {
         $queryBag->get('_channel_code')->willReturn(null);
         $request->query = $queryBag;
@@ -50,7 +50,7 @@ final class FakeChannelCodeProviderSpec extends ObjectBehavior
     function it_returns_null_channel_code_if_no_fake_channel_code_was_found(
         Request $request,
         ParameterBag $queryBag,
-        ParameterBag $cookiesBag
+        ParameterBag $cookiesBag,
     ): void {
         $queryBag->get('_channel_code')->willReturn(null);
         $request->query = $queryBag;

@@ -25,7 +25,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_association_type_translations_%s_name', $language),
-            $name
+            $name,
         );
     }
 

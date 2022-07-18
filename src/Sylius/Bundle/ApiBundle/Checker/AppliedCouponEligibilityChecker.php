@@ -23,7 +23,7 @@ final class AppliedCouponEligibilityChecker implements AppliedCouponEligibilityC
 {
     public function __construct(
         private PromotionEligibilityCheckerInterface $promotionChecker,
-        private PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        private PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
     ) {
     }
 

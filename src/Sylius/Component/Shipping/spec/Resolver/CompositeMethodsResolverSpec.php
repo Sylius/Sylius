@@ -36,7 +36,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingMethodInterface $shippingMethod,
-        ShippingSubjectInterface $shippingSubject
+        ShippingSubjectInterface $shippingSubject,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -52,7 +52,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        ShippingSubjectInterface $shippingSubject
+        ShippingSubjectInterface $shippingSubject,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -66,7 +66,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        ShippingSubjectInterface $shippingSubject
+        ShippingSubjectInterface $shippingSubject,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -80,7 +80,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         ShippingMethodsResolverInterface $firstMethodsResolver,
         ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        ShippingSubjectInterface $shippingSubject
+        ShippingSubjectInterface $shippingSubject,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 

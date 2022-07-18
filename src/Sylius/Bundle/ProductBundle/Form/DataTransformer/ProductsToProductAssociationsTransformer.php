@@ -35,7 +35,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     public function __construct(
         private FactoryInterface $productAssociationFactory,
         private ProductRepositoryInterface $productRepository,
-        private RepositoryInterface $productAssociationTypeRepository
+        private RepositoryInterface $productAssociationTypeRepository,
     ) {
     }
 
@@ -123,7 +123,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
     private function setAssociatedProductsByProductCodes(
         ProductAssociationInterface $productAssociation,
-        string $productCodes
+        string $productCodes,
     ): void {
         $products = $this->productRepository->findBy(['code' => explode(',', $productCodes)]);
 

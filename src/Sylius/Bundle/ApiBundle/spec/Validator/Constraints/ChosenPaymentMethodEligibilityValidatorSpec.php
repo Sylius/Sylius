@@ -31,7 +31,7 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentRepositoryInterface $paymentRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodsResolverInterface $paymentMethodsResolver,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->beConstructedWith($paymentRepository, $paymentMethodRepository, $paymentMethodsResolver);
 
@@ -47,7 +47,8 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', ['', new ChosenPaymentMethodEligibility()]);
+            ->during('validate', ['', new ChosenPaymentMethodEligibility()])
+        ;
     }
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_chosen_payment_method_eligibility(): void
@@ -67,7 +68,7 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod,
         PaymentMethodInterface $thirdPaymentMethod,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
         $command->setOrderTokenValue('ORDER_TOKEN');
@@ -90,7 +91,7 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_payment_method_does_not_exist(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
         $command->setOrderTokenValue('ORDER_TOKEN');
@@ -113,7 +114,7 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $command = new ChoosePaymentMethod('PAYMENT_METHOD_CODE');
         $command->setOrderTokenValue('ORDER_TOKEN');
@@ -129,11 +130,12 @@ final class ChosenPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation('sylius.payment_method.not_exist', ['%code%' => 'PAYMENT_METHOD_CODE'])
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->validate(
             $command,
-            new ChosenPaymentMethodEligibility()
+            new ChosenPaymentMethodEligibility(),
         );
     }
 }

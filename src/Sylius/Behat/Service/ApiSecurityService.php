@@ -22,7 +22,7 @@ final class ApiSecurityService implements SecurityServiceInterface
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private JWTTokenManagerInterface $jwtTokenManager
+        private JWTTokenManagerInterface $jwtTokenManager,
     ) {
     }
 

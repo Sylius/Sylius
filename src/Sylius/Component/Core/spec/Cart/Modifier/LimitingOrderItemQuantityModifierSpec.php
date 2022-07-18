@@ -31,7 +31,7 @@ final class LimitingOrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_restricts_max_item_quantity_to_the_stated_limit(
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->getQuantity()->willReturn(0);
 

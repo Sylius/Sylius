@@ -25,7 +25,7 @@ final class MoneyFormatter implements MoneyFormatterInterface
         Assert::notSame(
             false,
             $result,
-            sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currencyCode)
+            sprintf('The amount "%s" of type %s cannot be formatted to currency "%s".', $amount, gettype($amount), $currencyCode),
         );
 
         return $amount >= 0 ? $result : '-' . $result;

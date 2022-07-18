@@ -23,7 +23,7 @@ final class RemovingTaxonContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -45,7 +45,7 @@ final class RemovingTaxonContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('Some rules of the promotions with codes %s have been updated.', $promotion->getCode()),
-            NotificationType::info()
+            NotificationType::info(),
         );
     }
 }

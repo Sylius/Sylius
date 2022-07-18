@@ -49,7 +49,7 @@ final class Kernel extends HttpKernel
 
         $containerBuilder->loadFromExtension(
             'sonata_block',
-            ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]]
+            ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]],
         );
 
         $containerBuilder->loadFromExtension('sylius_ui', ['events' => [

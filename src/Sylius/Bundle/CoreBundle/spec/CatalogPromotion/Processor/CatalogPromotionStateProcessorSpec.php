@@ -25,7 +25,7 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $this->beConstructedWith($catalogPromotionEligibilityChecker, $stateMachineFactory);
     }
@@ -39,7 +39,7 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachine);
 
@@ -55,7 +55,7 @@ final class CatalogPromotionStateProcessorSpec extends ObjectBehavior
         CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
         CatalogPromotionInterface $catalogPromotion,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachineInterface
+        StateMachineInterface $stateMachineInterface,
     ): void {
         $stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH)->willReturn($stateMachineInterface);
 

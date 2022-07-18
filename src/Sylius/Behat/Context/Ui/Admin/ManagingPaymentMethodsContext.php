@@ -31,7 +31,7 @@ final class ManagingPaymentMethodsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
-        private array $gatewayFactories
+        private array $gatewayFactories,
     ) {
     }
 
@@ -263,7 +263,7 @@ final class ManagingPaymentMethodsContext implements Context
     {
         Assert::same(
             $this->createPage->getValidationMessage('paypal_' . $element),
-            sprintf('Please enter paypal %s.', $element)
+            sprintf('Please enter paypal %s.', $element),
         );
     }
 
@@ -274,7 +274,7 @@ final class ManagingPaymentMethodsContext implements Context
     {
         Assert::same(
             $this->createPage->getValidationMessage('gateway_name'),
-            'Gateway name should contain only letters and underscores.'
+            'Gateway name should contain only letters and underscores.',
         );
     }
 
@@ -351,7 +351,7 @@ final class ManagingPaymentMethodsContext implements Context
     public function thePaymentMethodShouldHaveInstructionsIn(
         PaymentMethodInterface $paymentMethod,
         $instructions,
-        $language
+        $language,
     ) {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 
@@ -363,7 +363,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,
-        $channelName
+        $channelName,
     ) {
         $this->iWantToModifyAPaymentMethod($paymentMethod);
 

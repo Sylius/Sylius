@@ -43,7 +43,7 @@ final class AddressType extends AbstractResourceType
                     'Not passing an $addressComparator to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
                     __CLASS__,
                 ),
-                \E_USER_DEPRECATED
+                \E_USER_DEPRECATED,
             );
         }
 

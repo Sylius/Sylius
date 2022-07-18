@@ -65,21 +65,21 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $sendAccountRegistrationEmailHandler = new SendAccountRegistrationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountRegistrationEmailHandler(
             new SendAccountRegistrationEmail(
                 'user@example.com',
                 'en_US',
-                'CHANNEL_CODE'
-            )
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
             $translator->trans('sylius.email.user_registration.start_shopping', [], null, 'en_US'),
-            'user@example.com'
+            'user@example.com',
         ));
     }
 }

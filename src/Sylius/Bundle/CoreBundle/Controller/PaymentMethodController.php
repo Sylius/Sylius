@@ -26,7 +26,7 @@ class PaymentMethodController extends ResourceController
             [
                 'gatewayFactories' => $this->getParameter('sylius.gateway_factories'),
                 'metadata' => $this->metadata,
-            ]
+            ],
         );
     }
 }

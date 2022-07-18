@@ -22,7 +22,7 @@ final class ShipmentIdAwareInputCommandDataTransformerSpec extends ObjectBehavio
 {
     function it_supports_only_shipment_id_aware_interface(
         LocaleCodeAwareInterface $localeCodeAware,
-        ShipmentIdAwareInterface $shipmentIdAware
+        ShipmentIdAwareInterface $shipmentIdAware,
     ): void {
         $this->supportsTransformation($localeCodeAware)->shouldReturn(false);
         $this->supportsTransformation($shipmentIdAware)->shouldReturn(true);
@@ -30,7 +30,7 @@ final class ShipmentIdAwareInputCommandDataTransformerSpec extends ObjectBehavio
 
     function it_adds_shipment_id_to_object(
         ShipmentIdAwareInterface $command,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $context = ['object_to_populate' => $shipment];
         $shipment->getId()->willReturn(123);

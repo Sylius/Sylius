@@ -65,8 +65,8 @@ final class DebugTemplateEventCommand extends Command
                     $templateBlock->getPriority(),
                     $templateBlock->isEnabled() ? 'TRUE' : 'FALSE',
                 ],
-                $this->templateBlockRegistry->all()[$eventName] ?? []
-            )
+                $this->templateBlockRegistry->all()[$eventName] ?? [],
+            ),
         );
 
         return 0;

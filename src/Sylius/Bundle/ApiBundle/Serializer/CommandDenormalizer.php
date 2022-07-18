@@ -61,7 +61,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
         if (count($missingFields) > 0) {
             throw new MissingConstructorArgumentsException(
-                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields))
+                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields)),
             );
         }
     }

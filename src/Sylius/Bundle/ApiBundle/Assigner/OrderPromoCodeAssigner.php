@@ -23,7 +23,7 @@ final class OrderPromoCodeAssigner implements OrderPromoCodeAssignerInterface
 {
     public function __construct(
         private PromotionCouponRepositoryInterface $promotionCouponRepository,
-        private OrderProcessorInterface $orderProcessor
+        private OrderProcessorInterface $orderProcessor,
     ) {
     }
 

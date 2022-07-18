@@ -41,7 +41,7 @@ final class CurrentPageResolverSpec extends ObjectBehavior
         Session $session,
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
-        UrlMatcherInterface $urlMatcher
+        UrlMatcherInterface $urlMatcher,
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/new');
         $urlMatcher->match('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
@@ -56,7 +56,7 @@ final class CurrentPageResolverSpec extends ObjectBehavior
         Session $session,
         SymfonyPageInterface $createPage,
         SymfonyPageInterface $updatePage,
-        UrlMatcherInterface $urlMatcher
+        UrlMatcherInterface $urlMatcher,
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/show');
         $urlMatcher->match('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);

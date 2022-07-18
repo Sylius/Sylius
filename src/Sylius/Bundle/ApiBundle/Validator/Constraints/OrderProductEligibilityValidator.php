@@ -50,12 +50,12 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
             if (!$orderItem->getVariant()->isEnabled()) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%productName%' => $orderItem->getVariant()->getName()]
+                    ['%productName%' => $orderItem->getVariant()->getName()],
                 );
             } elseif (!$orderItem->getProduct()->isEnabled()) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%productName%' => $orderItem->getProduct()->getName()]
+                    ['%productName%' => $orderItem->getProduct()->getName()],
                 );
             }
         }

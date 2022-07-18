@@ -90,7 +90,7 @@ final class NotificationControllerTest extends TestCase
             $this->client->reveal(),
             $this->messageFactory->reveal(),
             self::$hubUri,
-            'environment'
+            'environment',
         );
 
         parent::setUp();

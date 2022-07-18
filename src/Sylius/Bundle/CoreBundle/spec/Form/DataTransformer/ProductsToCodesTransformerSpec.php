@@ -34,7 +34,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
     function it_transforms_array_of_products_codes_to_products_collection(
         ProductRepositoryInterface $productRepository,
         ProductInterface $bow,
-        ProductInterface $sword
+        ProductInterface $sword,
     ): void {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow, $sword]);
 
@@ -43,7 +43,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
 
     function it_transforms_only_existing_products(
         ProductRepositoryInterface $productRepository,
-        ProductInterface $bow
+        ProductInterface $bow,
     ): void {
         $productRepository->findBy(['code' => ['bow', 'sword']])->willReturn([$bow]);
 
@@ -65,7 +65,7 @@ final class ProductsToCodesTransformerSpec extends ObjectBehavior
 
     function it_reverse_transforms_into_array_of_products_codes(
         ProductInterface $axes,
-        ProductInterface $shields
+        ProductInterface $shields,
     ): void {
         $axes->getCode()->willReturn('axes');
         $shields->getCode()->willReturn('shields');

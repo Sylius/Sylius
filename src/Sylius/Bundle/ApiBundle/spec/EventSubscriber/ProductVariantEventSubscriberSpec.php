@@ -35,7 +35,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         ProductVariantInterface $variant,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
@@ -48,7 +48,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $variant->getWrappedObject()
+            $variant->getWrappedObject(),
         ));
     }
 
@@ -56,7 +56,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         ProductVariantInterface $variant,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_PUT);
 
@@ -69,14 +69,14 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $variant->getWrappedObject()
+            $variant->getWrappedObject(),
         ));
     }
 
     function it_does_nothing_after_writing_other_entity(
         MessageBusInterface $eventBus,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
 
@@ -84,7 +84,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            new \stdClass()
+            new \stdClass(),
         ));
     }
 }

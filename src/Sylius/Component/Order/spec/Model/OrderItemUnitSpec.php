@@ -40,7 +40,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_includes_non_neutral_adjustments_in_total(
         AdjustmentInterface $adjustment,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(400);
@@ -55,7 +55,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_returns_0_as_total_even_when_adjustments_decreases_it_below_0(
         AdjustmentInterface $adjustment,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1400);
@@ -87,7 +87,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_does_not_remove_adjustment_when_it_is_locked(
         AdjustmentInterface $adjustment,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(1);
 
@@ -107,7 +107,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(4);
 
@@ -138,7 +138,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_has_correct_total_after_neutral_adjustment_add_and_remove(
         AdjustmentInterface $adjustment,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalled();
 
@@ -159,7 +159,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_has_proper_total_after_order_item_unit_price_change(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(2);
 
@@ -182,7 +182,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_recalculates_its_total_properly_after_adjustment_amount_change(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->recalculateUnitsTotal()->shouldBeCalledTimes(2);
 

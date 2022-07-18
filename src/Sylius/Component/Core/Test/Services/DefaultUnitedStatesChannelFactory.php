@@ -48,7 +48,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         private FactoryInterface $currencyFactory,
         private FactoryInterface $localeFactory,
         private ZoneFactoryInterface $zoneFactory,
-        private string $defaultLocaleCode
+        private string $defaultLocaleCode,
     ) {
     }
 

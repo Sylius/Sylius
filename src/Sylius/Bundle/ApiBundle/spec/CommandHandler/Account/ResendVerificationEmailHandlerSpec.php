@@ -30,7 +30,7 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
     function let(
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $this->beConstructedWith($userRepository, $generator, $messageBus);
     }
@@ -60,7 +60,7 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
         MessageBusInterface $messageBus,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $userRepository->find(42)->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -73,7 +73,7 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
 
         $messageBus->dispatch(
             $sendAccountVerificationEmail,
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendAccountVerificationEmail))->shouldBeCalled();
 
         $resendVerificationEmail = new ResendVerificationEmail();

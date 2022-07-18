@@ -60,7 +60,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
@@ -83,7 +83,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
@@ -109,7 +109,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
@@ -138,7 +138,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);

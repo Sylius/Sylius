@@ -36,7 +36,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_variants_configured(
         ProductVariantRepositoryInterface $variantRepository,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $variantRepository->findOneBy(['code' => 'not_existing_variant'])->willReturn(null);
 
@@ -51,7 +51,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $variantRepository,
         ExecutionContextInterface $executionContext,
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
     ): void {
         $variantRepository->findOneBy(['code' => 'first_variant'])->willReturn($firstVariant);
         $variantRepository->findOneBy(['code' => 'second_variant'])->willReturn($secondVariant);

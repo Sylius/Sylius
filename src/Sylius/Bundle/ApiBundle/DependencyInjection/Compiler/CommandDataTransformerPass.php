@@ -36,7 +36,7 @@ final class CommandDataTransformerPass implements CompilerPassInterface
 
         $container->setDefinition(
             'sylius.api.data_transformer.command_aware_input_data_transformer',
-            $commandDataTransformersChainDefinition
+            $commandDataTransformersChainDefinition,
         );
     }
 }

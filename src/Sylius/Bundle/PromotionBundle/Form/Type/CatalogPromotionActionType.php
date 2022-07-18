@@ -29,7 +29,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        iterable $actionConfigurationTypes
+        iterable $actionConfigurationTypes,
     ) {
         parent::__construct($dataClass, $validationGroups);
 

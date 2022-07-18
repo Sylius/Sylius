@@ -42,7 +42,7 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ChannelInterface $channel,
         ShipmentRepositoryInterface $shipmentRepository,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $shipmentRepository->find(123)->willReturn($shipment);
         $shipment->getOrder()->willReturn($order);
@@ -61,7 +61,7 @@ final class SendShipmentConfirmationEmailHandlerSpec extends ObjectBehavior
                 'order' => $order->getWrappedObject(),
                 'channel' => $channel->getWrappedObject(),
                 'localeCode' => 'pl_PL',
-            ]
+            ],
         )->shouldBeCalled();
 
         $this(new SendShipmentConfirmationEmail(123));

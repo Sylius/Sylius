@@ -32,7 +32,7 @@ final class ManagingChannelsContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -241,7 +241,7 @@ final class ManagingChannelsContext implements Context
 
         Assert::same(
             $currentPage->getValidationMessage(StringInflector::nameToCode($element)),
-            sprintf('Please enter channel %s.', $element)
+            sprintf('Please enter channel %s.', $element),
         );
     }
 
@@ -379,7 +379,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'The channel cannot be deleted. At least one enabled channel is required.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -480,7 +480,7 @@ final class ManagingChannelsContext implements Context
      */
     public function theTaxCalculationStrategyForTheChannelShouldBe(
         ChannelInterface $channel,
-        string $taxCalculationStrategy
+        string $taxCalculationStrategy,
     ): void {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -502,7 +502,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::same(
             $this->updatePage->getValidationMessage('default_locale'),
-            'Default locale has to be enabled.'
+            'Default locale has to be enabled.',
         );
     }
 

@@ -28,7 +28,7 @@ final class LocaleSwitchController
         private EngineInterface|Environment $templatingEngine,
         private LocaleContextInterface $localeContext,
         private LocaleProviderInterface $localeProvider,
-        private LocaleSwitcherInterface $localeSwitcher
+        private LocaleSwitcherInterface $localeSwitcher,
     ) {
     }
 
@@ -49,7 +49,7 @@ final class LocaleSwitchController
         if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes(), true)) {
             throw new HttpException(
                 Response::HTTP_NOT_ACCEPTABLE,
-                sprintf('The locale code "%s" is invalid.', $code)
+                sprintf('The locale code "%s" is invalid.', $code),
             );
         }
 

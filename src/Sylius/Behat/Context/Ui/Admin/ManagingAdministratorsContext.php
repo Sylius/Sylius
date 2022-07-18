@@ -34,7 +34,7 @@ final class ManagingAdministratorsContext implements Context
         private TopBarElementInterface $topBarElement,
         private NotificationCheckerInterface $notificationChecker,
         private RepositoryInterface $adminUserRepository,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -278,7 +278,7 @@ final class ManagingAdministratorsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Cannot remove currently logged in user.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 

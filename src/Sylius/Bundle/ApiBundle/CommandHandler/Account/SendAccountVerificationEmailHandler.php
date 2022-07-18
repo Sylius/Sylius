@@ -27,7 +27,7 @@ final class SendAccountVerificationEmailHandler implements MessageHandlerInterfa
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private SenderInterface $emailSender
+        private SenderInterface $emailSender,
     ) {
     }
 
@@ -41,7 +41,7 @@ final class SendAccountVerificationEmailHandler implements MessageHandlerInterfa
         $this->emailSender->send(
             Emails::ACCOUNT_VERIFICATION_TOKEN,
             [$command->shopUserEmail],
-            ['user' => $shopUser, 'localeCode' => $command->localeCode, 'channel' => $channel]
+            ['user' => $shopUser, 'localeCode' => $command->localeCode, 'channel' => $channel],
         );
     }
 }

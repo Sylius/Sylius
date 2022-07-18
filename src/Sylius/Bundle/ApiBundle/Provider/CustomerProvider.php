@@ -24,7 +24,7 @@ final class CustomerProvider implements CustomerProviderInterface
     public function __construct(
         private CanonicalizerInterface $canonicalizer,
         private FactoryInterface $customerFactory,
-        private CustomerRepositoryInterface $customerRepository
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 

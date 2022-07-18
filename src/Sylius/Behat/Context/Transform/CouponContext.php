@@ -34,7 +34,7 @@ final class CouponContext implements Context
 
         Assert::notNull(
             $coupon,
-            sprintf('Coupon with code "%s" does not exist', $couponCode)
+            sprintf('Coupon with code "%s" does not exist', $couponCode),
         );
 
         return $coupon;

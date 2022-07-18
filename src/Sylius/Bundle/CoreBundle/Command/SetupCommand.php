@@ -78,7 +78,7 @@ EOT
     private function configureNewUser(
         AdminUserInterface $user,
         InputInterface $input,
-        OutputInterface $output
+        OutputInterface $output,
     ): AdminUserInterface {
         /** @var UserRepositoryInterface $userRepository */
         $userRepository = $this->getAdminUserRepository();
@@ -116,7 +116,7 @@ EOT
                     }
 
                     return $value;
-                }
+                },
             )
             ->setMaxAttempts(3)
         ;

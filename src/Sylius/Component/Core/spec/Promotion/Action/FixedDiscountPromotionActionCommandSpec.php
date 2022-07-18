@@ -35,12 +35,12 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function let(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        MinimumPriceDistributorInterface $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
     ): void {
         $this->beConstructedWith(
             $distributor,
             $unitsPromotionAdjustmentsApplicator,
-            $minimumPriceDistributor
+            $minimumPriceDistributor,
         );
     }
 
@@ -60,7 +60,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
-        ChannelPricingInterface $channelPricingTwo
+        ChannelPricingInterface $channelPricingTwo,
     ): void {
         $channel->getCode()->willReturn('WEB_US');
 
@@ -107,11 +107,11 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
-        ChannelPricingInterface $channelPricingTwo
+        ChannelPricingInterface $channelPricingTwo,
     ): void {
         $this->beConstructedWith(
             $distributor,
-            $unitsPromotionAdjustmentsApplicator
+            $unitsPromotionAdjustmentsApplicator,
         );
 
         $order->getCurrencyCode()->willReturn('USD');
@@ -160,7 +160,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
-        ChannelPricingInterface $channelPricingTwo
+        ChannelPricingInterface $channelPricingTwo,
     ): void {
         $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
@@ -248,7 +248,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantOne,
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
-        ChannelPricingInterface $channelPricingTwo
+        ChannelPricingInterface $channelPricingTwo,
     ): void {
         $channel->getCode()->willReturn('WEB_US');
 
@@ -287,7 +287,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_order_has_no_items(
         ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -302,7 +302,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
-        MinimumPriceDistributorInterface $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -318,7 +318,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
-        MinimumPriceDistributorInterface $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -333,7 +333,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_amount_for_order_channel_is_not_configured(
         ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -347,7 +347,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel, $channel);
         $channel->getCode()->willReturn('WEB_US', 'WEB_US');
@@ -359,7 +359,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -373,7 +373,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
@@ -406,7 +406,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

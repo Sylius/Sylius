@@ -30,7 +30,7 @@ final class LockingListenerSpec extends ObjectBehavior
     function it_locks_versioned_entity(
         EntityManagerInterface $manager,
         GenericEvent $event,
-        VersionedInterface $subject
+        VersionedInterface $subject,
     ): void {
         $event->getSubject()->willReturn($subject);
         $subject->getVersion()->willReturn(7);

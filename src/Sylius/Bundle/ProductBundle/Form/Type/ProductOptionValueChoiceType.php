@@ -30,7 +30,7 @@ final class ProductOptionValueChoiceType extends AbstractType
         if (null === $availableProductOptionValuesResolver) {
             @trigger_error(
                 'Not passing availableProductOptionValuesResolver thru constructor is deprecated in Sylius 1.8 and ' .
-                'it will be removed in Sylius 2.0'
+                'it will be removed in Sylius 2.0',
             );
         }
 
@@ -46,7 +46,7 @@ final class ProductOptionValueChoiceType extends AbstractType
                     if (true === $options['only_available_values']) {
                         if (null === $options['product']) {
                             throw new \RuntimeException(
-                                'You must specify the "product" option when "only_available_values" is true.'
+                                'You must specify the "product" option when "only_available_values" is true.',
                             );
                         }
 
@@ -56,14 +56,14 @@ final class ProductOptionValueChoiceType extends AbstractType
                                     'Cannot provide only available values in "%s" because a "%s" is required but ' .
                                     'none has been set.',
                                     __CLASS__,
-                                    AvailableProductOptionValuesResolverInterface::class
-                                )
+                                    AvailableProductOptionValuesResolverInterface::class,
+                                ),
                             );
                         }
 
                         return $this->availableProductOptionValuesResolver->resolve(
                             $options['product'],
-                            $productOption
+                            $productOption,
                         );
                     }
 

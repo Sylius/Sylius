@@ -37,7 +37,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_action_with_a_default_action_factory(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
@@ -46,7 +46,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
@@ -58,7 +58,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_an_unit_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
@@ -70,7 +70,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_a_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
@@ -82,7 +82,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
@@ -94,7 +94,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
 
     function it_creates_a_shipping_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
-        PromotionActionInterface $promotionAction
+        PromotionActionInterface $promotionAction,
     ): void {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 

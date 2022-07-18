@@ -28,7 +28,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
     function let(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
-        RequestStack $requestStack
+        RequestStack $requestStack,
     ): void {
         $this->beConstructedWith($fakeChannelCodeProvider, $channelRepository, $requestStack);
     }
@@ -43,7 +43,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
         Request $request,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);
@@ -73,7 +73,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);
@@ -92,7 +92,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         ChannelRepositoryInterface $channelRepository,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);

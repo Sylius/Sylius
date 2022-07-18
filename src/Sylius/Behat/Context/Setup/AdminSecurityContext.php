@@ -26,7 +26,7 @@ final class AdminSecurityContext implements Context
         private SharedStorageInterface $sharedStorage,
         private SecurityServiceInterface $securityService,
         private ExampleFactoryInterface $userFactory,
-        private UserRepositoryInterface $userRepository
+        private UserRepositoryInterface $userRepository,
     ) {
     }
 

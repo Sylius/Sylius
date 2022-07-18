@@ -26,7 +26,7 @@ final class ProductGenerateVariantsType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        private EventSubscriberInterface $generateProductVariantsSubscriber
+        private EventSubscriberInterface $generateProductVariantsSubscriber,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -40,7 +40,8 @@ final class ProductGenerateVariantsType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
-            ->addEventSubscriber($this->generateProductVariantsSubscriber);
+            ->addEventSubscriber($this->generateProductVariantsSubscriber)
+        ;
     }
 
     public function getBlockPrefix(): string

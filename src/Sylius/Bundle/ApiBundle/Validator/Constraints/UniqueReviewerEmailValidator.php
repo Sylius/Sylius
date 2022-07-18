@@ -26,7 +26,7 @@ final class UniqueReviewerEmailValidator extends ConstraintValidator
 {
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

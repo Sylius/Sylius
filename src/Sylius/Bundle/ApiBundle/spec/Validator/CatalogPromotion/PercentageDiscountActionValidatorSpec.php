@@ -40,7 +40,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -57,7 +57,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -74,7 +74,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -90,7 +90,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_action_is_valid(
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -106,7 +106,7 @@ final class PercentageDiscountActionValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_section_is_not_admin_api(
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $sectionProvider->getSection()->willReturn(new ShopApiSection());
 

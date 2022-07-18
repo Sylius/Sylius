@@ -25,7 +25,7 @@ class SecurityController extends AbstractController
 {
     public function __construct(
         private ?AuthenticationUtils $authenticationUtils = null,
-        private ?FormFactoryInterface $formFactory = null
+        private ?FormFactoryInterface $formFactory = null,
     ) {
         if ($this->authenticationUtils === null) {
             @trigger_error(sprintf('Not passing a $authenticationUtils to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);

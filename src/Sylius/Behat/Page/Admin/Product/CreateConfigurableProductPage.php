@@ -33,7 +33,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode),
-            $name
+            $name,
         );
 
         if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {

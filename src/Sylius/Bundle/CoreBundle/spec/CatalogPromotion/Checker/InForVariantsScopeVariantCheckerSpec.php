@@ -49,7 +49,7 @@ final class InForVariantsScopeVariantCheckerSpec extends ObjectBehavior
 
     public function it_throws_exception_if_scope_does_not_contains_product_configuration(
         CatalogPromotionScopeInterface $scope,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $scope->getConfiguration()->willReturn(['FOO' => ['BOO']]);
 

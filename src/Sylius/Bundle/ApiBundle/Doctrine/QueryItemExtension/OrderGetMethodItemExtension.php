@@ -38,7 +38,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
@@ -58,7 +58,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
         ?UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        string $rootAlias
+        string $rootAlias,
     ): void {
         if ($user === null) {
             $queryBuilder

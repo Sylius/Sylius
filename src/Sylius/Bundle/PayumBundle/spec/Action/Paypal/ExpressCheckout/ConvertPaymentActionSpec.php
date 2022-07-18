@@ -49,7 +49,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         CustomerInterface $customer,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
     ): void {
         $request->getTo()->willReturn('array');
 
@@ -126,7 +126,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         ProductVariantInterface $productVariant,
         ProductInterface $product,
         CustomerInterface $customer,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
     ): void {
         $request->getTo()->willReturn('array');
 

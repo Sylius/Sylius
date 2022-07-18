@@ -34,7 +34,7 @@ final class TotalWeightLessThanOrEqualConfigurationType extends AbstractType
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                     new GreaterThan(['value' => 0, 'groups' => ['sylius']]),
                 ],
-            ]
+            ],
         );
     }
 

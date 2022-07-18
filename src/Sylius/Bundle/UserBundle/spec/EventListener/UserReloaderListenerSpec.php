@@ -37,7 +37,7 @@ final class UserReloaderListenerSpec extends ObjectBehavior
 
     function it_throws_exception_when_reloading_not_a_user_interface(
         UserReloaderInterface $userReloader,
-        GenericEvent $event
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn('user');
 

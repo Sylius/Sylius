@@ -35,7 +35,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         ProductInterface $product,
         ProductTranslationInterface $productTranslation,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
@@ -51,7 +51,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $product->getWrappedObject()
+            $product->getWrappedObject(),
         ));
     }
 
@@ -60,7 +60,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         ProductInterface $product,
         ProductTranslationInterface $productTranslation,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
@@ -75,7 +75,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $product->getWrappedObject()
+            $product->getWrappedObject(),
         ));
     }
 
@@ -84,7 +84,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
         ProductInterface $product,
         ProductTranslationInterface $productTranslation,
         HttpKernelInterface $kernel,
-        Request $request
+        Request $request,
     ): void {
         $request->getMethod()->willReturn(Request::METHOD_POST);
 
@@ -99,7 +99,7 @@ final class ProductSlugEventSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $product->getWrappedObject()
+            $product->getWrappedObject(),
         ));
     }
 }

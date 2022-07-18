@@ -60,7 +60,7 @@ abstract class AutocompleteHelper
     {
         $session->wait(5000, sprintf(
             '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            str_replace('"', '\"', $element->getXpath())
+            str_replace('"', '\"', $element->getXpath()),
         ));
     }
 }

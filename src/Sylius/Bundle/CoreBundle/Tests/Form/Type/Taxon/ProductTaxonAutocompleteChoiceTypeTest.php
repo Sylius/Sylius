@@ -48,7 +48,7 @@ final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
     {
         $productTaxonAutoCompleteType = new ProductTaxonAutocompleteChoiceType(
             $this->productTaxonFactory->reveal(),
-            $this->productTaxonRepository->reveal()
+            $this->productTaxonRepository->reveal(),
         );
         $resourceAutoCompleteType = new ResourceAutocompleteChoiceType($this->resourceRepositoryRegistry->reveal());
 

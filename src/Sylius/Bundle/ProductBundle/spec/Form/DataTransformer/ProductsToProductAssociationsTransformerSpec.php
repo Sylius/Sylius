@@ -28,12 +28,12 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
     function let(
         FactoryInterface $productAssociationFactory,
         ProductRepositoryInterface $productRepository,
-        RepositoryInterface $productAssociationTypeRepository
+        RepositoryInterface $productAssociationTypeRepository,
     ): void {
         $this->beConstructedWith(
             $productAssociationFactory,
             $productRepository,
-            $productAssociationTypeRepository
+            $productAssociationTypeRepository,
         );
     }
 
@@ -51,14 +51,14 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         ProductAssociationInterface $productAssociation,
         ProductAssociationTypeInterface $productAssociationType,
         ProductInterface $firstAssociatedProduct,
-        ProductInterface $secondAssociatedProduct
+        ProductInterface $secondAssociatedProduct,
     ): void {
         $productAssociation->getType()->willReturn($productAssociationType);
         $productAssociation->getAssociatedProducts()->willReturn(
             new ArrayCollection([
                 $firstAssociatedProduct->getWrappedObject(),
                 $secondAssociatedProduct->getWrappedObject(),
-            ])
+            ]),
         );
 
         $firstAssociatedProduct->getCode()->willReturn('FIRST');

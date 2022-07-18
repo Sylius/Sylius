@@ -39,7 +39,7 @@ final class SyliusShopExtension extends Extension
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $container->setParameter(
             'sylius_shop.product_grid.include_all_descendants',
-            $config['product_grid']['include_all_descendants']
+            $config['product_grid']['include_all_descendants'],
         );
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
@@ -57,7 +57,7 @@ final class SyliusShopExtension extends Extension
                 new Reference('sylius.router.checkout_state'),
                 new Definition(RequestMatcher::class, [$config['pattern']]),
                 new Reference('sm.factory'),
-            ]
+            ],
         );
         $checkoutResolverDefinition->addTag('kernel.event_subscriber');
 
@@ -66,7 +66,7 @@ final class SyliusShopExtension extends Extension
             [
                 new Reference('router'),
                 $config['route_map'],
-            ]
+            ],
         );
 
         $container->setDefinition('sylius.resolver.checkout', $checkoutResolverDefinition);

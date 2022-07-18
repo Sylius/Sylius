@@ -24,7 +24,7 @@ final class UserImpersonatedListener
     public function __construct(
         private CartStorageInterface $cartStorage,
         private ChannelContextInterface $channelContext,
-        private OrderRepositoryInterface $orderRepository
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 

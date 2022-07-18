@@ -29,7 +29,7 @@ final class TaxonExampleFactorySpec extends ObjectBehavior
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
         RepositoryInterface $localeRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator
+        TaxonSlugGeneratorInterface $taxonSlugGenerator,
     ) {
         $this->beConstructedWith($taxonFactory, $taxonRepository, $localeRepository, $taxonSlugGenerator);
     }
@@ -43,7 +43,7 @@ final class TaxonExampleFactorySpec extends ObjectBehavior
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ) {
         $taxonFactory->createNew()->willReturn($taxon);
         $localeRepository->findAll()->willReturn([$locale]);
@@ -66,7 +66,7 @@ final class TaxonExampleFactorySpec extends ObjectBehavior
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ) {
         $taxonFactory->createNew()->willReturn($taxon);
         $localeRepository->findAll()->willReturn([$locale]);
@@ -101,7 +101,7 @@ final class TaxonExampleFactorySpec extends ObjectBehavior
         FactoryInterface $taxonFactory,
         RepositoryInterface $localeRepository,
         Locale $locale,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ) {
         $taxonFactory->createNew()->willReturn($taxon);
         $localeRepository->findAll()->willReturn([$locale]);

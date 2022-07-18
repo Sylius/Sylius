@@ -33,7 +33,7 @@ class ProductImageNormalizer implements ContextAwareNormalizerInterface, Normali
     public function __construct(
         private CacheManager $cacheManager,
         private RequestStack $requestStack,
-        string $prefix
+        string $prefix,
     ) {
         $this->prefix = $this->validatePrefix($prefix);
     }

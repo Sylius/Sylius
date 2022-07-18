@@ -42,7 +42,7 @@ final class InForProductScopeVariantCheckerSpec extends ObjectBehavior
     public function it_returns_false_if_product_variant_is_not_in_scope_configuration(
         CatalogPromotionScopeInterface $scope,
         ProductVariantInterface $variant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $scope->getConfiguration()->willReturn(['products' => ['FIRST_PRODUCT', 'SECOND_PRODUCT']]);
 
@@ -54,7 +54,7 @@ final class InForProductScopeVariantCheckerSpec extends ObjectBehavior
 
     public function it_throws_exception_if_scope_does_not_contains_product_configuration(
         CatalogPromotionScopeInterface $scope,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $scope->getConfiguration()->willReturn(['FOO' => ['BOO']]);
 

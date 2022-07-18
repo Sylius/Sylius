@@ -26,7 +26,7 @@ final class SecurityServiceSpec extends ObjectBehavior
 {
     function let(
         SessionInterface $session,
-        CookieSetterInterface $cookieSetter
+        CookieSetterInterface $cookieSetter,
     ) {
         $this->beConstructedWith($session, $cookieSetter, 'shop');
     }
@@ -44,7 +44,7 @@ final class SecurityServiceSpec extends ObjectBehavior
     function it_logs_user_in(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
         $shopUser->getPassword()->willReturn('xyz');
@@ -62,7 +62,7 @@ final class SecurityServiceSpec extends ObjectBehavior
 
     function it_logs_user_out(
         SessionInterface $session,
-        CookieSetterInterface $cookieSetter
+        CookieSetterInterface $cookieSetter,
     ) {
         $session->set('_security_shop', null)->shouldBeCalled();
         $session->save()->shouldBeCalled();
@@ -74,7 +74,7 @@ final class SecurityServiceSpec extends ObjectBehavior
     }
 
     function it_throws_token_not_found_exception(
-        SessionInterface $session
+        SessionInterface $session,
     ) {
         $session->get('_security_shop')->willReturn(null);
 

@@ -44,7 +44,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         SecurityServiceInterface $adminSecurityService,
         TokenInterface $token,
         OrderInterface $order,
-        AdminUserInterface $adminUser
+        AdminUserInterface $adminUser,
     ) {
         $adminSecurityService->getCurrentToken()->willReturn($token);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
@@ -57,14 +57,14 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
             $adminUser,
             function () use ($wrappedOrder) {
                 $wrappedOrder->completeCheckout();
-            }
+            },
         );
     }
 
     function it_performs_action_as_given_admin_user_and_logout(
         SecurityServiceInterface $adminSecurityService,
         OrderInterface $order,
-        AdminUserInterface $adminUser
+        AdminUserInterface $adminUser,
     ) {
         $adminSecurityService->getCurrentToken()->willThrow(TokenNotFoundException::class);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
@@ -77,7 +77,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
             $adminUser,
             function () use ($wrappedOrder) {
                 $wrappedOrder->completeCheckout();
-            }
+            },
         );
     }
 }

@@ -21,7 +21,7 @@ final class CountryProvincesDeletionChecker implements CountryProvincesDeletionC
 {
     public function __construct(
         private RepositoryInterface $zoneMemberRepository,
-        private RepositoryInterface $provinceRepository
+        private RepositoryInterface $provinceRepository,
     ) {
     }
 

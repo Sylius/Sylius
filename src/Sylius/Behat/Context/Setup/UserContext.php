@@ -30,7 +30,7 @@ final class UserContext implements Context
         private UserRepositoryInterface $userRepository,
         private ExampleFactoryInterface $userFactory,
         private ObjectManager $userManager,
-        private MessageBusInterface $messageBus
+        private MessageBusInterface $messageBus,
     ) {
     }
 

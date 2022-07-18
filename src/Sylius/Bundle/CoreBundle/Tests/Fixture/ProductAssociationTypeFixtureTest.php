@@ -60,7 +60,7 @@ final class ProductAssociationTypeFixtureTest extends TestCase
     {
         return new ProductAssociationTypeFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

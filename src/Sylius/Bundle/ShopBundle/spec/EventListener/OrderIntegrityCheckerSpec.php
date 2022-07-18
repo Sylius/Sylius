@@ -29,7 +29,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
     function let(
         RouterInterface $router,
         OrderProcessorInterface $orderProcessor,
-        ObjectManager $orderManager
+        ObjectManager $orderManager,
     ): void {
         $this->beConstructedWith($router, $orderProcessor, $orderManager);
     }
@@ -38,7 +38,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderProcessorInterface $orderProcessor,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ResourceControllerEvent $event
+        ResourceControllerEvent $event,
     ): void {
         $event->getSubject()->willReturn($order);
 
@@ -60,13 +60,13 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         PromotionInterface $oldPromotion,
         PromotionInterface $newPromotion,
         ResourceControllerEvent $event,
-        ObjectManager $orderManager
+        ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
 
         $order->getPromotions()->willReturn(
             new ArrayCollection([$oldPromotion->getWrappedObject()]),
-            new ArrayCollection([$newPromotion->getWrappedObject()])
+            new ArrayCollection([$newPromotion->getWrappedObject()]),
         );
         $order->getTotal()->willReturn(1000);
 
@@ -79,7 +79,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         $event->stop(
             'sylius.order.promotion_integrity',
             ResourceControllerEvent::TYPE_ERROR,
-            ['%promotionName%' => 'Christmas']
+            ['%promotionName%' => 'Christmas'],
         )->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout.com'))->shouldBeCalled();
 
@@ -95,7 +95,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ResourceControllerEvent $event,
-        ObjectManager $orderManager
+        ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
 
@@ -121,13 +121,13 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $promotion,
         ResourceControllerEvent $event,
-        ObjectManager $orderManager
+        ObjectManager $orderManager,
     ): void {
         $event->getSubject()->willReturn($order);
 
         $order->getPromotions()->willReturn(
             new ArrayCollection([$promotion->getWrappedObject()]),
-            new ArrayCollection([])
+            new ArrayCollection([]),
         );
         $order->getTotal()->willReturn(1000);
 
@@ -141,7 +141,7 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         $event->stop(
             'sylius.order.promotion_integrity',
             ResourceControllerEvent::TYPE_ERROR,
-            ['%promotionName%' => 'Christmas']
+            ['%promotionName%' => 'Christmas'],
         )->shouldBeCalled();
         $event->setResponse(new RedirectResponse('checkout.com'))->shouldBeCalled();
 

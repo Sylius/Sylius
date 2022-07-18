@@ -20,7 +20,7 @@ final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVa
 {
     public function __construct(
         private ProductVariantRepositoryInterface $productVariantRepository,
-        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ) {
     }
 

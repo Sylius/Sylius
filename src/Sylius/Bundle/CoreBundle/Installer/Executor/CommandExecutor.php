@@ -34,7 +34,7 @@ final class CommandExecutor
         $parameters = array_merge(
             ['command' => $command],
             $this->getDefaultParameters(),
-            $parameters
+            $parameters,
         );
 
         $this->application->setAutoExit(false);

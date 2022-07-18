@@ -19,7 +19,7 @@ interface RequestInterface
         ?string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): self;
@@ -29,14 +29,14 @@ interface RequestInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function create(
         ?string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function update(
@@ -44,7 +44,7 @@ interface RequestInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function delete(
@@ -52,7 +52,7 @@ interface RequestInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function transition(?string $section, string $resource, string $id, string $transition): self;
@@ -63,7 +63,7 @@ interface RequestInterface
         ?string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): self;
 
     public static function custom(string $url, string $method, ?string $token = null): self;

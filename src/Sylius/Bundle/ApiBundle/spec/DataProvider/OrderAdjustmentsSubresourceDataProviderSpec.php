@@ -67,7 +67,7 @@ final class OrderAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
     function it_returns_order_adjustments(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
-        AdjustmentInterface $adjustment
+        AdjustmentInterface $adjustment,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN'];
         $orderRepository->findOneBy(['tokenValue' => 'TOKEN'])->willReturn($order);
@@ -79,7 +79,7 @@ final class OrderAdjustmentsSubresourceDataProviderSpec extends ObjectBehavior
                 AdjustmentInterface::class,
                 [],
                 $context,
-                Request::METHOD_GET
+                Request::METHOD_GET,
             )
             ->shouldBeLike(new ArrayCollection([$adjustment->getWrappedObject()]))
         ;

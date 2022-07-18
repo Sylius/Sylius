@@ -38,7 +38,7 @@ final class AddressItemExtension implements QueryItemExtensionInterface
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if (!is_a($resourceClass, AddressInterface::class, true)) {
             return;
@@ -74,7 +74,8 @@ final class AddressItemExtension implements QueryItemExtensionInterface
             $queryBuilder
                 ->innerJoin($rootAlias . '.customer', 'customer')
                 ->andWhere(sprintf('customer = :%s', $customerParameterName))
-                ->setParameter($customerParameterName, $customer);
+                ->setParameter($customerParameterName, $customer)
+            ;
 
             return;
         }

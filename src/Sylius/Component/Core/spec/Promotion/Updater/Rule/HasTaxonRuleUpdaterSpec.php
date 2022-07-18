@@ -34,7 +34,7 @@ final class HasTaxonRuleUpdaterSpec extends ObjectBehavior
         PromotionRuleInterface $firstPromotionRule,
         PromotionRuleInterface $secondPromotionRule,
         PromotionInterface $promotion,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $taxon->getCode()->willReturn('toys');
 

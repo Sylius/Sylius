@@ -55,7 +55,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
     function it_loads_user_by_username(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
@@ -66,7 +66,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
 
     function it_throws_exception_when_there_is_no_user_with_given_username_or_email(
         UserRepositoryInterface $userRepository,
-        CanonicalizerInterface $canonicalizer
+        CanonicalizerInterface $canonicalizer,
     ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
@@ -79,7 +79,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
     function it_loads_user_by_email(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
@@ -98,7 +98,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
     }
 
     function it_should_throw_exception_when_unsupported_user_is_used(
-        CoreUserInterface $user
+        CoreUserInterface $user,
     ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }

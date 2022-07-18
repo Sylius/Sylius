@@ -92,7 +92,7 @@ final class EmailChecker implements EmailCheckerInterface
         Assert::notEq(
             false,
             filter_var($recipient, \FILTER_VALIDATE_EMAIL),
-            'Given recipient is not a valid email address.'
+            'Given recipient is not a valid email address.',
         );
     }
 

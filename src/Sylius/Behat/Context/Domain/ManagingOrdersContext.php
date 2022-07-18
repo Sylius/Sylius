@@ -35,7 +35,7 @@ final class ManagingOrdersContext implements Context
         private RepositoryInterface $adjustmentRepository,
         private ObjectManager $orderManager,
         private ProductVariantResolverInterface $variantResolver,
-        private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
+        private UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
     ) {
     }
 

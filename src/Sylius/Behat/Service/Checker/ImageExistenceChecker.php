@@ -19,7 +19,7 @@ final class ImageExistenceChecker implements ImageExistenceCheckerInterface
 {
     public function __construct(
         private FilterService $filterService,
-        private string $mediaRootPath
+        private string $mediaRootPath,
     ) {
     }
 

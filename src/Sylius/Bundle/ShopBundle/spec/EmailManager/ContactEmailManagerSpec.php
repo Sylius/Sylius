@@ -32,7 +32,7 @@ final class ContactEmailManagerSpec extends ObjectBehavior
 
     function it_sends_a_contact_request_email(
         SenderInterface $sender,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $sender
             ->send(
@@ -47,7 +47,7 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                     'localeCode' => 'en_US',
                 ],
                 [],
-                ['customer@example.com']
+                ['customer@example.com'],
             )
             ->shouldBeCalled()
         ;
@@ -60,7 +60,7 @@ final class ContactEmailManagerSpec extends ObjectBehavior
                 ],
                 ['contact@example.com'],
                 $channel,
-                'en_US'
+                'en_US',
             )
         ;
     }

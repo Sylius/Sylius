@@ -36,7 +36,7 @@ class AddressExampleFactory extends AbstractExampleFactory
     public function __construct(
         private FactoryInterface $addressFactory,
         private RepositoryInterface $countryRepository,
-        private RepositoryInterface $customerRepository
+        private RepositoryInterface $customerRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

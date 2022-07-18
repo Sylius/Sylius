@@ -60,7 +60,7 @@ final class ProductOptionFixtureTest extends TestCase
     {
         return new ProductOptionFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

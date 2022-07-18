@@ -28,7 +28,7 @@ final class SettingsRequirements extends RequirementCollection
                 $translator->trans('sylius.installer.settings.timezone'),
                 $this->isOn('date.timezone'),
                 true,
-                $translator->trans('sylius.installer.settings.timezone_help')
+                $translator->trans('sylius.installer.settings.timezone_help'),
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.settings.version_recommended'),
@@ -37,19 +37,19 @@ final class SettingsRequirements extends RequirementCollection
                 $translator->trans('sylius.installer.settings.version_help', [
                     '%current%' => \PHP_VERSION,
                     '%recommended%' => self::RECOMMENDED_PHP_VERSION,
-                ])
+                ]),
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.settings.detect_unicode'),
                 !$this->isOn('detect_unicode'),
                 false,
-                $translator->trans('sylius.installer.settings.detect_unicode_help')
+                $translator->trans('sylius.installer.settings.detect_unicode_help'),
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.settings.session.auto_start'),
                 !$this->isOn('session.auto_start'),
                 false,
-                $translator->trans('sylius.installer.settings.session.auto_start_help')
+                $translator->trans('sylius.installer.settings.session.auto_start_help'),
             ))
         ;
     }

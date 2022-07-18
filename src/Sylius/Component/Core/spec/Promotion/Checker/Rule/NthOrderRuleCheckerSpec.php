@@ -43,7 +43,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_zero(
         CustomerInterface $customer,
         OrderInterface $subject,
-        OrderRepositoryInterface $ordersRepository
+        OrderRepositoryInterface $ordersRepository,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -56,7 +56,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
-        OrderRepositoryInterface $ordersRepository
+        OrderRepositoryInterface $ordersRepository,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -69,7 +69,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_greater_than_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
-        OrderRepositoryInterface $ordersRepository
+        OrderRepositoryInterface $ordersRepository,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -82,7 +82,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
     function it_recognizes_a_subject_as_eligible_if_nth_order_is_equal_with_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
-        OrderRepositoryInterface $ordersRepository
+        OrderRepositoryInterface $ordersRepository,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(1);
@@ -94,7 +94,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_eligible_if_nth_order_is_one_and_customer_is_not_in_database(
         CustomerInterface $customer,
-        OrderInterface $subject
+        OrderInterface $subject,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(null);
@@ -104,7 +104,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
 
     function it_recognizes_a_subject_as_not_eligible_if_it_is_first_order_of_new_customer_and_promotion_is_for_more_than_one_order(
         CustomerInterface $customer,
-        OrderInterface $subject
+        OrderInterface $subject,
     ): void {
         $subject->getCustomer()->willReturn($customer);
         $customer->getId()->willReturn(null);

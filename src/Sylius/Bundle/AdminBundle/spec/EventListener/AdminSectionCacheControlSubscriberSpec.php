@@ -43,7 +43,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         Request $request,
         Response $response,
         ResponseHeaderBag $responseHeaderBag,
-        AdminSection $adminSection
+        AdminSection $adminSection,
     ): void {
         $sectionProvider->getSection()->willReturn($adminSection);
 
@@ -53,7 +53,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             KernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         );
 
         $responseHeaderBag->addCacheControlDirective('no-cache', true)->shouldBeCalled();
@@ -70,7 +70,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
         Request $request,
         Response $response,
         ResponseHeaderBag $responseHeaderBag,
-        SectionInterface $section
+        SectionInterface $section,
     ): void {
         $sectionProvider->getSection()->willReturn($section);
 
@@ -80,7 +80,7 @@ final class AdminSectionCacheControlSubscriberSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             KernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         );
 
         $responseHeaderBag->addCacheControlDirective('no-cache', true)->shouldNotBeCalled();

@@ -33,7 +33,7 @@ final class CatalogPromotionEligibilityCheckerSpec extends ObjectBehavior
     public function it_returns_true_if_catalog_promotion_eligible(
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion,
-        CatalogPromotionInterface $promotion
+        CatalogPromotionInterface $promotion,
     ): void {
         $firstCriterion->verify($promotion)->willReturn(true);
         $secondCriterion->verify($promotion)->willReturn(true);
@@ -44,7 +44,7 @@ final class CatalogPromotionEligibilityCheckerSpec extends ObjectBehavior
     public function it_returns_false_if_catalog_promotion_not_eligible(
         CriteriaInterface $firstCriterion,
         CriteriaInterface $secondCriterion,
-        CatalogPromotionInterface $promotion
+        CatalogPromotionInterface $promotion,
     ): void {
         $firstCriterion->verify($promotion)->willReturn(false);
         $secondCriterion->verify($promotion)->shouldNotBeCalled();

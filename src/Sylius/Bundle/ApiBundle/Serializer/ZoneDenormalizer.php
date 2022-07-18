@@ -68,7 +68,7 @@ final class ZoneDenormalizer implements ContextAwareDenormalizerInterface, Denor
                 unset($data['members'][$key]);
 
                 $data['members'][$key] = $this->iriConverter->getIriFromItem(
-                    $this->getZoneMemberByCode($members, $member['code'])
+                    $this->getZoneMemberByCode($members, $member['code']),
                 );
             }
         }

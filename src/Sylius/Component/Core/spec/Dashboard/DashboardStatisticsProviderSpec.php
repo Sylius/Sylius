@@ -35,7 +35,7 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
     function it_obtains_order_and_customer_statistics_by_given_channel(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $expectedStats = new DashboardStatistics(450, 2, 6, $channel->getWrappedObject());
 
@@ -49,7 +49,7 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
     function it_obtains_order_and_customer_statistics_by_given_channel_and_period(
         OrderRepositoryInterface $orderRepository,
         CustomerRepositoryInterface $customerRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $expectedStats = new DashboardStatistics(450, 2, 6);
 

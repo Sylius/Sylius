@@ -36,7 +36,7 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     {
         return $this->createAction(
             FixedDiscountPromotionActionCommand::TYPE,
-            [$channelCode => ['amount' => $amount]]
+            [$channelCode => ['amount' => $amount]],
         );
     }
 
@@ -44,7 +44,7 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     {
         return $this->createAction(
             UnitFixedDiscountPromotionActionCommand::TYPE,
-            [$channelCode => ['amount' => $amount]]
+            [$channelCode => ['amount' => $amount]],
         );
     }
 
@@ -52,7 +52,7 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     {
         return $this->createAction(
             PercentageDiscountPromotionActionCommand::TYPE,
-            ['percentage' => $percentage]
+            ['percentage' => $percentage],
         );
     }
 
@@ -60,7 +60,7 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     {
         return $this->createAction(
             UnitPercentageDiscountPromotionActionCommand::TYPE,
-            [$channelCode => ['percentage' => $percentage]]
+            [$channelCode => ['percentage' => $percentage]],
         );
     }
 
@@ -68,7 +68,7 @@ final class PromotionActionFactory implements PromotionActionFactoryInterface
     {
         return $this->createAction(
             ShippingPercentageDiscountPromotionActionCommand::TYPE,
-            ['percentage' => $percentage]
+            ['percentage' => $percentage],
         );
     }
 

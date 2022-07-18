@@ -38,7 +38,7 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         private RepositoryInterface $localeRepository,
         private ChannelRepositoryInterface $channelRepository,
         private ExampleFactoryInterface $catalogPromotionScopeExampleFactory,
-        private ExampleFactoryInterface $catalogPromotionActionExampleFactory
+        private ExampleFactoryInterface $catalogPromotionActionExampleFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

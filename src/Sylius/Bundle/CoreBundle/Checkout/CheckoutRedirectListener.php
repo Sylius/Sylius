@@ -25,7 +25,7 @@ final class CheckoutRedirectListener
     public function __construct(
         private RequestStack $requestStack,
         private CheckoutStateUrlGeneratorInterface $checkoutStateUrlGenerator,
-        private RequestMatcherInterface $requestMatcher
+        private RequestMatcherInterface $requestMatcher,
     ) {
     }
 

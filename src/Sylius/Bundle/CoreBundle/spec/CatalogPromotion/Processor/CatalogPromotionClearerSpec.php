@@ -31,7 +31,7 @@ final class CatalogPromotionClearerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ChannelPricingInterface $firstChannelPricing,
         ChannelPricingInterface $secondChannelPricing,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $variant->getChannelPricings()->willReturn(new ArrayCollection([
             $firstChannelPricing->getWrappedObject(),

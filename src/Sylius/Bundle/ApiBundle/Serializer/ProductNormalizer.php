@@ -30,7 +30,7 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
     public function __construct(
         private ProductVariantResolverInterface $defaultProductVariantResolver,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
     }
 

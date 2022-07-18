@@ -59,7 +59,7 @@ class PromotionCouponController extends ResourceController
                 'metadata' => $this->metadata,
                 'promotion' => $promotion,
                 'form' => $form->createView(),
-            ]
+            ],
         );
     }
 

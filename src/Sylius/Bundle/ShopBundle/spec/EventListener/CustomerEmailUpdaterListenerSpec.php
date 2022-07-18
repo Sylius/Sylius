@@ -36,7 +36,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         EventDispatcherInterface $eventDispatcher,
         SessionInterface $session,
-        SectionProviderInterface $sectionResolver
+        SectionProviderInterface $sectionResolver,
     ): void {
         $this->beConstructedWith($tokenGenerator, $channelContext, $eventDispatcher, $session, $sectionResolver);
     }
@@ -44,7 +44,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
     function it_does_nothing_change_was_performed_by_admin(
         SectionProviderInterface $sectionResolver,
         SectionInterface $section,
-        GenericEvent $event
+        GenericEvent $event,
     ): void {
         $sectionResolver->getSection()->willReturn($section);
 
@@ -62,7 +62,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -92,7 +92,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -121,7 +121,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -146,7 +146,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         GenericEvent $event,
         \stdClass $customer,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -160,7 +160,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -181,7 +181,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -216,7 +216,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -251,7 +251,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -286,7 +286,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -321,7 +321,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         FlashBagInterface $flashBag,
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 

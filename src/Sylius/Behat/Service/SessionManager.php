@@ -23,7 +23,7 @@ final class SessionManager implements SessionManagerInterface
     public function __construct(
         private Mink $mink,
         private SharedStorageInterface $sharedStorage,
-        private SecurityServiceInterface $securityService
+        private SecurityServiceInterface $securityService,
     ) {
     }
 

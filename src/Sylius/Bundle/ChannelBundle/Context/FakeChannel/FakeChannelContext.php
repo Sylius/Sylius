@@ -25,7 +25,7 @@ final class FakeChannelContext implements ChannelContextInterface
     public function __construct(
         private FakeChannelCodeProviderInterface $fakeChannelCodeProvider,
         private ChannelRepositoryInterface $channelRepository,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {
     }
 

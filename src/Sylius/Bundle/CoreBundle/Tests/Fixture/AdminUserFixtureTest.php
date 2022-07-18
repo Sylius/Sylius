@@ -68,7 +68,7 @@ final class AdminUserFixtureTest extends TestCase
     {
         return new AdminUserFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

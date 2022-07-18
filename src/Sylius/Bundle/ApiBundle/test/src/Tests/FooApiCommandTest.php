@@ -32,7 +32,7 @@ final class FooApiCommandTest extends ApiTestCase
         static::createClient()->request(
             'POST',
             'api/v2/foo-api-command',
-            ['json' => ['name' => 'FooCommandPost']]
+            ['json' => ['name' => 'FooCommandPost']],
         );
         $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
 
@@ -49,7 +49,7 @@ final class FooApiCommandTest extends ApiTestCase
         static::createClient()->request(
             'POST',
             'api/v2/foo-api-command',
-            ['json' => ['bar' => 'FooCommandPost']]
+            ['json' => ['bar' => 'FooCommandPost']],
         );
         $this->assertResponseIsSuccessful();
     }

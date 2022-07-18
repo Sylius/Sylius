@@ -46,7 +46,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
         ProductVariantInterface $whiteSmallTShirt,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
@@ -61,16 +61,16 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $blackSmallTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
+            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()]),
         );
         $whiteSmallTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()])
+            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()]),
         );
         $blackLargeTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()])
+            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()]),
         );
         $whiteLargeTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()])
+            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()]),
         );
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
@@ -131,7 +131,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $whiteSmallTShirt,
         ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
         CatalogPromotionInterface $winterCatalogPromotion,
-        CatalogPromotionInterface $summerCatalogPromotion
+        CatalogPromotionInterface $summerCatalogPromotion,
     ): void {
         $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
@@ -146,21 +146,21 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         $whiteSmallTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
         $blackLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection(
             [
-            $summerCatalogPromotion->getWrappedObject(), ]
+            $summerCatalogPromotion->getWrappedObject(), ],
         ));
         $whiteLargeTShirt->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $blackSmallTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()])
+            new ArrayCollection([$black->getWrappedObject(), $small->getWrappedObject()]),
         );
         $whiteSmallTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()])
+            new ArrayCollection([$white->getWrappedObject(), $small->getWrappedObject()]),
         );
         $blackLargeTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()])
+            new ArrayCollection([$black->getWrappedObject(), $large->getWrappedObject()]),
         );
         $whiteLargeTShirt->getOptionValues()->willReturn(
-            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()])
+            new ArrayCollection([$white->getWrappedObject(), $large->getWrappedObject()]),
         );
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);

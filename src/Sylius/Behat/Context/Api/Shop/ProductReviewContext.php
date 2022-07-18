@@ -28,7 +28,7 @@ final class ProductReviewContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -133,7 +133,7 @@ final class ProductReviewContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'status'),
-            ReviewInterface::STATUS_NEW
+            ReviewInterface::STATUS_NEW,
         );
     }
 

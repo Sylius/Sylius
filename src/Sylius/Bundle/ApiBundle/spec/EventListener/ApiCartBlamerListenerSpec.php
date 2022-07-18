@@ -38,7 +38,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
     function let(
         CartContextInterface $cartContext,
         SectionProviderInterface $sectionResolver,
-        MessageBusInterface $commandBus
+        MessageBusInterface $commandBus,
     ): void {
         $this->beConstructedWith($cartContext, $sectionResolver, $commandBus);
     }
@@ -50,7 +50,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         Request $request,
         TokenInterface $token,
-        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection
+        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($order);
@@ -71,7 +71,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
-        MessageBusInterface $commandBus
+        MessageBusInterface $commandBus,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -100,7 +100,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         CustomerInterface $customer,
-        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection
+        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -117,7 +117,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         OrderInterface $cart,
         Request $request,
         TokenInterface $token,
-        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection
+        ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -134,7 +134,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         ShopUserInterface $user,
-        ShopApiOrdersSubSection $shopApiOrdersSubSection
+        ShopApiOrdersSubSection $shopApiOrdersSubSection,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSection);
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
@@ -148,7 +148,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         SectionProviderInterface $sectionResolver,
         Request $request,
         TokenInterface $token,
-        SectionInterface $section
+        SectionInterface $section,
     ): void {
         $sectionResolver->getSection()->willReturn($section);
 
@@ -163,7 +163,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         SectionProviderInterface $sectionResolver,
         Request $request,
         TokenInterface $token,
-        AdminApiSection $section
+        AdminApiSection $section,
     ): void {
         $sectionResolver->getSection()->willReturn($section);
 

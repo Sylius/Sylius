@@ -25,7 +25,7 @@ final class ManagingProductOptionsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -102,7 +102,7 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->client->addSubResourceData(
             'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value, 'locale' => 'en_US']]]
+            ['code' => $code, 'translations' => ['en_US' => ['value' => $value, 'locale' => 'en_US']]],
         );
     }
 
@@ -150,7 +150,7 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $productOption->getName()),
-            sprintf('Product option should have name "%s", but it does not.', $productOption->getName())
+            sprintf('Product option should have name "%s", but it does not.', $productOption->getName()),
         );
     }
 
@@ -161,7 +161,7 @@ final class ManagingProductOptionsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), 0, $field, $value),
-            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, 1)
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, 1),
         );
     }
 
@@ -174,7 +174,7 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::true(
             $this->responseChecker->hasItemOnPositionWithValue($this->client->getLastResponse(), $count - 1, $field, $value),
-            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count - 1)
+            sprintf('There should be product option with %s "%s" on position %d, but it does not.', $field, $value, $count - 1),
         );
     }
 
@@ -185,7 +185,7 @@ final class ManagingProductOptionsContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(), $element, $value),
-            sprintf('Product option should not have %s "%s", but it does,', $element, $value)
+            sprintf('Product option should not have %s "%s", but it does,', $element, $value),
         );
     }
 
@@ -216,13 +216,13 @@ final class ManagingProductOptionsContext implements Context
      */
     public function productOptionShouldHaveTheOptionValue(
         ProductOptionInterface $productOption,
-        string $optionValueName
+        string $optionValueName,
     ): void {
         Assert::true($this->responseChecker->hasItemWithTranslation(
             $this->client->subResourceIndex('values', $productOption->getCode()),
             'en_US',
             'value',
-            $optionValueName
+            $optionValueName,
         ));
     }
 
@@ -244,11 +244,11 @@ final class ManagingProductOptionsContext implements Context
         $response = $this->client->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Product option has been created successfully, but it should not'
+            'Product option has been created successfully, but it should not',
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'code: The option with given code already exists.'
+            'code: The option with given code already exists.',
         );
     }
 
@@ -259,7 +259,7 @@ final class ManagingProductOptionsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter option %s.', $element, $element)
+            sprintf('%s: Please enter option %s.', $element, $element),
         );
     }
 
@@ -270,7 +270,7 @@ final class ManagingProductOptionsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Product option could not be created'
+            'Product option could not be created',
         );
     }
 
@@ -281,7 +281,7 @@ final class ManagingProductOptionsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product option could not be edited'
+            'Product option could not be edited',
         );
     }
 }
