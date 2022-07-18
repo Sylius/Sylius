@@ -12,8 +12,8 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
 
-                - sylius.behat.context.ui.channel
-                - sylius.behat.context.ui.shop.homepage
+                - sylius.behat.context.api.channel
+                - sylius.behat.context.api.shop.homepage
 
             filters:
-                tags: "@channels&&@ui"
+                tags: "@channels&&@api"

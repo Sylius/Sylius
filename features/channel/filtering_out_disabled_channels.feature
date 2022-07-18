@@ -7,9 +7,12 @@ Feature: Filtering out disabled channels
     Background:
         Given the store operates on a channel named "Fashion" in "USD" currency and with hostname "127.0.0.1"
         And the store operates on a channel named "Furniture" in "EUR" currency and with hostname "127.0.0.1"
+        And there is product "Black T-Shirt" available in "Fashion" channel
+        And there is product "Old Wardrobe" available in "Furniture" channel
         And the channel "Fashion" is disabled
 
-    @ui
-    Scenario: Seeing Furniture shop homepage
-        When I visit the homepage
-        Then I should see "Furniture" shop
+    @ui @api
+    Scenario: Seeing Furniture shop products
+        When I check latest products
+        Then I should see "Old Wardrobe" product
+        And I should not see "Black T-Shirt" product

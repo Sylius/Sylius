@@ -29,7 +29,6 @@ final class HomepageContext implements Context
     /**
      * @When I check latest products
      * @When I check available taxons
-     * @When I visit the homepage
      */
     public function iCheckLatestProducts(): void
     {
@@ -50,6 +49,22 @@ final class HomepageContext implements Context
     public function iShouldSeeProductsInTheList(int $numberOfProducts): void
     {
         Assert::same(count($this->homePage->getLatestProductsNames()), $numberOfProducts);
+    }
+
+    /**
+     * @Then I should see :productName product
+     */
+    public function iShouldSeeProduct(string $productName): void
+    {
+        Assert::inArray($productName, $this->homePage->getLatestProductsNames());
+    }
+
+    /**
+     * @Then I should not see :productName product
+     */
+    public function iShouldNotSeeProduct(string $productName): void
+    {
+        Assert::true(!in_array($productName, $this->homePage->getLatestProductsNames()));
     }
 
     /**

@@ -78,12 +78,4 @@ final class ChannelContext implements Context
     {
         Assert::same($this->pluginMainPage->getContent(), $content);
     }
-
-    /**
-     * @Then I should see :channel shop
-     */
-    public function iShouldSeeShop(ChannelInterface $channel): void
-    {
-        Assert::eq($this->homePage->getMetaTitle(), $channel->getName());
-    }
 }
