@@ -1,0 +1,27 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-07-08T15:13:02Z
+
+@Zales0123
+All comments resolved. I've added an option to define redirect route from yml. I've decided to put "the default" value in a code anyway just to be sure we'll never spot `null` there. Also I've removed spec for `Render` action but after implementing the `define redirect route` option I've decided to left the second action. If you still feel we should remove it just let me know 🖖🏼.
+
+@AdamKasp
+Most of your comments are resolved, just 2 need your interaction :D.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-07-12T13:21:22Z
+
+@GSadee @NoResponseMate thanks for the suggestions, all introduced 👊🏻.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-07-14T15:20:29Z
+
+@GSadee, after a conversation with @NoResponseMate I've dropped his three commits and I've resolved all your comments. While adding information about changes in `security.yaml` I noticed we didn't mention a similar change in the case of API. I've included it in the same PR as all API-related PR are already merged ✌🏻.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-07-18T06:43:29Z
+
+Thank you, Jakub! :1st_place_medal:
