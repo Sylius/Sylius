@@ -71,6 +71,11 @@ $(document).ready(() => {
       $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
     }, 50);
   });
+  $('#sylius_shipping_method_rules > a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_shipping_method[rules]"][name$="[type]"]').last().change();
+    }, 50);
+  });
 
   $(document).on('collection-form-add', () => {
     $('.sylius-autocomplete').each((index, element) => {
