@@ -521,6 +521,27 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then /^I should see that the shipping charges for ("[^"]+" channel) has (\d+) validation errors?$/
+     */
+    public function iShouldSeeThatTheShippingChargesForChannelHasCountValidationErrors(
+        ChannelInterface $channel,
+        int $count,
+    ): void {
+        Assert::same(
+            $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
+            $count
+        );
+    }
+
+    /**
+     * @When /^I remove the shipping charges of ("[^"]+" channel)$/
+     */
+    public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
+    {
+        $this->updatePage->removeShippingChargesAmount($channel->getCode());
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */

@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
@@ -703,6 +704,38 @@ final class ManagingPromotionsContext implements Context
     public function iShouldSeeTheActionConfigurationForm()
     {
         Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Cart promotion action configuration form is not visible.');
+    }
+
+    /**
+     * @Then /^I should see that the rule for ("[^"]+" channel) has (\d+) validation errors?$/
+     */
+    public function iShouldSeeThatTheRuleForChannelHasCountValidationErrors(ChannelInterface $channel, int $count): void
+    {
+        Assert::same($this->updatePage->getRuleValidationErrorsCount($channel->getCode()), $count);
+    }
+
+    /**
+     * @Then /^I should see that the action for ("[^"]+" channel) has (\d+) validation errors?$/
+     */
+    public function iShouldSeeThatTheActionForChannelHasCountValidationErrors(ChannelInterface $channel, int $count): void
+    {
+        Assert::same($this->updatePage->getActionValidationErrorsCount($channel->getCode()), $count);
+    }
+
+    /**
+     * @When /^I remove the discount (amount|percentage) for ("[^"]+" channel)$/
+     */
+    public function iRemoveTheDiscountForChannel(string $field, ChannelInterface $channel): void
+    {
+        $this->updatePage->removeActionFieldValue($channel->getCode(), $field);
+    }
+
+    /**
+     * @When /^I remove the rule amount for ("[^"]+" channel)$/
+     */
+    public function iRemoveTheRuleAmountForChannel(ChannelInterface $channel): void
+    {
+        $this->updatePage->removeRuleAmount($channel->getCode());
     }
 
     /**

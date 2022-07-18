@@ -331,6 +331,48 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") off in the ("[^"]+" channel)$/
+     */
+    public function thisPromotionGivesFixedDiscountOnEveryProductInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        int $firstAmount,
+        ChannelInterface $firstChannel,
+        int $secondAmount,
+        ChannelInterface $secondChannel
+    ): void {
+        /** @var PromotionActionInterface $action */
+        $action = $this->actionFactory->createUnitFixedDiscount($firstAmount, $firstChannel->getCode());
+        $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondAmount]]));
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) gives ("[^"]+%") off on every product in the ("[^"]+" channel) and ("[^"]+%") off in the ("[^"]+" channel)$/
+     */
+    public function thisPromotionGivesPercentageDiscountOnEveryProductInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        int $firstPercentage,
+        ChannelInterface $firstChannel,
+        int $secondPercentage,
+        ChannelInterface $secondChannel
+    ): void {
+        /** @var PromotionActionInterface $action */
+        $action = $this->actionFactory->createUnitPercentageDiscount($firstPercentage, $firstChannel->getCode());
+        $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['percentage' => $secondPercentage]]));
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^([^"]+) gives ("[^"]+%") discount to every order$/
      */
     public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, float $discount): void
@@ -796,6 +838,22 @@ final class PromotionContext implements Context
     public function thisPromotionUsageLimitIsAlreadyReached(PromotionInterface $promotion): void
     {
         $promotion->setUsed($promotion->getUsageLimit());
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion) only applies to orders with a total of at least ("[^"]+") for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function thisPromotionOnlyAppliesToOrdersWithTotalOfAtLeastForAndFor(
+        PromotionInterface $promotion,
+        int $firstAmount,
+        ChannelInterface $firstChannel,
+        int $secondAmount,
+        ChannelInterface $secondChannel,
+    ): void {
+        $promotion->addRule($this->ruleFactory->createItemTotal($firstChannel->getCode(), $firstAmount));
+        $promotion->addRule($this->ruleFactory->createItemTotal($secondChannel->getCode(), $secondAmount));
 
         $this->objectManager->flush();
     }

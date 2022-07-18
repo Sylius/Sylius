@@ -50,4 +50,12 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function hasAnyRule(): bool;
 
     public function hasRule(string $name): bool;
+
+    public function removeActionFieldValue(string $channelCode, string $field): void;
+
+    public function removeRuleAmount(string $channelCode): void;
+
+    public function getActionValidationErrorsCount(string $channelCode): int;
+
+    public function getRuleValidationErrorsCount(string $channelCode): int;
 }

@@ -37,7 +37,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'endDate' => '#sylius_catalog_promotion_endDate',
             'name' => '#sylius_catalog_promotion_name',
             'products' => '[name="sylius_catalog_promotion[scopes][0][configuration][products]"]',
-            'amount' => '[name="sylius_catalog_promotion[actions][0][configuration][amount]"]',
+            'amount' => '[name^="sylius_catalog_promotion[actions][0][configuration]"][name$="[amount]"]',
         ]);
     }
 }
