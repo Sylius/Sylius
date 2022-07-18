@@ -119,69 +119,69 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and (?:€|£|\$)([^"]+) amount for "([^"]+)" channel$/
+     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
      */
-    public function iAddTheRuleConfiguredWith($taxonName, $amount, $channelName)
+    public function iAddTheRuleConfiguredWith($taxonName, $amount, ChannelInterface $channel)
     {
         $this->createPage->addRule('Total price of items from taxon');
         $this->createPage->selectAutocompleteRuleOption('Taxon', $taxonName);
-        $this->createPage->fillRuleOptionForChannel($channelName, 'Amount', $amount);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
-     * @When /^I add the "Item total" rule configured with (?:€|£|\$)([^"]+) amount for "([^"]+)" channel and (?:€|£|\$)([^"]+) amount for "([^"]+)" channel$/
+     * @When /^I add the "Item total" rule configured with (?:€|£|\$)([^"]+) amount for ("[^"]+" channel) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
      */
     public function iAddTheItemTotalRuleConfiguredWithTwoChannel(
         $firstAmount,
-        $firstChannelName,
+        ChannelInterface $firstChannel,
         $secondAmount,
-        $secondChannelName
+        ChannelInterface $secondChannel
     ) {
         $this->createPage->addRule('Item total');
-        $this->createPage->fillRuleOptionForChannel($firstChannelName, 'Amount', $firstAmount);
-        $this->createPage->fillRuleOptionForChannel($secondChannelName, 'Amount', $secondAmount);
+        $this->createPage->fillRuleOptionForChannel($firstChannel->getCode(), 'Amount', $firstAmount);
+        $this->createPage->fillRuleOptionForChannel($secondChannel->getCode(), 'Amount', $secondAmount);
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
      */
-    public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, $channelName)
+    public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, ChannelInterface $channel)
     {
         $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channelName, 'Amount', $amount);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
-     * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for ("[^"]+" channel)$/
      */
-    public function itIsConfiguredWithAmountForChannel($amount, $channelName)
+    public function itIsConfiguredWithAmountForChannel($amount, ChannelInterface $channel)
     {
-        $this->createPage->fillActionOptionForChannel($channelName, 'Amount', $amount);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
     }
 
     /**
-     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
      */
-    public function iAddAMinPriceFilterRangeForChannel($channelName, $minimum)
+    public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, $minimum)
     {
-        $this->createPage->fillActionOptionForChannel($channelName, 'Min', $minimum);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Min', $minimum);
     }
 
     /**
-     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
      */
-    public function iAddAMaxPriceFilterRangeForChannel($channelName, $maximum)
+    public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, $maximum)
     {
-        $this->createPage->fillActionOptionForChannel($channelName, 'Max', $maximum);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Max', $maximum);
     }
 
     /**
-     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
      */
-    public function iAddAMinMaxPriceFilterRangeForChannel($channelName, $minimum, $maximum)
+    public function iAddAMinMaxPriceFilterRangeForChannel(ChannelInterface $channel, $minimum, $maximum)
     {
-        $this->iAddAMinPriceFilterRangeForChannel($channelName, $minimum);
-        $this->iAddAMaxPriceFilterRangeForChannel($channelName, $maximum);
+        $this->iAddAMinPriceFilterRangeForChannel($channel, $minimum);
+        $this->iAddAMaxPriceFilterRangeForChannel($channel, $maximum);
     }
 
     /**
@@ -193,15 +193,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+") channel$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
         string $actionType,
         string $percentage,
-        string $channelName,
+        ChannelInterface $channel,
     ): void {
         $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', $percentage);
     }
 
     /**

@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
@@ -117,7 +119,11 @@ final class FormElement extends Element implements FormElementInterface
     {
         $lastAction = $this->getElement('last_action');
 
-        $lastAction->find('css', sprintf('.field:contains("%s") input', $channel->getName()))->setValue($discount);
+        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
+            $this->activateChannelTab($lastAction, $channel->getCode());
+        }
+
+        $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->setValue($discount);
     }
 
     public function getFieldValueInLocale(string $field, string $localeCode): string
@@ -143,7 +149,11 @@ final class FormElement extends Element implements FormElementInterface
     {
         $lastAction = $this->getElement('last_action');
 
-        return $lastAction->find('css', 'input')->getValue();
+        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
+            $this->activateChannelTab($lastAction, $channel->getCode());
+        }
+
+        return $lastAction->find('css', sprintf('[id$="%s_amount"]', $channel->getCode()))->getValue();
     }
 
     public function getValidationMessage(): string
@@ -239,5 +249,17 @@ final class FormElement extends Element implements FormElementInterface
         Assert::isArray($items);
 
         return $items;
+    }
+
+    private function activateChannelTab(NodeElement $configurationElement, string $channelCode): void
+    {
+        $tab = $configurationElement->find('css', sprintf('.item[data-tab*="%s"]', $channelCode));
+        if (false === $tab->hasClass('active')) {
+            $tab->click();
+
+            $tabContent = $configurationElement->find('css', sprintf('.tab[data-tab*="%s"]', $channelCode));
+
+            $this->getDocument()->waitFor(5, fn () => $tabContent->isVisible());
+        }
     }
 }

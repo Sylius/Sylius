@@ -46,6 +46,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyAmountForChannel(string $channelCode, string $amount): void
     {
+        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
+            $this->activateChannelTab($this->getElement('calculator_configuration'), $channelCode);
+        }
+
         $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
 
@@ -111,9 +115,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
 
-    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void
+    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void
     {
-        $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
+        $lastAction = $this->getChannelConfigurationOfLastRule($channelCode);
         $lastAction->fillField($option, $value);
     }
 
@@ -123,6 +127,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'channel' => '#sylius_shipping_method_channels .ui.checkbox:contains("%channel%")',
             'calculator' => '#sylius_shipping_method_calculator',
+            'calculator_configuration' => '.ui.segment.configuration',
             'code' => '#sylius_shipping_method_code',
             'name' => '#sylius_shipping_method_translations_en_US_name',
             'zone' => '#sylius_shipping_method_zone',
@@ -164,11 +169,23 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $items;
     }
 
-    private function getChannelConfigurationOfLastRule(string $channelName): NodeElement
+    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
     {
         return $this
             ->getLastCollectionItem('rules')
-            ->find('css', sprintf('[id$="configuration"] .field:contains("%s")', $channelName))
+            ->find('css', sprintf('[id^="sylius_shipping_method_rules_"][id$="_configuration_%s"]', $channelCode))
         ;
+    }
+
+    private function activateChannelTab(NodeElement $configurationElement, string $channelCode): void
+    {
+        $tab = $configurationElement->find('css', sprintf('.item[data-tab*="%s"]', $channelCode));
+        if (false === $tab->hasClass('active')) {
+            $tab->click();
+
+            $tabContent = $configurationElement->find('css', sprintf('.tab[data-tab*="%s"]', $channelCode));
+
+            $this->getDocument()->waitFor(5, fn () => $tabContent->isVisible());
+        }
     }
 }
