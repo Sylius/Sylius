@@ -26,7 +26,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
     public function __construct(
         private RepositoryInterface $shopUserRepository,
-        private DateTimeProviderInterface $calendar
+        private DateTimeProviderInterface $calendar,
     ) {
     }
 
@@ -36,7 +36,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
         if (null === $user) {
             throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->token)
+                sprintf('There is no shop user with %s email verification token', $command->token),
             );
         }
 

@@ -37,9 +37,9 @@ final class SelectAttributeType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if (is_array($options['configuration'])
-            && isset($options['configuration']['multiple'])
-            && !$options['configuration']['multiple']) {
+        if (is_array($options['configuration']) &&
+            isset($options['configuration']['multiple']) &&
+            !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
                 /**
                  * @param mixed $array
@@ -60,7 +60,7 @@ final class SelectAttributeType extends AbstractType
                     }
 
                     return [];
-                }
+                },
             ));
         }
     }
@@ -72,9 +72,9 @@ final class SelectAttributeType extends AbstractType
             ->setDefault('placeholder', 'sylius.form.attribute_type_configuration.select.choose')
             ->setDefault('locale_code', $this->defaultLocaleCode)
             ->setNormalizer('choices', function (Options $options) {
-                if (is_array($options['configuration'])
-                    && isset($options['configuration']['choices'])
-                    && is_array($options['configuration']['choices'])) {
+                if (is_array($options['configuration']) &&
+                    isset($options['configuration']['choices']) &&
+                    is_array($options['configuration']['choices'])) {
                     $choices = [];
                     $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
 

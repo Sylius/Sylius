@@ -44,7 +44,7 @@ final class ConfirmResetPasswordValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_passwords_are_different(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new ConfirmResetPassword();
         $constraint->message = 'message';

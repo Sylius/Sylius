@@ -28,13 +28,13 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         SessionInterface $session,
         ChannelRepositoryInterface $channelRepository,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
-        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater
+        TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
     ): void {
         $this->beConstructedWith(
             $session,
             $channelRepository,
             $hasTaxonRuleUpdater,
-            $totalOfItemsFromTaxonRuleUpdater
+            $totalOfItemsFromTaxonRuleUpdater,
         );
     }
 
@@ -44,7 +44,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         GenericEvent $event,
         TaxonInterface $taxon,
         ChannelInterface $channel,
-        FlashBagInterface $flashes
+        FlashBagInterface $flashes,
     ): void {
         $event->getSubject()->willReturn($taxon);
 
@@ -62,7 +62,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         GenericEvent $event,
         TaxonInterface $taxon,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($taxon);
 
@@ -88,7 +88,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
         FlashBagInterface $flashes,
         GenericEvent $event,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
 
@@ -112,7 +112,7 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
         GenericEvent $event,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $event->getSubject()->willReturn($taxon);
 

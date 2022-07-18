@@ -68,7 +68,7 @@ final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 
         $sendOrderConfirmationEmailHandler = new SendOrderConfirmationHandler(
             $emailSender,
-            $orderRepository->reveal()
+            $orderRepository->reveal(),
         );
 
         $sendOrderConfirmationEmailHandler(new SendOrderConfirmation('TOKEN'));
@@ -79,9 +79,9 @@ final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
                 '%s %s %s',
                 $translator->trans('sylius.email.order_confirmation.your_order_number', [], null, 'pl_PL'),
                 '#000001',
-                $translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, 'pl_PL')
+                $translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, 'pl_PL'),
             ),
-            'johnny.bravo@email.com'
+            'johnny.bravo@email.com',
         ));
     }
 }

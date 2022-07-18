@@ -30,13 +30,13 @@ final class CommandDenormalizerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
     ): void {
         $baseNormalizer->denormalize(Argument::any())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(new MissingConstructorArgumentsException(
-                'Request does not have the following required fields specified: firstName, lastName.'
+                'Request does not have the following required fields specified: firstName, lastName.',
             ))
             ->during(
                 'denormalize',
@@ -45,20 +45,20 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                     '',
                     null,
                     ['input' => ['class' => RegisterShopUser::class]],
-                ]
+                ],
             )
         ;
     }
 
     function it_denormalizes_data_if_all_required_parameters_are_specified(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
     ): void {
         $baseNormalizer
             ->denormalize(
                 ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
                 Customer::class,
                 null,
-                ['input' => ['class' => RegisterShopUser::class]]
+                ['input' => ['class' => RegisterShopUser::class]],
             )
             ->willReturn(['key' => 'value'])
         ;
@@ -67,12 +67,12 @@ final class CommandDenormalizerSpec extends ObjectBehavior
             ['firstName' => 'John', 'lastName' => 'Doe', 'email' => 'test@example.com', 'password' => 'pa$$word'],
             Customer::class,
             null,
-            ['input' => ['class' => RegisterShopUser::class]]
+            ['input' => ['class' => RegisterShopUser::class]],
         )->shouldReturn(['key' => 'value']);
     }
 
     function it_does_not_check_parameters_if_there_is_an_object_to_populate(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
     ): void {
         $baseNormalizer
             ->denormalize(
@@ -82,7 +82,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 [
                     'input' => ['class' => VerifyCustomerAccount::class],
                     'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
-                ]
+                ],
             )
             ->willReturn(['key' => 'value'])
         ;
@@ -95,21 +95,21 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 [
                     'input' => ['class' => VerifyCustomerAccount::class],
                     'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
-                ]
+                ],
             )
             ->shouldReturn(['key' => 'value'])
         ;
     }
 
     function it_does_not_check_parameters_if_there_is_no_constructor(
-        DenormalizerInterface $baseNormalizer
+        DenormalizerInterface $baseNormalizer,
     ): void {
         $baseNormalizer
             ->denormalize(
                 [],
                 Customer::class,
                 null,
-                ['input' => ['class' => \stdClass::class]]
+                ['input' => ['class' => \stdClass::class]],
             )
             ->willReturn(['key' => 'value'])
         ;
@@ -119,7 +119,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 [],
                 Customer::class,
                 null,
-                ['input' => ['class' => \stdClass::class]]
+                ['input' => ['class' => \stdClass::class]],
             )
             ->shouldReturn(['key' => 'value'])
         ;

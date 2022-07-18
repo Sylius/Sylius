@@ -43,7 +43,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
     function it_adds_violation(
         ExecutionContextInterface $context,
         PromotionCouponGeneratorInstructionInterface $instruction,
-        GenerationPolicyInterface $generationPolicy
+        GenerationPolicyInterface $generationPolicy,
     ): void {
         $constraint = new CouponPossibleGenerationAmount();
 
@@ -59,7 +59,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation(
         ExecutionContextInterface $context,
         PromotionCouponGeneratorInstructionInterface $instruction,
-        GenerationPolicyInterface $generationPolicy
+        GenerationPolicyInterface $generationPolicy,
     ): void {
         $constraint = new CouponPossibleGenerationAmount();
 

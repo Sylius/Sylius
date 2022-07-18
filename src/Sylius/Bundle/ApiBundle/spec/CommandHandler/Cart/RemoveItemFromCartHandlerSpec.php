@@ -27,12 +27,12 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
     function let(
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
-        ProductVariantResolverInterface $variantResolver
+        ProductVariantResolverInterface $variantResolver,
     ): void {
         $this->beConstructedWith(
             $orderItemRepository,
             $orderModifier,
-            $variantResolver
+            $variantResolver,
         );
     }
 
@@ -45,11 +45,11 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderInterface $cart,
-        OrderItemInterface $cartItem
+        OrderItemInterface $cartItem,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
-            'TOKEN_VALUE'
+            'TOKEN_VALUE',
         )->willReturn($cartItem);
 
         $cartItem->getOrder()->willReturn($cart);
@@ -63,11 +63,11 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_item_was_not_found(
         OrderItemRepository $orderItemRepository,
-        OrderItemInterface $cartItem
+        OrderItemInterface $cartItem,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
-            'TOKEN_VALUE'
+            'TOKEN_VALUE',
         )->willReturn(null);
 
         $cartItem->getOrder()->shouldNotBeCalled();
@@ -76,7 +76,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')]
+                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
             )
         ;
     }
@@ -85,11 +85,11 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
         OrderItemRepository $orderItemRepository,
         OrderModifierInterface $orderModifier,
         OrderItemInterface $cartItem,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
-            'TOKEN_VALUE'
+            'TOKEN_VALUE',
         )->willReturn($cartItem);
 
         $cartItem->getOrder()->willReturn($cart);
@@ -102,7 +102,7 @@ final class RemoveItemFromCartHandlerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during(
                 '__invoke',
-                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')]
+                [RemoveItemFromCart::removeFromData('TOKEN_VALUE', 'ORDER_ITEM_ID')],
             )
         ;
     }

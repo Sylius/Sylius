@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -25,7 +25,7 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
-        private SenderInterface $sender
+        private SenderInterface $sender,
     ) {
     }
 
@@ -40,7 +40,7 @@ final class SendResetPasswordEmailHandler implements MessageHandlerInterface
             [
                 'adminUser' => $adminUser,
                 'localeCode' => $sendResetPasswordEmail->localeCode,
-            ]
+            ],
         );
     }
 }

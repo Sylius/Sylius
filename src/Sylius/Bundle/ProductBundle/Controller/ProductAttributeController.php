@@ -30,7 +30,7 @@ class ProductAttributeController extends ResourceController
             [
                 'types' => $this->get('sylius.registry.attribute_type')->all(),
                 'metadata' => $this->metadata,
-            ]
+            ],
         );
     }
 
@@ -99,7 +99,7 @@ class ProductAttributeController extends ResourceController
 
     private function createFormAndView(
         $attributeForm,
-        AttributeInterface $attribute
+        AttributeInterface $attribute,
     ): FormView {
         return $this
             ->get('form.factory')
@@ -107,8 +107,9 @@ class ProductAttributeController extends ResourceController
                 'value',
                 $attributeForm,
                 null,
-                ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()]
+                ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()],
             )
-            ->createView();
+            ->createView()
+        ;
     }
 }

@@ -31,7 +31,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 {
     function let(
         OrderRepositoryInterface $orderRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ): void {
         $this->beConstructedWith($orderRepository, $eligibilityChecker);
     }
@@ -93,7 +93,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -115,7 +115,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $executionContext
             ->addViolation(
                 'sylius.order.shipping_method_eligibility',
-                ['%shippingMethodName%' => 'InPost']
+                ['%shippingMethodName%' => 'InPost'],
             )
             ->shouldBeCalled()
         ;
@@ -129,7 +129,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -151,7 +151,7 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         $executionContext
             ->addViolation(
                 'sylius.order.shipping_method_eligibility',
-                ['%shippingMethodName%' => 'InPost']
+                ['%shippingMethodName%' => 'InPost'],
             )
             ->shouldNotBeCalled()
         ;

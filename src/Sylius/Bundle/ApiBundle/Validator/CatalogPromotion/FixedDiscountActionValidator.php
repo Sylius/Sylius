@@ -25,7 +25,7 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
 {
     public function __construct(
         private ActionValidatorInterface $baseActionValidator,
-        private SectionProviderInterface $sectionProvider
+        private SectionProviderInterface $sectionProvider,
     ) {
     }
 

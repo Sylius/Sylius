@@ -55,7 +55,7 @@ final class PercentAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationInterface $constraintViolation,
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
     ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 

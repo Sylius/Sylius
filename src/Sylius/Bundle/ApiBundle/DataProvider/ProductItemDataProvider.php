@@ -28,7 +28,7 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
 {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

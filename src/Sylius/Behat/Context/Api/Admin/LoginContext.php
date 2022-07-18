@@ -33,7 +33,7 @@ final class LoginContext implements Context
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 

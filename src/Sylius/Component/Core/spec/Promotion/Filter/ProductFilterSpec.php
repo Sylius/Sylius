@@ -29,7 +29,7 @@ final class ProductFilterSpec extends ObjectBehavior
         OrderItemInterface $item1,
         OrderItemInterface $item2,
         ProductInterface $product1,
-        ProductInterface $product2
+        ProductInterface $product2,
     ): void {
         $item1->getProduct()->willReturn($product1);
         $product1->getCode()->willReturn('product1');

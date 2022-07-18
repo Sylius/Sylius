@@ -35,7 +35,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
-        TaxRateResolverInterface $taxRateResolver
+        TaxRateResolverInterface $taxRateResolver,
     ): void {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver);
     }
@@ -60,7 +60,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getItems()->willReturn($items);
 
@@ -96,7 +96,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($taxAdjustment1, $taxAdjustment2)
         ;
@@ -110,7 +110,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
     function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $items = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($items);
@@ -127,7 +127,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getItems()->willReturn($items);
 
@@ -161,7 +161,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         ProductVariantInterface $productVariant,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getItems()->willReturn($items);
 

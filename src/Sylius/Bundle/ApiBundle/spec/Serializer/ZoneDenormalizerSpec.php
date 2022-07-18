@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
@@ -32,7 +43,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
                 new Zone(),
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => $zone]
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $zone],
             )
             ->shouldReturn(true)
         ;
@@ -42,7 +53,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
                 new Zone(),
                 ProductInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => $zone]
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $zone],
             )
             ->shouldReturn(false)
         ;
@@ -55,7 +66,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
                 new Zone(),
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => $product]
+                [AbstractNormalizer::OBJECT_TO_POPULATE => $product],
             )
             ->shouldReturn(false)
         ;
@@ -73,7 +84,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
                 new Zone(),
                 ZoneInterface::class,
                 null,
-                [AbstractNormalizer::OBJECT_TO_POPULATE => 'I am even not an object!']
+                [AbstractNormalizer::OBJECT_TO_POPULATE => 'I am even not an object!'],
             )
             ->shouldReturn(false)
         ;
@@ -114,7 +125,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
                 'sylius_zone_denormalizer_already_called' => true,
-            ]
+            ],
         )->shouldBeCalled();
 
         $this->setDenormalizer($denormalizer);
@@ -130,7 +141,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             null,
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
-            ]
+            ],
         );
     }
 
@@ -163,7 +174,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
                 'sylius_zone_denormalizer_already_called' => true,
-            ]
+            ],
         )->shouldBeCalled();
 
         $this->setDenormalizer($denormalizer);
@@ -173,7 +184,7 @@ class ZoneDenormalizerSpec extends ObjectBehavior
             null,
             [
                 AbstractNormalizer::OBJECT_TO_POPULATE => $zone,
-            ]
+            ],
         );
     }
 }

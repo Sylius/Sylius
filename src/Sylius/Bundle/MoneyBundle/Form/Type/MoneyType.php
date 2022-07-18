@@ -30,7 +30,7 @@ final class MoneyType extends AbstractType
                 $options['scale'],
                 $options['grouping'],
                 null,
-                $options['divisor']
+                $options['divisor'],
             ))
         ;
     }

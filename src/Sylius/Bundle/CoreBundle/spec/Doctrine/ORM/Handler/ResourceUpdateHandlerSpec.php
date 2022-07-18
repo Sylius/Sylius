@@ -39,7 +39,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
-        ObjectManager $manager
+        ObjectManager $manager,
     ): void {
         $entityManager->beginTransaction()->shouldBeCalled();
         $decoratedUpdater->handle($resource, $configuration, $manager)->shouldBeCalled();
@@ -54,7 +54,7 @@ final class ResourceUpdateHandlerSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         ResourceInterface $resource,
         RequestConfiguration $configuration,
-        ObjectManager $manager
+        ObjectManager $manager,
     ): void {
         $entityManager->beginTransaction()->shouldBeCalled();
         $decoratedUpdater

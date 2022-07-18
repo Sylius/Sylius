@@ -31,7 +31,7 @@ final class RequestFactory implements RequestFactoryInterface
         ?string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
@@ -62,7 +62,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
@@ -81,7 +81,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
@@ -102,7 +102,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
@@ -123,7 +123,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id),
@@ -159,7 +159,7 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         array $files,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface {
         $builder = RequestBuilder::create(
             sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),

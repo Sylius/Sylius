@@ -36,7 +36,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentMethodInterface $paymentMethod,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -52,7 +52,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $firstMethodsResolver,
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -66,7 +66,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $firstMethodsResolver,
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 
@@ -80,7 +80,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
         PaymentMethodsResolverInterface $firstMethodsResolver,
         PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $resolversRegistry->all()->willReturn([$firstMethodsResolver, $secondMethodsResolver]);
 

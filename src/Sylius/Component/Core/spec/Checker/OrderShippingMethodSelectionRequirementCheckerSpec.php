@@ -35,7 +35,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     }
 
     function it_says_that_shipping_method_do_not_have_to_be_selected_if_none_of_variants_from_order_requires_shipping(
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->isShippingRequired()->willReturn(false);
 
@@ -47,7 +47,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
     ): void {
         $order->hasShipments()->willReturn(true);
 
@@ -64,7 +64,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
     }
 
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_order_has_not_shipments_yet(
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->isShippingRequired()->willReturn(true);
 
@@ -75,7 +75,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
 
     function it_says_that_shipping_method_have_to_be_selected_if_order_variants_require_shipping_and_channel_does_not_allow_to_skip_shipping_step(
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->isShippingRequired()->willReturn(true);
 
@@ -93,7 +93,7 @@ final class OrderShippingMethodSelectionRequirementCheckerSpec extends ObjectBeh
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
     ): void {
         $order->isShippingRequired()->willReturn(true);
 

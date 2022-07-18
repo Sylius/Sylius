@@ -36,7 +36,7 @@ final class OrderItemNamesSetterSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductVariantTranslationInterface $variantTranslation,
         ProductInterface $product,
-        ProductTranslationInterface $productTranslation
+        ProductTranslationInterface $productTranslation,
     ): void {
         $order->getLocaleCode()->willReturn('en_US');
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));

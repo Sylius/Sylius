@@ -35,7 +35,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function let(
         ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        MinimumPriceDistributorInterface $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
     ): void {
         $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator, $minimumPriceDistributor);
     }
@@ -56,7 +56,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
         ChannelPricingInterface $channelPricingTwo,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -97,7 +97,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
         ChannelPricingInterface $channelPricingTwo,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
 
@@ -142,7 +142,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         ProductVariantInterface $productVariantTwo,
         ChannelPricingInterface $channelPricingOne,
         ChannelPricingInterface $channelPricingTwo,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -182,7 +182,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor,
         MinimumPriceDistributorInterface $minimumPriceDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getItems()->willReturn(new ArrayCollection([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]));
@@ -219,7 +219,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_does_not_apply_discount_if_adjustment_amount_would_be_0(
         OrderInterface $order,
         PromotionInterface $promotion,
-        MinimumPriceDistributorInterface $minimumPriceDistributor
+        MinimumPriceDistributorInterface $minimumPriceDistributor,
     ): void {
         $order->countItems()->willReturn(0);
 
@@ -231,7 +231,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_does_not_apply_discount_if_configuration_is_invalid(
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->countItems()->willReturn(1);
 
@@ -241,7 +241,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_throws_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -255,7 +255,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getItems()->willReturn(new ArrayCollection([$item->getWrappedObject()]));
@@ -288,7 +288,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

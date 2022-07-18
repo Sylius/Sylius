@@ -96,7 +96,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
 
     private function createAdjustment(
         PromotionInterface $promotion,
-        string $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
+        string $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
     ): OrderAdjustmentInterface {
         /** @var OrderAdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();

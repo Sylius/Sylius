@@ -23,7 +23,7 @@ final class ChannelContextBuilderSpec extends ObjectBehavior
 {
     function let(
         SerializerContextBuilderInterface $decoratedContextBuilder,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ): void {
         $this->beConstructedWith($decoratedContextBuilder, $channelContext);
     }
@@ -32,7 +32,7 @@ final class ChannelContextBuilderSpec extends ObjectBehavior
         SerializerContextBuilderInterface $decoratedContextBuilder,
         Request $request,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $decoratedContextBuilder->createFromRequest($request, true, [])->shouldBeCalled();
         $channelContext->getChannel()->willReturn($channel);

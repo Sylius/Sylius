@@ -28,7 +28,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
     function let(
         CatalogPromotionPriceCalculatorInterface $priceCalculator,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
-        DiscountApplicationCriteriaInterface $exclusiveCriteria
+        DiscountApplicationCriteriaInterface $exclusiveCriteria,
     ): void {
         $this->beConstructedWith($priceCalculator, [$minimumPriceCriteria, $exclusiveCriteria]);
     }
@@ -44,7 +44,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
-        CatalogPromotionPriceCalculatorInterface $priceCalculator
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
     ): void {
         $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
@@ -65,7 +65,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
-        CatalogPromotionPriceCalculatorInterface $priceCalculator
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
     ): void {
         $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(false);
@@ -86,7 +86,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
-        CatalogPromotionPriceCalculatorInterface $priceCalculator
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
     ): void {
         $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
@@ -111,7 +111,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
-        CatalogPromotionPriceCalculatorInterface $priceCalculator
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
     ): void {
         $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
@@ -136,7 +136,7 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         DiscountApplicationCriteriaInterface $minimumPriceCriteria,
         DiscountApplicationCriteriaInterface $exclusiveCriteria,
-        CatalogPromotionPriceCalculatorInterface $priceCalculator
+        CatalogPromotionPriceCalculatorInterface $priceCalculator,
     ): void {
         $minimumPriceCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(true);
         $exclusiveCriteria->isApplicable($catalogPromotion, ['action' => $action, 'channelPricing' => $channelPricing])->willReturn(false);

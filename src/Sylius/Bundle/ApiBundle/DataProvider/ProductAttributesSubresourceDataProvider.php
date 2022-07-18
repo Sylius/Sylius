@@ -39,8 +39,8 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
         $subresourceIdentifiers = $context['subresource_identifiers'] ?? null;
 
         return
-            is_a($resourceClass, ProductAttributeValueInterface::class, true)
-            && isset($subresourceIdentifiers['code'])
+            is_a($resourceClass, ProductAttributeValueInterface::class, true) &&
+            isset($subresourceIdentifiers['code'])
         ;
     }
 
@@ -52,7 +52,7 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
             $subresourceIdentifiers['code'],
             $this->localeContext->getLocaleCode(),
             $this->localeProvider->getDefaultLocaleCode(),
-            $this->defaultLocaleCode
+            $this->defaultLocaleCode,
         );
 
         $queryNameGenerator = new QueryNameGenerator();
@@ -61,8 +61,8 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
             $extension->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
 
             if (
-                $extension instanceof QueryResultCollectionExtensionInterface
-                && $extension->supportsResult($resourceClass, $operationName)
+                $extension instanceof QueryResultCollectionExtensionInterface &&
+                $extension->supportsResult($resourceClass, $operationName)
             ) {
                 return $extension->getResult($queryBuilder);
             }

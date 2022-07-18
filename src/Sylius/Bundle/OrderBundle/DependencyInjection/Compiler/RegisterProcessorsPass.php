@@ -27,7 +27,7 @@ final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
             'sylius.order_processing.order_processor',
             'sylius.order_processing.order_processor.composite',
             self::PROCESSOR_SERVICE_TAG,
-            'addProcessor'
+            'addProcessor',
         );
     }
 

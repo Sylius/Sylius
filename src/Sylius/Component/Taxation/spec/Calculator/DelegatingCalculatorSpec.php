@@ -34,7 +34,7 @@ final class DelegatingCalculatorSpec extends ObjectBehavior
 
     function it_should_delegate_calculation_to_a_correct_calculator(
         CalculatorInterface $calculator,
-        TaxRateInterface $rate
+        TaxRateInterface $rate,
     ): void {
         $rate->getCalculator()->willReturn('default');
 

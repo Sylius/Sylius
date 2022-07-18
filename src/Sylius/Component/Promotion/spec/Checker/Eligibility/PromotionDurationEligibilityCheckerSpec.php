@@ -27,7 +27,7 @@ final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_promotion_has_not_started_yet(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getStartsAt()->willReturn(new \DateTime('+3 days'));
 
@@ -36,7 +36,7 @@ final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_promotion_has_already_ended(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getStartsAt()->willReturn(new \DateTime('-5 days'));
         $promotion->getEndsAt()->willReturn(new \DateTime('-3 days'));
@@ -46,7 +46,7 @@ final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_promotion_is_currently_available(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getStartsAt()->willReturn(new \DateTime('-2 days'));
         $promotion->getEndsAt()->willReturn(new \DateTime('+2 days'));
@@ -56,7 +56,7 @@ final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_promotion_dates_are_not_specified(
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);

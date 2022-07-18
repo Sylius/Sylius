@@ -43,7 +43,7 @@ final class CompositeShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodEligibilityCheckerInterface $firstShippingMethodEligibilityChecker,
         ShippingMethodEligibilityCheckerInterface $secondShippingMethodEligibilityChecker,
         ShippingSubjectInterface $promotionSubject,
-        ShippingMethodInterface $promotion
+        ShippingMethodInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstShippingMethodEligibilityChecker,
@@ -60,7 +60,7 @@ final class CompositeShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodEligibilityCheckerInterface $firstShippingMethodEligibilityChecker,
         ShippingMethodEligibilityCheckerInterface $secondShippingMethodEligibilityChecker,
         ShippingSubjectInterface $promotionSubject,
-        ShippingMethodInterface $promotion
+        ShippingMethodInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstShippingMethodEligibilityChecker,
@@ -77,7 +77,7 @@ final class CompositeShippingMethodEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodEligibilityCheckerInterface $firstShippingMethodEligibilityChecker,
         ShippingMethodEligibilityCheckerInterface $secondShippingMethodEligibilityChecker,
         ShippingSubjectInterface $promotionSubject,
-        ShippingMethodInterface $promotion
+        ShippingMethodInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstShippingMethodEligibilityChecker,

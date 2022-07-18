@@ -29,7 +29,7 @@ final class CatalogPromotionExecutorListener extends AbstractListener implements
         private AllProductVariantsCatalogPromotionsProcessorInterface $allCatalogPromotionsProcessor,
         private CatalogPromotionRepositoryInterface $catalogPromotionsRepository,
         private MessageBusInterface $messageBus,
-        private iterable $defaultCriteria = []
+        private iterable $defaultCriteria = [],
     ) {
     }
 

@@ -29,7 +29,7 @@ final class OrderPromotionsIntegrityCheckerSpec extends ObjectBehavior
     function it_returns_null_if_promotion_is_valid(
         OrderInterface $order,
         PromotionInterface $promotion,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$promotion->getWrappedObject()]),
@@ -44,11 +44,11 @@ final class OrderPromotionsIntegrityCheckerSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $oldPromotion,
         PromotionInterface $newPromotion,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->getPromotions()->willReturn(
             new ArrayCollection([$oldPromotion->getWrappedObject()]),
-            new ArrayCollection([$newPromotion->getWrappedObject()])
+            new ArrayCollection([$newPromotion->getWrappedObject()]),
         );
 
         $orderProcessor->process($order)->shouldBeCalled();

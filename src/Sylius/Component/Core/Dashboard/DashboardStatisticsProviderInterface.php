@@ -22,6 +22,6 @@ interface DashboardStatisticsProviderInterface
     public function getStatisticsForChannelInPeriod(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
-        \DateTimeInterface $endDate
+        \DateTimeInterface $endDate,
     ): DashboardStatistics;
 }

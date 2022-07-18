@@ -38,7 +38,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         CustomerInterface $customer,
         AddressInterface $address,
         Collection $addresses,
-        \Iterator $iterator
+        \Iterator $iterator,
     ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(true);
@@ -59,7 +59,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         CustomerInterface $customer,
         AddressInterface $address,
         Collection $addresses,
-        \Iterator $iterator
+        \Iterator $iterator,
     ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(false);
@@ -69,7 +69,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 
         $addressComparator->equal(
             Argument::type(AddressInterface::class),
-            Argument::type(AddressInterface::class)
+            Argument::type(AddressInterface::class),
         )->shouldNotBeCalled();
 
         $customer->addAddress($address)->shouldBeCalled();
@@ -83,7 +83,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         AddressInterface $customerAddress,
         AddressInterface $newAddress,
         Collection $addresses,
-        \Iterator $iterator
+        \Iterator $iterator,
     ): void {
         $iterator->rewind()->shouldBeCalled();
         $iterator->valid()->willReturn(true);

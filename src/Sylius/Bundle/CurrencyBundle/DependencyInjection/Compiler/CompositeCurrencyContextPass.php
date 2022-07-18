@@ -25,7 +25,7 @@ final class CompositeCurrencyContextPass extends PrioritizedCompositeServicePass
             'sylius.context.currency',
             'sylius.context.currency.composite',
             'sylius.context.currency',
-            'addContext'
+            'addContext',
         );
     }
 

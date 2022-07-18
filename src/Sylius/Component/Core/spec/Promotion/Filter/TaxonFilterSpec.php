@@ -33,7 +33,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         ProductInterface $product1,
         ProductInterface $product2,
         TaxonInterface $taxon1,
-        TaxonInterface $taxon2
+        TaxonInterface $taxon2,
     ): void {
         $item1->getProduct()->willReturn($product1);
         $product1->getTaxons()->willReturn(new ArrayCollection([$taxon1->getWrappedObject()]));

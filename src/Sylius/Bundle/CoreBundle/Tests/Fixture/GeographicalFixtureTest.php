@@ -41,7 +41,7 @@ final class GeographicalFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['countries' => array_keys(Countries::getNames())],
-            'countries'
+            'countries',
         );
     }
 
@@ -52,7 +52,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['countries' => ['PL', 'DE', 'FR']]],
-            'countries'
+            'countries',
         );
     }
 
@@ -64,7 +64,7 @@ final class GeographicalFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['provinces' => []],
-            'provinces'
+            'provinces',
         );
     }
 
@@ -75,7 +75,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['provinces' => ['US' => ['AL' => 'Alabama']]]],
-            'provinces'
+            'provinces',
         );
     }
 
@@ -87,7 +87,7 @@ final class GeographicalFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['zones' => []],
-            'zones'
+            'zones',
         );
     }
 
@@ -98,7 +98,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR']]]]],
-            'zones'
+            'zones',
         );
     }
 
@@ -109,7 +109,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR'], 'scope' => 'tax']]]],
-            'zones'
+            'zones',
         );
     }
 
@@ -120,7 +120,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['WEST-COAST' => ['name' => 'West Coast', 'provinces' => ['US-CA', 'US-OR', 'US-WA']]]]],
-            'zones'
+            'zones',
         );
     }
 
@@ -131,7 +131,7 @@ final class GeographicalFixtureTest extends TestCase
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['AMERICA' => ['name' => 'America', 'zones' => ['NORTH-AMERICA', 'SOUTH-AMERICA']]]]],
-            'zones'
+            'zones',
         );
     }
 
@@ -143,25 +143,25 @@ final class GeographicalFixtureTest extends TestCase
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone']]]],
             'zones',
-            'Zone must have only one type of members'
+            'Zone must have only one type of members',
         );
 
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone', 'countries' => ['PL'], 'zones' => ['AMERICA']]]]],
             'zones',
-            'Zone must have only one type of members'
+            'Zone must have only one type of members',
         );
 
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone', 'countries' => ['PL'], 'provinces' => ['US-CA']]]]],
             'zones',
-            'Zone must have only one type of members'
+            'Zone must have only one type of members',
         );
 
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone', 'zones' => ['AMERICA'], 'provinces' => ['US-CA']]]]],
             'zones',
-            'Zone must have only one type of members'
+            'Zone must have only one type of members',
         );
     }
 
@@ -173,7 +173,7 @@ final class GeographicalFixtureTest extends TestCase
             $this->getMockBuilder(FactoryInterface::class)->getMock(),
             $this->getMockBuilder(ObjectManager::class)->getMock(),
             $this->getMockBuilder(ZoneFactoryInterface::class)->getMock(),
-            $this->getMockBuilder(ObjectManager::class)->getMock()
+            $this->getMockBuilder(ObjectManager::class)->getMock(),
         );
     }
 }

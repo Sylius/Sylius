@@ -36,13 +36,13 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         MessageBusInterface $messageBus,
         CriteriaInterface $firstCriterion,
-        CriteriaInterface $secondCriterion
+        CriteriaInterface $secondCriterion,
     ): void {
         $this->beConstructedWith(
             $allCatalogPromotionsProcessor,
             $catalogPromotionRepository,
             $messageBus,
-            [$firstCriterion, $secondCriterion]
+            [$firstCriterion, $secondCriterion],
         );
     }
 
@@ -65,7 +65,7 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
         CatalogPromotionInterface $firstCatalogPromotion,
         CatalogPromotionInterface $secondCatalogPromotion,
         CriteriaInterface $firstCriterion,
-        CriteriaInterface $secondCriterion
+        CriteriaInterface $secondCriterion,
     ): void {
         $catalogPromotionRepository
             ->findByCriteria([$firstCriterion, $secondCriterion])
@@ -92,7 +92,7 @@ final class CatalogPromotionExecutorListenerSpec extends ObjectBehavior
         SuiteInterface $suite,
         FixtureInterface $fixture,
         CriteriaInterface $firstCriterion,
-        CriteriaInterface $secondCriterion
+        CriteriaInterface $secondCriterion,
     ): void {
         $catalogPromotionRepository->findByCriteria([$firstCriterion, $secondCriterion])->shouldNotBeCalled();
 

@@ -42,7 +42,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine
+        StateMachineInterface $secondOrderStateMachine,
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
            $firstOrder,
@@ -65,7 +65,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $firstOrderStateMachine,
         StateMachineInterface $secondOrderStateMachine,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ): void {
         $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTimeInterface::class))->willReturn([
             $firstOrder,
@@ -78,12 +78,13 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
 
         $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new SMException());
+            ->willThrow(new SMException())
+        ;
         $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $logger->error(
             Argument::containingString('An error occurred while cancelling unpaid order #13'),
-            Argument::any()
+            Argument::any(),
         )->shouldBeCalled();
 
         $this->cancel();
@@ -95,7 +96,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         OrderInterface $secondOrder,
         OrderRepositoryInterface $orderRepository,
         StateMachineInterface $firstOrderStateMachine,
-        StateMachineInterface $secondOrderStateMachine
+        StateMachineInterface $secondOrderStateMachine,
     ): void {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, '10 months', null);
 
@@ -110,7 +111,8 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $stateMachineFactory->get($secondOrder, 'sylius_order')->willReturn($secondOrderStateMachine);
 
         $firstOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled()
-            ->willThrow(new SMException());
+            ->willThrow(new SMException())
+        ;
         $secondOrderStateMachine->apply(OrderTransitions::TRANSITION_CANCEL)->shouldBeCalled();
 
         $this->cancel();

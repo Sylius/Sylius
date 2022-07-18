@@ -23,7 +23,7 @@ final class LoginContext implements Context
 {
     public function __construct(
         private DashboardPageInterface $dashboardPage,
-        private LoginPageInterface $loginPage
+        private LoginPageInterface $loginPage,
     ) {
     }
 

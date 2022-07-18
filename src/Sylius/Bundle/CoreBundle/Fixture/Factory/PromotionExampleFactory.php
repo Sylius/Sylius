@@ -38,7 +38,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         private ExampleFactoryInterface $promotionRuleExampleFactory,
         private ExampleFactoryInterface $promotionActionExampleFactory,
         private ChannelRepositoryInterface $channelRepository,
-        private ?FactoryInterface $couponFactory = null
+        private ?FactoryInterface $couponFactory = null,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

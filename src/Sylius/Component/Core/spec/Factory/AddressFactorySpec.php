@@ -46,7 +46,7 @@ final class AddressFactorySpec extends ObjectBehavior
     function it_creates_a_new_address_with_customer(
         FactoryInterface $decoratedFactory,
         AddressInterface $address,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $decoratedFactory->createNew()->willReturn($address);
 

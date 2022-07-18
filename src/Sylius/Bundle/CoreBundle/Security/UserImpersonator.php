@@ -29,7 +29,7 @@ final class UserImpersonator implements UserImpersonatorInterface
     public function __construct(
         private SessionInterface $session,
         string $firewallContextName,
-        private EventDispatcherInterface $eventDispatcher
+        private EventDispatcherInterface $eventDispatcher,
     ) {
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
@@ -42,14 +42,14 @@ final class UserImpersonator implements UserImpersonatorInterface
             $token = new UsernamePasswordToken(
                 $user,
                 $this->firewallContextName,
-                array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles())
+                array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
             );
         } else {
             $token = new UsernamePasswordToken(
                 $user,
                 $user->getPassword(),
                 $this->firewallContextName,
-                array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles())
+                array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
             );
         }
 

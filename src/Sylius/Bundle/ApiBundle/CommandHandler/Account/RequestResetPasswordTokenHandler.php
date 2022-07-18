@@ -30,7 +30,7 @@ final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
         private UserRepositoryInterface $userRepository,
         private MessageBusInterface $commandBus,
         private GeneratorInterface $generator,
-        private DateTimeProviderInterface $calendar
+        private DateTimeProviderInterface $calendar,
     ) {
     }
 
@@ -46,9 +46,9 @@ final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
             new SendResetPasswordEmail(
                 $command->getEmail(),
                 $command->getChannelCode(),
-                $command->getLocaleCode()
+                $command->getLocaleCode(),
             ),
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         );
     }
 }

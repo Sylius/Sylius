@@ -26,7 +26,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     public function __construct(
         private FactoryInterface $productTaxonFactory,
         private RepositoryInterface $productTaxonRepository,
-        private ProductInterface $product
+        private ProductInterface $product,
     ) {
     }
 
@@ -72,8 +72,8 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
                 sprintf(
                     'Expected "%s", but got "%s"',
                     $expectedType,
-                    get_debug_type($value)
-                )
+                    get_debug_type($value),
+                ),
             );
         }
     }

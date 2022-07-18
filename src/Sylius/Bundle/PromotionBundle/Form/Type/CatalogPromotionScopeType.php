@@ -29,7 +29,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        iterable $scopeConfigurationTypes
+        iterable $scopeConfigurationTypes,
     ) {
         parent::__construct($dataClass, $validationGroups);
 

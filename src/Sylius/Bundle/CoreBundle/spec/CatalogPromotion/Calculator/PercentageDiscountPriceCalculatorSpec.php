@@ -29,7 +29,7 @@ final class PercentageDiscountPriceCalculatorSpec extends ObjectBehavior
 
     function it_supports_only_percentage_discount_catalog_promotion_action(
         CatalogPromotionActionInterface $fixedDiscountAction,
-        CatalogPromotionActionInterface $percentageDiscountAction
+        CatalogPromotionActionInterface $percentageDiscountAction,
     ): void {
         $fixedDiscountAction->getType()->willReturn(FixedDiscountPriceCalculator::TYPE);
         $percentageDiscountAction->getType()->willReturn(PercentageDiscountPriceCalculator::TYPE);
@@ -40,7 +40,7 @@ final class PercentageDiscountPriceCalculatorSpec extends ObjectBehavior
 
     function it_calculates_price_for_given_channel_pricing_and_action(
         ChannelPricingInterface $channelPricing,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn(['amount' => 0.3]);
 
@@ -52,7 +52,7 @@ final class PercentageDiscountPriceCalculatorSpec extends ObjectBehavior
 
     function it_calculates_price_for_given_channel_pricing_and_action_with_taking_minimum_price_into_account(
         ChannelPricingInterface $channelPricing,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getConfiguration()->willReturn(['amount' => 0.7]);
 

@@ -39,7 +39,8 @@ The <info>sylius:user:promote</info> command promotes a user by adding security 
 
   <info>php app/console sylius:user:promote matthieu@email.com</info>
 EOT
-            );
+            )
+        ;
     }
 
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void

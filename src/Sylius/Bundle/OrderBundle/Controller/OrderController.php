@@ -49,7 +49,7 @@ class OrderController extends ResourceController
             [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ]
+            ],
         );
     }
 
@@ -67,7 +67,7 @@ class OrderController extends ResourceController
             $configuration->getTemplate('summary.html'),
             [
                 'cart' => $cart,
-            ]
+            ],
         );
     }
 
@@ -123,7 +123,7 @@ class OrderController extends ResourceController
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
                 'cart' => $resource,
-            ]
+            ],
         );
     }
 

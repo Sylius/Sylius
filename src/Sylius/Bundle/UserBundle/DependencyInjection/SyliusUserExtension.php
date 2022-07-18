@@ -115,8 +115,8 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['token']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
 
         $container->setDefinition(
@@ -127,8 +127,8 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType)),
                     $config['resetting']['pin']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
 
         $container->setDefinition(
@@ -139,8 +139,8 @@ final class SyliusUserExtension extends AbstractResourceExtension
                     new Reference('sylius.random_generator'),
                     new Reference(sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType)),
                     $config['verification']['token']['length'],
-                ]
-            )
+                ],
+            ),
         )->setPublic(true);
     }
 
@@ -161,7 +161,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $resetPasswordTokenUniquenessCheckerDefinition->addArgument($config['resetting']['token']['field_name']);
         $container->setDefinition(
             sprintf('sylius.%s_user.token_uniqueness_checker.password_reset', $userType),
-            $resetPasswordTokenUniquenessCheckerDefinition
+            $resetPasswordTokenUniquenessCheckerDefinition,
         );
 
         $resetPasswordPinUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -169,7 +169,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $resetPasswordPinUniquenessCheckerDefinition->addArgument($config['resetting']['pin']['field_name']);
         $container->setDefinition(
             sprintf('sylius.%s_user.pin_uniqueness_checker.password_reset', $userType),
-            $resetPasswordPinUniquenessCheckerDefinition
+            $resetPasswordPinUniquenessCheckerDefinition,
         );
 
         $emailVerificationTokenUniquenessCheckerDefinition = new Definition(TokenUniquenessChecker::class);
@@ -177,7 +177,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $emailVerificationTokenUniquenessCheckerDefinition->addArgument($config['verification']['token']['field_name']);
         $container->setDefinition(
             sprintf('sylius.%s_user.token_uniqueness_checker.email_verification', $userType),
-            $emailVerificationTokenUniquenessCheckerDefinition
+            $emailVerificationTokenUniquenessCheckerDefinition,
         );
     }
 
@@ -259,7 +259,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
             [
                 $container->getDefinition($factoryServiceId),
                 $encoder,
-            ]
+            ],
         );
         $factoryDefinition->setPublic(true);
 
@@ -279,7 +279,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $container->setDefinition(
             sprintf('sylius.%s_user.listener.update_user_encoder', $userType),
-            $updateUserEncoderListenerDefinition
+            $updateUserEncoderListenerDefinition,
         );
     }
 

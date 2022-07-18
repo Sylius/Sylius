@@ -22,7 +22,7 @@ final class LocaleContextBuilderSpec extends ObjectBehavior
 {
     function let(
         SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
-        LocaleContextInterface $localeContext
+        LocaleContextInterface $localeContext,
     ): void {
         $this->beConstructedWith($decoratedSerializerContextBuilder, $localeContext);
     }
@@ -30,7 +30,7 @@ final class LocaleContextBuilderSpec extends ObjectBehavior
     function it_updates_an_context_when_locale_context_has_locale(
         Request $request,
         SerializerContextBuilderInterface $decoratedSerializerContextBuilder,
-        LocaleContextInterface $localeContext
+        LocaleContextInterface $localeContext,
     ): void {
         $decoratedSerializerContextBuilder->createFromRequest($request, true, [])->shouldBeCalled();
         $localeContext->getLocaleCode()->willReturn('en_US');

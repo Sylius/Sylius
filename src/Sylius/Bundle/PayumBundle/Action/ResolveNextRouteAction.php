@@ -32,7 +32,7 @@ final class ResolveNextRouteAction implements ActionInterface
             $payment->getState() === PaymentInterface::STATE_AUTHORIZED
         ) {
             $request->setRouteName(
-                'sylius_shop_order_thank_you'
+                'sylius_shop_order_thank_you',
             );
 
             return;

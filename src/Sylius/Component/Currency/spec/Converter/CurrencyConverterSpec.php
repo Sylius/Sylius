@@ -34,7 +34,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
     function it_converts_multipling_ratio_based_on_currency_pair_exchange_rate(
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
-        ExchangeRateInterface $exchangeRate
+        ExchangeRateInterface $exchangeRate,
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
         $exchangeRate->getRatio()->willReturn(1.30);
@@ -48,7 +48,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
     function it_converts_dividing_ratio_based_on_reversed_currency_pair_exchange_rate(
         ExchangeRateRepositoryInterface $exchangeRateRepository,
         CurrencyInterface $sourceCurrency,
-        ExchangeRateInterface $exchangeRate
+        ExchangeRateInterface $exchangeRate,
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
         $exchangeRate->getRatio()->willReturn(1.30);
@@ -60,7 +60,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
     }
 
     function it_return_given_value_if_exchange_rate_for_given_currency_pair_has_not_been_found(
-        ExchangeRateRepositoryInterface $exchangeRateRepository
+        ExchangeRateRepositoryInterface $exchangeRateRepository,
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn(null);
 
@@ -68,7 +68,7 @@ final class CurrencyConverterSpec extends ObjectBehavior
     }
 
     function it_return_given_value_if_both_currencie_in_currency_pair_are_the_same(
-        ExchangeRateRepositoryInterface $exchangeRateRepository
+        ExchangeRateRepositoryInterface $exchangeRateRepository,
     ): void {
         $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'GBP')->willReturn(null);
 

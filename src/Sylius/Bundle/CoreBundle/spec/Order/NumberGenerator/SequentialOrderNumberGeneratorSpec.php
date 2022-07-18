@@ -27,7 +27,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
     function let(
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
-        EntityManagerInterface $sequenceManager
+        EntityManagerInterface $sequenceManager,
     ): void {
         $this->beConstructedWith($sequenceRepository, $sequenceFactory, $sequenceManager);
     }
@@ -41,7 +41,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         EntityRepository $sequenceRepository,
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $sequence->getIndex()->willReturn(6);
         $sequence->getVersion()->willReturn(7);
@@ -59,7 +59,7 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
         FactoryInterface $sequenceFactory,
         EntityManagerInterface $sequenceManager,
         OrderSequenceInterface $sequence,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $sequence->getIndex()->willReturn(0);
         $sequence->getVersion()->willReturn(1);

@@ -35,7 +35,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
-        TaxonInterface $swords
+        TaxonInterface $swords,
     ): void {
         $configuration = ['taxons' => ['swords']];
 
@@ -51,7 +51,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
-        TaxonInterface $swords
+        TaxonInterface $swords,
     ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
@@ -67,7 +67,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $reflexBow,
-        TaxonInterface $bows
+        TaxonInterface $bows,
     ): void {
         $configuration = ['taxons' => ['swords', 'axes']];
 
@@ -88,7 +88,7 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_promotion_subject_is_not_order(
         Collection $taxonsCollection,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(new UnsupportedTypeException($subject->getWrappedObject(), OrderInterface::class))

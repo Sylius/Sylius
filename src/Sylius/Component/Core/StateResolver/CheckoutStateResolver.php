@@ -25,7 +25,7 @@ final class CheckoutStateResolver implements StateResolverInterface
     public function __construct(
         private FactoryInterface $stateMachineFactory,
         private OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+        private OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
     ) {
     }
 
@@ -34,15 +34,15 @@ final class CheckoutStateResolver implements StateResolverInterface
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
         if (
-            !$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)
-            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
+            !$this->orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order) &&
+            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING)
         ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_SHIPPING);
         }
 
         if (
-            !$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)
-            && $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
+            !$this->orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order) &&
+            $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT)
         ) {
             $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SKIP_PAYMENT);
         }

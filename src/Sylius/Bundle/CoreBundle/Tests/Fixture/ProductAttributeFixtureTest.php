@@ -70,7 +70,7 @@ final class ProductAttributeFixtureTest extends TestCase
         return new ProductAttributeFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
             $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
-            ['text' => 'Text attribute', 'bool' => 'Boolean attribute']
+            ['text' => 'Text attribute', 'bool' => 'Boolean attribute'],
         );
     }
 }

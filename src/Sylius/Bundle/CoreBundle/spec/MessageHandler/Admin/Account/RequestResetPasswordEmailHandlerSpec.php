@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -32,7 +32,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
         DateTimeProviderInterface $calendar,
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $this->beConstructedWith($userRepository, $generator, $calendar, $messageBus);
     }
@@ -66,7 +66,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         $messageBus
             ->dispatch(
                 $sendResetPasswordEmail,
-                [new DispatchAfterCurrentBusStamp()]
+                [new DispatchAfterCurrentBusStamp()],
             )
             ->willReturn(new Envelope($sendResetPasswordEmail))
             ->shouldBeCalledOnce()
@@ -76,7 +76,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
     }
 
     public function it_throws_exception_while_handling_if_user_doesnt_exist(
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 

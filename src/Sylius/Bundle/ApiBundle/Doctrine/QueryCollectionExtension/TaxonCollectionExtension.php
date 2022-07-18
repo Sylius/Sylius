@@ -34,7 +34,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, TaxonInterface::class, true)) {
             return;
@@ -60,6 +60,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
             ->andWhere(sprintf('parent.code = :%s', $parentCodeParameterName))
             ->addOrderBy(sprintf('%s.position', $rootAlias))
             ->setParameter($parentCodeParameterName, ($channelMenuTaxon !== null) ? $channelMenuTaxon->getCode() : 'category')
-            ->setParameter($enabledParameterName, true);
+            ->setParameter($enabledParameterName, true)
+        ;
     }
 }

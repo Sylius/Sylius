@@ -24,7 +24,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     function it_adds_the_address_as_default_to_the_customer_on_pre_create_resource_controller_event(
         ResourceControllerEvent $event,
         AddressInterface $address,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($address);
         $address->getCustomer()->willReturn($customer);
@@ -44,7 +44,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         AddressInterface $address,
         CustomerInterface $customer,
-        AddressInterface $anotherAddress
+        AddressInterface $anotherAddress,
     ): void {
         $event->getSubject()->willReturn($address);
         $address->getCustomer()->willReturn($customer);
@@ -59,18 +59,19 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_event_subject_is_not_an_address(
-        ResourceControllerEvent $event
+        ResourceControllerEvent $event,
     ): void {
         $event->getSubject()->willReturn(Argument::any());
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('preCreate', [$event]);
+            ->during('preCreate', [$event])
+        ;
     }
 
     function it_does_nothing_if_address_does_have_an_id(
         ResourceControllerEvent $event,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $event->getSubject()->willReturn($address);
         $address->getId()->willReturn(1);
@@ -84,7 +85,7 @@ final class CustomerDefaultAddressListenerSpec extends ObjectBehavior
     function it_does_nothing_if_address_does_not_have_a_customer_assigned(
         ResourceControllerEvent $event,
         AddressInterface $address,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($address);
         $address->getCustomer()->willReturn(null);

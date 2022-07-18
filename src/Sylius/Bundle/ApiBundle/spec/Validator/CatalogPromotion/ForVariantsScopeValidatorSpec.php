@@ -38,7 +38,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
     function it_just_fallbacks_to_default_validator_if_it_is_not_admin_api_section(
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new CatalogPromotionScope();
 
@@ -55,7 +55,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -72,7 +72,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -88,7 +88,7 @@ final class ForVariantsScopeValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_scope_is_valid(
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new CatalogPromotionScope();
 

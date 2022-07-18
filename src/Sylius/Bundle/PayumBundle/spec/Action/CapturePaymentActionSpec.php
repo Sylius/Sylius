@@ -44,7 +44,7 @@ final class CapturePaymentActionSpec extends ObjectBehavior
         GatewayInterface $gateway,
         Capture $capture,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->setGateway($gateway);
 

@@ -33,7 +33,7 @@ final class ManagingChannelsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -154,7 +154,7 @@ final class ManagingChannelsContext implements Context
         string $street,
         string $postcode,
         string $city,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $this->shopBillingData['street'] = $street;
         $this->shopBillingData['city'] = $city;
@@ -195,7 +195,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Channel could not be created'
+            'Channel could not be created',
         );
     }
 
@@ -207,7 +207,7 @@ final class ManagingChannelsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::CHANNELS), 'name', $name),
-            sprintf('Channel with name %s does not exist', $name)
+            sprintf('Channel with name %s does not exist', $name),
         );
     }
 
@@ -219,7 +219,7 @@ final class ManagingChannelsContext implements Context
         Assert::same(
             $this->responseChecker->getValue($this->client->show(Resources::CHANNELS, $channel->getCode()), 'menuTaxon'),
             $this->iriConverter->getIriFromItem($taxon),
-            sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName())
+            sprintf('Channel %s does not have %s menu taxon', $channel->getName(), $taxon->getName()),
         );
     }
 

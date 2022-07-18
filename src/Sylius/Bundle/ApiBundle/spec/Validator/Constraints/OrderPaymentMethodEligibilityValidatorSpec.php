@@ -89,7 +89,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -111,7 +111,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $executionContext
             ->addViolation(
                 'sylius.order.payment_method_eligibility',
-                ['%paymentMethodName%' => 'bank transfer']
+                ['%paymentMethodName%' => 'bank transfer'],
             )
             ->shouldBeCalled()
         ;
@@ -124,7 +124,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -145,7 +145,7 @@ final class OrderPaymentMethodEligibilityValidatorSpec extends ObjectBehavior
         $executionContext
             ->addViolation(
                 'sylius.order.payment_method_eligibility',
-                ['%paymentMethodName%' => 'bank transfer']
+                ['%paymentMethodName%' => 'bank transfer'],
             )
             ->shouldNotBeCalled()
         ;

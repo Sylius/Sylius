@@ -29,7 +29,7 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
 
     function it_does_nothing_if_current_resource_is_not_a_product_review(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
@@ -41,7 +41,7 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
 
     function it_does_nothing_if_operation_name_is_not_shop_get(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
@@ -53,7 +53,7 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
 
     function it_filters_accepted_product_reviews(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryNameGenerator->generateParameterName('status')->shouldBeCalled()->willReturn('status');
 

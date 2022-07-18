@@ -25,7 +25,7 @@ final class ChangeShopUserPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(
         private PasswordUpdaterInterface $passwordUpdater,
-        private UserRepositoryInterface $userRepository
+        private UserRepositoryInterface $userRepository,
     ) {
     }
 

@@ -27,7 +27,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     public function __construct(
         private CalculatorInterface $calculator,
         private AdjustmentFactoryInterface $adjustmentFactory,
-        private TaxRateResolverInterface $taxRateResolver
+        private TaxRateResolverInterface $taxRateResolver,
     ) {
     }
 
@@ -62,7 +62,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
                 'taxRateCode' => $taxRate->getCode(),
                 'taxRateName' => $taxRate->getName(),
                 'taxRateAmount' => $taxRate->getAmount(),
-            ]
+            ],
         );
         $unit->addAdjustment($unitTaxAdjustment);
     }

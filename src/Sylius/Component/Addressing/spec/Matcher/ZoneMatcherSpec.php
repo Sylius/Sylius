@@ -46,7 +46,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ProvinceInterface $province,
         AddressInterface $address,
         ZoneMemberInterface $memberProvince,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $province->getCode()->willReturn('DU');
         $repository->findAll()->willReturn([$zone]);
@@ -65,7 +65,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ProvinceInterface $province,
         AddressInterface $address,
         ZoneMemberInterface $memberProvince,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->shouldBeCalled()->willReturn([$zone]);
         $province->getCode()->willReturn('TX');
@@ -83,7 +83,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         CountryInterface $country,
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $repository->findAll()->willReturn([$zone]);
         $country->getCode()->willReturn('IE');
@@ -101,7 +101,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         CountryInterface $country,
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->willReturn([$zone]);
         $country->getCode()->willReturn('IE');
@@ -121,7 +121,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberCountry,
         ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
-        ZoneInterface $rootZone
+        ZoneInterface $rootZone,
     ): void {
         $country->getCode()->willReturn('IE');
 
@@ -149,7 +149,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberCountry,
         ZoneMemberInterface $memberZone,
         ZoneInterface $subZone,
-        ZoneInterface $rootZone
+        ZoneInterface $rootZone,
     ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
@@ -179,7 +179,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberCountry,
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
-        ZoneInterface $zoneProvince
+        ZoneInterface $zoneProvince,
     ): void {
         $province->getCode()->willReturn('DU');
         $country->getCode()->willReturn('IE');
@@ -208,7 +208,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberCountry,
         ZoneMemberInterface $memberProvince,
         ZoneInterface $zoneCountry,
-        ZoneInterface $zoneProvince
+        ZoneInterface $zoneProvince,
     ): void {
         $address->getCountryCode()->willReturn('IE');
         $memberCountry->getCode()->willReturn('IE');
@@ -237,7 +237,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneMemberInterface $memberZone,
         ZoneInterface $zoneProvince,
         ZoneInterface $zoneCountry,
-        ZoneInterface $zoneZone
+        ZoneInterface $zoneZone,
     ): void {
         $repository->findAll()->willReturn([$zoneProvince, $zoneCountry, $zoneZone]);
 
@@ -270,7 +270,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneMemberInterface $memberCountry,
-        ZoneInterface $zoneCountry
+        ZoneInterface $zoneCountry,
     ): void {
         $repository->findBy(['scope' => ['shipping', 'all']])->willReturn([$zoneCountry]);
 

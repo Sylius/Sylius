@@ -33,7 +33,7 @@ final class ManagingPromotionCouponsContext implements Context
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -414,7 +414,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Error Cannot delete, the promotion coupon is in use.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -434,7 +434,7 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::true($this->generatePage->checkGenerationValidation(sprintf(
             'Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length %d.',
             $amount,
-            $codeLength
+            $codeLength,
         )));
     }
 

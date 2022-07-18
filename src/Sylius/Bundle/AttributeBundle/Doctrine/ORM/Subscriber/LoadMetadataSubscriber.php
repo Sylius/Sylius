@@ -48,7 +48,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         string $subject,
         string $subjectClass,
         ClassMetadataInfo $metadata,
-        ClassMetadataFactory $metadataFactory
+        ClassMetadataFactory $metadataFactory,
     ): void {
         /** @var ClassMetadataInfo $targetEntityMetadata */
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
@@ -70,7 +70,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     private function mapAttributeOnAttributeValue(
         string $attributeClass,
         ClassMetadataInfo $metadata,
-        ClassMetadataFactory $metadataFactory
+        ClassMetadataFactory $metadataFactory,
     ): void {
         /** @var ClassMetadataInfo $attributeMetadata */
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);

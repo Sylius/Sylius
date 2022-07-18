@@ -40,7 +40,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
 
         $apiResourceConfigurationMerger->mergeConfigs(
@@ -58,14 +58,14 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                 'admin_get' => [
                     'enabled' => false,
                 ],
-            ]
+            ],
         )->willReturn(
             [
                 'admin_post' => [
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
 
         $this->resolve(
@@ -73,14 +73,14 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             $resourceMetadata,
             [
                 'itemOperations' => ['admin_get' => ['enabled' => false]],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_post' => [
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
     }
 
@@ -99,7 +99,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
 
         $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
@@ -107,7 +107,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
         $this->resolve(
             'itemOperations',
             $resourceMetadata,
-            ['itemOperations' => null]
+            ['itemOperations' => null],
         )->shouldReturn(
             [
                 'admin_get' => [
@@ -118,7 +118,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
     }
 
@@ -128,7 +128,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
             null,
             null,
             null,
-            null
+            null,
         );
 
         $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();
@@ -143,14 +143,14 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                         'path' => 'admin/path',
                     ],
                 ],
-            ]
+            ],
         )->shouldReturn(
             [
                 'admin_patch' => [
                     'method' => 'PATCH',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
     }
 
@@ -167,7 +167,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
         $this->resolve(
             'shortName',
             $resourceMetadata,
-            ['shortName' => 'child_short_name']
+            ['shortName' => 'child_short_name'],
         )->shouldReturn('child_short_name');
     }
 
@@ -187,7 +187,7 @@ final class ResourceMetadataPropertyValueResolverSpec extends ObjectBehavior
                     'method' => 'POST',
                     'path' => 'admin/path',
                 ],
-            ]
+            ],
         );
 
         $apiResourceConfigurationMerger->mergeConfigs(Argument::any())->shouldNotBeCalled();

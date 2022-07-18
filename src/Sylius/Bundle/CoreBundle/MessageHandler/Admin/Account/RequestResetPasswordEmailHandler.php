@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -31,7 +31,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
         private UserRepositoryInterface $userRepository,
         private GeneratorInterface $generator,
         private DateTimeProviderInterface $calendar,
-        private MessageBusInterface $commandBus
+        private MessageBusInterface $commandBus,
     ) {
     }
 
@@ -46,7 +46,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail($adminUser->getEmail(), $adminUser->getLocaleCode()),
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         );
     }
 }

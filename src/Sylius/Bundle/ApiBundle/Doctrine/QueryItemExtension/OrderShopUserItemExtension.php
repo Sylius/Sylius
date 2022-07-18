@@ -35,7 +35,7 @@ final class OrderShopUserItemExtension implements QueryItemExtensionInterface
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;

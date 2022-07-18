@@ -36,7 +36,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([$firstShippingMethod, $secondShippingMethod]);
 
@@ -45,7 +45,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 
     function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
 

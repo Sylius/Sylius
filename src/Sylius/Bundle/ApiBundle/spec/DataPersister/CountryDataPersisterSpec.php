@@ -1,23 +1,30 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\ApiBundle\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class CountryDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $countryProvincesDeletionChecker);
     }
@@ -40,7 +47,7 @@ class CountryDataPersisterSpec extends ObjectBehavior
     function it_uses_decorated_data_persister_to_persist_country(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(true);
 
@@ -52,7 +59,7 @@ class CountryDataPersisterSpec extends ObjectBehavior
     function it_throws_an_error_if_the_province_within_a_country_is_in_use(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 

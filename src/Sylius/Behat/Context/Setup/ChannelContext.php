@@ -34,7 +34,7 @@ final class ChannelContext implements Context
         private DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         private DefaultChannelFactoryInterface $defaultChannelFactory,
         private ChannelRepositoryInterface $channelRepository,
-        private ObjectManager $channelManager
+        private ObjectManager $channelManager,
     ) {
     }
 
@@ -159,7 +159,7 @@ final class ChannelContext implements Context
      * @Given /^on (this channel) payment step is skipped if only a single payment method is available$/
      */
     public function onThisChannelPaymentStepIsSkippedIfOnlyASinglePaymentMethodIsAvailable(
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $channel->setSkippingPaymentStepAllowed(true);
 
@@ -186,7 +186,7 @@ final class ChannelContext implements Context
         string $postcode,
         string $city,
         CountryInterface $country,
-        string $taxId
+        string $taxId,
     ): void {
         $shopBillingData = new ShopBillingData();
         $shopBillingData->setCompany($company);

@@ -92,7 +92,7 @@ final class ProductReviewFixtureTest extends TestCase
     {
         return new ProductReviewFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

@@ -30,7 +30,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
         private FactoryInterface $stateMachineFactory,
-        private MessageBusInterface $eventBus
+        private MessageBusInterface $eventBus,
     ) {
     }
 
@@ -49,7 +49,7 @@ final class ShipShipmentHandler implements MessageHandlerInterface
 
         Assert::true(
             $stateMachine->can(ShipmentTransitions::TRANSITION_SHIP),
-            'This shipment cannot be completed.'
+            'This shipment cannot be completed.',
         );
 
         $stateMachine->apply(ShipmentTransitions::TRANSITION_SHIP);

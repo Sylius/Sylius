@@ -51,7 +51,7 @@ class ProvinceController extends ResourceController
                 [
                     'metadata' => $this->metadata,
                     'form' => $form->createView(),
-                ]
+                ],
             );
 
             return new JsonResponse([
@@ -66,7 +66,7 @@ class ProvinceController extends ResourceController
             [
                 'metadata' => $this->metadata,
                 'form' => $form->createView(),
-            ]
+            ],
         );
 
         return new JsonResponse([

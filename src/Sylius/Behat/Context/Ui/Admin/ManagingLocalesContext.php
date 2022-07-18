@@ -22,7 +22,7 @@ final class ManagingLocalesContext implements Context
 {
     public function __construct(
         private CreatePageInterface $createPage,
-        private IndexPageInterface $indexPage
+        private IndexPageInterface $indexPage,
     ) {
     }
 

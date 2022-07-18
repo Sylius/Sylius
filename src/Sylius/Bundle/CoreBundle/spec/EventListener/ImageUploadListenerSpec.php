@@ -30,7 +30,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         ImageUploaderInterface $imageUploader,
         ImageAwareInterface $imageAware,
         ImageInterface $image,
-        GenericEvent $event
+        GenericEvent $event,
     ): void {
         $event->getSubject()->willReturn($imageAware);
         $imageAware->getImage()->willReturn($image);

@@ -35,7 +35,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         private ReviewFactoryInterface $productReviewFactory,
         private ProductRepositoryInterface $productRepository,
         private CustomerRepositoryInterface $customerRepository,
-        private FactoryInterface $stateMachineFactory
+        private FactoryInterface $stateMachineFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -50,7 +50,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         /** @var ReviewInterface $productReview */
         $productReview = $this->productReviewFactory->createForSubjectWithReviewer(
             $options['product'],
-            $options['author']
+            $options['author'],
         );
         $productReview->setTitle($options['title']);
         $productReview->setComment($options['comment']);

@@ -31,7 +31,7 @@ final class AuthenticationSuccessListenerSpec extends ObjectBehavior
     function it_adds_customers_id_to_shop_authentication_token_response(
         IriConverterInterface $iriConverter,
         ShopUserInterface $shopUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event = new AuthenticationSuccessEvent([], $shopUser->getWrappedObject(), new Response());
 
@@ -45,7 +45,7 @@ final class AuthenticationSuccessListenerSpec extends ObjectBehavior
     function it_does_not_add_anything_to_admin_authentication_token_response(
         IriConverterInterface $iriConverter,
         AdminUserInterface $adminUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event = new AuthenticationSuccessEvent([], $adminUser->getWrappedObject(), new Response());
 

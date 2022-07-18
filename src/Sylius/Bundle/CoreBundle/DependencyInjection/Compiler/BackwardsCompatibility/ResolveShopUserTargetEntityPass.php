@@ -34,7 +34,7 @@ final class ResolveShopUserTargetEntityPass implements CompilerPassInterface
 
         $resolveTargetEntityListener->addMethodCall(
             'addResolveTargetEntity',
-            [UserInterface::class, $shopUserClass, []]
+            [UserInterface::class, $shopUserClass, []],
         );
     }
 }

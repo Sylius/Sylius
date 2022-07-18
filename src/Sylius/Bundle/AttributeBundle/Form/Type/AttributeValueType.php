@@ -34,7 +34,7 @@ abstract class AttributeValueType extends AbstractResourceType
         protected string $attributeChoiceType,
         protected RepositoryInterface $attributeRepository,
         protected RepositoryInterface $localeRepository,
-        protected FormTypeRegistryInterface $formTypeRegistry
+        protected FormTypeRegistryInterface $formTypeRegistry,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -77,14 +77,14 @@ abstract class AttributeValueType extends AbstractResourceType
         ;
 
         $builder->get('localeCode')->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'))
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code')),
         );
     }
 
     protected function addValueField(
         FormInterface $form,
         AttributeInterface $attribute,
-        ?string $localeCode = null
+        ?string $localeCode = null,
     ): void {
         $form->add('value', $this->formTypeRegistry->get($attribute->getType(), 'default'), [
             'auto_initialize' => false,

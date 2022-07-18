@@ -34,7 +34,7 @@ class BookProductFixture extends AbstractFixture
         private AbstractResourceFixture $taxonFixture,
         private AbstractResourceFixture $productAttributeFixture,
         private AbstractResourceFixture $productFixture,
-        private string $baseLocaleCode
+        private string $baseLocaleCode,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver =

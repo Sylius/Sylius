@@ -22,7 +22,7 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
 {
     public function __construct(
         private ReviewableRatingCalculatorInterface $averageRatingCalculator,
-        private ObjectManager $reviewSubjectManager
+        private ObjectManager $reviewSubjectManager,
     ) {
     }
 

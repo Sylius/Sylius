@@ -30,7 +30,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
     function it_gets_price_for_product_variant_in_given_channel(
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getPrice()->willReturn(1000);
@@ -40,7 +40,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
     function it_throws_a_channel_not_defined_exception_if_there_is_no_channel_pricing(
         ChannelInterface $channel,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $channel->getName()->willReturn('WEB');
 
@@ -56,7 +56,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
     function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $channel->getName()->willReturn('WEB');
 
@@ -81,7 +81,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
     function it_gets_original_price_for_product_variant_in_given_channel(
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getOriginalPrice()->willReturn(1000);
@@ -92,7 +92,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
     function it_gets_price_for_product_variant_if_it_has_no_original_price_in_given_channel(
         ChannelInterface $channel,
         ChannelPricingInterface $channelPricing,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getPrice()->willReturn(1000);
@@ -103,7 +103,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
     function it_throws_a_channel_not_defined_exception_if_there_is_no_channel_pricing_when_calculating_original_price(
         ChannelInterface $channel,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $channel->getName()->willReturn('WEB');
 
@@ -119,7 +119,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
     function it_throws_a_channel_not_defined_exception_if_there_is_no_variant_price_for_given_channel_when_calculating_original_price(
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $channel->getName()->willReturn('WEB');
 

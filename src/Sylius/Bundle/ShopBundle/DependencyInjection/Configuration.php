@@ -40,7 +40,7 @@ final class Configuration implements ConfigurationInterface
                             ->validate()
                             ->ifTrue(
                                 /** @param mixed $pattern */
-                                fn ($pattern) => !is_string($pattern)
+                                fn ($pattern) => !is_string($pattern),
                             )
                                 ->thenInvalid('Invalid pattern "%s"')
                             ->end()

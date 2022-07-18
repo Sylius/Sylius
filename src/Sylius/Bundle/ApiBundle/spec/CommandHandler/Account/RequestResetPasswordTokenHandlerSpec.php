@@ -32,7 +32,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         MessageBusInterface $messageBus,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $dateTimeProvider
+        DateTimeProviderInterface $dateTimeProvider,
     ): void {
         $this->beConstructedWith($userRepository, $messageBus, $generator, $dateTimeProvider);
     }
@@ -47,7 +47,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
         DateTimeProviderInterface $dateTimeProvider,
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
         $dateTimeProvider->now()->willReturn(new \DateTime());
@@ -60,7 +60,7 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
 
         $messageBus->dispatch(
             $sendResetPasswordEmail,
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendResetPasswordEmail))->shouldBeCalled();
 
         $requestResetPasswordToken = new RequestResetPasswordToken('test@email.com');

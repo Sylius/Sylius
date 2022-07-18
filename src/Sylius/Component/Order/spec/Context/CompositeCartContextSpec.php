@@ -31,7 +31,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
     }
 
     function it_throws_cart_not_found_exception_if_none_of_nested_cart_context_returned_a_cart(
-        CartContextInterface $cartContext
+        CartContextInterface $cartContext,
     ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $this->addContext($cartContext);
@@ -42,7 +42,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
     function it_returns_cart_from_first_available_context(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $firstCartContext->getCart()->willThrow(CartNotFoundException::class);
         $secondCartContext->getCart()->willReturn($cart);
@@ -56,7 +56,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
     function its_cart_contexts_can_have_priority(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $firstCartContext->getCart()->shouldNotBeCalled();
         $secondCartContext->getCart()->willReturn($cart);

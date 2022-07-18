@@ -39,7 +39,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
         RandomnessGeneratorInterface $generator,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $this->beConstructedWith(
             $cartFactory,
@@ -47,7 +47,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $channelRepository,
             $orderManager,
             $generator,
-            $customerRepository
+            $customerRepository,
         );
     }
 
@@ -68,7 +68,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         CurrencyInterface $currency,
         LocaleInterface $locale,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -113,7 +113,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -155,7 +155,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ObjectManager $orderManager,
         OrderInterface $cart,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -185,7 +185,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -223,7 +223,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');
@@ -261,7 +261,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $pickupCart = new PickupCart();
         $pickupCart->setChannelCode('code');

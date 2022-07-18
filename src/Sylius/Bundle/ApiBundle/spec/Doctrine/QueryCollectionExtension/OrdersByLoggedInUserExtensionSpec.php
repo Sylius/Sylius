@@ -35,7 +35,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
     function it_does_nothing_if_current_resource_is_not_an_order(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
@@ -47,7 +47,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         AdminUserInterface $user,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
 
@@ -65,7 +65,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         ShopUserInterface $user,
         CustomerInterface $customer,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getCustomer()->willReturn($customer);
@@ -86,7 +86,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         UserInterface $user,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
 
@@ -106,7 +106,7 @@ final class OrdersByLoggedInUserExtensionSpec extends ObjectBehavior
                     OrderInterface::class,
                     'get',
                     [],
-                ]
+                ],
             )
         ;
     }

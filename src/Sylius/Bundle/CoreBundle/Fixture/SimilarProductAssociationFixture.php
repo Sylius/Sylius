@@ -30,7 +30,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
     public function __construct(
         private AbstractResourceFixture $productAssociationTypeFixture,
         private AbstractResourceFixture $productAssociationFixture,
-        private ProductRepositoryInterface $productRepository
+        private ProductRepositoryInterface $productRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver =

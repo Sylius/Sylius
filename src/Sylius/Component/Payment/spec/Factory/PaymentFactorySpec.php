@@ -44,7 +44,7 @@ final class PaymentFactorySpec extends ObjectBehavior
 
     function it_creates_payment_with_currency_and_amount(
         FactoryInterface $paymentFactory,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $paymentFactory->createNew()->willReturn($payment);
 

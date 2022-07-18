@@ -41,7 +41,7 @@ final class ProductOptionValueCollectionType extends AbstractType
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
                 throw new InvalidConfigurationException(
-                    sprintf('Each object passed as option list must implement "%s"', ProductOptionInterface::class)
+                    sprintf('Each object passed as option list must implement "%s"', ProductOptionInterface::class),
                 );
             }
 
@@ -76,7 +76,7 @@ final class ProductOptionValueCollectionType extends AbstractType
     {
         Assert::true(
             isset($options['options']) && is_iterable($options['options']),
-            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\ProductOptionInterface" must be passed to collection'
+            'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Product\Model\ProductOptionInterface" must be passed to collection',
         );
     }
 

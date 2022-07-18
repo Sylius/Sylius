@@ -29,7 +29,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $minkParameters,
         RouterInterface $router,
         private TableAccessorInterface $tableAccessor,
-        private MoneyFormatterInterface $moneyFormatter
+        private MoneyFormatterInterface $moneyFormatter,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -121,7 +121,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             $table = $this->getElement('table');
             $rows = $this->tableAccessor->getRowsWithFields(
                 $table,
-                ['item' => $productName]
+                ['item' => $productName],
             );
 
             foreach ($rows as $row) {
@@ -443,7 +443,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $rows = $this->tableAccessor->getRowsWithFields(
             $this->getElement('table'),
-            ['item' => $itemName]
+            ['item' => $itemName],
         );
 
         return $rows[0]->find('css', '.' . $property)->getText();

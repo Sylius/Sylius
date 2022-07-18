@@ -60,14 +60,14 @@ class ProductAttributeValueRepository extends EntityRepository implements Produc
             ->andWhere(
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->in('o.localeCode', $acceptableLocaleCodes),
-                    $queryBuilder->expr()->isNull('o.localeCode')
-                )
+                    $queryBuilder->expr()->isNull('o.localeCode'),
+                ),
             )
             ->andWhere(
                 $queryBuilder->expr()->orX(
                     'o.localeCode = :locale',
-                    $queryBuilder->expr()->notIn('IDENTITY(o.attribute)', $subQuery->getDQL())
-                )
+                    $queryBuilder->expr()->notIn('IDENTITY(o.attribute)', $subQuery->getDQL()),
+                ),
             )
             ->setParameter('code', $productCode)
             ->setParameter('locale', $localeCode)

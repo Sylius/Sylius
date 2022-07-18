@@ -48,7 +48,7 @@ final class SendContactRequestHandler implements MessageHandlerInterface
                 'localeCode' => $command->getLocaleCode(),
             ],
             [],
-            [$email]
+            [$email],
         );
     }
 }

@@ -61,7 +61,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         AdjustmentInterface $adjustment,
         OrderInterface $order,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
 

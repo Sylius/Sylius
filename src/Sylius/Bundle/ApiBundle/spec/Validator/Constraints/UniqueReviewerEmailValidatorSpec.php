@@ -28,7 +28,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
     function let(
         UserRepositoryInterface $shopUserRepository,
         UserContextInterface $userContext,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->beConstructedWith($shopUserRepository, $userContext);
         $this->initialize($executionContext);
@@ -43,7 +43,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         UserRepositoryInterface $shopUserRepository,
         UserContextInterface $userContext,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $userContext->getUser()->willReturn(null);
 
@@ -73,7 +73,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_the_given_email_is_the_same_as_logged_in_shop_user(
         UserContextInterface $userContext,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getEmail()->willReturn('email@example.com');

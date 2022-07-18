@@ -24,7 +24,7 @@ final class UniqueShopUserEmailValidator extends ConstraintValidator
 {
     public function __construct(
         private CanonicalizerInterface $canonicalizer,
-        private UserRepositoryInterface $shopUserRepository
+        private UserRepositoryInterface $shopUserRepository,
     ) {
     }
 

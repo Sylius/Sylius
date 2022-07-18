@@ -29,7 +29,7 @@ final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
 
     function let(
         ProductInterface $product,
-        ProductOptionInterface $productOption
+        ProductOptionInterface $productOption,
     ) {
         $product->getCode()->willReturn(self::PRODUCT_CODE);
         $productOption->getCode()->willReturn(self::PRODUCT_OPTION_CODE);
@@ -43,7 +43,7 @@ final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
 
     function it_throws_if_option_does_not_belong_to_product(
         ProductInterface $product,
-        ProductOptionInterface $productOption
+        ProductOptionInterface $productOption,
     ) {
         $product->hasOption($productOption)->willReturn(false);
 
@@ -52,9 +52,9 @@ final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
                 sprintf(
                     'Cannot resolve available product option values. Option "%s" does not belong to product "%s".',
                     self::PRODUCT_CODE,
-                    self::PRODUCT_OPTION_CODE
-                )
-            )
+                    self::PRODUCT_OPTION_CODE,
+                ),
+            ),
         )->during('resolve', [$product, $productOption]);
     }
 
@@ -63,15 +63,15 @@ final class AvailableProductOptionValuesResolverSpec extends ObjectBehavior
         ProductOptionInterface $productOption,
         ProductOptionValueInterface $productOptionValue1,
         ProductOptionValueInterface $productOptionValue2,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ) {
         $productOption->getValues()->willReturn(
             new ArrayCollection(
                 [
                     $productOptionValue1->getWrappedObject(),
                     $productOptionValue2->getWrappedObject(),
-                ]
-            )
+                ],
+            ),
         );
         $product->getEnabledVariants()->willReturn(new ArrayCollection([$productVariant->getWrappedObject()]));
         $productVariant->hasOptionValue($productOptionValue1)->willReturn(true);

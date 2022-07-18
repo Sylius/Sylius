@@ -88,7 +88,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         Assert::oneOf(
             $variantSelectionMethod,
             [self::VARIANT_SELECTION_CHOICE, self::VARIANT_SELECTION_MATCH],
-            sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod)
+            sprintf('Wrong variant selection method "%s" given.', $variantSelectionMethod),
         );
 
         $this->variantSelectionMethod = $variantSelectionMethod;

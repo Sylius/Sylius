@@ -36,7 +36,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         Request $request,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request, $request);
@@ -56,7 +56,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         Request $firstRequest,
         Request $secondRequest,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest);
@@ -76,7 +76,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         Request $firstRequest,
         Request $secondRequest,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($firstRequest, $secondRequest, $firstRequest);
@@ -95,7 +95,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn(null, null);
@@ -112,7 +112,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
     function it_caches_channel_not_found_exceptions_for_the_same_request(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request, $request);
@@ -129,7 +129,7 @@ final class CachedPerRequestChannelContextSpec extends ObjectBehavior
     function it_does_not_cache_channel_not_found_exceptions_for_null_master_requests(
         ChannelContextInterface $decoratedChannelContext,
         RequestStack $requestStack,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn(null, null);

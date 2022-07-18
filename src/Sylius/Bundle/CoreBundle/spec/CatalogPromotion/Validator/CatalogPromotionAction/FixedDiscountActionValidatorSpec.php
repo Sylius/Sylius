@@ -38,7 +38,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_catalog_promotion_action_has_an_empty_configuration(
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $executionContext->buildViolation('sylius.catalog_promotion_action.fixed_discount.not_valid')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('configuration')->willReturn($constraintViolationBuilder);
@@ -52,7 +52,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
         CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $channelRepository->findOneBy(['code' => 'nonexistent_channel'])->willReturn(null);
 
@@ -72,7 +72,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ChannelInterface $channel,
         CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $channelRepository->findOneBy(['code' => 'channel'])->willReturn($channel);
 
@@ -94,7 +94,7 @@ final class FixedDiscountActionValidatorSpec extends ObjectBehavior
         ChannelInterface $channelOne,
         ChannelInterface $channelTwo,
         CatalogPromotionActionInterface $catalogPromotionAction,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $executionContext->getObject()->willReturn($catalogPromotionAction);
         $catalogPromotionAction->getCatalogPromotion()->willReturn($catalogPromotion);

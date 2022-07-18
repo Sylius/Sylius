@@ -55,7 +55,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
             function (CurrencyInterface $currency) {
                 return $currency->getCode();
             },
-            $channel->getCurrencies()->toArray()
+            $channel->getCurrencies()->toArray(),
         );
 
         return in_array($currencyCode, $availableCurrencies, true);

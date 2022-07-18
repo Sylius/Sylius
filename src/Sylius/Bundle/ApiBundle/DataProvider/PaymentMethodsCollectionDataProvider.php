@@ -33,7 +33,7 @@ final class PaymentMethodsCollectionDataProvider implements ContextAwareCollecti
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private PaymentRepositoryInterface $paymentRepository,
         private ChannelContextInterface $channelContext,
-        private PaymentMethodsResolverInterface $paymentMethodsResolver
+        private PaymentMethodsResolverInterface $paymentMethodsResolver,
     ) {
     }
 

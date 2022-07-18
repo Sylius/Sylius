@@ -26,7 +26,7 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
 {
     public function __construct(
         private OrderItemRepositoryInterface $orderItemRepository,
-        private OrderModifierInterface $orderModifier
+        private OrderModifierInterface $orderModifier,
     ) {
     }
 
@@ -35,7 +35,7 @@ final class RemoveItemFromCartHandler implements MessageHandlerInterface
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(
             $removeItemFromCart->itemId,
-            $removeItemFromCart->orderTokenValue
+            $removeItemFromCart->orderTokenValue,
         );
 
         Assert::notNull($orderItem);
