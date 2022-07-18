@@ -128,14 +128,6 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->isOpen());
     }
 
-    /**
-     * @Then I should be on the login page
-     */
-    public function iShouldBeOnTheLoginPage(): void
-    {
-        Assert::true($this->loginPage->isOpen());
-    }
-
     private function logInAgain(string $username, string $password): void
     {
         $this->dashboardPage->tryToOpen();

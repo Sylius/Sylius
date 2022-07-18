@@ -20,7 +20,7 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
 {
     public function getRouteName(): string
     {
-        return 'sylius_admin_request_password_reset';
+        return 'sylius_admin_render_reset_password_page';
     }
 
     public function specifyEmail(string $email): void
@@ -28,7 +28,7 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
         $this->getElement('email')->setValue($email);
     }
 
-    public function resetPassword(): void
+    public function reset(): void
     {
         $this->getDocument()->pressButton('Reset password');
     }

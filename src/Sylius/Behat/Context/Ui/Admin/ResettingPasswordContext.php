@@ -16,8 +16,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
+use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPageInterface;
 use Sylius\Behat\Page\Admin\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -26,6 +28,7 @@ final class ResettingPasswordContext implements Context
     public function __construct(
         private RequestPasswordResetPage $requestPasswordResetPage,
         private ResetPasswordPageInterface $resetPasswordPage,
+        private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -52,15 +55,13 @@ final class ResettingPasswordContext implements Context
      */
     public function iResetIt(): void
     {
-        $this->requestPasswordResetPage->resetPassword();
-    }
+        /** @var RequestPasswordResetPageInterface|ResetPasswordPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->requestPasswordResetPage,
+            $this->resetPasswordPage,
+        ]);
 
-    /**
-     * @When I reset it
-     */
-    public function iResetIt(): void
-    {
-        $this->resetPasswordPage->reset();
+        $currentPage->reset();
     }
 
     /**
