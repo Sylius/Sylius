@@ -73,6 +73,22 @@ final class ResettingPasswordContext implements Context
     }
 
     /**
+     * @When I specify my new password as :password
+     */
+    public function iSpecifyMyNewPassword(string $password): void
+    {
+        $this->request->updateContent(['newPassword' => $password]);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     */
+    public function iConfirmMyNewPassword(string $password): void
+    {
+        $this->request->updateContent(['confirmNewPassword' => $password]);
+    }
+
+    /**
      * @Then I should be notified that email with reset instruction has been sent
      */
     public function iShouldBeNotifiedThatEmailResetInstructionHasBeenSent(): void
@@ -122,21 +138,5 @@ final class ResettingPasswordContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'This email is not valid.'
         );
-    }
-
-    /**
-     * @When I specify my new password as :password
-     */
-    public function iSpecifyMyNewPassword(string $password): void
-    {
-        $this->request->updateContent(['newPassword' => $password]);
-    }
-
-    /**
-     * @When I confirm my new password as :password
-     */
-    public function iConfirmMyNewPassword(string $password): void
-    {
-        $this->request->updateContent(['confirmNewPassword' => $password]);
     }
 }
