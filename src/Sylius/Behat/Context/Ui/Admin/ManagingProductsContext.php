@@ -346,9 +346,16 @@ final class ManagingProductsContext implements Context
     {
         $this->sharedStorage->set('product', $product);
 
-        if (!$this->indexPage->isOpen()) {
-            $this->iWantToBrowseProducts();
-        }
+        $this->iWantToBrowseProducts();
+        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
+    }
+
+    /**
+     * @When I delete the :product product on filtered page
+     */
+    public function iDeleteProductOnFilteredPage(ProductInterface $product)
+    {
+        $this->sharedStorage->set('product', $product);
 
         $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
     }

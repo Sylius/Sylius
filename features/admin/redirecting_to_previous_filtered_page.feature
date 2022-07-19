@@ -16,7 +16,7 @@ Feature: Redirecting to previous filtered page
         When I browse products
         And I choose enabled filter
         And I filter
-        And I delete the "FC Barcelona T-Shirt" product
+        And I delete the "FC Barcelona T-Shirt" product on filtered page
         Then I should be redirected to the previous filtered page with enabled filter
 
     @ui

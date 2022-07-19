@@ -23,6 +23,7 @@ final class RedirectHandler implements RedirectHandlerInterface
 {
     public function __construct(
         private RedirectHandlerInterface $decoratedRedirectHandler,
+        private FilterStorageInterface $filterStorage,
     ) {
     }
 
@@ -33,18 +34,11 @@ final class RedirectHandler implements RedirectHandlerInterface
 
     public function redirectToIndex(RequestConfiguration $configuration, ?ResourceInterface $resource = null): Response
     {
-        $request = $configuration->getRequest();
-
-        $parameters = $configuration->getParameters();
-        $parameters->add(['redirect' => ['referer' => $request->headers->get('referer')]]);
-
-        $requestConfiguration = new RequestConfiguration(
-            $configuration->getMetadata(),
-            $request,
-            $parameters
+        return $this->decoratedRedirectHandler->redirectToRoute(
+            $configuration,
+            (string) $configuration->getRedirectRoute('index'),
+            array_merge($configuration->getRedirectParameters($resource), $this->filterStorage->all())
         );
-
-        return $this->decoratedRedirectHandler->redirectToIndex($requestConfiguration);
     }
 
     public function redirectToRoute(RequestConfiguration $configuration, string $route, array $parameters = []): Response
