@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -57,7 +58,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
 
             /** @var OrderInterface $cart */
             Assert::isInstanceOf($cart, OrderInterface::class);
-        } catch (CartNotFoundException) {
+        } catch (CartNotFoundException | ChannelNotFoundException) {
             return;
         }
 
