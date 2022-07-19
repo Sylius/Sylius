@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\TabsHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends BaseCreatePage implements CreatePageInterface
@@ -207,9 +206,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $lastAction = $this->getLastCollectionItem('actions');
 
-        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
-            $this->activateChannelTab($lastAction, $channelCode);
-        }
+        TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
 
         return $lastAction
             ->find('css', sprintf('[id^="sylius_promotion_actions_"][id$="_configuration_%s"]', $channelCode))
@@ -220,25 +217,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $lastRule = $this->getLastCollectionItem('rules');
 
-        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
-            $this->activateChannelTab($lastRule, $channelCode);
-        }
+        TabsHelper::switchTab($this->getSession(), $lastRule, $channelCode);
 
         return $lastRule
             ->find('css', sprintf('[id^="sylius_promotion_rules_"][id$="_configuration_%s"]', $channelCode))
         ;
-    }
-
-    private function activateChannelTab(NodeElement $configurationElement, string $channelCode): void
-    {
-        $tab = $configurationElement->find('css', sprintf('.item[data-tab*="%s"]', $channelCode));
-        if (false === $tab->hasClass('active')) {
-            $tab->click();
-
-            $tabContent = $configurationElement->find('css', sprintf('.tab[data-tab*="%s"]', $channelCode));
-
-            $this->getDocument()->waitFor(5, fn () => $tabContent->isVisible());
-        }
     }
 
     private function getLastCollectionItem(string $collection): NodeElement

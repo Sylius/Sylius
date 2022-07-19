@@ -19,6 +19,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\TabsHelper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
@@ -46,9 +47,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyAmountForChannel(string $channelCode, string $amount): void
     {
-        if ($this->getDriver() instanceof ChromeDriver || $this->getDriver() instanceof Selenium2Driver) {
-            $this->activateChannelTab($this->getElement('calculator_configuration'), $channelCode);
-        }
+        TabsHelper::switchTab($this->getSession(), $this->getElement('calculator_configuration'), $channelCode);
 
         $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
@@ -175,17 +174,5 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             ->getLastCollectionItem('rules')
             ->find('css', sprintf('[id^="sylius_shipping_method_rules_"][id$="_configuration_%s"]', $channelCode))
         ;
-    }
-
-    private function activateChannelTab(NodeElement $configurationElement, string $channelCode): void
-    {
-        $tab = $configurationElement->find('css', sprintf('.item[data-tab*="%s"]', $channelCode));
-        if (false === $tab->hasClass('active')) {
-            $tab->click();
-
-            $tabContent = $configurationElement->find('css', sprintf('.tab[data-tab*="%s"]', $channelCode));
-
-            $this->getDocument()->waitFor(5, fn () => $tabContent->isVisible());
-        }
     }
 }
