@@ -46,7 +46,7 @@ final class HomepageContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-                $this->productsClient->getLastResponse(),
+                $this->client->getLastResponse(),
                 'name',
                 $productName
             )
@@ -60,7 +60,7 @@ final class HomepageContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue(
-                $this->productsClient->getLastResponse(),
+                $this->client->getLastResponse(),
                 'name',
                 $productName
             )
