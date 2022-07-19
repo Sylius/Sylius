@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,9 +26,10 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class UserDeleteListenerSpec extends ObjectBehavior
 {
-    function let(TokenStorageInterface $tokenStorage, SessionInterface $session, FlashBagInterface $flashBag): void
+    function let(TokenStorageInterface $tokenStorage, RequestStack $requestStack, SessionInterface $session, FlashBagInterface $flashBag): void
     {
-        $this->beConstructedWith($tokenStorage, $session);
+        $this->beConstructedWith($tokenStorage, $requestStack);
+        $requestStack->getSession()->willReturn($session);
         $session->getBag('flashes')->willReturn($flashBag);
     }
 
