@@ -1,0 +1,23 @@
+---------------------------------------------------------------------------
+
+by oallain at 2021-07-30T10:02:53Z
+
+Ping @lchrusciel
+
+---------------------------------------------------------------------------
+
+by oallain at 2021-08-12T07:24:02Z
+
+Ping @Sylius/core-team ;)
+
+---------------------------------------------------------------------------
+
+by timching at 2022-07-12T06:43:18Z
+
+facing the same issue, also found that same issue in the SyliusPlus in this file `vendor/sylius/plus/src/Resources/config/serialization/OrderItem.xml`
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-07-19T14:14:48Z
+
+Thanks, @oallain! :tada:
