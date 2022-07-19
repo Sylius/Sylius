@@ -59,7 +59,12 @@ $(document).ready(() => {
   $('#sylius_shipping_method_calculator').handlePrototypes({
     prototypePrefix: 'sylius_shipping_method_calculator_calculators',
     containerSelector: '.configuration',
+  }).change(() => {
+    $('.ui.tabular.menu .item').tab();
   });
+  setTimeout(() => {
+    $('.ui.tabular.menu .item').tab();
+  }, 50);
 
   $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
