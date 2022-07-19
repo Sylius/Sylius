@@ -17,8 +17,6 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ResetPasswordPageInterface extends SymfonyPageInterface
 {
-    public function reset(): void;
-
     public function specifyNewPassword(string $password): void;
 
     public function specifyPasswordConfirmation(string $password): void;

@@ -28,11 +28,6 @@ class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordRes
         $this->getElement('email')->setValue($email);
     }
 
-    public function reset(): void
-    {
-        $this->getDocument()->pressButton('Reset password');
-    }
-
     public function getEmailValidationMessage(): string
     {
         $errorLabel = $this->getElement('email')->getParent()->find('css', '[data-test-validation-error]');
