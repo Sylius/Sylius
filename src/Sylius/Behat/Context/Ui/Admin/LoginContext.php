@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Account\ResetElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPageInterface;
 use Sylius\Behat\Page\Admin\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -31,7 +31,7 @@ final class LoginContext implements Context
         private LoginPageInterface $loginPage,
         private RequestPasswordResetPageInterface $requestPasswordResetPage,
         private ResetPasswordPageInterface $resetPasswordPage,
-        private CurrentPageResolverInterface $currentPageResolver,
+        private ResetElementInterface $resetElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -90,13 +90,7 @@ final class LoginContext implements Context
      */
     public function iResetIt(): void
     {
-        /** @var RequestPasswordResetPageInterface|ResetPasswordPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->requestPasswordResetPage,
-            $this->resetPasswordPage,
-        ]);
-
-        $currentPage->reset();
+        $this->resetElement->reset();
     }
 
     /**
@@ -199,7 +193,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
     {
-        $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
+        $this->notificationChecker->checkNotification('Your password has been changed successfully!', NotificationType::success());
     }
 
     /**

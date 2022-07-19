@@ -17,11 +17,6 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
 {
-    public function reset(): void
-    {
-        $this->getDocument()->pressButton('Reset');
-    }
-
     public function specifyNewPassword(string $password): void
     {
         $this->getElement('new_password')->setValue($password);

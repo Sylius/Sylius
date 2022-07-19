@@ -18,6 +18,4 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 interface RequestPasswordResetPageInterface extends SymfonyPageInterface
 {
     public function specifyEmail(string $email): void;
-
-    public function reset(): void;
 }
