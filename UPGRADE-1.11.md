@@ -5,6 +5,9 @@
 `Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver::findChannel` will start selecting only a channel from a range
 of enabled channels.
 
+2. The `code` field was removed from OrderItem serialization (in `src/Sylius/Bundle/ApiBundle/Resources/config/serialization/OrderItem.xml`)
+as such field does not exist. Please, add it in your code base if you need it.
+
 # UPGRADE FROM `v1.11.2` TO `v1.11.3`
 
 1. Order Processors' priorities have changed and `sylius.order_processing.order_prices_recalculator` has now a higher priority than `sylius.order_processing.order_shipment_processor`.
