@@ -29,6 +29,8 @@ final class DatetimeAttributeType extends AbstractType
         $resolver
             ->setDefaults([
                 'label' => false,
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
             ->setRequired('configuration')
             ->setDefined('locale_code')
