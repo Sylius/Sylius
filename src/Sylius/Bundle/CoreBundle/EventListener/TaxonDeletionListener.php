@@ -17,6 +17,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
@@ -27,7 +28,7 @@ final class TaxonDeletionListener
     private array $ruleUpdaters;
 
     public function __construct(
-        private SessionInterface $session,
+        private SessionInterface|RequestStack $requestStackOrSession,
         private ChannelRepositoryInterface $channelRepository,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters
     ) {
@@ -41,8 +42,14 @@ final class TaxonDeletionListener
 
         $channel = $this->channelRepository->findOneBy(['menuTaxon' => $taxon]);
         if ($channel !== null) {
+            if ($this->requestStackOrSession instanceof SessionInterface) {
+                $session = $this->requestStackOrSession;
+            } else {
+                $session = $this->requestStackOrSession->getSession();
+            }
+
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->session->getBag('flashes');
+            $flashes = $$session->getBag('flashes');
             $flashes->add('error', 'sylius.taxon.menu_taxon_delete');
 
             $event->stopPropagation();
@@ -60,8 +67,14 @@ final class TaxonDeletionListener
         }
 
         if (!empty($updatedPromotionCodes)) {
+            if ($this->requestStackOrSession instanceof SessionInterface) {
+                $session = $this->requestStackOrSession;
+            } else {
+                $session = $this->requestStackOrSession->getSession();
+            }
+
             /** @var FlashBagInterface $flashes */
-            $flashes = $this->session->getBag('flashes');
+            $flashes = $session->getBag('flashes');
             $flashes->add('info', [
                 'message' => 'sylius.promotion.update_rules',
                 'parameters' => ['%codes%' => implode(', ', array_unique($updatedPromotionCodes))],

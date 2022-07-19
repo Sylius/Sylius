@@ -216,7 +216,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $userDeleteListenerDefinition = new Definition(UserDeleteListener::class);
         $userDeleteListenerDefinition->addArgument(new Reference('security.token_storage'));
-        $userDeleteListenerDefinition->addArgument(new Reference('session'));
+        $userDeleteListenerDefinition->addArgument(new Reference('request_stack'));
         $userDeleteListenerDefinition->addTag('kernel.event_listener', ['event' => $userPreDeleteEventName, 'method' => 'deleteUser']);
         $container->setDefinition($userDeleteListenerServiceId, $userDeleteListenerDefinition);
     }
