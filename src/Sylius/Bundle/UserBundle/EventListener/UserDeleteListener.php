@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,8 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
 {
-    public function __construct(private TokenStorageInterface $tokenStorage, private SessionInterface $session)
+    public function __construct(private TokenStorageInterface $tokenStorage, private SessionInterface|RequestStack $requestStackOrSession)
     {
+        if ($requestStackOrSession instanceof SessionInterface) {
+            trigger_deprecation('sylius/user-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
+        }
     }
 
     /**
@@ -41,8 +45,14 @@ final class UserDeleteListener
             $event->setErrorCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             $event->setMessage('Cannot remove currently logged in user.');
 
+            if ($this->requestStackOrSession instanceof SessionInterface) {
+                $session = $this->requestStackOrSession;
+            } else {
+                $session = $this->requestStackOrSession->getSession();
+            }
+
             /** @var FlashBagInterface $flashBag */
-            $flashBag = $this->session->getBag('flashes');
+            $flashBag = $session->getBag('flashes');
             $flashBag->add('error', 'Cannot remove currently logged in user.');
         }
     }
