@@ -27,7 +27,7 @@ final class UserDeleteListener
     public function __construct(private TokenStorageInterface $tokenStorage, private SessionInterface|RequestStack $requestStackOrSession)
     {
         if ($requestStackOrSession instanceof SessionInterface) {
-            @trigger_error(sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class), \E_USER_DEPRECATED);
+            trigger_deprecation('sylius/user-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
         }
     }
 
