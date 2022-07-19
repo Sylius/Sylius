@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @experimental */
 final class ResetPasswordDispatcher implements ResetPasswordDispatcherInterface
 {
     public function __construct(private MessageBusInterface $messageBus)
