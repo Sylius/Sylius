@@ -22,7 +22,6 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
@@ -39,7 +38,9 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
     {
         /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->userRepository->findOneByEmail($requestResetPasswordEmail->email);
-        Assert::notNull($adminUser);
+        if (null === $adminUser) {
+            return;
+        }
 
         $adminUser->setPasswordResetToken($this->generator->generate());
         $adminUser->setPasswordRequestedAt($this->calendar->now());

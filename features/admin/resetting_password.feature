@@ -15,6 +15,14 @@ Feature: Resetting an administrator's password
         Then I should be notified that email with reset instruction has been sent
         And an email with instructions on how to reset the administrator's password should be sent to "sylius@example.com"
 
+    @email @api @ui
+    Scenario: Notifying about sending reset instructions even when an admin with email does not exist
+        When I want to reset password
+        And I specify email as "does-not-exist@example.com"
+        And I reset it
+        Then I should be notified that email with reset instruction has been sent
+        But "does-not-exist@example.com" should receive no emails
+
     @api
     Scenario: Changing my administrator's password
         Given I have already received a resetting password email

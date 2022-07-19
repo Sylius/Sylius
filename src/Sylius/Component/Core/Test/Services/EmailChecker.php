@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Test\Services;
 
+use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Webmozart\Assert\Assert;
@@ -27,11 +28,14 @@ final class EmailChecker implements EmailCheckerInterface
     {
         $this->assertRecipientIsValid($recipient);
 
-        $messages = $this->getMessages($this->spoolDirectory);
-        foreach ($messages as $message) {
-            if ($this->isMessageTo($message, $recipient)) {
-                return true;
+        try {
+            $messages = $this->getMessages($this->spoolDirectory);
+            foreach ($messages as $message) {
+                if ($this->isMessageTo($message, $recipient)) {
+                    return true;
+                }
             }
+        } catch (DirectoryNotFoundException) {
         }
 
         return false;

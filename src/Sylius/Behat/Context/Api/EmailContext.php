@@ -161,6 +161,14 @@ final class EmailContext implements Context
         );
     }
 
+    /**
+     * @Then :recipient should receive no emails
+     */
+    public function recipientShouldReceiveNoEmails(string $recipient): void
+    {
+        Assert::false($this->emailChecker->hasRecipient($recipient));
+    }
+
     private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));

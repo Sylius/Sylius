@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
 use DateTime;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
@@ -75,14 +76,14 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
         $this(new RequestResetPasswordEmail('admin@example.com'));
     }
 
-    public function it_throws_exception_while_handling_if_user_doesnt_exist(
-        UserRepositoryInterface $userRepository
+    public function it_does_nothing_while_handling_if_user_doesnt_exist(
+        UserRepositoryInterface $userRepository,
+        MessageBusInterface $messageBus,
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn(null);
 
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new RequestResetPasswordEmail('admin@example.com')])
-        ;
+        $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
+
+        $this(new RequestResetPasswordEmail('admin@example.com'));
     }
 }
