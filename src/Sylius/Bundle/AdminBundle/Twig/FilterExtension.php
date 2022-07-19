@@ -30,11 +30,11 @@ final class FilterExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_generate_path', [$this, 'generatePath']),
+            new TwigFunction('sylius_generate_redirect_path', [$this, 'generateRedirectPath']),
         ];
     }
 
-    public function generatePath(string $path): string
+    public function generateRedirectPath(string $path): string
     {
         $request = Request::create($path);
 

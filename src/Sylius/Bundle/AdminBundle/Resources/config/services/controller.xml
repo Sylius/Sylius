@@ -82,7 +82,6 @@
                  public="false"
         >
             <argument type="service" id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler.inner" />
-            <argument type="service" id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" />
         </service>
     </services>
 </container>

@@ -11,7 +11,7 @@ Feature: Redirecting to previous filtered page
         And the store has a product "FC Barcelona Home T-Shirt"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Redirecting to previous filtered page after delete product
         When I browse products
         And I choose enabled filter
