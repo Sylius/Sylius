@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Collector;
 
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -116,7 +117,7 @@ final class CartCollector extends DataCollector
                     'payment' => $cart->getPaymentState(),
                 ],
             ];
-        } catch (CartNotFoundException $exception) {
+        } catch (CartNotFoundException | ChannelNotFoundException $exception) {
             $this->data = [];
         }
     }
