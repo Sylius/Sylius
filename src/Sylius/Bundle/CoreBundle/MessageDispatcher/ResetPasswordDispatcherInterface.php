@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\MessageDispatcher;
 
-/** @experimental */
 interface ResetPasswordDispatcherInterface
 {
     public function dispatch(string $token, string $password): void;
