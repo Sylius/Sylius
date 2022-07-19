@@ -56,8 +56,12 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         }
     }
 
-    private function getAuthenticatedUserEmail(TokenInterface $token): ?string
+    private function getAuthenticatedUserEmail(?TokenInterface $token): ?string
     {
+        if (null === $token) {
+            return null;
+        }
+
         if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return null;
         }
