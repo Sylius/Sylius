@@ -66,11 +66,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
-            'shipping_charges' => '.ui.segment.configuration',
             'channel' => '.checkbox:contains("%channel%") input',
             'code' => '#sylius_shipping_method_code',
             'enabled' => '#sylius_shipping_method_enabled',
             'name' => '#sylius_shipping_method_translations_en_US_name',
+            'shipping_charges' => '.ui.segment.configuration',
             'zone' => '#sylius_shipping_method_zone',
         ]);
     }

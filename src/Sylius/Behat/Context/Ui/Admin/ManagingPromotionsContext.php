@@ -691,6 +691,22 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I remove the discount (amount|percentage) for ("[^"]+" channel)$/
+     */
+    public function iRemoveTheDiscountForChannel(string $field, ChannelInterface $channel): void
+    {
+        $this->updatePage->removeActionFieldValue($channel->getCode(), $field);
+    }
+
+    /**
+     * @When I remove the rule amount for :channel channel
+     */
+    public function iRemoveTheRuleAmountForChannel(ChannelInterface $channel): void
+    {
+        $this->updatePage->removeRuleAmount($channel->getCode());
+    }
+
+    /**
      * @Then I should see the rule configuration form
      */
     public function iShouldSeeTheRuleConfigurationForm()
@@ -720,22 +736,6 @@ final class ManagingPromotionsContext implements Context
     public function iShouldSeeThatTheActionForChannelHasCountValidationErrors(ChannelInterface $channel, int $count): void
     {
         Assert::same($this->updatePage->getActionValidationErrorsCount($channel->getCode()), $count);
-    }
-
-    /**
-     * @When /^I remove the discount (amount|percentage) for ("[^"]+" channel)$/
-     */
-    public function iRemoveTheDiscountForChannel(string $field, ChannelInterface $channel): void
-    {
-        $this->updatePage->removeActionFieldValue($channel->getCode(), $field);
-    }
-
-    /**
-     * @When /^I remove the rule amount for ("[^"]+" channel)$/
-     */
-    public function iRemoveTheRuleAmountForChannel(ChannelInterface $channel): void
-    {
-        $this->updatePage->removeRuleAmount($channel->getCode());
     }
 
     /**
