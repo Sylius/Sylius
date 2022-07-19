@@ -49,6 +49,7 @@
   },
   "engineStrict": true,
   "scripts": {
+    "watch": "gulp watch",
     "build": "gulp build",
     "gulp": "gulp build",
     "lint": "yarn lint:js",
