@@ -64,4 +64,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function setShippingRequired(bool $isShippingRequired): void;
 
     public function getChannelPricingValidationMessage(): string;
+
+    public function cancelChanges(): void;
 }

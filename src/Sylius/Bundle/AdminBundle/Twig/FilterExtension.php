@@ -21,6 +21,8 @@ use Twig\TwigFunction;
 
 final class FilterExtension extends AbstractExtension
 {
+    private const NUMBER_OF_ROUTE_PROPERTIES = 3;
+
     public function __construct(
         private FilterStorageInterface $filterStorage,
         private RouterInterface $router,
@@ -34,8 +36,12 @@ final class FilterExtension extends AbstractExtension
         ];
     }
 
-    public function generateRedirectPath(string $path): string
+    public function generateRedirectPath(?string $path): ?string
     {
+        if (null === $path) {
+            return null;
+        }
+
         $request = Request::create($path);
 
         try {
@@ -44,12 +50,17 @@ final class FilterExtension extends AbstractExtension
             return $path;
         }
 
-        if ([] !== $request->query->all()) {
+        if ([] !== $request->query->all() || $this->hasAdditionalParameters($routeInfo)) {
             return $path;
         }
 
         $route = $routeInfo['_route'];
 
         return $this->router->generate($route, $this->filterStorage->all());
+    }
+
+    private function hasAdditionalParameters(array $routeInfo): bool
+    {
+        return count($routeInfo) > self::NUMBER_OF_ROUTE_PROPERTIES;
     }
 }

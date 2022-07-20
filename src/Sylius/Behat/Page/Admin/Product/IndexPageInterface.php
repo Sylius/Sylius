@@ -29,9 +29,13 @@ interface IndexPageInterface extends CrudIndexPageInterface
 
     public function filter(): void;
 
+    public function goToPage(int $page): void;
+
     public function checkFirstProductHasDataAttribute(string $attributeName): bool;
 
     public function checkLastProductHasDataAttribute(string $attributeName): bool;
+
+    public function checkPageNumber(): int;
 
     public function isEnabledFilterApplied(): bool;
 }

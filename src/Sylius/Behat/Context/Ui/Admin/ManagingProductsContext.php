@@ -353,7 +353,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I delete the :product product on filtered page
      */
-    public function iDeleteProductOnFilteredPage(ProductInterface $product)
+    public function iDeleteProductOnFilteredPage(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
 
@@ -408,6 +408,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I go to ([^"]+)(nd) page$/
+     */
+    public function iGoToPage(int $page): void
+    {
+        $this->indexPage->goToPage($page);
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
@@ -456,7 +464,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I cancel my changes
      */
-    public function iCancelChanges()
+    public function iCancelChanges(): void
     {
         $currentPage = $this->resolveCurrentPage();
 
@@ -1167,11 +1175,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be redirected to the previous filtered page with enabled filter
+     * @Then I should be redirected to the previous page of only enabled products
      */
-    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter()
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
     {
         Assert::true($this->indexPage->isEnabledFilterApplied());
+    }
+
+    /**
+     * @Then /^I should be redirected to the ([^"]+)(nd) page of only enabled products$/
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilterAndPage(int $page): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
+        Assert::eq($this->indexPage->checkPageNumber(), $page);
     }
 
     /**

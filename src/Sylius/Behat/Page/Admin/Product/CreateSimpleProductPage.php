@@ -236,6 +236,11 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return $this->getElement('prices_validation_message')->getText();
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getDocument()->clickLink('sylius_cancel_changes_button');
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {

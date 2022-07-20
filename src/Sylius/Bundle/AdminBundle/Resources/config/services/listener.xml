@@ -33,7 +33,7 @@
 
         <service id="sylius.event_subscriber.admin_filter_subscriber" class="Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber">
             <argument type="service" id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" />
-            <tag name="kernel.event_subscriber" event="kernel.controller" />
+            <tag name="kernel.event_subscriber" event="kernel.request" />
         </service>
     </services>
 </container>

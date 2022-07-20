@@ -16,6 +16,8 @@ namespace Sylius\Bundle\AdminBundle\Storage;
 interface FilterStorageInterface
 {
     public function set(array $filters): void;
+
     public function all(): array;
+
     public function hasFilters(): bool;
 }

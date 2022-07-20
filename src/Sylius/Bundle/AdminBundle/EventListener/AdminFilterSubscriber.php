@@ -20,12 +20,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AdminFilterSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-        private FilterStorageInterface $filterStorage,
-    ) {
+    public function __construct(private FilterStorageInterface $filterStorage)
+    {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => 'onKernelRequest',
@@ -38,15 +37,17 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ('html' !== $event->getRequest()->getRequestFormat()) {
+        $eventRequest = $event->getRequest();
+
+        if ('html' !== $eventRequest->getRequestFormat()) {
             return;
         }
 
-        $eventRequest = $event->getRequest();
         $requestAttributes = $eventRequest->attributes;
         $originalRoute = $requestAttributes->get('_route');
 
-        if (!$this->isSyliusRoute($originalRoute) ||
+        if (
+            !$this->isSyliusRoute($originalRoute) ||
             !$this->isAdminSection($requestAttributes->get('_sylius', []))
         ) {
             return;
@@ -76,7 +77,7 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
 
     private function isIndexResourceRoute(string $route): bool
     {
-        return str_contains($route, 'index');
+        return str_ends_with($route, 'index');
     }
 
     private function isSyliusRoute(string $route): bool

@@ -29,7 +29,7 @@ final class FilterStorageSpec extends ObjectBehavior
         $this->shouldImplement(FilterStorageInterface::class);
     }
 
-    function it_sets_a_filters_in_a_session(SessionInterface $session): void
+    function it_sets_filters_in_a_session(SessionInterface $session): void
     {
         $filters = [
             'filter' => 'value',

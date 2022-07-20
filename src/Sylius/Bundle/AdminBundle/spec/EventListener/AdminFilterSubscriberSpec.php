@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\AdminBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AdminBundle\Storage\FilterStorageInterface;
-use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -39,7 +38,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('html');
@@ -78,7 +77,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
@@ -105,7 +104,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('html');
@@ -132,7 +131,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
@@ -159,7 +158,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
@@ -186,7 +185,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         Request $request,
         ParameterBag $attributes,
         ParameterBag $query,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
