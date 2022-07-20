@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-07-12T09:49:44Z
+
+It seems support for dbal3 works (and dbal2, too!). Two areas required changes:
+1. Migrations (as they stopped working after upgrade to dbal3)
+2. Deprecations
+
+**Migrations**
+I had to remove every occurrence of `COMMENT \'(DC2Type:json_array)\'` as it was trying to "cast" column type to `json_array` (removed in dbal3). Due to it, we couldn't perform even a fresh install of Sylius.
+
+**Deprecations**
+Psalm was complaining about deprecations, but I decided to fix them as it might be easier to upgrade to a newer version in the future. I decided to create `AbstractMySqlMigration` class and add a logic behind checking if current platform is `MySql` and/or `MariaDB`. Also I had to add some `psalm-suppress` and `phpstan-ignore` annotations because in dbal2 we had `MySqlPlatform` and now in dbal3 we have `MySQLPlatform`.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-07-20T12:52:14Z
+
+Thanks, Jakub! :1st_place_medal:
