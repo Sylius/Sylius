@@ -182,6 +182,7 @@ final class TestKernel extends BaseKernel
      */
     protected function configureRoutes(object $routes): void
     {
+        $routes->import('@SyliusAdminBundle/Resources/config/routing.yml');
     }
 
     public function getCacheDir(): string
