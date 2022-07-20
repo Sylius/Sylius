@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

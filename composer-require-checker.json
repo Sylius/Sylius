@@ -16,6 +16,8 @@
     "Behat\\Testwork\\Tester\\Result\\TestResult",
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
+    "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
+    "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
     "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface"

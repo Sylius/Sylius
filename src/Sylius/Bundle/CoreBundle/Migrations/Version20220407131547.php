@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 final class Version20220407131547 extends AbstractMigration
 {
@@ -25,8 +25,6 @@ final class Version20220407131547 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         if (!$schema->hasTable('messenger_messages')) {
             return;
         }
@@ -46,8 +44,6 @@ final class Version20220407131547 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         if ($schema->hasTable('messenger_messages')) {
             $this->addSql('DROP INDEX IDX_75EA56E0FB7336F0 ON messenger_messages');
             $this->addSql('DROP INDEX IDX_75EA56E0E3BD61CE ON messenger_messages');
@@ -57,7 +53,12 @@ final class Version20220407131547 extends AbstractMigration
 
     private function getExistingIndexesNames(string $tableName): array
     {
-        $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
+        if (method_exists($this->connection, 'createSchemaManager')) {
+            $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
+        } else {
+            /** @psalm-suppress DeprecatedMethod */
+            $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
+        }
         $indexesNames = [];
 
         foreach ($indexes as $index) {

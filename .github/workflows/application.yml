@@ -333,12 +333,13 @@ jobs:
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, DBAL ${{ matrix.dbal }}.x)"
         strategy:
             matrix:
                 php: ["8.0"]
                 symfony: ["^5.4"]
                 mariadb: ["10.4.10"]
+                dbal: ["2", "3"]
 
         env:
             APP_ENV: test_cached
@@ -371,6 +372,12 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Restrict doctrine/dbal version
+                if: matrix.dbal == '2'
+                run: |
+                    composer require "doctrine/dbal:^2.0" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
@@ -458,7 +465,7 @@ jobs:
     test-application-without-frontend-mysql:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x)"
 
         timeout-minutes: 25
 
@@ -469,12 +476,20 @@ jobs:
                 symfony: ["^5.4"]
                 mysql: ["5.7", "8.0"]
                 twig: ["3.x"]
+                dbal: ["3"]
                 include:
                     -
                         php: "8.0"
                         symfony: "^5.4"
                         twig: "2.x"
                         mysql: "5.7"
+                        dbal: "3"
+                    -
+                        php: "8.0"
+                        symfony: "^5.4"
+                        twig: "2.x"
+                        mysql: "5.7"
+                        dbal: "2"
 
         env:
             APP_ENV: test_cached
@@ -512,6 +527,12 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Restrict doctrine/dbal version
+                if: matrix.dbal == '2'
+                run: |
+                    composer require "doctrine/dbal:^2.0" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory

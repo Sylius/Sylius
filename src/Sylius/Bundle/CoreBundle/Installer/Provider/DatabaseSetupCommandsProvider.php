@@ -115,7 +115,18 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getSchemaManager(): AbstractSchemaManager
     {
-        return $this->getEntityManager()->getConnection()->getSchemaManager();
+        $connection = $this->getEntityManager()->getConnection();
+
+        if (method_exists($connection, 'createSchemaManager')) {
+            return $connection->createSchemaManager();
+        }
+
+        if (method_exists($connection, 'getSchemaManager')) {
+            /** @psalm-suppress DeprecatedMethod */
+            return $connection->getSchemaManager();
+        }
+
+        throw new \RuntimeException('Unable to get schema manager.');
     }
 
     private function getEntityManager(): EntityManagerInterface
