@@ -28,6 +28,10 @@ and should be used only this way.
            - { path: "%sylius.security.admin_regex%", role: ROLE_ADMINISTRATION_ACCESS }
    ```
 
+5. It is worth noticing that, that the [following services](https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Bundle/CoreBundle/Resources/config/test_services.xml) 
+are now included in every env starting with `test` keyword. If you wish to not have them, either you need to rename your env to not start 
+with test or remove these services with complier pass.
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
