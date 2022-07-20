@@ -33,7 +33,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function fillRuleOption(string $option, string $value): void;
 
-    public function fillRuleOptionForChannel(string $channelName, string $option, string $value): void;
+    public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void;
 
     public function addAction(?string $actionName): void;
 
@@ -41,7 +41,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function fillActionOption(string $option, string $value): void;
 
-    public function fillActionOptionForChannel(string $channelName, string $option, string $value): void;
+    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
 
     public function fillUsageLimit(string $limit): void;
 

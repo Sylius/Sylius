@@ -17,6 +17,8 @@ use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ChannelCollectionType extends AbstractType
@@ -32,6 +34,19 @@ final class ChannelCollectionType extends AbstractType
             'entry_name' => fn (ChannelInterface $channel) => $channel->getCode(),
             'error_bubbling' => false,
         ]);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options): void
+    {
+        $children = $form->all();
+
+        $view->vars['channels_errors_count'] = array_combine(
+            array_keys($children),
+            array_map(
+                static fn (FormInterface $child): int => $child->getErrors(true)->count(),
+                $children
+            )
+        );
     }
 
     public function getParent(): string

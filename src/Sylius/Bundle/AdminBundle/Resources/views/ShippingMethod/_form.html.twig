@@ -28,9 +28,7 @@
             {% endfor %}
             <div class="ui segment configuration">
                 {% if form.configuration is defined %}
-                    {% for field in form.configuration %}
-                        {{ form_row(field) }}
-                    {% endfor %}
+                    {{ form_widget(form.configuration) }}
                 {% endif %}
             </div>
 

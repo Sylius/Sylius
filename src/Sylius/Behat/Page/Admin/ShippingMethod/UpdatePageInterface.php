@@ -28,8 +28,12 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function removeZone(): void;
 
+    public function removeShippingChargesAmount(string $channelCode): void;
+
     /**
      * @throws ElementNotFoundException
      */
     public function getValidationMessageForAmount(string $channelCode): string;
+
+    public function getShippingChargesValidationErrorsCount(string $channelCode): int;
 }

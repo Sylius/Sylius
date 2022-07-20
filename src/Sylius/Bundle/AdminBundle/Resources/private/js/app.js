@@ -59,7 +59,12 @@ $(document).ready(() => {
   $('#sylius_shipping_method_calculator').handlePrototypes({
     prototypePrefix: 'sylius_shipping_method_calculator_calculators',
     containerSelector: '.configuration',
+  }).change(() => {
+    $('.ui.tabular.menu .item').tab();
   });
+  setTimeout(() => {
+    $('.ui.tabular.menu .item').tab();
+  }, 50);
 
   $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
@@ -69,6 +74,11 @@ $(document).ready(() => {
   $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
     setTimeout(() => {
       $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+    }, 50);
+  });
+  $('#sylius_shipping_method_rules > a[data-form-collection="add"]').on('click', () => {
+    setTimeout(() => {
+      $('select[name^="sylius_shipping_method[rules]"][name$="[type]"]').last().change();
     }, 50);
   });
 
@@ -120,6 +130,9 @@ $(document).ready(() => {
   $('body').on('DOMNodeInserted', '[data-form-collection="item"]', (event) => {
     if ($(event.target).find('.ui.accordion').length > 0) {
       $(event.target).find('.ui.accordion').accordion();
+    }
+    if ($(event.target).find('.ui.tabular.menu').length > 0) {
+      $(event.target).find('.ui.tabular.menu .item').tab();
     }
   });
 

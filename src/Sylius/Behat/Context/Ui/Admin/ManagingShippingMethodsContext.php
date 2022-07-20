@@ -503,21 +503,42 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
     {
         $this->createPage->addRule('Items total greater than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
     /**
-     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, string $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
     {
         $this->createPage->addRule('Items total less than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel, 'Amount', (string) $value);
+        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
+    }
+
+    /**
+     * @When /^I remove the shipping charges of ("[^"]+" channel)$/
+     */
+    public function iRemoveTheShippingChargesOfChannel(ChannelInterface $channel): void
+    {
+        $this->updatePage->removeShippingChargesAmount($channel->getCode());
+    }
+
+    /**
+     * @Then /^I should see that the shipping charges for ("[^"]+" channel) has (\d+) validation errors?$/
+     */
+    public function iShouldSeeThatTheShippingChargesForChannelHasCountValidationErrors(
+        ChannelInterface $channel,
+        int $count,
+    ): void {
+        Assert::same(
+            $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
+            $count
+        );
     }
 
     /**
