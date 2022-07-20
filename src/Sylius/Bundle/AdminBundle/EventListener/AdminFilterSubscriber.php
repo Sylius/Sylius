@@ -46,15 +46,15 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
         $requestAttributes = $eventRequest->attributes;
         $originalRoute = $requestAttributes->get('_route');
 
+        if (!$this->isIndexResourceRoute($originalRoute)) {
+            return;
+        }
+
         if (!$this->isAdminSection($requestAttributes->get('_sylius', []))) {
             return;
         }
 
         if (null === $requestAttributes->get('_controller')) {
-            return;
-        }
-
-        if (!$this->isIndexResourceRoute($originalRoute)) {
             return;
         }
 

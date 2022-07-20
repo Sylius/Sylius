@@ -1,8 +1,8 @@
 @admin_panel
 Feature: Being redirected to previous filtered page
-    In order to have proper filtered page
+    In order to return to a properly filtered page
     As an Administrator
-    I want to be able to redirect to previous filtered page after any action from index
+    I want to be redirected to a previously filtered page after taking any action on index
 
     Background:
         Given the store operates on a channel named "Poland"

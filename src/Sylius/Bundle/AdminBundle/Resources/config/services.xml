@@ -66,7 +66,7 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Storage\FilterStorage">
+        <service id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" public="false">
             <argument type="service" id="session" />
         </service>
 
