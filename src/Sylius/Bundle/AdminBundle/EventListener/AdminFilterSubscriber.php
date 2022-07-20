@@ -46,10 +46,7 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
         $requestAttributes = $eventRequest->attributes;
         $originalRoute = $requestAttributes->get('_route');
 
-        if (
-            !$this->isSyliusRoute($originalRoute) ||
-            !$this->isAdminSection($requestAttributes->get('_sylius', []))
-        ) {
+        if (!$this->isAdminSection($requestAttributes->get('_sylius', []))) {
             return;
         }
 
@@ -78,11 +75,6 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
     private function isIndexResourceRoute(string $route): bool
     {
         return str_ends_with($route, 'index');
-    }
-
-    private function isSyliusRoute(string $route): bool
-    {
-        return str_starts_with($route, 'sylius');
     }
 
     private function isAdminSection(array $syliusParameters): bool

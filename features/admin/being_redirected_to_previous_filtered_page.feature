@@ -13,7 +13,7 @@ Feature: Being redirected to previous filtered page
         And I am logged in as an administrator
 
     @ui @no-api
-    Scenario: Redirecting to previous filtered page after deleting a product
+    Scenario: Being redirected to previous filtered page after deleting a product
         When I browse products
         And I choose enabled filter
         And I filter
@@ -21,7 +21,7 @@ Feature: Being redirected to previous filtered page
         Then I should be redirected to the previous page of only enabled products
 
     @ui @no-api
-    Scenario: Redirecting to previous filtered page after cancelling editing a product
+    Scenario: Being redirected to previous filtered page after cancelling editing a product
         When I browse products
         And I choose enabled filter
         And I filter
@@ -30,7 +30,7 @@ Feature: Being redirected to previous filtered page
         Then I should be redirected to the previous page of only enabled products
 
     @ui @no-api
-    Scenario: Redirecting to previous filtered page with pagination after cancelling editing a product
+    Scenario: Being redirected to previous filtered page with pagination after cancelling editing a product
         When I browse products
         And I choose enabled filter
         And I filter
@@ -40,7 +40,7 @@ Feature: Being redirected to previous filtered page
         Then I should be redirected to the 2nd page of only enabled products
 
     @ui @javascript @no-api
-    Scenario: Redirecting to previous filtered page after cancelling creating a new product
+    Scenario: Being redirected to previous filtered page after cancelling creating a new product
         When I browse products
         And I choose enabled filter
         And I filter
