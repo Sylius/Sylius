@@ -45,7 +45,8 @@ final class ManagingProductsContext implements Context
     {
         try {
             $this->productVariantRepository->remove($productVariant);
-        } catch (\Exception $exception) {
+            /** @phpstan-ignore-next-line  */
+        } catch (\Doctrine\DBAL\DBALException|\Doctrine\DBAL\Exception $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
     }
