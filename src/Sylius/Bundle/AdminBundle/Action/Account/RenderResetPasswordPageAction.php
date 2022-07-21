@@ -48,19 +48,7 @@ final class RenderResetPasswordPageAction
         $lifetime = new \DateInterval($this->tokenTtl);
 
         if (!$admin->isPasswordRequestNonExpired($lifetime)) {
-            $this->flashBag->add('error', 'sylius.admin.password_reset.token_expired');
-
-            $attributes = $request->attributes->get('_sylius');
-            $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
-
-            if (is_array($redirect)) {
-                return new RedirectResponse($this->router->generate(
-                    $redirect['route'] ?? 'sylius_admin_login',
-                    $redirect['params'] ?? [],
-                ));
-            }
-
-            return new RedirectResponse($this->router->generate($redirect));
+            return $this->handleExpiredPasswordRequest($request);
         }
 
         $form = $this->formFactory->create(ResetPasswordType::class);
@@ -70,5 +58,22 @@ final class RenderResetPasswordPageAction
                 'form' => $form->createView(),
             ]),
         );
+    }
+
+    private function handleExpiredPasswordRequest(Request $request): RedirectResponse
+    {
+        $this->flashBag->add('error', 'sylius.admin.password_reset.token_expired');
+
+        $attributes = $request->attributes->get('_sylius');
+        $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
+
+        if (is_array($redirect)) {
+            return new RedirectResponse($this->router->generate(
+                $redirect['route'] ?? 'sylius_admin_login',
+                $redirect['params'] ?? [],
+            ));
+        }
+
+        return new RedirectResponse($this->router->generate($redirect));
     }
 }
