@@ -21,6 +21,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function disable(): void;
 
+    public function cancelChanges(): void;
+
     public function nameIt(string $name, string $languageCode): void;
 
     public function specifyCode(string $code): void;

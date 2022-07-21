@@ -12,16 +12,16 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
-                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.admin.browsing_product_variants
                 - sylius.behat.context.ui.admin.managing_products
                 - sylius.behat.context.ui.shop.browsing_product
                 - Sylius\Behat\Context\Ui\Admin\ProductCreationContext
-                    
+
             filters:
                 tags: "@admin_panel&&@ui"

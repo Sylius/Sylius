@@ -48,11 +48,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         $this->getElement('channel_filter')->selectOption($channelName);
     }
 
-    public function chooseEnabledFilter(): void
-    {
-        $this->getElement('enabled_filter')->selectOption('Yes');
-    }
-
     public function hasProductAccessibleImage(string $productCode): bool
     {
         $productRow = $this->getTableAccessor()->getRowWithFields($this->getElement('table'), ['code' => $productCode]);
@@ -83,11 +78,6 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
     public function checkLastProductHasDataAttribute(string $attributeName): bool
     {
         return $this->getElement('last_product')->find('css', sprintf('[%s]', $attributeName)) !== null;
-    }
-
-    public function isEnabledFilterApplied(): bool
-    {
-        return $this->getElement('enabled_filter')->getValue() === 'true';
     }
 
     public function getPageNumber(): int
