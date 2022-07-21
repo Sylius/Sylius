@@ -774,6 +774,106 @@ jobs:
                     path: etc/build/
                     if-no-files-found: ignore
 
+    test-webpack-build:
+        runs-on: ubuntu-latest
+
+        name: "Test Webpack build (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
+
+        timeout-minutes: 25
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: ["8.0", "8.1"]
+                symfony: ["^5.4"]
+                node: ["14.x", "16.x"]
+                mysql: [ "5.7", "8.0" ]                        
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -
+                uses: actions/checkout@v2
+
+            -
+                name: Shutdown default MySQL
+                run: sudo service mysql stop
+
+            -
+                name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ matrix.mysql }}"
+                    mysql root password: "root"
+
+            -
+                name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony
+                    coverage: none
+
+            -
+                name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -
+                name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -
+                name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+
+            -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn run encore production
+
     notify-about-build-failure:
         runs-on: ubuntu-latest
 
