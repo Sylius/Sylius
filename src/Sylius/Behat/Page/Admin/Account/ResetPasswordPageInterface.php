@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -15,9 +15,11 @@ namespace Sylius\Behat\Page\Admin\Account;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
-interface RequestPasswordResetPageInterface extends SymfonyPageInterface
+interface ResetPasswordPageInterface extends SymfonyPageInterface
 {
-    public function specifyEmail(string $email): void;
+    public function specifyNewPassword(string $password): void;
 
-    public function getEmailValidationMessage(): string;
+    public function specifyPasswordConfirmation(string $password): void;
+
+    public function getValidationMessageFor(string $element): string;
 }

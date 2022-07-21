@@ -14,15 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Account\ResetElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
+use Sylius\Behat\Page\Admin\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
 final class ResettingPasswordContext implements Context
 {
     public function __construct(
         private RequestPasswordResetPage $requestPasswordResetPage,
+        private ResetPasswordPageInterface $resetPasswordPage,
+        private ResetElementInterface $resetElement,
         private NotificationCheckerInterface $notificationChecker,
     ) {
     }
@@ -49,7 +54,33 @@ final class ResettingPasswordContext implements Context
      */
     public function iResetIt(): void
     {
-        $this->requestPasswordResetPage->resetPassword();
+        $this->resetElement->reset();
+    }
+
+    /**
+     * @When /^(I)(?:| try to) follow the instructions to reset my password$/
+     */
+    public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
+    {
+        $this->resetPasswordPage->tryToOpen(['token' => $admin->getPasswordResetToken()]);
+    }
+
+    /**
+     * @When I specify my new password as :password
+     * @When I do not specify my new password
+     */
+    public function iSpecifyMyNewPassword(string $password = ''): void
+    {
+        $this->resetPasswordPage->specifyNewPassword($password);
+    }
+
+    /**
+     * @When I confirm my new password as :password
+     * @When I do not confirm my new password
+     */
+    public function iConfirmMyNewPassword(string $password = ''): void
+    {
+        $this->resetPasswordPage->specifyPasswordConfirmation($password);
     }
 
     /**
@@ -82,6 +113,65 @@ final class ResettingPasswordContext implements Context
         Assert::same(
             $this->requestPasswordResetPage->getEmailValidationMessage(),
             'This email is not valid.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
+    {
+        $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
+    }
+
+    /**
+     * @Then I should not be able to change my password again with the same token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
+    {
+        $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
+
+        Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
+    }
+
+    /**
+     * @Then I should be notified that the password reset token has expired
+     */
+    public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
+    {
+        $this->notificationChecker->checkNotification('has expired', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that the new password is required
+     */
+    public function iShouldBeNotifiedThatTheNewPasswordIsRequired(): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            'Please enter the password.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            'The entered passwords do not match.',
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the password should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
+    {
+        Assert::contains(
+            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            $validationMessage,
         );
     }
 }

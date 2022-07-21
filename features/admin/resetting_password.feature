@@ -5,7 +5,8 @@ Feature: Resetting an administrator's password
     I want to be able to reset my password
 
     Background:
-        Given there is an administrator "sylius@example.com" identified by "sylius"
+        Given the store operates on a single channel in "United States"
+        And there is an administrator "sylius@example.com" identified by "sylius"
 
     @email @api @ui
     Scenario: Sending an administrator's password reset request
@@ -23,7 +24,7 @@ Feature: Resetting an administrator's password
         Then I should be notified that email with reset instruction has been sent
         But "does-not-exist@example.com" should receive no emails
 
-    @api
+    @ui @api
     Scenario: Changing my administrator's password
         Given I have already received a resetting password email
         When I follow the instructions to reset my password
@@ -33,7 +34,7 @@ Feature: Resetting an administrator's password
         Then I should be notified that my password has been successfully changed
         And I should be able to log in as "sylius@example.com" authenticated by "newp@ssw0rd" password
 
-    @api
+    @ui @api
     Scenario: Trying to change my administrator's password twice without sending a new password reset request
         Given I have already received an administrator's password resetting email
         When I follow the instructions to reset my password
@@ -41,3 +42,20 @@ Feature: Resetting an administrator's password
         And I confirm my new password as "newp@ssw0rd"
         And I reset it
         Then I should not be able to change my password again with the same token
+
+    @api
+    Scenario: Trying to change my administrator's password using an expired reset token
+        Given I have already received an administrator's password resetting email
+        But my password reset token has already expired
+        When I try to follow the instructions to reset my password
+        And I specify my new password as "newp@ssw0rd"
+        And I confirm my new password as "newp@ssw0rd"
+        And I reset it
+        Then I should be notified that the password reset token has expired
+
+    @ui @no-api
+    Scenario: Trying to change my administrator's password using an expired reset token
+        Given I have already received an administrator's password resetting email
+        But my password reset token has already expired
+        When I try to follow the instructions to reset my password
+        Then I should be notified that the password reset token has expired

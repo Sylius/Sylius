@@ -11,13 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Admin;
+namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
-use Sylius\Bundle\ApiBundle\Command\Admin\ResetPassword;
+use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-/** @experimental */
 final class ResetPasswordHandler implements MessageHandlerInterface
 {
     public function __construct(private UserPasswordResetterInterface $userPasswordResetter)

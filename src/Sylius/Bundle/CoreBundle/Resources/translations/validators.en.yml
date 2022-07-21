@@ -6,6 +6,12 @@ sylius:
                 max: Email must be at most {{ limit }} characters long.
                 min: Email must be at least {{ limit }} characters long.
                 not_blank: Please enter an email.
+        reset_password:
+            mismatch: The entered passwords do not match.
+            password:
+                min: Password must be at least {{ limit }} characters long.
+                max: Password must be at most {{ limit }} characters long.
+                not_blank: Please enter the password.
     avatar_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

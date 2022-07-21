@@ -1,0 +1,8 @@
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+{{ form_start(form, {action: path('sylius_admin_password_reset', {'token': app.request.attributes.get('token')}), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+    <div class="ui left aligned very padded segment">
+        {{ sylius_template_event('sylius.admin.reset_password.form.content', _context) }}
+    </div>
+    {{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

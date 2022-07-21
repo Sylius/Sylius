@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
-use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -53,6 +50,14 @@ final class LoginContext implements Context
     public function iSpecifyThePasswordAs($password = null)
     {
         $this->loginPage->specifyPassword($password);
+    }
+
+    /**
+     * @When /^(this administrator) logs in using "([^"]+)" password$/
+     */
+    public function theyLogIn(AdminUserInterface $adminUser, $password)
+    {
+        $this->logInAgain($adminUser->getUsername(), $password);
     }
 
     /**
@@ -101,16 +106,7 @@ final class LoginContext implements Context
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
     {
         $this->logInAgain($username, $password);
-
-        $this->dashboardPage->verify();
-    }
-
-    /**
-     * @When /^(this administrator) logs in using "([^"]+)" password$/
-     */
-    public function theyLogIn(AdminUserInterface $adminUser, $password)
-    {
-        $this->logInAgain($adminUser->getUsername(), $password);
+        $this->iShouldBeLoggedIn();
     }
 
     /**
@@ -132,14 +128,12 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->isOpen());
     }
 
-    /**
-     * @param string $username
-     * @param string $password
-     */
-    private function logInAgain($username, $password)
+    private function logInAgain(string $username, string $password): void
     {
-        $this->dashboardPage->open();
-        $this->dashboardPage->logOut();
+        $this->dashboardPage->tryToOpen();
+        if ($this->dashboardPage->isOpen()) {
+            $this->dashboardPage->logOut();
+        }
 
         $this->loginPage->open();
         $this->loginPage->specifyUsername($username);

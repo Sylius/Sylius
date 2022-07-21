@@ -62,7 +62,7 @@ final class ResettingPasswordContext implements Context
     }
 
     /**
-     * @When /^(I) follow the instructions to reset my password$/
+     * @When /^(I)(?:| try to) follow the instructions to reset my password$/
      */
     public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
@@ -74,16 +74,18 @@ final class ResettingPasswordContext implements Context
 
     /**
      * @When I specify my new password as :password
+     * @When I do not specify my new password
      */
-    public function iSpecifyMyNewPassword(string $password): void
+    public function iSpecifyMyNewPassword(string $password = ''): void
     {
         $this->request->updateContent(['newPassword' => $password]);
     }
 
     /**
      * @When I confirm my new password as :password
+     * @When I do not confirm my new password
      */
-    public function iConfirmMyNewPassword(string $password): void
+    public function iConfirmMyNewPassword(string $password = ''): void
     {
         $this->request->updateContent(['confirmNewPassword' => $password]);
     }
@@ -137,6 +139,49 @@ final class ResettingPasswordContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'This email is not valid.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the password reset token has expired
+     */
+    public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
+    {
+        $message = $this->responseChecker->getError($this->client->getLastResponse());
+        Assert::same($message, 'The password reset token has expired.');
+    }
+
+    /**
+     * @Then I should be notified that the new password is required
+     */
+    public function iShouldBeNotifiedThatTheNewPasswordIsRequired(): void
+    {
+        $this->assertResponseHasValidationMessageForNewPassword('Please enter the password.');
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
+    {
+        $this->assertResponseHasValidationMessageForNewPassword('The entered passwords do not match.');
+    }
+
+    /**
+     * @Then /^I should be notified that the password should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
+    {
+        $this->assertResponseHasValidationMessageForNewPassword(sprintf('Password must be %s.', $validationMessage));
+    }
+
+    private function assertResponseHasValidationMessageForNewPassword(string $message): void
+    {
+        $lastResponse = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage($lastResponse, $message, 'newPassword'),
+            $lastResponse->getContent(),
         );
     }
 }

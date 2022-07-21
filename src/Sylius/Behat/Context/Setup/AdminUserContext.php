@@ -109,4 +109,14 @@ final class AdminUserContext implements Context
 
         $this->objectManager->flush();
     }
+
+    /**
+     * @Given /^(my) password reset token has already expired$/
+     */
+    public function myPasswordResetTokenHasAlreadyExpired(AdminUserInterface $administrator): void
+    {
+        $administrator->setPasswordRequestedAt(new \DateTime('-1 year'));
+
+        $this->objectManager->flush();
+    }
 }

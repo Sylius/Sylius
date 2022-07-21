@@ -19,6 +19,9 @@
         <parameter key="sylius.form.type.admin.password_reset_request.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.admin.reset_password.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
     </parameters>
     <services>
         <service id="Sylius\Bundle\AdminBundle\Form\Extension\CatalogPromotionActionTypeExtension">
@@ -35,6 +38,11 @@
 
         <service id="Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType">
             <argument>%sylius.form.type.admin.password_reset_request.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType">
+            <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>

@@ -319,6 +319,8 @@
 
         <service id="sylius.behat.context.ui.admin.resetting_password" class="Sylius\Behat\Context\Ui\Admin\ResettingPasswordContext">
             <argument type="service" id="sylius.behat.page.admin.request_password_reset" />
+            <argument type="service" id="sylius.behat.page.admin.reset_password" />
+            <argument type="service" id="sylius.behat.element.admin.account.reset" />
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>
 
