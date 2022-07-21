@@ -408,7 +408,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I go to ([^"]+)(nd) page$/
+     * @When /^I go to the (\d)(?:st|nd|rd|th) page$/
      */
     public function iGoToPage(int $page): void
     {

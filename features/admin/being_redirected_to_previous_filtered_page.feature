@@ -34,7 +34,7 @@ Feature: Being redirected to previous filtered page
         When I browse products
         And I choose enabled filter
         And I filter
-        And I go to 2nd page
+        And I go to the 2nd page
         And I want to modify the "Znicz Pruszków T-Shirt" product
         And I cancel my changes
         Then I should be redirected to the 2nd page of only enabled products
@@ -44,7 +44,7 @@ Feature: Being redirected to previous filtered page
         When I browse products
         And I choose enabled filter
         And I filter
-        And I go to 2nd page
+        And I go to the 2nd page
         And I want to create a new simple product
         And I cancel my changes
         Then I should be redirected to the 2nd page of only enabled products
