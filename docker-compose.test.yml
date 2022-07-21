@@ -19,6 +19,7 @@ services:
         profiles: ["integration"]
         environment:
             APP_ENV: "test_cached"
+            APP_DEBUG: 0
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
             MESSENGER_TRANSPORT_DSN: "sync://"
