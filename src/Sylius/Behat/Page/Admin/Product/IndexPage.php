@@ -90,7 +90,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         return $this->getElement('enabled_filter')->getValue() === 'true';
     }
 
-    public function checkPageNumber(): int
+    public function getPageNumber(): int
     {
         return (int) $this->getElement('page_number')->getText();
     }

@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class FilterExtension extends AbstractExtension
+final class RedirectPathExtension extends AbstractExtension
 {
     private const NUMBER_OF_ROUTE_PROPERTIES = 3;
 

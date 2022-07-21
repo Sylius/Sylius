@@ -35,7 +35,7 @@ interface IndexPageInterface extends CrudIndexPageInterface
 
     public function checkLastProductHasDataAttribute(string $attributeName): bool;
 
-    public function checkPageNumber(): int;
+    public function getPageNumber(): int;
 
     public function isEnabledFilterApplied(): bool;
 }

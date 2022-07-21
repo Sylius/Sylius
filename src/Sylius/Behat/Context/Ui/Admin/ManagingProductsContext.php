@@ -1188,7 +1188,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeRedirectedToThePreviousFilteredPageWithFilterAndPage(int $page): void
     {
         Assert::true($this->indexPage->isEnabledFilterApplied());
-        Assert::eq($this->indexPage->checkPageNumber(), $page);
+        Assert::eq($this->indexPage->getPageNumber(), $page);
     }
 
     /**

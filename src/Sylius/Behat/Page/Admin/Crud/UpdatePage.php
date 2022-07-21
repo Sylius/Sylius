@@ -38,7 +38,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
 
     public function cancelChanges(): void
     {
-        $this->getDocument()->clickLink('sylius_cancel_changes_button');
+        $this->getDocument()->find('css', '[data-test-cancel-changes-button]')->click();
     }
 
     public function getValidationMessage(string $element): string
