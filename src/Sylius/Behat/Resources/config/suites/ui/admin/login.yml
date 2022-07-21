@@ -16,6 +16,7 @@ default:
 
                 - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.login
+                - sylius.behat.context.ui.admin.resetting_password
                 - sylius.behat.context.ui.email
 
             filters:

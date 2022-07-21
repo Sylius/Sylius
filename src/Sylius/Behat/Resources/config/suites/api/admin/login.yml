@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.api.admin.login
+                - sylius.behat.context.api.admin.resetting_password
                 - sylius.behat.context.api.email
 
             filters:

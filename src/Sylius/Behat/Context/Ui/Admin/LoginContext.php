@@ -27,8 +27,6 @@ final class LoginContext implements Context
     public function __construct(
         private DashboardPageInterface $dashboardPage,
         private LoginPageInterface $loginPage,
-        private RequestPasswordResetPage $requestPasswordResetPage,
-        private NotificationCheckerInterface $notificationChecker
     ) {
     }
 
@@ -63,30 +61,6 @@ final class LoginContext implements Context
     public function iLogIn()
     {
         $this->loginPage->logIn();
-    }
-
-    /**
-     * @When I want to reset password
-     */
-    public function iWantToResetPassword(): void
-    {
-        $this->requestPasswordResetPage->open();
-    }
-
-    /**
-     * @When I specify email as :email
-     */
-    public function iSpecifyEmailAs(string $email): void
-    {
-        $this->requestPasswordResetPage->specifyEmail($email);
-    }
-
-    /**
-     * @When I reset it
-     */
-    public function iResetIt(): void
-    {
-        $this->requestPasswordResetPage->resetPassword();
     }
 
     /**
@@ -151,14 +125,11 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Then I should be notified that email with reset instruction has been sent
+     * @Then I should be on the login page
      */
-    public function iShouldBeNotifiedThatEmailWithResetInstructionHasBeenSent(): void
+    public function iShouldBeOnTheLoginPage(): void
     {
-        $this->notificationChecker->checkNotification(
-            'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
-            NotificationType::success()
-        );
+        Assert::true($this->loginPage->isOpen());
     }
 
     /**
@@ -174,13 +145,5 @@ final class LoginContext implements Context
         $this->loginPage->specifyUsername($username);
         $this->loginPage->specifyPassword($password);
         $this->loginPage->logIn();
-    }
-
-    /**
-     * @Then I should be on the login page
-     */
-    public function iShouldBeOnTheLoginPage(): void
-    {
-        Assert::true($this->loginPage->isOpen());
     }
 }

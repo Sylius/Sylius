@@ -21,12 +21,15 @@ use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Twig\Environment;
 
 final class RequestPasswordResetActionSpec extends ObjectBehavior
 {
@@ -34,9 +37,10 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         MessageBusInterface $messageBus,
         FlashBagInterface $flashBag,
-        RouterInterface $router
+        RouterInterface $router,
+        Environment $twig,
     ): void {
-        $this->beConstructedWith($formFactory, $messageBus, $flashBag, $router);
+        $this->beConstructedWith($formFactory, $messageBus, $flashBag, $router, $twig);
     }
 
     public function it_sends_reset_password_request_to_message_bus(
@@ -150,5 +154,32 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $response = $this->__invoke($request);
         $response->shouldBeAnInstanceOf(RedirectResponse::class);
         $response->getTargetUrl()->shouldReturn('/login');
+    }
+
+    public function it_renders_form_with_errors_when_its_request_is_not_valid(
+        FormFactoryInterface $formFactory,
+        MessageBusInterface $messageBus,
+        Environment $twig,
+        FormInterface $form,
+        FormView $formView,
+        Request $request,
+    ): void {
+        $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
+
+        $form->handleRequest($request)->willReturn();
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(false);
+
+        $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
+
+        $form->createView()->willReturn($formView);
+
+        $twig->render(Argument::type('string'), [
+            'form' => $formView,
+        ])->shouldBeCalled()->willReturn('responseContent');
+
+        $response = $this->__invoke($request);
+        $response->shouldBeAnInstanceOf(Response::class);
+        $response->getContent()->shouldReturn('responseContent');
     }
 }

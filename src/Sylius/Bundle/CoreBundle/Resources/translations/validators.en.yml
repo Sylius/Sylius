@@ -1,4 +1,11 @@
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: This email is not valid.
+                max: Email must be at most {{ limit }} characters long.
+                min: Email must be at least {{ limit }} characters long.
+                not_blank: Please enter an email.
     avatar_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

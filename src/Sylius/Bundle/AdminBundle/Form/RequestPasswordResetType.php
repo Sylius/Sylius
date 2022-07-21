@@ -21,6 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class RequestPasswordResetType extends AbstractType
 {
+    public function __construct(private array $validationGroups = [])
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,6 +39,7 @@ final class RequestPasswordResetType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PasswordResetRequest::class,
+            'validation_groups' => $this->validationGroups,
         ]);
     }
 

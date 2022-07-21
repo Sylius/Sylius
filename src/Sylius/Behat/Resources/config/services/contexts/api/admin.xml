@@ -25,10 +25,6 @@
 
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
             <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
-            <argument type="service" id="sylius.behat.api_platform_client.shop" />
-            <argument type="service" id="sylius.behat.request_factory" />
-            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
-            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_administrators" class="Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext">
@@ -172,6 +168,13 @@
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="sylius.behat.context.api.admin.resetting_password" class="Sylius\Behat\Context\Api\Admin\ResettingPasswordContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="sylius.behat.request_factory" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
     </services>
 </container>
