@@ -1,5 +1,5 @@
 <div class="ui hidden divider"></div>
 <div class="ui buttons">
     <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}</button>
-    {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
+    {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': sylius_generate_redirect_path(paths.cancel|default(null))} %}
 </div>

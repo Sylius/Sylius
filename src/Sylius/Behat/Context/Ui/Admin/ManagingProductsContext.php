@@ -212,6 +212,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->indexPage->chooseEnabledFilter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
@@ -343,6 +351,16 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I delete the :product product on filtered page
+     */
+    public function iDeleteProductOnFilteredPage(ProductInterface $product): void
+    {
+        $this->sharedStorage->set('product', $product);
+
+        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
+    }
+
+    /**
      * @Then /^(this product) should not exist in the product catalog$/
      */
     public function productShouldNotExist(ProductInterface $product)
@@ -390,6 +408,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I go to the (\d)(?:st|nd|rd|th) page$/
+     */
+    public function iGoToPage(int $page): void
+    {
+        $this->indexPage->goToPage($page);
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
@@ -433,6 +459,16 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->saveChanges();
+    }
+
+    /**
+     * @When I cancel my changes
+     */
+    public function iCancelChanges(): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->cancelChanges();
     }
 
     /**
@@ -1136,6 +1172,23 @@ final class ManagingProductsContext implements Context
     public function theLastProductOnTheListShouldNotHaveName(): void
     {
         Assert::true($this->indexPage->checkLastProductHasDataAttribute('data-test-missing-translation-paragraph'));
+    }
+
+    /**
+     * @Then I should be redirected to the previous page of only enabled products
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
+    }
+
+    /**
+     * @Then /^I should be redirected to the ([^"]+)(nd) page of only enabled products$/
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilterAndPage(int $page): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
+        Assert::eq($this->indexPage->getPageNumber(), $page);
     }
 
     /**

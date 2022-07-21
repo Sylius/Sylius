@@ -77,5 +77,14 @@
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
         </service>
+
+        <service
+            id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
+            decorates="sylius.resource_controller.redirect_handler"
+            public="false"
+        >
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler.inner" />
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" />
+        </service>
     </services>
 </container>

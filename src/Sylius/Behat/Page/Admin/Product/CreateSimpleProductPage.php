@@ -236,6 +236,11 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return $this->getElement('prices_validation_message')->getText();
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%locale%'])) {
@@ -255,6 +260,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
             'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
             'attributes_choice' => '#sylius_product_attribute_choice',
+            'cancel_button' => '[data-test-cancel-changes-button]',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',

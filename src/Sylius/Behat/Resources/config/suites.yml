@@ -77,6 +77,7 @@ imports:
     - suites/ui/admin/impersonating_customers.yml
     - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
+    - suites/ui/admin/panel.yml
     - suites/ui/cart/shopping_cart.yml
     - suites/ui/channel/channels.yml
     - suites/ui/channel/managing_channels.yml

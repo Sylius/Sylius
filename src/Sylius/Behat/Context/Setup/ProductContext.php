@@ -78,6 +78,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given the store has :numberOfProducts products
+     */
+    public function storeHasMoreProducts(int $numberOfProducts): void
+    {
+        for ($i = 0; $i < $numberOfProducts; $i++) {
+            $product = $this->createProduct('TEST' . $i);
+
+            $this->saveProduct($product);
+        }
+    }
+
+    /**
      * @Given /^(this product) is originally priced at ("[^"]+") in ("[^"]+" channel)$/
      */
     public function thisProductHasOriginallyPriceInChannel(
