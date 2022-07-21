@@ -168,7 +168,7 @@ final class ResettingPasswordContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the password should be ([^"]+)$/
+     * @Then I should be notified that the password should be :validationMessage
      */
     public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
     {
