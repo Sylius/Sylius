@@ -135,6 +135,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $this->getDocument()->clickLink($order);
     }
 
+    public function chooseEnabledFilter(): void
+    {
+        $this->getElement('enabled_filter')->selectOption('Yes');
+    }
+
+    public function isEnabledFilterApplied(): bool
+    {
+        return $this->getElement('enabled_filter')->getValue() === 'true';
+    }
+
     public function getRouteName(): string
     {
         return $this->routeName;
@@ -150,6 +160,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
             'confirmation_button' => '#confirmation-button',
+            'enabled_filter' => '#criteria_enabled',
             'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);

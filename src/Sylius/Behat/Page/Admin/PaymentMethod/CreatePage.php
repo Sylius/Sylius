@@ -33,6 +33,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         );
     }
 
+    public function cancelChanges(): void
+    {
+        $this->getElement('cancel_button')->click();
+    }
+
     public function checkChannel(string $channelName): void
     {
         $this->getDocument()->checkField($channelName);
@@ -97,6 +102,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'cancel_button' => '[data-test-cancel-changes-button]',
             'code' => '#sylius_payment_method_code',
             'enabled' => '#sylius_payment_method_enabled',
             'gateway_name' => '#sylius_payment_method_gatewayConfig_gatewayName',

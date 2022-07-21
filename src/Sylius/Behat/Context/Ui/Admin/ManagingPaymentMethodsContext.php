@@ -167,6 +167,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I cancel my changes
+     */
+    public function iCancelMyChanges(): void
+    {
+        $this->createPage->cancelChanges();
+    }
+
+    /**
      * @When I check (also) the :paymentMethodName payment method
      */
     public function iCheckThePaymentMethod(string $paymentMethodName): void
@@ -209,6 +217,22 @@ final class ManagingPaymentMethodsContext implements Context
     public function iBrowsePaymentMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I choose enabled filter
+     */
+    public function iChooseEnabledFilter(): void
+    {
+        $this->indexPage->chooseEnabledFilter();
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
     }
 
     /**
@@ -439,5 +463,13 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->createPage->setStripeSecretKey('TEST');
         $this->createPage->setStripePublishableKey('TEST');
+    }
+
+    /**
+     * @Then I should be redirected to the previous page of only enabled payment methods
+     */
+    public function iShouldBeRedirectedToThePreviousFilteredPageWithFilter(): void
+    {
+        Assert::true($this->indexPage->isEnabledFilterApplied());
     }
 }

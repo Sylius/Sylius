@@ -34,9 +34,13 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function countItems(): int;
 
+    public function chooseEnabledFilter(): void;
+
     public function filter(): void;
 
     public function bulkDelete(): void;
 
     public function sort(string $order): void;
+
+    public function isEnabledFilterApplied(): bool;
 }
