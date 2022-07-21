@@ -41,6 +41,10 @@ final class ShopAuthenticationTokenDocumentationNormalizer implements Normalizer
                     'type' => 'string',
                     'readOnly' => true,
                 ],
+                'customer' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
             ],
         ];
 
