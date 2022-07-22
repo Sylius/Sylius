@@ -30,7 +30,7 @@
     "require": {
         "php": "^8.0",
         "sylius/registry": "^1.5",
-        "sylius/resource": "^1.7",
+        "sylius/resource": "^1.9 || ^1.10@alpha",
         "symfony/options-resolver": "^5.4 || ^6.0"
     },
     "require-dev": {
