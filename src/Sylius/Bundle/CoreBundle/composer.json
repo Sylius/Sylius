@@ -59,6 +59,7 @@
         "sylius/shipping-bundle": "^1.6",
         "sylius/taxation-bundle": "^1.6",
         "sylius/taxonomy-bundle": "^1.6",
+        "sylius/mailer-bundle": "dev-symfony-6",
         "sylius/theme-bundle": "^2.1.1 || dev-symfony6",
         "sylius/ui-bundle": "^1.6",
         "sylius/user-bundle": "^1.6 || dev-symfony-6",
@@ -76,7 +77,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4 || ^6.0"
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/dotenv": "^5.4 || ^6.0"
     },
     "conflict": {
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
@@ -99,7 +101,8 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\CoreBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\CoreBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\CoreBundle\\Tests\\": "Tests/",
+            "Sylius\\Bundle\\CoreBundle\\Application\\": "test/src/"
         }
     },
     "repositories": [

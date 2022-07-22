@@ -44,7 +44,7 @@ jobs:
         runs-on: ubuntu-latest
 
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
-
+    
         timeout-minutes: 10
 
         strategy:
@@ -53,6 +53,18 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4", "^6.0"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
+                swiftmailer: [false]
+                include:
+                    -   
+                        php: "8.0"
+                        symfony: "^5.4"
+                        package: "Bundle/CoreBundle"
+                        swiftmailer: true
+                    -   
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/CoreBundle"
+                        swiftmailer: true
 
         steps:
             -
@@ -90,6 +102,14 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
 
             -
+                name: Configure Swiftmailer (if needed)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: |
+                    composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"
+                    echo "APP_ENV=test_with_swiftmailer" >> $GITHUB_ENV
+                if: matrix.swiftmailer == true
+
+            -
                 name: Validate composer.json
                 run: composer validate --ansi --strict
                 working-directory: "src/Sylius/${{ matrix.package }}"
@@ -109,10 +129,10 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
 
             -
-                name: Setup Database (for ApiBundle and CoreBundle only)
+                name: Setup Database (for ApiBundle)
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: test/bin/console doctrine:schema:update --force -e test
-                if: matrix.package == 'Bundle/ApiBundle' || matrix.package == 'Bundle/CoreBundle'
+                if: matrix.package == 'Bundle/ApiBundle'
             
             -
                 name: Remove Specifications not supported on Symfony >= 6.0
@@ -145,19 +165,6 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
-
-            -
-                name: Install Swiftmailer (for CoreBundle and Symfony 5.4 only)
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                run: |
-                    composer require --no-progress --no-scripts --no-plugins "symfony/swiftmailer-bundle" --update-with-all-dependencies
-                if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/CoreBundle' && matrix.symfony == '^5.4'
-
-            -
-                name: Run PHPUnit with Swiftmailer (for CoreBundle and Symfony 5.4 only)
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                run: APP_ENV=test_with_swiftmailer vendor/bin/phpunit --colors=always
-                if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/CoreBundle' && matrix.symfony == '^5.4' && (steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true')
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
