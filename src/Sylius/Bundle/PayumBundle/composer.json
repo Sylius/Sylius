@@ -29,14 +29,14 @@
     ],
     "require": {
         "php": "^8.0",
-        "payum/payum": "^1.6",
-        "payum/payum-bundle": "^2.4",
+        "payum/payum": "^1.7.2",
+        "payum/payum-bundle": "^2.5",
         "php-http/guzzle6-adapter": "^2.0",
-        "sylius/core": "^1.6",
-        "sylius/currency": "^1.6",
-        "sylius/order-bundle": "^1.6",
-        "sylius/payment-bundle": "^1.6",
-        "sylius/resource-bundle": "^1.7"
+        "sylius/core": "^1.6 || dev-symfony-6",
+        "sylius/currency": "^1.6 || dev-symfony-6",
+        "sylius/order-bundle": "^1.6 || dev-symfony-6",
+        "sylius/payment-bundle": "^1.6 || dev-symfony-6",
+        "sylius/resource-bundle": "^1.7 || ^1.10@alpha"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
