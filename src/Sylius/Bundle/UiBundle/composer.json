@@ -32,27 +32,27 @@
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
-        "sonata-project/block-bundle": "^3.20|^4.0",
+        "sonata-project/block-bundle": "^4.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.8",
+        "sylius/grid-bundle": "^1.11",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/security-core": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/templating": "^5.4 || ^6.0",
-        "laminas/laminas-stdlib": "^3.2"
+        "laminas/laminas-stdlib": "^3.3.1"
     },
     "conflict": {
         "twig/twig": "^1.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0",
-        "twig/twig": "^2.12"
+        "twig/twig": "^2.12 || ^3.3"
     },
     "config": {
         "allow-plugins": {

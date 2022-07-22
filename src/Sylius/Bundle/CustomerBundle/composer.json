@@ -37,11 +37,11 @@
     "require": {
         "php": "^8.0",
         "doctrine/orm": "^2.7",
-        "egulias/email-validator": "^3.0",
+        "egulias/email-validator": "^3.1",
         "sylius/customer": "^1.6",
-        "sylius/resource-bundle": "^1.7",
+        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "symfony/framework-bundle": "^5.4 || ^6.0",
-        "webmozart/assert": "^1.8"
+        "webmozart/assert": "^1.9"
     },
     "conflict": {
         "twig/twig": "^3.0"

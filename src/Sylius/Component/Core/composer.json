@@ -30,12 +30,12 @@
         "enshrined/svg-sanitize": "^0.15.4",
         "knplabs/gaufrette": "^0.10",
         "league/flysystem": "^2.4",
-        "payum/payum": "^1.6",
+        "payum/payum": "^1.7.2",
         "php-http/guzzle6-adapter": "^2.0",
         "sylius/addressing": "^1.6",
         "sylius/attribute": "^1.6",
         "sylius/channel": "^1.6",
-        "sylius/currency": "^1.6",
+        "sylius/currency": "^1.6 || dev-symfony-6",
         "sylius/customer": "^1.6",
         "sylius/inventory": "^1.6",
         "sylius/locale": "^1.6",
@@ -52,9 +52,9 @@
         "sylius/user": "^1.6 || dev-symfony-6",
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/mime": "^5.4 || ^6.0",
-        "symfony/string": "^5.2 || ^6.0",
-        "webmozart/assert": "^1.8",
-        "laminas/laminas-stdlib": "^3.2"
+        "symfony/string": "^5.4 || ^6.0",
+        "webmozart/assert": "^1.9",
+        "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",

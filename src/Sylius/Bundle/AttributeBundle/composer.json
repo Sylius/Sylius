@@ -30,7 +30,7 @@
         "ramsey/uuid": "^3.9",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/attribute": "^1.6",
-        "sylius/resource-bundle": "^1.7",
+        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "require-dev": {

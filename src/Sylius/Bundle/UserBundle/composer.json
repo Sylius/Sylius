@@ -39,22 +39,22 @@
     "require": {
         "php": "^8.0",
         "doctrine/orm": "^2.7",
-        "egulias/email-validator": "^3.0",
+        "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || dev-master",
-        "sylius/mailer-bundle": "^1.4 || dev-symfony-6",
+        "sylius/mailer-bundle": "^1.5 || dev-symfony-6",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
-        "sylius/user": "^1.6",
+        "sylius/user": "^1.6 || dev-symfony-6",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/password-hasher": "^5.4 || 6.0",
-        "webmozart/assert": "^1.8"
+        "webmozart/assert": "^1.9"
     },
     "conflict": {
         "twig/twig": "^3.0"
     },
     "require-dev": {
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
