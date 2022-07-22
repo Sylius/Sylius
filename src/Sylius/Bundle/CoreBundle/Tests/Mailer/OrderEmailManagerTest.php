@@ -38,13 +38,13 @@ final class OrderEmailManagerTest extends KernelTestCase
         static::bootKernel();
 
         /** @var Filesystem $filesystem */
-        $filesystem = static::$kernel->getContainer()->get('filesystem');
+        $filesystem = $this->getContainer()->get('filesystem');
 
         /** @var TranslatorInterface $translator */
-        $translator = static::$kernel->getContainer()->get('translator');
+        $translator = $this->getContainer()->get('translator');
 
         /** @var EmailChecker $emailChecker */
-        $emailChecker = static::$kernel->getContainer()->get('sylius.behat.email_checker');
+        $emailChecker = $this->getContainer()->get('sylius.behat.email_checker');
 
         $filesystem->remove($emailChecker->getSpoolDirectory());
 
