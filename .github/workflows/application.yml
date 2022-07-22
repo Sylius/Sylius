@@ -234,7 +234,7 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?serverVersion=${{ matrix.postgres }}"
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
 
         steps:
             -
@@ -343,7 +343,7 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=mariadb-${{ matrix.mariadb }}"
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
 
         steps:
             -
@@ -493,7 +493,7 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
             -
@@ -636,7 +636,7 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
             -
