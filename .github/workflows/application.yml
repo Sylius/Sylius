@@ -154,6 +154,11 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
+                name: Validate Package versions
+                run: vendor/bin/monorepo-builder validate
+                if: always() && steps.end-of-setup.outcome == 'success'
+
+            -
                 name: Run Psalm
                 run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
                 if: always() && steps.end-of-setup.outcome == 'success'
