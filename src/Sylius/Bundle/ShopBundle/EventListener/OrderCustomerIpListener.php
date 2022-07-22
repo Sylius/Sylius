@@ -30,6 +30,6 @@ final class OrderCustomerIpListener
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, OrderInterface::class);
 
-        $this->ipAssigner->assign($subject, $this->requestStack->getMasterRequest());
+        $this->ipAssigner->assign($subject, $this->requestStack->getMainRequest());
     }
 }
