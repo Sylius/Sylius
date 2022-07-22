@@ -36,7 +36,7 @@
         "sylius/currency": "^1.6 || dev-symfony-6",
         "sylius/order-bundle": "^1.6 || dev-symfony-6",
         "sylius/payment-bundle": "^1.6 || dev-symfony-6",
-        "sylius/resource-bundle": "^1.7 || ^1.10@alpha"
+        "sylius/resource-bundle": "^1.9 || ^1.10@alpha"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
