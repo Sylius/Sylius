@@ -52,6 +52,9 @@ watchShop.description = 'Watch shop asset sources and rebuild on changes.';
 export const build = gulp.parallel(buildAdmin, buildShop);
 build.description = 'Build assets.';
 
+export const watch = gulp.parallel(watchAdmin, watchShop);
+watch.description = 'Watch asset sources and rebuild on changes.';
+
 gulp.task('admin', buildAdmin);
 gulp.task('admin-watch', watchAdmin);
 gulp.task('shop', buildShop);
