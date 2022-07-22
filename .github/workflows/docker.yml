@@ -2,6 +2,15 @@ name: Docker Based Pipeline
 
 on:
     push:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
+    pull_request:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
 
 jobs:
     static-analyze:
