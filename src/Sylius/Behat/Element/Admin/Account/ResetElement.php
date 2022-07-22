@@ -19,6 +19,13 @@ final class ResetElement extends Element implements ResetElementInterface
 {
     public function reset(): void
     {
-        $this->getDocument()->find('css', 'button[type="submit"]:contains("Reset")')->click();
+        $this->getElement('reset')->click();
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'reset' => 'button[type="submit"]:contains("Reset")',
+        ]);
     }
 }

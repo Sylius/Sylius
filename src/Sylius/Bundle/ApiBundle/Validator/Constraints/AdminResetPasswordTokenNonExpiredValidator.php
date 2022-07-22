@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidator
 {
     public function __construct(
@@ -45,9 +46,7 @@ final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidat
         $lifetime = new \DateInterval($this->tokenTtl);
 
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
-            $this->context->addViolation(
-                $constraint->message,
-            );
+            $this->context->addViolation($constraint->message);
         }
     }
 }

@@ -28,9 +28,9 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
         $this->getElement('confirm_new_password')->setValue($password);
     }
 
-    public function getValidationMessageFor(string $element): string
+    public function getValidationMessageForNewPassword(): string
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
+        $errorLabel = $this->getElement('new_password')->getParent()->find('css', '[data-test-validation-error]');
 
         if (null === $errorLabel) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');

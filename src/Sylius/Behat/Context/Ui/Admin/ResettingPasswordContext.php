@@ -121,7 +121,10 @@ final class ResettingPasswordContext implements Context
      */
     public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
     {
-        $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
+        $this->notificationChecker->checkNotification(
+            'Your password has been changed successfully!',
+            NotificationType::success(),
+        );
     }
 
     /**
@@ -139,7 +142,10 @@ final class ResettingPasswordContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
     {
-        $this->notificationChecker->checkNotification('has expired', NotificationType::failure());
+        $this->notificationChecker->checkNotification(
+            'The password reset token has expired',
+            NotificationType::failure(),
+        );
     }
 
     /**
@@ -148,7 +154,7 @@ final class ResettingPasswordContext implements Context
     public function iShouldBeNotifiedThatTheNewPasswordIsRequired(): void
     {
         Assert::contains(
-            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            $this->resetPasswordPage->getValidationMessageForNewPassword(),
             'Please enter the password.',
         );
     }
@@ -159,18 +165,18 @@ final class ResettingPasswordContext implements Context
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
         Assert::contains(
-            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            $this->resetPasswordPage->getValidationMessageForNewPassword(),
             'The entered passwords do not match.',
         );
     }
 
     /**
-     * @Then /^I should be notified that the password should be ([^"]+)$/
+     * @Then I should be notified that the password should be :validationMessage
      */
     public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
     {
         Assert::contains(
-            $this->resetPasswordPage->getValidationMessageFor('new_password'),
+            $this->resetPasswordPage->getValidationMessageForNewPassword(),
             $validationMessage,
         );
     }
