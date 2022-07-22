@@ -140,9 +140,8 @@ final class CircularDependencyBreakingErrorListenerTest extends TestCase
     private function createExceptionEvent(): ExceptionEvent
     {
         $kernel = $this->createMock(HttpKernelInterface::class);
-        $request = $this->createMock(Request::class);
         $exception = new \Exception();
 
-        return new ExceptionEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $exception);
+        return new ExceptionEvent($kernel, new Request(), HttpKernelInterface::MAIN_REQUEST, $exception);
     }
 }
