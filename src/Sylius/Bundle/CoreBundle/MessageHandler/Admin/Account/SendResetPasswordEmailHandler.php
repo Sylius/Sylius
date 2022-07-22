@@ -20,7 +20,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class SendResetPasswordEmailHandler implements MessageHandlerInterface
 {
     public function __construct(
