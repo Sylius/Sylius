@@ -109,11 +109,11 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
 
             -
-                name: Setup Database (for ApiBundle only)
+                name: Setup Database (for ApiBundle and CoreBundle only)
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: test/bin/console doctrine:schema:update --force -e test
-                if: always() && matrix.package == 'Bundle/ApiBundle'
-
+                if: matrix.package == 'Bundle/ApiBundle' || matrix.package == 'Bundle/CoreBundle'
+            
             -
                 name: Remove Specifications not supported on Symfony >= 6.0
                 working-directory: "src/Sylius/${{ matrix.package }}"
@@ -145,6 +145,19 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
+
+            -
+                name: Install Swiftmailer (for CoreBundle and Symfony 5.4 only)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: |
+                    composer require --no-progress --no-scripts --no-plugins "symfony/swiftmailer-bundle" --update-with-all-dependencies
+                if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/CoreBundle' && matrix.symfony == '^5.4'
+
+            -
+                name: Run PHPUnit with Swiftmailer (for CoreBundle and Symfony 5.4 only)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: APP_ENV=test_with_swiftmailer vendor/bin/phpunit --colors=always
+                if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/CoreBundle' && matrix.symfony == '^5.4' && (steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true')
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
