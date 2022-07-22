@@ -73,7 +73,7 @@
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0",
-        "sylius-labs/polyfill-symfony-security": "^1.0",
+        "sylius-labs/polyfill-symfony-security": "dev-master",
         "sylius/calendar": "^0.3",
         "sylius/fixtures-bundle": "^1.6.1",
         "sylius/grid": "^1.11",
