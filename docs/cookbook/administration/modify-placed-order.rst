@@ -1,13 +1,13 @@
 How to modify placed order?
 ===========================
 
-since time immemorial, people have been using trial and error methods to create or repeat processes that make their lives simpler.
+Since time immemorial, people have been using trial and error methods to create or repeat processes that make their lives simpler.
 Thanks to this, we live in a time where everything is easily available and within reach.
 However, this time we will not focus on inventions, but on the mistakes that people still make.
-Usually, e-commerce processes go smoothly, but from time to time there will be a customer who confuses something in his order (e.g. the size of the shorts he wears).
-In this cookbook, I will try to show you how to easily fix this error as a store administrator.
+Usually, e-commerce processes go smoothly, but from time to time there will be a customer who confuses something in his order (e.g. the size of the shorts they wear).
+In this cookbook, we will try to show you how to easily fix this kind of mistake as a store administrator.
 
-TLDR?
+TL;DR
 -----
 
 Quick general steps of how to easily solve this issue:
@@ -15,7 +15,7 @@ Quick general steps of how to easily solve this issue:
 * From admin panel go to the order you want to edit
 * Click on the customer and go to their show page
 * Login as this customer whose order you want to edit
-* Place a new Order with the required modifications (like, change size of one of the products)
+* Place a new order with the required modifications (like, changing the size of one of the products)
 * Choose offline payment as the payment method (as we already got the money)
 * or choose any payment method and set payment as completed on admin order page
 * In the order notes you can add a note that it is a modified order and add the original order number
@@ -31,14 +31,14 @@ If you have troubles of going with shorter instruction, here we will go step by 
 .. note::
 
     The tutorial steps are done on Sylius demo environment under link: https://demo.sylius.com
-    If you want to test if Sylius suits you or try the steps, do not hesitate to check it out by yourself.
+    If you want to test if Sylius suits you or try the steps, do not hesitate to check it out by your own.
 
 Impersonate as user and create an order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start with the steps that will let you impersonate as user and create new order as him/her.
+Let's start with the steps that will let you impersonate an user and create new order as them.
 
-First login as an administrator into the admin panel and go to ``orders`` tab, and find the incorrect order (in this example Order #000000021):
+First, log in as an administrator into the admin panel, go to ``orders`` tab, and find the incorrect order (in this example Order #000000021):
 
 .. image:: ../../_images/cookbook/administration/modify-placed-order/orders-page.png
     :align: center
@@ -80,7 +80,7 @@ Now you need to find products with correct variants, add them and proceed to che
 |
 
 On the next checkout steps just fill out the data that was used in old order,
-as payment method - use one of the offline methods (if your shop supports one),or proceed with any - and we will complete payment manually.
+as a payment method - use one of the offline methods (if your shop supports one), or proceed with any - and we will complete payment manually.
 You can also add a note to it that it is modification of original order.
 In the end you will be greeted with message that your checkout has been completed.
 
