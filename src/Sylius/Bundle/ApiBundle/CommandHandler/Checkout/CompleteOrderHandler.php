@@ -55,7 +55,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)) {
             $this->commandBus->dispatch(
                 new InformAboutCartRecalculation($promotion->getName()),
-                [new DispatchAfterCurrentBusStamp()]
+                [new DispatchAfterCurrentBusStamp()],
             );
 
             return $cart;

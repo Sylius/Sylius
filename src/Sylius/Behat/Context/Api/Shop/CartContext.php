@@ -172,7 +172,7 @@ final class CartContext implements Context
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_POST,
-            'items'
+            'items',
         );
         $request->updateContent([
             'productCode' => $productData['code'],
@@ -332,7 +332,7 @@ final class CartContext implements Context
         Assert::same(
             $this->responseChecker->getValue($response, 'taxIncludedTotal'),
             $taxTotal,
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Expected totals are not the same.', $response)
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Expected totals are not the same.', $response),
         );
     }
 
@@ -594,7 +594,7 @@ final class CartContext implements Context
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_GET,
-            'items'
+            'items',
         );
         $this->shopClient->executeCustomRequest($request);
     }
@@ -750,7 +750,7 @@ final class CartContext implements Context
         $request = $this->requestFactory->custom(
             sprintf('%s/shop/orders', $this->apiUrlPrefix),
             HttpRequest::METHOD_POST,
-            $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : []
+            $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : [],
         );
         $this->shopClient->executeCustomRequest($request);
 
@@ -770,7 +770,7 @@ final class CartContext implements Context
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_POST,
-            'items'
+            'items',
         );
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
@@ -789,7 +789,7 @@ final class CartContext implements Context
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_POST,
-            'items'
+            'items',
         );
         $request->updateContent([
             'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
@@ -861,7 +861,7 @@ final class CartContext implements Context
             Resources::ORDERS,
             $tokenValue,
             HttpRequest::METHOD_PATCH,
-            sprintf('items/%s', $orderItemId)
+            sprintf('items/%s', $orderItemId),
         );
         $request->updateContent(['quantity' => $quantity]);
 

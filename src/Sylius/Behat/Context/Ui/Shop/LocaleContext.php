@@ -24,7 +24,7 @@ final class LocaleContext implements Context
 {
     public function __construct(
         private HomePageInterface $homePage,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

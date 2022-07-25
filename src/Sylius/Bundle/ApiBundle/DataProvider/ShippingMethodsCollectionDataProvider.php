@@ -30,7 +30,7 @@ final class ShippingMethodsCollectionDataProvider implements ContextAwareCollect
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private ShippingMethodsResolverInterface $shippingMethodsResolver,
-        private ChannelContextInterface $channelContext
+        private ChannelContextInterface $channelContext,
     ) {
     }
 

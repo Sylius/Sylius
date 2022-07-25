@@ -20,7 +20,7 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
 {
     public function __construct(
         private NormalizerInterface $decoratedNormalizer,
-        private string $apiRoute
+        private string $apiRoute,
     ) {
     }
 

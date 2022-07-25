@@ -43,7 +43,7 @@ final class OrderIntegrityChecker
             $event->stop(
                 'sylius.order.promotion_integrity',
                 ResourceControllerEvent::TYPE_ERROR,
-                ['%promotionName%' => $promotion->getName()]
+                ['%promotionName%' => $promotion->getName()],
             );
 
             $event->setResponse(new RedirectResponse($this->router->generate('sylius_shop_checkout_complete')));

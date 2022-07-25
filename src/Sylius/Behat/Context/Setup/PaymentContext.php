@@ -152,7 +152,7 @@ final class PaymentContext implements Context
             StringInflector::nameToUppercaseCode($paymentMethodName),
             'Offline',
             'Payment method',
-            false
+            false,
         );
 
         $paymentMethod->addChannel($channel);

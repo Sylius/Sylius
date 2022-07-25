@@ -121,7 +121,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         MessageBusInterface $commandBus,
         CustomerInterface $customer,
         PromotionInterface $promotion,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');

@@ -25,7 +25,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shopUserRepository,
-        DateTimeProviderInterface $dateTimeProvider
+        DateTimeProviderInterface $dateTimeProvider,
     ): void {
         $this->beConstructedWith($shopUserRepository, $dateTimeProvider);
     }

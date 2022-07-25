@@ -64,7 +64,7 @@ final class ChannelsCollectionDataProviderSpec extends ObjectBehavior
 
     function it_returns_channel_collection(
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -72,7 +72,7 @@ final class ChannelsCollectionDataProviderSpec extends ObjectBehavior
             ->getCollection(
                 ChannelInterface::class,
                 Request::METHOD_GET,
-                []
+                [],
             )
             ->shouldReturn([$channel])
         ;

@@ -29,7 +29,7 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
 
     function it_supports_only_product_attribute_value_interface(
         ProductAttributeValueInterface $productAttributeValue,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->supportsNormalization($productAttributeValue)->shouldReturn(true);
         $this->supportsNormalization($order)->shouldReturn(false);
@@ -52,7 +52,7 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ProductAttributeValueInterface $productAttributeValue,
         ProductAttributeInterface $productAttribute,
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
     ): void {
         $normalizer
             ->normalize($productAttributeValue, null, ['sylius_product_attribute_value_normalizer_already_called' => true])
@@ -109,7 +109,7 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
         NormalizerInterface $normalizer,
         ProductAttributeValueInterface $productAttributeValue,
         ProductAttributeInterface $productAttribute,
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
     ): void {
         $normalizer
             ->normalize($productAttributeValue, null, ['sylius_product_attribute_value_normalizer_already_called' => true])

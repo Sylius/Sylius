@@ -59,7 +59,7 @@ final class SendContactRequestHandlerTest extends KernelTestCase
 
         $sendContactEmailHandler = new SendContactRequestHandler(
             $emailSender,
-            $channelRepository->reveal()
+            $channelRepository->reveal(),
         );
 
         $sendContactEmailHandler($sendContactRequest);
@@ -67,7 +67,7 @@ final class SendContactRequestHandlerTest extends KernelTestCase
         self::assertSame(1, $emailChecker->countMessagesTo('shop@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
             $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'),
-            'shop@example.com'
+            'shop@example.com',
         ));
     }
 }

@@ -41,7 +41,7 @@ final class PaymentMethodsCollectionDataProviderSpec extends ObjectBehavior
             $paymentMethodRepository,
             $paymentRepository,
             $channelContext,
-            $paymentMethodsResolver
+            $paymentMethodsResolver,
         );
     }
 

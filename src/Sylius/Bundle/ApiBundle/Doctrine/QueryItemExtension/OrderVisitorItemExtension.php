@@ -34,7 +34,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;
@@ -56,8 +56,8 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
                 sprintf('%s.customer IS NULL', $rootAlias),
                 $queryBuilder->expr()->andX(
                     sprintf('%s.customer IS NOT NULL', $rootAlias),
-                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias)
-                )
+                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias),
+                ),
             ))->setParameter('createdByGuest', true)
         ;
 

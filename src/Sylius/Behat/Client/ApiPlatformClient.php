@@ -63,8 +63,8 @@ final class ApiPlatformClient implements ApiClientInterface
                 $resource,
                 $id,
                 $this->authorizationHeader,
-                $this->getToken()
-            )
+                $this->getToken(),
+            ),
         );
     }
 
@@ -91,8 +91,8 @@ final class ApiPlatformClient implements ApiClientInterface
                 $resource,
                 $id,
                 $this->authorizationHeader,
-                $this->getToken()
-            )
+                $this->getToken(),
+            ),
         );
     }
 

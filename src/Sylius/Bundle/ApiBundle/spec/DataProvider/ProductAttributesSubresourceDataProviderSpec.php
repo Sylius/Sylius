@@ -32,7 +32,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
     function let(
         ProductAttributeValueRepositoryInterface $attributeValueRepository,
         LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
     ): void {
         $this->beConstructedWith([], $attributeValueRepository, $localeContext, $localeProvider, 'pl_PL');
     }
@@ -69,7 +69,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
                 'xyz',
                 'en_US',
                 'en_US',
-                'pl_PL'
+                'pl_PL',
             )
             ->willReturn($queryBuilder)
         ;
@@ -83,7 +83,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
                 [],
                 [
                     'subresource_identifiers' => ['code' => 'xyz'],
-                ]
+                ],
             )
             ->shouldReturn(['key' => 'value'])
         ;
@@ -95,14 +95,14 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         QueryBuilder $queryBuilder,
         QueryResultCollectionExtensionInterface $firstQueryResultCollectionExtension,
-        QueryResultCollectionExtensionInterface $secondQueryResultCollectionExtension
+        QueryResultCollectionExtensionInterface $secondQueryResultCollectionExtension,
     ): void {
         $this->beConstructedWith(
             [$firstQueryResultCollectionExtension, $secondQueryResultCollectionExtension],
             $attributeValueRepository,
             $localeContext,
             $localeProvider,
-            'pl_PL'
+            'pl_PL',
         );
 
         $context = [
@@ -117,7 +117,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
                 'xyz',
                 'en_US',
                 'en_US',
-                'pl_PL'
+                'pl_PL',
             )
             ->willReturn($queryBuilder)
         ;
@@ -140,7 +140,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
             ->getSubresource(
                 'resourceClass',
                 [],
-                $context
+                $context,
             )
             ->shouldReturn(['key' => 'value'])
         ;
@@ -153,14 +153,14 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         AbstractQuery $query,
         QueryCollectionExtensionInterface $queryCollectionExtension,
-        QueryResultCollectionExtensionInterface $queryResultCollectionExtension
+        QueryResultCollectionExtensionInterface $queryResultCollectionExtension,
     ): void {
         $this->beConstructedWith(
             [$queryCollectionExtension, $queryResultCollectionExtension],
             $attributeValueRepository,
             $localeContext,
             $localeProvider,
-            'pl_PL'
+            'pl_PL',
         );
 
         $context = [
@@ -175,7 +175,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
                 'xyz',
                 'en_US',
                 'en_US',
-                'pl_PL'
+                'pl_PL',
             )
             ->willReturn($queryBuilder)
         ;
@@ -202,7 +202,7 @@ final class ProductAttributesSubresourceDataProviderSpec extends ObjectBehavior
             ->getSubresource(
                 'resourceClass',
                 [],
-                $context
+                $context,
             )
             ->shouldReturn(['key' => 'value'])
         ;

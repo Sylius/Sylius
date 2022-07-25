@@ -32,7 +32,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
         UserContextInterface $userContext,
         LoggedInCustomerEmailIfNotSetAwareInterface $command,
         ShopUserInterface $shopUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -48,7 +48,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
         UserContextInterface $userContext,
         LoggedInCustomerEmailIfNotSetAwareInterface $command,
         ShopUserInterface $shopUser,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -74,7 +74,7 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformerSpec extends
 
     function it_adds_nothing_for_visitor(
         UserContextInterface $userContext,
-        LoggedInCustomerEmailIfNotSetAwareInterface $command
+        LoggedInCustomerEmailIfNotSetAwareInterface $command,
     ): void {
         $userContext->getUser()->willReturn(null);
 

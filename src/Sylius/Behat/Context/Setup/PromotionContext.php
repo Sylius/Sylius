@@ -338,7 +338,7 @@ final class PromotionContext implements Context
         int $firstAmount,
         ChannelInterface $firstChannel,
         int $secondAmount,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createUnitFixedDiscount($firstAmount, $firstChannel->getCode());
@@ -359,7 +359,7 @@ final class PromotionContext implements Context
         int $firstPercentage,
         ChannelInterface $firstChannel,
         int $secondPercentage,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         /** @var PromotionActionInterface $action */
         $action = $this->actionFactory->createUnitPercentageDiscount($firstPercentage, $firstChannel->getCode());

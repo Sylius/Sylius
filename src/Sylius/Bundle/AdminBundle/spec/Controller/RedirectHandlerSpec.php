@@ -24,7 +24,7 @@ final class RedirectHandlerSpec extends ObjectBehavior
 {
     function let(
         RedirectHandlerInterface $decoratedRedirectHandler,
-        FilterStorageInterface $filterStorage
+        FilterStorageInterface $filterStorage,
     ): void {
         $this->beConstructedWith($decoratedRedirectHandler, $filterStorage);
     }

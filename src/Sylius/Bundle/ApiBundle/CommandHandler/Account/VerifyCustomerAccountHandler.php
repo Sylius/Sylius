@@ -26,7 +26,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
     public function __construct(
         private RepositoryInterface $shopUserRepository,
-        private DateTimeProviderInterface $calendar
+        private DateTimeProviderInterface $calendar,
     ) {
     }
 

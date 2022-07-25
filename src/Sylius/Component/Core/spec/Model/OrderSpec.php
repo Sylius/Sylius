@@ -776,7 +776,7 @@ final class OrderSpec extends ObjectBehavior
         OrderItemInterface $secondOrderItem,
         AdjustmentInterface $includedUnitTaxAdjustment,
         AdjustmentInterface $excludedUnitTaxAdjustment,
-        AdjustmentInterface $shippingTaxAdjustment
+        AdjustmentInterface $shippingTaxAdjustment,
     ): void {
         $includedUnitTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $includedUnitTaxAdjustment->isNeutral()->willReturn(true);

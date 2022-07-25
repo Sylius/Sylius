@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -50,9 +50,8 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag
-    ): void
-    {
+        ParameterBagInterface $attributesBag,
+    ): void {
         $formFactory
             ->create(RequestPasswordResetType::class)
             ->shouldBeCalled()
@@ -76,7 +75,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $flashBag->set('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
         $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
-            'redirect' => 'my_custom_route'
+            'redirect' => 'my_custom_route',
         ]);
         $request->attributes = $attributesBag->getWrappedObject();
 
@@ -93,7 +92,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag
+        ParameterBagInterface $attributesBag,
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
@@ -115,7 +114,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
             'redirect' => [
                 'route' => $route,
                 'params' => $parameters,
-            ]
+            ],
         ]);
         $request->attributes = $attributesBag->getWrappedObject();
 
@@ -132,7 +131,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         RouterInterface $router,
         FormInterface $form,
         Request $request,
-        ParameterBagInterface $attributesBag
+        ParameterBagInterface $attributesBag,
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
