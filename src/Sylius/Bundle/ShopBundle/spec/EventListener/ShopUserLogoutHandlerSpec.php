@@ -55,7 +55,6 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         $httpUtils->createRedirectResponse($request, '/')->willReturn($response);
 
         $tokenStorage->setToken(null)->shouldBeCalled();
-        $session->invalidate()->shouldBeCalled();
         $cartStorage->removeForChannel($channel)->shouldBeCalled();
         $logoutEvent->setResponse($response)->shouldBeCalled();
 
