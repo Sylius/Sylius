@@ -576,9 +576,6 @@
     "stripe/stripe-php": {
         "version": "v4.13.0"
     },
-    "swiftmailer/swiftmailer": {
-        "version": "v6.1.2"
-    },
     "sylius-labs/association-hydrator": {
         "version": "v1.1.0"
     },
@@ -783,9 +780,6 @@
     "symfony/polyfill-php72": {
         "version": "v1.18.1"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.18.1"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.15.0"
     },
@@ -839,9 +833,6 @@
     "symfony/security-csrf": {
         "version": "v4.4.13"
     },
-    "symfony/security-guard": {
-        "version": "v4.4.13"
-    },
     "symfony/security-http": {
         "version": "v4.4.13"
     },
@@ -856,20 +847,6 @@
     },
     "symfony/string": {
         "version": "v5.2.1"
-    },
-    "symfony/swiftmailer-bundle": {
-        "version": "2.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.5",
-            "ref": "ae4d22af30bbd484506bc1817c5a3ef72c855b93"
-        },
-        "files": [
-            "config/packages/dev/swiftmailer.yaml",
-            "config/packages/swiftmailer.yaml",
-            "config/packages/test/swiftmailer.yaml"
-        ]
     },
     "symfony/templating": {
         "version": "v4.4.13"
