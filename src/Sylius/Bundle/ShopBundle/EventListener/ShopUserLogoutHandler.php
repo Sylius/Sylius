@@ -15,27 +15,42 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Http\Event\LogoutEvent;
 use Symfony\Component\Security\Http\HttpUtils;
-use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 
-final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
+final class ShopUserLogoutHandler implements EventSubscriberInterface
 {
     public function __construct(
-        HttpUtils $httpUtils,
-        string $targetUrl,
+        private HttpUtils $httpUtils,
+        private string $targetUrl,
         private ChannelContextInterface $channelContext,
         private CartStorageInterface $cartStorage,
+        private TokenStorageInterface $tokenStorage,
     ) {
-        parent::__construct($httpUtils, $targetUrl);
     }
 
-    public function onLogoutSuccess(Request $request): Response
+    public function onLogout(LogoutEvent $logoutEvent): void
     {
+        if ($logoutEvent->getResponse() !== null) {
+            return;
+        }
+
         $channel = $this->channelContext->getChannel();
         $this->cartStorage->removeForChannel($channel);
 
-        return parent::onLogoutSuccess($request);
+        $this->tokenStorage->setToken(null);
+        $logoutEvent->getRequest()->getSession()->invalidate();
+
+        $response = $this->httpUtils->createRedirectResponse($logoutEvent->getRequest(), $this->targetUrl);
+        $logoutEvent->setResponse($response);
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            LogoutEvent::class => [['onLogout', 64]],
+        ];
     }
 }
