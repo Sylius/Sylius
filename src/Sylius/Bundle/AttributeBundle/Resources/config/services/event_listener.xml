@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.listener.product_attribute_exception" class="Sylius\Bundle\AttributeBundle\EventListener\RemoveAttributeListener">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Sylius\Component\Attribute\Checker\AttributeDeletionCheckerInterface" />
+            <tag name="kernel.event_listener" priority="4096" event="sylius.product_attribute.pre_delete" method="protectFromRemovingAttribute" />
+        </service>
+    </services>
+</container>

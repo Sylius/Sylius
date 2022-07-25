@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="Sylius\Component\Attribute\Checker\AttributeDeletionCheckerInterface" class="Sylius\Component\Attribute\Checker\AttributeDeletionChecker">
+            <argument type="service" id="sylius.repository.product_attribute_value" />
+        </service>
+    </services>
+</container>
