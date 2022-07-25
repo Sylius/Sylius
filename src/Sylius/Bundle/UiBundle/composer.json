@@ -34,7 +34,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^4.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.11",
+        "sylius/grid-bundle": "^1.11 || ^1.12@alpha",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/security-core": "^5.4 || ^6.0",
