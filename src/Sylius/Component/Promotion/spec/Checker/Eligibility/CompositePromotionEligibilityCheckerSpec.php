@@ -34,7 +34,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $firstPromotionEligibilityChecker,
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,
@@ -51,7 +51,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $firstPromotionEligibilityChecker,
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,
@@ -68,7 +68,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         PromotionEligibilityCheckerInterface $firstPromotionEligibilityChecker,
         PromotionEligibilityCheckerInterface $secondPromotionEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $this->beConstructedWith([
             $firstPromotionEligibilityChecker,

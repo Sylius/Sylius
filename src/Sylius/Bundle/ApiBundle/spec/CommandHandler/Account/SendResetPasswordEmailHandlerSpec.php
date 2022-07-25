@@ -28,7 +28,7 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
     function let(
         SenderInterface $emailSender,
         ChannelRepositoryInterface $channelRepository,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
     ): void {
         $this->beConstructedWith($emailSender, $channelRepository, $userRepository);
     }
@@ -44,7 +44,7 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
         SendResetPasswordEmail $sendResetPasswordEmail,
         UserInterface $user,
         ChannelRepositoryInterface $channelRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $sendResetPasswordEmail->email()->willReturn('iAmAnEmail@spaghettiCode.php');
 
@@ -63,7 +63,7 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
                 'user' => $user->getWrappedObject(),
                 'localeCode' => 'en_US',
                 'channel' => $channel->getWrappedObject(),
-            ]
+            ],
         );
 
         $this(new SendResetPasswordEmail('iAmAnEmail@spaghettiCode.php', 'WEB', 'en_US'));

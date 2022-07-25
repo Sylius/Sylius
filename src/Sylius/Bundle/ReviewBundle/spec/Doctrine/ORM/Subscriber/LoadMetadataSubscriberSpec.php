@@ -57,7 +57,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadata $classMetadataInfo,
         ClassMetadata $metadata,
         EntityManager $entityManager,
-        LoadClassMetadataEventArgs $eventArguments
+        LoadClassMetadataEventArgs $eventArguments,
     ): void {
         $eventArguments->getClassMetadata()->willReturn($metadata);
         $eventArguments->getEntityManager()->willReturn($entityManager);
@@ -99,7 +99,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataFactory $metadataFactory,
         ClassMetadata $metadata,
         EntityManager $entityManager,
-        LoadClassMetadataEventArgs $eventArguments
+        LoadClassMetadataEventArgs $eventArguments,
     ): void {
         $eventArguments->getClassMetadata()->willReturn($metadata);
         $eventArguments->getEntityManager()->willReturn($entityManager);
@@ -120,7 +120,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         ClassMetadataFactory $metadataFactory,
         ClassMetadata $metadata,
         EntityManager $entityManager,
-        LoadClassMetadataEventArgs $eventArguments
+        LoadClassMetadataEventArgs $eventArguments,
     ): void {
         $this->beConstructedWith([
             'reviewable' => [

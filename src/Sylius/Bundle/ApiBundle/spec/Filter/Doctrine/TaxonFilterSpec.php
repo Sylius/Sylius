@@ -34,7 +34,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         TaxonInterface $taxon,
         TaxonInterface $taxonRoot,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $iriConverter->getItemFromIri('api/taxon')->willReturn($taxon);
         $queryBuilder->getRootAliases()->willReturn(['o']);
@@ -54,7 +54,7 @@ final class TaxonFilterSpec extends ObjectBehavior
             'api/taxon',
             $queryBuilder,
             $queryNameGenerator,
-            'resourceClass'
+            'resourceClass',
         );
     }
 

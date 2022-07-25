@@ -73,20 +73,21 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
 
     function it_throws_exception_when_trying_to_reverse_transform_variable_without_variants(
         ProductInterface $variable,
-        ProductOptionValueInterface $optionValue
+        ProductOptionValueInterface $optionValue,
     ): void {
         $variable->getVariants()->willReturn(new ArrayCollection([]));
         $variable->getCode()->willReturn('example');
 
         $this
             ->shouldThrow(TransformationFailedException::class)
-            ->duringReverseTransform([$optionValue]);
+            ->duringReverseTransform([$optionValue])
+        ;
     }
 
     function it_reverse_transforms_variable_with_variants_if_options_match(
         ProductInterface $variable,
         ProductVariantInterface $variant,
-        ProductOptionValueInterface $optionValue
+        ProductOptionValueInterface $optionValue,
     ): void {
         $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
@@ -98,7 +99,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
     function it_throws_exception_when_trying_to_reverse_transform_variable_with_variants_if_options_not_match(
         ProductInterface $variable,
         ProductVariantInterface $variant,
-        ProductOptionValueInterface $optionValue
+        ProductOptionValueInterface $optionValue,
     ): void {
         $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
@@ -107,18 +108,20 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(TransformationFailedException::class)
-            ->duringReverseTransform([$optionValue]);
+            ->duringReverseTransform([$optionValue])
+        ;
     }
 
     function it_throws_exception_when_trying_to_reverse_transform_variable_with_variants_if_options_are_missing(
         ProductInterface $variable,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $variable->getVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $variable->getCode()->willReturn('example');
 
         $this
             ->shouldThrow(TransformationFailedException::class)
-            ->duringReverseTransform([null]);
+            ->duringReverseTransform([null])
+        ;
     }
 }

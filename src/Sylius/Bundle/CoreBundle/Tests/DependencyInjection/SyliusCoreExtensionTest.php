@@ -30,22 +30,22 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->assertThat(
             $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
-            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]),
         );
 
         $this->assertThat(
             $this->container->findDefinition('sylius.order_processing.order_prices_recalculator'),
-            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]))
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])),
         );
 
         $this->assertThat(
             $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
-            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50])
+            new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 50]),
         );
 
         $this->assertThat(
             $this->container->findDefinition('sylius.order_processing.order_shipment_processor'),
-            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40]))
+            $this->logicalNot(new DefinitionHasTagConstraint('sylius.order_processor', ['priority' => 40])),
         );
     }
 
@@ -123,7 +123,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         ));
         $this->assertSame(
             '@SyliusCoreBundle/Migrations',
-            $doctrineMigrationsExtensionConfig[0]['migrations_paths']['Sylius\Bundle\CoreBundle\Migrations']
+            $doctrineMigrationsExtensionConfig[0]['migrations_paths']['Sylius\Bundle\CoreBundle\Migrations'],
         );
 
         $syliusLabsDoctrineMigrationsExtraExtensionConfig = $this
@@ -136,7 +136,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         ));
         $this->assertSame(
             [],
-            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\CoreBundle\Migrations']
+            $syliusLabsDoctrineMigrationsExtraExtensionConfig[0]['migrations']['Sylius\Bundle\CoreBundle\Migrations'],
         );
     }
 

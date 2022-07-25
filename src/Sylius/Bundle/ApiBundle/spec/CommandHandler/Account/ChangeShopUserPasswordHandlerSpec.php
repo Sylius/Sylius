@@ -36,7 +36,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
     function it_updates_user_password(
         PasswordUpdaterInterface $passwordUpdater,
         UserRepositoryInterface $userRepository,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $userRepository->find(42)->willReturn($shopUser);
 
@@ -46,7 +46,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $changePasswordShopUser = new ChangeShopUserPassword(
             'PLAIN_PASSWORD',
             'PLAIN_PASSWORD',
-            'OLD_PASSWORD'
+            'OLD_PASSWORD',
         );
 
         $changePasswordShopUser->setShopUserId(42);
@@ -57,7 +57,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_new_passwords_do_not_match(
         PasswordUpdaterInterface $passwordUpdater,
         UserRepositoryInterface $userRepository,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $userRepository->find(Argument::any())->shouldNotBeCalled();
 
@@ -67,7 +67,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $changePasswordShopUser = new ChangeShopUserPassword(
             'PLAIN_PASSWORD',
             'WRONG_PASSWORD',
-            'OLD_PASSWORD'
+            'OLD_PASSWORD',
         );
 
         $changePasswordShopUser->setShopUserId(42);
@@ -81,7 +81,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
     function it_throws_exception_if_shop_user_has_not_been_found(
         PasswordUpdaterInterface $passwordUpdater,
         UserRepositoryInterface $userRepository,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $userRepository->find(42)->willReturn(null);
 
@@ -91,7 +91,7 @@ final class ChangeShopUserPasswordHandlerSpec extends ObjectBehavior
         $changePasswordShopUser = new ChangeShopUserPassword(
             'PLAIN_PASSWORD',
             'PLAIN_PASSWORD',
-            'OLD_PASSWORD'
+            'OLD_PASSWORD',
         );
 
         $changePasswordShopUser->setShopUserId(42);

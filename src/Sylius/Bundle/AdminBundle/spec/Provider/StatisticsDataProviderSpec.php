@@ -30,7 +30,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
     function let(
         DashboardStatisticsProviderInterface $statisticsProvider,
         SalesDataProviderInterface $salesDataProvider,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyFormatterInterface $moneyFormatter,
     ): void {
         $this->beConstructedWith($statisticsProvider, $salesDataProvider, $moneyFormatter);
     }
@@ -52,7 +52,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
         DashboardStatistics $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyFormatterInterface $moneyFormatter,
     ): void {
         $startDate = new \DateTime('2020-01-01');
         $endDate = new \DateTime('2021-01-01');
@@ -102,7 +102,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
         DashboardStatistics $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyFormatterInterface $moneyFormatter,
     ): void {
         $startDate = new \DateTime('2020-05-01');
         $endDate = new \DateTime('2020-06-01');
@@ -125,7 +125,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
                 '21.5.2020', '22.5.2020', '23.5.2020', '24.5.2020', '25.5.2020',
                 '26.5.2020', '27.5.2020', '28.5.2020', '29.5.2020', '30.5.2020',
                 '31.5.2020',
-            ]
+            ],
         );
         $salesSummary->getSales()->willReturn(
             [
@@ -134,7 +134,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
                 '0', '0', '0', '0', '0', '0', '0',
                 '0', '0', '0', '81.0', '0', '0', '0',
                 '0', '0', '0', '0', '0', '4.50', '0',
-            ]
+            ],
         );
         $channel->getBaseCurrency()->willReturn($currency);
         $currency->getCode()->willReturn('USD');
@@ -184,7 +184,7 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
         DashboardStatistics $statistics,
         SalesSummaryInterface $salesSummary,
         CurrencyInterface $currency,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyFormatterInterface $moneyFormatter,
     ): void {
         $startDate = new \DateTime('2020-05-21');
         $endDate = new \DateTime('2020-06-04');
@@ -202,13 +202,13 @@ final class StatisticsDataProviderSpec extends ObjectBehavior
             [
                 '21.5.2020', '22.5.2020', '23.5.2020', '24.5.2020', '25.5.2020', '26.5.2020', '27.5.2020',
                 '28.5.2020', '29.5.2020', '30.5.2020', '31.5.2020', '1.6.2020', '2.6.2020', '3.6.2020',
-            ]
+            ],
         );
         $salesSummary->getSales()->willReturn(
             [
                 '0', '168.82', '0', '203.92', '0', '0', '10.0',
                 '0', '0', '40.50', '0', '0', '23.0', '0', '7.0', '11.0',
-            ]
+            ],
         );
         $channel->getBaseCurrency()->willReturn($currency);
         $currency->getCode()->willReturn('USD');

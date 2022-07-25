@@ -24,7 +24,7 @@ final class CheckoutPaymentContext implements Context
 {
     public function __construct(
         private SelectPaymentPageInterface $selectPaymentPage,
-        private CompletePageInterface $completePage
+        private CompletePageInterface $completePage,
     ) {
     }
 

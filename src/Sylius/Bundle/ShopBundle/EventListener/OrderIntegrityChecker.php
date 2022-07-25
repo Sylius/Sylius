@@ -26,7 +26,7 @@ final class OrderIntegrityChecker
     public function __construct(
         private RouterInterface $router,
         private ObjectManager $manager,
-        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 

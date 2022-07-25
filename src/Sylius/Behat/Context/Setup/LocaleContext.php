@@ -30,7 +30,7 @@ final class LocaleContext implements Context
         private FactoryInterface $localeFactory,
         private RepositoryInterface $localeRepository,
         private ObjectManager $localeManager,
-        private ObjectManager $channelManager
+        private ObjectManager $channelManager,
     ) {
     }
 

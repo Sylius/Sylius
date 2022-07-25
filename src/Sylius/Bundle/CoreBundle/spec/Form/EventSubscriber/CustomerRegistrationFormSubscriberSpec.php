@@ -45,7 +45,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         CustomerInterface $customer,
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);
@@ -65,7 +65,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
     function it_throws_unexpected_type_exception_if_data_is_not_customer_type(
         FormEvent $event,
         FormInterface $form,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($user);
@@ -80,7 +80,7 @@ final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         CustomerInterface $customer,
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);

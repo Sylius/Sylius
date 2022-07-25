@@ -29,7 +29,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     public function __construct(
         private DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         private PaymentFactoryInterface $paymentFactory,
-        private StateMachineFactoryInterface $stateMachineFactory
+        private StateMachineFactoryInterface $stateMachineFactory,
     ) {
     }
 
@@ -38,7 +38,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         /** @var PaymentInterface $payment */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode(
             $order->getTotal(),
-            $order->getCurrencyCode()
+            $order->getCurrencyCode(),
         );
 
         $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);

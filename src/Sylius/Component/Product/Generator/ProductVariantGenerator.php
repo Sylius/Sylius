@@ -26,7 +26,7 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 
     public function __construct(
         private ProductVariantFactoryInterface $productVariantFactory,
-        private ProductVariantsParityCheckerInterface $variantsParityChecker
+        private ProductVariantsParityCheckerInterface $variantsParityChecker,
     ) {
         $this->setBuilder = new CartesianSetBuilder();
     }

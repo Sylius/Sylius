@@ -28,7 +28,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $minkParameters,
         RouterInterface $router,
         private TableAccessorInterface $tableAccessor,
-        private string $routeName
+        private string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

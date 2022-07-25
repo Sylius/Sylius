@@ -41,7 +41,7 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         ChannelPricingInterface $bookVariantChannelPricing,
         ChannelPricingInterface $shoesVariantChannelPricing,
         ChannelPricingInterface $boardGameVariantChannelPricing,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $tshirt->getTotal()->willReturn(1000);
         $tshirt->getQuantity()->willReturn(1);
@@ -86,7 +86,7 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         ProductVariantInterface $mugVariant,
         ChannelPricingInterface $tshirtVariantChannelPricing,
         ChannelPricingInterface $mugVariantChannelPricing,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $tshirt->getTotal()->willReturn(5000);
         $tshirt->getQuantity()->willReturn(1);
@@ -116,7 +116,7 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         ProductVariantInterface $mugVariant,
         ChannelPricingInterface $tshirtVariantChannelPricing,
         ChannelPricingInterface $mugVariantChannelPricing,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $tshirt->getTotal()->willReturn(5000);
         $tshirt->getQuantity()->willReturn(1);
@@ -146,7 +146,7 @@ final class MinimumPriceDistributorSpec extends ObjectBehavior
         ProductVariantInterface $mugVariant,
         ChannelPricingInterface $tshirtVariantChannelPricing,
         ChannelPricingInterface $mugVariantChannelPricing,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $tshirt->getTotal()->willReturn(5000);
         $tshirt->getQuantity()->willReturn(1);

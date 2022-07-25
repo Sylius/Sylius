@@ -23,16 +23,16 @@ final class OrderEmailManager implements OrderEmailManagerInterface
 {
     public function __construct(
         private SenderInterface $emailSender,
-        private ?DecoratedOrderEmailManagerInterface $decoratedEmailManager
+        private ?DecoratedOrderEmailManagerInterface $decoratedEmailManager,
     ) {
         if ($decoratedEmailManager === null) {
             @trigger_error(
                 sprintf(
                     'Not passing an instance of %s to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.',
                     DecoratedOrderEmailManagerInterface::class,
-                    self::class
+                    self::class,
                 ),
-                \E_USER_DEPRECATED
+                \E_USER_DEPRECATED,
             );
         }
     }
@@ -55,7 +55,7 @@ final class OrderEmailManager implements OrderEmailManagerInterface
                 'order' => $order,
                 'channel' => $order->getChannel(),
                 'localeCode' => $order->getLocaleCode(),
-            ]
+            ],
         );
     }
 }

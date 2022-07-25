@@ -57,7 +57,7 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
                 'disabled' => $this->disabled,
                 'options' => $product->getOptions(),
                 'auto_initialize' => false,
-            ]
+            ],
         ));
     }
 }

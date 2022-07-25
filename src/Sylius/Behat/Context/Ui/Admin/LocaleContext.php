@@ -24,7 +24,7 @@ final class LocaleContext implements Context
     public function __construct(
         private DashboardPageInterface $dashboardPage,
         private TranslatorInterface $translator,
-        private CreatePageInterface $createPage
+        private CreatePageInterface $createPage,
     ) {
     }
 

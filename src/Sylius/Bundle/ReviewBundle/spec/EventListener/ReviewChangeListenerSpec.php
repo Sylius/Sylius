@@ -31,7 +31,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
         $averageRatingUpdater,
         LifecycleEventArgs $event,
         ReviewInterface $review,
-        ReviewableInterface $reviewSubject
+        ReviewableInterface $reviewSubject,
     ): void {
         $event->getObject()->willReturn($review);
         $review->getReviewSubject()->willReturn($reviewSubject);

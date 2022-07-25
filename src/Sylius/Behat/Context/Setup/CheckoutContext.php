@@ -38,7 +38,7 @@ final class CheckoutContext implements Context
         private RepositoryInterface $paymentMethodRepository,
         private MessageBusInterface $commandBus,
         private FactoryInterface $addressFactory,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

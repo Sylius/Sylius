@@ -32,7 +32,7 @@ final class InventoryHelperSpec extends ObjectBehavior
 
     function it_delegates_the_stock_availability_checking_to_the_checker(
         AvailabilityCheckerInterface $checker,
-        StockableInterface $stockable
+        StockableInterface $stockable,
     ): void {
         $checker->isStockAvailable($stockable)->shouldBeCalled()->willReturn(true);
 
@@ -41,7 +41,7 @@ final class InventoryHelperSpec extends ObjectBehavior
 
     function it_delegates_the_stock_sufficiency_checking_to_the_checker(
         AvailabilityCheckerInterface $checker,
-        StockableInterface $stockable
+        StockableInterface $stockable,
     ): void {
         $checker->isStockSufficient($stockable, 3)->shouldBeCalled()->willReturn(false);
 

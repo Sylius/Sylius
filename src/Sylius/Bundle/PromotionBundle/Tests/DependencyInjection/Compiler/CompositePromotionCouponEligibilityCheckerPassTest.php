@@ -29,7 +29,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
         $this->setDefinition('sylius.promotion_coupon_eligibility_checker', new Definition());
         $this->setDefinition(
             'sylius.promotion_coupon_eligibility_checker.tagged',
-            (new Definition())->addTag('sylius.promotion_coupon_eligibility_checker')
+            (new Definition())->addTag('sylius.promotion_coupon_eligibility_checker'),
         );
 
         $this->compile();
@@ -37,7 +37,7 @@ final class CompositePromotionCouponEligibilityCheckerPassTest extends AbstractC
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.promotion_coupon_eligibility_checker',
             0,
-            [new Reference('sylius.promotion_coupon_eligibility_checker.tagged')]
+            [new Reference('sylius.promotion_coupon_eligibility_checker.tagged')],
         );
     }
 

@@ -28,7 +28,7 @@ final class ThemeContext implements Context
         private SharedStorageInterface $sharedStorage,
         private IndexPageInterface $channelIndexPage,
         private UpdatePageInterface $channelUpdatePage,
-        private HomePageInterface $homePage
+        private HomePageInterface $homePage,
     ) {
     }
 

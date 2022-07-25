@@ -28,7 +28,7 @@ final class ZoneMemberIntegrityListener
     public function __construct(
         private RequestStack $requestStack,
         private ZoneDeletionCheckerInterface $zoneDeletionChecker,
-        private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
+        private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ) {
     }
 

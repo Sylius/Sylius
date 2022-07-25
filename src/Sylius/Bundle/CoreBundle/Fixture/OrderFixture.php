@@ -53,7 +53,7 @@ class OrderFixture extends AbstractFixture
         StateMachineFactoryInterface $stateMachineFactory,
         OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        OrderExampleFactory $orderExampleFactory = null
+        OrderExampleFactory $orderExampleFactory = null,
     ) {
         if ($orderExampleFactory === null) {
             $orderExampleFactory = new OrderExampleFactory(
@@ -70,7 +70,7 @@ class OrderFixture extends AbstractFixture
                 $addressFactory,
                 $stateMachineFactory,
                 $orderShippingMethodSelectionRequirementChecker,
-                $orderPaymentMethodSelectionRequirementChecker
+                $orderPaymentMethodSelectionRequirementChecker,
             );
 
             @trigger_error('Use orderExampleFactory. OrderFixture is deprecated since 1.6 and will be prohibited since 2.0.', \E_USER_DEPRECATED);

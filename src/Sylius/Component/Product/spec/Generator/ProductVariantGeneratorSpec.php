@@ -28,7 +28,7 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
     function let(
         ProductVariantFactoryInterface $productVariantFactory,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $this->beConstructedWith($productVariantFactory, $variantsParityChecker);
     }
@@ -53,14 +53,14 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValueInterface $whiteColor,
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $productVariable->hasOptions()->willReturn(true);
 
         $productVariable->getOptions()->willReturn(new ArrayCollection([$colorOption->getWrappedObject()]));
 
         $colorOption->getValues()->willReturn(
-            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()]),
         );
 
         $blackColor->getCode()->willReturn('black1');
@@ -85,14 +85,14 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValueInterface $whiteColor,
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $productVariable->hasOptions()->willReturn(true);
 
         $productVariable->getOptions()->willReturn(new ArrayCollection([$colorOption->getWrappedObject()]));
 
         $colorOption->getValues()->willReturn(
-            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()]),
         );
 
         $blackColor->getCode()->willReturn('black1');
@@ -121,19 +121,19 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValueInterface $whiteColor,
         ProductVariantFactoryInterface $productVariantFactory,
         ProductVariantInterface $permutationVariant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $productVariable->hasOptions()->willReturn(true);
 
         $productVariable->getOptions()->willReturn(
-            new ArrayCollection([$colorOption->getWrappedObject(), $sizeOption->getWrappedObject()])
+            new ArrayCollection([$colorOption->getWrappedObject(), $sizeOption->getWrappedObject()]),
         );
 
         $colorOption->getValues()->willReturn(
-            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()])
+            new ArrayCollection([$blackColor->getWrappedObject(), $whiteColor->getWrappedObject(), $redColor->getWrappedObject()]),
         );
         $sizeOption->getValues()->willReturn(
-            new ArrayCollection([$smallSize->getWrappedObject(), $mediumSize->getWrappedObject(), $largeSize->getWrappedObject()])
+            new ArrayCollection([$smallSize->getWrappedObject(), $mediumSize->getWrappedObject(), $largeSize->getWrappedObject()]),
         );
 
         $blackColor->getCode()->willReturn('black1');

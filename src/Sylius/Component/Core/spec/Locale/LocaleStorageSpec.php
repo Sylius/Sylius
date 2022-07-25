@@ -51,7 +51,7 @@ final class LocaleStorageSpec extends ObjectBehavior
 
     function it_throws_a_locale_not_found_exception_if_storage_does_not_have_locale_code_for_given_channel(
         StorageInterface $storage,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channel->getCode()->willReturn('web');
 

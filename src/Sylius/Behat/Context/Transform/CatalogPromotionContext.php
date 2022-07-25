@@ -34,7 +34,7 @@ final class CatalogPromotionContext implements Context
 
         Assert::notNull(
             $catalogPromotion,
-            sprintf('Catalog promotion with name "%s" does not exist', $name)
+            sprintf('Catalog promotion with name "%s" does not exist', $name),
         );
 
         return $catalogPromotion;

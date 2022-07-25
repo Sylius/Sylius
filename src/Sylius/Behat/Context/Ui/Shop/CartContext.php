@@ -32,7 +32,7 @@ final class CartContext implements Context
         private SummaryPageInterface $summaryPage,
         private ShowPageInterface $productShowPage,
         private NotificationCheckerInterface $notificationChecker,
-        private SessionManagerInterface $sessionManager
+        private SessionManagerInterface $sessionManager,
     ) {
     }
 
@@ -391,7 +391,7 @@ final class CartContext implements Context
     public function iAddThisProductWithToTheCart(
         ProductInterface $product,
         ProductOptionInterface $productOption,
-        string $productOptionValue
+        string $productOptionValue,
     ): void {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 

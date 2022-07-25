@@ -30,7 +30,7 @@ final class CurrencySetup implements CurrencySetupInterface
     public function __construct(
         private RepositoryInterface $currencyRepository,
         private FactoryInterface $currencyFactory,
-        string $currency = 'USD'
+        string $currency = 'USD',
     ) {
         $this->currency = trim($currency);
     }
@@ -61,7 +61,7 @@ final class CurrencySetup implements CurrencySetupInterface
 
         while (null === $name) {
             $output->writeln(
-                sprintf('<comment>Currency with code <info>%s</info> could not be resolved.</comment>', $code)
+                sprintf('<comment>Currency with code <info>%s</info> could not be resolved.</comment>', $code),
             );
 
             $code = $this->getNewCurrencyCode($input, $output, $questionHelper);

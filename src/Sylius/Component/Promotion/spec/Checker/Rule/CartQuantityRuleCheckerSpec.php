@@ -32,7 +32,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_not_eligible_if_a_cart_quantity_is_less_then_configured(
-        CountablePromotionSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectCount()->willReturn(7);
 
@@ -40,7 +40,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_greater_then_configured(
-        CountablePromotionSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectCount()->willReturn(12);
 
@@ -48,7 +48,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_equal_with_configured(
-        CountablePromotionSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject,
     ): void {
         $subject->getPromotionSubjectCount()->willReturn(10);
 

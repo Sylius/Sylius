@@ -40,7 +40,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         private ChannelContextInterface $channelContext,
         private AvailabilityCheckerInterface $availabilityChecker,
         private SectionProviderInterface $uriBasedSectionContext,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -65,7 +65,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         if (!$appliedPromotions->isEmpty()) {
             $data['appliedPromotions'] = array_map(
                 fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromItem($catalogPromotion),
-                $appliedPromotions->toArray()
+                $appliedPromotions->toArray(),
             );
         }
 

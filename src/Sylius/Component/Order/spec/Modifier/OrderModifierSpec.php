@@ -26,7 +26,7 @@ final class OrderModifierSpec extends ObjectBehavior
 {
     function let(
         OrderProcessorInterface $orderProcessor,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
     ): void {
         $this->beConstructedWith($orderProcessor, $orderItemQuantityModifier);
     }
@@ -39,7 +39,7 @@ final class OrderModifierSpec extends ObjectBehavior
     function it_adds_new_item_to_order_if_it_is_empty(
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([]));
 
@@ -54,7 +54,7 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$existingItem->getWrappedObject()]));
 
@@ -73,7 +73,7 @@ final class OrderModifierSpec extends ObjectBehavior
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$existingItem->getWrappedObject()]));
 
@@ -92,7 +92,7 @@ final class OrderModifierSpec extends ObjectBehavior
     function it_removes_an_order_item_from_an_order(
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $order->removeItem($orderItem)->shouldBeCalled();
         $orderProcessor->process($order)->shouldBeCalled();

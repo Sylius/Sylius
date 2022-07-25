@@ -67,7 +67,7 @@ final class CheckoutStateUrlGeneratorSpec extends ObjectBehavior
 
     function it_throws_route_not_found_exception_if_there_is_no_route_for_given_state(
         RouterInterface $router,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getCheckoutState()->willReturn('shipping_selected');
         $router->generate(Argument::any())->shouldNotBeCalled();

@@ -24,7 +24,7 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
     public function countByCodeLength(
         int $codeLength,
         ?string $prefix = null,
-        ?string $suffix = null
+        ?string $suffix = null,
     ): int;
 
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;

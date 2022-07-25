@@ -26,7 +26,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
     public function __construct(
         private MessageBusInterface $eventBus,
         private DelayStampCalculatorInterface $delayStampCalculator,
-        private DateTimeProviderInterface $dateTimeProvider
+        private DateTimeProviderInterface $dateTimeProvider,
     ) {
     }
 
@@ -34,7 +34,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
     {
         $this->eventBus->dispatch(
             new CatalogPromotionCreated($catalogPromotion->getCode()),
-            $this->calculateStartDateStamp($catalogPromotion)
+            $this->calculateStartDateStamp($catalogPromotion),
         );
 
         $this->dispatchCatalogPromotionEndedEvent($catalogPromotion);
@@ -48,7 +48,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
 
         $this->eventBus->dispatch(
             new CatalogPromotionUpdated($catalogPromotion->getCode()),
-            $this->calculateStartDateStamp($catalogPromotion)
+            $this->calculateStartDateStamp($catalogPromotion),
         );
 
         $this->dispatchCatalogPromotionEndedEvent($catalogPromotion);
@@ -68,7 +68,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
         if ($catalogPromotion->getEndDate() !== null) {
             $this->eventBus->dispatch(
                 new CatalogPromotionEnded($catalogPromotion->getCode()),
-                [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $catalogPromotion->getEndDate())]
+                [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $catalogPromotion->getEndDate())],
             );
         }
     }

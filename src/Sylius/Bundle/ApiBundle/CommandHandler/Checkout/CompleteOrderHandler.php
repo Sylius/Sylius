@@ -34,7 +34,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         private FactoryInterface $stateMachineFactory,
         private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
-        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 
@@ -65,7 +65,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE),
-            sprintf('Order with %s token cannot be completed.', $orderTokenValue)
+            sprintf('Order with %s token cannot be completed.', $orderTokenValue),
         );
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);

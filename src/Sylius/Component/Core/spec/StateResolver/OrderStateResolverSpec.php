@@ -38,7 +38,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
     function it_marks_an_order_as_fulfilled_when_its_paid_for_and_has_been_shipped(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
@@ -54,7 +54,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
     function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_paid_but_not_shipped(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getShippingState()->willReturn(Argument::not(OrderShippingStates::STATE_SHIPPED));
         $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
@@ -70,7 +70,7 @@ final class OrderStateResolverSpec extends ObjectBehavior
     function it_does_not_mark_an_order_as_fulfilled_when_it_has_been_shipped_but_not_paid(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
         $order->getPaymentState()->willReturn(Argument::not(OrderPaymentStates::STATE_PAID));

@@ -38,7 +38,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         OrderRepositoryInterface $orderRepository,
         Request $request,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');
@@ -69,7 +69,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_the_request_is_not_an_api_request(
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $request->attributes = new ParameterBag([]);
         $request->getRequestUri()->willReturn('/orders');
@@ -88,7 +88,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_there_is_no_token_value(
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $request->attributes = new ParameterBag([]);
         $request->getRequestUri()->willReturn('/api/v2/orders');
@@ -108,7 +108,7 @@ final class TokenValueBasedCartContextSpec extends ObjectBehavior
     function it_throws_an_exception_if_there_is_no_cart_with_given_token_value(
         RequestStack $requestStack,
         OrderRepositoryInterface $orderRepository,
-        Request $request
+        Request $request,
     ): void {
         $request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $request->getRequestUri()->willReturn('/api/v2/orders/TOKEN_VALUE');

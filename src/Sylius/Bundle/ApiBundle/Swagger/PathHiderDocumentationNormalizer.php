@@ -19,7 +19,7 @@ class PathHiderDocumentationNormalizer implements NormalizerInterface
 {
     public function __construct(
         private NormalizerInterface $decoratedNormalizer,
-        private array $apiRoutes
+        private array $apiRoutes,
     ) {
     }
 

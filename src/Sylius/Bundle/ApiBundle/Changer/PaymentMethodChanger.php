@@ -25,14 +25,14 @@ final class PaymentMethodChanger implements PaymentMethodChangerInterface
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
-        private PaymentMethodRepositoryInterface $paymentMethodRepository
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
     ) {
     }
 
     public function changePaymentMethod(
         string $paymentMethodCode,
         string $paymentId,
-        OrderInterface $order
+        OrderInterface $order,
     ): OrderInterface {
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([
@@ -47,7 +47,7 @@ final class PaymentMethodChanger implements PaymentMethodChangerInterface
             Assert::same(
                 $payment->getState(),
                 PaymentInterface::STATE_NEW,
-                'Can not change payment method for this payment'
+                'Can not change payment method for this payment',
             );
             $payment->setMethod($paymentMethod);
 

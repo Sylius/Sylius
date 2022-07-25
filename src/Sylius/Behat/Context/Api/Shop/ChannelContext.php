@@ -52,9 +52,9 @@ final class ChannelContext implements Context
         Assert::same(
             $this->responseChecker->getValue(
                 $this->client->getLastResponse(),
-                'baseCurrency'
+                'baseCurrency',
             ),
-            sprintf('%s/shop/currencies/%s', $this->apiUrlPrefix, $currencyCode)
+            sprintf('%s/shop/currencies/%s', $this->apiUrlPrefix, $currencyCode),
         );
     }
 }

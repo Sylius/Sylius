@@ -47,7 +47,7 @@ final class UsernameProviderSpec extends ObjectBehavior
     function it_loads_user_by_user_name(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
-        User $user
+        User $user,
     ): void {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
@@ -66,7 +66,7 @@ final class UsernameProviderSpec extends ObjectBehavior
     }
 
     function it_should_throw_exception_when_unsupported_user_is_used(
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }

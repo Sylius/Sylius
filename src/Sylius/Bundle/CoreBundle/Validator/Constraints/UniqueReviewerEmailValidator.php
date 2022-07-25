@@ -28,7 +28,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private TokenStorageInterface $tokenStorage,
-        private AuthorizationCheckerInterface $authorizationChecker
+        private AuthorizationCheckerInterface $authorizationChecker,
     ) {
     }
 

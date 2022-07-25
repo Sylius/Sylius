@@ -20,7 +20,7 @@ final class ShippingCalculatorContext implements Context
 {
     public function __construct(
         private array $shippingCalculators,
-        private TranslatorInterface $translator
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -31,7 +31,7 @@ final class ShippingCalculatorContext implements Context
     {
         $flippedCalculators = array_flip(array_map(
             fn (string $translationKey): string => $this->translator->trans($translationKey),
-            $this->shippingCalculators
+            $this->shippingCalculators,
         ));
 
         return $flippedCalculators[$shippingCalculator];

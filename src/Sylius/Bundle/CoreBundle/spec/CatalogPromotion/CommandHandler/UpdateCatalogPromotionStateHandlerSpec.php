@@ -24,7 +24,7 @@ final class UpdateCatalogPromotionStateHandlerSpec extends ObjectBehavior
 {
     function let(
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        RepositoryInterface $catalogPromotionRepository,
     ): void {
         $this->beConstructedWith($catalogPromotionStateProcessor, $catalogPromotionRepository);
     }
@@ -32,7 +32,7 @@ final class UpdateCatalogPromotionStateHandlerSpec extends ObjectBehavior
     function it_processes_catalog_promotion_that_has_just_been_created(
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
@@ -44,7 +44,7 @@ final class UpdateCatalogPromotionStateHandlerSpec extends ObjectBehavior
     function it_processes_catalog_promotion_that_has_just_been_updated(
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
@@ -56,7 +56,7 @@ final class UpdateCatalogPromotionStateHandlerSpec extends ObjectBehavior
     function it_processes_catalog_promotion_that_has_just_been_ended(
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
         RepositoryInterface $catalogPromotionRepository,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn($catalogPromotion);
 
@@ -67,7 +67,7 @@ final class UpdateCatalogPromotionStateHandlerSpec extends ObjectBehavior
 
     function it_does_nothing_if_there_is_no_catalog_promotion_with_given_code(
         CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        RepositoryInterface $catalogPromotionRepository
+        RepositoryInterface $catalogPromotionRepository,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'WINTER_MUGS_SALE'])->willReturn(null);
         $catalogPromotionRepository->findAll()->shouldNotBeCalled();

@@ -46,8 +46,8 @@ final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
                             ['field' => $builder->create(
                                 'configuration',
                                 $this->actionConfigurationTypes[$type],
-                                ['label' => false, 'csrf_protection' => false]
-                            )->getForm()->createView()]
+                                ['label' => false, 'csrf_protection' => false],
+                            )->getForm()->createView()],
                         ),
                     ];
                 },

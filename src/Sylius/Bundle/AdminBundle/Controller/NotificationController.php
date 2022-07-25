@@ -29,7 +29,7 @@ final class NotificationController
         private ClientInterface $client,
         private MessageFactory $messageFactory,
         string $hubUri,
-        private string $environment
+        private string $environment,
     ) {
         $this->hubUri = new Uri($hubUri);
     }
@@ -50,7 +50,7 @@ final class NotificationController
             Request::METHOD_GET,
             $this->hubUri,
             $headers,
-            json_encode($content)
+            json_encode($content),
         );
 
         try {

@@ -26,7 +26,7 @@ final class BlameCartHandler implements MessageHandlerInterface
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
         private OrderRepositoryInterface $orderRepository,
-        private OrderProcessorInterface $orderProcessor
+        private OrderProcessorInterface $orderProcessor,
     ) {
     }
 

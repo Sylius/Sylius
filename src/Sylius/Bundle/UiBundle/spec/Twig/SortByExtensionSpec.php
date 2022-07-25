@@ -29,7 +29,7 @@ final class SortByExtensionSpec extends ObjectBehavior
     function it_sorts_in_ascending_order_by_default(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
-        SampleInterface $thirdSample
+        SampleInterface $thirdSample,
     ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
@@ -46,14 +46,14 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $thirdSample,
                 $firstSample,
                 $secondSample,
-            ]
+            ],
         );
     }
 
     function it_sorts_an_array_of_objects_by_various_properties(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
-        SampleInterface $thirdSample
+        SampleInterface $thirdSample,
     ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
@@ -78,7 +78,7 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $thirdSample,
                 $firstSample,
                 $secondSample,
-            ]
+            ],
         );
 
         $this->sortBy($arrayBeforeSorting, 'string')->shouldReturn(
@@ -86,7 +86,7 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $secondSample,
                 $thirdSample,
                 $firstSample,
-            ]
+            ],
         );
 
         $this->sortBy($arrayBeforeSorting, 'bizarrelyNamedProperty')->shouldReturn(
@@ -94,14 +94,14 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $thirdSample,
                 $secondSample,
                 $firstSample,
-            ]
+            ],
         );
     }
 
     function it_sorts_an_array_of_objects_in_descending_order_by_a_property(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
-        SampleInterface $thirdSample
+        SampleInterface $thirdSample,
     ): void {
         $firstSample->getInt()->willReturn(3);
         $secondSample->getInt()->willReturn(5);
@@ -118,7 +118,7 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $secondSample,
                 $firstSample,
                 $thirdSample,
-            ]
+            ],
         );
     }
 
@@ -128,7 +128,7 @@ final class SortByExtensionSpec extends ObjectBehavior
         SampleInterface $thirdSample,
         SampleInterface $firstInnerSample,
         SampleInterface $secondInnerSample,
-        SampleInterface $thirdInnerSample
+        SampleInterface $thirdInnerSample,
     ): void {
         $firstInnerSample->getString()->willReturn('m');
         $secondInnerSample->getString()->willReturn('Z');
@@ -149,14 +149,14 @@ final class SortByExtensionSpec extends ObjectBehavior
                 $thirdSample,
                 $firstSample,
                 $secondSample,
-            ]
+            ],
         );
     }
 
     function it_throws_an_exception_if_the_property_is_not_found_on_objects(
         SampleInterface $firstSample,
         SampleInterface $secondSample,
-        SampleInterface $thirdSample
+        SampleInterface $thirdSample,
     ): void {
         $arrayBeforeSorting = [
             $firstSample,

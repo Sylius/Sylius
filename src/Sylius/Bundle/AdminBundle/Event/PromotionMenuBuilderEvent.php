@@ -23,7 +23,7 @@ final class PromotionMenuBuilderEvent extends MenuBuilderEvent
     public function __construct(
         FactoryInterface $factory,
         ItemInterface $menu,
-        private PromotionInterface $promotion
+        private PromotionInterface $promotion,
     ) {
         parent::__construct($factory, $menu);
     }

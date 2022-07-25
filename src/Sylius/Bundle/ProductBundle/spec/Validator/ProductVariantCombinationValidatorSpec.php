@@ -39,7 +39,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
@@ -61,7 +61,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
@@ -83,7 +83,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $variant,
-        ProductVariantsParityCheckerInterface $variantsParityChecker
+        ProductVariantsParityCheckerInterface $variantsParityChecker,
     ): void {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',

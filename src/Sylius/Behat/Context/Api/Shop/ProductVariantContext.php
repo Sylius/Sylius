@@ -26,7 +26,7 @@ final class ProductVariantContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -92,7 +92,7 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        string ...$promotionsNames
+        string ...$promotionsNames,
     ): void {
         $content = $this->findVariant($variant);
 
@@ -100,7 +100,7 @@ final class ProductVariantContext implements Context
         Assert::same($content['originalPrice'], $originalPrice);
         foreach ($content['appliedPromotions'] as $promotionIri) {
             $catalogPromotionContent = $this->responseChecker->getResponseContent(
-                $this->client->showByIri($promotionIri)
+                $this->client->showByIri($promotionIri),
             );
             Assert::inArray($catalogPromotionContent['label'], $promotionsNames);
         }
@@ -113,7 +113,7 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        int $numberOfPromotions
+        int $numberOfPromotions,
     ): void {
         $content = $this->findVariant($variant);
 
@@ -129,7 +129,7 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        string $promotionName
+        string $promotionName,
     ): void {
         $variantContent = $this->findVariant($variant);
         $catalogPromotionResponse = $this->client->showByIri($variantContent['appliedPromotions'][0]);
@@ -148,7 +148,7 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $productVariant,
         int $originalPrice,
         int $price,
-        string $promotionName
+        string $promotionName,
     ): void {
         $this->sharedStorage->set('token', null);
         $this->client->show(Resources::PRODUCT_VARIANTS, $productVariant->getCode());
@@ -163,7 +163,7 @@ final class ProductVariantContext implements Context
         ProductVariantInterface $variant,
         int $originalPrice,
         int $price,
-        int $numberOfPromotions
+        int $numberOfPromotions,
     ): void {
         $this->sharedStorage->set('token', null);
         $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
@@ -218,7 +218,7 @@ final class ProductVariantContext implements Context
             Assert::keyExists(
                 $content,
                 'appliedPromotions',
-                sprintf('%s variant should be discounted', $variant->getName())
+                sprintf('%s variant should be discounted', $variant->getName()),
             );
         }
     }
@@ -237,7 +237,7 @@ final class ProductVariantContext implements Context
             Assert::keyNotExists(
                 $content,
                 'appliedPromotions',
-                sprintf('%s variant should not be discounted', $variant->getName())
+                sprintf('%s variant should not be discounted', $variant->getName()),
             );
         }
     }

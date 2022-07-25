@@ -44,7 +44,7 @@ final class ProductShowPageContext implements Context
         private ShippingElementInterface $shippingElement,
         private TaxonomyElementInterface $taxonomyElement,
         private OptionsElementInterface $optionsElement,
-        private VariantsElementInterface $variantsElement
+        private VariantsElementInterface $variantsElement,
     ) {
     }
 

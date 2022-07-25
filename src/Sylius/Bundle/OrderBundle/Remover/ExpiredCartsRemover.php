@@ -26,7 +26,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         private OrderRepositoryInterface $orderRepository,
         private ObjectManager $orderManager,
         private EventDispatcherInterface $eventDispatcher,
-        private string $expirationPeriod
+        private string $expirationPeriod,
     ) {
     }
 

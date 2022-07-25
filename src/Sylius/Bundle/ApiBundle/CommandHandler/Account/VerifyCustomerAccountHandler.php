@@ -36,7 +36,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
         if (null === $user) {
             throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->token)
+                sprintf('There is no shop user with %s email verification token', $command->token),
             );
         }
 

@@ -34,7 +34,7 @@ final class ProductOptionValueContext implements Context
         Assert::count(
             $productOptionValues,
             1,
-            sprintf('%d product option values have been found with name "%s" but should be only one.', count($productOptionValues), $code)
+            sprintf('%d product option values have been found with name "%s" but should be only one.', count($productOptionValues), $code),
         );
 
         return $productOptionValues[0];

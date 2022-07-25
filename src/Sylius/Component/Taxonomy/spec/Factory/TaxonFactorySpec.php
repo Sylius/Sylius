@@ -32,7 +32,7 @@ final class TaxonFactorySpec extends ObjectBehavior
 
     function it_uses_decorated_factory_to_create_new_taxon(
         FactoryInterface $factory,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $factory->createNew()->willReturn($taxon);
 
@@ -42,7 +42,7 @@ final class TaxonFactorySpec extends ObjectBehavior
     function it_creates_taxon_for_given_parent_taxon(
         FactoryInterface $factory,
         TaxonInterface $parent,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $factory->createNew()->willReturn($taxon);
         $taxon->setParent($parent)->shouldBeCalled();

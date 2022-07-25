@@ -22,7 +22,7 @@ final class NotificationContext implements Context
 {
     public function __construct(
         private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelperInterface $testHelper
+        private JavaScriptTestHelperInterface $testHelper,
     ) {
     }
 
@@ -34,7 +34,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::success(),
-            'has been successfully created.'
+            'has been successfully created.',
         );
     }
 
@@ -46,7 +46,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::success(),
-            'has been successfully updated.'
+            'has been successfully updated.',
         );
     }
 
@@ -59,7 +59,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::success(),
-            'has been successfully deleted.'
+            'has been successfully deleted.',
         );
     }
 }

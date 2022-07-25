@@ -23,7 +23,7 @@ final class ProductFactorySpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $factory,
-        FactoryInterface $variantFactory
+        FactoryInterface $variantFactory,
     ): void {
         $this->beConstructedWith($factory, $variantFactory);
     }
@@ -44,7 +44,7 @@ final class ProductFactorySpec extends ObjectBehavior
         FactoryInterface $factory,
         FactoryInterface $variantFactory,
         ProductInterface $product,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $variantFactory->createNew()->willReturn($variant);
 

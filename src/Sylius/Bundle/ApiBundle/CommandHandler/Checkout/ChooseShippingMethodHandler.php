@@ -33,7 +33,7 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        private FactoryInterface $stateMachineFactory
+        private FactoryInterface $stateMachineFactory,
     ) {
     }
 
@@ -48,7 +48,7 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING),
-            'Order cannot have shipment method assigned.'
+            'Order cannot have shipment method assigned.',
         );
 
         /** @var ShippingMethodInterface|null $shippingMethod */
@@ -62,7 +62,7 @@ final class ChooseShippingMethodHandler implements MessageHandlerInterface
 
         Assert::true(
             $this->eligibilityChecker->isEligible($shipment, $shippingMethod),
-            'Given shipment is not eligible for provided shipping method.'
+            'Given shipment is not eligible for provided shipping method.',
         );
 
         $shipment->setMethod($shippingMethod);

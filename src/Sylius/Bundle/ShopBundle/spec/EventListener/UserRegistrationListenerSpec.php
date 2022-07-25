@@ -33,7 +33,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher,
         ChannelContextInterface $channelContext,
-        UserLoginInterface $userLogin
+        UserLoginInterface $userLogin,
     ): void {
         $this->beConstructedWith(
             $userManager,
@@ -41,7 +41,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
             $eventDispatcher,
             $channelContext,
             $userLogin,
-            'shop'
+            'shop',
         );
     }
 
@@ -53,7 +53,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -84,7 +84,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -119,7 +119,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -147,7 +147,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_if_event_subject_is_not_customer_type(
         GenericEvent $event,
-        \stdClass $customer
+        \stdClass $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
 
@@ -156,7 +156,7 @@ final class UserRegistrationListenerSpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_if_user_is_null(
         GenericEvent $event,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);

@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(
             sprintf('sylius_shipping_method_translations_%s_description', $languageCode),
-            $description
+            $description,
         );
     }
 
@@ -86,7 +86,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
                 $this->getSession(),
                 'Validation message',
                 'css',
-                '.sylius-validation-error'
+                '.sylius-validation-error',
             );
         }
 

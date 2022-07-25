@@ -23,7 +23,7 @@ final class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public function __construct(
         private UserContextInterface $userContext,
-        private string $apiRoute
+        private string $apiRoute,
     ) {
     }
 

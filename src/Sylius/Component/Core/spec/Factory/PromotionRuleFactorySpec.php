@@ -38,7 +38,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
 
     function it_uses_a_decorated_factory_to_create_new_rule_object(
         FactoryInterface $decoratedFactory,
-        PromotionRuleInterface $rule
+        PromotionRuleInterface $rule,
     ): void {
         $decoratedFactory->createNew()->willReturn($rule);
 
@@ -74,7 +74,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
 
     function it_creates_a_total_of_items_from_taxon_rule(
         FactoryInterface $decoratedFactory,
-        PromotionRuleInterface $rule
+        PromotionRuleInterface $rule,
     ): void {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE)->shouldBeCalled();

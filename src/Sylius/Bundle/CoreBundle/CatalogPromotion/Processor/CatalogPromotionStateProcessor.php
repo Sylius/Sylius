@@ -22,7 +22,7 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
 {
     public function __construct(
         private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
-        private FactoryInterface $stateMachineFactory
+        private FactoryInterface $stateMachineFactory,
     ) {
     }
 

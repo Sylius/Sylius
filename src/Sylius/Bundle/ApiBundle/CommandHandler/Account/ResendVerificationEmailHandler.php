@@ -30,7 +30,7 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
         private GeneratorInterface $tokenGenerator,
-        private MessageBusInterface $commandBus
+        private MessageBusInterface $commandBus,
     ) {
     }
 
@@ -47,7 +47,7 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
         $this->commandBus->dispatch(new SendAccountVerificationEmail(
             $customer->getEmail(),
             $command->getLocaleCode(),
-            $command->getChannelCode()
+            $command->getChannelCode(),
         ), [new DispatchAfterCurrentBusStamp()]);
     }
 }

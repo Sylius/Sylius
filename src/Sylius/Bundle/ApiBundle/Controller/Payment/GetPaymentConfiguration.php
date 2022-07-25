@@ -25,7 +25,7 @@ final class GetPaymentConfiguration
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
-        private CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider
+        private CompositePaymentConfigurationProviderInterface $compositePaymentConfigurationProvider,
     ) {
     }
 
@@ -34,7 +34,7 @@ final class GetPaymentConfiguration
         /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->findOneByOrderToken(
             $request->attributes->get('paymentId'),
-            $request->attributes->get('id')
+            $request->attributes->get('id'),
         );
 
         Assert::notNull($payment);

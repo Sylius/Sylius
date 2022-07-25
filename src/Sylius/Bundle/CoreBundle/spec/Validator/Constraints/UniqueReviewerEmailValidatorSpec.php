@@ -32,7 +32,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
-        ExecutionContextInterface $executionContextInterface
+        ExecutionContextInterface $executionContextInterface,
     ): void {
         $this->beConstructedWith($userRepository, $tokenStorage, $authorizationChecker);
         $this->initialize($executionContextInterface);
@@ -52,7 +52,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         TokenInterface $token,
         ReviewInterface $review,
         CustomerInterface $customer,
-        UserInterface $existingUser
+        UserInterface $existingUser,
     ): void {
         $constraint = new UniqueReviewerEmail();
 

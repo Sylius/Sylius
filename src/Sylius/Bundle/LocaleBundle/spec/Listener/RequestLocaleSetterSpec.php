@@ -30,7 +30,7 @@ final class RequestLocaleSetterSpec extends ObjectBehavior
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         RequestEvent $event,
-        Request $request
+        Request $request,
     ): void {
         $event->getRequest()->willReturn($request);
 

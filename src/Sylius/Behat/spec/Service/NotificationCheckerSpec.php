@@ -41,7 +41,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
     function it_checks_if_successful_notification_with_specific_message_has_appeared(
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
-        NodeElement $secondMessage
+        NodeElement $secondMessage,
     ) {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
@@ -57,7 +57,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
     function it_checks_if_failure_notification_with_specific_message_has_appeared(
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
-        NodeElement $secondMessage
+        NodeElement $secondMessage,
     ) {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 
@@ -73,7 +73,7 @@ final class NotificationCheckerSpec extends ObjectBehavior
     function it_throws_exception_if_no_message_with_given_content_and_type_has_been_found(
         NotificationAccessorInterface $notificationAccessor,
         NodeElement $firstMessage,
-        NodeElement $secondMessage
+        NodeElement $secondMessage,
     ) {
         $notificationAccessor->getMessageElements()->willReturn([$firstMessage, $secondMessage]);
 

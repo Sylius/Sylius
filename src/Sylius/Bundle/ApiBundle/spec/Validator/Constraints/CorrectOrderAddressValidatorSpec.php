@@ -46,7 +46,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_adding_eligible_product_variant_to_cart(
         AddressInterface $billingAddress,
-        AddressInterface $shippingAddress
+        AddressInterface $shippingAddress,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -60,7 +60,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_billing_address_has_incorrect_country_code(
         ExecutionContextInterface $executionContext,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
     ): void {
         $this->initialize($executionContext);
 
@@ -73,13 +73,13 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
-            new CorrectOrderAddress()
+            new CorrectOrderAddress(),
         );
     }
 
     function it_adds_violation_if_billing_address_has_not_country_code(
         ExecutionContextInterface $executionContext,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
     ): void {
         $this->initialize($executionContext);
 
@@ -92,7 +92,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new UpdateCart('john@doe.com', $billingAddress->getWrappedObject()),
-            new CorrectOrderAddress()
+            new CorrectOrderAddress(),
         );
     }
 
@@ -101,7 +101,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
-        CountryInterface $usa
+        CountryInterface $usa,
     ): void {
         $this->initialize($executionContext);
 
@@ -118,7 +118,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
-            new CorrectOrderAddress()
+            new CorrectOrderAddress(),
         );
     }
 
@@ -126,7 +126,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
         RepositoryInterface $countryRepository,
         ExecutionContextInterface $executionContext,
         AddressInterface $billingAddress,
-        AddressInterface $shippingAddress
+        AddressInterface $shippingAddress,
     ): void {
         $this->initialize($executionContext);
 
@@ -148,7 +148,7 @@ final class CorrectOrderAddressValidatorSpec extends ObjectBehavior
 
         $this->validate(
             new UpdateCart('john@doe.com', $billingAddress->getWrappedObject(), $shippingAddress->getWrappedObject()),
-            new CorrectOrderAddress()
+            new CorrectOrderAddress(),
         );
     }
 }

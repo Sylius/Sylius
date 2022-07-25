@@ -88,7 +88,7 @@ final class ChannelPricingSpec extends ObjectBehavior
     }
 
     function it_has_information_about_applied_exclusive_catalog_promotion_applied(
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotion->isExclusive()->willReturn(true);
 
@@ -98,7 +98,7 @@ final class ChannelPricingSpec extends ObjectBehavior
 
     function it_can_have_multiple_promotions_applied(
         CatalogPromotionInterface $firstCatalogPromotion,
-        CatalogPromotionInterface $secondCatalogPromotion
+        CatalogPromotionInterface $secondCatalogPromotion,
     ): void {
         $this->addAppliedPromotion($firstCatalogPromotion);
         $this->addAppliedPromotion($secondCatalogPromotion);

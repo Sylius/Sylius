@@ -33,7 +33,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
     function it_does_nothing_if_current_resource_is_not_a_product(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->shouldNotBeCalled();
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
@@ -46,7 +46,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         UserInterface $user,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
@@ -62,7 +62,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
@@ -77,7 +77,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         UserInterface $user,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -93,7 +93,7 @@ final class ProductsByChannelAndLocaleCodeExtensionSpec extends ObjectBehavior
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);

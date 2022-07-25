@@ -34,7 +34,7 @@ class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFac
     public function __construct(
         private FactoryInterface $taxRateFactory,
         private RepositoryInterface $zoneRepository,
-        private RepositoryInterface $taxCategoryRepository
+        private RepositoryInterface $taxCategoryRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

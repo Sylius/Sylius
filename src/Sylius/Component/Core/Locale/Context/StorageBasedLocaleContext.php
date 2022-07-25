@@ -25,7 +25,7 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
     public function __construct(
         private ChannelContextInterface $channelContext,
         private LocaleStorageInterface $localeStorage,
-        private LocaleProviderInterface $localeProvider
+        private LocaleProviderInterface $localeProvider,
     ) {
     }
 

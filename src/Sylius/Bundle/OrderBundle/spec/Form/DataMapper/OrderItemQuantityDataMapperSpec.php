@@ -23,7 +23,7 @@ final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 {
     function let(
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        DataMapperInterface $propertyPathDataMapper
+        DataMapperInterface $propertyPathDataMapper,
     ): void {
         $this->beConstructedWith($orderItemQuantityModifier, $propertyPathDataMapper);
     }
@@ -36,7 +36,7 @@ final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
     function it_uses_a_property_path_data_mapper_while_mapping_data_to_forms(
         DataMapperInterface $propertyPathDataMapper,
         FormInterface $form,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $forms = new \ArrayIterator([$form->getWrappedObject()]);
 

@@ -32,7 +32,7 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
         EntityManagerInterface $manager,
         GenericEvent $event,
         ProductInterface $product,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(true);
@@ -46,7 +46,7 @@ final class SimpleProductLockingListenerSpec extends ObjectBehavior
 
     function it_does_not_lock_variant_of_a_configurable_product_entity(
         GenericEvent $event,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(false);

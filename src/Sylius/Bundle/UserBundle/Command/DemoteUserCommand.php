@@ -39,7 +39,8 @@ The <info>sylius:user:demote</info> command demotes a user by removing security 
 
   <info>php app/console sylius:user:demote matthieu@email.com</info>
 EOT
-            );
+            )
+        ;
     }
 
     protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void

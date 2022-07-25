@@ -41,7 +41,7 @@ final class PaymentItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -60,7 +60,7 @@ final class PaymentItemDataProviderSpec extends ObjectBehavior
         PaymentRepositoryInterface $paymentRepository,
         UserContextInterface $userContext,
         AdminUserInterface $adminUser,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ) {
         $userContext->getUser()->willReturn($adminUser);
 
@@ -74,7 +74,7 @@ final class PaymentItemDataProviderSpec extends ObjectBehavior
     function it_returns_null_if_shop_user_has_no_customer(
         PaymentRepositoryInterface $paymentRepository,
         UserContextInterface $userContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -90,7 +90,7 @@ final class PaymentItemDataProviderSpec extends ObjectBehavior
         PaymentRepositoryInterface $paymentRepository,
         UserContextInterface $userContext,
         CustomerInterface $customer,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 

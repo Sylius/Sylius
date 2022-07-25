@@ -25,7 +25,7 @@ final class ExchangeRateContext implements Context
     public function __construct(
         private CurrencyNameConverterInterface $currencyNameConverter,
         private RepositoryInterface $currencyRepository,
-        private ExchangeRateRepositoryInterface $exchangeRateRepository
+        private ExchangeRateRepositoryInterface $exchangeRateRepository,
     ) {
     }
 
@@ -34,7 +34,7 @@ final class ExchangeRateContext implements Context
      */
     public function getExchangeRateByCurrencies(
         string $sourceCurrencyName,
-        string $targetCurrencyName
+        string $targetCurrencyName,
     ): ExchangeRateInterface {
         $sourceCurrencyCode = $this->currencyNameConverter->convertToCode($sourceCurrencyName);
         $targetCurrencyCode = $this->currencyNameConverter->convertToCode($targetCurrencyName);
@@ -50,8 +50,8 @@ final class ExchangeRateContext implements Context
             sprintf(
                 'ExchangeRate for %s and %s currencies does not exist.',
                 $sourceCurrencyName,
-                $targetCurrencyName
-            )
+                $targetCurrencyName,
+            ),
         );
 
         return $exchangeRate;

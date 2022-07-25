@@ -35,7 +35,7 @@ final class HomepageContext implements Context
     {
         $this->client->customAction(
             sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiUrlPrefix),
-            HttpRequest::METHOD_GET
+            HttpRequest::METHOD_GET,
         );
     }
 
@@ -48,8 +48,8 @@ final class HomepageContext implements Context
             $this->responseChecker->hasItemWithValue(
                 $this->client->getLastResponse(),
                 'name',
-                $productName
-            )
+                $productName,
+            ),
         );
     }
 
@@ -62,8 +62,8 @@ final class HomepageContext implements Context
             $this->responseChecker->hasItemWithValue(
                 $this->client->getLastResponse(),
                 'name',
-                $productName
-            )
+                $productName,
+            ),
         );
     }
 

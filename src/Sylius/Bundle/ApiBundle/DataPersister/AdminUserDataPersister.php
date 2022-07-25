@@ -26,7 +26,7 @@ final class AdminUserDataPersister implements ContextAwareDataPersisterInterface
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
         private TokenStorageInterface $tokenStorage,
-        private PasswordUpdaterInterface $passwordUpdater
+        private PasswordUpdaterInterface $passwordUpdater,
     ) {
     }
 

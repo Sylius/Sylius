@@ -24,7 +24,7 @@ final class ShippingDateAssigner implements ShippingDateAssignerInterface
         if ($calendar instanceof DateTimeProvider) {
             @trigger_error(
                 sprintf('Passing a "Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.', self::class),
-                \E_USER_DEPRECATED
+                \E_USER_DEPRECATED,
             );
         }
     }

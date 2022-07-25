@@ -29,7 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_name', $languageCode),
-            $name
+            $name,
         );
     }
 
@@ -47,7 +47,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_description', $languageCode),
-            $description
+            $description,
         );
     }
 
@@ -55,7 +55,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(
             sprintf('sylius_payment_method_translations_%s_instructions', $languageCode),
-            $instructions
+            $instructions,
         );
     }
 

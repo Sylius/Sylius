@@ -32,7 +32,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
     function let(
         AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor
+        IntegerDistributorInterface $distributor,
     ): void {
         $this->beConstructedWith($adjustmentFactory, $distributor);
     }
@@ -59,7 +59,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $coltItemVariant,
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
-        ChannelPricingInterface $magnumItemChannelPricing
+        ChannelPricingInterface $magnumItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -131,7 +131,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $coltItemVariant,
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
-        ChannelPricingInterface $magnumItemChannelPricing
+        ChannelPricingInterface $magnumItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -199,7 +199,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $winchesterItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
         ChannelPricingInterface $magnumItemChannelPricing,
-        ChannelPricingInterface $winchesterItemChannelPricing
+        ChannelPricingInterface $winchesterItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(3);
         $order->getChannel()->willReturn($channel);
@@ -276,7 +276,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ChannelInterface $channel,
         ProductVariantInterface $coltItemVariant,
-        ChannelPricingInterface $coltItemChannelPricing
+        ChannelPricingInterface $coltItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getChannel()->willReturn($channel);
@@ -335,7 +335,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ChannelInterface $channel,
         ProductVariantInterface $coltItemVariant,
-        ChannelPricingInterface $coltItemChannelPricing
+        ChannelPricingInterface $coltItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getChannel()->willReturn($channel);
@@ -393,7 +393,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $coltItemVariant,
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
-        ChannelPricingInterface $magnumItemChannelPricing
+        ChannelPricingInterface $magnumItemChannelPricing,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -453,7 +453,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_items_count_is_different_than_adjustment_amounts(
         PromotionInterface $promotion,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->countItems()->willReturn(2);
 

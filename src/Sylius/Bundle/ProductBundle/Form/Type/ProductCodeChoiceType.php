@@ -28,7 +28,7 @@ final class ProductCodeChoiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code'))
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')),
         );
     }
 

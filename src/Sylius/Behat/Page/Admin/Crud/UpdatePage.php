@@ -26,7 +26,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private string $routeName
+        private string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

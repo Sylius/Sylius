@@ -36,7 +36,7 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
                 $templateBlock->getEventName(),
                 $templateBlock->getName(),
                 $templateBlock->getTemplate(),
-                $templateBlock->getPriority()
+                $templateBlock->getPriority(),
             );
         }
 
@@ -46,7 +46,7 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
             $renderedParts[] = sprintf(
                 '<!-- END BLOCK | event name: "%s", block name: "%s" -->',
                 $templateBlock->getEventName(),
-                $templateBlock->getName()
+                $templateBlock->getName(),
             );
         }
 

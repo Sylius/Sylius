@@ -39,7 +39,7 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_order_item_unit_with_given_order_item(
         OrderItemInterface $orderItem,
-        OrderItemUnitInterface $orderItemUnit
+        OrderItemUnitInterface $orderItemUnit,
     ): void {
         $orderItemUnit->getOrderItem()->willReturn($orderItem);
 

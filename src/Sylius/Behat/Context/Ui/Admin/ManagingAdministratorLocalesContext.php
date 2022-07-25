@@ -22,7 +22,7 @@ final class ManagingAdministratorLocalesContext implements Context
 {
     public function __construct(
         private UpdatePageInterface $updatePage,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

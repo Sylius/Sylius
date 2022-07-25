@@ -35,7 +35,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         ServiceRegistryInterface $shippingCalculators,
         RequestStack $requestStack,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ): void {
         $this->beConstructedWith($orderRepository, $shipmentRepository, $shippingCalculators, $requestStack, $channelContext);
     }
@@ -106,7 +106,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $channelContext->getChannel()->willReturn($channel);
@@ -154,7 +154,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         RequestStack $requestStack,
         Request $request,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $channelContext->getChannel()->willReturn($channel);
@@ -201,7 +201,7 @@ final class ShippingMethodNormalizerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         RequestStack $requestStack,
         Request $request,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
         $channelContext->getChannel()->willReturn($channel);

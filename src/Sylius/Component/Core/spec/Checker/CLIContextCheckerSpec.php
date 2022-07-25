@@ -39,7 +39,7 @@ final class CLIContextCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_process_is_running_with_current_request_defined(
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         $requestStack->getCurrentRequest()->willReturn($request);
 

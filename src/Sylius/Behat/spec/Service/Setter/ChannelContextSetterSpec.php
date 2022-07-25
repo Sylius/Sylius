@@ -38,7 +38,7 @@ final class ChannelContextSetterSpec extends ObjectBehavior
 
     function it_sets_channel_as_current(
         CookieSetterInterface $cookieSetter,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $channel->getCode()->willReturn('CHANNEL_CODE');
 

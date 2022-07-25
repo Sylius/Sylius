@@ -27,7 +27,7 @@ final class ShipmentItemDataProvider implements ItemDataProviderInterface, Restr
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

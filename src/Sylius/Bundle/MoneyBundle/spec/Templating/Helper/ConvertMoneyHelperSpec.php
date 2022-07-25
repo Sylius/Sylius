@@ -36,7 +36,7 @@ final class ConvertMoneyHelperSpec extends ObjectBehavior
     }
 
     function it_converts_and_formats_money_using_default_locale_if_not_given(
-        CurrencyConverterInterface $currencyConverter
+        CurrencyConverterInterface $currencyConverter,
     ): void {
         $currencyConverter->convert(500, 'USD', 'CAD')->willReturn(250);
 

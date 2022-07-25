@@ -25,7 +25,7 @@ final class LocaleContext implements Context
     public function __construct(
         private LocaleConverterInterface $localeNameConverter,
         private RepositoryInterface $localeRepository,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -83,7 +83,7 @@ final class LocaleContext implements Context
         Assert::isInstanceOf(
             $locale,
             LocaleInterface::class,
-            sprintf('Cannot find "%s" locale.', $name)
+            sprintf('Cannot find "%s" locale.', $name),
         );
 
         return $locale;

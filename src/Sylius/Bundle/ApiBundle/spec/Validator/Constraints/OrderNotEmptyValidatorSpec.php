@@ -70,7 +70,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_the_order_has_no_items(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -89,7 +89,7 @@ final class OrderNotEmptyValidatorSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 

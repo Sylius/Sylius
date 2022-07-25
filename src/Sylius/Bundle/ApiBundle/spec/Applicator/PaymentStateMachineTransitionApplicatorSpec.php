@@ -29,7 +29,7 @@ final class PaymentStateMachineTransitionApplicatorSpec extends ObjectBehavior
     function it_completes_payment(
         StateMachineFactoryInterface $stateMachineFactory,
         PaymentInterface $payment,
-        StateMachine $stateMachine
+        StateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(PaymentTransitions::TRANSITION_COMPLETE)->shouldBeCalled();

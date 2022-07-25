@@ -44,7 +44,7 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
         ?string $algorithm = null,
         ?bool $encodeHashAsBase64 = null,
         ?int $iterations = null,
-        ?int $length = null
+        ?int $length = null,
     ) {
         $this->algorithm = $algorithm ?? 'sha512';
         $this->encodeHashAsBase64 = $encodeHashAsBase64 ?? true;
@@ -69,7 +69,7 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
         Assert::lessThanEq(
             strlen($plainPassword),
             self::MAX_PASSWORD_LENGTH,
-            sprintf('The password must be at most %d characters long.', self::MAX_PASSWORD_LENGTH)
+            sprintf('The password must be at most %d characters long.', self::MAX_PASSWORD_LENGTH),
         );
 
         if (!in_array($this->algorithm, hash_algos(), true)) {

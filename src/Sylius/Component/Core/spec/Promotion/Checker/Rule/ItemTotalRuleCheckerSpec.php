@@ -34,7 +34,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
     function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
         ChannelInterface $channel,
         OrderInterface $order,
-        RuleCheckerInterface $itemTotalRuleChecker
+        RuleCheckerInterface $itemTotalRuleChecker,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -46,7 +46,7 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');

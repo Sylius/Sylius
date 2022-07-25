@@ -36,7 +36,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $commandBus,
         MessageBusInterface $eventBus,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $this->beConstructedWith($orderRepository, $stateMachineFactory, $commandBus, $eventBus, $orderPromotionsIntegrityChecker);
     }
@@ -48,7 +48,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -85,7 +85,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
         CustomerInterface $customer,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -147,7 +147,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_order_does_not_exist(
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -166,7 +166,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -188,7 +188,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_customer_is_null(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');

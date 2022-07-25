@@ -34,7 +34,7 @@ final class CreatedByGuestFlagResolverSpec extends ObjectBehavior
     function it_returns_false_if_there_is_logged_in_customer(
         TokenStorageInterface $tokenStorage,
         TokenInterface $token,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn($user);
@@ -44,7 +44,7 @@ final class CreatedByGuestFlagResolverSpec extends ObjectBehavior
 
     function it_returns_true_if_order_is_created_by_anonymous_user(
         TokenStorageInterface $tokenStorage,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $tokenStorage->getToken()->willReturn($token);
         $token->getUser()->willReturn(null);

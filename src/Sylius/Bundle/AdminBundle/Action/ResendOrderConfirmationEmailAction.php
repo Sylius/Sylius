@@ -31,7 +31,7 @@ final class ResendOrderConfirmationEmailAction
         private OrderRepositoryInterface $orderRepository,
         private OrderEmailManagerInterface $orderEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private Session $session
+        private Session $session,
     ) {
     }
 
@@ -53,7 +53,7 @@ final class ResendOrderConfirmationEmailAction
 
         $this->session->getFlashBag()->add(
             'success',
-            'sylius.email.order_confirmation_resent'
+            'sylius.email.order_confirmation_resent',
         );
 
         return new RedirectResponse($request->headers->get('referer'));

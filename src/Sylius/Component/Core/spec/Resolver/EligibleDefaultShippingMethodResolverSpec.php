@@ -33,12 +33,12 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher,
     ): void {
         $this->beConstructedWith(
             $shippingMethodRepository,
             $shippingMethodEligibilityChecker,
-            $zoneMatcher
+            $zoneMatcher,
         );
     }
 
@@ -55,7 +55,7 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -84,7 +84,7 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
         AddressInterface $shippingAddress,
         ZoneMatcherInterface $zoneMatcher,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
@@ -111,7 +111,7 @@ final class EligibleDefaultShippingMethodResolverSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker
+        ShippingMethodEligibilityCheckerInterface $shippingMethodEligibilityChecker,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);

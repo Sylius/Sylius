@@ -43,7 +43,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,
-        RepositoryInterface $countryRepository
+        RepositoryInterface $countryRepository,
     ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
@@ -58,7 +58,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,
-        RepositoryInterface $countryRepository
+        RepositoryInterface $countryRepository,
     ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');

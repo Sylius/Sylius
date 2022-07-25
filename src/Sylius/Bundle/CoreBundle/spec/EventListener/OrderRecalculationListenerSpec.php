@@ -28,7 +28,7 @@ final class OrderRecalculationListenerSpec extends ObjectBehavior
     function it_uses_order_processor_to_recalculate_order(
         OrderProcessorInterface $orderProcessor,
         GenericEvent $event,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $event->getSubject()->willReturn($order);
         $orderProcessor->process($order)->shouldBeCalled();

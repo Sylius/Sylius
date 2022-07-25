@@ -29,7 +29,7 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
             'custom_calc',
             (new Definition())
                 ->addTag('sylius.tax_calculator', ['calculator' => 'calc1'])
-                ->addTag('sylius.tax_calculator', ['calculator' => 'calc2'])
+                ->addTag('sylius.tax_calculator', ['calculator' => 'calc2']),
         );
 
         $this->compile();
@@ -37,12 +37,12 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.tax_calculator',
             'register',
-            ['calc1', new Reference('custom_calc')]
+            ['calc1', new Reference('custom_calc')],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.tax_calculator',
             'register',
-            ['calc2', new Reference('custom_calc')]
+            ['calc2', new Reference('custom_calc')],
         );
     }
 
@@ -54,14 +54,14 @@ final class RegisterCalculatorsPassTest extends AbstractCompilerPassTestCase
             'custom_calc',
             (new Definition())
                 ->addTag('sylius.tax_calculator', ['calculator' => 'calc1'])
-                ->addTag('sylius.tax_calculator', ['calculator' => 'calc2'])
+                ->addTag('sylius.tax_calculator', ['calculator' => 'calc2']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.tax_calculators',
-            ['calc1' => 'calc1', 'calc2' => 'calc2']
+            ['calc1' => 'calc1', 'calc2' => 'calc2'],
         );
     }
 

@@ -43,7 +43,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
             SlugGenerationHelper::waitForSlugGeneration(
                 $this->getSession(),
-                $this->getElement('slug', ['%locale%' => $localeCode])
+                $this->getElement('slug', ['%locale%' => $localeCode]),
             );
         }
     }

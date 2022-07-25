@@ -97,7 +97,7 @@ final class PaymentMethodFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['custom' => [[]]]],
             ['custom' => [[]]],
-            'custom.*.instructions'
+            'custom.*.instructions',
         );
     }
 
@@ -130,7 +130,7 @@ final class PaymentMethodFixtureTest extends TestCase
     {
         return new PaymentMethodFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

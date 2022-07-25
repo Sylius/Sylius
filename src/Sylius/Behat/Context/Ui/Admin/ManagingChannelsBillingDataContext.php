@@ -47,7 +47,7 @@ final class ManagingChannelsBillingDataContext implements Context
         string $street,
         string $postcode,
         string $city,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $this->shopBillingDataElement->specifyBillingAddress($street, $postcode, $city, $country->getCode());
     }
@@ -75,7 +75,7 @@ final class ManagingChannelsBillingDataContext implements Context
         string $street,
         string $postcode,
         string $city,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         Assert::true($this->shopBillingDataElement->hasBillingAddress($street, $postcode, $city, $country->getCode()));
     }

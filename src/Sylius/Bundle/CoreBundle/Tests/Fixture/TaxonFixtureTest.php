@@ -72,7 +72,7 @@ final class TaxonFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['custom' => [['children' => [['nested' => ['key' => 'value']]]]]]],
             ['custom' => [['children' => [['nested' => ['key' => 'value']]]]]],
-            'custom.*.children'
+            'custom.*.children',
         );
     }
 
@@ -92,7 +92,7 @@ final class TaxonFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]]],
             ['custom' => [['translations' => [['nested' => ['key' => 'value']]]]]],
-            'custom.*.translations'
+            'custom.*.translations',
         );
     }
 
@@ -100,7 +100,7 @@ final class TaxonFixtureTest extends TestCase
     {
         return new TaxonFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }
