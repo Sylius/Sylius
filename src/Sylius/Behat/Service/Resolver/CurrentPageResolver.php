@@ -22,7 +22,7 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
 {
     public function __construct(
         private Session $session,
-        private UrlMatcherInterface $urlMatcher
+        private UrlMatcherInterface $urlMatcher,
     ) {
     }
 

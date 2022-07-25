@@ -31,7 +31,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
     {
         if (!$value instanceof AddressInterface) {
             throw new \InvalidArgumentException(
-                'ProvinceAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"'
+                'ProvinceAddressConstraintValidator can only validate instances of "Sylius\Component\Addressing\Model\AddressInterface"',
             );
         }
 

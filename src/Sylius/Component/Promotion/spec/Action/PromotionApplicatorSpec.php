@@ -39,7 +39,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionCommandInterface $actionCommand,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        PromotionActionInterface $action
+        PromotionActionInterface $action,
     ): void {
         $configuration = [];
 
@@ -62,10 +62,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
-        PromotionActionInterface $secondAction
+        PromotionActionInterface $secondAction,
     ): void {
         $promotion->getActions()->willReturn(
-            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()]),
         );
 
         $firstAction->getType()->willReturn('first_action');
@@ -92,10 +92,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
-        PromotionActionInterface $secondAction
+        PromotionActionInterface $secondAction,
     ): void {
         $promotion->getActions()->willReturn(
-            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()]),
         );
 
         $firstAction->getType()->willReturn('first_action');
@@ -122,10 +122,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionActionInterface $firstAction,
-        PromotionActionInterface $secondAction
+        PromotionActionInterface $secondAction,
     ): void {
         $promotion->getActions()->willReturn(
-            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()])
+            new ArrayCollection([$firstAction->getWrappedObject(), $secondAction->getWrappedObject()]),
         );
 
         $firstAction->getType()->willReturn('first_action');
@@ -150,7 +150,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionCommandInterface $actionCommand,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        PromotionActionInterface $action
+        PromotionActionInterface $action,
     ): void {
         $configuration = [];
 

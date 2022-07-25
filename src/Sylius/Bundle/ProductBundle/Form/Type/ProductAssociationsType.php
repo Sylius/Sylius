@@ -26,7 +26,7 @@ final class ProductAssociationsType extends AbstractType
 {
     public function __construct(
         private RepositoryInterface $productAssociationTypeRepository,
-        private DataTransformerInterface $productsToProductAssociationsTransformer
+        private DataTransformerInterface $productsToProductAssociationsTransformer,
     ) {
     }
 

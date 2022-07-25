@@ -28,7 +28,7 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     public function __construct(
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private ZoneMatcherInterface $zoneMatcher,
-        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ) {
     }
 

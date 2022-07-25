@@ -50,7 +50,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
         // if the logic that is being tested (NOT adding a validation) does not work.
@@ -78,7 +78,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         // DO NOT REMOVE THIS CODE: it ensures that there is a violation that can be added
         // if the logic that is being tested (NOT adding a validation) does not work.
@@ -106,7 +106,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         $country->getCode()->willReturn('IE');
         $address->getCountryCode()->willReturn('IE');
@@ -133,7 +133,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Country $country,
         Province $province,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
@@ -164,7 +164,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         AddressInterface $address,
         Country $country,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');
@@ -194,7 +194,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
         Country $country,
         Province $province,
         ProvinceAddressConstraint $constraint,
-        ExecutionContextInterface $context
+        ExecutionContextInterface $context,
     ): void {
         $country->getCode()->willReturn('US');
         $address->getCountryCode()->willReturn('US');

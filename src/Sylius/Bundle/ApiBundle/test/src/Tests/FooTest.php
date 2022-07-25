@@ -36,7 +36,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/foos',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();
@@ -123,7 +123,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/admin/foos/' . $foo->getId(),
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();

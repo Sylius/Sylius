@@ -31,7 +31,7 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
     function let(
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
-        DateTimeProviderInterface $dateTimeProvider
+        DateTimeProviderInterface $dateTimeProvider,
     ): void {
         $this->beConstructedWith($eventBus, $delayStampCalculator, $dateTimeProvider);
     }
@@ -45,7 +45,7 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');
@@ -75,7 +75,7 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
 
@@ -102,7 +102,7 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');
@@ -132,7 +132,7 @@ final class CatalogPromotionAnnouncerSpec extends ObjectBehavior
         MessageBusInterface $eventBus,
         DelayStampCalculatorInterface $delayStampCalculator,
         DateTimeProviderInterface $dateTimeProvider,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $startDateTime = new \DateTime('2021-10-10');
         $endDateTime = new \DateTime('2021-10-11');

@@ -32,7 +32,7 @@ final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterf
     public function generateForOrderCheckoutState(
         OrderInterface $order,
         array $parameters = [],
-        int $referenceType = self::ABSOLUTE_PATH
+        int $referenceType = self::ABSOLUTE_PATH,
     ): string {
         if (!isset($this->routeCollection[$order->getCheckoutState()]['route'])) {
             throw new RouteNotFoundException();

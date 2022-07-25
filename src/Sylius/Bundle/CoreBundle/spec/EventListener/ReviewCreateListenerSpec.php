@@ -30,7 +30,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         CustomerInterface $customer,
         GenericEvent $event,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $event->getSubject()->willReturn($review);
         $customerContext->getCustomer()->willReturn($customer);
@@ -55,7 +55,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
         CustomerContextInterface $customerContext,
         CustomerInterface $existingAuthor,
         GenericEvent $event,
-        ReviewInterface $review
+        ReviewInterface $review,
     ): void {
         $event->getSubject()->willReturn($review);
         $review->getAuthor()->willReturn($existingAuthor);

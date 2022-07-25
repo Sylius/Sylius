@@ -65,21 +65,21 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountVerificationEmailHandler(
             new SendAccountVerificationEmail(
                 'user@example.com',
                 'en_US',
-                'CHANNEL_CODE'
-            )
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
             $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
-            'user@example.com'
+            'user@example.com',
         ));
     }
 }

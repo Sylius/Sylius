@@ -22,7 +22,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
     public function __construct(
         private LocaleConverterInterface $localeConverter,
-        private ?LocaleContextInterface $localeContext = null
+        private ?LocaleContextInterface $localeContext = null,
     ) {
         if (null === $localeContext) {
             @trigger_error('Not passing LocaleContextInterface explicitly as the second argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);

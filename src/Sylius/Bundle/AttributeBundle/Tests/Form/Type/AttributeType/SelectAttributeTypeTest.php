@@ -63,7 +63,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
         $form = $this->factory->create(
             SelectAttributeType::class,
             null,
-            $formConfiguration
+            $formConfiguration,
         );
         $view = $form->createView();
 

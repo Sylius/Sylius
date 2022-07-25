@@ -56,7 +56,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationInterface $constraintViolation,
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
     ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 
@@ -86,7 +86,7 @@ final class TextAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationInterface $constraintViolation,
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
     ) {
         $attributeValue->getAttribute()->willReturn($attribute);
 

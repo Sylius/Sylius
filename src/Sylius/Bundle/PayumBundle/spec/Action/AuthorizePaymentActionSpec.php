@@ -44,7 +44,7 @@ final class AuthorizePaymentActionSpec extends ObjectBehavior
         GatewayInterface $gateway,
         Authorize $authorize,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->setGateway($gateway);
         $payment->getOrder()->willReturn($order);

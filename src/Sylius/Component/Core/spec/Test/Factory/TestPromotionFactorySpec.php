@@ -46,7 +46,7 @@ final class TestPromotionFactorySpec extends ObjectBehavior
     function it_creates_a_promotion_with_a_given_name_and_channel(
         FactoryInterface $promotionFactory,
         ChannelInterface $channel,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();

@@ -26,7 +26,7 @@ final class CatalogPromotionFailedListener
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         private RepositoryInterface $catalogPromotionRepository,
         private EntityManagerInterface $entityManager,
-        private FactoryInterface $stateMachine
+        private FactoryInterface $stateMachine,
     ) {
     }
 

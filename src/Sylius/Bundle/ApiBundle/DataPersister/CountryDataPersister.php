@@ -23,7 +23,7 @@ final class CountryDataPersister implements ContextAwareDataPersisterInterface
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
-        private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker
+        private CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
     ) {
     }
 

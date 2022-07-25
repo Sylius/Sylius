@@ -43,7 +43,7 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 
                 $formRegistry->addMethodCall(
                     'add',
-                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()]
+                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()],
                 );
             }
         }

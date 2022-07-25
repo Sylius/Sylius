@@ -44,7 +44,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 
         return array_values(array_map(
             function (array $processedOrderItem): int { return $processedOrderItem['promotion']; },
-            $this->processDistributionWithMinimumPrice($orderItemsToProcess, $amount, $channel, $appliesOnDiscounted)
+            $this->processDistributionWithMinimumPrice($orderItemsToProcess, $amount, $channel, $appliesOnDiscounted),
         ));
     }
 
@@ -56,7 +56,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 
         $promotionsToDistribute = array_combine(
             array_keys($orderItems),
-            $this->proportionalIntegerDistributor->distribute($totals, $amount)
+            $this->proportionalIntegerDistributor->distribute($totals, $amount),
         );
 
         foreach ($promotionsToDistribute as $index => $promotion) {
@@ -100,7 +100,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
     private function exceedsOrderItemMinimumPrice(
         int $orderItemTotal,
         int $minimumPriceAdjustedByCurrentDiscount,
-        int $proposedPromotion
+        int $proposedPromotion,
     ): bool {
         return $minimumPriceAdjustedByCurrentDiscount >= ($orderItemTotal + $proposedPromotion);
     }

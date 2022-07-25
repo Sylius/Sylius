@@ -36,8 +36,8 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
                 $options['entry_type'],
                 array_replace(
                     $options['entry_options'],
-                    ['configuration_type' => $type]
-                )
+                    ['configuration_type' => $type],
+                ),
             );
 
             $prototypes[$type] = $formBuilder->getForm();

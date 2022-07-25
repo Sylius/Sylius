@@ -23,7 +23,7 @@ final class ChannelAwareItemDataProvider implements ItemDataProviderInterface
 {
     public function __construct(
         private ItemDataProviderInterface $itemDataProvider,
-        private ChannelContextInterface $channelContext
+        private ChannelContextInterface $channelContext,
     ) {
     }
 

@@ -35,7 +35,7 @@ final class TaxCategoryContext implements Context
         Assert::eq(
             count($taxCategories),
             1,
-            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
+            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName),
         );
 
         return $taxCategories[0];

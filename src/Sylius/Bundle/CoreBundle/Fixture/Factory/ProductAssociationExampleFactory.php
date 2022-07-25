@@ -29,7 +29,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     public function __construct(
         private FactoryInterface $productAssociationFactory,
         private ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
-        private ProductRepositoryInterface $productRepository
+        private ProductRepositoryInterface $productRepository,
     ) {
         $this->optionsResolver = new OptionsResolver();
 

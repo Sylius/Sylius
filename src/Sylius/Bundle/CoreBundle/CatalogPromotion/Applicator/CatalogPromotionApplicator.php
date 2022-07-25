@@ -24,13 +24,13 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
     public function __construct(
         private ActionBasedDiscountApplicatorInterface $actionBasedDiscountApplicator,
         private ProductVariantForCatalogPromotionEligibilityInterface $checker,
-        private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker
+        private CatalogPromotionEligibilityCheckerInterface $catalogPromotionEligibilityChecker,
     ) {
     }
 
     public function applyOnVariant(
         ProductVariantInterface $variant,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
             return;
@@ -48,7 +48,7 @@ final class CatalogPromotionApplicator implements CatalogPromotionApplicatorInte
     private function applyDiscountFromAction(
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         foreach ($catalogPromotion->getChannels() as $channel) {
             $channelPricing = $variant->getChannelPricingForChannel($channel);

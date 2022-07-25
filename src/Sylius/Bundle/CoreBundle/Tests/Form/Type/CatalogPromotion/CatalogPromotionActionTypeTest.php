@@ -42,7 +42,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -69,7 +69,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -94,7 +94,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -121,7 +121,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -146,7 +146,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -171,7 +171,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -198,7 +198,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -225,7 +225,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -252,7 +252,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -295,11 +295,11 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             [
                 'percentage_discount' => new PercentageDiscountActionConfigurationType(),
                 'fixed_discount' => new ChannelBasedFixedDiscountActionConfigurationType(),
-            ]
+            ],
         );
 
         $channelCollectionType = new ChannelCollectionType(
-            $this->channelRepository->reveal()
+            $this->channelRepository->reveal(),
         );
 
         $validator = Validation::createValidatorBuilder()->getValidator();

@@ -36,7 +36,7 @@ final class ManagingProductVariantsContext implements Context
         private UpdatePageInterface $updatePage,
         private GeneratePageInterface $generatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -231,7 +231,7 @@ final class ManagingProductVariantsContext implements Context
     public function theVariantWithCodeShouldBeOriginalPricedAtForChannel(
         ProductVariantInterface $productVariant,
         string $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
@@ -257,7 +257,7 @@ final class ManagingProductVariantsContext implements Context
 
         Assert::same(
             $this->updatePage->getOriginalPriceForChannel($channel),
-            $originalPrice
+            $originalPrice,
         );
     }
 
@@ -279,7 +279,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Cannot delete, the product variant is in use.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -363,7 +363,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::same(
             $this->generatePage->getValidationMessage('code', $position - 1),
-            'Please enter the code.'
+            'Please enter the code.',
         );
     }
 
@@ -374,7 +374,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::same(
             $this->generatePage->getPricesValidationMessage($position - 1),
-            'You must define price for every channel.'
+            'You must define price for every channel.',
         );
     }
 
@@ -385,7 +385,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::same(
             $this->generatePage->getValidationMessage('code', $position - 1),
-            'This code must be unique within this product.'
+            'This code must be unique within this product.',
         );
     }
 
@@ -396,7 +396,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::contains(
             $this->createPage->getPricesValidationMessage(),
-            'You must define price for every channel.'
+            'You must define price for every channel.',
         );
     }
 
@@ -544,7 +544,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::same(
             $this->updatePage->getValidationMessage('on_hand'),
-            'On hand must be greater than the number of on hold units'
+            'On hand must be greater than the number of on hold units',
         );
     }
 

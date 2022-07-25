@@ -21,7 +21,7 @@ final class ShopApiUriBasedSectionResolver implements UriBasedSectionResolverInt
 {
     public function __construct(
         private string $shopApiUriBeginning,
-        private string $shopApiOrdersResourceUri
+        private string $shopApiOrdersResourceUri,
     ) {
     }
 

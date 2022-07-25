@@ -35,7 +35,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
         private ExtractorInterface $extractor,
         private ResourceMetadataFactoryInterface $decorated,
         private ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
-        array $defaults = []
+        array $defaults = [],
     ) {
         $this->defaults = $defaults + ['attributes' => []];
     }

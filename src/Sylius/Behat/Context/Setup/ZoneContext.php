@@ -36,7 +36,7 @@ final class ZoneContext implements Context
         private RepositoryInterface $zoneRepository,
         private ObjectManager $objectManager,
         private ZoneFactoryInterface $zoneFactory,
-        private FactoryInterface $zoneMemberFactory
+        private FactoryInterface $zoneMemberFactory,
     ) {
     }
 
@@ -114,7 +114,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,
-        CountryInterface $country
+        CountryInterface $country,
     ) {
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->addMember($this->createZoneMember($country));
@@ -128,7 +128,7 @@ final class ZoneContext implements Context
     public function theZoneMemberHasBeenRemoved(
         ZoneMemberInterface $zoneMember,
         string $zoneMemberName,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $zone->removeMember($zoneMember);
 
@@ -155,7 +155,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
-        ProvinceInterface $province
+        ProvinceInterface $province,
     ) {
         $zone->setType(ZoneInterface::TYPE_PROVINCE);
         $zone->addMember($this->createZoneMember($province));
@@ -169,7 +169,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheZoneMemberAndTheZoneMember(
         ZoneInterface $parentZone,
-        ZoneInterface $childZone
+        ZoneInterface $childZone,
     ) {
         $parentZone->setType(ZoneInterface::TYPE_ZONE);
         $parentZone->addMember($this->createZoneMember($childZone));

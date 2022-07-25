@@ -51,7 +51,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $factory->withPluralRules(new Ruleset(
             new Transformations(),
             new Patterns(),
-            new Substitutions(new Substitution(new Word('taxon'), new Word('taxons')))
+            new Substitutions(new Substitution(new Word('taxon'), new Word('taxons'))),
         ));
         $inflector = $factory->build();
 

@@ -36,7 +36,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         private CustomerProviderInterface $customerProvider,
         private ChannelRepositoryInterface $channelRepository,
         private GeneratorInterface $tokenGenerator,
-        private MessageBusInterface $commandBus
+        private MessageBusInterface $commandBus,
     ) {
     }
 
@@ -65,7 +65,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->commandBus->dispatch(new SendAccountRegistrationEmail(
             $command->email,
             $command->localeCode,
-            $command->channelCode
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         if (!$channel->isAccountVerificationRequired()) {
@@ -80,7 +80,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $this->commandBus->dispatch(new SendAccountVerificationEmail(
             $command->email,
             $command->localeCode,
-            $command->channelCode
+            $command->channelCode,
         ), [new DispatchAfterCurrentBusStamp()]);
 
         return $user;

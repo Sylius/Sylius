@@ -24,7 +24,7 @@ final class PaymentMethodChangerSpec extends ObjectBehavior
 {
     function let(
         PaymentRepositoryInterface $paymentRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
     ): void {
         $this->beConstructedWith($paymentRepository, $paymentMethodRepository);
     }
@@ -32,7 +32,7 @@ final class PaymentMethodChangerSpec extends ObjectBehavior
     function it_throws_an_exception_if_payment_method_with_given_code_has_not_been_found(
         PaymentRepositoryInterface $paymentRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn(null);
 
@@ -50,7 +50,7 @@ final class PaymentMethodChangerSpec extends ObjectBehavior
         PaymentRepositoryInterface $paymentRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $paymentMethod,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
@@ -71,7 +71,7 @@ final class PaymentMethodChangerSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $paymentMethod,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 
@@ -94,7 +94,7 @@ final class PaymentMethodChangerSpec extends ObjectBehavior
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $paymentMethod,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $paymentMethodRepository->findOneBy(['code' => 'CASH_ON_DELIVERY_METHOD'])->willReturn($paymentMethod);
 

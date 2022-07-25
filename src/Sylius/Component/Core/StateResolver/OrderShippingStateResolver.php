@@ -64,7 +64,7 @@ final class OrderShippingStateResolver implements StateResolverInterface
     private function allShipmentsInStateButOrderStateNotUpdated(
         OrderInterface $order,
         string $shipmentState,
-        string $orderShippingState
+        string $orderShippingState,
     ): bool {
         $shipmentInStateAmount = $this->countOrderShipmentsInState($order, $shipmentState);
         $shipmentAmount = $order->getShipments()->count();

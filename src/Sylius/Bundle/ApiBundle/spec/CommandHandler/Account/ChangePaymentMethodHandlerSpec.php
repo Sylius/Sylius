@@ -24,14 +24,14 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
 {
     function let(
         PaymentMethodChangerInterface $paymentMethodChanger,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $this->beConstructedWith($paymentMethodChanger, $orderRepository);
     }
 
     function it_throws_an_exception_if_order_with_given_token_has_not_been_found(
         OrderRepositoryInterface $orderRepository,
-        PaymentMethodChangerInterface $paymentMethodChanger
+        PaymentMethodChangerInterface $paymentMethodChanger,
     ): void {
         $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -43,7 +43,7 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
             ->changePaymentMethod(
                 'CASH_ON_DELIVERY_METHOD',
                 '123',
-                Argument::type(OrderInterface::class)
+                Argument::type(OrderInterface::class),
             )
             ->shouldNotBeCalled()
         ;
@@ -57,7 +57,7 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
     function it_assigns_shop_user_s_change_payment_method_to_specified_payment_after_checkout_completed(
         PaymentMethodChangerInterface $paymentMethodChanger,
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $changePaymentMethod = new ChangePaymentMethod('CASH_ON_DELIVERY_METHOD');
         $changePaymentMethod->setOrderTokenValue('ORDERTOKEN');
@@ -69,7 +69,7 @@ final class ChangePaymentMethodHandlerSpec extends ObjectBehavior
             ->changePaymentMethod(
                 'CASH_ON_DELIVERY_METHOD',
                 '123',
-                $order
+                $order,
             )
             ->willReturn($order)
         ;

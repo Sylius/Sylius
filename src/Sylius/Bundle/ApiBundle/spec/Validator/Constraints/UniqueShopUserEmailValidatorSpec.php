@@ -28,7 +28,7 @@ final class UniqueShopUserEmailValidatorSpec extends ObjectBehavior
     function let(
         CanonicalizerInterface $canonicalizer,
         UserRepositoryInterface $shopUserRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->beConstructedWith($canonicalizer, $shopUserRepository);
         $this->initialize($executionContext);
@@ -55,7 +55,7 @@ final class UniqueShopUserEmailValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_a_user_with_given_email_is_not_found(
         CanonicalizerInterface $canonicalizer,
         UserRepositoryInterface $shopUserRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $canonicalizer->canonicalize('eMaIl@example.com')->willReturn('email@example.com');
         $shopUserRepository->findOneByEmail('email@example.com')->willReturn(null);
@@ -69,7 +69,7 @@ final class UniqueShopUserEmailValidatorSpec extends ObjectBehavior
         CanonicalizerInterface $canonicalizer,
         UserRepositoryInterface $shopUserRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $canonicalizer->canonicalize('eMaIl@example.com')->willReturn('email@example.com');
         $shopUserRepository->findOneByEmail('email@example.com')->willReturn($shopUser);

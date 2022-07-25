@@ -32,7 +32,7 @@ trait SetUpTestsTrait
     {
         $this->fixturesFiles = array_merge(
             $fixturesFiles,
-            ['test/config/fixtures/administrator.yaml', 'test/config/fixtures/channel.yaml']
+            ['test/config/fixtures/administrator.yaml', 'test/config/fixtures/channel.yaml'],
         );
     }
 

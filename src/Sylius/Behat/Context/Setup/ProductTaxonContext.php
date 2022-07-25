@@ -24,7 +24,7 @@ final class ProductTaxonContext implements Context
 {
     public function __construct(
         private FactoryInterface $productTaxonFactory,
-        private ObjectManager $objectManager
+        private ObjectManager $objectManager,
     ) {
     }
 

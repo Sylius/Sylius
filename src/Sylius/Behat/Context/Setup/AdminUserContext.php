@@ -31,7 +31,7 @@ final class AdminUserContext implements Context
         private UserRepositoryInterface $userRepository,
         private ImageUploaderInterface $imageUploader,
         private ObjectManager $objectManager,
-        private \ArrayAccess $minkParameters
+        private \ArrayAccess $minkParameters,
     ) {
     }
 

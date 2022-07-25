@@ -38,7 +38,7 @@ final class ShipmentEmailManagerSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);

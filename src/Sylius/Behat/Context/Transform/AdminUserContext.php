@@ -23,7 +23,7 @@ final class AdminUserContext implements Context
 {
     public function __construct(
         private RepositoryInterface $adminUserRepository,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

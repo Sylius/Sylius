@@ -26,7 +26,7 @@ final class ProductVariantUpdatedListenerSpec extends ObjectBehavior
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ): void {
         $this->beConstructedWith($productVariantRepository, $productVariantCatalogPromotionsProcessor, $entityManager);
     }
@@ -35,7 +35,7 @@ final class ProductVariantUpdatedListenerSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
         EntityManagerInterface $entityManager,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn($variant);
 
@@ -48,7 +48,7 @@ final class ProductVariantUpdatedListenerSpec extends ObjectBehavior
     function it_does_nothing_if_there_is_no_product_variant_with_given_code(
         ProductVariantRepositoryInterface $productVariantRepository,
         ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PHP_MUG'])->willReturn(null);
 

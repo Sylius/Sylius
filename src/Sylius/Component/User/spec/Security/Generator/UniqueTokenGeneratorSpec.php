@@ -32,7 +32,7 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_on_instantiation_with_an_out_of_range_length(
         RandomnessGeneratorInterface $generator,
-        UniquenessCheckerInterface $checker
+        UniquenessCheckerInterface $checker,
     ): void {
         $this->beConstructedWith($generator, $checker, -1);
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
@@ -42,7 +42,7 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
 
     function it_generates_tokens_with_length_stated_on_instantiation(
         RandomnessGeneratorInterface $generator,
-        UniquenessCheckerInterface $checker
+        UniquenessCheckerInterface $checker,
     ): void {
         $token = 'vanquishable';
 

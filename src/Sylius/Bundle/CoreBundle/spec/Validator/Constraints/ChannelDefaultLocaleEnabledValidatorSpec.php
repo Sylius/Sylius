@@ -50,7 +50,7 @@ final class ChannelDefaultLocaleEnabledValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $constraint = new ChannelDefaultLocaleEnabled();
 
@@ -67,7 +67,7 @@ final class ChannelDefaultLocaleEnabledValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_default_locale_is_enabled_for_a_given_channel(
         ExecutionContextInterface $executionContext,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $constraint = new ChannelDefaultLocaleEnabled();
 

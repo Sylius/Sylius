@@ -33,18 +33,18 @@ final class CategoryRequirementEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
         ShippingCategoryInterface $shippingCategory2,
-        ShippableInterface $shippable
+        ShippableInterface $shippable,
     ): void {
         $shippingMethod->getCategory()->willReturn($shippingCategory);
         $shippingMethod->getCategoryRequirement()->willReturn(
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE,
         );
         $shippable->getShippingCategory()->willReturn(
             $shippingCategory,
             $shippingCategory,
-            $shippingCategory2
+            $shippingCategory2,
         ); // first two times we will return the same shippingCategory. But we need different for the third test to pass
 
         $subject->getShippables()->willReturn(new ArrayCollection([$shippable->getWrappedObject()]));
@@ -55,7 +55,7 @@ final class CategoryRequirementEligibilityCheckerSpec extends ObjectBehavior
 
     function it_approves_category_requirement_if_no_category_is_required(
         ShippingSubjectInterface $subject,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $shippingMethod->getCategory()->willReturn(null);
 
@@ -67,17 +67,17 @@ final class CategoryRequirementEligibilityCheckerSpec extends ObjectBehavior
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
         ShippingCategoryInterface $shippingCategory2,
-        ShippableInterface $shippable
+        ShippableInterface $shippable,
     ): void {
         $shippingMethod->getCategory()->willReturn(
             $shippingCategory,
             $shippingCategory,
-            $shippingCategory2
+            $shippingCategory2,
         );
         $shippingMethod->getCategoryRequirement()->willReturn(
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY,
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL,
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE
+            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE,
         );
 
         $shippable->getShippingCategory()->willReturn($shippingCategory2);

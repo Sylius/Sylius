@@ -26,7 +26,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
     public function __construct(
         private RequestStack $requestStack,
         private OrderRepositoryInterface $orderRepository,
-        private string $newApiRoute
+        private string $newApiRoute,
     ) {
     }
 

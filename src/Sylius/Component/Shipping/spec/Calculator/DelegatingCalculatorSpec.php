@@ -47,7 +47,7 @@ final class DelegatingCalculatorSpec extends ObjectBehavior
         ServiceRegistryInterface $registry,
         ShipmentInterface $shipment,
         ShippingMethodInterface $method,
-        CalculatorInterface $calculator
+        CalculatorInterface $calculator,
     ): void {
         $shipment->getMethod()->willReturn($method);
 

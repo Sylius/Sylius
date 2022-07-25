@@ -24,7 +24,7 @@ final class UpdateUserEncoderListener
         private string $recommendedEncoderName,
         private string $className,
         private string $interfaceName,
-        private string $passwordParameter
+        private string $passwordParameter,
     ) {
     }
 

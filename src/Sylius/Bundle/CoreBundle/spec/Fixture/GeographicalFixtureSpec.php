@@ -30,7 +30,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         FactoryInterface $provinceFactory,
         ObjectManager $provinceManager,
         ZoneFactoryInterface $zoneFactory,
-        ObjectManager $zoneManager
+        ObjectManager $zoneManager,
     ): void {
         $this->beConstructedWith(
             $countryFactory,
@@ -38,7 +38,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
             $provinceFactory,
             $provinceManager,
             $zoneFactory,
-            $zoneManager
+            $zoneManager,
         );
     }
 
@@ -50,7 +50,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
     function it_creates_and_persist_a_country(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
-        CountryInterface $country
+        CountryInterface $country,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
@@ -68,7 +68,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         FactoryInterface $provinceFactory,
         ObjectManager $provinceManager,
         CountryInterface $country,
-        ProvinceInterface $province
+        ProvinceInterface $province,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
@@ -100,7 +100,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ZoneFactoryInterface $zoneFactory,
         ObjectManager $zoneManager,
         CountryInterface $country,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
@@ -133,7 +133,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ZoneFactoryInterface $zoneFactory,
         ObjectManager $zoneManager,
         CountryInterface $country,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
@@ -171,7 +171,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $zoneManager,
         CountryInterface $country,
         ProvinceInterface $province,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();
@@ -213,7 +213,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ObjectManager $zoneManager,
         CountryInterface $country,
         ZoneInterface $countryTypeZone,
-        ZoneInterface $zoneTypeZone
+        ZoneInterface $zoneTypeZone,
     ): void {
         $countryFactory->createNew()->willReturn($country);
         $country->setCode('PL')->shouldBeCalled();

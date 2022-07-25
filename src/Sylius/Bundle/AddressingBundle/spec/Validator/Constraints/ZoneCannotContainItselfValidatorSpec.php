@@ -54,7 +54,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_zone_does_not_contain_itself_in_members(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('WORLD');
         $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);
@@ -69,7 +69,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_for_zones_of_country_type_containing_a_member_with_same_code(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('US');
         $zone->getType()->willReturn(ZoneInterface::TYPE_COUNTRY);
@@ -85,7 +85,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_for_zones_of_province_type_containing_a_member_with_same_code(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('RO-B');
         $zone->getType()->willReturn(ZoneInterface::TYPE_PROVINCE);
@@ -101,7 +101,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_zone_contains_itself_in_members(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('EU');
         $zone->getType()->willReturn(ZoneInterface::TYPE_ZONE);

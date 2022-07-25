@@ -28,22 +28,22 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
             'custom_low_priority_gateway',
             (new Definition('LowGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10]
-            )
+                ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10],
+            ),
         );
         $this->setDefinition(
             'custom_high_priority_gateway',
             (new Definition('HighGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'high_gateway', 'label' => 'High Gateway', 'priority' => 1000]
-            )
+                ['type' => 'high_gateway', 'label' => 'High Gateway', 'priority' => 1000],
+            ),
         );
         $this->setDefinition(
             'custom_medium_priority_gateway',
             (new Definition('MediumGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300]
-            )
+                ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300],
+            ),
         );
 
         $this->compile();
@@ -51,17 +51,17 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'low_gateway', 'LowGatewayClass']
+            ['gateway_config', 'low_gateway', 'LowGatewayClass'],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'high_gateway', 'HighGatewayClass']
+            ['gateway_config', 'high_gateway', 'HighGatewayClass'],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'medium_gateway', 'MediumGatewayClass']
+            ['gateway_config', 'medium_gateway', 'MediumGatewayClass'],
         );
 
         $this->assertSame(
@@ -71,7 +71,7 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
                 'low_gateway' => 'Low Gateway',
                 'offline' => 'sylius.payum_gateway_factory.offline',
             ],
-            $this->container->getParameter('sylius.gateway_factories')
+            $this->container->getParameter('sylius.gateway_factories'),
         );
     }
 
@@ -83,22 +83,22 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
             'custom_low_priority_gateway',
             (new Definition('LowGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10]
-            )
+                ['type' => 'low_gateway', 'label' => 'Low Gateway', 'priority' => 10],
+            ),
         );
         $this->setDefinition(
             'custom_regular_priority_gateway',
             (new Definition('RegularGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'regular_gateway', 'label' => 'Regular Gateway']
-            )
+                ['type' => 'regular_gateway', 'label' => 'Regular Gateway'],
+            ),
         );
         $this->setDefinition(
             'custom_medium_priority_gateway',
             (new Definition('MediumGatewayClass'))->addTag(
                 'sylius.gateway_configuration_type',
-                ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300]
-            )
+                ['type' => 'medium_gateway', 'label' => 'Medium Gateway', 'priority' => 300],
+            ),
         );
 
         $this->compile();
@@ -106,17 +106,17 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'low_gateway', 'LowGatewayClass']
+            ['gateway_config', 'low_gateway', 'LowGatewayClass'],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'regular_gateway', 'RegularGatewayClass']
+            ['gateway_config', 'regular_gateway', 'RegularGatewayClass'],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.payum_gateway_config',
             'add',
-            ['gateway_config', 'medium_gateway', 'MediumGatewayClass']
+            ['gateway_config', 'medium_gateway', 'MediumGatewayClass'],
         );
 
         $this->assertSame(
@@ -126,7 +126,7 @@ final class RegisterGatewayConfigTypePassTest extends AbstractCompilerPassTestCa
                 'offline' => 'sylius.payum_gateway_factory.offline',
                 'regular_gateway' => 'Regular Gateway',
             ],
-            $this->container->getParameter('sylius.gateway_factories')
+            $this->container->getParameter('sylius.gateway_factories'),
         );
     }
 

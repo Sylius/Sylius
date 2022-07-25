@@ -32,7 +32,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
             'checker',
             (new Definition())
                 ->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
-                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
+                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2']),
         );
 
         $this->compile();
@@ -40,12 +40,12 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry_promotion_rule_checker',
             'register',
-            ['custom', new Reference('checker')]
+            ['custom', new Reference('checker')],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry_promotion_rule_checker',
             'register',
-            ['another_custom', new Reference('checker')]
+            ['another_custom', new Reference('checker')],
         );
     }
 
@@ -60,14 +60,14 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
             'checker',
             (new Definition())
                 ->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
-                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
+                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion_rules',
-            ['custom' => 'Label 1', 'another_custom' => 'Label 2']
+            ['custom' => 'Label 1', 'another_custom' => 'Label 2'],
         );
     }
 
@@ -82,7 +82,7 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
             'checker',
             (new Definition())
                 ->addTag('sylius.promotion_rule_checker', ['type' => 'custom', 'label' => 'Label 1', 'form_type' => 'FQCN1'])
-                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2'])
+                ->addTag('sylius.promotion_rule_checker', ['type' => 'another_custom', 'label' => 'Label 2', 'form_type' => 'FQCN2']),
         );
 
         $this->compile();
@@ -90,12 +90,12 @@ final class RegisterRuleCheckersPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.promotion_rule_checker',
             'add',
-            ['custom', 'default', 'FQCN1']
+            ['custom', 'default', 'FQCN1'],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.form_registry.promotion_rule_checker',
             'add',
-            ['another_custom', 'default', 'FQCN2']
+            ['another_custom', 'default', 'FQCN2'],
         );
     }
 

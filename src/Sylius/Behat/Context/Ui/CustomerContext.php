@@ -23,7 +23,7 @@ final class CustomerContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private ShowPageInterface $customerShowPage
+        private ShowPageInterface $customerShowPage,
     ) {
     }
 

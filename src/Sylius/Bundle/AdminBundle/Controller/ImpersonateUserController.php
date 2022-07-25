@@ -33,7 +33,7 @@ final class ImpersonateUserController
         private AuthorizationCheckerInterface $authorizationChecker,
         private UserProviderInterface $userProvider,
         ?RouterInterface $router,
-        private string $authorizationRole
+        private string $authorizationRole,
     ) {
         if (null !== $router) {
             @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);
@@ -56,7 +56,7 @@ final class ImpersonateUserController
 
         $redirectUrl = $request->headers->get(
             'referer',
-            $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()])
+            $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()]),
         );
 
         return new RedirectResponse($redirectUrl);

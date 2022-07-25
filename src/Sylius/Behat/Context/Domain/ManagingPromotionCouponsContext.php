@@ -25,7 +25,7 @@ final class ManagingPromotionCouponsContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private PromotionCouponRepositoryInterface $couponRepository
+        private PromotionCouponRepositoryInterface $couponRepository,
     ) {
     }
 

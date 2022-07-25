@@ -22,7 +22,7 @@ final class ManagingCurrenciesContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -76,7 +76,7 @@ final class ManagingCurrenciesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(), 'name', $currencyName),
-            sprintf('There is no currency with name "%s"', $currencyName)
+            sprintf('There is no currency with name "%s"', $currencyName),
         );
     }
 
@@ -89,7 +89,7 @@ final class ManagingCurrenciesContext implements Context
         Assert::same($this->responseChecker->countCollectionItems($response), 1);
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $code),
-            sprintf('There is no currency with code "%s"', $code)
+            sprintf('There is no currency with code "%s"', $code),
         );
     }
 
@@ -101,7 +101,7 @@ final class ManagingCurrenciesContext implements Context
         $response = $this->client->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Currency has been created successfully, but it should not'
+            'Currency has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Currency code must be unique.');
     }
@@ -113,7 +113,7 @@ final class ManagingCurrenciesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Currency could not be created'
+            'Currency could not be created',
         );
     }
 }

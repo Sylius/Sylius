@@ -33,7 +33,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
     public function __construct(
         private FactoryInterface $productOptionFactory,
         private FactoryInterface $productOptionValueFactory,
-        private RepositoryInterface $localeRepository
+        private RepositoryInterface $localeRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotionsProcessorInterface
 {
     public function __construct(
-        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ) {
     }
 
@@ -30,7 +30,7 @@ final class ProductCatalogPromotionsProcessor implements ProductCatalogPromotion
 
         $variantsCodes = array_map(
             fn (ProductVariantInterface $variant): string => $variant->getCode(),
-            $variants
+            $variants,
         );
 
         $this->commandDispatcher->updateVariants($variantsCodes);

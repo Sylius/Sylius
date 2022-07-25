@@ -29,7 +29,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
         TaxonInterface $taxon,
         string $locale,
         array $sorting = [],
-        bool $includeAllDescendants = false
+        bool $includeAllDescendants = false,
     ): QueryBuilder;
 
     /**

@@ -59,7 +59,7 @@ final class PathPrefixProviderSpec extends ObjectBehavior
 
     function it_returns_admin_prefix_if_currently_logged_in_is_admin_user(
         UserContextInterface $userContext,
-        AdminUserInterface $user
+        AdminUserInterface $user,
     ): void {
         $userContext->getUser()->willReturn($user);
 
@@ -68,7 +68,7 @@ final class PathPrefixProviderSpec extends ObjectBehavior
 
     function it_returns_shop_prefix_if_currently_logged_in_is_shop_user(
         UserContextInterface $userContext,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $userContext->getUser()->willReturn($user);
 

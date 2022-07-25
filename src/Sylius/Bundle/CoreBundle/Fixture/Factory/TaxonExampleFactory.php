@@ -35,7 +35,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         private FactoryInterface $taxonFactory,
         private TaxonRepositoryInterface $taxonRepository,
         private RepositoryInterface $localeRepository,
-        private TaxonSlugGeneratorInterface $taxonSlugGenerator
+        private TaxonSlugGeneratorInterface $taxonSlugGenerator,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

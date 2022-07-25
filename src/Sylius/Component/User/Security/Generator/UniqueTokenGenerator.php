@@ -27,7 +27,7 @@ final class UniqueTokenGenerator implements GeneratorInterface
     public function __construct(
         private RandomnessGeneratorInterface $generator,
         private UniquenessCheckerInterface $uniquenessChecker,
-        int $tokenLength
+        int $tokenLength,
     ) {
         Assert::greaterThanEq($tokenLength, 1, 'The value of token length has to be at least 1.');
         $this->tokenLength = $tokenLength;

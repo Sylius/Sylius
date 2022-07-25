@@ -23,7 +23,7 @@ final class CookieSetter implements CookieSetterInterface
 {
     public function __construct(
         private Session $minkSession,
-        private \ArrayAccess $minkParameters
+        private \ArrayAccess $minkParameters,
     ) {
     }
 
@@ -41,7 +41,7 @@ final class CookieSetter implements CookieSetterInterface
 
         if ($driver instanceof SymfonyDriver) {
             $driver->getClient()->getCookieJar()->set(
-                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST))
+                new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST)),
             );
 
             return;

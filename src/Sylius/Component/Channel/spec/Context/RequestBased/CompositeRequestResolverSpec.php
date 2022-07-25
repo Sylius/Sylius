@@ -32,7 +32,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
 
     function it_returns_null_if_none_of_nested_request_resolvers_returned_channel(
         Request $request,
-        RequestResolverInterface $requestResolver
+        RequestResolverInterface $requestResolver,
     ): void {
         $requestResolver->findChannel($request)->willReturn(null);
 
@@ -46,7 +46,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         RequestResolverInterface $firstRequestResolver,
         RequestResolverInterface $secondRequestResolver,
         RequestResolverInterface $thirdRequestResolver,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $firstRequestResolver->findChannel($request)->willReturn(null);
         $secondRequestResolver->findChannel($request)->willReturn($channel);
@@ -64,7 +64,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         RequestResolverInterface $firstRequestResolver,
         RequestResolverInterface $secondRequestResolver,
         RequestResolverInterface $thirdRequestResolver,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $firstRequestResolver->findChannel($request)->shouldNotBeCalled();
         $secondRequestResolver->findChannel($request)->willReturn($channel);

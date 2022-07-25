@@ -38,7 +38,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
 
     function it_does_not_add_violation_if_product_is_configurable(
         ExecutionContextInterface $context,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $constraint = new UniqueSimpleProductCode([
             'message' => 'Simple product code has to be unique',
@@ -54,7 +54,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_product_is_simple_but_code_has_not_been_used_among_neither_producs_nor_product_variants(
         ExecutionContextInterface $context,
         ProductInterface $product,
-        ProductVariantRepositoryInterface $productVariantRepository
+        ProductVariantRepositoryInterface $productVariantRepository,
     ): void {
         $constraint = new UniqueSimpleProductCode([
             'message' => 'Simple product code has to be unique',
@@ -74,7 +74,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $context,
         ProductInterface $product,
         ProductVariantInterface $existingProductVariant,
-        ProductVariantRepositoryInterface $productVariantRepository
+        ProductVariantRepositoryInterface $productVariantRepository,
     ): void {
         $constraint = new UniqueSimpleProductCode([
             'message' => 'Simple product code has to be unique',
@@ -98,7 +98,7 @@ final class UniqueSimpleProductCodeValidatorSpec extends ObjectBehavior
         ProductInterface $existingProduct,
         ProductVariantInterface $existingProductVariant,
         ProductVariantRepositoryInterface $productVariantRepository,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $constraint = new UniqueSimpleProductCode([
             'message' => 'Simple product code has to be unique',

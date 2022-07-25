@@ -36,7 +36,7 @@ EOT
     {
         $output->writeln(sprintf(
             'Installing Sylius assets for environment <info>%s</info>.',
-            $this->getEnvironment()
+            $this->getEnvironment(),
         ));
 
         try {

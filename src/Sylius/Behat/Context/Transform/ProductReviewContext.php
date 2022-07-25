@@ -34,7 +34,7 @@ final class ProductReviewContext implements Context
 
         Assert::notNull(
             $productReview,
-            sprintf('Product review with title "%s" does not exist', $title)
+            sprintf('Product review with title "%s" does not exist', $title),
         );
 
         return $productReview;

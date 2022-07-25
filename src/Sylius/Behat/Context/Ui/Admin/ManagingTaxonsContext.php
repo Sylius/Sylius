@@ -34,7 +34,7 @@ final class ManagingTaxonsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelper $testHelper
+        private JavaScriptTestHelper $testHelper,
     ) {
     }
 
@@ -373,7 +373,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'You cannot delete a menu taxon of any channel.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -384,7 +384,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Cannot delete, the taxon is in use.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 

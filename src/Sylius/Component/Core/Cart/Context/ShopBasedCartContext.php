@@ -39,7 +39,7 @@ final class ShopBasedCartContext implements CartContextInterface
     public function __construct(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
-        ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver = null
+        ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver = null,
     ) {
         $this->cartContext = $cartContext;
         $this->shopperContext = $shopperContext;

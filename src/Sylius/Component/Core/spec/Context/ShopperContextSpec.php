@@ -28,7 +28,7 @@ final class ShopperContextSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         CurrencyContextInterface $currencyContext,
         LocaleContextInterface $localeContext,
-        CustomerContextInterface $customerContext
+        CustomerContextInterface $customerContext,
     ): void {
         $this->beConstructedWith($channelContext, $currencyContext, $localeContext, $customerContext);
     }
@@ -40,7 +40,7 @@ final class ShopperContextSpec extends ObjectBehavior
 
     function it_gets_a_current_channel_from_a_context(
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -63,7 +63,7 @@ final class ShopperContextSpec extends ObjectBehavior
 
     function it_gets_a_current_customer_from_a_context(
         CustomerContextInterface $customerContext,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $customerContext->getCustomer()->willReturn($customer);
 

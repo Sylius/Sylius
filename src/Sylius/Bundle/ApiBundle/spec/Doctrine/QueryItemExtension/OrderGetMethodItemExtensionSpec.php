@@ -36,7 +36,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        Expr $expr
+        Expr $expr,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -57,7 +57,8 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         $queryBuilder
             ->expr()
             ->shouldBeCalled()
-            ->willReturn($expr);
+            ->willReturn($expr)
+        ;
 
         $expr
             ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
@@ -86,7 +87,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryNameGenerator->generateParameterName('customer')->shouldBeCalled()->willReturn('customer');
         $queryBuilder->getRootAliases()->willReturn(['o']);
@@ -123,7 +124,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -143,7 +144,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_GET,
                     [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
-                ]
+                ],
             )
         ;
     }

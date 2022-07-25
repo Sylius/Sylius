@@ -20,21 +20,21 @@ final class SalesSummarySpec extends ObjectBehavior
     function let(): void
     {
         $this->beConstructedWith(
-            [9 => 1200, 10 => 400, 11 => 500]
+            [9 => 1200, 10 => 400, 11 => 500],
         );
     }
 
     function it_has_intervals_list(): void
     {
         $this->getIntervals()->shouldReturn(
-            [9, 10, 11]
+            [9, 10, 11],
         );
     }
 
     function it_has_sales_list(): void
     {
         $this->getSales()->shouldReturn(
-            [1200, 400, 500]
+            [1200, 400, 500],
         );
     }
 }

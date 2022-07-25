@@ -33,7 +33,7 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
     public function it_returns_billing_address_from_order_if_it_has_default_parameter(
         OrderInterface $order,
         AddressInterface $billingAddress,
-        AddressInterface $shippingAddress
+        AddressInterface $shippingAddress,
     ): void {
         $order->setBillingAddress($billingAddress);
         $order->setShippingAddress($shippingAddress);
@@ -47,7 +47,7 @@ final class TaxationAddressResolverSpec extends ObjectBehavior
     public function it_returns_shipping_address_from_order_if_parameter_is_true(
         OrderInterface $order,
         AddressInterface $billingAddress,
-        AddressInterface $shippingAddress
+        AddressInterface $shippingAddress,
     ): void {
         $this->beConstructedWith(true);
         $order->setBillingAddress($billingAddress);

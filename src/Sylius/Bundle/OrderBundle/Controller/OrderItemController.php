@@ -48,7 +48,7 @@ class OrderItemController extends ResourceController
         $form = $this->getFormFactory()->create(
             $configuration->getFormType(),
             $this->createAddToCartCommand($cart, $orderItem),
-            $configuration->getFormOptions()
+            $configuration->getFormOptions(),
         );
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
@@ -103,7 +103,7 @@ class OrderItemController extends ResourceController
                 'configuration' => $configuration,
                 $this->metadata->getName() => $orderItem,
                 'form' => $form->createView(),
-            ]
+            ],
         );
     }
 
@@ -239,7 +239,7 @@ class OrderItemController extends ResourceController
     {
         return $this->viewHandler->handle(
             $configuration,
-            View::create($form, Response::HTTP_BAD_REQUEST)->setData(['errors' => $form->getErrors(true, true)])
+            View::create($form, Response::HTTP_BAD_REQUEST)->setData(['errors' => $form->getErrors(true, true)]),
         );
     }
 }

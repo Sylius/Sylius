@@ -32,7 +32,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
     function let(
         OrderRepositoryInterface $orderRepository,
         AvailabilityCheckerInterface $availabilityChecker,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->beConstructedWith($orderRepository, $availabilityChecker);
         $this->initialize($executionContext);
@@ -62,7 +62,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        Collection $orderItems
+        Collection $orderItems,
     ): void {
         $command = new CompleteOrder();
         $command->setOrderTokenValue('cartToken');
@@ -94,7 +94,7 @@ final class OrderItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
-        Collection $orderItems
+        Collection $orderItems,
     ): void {
         $command = new CompleteOrder();
         $command->setOrderTokenValue('cartToken');

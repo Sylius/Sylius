@@ -20,7 +20,7 @@ final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
     function let(
         PromotionCouponGeneratorInstructionInterface $instruction,
-        \InvalidArgumentException $previousException
+        \InvalidArgumentException $previousException,
     ): void {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);

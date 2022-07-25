@@ -30,7 +30,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_currency_not_found_exception_if_none_of_nested_currency_contexts_returned_a_currency(
-        CurrencyContextInterface $currencyContext
+        CurrencyContextInterface $currencyContext,
     ): void {
         $currencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
@@ -42,7 +42,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
     function it_returns_first_result_returned_by_nested_request_resolvers(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
-        CurrencyContextInterface $thirdCurrencyContext
+        CurrencyContextInterface $thirdCurrencyContext,
     ): void {
         $firstCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
         $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
@@ -58,7 +58,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
     function its_nested_request_resolvers_can_have_priority(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
-        CurrencyContextInterface $thirdCurrencyContext
+        CurrencyContextInterface $thirdCurrencyContext,
     ): void {
         $firstCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
         $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');

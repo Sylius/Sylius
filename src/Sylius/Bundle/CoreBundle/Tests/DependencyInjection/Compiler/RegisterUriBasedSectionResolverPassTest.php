@@ -55,7 +55,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
                 new Reference('sylius.section_resolver.admin_uri_based_section_resolver'),
                 new Reference('sylius.section_resolver.admin_api_uri_based_section_resolver'),
                 new Reference('sylius.section_resolver.shop_uri_based_section_resolver'),
-            ]
+            ],
         );
     }
 
@@ -72,7 +72,7 @@ final class RegisterUriBasedSectionResolverPassTest extends AbstractCompilerPass
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.section_resolver.uri_based_section_resolver',
             1,
-            []
+            [],
         );
     }
 

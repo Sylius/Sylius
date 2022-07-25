@@ -60,7 +60,7 @@ final class CommandExecutorSpec extends ObjectBehavior
                 '--no-debug' => true,
                 '--env' => 'dev',
                 '--verbose' => true,
-            ]
+            ],
         );
 
         $application->setAutoExit(false)->shouldBeCalled();
@@ -103,7 +103,7 @@ final class CommandExecutorSpec extends ObjectBehavior
                 '--env' => 'dev',
                 '--no-interaction' => true,
                 '--verbose' => true,
-            ]
+            ],
         );
 
         $application->setAutoExit(false)->shouldBeCalled();

@@ -46,7 +46,7 @@ final class CartSessionStorageSpec extends ObjectBehavior
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $channel->getCode()->willReturn('channel_code');
 

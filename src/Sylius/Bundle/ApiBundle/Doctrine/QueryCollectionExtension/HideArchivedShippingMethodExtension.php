@@ -29,7 +29,7 @@ final class HideArchivedShippingMethodExtension implements ContextAwareQueryColl
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if ($this->shippingMethodClass !== $resourceClass) {
             return;

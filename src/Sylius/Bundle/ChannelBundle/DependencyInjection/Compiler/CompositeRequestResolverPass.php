@@ -23,7 +23,7 @@ final class CompositeRequestResolverPass extends PrioritizedCompositeServicePass
             'sylius.context.channel.request_based.resolver',
             'sylius.context.channel.request_based.resolver.composite',
             'sylius.context.channel.request_based.resolver',
-            'addResolver'
+            'addResolver',
         );
     }
 }

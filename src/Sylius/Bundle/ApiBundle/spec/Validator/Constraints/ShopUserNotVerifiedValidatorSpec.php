@@ -78,7 +78,7 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_user_has_been_verified(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
 
@@ -101,7 +101,8 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->validate($value, new ShopUserNotVerified());
     }
@@ -109,7 +110,7 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_shop_user_exists(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ): void {
         $this->initialize($executionContext);
 
@@ -131,7 +132,8 @@ final class ShopUserNotVerifiedValidatorSpec extends ObjectBehavior
 
         $executionContext
             ->addViolation('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->validate($value, new ShopUserNotVerified());
     }

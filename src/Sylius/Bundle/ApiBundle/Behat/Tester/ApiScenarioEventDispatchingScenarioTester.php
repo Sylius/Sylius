@@ -50,7 +50,7 @@ final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
             $tags,
             $scenario->getSteps(),
             $scenario->getKeyword(),
-            $scenario->getLine()
+            $scenario->getLine(),
         );
 
         return $this->baseTester->setUp($env, $feature, $scenario, $skip);

@@ -29,7 +29,7 @@ final class RegisterTaxCalculationStrategiesPassTest extends AbstractCompilerPas
             'str',
             (new Definition())
                 ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str1', 'label' => 'Str 1'])
-                ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str2', 'label' => 'Str 2', 'priority' => 5])
+                ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str2', 'label' => 'Str 2', 'priority' => 5]),
         );
 
         $this->compile();
@@ -37,12 +37,12 @@ final class RegisterTaxCalculationStrategiesPassTest extends AbstractCompilerPas
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.tax_calculation_strategy',
             'register',
-            [new Reference('str'), 0]
+            [new Reference('str'), 0],
         );
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.registry.tax_calculation_strategy',
             'register',
-            [new Reference('str'), 5]
+            [new Reference('str'), 5],
         );
     }
 
@@ -54,14 +54,14 @@ final class RegisterTaxCalculationStrategiesPassTest extends AbstractCompilerPas
             'str',
             (new Definition())
                 ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str1', 'label' => 'Str 1'])
-                ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str2', 'label' => 'Str 2'])
+                ->addTag('sylius.taxation.calculation_strategy', ['type' => 'str2', 'label' => 'Str 2']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.tax_calculation_strategies',
-            ['str1' => 'Str 1', 'str2' => 'Str 2']
+            ['str1' => 'Str 1', 'str2' => 'Str 2'],
         );
     }
 

@@ -27,7 +27,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
     function let(
         UserRepositoryInterface $userRepository,
         MetadataInterface $metadata,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $this->beConstructedWith($userRepository, $metadata, $passwordUpdater);
     }
@@ -41,7 +41,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
         MetadataInterface $metadata,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
@@ -67,7 +67,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
         MetadataInterface $metadata,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);
@@ -94,7 +94,7 @@ final class ResetPasswordHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
         MetadataInterface $metadata,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $userRepository->findOneBy(['passwordResetToken' => 'TOKEN'])->willReturn($shopUser);
         $metadata->getParameter('resetting')->willReturn(['token' => ['ttl' => 'P5D']]);

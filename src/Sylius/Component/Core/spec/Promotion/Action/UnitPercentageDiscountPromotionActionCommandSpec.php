@@ -38,13 +38,13 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter
+        FilterInterface $productFilter,
     ): void {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
-            $productFilter
+            $productFilter,
         );
     }
 
@@ -72,7 +72,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ProductVariantInterface $productVariant1,
         ProductVariantInterface $productVariant2,
         ChannelPricingInterface $channelPricing1,
-        ChannelPricingInterface $channelPricing2
+        ChannelPricingInterface $channelPricing2,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -148,7 +148,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ProductVariantInterface $variant2,
         ChannelPricingInterface $channelPricing1,
         ChannelPricingInterface $channelPricing2,
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -207,7 +207,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -225,7 +225,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     function it_does_not_apply_discount_if_configuration_for_order_channel_is_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_PL');
@@ -238,7 +238,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     function it_does_not_apply_discount_if_percentage_configuration_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_PL');
@@ -250,7 +250,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
 
     function it_throws_an_exception_if_passed_subject_is_not_order(
         PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)
@@ -267,7 +267,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->getItems()->willReturn($items);
         $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
@@ -294,7 +294,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
 
     function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $this
             ->shouldThrow(UnexpectedTypeException::class)

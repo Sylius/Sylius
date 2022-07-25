@@ -25,7 +25,7 @@ final class ChannelContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -53,9 +53,9 @@ final class ChannelContext implements Context
         Assert::same(
             $this->responseChecker->getValue(
                 $this->client->getLastResponse(),
-                'baseCurrency'
+                'baseCurrency',
             )['code'],
-            $currencyCode
+            $currencyCode,
         );
     }
 }

@@ -46,13 +46,13 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
 
             return array_values(array_filter(
                 $this->eventsToTemplateBlocks[$eventName] ?? [],
-                static fn (TemplateBlock $templateBlock): bool => $templateBlock->isEnabled()
+                static fn (TemplateBlock $templateBlock): bool => $templateBlock->isEnabled(),
             ));
         }
 
         $enabledFinalizedTemplateBlocks = array_filter(
             $this->findFinalizedForEvents($eventNames),
-            static fn (TemplateBlock $templateBlock): bool => $templateBlock->isEnabled()
+            static fn (TemplateBlock $templateBlock): bool => $templateBlock->isEnabled(),
         );
 
         $templateBlocksPriorityQueue = new SplPriorityQueue();

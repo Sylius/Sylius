@@ -22,7 +22,7 @@ final class UpdateCatalogPromotionStateHandler
 {
     public function __construct(
         private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
-        private RepositoryInterface $catalogPromotionRepository
+        private RepositoryInterface $catalogPromotionRepository,
     ) {
     }
 

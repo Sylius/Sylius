@@ -35,7 +35,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     function let(
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderRepositoryInterface $orderRepository,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
     ): void {
         $this->beConstructedWith($productVariantRepository, $orderRepository, $availabilityChecker);
     }
@@ -49,7 +49,8 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()]);
+            ->during('validate', [new CompleteOrder(), new AddingEligibleProductVariantToCart()])
+        ;
     }
 
     function it_throws_an_exception_if_constraint_is_not_an_instance_of_adding_eligible_product_variant_to_cart(): void
@@ -66,7 +67,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
     function it_adds_violation_if_product_variant_does_not_exist(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -79,7 +80,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             new AddItemToCart('productVariantCode', 1),
-            new AddingEligibleProductVariantToCart()
+            new AddingEligibleProductVariantToCart(),
         );
     }
 
@@ -87,7 +88,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantRepositoryInterface $productVariantRepository,
         ExecutionContextInterface $executionContext,
         ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->initialize($executionContext);
 
@@ -104,7 +105,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             new AddItemToCart('productVariantCode', 1),
-            new AddingEligibleProductVariantToCart()
+            new AddingEligibleProductVariantToCart(),
         );
     }
 
@@ -112,7 +113,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         ProductVariantRepositoryInterface $productVariantRepository,
         ExecutionContextInterface $executionContext,
         ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->initialize($executionContext);
 
@@ -130,7 +131,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             new AddItemToCart('productVariantCode', 1),
-            new AddingEligibleProductVariantToCart()
+            new AddingEligibleProductVariantToCart(),
         );
     }
 
@@ -144,7 +145,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         OrderInterface $cart,
         Collection $items,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $itemProductVariant
+        ProductVariantInterface $itemProductVariant,
     ): void {
         $this->initialize($executionContext);
 
@@ -179,7 +180,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             $command,
-            new AddingEligibleProductVariantToCart()
+            new AddingEligibleProductVariantToCart(),
         );
     }
 
@@ -193,7 +194,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         OrderInterface $cart,
         Collection $items,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $orderItemVariant
+        ProductVariantInterface $orderItemVariant,
     ): void {
         $this->initialize($executionContext);
 
@@ -228,7 +229,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
 
         $this->validate(
             $command,
-            new AddingEligibleProductVariantToCart()
+            new AddingEligibleProductVariantToCart(),
         );
     }
 
@@ -243,7 +244,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         Collection $items,
         OrderItemInterface $orderItem,
         AvailabilityCheckerInterface $availabilityChecker,
-        ProductVariantInterface $itemProductVariant
+        ProductVariantInterface $itemProductVariant,
     ): void {
         $this->initialize($executionContext);
 
@@ -294,7 +295,7 @@ final class AddingEligibleProductVariantToCartValidatorSpec extends ObjectBehavi
         Collection $items,
         OrderItemInterface $orderItem,
         ProductVariantInterface $itemProductVariant,
-        AvailabilityCheckerInterface $availabilityChecker
+        AvailabilityCheckerInterface $availabilityChecker,
     ): void {
         $this->initialize($executionContext);
 

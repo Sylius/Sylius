@@ -34,7 +34,7 @@ class MugProductFixture extends AbstractFixture
         private AbstractResourceFixture $productAttributeFixture,
         private AbstractResourceFixture $productOptionFixture,
         private AbstractResourceFixture $productFixture,
-        private string $baseLocaleCode
+        private string $baseLocaleCode,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver =

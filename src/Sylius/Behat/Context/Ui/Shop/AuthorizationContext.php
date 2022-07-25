@@ -23,7 +23,7 @@ final class AuthorizationContext implements Context
     public function __construct(
         private LoginPageInterface $loginPage,
         private RegisterPageInterface $registerPage,
-        private RegisterElementInterface $registerElement
+        private RegisterElementInterface $registerElement,
     ) {
     }
 

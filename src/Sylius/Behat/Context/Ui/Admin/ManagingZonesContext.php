@@ -32,7 +32,7 @@ final class ManagingZonesContext implements Context
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private NotificationCheckerInterface $notificationChecker
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -337,7 +337,7 @@ final class ManagingZonesContext implements Context
                 'code' => $zone->getCode(),
                 'name' => $zone->getName(),
             ]),
-            sprintf('Zone %s is not valid', $zone->getName())
+            sprintf('Zone %s is not valid', $zone->getName()),
         );
 
         Assert::true($this->updatePage->hasMember($zoneMember));

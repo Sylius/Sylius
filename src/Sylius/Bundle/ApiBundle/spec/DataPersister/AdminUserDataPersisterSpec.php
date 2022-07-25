@@ -27,7 +27,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         TokenStorageInterface $tokenStorage,
-        PasswordUpdaterInterface $passwordUpdater
+        PasswordUpdaterInterface $passwordUpdater,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $tokenStorage, $passwordUpdater);
     }
@@ -41,7 +41,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
     function it_updates_password_during_persisting_an_admin_user(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         PasswordUpdaterInterface $passwordUpdater,
-        AdminUserInterface $adminUser
+        AdminUserInterface $adminUser,
     ): void {
         $passwordUpdater->updatePassword($adminUser)->shouldBeCalled();
         $decoratedDataPersister->persist($adminUser, [])->shouldBeCalled();
@@ -54,7 +54,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         AdminUserInterface $userToBeDeleted,
         AdminUserInterface $currentlyLoggedInUser,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $userToBeDeleted->getId()->willReturn(1);
 
@@ -72,7 +72,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         AdminUserInterface $userToBeDeleted,
         AdminUserInterface $currentlyLoggedInUser,
-        TokenInterface $token
+        TokenInterface $token,
     ): void {
         $userToBeDeleted->getId()->willReturn(1);
 
@@ -91,7 +91,7 @@ final class AdminUserDataPersisterSpec extends ObjectBehavior
     function it_removes_admin_user_if_there_is_no_token(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         TokenStorageInterface $tokenStorage,
-        AdminUserInterface $userToBeDeleted
+        AdminUserInterface $userToBeDeleted,
     ): void {
         $userToBeDeleted->getId()->willReturn(11);
 

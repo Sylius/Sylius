@@ -30,7 +30,7 @@ final class SyliusApiExtension extends Extension
         $container->setParameter('sylius_api.product_image_prefix', $config['product_image_prefix']);
         $container->setParameter(
             'sylius_api.filter_eager_loading_extension.restricted_resources',
-            $config['filter_eager_loading_extension']['restricted_resources']
+            $config['filter_eager_loading_extension']['restricted_resources'],
         );
 
         $loader->load('services.xml');

@@ -34,7 +34,7 @@ final class CircularDependencyBreakingExceptionListenerPass implements CompilerP
 
         $container->setDefinition(
             CircularDependencyBreakingExceptionListener::class,
-            $definition
+            $definition,
         );
     }
 }

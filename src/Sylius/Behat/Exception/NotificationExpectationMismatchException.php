@@ -21,12 +21,12 @@ final class NotificationExpectationMismatchException extends \RuntimeException
         NotificationType $expectedType,
         $expectedMessage,
         $code = 0,
-        \Exception $previous = null
+        \Exception $previous = null,
     ) {
         $message = sprintf(
             'Expected *%s* notification with a "%s" message was not found',
             $expectedType,
-            $expectedMessage
+            $expectedMessage,
         );
 
         parent::__construct($message, $code, $previous);

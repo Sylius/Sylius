@@ -40,7 +40,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine
+        StateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -61,7 +61,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
     function it_marks_an_order_as_shipped_if_there_are_no_shipments_to_deliver(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
-        StateMachineInterface $orderStateMachine
+        StateMachineInterface $orderStateMachine,
     ): void {
         $order->getShipments()->willReturn(new ArrayCollection());
         $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
@@ -77,7 +77,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine
+        StateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());
@@ -100,7 +100,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2,
-        StateMachineInterface $orderStateMachine
+        StateMachineInterface $orderStateMachine,
     ): void {
         $shipments = new ArrayCollection();
         $shipments->add($shipment1->getWrappedObject());

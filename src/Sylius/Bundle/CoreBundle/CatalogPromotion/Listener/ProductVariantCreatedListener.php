@@ -24,7 +24,7 @@ final class ProductVariantCreatedListener
     public function __construct(
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ProductVariantCatalogPromotionsProcessorInterface $productVariantCatalogPromotionsProcessor,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
     ) {
     }
 
