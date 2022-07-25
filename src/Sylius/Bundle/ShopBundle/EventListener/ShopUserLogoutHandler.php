@@ -44,11 +44,4 @@ final class ShopUserLogoutHandler
         $response = $this->httpUtils->createRedirectResponse($logoutEvent->getRequest(), $this->targetUrl);
         $logoutEvent->setResponse($response);
     }
-
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            LogoutEvent::class => [['onLogout', 64]],
-        ];
-    }
 }
