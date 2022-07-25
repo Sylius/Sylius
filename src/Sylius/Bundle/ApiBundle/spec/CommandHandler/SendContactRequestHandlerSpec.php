@@ -30,7 +30,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
     function it_sends_contact_request(
         ChannelInterface $channel,
         ChannelRepositoryInterface $channelRepository,
-        SenderInterface $sender
+        SenderInterface $sender,
     ): void {
         $command = new SendContactRequest('adam@sylius.com', 'message');
         $command->setChannelCode('CODE');
@@ -49,7 +49,7 @@ final class SendContactRequestHandlerSpec extends ObjectBehavior
                 'localeCode' => 'en_US',
             ],
             [],
-            ['adam@sylius.com']
+            ['adam@sylius.com'],
         );
 
         $this($command);

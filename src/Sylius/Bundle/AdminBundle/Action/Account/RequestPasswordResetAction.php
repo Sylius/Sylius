@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -68,7 +68,7 @@ final class RequestPasswordResetAction
         return new Response(
             $this->twig->render('@SyliusAdmin/Security/requestPasswordReset.html.twig', [
                 'form' => $form->createView(),
-            ])
+            ]),
         );
     }
 }

@@ -251,7 +251,7 @@ final class ProductVariantContext implements Context
         Assert::same(
             $content['code'],
             404,
-            sprintf('%s variant should be disabled', $variant->getName())
+            sprintf('%s variant should be disabled', $variant->getName()),
         );
     }
 
@@ -268,7 +268,7 @@ final class ProductVariantContext implements Context
             Assert::same(
                 $content['name'],
                 $variant->getName(),
-                sprintf('%s variant should be visible', $variant->getName())
+                sprintf('%s variant should be visible', $variant->getName()),
             );
         }
     }

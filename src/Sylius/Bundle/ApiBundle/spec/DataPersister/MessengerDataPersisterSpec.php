@@ -29,7 +29,7 @@ final class MessengerDataPersisterSpec extends ObjectBehavior
     }
 
     function it_calls_supports_method_from_decorated_data_presister(
-        ContextAwareDataPersisterInterface $decoratedDataPersister
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
     ): void {
         $decoratedDataPersister->supports(Argument::any(), [])->shouldBeCalled();
 
@@ -56,15 +56,15 @@ final class MessengerDataPersisterSpec extends ObjectBehavior
         $decoratedDataPersister->persist($envelope, [])->willThrow(
             new HandlerFailedException(
                 $envelope,
-                [new \RuntimeException('Delayed message exception')]
-            )
+                [new \RuntimeException('Delayed message exception')],
+            ),
         );
 
         $this->shouldThrow(new \RuntimeException('Delayed message exception'))->during('persist', [$envelope, []]);
     }
 
     function it_calls_remove_method_from_decorated_data_presister(
-        ContextAwareDataPersisterInterface $decoratedDataPersister
+        ContextAwareDataPersisterInterface $decoratedDataPersister,
     ): void {
         $decoratedDataPersister->remove(Argument::any(), [])->shouldBeCalled();
 

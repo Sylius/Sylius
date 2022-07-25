@@ -63,7 +63,7 @@ final class ProductAttributeContext implements Context
     {
         Assert::eq(
             new \DateTime($this->showPage->getAttributeByName($attributeName)),
-            new \DateTime($expectedAttribute)
+            new \DateTime($expectedAttribute),
         );
     }
 
@@ -74,7 +74,7 @@ final class ProductAttributeContext implements Context
     {
         Assert::eq(
             $this->showPage->getAttributeByName($attributeName),
-            sprintf('%d %%', $expectedAttribute)
+            sprintf('%d %%', $expectedAttribute),
         );
     }
 

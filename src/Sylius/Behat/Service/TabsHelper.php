@@ -36,6 +36,6 @@ abstract class TabsHelper
 
         $tabContent = $tabsContainer->find('css', sprintf('.tab[data-tab*="%s"]', $dataTabHook));
 
-        $session->getPage()->waitFor(5, fn() => $tabContent->isVisible());
+        $session->getPage()->waitFor(5, fn () => $tabContent->isVisible());
     }
 }

@@ -537,7 +537,7 @@ final class ManagingShippingMethodsContext implements Context
     ): void {
         Assert::same(
             $this->updatePage->getShippingChargesValidationErrorsCount($channel->getCode()),
-            $count
+            $count,
         );
     }
 

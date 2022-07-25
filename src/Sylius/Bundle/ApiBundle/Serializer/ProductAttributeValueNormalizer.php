@@ -31,7 +31,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
 
     public function __construct(
         private LocaleProviderInterface $localeProvider,
-        private string $defaultLocaleCode
+        private string $defaultLocaleCode,
     ) {
     }
 

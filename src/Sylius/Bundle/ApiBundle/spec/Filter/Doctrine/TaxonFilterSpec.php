@@ -85,7 +85,7 @@ final class TaxonFilterSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',
-            context: $context
+            context: $context,
         );
     }
 
@@ -115,7 +115,7 @@ final class TaxonFilterSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',
-            context: $context
+            context: $context,
         );
     }
 
@@ -146,7 +146,7 @@ final class TaxonFilterSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',
-            context: $context
+            context: $context,
         );
     }
 }

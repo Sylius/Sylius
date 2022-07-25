@@ -66,7 +66,7 @@ final class ContactContext implements Context
             'shop',
             Resources::CONTACT_REQUESTS,
             'Authorization',
-            $this->client->getToken()
+            $this->client->getToken(),
         );
 
         $request->setContent($this->content);
@@ -93,7 +93,7 @@ final class ContactContext implements Context
 
         Assert::same(
             $this->responseChecker->getError($response),
-            'email: The provided email is invalid.'
+            'email: The provided email is invalid.',
         );
     }
 
@@ -106,7 +106,7 @@ final class ContactContext implements Context
 
         Assert::same(
             $this->responseChecker->getError($response),
-            sprintf('%s: This value should not be blank.', $element)
+            sprintf('%s: This value should not be blank.', $element),
         );
     }
 }

@@ -37,7 +37,7 @@ final class RedirectHandler implements RedirectHandlerInterface
         return $this->decoratedRedirectHandler->redirectToRoute(
             $configuration,
             (string) $configuration->getRedirectRoute('index'),
-            array_merge($configuration->getRedirectParameters($resource), $this->filterStorage->all())
+            array_merge($configuration->getRedirectParameters($resource), $this->filterStorage->all()),
         );
     }
 

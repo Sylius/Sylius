@@ -23,7 +23,7 @@ final class ExchangeRateContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker
+        private ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -61,7 +61,7 @@ final class ExchangeRateContext implements Context
         Assert::throws(
             fn () => $this->getExchangeRateByTargetCurrency($sourceCurrency, $targetCurrency),
             \RuntimeException::class,
-            sprintf('Cannot find %s/%s exchange rate.', $sourceCurrency, $targetCurrency)
+            sprintf('Cannot find %s/%s exchange rate.', $sourceCurrency, $targetCurrency),
         );
     }
 

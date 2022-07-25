@@ -115,7 +115,7 @@ final class LocaleContext implements Context
         $this->iGetAvailableLocales();
 
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode),
         );
     }
 
@@ -127,7 +127,7 @@ final class LocaleContext implements Context
         $this->iGetAvailableLocales();
 
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode)
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $localeCode),
         );
     }
 }

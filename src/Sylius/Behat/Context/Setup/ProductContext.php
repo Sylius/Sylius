@@ -82,7 +82,7 @@ final class ProductContext implements Context
      */
     public function storeHasMoreProducts(int $numberOfProducts): void
     {
-        for ($i = 0; $i < $numberOfProducts; $i++) {
+        for ($i = 0; $i < $numberOfProducts; ++$i) {
             $product = $this->createProduct('TEST' . $i);
 
             $this->saveProduct($product);

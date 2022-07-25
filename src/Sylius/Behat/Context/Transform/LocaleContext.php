@@ -58,7 +58,7 @@ final class LocaleContext implements Context
         if ($this->sharedStorage->has('current_locale_code')) {
             return $this->localeNameConverter->convertCodeToName(
                 $this->localeNameConverter->convertNameToCode($localeName),
-                $this->sharedStorage->get('current_locale_code')
+                $this->sharedStorage->get('current_locale_code'),
             );
         }
 

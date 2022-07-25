@@ -79,7 +79,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->addRequestData(
             'sourceCurrency',
-            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode),
         );
     }
 
@@ -90,7 +90,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->client->addRequestData(
             'targetCurrency',
-            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode)
+            sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $currencyCode),
         );
     }
 
@@ -347,7 +347,7 @@ final class ManagingExchangeRatesContext implements Context
 
         $this->client->addRequestData(
             $currencyType,
-            sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix)
+            sprintf('%s/admin/currencies/EUR', $this->apiUrlPrefix),
         );
         $this->client->update();
 

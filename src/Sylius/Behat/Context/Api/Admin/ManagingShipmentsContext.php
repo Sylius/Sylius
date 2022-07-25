@@ -272,7 +272,7 @@ final class ManagingShipmentsContext implements Context
         foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
             $shipmentUnitResponse = $this->client->showByIri($shipmentUnitFromResponse);
             $productVariantResponse = $this->client->showByIri(
-                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id']
+                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id'],
             );
             $productResponse = $this->client->showByIri(
                 $this->responseChecker->getValue($productVariantResponse, 'product'),

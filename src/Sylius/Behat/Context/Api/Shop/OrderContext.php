@@ -102,7 +102,7 @@ final class OrderContext implements Context
         Assert::same($response->getStatusCode(), Response::HTTP_OK);
         Assert::same(
             $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'checkoutState'),
-            OrderCheckoutStates::STATE_COMPLETED
+            OrderCheckoutStates::STATE_COMPLETED,
         );
         Assert::same(
             $this->sharedStorage->get('order_number'),
@@ -196,8 +196,8 @@ final class OrderContext implements Context
             StringInflector::codeToName(
                 $this->responseChecker->getValue(
                     $this->shopClient->getLastResponse(),
-                    $elementType . 'State'
-                )
+                    $elementType . 'State',
+                ),
             ),
         );
     }

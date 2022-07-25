@@ -39,7 +39,7 @@ final class ProductContext implements Context
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
         private RequestFactoryInterface $requestFactory,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -426,7 +426,7 @@ final class ProductContext implements Context
         Assert::false($this->responseChecker->hasValue(
             $this->client->getLastResponse(),
             'name',
-            $product->getTranslation($localeCode)->getName()
+            $product->getTranslation($localeCode)->getName(),
         ));
     }
 
@@ -691,7 +691,7 @@ final class ProductContext implements Context
     private function hasAssociationsWithProducts(
         array $associationsIris,
         string $productAssociationTypeName,
-        array $products
+        array $products,
     ): bool {
         try {
             $associatedProducts = $this->provideAssociatedProductsOfAssociationTypeName($associationsIris, $productAssociationTypeName);
@@ -710,7 +710,7 @@ final class ProductContext implements Context
 
     private function provideAssociatedProductsOfAssociationTypeName(
         array $associationsIris,
-        string $productAssociationTypeName
+        string $productAssociationTypeName,
     ): array {
         foreach ($associationsIris as $associationIri) {
             $associationResponse = $this->client->showByIri($associationIri);
