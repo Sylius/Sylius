@@ -52,6 +52,16 @@ final class TokenBasedUserContextSpec extends ObjectBehavior
         $this->getUser()->shouldReturn(null);
     }
 
+    function it_returns_null_if_user_from_token_is_null(
+        TokenStorageInterface $tokenStorage,
+        TokenInterface $token
+    ): void {
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getUser()->willReturn(null);
+
+        $this->getUser()->shouldReturn(null);
+    }
+
     function it_returns_null_if_no_token_is_set_in_token_storage(TokenStorageInterface $tokenStorage): void
     {
         $tokenStorage->getToken()->willReturn(null);
