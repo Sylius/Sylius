@@ -36,7 +36,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         AdminUserInterface $admin,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -61,7 +61,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryNameGenerator->generateParameterName('customer')->shouldBeCalled()->willReturn('customer');
         $queryBuilder->getRootAliases()->willReturn(['o']);
@@ -87,7 +87,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
     function it_throws_an_exception_anonymous_user_tries_to_get_address(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -104,7 +104,7 @@ final class AddressItemExtensionSpec extends ObjectBehavior
                     ['tokenValue' => 'xaza-tt_fee'],
                     Request::METHOD_GET,
                     [ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET],
-                ]
+                ],
             )
         ;
     }

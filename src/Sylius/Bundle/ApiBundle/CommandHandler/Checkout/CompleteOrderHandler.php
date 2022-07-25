@@ -34,7 +34,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         private FactoryInterface $stateMachineFactory,
         private MessageBusInterface $commandBus,
         private MessageBusInterface $eventBus,
-        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker
+        private OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ) {
     }
 
@@ -55,7 +55,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
         if ($promotion = $this->orderPromotionsIntegrityChecker->check($cart)) {
             $this->commandBus->dispatch(
                 new InformAboutCartRecalculation($promotion->getName()),
-                [new DispatchAfterCurrentBusStamp()]
+                [new DispatchAfterCurrentBusStamp()],
             );
 
             return $cart;
@@ -65,7 +65,7 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         Assert::true(
             $stateMachine->can(OrderCheckoutTransitions::TRANSITION_COMPLETE),
-            sprintf('Order with %s token cannot be completed.', $orderTokenValue)
+            sprintf('Order with %s token cannot be completed.', $orderTokenValue),
         );
 
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);

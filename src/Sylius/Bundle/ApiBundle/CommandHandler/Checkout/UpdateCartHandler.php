@@ -29,7 +29,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
         private OrderRepositoryInterface $orderRepository,
         private OrderAddressModifierInterface $orderAddressModifier,
         private OrderPromoCodeAssignerInterface $orderPromoCodeAssigner,
-        private CustomerProviderInterface $customerProvider
+        private CustomerProviderInterface $customerProvider,
     ) {
     }
 
@@ -49,7 +49,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
             $order = $this->orderAddressModifier->modify(
                 $order,
                 $updateCart->getBillingAddress(),
-                $updateCart->getShippingAddress()
+                $updateCart->getShippingAddress(),
             );
         }
 

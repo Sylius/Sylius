@@ -28,7 +28,7 @@ final class AddToCartCommandFactorySpec extends ObjectBehavior
 
     function it_creates_add_to_cart_command_with_cart_and_cart_item(
         OrderInterface $cart,
-        OrderItemInterface $cartItem
+        OrderItemInterface $cartItem,
     ): void {
         $this->createWithCartAndCartItem($cart, $cartItem)->shouldBeLike(new AddToCartCommand($cart->getWrappedObject(), $cartItem->getWrappedObject()));
     }

@@ -42,7 +42,7 @@ class ProductVariantController extends ResourceController
                 if (!is_numeric($productVariantToUpdate['position'])) {
                     throw new HttpException(
                         Response::HTTP_NOT_ACCEPTABLE,
-                        sprintf('The product variant position "%s" is invalid.', $productVariantToUpdate['position'])
+                        sprintf('The product variant position "%s" is invalid.', $productVariantToUpdate['position']),
                     );
                 }
 

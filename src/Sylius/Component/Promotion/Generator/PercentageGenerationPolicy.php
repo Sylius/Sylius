@@ -45,13 +45,13 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
 
         Assert::allNotNull(
             [$expectedAmount, $expectedCodeLength],
-            'Code length or amount cannot be null.'
+            'Code length or amount cannot be null.',
         );
 
         $generatedAmount = $this->couponRepository->countByCodeLength(
             $expectedCodeLength,
             $instruction->getPrefix(),
-            $instruction->getSuffix()
+            $instruction->getSuffix(),
         );
 
         $codeCombination = 16 ** $expectedCodeLength * $this->ratio;

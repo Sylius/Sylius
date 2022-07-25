@@ -22,6 +22,6 @@ interface ActionBasedDiscountApplicatorInterface
     public function applyDiscountOnChannelPricing(
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void;
 }

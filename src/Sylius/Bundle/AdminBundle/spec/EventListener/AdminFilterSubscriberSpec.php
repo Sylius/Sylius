@@ -53,7 +53,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
 
         $filterStorage->all()->willReturn([]);
 
-        $event->getRequest()->willReturn($request);;
+        $event->getRequest()->willReturn($request);
 
         $filterStorage->set(Argument::any())->shouldBeCalled();
 
@@ -92,7 +92,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
 
         $filterStorage->all()->willReturn([]);
 
-        $event->getRequest()->willReturn($request);;
+        $event->getRequest()->willReturn($request);
 
         $filterStorage->set(Argument::any())->shouldNotBeCalled();
 
@@ -119,7 +119,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
 
         $filterStorage->all()->willReturn([]);
 
-        $event->getRequest()->willReturn($request);;
+        $event->getRequest()->willReturn($request);
 
         $filterStorage->set(Argument::any())->shouldNotBeCalled();
 
@@ -146,7 +146,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
 
         $filterStorage->all()->willReturn([]);
 
-        $event->getRequest()->willReturn($request);;
+        $event->getRequest()->willReturn($request);
 
         $filterStorage->set(Argument::any())->shouldNotBeCalled();
 
@@ -173,7 +173,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
 
         $filterStorage->all()->willReturn([]);
 
-        $event->getRequest()->willReturn($request);;
+        $event->getRequest()->willReturn($request);
 
         $filterStorage->set(Argument::any())->shouldNotBeCalled();
 

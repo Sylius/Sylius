@@ -25,7 +25,7 @@ final class PaypalContext implements Context
         private PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         private ShowPageInterface $orderDetails,
         private CompletePageInterface $summaryPage,
-        private PaypalApiMocker $paypalApiMocker
+        private PaypalApiMocker $paypalApiMocker,
     ) {
     }
 

@@ -51,7 +51,7 @@ final class SyliusCoreConfigurationTest extends TestCase
         (new PartialProcessor())->processConfiguration(
             $this->getConfiguration(),
             'process_shipments_before_recalculating_prices',
-            [['process_shipments_before_recalculating_prices' => 'yolo']]
+            [['process_shipments_before_recalculating_prices' => 'yolo']],
         );
     }
 

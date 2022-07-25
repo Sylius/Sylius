@@ -44,7 +44,7 @@ final class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         AttributeValueInterface $attributeValue,
         ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint,
-        TranslationLocaleProviderInterface $localeProvider
+        TranslationLocaleProviderInterface $localeProvider,
     ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
@@ -65,7 +65,7 @@ final class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
         AttributeValueInterface $attributeValue,
         ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint,
-        TranslationLocaleProviderInterface $localeProvider
+        TranslationLocaleProviderInterface $localeProvider,
     ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
@@ -82,7 +82,7 @@ final class LocalesAwareValidAttributeValueValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_validated_value_is_not_attribute_value(
         \DateTime $badObject,
-        ValidAttributeValue $attributeValueConstraint
+        ValidAttributeValue $attributeValueConstraint,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

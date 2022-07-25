@@ -27,7 +27,7 @@ final class ManagingProductAssociationTypesContext implements Context
         private CreatePageInterface $createPage,
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
-        private CurrentPageResolverInterface $currentPageResolver
+        private CurrentPageResolverInterface $currentPageResolver,
     ) {
     }
 
@@ -184,7 +184,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function thisProductAssociationTypeNameShouldBe(
         ProductAssociationTypeInterface $productAssociationType,
-        $productAssociationTypeName
+        $productAssociationTypeName,
     ) {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -206,7 +206,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @Then /^(this product association type) should no longer exist in the registry$/
      */
     public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(
-        ProductAssociationTypeInterface $productAssociationType
+        ProductAssociationTypeInterface $productAssociationType,
     ) {
         Assert::false($this->indexPage->isSingleResourceOnPage([
             'code' => $productAssociationType->getCode(),
@@ -221,7 +221,7 @@ final class ManagingProductAssociationTypesContext implements Context
     {
         Assert::same(
             $this->createPage->getValidationMessage('code'),
-            'The association type with given code already exists.'
+            'The association type with given code already exists.',
         );
     }
 

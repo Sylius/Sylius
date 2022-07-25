@@ -33,7 +33,7 @@ final class CircularDependencyBreakingErrorListenerPass implements CompilerPassI
 
         $container->setDefinition(
             CircularDependencyBreakingErrorListener::class,
-            $definition
+            $definition,
         );
     }
 }

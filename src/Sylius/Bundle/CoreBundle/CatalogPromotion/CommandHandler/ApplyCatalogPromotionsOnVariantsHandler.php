@@ -25,7 +25,7 @@ final class ApplyCatalogPromotionsOnVariantsHandler
         private EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         private CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         private ProductVariantRepositoryInterface $productVariantRepository,
-        private CatalogPromotionClearerInterface $clearer
+        private CatalogPromotionClearerInterface $clearer,
     ) {
     }
 

@@ -27,7 +27,7 @@ final class PaymentItemDataProvider implements ItemDataProviderInterface, Restri
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

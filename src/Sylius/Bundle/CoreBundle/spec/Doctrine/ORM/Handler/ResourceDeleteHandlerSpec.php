@@ -37,7 +37,7 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         ResourceDeleteHandlerInterface $decoratedHandler,
         EntityManagerInterface $entityManager,
         RepositoryInterface $repository,
-        ResourceInterface $resource
+        ResourceInterface $resource,
     ): void {
         $entityManager->beginTransaction()->shouldBeCalled();
         $decoratedHandler->handle($resource, $repository)->shouldBeCalled();
@@ -50,7 +50,7 @@ final class ResourceDeleteHandlerSpec extends ObjectBehavior
         ResourceDeleteHandlerInterface $decoratedHandler,
         EntityManagerInterface $entityManager,
         RepositoryInterface $repository,
-        ResourceInterface $resource
+        ResourceInterface $resource,
     ): void {
         $entityManager->beginTransaction()->shouldBeCalled();
         $decoratedHandler->handle($resource, $repository)->willThrow(ORMException::class);

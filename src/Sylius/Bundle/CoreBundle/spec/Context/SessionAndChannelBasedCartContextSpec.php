@@ -38,7 +38,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $cartStorage->hasForChannel($channel)->willReturn(true);
@@ -50,7 +50,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
     function it_throws_cart_not_found_exception_if_session_key_does_not_exist(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $cartStorage->hasForChannel($channel)->willReturn(false);
@@ -61,7 +61,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
     function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_was_not_found(
         CartStorageInterface $cartStorage,
         ChannelContextInterface $channelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
         $cartStorage->hasForChannel($channel)->willReturn(true);

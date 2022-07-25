@@ -29,7 +29,7 @@ final class ApiCartBlamerListener
     public function __construct(
         private CartContextInterface $cartContext,
         private SectionProviderInterface $uriBasedSectionContext,
-        private MessageBusInterface $commandBus
+        private MessageBusInterface $commandBus,
     ) {
     }
 

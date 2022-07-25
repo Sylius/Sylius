@@ -32,7 +32,7 @@ final class CustomerContextSpec extends ObjectBehavior
         AuthorizationCheckerInterface $authorizationChecker,
         TokenInterface $token,
         ShopUserInterface $user,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $tokenStorage->getToken()->willReturn($token);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
@@ -53,7 +53,7 @@ final class CustomerContextSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         TokenInterface $token,
-        \stdClass $user
+        \stdClass $user,
     ): void {
         $tokenStorage->getToken()->willReturn($token);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);

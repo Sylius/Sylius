@@ -150,7 +150,7 @@ final class BuildZoneFormSubscriberSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_from_data_is_not_a_zone(
         FormEvent $event,
-        FormInterface $form
+        FormInterface $form,
     ): void {
         $event->getData()->willReturn([
             'name' => 'Europe',

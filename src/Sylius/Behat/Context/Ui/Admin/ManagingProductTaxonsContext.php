@@ -39,7 +39,7 @@ final class ManagingProductTaxonsContext implements Context
      */
     public function iChangeThatTheProductDoesNotBelongToTheTaxon(
         ProductInterface $product,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
         $this->updateSimpleProductPage->unselectProductTaxon($taxon);

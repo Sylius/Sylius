@@ -31,7 +31,7 @@ final class ChannelContext implements Context
         private ChannelRepositoryInterface $channelRepository,
         private CreatePageInterface $channelCreatePage,
         private HomePageInterface $homePage,
-        private MainPageInterface $pluginMainPage
+        private MainPageInterface $pluginMainPage,
     ) {
     }
 

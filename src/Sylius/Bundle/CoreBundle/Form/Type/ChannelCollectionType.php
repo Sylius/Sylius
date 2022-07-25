@@ -44,8 +44,8 @@ final class ChannelCollectionType extends AbstractType
             array_keys($children),
             array_map(
                 static fn (FormInterface $child): int => $child->getErrors(true)->count(),
-                $children
-            )
+                $children,
+            ),
         );
     }
 

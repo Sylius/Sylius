@@ -100,7 +100,7 @@ final class CatalogPromotionFixtureTest extends TestCase
     {
         return new CatalogPromotionFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

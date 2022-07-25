@@ -30,14 +30,14 @@ final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
             [
                 Product::class => ['operations' => ['shop_get' => ['enabled' => true]]],
                 ProductReview::class => ['operations' => ['shop_get' => ['enabled' => true], 'admin_get' => ['enabled' => false]]],
-            ]
+            ],
         );
     }
 
     function it_does_nothing_if_current_resource_and_operation_is_restricted(
         ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Product::class, 'shop_get', []];
 
@@ -48,7 +48,7 @@ final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
     public function it_calls_filter_eager_loading_extension_if_current_resource_is_not_restricted(
         ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Order::class, 'shop_get', []];
 
@@ -59,7 +59,7 @@ final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
     public function it_calls_filter_eager_loading_extension_if_current_operation_is_not_restricted(
         ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, Product::class, 'admin_get', []];
 
@@ -70,7 +70,7 @@ final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
     public function it_calls_filter_eager_loading_extension_if_current_resource_is_restricted_but_operation_is_not(
         ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $args = [$queryBuilder, $queryNameGenerator, ProductReview::class, 'admin_get', []];
 

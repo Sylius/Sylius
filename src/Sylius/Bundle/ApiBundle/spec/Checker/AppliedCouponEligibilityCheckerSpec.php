@@ -28,7 +28,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(
         PromotionEligibilityCheckerInterface $promotionChecker,
-        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker
+        PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
     ): void {
         $this->beConstructedWith($promotionChecker, $promotionCouponChecker);
     }
@@ -43,7 +43,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionCouponEligibilityCheckerInterface $promotionCouponChecker,
         PromotionCouponInterface $promotionCoupon,
         PromotionInterface $promotion,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $promotionCoupon->getPromotion()->shouldNotBeCalled();
         $promotion->getChannels()->shouldNotBeCalled();
@@ -61,7 +61,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         OrderInterface $cart,
         ChannelInterface $firstChannel,
         ChannelInterface $secondChannel,
-        ChannelInterface $thirdChannel
+        ChannelInterface $thirdChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
@@ -84,7 +84,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
@@ -107,7 +107,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 
@@ -130,7 +130,7 @@ final class AppliedCouponEligibilityCheckerSpec extends ObjectBehavior
         PromotionInterface $promotion,
         OrderInterface $cart,
         ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel
+        ChannelInterface $secondChannel,
     ): void {
         $promotionCoupon->getPromotion()->willReturn($promotion);
 

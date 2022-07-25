@@ -30,10 +30,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
     function it_increments_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
-        PromotionInterface $secondPromotion
+        PromotionInterface $secondPromotion,
     ): void {
         $order->getPromotions()->willReturn(
-            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]),
         );
         $order->getPromotionCoupon()->willReturn(null);
 
@@ -46,10 +46,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
     function it_decrements_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
-        PromotionInterface $secondPromotion
+        PromotionInterface $secondPromotion,
     ): void {
         $order->getPromotions()->willReturn(
-            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]),
         );
         $order->getPromotionCoupon()->willReturn(null);
 
@@ -63,10 +63,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $order->getPromotions()->willReturn(
-            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]),
         );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
 
@@ -82,11 +82,11 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $order->getState()->willReturn('cancelled');
         $order->getPromotions()->willReturn(
-            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]),
         );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
         $promotionCoupon->isReusableFromCancelledOrders()->willReturn(true);
@@ -103,11 +103,11 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $order->getState()->willReturn('cancelled');
         $order->getPromotions()->willReturn(
-            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()])
+            new ArrayCollection([$firstPromotion->getWrappedObject(), $secondPromotion->getWrappedObject()]),
         );
         $order->getPromotionCoupon()->willReturn($promotionCoupon);
         $promotionCoupon->isReusableFromCancelledOrders()->willReturn(false);

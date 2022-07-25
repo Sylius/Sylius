@@ -29,7 +29,7 @@ final class OrderShowMenuBuilder
         private FactoryInterface $factory,
         private EventDispatcherInterface $eventDispatcher,
         private StateMachineFactoryInterface $stateMachineFactory,
-        private CsrfTokenManagerInterface $csrfTokenManager
+        private CsrfTokenManagerInterface $csrfTokenManager,
     ) {
     }
 
@@ -73,7 +73,7 @@ final class OrderShowMenuBuilder
 
         $this->eventDispatcher->dispatch(
             new OrderShowMenuBuilderEvent($this->factory, $menu, $order, $stateMachine),
-            self::EVENT_NAME
+            self::EVENT_NAME,
         );
 
         return $menu;

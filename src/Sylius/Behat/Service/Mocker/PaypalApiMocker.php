@@ -23,7 +23,7 @@ class PaypalApiMocker
 {
     public function __construct(
         private MockerInterface $mocker,
-        private ResponseLoaderInterface $responseLoader
+        private ResponseLoaderInterface $responseLoader,
     ) {
     }
 

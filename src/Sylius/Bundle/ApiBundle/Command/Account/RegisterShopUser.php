@@ -67,7 +67,7 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
         string $lastName,
         string $email,
         string $password,
-        bool $subscribedToNewsletter = false
+        bool $subscribedToNewsletter = false,
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;

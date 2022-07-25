@@ -40,7 +40,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         private ShipmentRepositoryInterface $shipmentRepository,
         private ServiceRegistryInterface $shippingCalculators,
         private RequestStack $requestStack,
-        private ChannelContextInterface $channelContext
+        private ChannelContextInterface $channelContext,
     ) {
     }
 

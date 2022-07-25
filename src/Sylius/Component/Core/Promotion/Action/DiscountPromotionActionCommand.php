@@ -57,7 +57,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
 
     private function removeUnitOrderPromotionAdjustmentsByOrigin(
         OrderItemUnitInterface $unit,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {

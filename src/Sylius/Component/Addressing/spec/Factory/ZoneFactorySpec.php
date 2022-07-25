@@ -55,7 +55,7 @@ final class ZoneFactorySpec extends ObjectBehavior
         FactoryInterface $zoneMemberFactory,
         ZoneInterface $zone,
         ZoneMemberInterface $zoneMember1,
-        ZoneMemberInterface $zoneMember2
+        ZoneMemberInterface $zoneMember2,
     ): void {
         $factory->createNew()->willReturn($zone);
         $zoneMemberFactory->createNew()->willReturn($zoneMember1, $zoneMember2);

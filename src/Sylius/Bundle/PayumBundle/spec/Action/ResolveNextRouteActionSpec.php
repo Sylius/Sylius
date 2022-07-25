@@ -28,7 +28,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
 
     function it_resolves_next_route_for_completed_payment(
         ResolveNextRoute $resolveNextRouteRequest,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
@@ -41,7 +41,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
     function it_resolves_next_route_for_cancelled_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
@@ -57,7 +57,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
     function it_resolves_next_route_for_payment_in_cart_state(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_CART);
@@ -73,7 +73,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
     function it_resolves_next_route_for_faild_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
@@ -89,7 +89,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
     function it_resolves_next_route_for_processing_payment(
         ResolveNextRoute $resolveNextRouteRequest,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $resolveNextRouteRequest->getFirstModel()->willReturn($payment);
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);

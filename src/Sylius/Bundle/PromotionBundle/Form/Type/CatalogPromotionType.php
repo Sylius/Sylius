@@ -30,7 +30,7 @@ final class CatalogPromotionType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        private string $catalogPromotionTranslationType
+        private string $catalogPromotionTranslationType,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }

@@ -34,7 +34,7 @@ final class AdjustmentsHelperSpec extends ObjectBehavior
         AdjustmentsAggregatorInterface $adjustmentsAggregator,
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
-        AdjustmentInterface $adjustment3
+        AdjustmentInterface $adjustment3,
     ): void {
         $adjustmentsAggregator
             ->aggregate([$adjustment1, $adjustment2, $adjustment3])

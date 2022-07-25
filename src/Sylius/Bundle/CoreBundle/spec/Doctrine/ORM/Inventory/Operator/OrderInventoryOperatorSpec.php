@@ -39,7 +39,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
@@ -58,7 +58,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);
@@ -77,7 +77,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         EntityManagerInterface $productVariantManager,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
         $orderItem->getVariant()->willReturn($variant);

@@ -25,7 +25,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shopUserRepository,
-        DateTimeProviderInterface $dateTimeProvider
+        DateTimeProviderInterface $dateTimeProvider,
     ): void {
         $this->beConstructedWith($shopUserRepository, $dateTimeProvider);
     }
@@ -38,7 +38,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
     function it_verifies_shop_user(
         RepositoryInterface $shopUserRepository,
         DateTimeProviderInterface $dateTimeProvider,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn($user);
         $dateTimeProvider->now()->willReturn(new \DateTime());
@@ -51,7 +51,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_error_if_user_does_not_exist(
-        RepositoryInterface $shopUserRepository
+        RepositoryInterface $shopUserRepository,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn(null);
 

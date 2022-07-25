@@ -24,7 +24,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
 {
     function let(
         OrderTaxesApplicatorInterface $applicatorOne,
-        OrderTaxesApplicatorInterface $applicatorTwo
+        OrderTaxesApplicatorInterface $applicatorTwo,
     ): void {
         $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo]);
     }
@@ -42,7 +42,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_throws_an_exception_if_any_of_the_applicators_are_not_of_the_correct_type(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
-        \stdClass $applicatorThree
+        \stdClass $applicatorThree,
     ): void {
         $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo, $applicatorThree]);
 
@@ -52,7 +52,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_can_be_supported_when_the_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getTaxCalculationStrategy()->willReturn('order_items_based');
@@ -63,7 +63,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_cannot_be_supported_when_the_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getTaxCalculationStrategy()->willReturn('order_item_units_based');
@@ -75,7 +75,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $applicatorOne->apply($order, $zone)->shouldBeCalled();
         $applicatorTwo->apply($order, $zone)->shouldBeCalled();

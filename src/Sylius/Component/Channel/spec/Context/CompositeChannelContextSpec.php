@@ -31,7 +31,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_channel_not_found_exception_if_none_of_nested_channel_contexts_returned_a_channel(
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
@@ -44,7 +44,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $firstChannelContext,
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $firstChannelContext->getChannel()->willThrow(ChannelNotFoundException::class);
         $secondChannelContext->getChannel()->willReturn($channel);
@@ -61,7 +61,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         ChannelContextInterface $firstChannelContext,
         ChannelContextInterface $secondChannelContext,
         ChannelContextInterface $thirdChannelContext,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $firstChannelContext->getChannel()->shouldNotBeCalled();
         $secondChannelContext->getChannel()->willReturn($channel);

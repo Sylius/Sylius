@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
@@ -28,7 +27,7 @@ class IndexPage extends CrudIndexPage implements IndexPageInterface
         RouterInterface $router,
         TableAccessorInterface $tableAccessor,
         string $routeName,
-        private ImageExistenceCheckerInterface $imageExistenceChecker
+        private ImageExistenceCheckerInterface $imageExistenceChecker,
     ) {
         parent::__construct($session, $minkParameters, $router, $tableAccessor, $routeName);
     }

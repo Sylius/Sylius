@@ -26,7 +26,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
 {
     function let(
         ProductVariantResolverInterface $defaultProductVariantResolver,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ): void {
         $this->beConstructedWith($defaultProductVariantResolver, $iriConverter);
     }
@@ -73,7 +73,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         IriConverterInterface $iriConverter,
         NormalizerInterface $normalizer,
         ProductInterface $product,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -93,7 +93,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         IriConverterInterface $iriConverter,
         NormalizerInterface $normalizer,
         ProductVariantInterface $variant,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->setNormalizer($normalizer);
 
@@ -111,7 +111,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_the_normalizer_has_been_already_called(
         NormalizerInterface $normalizer,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->setNormalizer($normalizer);
 

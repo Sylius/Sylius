@@ -23,6 +23,6 @@ interface AdjustmentFactoryInterface extends FactoryInterface
         string $label,
         int $amount,
         bool $neutral = false,
-        array $details = []
+        array $details = [],
     ): AdjustmentInterface;
 }

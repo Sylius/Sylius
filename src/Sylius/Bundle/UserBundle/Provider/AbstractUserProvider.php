@@ -28,7 +28,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
     public function __construct(
         protected string $supportedUserClass,
         protected UserRepositoryInterface $userRepository,
-        protected CanonicalizerInterface $canonicalizer
+        protected CanonicalizerInterface $canonicalizer,
     ) {
     }
 
@@ -39,7 +39,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
         if (null === $user) {
             throw new UsernameNotFoundException(
-                sprintf('Username "%s" does not exist.', $username)
+                sprintf('Username "%s" does not exist.', $username),
             );
         }
 
@@ -55,13 +55,13 @@ abstract class AbstractUserProvider implements UserProviderInterface
     {
         if (!$user instanceof SyliusUserInterface) {
             throw new UnsupportedUserException(
-                sprintf('User must implement "%s".', SyliusUserInterface::class)
+                sprintf('User must implement "%s".', SyliusUserInterface::class),
             );
         }
 
         if (!$this->supportsClass($user::class)) {
             throw new UnsupportedUserException(
-                sprintf('Instances of "%s" are not supported.', $user::class)
+                sprintf('Instances of "%s" are not supported.', $user::class),
             );
         }
 
@@ -69,7 +69,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
         $reloadedUser = $this->userRepository->find($user->getId());
         if (null === $reloadedUser) {
             throw new UsernameNotFoundException(
-                sprintf('User with ID "%d" could not be refreshed.', $user->getId())
+                sprintf('User with ID "%d" could not be refreshed.', $user->getId()),
             );
         }
 

@@ -31,7 +31,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     function let(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
-        SectionProviderInterface $uriBasedSectionContext
+        SectionProviderInterface $uriBasedSectionContext,
     ): void {
         $this->beConstructedWith($cartContext, $orderProcessor, $uriBasedSectionContext);
     }
@@ -43,7 +43,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         OrderInterface $order,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($order);
@@ -58,7 +58,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         SectionProviderInterface $uriBasedSectionContext,
         UserEvent $event,
         OrderInterface $order,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($order);
@@ -73,7 +73,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         SectionProviderInterface $uriBasedSectionContext,
         Request $request,
         TokenInterface $token,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
@@ -87,7 +87,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         OrderProcessorInterface $orderProcessor,
         SectionProviderInterface $uriBasedSectionContext,
         UserEvent $event,
-        ShopSection $shopSection
+        ShopSection $shopSection,
     ): void {
         $uriBasedSectionContext->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
@@ -100,7 +100,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
         SectionProviderInterface $uriBasedSectionContext,
-        UserEvent $event
+        UserEvent $event,
     ): void {
         $uriBasedSectionContext->getSection()->willReturn(null);
         $cartContext->getCart()->shouldNotBeCalled();

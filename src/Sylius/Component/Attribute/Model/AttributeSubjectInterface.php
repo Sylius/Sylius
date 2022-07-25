@@ -32,7 +32,7 @@ interface AttributeSubjectInterface
     public function getAttributesByLocale(
         string $localeCode,
         string $fallbackLocaleCode,
-        ?string $baseLocaleCode = null
+        ?string $baseLocaleCode = null,
     ): Collection;
 
     public function addAttribute(AttributeValueInterface $attribute): void;

@@ -34,7 +34,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_context_has_not_channel(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -51,7 +51,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         ChannelInterface $channel,
         ShopUserInterface $user,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn($user);
 
@@ -82,7 +82,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -94,7 +94,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         TaxonInterface $secondTaxon,
         ChannelInterface $channel,
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $userContext->getUser()->willReturn(null);
 
@@ -125,7 +125,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 
@@ -138,7 +138,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         ChannelInterface $channel,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        AdminUserInterface $admin
+        AdminUserInterface $admin,
     ): void {
         $userContext->getUser()->willReturn($admin);
 
@@ -168,7 +168,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
-            ]
+            ],
         );
     }
 }

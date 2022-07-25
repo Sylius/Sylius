@@ -24,7 +24,7 @@ final class TraceableTemplateBlockRenderer implements TemplateBlockRendererInter
 {
     public function __construct(
         private TemplateBlockRendererInterface $templateBlockRenderer,
-        private TemplateBlockRenderingHistory $templateBlockRenderingHistory
+        private TemplateBlockRenderingHistory $templateBlockRenderingHistory,
     ) {
     }
 

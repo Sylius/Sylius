@@ -63,7 +63,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         protected FactoryInterface $addressFactory,
         protected StateMachineFactoryInterface $stateMachineFactory,
         protected OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+        protected OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
     ) {
         $this->optionsResolver = new OptionsResolver();
         $this->faker = Factory::create();
@@ -140,7 +140,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if (0 === count($products)) {
             throw new \InvalidArgumentException(sprintf(
                 'You have no enabled products at the channel "%s", but they are required to create an orders for that channel',
-                $channel->getCode()
+                $channel->getCode(),
             ));
         }
 
@@ -199,7 +199,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
         if (count($shippingMethods) === 0) {
             throw new \InvalidArgumentException(sprintf(
                 'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
-                $channel->getCode()
+                $channel->getCode(),
             ));
         }
 
@@ -262,7 +262,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             $type,
             $channelCode,
             $type,
-            $type
+            $type,
         );
     }
 

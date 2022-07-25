@@ -90,7 +90,7 @@ final class ResettingPasswordContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 

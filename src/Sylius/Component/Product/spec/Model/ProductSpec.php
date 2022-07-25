@@ -120,7 +120,7 @@ final class ProductSpec extends ObjectBehavior
     function it_returns_attributes_by_a_locale_without_a_base_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
-        ProductAttributeValueInterface $attributeValuePL
+        ProductAttributeValueInterface $attributeValuePL,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -149,7 +149,7 @@ final class ProductSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL,
-        ProductAttributeValueInterface $attributeValueFR
+        ProductAttributeValueInterface $attributeValueFR,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -183,7 +183,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_returns_attributes_by_a_fallback_locale_when_there_is_no_value_for_a_given_locale(
         ProductAttributeInterface $attribute,
-        ProductAttributeValueInterface $attributeValueEN
+        ProductAttributeValueInterface $attributeValueEN,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -204,7 +204,7 @@ final class ProductSpec extends ObjectBehavior
     function it_returns_attributes_by_a_fallback_locale_when_there_is_an_empty_value_for_a_given_locale(
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
-        ProductAttributeValueInterface $attributeValuePL
+        ProductAttributeValueInterface $attributeValuePL,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -231,7 +231,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_returns_attributes_by_a_base_locale_when_there_is_no_value_for_a_given_locale_or_a_fallback_locale(
         ProductAttributeInterface $attribute,
-        ProductAttributeValueInterface $attributeValueFR
+        ProductAttributeValueInterface $attributeValueFR,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -253,7 +253,7 @@ final class ProductSpec extends ObjectBehavior
         ProductAttributeInterface $attribute,
         ProductAttributeValueInterface $attributeValueEN,
         ProductAttributeValueInterface $attributeValuePL,
-        ProductAttributeValueInterface $attributeValueFR
+        ProductAttributeValueInterface $attributeValueFR,
     ): void {
         $attribute->getCode()->willReturn('colour');
 
@@ -292,7 +292,7 @@ final class ProductSpec extends ObjectBehavior
 
     function its_says_it_has_variants_only_if_multiple_variants_are_defined(
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
     ): void {
         $firstVariant->setProduct($this)->shouldBeCalled();
         $secondVariant->setProduct($this)->shouldBeCalled();
@@ -316,7 +316,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_returns_available_variants(
         ProductVariantInterface $unavailableVariant,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $unavailableVariant->setProduct($this)->shouldBeCalled();
         $variant->setProduct($this)->shouldBeCalled();
@@ -422,7 +422,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_configurable_if_it_has_at_least_two_variants(
         ProductVariantInterface $firstVariant,
-        ProductVariantInterface $secondVariant
+        ProductVariantInterface $secondVariant,
     ): void {
         $firstVariant->setProduct($this)->shouldBeCalled();
         $this->addVariant($firstVariant);
@@ -435,7 +435,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_configurable_if_it_has_one_variant_and_at_least_one_option(
         ProductOptionInterface $option,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
     ): void {
         $variant->setProduct($this)->shouldBeCalled();
         $this->addVariant($variant);

@@ -41,7 +41,7 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
         SenderInterface $sender,
         CustomerInterface $customer,
         ChannelInterface $channel,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $sendOrderConfirmation->orderToken()->willReturn('TOKEN');
 
@@ -60,7 +60,7 @@ final class SendOrderConfirmationHandlerSpec extends ObjectBehavior
                 'order' => $order->getWrappedObject(),
                 'channel' => $channel->getWrappedObject(),
                 'localeCode' => 'pl_PL',
-            ]
+            ],
         )->shouldBeCalled();
 
         $this(new SendOrderConfirmation('TOKEN'));

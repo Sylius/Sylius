@@ -28,7 +28,7 @@ class SendResetPasswordEmail
     public function __construct(
         string $email,
         string $channelCode,
-        string $localeCode
+        string $localeCode,
     ) {
         $this->email = $email;
         $this->channelCode = $channelCode;

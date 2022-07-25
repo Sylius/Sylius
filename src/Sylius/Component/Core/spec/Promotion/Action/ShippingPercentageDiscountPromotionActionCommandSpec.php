@@ -42,7 +42,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
         ShipmentInterface $firstShipment,
         ShipmentInterface $secondShipment,
         AdjustmentInterface $firstAdjustment,
-        AdjustmentInterface $secondAdjustment
+        AdjustmentInterface $secondAdjustment,
     ): void {
         $promotion->getName()->willReturn('Promotion');
         $promotion->getCode()->willReturn('PROMOTION');
@@ -76,7 +76,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
     function it_does_not_apply_discount_if_order_has_no_shipment(
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $order->hasShipments()->willReturn(false);
         $order->getShipments()->shouldNotBeCalled();
@@ -89,7 +89,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
         PromotionInterface $promotion,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $order->hasShipments()->willReturn(true);
         $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
@@ -103,7 +103,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
 
     function it_throws_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -117,7 +117,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
         AdjustmentInterface $secondAdjustment,
         ShipmentInterface $firstShipment,
         ShipmentInterface $secondShipment,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getCode()->willReturn('PROMOTION');
 
@@ -162,7 +162,7 @@ final class ShippingPercentageDiscountPromotionActionCommandSpec extends ObjectB
 
     function it_throws_an_exception_while_reverting_subject_is_not_an_order(
         PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

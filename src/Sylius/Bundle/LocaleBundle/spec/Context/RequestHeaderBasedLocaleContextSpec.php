@@ -46,7 +46,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_if_main_request_does_not_have_accept_language_in_header(
         RequestStack $requestStack,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);
@@ -62,7 +62,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
     function it_throws_locale_not_found_exception_if_main_request_locale_code_is_not_among_available_ones(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);
@@ -80,7 +80,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
     function it_returns_main_request_locale_code(
         RequestStack $requestStack,
         LocaleProviderInterface $localeProvider,
-        Request $request
+        Request $request,
     ): void {
         if (\method_exists(RequestStack::class, 'getMainRequest')) {
             $requestStack->getMainRequest()->willReturn($request);

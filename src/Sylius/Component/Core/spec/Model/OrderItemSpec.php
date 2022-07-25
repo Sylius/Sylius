@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Model\VersionedInterface;
 
@@ -51,7 +49,7 @@ final class OrderItemSpec extends ObjectBehavior
         OrderItemUnitInterface $orderItemUnit1,
         OrderItemUnitInterface $orderItemUnit2,
         AdjustmentInterface $nonNeutralTaxAdjustment,
-        AdjustmentInterface $neutralTaxAdjustment
+        AdjustmentInterface $neutralTaxAdjustment,
     ): void {
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
@@ -79,7 +77,7 @@ final class OrderItemSpec extends ObjectBehavior
     }
 
     function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
-        OrderItemUnitInterface $unit
+        OrderItemUnitInterface $unit,
     ): void {
         $this->setUnitPrice(10000);
 

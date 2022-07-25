@@ -39,7 +39,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $expectedStatistics = new CustomerStatistics([]);
 
@@ -56,7 +56,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         ChannelInterface $channelWithoutOrders,
         OrderInterface $firstOrder,
         OrderInterface $secondOrder,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $firstOrder->getChannel()->willReturn($channel);
         $secondOrder->getChannel()->willReturn($channel);
@@ -84,7 +84,7 @@ final class CustomerStatisticsProviderSpec extends ObjectBehavior
         OrderInterface $thirdOrder,
         OrderInterface $fourthOrder,
         OrderInterface $fifthOrder,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $allOrders = [$firstOrder, $secondOrder, $thirdOrder, $fourthOrder, $fifthOrder];
 

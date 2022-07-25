@@ -26,7 +26,7 @@ final class ChannelCollector extends DataCollector
     public function __construct(
         ChannelRepositoryInterface $channelRepository,
         private ChannelContextInterface $channelContext,
-        bool $channelChangeSupport = false
+        bool $channelChangeSupport = false,
     ) {
         $this->data = [
             'channel' => null,

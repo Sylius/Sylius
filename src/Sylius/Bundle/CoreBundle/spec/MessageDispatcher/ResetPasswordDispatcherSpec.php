@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\MessageDispatcher;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\ResetPassword;
-use Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 

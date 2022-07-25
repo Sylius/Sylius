@@ -57,7 +57,7 @@ final class PromotionTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             '/api/v2/custom/promotions',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();

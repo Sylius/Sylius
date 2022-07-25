@@ -24,7 +24,7 @@ final class CustomerContext implements Context
     public function __construct(
         private CustomerRepositoryInterface $customerRepository,
         private FactoryInterface $customerFactory,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

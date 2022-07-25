@@ -27,7 +27,7 @@ class UserLogin implements UserLoginInterface
     public function __construct(
         private TokenStorageInterface $tokenStorage,
         private UserCheckerInterface $userChecker,
-        private EventDispatcherInterface $eventDispatcher
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
@@ -54,7 +54,7 @@ class UserLogin implements UserLoginInterface
             return new UsernamePasswordToken(
                 $user,
                 $firewallName,
-                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles())
+                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles()),
             );
         }
 
@@ -62,7 +62,7 @@ class UserLogin implements UserLoginInterface
             $user,
             null,
             $firewallName,
-            array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles())
+            array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
         );
     }
 }

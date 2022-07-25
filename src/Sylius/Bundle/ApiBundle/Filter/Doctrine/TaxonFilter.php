@@ -26,7 +26,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
 {
     public function __construct(
         ManagerRegistry $managerRegistry,
-        private IriConverterInterface $iriConverter
+        private IriConverterInterface $iriConverter,
     ) {
         parent::__construct($managerRegistry);
     }
@@ -38,7 +38,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if ($property !== 'taxon') {
             return;

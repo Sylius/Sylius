@@ -27,7 +27,7 @@ final class CurrencyContext implements Context
         private SharedStorageInterface $sharedStorage,
         private RepositoryInterface $currencyRepository,
         private FactoryInterface $currencyFactory,
-        private ObjectManager $channelManager
+        private ObjectManager $channelManager,
     ) {
     }
 

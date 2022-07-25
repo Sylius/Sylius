@@ -33,8 +33,8 @@ final class HandleExceptionSpec extends ObjectBehavior
         $this->getMessage()->shouldReturn(
             sprintf(
                 '%s was unable to handle this request. request does not have locale code',
-                HandleException::class
-            )
+                HandleException::class,
+            ),
         );
     }
 }

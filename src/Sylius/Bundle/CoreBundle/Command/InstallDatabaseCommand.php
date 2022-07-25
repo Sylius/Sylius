@@ -42,7 +42,7 @@ EOT
         $outputStyle = new SymfonyStyle($input, $output);
         $outputStyle->writeln(sprintf(
             'Creating Sylius database for environment <info>%s</info>.',
-            $this->getEnvironment()
+            $this->getEnvironment(),
         ));
 
         $commands = $this

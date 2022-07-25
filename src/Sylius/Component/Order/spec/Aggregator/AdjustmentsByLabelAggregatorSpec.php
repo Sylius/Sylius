@@ -28,7 +28,7 @@ final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
         AdjustmentInterface $adjustment3,
-        AdjustmentInterface $adjustment4
+        AdjustmentInterface $adjustment4,
     ): void {
         $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);
@@ -47,7 +47,7 @@ final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_any_array_element_is_not_adjustment(
         AdjustmentInterface $adjustment1,
-        AdjustmentInterface $adjustment2
+        AdjustmentInterface $adjustment2,
     ): void {
         $adjustment1->getLabel()->willReturn('tax 1');
         $adjustment1->getAmount()->willReturn(1000);

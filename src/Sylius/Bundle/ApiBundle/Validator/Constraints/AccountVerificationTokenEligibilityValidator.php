@@ -41,7 +41,7 @@ final class AccountVerificationTokenEligibilityValidator extends ConstraintValid
         if (null === $user) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%verificationToken%' => $value->token]
+                ['%verificationToken%' => $value->token],
             );
         }
     }

@@ -46,7 +46,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         ProductInterface $reflexBow,
-        TaxonInterface $bows
+        TaxonInterface $bows,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -82,7 +82,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $compositeBow,
         ProductInterface $reflexBow,
         TaxonInterface $bows,
-        TaxonRepositoryInterface $taxonRepository
+        TaxonRepositoryInterface $taxonRepository,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -110,7 +110,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         TaxonInterface $bows,
-        TaxonRepositoryInterface $taxonRepository
+        TaxonRepositoryInterface $taxonRepository,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -132,7 +132,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_configuration_is_invalid(
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -143,7 +143,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_there_is_no_configuration_for_order_channel(
         ChannelInterface $channel,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -154,7 +154,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
     function it_returns_false_if_taxon_with_configured_code_cannot_be_found(
         ChannelInterface $channel,
         OrderInterface $order,
-        TaxonRepositoryInterface $taxonRepository
+        TaxonRepositoryInterface $taxonRepository,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');

@@ -41,7 +41,7 @@ final class ShipmentItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -60,7 +60,7 @@ final class ShipmentItemDataProviderSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         UserContextInterface $userContext,
         AdminUserInterface $adminUser,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ) {
         $userContext->getUser()->willReturn($adminUser);
 
@@ -74,7 +74,7 @@ final class ShipmentItemDataProviderSpec extends ObjectBehavior
     function it_returns_null_if_shop_user_has_no_customer(
         ShipmentRepositoryInterface $shipmentRepository,
         UserContextInterface $userContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -90,7 +90,7 @@ final class ShipmentItemDataProviderSpec extends ObjectBehavior
         ShipmentRepositoryInterface $shipmentRepository,
         UserContextInterface $userContext,
         CustomerInterface $customer,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 

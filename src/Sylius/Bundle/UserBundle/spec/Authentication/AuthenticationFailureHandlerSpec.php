@@ -41,7 +41,7 @@ final class AuthenticationFailureHandlerSpec extends ObjectBehavior
 
     function it_returns_json_response_if_request_is_xml_based(
         Request $request,
-        AuthenticationException $authenticationException
+        AuthenticationException $authenticationException,
     ): void {
         $request->isXmlHttpRequest()->willReturn(true);
         $authenticationException->getMessageKey()->willReturn('Invalid credentials.');

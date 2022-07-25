@@ -35,7 +35,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         private string $localeCode,
         private ?FileLocatorInterface $fileLocator = null,
         private ?ImageUploaderInterface $imageUploader = null,
-        private ?FactoryInterface $avatarImageFactory = null
+        private ?FactoryInterface $avatarImageFactory = null,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

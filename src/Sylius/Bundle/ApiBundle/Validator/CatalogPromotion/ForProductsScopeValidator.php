@@ -25,7 +25,7 @@ final class ForProductsScopeValidator implements ScopeValidatorInterface
 {
     public function __construct(
         private ScopeValidatorInterface $baseScopeValidator,
-        private SectionProviderInterface $sectionProvider
+        private SectionProviderInterface $sectionProvider,
     ) {
     }
 

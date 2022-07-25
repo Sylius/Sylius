@@ -27,7 +27,7 @@ final class OrderItemUnitItemDataProvider implements ItemDataProviderInterface, 
 {
     public function __construct(
         private OrderItemUnitRepositoryInterface $orderItemUnitRepository,
-        private UserContextInterface $userContext
+        private UserContextInterface $userContext,
     ) {
     }
 

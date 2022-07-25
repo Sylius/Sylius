@@ -34,7 +34,7 @@ final class ShippingMethodChoiceType extends AbstractType
     public function __construct(
         private ShippingMethodsResolverInterface $shippingMethodsResolver,
         private ServiceRegistryInterface $calculators,
-        private RepositoryInterface $repository
+        private RepositoryInterface $repository,
     ) {
     }
 

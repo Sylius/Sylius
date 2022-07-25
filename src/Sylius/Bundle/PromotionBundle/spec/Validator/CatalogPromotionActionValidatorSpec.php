@@ -26,14 +26,14 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
     function let(
         ExecutionContextInterface $executionContext,
         ActionValidatorInterface $fixedDiscountValidator,
-        ActionValidatorInterface $percentageDiscountValidator
+        ActionValidatorInterface $percentageDiscountValidator,
     ): void {
         $this->beConstructedWith(
             ['fixed_discount', 'percentage_discount'],
             [
                 'fixed_discount' => $fixedDiscountValidator,
                 'percentage_discount' => $percentageDiscountValidator,
-            ]
+            ],
         );
 
         $this->initialize($executionContext);
@@ -47,7 +47,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_action_has_invalid_type(
         ExecutionContextInterface $executionContext,
         ConstraintViolationBuilderInterface $constraintViolationBuilder,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $action->getType()->willReturn('wrong_type');
 
@@ -61,7 +61,7 @@ final class CatalogPromotionActionValidatorSpec extends ObjectBehavior
     function it_calls_a_proper_validator_to_validate_the_configuration(
         ExecutionContextInterface $executionContext,
         CatalogPromotionActionInterface $action,
-        ActionValidatorInterface $percentageDiscountValidator
+        ActionValidatorInterface $percentageDiscountValidator,
     ): void {
         $constraint = new CatalogPromotionAction();
 

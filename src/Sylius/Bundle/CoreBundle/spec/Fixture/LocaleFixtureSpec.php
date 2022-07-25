@@ -35,7 +35,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
         FactoryInterface $localeFactory,
         ObjectManager $localeManager,
         LocaleInterface $germanLocale,
-        LocaleInterface $englishLocale
+        LocaleInterface $englishLocale,
     ): void {
         $localeFactory->createNew()->willReturn($englishLocale, $germanLocale);
 
@@ -55,7 +55,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
         ObjectManager $localeManager,
         LocaleInterface $defaultLocale,
         LocaleInterface $germanLocale,
-        LocaleInterface $englishLocale
+        LocaleInterface $englishLocale,
     ): void {
         $localeFactory->createNew()->willReturn($defaultLocale, $englishLocale, $germanLocale);
 
@@ -75,7 +75,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
     function it_allows_to_load_default_locale_and_specify_it_explicitly(
         FactoryInterface $localeFactory,
         ObjectManager $localeManager,
-        LocaleInterface $defaultLocale
+        LocaleInterface $defaultLocale,
     ): void {
         $localeFactory->createNew()->willReturn($defaultLocale);
 
@@ -91,7 +91,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
     function it_creates_and_persists_default_locale(
         FactoryInterface $localeFactory,
         ObjectManager $localeManager,
-        LocaleInterface $defaultLocale
+        LocaleInterface $defaultLocale,
     ): void {
         $localeFactory->createNew()->willReturn($defaultLocale);
 
@@ -108,7 +108,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
         FactoryInterface $localeFactory,
         ObjectManager $localeManager,
         LocaleInterface $defaultLocale,
-        LocaleInterface $polishLocale
+        LocaleInterface $polishLocale,
     ): void {
         $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
 
@@ -127,7 +127,7 @@ final class LocaleFixtureSpec extends ObjectBehavior
         FactoryInterface $localeFactory,
         ObjectManager $localeManager,
         LocaleInterface $defaultLocale,
-        LocaleInterface $polishLocale
+        LocaleInterface $polishLocale,
     ): void {
         $localeFactory->createNew()->willReturn($defaultLocale, $polishLocale);
 

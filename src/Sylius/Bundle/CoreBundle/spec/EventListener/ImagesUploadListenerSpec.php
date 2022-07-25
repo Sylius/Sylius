@@ -31,7 +31,7 @@ final class ImagesUploadListenerSpec extends ObjectBehavior
         GenericEvent $event,
         ImagesAwareInterface $subject,
         ImageInterface $image,
-        ImageUploaderInterface $uploader
+        ImageUploaderInterface $uploader,
     ): void {
         $event->getSubject()->willReturn($subject);
         $subject->getImages()->willReturn(new ArrayCollection([$image->getWrappedObject()]));
@@ -44,7 +44,7 @@ final class ImagesUploadListenerSpec extends ObjectBehavior
 
     function it_throws_exception_if_event_subject_is_not_an_image_aware(
         GenericEvent $event,
-        \stdClass $object
+        \stdClass $object,
     ): void {
         $event->getSubject()->willReturn($object);
 

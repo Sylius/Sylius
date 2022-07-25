@@ -20,7 +20,7 @@ final class AddressMapperSpec extends ObjectBehavior
 {
     function it_updates_an_address_with_a_province(
         AddressInterface $currentAddress,
-        AddressInterface $targetAddress
+        AddressInterface $targetAddress,
     ): void {
         $targetAddress->getFirstName()->willReturn('John');
         $targetAddress->getLastName()->willReturn('Doe');
@@ -49,7 +49,7 @@ final class AddressMapperSpec extends ObjectBehavior
 
     function it_updates_an_address_without_a_province(
         AddressInterface $currentAddress,
-        AddressInterface $targetAddress
+        AddressInterface $targetAddress,
     ): void {
         $targetAddress->getFirstName()->willReturn('John');
         $targetAddress->getLastName()->willReturn('Doe');

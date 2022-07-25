@@ -47,7 +47,7 @@ final class EmailProviderSpec extends ObjectBehavior
     function it_loads_user_by_email(
         UserRepositoryInterface $userRepository,
         CanonicalizerInterface $canonicalizer,
-        User $user
+        User $user,
     ): void {
         $canonicalizer->canonicalize('test@user.com')->willReturn('test@user.com');
 
@@ -66,7 +66,7 @@ final class EmailProviderSpec extends ObjectBehavior
     }
 
     function it_should_throw_exception_when_unsupported_user_is_used(
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }

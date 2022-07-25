@@ -36,7 +36,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
     function it_returns_all_channels_locales_as_available_ones(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        LocaleInterface $enabledLocale
+        LocaleInterface $enabledLocale,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -50,7 +50,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
     }
 
     function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
@@ -60,7 +60,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
     function it_returns_channels_default_locale(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -72,7 +72,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
     }
 
     function it_returns_the_default_locale_if_channel_cannot_be_determined(
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 

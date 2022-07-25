@@ -33,7 +33,7 @@ final class RegistrationContext implements Context
         private SharedStorageInterface $sharedStorage,
         private ResponseCheckerInterface $responseChecker,
         private RequestFactoryInterface $requestFactory,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -193,7 +193,7 @@ final class RegistrationContext implements Context
 
         Assert::same(
             $content['message'],
-            'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.'
+            'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
         Assert::same($content['code'], 400);
     }
@@ -258,7 +258,7 @@ final class RegistrationContext implements Context
         Assert::keyExists($decodedResponse, 'violations');
         Assert::same(
             $decodedResponse['violations'][0],
-            ['propertyPath' => $path, 'message' => $message, 'code' => $decodedResponse['violations'][0]['code']]
+            ['propertyPath' => $path, 'message' => $message, 'code' => $decodedResponse['violations'][0]['code']],
         );
     }
 

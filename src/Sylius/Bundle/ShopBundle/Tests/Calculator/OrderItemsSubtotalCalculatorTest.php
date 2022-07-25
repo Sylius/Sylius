@@ -47,7 +47,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
      * @depends it_can_be_instantiated
      */
     public function it_can_calculate_a_subtotal_if_there_are_no_order_items(
-        OrderItemsSubtotalCalculator $calculator
+        OrderItemsSubtotalCalculator $calculator,
     ): void {
         $subTotal = $calculator->getSubtotal($this->getOrderMock([]));
         $this->assertEquals(0, $subTotal);
@@ -71,7 +71,8 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
         $order
             ->shouldReceive('getItems->toArray')
             ->once()
-            ->andReturn($orderItems);
+            ->andReturn($orderItems)
+        ;
 
         return $order;
     }

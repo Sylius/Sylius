@@ -31,7 +31,7 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     public function countByCodeLength(
         int $codeLength,
         ?string $prefix = null,
-        ?string $suffix = null
+        ?string $suffix = null,
     ): int {
         if ($prefix !== null) {
             $codeLength += strlen($prefix);

@@ -27,7 +27,7 @@ final class PromotionCouponUsageLimitEligibilityCheckerSpec extends ObjectBehavi
 
     function it_returns_true_if_usage_limit_is_not_defined(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getUsageLimit()->willReturn(null);
 
@@ -36,7 +36,7 @@ final class PromotionCouponUsageLimitEligibilityCheckerSpec extends ObjectBehavi
 
     function it_returns_true_if_usage_limit_has_not_been_reached_yet(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getUsageLimit()->willReturn(42);
         $promotionCoupon->getUsed()->willReturn(41);
@@ -46,7 +46,7 @@ final class PromotionCouponUsageLimitEligibilityCheckerSpec extends ObjectBehavi
 
     function it_returns_false_if_usage_limit_has_been_reached(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getUsageLimit()->willReturn(42);
         $promotionCoupon->getUsed()->willReturn(42);

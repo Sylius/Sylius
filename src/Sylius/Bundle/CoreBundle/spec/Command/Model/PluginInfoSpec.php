@@ -22,7 +22,7 @@ final class PluginInfoSpec extends ObjectBehavior
         $this->beConstructedWith(
             'Admin Order Creation',
             'Creating (and copying) orders in the administration panel.',
-            'https://github.com/Sylius/AdminOrderCreationPlugin'
+            'https://github.com/Sylius/AdminOrderCreationPlugin',
         );
     }
 

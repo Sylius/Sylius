@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -62,13 +62,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         $resetPasswordEmailHandler = new SendResetPasswordEmailHandler($adminUserRepository, $emailSender);
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'sylius@example.com',
-            'en_US'
+            'en_US',
         ));
 
         self::assertSame(1, $this->emailChecker->countMessagesTo('sylius@example.com'));
         self::assertTrue($this->emailChecker->hasMessageTo(
             $translator->trans('sylius.email.admin_password_reset.to_reset_your_password', [], null, 'en_US'),
-            'sylius@example.com'
+            'sylius@example.com',
         ));
     }
 }

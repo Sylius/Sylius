@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 final class ProductVariantCatalogPromotionsProcessor implements ProductVariantCatalogPromotionsProcessorInterface
 {
     public function __construct(
-        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ) {
     }
 

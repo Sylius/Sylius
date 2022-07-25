@@ -27,7 +27,7 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
     function let(
         OrderItemRepositoryInterface $orderItemRepository,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ) {
         $this->beConstructedWith($orderItemRepository, $orderItemQuantityModifier, $orderProcessor);
     }
@@ -42,11 +42,11 @@ final class ChangeItemQuantityInCartHandlerSpec extends ObjectBehavior
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor,
         OrderInterface $cart,
-        OrderItemInterface $cartItem
+        OrderItemInterface $cartItem,
     ): void {
         $orderItemRepository->findOneByIdAndCartTokenValue(
             'ORDER_ITEM_ID',
-            'TOKEN_VALUE'
+            'TOKEN_VALUE',
         )->willReturn($cartItem);
 
         $cartItem->getOrder()->willReturn($cart);

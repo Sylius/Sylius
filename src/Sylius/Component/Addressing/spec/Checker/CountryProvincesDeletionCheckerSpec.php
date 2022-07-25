@@ -15,25 +15,18 @@ namespace spec\Sylius\Component\Addressing\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
-use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $zoneMemberRepository,
-        RepositoryInterface $provinceRepository
-    ): void
-    {
+        RepositoryInterface $provinceRepository,
+    ): void {
         $this->beConstructedWith($zoneMemberRepository, $provinceRepository);
     }
 
@@ -49,7 +42,7 @@ class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
         ProvinceInterface $firstProvince,
         ProvinceInterface $secondProvince,
         ProvinceInterface $thirdProvince,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $firstProvince->getCode()->willReturn('US-AK');
         $secondProvince->getCode()->willReturn('US-TX');
@@ -76,7 +69,7 @@ class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
         CountryInterface $country,
         ProvinceInterface $firstProvince,
         ProvinceInterface $secondProvince,
-        ProvinceInterface $thirdProvince
+        ProvinceInterface $thirdProvince,
     ): void {
         $firstProvince->getCode()->willReturn('US-AK');
         $secondProvince->getCode()->willReturn('US-TX');

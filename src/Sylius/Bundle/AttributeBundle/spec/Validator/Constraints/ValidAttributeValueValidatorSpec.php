@@ -49,7 +49,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         AttributeTypeInterface $attributeType,
         AttributeValueInterface $attributeValue,
         ServiceRegistryInterface $attributeTypesRegistry,
-        ValidAttributeValue $attributeValueConstraint
+        ValidAttributeValue $attributeValueConstraint,
     ): void {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
         $attributeTypesRegistry->get('text')->willReturn($attributeType);
@@ -63,7 +63,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
 
     function it_throws_exception_if_validated_value_is_not_attribute_value(
         \DateTime $badObject,
-        ValidAttributeValue $attributeValueConstraint
+        ValidAttributeValue $attributeValueConstraint,
     ): void {
         $this
             ->shouldThrow(new UnexpectedTypeException('\DateTimeInterface', AttributeValueInterface::class))

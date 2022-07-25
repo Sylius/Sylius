@@ -37,7 +37,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -97,7 +97,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -143,7 +143,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         UserInterface $user,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -175,7 +175,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
 
     function it_does_nothing_if_object_passed_is_different_then_order(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator
+        QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->leftJoin(Argument::any())->shouldNotBeCalled();
         $queryBuilder->expr()->shouldNotBeCalled();

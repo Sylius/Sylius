@@ -26,7 +26,7 @@ final class CountryNameConverter implements CountryNameConverterInterface
             throw new \InvalidArgumentException(sprintf(
                 'Country "%s" not found! Available names: %s.',
                 $name,
-                implode(', ', $names)
+                implode(', ', $names),
             ));
         }
 

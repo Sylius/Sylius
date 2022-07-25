@@ -29,7 +29,7 @@ final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBeha
     public function it_accepts_product_review(
         StateMachineFactoryInterface $stateMachineFactory,
         ReviewInterface $review,
-        StateMachine $stateMachine
+        StateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($review, ProductReviewTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ProductReviewTransitions::TRANSITION_ACCEPT)->shouldBeCalled();
@@ -40,7 +40,7 @@ final class ProductReviewStateMachineTransitionApplicatorSpec extends ObjectBeha
     public function it_rejects_product_review(
         StateMachineFactoryInterface $stateMachineFactory,
         ReviewInterface $review,
-        StateMachine $stateMachine
+        StateMachine $stateMachine,
     ): void {
         $stateMachineFactory->get($review, ProductReviewTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->apply(ProductReviewTransitions::TRANSITION_REJECT)->shouldBeCalled();

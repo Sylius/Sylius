@@ -23,7 +23,7 @@ final class CompositeLocaleContextPass extends PrioritizedCompositeServicePass
             'sylius.context.locale',
             'sylius.context.locale.composite',
             'sylius.context.locale',
-            'addContext'
+            'addContext',
         );
     }
 }

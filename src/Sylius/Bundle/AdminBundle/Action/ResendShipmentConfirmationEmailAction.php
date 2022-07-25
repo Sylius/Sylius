@@ -31,7 +31,7 @@ final class ResendShipmentConfirmationEmailAction
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShipmentEmailManagerInterface $shipmentEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private Session $session
+        private Session $session,
     ) {
     }
 
@@ -53,7 +53,7 @@ final class ResendShipmentConfirmationEmailAction
 
         $this->session->getFlashBag()->add(
             'success',
-            'sylius.email.shipment_confirmation_resent'
+            'sylius.email.shipment_confirmation_resent',
         );
 
         return new RedirectResponse($request->headers->get('referer'));

@@ -29,7 +29,7 @@ final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
     function it_provides_default_tax_zone_from_order_channel(
         ChannelInterface $channel,
         OrderInterface $order,
-        ZoneInterface $defaultTaxZone
+        ZoneInterface $defaultTaxZone,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getDefaultTaxZone()->willReturn($defaultTaxZone);

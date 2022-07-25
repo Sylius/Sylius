@@ -51,7 +51,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         ProductVariantResolverInterface $variantResolver,
         OrderItemInterface $cartItem,
         ProductInterface $product,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $decoratedFactory->createNew()->willReturn($cartItem);
         $variantResolver->getVariant($product)->willReturn($productVariant);
@@ -64,7 +64,7 @@ final class CartItemFactorySpec extends ObjectBehavior
     function it_creates_a_cart_item_for_given_cart(
         FactoryInterface $decoratedFactory,
         OrderItemInterface $cartItem,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $decoratedFactory->createNew()->willReturn($cartItem);
 

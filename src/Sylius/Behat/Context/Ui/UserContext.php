@@ -27,7 +27,7 @@ final class UserContext implements Context
         private SharedStorageInterface $sharedStorage,
         private UserRepositoryInterface $userRepository,
         private ShowPageInterface $customerShowPage,
-        private HomePageInterface $homePage
+        private HomePageInterface $homePage,
     ) {
     }
 

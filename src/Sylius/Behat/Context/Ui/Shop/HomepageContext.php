@@ -22,7 +22,7 @@ final class HomepageContext implements Context
 {
     public function __construct(
         private HomePageInterface $homePage,
-        private MenuElementInterface $menuElement
+        private MenuElementInterface $menuElement,
     ) {
     }
 

@@ -33,7 +33,7 @@ class StickerProductFixture extends AbstractFixture
         private AbstractResourceFixture $taxonFixture,
         private AbstractResourceFixture $productAttributeFixture,
         private AbstractResourceFixture $productOptionFixture,
-        private AbstractResourceFixture $productFixture
+        private AbstractResourceFixture $productFixture,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver =

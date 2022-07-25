@@ -19,14 +19,14 @@ interface RequestFactoryInterface
         ?string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function subResourceIndex(
         string $section,
         string $resource,
         string $id,
-        string $subResource
+        string $subResource,
     ): RequestInterface;
 
     public function show(
@@ -34,14 +34,14 @@ interface RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function create(
         string $section,
         string $resource,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function update(
@@ -49,7 +49,7 @@ interface RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function delete(
@@ -57,7 +57,7 @@ interface RequestFactoryInterface
         string $resource,
         string $id,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function upload(
@@ -65,14 +65,14 @@ interface RequestFactoryInterface
         string $resource,
         array $files,
         string $authorizationHeader,
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 
     public function transition(
         string $section,
         string $resource,
         string $id,
-        string $transition
+        string $transition,
     ): RequestInterface;
 
     public function customItemAction(
@@ -80,13 +80,13 @@ interface RequestFactoryInterface
         string $resource,
         string $id,
         string $type,
-        string $action
+        string $action,
     ): RequestInterface;
 
     public function custom(
         string $url,
         string $method,
         array $additionalHeaders = [],
-        ?string $token = null
+        ?string $token = null,
     ): RequestInterface;
 }

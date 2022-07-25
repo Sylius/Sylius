@@ -32,7 +32,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
     function let(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
-        TaxRateResolverInterface $taxRateResolver
+        TaxRateResolverInterface $taxRateResolver,
     ): void {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $taxRateResolver);
     }
@@ -51,7 +51,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(1000);
         $order->hasShipments()->willReturn(true);
@@ -83,7 +83,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($shippingTaxAdjustment)
         ;
@@ -103,7 +103,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShipmentInterface $secondShipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(1000);
         $order->hasShipments()->willReturn(true);
@@ -139,7 +139,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($firstShippingTaxAdjustment)
         ;
@@ -158,7 +158,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($secondShippingTaxAdjustment)
         ;
@@ -178,7 +178,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(1000);
         $order->hasShipments()->willReturn(true);
@@ -221,7 +221,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($shippingTaxAdjustment)
         ;
@@ -241,7 +241,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(1000);
         $order->hasShipments()->willReturn(true);
@@ -283,7 +283,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->shouldNotBeCalled()
         ;
@@ -301,7 +301,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
                     'taxRateCode' => 'simple_tax',
                     'taxRateName' => 'Simple tax',
                     'taxRateAmount' => 0.1,
-                ]
+                ],
             )
             ->willReturn($shippingTaxAdjustment)
         ;
@@ -318,7 +318,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(1000);
         $order->hasShipments()->willReturn(true);
@@ -338,7 +338,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_has_no_shipment_but_shipment_total_is_greater_than_0(
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(10);
         $order->hasShipments()->willReturn(false);
@@ -352,7 +352,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(100);
         $order->hasShipments()->willReturn(true);
@@ -370,7 +370,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
     function it_does_nothing_if_order_has_0_shipping_total(
         TaxRateResolverInterface $taxRateResolver,
         OrderInterface $order,
-        ZoneInterface $zone
+        ZoneInterface $zone,
     ): void {
         $order->getShippingTotal()->willReturn(0);
 

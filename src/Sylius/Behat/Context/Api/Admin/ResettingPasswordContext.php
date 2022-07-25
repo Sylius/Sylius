@@ -31,7 +31,7 @@ final class ResettingPasswordContext implements Context
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -127,7 +127,7 @@ final class ResettingPasswordContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Please enter an email.'
+            'Please enter an email.',
         );
     }
 
@@ -138,7 +138,7 @@ final class ResettingPasswordContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'This email is not valid.'
+            'This email is not valid.',
         );
     }
 

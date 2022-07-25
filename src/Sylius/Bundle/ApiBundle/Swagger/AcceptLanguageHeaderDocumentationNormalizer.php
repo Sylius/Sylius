@@ -22,7 +22,7 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
 {
     public function __construct(
         private NormalizerInterface $decoratedNormalizer,
-        private RepositoryInterface $localeRepository
+        private RepositoryInterface $localeRepository,
     ) {
     }
 
@@ -44,7 +44,7 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
                 'type' => 'string',
                 'enum' => array_map(
                     fn (LocaleInterface $locale): string => $locale->getCode(),
-                    $this->localeRepository->findAll()
+                    $this->localeRepository->findAll(),
                 ),
             ],
         ];

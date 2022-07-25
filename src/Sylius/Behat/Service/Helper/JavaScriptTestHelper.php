@@ -23,7 +23,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
 {
     public function __construct(
         private int $microsecondsInterval,
-        private int $defaultTimeout
+        private int $defaultTimeout,
     ) {
     }
 
@@ -36,7 +36,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         NotificationCheckerInterface $notificationChecker,
         NotificationType $type,
         string $message,
-        ?int $timeout = null
+        ?int $timeout = null,
     ): void {
         $callable = function () use ($notificationChecker, $message, $type): void {
             $notificationChecker->checkNotification($message, $type);

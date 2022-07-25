@@ -40,7 +40,7 @@ final class LoginContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private RequestFactoryInterface $requestFactory,
-        private string $apiUrlPrefix
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -63,7 +63,7 @@ final class LoginContext implements Context
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => 'sylius'])
+            json_encode(['email' => $email, 'password' => 'sylius']),
         );
 
         $response = $this->shopAuthenticationTokenClient->getResponse();
@@ -106,7 +106,7 @@ final class LoginContext implements Context
     {
         $this->request = $this->requestFactory->custom(
             sprintf('%s/shop/reset-password-requests/%s', $this->apiUrlPrefix, $user->getPasswordResetToken()),
-            HttpRequest::METHOD_PATCH
+            HttpRequest::METHOD_PATCH,
         );
     }
 
@@ -256,9 +256,9 @@ final class LoginContext implements Context
         Assert::same(
             $this->responseChecker->getValue(
                 $this->shopAuthenticationTokenClient->getResponse(),
-                'customer'
+                'customer',
             ),
-            $this->iriConverter->getIriFromItem($customer)
+            $this->iriConverter->getIriFromItem($customer),
         );
     }
 

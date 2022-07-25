@@ -34,7 +34,7 @@ final class LegacySonataBlockPass implements CompilerPassInterface
 
             $whitelistedVariables = array_merge(
                 $whitelistedVariables,
-                array_keys($config['blocks']['sonata.block.service.template']['settings'])
+                array_keys($config['blocks']['sonata.block.service.template']['settings']),
             );
         }
 

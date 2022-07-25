@@ -1,7 +1,7 @@
 <?php
 
 /*
- *  This file is part of the Sylius package.
+ * This file is part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -22,7 +22,7 @@ final class RenderRequestPasswordResetPageAction
 {
     public function __construct(
         private Environment $twig,
-        private FormFactoryInterface $formFactory
+        private FormFactoryInterface $formFactory,
     ) {
     }
 
@@ -33,7 +33,7 @@ final class RenderRequestPasswordResetPageAction
         return new Response(
             $this->twig->render('@SyliusAdmin/Security/requestPasswordReset.html.twig', [
                 'form' => $form->createView(),
-            ])
+            ]),
         );
     }
 }
