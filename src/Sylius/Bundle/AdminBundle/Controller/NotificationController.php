@@ -56,7 +56,7 @@ final class NotificationController
         try {
             $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
         } catch (GuzzleException) {
-            return JsonResponse::create('', JsonResponse::HTTP_NO_CONTENT);
+            return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
         }
 
         $hubResponse = json_decode($hubResponse->getBody()->getContents(), true);
