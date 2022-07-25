@@ -26,7 +26,7 @@ final class CheckoutShippingContext implements Context
     public function __construct(
         private SelectShippingPageInterface $selectShippingPage,
         private SelectPaymentPageInterface $selectPaymentPage,
-        private CompletePageInterface $completePage
+        private CompletePageInterface $completePage,
     ) {
     }
 

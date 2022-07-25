@@ -35,7 +35,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
     function it_returns_an_available_active_currency(
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
@@ -47,7 +47,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
     function it_throws_an_exception_if_storage_does_not_have_currency_code(
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 

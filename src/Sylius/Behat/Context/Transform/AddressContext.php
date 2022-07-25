@@ -27,7 +27,7 @@ final class AddressContext implements Context
         private FactoryInterface $addressFactory,
         private CountryNameConverterInterface $countryNameConverter,
         private AddressRepositoryInterface $addressRepository,
-        private ExampleFactoryInterface $exampleAddressFactory
+        private ExampleFactoryInterface $exampleAddressFactory,
     ) {
     }
 

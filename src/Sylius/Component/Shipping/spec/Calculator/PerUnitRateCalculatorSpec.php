@@ -30,7 +30,7 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
     }
 
     function it_should_calculate_the_total_with_the_per_unit_amount_configured_on_the_method(
-        ShipmentInterface $subject
+        ShipmentInterface $subject,
     ): void {
         $subject->getShippingUnitCount()->willReturn(11);
 

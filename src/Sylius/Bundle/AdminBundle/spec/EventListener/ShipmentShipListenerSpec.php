@@ -28,7 +28,7 @@ final class ShipmentShipListenerSpec extends ObjectBehavior
     function it_sends_a_confirmation_email(
         ShipmentEmailManagerInterface $shipmentEmailManager,
         GenericEvent $event,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $event->getSubject()->willReturn($shipment);
 
@@ -39,7 +39,7 @@ final class ShipmentShipListenerSpec extends ObjectBehavior
 
     function it_throws_an_invalid_argument_exception_if_an_event_subject_is_not_a_shipment_instance(
         GenericEvent $event,
-        \stdClass $shipment
+        \stdClass $shipment,
     ): void {
         $event->getSubject()->willReturn($shipment);
 

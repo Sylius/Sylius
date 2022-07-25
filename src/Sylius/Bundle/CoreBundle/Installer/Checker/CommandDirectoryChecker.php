@@ -43,7 +43,7 @@ final class CommandDirectoryChecker
             throw new \RuntimeException(sprintf(
                 'Create directory "%s" and run command "<comment>%s</comment>"',
                 realpath($directory),
-                $this->name
+                $this->name,
             ));
         }
     }
@@ -66,7 +66,7 @@ final class CommandDirectoryChecker
             throw new \RuntimeException(sprintf(
                 'Set "%s" writable and run command "<comment>%s</comment>"',
                 realpath(dirname($directory)),
-                $this->name
+                $this->name,
             ));
         }
     }

@@ -93,7 +93,7 @@ final class TaxRateFixtureTest extends TestCase
     {
         return new TaxRateFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
+            $this->getMockBuilder(ExampleFactoryInterface::class)->getMock(),
         );
     }
 }

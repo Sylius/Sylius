@@ -22,7 +22,7 @@ final class CountryContext implements Context
 {
     public function __construct(
         private CountryNameConverterInterface $countryNameConverter,
-        private RepositoryInterface $countryRepository
+        private RepositoryInterface $countryRepository,
     ) {
     }
 
@@ -41,7 +41,7 @@ final class CountryContext implements Context
 
         Assert::notNull(
             $country,
-            sprintf('Country with name "%s" does not exist', $countryName)
+            sprintf('Country with name "%s" does not exist', $countryName),
         );
 
         return $country;

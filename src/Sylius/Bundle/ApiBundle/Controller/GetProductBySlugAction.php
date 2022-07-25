@@ -29,7 +29,7 @@ final class GetProductBySlugAction
         private LocaleContextInterface $localeContext,
         private ProductRepositoryInterface $productRepository,
         private IriConverterInterface $iriConverter,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {
     }
 

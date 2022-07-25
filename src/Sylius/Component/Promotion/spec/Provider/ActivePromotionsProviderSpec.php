@@ -35,7 +35,7 @@ final class ActivePromotionsProviderSpec extends ObjectBehavior
         PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
     ): void {
         $promotionRepository->findActive()->willReturn([$promotion1, $promotion2]);
 

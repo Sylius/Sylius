@@ -29,7 +29,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
     public function __construct(
         private PromotionCouponRepositoryInterface $promotionCouponRepository,
         private OrderRepositoryInterface $orderRepository,
-        private AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker
+        private AppliedCouponEligibilityCheckerInterface $appliedCouponEligibilityChecker,
     ) {
     }
 

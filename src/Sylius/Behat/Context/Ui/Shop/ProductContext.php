@@ -35,7 +35,7 @@ final class ProductContext implements Context
         private ProductReviewIndexPageInterface $productReviewsIndexPage,
         private ErrorPageInterface $errorPage,
         private VerticalMenuElementInterface $verticalMenuElement,
-        private ChannelContextSetterInterface $channelContextSetter
+        private ChannelContextSetterInterface $channelContextSetter,
     ) {
     }
 
@@ -131,7 +131,7 @@ final class ProductContext implements Context
             $this->showPage->isOpen([
                 'slug' => $product->getTranslation($localeCode)->getSlug(),
                 '_locale' => $localeCode,
-            ])
+            ]),
         );
     }
 
@@ -191,7 +191,7 @@ final class ProductContext implements Context
     {
         Assert::eq(
             new \DateTime($this->showPage->getAttributeByName($attributeName)),
-            new \DateTime($expectedAttribute)
+            new \DateTime($expectedAttribute),
         );
     }
 
@@ -383,7 +383,7 @@ final class ProductContext implements Context
         string $productName,
         string $originalPrice,
         string $price,
-        string $promotionLabel
+        string $promotionLabel,
     ): void {
         Assert::same($this->indexPage->getProductPrice($productName), $price);
         Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
@@ -435,7 +435,7 @@ final class ProductContext implements Context
         string $price,
         string $priceType,
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->channelContextSetter->setChannel($channel);
 
@@ -462,7 +462,7 @@ final class ProductContext implements Context
      */
     public function theOriginalPriceOfTheProductInTheChannelShouldBeEmpty(
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->channelContextSetter->setChannel($channel);
 
@@ -518,14 +518,14 @@ final class ProductContext implements Context
         ProductInterface $product,
         string $originalPrice,
         string $price,
-        string ...$promotionsNames
+        string ...$promotionsNames,
     ): void {
         Assert::same($this->showPage->getPrice(), $price);
         Assert::same($this->showPage->getOriginalPrice(), $originalPrice);
         foreach ($promotionsNames as $promotionName) {
             Assert::true(
                 $this->showPage->hasCatalogPromotionApplied($promotionName),
-                sprintf("Catalog promotion '%s' does not found ", $promotionName)
+                sprintf("Catalog promotion '%s' does not found ", $promotionName),
             );
         }
     }
@@ -541,7 +541,7 @@ final class ProductContext implements Context
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
-        string ...$promotionsNames
+        string ...$promotionsNames,
     ): void {
         $this->showPage->selectVariant($variant->getName());
 
@@ -559,7 +559,7 @@ final class ProductContext implements Context
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
-        int $numberOfPromotions
+        int $numberOfPromotions,
     ): void {
         $this->showPage->selectVariant($variant->getName());
 
@@ -575,7 +575,7 @@ final class ProductContext implements Context
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
-        string $promotionName
+        string $promotionName,
     ): void {
         $this->showPage->selectVariant($variant->getName());
 
@@ -592,7 +592,7 @@ final class ProductContext implements Context
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
-        string $promotionName
+        string $promotionName,
     ): void {
         /** @var ProductInterface $product */
         $product = $variant->getProduct();
@@ -608,7 +608,7 @@ final class ProductContext implements Context
         ProductVariantInterface $variant,
         string $originalPrice,
         string $price,
-        int $numberOfPromotions
+        int $numberOfPromotions,
     ): void {
         /** @var ProductInterface $product */
         $product = $variant->getProduct();
@@ -734,7 +734,7 @@ final class ProductContext implements Context
         foreach ($reviews as $review) {
             Assert::true(
                 $this->showPage->hasReviewTitled($review),
-                sprintf('Product should have review titled "%s" but it does not.', $review)
+                sprintf('Product should have review titled "%s" but it does not.', $review),
             );
         }
     }
@@ -794,7 +794,7 @@ final class ProductContext implements Context
     {
         Assert::true(
             $this->showPage->hasAssociation($productAssociationName),
-            sprintf('There should be an association named "%s" but it does not.', $productAssociationName)
+            sprintf('There should be an association named "%s" but it does not.', $productAssociationName),
         );
 
         foreach ($products as $product) {
@@ -865,7 +865,7 @@ final class ProductContext implements Context
     public function iShouldBeAbleToSelectTheAndColorOptionValues(
         string $optionValue1,
         string $optionValue2,
-        string $optionName
+        string $optionName,
     ) {
         Assert::true(in_array($optionValue1, $this->showPage->getOptionValues($optionName), true));
         Assert::true(in_array($optionValue2, $this->showPage->getOptionValues($optionName), true));
@@ -957,8 +957,8 @@ final class ProductContext implements Context
             sprintf(
                 'There should be an associated product "%s" under association "%s" but it does not.',
                 $productName,
-                $productAssociationName
-            )
+                $productAssociationName,
+            ),
         );
     }
 

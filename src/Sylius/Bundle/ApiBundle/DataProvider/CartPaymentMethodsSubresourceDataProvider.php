@@ -29,7 +29,7 @@ final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataP
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private PaymentRepositoryInterface $paymentRepository,
-        private PaymentMethodsResolverInterface $paymentMethodsResolver
+        private PaymentMethodsResolverInterface $paymentMethodsResolver,
     ) {
     }
 

@@ -35,7 +35,7 @@ final class InStockValidatorSpec extends ObjectBehavior
 
     function it_does_not_add_violation_if_there_is_no_stockable(
         InventoryUnitInterface $inventoryUnit,
-        PropertyAccessor $propertyAccessor
+        PropertyAccessor $propertyAccessor,
     ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn(null);
 
@@ -47,7 +47,7 @@ final class InStockValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_there_is_no_quantity(
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,
-        StockableInterface $stockable
+        StockableInterface $stockable,
     ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn($stockable);
         $propertyAccessor->getValue($inventoryUnit, 'quantity')->willReturn(null);
@@ -61,7 +61,7 @@ final class InStockValidatorSpec extends ObjectBehavior
         AvailabilityCheckerInterface $availabilityChecker,
         InventoryUnitInterface $inventoryUnit,
         PropertyAccessor $propertyAccessor,
-        StockableInterface $stockable
+        StockableInterface $stockable,
     ): void {
         $propertyAccessor->getValue($inventoryUnit, 'stockable')->willReturn($stockable);
         $propertyAccessor->getValue($inventoryUnit, 'quantity')->willReturn(1);

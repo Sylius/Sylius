@@ -22,7 +22,7 @@ final class CurrencyContext implements Context
 {
     public function __construct(
         private CurrencyNameConverterInterface $currencyNameConverter,
-        private RepositoryInterface $currencyRepository
+        private RepositoryInterface $currencyRepository,
     ) {
     }
 
@@ -38,7 +38,7 @@ final class CurrencyContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $this->getCurrencyCodeByName($currencyName)]);
         Assert::notNull(
             $currency,
-            sprintf('Currency with name %s does not exist.', $currencyName)
+            sprintf('Currency with name %s does not exist.', $currencyName),
         );
 
         return $currency;

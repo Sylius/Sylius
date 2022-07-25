@@ -47,7 +47,7 @@ final class LocaleFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['load_default_locale' => false]],
             ['load_default_locale' => false],
-            'load_default_locale'
+            'load_default_locale',
         );
     }
 
@@ -59,7 +59,7 @@ final class LocaleFixtureTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [[]],
             ['load_default_locale' => true],
-            'load_default_locale'
+            'load_default_locale',
         );
     }
 
@@ -68,7 +68,7 @@ final class LocaleFixtureTest extends TestCase
         return new LocaleFixture(
             $this->getMockBuilder(FactoryInterface::class)->getMock(),
             $this->getMockBuilder(ObjectManager::class)->getMock(),
-            'default_LOCALE'
+            'default_LOCALE',
         );
     }
 }

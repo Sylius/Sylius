@@ -39,7 +39,7 @@ final class ProviderBasedLocaleContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_locale_not_found_exception_if_default_locale_is_not_available(
-        LocaleProviderInterface $localeProvider
+        LocaleProviderInterface $localeProvider,
     ): void {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['es_ES', 'en_US']);
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');

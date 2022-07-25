@@ -31,7 +31,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor
+        private TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }

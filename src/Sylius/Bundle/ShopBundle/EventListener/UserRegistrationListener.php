@@ -33,7 +33,7 @@ final class UserRegistrationListener
         private EventDispatcherInterface $eventDispatcher,
         private ChannelContextInterface $channelContext,
         private UserLoginInterface $userLogin,
-        private string $firewallContextName
+        private string $firewallContextName,
     ) {
     }
 

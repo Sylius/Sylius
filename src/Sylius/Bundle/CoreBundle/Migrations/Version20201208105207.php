@@ -41,7 +41,7 @@ final class Version20201208105207 extends AbstractMigration
             $this->updateAdjustment(
                 (int) $adjustment['id'],
                 $adjustment['shipping_id'] ?? 'NULL',
-                $this->getParsedDetails(['taxRateCode' => $adjustment['tax_rate_code'], 'taxRateName' => $adjustment['tax_rate_name'], 'taxRateAmount' => ($adjustment['tax_rate_amount'] ? (float) $adjustment['tax_rate_amount'] : null), 'shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $this->getShippingMethodName($adjustment['shipment_code'])])
+                $this->getParsedDetails(['taxRateCode' => $adjustment['tax_rate_code'], 'taxRateName' => $adjustment['tax_rate_name'], 'taxRateAmount' => ($adjustment['tax_rate_amount'] ? (float) $adjustment['tax_rate_amount'] : null), 'shippingMethodCode' => $adjustment['shipment_code'], 'shippingMethodName' => $this->getShippingMethodName($adjustment['shipment_code'])]),
             );
         }
     }
@@ -97,7 +97,7 @@ final class Version20201208105207 extends AbstractMigration
                 LEFT JOIN sylius_tax_rate tax_rate on adjustment.label LIKE CONCAT(tax_rate.name, \'%\')
                 WHERE adjustment.type IN ("shipping", "tax")
                 ORDER BY adjustment.type
-            '
+            ',
         );
     }
 }

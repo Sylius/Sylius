@@ -31,7 +31,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function let(
         RouterInterface $router,
         LocaleProviderInterface $localeProvider,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ): void {
         $this->beConstructedWith($router, $localeProvider, $firewallMap, ['shop']);
     }
@@ -39,7 +39,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_throws_exception_on_instantiation_with_no_firewall_names(
         RouterInterface $router,
         LocaleProviderInterface $localeProvider,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ): void {
         $this->beConstructedWith($router, $localeProvider, $firewallMap, []);
 
@@ -52,7 +52,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_throws_exception_on_instantiation_with_non_string_firewall_names(
         RouterInterface $router,
         LocaleProviderInterface $localeProvider,
-        FirewallMap $firewallMap
+        FirewallMap $firewallMap,
     ): void {
         $this->beConstructedWith($router, $localeProvider, $firewallMap, [new \DateTime(), 1, 5.0]);
 
@@ -65,7 +65,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
     function it_does_nothing_if_its_not_a_master_request(
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
-        RequestEvent $event
+        RequestEvent $event,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(false);
@@ -87,7 +87,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        RequestEvent $event
+        RequestEvent $event,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(true);
@@ -109,7 +109,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        RequestEvent $event
+        RequestEvent $event,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(true);
@@ -118,7 +118,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         }
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
-            new FirewallConfig('lalaland', 'mock')
+            new FirewallConfig('lalaland', 'mock'),
         );
 
         $localeProvider->getAvailableLocalesCodes()->shouldNotBeCalled();
@@ -133,7 +133,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        RequestEvent $event
+        RequestEvent $event,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(true);
@@ -142,7 +142,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         }
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
-            new FirewallConfig('shop', 'mock')
+            new FirewallConfig('shop', 'mock'),
         );
 
         $request->getLocale()->willReturn('en');
@@ -159,7 +159,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         FirewallMap $firewallMap,
         Request $request,
-        RequestEvent $event
+        RequestEvent $event,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(true);
@@ -168,7 +168,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         }
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
-            new FirewallConfig('shop', 'mock')
+            new FirewallConfig('shop', 'mock'),
         );
 
         $request->attributes = new ParameterBag(['_route' => '_wdt']);
@@ -193,7 +193,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         FirewallMap $firewallMap,
         Request $request,
         RequestEvent $event,
-        Router $router
+        Router $router,
     ): void {
         if (\method_exists(RequestEvent::class, 'isMainRequest')) {
             $event->isMainRequest()->willReturn(true);
@@ -202,7 +202,7 @@ final class NonChannelLocaleListenerSpec extends ObjectBehavior
         }
         $event->getRequest()->willReturn($request);
         $firewallMap->getFirewallConfig($request)->willReturn(
-            new FirewallConfig('shop', 'mock')
+            new FirewallConfig('shop', 'mock'),
         );
 
         $request->getLocale()->willReturn('en');

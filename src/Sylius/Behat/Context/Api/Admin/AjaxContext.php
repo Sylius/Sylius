@@ -24,7 +24,7 @@ final class AjaxContext implements Context
 {
     public function __construct(
         private AbstractBrowser $client,
-        private SessionInterface $session
+        private SessionInterface $session,
     ) {
     }
 
@@ -39,7 +39,7 @@ final class AjaxContext implements Context
             '/admin/ajax/product-variants/search',
             ['phrase' => $phrase, 'productCode' => $product->getCode()],
             [],
-            ['ACCEPT' => 'application/json']
+            ['ACCEPT' => 'application/json'],
         );
     }
 

@@ -47,7 +47,7 @@ final class DateRangeSpec extends ObjectBehavior
 
     function it_verifies_catalog_promotion(
         CatalogPromotionInterface $catalogPromotion,
-        DateTimeProviderInterface $calendar
+        DateTimeProviderInterface $calendar,
     ): void {
         $tomorrow = new \DateTime('+1day');
         $yesterday = new \DateTime('-1day');

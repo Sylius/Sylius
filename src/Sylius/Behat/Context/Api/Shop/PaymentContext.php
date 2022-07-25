@@ -27,7 +27,7 @@ final class PaymentContext implements Context
     public function __construct(
         private ApiClientInterface $paymentsClient,
         private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

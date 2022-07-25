@@ -31,7 +31,7 @@ final class CancelUnpaidOrdersContext implements Context
 
     public function __construct(
         KernelInterface $kernel,
-        private OrderRepositoryInterface $orderRepository
+        private OrderRepositoryInterface $orderRepository,
     ) {
         $this->application = new Application($kernel);
     }

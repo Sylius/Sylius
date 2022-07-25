@@ -57,7 +57,7 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
 
     function it_adds_violation_if_account_is_null(
         RepositoryInterface $shopUserRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new AccountVerificationTokenEligibility();
         $value = new VerifyCustomerAccount('TOKEN');
@@ -69,7 +69,7 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         $executionContext
             ->addViolation(
                 'sylius.account.invalid_verification_token',
-                ['%verificationToken%' => 'TOKEN']
+                ['%verificationToken%' => 'TOKEN'],
             )
             ->shouldBeCalled()
         ;
@@ -80,7 +80,7 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
     function it_does_nothing_if_account_has_been_found(
         RepositoryInterface $shopUserRepository,
         ExecutionContextInterface $executionContext,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $constraint = new AccountVerificationTokenEligibility();
         $value = new VerifyCustomerAccount('TOKEN');
@@ -92,7 +92,7 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         $executionContext
             ->addViolation(
                 'sylius.account.invalid_verification_token',
-                ['%verificationToken%' => 'TOKEN']
+                ['%verificationToken%' => 'TOKEN'],
             )
             ->shouldNotBeCalled()
         ;

@@ -27,7 +27,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
 
     function it_generates_slug_for_root_taxon(
         TaxonInterface $taxon,
-        TaxonTranslationInterface $taxonTranslation
+        TaxonTranslationInterface $taxonTranslation,
     ): void {
         $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getName()->willReturn('Board games');
@@ -39,7 +39,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
 
     function it_generates_slug_for_root_taxon_replacing_apostrophes_with_hyphens(
         TaxonInterface $taxon,
-        TaxonTranslationInterface $taxonTranslation
+        TaxonTranslationInterface $taxonTranslation,
     ): void {
         $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getName()->willReturn('Rock\'n\'roll');
@@ -53,7 +53,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
         TaxonInterface $taxon,
         TaxonTranslationInterface $taxonTranslation,
         TaxonInterface $parentTaxon,
-        TaxonTranslationInterface $parentTaxonTranslation
+        TaxonTranslationInterface $parentTaxonTranslation,
     ): void {
         $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getName()->willReturn('Battle games');
@@ -70,7 +70,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
         TaxonInterface $taxon,
         TaxonTranslationInterface $taxonTranslation,
         TaxonInterface $parentTaxon,
-        TaxonTranslationInterface $parentTaxonTranslation
+        TaxonTranslationInterface $parentTaxonTranslation,
     ): void {
         $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getName()->willReturn('Battle games');
@@ -88,7 +88,7 @@ final class TaxonSlugGeneratorSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_passed_taxon_has_no_name(
         TaxonInterface $taxon,
-        TaxonTranslationInterface $taxonTranslation
+        TaxonTranslationInterface $taxonTranslation,
     ): void {
         $taxon->getTranslation('pl_PL')->willReturn($taxonTranslation);
         $taxonTranslation->getName()->willReturn('');

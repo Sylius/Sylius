@@ -28,7 +28,7 @@ final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
     function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(
         ReviewerReviewsRemoverInterface $reviewerReviewsRemover,
         GenericEvent $event,
-        ReviewerInterface $author
+        ReviewerInterface $author,
     ): void {
         $event->getSubject()->willReturn($author);
         $reviewerReviewsRemover->removeReviewerReviews($author)->shouldBeCalled();

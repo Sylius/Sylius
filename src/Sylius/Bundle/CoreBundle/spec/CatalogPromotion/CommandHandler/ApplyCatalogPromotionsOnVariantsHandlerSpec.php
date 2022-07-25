@@ -28,13 +28,13 @@ final class ApplyCatalogPromotionsOnVariantsHandlerSpec extends ObjectBehavior
         EligibleCatalogPromotionsProviderInterface $catalogPromotionsProvider,
         CatalogPromotionApplicatorInterface $catalogPromotionApplicator,
         ProductVariantRepositoryInterface $productVariantRepository,
-        CatalogPromotionClearerInterface $clearer
+        CatalogPromotionClearerInterface $clearer,
     ): void {
         $this->beConstructedWith(
             $catalogPromotionsProvider,
             $catalogPromotionApplicator,
             $productVariantRepository,
-            $clearer
+            $clearer,
         );
     }
 

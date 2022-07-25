@@ -32,7 +32,7 @@ final class AdjustmentFactorySpec extends ObjectBehavior
 
     function it_creates_new_adjustment(
         FactoryInterface $adjustmentFactory,
-        AdjustmentInterface $adjustment
+        AdjustmentInterface $adjustment,
     ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
 
@@ -41,7 +41,7 @@ final class AdjustmentFactorySpec extends ObjectBehavior
 
     function it_creates_new_adjustment_with_provided_data(
         FactoryInterface $adjustmentFactory,
-        AdjustmentInterface $adjustment
+        AdjustmentInterface $adjustment,
     ): void {
         $adjustmentFactory->createNew()->willReturn($adjustment);
         $adjustment->setType('tax')->shouldBeCalled();

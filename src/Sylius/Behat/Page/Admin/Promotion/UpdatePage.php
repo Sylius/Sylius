@@ -80,16 +80,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $timestamp = $dateTime->getTimestamp();
 
-        return $this->getElement('starts_at_date')->getValue() === date('Y-m-d', $timestamp)
-            && $this->getElement('starts_at_time')->getValue() === date('H:i', $timestamp);
+        return $this->getElement('starts_at_date')->getValue() === date('Y-m-d', $timestamp) &&
+            $this->getElement('starts_at_time')->getValue() === date('H:i', $timestamp);
     }
 
     public function hasEndsAt(\DateTimeInterface $dateTime): bool
     {
         $timestamp = $dateTime->getTimestamp();
 
-        return $this->getElement('ends_at_date')->getValue() === date('Y-m-d', $timestamp)
-            && $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
+        return $this->getElement('ends_at_date')->getValue() === date('Y-m-d', $timestamp) &&
+            $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
     }
 
     public function isCouponManagementAvailable(): bool

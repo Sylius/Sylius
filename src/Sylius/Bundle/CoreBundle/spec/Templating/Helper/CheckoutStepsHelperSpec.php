@@ -23,11 +23,11 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
 {
     function let(
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
     ): void {
         $this->beConstructedWith(
             $orderPaymentMethodSelectionRequirementChecker,
-            $orderShippingMethodSelectionRequirementChecker
+            $orderShippingMethodSelectionRequirementChecker,
         );
     }
 
@@ -38,7 +38,7 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
 
     function it_checks_if_order_requires_shipping(
         OrderInterface $order,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker
+        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
     ): void {
         $orderShippingMethodSelectionRequirementChecker->isShippingMethodSelectionRequired($order)->willReturn(true);
 
@@ -47,7 +47,7 @@ final class CheckoutStepsHelperSpec extends ObjectBehavior
 
     function it_checks_if_order_required_payment(
         OrderInterface $order,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker
+        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
     ): void {
         $orderPaymentMethodSelectionRequirementChecker->isPaymentMethodSelectionRequired($order)->willReturn(true);
         $this->isPaymentRequired($order)->shouldReturn(true);

@@ -49,7 +49,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ProductRepositoryInterface $productRepository,
         UserContextInterface $userContext,
         AdminUserInterface $user,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn(['ROLE_API_ACCESS']);
@@ -67,7 +67,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         UserInterface $user,
         ChannelInterface $channel,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
@@ -81,7 +81,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                ]
+                ],
             )
             ->shouldReturn($product)
         ;
@@ -91,7 +91,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         ProductRepositoryInterface $productRepository,
         UserContextInterface $userContext,
         ChannelInterface $channel,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $userContext->getUser()->willReturn(null);
 
@@ -104,7 +104,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
                 Request::METHOD_GET,
                 [
                     ContextKeys::CHANNEL => $channel,
-                ]
+                ],
             )
             ->shouldReturn($product)
         ;

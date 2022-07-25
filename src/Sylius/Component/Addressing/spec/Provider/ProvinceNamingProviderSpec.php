@@ -39,7 +39,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_province_with_given_code_is_not_found(
         RepositoryInterface $provinceRepository,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('ZZ-TOP');
@@ -52,7 +52,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
     function it_gets_province_name_if_province_with_given_code_exist_in_database(
         RepositoryInterface $provinceRepository,
         ProvinceInterface $province,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $address->getProvinceCode()->willReturn('IE-UL');
         $address->getProvinceName()->willReturn(null);
@@ -81,7 +81,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
     function it_gets_province_abbreviation_by_its_code_if_province_exists_in_database(
         RepositoryInterface $provinceRepository,
         ProvinceInterface $province,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('IE-UL');
@@ -94,7 +94,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
     function it_gets_province_name_if_its_abbreviation_is_not_set_but_province_exists_in_database(
         RepositoryInterface $provinceRepository,
         ProvinceInterface $province,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('IE-UL');

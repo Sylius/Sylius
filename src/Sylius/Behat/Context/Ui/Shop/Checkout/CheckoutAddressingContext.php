@@ -32,7 +32,7 @@ final class CheckoutAddressingContext implements Context
         private FactoryInterface $addressFactory,
         private AddressComparatorInterface $addressComparator,
         private SelectShippingPageInterface $selectShippingPage,
-        private JavaScriptTestHelperInterface $testHelper
+        private JavaScriptTestHelperInterface $testHelper,
     ) {
     }
 
@@ -132,7 +132,7 @@ final class CheckoutAddressingContext implements Context
         $key = sprintf(
             'shipping_address_%s_%s',
             strtolower((string) $address->getFirstName()),
-            strtolower((string) $address->getLastName())
+            strtolower((string) $address->getLastName()),
         );
         $this->sharedStorage->set($key, $address);
 
@@ -165,7 +165,7 @@ final class CheckoutAddressingContext implements Context
         $key = sprintf(
             'billing_address_%s_%s',
             strtolower((string) $address->getFirstName()),
-            strtolower((string) $address->getLastName())
+            strtolower((string) $address->getLastName()),
         );
         $this->sharedStorage->set($key, $address);
 
@@ -232,7 +232,7 @@ final class CheckoutAddressingContext implements Context
     public function iProceedSelectingBillingCountry(
         CountryInterface $shippingCountry = null,
         string $localeCode = 'en_US',
-        ?string $email = null
+        ?string $email = null,
     ) {
         $this->addressPage->open(['_locale' => $localeCode]);
         $shippingAddress = $this->createDefaultAddress();
@@ -251,7 +251,7 @@ final class CheckoutAddressingContext implements Context
      */
     public function iProceedLoggingAsGuestWithAsBillingCountry(
         string $email,
-        CountryInterface $shippingCountry = null
+        CountryInterface $shippingCountry = null,
     ): void {
         $this->addressPage->open();
         $this->addressPage->specifyEmail($email);

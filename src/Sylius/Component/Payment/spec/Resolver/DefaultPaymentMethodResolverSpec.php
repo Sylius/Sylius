@@ -36,7 +36,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $paymentMethodRepository->findBy(['enabled' => true])->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
 
@@ -45,7 +45,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 
     function it_throws_exception_if_there_are_no_enabled_payment_methods(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $paymentMethodRepository->findBy(['enabled' => true])->willReturn([]);
 

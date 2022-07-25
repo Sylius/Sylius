@@ -35,7 +35,7 @@ final class AddressesExtension implements ContextAwareQueryCollectionExtensionIn
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, AddressInterface::class, true)) {
             return;

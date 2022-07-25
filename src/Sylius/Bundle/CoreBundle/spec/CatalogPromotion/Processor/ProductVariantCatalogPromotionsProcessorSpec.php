@@ -32,7 +32,7 @@ final class ProductVariantCatalogPromotionsProcessorSpec extends ObjectBehavior
 
     function it_reapplies_catalog_promotion_on_variant(
         ProductVariantInterface $variant,
-        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher
+        ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
     ): void {
         $variant->getCode()->willReturn('VARIANT_CODE');
         $commandDispatcher->updateVariants(['VARIANT_CODE']);

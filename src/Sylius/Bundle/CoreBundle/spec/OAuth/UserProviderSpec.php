@@ -43,7 +43,7 @@ final class UserProviderSpec extends ObjectBehavior
         RepositoryInterface $oauthRepository,
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
     ): void {
         $this->beConstructedWith(
             ShopUser::class,
@@ -54,7 +54,7 @@ final class UserProviderSpec extends ObjectBehavior
             $oauthRepository,
             $userManager,
             $canonicalizer,
-            $customerRepository
+            $customerRepository,
         );
     }
 
@@ -74,7 +74,7 @@ final class UserProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
-        UserOAuthInterface $oauth
+        UserOAuthInterface $oauth,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -104,7 +104,7 @@ final class UserProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         UserOAuthInterface $oauth,
         UserResponseInterface $response,
-        ResourceOwnerInterface $resourceOwner
+        ResourceOwnerInterface $resourceOwner,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -125,7 +125,7 @@ final class UserProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
-        UserOAuthInterface $oauth
+        UserOAuthInterface $oauth,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -163,7 +163,7 @@ final class UserProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
-        UserOAuthInterface $oauth
+        UserOAuthInterface $oauth,
     ): void {
         $resourceOwner->getName()->willReturn('google');
 
@@ -211,7 +211,7 @@ final class UserProviderSpec extends ObjectBehavior
         ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
-        UserOAuthInterface $oauth
+        UserOAuthInterface $oauth,
     ): void {
         $response->getResourceOwner()->willReturn($resourceOwner);
         $resourceOwner->getName()->willReturn('google');
@@ -227,7 +227,7 @@ final class UserProviderSpec extends ObjectBehavior
     }
 
     function it_should_throw_exception_when_unsupported_user_is_used(
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->shouldThrow(UnsupportedUserException::class)->during('refreshUser', [$user]);
     }

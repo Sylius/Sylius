@@ -27,7 +27,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        UserContextInterface $userContext
+        UserContextInterface $userContext,
     ): void {
         $this->beConstructedWith($decoratedDataPersister, $userContext);
     }
@@ -43,7 +43,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -63,7 +63,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
         AddressInterface $address,
-        AddressInterface $defaultAddress
+        AddressInterface $defaultAddress,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn($customer);
@@ -81,7 +81,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
         $shopUser->getCustomer()->willReturn(null);
@@ -97,7 +97,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -108,7 +108,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_there_is_not_logged_in_user_during_persisting(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $decoratedDataPersister->persist($address, [])->shouldNotBeCalled();
 
@@ -117,7 +117,7 @@ final class AddressDataPersisterSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_there_is_not_logged_in_user_during_removing(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        AddressInterface $address
+        AddressInterface $address,
     ): void {
         $decoratedDataPersister->remove($address, [])->shouldNotBeCalled();
 

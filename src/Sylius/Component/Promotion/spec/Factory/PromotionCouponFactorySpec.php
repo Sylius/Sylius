@@ -44,7 +44,7 @@ final class PromotionCouponFactorySpec extends ObjectBehavior
     }
 
     function it_throws_an_invalid_argument_exception_when_promotion_is_not_coupon_based(
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(false);
@@ -58,7 +58,7 @@ final class PromotionCouponFactorySpec extends ObjectBehavior
     function it_creates_a_coupon_and_assigns_a_promotion_to_id(
         FactoryInterface $factory,
         PromotionInterface $promotion,
-        PromotionCouponInterface $coupon
+        PromotionCouponInterface $coupon,
     ): void {
         $factory->createNew()->willReturn($coupon);
         $promotion->getName()->willReturn('Christmas sale');

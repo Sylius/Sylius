@@ -33,7 +33,7 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
 
     public function __construct(
         private RouterInterface $router,
-        IdentifierConverterInterface $identifierConverter
+        IdentifierConverterInterface $identifierConverter,
     ) {
         $this->identifierConverter = $identifierConverter;
     }

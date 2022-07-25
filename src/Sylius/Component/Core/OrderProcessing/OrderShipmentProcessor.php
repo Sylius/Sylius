@@ -28,12 +28,12 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     public function __construct(
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         private FactoryInterface $shipmentFactory,
-        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null
+        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null,
     ) {
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
             @trigger_error(
                 'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
-                \E_USER_DEPRECATED
+                \E_USER_DEPRECATED,
             );
         }
     }

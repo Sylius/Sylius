@@ -36,7 +36,7 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
 
     function it_transforms_product_taxon_to_taxon(
         ProductTaxonInterface $productTaxon,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $productTaxon->getTaxon()->willReturn($taxon);
 
@@ -53,7 +53,7 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         RepositoryInterface $productTaxonRepository,
         ProductInterface $product,
         ProductTaxonInterface $productTaxon,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $product])->willReturn(null);
         $productTaxonFactory->createNew()->willReturn($productTaxon);
@@ -67,7 +67,7 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         RepositoryInterface $productTaxonRepository,
         ProductTaxonInterface $productTaxon,
         ProductInterface $product,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $productTaxonRepository->findOneBy(['taxon' => $taxon, 'product' => $product])->willReturn($productTaxon);
 

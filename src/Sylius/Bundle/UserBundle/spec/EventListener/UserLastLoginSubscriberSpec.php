@@ -50,7 +50,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         ObjectManager $userManager,
         Request $request,
         TokenInterface $token,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $token->getUser()->willReturn($user);
 
@@ -65,7 +65,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     function it_updates_user_last_login_on_implicit_login(
         ObjectManager $userManager,
         UserEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $event->getUser()->willReturn($user);
 
@@ -80,7 +80,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     function it_updates_only_sylius_user_specified_in_constructor(
         ObjectManager $userManager,
         UserEvent $event,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
@@ -98,7 +98,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         UserEvent $event,
         Request $request,
         TokenInterface $token,
-        SymfonyUserInterface $user
+        SymfonyUserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, 'FakeBundle\User\Model\User');
 
@@ -116,7 +116,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         ObjectManager $userManager,
         Request $request,
         TokenInterface $token,
-        SymfonyUserInterface $user
+        SymfonyUserInterface $user,
     ): void {
         $this->beConstructedWith($userManager, SymfonyUserInterface::class);
 

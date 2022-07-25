@@ -28,7 +28,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
     function let(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        ShippingMethodsResolverInterface $shippingMethodsResolver
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
     ): void {
         $this->beConstructedWith($orderRepository, $shipmentRepository, $shippingMethodsResolver);
     }
@@ -55,7 +55,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
     }
 
     function it_throws_an_exception_if_cart_does_not_exist(
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $orderRepository->findCartByTokenValue('666')->willReturn(null);
 
@@ -73,7 +73,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
     function it_throws_an_exception_if_shipment_does_not_exist(
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn(null);
@@ -93,7 +93,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         OrderRepositoryInterface $orderRepository,
         ShipmentRepositoryInterface $shipmentRepository,
         OrderInterface $cart,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);
@@ -117,7 +117,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         OrderInterface $cart,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $orderRepository->findCartByTokenValue('666')->willReturn($cart);
         $shipmentRepository->find('999')->willReturn($shipment);
@@ -132,7 +132,7 @@ final class CartShippingMethodsSubresourceDataProviderSpec extends ObjectBehavio
                 ShippingMethodInterface::class,
                 [],
                 ['subresource_identifiers' => ['tokenValue' => '666', 'shipments' => '999']],
-                Request::METHOD_GET
+                Request::METHOD_GET,
             )
             ->shouldReturn([$shippingMethod])
         ;

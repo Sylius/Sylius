@@ -58,7 +58,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
     private function createSubjectMapping(
         string $reviewableEntity,
         string $subject,
-        ClassMetadata $reviewableEntityMetadata
+        ClassMetadata $reviewableEntityMetadata,
     ): array {
         return [
             'fieldName' => 'reviewSubject',

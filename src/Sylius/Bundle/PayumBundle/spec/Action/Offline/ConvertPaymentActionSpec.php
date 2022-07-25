@@ -43,7 +43,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
     function it_supports_only_convert_request(
         Convert $convertRequest,
         Capture $captureRequest,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $convertRequest->getTo()->willReturn('array');
         $convertRequest->getSource()->willReturn($payment);
@@ -56,7 +56,7 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         Convert $fromSomethingElseToSomethingElseRequest,
         Convert $fromPaymentToArrayRequest,
         PaymentInterface $payment,
-        PaymentMethodInterface $method
+        PaymentMethodInterface $method,
     ): void {
         $fromPaymentToArrayRequest->getTo()->willReturn('array');
         $fromPaymentToArrayRequest->getSource()->willReturn($payment);

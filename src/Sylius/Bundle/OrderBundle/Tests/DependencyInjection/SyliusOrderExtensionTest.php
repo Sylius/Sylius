@@ -32,7 +32,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
             'acme.cart_context_autoconfigured',
             (new Definition())
                 ->setClass($this->getMockClass(CartContextInterface::class))
-                ->setAutoconfigured(true)
+                ->setAutoconfigured(true),
         );
 
         $this->load();
@@ -40,7 +40,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.cart_context_autoconfigured',
-            RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG
+            RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG,
         );
     }
 
@@ -53,7 +53,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
             'acme.processor_autoconfigured',
             (new Definition())
                 ->setClass($this->getMockClass(OrderProcessorInterface::class))
-                ->setAutoconfigured(true)
+                ->setAutoconfigured(true),
         );
 
         $this->load();
@@ -61,7 +61,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.processor_autoconfigured',
-            RegisterProcessorsPass::PROCESSOR_SERVICE_TAG
+            RegisterProcessorsPass::PROCESSOR_SERVICE_TAG,
         );
     }
 

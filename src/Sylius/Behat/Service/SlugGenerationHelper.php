@@ -57,7 +57,7 @@ abstract class SlugGenerationHelper
     {
         return $session->wait(1000, sprintf(
             'undefined != $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
-            str_replace('"', '\"', $element->getXpath())
+            str_replace('"', '\"', $element->getXpath()),
         ));
     }
 
@@ -65,7 +65,7 @@ abstract class SlugGenerationHelper
     {
         return $session->wait(1000, sprintf(
             'undefined == $(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).attr("readonly")',
-            str_replace('"', '\"', $element->getXpath())
+            str_replace('"', '\"', $element->getXpath()),
         ));
     }
 }

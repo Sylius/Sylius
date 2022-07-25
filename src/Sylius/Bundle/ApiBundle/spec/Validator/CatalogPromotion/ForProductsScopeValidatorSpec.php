@@ -55,7 +55,7 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -72,7 +72,7 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
 
@@ -88,7 +88,7 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_scope_is_valid(
         ScopeValidatorInterface $baseScopeValidator,
         SectionProviderInterface $sectionProvider,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $sectionProvider->getSection()->willReturn(new AdminApiSection());
         $constraint = new CatalogPromotionScope();

@@ -34,7 +34,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $firstPromotionCouponEligibilityChecker,
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,
@@ -51,7 +51,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $firstPromotionCouponEligibilityChecker,
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,
@@ -68,7 +68,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         PromotionCouponEligibilityCheckerInterface $firstPromotionCouponEligibilityChecker,
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $this->beConstructedWith([
             $firstPromotionCouponEligibilityChecker,

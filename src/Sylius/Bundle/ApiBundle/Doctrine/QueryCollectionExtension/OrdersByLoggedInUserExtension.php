@@ -35,7 +35,7 @@ final class OrdersByLoggedInUserExtension implements ContextAwareQueryCollection
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         if (!is_a($resourceClass, OrderInterface::class, true)) {
             return;

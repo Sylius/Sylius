@@ -41,7 +41,7 @@ final class OrderItemUnitItemDataProviderSpec extends ObjectBehavior
         UserContextInterface $userContext,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
-        OrderItemUnitInterface $orderItemUnit
+        OrderItemUnitInterface $orderItemUnit,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -60,7 +60,7 @@ final class OrderItemUnitItemDataProviderSpec extends ObjectBehavior
         OrderItemUnitRepositoryInterface $orderItemUnitRepository,
         UserContextInterface $userContext,
         AdminUserInterface $adminUser,
-        OrderItemUnitInterface $orderItemUnit
+        OrderItemUnitInterface $orderItemUnit,
     ) {
         $userContext->getUser()->willReturn($adminUser);
 
@@ -74,7 +74,7 @@ final class OrderItemUnitItemDataProviderSpec extends ObjectBehavior
     function it_returns_null_if_shop_user_has_no_customer(
         OrderItemUnitRepositoryInterface $orderItemUnitRepository,
         UserContextInterface $userContext,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 
@@ -90,7 +90,7 @@ final class OrderItemUnitItemDataProviderSpec extends ObjectBehavior
         OrderItemUnitRepositoryInterface $orderItemUnitRepository,
         UserContextInterface $userContext,
         CustomerInterface $customer,
-        ShopUserInterface $shopUser
+        ShopUserInterface $shopUser,
     ) {
         $userContext->getUser()->willReturn($shopUser);
 

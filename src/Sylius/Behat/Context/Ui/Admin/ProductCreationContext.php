@@ -32,7 +32,7 @@ final class ProductCreationContext implements Context
         string $name,
         string $price,
         TaxonInterface $taxon,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $localeCode = $channel->getDefaultLocale()->getCode();
 

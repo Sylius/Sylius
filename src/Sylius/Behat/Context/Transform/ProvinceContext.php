@@ -36,7 +36,7 @@ final class ProvinceContext implements Context
         $province = $this->provinceRepository->findOneBy(['name' => $provinceName]);
         Assert::notNull(
             $province,
-            sprintf('Province with name "%s" does not exist', $provinceName)
+            sprintf('Province with name "%s" does not exist', $provinceName),
         );
 
         return $province;

@@ -36,7 +36,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
 
     function it_says_that_payment_method_has_to_be_selected_if_order_total_is_bigger_than_0(
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
@@ -54,7 +54,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
 
     function it_says_that_payment_method_has_to_be_selected_if_skipping_payment_step_is_disabled(
         OrderInterface $order,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
@@ -69,7 +69,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         ChannelInterface $channel,
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod,
-        PaymentMethodsResolverInterface $paymentMethodsResolver
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
@@ -87,7 +87,7 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         PaymentInterface $payment,
         PaymentMethodInterface $paymentMethod1,
         PaymentMethodInterface $paymentMethod2,
-        PaymentMethodsResolverInterface $paymentMethodsResolver
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);

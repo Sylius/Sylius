@@ -34,7 +34,7 @@ final class ProductVariantsPricesHelperSpec extends ObjectBehavior
     function it_uses_provider_to_get_variants_prices(
         ChannelInterface $channel,
         ProductInterface $product,
-        ProductVariantsPricesProviderInterface $productVariantsPricesProvider
+        ProductVariantsPricesProviderInterface $productVariantsPricesProvider,
     ): void {
         $productVariantsPricesProvider->provideVariantsPrices($product, $channel)->willReturn([
             ['color' => 'black', 'value' => 1000],

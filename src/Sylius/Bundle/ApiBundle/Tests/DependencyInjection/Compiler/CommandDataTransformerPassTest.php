@@ -27,12 +27,12 @@ final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
     {
         $this->setDefinition(
             'sylius.api.command_data_transformer.service.first',
-            (new Definition())->addTag('sylius.api.command_data_transformer')
+            (new Definition())->addTag('sylius.api.command_data_transformer'),
         );
 
         $this->setDefinition(
             'sylius.api.command_data_transformer.service.second',
-            (new Definition())->addTag('sylius.api.command_data_transformer')
+            (new Definition())->addTag('sylius.api.command_data_transformer'),
         );
 
         $this->compile();
@@ -40,13 +40,13 @@ final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.api.data_transformer.command_aware_input_data_transformer',
             0,
-            'sylius.api.command_data_transformer.service.first'
+            'sylius.api.command_data_transformer.service.first',
         );
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.api.data_transformer.command_aware_input_data_transformer',
             1,
-            'sylius.api.command_data_transformer.service.second'
+            'sylius.api.command_data_transformer.service.second',
         );
     }
 

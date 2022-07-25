@@ -27,7 +27,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_promotion_coupon_does_not_expire(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getExpiresAt()->willReturn(null);
 
@@ -36,7 +36,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_true_if_promotion_coupon_has_not_expired_yet(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('tomorrow'));
 
@@ -45,7 +45,7 @@ final class PromotionCouponDurationEligibilityCheckerSpec extends ObjectBehavior
 
     function it_returns_false_if_promotion_coupon_has_already_expired(
         PromotionSubjectInterface $promotionSubject,
-        PromotionCouponInterface $promotionCoupon
+        PromotionCouponInterface $promotionCoupon,
     ): void {
         $promotionCoupon->getExpiresAt()->willReturn(new \DateTime('yesterday'));
 

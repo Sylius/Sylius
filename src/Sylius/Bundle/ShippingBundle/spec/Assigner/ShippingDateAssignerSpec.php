@@ -30,7 +30,7 @@ final class ShippingDateAssignerSpec extends ObjectBehavior
 
     function it_assigns_a_shipped_at_date_to_a_shipment_using_date_time_provider_interface_from_sylius_calendar_repository(
         DateTimeProviderInterface $calendar,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $this->beConstructedWith($calendar);
 
@@ -42,7 +42,7 @@ final class ShippingDateAssignerSpec extends ObjectBehavior
 
     function it_assigns_a_shipped_at_date_to_a_shipment_using_deprecated_date_time_provider(
         DateTimeProvider $calendar,
-        ShipmentInterface $shipment
+        ShipmentInterface $shipment,
     ): void {
         $this->beConstructedWith($calendar);
 

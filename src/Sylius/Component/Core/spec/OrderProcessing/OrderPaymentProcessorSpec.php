@@ -48,7 +48,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentInterface $cartPayment,
         PaymentInterface $cancelledPayment,
-        Collection $payments
+        Collection $payments,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getTotal()->willReturn(0);
@@ -75,7 +75,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
     function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
         OrderInterface $order,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn($payment);
@@ -92,7 +92,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     function it_sets_provided_order_payment_if_it_is_not_null(
         OrderInterface $order,
         OrderPaymentProviderInterface $orderPaymentProvider,
-        PaymentInterface $payment
+        PaymentInterface $payment,
     ): void {
         $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);
@@ -106,7 +106,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
     function it_does_not_set_order_payment_if_it_cannot_be_provided(
         OrderInterface $order,
-        OrderPaymentProviderInterface $orderPaymentProvider
+        OrderPaymentProviderInterface $orderPaymentProvider,
     ): void {
         $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);

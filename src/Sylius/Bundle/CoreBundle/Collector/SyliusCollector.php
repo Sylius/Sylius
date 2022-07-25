@@ -28,7 +28,7 @@ final class SyliusCollector extends DataCollector
     public function __construct(
         private ShopperContextInterface $shopperContext,
         array $bundles,
-        string $defaultLocaleCode
+        string $defaultLocaleCode,
     ) {
         $this->data = [
             'version' => Kernel::VERSION,

@@ -30,43 +30,43 @@ final class ExclusiveCriteriaSpec extends ObjectBehavior
     function it_returns_false_if_channel_pricing_exclusive_promotion_is_applied(
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(true);
 
         $this->isApplicable(
             $catalogPromotion,
-            ['action' => $action->getWrappedObject(), 'channelPricing' => $channelPricing->getWrappedObject()]
+            ['action' => $action->getWrappedObject(), 'channelPricing' => $channelPricing->getWrappedObject()],
         )->shouldReturn(false);
     }
 
     function it_returns_true_if_channel_pricing_exclusive_promotion_is_not_applied(
         CatalogPromotionInterface $catalogPromotion,
         CatalogPromotionActionInterface $action,
-        ChannelPricingInterface $channelPricing
+        ChannelPricingInterface $channelPricing,
     ): void {
         $channelPricing->hasExclusiveCatalogPromotionApplied()->willReturn(false);
 
         $this->isApplicable(
             $catalogPromotion,
-            ['action' => $action->getWrappedObject(), 'channelPricing' => $channelPricing->getWrappedObject()]
+            ['action' => $action->getWrappedObject(), 'channelPricing' => $channelPricing->getWrappedObject()],
         )->shouldReturn(true);
     }
 
     function it_throws_exception_if_channel_pricing_is_not_provided(
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $this->shouldThrow(InvalidArgumentException::class)->during('isApplicable', [$catalogPromotion, ['action' => $action->getWrappedObject()]]);
     }
 
     function it_throws_exception_if_channel_pricing_is_not_instance_of_channel_pricing(
         CatalogPromotionInterface $catalogPromotion,
-        CatalogPromotionActionInterface $action
+        CatalogPromotionActionInterface $action,
     ): void {
         $this->shouldThrow(InvalidArgumentException::class)->during(
             'isApplicable',
-            [$catalogPromotion, ['action' => $action->getWrappedObject(), 'channelPricing' => 'string']]
+            [$catalogPromotion, ['action' => $action->getWrappedObject(), 'channelPricing' => 'string']],
         );
     }
 }

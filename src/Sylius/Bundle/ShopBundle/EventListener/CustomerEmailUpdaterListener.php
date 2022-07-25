@@ -34,7 +34,7 @@ final class CustomerEmailUpdaterListener
         private ChannelContextInterface $channelContext,
         private EventDispatcherInterface $eventDispatcher,
         private SessionInterface $session,
-        private SectionProviderInterface $uriBasedSectionContext
+        private SectionProviderInterface $uriBasedSectionContext,
     ) {
     }
 

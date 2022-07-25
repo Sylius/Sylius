@@ -35,7 +35,7 @@ final class OrderEmailManagerSpec extends ObjectBehavior
 
     function it_delegates_email_sending_to_core_implementation(
         CoreOrderEmailManagerInterface $decoratedEmailManager,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $decoratedEmailManager->sendConfirmationEmail($order)->shouldBeCalled();
 
@@ -46,7 +46,7 @@ final class OrderEmailManagerSpec extends ObjectBehavior
         SenderInterface $sender,
         OrderInterface $order,
         ChannelInterface $channel,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $this->beConstructedWith($sender, null);
 

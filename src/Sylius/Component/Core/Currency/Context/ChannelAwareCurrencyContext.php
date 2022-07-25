@@ -49,7 +49,7 @@ final class ChannelAwareCurrencyContext implements CurrencyContextInterface
             function (CurrencyInterface $currency) {
                 return $currency->getCode();
             },
-            $channel->getCurrencies()->toArray()
+            $channel->getCurrencies()->toArray(),
         );
 
         return in_array($currencyCode, $availableCurrencies, true);

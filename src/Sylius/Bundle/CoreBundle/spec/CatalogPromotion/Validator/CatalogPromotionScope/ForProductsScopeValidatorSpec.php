@@ -36,7 +36,7 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_catalog_promotion_scope_has_not_existing_products_configured(
         ProductRepositoryInterface $productRepository,
         ExecutionContextInterface $executionContext,
-        ConstraintViolationBuilderInterface $constraintViolationBuilder
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
     ): void {
         $productRepository->findOneBy(['code' => 'not_existing_product'])->willReturn(null);
 
@@ -50,7 +50,7 @@ final class ForProductsScopeValidatorSpec extends ObjectBehavior
     function it_does_nothing_if_catalog_promotion_scope_is_valid(
         ProductRepositoryInterface $productRepository,
         ExecutionContextInterface $executionContext,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $productRepository->findOneBy(['code' => 'product'])->willReturn($product);
 

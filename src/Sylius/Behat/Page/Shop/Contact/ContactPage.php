@@ -50,7 +50,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
                 $this->getSession(),
                 'Validation message',
                 'css',
-                '[data-test-validation-error]'
+                '[data-test-validation-error]',
             )
             ;
         }

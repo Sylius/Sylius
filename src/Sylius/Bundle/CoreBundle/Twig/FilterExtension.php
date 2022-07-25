@@ -33,7 +33,7 @@ final class FilterExtension extends BaseFilterExtension
         $filter,
         array $config = [],
         $resolver = null,
-        $referenceType = UrlGeneratorInterface::ABSOLUTE_URL
+        $referenceType = UrlGeneratorInterface::ABSOLUTE_URL,
     ) {
         if (!$this->canImageBeFiltered($path)) {
             return $this->imagesPath . $path;

@@ -39,7 +39,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $constraint = new PickupCartLocale();
         $this->initialize($executionContext);
@@ -59,7 +59,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
 
     function it_does_not_add_violation_if_locale_code_is_not_set(
         ExecutionContextInterface $executionContext,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
     ): void {
         $constraint = new PickupCartLocale();
         $this->initialize($executionContext);
@@ -78,7 +78,7 @@ final class PickupCartLocaleValidatorSpec extends ObjectBehavior
         ExecutionContextInterface $executionContext,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $constraint = new PickupCartLocale();
         $this->initialize($executionContext);

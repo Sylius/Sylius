@@ -43,7 +43,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
     }
 
     function it_throws_an_exception_if_order_item_with_given_id_does_not_exist(
-        OrderItemRepositoryInterface $orderItemRepository
+        OrderItemRepositoryInterface $orderItemRepository,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
         $orderItemRepository->find(11)->willReturn(null);
@@ -62,7 +62,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
     function it_returns_order_adjustments(
         OrderItemRepositoryInterface $orderItemRepository,
         OrderItemInterface $orderItem,
-        AdjustmentInterface $adjustment
+        AdjustmentInterface $adjustment,
     ): void {
         $context['subresource_identifiers'] = ['tokenValue' => 'TOKEN', 'items' => 11];
         $orderItemRepository->find(11)->willReturn($orderItem);
@@ -74,7 +74,7 @@ final class OrderItemAdjustmentsSubresourceDataProviderSpec extends ObjectBehavi
                 AdjustmentInterface::class,
                 [],
                 $context,
-                Request::METHOD_GET
+                Request::METHOD_GET,
             )
             ->shouldBeLike(new ArrayCollection([$adjustment->getWrappedObject()]))
         ;

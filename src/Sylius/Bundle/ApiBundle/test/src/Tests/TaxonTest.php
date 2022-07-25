@@ -63,7 +63,7 @@ final class TaxonTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             '/api/v2/admin/taxons',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();

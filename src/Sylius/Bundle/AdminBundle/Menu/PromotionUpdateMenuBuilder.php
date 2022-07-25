@@ -39,7 +39,7 @@ final class PromotionUpdateMenuBuilder
         $this->addChildren($menu, $promotion);
         $this->eventDispatcher->dispatch(
             new PromotionMenuBuilderEvent($this->factory, $menu, $promotion),
-            self::EVENT_NAME
+            self::EVENT_NAME,
         );
 
         return $menu;

@@ -41,7 +41,7 @@ class UpdateCart implements OrderTokenValueAwareInterface, CustomerEmailAwareInt
         ?AddressInterface $billingAddress = null,
         ?AddressInterface $shippingAddress = null,
         ?string $couponCode = null,
-        ?string $localeCode = null
+        ?string $localeCode = null,
     ) {
         $this->email = $email;
         $this->billingAddress = $billingAddress;

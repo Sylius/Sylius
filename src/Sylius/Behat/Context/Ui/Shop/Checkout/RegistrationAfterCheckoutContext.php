@@ -31,7 +31,7 @@ final class RegistrationAfterCheckoutContext implements Context
         private ThankYouPageInterface $thankYouPage,
         private HomePageInterface $homePage,
         private VerificationPageInterface $verificationPage,
-        private RegisterElementInterface $registerElement
+        private RegisterElementInterface $registerElement,
     ) {
     }
 

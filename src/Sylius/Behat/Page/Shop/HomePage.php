@@ -57,7 +57,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),
-            $this->getElement('currency_selector')->findAll('css', '[data-test-available-currency]')
+            $this->getElement('currency_selector')->findAll('css', '[data-test-available-currency]'),
         );
     }
 
@@ -80,7 +80,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),
-            $this->getElement('locale_selector')->findAll('css', '[data-test-available-locale]')
+            $this->getElement('locale_selector')->findAll('css', '[data-test-available-locale]'),
         );
     }
 
@@ -93,7 +93,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),
-            $this->getElement('latest_products')->findAll('css', '[data-test-product-name]')
+            $this->getElement('latest_products')->findAll('css', '[data-test-product-name]'),
         );
     }
 

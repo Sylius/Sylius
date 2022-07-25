@@ -30,7 +30,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         FactoryInterface $localeFactory,
         RepositoryInterface $channelRepository,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $localeRepository
+        RepositoryInterface $localeRepository,
     ): void {
         $this->beConstructedWith(
             $channelFactory,
@@ -39,7 +39,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
             $channelRepository,
             $currencyRepository,
             $localeRepository,
-            'en_US'
+            'en_US',
         );
     }
 
@@ -57,7 +57,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         RepositoryInterface $localeRepository,
         ChannelInterface $channel,
         CurrencyInterface $currency,
-        LocaleInterface $locale
+        LocaleInterface $locale,
     ): void {
         $localeFactory->createNew()->willReturn($locale);
         $locale->setCode('en_US')->shouldBeCalled();

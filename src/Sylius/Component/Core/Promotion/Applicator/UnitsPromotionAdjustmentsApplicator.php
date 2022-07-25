@@ -52,7 +52,7 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         OrderItemInterface $item,
         PromotionInterface $promotion,
         int $itemPromotionAmount,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
 
@@ -68,7 +68,7 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
             $this->addAdjustment(
                 $promotion,
                 $unit,
-                $this->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount)
+                $this->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount),
             );
         }
     }

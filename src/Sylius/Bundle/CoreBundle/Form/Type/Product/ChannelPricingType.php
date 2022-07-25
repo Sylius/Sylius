@@ -29,7 +29,7 @@ final class ChannelPricingType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $channelPricingRepository = null
+        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $channelPricingRepository = null,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }

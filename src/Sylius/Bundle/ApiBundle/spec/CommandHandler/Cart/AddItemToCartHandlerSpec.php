@@ -32,7 +32,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         ProductVariantRepositoryInterface $productVariantRepository,
         OrderModifierInterface $orderModifier,
         CartItemFactoryInterface $cartItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
     ): void {
         $this->beConstructedWith(
             $orderRepository,
@@ -56,7 +56,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderInterface $cart,
         OrderItemInterface $cartItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
         $productVariantRepository
@@ -74,13 +74,13 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         $this(AddItemToCart::createFromData(
             'TOKEN',
             'PRODUCT_VARIANT_CODE',
-            5
+            5,
         ))->shouldReturn($cart);
     }
 
     function it_throws_an_exception_if_product_is_not_found(
         ProductVariantRepositoryInterface $productVariantRepository,
-        CartItemFactoryInterface $cartItemFactory
+        CartItemFactoryInterface $cartItemFactory,
     ): void {
         $productVariantRepository->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])->willReturn(null);
 
@@ -91,7 +91,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             ->during('__invoke', [AddItemToCart::createFromData(
                 'TOKEN',
                 'PRODUCT_VARIANT_CODE',
-                1
+                1,
             )])
         ;
     }
@@ -100,7 +100,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
         CartItemFactoryInterface $cartItemFactory,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
     ): void {
         $productVariantRepository
             ->findOneBy(['code' => 'PRODUCT_VARIANT_CODE'])
@@ -116,7 +116,7 @@ final class AddItemToCartHandlerSpec extends ObjectBehavior
             ->during('__invoke', [AddItemToCart::createFromData(
                 'TOKEN',
                 'PRODUCT_VARIANT_CODE',
-                1
+                1,
             )])
         ;
     }

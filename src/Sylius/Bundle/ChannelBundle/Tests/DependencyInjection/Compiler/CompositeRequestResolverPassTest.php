@@ -31,7 +31,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.context.channel.request_based.resolver.composite', new Definition());
         $this->setDefinition(
             'sylius.context.channel.request_based.resolver.tagged_one',
-            (new Definition())->addTag('sylius.context.channel.request_based.resolver')
+            (new Definition())->addTag('sylius.context.channel.request_based.resolver'),
         );
 
         $this->compile();
@@ -39,7 +39,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0],
         );
     }
 
@@ -51,7 +51,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.context.channel.request_based.resolver.composite', new Definition());
         $this->setDefinition(
             'sylius.context.channel.request_based.resolver.tagged_one',
-            (new Definition())->addTag('sylius.context.channel.request_based.resolver', ['priority' => 42])
+            (new Definition())->addTag('sylius.context.channel.request_based.resolver', ['priority' => 42]),
         );
 
         $this->compile();
@@ -59,7 +59,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 42]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 42],
         );
     }
 
@@ -72,7 +72,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.context.channel.request_based.resolver.composite', new Definition());
         $this->setDefinition(
             'sylius.context.channel.request_based.resolver.tagged_one',
-            (new Definition())->addTag('sylius.context.channel.request_based.resolver')
+            (new Definition())->addTag('sylius.context.channel.request_based.resolver'),
         );
 
         $this->compile();
@@ -80,7 +80,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0],
         );
     }
 
@@ -93,7 +93,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.context.channel.request_based.resolver.composite', new Definition());
         $this->setDefinition(
             'sylius.context.channel.request_based.resolver.tagged_one',
-            (new Definition())->addTag('sylius.context.channel.request_based.resolver')
+            (new Definition())->addTag('sylius.context.channel.request_based.resolver'),
         );
 
         $this->compile();
@@ -101,7 +101,7 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.context.channel.request_based.resolver.composite',
             'addResolver',
-            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0]
+            [new Reference('sylius.context.channel.request_based.resolver.tagged_one'), 0],
         );
     }
 
@@ -113,13 +113,13 @@ class CompositeRequestResolverPassTest extends AbstractCompilerPassTestCase
     private function assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
         string $serviceId,
         string $method,
-        array $arguments
+        array $arguments,
     ): void {
         $definition = $this->container->findDefinition($serviceId);
 
         self::assertThat(
             $definition,
-            new LogicalNot(new DefinitionHasMethodCallConstraint($method, $arguments))
+            new LogicalNot(new DefinitionHasMethodCallConstraint($method, $arguments)),
         );
     }
 }

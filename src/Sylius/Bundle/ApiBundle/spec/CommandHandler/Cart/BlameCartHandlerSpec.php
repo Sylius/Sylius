@@ -28,12 +28,12 @@ final class BlameCartHandlerSpec extends ObjectBehavior
     function let(
         UserRepositoryInterface $shopUserRepository,
         OrderRepositoryInterface $orderRepository,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $this->beConstructedWith(
             $shopUserRepository,
             $orderRepository,
-            $orderProcessor
+            $orderProcessor,
         );
     }
 
@@ -48,7 +48,7 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         OrderInterface $cart,
         ShopUserInterface $user,
         CustomerInterface $customer,
-        OrderProcessorInterface $orderProcessor
+        OrderProcessorInterface $orderProcessor,
     ): void {
         $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
@@ -69,7 +69,7 @@ final class BlameCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart,
         ShopUserInterface $user,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
         $orderRepository->findCartByTokenValue('TOKEN')->willReturn($cart);
@@ -86,7 +86,7 @@ final class BlameCartHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_cart_has_not_been_found(
         UserRepositoryInterface $shopUserRepository,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $shopUserRepository->findOneByEmail('sylius@example.com')->willReturn($user);
 

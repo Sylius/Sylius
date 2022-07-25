@@ -65,19 +65,19 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         $resetPasswordEmailHandler = new SendResetPasswordEmailHandler(
             $emailSender,
             $channelRepository->reveal(),
-            $userRepository->reveal()
+            $userRepository->reveal(),
         );
 
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'user@example.com',
             'CHANNEL_CODE',
-            'en_US'
+            'en_US',
         ));
 
         self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
         self::assertTrue($emailChecker->hasMessageTo(
             $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
-            'user@example.com'
+            'user@example.com',
         ));
     }
 }

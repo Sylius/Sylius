@@ -35,7 +35,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
     function it_returns_a_cart_based_on_id_stored_in_session(
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $cart
+        OrderInterface $cart,
     ): void {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
@@ -53,7 +53,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
 
     function it_throws_a_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
         SessionInterface $session,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ): void {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);

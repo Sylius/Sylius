@@ -32,7 +32,7 @@ final class DashboardController
         private EngineInterface|Environment $templatingEngine,
         private RouterInterface $router,
         private ?SalesDataProviderInterface $salesDataProvider = null,
-        private ?StatisticsDataProviderInterface $statisticsDataProvider = null
+        private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
     }
 
@@ -64,8 +64,8 @@ final class DashboardController
                 $channel,
                 (new \DateTime((string) $request->query->get('startDate'))),
                 (new \DateTime((string) $request->query->get('endDate'))),
-                (string) $request->query->get('interval')
-            )
+                (string) $request->query->get('interval'),
+            ),
         );
     }
 

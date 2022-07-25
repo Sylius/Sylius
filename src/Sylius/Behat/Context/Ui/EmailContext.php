@@ -26,7 +26,7 @@ final class EmailContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private EmailCheckerInterface $emailChecker,
-        private TranslatorInterface $translator
+        private TranslatorInterface $translator,
     ) {
     }
 
@@ -47,7 +47,7 @@ final class EmailContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
-            $recipient
+            $recipient,
         );
     }
 
@@ -60,9 +60,9 @@ final class EmailContext implements Context
             sprintf(
                 'Your order with number %s has been sent using %s.',
                 $orderNumber,
-                $method
+                $method,
             ),
-            $recipient
+            $recipient,
         ));
     }
 
@@ -82,7 +82,7 @@ final class EmailContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             $this->translator->trans('sylius.email.user_registration.welcome_to_our_store', [], null, $localeCode),
-            $recipient
+            $recipient,
         );
     }
 
@@ -93,16 +93,16 @@ final class EmailContext implements Context
     public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
                 $order->getNumber(),
-                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode)
+                $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
             ),
-            $recipient
+            $recipient,
         );
     }
 
@@ -124,7 +124,7 @@ final class EmailContext implements Context
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->assertEmailContainsMessageTo(
             sprintf(
@@ -132,9 +132,9 @@ final class EmailContext implements Context
                 $this->translator->trans('sylius.email.shipment_confirmation.your_order_with_number', [], null, $localeCode),
                 $order->getNumber(),
                 $this->translator->trans('sylius.email.shipment_confirmation.has_been_sent_using', [], null, $localeCode),
-                $this->getShippingMethodName($order)
+                $this->getShippingMethodName($order),
             ),
-            $recipient
+            $recipient,
         );
 
         if ($this->sharedStorage->has('tracking_code')) {
@@ -142,7 +142,7 @@ final class EmailContext implements Context
                 $this->translator->trans('sylius.email.shipment_confirmation.you_can_check_its_location_with_the_tracking_code', [
                     '%tracking_code%' => $this->sharedStorage->get('tracking_code'),
                 ], null, $localeCode),
-                $recipient
+                $recipient,
             );
         }
     }

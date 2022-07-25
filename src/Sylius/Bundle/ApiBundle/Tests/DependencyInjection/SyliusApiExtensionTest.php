@@ -86,7 +86,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
                         'shop_get' => ['enabled' => false],
                     ],
                 ],
-            ]
+            ],
         );
     }
 

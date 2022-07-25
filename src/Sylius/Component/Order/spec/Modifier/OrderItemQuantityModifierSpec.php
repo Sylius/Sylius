@@ -35,7 +35,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_adds_proper_number_of_order_item_units_to_an_order_item(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->getQuantity()->willReturn(1);
 
@@ -49,7 +49,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         OrderItemUnitInterface $unit3,
-        OrderItemUnitInterface $unit4
+        OrderItemUnitInterface $unit4,
     ): void {
         $orderItem->getQuantity()->willReturn(4);
         $orderItem->getUnits()->willReturn(new ArrayCollection([
@@ -65,7 +65,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_does_nothing_if_target_quantity_is_equal_to_current(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->getQuantity()->willReturn(3);
 
@@ -78,7 +78,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_does_nothing_if_target_quantity_is_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->getQuantity()->willReturn(3);
 
@@ -91,7 +91,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
 
     function it_does_nothing_if_target_quantity_is_below_0(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        OrderItemInterface $orderItem
+        OrderItemInterface $orderItem,
     ): void {
         $orderItem->getQuantity()->willReturn(3);
 

@@ -28,7 +28,7 @@ final class FilesystemRequirements extends RequirementCollection
             @trigger_error(sprintf(
                 'Passing root directory to "%s" constructor as the second argument is deprecated since 1.2 ' .
                 'and this argument will be removed in 2.0.',
-                self::class
+                self::class,
             ), \E_USER_DEPRECATED);
 
             [$rootDir, $cacheDir, $logsDir] = [$cacheDir, $logsDir, $rootDir];
@@ -39,13 +39,13 @@ final class FilesystemRequirements extends RequirementCollection
                 $translator->trans('sylius.installer.filesystem.cache.header', []),
                 is_writable($cacheDir),
                 true,
-                $translator->trans('sylius.installer.filesystem.cache.help', ['%path%' => $cacheDir])
+                $translator->trans('sylius.installer.filesystem.cache.help', ['%path%' => $cacheDir]),
             ))
             ->add(new Requirement(
                 $translator->trans('sylius.installer.filesystem.logs.header', []),
                 is_writable($logsDir),
                 true,
-                $translator->trans('sylius.installer.filesystem.logs.help', ['%path%' => $logsDir])
+                $translator->trans('sylius.installer.filesystem.logs.help', ['%path%' => $logsDir]),
             ))
         ;
     }

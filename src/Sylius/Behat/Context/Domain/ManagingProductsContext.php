@@ -27,7 +27,7 @@ final class ManagingProductsContext implements Context
         private SharedStorageInterface $sharedStorage,
         private RepositoryInterface $productRepository,
         private RepositoryInterface $productVariantRepository,
-        private RepositoryInterface $productReviewRepository
+        private RepositoryInterface $productReviewRepository,
     ) {
     }
 

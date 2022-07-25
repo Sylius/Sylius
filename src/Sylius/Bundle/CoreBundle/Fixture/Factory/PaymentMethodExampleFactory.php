@@ -36,7 +36,7 @@ class PaymentMethodExampleFactory extends AbstractExampleFactory implements Exam
     public function __construct(
         private PaymentMethodFactoryInterface $paymentMethodFactory,
         private RepositoryInterface $localeRepository,
-        private ChannelRepositoryInterface $channelRepository
+        private ChannelRepositoryInterface $channelRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();

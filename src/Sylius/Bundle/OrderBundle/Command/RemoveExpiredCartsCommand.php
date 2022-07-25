@@ -36,7 +36,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
         $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
         $output->writeln(sprintf(
             'Command will remove carts that have been idle for <info>%s</info>.',
-            (string) $expirationTime
+            (string) $expirationTime,
         ));
 
         $expiredCartsRemover = $this->getContainer()->get('sylius.expired_carts_remover');

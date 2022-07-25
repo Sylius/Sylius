@@ -40,7 +40,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopUserInterface $user,
         AddressInterface $shippingAddress,
-        AddressInterface $billingAddress
+        AddressInterface $billingAddress,
     ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -57,7 +57,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
     function it_does_not_save_addresses_for_guest_order(
         CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn(null);
@@ -72,7 +72,7 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
         CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
         CustomerInterface $customer,
-        ShopUserInterface $user
+        ShopUserInterface $user,
     ): void {
         $order->getCustomer()->willReturn($customer);
         $customer->getUser()->willReturn($user);

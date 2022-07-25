@@ -18,7 +18,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneDeletionChecker implements ZoneDeletionCheckerInterface
 {
-    public function __construct(private RepositoryInterface $zoneMemberRepository) {
+    public function __construct(private RepositoryInterface $zoneMemberRepository)
+    {
     }
 
     public function isDeletable(ZoneInterface $zone): bool

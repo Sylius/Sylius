@@ -31,14 +31,14 @@ final class CatalogPromotionUpdateFailedMessageListenerSpec extends ObjectBehavi
 
     function it_dispatches_catalog_promotion_failed_for_failed_worker_message(
         MessageBusInterface $messageBus,
-        CatalogPromotionFailed $catalogPromotionFailed
+        CatalogPromotionFailed $catalogPromotionFailed,
     ): void {
         $failedEvent = new WorkerMessageFailedEvent(
             new Envelope(
-                new CatalogPromotionUpdated('code')
+                new CatalogPromotionUpdated('code'),
             ),
             'receiver',
-            new \Exception('exception')
+            new \Exception('exception'),
         );
 
         $messageBus->dispatch(Argument::that(
@@ -47,21 +47,21 @@ final class CatalogPromotionUpdateFailedMessageListenerSpec extends ObjectBehavi
                     $object->code === 'code' &&
                     $object instanceof CatalogPromotionFailed
                 ;
-            }
+            },
         ))->willReturn(new Envelope($catalogPromotionFailed))->shouldBeCalled();
 
         $this->onMessageFailed($failedEvent);
     }
 
     function it_does_nothing_for_failed_messages_other_than_catalog_promotion_updated(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $failedEvent = new WorkerMessageFailedEvent(
             new Envelope(
-                new CatalogPromotionEnded('code')
+                new CatalogPromotionEnded('code'),
             ),
             'receiver',
-            new \Exception('exception')
+            new \Exception('exception'),
         );
 
         $messageBus->dispatch(Argument::any())->shouldNotBeCalled();
@@ -70,14 +70,14 @@ final class CatalogPromotionUpdateFailedMessageListenerSpec extends ObjectBehavi
     }
 
     function it_does_nothing_for_failed_messages_that_can_be_retried_by_messenger(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ): void {
         $failedEvent = new WorkerMessageFailedEvent(
             new Envelope(
-                new CatalogPromotionEnded('code')
+                new CatalogPromotionEnded('code'),
             ),
             'receiver',
-            new \Exception('exception')
+            new \Exception('exception'),
         );
 
         $failedEvent->setForRetry();

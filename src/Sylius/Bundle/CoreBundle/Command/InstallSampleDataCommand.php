@@ -48,7 +48,7 @@ EOT
         $outputStyle->writeln(sprintf(
             'Loading sample data for environment <info>%s</info> from suite <info>%s</info>.',
             $this->getEnvironment(),
-            $suite ?? 'default'
+            $suite ?? 'default',
         ));
         $outputStyle->writeln('<error>Warning! This action will erase your database.</error>');
 

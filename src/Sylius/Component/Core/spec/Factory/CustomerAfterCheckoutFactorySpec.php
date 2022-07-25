@@ -49,7 +49,7 @@ final class CustomerAfterCheckoutFactorySpec extends ObjectBehavior
         CustomerInterface $guest,
         OrderInterface $order,
         AddressInterface $address,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $order->getCustomer()->willReturn($guest);
         $order->getBillingAddress()->willReturn($address);

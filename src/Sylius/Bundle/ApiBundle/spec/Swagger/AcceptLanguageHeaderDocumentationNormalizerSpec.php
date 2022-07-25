@@ -47,7 +47,7 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         NormalizerInterface $decoratedNormalizer,
         RepositoryInterface $localeRepository,
         LocaleInterface $locale1,
-        LocaleInterface $locale2
+        LocaleInterface $locale2,
     ): void {
         $docs = [
             'paths' => [
@@ -89,7 +89,7 @@ final class AcceptLanguageHeaderDocumentationNormalizerSpec extends ObjectBehavi
         NormalizerInterface $decoratedNormalizer,
         RepositoryInterface $localeRepository,
         LocaleInterface $locale1,
-        LocaleInterface $locale2
+        LocaleInterface $locale2,
     ): void {
         $docs = [
             'paths' => [
