@@ -27,6 +27,8 @@
             <argument>sylius_shop_homepage</argument>
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="sylius.storage.cart_session" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LogoutEvent" dispatcher="security.event_dispatcher.shop" method="onLogout" />
         </service>
 
         <service id="sylius.section_resolver.shop_uri_based_section_resolver" class="Sylius\Bundle\ShopBundle\SectionResolver\ShopUriBasedSectionResolver">
