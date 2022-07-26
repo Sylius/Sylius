@@ -7,6 +7,7 @@ Contributing Code
     patches
     security
     standards
+    conventions
     license
 
 .. include:: /book/contributing/code/map.rst.inc
