@@ -26,7 +26,6 @@ import './sylius-notification';
 import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
-import './sylius-chart';
 import customCollapse from './sylius-custom-collapse';
 
 import StatisticsComponent from './sylius-statistics';
