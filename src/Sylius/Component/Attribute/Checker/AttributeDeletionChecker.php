@@ -13,18 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Attribute\Checker;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
 
 final class AttributeDeletionChecker implements AttributeDeletionCheckerInterface
 {
-    public function __construct(private RepositoryInterface $attributeValueRepository)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
     }
 
     public function isDeletable(ProductAttributeInterface $productAttribute): bool
     {
-        $attribute = $this->attributeValueRepository->findOneBy(['attribute' => $productAttribute]);
+        $attribute = $this->entityManager->getRepository(ProductAttributeValue::class)->findOneBy(['attribute' => $productAttribute]);
 
         return null === $attribute;
     }
