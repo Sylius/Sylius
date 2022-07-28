@@ -172,6 +172,17 @@ final class ChannelSpec extends ObjectBehavior
         $this->isAccountVerificationRequired()->shouldReturn(false);
     }
 
+    function it_does_not_have_shipping_address_in_checkout_required_by_default(): void
+    {
+        $this->isShippingAddressInCheckoutRequired()->shouldReturn(false);
+    }
+
+    function it_can_set_shipping_address_in_checkout_required(): void
+    {
+        $this->setShippingAddressInCheckoutRequired(true);
+        $this->isShippingAddressInCheckoutRequired()->shouldReturn(true);
+    }
+
     function its_menu_taxon_is_mutable(TaxonInterface $taxon): void
     {
         $this->setMenuTaxon($taxon);

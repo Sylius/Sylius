@@ -74,6 +74,8 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var bool */
     protected $accountVerificationRequired = true;
 
+    protected bool $shippingAddressInCheckoutRequired = false;
+
     /** @var ShopBillingDataInterface|null */
     protected $shopBillingData;
 
@@ -262,6 +264,16 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setAccountVerificationRequired(bool $accountVerificationRequired): void
     {
         $this->accountVerificationRequired = $accountVerificationRequired;
+    }
+
+    public function isShippingAddressInCheckoutRequired(): bool
+    {
+        return $this->shippingAddressInCheckoutRequired;
+    }
+
+    public function setShippingAddressInCheckoutRequired(bool $shippingAddressInCheckoutRequired): void
+    {
+        $this->shippingAddressInCheckoutRequired = $shippingAddressInCheckoutRequired;
     }
 
     public function getShopBillingData(): ?ShopBillingDataInterface

@@ -189,6 +189,30 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When /^I choose (billing|shipping) address as a required address in the checkout$/
+     */
+    public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
+    {
+        $this->client->addRequestData('shippingAddressInCheckoutRequired', $type === 'shipping');
+    }
+
+    /**
+     * @When /^I want to modify (this channel)$/
+     */
+    public function iWantToModifyThisChannel(ChannelInterface $channel): void
+    {
+        $this->client->buildUpdateRequest(Resources::CHANNELS, $channel->getCode());
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges(): void
+    {
+        $this->client->update();
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -229,5 +253,28 @@ final class ManagingChannelsContext implements Context
     public function iShouldSeeChannelsInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then /^the required address in the checkout for the ("[^"]+" channel) should be (billing|shipping)$/
+     */
+    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, string $type): void
+    {
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->getLastResponse(),
+            'shippingAddressInCheckoutRequired',
+            $type === 'shipping',
+        ));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Channel could not be edited',
+        );
     }
 }
