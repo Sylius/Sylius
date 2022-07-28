@@ -1,5 +1,24 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.7 (2022-07-28)
+
+#### Details
+
+- [#12773](https://github.com/Sylius/Sylius/issues/12773) [API][FIX] Remove code attribute of OrderItem in API serialization ([@oallain](https://github.com/oallain), [@lchrusciel](https://github.com/lchrusciel))
+- [#13874](https://github.com/Sylius/Sylius/issues/13874) [Product] Render disabled main taxon without link in breadcrumb ([@hbsfaria](https://github.com/hbsfaria), [@GSadee](https://github.com/GSadee))
+- [#13918](https://github.com/Sylius/Sylius/issues/13918) Changing templates with Sylius Event ([@arti0090](https://github.com/arti0090), [@coldic3](https://github.com/coldic3))
+- [#14112](https://github.com/Sylius/Sylius/issues/14112) [Documentation][Plus] Add missing step for updating security file during installation ([@GSadee](https://github.com/GSadee))
+- [#14114](https://github.com/Sylius/Sylius/issues/14114) Move login events on Ui bundle ([@loic425](https://github.com/loic425))
+- [#14116](https://github.com/Sylius/Sylius/issues/14116) [Docs] Fix logo customization guide ([@coldic3](https://github.com/coldic3))
+- [#14120](https://github.com/Sylius/Sylius/issues/14120) [Docs] Drop security support for Sylius 1.9 ([@Zales0123](https://github.com/Zales0123))
+- [#14123](https://github.com/Sylius/Sylius/issues/14123) Removed version specification ([@vjandrea](https://github.com/vjandrea))
+- [#14130](https://github.com/Sylius/Sylius/issues/14130) [Maintenance] Fix package build ([@lchrusciel](https://github.com/lchrusciel), [@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14140](https://github.com/Sylius/Sylius/issues/14140) [GitHub Actions] Replace master branch with 1.12 in "Refactor" workflow ([@coldic3](https://github.com/coldic3))
+- [#14146](https://github.com/Sylius/Sylius/issues/14146) Allow to set zero tax rate ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14155](https://github.com/Sylius/Sylius/issues/14155) [BUG] The hostname resolver does not check for the channel status ([@lruozzi9](https://github.com/lruozzi9), [@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14180](https://github.com/Sylius/Sylius/issues/14180) [CS] ECS configuration updated ([@Rafikooo](https://github.com/Rafikooo))
+- [#14190](https://github.com/Sylius/Sylius/issues/14190) [CS][DX] Refactor ([@bot](https://github.com/bot)@[@sylius](https://github.com/sylius).[@org](https://github.com/org))
+
 ## v1.11.6 (2022-06-27)
 
 #### Details
