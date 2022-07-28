@@ -145,7 +145,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $catalogPromotions = [];
 
         /** @var NodeElement $catalogPromotion */
-        foreach ($this->getElement('product_price_content')->findAll('css', '.promotion_label') as $catalogPromotion) {
+        foreach ($this->getElement('product_box')->findAll('css', '.promotion_label') as $catalogPromotion) {
             $catalogPromotions[] = explode(' - ', $catalogPromotion->getText())[0];
         }
 
@@ -154,8 +154,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getCatalogPromotionNames(): array
     {
-        /** @var NodeElement $productPriceContent */
-        $productPriceContent = $this->getElement('product_price_content');
+        $productPriceContent = $this->getElement('product_box');
         $catalogPromotions = $productPriceContent->findAll('css', '.promotion_label');
 
         return array_map(fn (NodeElement $element): string => $element->getText(), $catalogPromotions);
@@ -372,6 +371,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'name' => '[data-test-product-name]',
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%optionCode%',
             'out_of_stock' => '[data-test-product-out-of-stock]',
+            'product_box' => '[data-test-product-box]',
             'product_name' => '[data-test-product-name]',
             'product_original_price' => '[data-test-product-price-content] [data-test-product-original-price]',
             'product_price' => '[data-test-product-price-content] [data-test-product-price]',
