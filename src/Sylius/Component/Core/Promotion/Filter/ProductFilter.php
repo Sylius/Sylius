@@ -23,7 +23,7 @@ final class ProductFilter implements FilterInterface
 
         $filteredItems = [];
         foreach ($items as $item) {
-            if (in_array($item->getProduct()->getCode(), $configuration['filters']['products_filter']['products'], true)) {
+            if (in_array($item->getProduct()->getCode(), $configuration['filters']['products_filter']['products'])) {
                 $filteredItems[] = $item;
             }
         }
