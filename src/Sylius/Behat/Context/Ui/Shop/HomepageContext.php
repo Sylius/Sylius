@@ -99,4 +99,13 @@ final class HomepageContext implements Context
         $this->homePage->verify();
         Assert::true($this->homePage->hasLogoutButton());
     }
+
+    /**
+     * @Then I should see :numberOfItems item in the cart button
+     * @Then I should see :numberOfItems items in the cart button
+     */
+    public function iShouldSeeItemsInTheCart(int $numberOfItems): void
+    {
+        Assert::same($this->homePage->getCartItemsCount(), $numberOfItems);
+    }
 }

@@ -97,9 +97,18 @@ class HomePage extends SymfonyPage implements HomePageInterface
         );
     }
 
+    public function getCartItemsCount(): int
+    {
+        $cartTotal = $this->getElement('cart_button')->getText();
+        preg_match('/.+,\s(\d+)\s(items|item)/', $cartTotal, $parts);
+
+        return intval($parts[1] ?? 0);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'cart_button' => '[data-test-cart-button]',
             'currency_selector' => '[data-test-currency-selector]',
             'full_name' => '[data-test-full-name]',
             'latest_products' => '[data-test-latest-products]',
