@@ -17,15 +17,5 @@ Feature: Addressing an order with shipping address when it is the required one f
     @todo
     Scenario: Addressing an order only with shipping address when it is the required one for the channel
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I complete the addressing, shipping and payment steps
-        Then I should be on the checkout complete step
-        And my billing and shipping addresses should be "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-
-    @todo
-    Scenario: Addressing an order with different billing address when the shipping is the required one for the channel
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
-        And I complete the addressing, shipping and payment steps
-        Then I should be on the checkout complete step
-        And my shipping address should be "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And my billing address should be "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
+        And I complete the addressing step
+        Then I should be on the checkout shipping step
