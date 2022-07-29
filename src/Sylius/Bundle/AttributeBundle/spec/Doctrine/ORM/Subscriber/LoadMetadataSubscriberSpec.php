@@ -115,7 +115,6 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
                 'name' => 'attribute_id',
                 'referencedColumnName' => 'id',
                 'nullable' => false,
-                'onDelete' => 'CASCADE',
             ]],
         ];
 
