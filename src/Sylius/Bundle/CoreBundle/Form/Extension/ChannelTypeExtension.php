@@ -92,6 +92,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.channel.account_verification_required',
                 'required' => false,
             ])
+            ->add('shippingAddressInCheckoutRequired', CheckboxType::class, [
+                'label' => 'sylius.form.channel.shipping_address_in_checkout_required',
+                'required' => false,
+            ])
             ->add('shopBillingData', ShopBillingDataType::class, [
                 'label' => 'sylius.form.channel.shop_billing_data',
             ])

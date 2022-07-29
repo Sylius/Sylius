@@ -256,9 +256,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then /^the required address in the checkout for the ("[^"]+" channel) should be (billing|shipping)$/
+     * @Then /^the required address in the checkout for this channel should be (billing|shipping)$/
      */
-    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, string $type): void
+    public function theRequiredAddressInTheCheckoutForTheChannelShouldBe(string $type): void
     {
         Assert::true($this->responseChecker->hasValue(
             $this->client->getLastResponse(),

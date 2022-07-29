@@ -1077,6 +1077,9 @@ sylius_ui:
                 countries:
                     template: '@SyliusAdmin/Channel/Form/_countries.html.twig'
                     priority: 20
+                required_address_in_checkout:
+                    template: '@SyliusAdmin/Channel/Form/_shippingAddressInCheckoutRequired.html.twig'
+                    priority: 15
                 money:
                     template: '@SyliusAdmin/Channel/Form/_money.html.twig'
                     priority: 10

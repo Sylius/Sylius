@@ -1,0 +1,18 @@
+<div class="ui attached segment">
+    <div style="padding-bottom: 0.8rem; font-size: 0.93rem">
+        {{ form_label(form.shippingAddressInCheckoutRequired) }}
+    </div>
+    <div style="display: flex">
+        <div style="padding-right: 0.8rem">
+            <label for="{{ form.shippingAddressInCheckoutRequired.vars.id }}">{{ 'sylius.ui.billing_address'|trans }}</label>
+        </div>
+        <div>
+            <div class="ui toggle checkbox">
+                {{ form_widget(form.shippingAddressInCheckoutRequired) }}
+            </div>
+        </div>
+        <div>
+            <label for="{{ form.shippingAddressInCheckoutRequired.vars.id }}">{{ 'sylius.ui.shipping_address'|trans }}</label>
+        </div>
+    </div>
+</div>
