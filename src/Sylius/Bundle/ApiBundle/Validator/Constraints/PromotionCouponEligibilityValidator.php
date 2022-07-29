@@ -58,6 +58,15 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
         /** @var PromotionCouponInterface $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
 
+        if (null === $promotionCoupon) {
+            $this->context->buildViolation('sylius.promotion_coupon.is_invalid')
+                ->atPath('couponCode')
+                ->addViolation()
+            ;
+
+            return;
+        }
+
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
