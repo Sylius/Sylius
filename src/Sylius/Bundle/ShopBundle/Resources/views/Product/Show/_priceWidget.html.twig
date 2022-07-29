@@ -1,3 +1,10 @@
+{% set variant = product|sylius_resolve_variant %}
+
+{% if variant is not null %}
+    {% set appliedPromotions = variant.getChannelPricingForChannel(sylius.channel).getAppliedPromotions() %}
+    {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': true} %}
+{% endif %}
+
 <div class="ui stackable grid" {{ sylius_test_html_attribute('product-price-content') }}>
     <div class="seven wide column">
         {% if not product.enabledVariants.empty() %}
