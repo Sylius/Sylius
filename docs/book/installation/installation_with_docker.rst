@@ -20,12 +20,12 @@ Development
 -----------
 
 Sylius Standard comes with the `multi-stage build <https://docs.docker.com/develop/develop-images/multistage-build/>`_.
-You can execute it via the ``docker compose up -d`` command in your favorite terminal. Please note that the speed of building images
+You can execute it via the ``docker-compose up -d`` command in your favorite terminal. Please note that the speed of building images
 and initializing containers depends on your local machine and internet connection - it may take some time. Then enter ``localhost`` in your browser or execute ``open localhost`` in your terminal.
 
 .. code-block:: bash
 
-    docker compose up -d
+    docker-compose up -d
     open localhost
 
 .. tip::
