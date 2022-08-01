@@ -17,7 +17,9 @@ use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
@@ -117,17 +119,32 @@ final class AddressType extends AbstractResourceType
                     $form->add('customer', CustomerCheckoutGuestType::class, ['constraints' => [new Valid()]]);
                 }
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
                 $orderData = $event->getData();
+
+                /** @var ChannelAwareInterface $order */
+                $order = $options['data'];
+                /** @var ChannelInterface $channel */
+                $channel = $order->getChannel();
 
                 $differentBillingAddress = $orderData['differentBillingAddress'] ?? false;
                 $differentShippingAddress = $orderData['differentShippingAddress'] ?? false;
 
-                if (isset($orderData['billingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
+                if (
+                    isset($orderData['billingAddress']) &&
+                    !$differentBillingAddress &&
+                    !$differentShippingAddress &&
+                    !$channel->isShippingAddressInCheckoutRequired()
+                ) {
                     $orderData['shippingAddress'] = $orderData['billingAddress'];
                 }
 
-                if (isset($orderData['shippingAddress']) && !$differentBillingAddress && !$differentShippingAddress) {
+                if (
+                    isset($orderData['shippingAddress']) &&
+                    !$differentBillingAddress &&
+                    !$differentShippingAddress &&
+                    $channel->isShippingAddressInCheckoutRequired()
+                ) {
                     $orderData['billingAddress'] = $orderData['shippingAddress'];
                 }
 

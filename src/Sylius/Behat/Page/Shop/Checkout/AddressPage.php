@@ -64,6 +64,24 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $billingAddressSwitch->check();
     }
 
+    public function chooseDifferentBillingAddress(): void
+    {
+        $driver = $this->getDriver();
+        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+            $this->getElement('different_billing_address_label')->click();
+
+            return;
+        }
+
+        $billingAddressSwitch = $this->getElement('different_billing_address');
+        Assert::false(
+            $billingAddressSwitch->isChecked(),
+            'Previous state of different billing address switch was true expected to be false',
+        );
+
+        $billingAddressSwitch->check();
+    }
+
     public function isDifferentShippingAddressChecked(): bool
     {
         return $this->getElement('different_shipping_address')->isChecked();
