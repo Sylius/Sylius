@@ -21,7 +21,7 @@ Feature: Viewing a total quantity of the cart
         Then I should see cart total quantity is 2
 
     @ui @no-api
-    Scenario: Viewing a total quantity for 3 product with various quantities
+    Scenario: Viewing a total quantity for 3 products with various quantities
         When I add 2 products "PHP T-Shirt" to the cart
         And I add 3 products "Sylius T-Shirt" to the cart
         And I add product "Symfony T-Shirt" to the cart
