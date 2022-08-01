@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
@@ -31,6 +32,7 @@ final class CartContext implements Context
         private SharedStorageInterface $sharedStorage,
         private SummaryPageInterface $summaryPage,
         private ShowPageInterface $productShowPage,
+        private CartWidgetElementInterface $cartWidgetElement,
         private NotificationCheckerInterface $notificationChecker,
         private SessionManagerInterface $sessionManager,
     ) {
@@ -515,6 +517,14 @@ final class CartContext implements Context
     public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
     {
         Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
+    }
+
+    /**
+     * @Then I should see cart total quantity is :totalQuantity
+     */
+    public function iShouldSeeCartTotalQuantity(int $totalQuantity): void
+    {
+        Assert::same($this->cartWidgetElement->getCartTotalQuantity(), $totalQuantity);
     }
 
     private function getPriceFromString(string $price): int

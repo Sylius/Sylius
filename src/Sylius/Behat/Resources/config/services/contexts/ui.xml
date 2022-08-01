@@ -454,6 +454,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
+            <argument type="service" id="Sylius\Behat\Element\Shop\CartWidgetElementInterface" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="Sylius\Behat\Service\SessionManagerInterface"/>
         </service>
