@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -31,6 +32,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         private FilterInterface $priceRangeFilter,
         private FilterInterface $taxonFilter,
         private FilterInterface $productFilter,
+        private ServiceRegistryInterface $additionalItemFiltersRegistry,
     ) {
         parent::__construct($adjustmentFactory);
     }
@@ -57,6 +59,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         );
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->applyAdditionalItemFilters($filteredItems, $configuration[$channelCode]);
 
         if (empty($filteredItems)) {
             return false;
@@ -79,5 +82,15 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
                 $promotion,
             );
         }
+    }
+
+    private function applyAdditionalItemFilters(array $filteredItems, array $configuration): array
+    {
+        /** @var FilterInterface $additionalItemFilter */
+        foreach($this->additionalItemFiltersRegistry->all() as $additionalItemFilter) {
+            $filteredItems = $additionalItemFilter->filter($filteredItems, $configuration);
+        }
+
+        return $filteredItems;
     }
 }

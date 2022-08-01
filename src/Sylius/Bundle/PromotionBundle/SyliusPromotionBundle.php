@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotionCouponEligibilityCheckerPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\CompositePromotionEligibilityCheckerPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionActionsPass;
+use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotionAdditionalItemFilters;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\SetCatalogPromotionActionTypesPass;
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\SetCatalogPromotionScopeTypesPass;
@@ -41,6 +42,7 @@ final class SyliusPromotionBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());
+        $container->addCompilerPass(new RegisterPromotionAdditionalItemFilters());
 
         $container->addCompilerPass(new SetCatalogPromotionActionTypesPass());
         $container->addCompilerPass(new SetCatalogPromotionScopeTypesPass());

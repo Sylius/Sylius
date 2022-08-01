@@ -59,6 +59,11 @@
         </service>
         <service id="sylius.form_registry.promotion_action" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
 
+        <service id="sylius.registry_promotion_additional_item_filters" class="Sylius\Component\Registry\ServiceRegistry">
+            <argument>Sylius\Component\Core\Promotion\Filter\FilterInterface</argument>
+            <argument>promotion additional item filters</argument>
+        </service>
+
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Promotion\Provider\ActivePromotionsProvider">
             <argument type="service" id="sylius.repository.promotion" />
         </service>
