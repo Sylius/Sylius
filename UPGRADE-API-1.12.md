@@ -110,3 +110,6 @@ Here is how the response looks like:
             access_control:
     +           - { path: "%sylius.security.new_api_admin_route%/reset-password-requests", role: IS_AUTHENTICATED_ANONYMOUSLY }
     ```
+
+1. The second argument `$billingAddress` of `Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface::modify` 
+   has become nullable.

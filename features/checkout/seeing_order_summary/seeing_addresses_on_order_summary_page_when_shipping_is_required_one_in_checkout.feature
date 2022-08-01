@@ -12,15 +12,16 @@ Feature: Seeing order addresses on order summary page when shipping is the requi
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
 
-    @todo
+    @api
     Scenario: Seeing the same shipping and billing address on order summary
         Given I have product "PHP T-Shirt" in the cart
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         Then I should be on the checkout summary step
         And address to "Jon Snow" should be used for both shipping and billing of my order
 
-    @todo
+    @api
     Scenario: Seeing different shipping and billing addresses on order summary
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
