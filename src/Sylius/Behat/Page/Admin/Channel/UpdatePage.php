@@ -20,6 +20,7 @@ use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\DriverHelper;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -101,10 +102,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $element = $this->getElement('menu_taxon');
 
-        if (
-            $this->getDriver() instanceof Selenium2Driver ||
-            $this->getDriver() instanceof ChromeDriver
-        ) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getDocument()->waitFor(1, function () use ($element) {
                 return $element->getText() !== '';
             });

@@ -18,6 +18,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
@@ -28,7 +29,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function selectShippingMethod(string $shippingMethod): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;

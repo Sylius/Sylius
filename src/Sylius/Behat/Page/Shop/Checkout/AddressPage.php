@@ -20,6 +20,7 @@ use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -48,8 +49,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function chooseDifferentShippingAddress(): void
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getElement('different_shipping_address_label')->click();
 
             return;
