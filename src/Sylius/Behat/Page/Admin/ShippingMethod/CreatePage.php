@@ -19,6 +19,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use DMore\ChromeDriver\ChromeDriver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
@@ -61,7 +62,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function checkChannel($channelName): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getElement('channel', ['%channel%' => $channelName])->click();
 
             return;

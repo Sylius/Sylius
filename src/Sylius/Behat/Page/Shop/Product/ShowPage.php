@@ -21,6 +21,7 @@ use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -81,8 +82,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $attributesTable = $this->getElement('attributes');
 
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             try {
                 $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
                 if (!$attributesTab->hasAttribute('[data-test-active]')) {
@@ -288,8 +288,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             return;
         }
 
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $variantRadio->click();
 
             return;
@@ -382,7 +381,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     private function waitForCartSummary(): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
             $this->getDocument()->waitFor(3, fn (): bool => $this->summaryPage->isOpen());
         }

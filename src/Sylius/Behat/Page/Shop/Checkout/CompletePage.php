@@ -19,6 +19,7 @@ use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -234,7 +235,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     public function tryToOpen(array $urlParameters = []): void
     {
-        if ($this->getDriver() instanceof Selenium2Driver || $this->getDriver() instanceof ChromeDriver) {
+        if (DriverHelper::isJavascript($this->getDriver())) {
             $start = microtime(true);
             $end = $start + 15;
             do {
