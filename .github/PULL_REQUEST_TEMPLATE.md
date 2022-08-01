@@ -1,6 +1,6 @@
 | Q               | A
 | --------------- | -----
-| Branch?         | 1.10, 1.11 or master <!-- see the comment below -->
+| Branch?         | 1.11 or 1.12 <!-- see the comment below -->
 | Bug fix?        | no/yes
 | New feature?    | no/yes
 | BC breaks?      | no/yes
@@ -9,8 +9,8 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.10 or 1.11 branch(the lowest possible)
- - Features and deprecations must be submitted against the master branch
+ - Bug fixes must be submitted against the 1.11 branch
+ - Features and deprecations must be submitted against the 1.12 branch
  - Make sure that the correct base branch is set
 
  To be sure you are not breaking any Backward Compatibilities, check the documentation:
