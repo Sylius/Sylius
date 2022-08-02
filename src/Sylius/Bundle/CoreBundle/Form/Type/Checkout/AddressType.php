@@ -130,21 +130,15 @@ final class AddressType extends AbstractResourceType
                 $differentBillingAddress = $orderData['differentBillingAddress'] ?? false;
                 $differentShippingAddress = $orderData['differentShippingAddress'] ?? false;
 
-                if (
-                    isset($orderData['billingAddress']) &&
-                    !$differentBillingAddress &&
-                    !$differentShippingAddress &&
-                    !$channel->isShippingAddressInCheckoutRequired()
-                ) {
+                if ($differentBillingAddress || $differentShippingAddress) {
+                    return;
+                }
+
+                if (isset($orderData['billingAddress']) && !$channel->isShippingAddressInCheckoutRequired()) {
                     $orderData['shippingAddress'] = $orderData['billingAddress'];
                 }
 
-                if (
-                    isset($orderData['shippingAddress']) &&
-                    !$differentBillingAddress &&
-                    !$differentShippingAddress &&
-                    $channel->isShippingAddressInCheckoutRequired()
-                ) {
+                if (isset($orderData['shippingAddress']) && $channel->isShippingAddressInCheckoutRequired()) {
                     $orderData['billingAddress'] = $orderData['shippingAddress'];
                 }
 

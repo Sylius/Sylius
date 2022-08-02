@@ -46,9 +46,7 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
         if ($channel->isShippingAddressInCheckoutRequired()) {
             Assert::notNull($shippingAddress);
             $billingAddress = $billingAddress ?? clone $shippingAddress;
-        }
-
-        if (!$channel->isShippingAddressInCheckoutRequired()) {
+        } else {
             Assert::notNull($billingAddress);
             $shippingAddress = $shippingAddress ?? clone $billingAddress;
         }
