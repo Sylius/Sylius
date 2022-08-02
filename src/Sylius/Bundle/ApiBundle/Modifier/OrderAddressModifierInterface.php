@@ -18,5 +18,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface OrderAddressModifierInterface
 {
-    public function modify(OrderInterface $order, AddressInterface $billingAddress, ?AddressInterface $shippingAddress = null): OrderInterface;
+    public function modify(
+        OrderInterface $order,
+        ?AddressInterface $billingAddress,
+        ?AddressInterface $shippingAddress = null
+    ): OrderInterface;
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Channel\ShippingAddressInCheckoutRequiredElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
@@ -31,6 +32,7 @@ final class ManagingChannelsContext implements Context
         private IndexPageInterface $indexPage,
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
+        private ShippingAddressInCheckoutRequiredElementInterface $shippingAddressInCheckoutRequiredElement,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
     ) {
@@ -130,6 +132,14 @@ final class ManagingChannelsContext implements Context
     {
         $this->createPage->create();
     }
+
+    /**
+     * @When /^I choose (billing|shipping) address as a required address in the checkout$/
+     */
+    public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
+    {
+        $this->shippingAddressInCheckoutRequiredElement->requireAddressTypeInCheckout($type);
+     }
 
     /**
      * @Then I should see the channel :channelName in the list
@@ -517,6 +527,14 @@ final class ManagingChannelsContext implements Context
         }
 
         Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
+    }
+
+    /**
+     * @Then /^the required address in the checkout for this channel should be (billing|shipping)$/
+     */
+    public function theRequiredAddressInTheCheckoutForThisChannelShouldBe(string $type): void
+    {
+        Assert::same($this->shippingAddressInCheckoutRequiredElement->getRequiredAddressTypeInCheckout(), $type);
     }
 
     private function assertChannelState(ChannelInterface $channel, bool $state): void

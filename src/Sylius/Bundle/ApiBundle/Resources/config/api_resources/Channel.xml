@@ -64,6 +64,14 @@
                     <attribute name="summary">Use $code to retrieve a channel resource.</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/channels/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:channel:update</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
@@ -92,6 +100,7 @@
         <property name="skippingShippingStepAllowed" writable="true" readable="true" />
         <property name="skippingPaymentStepAllowed" writable="true" readable="true" />
         <property name="accountVerificationRequired" writable="true" readable="true" />
+        <property name="shippingAddressInCheckoutRequired" writable="true" readable="true" />
         <property name="shopBillingData" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.shop_billing_data.class%" collection="false" />
         </property>

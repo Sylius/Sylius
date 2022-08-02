@@ -45,12 +45,10 @@ final class UpdateCartHandler implements MessageHandlerInterface
             $order->setCustomer($this->customerProvider->provide($updateCart->getEmail()));
         }
 
-        if ($updateCart->getBillingAddress()) {
-            $order = $this->orderAddressModifier->modify(
-                $order,
-                $updateCart->getBillingAddress(),
-                $updateCart->getShippingAddress(),
-            );
+        $billingAddress = $updateCart->getBillingAddress();
+        $shippingAddress = $updateCart->getShippingAddress();
+        if ($billingAddress || $shippingAddress) {
+            $order = $this->orderAddressModifier->modify($order, $billingAddress, $shippingAddress);
         }
 
         $order = $this->orderPromoCodeAssigner->assign($order, $updateCart->getCouponCode());

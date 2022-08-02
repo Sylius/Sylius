@@ -59,6 +59,7 @@
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
+            <argument type="service" id="sylius.behat.element.admin.channel.shipping_address_in_checkout_required" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
         </service>

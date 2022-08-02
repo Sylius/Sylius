@@ -20,6 +20,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 {
     public function chooseDifferentShippingAddress(): void;
 
+    public function chooseDifferentBillingAddress(): void;
+
     public function checkInvalidCredentialsValidation(): bool;
 
     public function checkValidationMessageFor(string $element, string $message): bool;

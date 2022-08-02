@@ -94,6 +94,11 @@
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
         </attribute>
+        <attribute name="shippingAddressInCheckoutRequired">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>admin:channel:update</group>
+        </attribute>
         <attribute name="shopBillingData">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>

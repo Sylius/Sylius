@@ -90,6 +90,7 @@ sylius:
             locales: Locales
             menu_taxon: Menu taxon
             payment_methods: Payment Methods
+            shipping_address_in_checkout_required: Address required in checkout
             shipping_methods: Shipping Methods
             shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?

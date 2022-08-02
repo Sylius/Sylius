@@ -248,6 +248,18 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^its required address in the checkout is (billing|shipping)$/
+     */
+    public function itsRequiredAddressInTheCheckoutIs(string $type): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setShippingAddressInCheckoutRequired($type === 'shipping');
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

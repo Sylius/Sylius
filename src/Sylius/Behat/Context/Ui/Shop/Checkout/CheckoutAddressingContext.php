@@ -140,6 +140,22 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @When /^I specify the required shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
+     */
+    public function iSpecifyTheRequiredShippingAddressAs(AddressInterface $address): void
+    {
+        $key = sprintf(
+            'shipping_address_%s_%s',
+            strtolower((string) $address->getFirstName()),
+            strtolower((string) $address->getLastName()),
+        );
+        $this->sharedStorage->set($key, $address);
+        $this->sharedStorage->set(str_replace('shipping', 'billing', $key), $address);
+
+        $this->addressPage->specifyShippingAddress($address);
+    }
+
+    /**
      * @When I specify shipping country province as :provinceName
      */
     public function iSpecifyShippingCountryProvinceAs(string $provinceName): void
@@ -170,6 +186,16 @@ final class CheckoutAddressingContext implements Context
         $this->sharedStorage->set($key, $address);
 
         $this->addressPage->specifyBillingAddress($address);
+    }
+
+    /**
+     * @When /^I specify different billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifyDifferentBillingAddressAs(AddressInterface $address): void
+    {
+        $this->addressPage->chooseDifferentShippingAddress();
+
+        $this->iSpecifyTheBillingAddressAs($address);
     }
 
     /**

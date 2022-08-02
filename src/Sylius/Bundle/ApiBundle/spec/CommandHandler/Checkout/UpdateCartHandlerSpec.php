@@ -98,15 +98,9 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderAddressModifierInterface $orderAddressModifier,
         OrderPromoCodeAssignerInterface $orderPromoCodeAssigner,
         OrderInterface $order,
-        AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
     ): void {
-        $updateCart = new UpdateCart(
-            null,
-            $billingAddress->getWrappedObject(),
-            $shippingAddress->getWrappedObject(),
-            null,
-        );
+        $updateCart = new UpdateCart(null, null, $shippingAddress->getWrappedObject(), null);
 
         $updateCart->setOrderTokenValue('cart');
 
@@ -116,7 +110,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
 
         $orderAddressModifier->modify(
             $order->getWrappedObject(),
-            $billingAddress->getWrappedObject(),
+            null,
             $shippingAddress->getWrappedObject(),
         )
             ->shouldBeCalled()
