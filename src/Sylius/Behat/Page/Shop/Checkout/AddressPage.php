@@ -49,37 +49,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function chooseDifferentShippingAddress(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getElement('different_shipping_address_label')->click();
-
-            return;
-        }
-
-        $billingAddressSwitch = $this->getElement('different_shipping_address');
-        Assert::false(
-            $billingAddressSwitch->isChecked(),
-            'Previous state of different billing address switch was true expected to be false',
-        );
-
-        $billingAddressSwitch->check();
+        $this->chooseDifferentAddress('shipping');
     }
 
     public function chooseDifferentBillingAddress(): void
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver || $driver instanceof ChromeDriver) {
-            $this->getElement('different_billing_address_label')->click();
-
-            return;
-        }
-
-        $billingAddressSwitch = $this->getElement('different_billing_address');
-        Assert::false(
-            $billingAddressSwitch->isChecked(),
-            'Previous state of different billing address switch was true expected to be false',
-        );
-
-        $billingAddressSwitch->check();
+        $this->chooseDifferentAddress('billing');
     }
 
     public function isDifferentShippingAddressChecked(): bool
@@ -410,5 +385,16 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 
         Assert::oneOf($type, $availableTypes, sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
+    }
+
+    private function chooseDifferentAddress(string $type): void
+    {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getElement(sprintf('different_%s_address_label', $type))->click();
+
+            return;
+        }
+
+        $this->getElement(sprintf('different_%s_address', $type))->check();
     }
 }

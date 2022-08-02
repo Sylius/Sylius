@@ -138,13 +138,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
     {
-        if ($type === 'shipping') {
-            $this->shippingAddressInCheckoutRequiredElement->requireShippingAddressInCheckout();
-
-            return;
-        }
-
-        $this->shippingAddressInCheckoutRequiredElement->requireBillingAddressInCheckout();
+        $this->shippingAddressInCheckoutRequiredElement->requireAddressTypeInCheckout($type);
      }
 
     /**
@@ -540,13 +534,7 @@ final class ManagingChannelsContext implements Context
      */
     public function theRequiredAddressInTheCheckoutForThisChannelShouldBe(string $type): void
     {
-        if ($type === 'shipping') {
-            Assert::true($this->shippingAddressInCheckoutRequiredElement->isShippingAddressInCheckoutRequired());
-
-            return;
-        }
-
-        Assert::false($this->shippingAddressInCheckoutRequiredElement->isShippingAddressInCheckoutRequired());
+        Assert::same($this->shippingAddressInCheckoutRequiredElement->getRequiredAddressTypeInCheckout(), $type);
     }
 
     private function assertChannelState(ChannelInterface $channel, bool $state): void

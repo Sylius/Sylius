@@ -27,9 +27,29 @@ final class ShippingAddressInCheckoutRequiredElement extends Element implements 
         $this->getElement('shipping_address_in_checkout_required')->uncheck();
     }
 
+    public function requireAddressTypeInCheckout(string $type): void
+    {
+        if ($type === 'shipping') {
+            $this->requireShippingAddressInCheckout();
+
+            return;
+        }
+
+        $this->requireBillingAddressInCheckout();
+    }
+
     public function isShippingAddressInCheckoutRequired(): bool
     {
         return $this->getElement('shipping_address_in_checkout_required')->isChecked();
+    }
+
+    public function getRequiredAddressTypeInCheckout(): string
+    {
+        if ($this->isShippingAddressInCheckoutRequired()) {
+            return 'shipping';
+        }
+
+        return 'billing';
     }
 
     protected function getDefinedElements(): array

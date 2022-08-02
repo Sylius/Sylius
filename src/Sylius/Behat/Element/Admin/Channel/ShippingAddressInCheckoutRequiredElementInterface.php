@@ -19,5 +19,9 @@ interface ShippingAddressInCheckoutRequiredElementInterface
 
     public function requireBillingAddressInCheckout(): void;
 
+    public function requireAddressTypeInCheckout(string $type): void;
+
     public function isShippingAddressInCheckoutRequired(): bool;
+
+    public function getRequiredAddressTypeInCheckout(): string;
 }
