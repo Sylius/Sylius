@@ -66,7 +66,6 @@ final class NotificationContext implements Context
     /**
      * @Then I should be notified that it has been failed deleted :name
      */
-
     public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
     {
         $this->testHelper->waitUntilNotificationPopups(
