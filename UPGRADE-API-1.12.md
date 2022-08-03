@@ -113,3 +113,5 @@ Here is how the response looks like:
 
 1. The second argument `$billingAddress` of `Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface::modify` 
    has become nullable.
+
+1. The `Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface` has been renamed to `Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface`.

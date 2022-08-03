@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
-use Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface;
+use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
 use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
@@ -28,7 +28,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private OrderAddressModifierInterface $orderAddressModifier,
-        private OrderPromoCodeAssignerInterface $orderPromoCodeAssigner,
+        private OrderPromotionCodeAssignerInterface $orderPromotionCodeAssigner,
         private CustomerProviderInterface $customerProvider,
     ) {
     }
@@ -51,7 +51,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
             $order = $this->orderAddressModifier->modify($order, $billingAddress, $shippingAddress);
         }
 
-        $order = $this->orderPromoCodeAssigner->assign($order, $updateCart->getCouponCode());
+        $order = $this->orderPromotionCodeAssigner->assign($order, $updateCart->getCouponCode());
 
         return $order;
     }

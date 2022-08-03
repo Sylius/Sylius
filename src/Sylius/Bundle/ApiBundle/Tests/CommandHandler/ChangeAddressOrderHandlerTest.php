@@ -17,7 +17,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface;
+use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
@@ -47,7 +47,7 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
 
         $orderAddressModifier = $container->get(OrderAddressModifierInterface::class);
 
-        $orderPromoCodeAssigner = $container->get(OrderPromoCodeAssignerInterface::class);
+        $orderPromotionCodeAssigner = $container->get(OrderPromotionCodeAssignerInterface::class);
 
         $customerProvider = $container->get(CustomerProviderInterface::class);
 
@@ -73,7 +73,7 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
         $updateCartHandler = new UpdateCartHandler(
             $orderRepository,
             $orderAddressModifier,
-            $orderPromoCodeAssigner,
+            $orderPromotionCodeAssigner,
             $customerProvider,
         );
 
