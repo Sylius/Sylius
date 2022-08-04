@@ -246,7 +246,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "symfony/flex": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "composer/package-versions-deprecated": true,
+            "symfony/thanks": true
         }
     },
     "extra": {
@@ -313,7 +315,8 @@
             "spec\\Sylius\\Bundle\\TaxationBundle\\": "src/Sylius/Bundle/TaxationBundle/spec/",
             "spec\\Sylius\\Bundle\\TaxonomyBundle\\": "src/Sylius/Bundle/TaxonomyBundle/spec/",
             "spec\\Sylius\\Bundle\\UiBundle\\": "src/Sylius/Bundle/UiBundle/spec/",
-            "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/"
+            "spec\\Sylius\\Bundle\\UserBundle\\": "src/Sylius/Bundle/UserBundle/spec/",
+            "Sylius\\Bundle\\ShippingBundle\\Application\\": "src/Sylius/Bundle/ShippingBundle/test/src/"
         },
         "classmap": [
             "src/Kernel.php"
