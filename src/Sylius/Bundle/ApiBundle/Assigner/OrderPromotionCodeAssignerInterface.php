@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Assigner;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
+/** @experimental */
 interface OrderPromotionCodeAssignerInterface
 {
     public function assign(OrderInterface $cart, ?string $couponCode = null): OrderInterface;
