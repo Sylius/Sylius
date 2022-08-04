@@ -61,6 +61,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        FilterInterface $additionalFilter,
         ServiceRegistryInterface $additionalItemFiltersRegistry,
         ChannelInterface $channel,
         AdjustmentInterface $promotionAdjustment1,
@@ -104,7 +105,8 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
         $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
-        $additionalItemFiltersRegistry->all()->willReturn([]);
+        $additionalFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1])->shouldBeCalled();
+        $additionalItemFiltersRegistry->all()->willReturn([$additionalFilter]);
 
         $orderItem1->getQuantity()->willReturn(2);
         $orderItem1->getUnits()->willReturn($units);
@@ -227,6 +229,31 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $taxonFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([]);
         $additionalItemFiltersRegistry->all()->willReturn([]);
+
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
+    }
+
+    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out_by_additional_filters(
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        FilterInterface $additionalFilter,
+        ServiceRegistryInterface $additionalItemFiltersRegistry,
+        ChannelInterface $channel,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        PromotionInterface $promotion,
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+
+        $priceRangeFilter->filter([$orderItem], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
+        $additionalFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([]);
+        $additionalItemFiltersRegistry->all()->willReturn([$additionalFilter]);
 
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
     }

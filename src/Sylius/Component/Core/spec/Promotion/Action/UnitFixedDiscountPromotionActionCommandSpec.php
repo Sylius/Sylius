@@ -60,6 +60,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        FilterInterface $additionalFilter,
         ServiceRegistryInterface $additionalItemFiltersRegistry,
         ChannelInterface $channel,
         AdjustmentInterface $promotionAdjustment1,
@@ -98,7 +99,8 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $priceRangeFilter->filter([$orderItem], ['amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
-        $additionalItemFiltersRegistry->all()->willReturn([]);
+        $additionalFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem])->shouldBeCalled();
+        $additionalItemFiltersRegistry->all()->willReturn([$additionalFilter]);
 
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
@@ -216,6 +218,31 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([]);
         $additionalItemFiltersRegistry->all()->willReturn([]);
+
+        $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(false);
+    }
+
+    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out_by_additional_filters(
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        FilterInterface $additionalFilter,
+        ServiceRegistryInterface $additionalItemFiltersRegistry,
+        ChannelInterface $channel,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        PromotionInterface $promotion,
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+
+        $priceRangeFilter->filter([$orderItem], ['amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $additionalFilter->filter([$orderItem], ['amount' => 500])->willReturn([]);
+        $additionalItemFiltersRegistry->all()->willReturn([$additionalFilter]);
 
         $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(false);
     }
