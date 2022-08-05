@@ -45,6 +45,6 @@ Naming
 * Suffix exceptions with `Exception`,
 * Suffix PHPSpec classes with `Spec`,
 * Suffix PHPUnit tests with `Test`,
-* Prefix Twig templates that are just partial blocks with `_`,
-* Use fully qualified class name (FQCN) of an interface  as a service name of newly created service or FQCN of class
-  if there are multiple implementations of a given interface  unless it is inconsistent with the current scope of Sylius.
+* Prefix Twig templates that are partial blocks with `_`,
+* Use fully qualified class name (FQCN) of an interface as a service name of newly created service or FQCN of class
+  if there are multiple implementations of a given interface unless it is inconsistent with the current scope of Sylius.
