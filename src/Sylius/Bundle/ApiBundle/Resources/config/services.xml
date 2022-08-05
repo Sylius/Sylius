@@ -156,7 +156,7 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssigner" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
         </service>

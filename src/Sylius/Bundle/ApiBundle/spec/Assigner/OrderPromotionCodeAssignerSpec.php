@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
-final class OrderPromoCodeAssignerSpec extends ObjectBehavior
+final class OrderPromotionCodeAssignerSpec extends ObjectBehavior
 {
     function let(
         PromotionCouponRepositoryInterface $promotionCouponRepository,
