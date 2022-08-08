@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
-use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
