@@ -139,7 +139,7 @@ final class ManagingChannelsContext implements Context
     public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
     {
         $this->shippingAddressInCheckoutRequiredElement->requireAddressTypeInCheckout($type);
-     }
+    }
 
     /**
      * @Then I should see the channel :channelName in the list

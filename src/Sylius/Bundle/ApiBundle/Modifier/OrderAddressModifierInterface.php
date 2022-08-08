@@ -21,6 +21,6 @@ interface OrderAddressModifierInterface
     public function modify(
         OrderInterface $order,
         ?AddressInterface $billingAddress,
-        ?AddressInterface $shippingAddress = null
+        ?AddressInterface $shippingAddress = null,
     ): OrderInterface;
 }
