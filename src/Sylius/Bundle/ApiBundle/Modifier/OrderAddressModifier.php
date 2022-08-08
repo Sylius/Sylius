@@ -31,7 +31,7 @@ final class OrderAddressModifier implements OrderAddressModifierInterface
     public function modify(
         OrderInterface $order,
         ?AddressInterface $billingAddress,
-        ?AddressInterface $shippingAddress = null
+        ?AddressInterface $shippingAddress = null,
     ): OrderInterface {
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
