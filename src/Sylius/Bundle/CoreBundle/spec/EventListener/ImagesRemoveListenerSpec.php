@@ -45,7 +45,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         ImageInterface $image,
         ProductInterface $product,
     ): void {
-        $event->getEntityManager()->willReturn($entityManager);
+        $event->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
         $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 
@@ -66,7 +66,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         ProductInterface $product,
         FilterConfiguration $filterConfiguration,
     ): void {
-        $onFlushEvent->getEntityManager()->willReturn($entityManager);
+        $onFlushEvent->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
         $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 
@@ -96,7 +96,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         ProductInterface $product,
         FilterConfiguration $filterConfiguration,
     ): void {
-        $onFlushEvent->getEntityManager()->willReturn($entityManager);
+        $onFlushEvent->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
         $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 

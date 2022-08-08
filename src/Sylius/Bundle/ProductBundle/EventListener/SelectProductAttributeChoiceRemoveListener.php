@@ -28,7 +28,7 @@ final class SelectProductAttributeChoiceRemoveListener
 
     public function postUpdate(LifecycleEventArgs $event): void
     {
-        $productAttribute = $event->getEntity();
+        $productAttribute = $event->getObject();
 
         if (!$productAttribute instanceof ProductAttributeInterface) {
             return;
@@ -38,7 +38,7 @@ final class SelectProductAttributeChoiceRemoveListener
             return;
         }
 
-        $entityManager = $event->getEntityManager();
+        $entityManager = $event->getObjectManager();
 
         $unitOfWork = $entityManager->getUnitOfWork();
         $changeSet = $unitOfWork->getEntityChangeSet($productAttribute);

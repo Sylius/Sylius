@@ -31,7 +31,7 @@ class PasswordUpdaterListener
 
     public function prePersist(LifecycleEventArgs $event): void
     {
-        $user = $event->getEntity();
+        $user = $event->getObject();
 
         if (!$user instanceof UserInterface) {
             return;
@@ -42,7 +42,7 @@ class PasswordUpdaterListener
 
     public function preUpdate(LifecycleEventArgs $event): void
     {
-        $user = $event->getEntity();
+        $user = $event->getObject();
 
         if (!$user instanceof UserInterface) {
             return;
