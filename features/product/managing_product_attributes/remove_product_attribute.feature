@@ -1,7 +1,8 @@
 @managing_product_attributes
 Feature:Removing a attribute
+    In order to keep my collection of product attributes not cluttered
     As an administrator
-    I want to be able to remove a attribute that is not assigned to any of the products
+    I want to be able to remove an attribute that is not assigned to any of the products
 
     Background:
         Given I am logged in as an administrator
@@ -9,7 +10,7 @@ Feature:Removing a attribute
 
     @ui
     Scenario: Try deleting a attribute from the registry when product use him
-        And this product has a text attribute "Gun caliber" with value "11 mm"
+        Given this product has a text attribute "Gun caliber" with value "11 mm"
         When I delete this product attribute
         Then I should be notified that it has been failed deleted "product attribute"
 
