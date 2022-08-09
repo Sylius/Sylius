@@ -32,7 +32,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ClassMetadata $userMetadata,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([$customer]);
@@ -61,7 +61,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ClassMetadata $userMetadata,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([$user]);
@@ -90,7 +90,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ClassMetadata $userMetadata,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
@@ -119,7 +119,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ClassMetadata $userMetadata,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
@@ -148,7 +148,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         ClassMetadata $userMetadata,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
@@ -174,7 +174,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([$customer]);
@@ -193,7 +193,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
@@ -212,7 +212,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
@@ -230,7 +230,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         \stdClass $stdObject,
         \stdClass $stdObject2,
     ): void {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $onFlushEventArgs->getObjectManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
 
         $unitOfWork->getScheduledEntityInsertions()->willReturn([$stdObject]);

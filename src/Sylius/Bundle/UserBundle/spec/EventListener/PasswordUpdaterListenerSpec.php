@@ -56,7 +56,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         LifecycleEventArgs $event,
         UserInterface $user,
     ): void {
-        $event->getEntity()->willReturn($user);
+        $event->getObject()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
 
@@ -70,7 +70,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         LifecycleEventArgs $event,
         UserInterface $user,
     ): void {
-        $event->getEntity()->willReturn($user);
+        $event->getObject()->willReturn($user);
 
         $user->getPlainPassword()->willReturn('testPassword');
 
@@ -83,7 +83,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
     ): void {
-        $event->getEntity()->willReturn('user');
+        $event->getObject()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
         $this->prePersist($event);
@@ -93,7 +93,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         PasswordUpdaterInterface $passwordUpdater,
         LifecycleEventArgs $event,
     ): void {
-        $event->getEntity()->willReturn('user');
+        $event->getObject()->willReturn('user');
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
         $this->preUpdate($event);

@@ -323,7 +323,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     private function setupFixedDiscount(): CatalogPromotionActionInterface
     {
         $fixedDiscount = new CatalogPromotionAction();
-        $fixedDiscount->setType('percentage_discount');
+        $fixedDiscount->setType('fixed_discount');
         $fixedDiscount->setCatalogPromotion(null);
         $fixedDiscount->setConfiguration(['WEB_US' => ['amount' => 10]]);
 

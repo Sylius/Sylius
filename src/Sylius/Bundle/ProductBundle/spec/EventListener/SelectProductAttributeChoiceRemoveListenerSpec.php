@@ -39,8 +39,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         ProductAttributeInterface $productAttribute,
         ProductAttributeValueInterface $productAttributeValue,
     ): void {
-        $event->getEntity()->willReturn($productAttribute);
-        $event->getEntityManager()->willReturn($entityManager);
+        $event->getObject()->willReturn($productAttribute);
+        $event->getObjectManager()->willReturn($entityManager);
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
@@ -85,8 +85,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute,
     ): void {
-        $event->getEntity()->willReturn($productAttribute);
-        $event->getEntityManager()->willReturn($entityManager);
+        $event->getObject()->willReturn($productAttribute);
+        $event->getObjectManager()->willReturn($entityManager);
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
@@ -116,8 +116,8 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute,
     ): void {
-        $event->getEntity()->willReturn($productAttribute);
-        $event->getEntityManager()->willReturn($entityManager);
+        $event->getObject()->willReturn($productAttribute);
+        $event->getObjectManager()->willReturn($entityManager);
 
         $productAttribute->getType()->willReturn(SelectAttributeType::TYPE);
 
@@ -147,7 +147,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         EntityManagerInterface $entityManager,
         LifecycleEventArgs $event,
     ): void {
-        $event->getEntity()->willReturn('wrongObject');
+        $event->getObject()->willReturn('wrongObject');
 
         $entityManager
             ->getRepository('Sylius\Component\Product\Model\ProductAttributeValue')
@@ -161,7 +161,7 @@ final class SelectProductAttributeChoiceRemoveListenerSpec extends ObjectBehavio
         EntityManagerInterface $entityManager,
         ProductAttributeInterface $productAttribute,
     ): void {
-        $event->getEntity()->willReturn($productAttribute);
+        $event->getObject()->willReturn($productAttribute);
         $productAttribute->getType()->willReturn('wrongType');
 
         $entityManager

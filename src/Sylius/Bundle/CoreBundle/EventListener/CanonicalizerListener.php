@@ -26,7 +26,7 @@ final class CanonicalizerListener
 
     public function canonicalize(LifecycleEventArgs $event): void
     {
-        $item = $event->getEntity();
+        $item = $event->getObject();
 
         if ($item instanceof CustomerInterface) {
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
