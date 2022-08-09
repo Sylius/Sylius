@@ -27,7 +27,7 @@ final class DefaultUsernameORMListener
 {
     public function onFlush(OnFlushEventArgs $onFlushEventArgs)
     {
-        $entityManager = $onFlushEventArgs->getEntityManager();
+        $entityManager = $onFlushEventArgs->getObjectManager();
         $unitOfWork = $entityManager->getUnitOfWork();
 
         $this->processEntities($unitOfWork->getScheduledEntityInsertions(), $entityManager, $unitOfWork);

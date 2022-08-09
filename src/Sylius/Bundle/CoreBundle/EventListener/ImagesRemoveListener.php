@@ -37,7 +37,7 @@ final class ImagesRemoveListener
 
     public function onFlush(OnFlushEventArgs $event): void
     {
-        foreach ($event->getEntityManager()->getUnitOfWork()->getScheduledEntityDeletions() as $entityDeletion) {
+        foreach ($event->getObjectManager()->getUnitOfWork()->getScheduledEntityDeletions() as $entityDeletion) {
             if (!$entityDeletion instanceof ImageInterface) {
                 continue;
             }
