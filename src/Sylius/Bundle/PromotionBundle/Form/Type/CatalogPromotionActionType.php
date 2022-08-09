@@ -68,11 +68,8 @@ final class CatalogPromotionActionType extends AbstractResourceType
                 $form = $event->getForm();
                 $formData = $form->getData();
 
-                if ($formData !== null) {
-                    $formData->setType($data['type']);
-                    $formData->setConfiguration($data['configuration']);
-
-                    $form->setData($formData);
+                if ($formData !== null && $formData->getType() !== $data['type']) {
+                    $formData->setConfiguration([]);
                 }
 
                 $this->addConfigurationTypeToForm($event);
