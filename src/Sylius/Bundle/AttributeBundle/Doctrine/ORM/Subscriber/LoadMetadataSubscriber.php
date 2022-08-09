@@ -81,7 +81,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
                 'name' => 'attribute_id',
                 'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'] ?? $attributeMetadata->fieldMappings['id']['fieldName'],
                 'nullable' => false,
-                'onDelete' => 'CASCADE',
             ]],
         ];
 
