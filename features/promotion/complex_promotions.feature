@@ -11,7 +11,7 @@ Feature: Receiving a discount based on a configured promotion
         And this product belongs to "Jackets"
         And the store has a product "Iron Maiden trousers" priced at "$80.00"
         And this product belongs to "Trousers"
-        And the store has a product "Metallica Dress" priced at "$50.00"
+        And the store has a product "Metallica dress" priced at "$50.00"
         And this product belongs to "Dresses"
         And the store has a product "Rammstein bow tie" priced at "$10.00"
         And this product belongs to "Formal attire"
@@ -21,7 +21,7 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "First order promotion"
         And it gives "20%" off on the customer's 1st order
         And I am a logged in customer
-        When I add product "Metallica Dress" to the cart
+        When I add product "Metallica dress" to the cart
         Then my cart total should be "$40.00"
         And my discount should be "-$10.00"
 

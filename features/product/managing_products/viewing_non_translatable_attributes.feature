@@ -12,5 +12,5 @@ Feature: Viewing product's non translatable attributes on edit page
 
     @ui
     Scenario: Viewing product's attributes defined in different locales
-        When I modify the "Iron pickaxe" product
+        When I modify the "Iron Pickaxe" product
         And I should see non-translatable attribute "crit chance" with value "10"
