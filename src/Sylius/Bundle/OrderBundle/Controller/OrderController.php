@@ -31,6 +31,8 @@ class OrderController extends ResourceController
 {
     private const CHECKOUT_SUBMIT_TYPE = 'checkout';
 
+    private const DEFAULT_TARGET_ROUTE_AFTER_SAVE = 'sylius_shop_checkout_start';
+
     public function summaryAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -112,7 +114,7 @@ class OrderController extends ResourceController
             $submitType = $request->request->get('submit-type');
 
             if (self::CHECKOUT_SUBMIT_TYPE === $submitType) {
-                return $this->redirectHandler->redirectToRoute($configuration, 'sylius_shop_checkout_start');
+                return $this->handleCheckoutRedirect($request, $configuration);
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -133,6 +135,21 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ],
         );
+    }
+
+    private function handleCheckoutRedirect(Request $request, RequestConfiguration $configuration): Response
+    {
+        $attributes = $request->attributes->get('_sylius');
+        $redirectTarget = $attributes['checkout_redirect'] ?? self::DEFAULT_TARGET_ROUTE_AFTER_SAVE;
+
+        if (is_array($redirectTarget)) {
+            $routeName = $redirectTarget['route'] ?? self::DEFAULT_TARGET_ROUTE_AFTER_SAVE;
+            $routeParams = $redirectTarget['params'] ?? [];
+
+            return $this->redirectHandler->redirectToRoute($configuration, $routeName, $routeParams);
+        }
+
+        return $this->redirectHandler->redirectToRoute($configuration, $redirectTarget);
     }
 
     /**
