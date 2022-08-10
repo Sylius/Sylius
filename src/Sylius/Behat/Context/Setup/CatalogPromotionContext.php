@@ -34,6 +34,7 @@ use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -101,6 +102,7 @@ final class CatalogPromotionContext implements Context
 
     /**
      * @Given the catalog promotion :catalogPromotion is available in :channel
+     * @Given /^(this catalog promotion) is(?:| also) available in the ("[^"]+" channel)$/
      */
     public function theCatalogPromotionIsAvailableIn(
         CatalogPromotionInterface $catalogPromotion,
@@ -757,12 +759,33 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" catalog promotion) is (active|inactive)$/
+     * @Given /^(this catalog promotion) is (active|inactive)$/
+     */
+    public function theCatalogPromotionIs(CatalogPromotionInterface $catalogPromotion, string $state)
+    {
+        $this->setCatalogPromotionState($catalogPromotion, $state);
+    }
+
+    /**
      * @Given the catalog promotion :catalogPromotion is currently being processed
      */
     public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
     {
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+        $this->setCatalogPromotionState($catalogPromotion, CatalogPromotionStates::STATE_PROCESSING);
+    }
+
+    /**
+     * @Given the processing of :catalogPromotion has failed
+     */
+    public function theProcessingOfCatalogPromotionHasFailed(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->setCatalogPromotionState($catalogPromotion, CatalogPromotionStates::STATE_FAILED);
+    }
+
+    private function setCatalogPromotionState(CatalogPromotionInterface $catalogPromotion, string $state): void
+    {
+        $catalogPromotion->setState($state);
 
         $this->entityManager->flush();
     }
