@@ -29,6 +29,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends ResourceController
 {
+    private const CHECKOUT_SUBMIT_TYPE = 'checkout';
+
     public function summaryAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -105,6 +107,12 @@ class OrderController extends ResourceController
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            }
+
+            $submitType = $request->request->get('submit-type');
+
+            if (self::CHECKOUT_SUBMIT_TYPE === $submitType) {
+                return $this->redirectHandler->redirectToRoute($configuration, 'sylius_shop_checkout_start');
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);

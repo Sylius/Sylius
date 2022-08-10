@@ -16,8 +16,10 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
+use Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SessionManagerInterface;
@@ -31,6 +33,8 @@ final class CartContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private SummaryPageInterface $summaryPage,
+        private AddressPageInterface $addressPage,
+        private CheckoutSubtotalElementInterface $checkoutSubtotalElement,
         private ShowPageInterface $productShowPage,
         private CartWidgetElementInterface $cartWidgetElement,
         private NotificationCheckerInterface $notificationChecker,
@@ -53,6 +57,14 @@ final class CartContext implements Context
     public function iUpdateMyCart()
     {
         $this->summaryPage->updateCart();
+    }
+
+    /**
+     * @When I checkout
+     */
+    public function iCheckout(): void
+    {
+        $this->summaryPage->checkout();
     }
 
     /**
@@ -325,6 +337,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @When I specify product :productName quantity to :quantity
+     */
+    public function iSpecifyQuantityToInMyCart(string $productName, int $quantity): void
+    {
+        $this->summaryPage->specifyQuantity($productName, $quantity);
+    }
+
+    /**
      * @Then /^I should be(?: on| redirected to) my cart summary page$/
      * @Then I should not be able to address an order with an empty cart
      */
@@ -525,6 +545,22 @@ final class CartContext implements Context
     public function iShouldSeeCartTotalQuantity(int $totalQuantity): void
     {
         Assert::same($this->cartWidgetElement->getCartTotalQuantity(), $totalQuantity);
+    }
+
+    /**
+     * @Then I should be on the checkout page
+     */
+    public function iShouldBeOnTheCheckoutPage(): void
+    {
+        $this->addressPage->verify();
+    }
+
+    /**
+     * @Then the quantity of :productName should be :quantity
+     */
+    public function theQuantityOfShouldBe(string $productName, int $quantity): void
+    {
+        Assert::same($this->checkoutSubtotalElement->getProductQuantity($productName), $quantity);
     }
 
     private function getPriceFromString(string $price): int

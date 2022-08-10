@@ -17,7 +17,7 @@
         {% for item in order.items %}
             <tr>
                 <td>{{ item.getVariant.product.name }}</td>
-                <td class="center aligned">
+                <td class="center aligned" {{ sylius_test_html_attribute('item-subtotal-quantity', item.variant.product.name) }}>
                     {{ item.quantity }}
                 </td>
                 <td class="right aligned" id="sylius-item-{{ item.variant.product.slug }}-subtotal" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>
