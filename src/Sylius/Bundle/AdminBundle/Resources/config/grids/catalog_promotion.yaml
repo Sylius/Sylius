@@ -46,6 +46,43 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    form_options:
+                        type: contains
+                    options:
+                        fields: [name, code]
+                channel:
+                    type: entities
+                    label: sylius.ui.channel
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                    options:
+                        field: channels.id
+                startDate:
+                    type: date
+                    label: sylius.ui.start_date
+                    options:
+                        inclusive_to: true
+                endDate:
+                    type: date
+                    label: sylius.ui.end_date
+                    options:
+                        inclusive_to: true
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.active: active
+                            sylius.ui.failed: failed
+                            sylius.ui.inactive: inactive
+                            sylius.ui.processing: processing
             actions:
                 main:
                     create:
