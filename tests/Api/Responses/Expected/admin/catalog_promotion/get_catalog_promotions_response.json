@@ -31,5 +31,6 @@
             }
         }
     ],
-    "hydra:totalItems": 1
+    "hydra:totalItems": 1,
+    "hydra:search": @array@
 }
