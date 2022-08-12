@@ -21,6 +21,17 @@ sylius_shop_cart_save:
             form: Sylius\Bundle\OrderBundle\Form\Type\CartType
             flash: sylius.cart.save
 
+sylius_shop_cart_checkout:
+    path: /checkout
+    methods: [PATCH]
+    defaults:
+        _controller: sylius.controller.order:saveAction
+        _sylius:
+            template: "@SyliusShop/Cart/summary.html.twig"
+            redirect: sylius_shop_checkout_start
+            form: Sylius\Bundle\OrderBundle\Form\Type\CartType
+            flash: false
+
 sylius_shop_cart_clear:
     path: /
     methods: [DELETE]

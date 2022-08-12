@@ -52,6 +52,8 @@ interface SummaryPageInterface extends PageInterface
 
     public function changeQuantity(string $productName, string $quantity): void;
 
+    public function specifyQuantity(string $productName, int $quantity): void;
+
     public function applyCoupon(string $couponCode): void;
 
     public function isSingleItemOnPage(): bool;
@@ -75,6 +77,8 @@ interface SummaryPageInterface extends PageInterface
     public function clearCart(): void;
 
     public function updateCart(): void;
+
+    public function checkout(): void;
 
     public function waitForRedirect(int $timeout): void;
 
