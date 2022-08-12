@@ -29,6 +29,8 @@ final class SyliusUserBundle extends AbstractResourceBundle
 
     public function build(ContainerBuilder $container): void
     {
+        parent::build($container);
+
         $container->addCompilerPass(new RemoveUserPasswordEncoderPass());
     }
 
