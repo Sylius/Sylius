@@ -11,8 +11,8 @@ Feature:
 
     @ui @no-api
     Scenario: Updating the cart on checkout
-        Given I see the summary of my cart
+        Given I am on the summary of my cart page
         When I specify product "T-Shirt banana" quantity to 2
-        And I checkout
-        Then I should be on the checkout page
+        And I proceed to the checkout
+        Then I should be on the checkout addressing page
         And the quantity of "T-Shirt banana" should be 2

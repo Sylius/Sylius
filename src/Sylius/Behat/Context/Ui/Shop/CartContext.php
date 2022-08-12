@@ -43,6 +43,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I am on the summary of my cart page
      * @When /^I see the summary of my (?:|previous )cart$/
      * @When /^I check details of my cart$/
      */
@@ -60,9 +61,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I checkout
+     * @When I proceed to the checkout
      */
-    public function iCheckout(): void
+    public function iProceedToTheCheckout(): void
     {
         $this->summaryPage->checkout();
     }
@@ -548,9 +549,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout page
+     * @Then I should be on the checkout addressing page
      */
-    public function iShouldBeOnTheCheckoutPage(): void
+    public function iShouldBeOnTheCheckoutAddressingStep(): void
     {
         $this->addressPage->verify();
     }
