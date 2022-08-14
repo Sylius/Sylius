@@ -37,9 +37,9 @@ class CreateAdminUserCommand extends Command
     {
         $this->io->title('Admin user creation');
 
-        $question = $this->io->confirm('Do you want to create an admin user ?', true);
+        $confirm = $this->io->confirm('Do you want to create an admin user ?', true);
 
-        if (!$question) {
+        if (!$confirm) {
             return Command::INVALID;
         }
 
@@ -48,7 +48,7 @@ class CreateAdminUserCommand extends Command
         }
         while (!$this->validateEmail($email));
 
-        if (!$this->checkIfAdminUserExists($email)) {
+        if ($this->checkIfAdminUserExists($email)) {
             $this->io->error(sprintf('Admin user with email address %s already exists.', $email));
             return COMMAND::FAILURE;
         }
@@ -88,8 +88,6 @@ class CreateAdminUserCommand extends Command
 
     private function checkIfAdminUserExists(string $email): bool
     {
-        return null === $this->adminUserRepository->findOneByEmail($email);
+        return null !== $this->adminUserRepository->findOneByEmail($email);
     }
 }
-
-
