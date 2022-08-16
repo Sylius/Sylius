@@ -24,11 +24,3 @@ Feature: Filtering catalog promotions by channel
         Then I should see a catalog promotion with name "Surprise sale"
         And I should see a catalog promotion with name "Spring sale"
         But I should not see a catalog promotion with name "Winter sale"
-
-    @ui @api
-    Scenario: Filtering catalog promotions by another channel
-        When I browse catalog promotions
-        And I filter by "Web-US" channel
-        Then I should see a catalog promotion with name "Surprise sale"
-        And I should see a catalog promotion with name "Winter sale"
-        But I should not see a catalog promotion with name "Spring sale"

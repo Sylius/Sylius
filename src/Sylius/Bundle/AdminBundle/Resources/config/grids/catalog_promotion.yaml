@@ -79,10 +79,8 @@ sylius_grid:
                     label: sylius.ui.state
                     form_options:
                         choices:
-                            sylius.ui.active: active
-                            sylius.ui.failed: failed
-                            sylius.ui.inactive: inactive
-                            sylius.ui.processing: processing
+                            sylius.ui.active: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE
+                            sylius.ui.inactive: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
             actions:
                 main:
                     create:

@@ -42,23 +42,3 @@ Feature: Filtering catalog promotions by status
         And I should see a catalog promotion with name "Special sale"
         But I should not see a catalog promotion with name "Winter sale"
         And I should not see a catalog promotion with name "Spring sale"
-
-    @ui @api
-    Scenario: Filtering processing catalog promotions
-        Given the catalog promotion "Special sale" is currently being processed
-        When I browse catalog promotions
-        And I filter by processing state
-        Then I should see a catalog promotion with name "Special sale"
-        But I should not see a catalog promotion with name "Surprise sale"
-        And I should not see a catalog promotion with name "Winter sale"
-        And I should not see a catalog promotion with name "Spring sale"
-
-    @ui @api
-    Scenario: Filtering failed catalog promotions
-        Given the processing of "Winter sale" has failed
-        When I browse catalog promotions
-        And I filter by failed state
-        Then I should see a catalog promotion with name "Winter sale"
-        But I should not see a catalog promotion with name "Surprise sale"
-        And I should not see a catalog promotion with name "Special sale"
-        And I should not see a catalog promotion with name "Spring sale"

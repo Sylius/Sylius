@@ -759,33 +759,17 @@ final class CatalogPromotionContext implements Context
     }
 
     /**
-     * @Given /^the ("[^"]+" catalog promotion) is (active|inactive)$/
-     * @Given /^(this catalog promotion) is (active|inactive)$/
+     * @Given /^the ("[^"]+" catalog promotion) is active$/
+     * @Given /^(this catalog promotion) is active$/
      */
-    public function theCatalogPromotionIs(CatalogPromotionInterface $catalogPromotion, string $state)
+    public function theCatalogPromotionIsActive(CatalogPromotionInterface $catalogPromotion)
     {
-        $this->setCatalogPromotionState($catalogPromotion, $state);
-    }
+        if (CatalogPromotionStates::STATE_ACTIVE === $catalogPromotion->getState()) {
+            return;
+        }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion is currently being processed
-     */
-    public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $this->setCatalogPromotionState($catalogPromotion, CatalogPromotionStates::STATE_PROCESSING);
-    }
-
-    /**
-     * @Given the processing of :catalogPromotion has failed
-     */
-    public function theProcessingOfCatalogPromotionHasFailed(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $this->setCatalogPromotionState($catalogPromotion, CatalogPromotionStates::STATE_FAILED);
-    }
-
-    private function setCatalogPromotionState(CatalogPromotionInterface $catalogPromotion, string $state): void
-    {
-        $catalogPromotion->setState($state);
+        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
 
         $this->entityManager->flush();
     }
