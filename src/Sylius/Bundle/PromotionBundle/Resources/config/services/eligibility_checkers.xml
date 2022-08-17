@@ -25,16 +25,10 @@
                  public="false">
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-        <service id="sylius.promotion_coupon_channels_eligibility_checker"
-                 class="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponChannelEligibilityChecker"
-                 public="false">
-            <tag name="sylius.promotion_coupon_eligibility_checker" />
-        </service>
         <service id="sylius.promotion_coupon_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker">
             <argument type="collection" />
         </service>
-
         <service id="sylius.promotion_duration_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionDurationEligibilityChecker"
                  public="false">

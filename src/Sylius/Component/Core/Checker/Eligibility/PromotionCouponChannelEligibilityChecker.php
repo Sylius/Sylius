@@ -11,35 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Promotion\Checker\Eligibility;
+namespace Sylius\Component\Core\Checker\Eligibility;
 
-use Sylius\Component\Core\Model\OrderInterface as ModelOrderInterface;
-use Sylius\Component\Core\Model\Promotion as CoreModelPromotion;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Webmozart\Assert\Assert;
 
 final class PromotionCouponChannelEligibilityChecker implements PromotionCouponEligibilityCheckerInterface
 {
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
-        if (!$promotionSubject instanceof ModelOrderInterface) {
-            return true;
-        }
+        Assert::isInstanceOf($promotionSubject, ChannelAwareInterface::class);
+        $orderChannel = $promotionSubject->getChannel();
+        Assert::notNull($orderChannel);
 
         $promotion = $promotionCoupon->getPromotion();
+        Assert::isInstanceOf($promotion, PromotionInterface::class);
 
-
-        if (!$promotion instanceof CoreModelPromotion) {
-            return true;
-        }
-
-        $orderChannel = $promotionSubject->getChannel();
-
-        if ($orderChannel === null) {
-            return false;
-        }
-
-        return $promotion->getChannels()->contains($orderChannel);
+        return $promotion->hasChannel($orderChannel);
     }
 }

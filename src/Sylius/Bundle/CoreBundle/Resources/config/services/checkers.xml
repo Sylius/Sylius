@@ -29,5 +29,13 @@
         </service>
 
         <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
+
+        <service
+            id="sylius.promotion_coupon_channels_eligibility_checker"
+            class="Sylius\Component\Core\Checker\Eligibility\PromotionCouponChannelEligibilityChecker"
+            public="false"
+        >
+            <tag name="sylius.promotion_coupon_eligibility_checker" />
+        </service>
     </services>
 </container>
