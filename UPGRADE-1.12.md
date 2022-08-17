@@ -65,6 +65,13 @@ with test or remove these services with complier pass.
    -       authenticators:
    -           # ...
    +   jwt: true
+   shop:
+       logout:
+       path: sylius_shop_logout
+   -   target: sylius_shop_login
+   +   target: sylius_shop_homepage
+       invalidate_session: false
+   -   success_handler: sylius.handler.shop_user_logout
    ```
    
     and also you need to adjust all of your access_control like that:

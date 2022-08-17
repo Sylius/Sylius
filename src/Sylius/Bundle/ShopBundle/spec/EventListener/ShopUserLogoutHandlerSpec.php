@@ -17,46 +17,26 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
-use Symfony\Component\Security\Http\HttpUtils;
 
 final class ShopUserLogoutHandlerSpec extends ObjectBehavior
 {
     function let(
-        HttpUtils $httpUtils,
         ChannelContextInterface $channelContext,
         CartStorageInterface $cartStorage,
-        TokenStorageInterface $tokenStorage,
     ): void {
-        $this->beConstructedWith($httpUtils, '/', $channelContext, $cartStorage, $tokenStorage);
+        $this->beConstructedWith($channelContext, $cartStorage);
     }
 
-    function it_clears_cart_session_after_logging_out_and_return_default_handler_response(
+    function it_clears_cart_session_after_logging_out(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        HttpUtils $httpUtils,
-        Request $request,
-        Response $response,
         CartStorageInterface $cartStorage,
         LogoutEvent $logoutEvent,
-        SessionInterface $session,
-        TokenStorageInterface $tokenStorage,
     ): void {
         $channelContext->getChannel()->willReturn($channel);
 
-        $logoutEvent->getRequest()->willReturn($request);
-        $logoutEvent->getResponse()->willReturn(null);
-        $request->getSession()->willReturn($session);
-
-        $httpUtils->createRedirectResponse($request, '/')->willReturn($response);
-
-        $tokenStorage->setToken(null)->shouldBeCalled();
         $cartStorage->removeForChannel($channel)->shouldBeCalled();
-        $logoutEvent->setResponse($response)->shouldBeCalled();
 
         $this->onLogout($logoutEvent);
     }
