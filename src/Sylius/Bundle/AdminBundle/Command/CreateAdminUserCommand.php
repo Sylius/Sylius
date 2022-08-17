@@ -6,6 +6,7 @@ namespace Sylius\Bundle\AdminBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\AdminUser;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -24,6 +25,7 @@ class CreateAdminUserCommand extends Command
     public function __construct(
         private EntityManagerInterface $entityManager,
         private UserRepositoryInterface $adminUserRepository,
+        private RepositoryInterface $localeRepository,
     ) {
         parent::__construct();
     }
@@ -65,8 +67,17 @@ class CreateAdminUserCommand extends Command
         $adminUser->setUsername($userName);
         $adminUser->setFirstName($firstName);
         $adminUser->setLastName($lastName);
-        $adminUser->setLocaleCode('en_US');
-        $adminUser->setEnabled(true);
+
+        $locales = [];
+        foreach ($this->localeRepository->findAll() as $locale) {
+            $locales[] = $locale->getCode();
+        }
+
+        $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
+        $adminUser->setLocaleCode($localeCode);
+
+        $enabled = $this->io->confirm('Do you want to enabled this admin user ?', true);
+        $adminUser->setEnabled($enabled);
 
         $this->entityManager->persist($adminUser);
         $this->entityManager->flush();
