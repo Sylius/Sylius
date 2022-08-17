@@ -32,6 +32,15 @@ and should be used only this way.
 are now included in every env starting with `test` keyword. If you wish to not have them, either you need to rename your env to not start 
 with test or remove these services with complier pass.
 
+6. Remove the `success_handler` node from shop's firewall
+    ```diff
+    logout:
+        path: sylius_shop_logout
+        target: sylius_shop_login
+        invalidate_session: false
+    -    success_handler: sylius.handler.shop_user_logout
+    ```
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
