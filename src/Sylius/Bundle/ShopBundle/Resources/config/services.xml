@@ -23,11 +23,8 @@
         <defaults public="true" />
 
         <service id="sylius.handler.shop_user_logout" class="Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler">
-            <argument type="service" id="security.http_utils" />
-            <argument>sylius_shop_homepage</argument>
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="sylius.storage.cart_session" />
-            <argument type="service" id="security.token_storage" />
             <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LogoutEvent" dispatcher="security.event_dispatcher.shop" method="onLogout" />
         </service>
 
