@@ -29,7 +29,6 @@
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker">
             <argument type="collection" />
         </service>
-
         <service id="sylius.promotion_duration_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionDurationEligibilityChecker"
                  public="false">
