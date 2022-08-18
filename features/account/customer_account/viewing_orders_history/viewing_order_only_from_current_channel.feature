@@ -5,8 +5,8 @@ Feature: Viewing orders only from current channel
     I want to be able to track my placed orders from current channel
 
     Background:
-        Given the store operates on a channel named "Web-US" in "USD" currency
-        And the store operates on a channel named "Web-UK" in "GBP" currency
+        Given the store operates on a channel named "Web-US" in "USD" currency and with hostname "example.com"
+        And the store operates on a channel named "Web-UK" in "GBP" currency and with hostname "example.co.uk"
         And the store has country "United States"
         And the store has country "United Kingdom"
         And the store has a zone "United States + United Kingdom" with code "US + UK"
@@ -27,7 +27,7 @@ Feature: Viewing orders only from current channel
         And the customer chose "Free" shipping method with "Offline" payment
         And I am logged in as "hancock@superheronope.com"
 
-    @ui
+    @ui @api
     Scenario: Viewing orders only from current channel
         When I change my current channel to "Web-US"
         And I browse my orders
