@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
@@ -38,6 +39,7 @@ final class ManagingCatalogPromotionsContext implements Context
         private UpdatePageInterface $updatePage,
         private ShowPageInterface $showPage,
         private FormElementInterface $formElement,
+        private FilterElementInterface $filterElement,
         private SharedStorageInterface $sharedStorage,
         private NotificationCheckerInterface $notificationChecker,
     ) {
@@ -594,6 +596,87 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I filter by :channel channel
+     */
+    public function iFilterByChannel(ChannelInterface $channel): void
+    {
+        $this->filterElement->chooseChannel($channel);
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When I filter enabled catalog promotions
+     */
+    public function iFilterEnabledCatalogPromotions(): void
+    {
+        $this->filterElement->chooseEnabled();
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter by (active|failed|inactive|processing) state$/
+     */
+    public function iFilterByState(string $state): void
+    {
+        $this->filterElement->chooseState(ucfirst($state));
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When I search by :phrase name
+     * @When I search by :phrase code
+     */
+    public function iSearchBy(string $phrase): void
+    {
+        $this->filterElement->search($phrase);
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterByDateUpTo(string $dateType, string $date): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateTo($date);
+        } else {
+            $this->filterElement->specifyEndDateTo($date);
+        }
+
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterByDateFrom(string $dateType, string $date): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateFrom($date);
+        } else {
+            $this->filterElement->specifyEndDateFrom($date);
+        }
+
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})" up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterByDateFromDateToDate(string $dateType, string $fromDate, string $toDate): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateFrom($fromDate);
+            $this->filterElement->specifyStartDateTo($toDate);
+        } else {
+            $this->filterElement->specifyEndDateFrom($fromDate);
+            $this->filterElement->specifyEndDateTo($toDate);
+        }
+
+        $this->filterElement->filter();
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
@@ -641,6 +724,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then the catalog promotions named :firstName and :secondName should be in the registry
+     * @Then I should see a catalog promotion with name :name
      */
     public function theCatalogPromotionsNamedShouldBeInTheRegistry(string ...$names): void
     {
@@ -1113,6 +1197,17 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
         Assert::true($this->createPage->checkIfActionConfigurationFormIsVisible(), 'Catalog promotion action configuration form is not visible.');
+    }
+
+    /**
+     * @Then I should not see a catalog promotion with name :name
+     */
+    public function iShouldNotSeeACatalogPromotionWithName(string $name): void
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name]),
+            sprintf('Catalog promotion with name "%s" has been found, but should not.', $name),
+        );
     }
 
     private function createCatalogPromotion(

@@ -835,6 +835,70 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When /^I search by "([^"]+)" (code|name)$/
+     */
+    public function iSearchByName(string $phrase, string $field): void
+    {
+        $this->client->addFilter($field, $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by :channel channel
+     */
+    public function iFilterByChannel(ChannelInterface $channel): void
+    {
+        $this->client->addFilter('channel', $this->iriConverter->getIriFromItem($channel));
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter enabled catalog promotions
+     */
+    public function iFilterEnabledCatalogPromotions(): void
+    {
+        $this->client->addFilter('enabled', true);
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I filter by (active|failed|inactive|processing) state$/
+     */
+    public function iFilterByState(string $state): void
+    {
+        $this->client->addFilter('state', $state);
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterDateUpTo(string $dateType, string $date): void
+    {
+        $this->client->addFilter(sprintf('%sDate[before]', $dateType), $date);
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterByDateFrom(string $dateType, string $date): void
+    {
+        $this->client->addFilter(sprintf('%sDate[after]', $dateType), $date);
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})" up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterByDateFromDateToDate(string $dateType, string $fromDate, string $toDate): void
+    {
+        $this->client->addFilter(sprintf('%sDate[after]', $dateType), $fromDate);
+        $this->client->addFilter(sprintf('%sDate[before]', $dateType), $toDate);
+        $this->client->filter();
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
@@ -935,6 +999,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @Then the catalog promotions named :firstName and :secondName should be in the registry
+     * @Then the catalog promotion named :firstName should be in the registry
      */
     public function theCatalogPromotionsNamedShouldBeInTheRegistry(string ...$names): void
     {
@@ -1470,6 +1535,32 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'endDate: End date cannot be set before start date.',
+        );
+    }
+
+    /**
+     * @Then I should see a catalog promotion with name :name
+     */
+    public function iShouldSeeACatalogPromotionWithName(string $name): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'name', $name),
+            sprintf('No catalog promotion with name "%s" has been found.', $name),
+        );
+    }
+
+    /**
+     * @Then I should not see a catalog promotion with name :name
+     */
+    public function iShouldNotSeeACatalogPromotionWithName(string $name): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($response, 'name', $name),
+            sprintf('Catalog promotion with name "%s" has been found, but should not.', $name),
         );
     }
 
