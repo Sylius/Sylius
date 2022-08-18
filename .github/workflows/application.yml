@@ -54,6 +54,12 @@ jobs:
                     coverage: none
 
             -
+                name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
@@ -198,6 +204,11 @@ jobs:
                     tools: symfony
                     coverage: none
 
+            -   name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
             -   name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
@@ -256,6 +267,12 @@ jobs:
                     extensions: intl, gd, opcache, pgsql, pdo_pgsql
                     tools: symfony
                     coverage: none
+
+            -   name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+            
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -365,6 +382,12 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+
+            -   name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+                    
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -520,6 +543,11 @@ jobs:
                     tools: symfony
                     coverage: none
 
+            -   name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -662,6 +690,11 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+
+            -   name: Install Symfony CLI
+                run: |
+                    curl -sS https://get.symfony.com/cli/installer | bash
+                    mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
 
             -
                 name: Restrict Symfony version
