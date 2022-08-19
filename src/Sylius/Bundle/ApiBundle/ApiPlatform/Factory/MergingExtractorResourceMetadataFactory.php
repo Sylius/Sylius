@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\ApiPlatform\Factory;
 
 use ApiPlatform\Core\Exception\ResourceClassNotFoundException;
-use ApiPlatform\Core\Metadata\Extractor\ExtractorInterface;
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Metadata\Resource\ResourceMetadata;
+use ApiPlatform\Metadata\Extractor\ResourceExtractorInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver;
 
 /**
@@ -32,7 +32,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     private const RESOURCES = ['shortName', 'description', 'iri', 'itemOperations', 'collectionOperations', 'subresourceOperations', 'graphql', 'attributes'];
 
     public function __construct(
-        private ExtractorInterface $extractor,
+        private ResourceExtractorInterface $extractor,
         private ResourceMetadataFactoryInterface $decorated,
         private ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
         array $defaults = [],
