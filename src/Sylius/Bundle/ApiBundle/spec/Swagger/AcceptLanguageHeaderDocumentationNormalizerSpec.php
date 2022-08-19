@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Swagger;
 
-use ApiPlatform\Core\Documentation\Documentation;
-use ApiPlatform\Core\Metadata\Resource\ResourceNameCollection;
+use ApiPlatform\Documentation\Documentation;
+use ApiPlatform\Metadata\Resource\ResourceNameCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
