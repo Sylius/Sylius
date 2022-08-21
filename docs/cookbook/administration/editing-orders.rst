@@ -1,5 +1,5 @@
-How to modify placed order?
-===========================
+How to edit orders in Sylius?
+=============================
 
 Since time immemorial, people have been using trial and error methods to create or repeat processes that make their lives simpler.
 Thanks to this, we live in a time where everything is easily available and within reach.
@@ -40,7 +40,7 @@ Let's start with the steps that will let you impersonate an user and create new 
 
 First, log in as an administrator into the admin panel, go to ``orders`` tab, and find the incorrect order (in this example Order #000000021):
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/orders-page.png
+.. image:: ../../_images/cookbook/administration/editing-orders/orders-page.png
     :align: center
     :scale: 50%
 
@@ -48,7 +48,7 @@ First, log in as an administrator into the admin panel, go to ``orders`` tab, an
 
 Let's show it as the data in it will be useful for us in creation of the new order.
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/order.png
+.. image:: ../../_images/cookbook/administration/editing-orders/order.png
     :align: center
     :scale: 50%
 
@@ -57,7 +57,7 @@ Let's show it as the data in it will be useful for us in creation of the new ord
 In this order we can click on the name of the user to go directly to customer account.
 Here we have an option ``impersonate``, click it and now it would be best to open a shop page in new tab.
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/customer.png
+.. image:: ../../_images/cookbook/administration/editing-orders/customer.png
     :align: center
     :scale: 50%
 
@@ -65,7 +65,7 @@ Here we have an option ``impersonate``, click it and now it would be best to ope
 
 Now on the shop page, we can see the greeting with name and surname of customer. This indicates we are impersonated correctly.
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/shop.png
+.. image:: ../../_images/cookbook/administration/editing-orders/shop.png
     :align: center
     :scale: 50%
 
@@ -73,7 +73,7 @@ Now on the shop page, we can see the greeting with name and surname of customer.
 
 Now you need to find products with correct variants, add them and proceed to checkout
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/checkout.png
+.. image:: ../../_images/cookbook/administration/editing-orders/checkout.png
     :align: center
     :scale: 50%
 
@@ -84,7 +84,7 @@ as a payment method - use one of the offline methods (if your shop supports one)
 You can also add a note to it that it is modification of original order.
 In the end you will be greeted with message that your checkout has been completed.
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/completed-checkout.png
+.. image:: ../../_images/cookbook/administration/editing-orders/completed-checkout.png
     :align: center
     :scale: 50%
 
@@ -94,7 +94,7 @@ Now lets go back to the customer page (where you can click ``show orders`` butto
 
 Here look for ``complete`` button on payment tab:
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/new-order.png
+.. image:: ../../_images/cookbook/administration/editing-orders/new-order.png
     :align: center
     :scale: 50%
 
@@ -102,7 +102,7 @@ Here look for ``complete`` button on payment tab:
 
 And let's get back to the old order once more and ``cancel`` this order:
 
-.. image:: ../../_images/cookbook/administration/modify-placed-order/old-order.png
+.. image:: ../../_images/cookbook/administration/editing-orders/old-order.png
     :align: center
     :scale: 50%
 

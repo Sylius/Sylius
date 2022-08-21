@@ -21,7 +21,7 @@ Administration
 .. toctree::
     :hidden:
 
-    administration/modify-placed-order
+    administration/editing-orders
 
 .. include:: /cookbook/administration/map.rst.inc
 

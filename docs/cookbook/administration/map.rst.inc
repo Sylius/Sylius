@@ -1,1 +1,1 @@
-* :doc:`/cookbook/administration/modify-placed-order`
+* :doc:`/cookbook/administration/editing-orders`
