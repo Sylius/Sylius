@@ -110,6 +110,14 @@ In the root directory of your project you will find these important subdirectori
     As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <https://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
     Read also about the `best practices while structuring your project <https://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
 
+Running asynchronous tasks
+--------------------------
+
+To enable asynchronous tasks (for example for Catalog Promotions), remember about running messenger consumer in a separate process,
+use the command: `php bin/console messenger:consume main`
+
+You can learn more about Catalog Promotions :doc:`Here </book/products/catalog_promotions>`
+
 Contributing
 ------------
 
