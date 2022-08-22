@@ -1,5 +1,4 @@
 <div class="one field" id="sylius-api-login">
-    {{ form_errors(form.email, sylius_test_form_attribute('login-errors')) }}
     {% set ajax_user_check_action_path = path('sylius_shop_ajax_user_check_action')  %}
     {{ form_row(form.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-url': ajax_user_check_action_path}})) }}
 
