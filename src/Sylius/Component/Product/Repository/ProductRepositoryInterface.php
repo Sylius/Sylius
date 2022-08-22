@@ -27,4 +27,6 @@ interface ProductRepositoryInterface extends RepositoryInterface
      * @return array|ProductInterface[]
      */
     public function findByNamePart(string $phrase, string $locale, ?int $limit = null): array;
+
+    public function findByPhrase(string $phrase, string $locale, ?int $limit = null): iterable;
 }
