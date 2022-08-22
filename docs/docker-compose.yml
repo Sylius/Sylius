@@ -2,6 +2,7 @@ services:
     docs:
         build:
             context: .
+        command: ["sphinx-autobuild", ".", "build"]
         volumes:
             - ./:/usr/src/app:delegated
 
