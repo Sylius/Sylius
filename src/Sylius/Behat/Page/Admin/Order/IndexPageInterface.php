@@ -30,4 +30,8 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function specifyFilterTotalGreaterThan(string $total): void;
 
     public function specifyFilterTotalLessThan(string $total): void;
+
+    public function specifyFilterProduct(string $productName): void;
+
+    public function specifyFilterVariant(string $variantName): void;
 }
