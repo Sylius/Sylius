@@ -7,7 +7,6 @@ sylius_grid:
                     class: "%sylius.model.order.class%"
                     repository:
                         method: createSearchListQueryBuilder
-                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
             sorting:
                 number: desc
             fields:

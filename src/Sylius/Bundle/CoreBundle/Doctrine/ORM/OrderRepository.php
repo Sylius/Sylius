@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -50,15 +49,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createSearchListQueryBuilder(string $locale): QueryBuilder
+    public function createSearchListQueryBuilder(): QueryBuilder
     {
         return $this->createListQueryBuilder()
-            ->innerJoin('o.items', 'item')
-            ->innerJoin('item.variant', 'variant')
-            ->leftJoin('variant.translations', 'variantTranslation', Join::WITH, 'variantTranslation.locale = :locale')
-            ->innerJoin('variant.product', 'product')
-            ->leftJoin('product.translations', 'productTranslation', Join::WITH, 'productTranslation.locale = :locale')
-            ->setParameter('locale', $locale)
+            ->leftJoin('o.items', 'item')
+            ->leftJoin('item.variant', 'variant')
+            ->leftJoin('variant.product', 'product')
         ;
     }
 
