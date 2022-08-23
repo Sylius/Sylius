@@ -2,7 +2,7 @@
 {% set data = grid.data %}
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
-{% set criteria = app.request.query.get('criteria') %}
+{% set criteria = app.request.query.all('criteria') %}
 
 {{ sylius_template_event('sylius.grid.filters', _context) }}
 
