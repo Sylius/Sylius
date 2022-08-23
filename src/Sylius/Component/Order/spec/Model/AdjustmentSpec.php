@@ -240,4 +240,13 @@ final class AdjustmentSpec extends ObjectBehavior
         $this->setDetails(['taxRateAmount' => 0.1]);
         $this->getDetails()->shouldReturn(['taxRateAmount' => 0.1]);
     }
+
+    function it_resets_internal_information_while_cloning(): void
+    {
+        $this->setUpdatedAt(new \DateTime());
+        $new = clone $this->getWrappedObject();
+
+        $this->getCreatedAt()->shouldNotBe($new->getCreatedAt());
+        $this->getUpdatedAt()->shouldNotBe($new->getUpdatedAt());
+    }
 }

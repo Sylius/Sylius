@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.11.7` TO `v1.11.8`
+
+1. Cloning `Sylius\Component\Order\Model\Adjustment` resets values of fields `id`, `createdAt` and `updatedAt`.
+
 # UPGRADE FROM `v1.11.6` TO `v1.11.7`
 
 1. Method `Sylius\Component\Channel\Repository\ChannelRepository::findOneByHostname` has become deprecated, use
