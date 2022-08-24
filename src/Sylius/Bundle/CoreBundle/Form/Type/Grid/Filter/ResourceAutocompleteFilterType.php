@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @experimental */
 final class ResourceAutocompleteFilterType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void

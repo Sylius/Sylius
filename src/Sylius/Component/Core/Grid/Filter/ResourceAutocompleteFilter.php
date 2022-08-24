@@ -15,7 +15,9 @@ namespace Sylius\Component\Core\Grid\Filter;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
+use Webmozart\Assert\Assert;
 
+/** @experimental */
 final class ResourceAutocompleteFilter implements FilterInterface
 {
     public function apply(DataSourceInterface $dataSource, string $name, $data, array $options): void
@@ -26,7 +28,9 @@ final class ResourceAutocompleteFilter implements FilterInterface
 
         $expressionBuilder = $dataSource->getExpressionBuilder();
         $fields = $options['fields'] ?? [$name];
-        $values = str_contains($data, ',') ? explode(',', $data) : [$data];
+
+        Assert::string($data);
+        $values = explode(',', $data);
 
         $expressions = [];
         foreach ($fields as $field) {
