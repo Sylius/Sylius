@@ -36,6 +36,30 @@ To manage the currently used currency, we use the **CurrencyContext**. You can a
         $currency = $this->get('sylius.context.currency')->getCurrency();
     }
 
+Getting the list of available currencies for a channel
+------------------------------------------------------
+
+If you want to get a list of currently available currencies for a given channel,
+you can get them from the ``Channel``.
+You can also get the current ``Channel`` from the container.
+
+.. code-block:: php
+
+    <?php
+
+    public function fooAction()
+    {
+        // If you don't have it, you can get the current channel from container
+        $channel = $this->container->get('sylius.context.channel')->getChannel();
+
+        $currencies = $channel->getCurrencies();
+    }
+
+.. note::
+
+    If you want to learn more about ``Channels``, what they represent, and how they work; read the previous chapter :doc:`Channels </book/configuration/channels>`
+
+
 Currency Converter
 ------------------
 
