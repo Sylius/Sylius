@@ -121,11 +121,7 @@ class Product implements ProductInterface, \Stringable
 
     public function getDescriptor(): string
     {
-        /** @psalm-suppress PossiblyFalseReference */
-        $variantName = $this->hasVariants() ? $this->variants->first()->getName() : '';
-        $name = $this->isConfigurable() ? $this->getName() : $variantName;
-
-        return trim(sprintf('%s (%s)', $name, $this->code));
+        return trim(sprintf('%s (%s)', $this->getName(), $this->code));
     }
 
     public function getSlug(): ?string
