@@ -43,7 +43,7 @@ interface ShopUserFactoryInterface
 
     public function withLastName(string $lastName): self;
 
-    public function withCustomerGroup(Proxy|CustomerGroupInterface|string $customerGroup): self;
+    public function withCustomerGroup(Proxy|CustomerGroupInterface $customerGroup): self;
 
     public function male(): self;
 

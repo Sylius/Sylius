@@ -118,14 +118,6 @@ final class ShopUserFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_customer_with_new_given_group(): void
-    {
-        $shopUser = ShopUserFactory::new()->withCustomerGroup('group_a')->create();
-
-        $this->assertEquals('group_a', $shopUser->getCustomer()->getGroup()->getCode());
-    }
-
-    /** @test */
     function it_creates_customer_with_existing_proxy_given_group(): void
     {
         $customerGroup = CustomerGroupFactory::new()->withCode('group_a')->create();

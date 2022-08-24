@@ -38,7 +38,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ShopUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ShopUserInterface|Proxy create(array|callable $attributes = [])
  */
-final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface
+class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface
 {
     public function __construct(
         private FactoryInterface $shopUserFactory,
@@ -92,13 +92,9 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
         return $this->addState(['password' => $password]);
     }
 
-    public function withCustomerGroup(Proxy|CustomerGroupInterface|string $customerGroup): self
+    public function withCustomerGroup(Proxy|CustomerGroupInterface $customerGroup): self
     {
         return $this->addState(function () use ($customerGroup): array {
-            if (is_string($customerGroup)) {
-                return ['customer_group' => $this->customerGroupFactory::randomOrCreate(['code' => $customerGroup])];
-            }
-
             return ['customer_group' => $customerGroup];
         });
     }
@@ -111,7 +107,7 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
             'last_name' => self::faker()->lastName(),
             'enabled' => true,
             'password' => 'password123',
-            'customer_group' => $this->customerGroupFactory::randomOrCreate(),
+            'customer_group' => $this->customerGroupFactory::new(),
             'gender' => CustomerInterface::UNKNOWN_GENDER,
             'phone_number' => self::faker()->phoneNumber(),
             'birthday' => self::faker()->dateTimeBetween('-80 years', '-18 years'),
