@@ -3,7 +3,7 @@
 {% set route = app.request.attributes.get('_route') %}
 {% set route_parameters = app.request.attributes.get('_route_params')|merge(app.request.query.all) %}
 
-{% set criteria = app.request.query.get('criteria', {}) %}
+{% set criteria = app.request.query.all('criteria') %}
 
 {% set default_path = path(route, route_parameters|merge({'sorting': null, 'criteria': criteria})) %}
 {% set from_a_to_z_path = path(route, route_parameters|merge({'sorting': {'name': 'asc'}, 'criteria': criteria})) %}
