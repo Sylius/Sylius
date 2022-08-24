@@ -14,7 +14,7 @@
 {% endmacro %}
 
 {% macro link(fieldName, attributes, order, parameters) %}
-    {% set params = attributes.get('_route_params')|merge(parameters) %}
+    {% set params = attributes.all('_route_params')|merge(parameters) %}
     {% set sorting = {'sorting': {(fieldName): (order)}} %}
 
     {{ path(attributes.get('_route'), params|merge(sorting)|merge({'page': 1})) }}

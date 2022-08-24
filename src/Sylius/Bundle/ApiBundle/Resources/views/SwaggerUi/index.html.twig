@@ -67,7 +67,7 @@
         <div class="info">
             Available formats:
             {% for format in formats|keys %}
-                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_format': format})) }}">{{ format }}</a>
+                <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.all('_route_params')|merge({'_format': format})) }}">{{ format }}</a>
             {% endfor %}
             <br>
             Other API docs:

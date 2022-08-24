@@ -1,7 +1,7 @@
 {% if resources.data.nbResults > 0 %}
 
 {% set route = app.request.attributes.get('_route') %}
-{% set route_parameters = app.request.attributes.get('_route_params')|merge(app.request.query.all) %}
+{% set route_parameters = app.request.attributes.all('_route_params')|merge(app.request.query.all) %}
 
 {% set criteria = app.request.query.all('criteria') %}
 
