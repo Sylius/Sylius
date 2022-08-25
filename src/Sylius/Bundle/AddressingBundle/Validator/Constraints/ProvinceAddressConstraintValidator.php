@@ -81,7 +81,7 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         }
 
         /** @var ProvinceInterface|null $province */
-        $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
+        $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode(), 'country' => $country]);
 
         if (null === $province) {
             return false;
