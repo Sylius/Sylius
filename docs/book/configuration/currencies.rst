@@ -84,12 +84,12 @@ Displaying Currencies in the templates
 --------------------------------------
 
 There are some useful helpers for rendering money values in the front end.
-Simply import the money macros of the ``AdminBundle`` in your twig template and use the functions to display the value:
+Simply import the money macros of the ``CoreBundle`` in your twig template and use the functions to display the value:
 
 .. code-block:: twig
 
     ..
-    {% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+    {% import "@SyliusCore/Common/Macro/money.html.twig" as money %}
     ..
 
     <span class="price">{{ money.format(price, 'EUR') }}</span>
