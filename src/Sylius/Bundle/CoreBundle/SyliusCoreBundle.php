@@ -20,6 +20,7 @@ use Doctrine\Inflector\Rules\Substitution;
 use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\FixtureFactory;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
@@ -67,6 +68,8 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $inflector = $factory->build();
 
         Metadata::setInflector($inflector);
+
+        FixtureFactory::boot($this->container);
     }
 
     public function build(ContainerBuilder $container): void
