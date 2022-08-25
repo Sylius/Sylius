@@ -36,13 +36,20 @@ use Zenstruck\Foundry\Proxy;
  * @method static LocaleInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method LocaleInterface|Proxy create(array|callable $attributes = [])
  */
-class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
+class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(
         private FactoryInterface $localeFactory,
         private string $baseLocaleCode,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withDefaultCode(): self
@@ -78,6 +85,6 @@ class LocaleFactory extends ModelFactory implements LocaleFactoryInterface
 
     protected static function getClass(): string
     {
-        return Locale::class;
+        return self::$modelClass;
     }
 }

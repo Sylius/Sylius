@@ -39,14 +39,21 @@ use Zenstruck\Foundry\Proxy;
  * @method static ProductAttributeInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ProductAttributeInterface|Proxy create(array|callable $attributes = [])
  */
-class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface
+class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
         private RepositoryInterface $localeRepository,
         private array $attributeTypes,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -118,7 +125,7 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
 
     protected static function getClass(): string
     {
-        return ProductAttribute::class;
+        return self::$modelClass;
     }
 
     private function getLocales(): iterable

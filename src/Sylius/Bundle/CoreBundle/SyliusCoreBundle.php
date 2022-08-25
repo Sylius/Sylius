@@ -22,6 +22,7 @@ use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
 use Doctrine\ORM\Query;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\FixtureFactory;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
@@ -77,6 +78,8 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $inflector = $factory->build();
 
         Metadata::setInflector($inflector);
+
+        FixtureFactory::boot($this->container);
     }
 
     public function build(ContainerBuilder $container): void

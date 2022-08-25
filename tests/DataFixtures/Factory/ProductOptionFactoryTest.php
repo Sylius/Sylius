@@ -17,13 +17,13 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactory;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
-use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ProductOptionFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */

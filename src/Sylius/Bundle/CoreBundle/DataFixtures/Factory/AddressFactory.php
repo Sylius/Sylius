@@ -37,14 +37,21 @@ use Zenstruck\Foundry\Proxy;
  * @method static AddressInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AddressInterface|Proxy create(array|callable $attributes = [])
  */
-class AddressFactory extends ModelFactory implements AddressFactoryInterface
+class AddressFactory extends ModelFactory implements AddressFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(
         private FactoryInterface $addressFactory,
         private CountryFactoryInterface $countryFactory,
         private ShopUserFactoryInterface $shopUserFactory
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withFirstName(string $firstName): self
@@ -150,6 +157,6 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface
 
     protected static function getClass(): string
     {
-        return Address::class;
+        return self::$modelClass;
     }
 }

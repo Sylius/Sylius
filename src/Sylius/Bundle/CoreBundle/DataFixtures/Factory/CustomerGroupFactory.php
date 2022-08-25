@@ -37,11 +37,18 @@ use Zenstruck\Foundry\Proxy;
  * @method static CustomerGroupInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CustomerGroupInterface|Proxy create(array|callable $attributes = [])
  */
-final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFactoryInterface
+final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(private FactoryInterface $customerGroupFactory)
     {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -84,6 +91,6 @@ final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFa
 
     protected static function getClass(): string
     {
-        return CustomerGroup::class;
+        return self::$modelClass;
     }
 }

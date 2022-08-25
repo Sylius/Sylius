@@ -36,11 +36,18 @@ use Zenstruck\Foundry\Proxy;
  * @method static CurrencyInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CurrencyInterface|Proxy create(array|callable $attributes = [])
  */
-class CurrencyFactory extends ModelFactory implements CurrencyFactoryInterface
+class CurrencyFactory extends ModelFactory implements CurrencyFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(private FactoryInterface $currencyFactory)
     {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -71,6 +78,6 @@ class CurrencyFactory extends ModelFactory implements CurrencyFactoryInterface
 
     protected static function getClass(): string
     {
-        return Currency::class;
+        return self::$modelClass;
     }
 }

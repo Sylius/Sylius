@@ -38,8 +38,10 @@ use Zenstruck\Foundry\Proxy;
  * @method static ShopUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ShopUserInterface|Proxy create(array|callable $attributes = [])
  */
-final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface
+final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,
@@ -146,6 +148,11 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
 
     protected static function getClass(): string
     {
-        return ShopUser::class;
+        return self::$modelClass;
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 }
