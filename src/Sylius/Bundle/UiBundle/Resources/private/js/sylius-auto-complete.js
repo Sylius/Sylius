@@ -41,10 +41,10 @@ $.fn.extend({
               value: item[choiceValue],
             }));
 
-            if (!element.hasClass('multiple')){
+            if (!element.hasClass('multiple')) {
               results.unshift({
                 name: '&nbsp;',
-                value: '&nbsp;',
+                value: '',
               });
             }
 

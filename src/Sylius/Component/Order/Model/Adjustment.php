@@ -57,6 +57,13 @@ class Adjustment implements AdjustmentInterface
         $this->createdAt = new \DateTime();
     }
 
+    public function __clone()
+    {
+        $this->id = null;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = null;
+    }
+
     public function getId()
     {
         return $this->id;
