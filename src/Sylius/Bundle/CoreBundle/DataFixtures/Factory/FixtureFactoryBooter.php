@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @internal
  */
-final class FixtureFactory
+final class FixtureFactoryBooter
 {
     public static function boot(ContainerInterface $container): void
     {
@@ -20,6 +20,12 @@ final class FixtureFactory
         LocaleFactory::withModelClass($container->getParameter('sylius.model.locale.class'));
         ProductAssociationTypeFactory::withModelClass($container->getParameter('sylius.model.product_association_type.class'));
         ProductAttributeFactory::withModelClass($container->getParameter('sylius.model.product_attribute.class'));
+        ProductOptionFactory::withModelClass($container->getParameter('sylius.model.product_option.class'));
+        ShippingCategoryFactory::withModelClass($container->getParameter('sylius.model.shipping_category.class'));
         ShopUserFactory::withModelClass($container->getParameter('sylius.model.shop_user.class'));
+        TaxCategoryFactory::withModelClass($container->getParameter('sylius.model.tax_category.class'));
+        TaxonFactory::withModelClass($container->getParameter('sylius.model.taxon.class'));
+        ZoneFactory::withModelClass($container->getParameter('sylius.model.zone.class'));
+        ZoneMemberFactory::withModelClass($container->getParameter('sylius.model.zone_member.class'));
     }
 }

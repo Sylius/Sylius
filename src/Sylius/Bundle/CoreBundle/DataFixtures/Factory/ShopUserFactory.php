@@ -50,6 +50,11 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
         parent::__construct();
     }
 
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
+    }
+
     public function withEmail(string $email): self
     {
         return $this->addState(['email' => $email]);
@@ -149,10 +154,5 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
     protected static function getClass(): string
     {
         return self::$modelClass;
-    }
-
-    public static function withModelClass(string $modelClass): void
-    {
-        self::$modelClass = $modelClass;
     }
 }
