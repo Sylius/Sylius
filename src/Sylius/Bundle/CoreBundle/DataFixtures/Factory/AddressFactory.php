@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Component\Core\Model\Address;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\DefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AddressFactoryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdaterInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -43,8 +46,9 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
 
     public function __construct(
         private FactoryInterface $addressFactory,
-        private CountryFactoryInterface $countryFactory,
-        private ShopUserFactoryInterface $shopUserFactory
+        private AddressFactoryDefaultValuesInterface $factoryDefaultValues,
+        private AddressFactoryTransformerInterface $factoryTransformer,
+        private AddressFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
     }
@@ -107,34 +111,21 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
     public function withCustomer(Proxy|CustomerInterface|string $customer): self
     {
         return $this->addState(function () use ($customer): array {
-            if (is_string($customer)) {
-                $customer = $this->shopUserFactory::findOrCreate(['email' => $customer])->getCustomer();
-            }
-
             return ['customer' => $customer];
         });
     }
 
     protected function getDefaults(): array
     {
-        return [
-            'first_name' => self::faker()->firstName(),
-            'last_name' => self::faker()->lastName(),
-            'phone_number' => self::faker()->boolean() ? self::faker()->phoneNumber() : null,
-            'company' => self::faker()->boolean() ? self::faker()->company() : null,
-            'street' => self::faker()->streetAddress(),
-            'city' => self::faker()->city(),
-            'postcode' => self::faker()->postcode(),
-            'country_code' => $this->countryFactory::randomOrCreate()->getCode(),
-            'province_name' => null,
-            'province_code' => null,
-            'customer' => $this->shopUserFactory::randomOrCreate()->getCustomer(),
-        ];
+        return $this->factoryDefaultValues->getDefaults(self::faker());
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function(array $attributes): array {
+                return $this->factoryTransformer->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): AddressInterface {
                 /** @var AddressInterface $address */
                 $address = $this->addressFactory->createNew();
@@ -151,6 +142,9 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
                 $address->setCustomer($attributes['customer']);
 
                 return $address;
+            })
+            ->afterInstantiate(function(AddressInterface $address): void {
+                $this->factoryUpdater->update($address);
             })
         ;
     }
