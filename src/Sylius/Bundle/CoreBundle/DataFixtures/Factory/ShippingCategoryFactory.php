@@ -37,11 +37,18 @@ use Zenstruck\Foundry\Proxy;
  * @method static ShippingCategoryInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ShippingCategoryInterface|Proxy create(array|callable $attributes = [])
  */
-class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFactoryInterface
+class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(private FactoryInterface $shippingCategoryFactory)
     {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -88,6 +95,6 @@ class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFa
 
     protected static function getClass(): string
     {
-        return ShippingCategory::class;
+        return self::$modelClass;
     }
 }

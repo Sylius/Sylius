@@ -40,8 +40,10 @@ use Zenstruck\Foundry\Proxy;
  * @method static TaxonInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method TaxonInterface|Proxy create(array|callable $attributes = [])
  */
-class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
+class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(
         private FactoryInterface $taxonFactory,
         private RepositoryInterface $taxonRepository,
@@ -49,6 +51,11 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
         private TaxonSlugGeneratorInterface $taxonSlugGenerator
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -153,7 +160,7 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface
 
     protected static function getClass(): string
     {
-        return Taxon::class;
+        return self::$modelClass;
     }
 
     private function getLocales(): iterable

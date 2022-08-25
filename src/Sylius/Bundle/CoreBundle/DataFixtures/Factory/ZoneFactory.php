@@ -37,11 +37,18 @@ use Zenstruck\Foundry\Proxy;
  * @method static ZoneInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ZoneInterface|Proxy create(array|callable $attributes = [])
  */
-class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
+class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static string $modelClass;
+
     public function __construct(private FactoryInterface $zoneFactory)
     {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -114,6 +121,6 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface
 
     protected static function getClass(): string
     {
-        return Zone::class;
+        return self::$modelClass;
     }
 }
