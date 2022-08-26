@@ -70,7 +70,7 @@ final class Version20201208105207 extends AbstractMigration
             }
         }
 
-        return json_encode($parsedDetails);
+        return str_replace('\\', '\\\\', json_encode($parsedDetails));
     }
 
     private function setDefaultAdjustmentData(): void
