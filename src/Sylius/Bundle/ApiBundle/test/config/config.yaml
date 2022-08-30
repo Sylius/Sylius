@@ -17,7 +17,7 @@ api_platform:
     mapping:
         paths:
             - '%kernel.api_bundle_path%/Resources/config/api_resources'
-            - '%kernel.project_dir%/config/api_resources'
+            - '%kernel.project_dir%/config/api_platform'
 
 sylius_api:
     enabled: '%env(bool:SYLIUS_API_ENABLED)%'
