@@ -42,4 +42,22 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
             ->getResult()
         ;
     }
+
+    public function findByPhrase(string $phrase, string $locale, ?int $limit = null): iterable
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere($expr->orX(
+                'translation.name LIKE :phrase',
+                'o.code LIKE :phrase',
+            ))
+            ->setParameter('phrase', '%' . $phrase . '%')
+            ->setParameter('locale', $locale)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

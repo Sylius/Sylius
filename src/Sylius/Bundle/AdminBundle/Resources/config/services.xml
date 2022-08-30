@@ -22,6 +22,7 @@
     </imports>
 
     <parameters>
+        <parameter key="sylius.ajax.product.autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
     </parameters>
 

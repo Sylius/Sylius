@@ -36,6 +36,8 @@ interface ProductInterface extends
 
     public function setName(?string $name): void;
 
+    public function getDescriptor(): string;
+
     public function getDescription(): ?string;
 
     public function setDescription(?string $description): void;

@@ -173,6 +173,32 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I filter by product :productName
+     * @When I filter by products :firstProduct and :secondProduct
+     */
+    public function iFilterByProduct(string ...$productsNames): void
+    {
+        foreach ($productsNames as $productName) {
+            $this->indexPage->specifyFilterProduct($productName);
+        }
+
+        $this->iFilter();
+    }
+
+    /**
+     * @When I filter by variant :variantName
+     * @When I filter by variants :firstVariant and :secondVariant
+     */
+    public function iFilterByVariant(string ...$variantsNames): void
+    {
+        foreach ($variantsNames as $variantName) {
+            $this->indexPage->specifyFilterVariant($variantName);
+        }
+
+        $this->iFilter();
+    }
+
+    /**
      * @When I resend the order confirmation email
      */
     public function iResendTheOrderConfirmationEmail(): void

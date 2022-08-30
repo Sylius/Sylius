@@ -119,6 +119,11 @@ class Product implements ProductInterface, \Stringable
         $this->getTranslation()->setName($name);
     }
 
+    public function getDescriptor(): string
+    {
+        return trim(sprintf('%s (%s)', $this->getName(), $this->code));
+    }
+
     public function getSlug(): ?string
     {
         return $this->getTranslation()->getSlug();

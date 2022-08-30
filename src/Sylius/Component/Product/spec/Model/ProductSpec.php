@@ -58,6 +58,14 @@ final class ProductSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Super product');
     }
 
+    function it_has_a_descriptor(): void
+    {
+        $this->setName('Name');
+        $this->setCode('code');
+
+        $this->getDescriptor()->shouldReturn('Name (code)');
+    }
+
     function it_has_no_slug_by_default(): void
     {
         $this->getSlug()->shouldReturn(null);

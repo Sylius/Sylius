@@ -407,6 +407,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^the customer bought a single ("[^"]+" variant of product "[^"]+")$/
+     * @Given /^the customer also bought a ("[^"]+" variant of product "[^"]+")$/
      */
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {

@@ -49,6 +49,15 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function createSearchListQueryBuilder(): QueryBuilder
+    {
+        return $this->createListQueryBuilder()
+            ->leftJoin('o.items', 'item')
+            ->leftJoin('item.variant', 'variant')
+            ->leftJoin('variant.product', 'product')
+        ;
+    }
+
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
         return $this->createListQueryBuilder()
