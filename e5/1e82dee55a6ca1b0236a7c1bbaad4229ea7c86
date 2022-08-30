@@ -1,0 +1,14 @@
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2022-08-26T12:13:27Z
+
+@Roshyo
+There is indeed a bit of a performance bump, but it's not even nearly the level I was expecting. Most likely it's not as tragic since translations aren't joined at all. The performance goes down noticeably when orders have a lot of different items, but the sheer amount of products/variants doesn't seem to make a difference.
+
+IMO a mechanism to enrich a query only when a specific filter is used seems like a nice addition to the grid bundle.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-08-30T06:53:48Z
+
+Thank you, Jan! :1st_place_medal:
