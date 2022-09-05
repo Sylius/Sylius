@@ -16,6 +16,8 @@ namespace Sylius\Bundle\UserBundle\Security;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\PasswordHasher\LegacyPasswordHasherInterface;
+use Webmozart\Assert\Assert;
 
 final class UserPasswordHasher implements UserPasswordHasherInterface
 {
@@ -27,6 +29,7 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
     {
         /** @psalm-suppress InvalidArgument */
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
+        Assert::isInstanceOf($passwordHasher, LegacyPasswordHasherInterface::class);
 
         return $passwordHasher->hash($user->getPlainPassword());
     }
