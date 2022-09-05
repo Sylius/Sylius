@@ -17,9 +17,11 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface ResetPasswordPageInterface extends SymfonyPageInterface
 {
+    public function checkValidationMessageFor(string $element, string $message): bool;
+
+    public function getValidationMessageForNewPassword(): string;
+
     public function specifyNewPassword(string $password): void;
 
     public function specifyPasswordConfirmation(string $password): void;
-
-    public function getValidationMessageForNewPassword(): string;
 }

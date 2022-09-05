@@ -171,13 +171,13 @@ final class ResettingPasswordContext implements Context
     }
 
     /**
-     * @Then I should be notified that the password should be :validationMessage
+     * @Then I should be notified that the password should be at least :length characters long
      */
-    public function iShouldBeNotifiedThatThePasswordShouldBe(string $validationMessage): void
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length): void
     {
-        Assert::contains(
-            $this->resetPasswordPage->getValidationMessageForNewPassword(),
-            $validationMessage,
-        );
+        Assert::true($this->resetPasswordPage->checkValidationMessageFor(
+            'new_password',
+            sprintf('Password must be at least %s characters long.', $length),
+        ));
     }
 }
