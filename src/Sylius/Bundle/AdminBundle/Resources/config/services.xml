@@ -29,9 +29,9 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\AdminBundle\Command\CreateAdminUserCommand">
-            <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="service_container" />
             <tag name="console.command" />
         </service>
 
