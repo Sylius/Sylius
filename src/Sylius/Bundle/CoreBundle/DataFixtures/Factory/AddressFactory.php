@@ -120,11 +120,21 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
         return $this->factoryDefaultValues->getDefaults(self::faker());
     }
 
+    protected function transform(array $attributes): array
+    {
+        return $this->factoryTransformer->transform($attributes);
+    }
+
+    protected function update(AddressInterface $address): void
+    {
+        $this->factoryUpdater->update($address);
+    }
+
     protected function initialize(): self
     {
         return $this
             ->beforeInstantiate(function(array $attributes): array {
-                return $this->factoryTransformer->transform($attributes);
+                return $this->transform($attributes);
             })
             ->instantiateWith(function(array $attributes): AddressInterface {
                 /** @var AddressInterface $address */
@@ -144,7 +154,7 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
                 return $address;
             })
             ->afterInstantiate(function(AddressInterface $address): void {
-                $this->factoryUpdater->update($address);
+                $this->update($address);
             })
         ;
     }
