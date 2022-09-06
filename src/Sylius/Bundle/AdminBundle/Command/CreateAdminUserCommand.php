@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Core\Model\AdminUser;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -13,6 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Container;
 
 #[AsCommand(
     name: 'sylius:admin-user:create',
@@ -23,9 +23,9 @@ class CreateAdminUserCommand extends Command
     private SymfonyStyle $io;
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
         private UserRepositoryInterface $adminUserRepository,
         private RepositoryInterface $localeRepository,
+        private Container $container,
     ) {
         parent::__construct();
     }
@@ -60,9 +60,10 @@ class CreateAdminUserCommand extends Command
         $lastName = $this->io->ask('Lastname', null);
         $password = $this->io->askHidden('Password');
 
-        $adminUser = new AdminUser();
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $this->container->get('sylius.factory.admin_user')->createNew();
+
         $adminUser->setEmail($email);
-        $adminUser->setEncoderName('argon2i');
         $adminUser->setPlainPassword($password);
         $adminUser->setUsername($userName);
         $adminUser->setFirstName($firstName);
@@ -79,8 +80,7 @@ class CreateAdminUserCommand extends Command
         $enabled = $this->io->confirm('Do you want to enabled this admin user ?', true);
         $adminUser->setEnabled($enabled);
 
-        $this->entityManager->persist($adminUser);
-        $this->entityManager->flush();
+        $this->container->get('sylius.repository.admin_user')->add($adminUser);
 
         $this->io->success(sprintf('Admin user %s was successfully created', $adminUser->getEmail()));
 
