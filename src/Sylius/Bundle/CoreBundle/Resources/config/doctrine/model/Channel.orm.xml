@@ -29,6 +29,7 @@
                 <option name="default">0</option>
             </options>
         </field>
+
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
@@ -41,7 +42,7 @@
         <many-to-one field="menuTaxon" target-entity="Sylius\Component\Core\Model\TaxonInterface">
             <join-column name="menu_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
-        <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
+        <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <order-by>
                 <order-by-field name="id" />
             </order-by>
@@ -55,7 +56,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-many field="locales" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
+        <many-to-many field="locales" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
             <join-table name="sylius_channel_locales">
                 <join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
@@ -65,7 +66,7 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
-        <many-to-many field="countries" target-entity="Sylius\Component\Addressing\Model\CountryInterface" fetch="EAGER">
+        <many-to-many field="countries" target-entity="Sylius\Component\Addressing\Model\CountryInterface">
             <join-table name="sylius_channel_countries">
                 <join-columns>
                     <join-column name="channel_id" nullable="false" on-delete="CASCADE" />
