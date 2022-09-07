@@ -78,7 +78,7 @@ class CreateAdminUserCommand extends Command
         $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
         $adminUser->setLocaleCode($localeCode);
 
-        $enabled = $this->io->confirm('Do you want to enabled this admin user ?', true);
+        $enabled = $this->io->confirm('Do you want to enabled this admin user?', true);
         $adminUser->setEnabled($enabled);
 
         $this->container->get('sylius.repository.admin_user')->add($adminUser);
@@ -92,6 +92,7 @@ class CreateAdminUserCommand extends Command
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->io->error('Email address is not valid. Please, enter a valid address');
+
             return false;
         }
 
