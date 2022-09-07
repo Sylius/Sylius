@@ -25,6 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class CustomerEmailUpdaterListener
@@ -35,6 +36,7 @@ final class CustomerEmailUpdaterListener
         private EventDispatcherInterface $eventDispatcher,
         private SessionInterface $session,
         private SectionProviderInterface $uriBasedSectionContext,
+        private TokenStorageInterface $tokenStorage,
     ) {
     }
 
@@ -64,6 +66,8 @@ final class CustomerEmailUpdaterListener
                 $user->setEmailVerificationToken($token);
 
                 $user->setEnabled(false);
+
+                $this->tokenStorage->setToken(null);
             }
         }
     }

@@ -63,7 +63,10 @@ security:
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            jwt: true    
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+            jwt: true
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
