@@ -18,28 +18,21 @@ use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendContactRequestHandlerTest extends KernelTestCase
 {
+    use MailerAssertionsTrait;
+
     /** @test */
     public function it_sends_contact_request(): void
     {
         $container = self::bootKernel()->getContainer();
 
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
-
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -64,10 +57,9 @@ final class SendContactRequestHandlerTest extends KernelTestCase
 
         $sendContactEmailHandler($sendContactRequest);
 
-        self::assertSame(1, $emailChecker->countMessagesTo('shop@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'),
-            'shop@example.com',
-        ));
+        $this->assertEmailCount(1);
+        $email = $this->getMailerMessage();
+        $this->assertEmailAddressContains($email, 'To', 'shop@example.com');
+        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'));
     }
 }
