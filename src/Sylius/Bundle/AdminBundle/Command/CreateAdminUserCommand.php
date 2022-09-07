@@ -52,6 +52,7 @@ class CreateAdminUserCommand extends Command
 
         if ($this->checkIfAdminUserExists($email)) {
             $this->io->error(sprintf('Admin user with email address %s already exists.', $email));
+
             return COMMAND::FAILURE;
         }
 
