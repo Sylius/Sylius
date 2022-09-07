@@ -30,9 +30,9 @@ final class TokenBasedUserContext implements UserContextInterface
             return null;
         }
 
-        /** @var UserInterface|string $user */
+        /** @var UserInterface|null|string $user */
         $user = $token->getUser();
-        if (is_string($user)) {
+        if (!$user instanceof UserInterface) {
             return null;
         }
 
