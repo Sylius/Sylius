@@ -19,8 +19,8 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -30,7 +30,7 @@ final class RenderResetPasswordPageAction
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private FormFactoryInterface $formFactory,
-        private FlashBagInterface $flashBag,
+        private RequestStack $requestStack,
         private RouterInterface $router,
         private Environment $twig,
         private string $tokenTtl,
@@ -62,7 +62,7 @@ final class RenderResetPasswordPageAction
 
     private function handleExpiredPasswordRequest(Request $request): RedirectResponse
     {
-        $this->flashBag->add('error', 'sylius.admin.password_reset.token_expired');
+        $this->requestStack->getSession()->getFlashBag()->add('error', 'sylius.admin.password_reset.token_expired');
 
         $attributes = $request->attributes->get('_sylius');
         $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
