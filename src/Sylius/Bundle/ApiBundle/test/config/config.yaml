@@ -79,9 +79,6 @@ sylius_resource:
             classes:
                 model: Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource
 
-sylius_mailer:
-    sender_adapter: sylius.email_sender.adapter.symfony_mailer
-
 services:
     test.channel.id_filter:
         parent: api_platform.doctrine.orm.search_filter

@@ -44,7 +44,7 @@ jobs:
         runs-on: ubuntu-latest
 
         name: "${{ matrix.package }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
-    
+
         timeout-minutes: 10
 
         strategy:
@@ -55,15 +55,20 @@ jobs:
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
                 swiftmailer: [false]
                 include:
-                    -   
+                    -
                         php: "8.0"
                         symfony: "^5.4"
                         package: "Bundle/CoreBundle"
                         swiftmailer: true
-                    -   
+                    -
                         php: "8.1"
                         symfony: "^5.4"
                         package: "Bundle/CoreBundle"
+                        swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/ApiBundle"
                         swiftmailer: true
 
         steps:
@@ -131,9 +136,9 @@ jobs:
             -
                 name: Setup Database (for ApiBundle)
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                run: test/bin/console doctrine:schema:update --force -e test
+                run: test/bin/console doctrine:schema:update --force
                 if: matrix.package == 'Bundle/ApiBundle'
-            
+
             -
                 name: Remove Specifications not supported on Symfony >= 6.0
                 working-directory: "src/Sylius/${{ matrix.package }}"
