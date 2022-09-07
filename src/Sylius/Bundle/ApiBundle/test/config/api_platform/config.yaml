@@ -21,3 +21,23 @@
     collectionOperations:
         admin_get:
             path: /admin/orders/get/all
+
+'%sylius.model.promotion.class%':
+    attributes:
+        route_prefix: /custom
+    collectionOperations:
+        admin_get:
+            method: GET
+            normalization_context:
+                groups: ['admin:promotion:read']
+        admin_post:
+            method: GET
+            denormalization_context:
+                groups: ['admin:promotion:create']
+    itemOperations:
+        admin_get:
+            method: GET
+            normalization_context:
+                groups: ['admin:promotion:read']
+        admin_delete:
+            method: DELETE
