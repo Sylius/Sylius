@@ -70,6 +70,11 @@ jobs:
                         symfony: "^5.4"
                         package: "Bundle/ApiBundle"
                         swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/AdminBundle"
+                        swiftmailer: true
 
         steps:
             -
