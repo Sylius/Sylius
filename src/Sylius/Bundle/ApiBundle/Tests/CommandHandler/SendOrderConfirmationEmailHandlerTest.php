@@ -20,30 +20,21 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 {
-    /**
-     * @test
-     */
+    use MailerAssertionsTrait;
+
+    /** @test */
     public function it_sends_order_confirmation_email(): void
     {
         $container = self::bootKernel()->getContainer();
 
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
-
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -73,15 +64,9 @@ final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 
         $sendOrderConfirmationEmailHandler(new SendOrderConfirmation('TOKEN'));
 
-        self::assertSame($emailChecker->countMessagesTo('johnny.bravo@email.com'), 1);
-        self::assertTrue($emailChecker->hasMessageTo(
-            sprintf(
-                '%s %s %s',
-                $translator->trans('sylius.email.order_confirmation.your_order_number', [], null, 'pl_PL'),
-                '#000001',
-                $translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, 'pl_PL'),
-            ),
-            'johnny.bravo@email.com',
-        ));
+        $this->assertEmailCount(1);
+        $email = $this->getMailerMessage();
+        $this->assertEmailAddressContains($email, 'To', 'johnny.bravo@email.com');
+        $this->assertEmailHtmlBodyContains($email, '#000001');
     }
 }
