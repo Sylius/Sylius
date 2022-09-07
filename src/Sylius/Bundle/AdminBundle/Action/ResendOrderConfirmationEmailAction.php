@@ -18,8 +18,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -31,7 +31,7 @@ final class ResendOrderConfirmationEmailAction
         private OrderRepositoryInterface $orderRepository,
         private OrderEmailManagerInterface $orderEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private Session $session,
+        private RequestStack $requestStack,
     ) {
     }
 
@@ -51,7 +51,7 @@ final class ResendOrderConfirmationEmailAction
 
         $this->orderEmailManager->sendConfirmationEmail($order);
 
-        $this->session->getFlashBag()->add(
+        $this->requestStack->getSession()->getFlashBag()->add(
             'success',
             'sylius.email.order_confirmation_resent',
         );

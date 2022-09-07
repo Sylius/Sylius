@@ -22,7 +22,7 @@
         <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderResetPasswordPageAction">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="form.factory" />
-            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
             <argument type="service" id="twig" />
             <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
@@ -31,7 +31,7 @@
         <service id="Sylius\Bundle\AdminBundle\Action\Account\ResetPasswordAction">
             <argument type="service" id="form.factory" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher" />
-            <argument type="service" id="session.flash_bag" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="router" />
             <argument type="service" id="twig" />
         </service>
@@ -46,14 +46,14 @@
             <argument type='service' id="sylius.repository.order" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction" public="true">
             <argument type='service' id="sylius.repository.shipment" />
             <argument type="service" id="Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface" />
             <argument type="service" id="security.csrf.token_manager" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Action\Account\RenderRequestPasswordResetPageAction">
@@ -64,7 +64,7 @@
         <service id="Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="sylius.command_bus"/>
-            <argument type="service" id="session.flash_bag"/>
+            <argument type="service" id="request_stack" />
             <argument type="service" id="router"/>
             <argument type="service" id="twig" />
         </service>
