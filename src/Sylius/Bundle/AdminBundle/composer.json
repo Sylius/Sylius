@@ -42,7 +42,8 @@
     "require-dev": {
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4 || ^6.0"
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/dotenv": "^5.4 || ^6.0"
     },
     "config": {
         "allow-plugins": {
