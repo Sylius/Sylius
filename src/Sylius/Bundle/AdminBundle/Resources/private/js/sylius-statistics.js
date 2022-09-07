@@ -63,6 +63,8 @@ class StatisticsComponent {
     const interval = e.target.getAttribute('data-stats-button') || e.target.getAttribute('interval');
 
     const DateObject = this.DateObjectFactory.createDateObject(interval, date);
+    DateObject.endDate.setSeconds(DateObject.endDate.getSeconds() - 1);
+    
     this.updateNavButtons(interval,
       DateObject.prevDate,
       DateObject.nextDate,
