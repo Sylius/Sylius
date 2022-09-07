@@ -31,11 +31,11 @@ final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
     /** @test */
     public function it_sends_order_confirmation_email(): void
     {
+        if ($this->isItSwiftmailerTestEnv()) {
+            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
+        }
+
         $container = self::bootKernel()->getContainer();
-
-        /** @var TranslatorInterface $translator */
-        $translator = $container->get('translator');
-
         $emailSender = $container->get('sylius.email_sender');
 
         /** @var OrderInterface|ObjectProphecy $order */
@@ -68,5 +68,12 @@ final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
         $email = $this->getMailerMessage();
         $this->assertEmailAddressContains($email, 'To', 'johnny.bravo@email.com');
         $this->assertEmailHtmlBodyContains($email, '#000001');
+    }
+
+    private function isItSwiftmailerTestEnv(): bool
+    {
+        $env = $this->getContainer()->getParameter('kernel.environment');
+
+        return $env === 'test_with_swiftmailer';
     }
 }

@@ -29,6 +29,10 @@ final class SendContactRequestHandlerTest extends KernelTestCase
     /** @test */
     public function it_sends_contact_request(): void
     {
+        if ($this->isItSwiftmailerTestEnv()) {
+            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
+        }
+
         $container = self::bootKernel()->getContainer();
 
         /** @var TranslatorInterface $translator */
@@ -61,5 +65,12 @@ final class SendContactRequestHandlerTest extends KernelTestCase
         $email = $this->getMailerMessage();
         $this->assertEmailAddressContains($email, 'To', 'shop@example.com');
         $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'));
+    }
+
+    private function isItSwiftmailerTestEnv(): bool
+    {
+        $env = $this->getContainer()->getParameter('kernel.environment');
+
+        return $env === 'test_with_swiftmailer';
     }
 }
