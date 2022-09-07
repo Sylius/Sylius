@@ -13,26 +13,32 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Storage;
 
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class FilterStorage implements FilterStorageInterface
 {
-    public function __construct(private SessionInterface $session)
+    public function __construct(private RequestStack $requestStack)
     {
     }
 
     public function set(array $filters): void
     {
-        $this->session->set('filters', $filters);
+        $this->getSession()->set('filters', $filters);
     }
 
     public function all(): array
     {
-        return $this->session->get('filters', []);
+        return $this->getSession()->get('filters', []);
     }
 
     public function hasFilters(): bool
     {
-        return [] !== $this->session->get('filters', []);
+        return [] !== $this->getSession()->get('filters', []);
+    }
+
+    private function getSession(): SessionInterface
+    {
+        return $this->requestStack->getSession();
     }
 }

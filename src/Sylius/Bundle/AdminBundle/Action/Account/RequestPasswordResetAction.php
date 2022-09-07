@@ -19,8 +19,8 @@ use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -30,7 +30,7 @@ final class RequestPasswordResetAction
     public function __construct(
         private FormFactoryInterface $formFactory,
         private MessageBusInterface $messageBus,
-        private FlashBagInterface $flashBag,
+        private RequestStack $requestStack,
         private RouterInterface $router,
         private Environment $twig,
     ) {
@@ -50,7 +50,10 @@ final class RequestPasswordResetAction
 
             $this->messageBus->dispatch($requestPasswordResetMessage);
 
-            $this->flashBag->set('success', 'sylius.admin.request_reset_password.success');
+            $this->requestStack->getSession()->getFlashBag()->add(
+                'success',
+                'sylius.admin.request_reset_password.success',
+            );
 
             $options = $request->attributes->get('_sylius');
             $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
