@@ -185,7 +185,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
-        $form->handleRequest($request)->willReturn();
+        $form->handleRequest($request)->willReturn($form);
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(false);
 
