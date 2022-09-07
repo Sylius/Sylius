@@ -159,7 +159,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
-        $token->getUser()->willReturn('anon.');
+        $token->getUser()->willReturn(null);
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 

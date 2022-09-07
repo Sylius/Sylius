@@ -47,7 +47,7 @@ final class TokenBasedUserContextSpec extends ObjectBehavior
         TokenInterface $token,
     ): void {
         $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn('anon.');
+        $token->getUser()->willReturn(null);
 
         $this->getUser()->shouldReturn(null);
     }

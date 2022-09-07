@@ -28,6 +28,10 @@ final class TokenBasedUserContext implements UserContextInterface
         /** @var UserInterface|null $user */
         $user = $this->tokenStorage->getToken()?->getUser();
 
-        return $user instanceof UserInterface ? $user : null;
+        if (!$user instanceof UserInterface) {
+            return null;
+        }
+
+        return $user;
     }
 }
