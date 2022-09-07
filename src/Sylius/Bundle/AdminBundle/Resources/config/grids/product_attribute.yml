@@ -30,7 +30,7 @@ sylius_grid:
                     label: sylius.ui.translatable
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusUi/Grid/Field/yesNo.html.twig"
             filters:
                 code:
                     type: string
