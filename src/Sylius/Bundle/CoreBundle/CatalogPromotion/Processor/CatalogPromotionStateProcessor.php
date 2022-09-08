@@ -30,6 +30,12 @@ final class CatalogPromotionStateProcessor implements CatalogPromotionStateProce
     {
         $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
 
+        if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_PROCESS)) {
+            $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
+
+            return;
+        }
+
         if (!$this->catalogPromotionEligibilityChecker->isCatalogPromotionEligible($catalogPromotion)) {
             if ($stateMachine->can(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)) {
                 $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_DEACTIVATE);
