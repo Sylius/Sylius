@@ -32,7 +32,7 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
 
         $docs['components']['schemas']['ProductVariant.jsonld-shop.product_variant.read']['properties']['price'] = [
-            'type' => 'int',
+            'type' => 'integer',
             'readOnly' => true,
             'default' => 0,
         ];
@@ -43,7 +43,7 @@ final class ProductVariantDocumentationNormalizer implements NormalizerInterface
         ];
 
         $docs['components']['schemas']['ProductVariant.jsonld-shop.product_variant.read']['properties']['originalPrice'] = [
-            'type' => 'int',
+            'type' => 'integer',
             'readOnly' => true,
             'default' => 0,
         ];
