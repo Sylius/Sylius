@@ -32,6 +32,12 @@ and should be used only this way.
 are now included in every env starting with `test` keyword. If you wish to not have them, either you need to rename your env to not start 
 with test or remove these services with complier pass.
 
+6. The following listeners have been removed as they are not used anymore:
+- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener`
+- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionUpdateFailedMessageListener`
+
+7. The `Sylius\Component\Promotion\Event\CatalogPromotionFailed` has been removed as it is not used anymore.
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
