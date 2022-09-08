@@ -59,14 +59,6 @@
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
-            <argument type="service" id="sylius.repository.catalog_promotion" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sm.factory" />
-            <tag name="messenger.message_handler" bus="sylius.event_bus" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\ProductCreatedListener">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface" />
