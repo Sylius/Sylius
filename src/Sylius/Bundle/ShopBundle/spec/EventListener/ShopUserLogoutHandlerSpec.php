@@ -17,8 +17,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
@@ -40,7 +40,7 @@ final class ShopUserLogoutHandlerSpec extends ObjectBehavior
         ChannelInterface $channel,
         HttpUtils $httpUtils,
         Request $request,
-        Response $response,
+        RedirectResponse $response,
         CartStorageInterface $cartStorage,
         LogoutEvent $logoutEvent,
         SessionInterface $session,

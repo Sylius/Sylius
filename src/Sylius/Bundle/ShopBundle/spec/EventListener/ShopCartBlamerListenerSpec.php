@@ -142,7 +142,7 @@ final class ShopCartBlamerListenerSpec extends ObjectBehavior
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
         $cartContext->getCart()->willReturn($cart);
-        $token->getUser()->willReturn('anon.');
+        $token->getUser()->willReturn(null);
 
         $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
 
