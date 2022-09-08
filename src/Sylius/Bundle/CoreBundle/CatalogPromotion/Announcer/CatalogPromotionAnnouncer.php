@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer;
 
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
@@ -25,6 +26,7 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
 {
     public function __construct(
         private MessageBusInterface $eventBus,
+        private MessageBusInterface $commandBus,
         private DelayStampCalculatorInterface $delayStampCalculator,
         private DateTimeProviderInterface $dateTimeProvider,
     ) {
@@ -32,6 +34,11 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
 
     public function dispatchCatalogPromotionCreatedEvent(CatalogPromotionInterface $catalogPromotion): void
     {
+        $this->commandBus->dispatch(
+            new UpdateCatalogPromotionState($catalogPromotion->getCode()),
+            $this->calculateStartDateStamp($catalogPromotion)
+        );
+
         $this->eventBus->dispatch(
             new CatalogPromotionCreated($catalogPromotion->getCode()),
             $this->calculateStartDateStamp($catalogPromotion),
@@ -43,8 +50,14 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
     public function dispatchCatalogPromotionUpdatedEvent(CatalogPromotionInterface $catalogPromotion): void
     {
         if ($catalogPromotion->getStartDate() > $this->dateTimeProvider->now()) {
-            $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()), []);
+            $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
+            $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
         }
+
+        $this->commandBus->dispatch(
+            new UpdateCatalogPromotionState($catalogPromotion->getCode()),
+            $this->calculateStartDateStamp($catalogPromotion)
+        );
 
         $this->eventBus->dispatch(
             new CatalogPromotionUpdated($catalogPromotion->getCode()),
@@ -66,10 +79,13 @@ final class CatalogPromotionAnnouncer implements CatalogPromotionAnnouncerInterf
     private function dispatchCatalogPromotionEndedEvent(CatalogPromotionInterface $catalogPromotion): void
     {
         if ($catalogPromotion->getEndDate() !== null) {
-            $this->eventBus->dispatch(
-                new CatalogPromotionEnded($catalogPromotion->getCode()),
-                [$this->delayStampCalculator->calculate($this->dateTimeProvider->now(), $catalogPromotion->getEndDate())],
+            $delayStamp = $this->delayStampCalculator->calculate(
+                $this->dateTimeProvider->now(),
+                $catalogPromotion->getEndDate(),
             );
+
+            $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()), [$delayStamp]);
+            $this->eventBus->dispatch(new CatalogPromotionEnded($catalogPromotion->getCode()), [$delayStamp]);
         }
     }
 }
