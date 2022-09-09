@@ -18,7 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -31,9 +31,14 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderAddressModifierInterface $orderAddressModifier,
         OrderPromotionCodeAssignerInterface $orderPromotionCodeAssigner,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
     ) {
-        $this->beConstructedWith($orderRepository, $orderAddressModifier, $orderPromotionCodeAssigner, $customerProvider);
+        $this->beConstructedWith(
+            $orderRepository,
+            $orderAddressModifier,
+            $orderPromotionCodeAssigner,
+            $customerResolver
+        );
     }
 
     function it_is_a_message_handler(): void
@@ -158,7 +163,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
         CustomerInterface $customer,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
     ): void {
         $updateCart = new UpdateCart(
             'john.doe@email.com',
@@ -171,7 +176,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 
-        $customerProvider->provide('john.doe@email.com')->shouldBeCalled()->willReturn($customer);
+        $customerResolver->resolve('john.doe@email.com')->shouldBeCalled()->willReturn($customer);
         $order->setCustomer($customer)->shouldBeCalled();
 
         $orderAddressModifier->modify(
@@ -199,7 +204,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
         OrderInterface $order,
         AddressInterface $billingAddress,
         AddressInterface $shippingAddress,
-        CustomerProviderInterface $customerProvider,
+        CustomerResolverInterface $customerResolver,
         CustomerInterface $customer,
     ): void {
         $updateCart = new UpdateCart(
@@ -213,7 +218,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
 
         $orderRepository->findOneBy(['tokenValue' => 'cart'])->willReturn($order->getWrappedObject());
 
-        $customerProvider->provide('john.doe@email.com')->shouldBeCalled()->willReturn($customer);
+        $customerResolver->resolve('john.doe@email.com')->shouldBeCalled()->willReturn($customer);
         $order->setCustomer($customer)->shouldBeCalled();
 
         $orderAddressModifier->modify(

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -30,7 +30,7 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         private FactoryInterface $productReviewFactory,
         private RepositoryInterface $productReviewRepository,
         private ProductRepositoryInterface $productRepository,
-        private CustomerProviderInterface $customerProvider,
+        private CustomerResolverInterface $customerResolver,
     ) {
     }
 
@@ -47,7 +47,7 @@ final class AddProductReviewHandler implements MessageHandlerInterface
         }
 
         /** @var CustomerInterface $customer */
-        $customer = $this->customerProvider->provide($email);
+        $customer = $this->customerResolver->resolve($email);
 
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();

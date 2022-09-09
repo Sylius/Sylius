@@ -17,7 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -33,7 +33,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private ObjectManager $shopUserManager,
-        private CustomerProviderInterface $customerProvider,
+        private CustomerResolverInterface $customerResolver,
         private ChannelRepositoryInterface $channelRepository,
         private GeneratorInterface $tokenGenerator,
         private MessageBusInterface $commandBus,
@@ -46,7 +46,7 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $user = $this->shopUserFactory->createNew();
         $user->setPlainPassword($command->password);
 
-        $customer = $this->customerProvider->provide($command->email);
+        $customer = $this->customerResolver->resolve($command->email);
 
         if ($customer->getUser() !== null) {
             throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));

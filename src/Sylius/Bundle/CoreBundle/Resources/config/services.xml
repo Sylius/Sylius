@@ -287,5 +287,11 @@
         <service id="Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcher">
             <argument type="service" id="sylius.command_bus" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
     </services>
 </container>

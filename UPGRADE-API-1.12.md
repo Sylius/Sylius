@@ -2,6 +2,8 @@
 
 1. The `Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider` has been removed and replaced by `Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider`.
 
+1. The `Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface` has been removed and replaced by `Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface`.
+
 1. The `Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer` logic and constructor has been changed due to refactor above.
 
     ```diff

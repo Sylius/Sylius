@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\Resolver;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 
-/** @experimental */
-interface CustomerProviderInterface
+interface CustomerResolverInterface
 {
-    public function provide(string $email): CustomerInterface;
+    public function resolve(string $email): CustomerInterface;
+
 }

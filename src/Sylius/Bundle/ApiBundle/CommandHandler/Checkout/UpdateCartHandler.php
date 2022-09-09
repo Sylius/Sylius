@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -29,7 +29,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
         private OrderRepositoryInterface $orderRepository,
         private OrderAddressModifierInterface $orderAddressModifier,
         private OrderPromotionCodeAssignerInterface $orderPromotionCodeAssigner,
-        private CustomerProviderInterface $customerProvider,
+        private CustomerResolverInterface $customerResolver,
     ) {
     }
 
@@ -42,7 +42,7 @@ final class UpdateCartHandler implements MessageHandlerInterface
         Assert::notNull($order, sprintf('Order with %s token has not been found.', $tokenValue));
 
         if ($updateCart->getEmail()) {
-            $order->setCustomer($this->customerProvider->provide($updateCart->getEmail()));
+            $order->setCustomer($this->customerResolver->resolve($updateCart->getEmail()));
         }
 
         $billingAddress = $updateCart->getBillingAddress();
