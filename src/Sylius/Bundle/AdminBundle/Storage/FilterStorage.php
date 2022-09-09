@@ -18,8 +18,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class FilterStorage implements FilterStorageInterface
 {
-    public function __construct(private RequestStack $requestStack)
+    public function __construct(private SessionInterface|RequestStack $requestStackOrSession)
     {
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            trigger_deprecation('sylius/admin-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function set(array $filters): void
@@ -39,6 +42,10 @@ final class FilterStorage implements FilterStorageInterface
 
     private function getSession(): SessionInterface
     {
-        return $this->requestStack->getSession();
+        if ($this->requestStackOrSession instanceof RequestStack) {
+            return $this->requestStackOrSession->getSession();
+        }
+
+        return $this->requestStackOrSession;
     }
 }
