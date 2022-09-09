@@ -68,7 +68,7 @@
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" public="false">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
