@@ -51,7 +51,6 @@ final class CatalogPromotionContext implements Context
         private ChannelRepositoryInterface $channelRepository,
         private StateMachineFactoryInterface $stateMachineFactory,
         private MessageBusInterface $eventBus,
-        private MessageBusInterface $commandBus,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -74,7 +73,6 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEnabled(true);
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -86,7 +84,6 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEnabled(false);
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -221,7 +218,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -250,7 +246,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -279,7 +274,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -308,7 +302,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -337,7 +330,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -365,7 +357,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -541,7 +532,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
@@ -556,7 +546,6 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -707,7 +696,6 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEndDate(new \DateTime($endDate));
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -719,7 +707,7 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setStartDate(new \DateTime($startDate));
 
         $this->entityManager->flush();
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
+
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -731,7 +719,6 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setEndDate(new \DateTime($endDate));
         $this->entityManager->flush();
 
-        $this->commandBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 

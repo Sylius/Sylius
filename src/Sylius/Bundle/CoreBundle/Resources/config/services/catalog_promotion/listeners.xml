@@ -37,6 +37,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
@@ -44,6 +45,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 
@@ -51,6 +53,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.event_bus" />
         </service>
 

@@ -16,62 +16,37 @@ namespace Sylius\Tests\Functional;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Component\Core\Model\CatalogPromotion;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Messenger\Transport\InMemoryTransport;
 
-class CatalogPromotionAnnouncerTest extends WebTestCase
+final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
 {
-    /** @var Client */
-    private static $client;
-
-    protected function setUp(): void
+    /** @test */
+    public function it_puts_catalog_promotion_into_processing_state(): void
     {
-        self::$client = static::createClient();
-        self::$container = self::$client->getContainer();
+        $this->createClient(['test_case' => 'CatalogPromotionProcessingState']);
+
+        $catalogPromotion = $this->getCatalogPromotion();
+
+        /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
+        $catalogPromotionAnnouncer = self::$container->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
+
+        $this->assertSame('processing', $catalogPromotion->getState());
     }
 
     /** @test */
-    public function it_announces_catalog_promotion_has_been_created_and_updates_its_state_during_that_process(): void
+    public function it_activates_catalog_promotion_when_processing_has_been_finished(): void
     {
+        $this->createClient();
+
+        $catalogPromotion = $this->getCatalogPromotion();
+
         /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
         $catalogPromotionAnnouncer = self::$container->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
 
-        $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($this->getCatalogPromotion());
-
-        /* @var InMemoryTransport $transport */
-        $transport = $this->getContainer()->get('messenger.transport.main');
-
-        $this->assertCount(4, $transport->getSent());
-
-        $this->assertInstanceOf(UpdateCatalogPromotionState::class, $transport->getSent()[0]->getMessage());
-        $this->assertInstanceOf(CatalogPromotionCreated::class, $transport->getSent()[1]->getMessage());
-        $this->assertInstanceOf(UpdateCatalogPromotionState::class, $transport->getSent()[2]->getMessage());
-        $this->assertInstanceOf(CatalogPromotionEnded::class, $transport->getSent()[3]->getMessage());
-    }
-
-    /** @test */
-    public function it_announces_catalog_promotion_has_been_updated_and_updates_its_state_during_that_process(): void
-    {
-        /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
-        $catalogPromotionAnnouncer = self::$container->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
-
-        $catalogPromotionAnnouncer->dispatchCatalogPromotionUpdatedEvent($this->getCatalogPromotion());
-
-        /* @var InMemoryTransport $transport */
-        $transport = $this->getContainer()->get('messenger.transport.main');
-
-        $this->assertCount(4, $transport->getSent());
-
-        $this->assertInstanceOf(UpdateCatalogPromotionState::class, $transport->getSent()[0]->getMessage());
-        $this->assertInstanceOf(CatalogPromotionUpdated::class, $transport->getSent()[1]->getMessage());
-        $this->assertInstanceOf(UpdateCatalogPromotionState::class, $transport->getSent()[2]->getMessage());
-        $this->assertInstanceOf(CatalogPromotionEnded::class, $transport->getSent()[3]->getMessage());
+        $this->assertSame('active', $catalogPromotion->getState());
     }
 
     private function getCatalogPromotion(): CatalogPromotionInterface
@@ -79,6 +54,7 @@ class CatalogPromotionAnnouncerTest extends WebTestCase
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
         $fixtures = $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
+
         /** @var CatalogPromotion $catalogPromotion */
         $catalogPromotion = $fixtures['sale_1'];
 
