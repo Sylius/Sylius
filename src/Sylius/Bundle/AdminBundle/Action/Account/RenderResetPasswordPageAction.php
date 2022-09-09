@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -30,11 +31,14 @@ final class RenderResetPasswordPageAction
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private FormFactoryInterface $formFactory,
-        private RequestStack $requestStack,
+        private FlashBagInterface|RequestStack $requestStackOrFlashBag,
         private RouterInterface $router,
         private Environment $twig,
         private string $tokenTtl,
     ) {
+        if ($this->requestStackOrFlashBag instanceof FlashBagInterface) {
+            trigger_deprecation('sylius/admin-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', FlashBagInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function __invoke(Request $request, string $token): Response
@@ -62,7 +66,7 @@ final class RenderResetPasswordPageAction
 
     private function handleExpiredPasswordRequest(Request $request): RedirectResponse
     {
-        $this->requestStack->getSession()->getFlashBag()->add('error', 'sylius.admin.password_reset.token_expired');
+        $this->getFlashBag()->add('error', 'sylius.admin.password_reset.token_expired');
 
         $attributes = $request->attributes->get('_sylius');
         $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
@@ -75,5 +79,14 @@ final class RenderResetPasswordPageAction
         }
 
         return new RedirectResponse($this->router->generate($redirect));
+    }
+
+    private function getFlashBag(): FlashBagInterface
+    {
+        if ($this->requestStackOrFlashBag instanceof RequestStack) {
+            return $this->requestStackOrFlashBag->getSession()->getBag('flashes');
+        }
+
+        return $this->requestStackOrFlashBag;
     }
 }
