@@ -102,23 +102,24 @@
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Core\User\AdvancedUserInterface" /> <!-- deprecated in Symfony 4.1 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
-                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
             </errorLevel>
         </DeprecatedInterface>
         <DeprecatedMethod>
             <errorLevel type="info">
+                <referencedMethod name="Faker\Generator::__get"/>
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
+                <referencedMethod name="Sylius\Component\Mailer\Sender\SenderInterface::send"/>
                 <referencedMethod name="Symfony\Component\EventDispatcher\Event::stopPropagation" /> <!-- deprecated in Symfony 4.3 -->
                 <referencedMethod name="Symfony\Component\HttpFoundation\JsonResponse::create" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getMasterRequest" /> <!-- deprecated in Symfony 5.3 -->
-                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\AbstractToken::isAuthenticated" /> <!-- deprecated in Symfony 5.4 -->
+                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserProviderInterface::loadUserByUsername" /> <!-- deprecated in Symfony 5.3 -->
-                <referencedMethod name="Faker\Generator::__get"/>
-                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\AbstractToken::isAuthenticated" /> <!-- deprecated in Symfony 5.4 -->
             </errorLevel>
         </DeprecatedMethod>
 
