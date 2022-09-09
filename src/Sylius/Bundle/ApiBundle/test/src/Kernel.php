@@ -18,6 +18,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 final class Kernel extends BaseKernel
@@ -52,17 +53,20 @@ final class Kernel extends BaseKernel
         }
     }
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
+    protected function build(ContainerBuilder $container): void
     {
         $container->addResource(new FileResource($this->getProjectDir() . '/config/bundles.php'));
         $container->setParameter('container.dumper.inline_class_loader', true);
-
-        $loader->load($this->getProjectDir() . '/config/config.yaml');
-        $loader->load($this->getProjectDir() . '/config/services.php');
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes): void
+    public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $routes->import($this->getProjectDir() . '/config/routing.yaml', '/');
+        $loader->load($this->getProjectDir() . '/config/config.yaml');
+
+        $confDir = $this->getProjectDir() . '/config';
+        $loader->load($confDir . '/{packages}/*' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{packages}/' . $this->environment . '/**/*' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{services}' . self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir . '/{services}_' . $this->environment . self::CONFIG_EXTS, 'glob');
     }
 }

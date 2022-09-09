@@ -20,28 +20,21 @@ use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 {
-    private EmailCheckerInterface $emailChecker;
-
-    protected function setUp(): void
-    {
-        self::bootKernel();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $this->getContainer()->get('filesystem');
-
-        $this->emailChecker = $this->getContainer()->get('sylius.behat.email_checker');
-
-        $filesystem->remove($this->emailChecker->getSpoolDirectory());
-    }
+    use MailerAssertionsTrait;
 
     /** @test */
     public function it_sends_password_reset_token_email(): void
     {
+        if ($this->isItSwiftmailerTestEnv()) {
+            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
+        }
+
         /** @var TranslatorInterface $translator */
         $translator = $this->getContainer()->get('translator');
 
@@ -65,10 +58,16 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US',
         ));
 
-        self::assertSame(1, $this->emailChecker->countMessagesTo('sylius@example.com'));
-        self::assertTrue($this->emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'),
-            'sylius@example.com',
-        ));
+        $this->assertEmailCount(1);
+        $email = $this->getMailerMessage();
+        $this->assertEmailAddressContains($email, 'To', 'sylius@example.com');
+        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'));
+    }
+
+    private function isItSwiftmailerTestEnv(): bool
+    {
+        $env = $this->getContainer()->getParameter('kernel.environment');
+
+        return $env === 'test_with_swiftmailer';
     }
 }
