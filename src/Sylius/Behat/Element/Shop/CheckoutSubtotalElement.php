@@ -19,13 +19,13 @@ final class CheckoutSubtotalElement extends Element implements CheckoutSubtotalE
 {
     public function getProductQuantity(string $productName): int
     {
-        return intval($this->getElement('item_quantity', ['%name%' => $productName])->getText());
+        return (int) ($this->getElement('item_quantity', ['%name%' => $productName])->getText());
     }
 
     protected function getDefinedElements(): array
     {
         return [
-            'item_quantity' => '[data-test-item-subtotal-quantity="%name%"]'
+            'item_quantity' => '[data-test-item-subtotal-quantity="%name%"]',
         ];
     }
 }
