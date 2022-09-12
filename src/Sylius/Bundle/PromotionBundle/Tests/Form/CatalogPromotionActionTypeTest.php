@@ -51,7 +51,6 @@ final class CatalogPromotionActionTypeTest extends FormIntegrationTestCase
         ];
     }
 
-
     protected function getExtensions(): array
     {
         return [
