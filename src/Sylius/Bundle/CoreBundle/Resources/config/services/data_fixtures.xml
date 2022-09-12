@@ -15,6 +15,14 @@
     <services>
         <defaults public="true" />
 
+        <instanceof id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\FactoryWithModelClassAwareInterface">
+            <configurator service="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Configurator" method="configure"/>
+        </instanceof>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Configurator">
+            <argument type="service" id="sylius.resource_registry"/>
+        </service>
+
         <service id="sylius.data_fixtures.shop_configuration" class="Sylius\Bundle\CoreBundle\DataFixtures\ShopConfigurationFixtures">
             <tag name="doctrine.fixture.orm" />
         </service>
