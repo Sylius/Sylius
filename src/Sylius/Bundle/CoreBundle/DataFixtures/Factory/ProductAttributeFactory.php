@@ -41,7 +41,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
@@ -125,7 +125,7 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? ProductAttribute::class;
     }
 
     private function getLocales(): iterable

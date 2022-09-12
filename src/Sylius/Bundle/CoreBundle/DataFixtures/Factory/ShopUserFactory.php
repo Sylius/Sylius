@@ -40,7 +40,7 @@ use Zenstruck\Foundry\Proxy;
  */
 final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(
         private FactoryInterface $shopUserFactory,
@@ -153,6 +153,6 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? ShopUser::class;
     }
 }

@@ -38,7 +38,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(
         private FactoryInterface $localeFactory,
@@ -85,6 +85,6 @@ class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, Fact
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? Locale::class;
     }
 }

@@ -79,8 +79,6 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $inflector = $factory->build();
 
         Metadata::setInflector($inflector);
-
-        FixtureFactoryBooter::boot($this->container);
     }
 
     public function build(ContainerBuilder $container): void

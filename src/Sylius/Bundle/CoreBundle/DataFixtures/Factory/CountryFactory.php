@@ -38,7 +38,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class CountryFactory extends ModelFactory implements CountryFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $countryFactory)
     {
