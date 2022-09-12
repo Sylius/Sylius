@@ -135,6 +135,7 @@
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::getQueryString" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
+                <referencedMethod name="Zenstruck\Foundry\ModelFactory::getEntityClass" />
             </errorLevel>
         </InternalMethod>
 
