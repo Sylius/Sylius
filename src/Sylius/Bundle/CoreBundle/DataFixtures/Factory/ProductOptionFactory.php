@@ -42,7 +42,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class ProductOptionFactory extends ModelFactory implements ProductOptionFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(
         private FactoryInterface $productOptionFactory,
@@ -133,7 +133,7 @@ class ProductOptionFactory extends ModelFactory implements ProductOptionFactoryI
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? ProductOption::class;
     }
 
     private function getLocales(): iterable

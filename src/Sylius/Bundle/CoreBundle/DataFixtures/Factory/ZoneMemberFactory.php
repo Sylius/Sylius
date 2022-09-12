@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 final class ZoneMemberFactory extends ModelFactory implements ZoneMemberFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $zoneMemberFactory, private ZoneFactoryInterface $zoneFactory)
     {
@@ -92,6 +92,6 @@ final class ZoneMemberFactory extends ModelFactory implements ZoneMemberFactoryI
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? ZoneMember::class;
     }
 }
