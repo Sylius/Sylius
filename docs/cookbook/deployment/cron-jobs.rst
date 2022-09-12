@@ -20,7 +20,7 @@ The recommended configuration
 .. code-block:: bash
 
     0 */6 * * * sh php bin/console sylius:remove-expired-carts
-    0 */6 * * * sh php bin/console sylius:sylius:cancel-unpaid-orders
+    0 */6 * * * sh php bin/console sylius:cancel-unpaid-orders
 
 How to configure a CRON job ?
 -----------------------------
