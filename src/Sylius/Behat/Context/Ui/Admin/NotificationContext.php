@@ -71,7 +71,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::failure(),
-            'Cannot delete, the '. $name. ' is in use.'
+            'Cannot delete, the ' . $name . ' is in use.',
         );
     }
 }
