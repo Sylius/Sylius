@@ -90,6 +90,6 @@ class CountryFactory extends ModelFactory implements CountryFactoryInterface, Fa
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? Country::class;
     }
 }
