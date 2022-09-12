@@ -54,10 +54,5 @@
         <service id="Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand">
             <tag name="console.command" />
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Command\TestCommand">
-            <argument type="service" id="sylius.data_fixtures.factory.country"/>
-            <tag name="console.command" />
-        </service>
     </services>
 </container>

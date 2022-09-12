@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class TaxCategoryFactory extends ModelFactory implements TaxCategoryFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $taxCategoryFactory)
     {
@@ -95,6 +95,6 @@ class TaxCategoryFactory extends ModelFactory implements TaxCategoryFactoryInter
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? TaxCategory::class;
     }
 }

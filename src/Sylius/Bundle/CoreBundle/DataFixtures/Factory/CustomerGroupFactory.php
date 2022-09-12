@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $customerGroupFactory)
     {
@@ -91,6 +91,6 @@ final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFa
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? CustomerGroup::class;
     }
 }

@@ -42,7 +42,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(
         private FactoryInterface $taxonFactory,
@@ -160,7 +160,7 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? Taxon::class;
     }
 
     private function getLocales(): iterable

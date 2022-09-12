@@ -39,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  */
 class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    private static string $modelClass;
+    private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $shippingCategoryFactory)
     {
@@ -95,6 +95,6 @@ class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFa
 
     protected static function getClass(): string
     {
-        return self::$modelClass;
+        return self::$modelClass ?? ShippingCategory::class;
     }
 }
