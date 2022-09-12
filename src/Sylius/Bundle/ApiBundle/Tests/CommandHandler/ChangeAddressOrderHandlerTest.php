@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -49,7 +49,7 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
 
         $orderPromotionCodeAssigner = $container->get(OrderPromotionCodeAssignerInterface::class);
 
-        $customerProvider = $container->get(CustomerProviderInterface::class);
+        $customerResolver = $container->get(CustomerResolverInterface::class);
 
         $purger = new ORMPurger($manager);
         $purger->purge();
@@ -74,7 +74,7 @@ final class ChangeAddressOrderHandlerTest extends KernelTestCase
             $orderRepository,
             $orderAddressModifier,
             $orderPromotionCodeAssigner,
-            $customerProvider,
+            $customerResolver,
         );
 
         $newBillingAddress = $address = new Address();

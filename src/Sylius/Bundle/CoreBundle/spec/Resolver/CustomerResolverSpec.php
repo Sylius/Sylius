@@ -11,16 +11,16 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Provider;
+namespace spec\Sylius\Bundle\CoreBundle\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface;
+use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-final class CustomerProviderSpec extends ObjectBehavior
+final class CustomerResolverSpec extends ObjectBehavior
 {
     function let(
         CanonicalizerInterface $canonicalizer,
@@ -32,7 +32,7 @@ final class CustomerProviderSpec extends ObjectBehavior
 
     function it_is_a_customer_provider(): void
     {
-        $this->shouldImplement(CustomerProviderInterface::class);
+        $this->shouldImplement(CustomerResolverInterface::class);
     }
 
     function it_creates_a_customer_if_there_is_no_existing_one_with_given_email(
@@ -47,10 +47,10 @@ final class CustomerProviderSpec extends ObjectBehavior
         $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('WILL.SMITH@example.com')->shouldBeCalled();
 
-        $this->provide('WILL.SMITH@example.com')->shouldReturn($customer);
+        $this->resolve('WILL.SMITH@example.com')->shouldReturn($customer);
     }
 
-    function it_doesn_not_create_a_customer_if_customer_with_given_email_already_exists(
+    function it_does_not_create_a_customer_if_customer_with_given_email_already_exists(
         CanonicalizerInterface $canonicalizer,
         FactoryInterface $customerFactory,
         CustomerRepositoryInterface $customerRepository,
@@ -61,6 +61,6 @@ final class CustomerProviderSpec extends ObjectBehavior
 
         $customerFactory->createNew()->shouldNotBeCalled();
 
-        $this->provide('WILL.SMITH@example.com')->shouldReturn($customer);
+        $this->resolve('WILL.SMITH@example.com')->shouldReturn($customer);
     }
 }

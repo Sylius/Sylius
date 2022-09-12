@@ -11,15 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\Resolver;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
-/** @experimental */
-final class CustomerProvider implements CustomerProviderInterface
+final class CustomerResolver implements CustomerResolverInterface
 {
     public function __construct(
         private CanonicalizerInterface $canonicalizer,
@@ -28,7 +27,7 @@ final class CustomerProvider implements CustomerProviderInterface
     ) {
     }
 
-    public function provide(string $email): CustomerInterface
+    public function resolve(string $email): CustomerInterface
     {
         $emailCanonical = $this->canonicalizer->canonicalize($email);
 
