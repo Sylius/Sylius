@@ -17,13 +17,14 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class ChannelFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */

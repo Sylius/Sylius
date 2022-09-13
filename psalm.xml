@@ -161,17 +161,12 @@
             <errorLevel type="info">
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/AddressFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/CatalogPromotionActionFactory.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ChannelFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/AddressFactoryDefaultValues.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/ChannelFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/AddressFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
-            </errorLevel>
-        </UndefinedMethod>
-
-        <UndefinedMethod>
-            <errorLevel type="info">
-                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ChannelFactory.php" />
-                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
             </errorLevel>
         </UndefinedMethod>
 
