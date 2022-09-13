@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface as ChannelResourceFactory;
@@ -46,10 +47,8 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
     public function __construct(
         private ChannelResourceFactory $channelFactory,
         private ZoneFactoryInterface $zoneFactory,
-        private LocaleFactoryInterface $localeFactory,
-        private CurrencyFactoryInterface $currencyFactory,
-        private TaxonFactoryInterface $taxonFactory,
-        private ShopBillingDataFactoryInterface $shopBillingDataFactory
+        private ShopBillingDataFactoryInterface $shopBillingDataFactory,
+        private ChannelFactoryDefaultValuesInterface $factoryDefaultValues,
     ) {
         parent::__construct();
     }
@@ -131,27 +130,7 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
 
     protected function getDefaults(): array
     {
-        return [
-            'name' => self::faker()->words(3, true),
-            'code' => null,
-            'hostname' => null,
-            'color' => self::faker()->colorName(),
-            'enabled' => self::faker()->boolean(90),
-            'skipping_shipping_step_allowed' => false,
-            'skipping_payment_step_allowed' => false,
-            'account_verification_required' => true,
-            'default_tax_zone' => $this->zoneFactory::randomOrCreate(['scope' => self::faker()->boolean() ? Scope::TAX : AddressingScope::ALL]),
-            'tax_calculation_strategy' => 'order_items_based',
-            'default_locale' => $this->localeFactory::randomOrCreate(),
-            'locales' => $this->localeFactory::all(),
-            'base_currency' => $this->currencyFactory::randomOrCreate(),
-            'currencies' => $this->currencyFactory::all(),
-            'theme_name' => null,
-            'contact_email' => null,
-            'contact_phone_number' => null,
-            'shop_billing_data' => null,
-            'menu_taxon' => $this->taxonFactory::randomOrCreate(),
-        ];
+        return $this->factoryDefaultValues->getDefaults(self::faker());
     }
 
     protected function initialize(): self
