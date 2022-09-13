@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImageInterface;
-use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -40,16 +39,22 @@ use Zenstruck\Foundry\Proxy;
  * @method static AdminUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AdminUserInterface|Proxy create(array|callable $attributes = [])
  */
-class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
+class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static ?string $modelClass = null;
+
     public function __construct(
         private FactoryInterface $adminUserFactory,
-        private FactoryInterface $avatarImageFactory,
-        private FileLocatorInterface $fileLocator,
-        private ImageUploaderInterface $imageUploader,
-        private string $localeCode,
+        private AdminUserFactoryDefaultValuesInterface $factoryDefaultValues,
+        private AdminUserFactoryTransformerInterface $factoryTransformer,
+        private AdminUserFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withEmail(string $email): self
@@ -99,64 +104,39 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
 
     protected function getDefaults(): array
     {
-        return [
-            'email' => self::faker()->email(),
-            'username' => self::faker()->firstName() . ' ' . self::faker()->lastName(),
-            'enabled' => true,
-            'password' => 'password123',
-            'api' => false,
-            'locale_code' => $this->localeCode,
-            'first_name' => null,
-            'last_name' => null,
-            'avatar' => '',
-        ];
+        return $this->factoryDefaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->factoryTransformer->transform($attributes);
+    }
+
+    protected function update(AdminUserInterface $adminUser, $attributes): void
+    {
+        $this->factoryUpdater->update($adminUser, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
-            ->instantiateWith(function(array $attributes): AdminUserInterface {
+            ->beforeInstantiate(function(array $attributes): array {
+                return $this->transform($attributes);
+            })
+            ->instantiateWith(function(): AdminUserInterface {
                 /** @var AdminUserInterface $adminUser */
                 $adminUser = $this->adminUserFactory->createNew();
 
-                $adminUser->setEmail($attributes['email']);
-                $adminUser->setUsername($attributes['username']);
-                $adminUser->setEnabled($attributes['enabled']);
-                $adminUser->setPlainPassword($attributes['password']);
-                $adminUser->setLocaleCode($attributes['locale_code']);
-                $adminUser->setFirstName($attributes['first_name']);
-                $adminUser->setLastName($attributes['last_name']);
-
-                if ($attributes['api']) {
-                    $adminUser->addRole('ROLE_API_ACCESS');
-                }
-
-                if ('' !== $attributes['avatar']) {
-                    $this->createAvatar($adminUser, $attributes);
-                }
-
                 return $adminUser;
+            })
+            ->afterInstantiate(function(AdminUserInterface $adminUser, array $attributes): void {
+                $this->update($adminUser, $attributes);
             })
         ;
     }
 
     protected static function getClass(): string
     {
-        return AdminUser::class;
-    }
-
-    private function createAvatar(AdminUserInterface $adminUser, array $options): void
-    {
-        $imagePath = $this->fileLocator->locate($options['avatar']);
-        $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
-
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $this->avatarImageFactory->createNew();
-
-        $avatarImage->setFile($uploadedImage);
-
-        $this->imageUploader->upload($avatarImage);
-
-        $adminUser->setAvatar($avatarImage);
+        return self::$modelClass ?? AdminUser::class;
     }
 }
