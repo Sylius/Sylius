@@ -82,10 +82,21 @@
 
         <service id="sylius.data_fixtures.factory.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.catalog_promotion_action" />
             <tag name="foundry.factory" />
         </service>
-
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_action" />
+
+        <service id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
+
+        <service id="sylius.data_fixtures.factory_transformer.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion_action" />
+
+        <service id="sylius.data_fixtures.factory_updater.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion_action" />
 
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
