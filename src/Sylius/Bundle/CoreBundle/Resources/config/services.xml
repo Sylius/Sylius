@@ -50,6 +50,11 @@
 
         <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
+        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
+            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sylius.canonicalizer" />
+        </service>
+
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\IntegerDistributorInterface" alias="sylius.integer_distributor" />
 
@@ -296,9 +301,8 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
-            <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
         </service>
     </services>
 </container>

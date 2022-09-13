@@ -13,33 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Resolver;
 
+use Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 final class CustomerResolver implements CustomerResolverInterface
 {
     public function __construct(
-        private CanonicalizerInterface $canonicalizer,
         private FactoryInterface $customerFactory,
-        private CustomerRepositoryInterface $customerRepository,
+        private CustomerProviderInterface $customerProvider,
     ) {
     }
 
     public function resolve(string $email): CustomerInterface
     {
-        $emailCanonical = $this->canonicalizer->canonicalize($email);
-
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
-
-        if ($customer === null) {
+        try {
+            return $this->customerProvider->provide($email);
+        } catch (\RuntimeException) {
             /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);
-        }
 
-        return $customer;
+            return $customer;
+        }
     }
 }
