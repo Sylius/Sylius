@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionUpdatedListener
 {
@@ -24,6 +26,7 @@ final class CatalogPromotionUpdatedListener
         private AllProductVariantsCatalogPromotionsProcessorInterface $allProductVariantsCatalogPromotionsProcessor,
         private RepositoryInterface $catalogPromotionRepository,
         private EntityManagerInterface $entityManager,
+        private MessageBusInterface $messageBus,
     ) {
     }
 
@@ -35,6 +38,7 @@ final class CatalogPromotionUpdatedListener
             return;
         }
 
+        $this->messageBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         $this->allProductVariantsCatalogPromotionsProcessor->process();
 
         $this->entityManager->flush();

@@ -38,7 +38,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
 
-        $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
+        $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/scheduled_catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
     }
 
     /** @test */

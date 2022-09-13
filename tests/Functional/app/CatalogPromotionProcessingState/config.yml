@@ -1,0 +1,3 @@
+services:
+    Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionCreatedListener:
+        class: stdClass

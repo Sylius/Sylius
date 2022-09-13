@@ -5,12 +5,16 @@ winzou_state_machine:
         graph: sylius_catalog_promotion
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            inactive: ~
             active: ~
+            inactive: ~
+            processing: ~
         transitions:
             activate:
-                from: [inactive]
+                from: [processing]
                 to: active
             deactivate:
-                from: [active]
+                from: [processing]
                 to: inactive
+            process:
+                from: [inactive, active]
+                to: processing
