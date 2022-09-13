@@ -63,7 +63,7 @@ final class TaxonFilter extends AbstractContextAwareFilter
             ->setParameter('taxonRoot', $taxonRoot)
         ;
 
-        if (empty($context['filters']['order'])) {
+        if (null !== $taxonRoot && empty($context['filters']['order'])) {
             $queryBuilder->addOrderBy('productTaxon.position');
         }
     }

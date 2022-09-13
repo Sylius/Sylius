@@ -95,7 +95,6 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
         $iriConverter->getItemFromIri('api/taxon')->willThrow(ItemNotFoundException::class);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -115,7 +114,6 @@ final class TaxonFilterSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',
-            context: $context,
         );
     }
 
@@ -125,7 +123,6 @@ final class TaxonFilterSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $context['filters']['order'] = ['differentOrderParameter' => 'asc'];
         $iriConverter->getItemFromIri('non-existing-taxon')->willThrow(InvalidArgumentException::class);
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -146,7 +143,6 @@ final class TaxonFilterSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             'resourceClass',
-            context: $context,
         );
     }
 }
