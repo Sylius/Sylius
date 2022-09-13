@@ -16,13 +16,14 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactory;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
+use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 final class CatalogPromotionScopeFactoryTest extends KernelTestCase
 {
-    use ResetDatabase;
+    use PurgeDatabaseTrait;
     use Factories;
 
     /** @test */
