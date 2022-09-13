@@ -15,6 +15,13 @@ Sylius has two vital, predefined commands designed to be run as cron jobs on you
 * ``sylius:remove-expired-carts`` - to remove carts that have expired after desired time
 * ``sylius:cancel-unpaid-orders`` - to cancel orders that are still unpaid after desired time
 
+The recommended configuration
+
+.. code-block:: bash
+
+    0 */6 * * * sh php bin/console sylius:remove-expired-carts
+    0 */6 * * * sh php bin/console sylius:cancel-unpaid-orders
+
 How to configure a CRON job ?
 -----------------------------
 
