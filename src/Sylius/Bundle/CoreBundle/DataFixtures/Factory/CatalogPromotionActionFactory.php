@@ -30,7 +30,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static CatalogPromotionActionInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CatalogPromotionActionInterface|Proxy create(array|callable $attributes = [])
  */
-class CatalogPromotionActionFactory extends ModelFactory implements FactoryWithModelClassAwareInterface
+class CatalogPromotionActionFactory extends ModelFactory implements CatalogPromotionActionFactoryInterface, FactoryWithModelClassAwareInterface
 {
     private static ?string $modelClass = null;
 

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionScopeFactoryDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionScopeFactoryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionScopeFactoryUpdaterInterface;
 use Sylius\Component\Core\Model\CatalogPromotionScope;
 use Sylius\Component\Core\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -37,11 +39,22 @@ use Zenstruck\Foundry\Proxy;
  * @method static CatalogPromotionScopeInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CatalogPromotionScopeInterface|Proxy create(array|callable $attributes = [])
  */
-class CatalogPromotionScopeFactory extends ModelFactory implements CatalogPromotionScopeFactoryInterface
+class CatalogPromotionScopeFactory extends ModelFactory implements CatalogPromotionScopeFactoryInterface, FactoryWithModelClassAwareInterface
 {
-    public function __construct(private FactoryInterface $catalogPromotionScopeFactory)
-    {
+    private static ?string $modelClass = null;
+
+    public function __construct(
+        private FactoryInterface $catalogPromotionScopeFactory,
+        private CatalogPromotionScopeFactoryDefaultValuesInterface $factoryDefaultValues,
+        private CatalogPromotionScopeFactoryTransformerInterface $factoryTransformer,
+        private CatalogPromotionScopeFactoryUpdaterInterface $factoryUpdater,
+    ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withType(string $type): self
@@ -56,21 +69,30 @@ class CatalogPromotionScopeFactory extends ModelFactory implements CatalogPromot
 
     protected function getDefaults(): array
     {
-        return [
-            'type' => InForProductScopeVariantChecker::TYPE,
-            'configuration' => [],
-        ];
+        return $this->factoryDefaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->factoryTransformer->transform($attributes);
+    }
+
+    protected function update(CatalogPromotionScopeInterface $catalogPromotionScope, array $attributes): void
+    {
+        $this->factoryUpdater->update($catalogPromotionScope, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function(array $attributes): array {
+                return $this->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): CatalogPromotionScopeInterface {
                 /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
                 $catalogPromotionScope = $this->catalogPromotionScopeFactory->createNew();
 
-                $catalogPromotionScope->setType($attributes['type']);
-                $catalogPromotionScope->setConfiguration($attributes['configuration']);
+                $this->update($catalogPromotionScope, $attributes);
 
                 return $catalogPromotionScope;
             })
@@ -79,6 +101,6 @@ class CatalogPromotionScopeFactory extends ModelFactory implements CatalogPromot
 
     protected static function getClass(): string
     {
-        return CatalogPromotionScope::class;
+        return self::$modelClass ?? CatalogPromotionScope::class;
     }
 }
