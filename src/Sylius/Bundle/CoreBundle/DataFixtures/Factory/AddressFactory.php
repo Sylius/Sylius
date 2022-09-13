@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDe
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\DefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AddressFactoryTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdaterInterface;
+use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -125,9 +126,9 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
         return $this->factoryTransformer->transform($attributes);
     }
 
-    protected function update(AddressInterface $address): void
+    protected function update(AddressInterface $address, array $attributes): void
     {
-        $this->factoryUpdater->update($address);
+        $this->factoryUpdater->update($address, $attributes);
     }
 
     protected function initialize(): self
@@ -136,25 +137,14 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
             ->beforeInstantiate(function(array $attributes): array {
                 return $this->transform($attributes);
             })
-            ->instantiateWith(function(array $attributes): AddressInterface {
+            ->instantiateWith(function(): AddressInterface {
                 /** @var AddressInterface $address */
                 $address = $this->addressFactory->createNew();
-                $address->setFirstName($attributes['first_name']);
-                $address->setLastName($attributes['last_name']);
-                $address->setPhoneNumber($attributes['phone_number']);
-                $address->setCompany($attributes['company']);
-                $address->setStreet($attributes['street']);
-                $address->setCity($attributes['city']);
-                $address->setPostcode($attributes['postcode']);
-                $address->setCountryCode($attributes['country_code']);
-                $address->setProvinceName($attributes['province_name']);
-                $address->setProvinceCode($attributes['province_code']);
-                $address->setCustomer($attributes['customer']);
 
                 return $address;
             })
-            ->afterInstantiate(function(AddressInterface $address): void {
-                $this->update($address);
+            ->afterInstantiate(function(AddressInterface $address, array $attributes): void {
+                $this->update($address, $attributes);
             })
         ;
     }
