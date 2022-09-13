@@ -37,17 +37,6 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactoryInterface" alias="sylius.data_fixtures.factory.address" />
 
-        <service id="sylius.data_fixtures.factory.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactory">
-            <argument type="service" id="sylius.factory.admin_user" />
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="file_locator" />
-            <argument type="service" id="sylius.image_uploader" />
-            <argument>%locale%</argument>
-            <tag name="foundry.factory" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactoryInterface" alias="sylius.data_fixtures.factory.admin_user" />
-
         <service id="sylius.data_fixtures.factory_default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.country" />
             <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
@@ -62,6 +51,34 @@
 
         <service id="sylius.data_fixtures.factory_updater.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.address" />
+
+        <service id="sylius.data_fixtures.factory.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactory">
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.admin_user" />
+            <tag name="foundry.factory" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactoryInterface" alias="sylius.data_fixtures.factory.admin_user" />
+
+        <service id="sylius.data_fixtures.factory_default_values.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValues">
+            <argument>%locale%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.admin_user" />
+
+        <service id="sylius.data_fixtures.factory_transformer.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.admin_user" />
+
+        <service id="sylius.data_fixtures.factory_updater.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdater">
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="sylius.image_uploader" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.admin_user" />
 
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
