@@ -677,6 +677,15 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I request the removal of :catalogPromotion catalog promotion
+     */
+    public function iRequestTheRemovalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['name' => $catalogPromotion->getName()]);
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
