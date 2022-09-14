@@ -202,6 +202,7 @@
             <argument type="service" id="sylius.factory.promotion_rule" />
             <argument type="service" id="sylius.data_fixtures.factory_default_values.promotion_rule" />
             <argument type="service" id="sylius.data_fixtures.factory_transformer.promotion_rule" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.promotion_rule" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactoryInterface" alias="sylius.data_fixtures.factory.promotion_rule" />
@@ -211,6 +212,9 @@
 
         <service id="sylius.data_fixtures.factory_transformer.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformer" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion_rule" />
+
+        <service id="sylius.data_fixtures.factory_updater.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.promotion_rule" />
 
         <service id="sylius.data_fixtures.factory.shipping_category" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactory">
             <argument type="service" id="sylius.factory.shipping_category" />
