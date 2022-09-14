@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformerInterface;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdaterInterface;
 use Sylius\Component\Promotion\Model\PromotionRule;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -39,14 +39,22 @@ use Zenstruck\Foundry\Proxy;
  * @method static PromotionRuleInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method PromotionRuleInterface|Proxy create(array|callable $attributes = [])
  */
-class PromotionRuleFactory extends ModelFactory implements PromotionRuleFactoryInterface
+class PromotionRuleFactory extends ModelFactory implements PromotionRuleFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static ?string $modelClass = null;
+
     public function __construct(
         private FactoryInterface $promotionRuleFactory,
         private PromotionRuleFactoryDefaultValuesInterface $factoryDefaultValues,
         private PromotionRuleFactoryTransformerInterface $factoryTransformer,
+        private PromotionRuleFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withType(string $type): self
@@ -69,26 +77,31 @@ class PromotionRuleFactory extends ModelFactory implements PromotionRuleFactoryI
         return $this->factoryTransformer->transform($attributes);
     }
 
+    protected function update(PromotionRuleInterface $promotionRule, array $attributes): void
+    {
+        $this->factoryUpdater->update($promotionRule, $attributes);
+    }
+
     protected function initialize(): self
     {
         return $this
             ->beforeInstantiate(function (array $attributes): array {
                 return $this->transform($attributes);
             })
-            ->instantiateWith(function(array $attributes): PromotionRuleInterface {
+            ->instantiateWith(function(): PromotionRuleInterface {
                 /** @var PromotionRuleInterface $promotionRule */
                 $promotionRule = $this->promotionRuleFactory->createNew();
 
-                $promotionRule->setType($attributes['type']);
-                $promotionRule->setConfiguration($attributes['configuration']);
-
                 return $promotionRule;
+            })
+            ->afterInstantiate(function (PromotionRuleInterface $promotionRule, array $attributes): void {
+                $this->update($promotionRule, $attributes);
             })
         ;
     }
 
     protected static function getClass(): string
     {
-        return PromotionRule::class;
+        return self::$modelClass ?? PromotionRule::class;
     }
 }
