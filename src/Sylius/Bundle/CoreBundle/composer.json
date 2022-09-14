@@ -45,7 +45,7 @@
         "sylius/core": "^1.6 || dev-symfony-6",
         "sylius/currency-bundle": "^1.6",
         "sylius/customer-bundle": "^1.6",
-        "sylius/fixtures-bundle": "^1.6.1 || dev-master",
+        "sylius/fixtures-bundle": "^1.7.0 || ^1.8@beta",
         "sylius/grid-bundle": "^1.11 || ^1.12@alpha",
         "sylius/inventory-bundle": "^1.6",
         "sylius/locale-bundle": "^1.6",
