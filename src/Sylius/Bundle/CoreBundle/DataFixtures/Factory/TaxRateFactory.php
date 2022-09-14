@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdaterInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxRate;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -39,14 +41,22 @@ use Zenstruck\Foundry\Proxy;
  * @method static TaxRateInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method TaxRateInterface|Proxy create(array|callable $attributes = [])
  */
-class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface
+class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    private static ?string $modelClass = null;
+
     public function __construct(
         private FactoryInterface $countryFactory,
-        private ZoneFactoryInterface $zoneFactory,
-        private TaxCategoryFactoryInterface $taxCategoryFactory
+        private TaxRateFactoryDefaultValuesInterface $factoryDefaultValues,
+        private TaxRateFactoryTransformerInterface $factoryTransformer,
+        private TaxRateFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withCode(string $code): self
@@ -91,52 +101,39 @@ class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => null,
-            'name' => self::faker()->words(3, true),
-            'amount' => self::faker()->randomFloat(2, 0, 0.4),
-            'included_in_price' => self::faker()->boolean(),
-            'calculator' => 'default',
-            'zone' => $this->zoneFactory->randomOrCreate(),
-            'category' => $this->taxCategoryFactory->randomOrCreate(),
-        ];
+        return $this->factoryDefaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->factoryTransformer->transform($attributes);
+    }
+
+    protected function update(TaxRateInterface $taxRate, array $attributes): void
+    {
+        $this->factoryUpdater->update($taxRate, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
             ->beforeInstantiate(function(array $attributes): array {
-                $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
-
-                if (is_string($attributes['zone'])) {
-                    $attributes['zone'] = $this->zoneFactory->randomOrCreate(['code' => $attributes['zone']]);
-                }
-
-                if (is_string($attributes['category'])) {
-                    $attributes['category'] = $this->taxCategoryFactory->randomOrCreate(['code' => $attributes['category']]);
-                }
-
-                return $attributes;
+                return $this->transform($attributes);
             })
-            ->instantiateWith(function(array $attributes): TaxRateInterface {
+            ->instantiateWith(function(): TaxRateInterface {
                 /** @var TaxRateInterface $taxRate */
                 $taxRate = $this->countryFactory->createNew();
 
-                $taxRate->setCode($attributes['code']);
-                $taxRate->setName($attributes['name']);
-                $taxRate->setAmount($attributes['amount']);
-                $taxRate->setIncludedInPrice($attributes['included_in_price']);
-                $taxRate->setCalculator($attributes['calculator']);
-                $taxRate->setZone($attributes['zone']);
-                $taxRate->setCategory($attributes['category']);
-
                 return $taxRate;
+            })
+            ->afterInstantiate(function (TaxRateInterface $taxRate, array $attributes): void {
+                $this->update($taxRate, $attributes);
             })
         ;
     }
 
     protected static function getClass(): string
     {
-        return TaxRate::class;
+        return self::$modelClass ?? TaxRate::class;
     }
 }
