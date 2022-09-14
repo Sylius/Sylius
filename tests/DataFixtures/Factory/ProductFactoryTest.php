@@ -15,6 +15,7 @@ namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactory;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -34,6 +35,13 @@ final class ProductFactoryTest extends KernelTestCase
         $this->assertNotNull($product->getCode());
         $this->assertNotNull($product->getName());
         $this->assertIsBool($product->isEnabled());
+        $this->assertSame(ProductInterface::VARIANT_SELECTION_MATCH, $product->getVariantSelectionMethod());
+
+        /** @var ProductVariantInterface|false $variant */
+        $variant = $product->getVariants()->first();
+        $this->assertNotFalse($variant);
+
+        $this->assertFalse($variant->isTracked());
     }
 
     /** @test */
@@ -67,5 +75,25 @@ final class ProductFactoryTest extends KernelTestCase
         $product = ProductFactory::new()->disabled()->create();
 
         $this->assertFalse($product->isEnabled());
+    }
+
+    /** @test */
+    function it_creates_tracked_product(): void
+    {
+        $product = ProductFactory::new()->tracked()->create();
+
+        /** @var ProductVariantInterface|false $variant */
+        $variant = $product->getVariants()->first();
+        $this->assertNotFalse($variant);
+
+        $this->assertTrue($variant->isTracked());
+    }
+
+    /** @test */
+    function it_creates_product_with_given_variant_selection_method(): void
+    {
+        $product = ProductFactory::new()->withVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE)->create();
+
+        $this->assertEquals(ProductInterface::VARIANT_SELECTION_CHOICE, $product->getVariantSelectionMethod());
     }
 }

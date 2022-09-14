@@ -69,6 +69,16 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         return $this->addState(['enabled' => false]);
     }
 
+    public function tracked(): self
+    {
+        return $this->addState(['tracked' => true]);
+    }
+
+    public function withVariantSelectionMethod(string $variantSelectionMethod): self
+    {
+        return $this->addState(['variant_selection_method' => $variantSelectionMethod]);
+    }
+
     protected function getDefaults(): array
     {
         return $this->factoryDefaultValues->getDefaults(self::faker());

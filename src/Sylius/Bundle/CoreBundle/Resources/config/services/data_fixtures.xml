@@ -190,6 +190,10 @@
 
         <service id="sylius.data_fixtures.factory_updater.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdater">
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.factory.product_variant" />
+            <argument type="service" id="sylius.factory.channel_pricing" />
+            <argument type="service" id="sylius.generator.product_variant" />
+            <argument type="service" id="sylius.repository.channel" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.product" />
 
