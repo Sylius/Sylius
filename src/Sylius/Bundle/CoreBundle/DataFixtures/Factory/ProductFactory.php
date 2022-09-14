@@ -74,9 +74,39 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         return $this->addState(['tracked' => true]);
     }
 
+    public function untracked(): self
+    {
+        return $this->addState(['tracked' => false]);
+    }
+
+    public function withSlug(string $slug): self
+    {
+        return $this->addState(['slug' => $slug]);
+    }
+
+    public function withShortDescription(string $shortDescription): self
+    {
+        return $this->addState(['short_description' => $shortDescription]);
+    }
+
+    public function withDescription(string $description): self
+    {
+        return $this->addState(['description' => $description]);
+    }
+
     public function withVariantSelectionMethod(string $variantSelectionMethod): self
     {
         return $this->addState(['variant_selection_method' => $variantSelectionMethod]);
+    }
+
+    public function withShippingRequired(): self
+    {
+        return $this->addState(['shipping_required' => true]);
+    }
+
+    public function withShippingNotRequired(): self
+    {
+        return $this->addState(['shipping_required' => false]);
     }
 
     protected function getDefaults(): array
@@ -100,7 +130,7 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
             ->beforeInstantiate(function (array $attributes): array {
                 return $this->transform($attributes);
             })
-            ->instantiateWith(function(array $attributes): ProductInterface {
+            ->instantiateWith(function(): ProductInterface {
                 /** @var ProductInterface $product */
                 $product = $this->productFactory->createNew();
 
