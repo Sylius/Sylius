@@ -97,6 +97,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
+        TokenStorageInterface $tokenStorage,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -114,6 +115,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
         $user->setEnabled(false)->shouldNotBeCalled();
+        $tokenStorage->setToken(null)->shouldNotBeCalled();
 
         $this->eraseVerification($event);
     }
@@ -126,6 +128,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
+        TokenStorageInterface $tokenStorage,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -142,6 +145,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $user->setVerifiedAt(null)->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
         $user->setEnabled(false)->shouldNotBeCalled();
+        $tokenStorage->setToken(null)->shouldNotBeCalled();
 
         $this->eraseVerification($event);
     }
