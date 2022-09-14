@@ -45,6 +45,10 @@ final class CatalogPromotionExecutorListener extends AbstractListener implements
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         foreach ($catalogPromotions as $catalogPromotion) {
+            // process
+            $this->messageBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
+
+            // activate/deactivate
             $this->messageBus->dispatch(new UpdateCatalogPromotionState($catalogPromotion->getCode()));
         }
     }
