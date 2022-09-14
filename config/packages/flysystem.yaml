@@ -1,0 +1,6 @@
+flysystem:
+    storages:
+        sylius.storage:
+            adapter: 'local'
+            options:
+                directory: '%sylius_core.images_dir%'
