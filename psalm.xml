@@ -166,6 +166,7 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/ChannelFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/AddressFactoryTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/ChannelFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
             </errorLevel>
         </UndefinedMethod>
