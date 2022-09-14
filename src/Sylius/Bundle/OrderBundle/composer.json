@@ -29,7 +29,7 @@
     "require": {
         "php": "^8.0",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || dev-master",
+        "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius/money-bundle": "^1.6",
         "sylius/order": "^1.6",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
