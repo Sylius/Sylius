@@ -15,9 +15,9 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdaterInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface as ChannelResourceFactory;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
@@ -47,6 +47,7 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         private ChannelResourceFactory $channelFactory,
         private ChannelFactoryDefaultValuesInterface $factoryDefaultValues,
         private ChannelFactoryTransformerInterface $factoryTransformer,
+        private ChannelFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
     }
@@ -136,6 +137,11 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         return $this->factoryTransformer->transform($attributes);
     }
 
+    protected function update(ChannelInterface $channel, array $attributes): void
+    {
+        $this->factoryUpdater->update($channel, $attributes);
+    }
+
     protected function initialize(): self
     {
         return $this
@@ -146,35 +152,10 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
                 /** @var ChannelInterface $channel */
                 $channel = $this->channelFactory->createNamed($attributes['name']);
 
-                $channel->setCode($attributes['code']);
-                $channel->setHostname($attributes['hostname']);
-                $channel->setEnabled($attributes['enabled']);
-                $channel->setColor($attributes['color']);
-                $channel->setDefaultTaxZone($attributes['default_tax_zone']);
-                $channel->setTaxCalculationStrategy($attributes['tax_calculation_strategy']);
-                $channel->setThemeName($attributes['theme_name']);
-                $channel->setContactEmail($attributes['contact_email']);
-                $channel->setContactPhoneNumber($attributes['contact_phone_number']);
-                $channel->setSkippingShippingStepAllowed($attributes['skipping_shipping_step_allowed']);
-                $channel->setSkippingPaymentStepAllowed($attributes['skipping_payment_step_allowed']);
-                $channel->setAccountVerificationRequired($attributes['account_verification_required']);
-                $channel->setMenuTaxon($attributes['menu_taxon']);
-
-                $channel->setDefaultLocale($attributes['default_locale']);
-                foreach ($attributes['locales'] as $locale) {
-                    $channel->addLocale($locale);
-                }
-
-                $channel->setBaseCurrency($attributes['base_currency']);
-                foreach ($attributes['currencies'] as $currency) {
-                    $channel->addCurrency($currency);
-                }
-
-                if (null !== $attributes['shop_billing_data']) {
-                    $channel->setShopBillingData($attributes['shop_billing_data']);
-                }
-
                 return $channel;
+            })
+            ->afterInstantiate(function (ChannelInterface $channel, array $attributes): void {
+                $this->update($channel, $attributes);
             })
         ;
     }
