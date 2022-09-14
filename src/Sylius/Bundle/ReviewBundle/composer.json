@@ -43,7 +43,7 @@
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "sylius/review": "^1.6",
-        "sylius/user-bundle": "^1.6 || dev-master",
+        "sylius/user-bundle": "^1.6 || dev-symfony-6",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {
@@ -52,7 +52,7 @@
     "require-dev": {
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "polishsymfonycommunity/symfony-mocker-container": "dev-support-symfony-6",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0",
@@ -86,7 +86,8 @@
         {
             "type": "path",
             "url": "../../*/*"
-        }
+        },
+        { "type": "vcs", "url": "git@github.com:Zales0123/SymfonyMockerContainer.git" }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true
