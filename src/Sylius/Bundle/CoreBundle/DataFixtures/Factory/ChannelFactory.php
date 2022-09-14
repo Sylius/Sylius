@@ -14,13 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface;
-use Sylius\Component\Addressing\Model\Scope as AddressingScope;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface as ChannelResourceFactory;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -46,9 +45,8 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
 {
     public function __construct(
         private ChannelResourceFactory $channelFactory,
-        private ZoneFactoryInterface $zoneFactory,
-        private ShopBillingDataFactoryInterface $shopBillingDataFactory,
         private ChannelFactoryDefaultValuesInterface $factoryDefaultValues,
+        private ChannelFactoryTransformerInterface $factoryTransformer,
     ) {
         parent::__construct();
     }
@@ -133,22 +131,16 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         return $this->factoryDefaultValues->getDefaults(self::faker());
     }
 
+    protected function transform(array $attributes): array
+    {
+        return $this->factoryTransformer->transform($attributes);
+    }
+
     protected function initialize(): self
     {
         return $this
             ->beforeInstantiate(function (array $attributes): array {
-                $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
-                $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
-
-                if (is_string($attributes['default_tax_zone'])) {
-                    $attributes['default_tax_zone'] = $this->zoneFactory::randomOrCreate(['code' => $attributes['default_tax_zone']]);
-                }
-
-                if (is_array($attributes['shop_billing_data'])) {
-                    $attributes['shop_billing_data'] = $this->shopBillingDataFactory->create($attributes['shop_billing_data']);
-                }
-
-                return $attributes;
+                return $this->transform($attributes);
             })
             ->instantiateWith(function(array $attributes): ChannelInterface {
                 /** @var ChannelInterface $channel */
