@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues;
 
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductFactoryDefaultValues implements ProductFactoryDefaultValuesInterface
 {
@@ -29,6 +28,8 @@ final class ProductFactoryDefaultValues implements ProductFactoryDefaultValuesIn
             'slug' => null,
             'short_description' => $faker->paragraph(),
             'description' => $faker->paragraphs(3, true),
+            'variant_selection_method' => ProductInterface::VARIANT_SELECTION_MATCH,
+            'shipping_required' => true,
         ];
     }
 }
