@@ -248,12 +248,27 @@
 
         <service id="sylius.data_fixtures.factory.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactory">
             <argument type="service" id="sylius.factory.tax_rate" />
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.tax_rate" />
             <tag name="foundry.factory" />
         </service>
-
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactoryInterface" alias="sylius.data_fixtures.factory.tax_rate" />
+
+        <service id="sylius.data_fixtures.factory_default_values.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.tax_rate" />
+
+        <service id="sylius.data_fixtures.factory_transformer.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.tax_rate" />
+
+        <service id="sylius.data_fixtures.factory_updater.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.tax_rate" />
 
         <service id="sylius.data_fixtures.factory.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactory">
             <argument type="service" id="sylius.factory.taxon" />
