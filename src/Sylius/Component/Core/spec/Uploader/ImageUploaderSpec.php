@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Uploader;
 use Gaufrette\FilesystemInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -23,7 +24,20 @@ use Symfony\Component\HttpFoundation\File\File;
 
 final class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(
+    private function standardLet(
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image,
+    ): void {
+        $filesystem->has(Argument::any())->willReturn(false);
+
+        $file = new File(__FILE__);
+        $image->getFile()->willReturn($file);
+
+        $this->beConstructedWith($filesystem, $imagePathGenerator);
+    }
+
+    private function legacyLet(
         FilesystemInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image,
@@ -36,16 +50,22 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->beConstructedWith($filesystem, $imagePathGenerator);
     }
 
-    function it_is_an_image_uploader(): void
-    {
+    function it_is_an_image_uploader(
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image,
+    ): void {
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
+
         $this->shouldImplement(ImageUploaderInterface::class);
     }
 
     function it_triggers_a_deprecation_exception_if_no_image_path_generator_is_passed(
-        FilesystemInterface $filesystem,
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image,
     ): void {
-        $filesystem->has(Argument::any())->willReturn(false);
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
 
         $file = new File(__FILE__);
         $image->getFile()->willReturn($file);
@@ -56,11 +76,26 @@ final class ImageUploaderSpec extends ObjectBehavior
         ;
     }
 
-    function it_uploads_an_image(
+    function it_triggers_a_deprecation_exception_if_gaufrette_filesystem_is_passed(
         FilesystemInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image,
     ): void {
+        $this->legacyLet($filesystem, $imagePathGenerator, $image);
+
+        $this
+            ->shouldTrigger(\E_USER_DEPRECATED)
+            ->duringInstantiation()
+        ;
+    }
+
+    function it_uploads_an_image(
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image,
+    ): void {
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
+
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
@@ -80,16 +115,18 @@ final class ImageUploaderSpec extends ObjectBehavior
     }
 
     function it_replaces_an_image(
-        FilesystemInterface $filesystem,
+        FilesystemAdapterInterface $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
         ImageInterface $image,
     ): void {
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
+
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
 
         $filesystem->has('foo.jpg')->willReturn(true);
 
-        $filesystem->delete('foo.jpg')->willReturn(true);
+        $filesystem->delete('foo.jpg')->shouldBeCalled();
 
         $imagePathGenerator->generate($image)->willReturn('image/path/image.jpg');
 
@@ -102,19 +139,27 @@ final class ImageUploaderSpec extends ObjectBehavior
         $this->upload($image);
     }
 
-    function it_removes_an_image_if_one_exists(FilesystemInterface $filesystem): void
-    {
-        $filesystem->has('path/to/img')->willReturn(true);
-        $filesystem->delete('path/to/img')->willReturn(true);
+    function it_removes_an_image_if_one_exists(
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image,
+    ): void {
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
 
-        $this->remove('path/to/img');
+        $filesystem->delete('path/to/img')->shouldBeCalled();
+
+        $this->remove('path/to/img')->shouldReturn(true);
     }
 
-    function it_does_not_remove_an_image_if_one_does_not_exist(FilesystemInterface $filesystem): void
-    {
-        $filesystem->has('path/to/img')->willReturn(false);
-        $filesystem->delete('path/to/img')->shouldNotBeCalled();
+    function it_does_not_remove_an_image_if_one_does_not_exist(
+        FilesystemAdapterInterface $filesystem,
+        ImagePathGeneratorInterface $imagePathGenerator,
+        ImageInterface $image,
+    ): void {
+        $this->standardLet($filesystem, $imagePathGenerator, $image);
 
-        $this->remove('path/to/img');
+        $filesystem->delete('path/to/img')->willThrow(\InvalidArgumentException::class)->shouldBeCalled();
+
+        $this->remove('path/to/img')->shouldReturn(false);
     }
 }

@@ -15,6 +15,8 @@ namespace Sylius\Component\Core\Uploader;
 
 use enshrined\svgSanitize\Sanitizer;
 use Gaufrette\FilesystemInterface;
+use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
+use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -31,9 +33,19 @@ class ImageUploader implements ImageUploaderInterface
     protected $sanitizer;
 
     public function __construct(
-        protected FilesystemInterface $filesystem,
+        /** @var FilesystemAdapterInterface $filesystem */
+        protected FilesystemAdapterInterface|FilesystemInterface $filesystem,
         protected ?ImagePathGeneratorInterface $imagePathGenerator = null,
     ) {
+        if ($this->filesystem instanceof FilesystemInterface) {
+            @trigger_error(sprintf(
+                'Passing Gaufrette\FilesystemInterface as a first argument in %s constructor is deprecated since Sylius 1.12 and will be not possible in Sylius 2.0.',
+                self::class,
+            ), \E_USER_DEPRECATED);
+
+            $this->filesystem = new GaufretteFilesystemAdapter($this->filesystem);
+        }
+
         if ($imagePathGenerator === null) {
             @trigger_error(sprintf(
                 'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.',
@@ -73,11 +85,13 @@ class ImageUploader implements ImageUploaderInterface
 
     public function remove(string $path): bool
     {
-        if ($this->filesystem->has($path)) {
-            return $this->filesystem->delete($path);
+        try {
+            $this->filesystem->delete($path);
+        } catch (\InvalidArgumentException) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     protected function sanitizeContent(string $fileContent, string $mimeType): string

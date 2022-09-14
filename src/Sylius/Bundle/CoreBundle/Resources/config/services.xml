@@ -64,15 +64,22 @@
         <service id="Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface" alias="sylius.invoice_number_generator" />
 
         <service id="sylius.image_uploader" class="Sylius\Component\Core\Uploader\ImageUploader">
+            <argument type="service" id="Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface" />
+            <argument type="service" id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" />
+        </service>
+        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
+
+        <service
+            id="Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface"
+            class="Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter"
+        >
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
                     <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
-            <argument type="service" id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface" />
         </service>
-        <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
 
         <service
             id="Sylius\Component\Core\Generator\ImagePathGeneratorInterface"
