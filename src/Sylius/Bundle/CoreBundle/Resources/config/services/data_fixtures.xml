@@ -120,6 +120,7 @@
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.data_fixtures.factory_default_values.channel" />
             <argument type="service" id="sylius.data_fixtures.factory_transformer.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.channel" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
@@ -137,6 +138,9 @@
             <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.channel" />
+
+        <service id="sylius.data_fixtures.factory_updater.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.channel" />
 
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
