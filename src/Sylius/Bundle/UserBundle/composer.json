@@ -42,7 +42,7 @@
         "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || dev-master",
-        "sylius/mailer-bundle": "^1.5 || dev-symfony-6",
+        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "sylius/user": "^1.6 || dev-symfony-6",
         "symfony/framework-bundle": "^5.4 || ^6.0",
