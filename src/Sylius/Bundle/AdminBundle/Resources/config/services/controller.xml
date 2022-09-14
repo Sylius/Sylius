@@ -95,6 +95,10 @@
             <argument type="string">%kernel.environment%</argument>
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        </service>
+
         <service
             id="Sylius\Bundle\AdminBundle\Controller\RedirectHandler"
             decorates="sylius.resource_controller.redirect_handler"

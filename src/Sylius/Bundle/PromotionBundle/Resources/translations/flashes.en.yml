@@ -4,3 +4,5 @@
 sylius:
     promotion_coupon:
         generate: 'Promotion coupons have been successfully generated.'
+    catalog_promotion:
+        remove: 'Removing of catalog promotion has been requested. This process can take a while depending on the number of affected products.'
