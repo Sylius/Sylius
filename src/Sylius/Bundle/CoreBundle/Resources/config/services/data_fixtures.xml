@@ -171,6 +171,28 @@
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
 
+        <service id="sylius.data_fixtures.factory.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactory">
+            <argument type="service" id="sylius.factory.product" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.product" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.product" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.product" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface" alias="sylius.data_fixtures.factory.product" />
+
+        <service id="sylius.data_fixtures.factory_default_values.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.product" />
+
+        <service id="sylius.data_fixtures.factory_transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformer">
+            <argument type="service" id="sylius.generator.slug" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.product" />
+
+        <service id="sylius.data_fixtures.factory_updater.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.product" />
+
         <service id="sylius.data_fixtures.factory.product_association_type" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactory">
             <argument type="service" id="sylius.factory.product_association_type" />
             <argument type="service" id="sylius.repository.locale" />
