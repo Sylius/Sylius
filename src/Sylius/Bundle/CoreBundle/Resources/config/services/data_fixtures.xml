@@ -90,7 +90,7 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_action" />
 
         <service id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValues" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.channel" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
 
         <service id="sylius.data_fixtures.factory_transformer.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformer" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion_action" />
@@ -118,9 +118,8 @@
 
         <service id="sylius.data_fixtures.factory.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory">
             <argument type="service" id="sylius.factory.channel" />
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
             <argument type="service" id="sylius.data_fixtures.factory_default_values.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.channel" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
@@ -132,6 +131,12 @@
             <argument type="service" id="sylius.data_fixtures.factory.taxon" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_scope" />
+
+        <service id="sylius.data_fixtures.factory_transformer.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.channel" />
 
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
