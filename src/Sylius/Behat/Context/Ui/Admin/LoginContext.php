@@ -128,6 +128,13 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->isOpen());
     }
 
+    /**
+     * @Then I should be notified that the password should be at least 4 characters long
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    {
+    }
+
     private function logInAgain(string $username, string $password): void
     {
         $this->dashboardPage->tryToOpen();

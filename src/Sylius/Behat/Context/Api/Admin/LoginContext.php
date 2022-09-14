@@ -98,6 +98,13 @@ final class LoginContext implements Context
         $this->iShouldNotBeLoggedIn();
     }
 
+    /**
+     * @Then I should be notified that the password should be at least 4 characters long
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    {
+    }
+
     private function logIn(string $username, string $password): void
     {
         $this->iWantToLogIn();
