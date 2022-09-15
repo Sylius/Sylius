@@ -22,12 +22,14 @@
             <directory name="src/Sylius/Bundle/ApiBundle/test" />
             <directory name="src/Sylius/Bundle/AdminBundle/spec" />
             <directory name="src/Sylius/Bundle/AdminBundle/Tests" />
+            <directory name="src/Sylius/Bundle/AdminBundle/test" />
             <directory name="src/Sylius/Bundle/AttributeBundle/spec" />
             <directory name="src/Sylius/Bundle/AttributeBundle/test" />
             <directory name="src/Sylius/Bundle/ChannelBundle/spec" />
             <directory name="src/Sylius/Bundle/ChannelBundle/test" />
             <directory name="src/Sylius/Bundle/CoreBundle/spec" />
             <directory name="src/Sylius/Bundle/CoreBundle/Tests" />
+            <directory name="src/Sylius/Bundle/CoreBundle/test" />
             <directory name="src/Sylius/Bundle/CurrencyBundle/spec" />
             <directory name="src/Sylius/Bundle/CurrencyBundle/test" />
             <directory name="src/Sylius/Bundle/CustomerBundle/test" />
@@ -120,6 +122,8 @@
                 <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserProviderInterface::loadUserByUsername" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\AbstractToken::isAuthenticated" /> <!-- deprecated in Symfony 5.4 -->
+                <referencedMethod name="Sylius\Component\Mailer\Sender\SenderInterface::send" /> <!-- deprecated in Symfony 5.4 -->
             </errorLevel>
         </DeprecatedMethod>
 
@@ -128,7 +132,9 @@
                 <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::getQueryString" />
+                <referencedMethod name="ApiPlatform\Util\RequestParser::getQueryString" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
+                <referencedMethod name="ApiPlatform\Util\RequestParser::parseRequestParams" />
             </errorLevel>
         </InternalMethod>
 

@@ -82,7 +82,7 @@ final class EmailChecker implements EmailCheckerInterface
         return $this->spoolDirectory;
     }
 
-    private function isMessageTo(\Swift_Message $message, string $recipient): bool
+    private function isMessageTo(object $message, string $recipient): bool
     {
         return array_key_exists($recipient, $message->getTo());
     }
@@ -100,9 +100,6 @@ final class EmailChecker implements EmailCheckerInterface
         );
     }
 
-    /**
-     * @return array|\Swift_Message[]
-     */
     private function getMessages(string $directory): array
     {
         $finder = new Finder();

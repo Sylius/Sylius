@@ -62,7 +62,7 @@ final class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($product);
         $generator->generate($product)->willThrow(new VariantWithNoOptionsValuesException());
         $requestStack->getSession()->willReturn($session);
-        $session->getFlashBag()->willReturn($flashBag);
+        $session->getBag('flashes')->willReturn($flashBag);
 
         $flashBag->add('error', 'sylius.product_variant.cannot_generate_variants')->shouldBeCalled();
 
@@ -80,7 +80,7 @@ final class GenerateProductVariantsSubscriberSpec extends ObjectBehavior
 
         $event->getData()->willReturn($product);
         $generator->generate($product)->willThrow(new VariantWithNoOptionsValuesException());
-        $session->getFlashBag()->willReturn($flashBag);
+        $session->getBag('flashes')->willReturn($flashBag);
 
         $flashBag->add('error', 'sylius.product_variant.cannot_generate_variants')->shouldBeCalled();
 
