@@ -36,10 +36,8 @@ use Zenstruck\Foundry\Proxy;
  * @method static TaxRateInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method TaxRateInterface|Proxy create(array|callable $attributes = [])
  */
-interface TaxRateFactoryInterface
+interface TaxRateFactoryInterface extends WithCodeInterface
 {
-    public function withCode(string $code): self;
-
     public function withName(string $name): self;
 
     public function withAmount(float $amount): self;

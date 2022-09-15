@@ -34,7 +34,6 @@ use Zenstruck\Foundry\Proxy;
  * @method static CurrencyInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CurrencyInterface|Proxy create(array|callable $attributes = [])
  */
-interface CurrencyFactoryInterface
+interface CurrencyFactoryInterface extends WithCodeInterface
 {
-    public function withCode(string $code): self;
 }

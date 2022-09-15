@@ -34,10 +34,8 @@ use Zenstruck\Foundry\Proxy;
  * @method static TaxonInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method TaxonInterface|Proxy create(array|callable $attributes = [])
  */
-interface TaxonFactoryInterface
+interface TaxonFactoryInterface extends WithCodeInterface
 {
-    public function withCode(string $code): self;
-
     public function withName(string $name): self;
 
     public function withSlug(string $slug): self;

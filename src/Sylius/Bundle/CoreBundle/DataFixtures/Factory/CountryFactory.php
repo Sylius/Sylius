@@ -38,6 +38,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class CountryFactory extends ModelFactory implements CountryFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCodeTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $countryFactory)
@@ -48,11 +50,6 @@ class CountryFactory extends ModelFactory implements CountryFactoryInterface, Fa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function enabled(): self

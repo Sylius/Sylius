@@ -40,6 +40,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class ProductFactory extends ModelFactory implements ProductFactoryInterface
 {
+    use WithCodeTrait;
+
     public function __construct(
         private FactoryInterface $productFactory,
         private ProductFactoryDefaultValuesInterface $factoryDefaultValues,
@@ -47,11 +49,6 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         private ProductFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function withName(string $name): self
