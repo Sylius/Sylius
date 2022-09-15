@@ -63,3 +63,11 @@ references related issues.
 
    These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
+
+ - `api-platform/core:2.7.0`:
+
+   The FQCN of `ApiPlatform\Core\Metadata\Resource\ResourceNameCollection` has changed to:
+   `ApiPlatform\Metadata\Resource\ResourceNameCollection` and due to this fact
+   `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer` 
+   references this class throws an exception
+  `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`
