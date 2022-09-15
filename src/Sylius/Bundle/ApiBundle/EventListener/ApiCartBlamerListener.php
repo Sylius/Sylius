@@ -35,7 +35,7 @@ final class ApiCartBlamerListener
     ) {
     }
 
-    public function onSuccessLogin(LoginSuccessEvent $loginSuccessEvent): void
+    public function onLoginSuccess(LoginSuccessEvent $loginSuccessEvent): void
     {
         if (!$this->uriBasedSectionContext->getSection() instanceof ShopApiOrdersSubSection) {
             return;

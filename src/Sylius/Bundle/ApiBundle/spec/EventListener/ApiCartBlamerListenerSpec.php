@@ -63,7 +63,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(UnexpectedTypeException::class)
-            ->during('onSuccessLogin', [
+            ->during('onLoginSuccess', [
                 new LoginSuccessEvent(
                     $authenticator->getWrappedObject(),
                     $passport->getWrappedObject(),
@@ -106,7 +106,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
             ->willReturn(new Envelope($blameCart))
         ;
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
@@ -135,7 +135,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
@@ -163,7 +163,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
@@ -189,7 +189,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $token->getUser()->willReturn($user);
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
@@ -215,7 +215,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         $token->getUser()->shouldNotBeCalled();
         $cartContext->getCart()->shouldNotBeCalled();
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
@@ -241,7 +241,7 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         $token->getUser()->shouldNotBeCalled();
         $cartContext->getCart()->shouldNotBeCalled();
 
-        $this->onSuccessLogin(
+        $this->onLoginSuccess(
             new LoginSuccessEvent(
                 $authenticator->getWrappedObject(),
                 $passport->getWrappedObject(),
