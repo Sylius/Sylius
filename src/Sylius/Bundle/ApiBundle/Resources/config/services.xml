@@ -93,6 +93,10 @@
             <argument type="service" id="sylius.command_bus" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
             <argument type="service" id="sylius.context.channel" />

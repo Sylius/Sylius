@@ -49,5 +49,14 @@
         >
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface" />
         </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.event_bus" />
+        </service>
     </services>
 </container>

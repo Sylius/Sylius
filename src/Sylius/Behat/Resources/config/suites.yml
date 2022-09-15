@@ -43,6 +43,7 @@ imports:
     - suites/api/promotion/managing_catalog_promotions.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
+    - suites/api/promotion/removing_catalog_promotions.yml
     - suites/api/shipping/applying_shipping_method_rules.yml
     - suites/api/shipping/viewing_shipping_methods.yml
     - suites/api/shipping/managing_shipments.yml

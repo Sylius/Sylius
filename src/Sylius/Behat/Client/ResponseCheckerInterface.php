@@ -31,6 +31,8 @@ interface ResponseCheckerInterface
 
     public function getError(Response $response): string;
 
+    public function isAccepted(Response $response): bool;
+
     public function isCreationSuccessful(Response $response): bool;
 
     public function isUpdateSuccessful(Response $response): bool;

@@ -82,6 +82,7 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="path">/shop/catalog-promotions/{code}</attribute>
                 <attribute name="method">GET</attribute>
@@ -126,6 +127,12 @@ Example configuration for `percentage_discount` action type:
 ```
                     </attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/catalog-promotions/{code}</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction</attribute>
             </itemOperation>
         </itemOperations>
 
