@@ -15,10 +15,18 @@ namespace Sylius\Component\Core\Filesystem\Adapter;
 
 use Gaufrette\FilesystemInterface;
 
+/**
+ * @deprecated since version 1.12, to be removed in 2.0. Use {@link FilesystemInterface} instead.
+ */
 class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
 {
     public function __construct(private FilesystemInterface $filesystem)
     {
+        @trigger_error(sprintf(
+            'The "%s" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use "%s" instead.',
+            GaufretteFilesystemAdapter::class,
+            FlysystemFilesystemAdapter::class,
+        ), \E_USER_DEPRECATED);
     }
 
     public function has(string $location): bool
