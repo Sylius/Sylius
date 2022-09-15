@@ -31,7 +31,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 final class ApiCartBlamerListenerSpec extends ObjectBehavior
 {
@@ -51,6 +54,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($order);
@@ -58,7 +63,16 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(UnexpectedTypeException::class)
-            ->during('onInteractiveLogin', [new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject())])
+            ->during('onLoginSuccess', [
+                new LoginSuccessEvent(
+                    $authenticator->getWrappedObject(),
+                    $passport->getWrappedObject(),
+                    $token->getWrappedObject(),
+                    $request->getWrappedObject(),
+                    null,
+                    'new_api_shop_user'
+                )
+            ])
         ;
     }
 
@@ -72,6 +86,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         CustomerInterface $customer,
         ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
         MessageBusInterface $commandBus,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -90,7 +106,16 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
             ->willReturn(new Envelope($blameCart))
         ;
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 
     function it_does_nothing_if_given_cart_has_been_blamed_in_past(
@@ -101,6 +126,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         TokenInterface $token,
         CustomerInterface $customer,
         ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -108,7 +135,16 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 
     function it_does_nothing_if_given_user_is_invalid_on_interactive_login(
@@ -118,6 +154,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         ShopApiOrdersSubSection $shopApiOrdersSubSectionSection,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSectionSection);
         $cartContext->getCart()->willReturn($cart);
@@ -125,7 +163,16 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
 
         $cart->setCustomer(Argument::any())->shouldNotBeCalled();
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 
     function it_does_nothing_if_there_is_no_existing_cart_on_interactive_login(
@@ -135,12 +182,23 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         TokenInterface $token,
         ShopUserInterface $user,
         ShopApiOrdersSubSection $shopApiOrdersSubSection,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($shopApiOrdersSubSection);
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $token->getUser()->willReturn($user);
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 
     function it_does_nothing_if_the_current_section_is_not_shop_on_interactive_login(
@@ -149,13 +207,24 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         SectionInterface $section,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($section);
 
         $token->getUser()->shouldNotBeCalled();
         $cartContext->getCart()->shouldNotBeCalled();
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 
     function it_does_nothing_if_the_current_section_is_not_orders_subsection(
@@ -164,12 +233,23 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
         Request $request,
         TokenInterface $token,
         AdminApiSection $section,
+        AuthenticatorInterface $authenticator,
+        Passport $passport,
     ): void {
         $sectionResolver->getSection()->willReturn($section);
 
         $token->getUser()->shouldNotBeCalled();
         $cartContext->getCart()->shouldNotBeCalled();
 
-        $this->onInteractiveLogin(new InteractiveLoginEvent($request->getWrappedObject(), $token->getWrappedObject()));
+        $this->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticator->getWrappedObject(),
+                $passport->getWrappedObject(),
+                $token->getWrappedObject(),
+                $request->getWrappedObject(),
+                null,
+                'new_api_shop_user'
+            )
+        );
     }
 }

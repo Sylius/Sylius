@@ -28,6 +28,7 @@
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="session" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="security.token_storage" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
             <tag name="kernel.event_listener" event="sylius.customer.post_update" method="sendVerificationEmail" />
         </service>

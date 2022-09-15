@@ -38,6 +38,42 @@ with test or remove these services with complier pass.
 
 7. The `Sylius\Component\Promotion\Event\CatalogPromotionFailed` has been removed as it is not used anymore.
 
+8. Due to updating to Symfony 6 security file was changed to use the updated security system so you need to adjust your `config/packages/security.yaml` file:
+    
+    ```diff
+   security:
+        - always_authenticate_before_granting: true
+        + enable_authenticator_manager: true
+   ```
+
+   and you need to adjust all of your firewalls like that:
+
+   ```diff
+        admin:
+            # ...
+            form_login:
+                # ...
+                - csrf_token_generator: security.csrf.token_manager
+                + enable_csrf: true
+                # ...
+        new_api_admin_user:
+            # ...
+            - anonymous: true
+            + entry_point: jwt
+            # ...
+            - guard:
+                 # ...
+            + jwt: true
+   ```
+   
+    and also you need to adjust all of your access_control like that:
+    
+    ```diff
+        - - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
+   
+        + - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
+    ```
+
 ### Asset management changes
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation

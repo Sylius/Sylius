@@ -28,6 +28,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
 {
@@ -37,8 +38,9 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         SessionInterface $session,
         SectionProviderInterface $sectionResolver,
+        TokenStorageInterface $tokenStorage,
     ): void {
-        $this->beConstructedWith($tokenGenerator, $channelContext, $eventDispatcher, $session, $sectionResolver);
+        $this->beConstructedWith($tokenGenerator, $channelContext, $eventDispatcher, $session, $sectionResolver, $tokenStorage);
     }
 
     function it_does_nothing_change_was_performed_by_admin(
@@ -63,6 +65,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
+        TokenStorageInterface $tokenStorage
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -80,6 +83,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $user->setVerifiedAt(null)->shouldBeCalled();
         $user->setEmailVerificationToken('1d7dbc5c3dbebe5c')->shouldBeCalled();
         $user->setEnabled(false)->shouldBeCalled();
+        $tokenStorage->setToken(null)->shouldBeCalled();
 
         $this->eraseVerification($event);
     }
@@ -93,6 +97,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
+        TokenStorageInterface $tokenStorage,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -110,6 +115,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $tokenGenerator->generate()->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
         $user->setEnabled(false)->shouldNotBeCalled();
+        $tokenStorage->setToken(null)->shouldNotBeCalled();
 
         $this->eraseVerification($event);
     }
@@ -122,6 +128,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ShopUserInterface $user,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
+        TokenStorageInterface $tokenStorage,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 
@@ -138,6 +145,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         $user->setVerifiedAt(null)->shouldNotBeCalled();
         $user->setEmailVerificationToken(Argument::any())->shouldNotBeCalled();
         $user->setEnabled(false)->shouldNotBeCalled();
+        $tokenStorage->setToken(null)->shouldNotBeCalled();
 
         $this->eraseVerification($event);
     }
