@@ -9,32 +9,33 @@ First you need to ensure that the official ``AWS-S3 SDK`` for PHP is installed:
 
 .. code-block:: bash
 
-    composer require aws/aws-sdk-php
+    composer require aws/aws-sdk-php league/flysystem-aws-s3-v3
 
 
-1. Configure Knp-Gaufrette
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Configure Flysystem AWS S3 Adapter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Place this file under ``config/packages/knp_gaufrette.yaml``:
+Place this file under ``config/packages/flysystem.yaml``:
 
 .. code-block:: yaml
 
-    # config/packages/knp_gaufrette.yaml
-    knp_gaufrette:
-        adapters:
-            sylius_image:
-                aws_s3:
-                    service_id: Aws\S3\S3Client
-                    bucket_name: "%aws.s3.bucket%"
-                    detect_content_type: true
-                    options:
-                        directory: "media/image"
-                        acl: "public-read"
-        stream_wrapper: ~
+    # config/packages/flysystem.yaml
+    flysystem:
+        storages:
+            sylius.storage:
+                adapter: 'aws'
+                options:
+                    client: Aws\S3\S3Client
+                    bucket: "%aws.s3.bucket%"
+                    prefix: "media/image"
+                    streamReads: true
 
+For more details see:
+ * https://flysystem.thephpleague.com/docs/adapter/aws-s3-v3/
+ * https://github.com/thephpleague/flysystem-bundle/blob/3.x/docs/2-cloud-storage-providers.md#aws-sdk-s3
 
 2. Configure Liip-Imagine:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Add this file under ``config/packages/liip_imagine.yaml`` in order to make Liip-Imagine aware of AWS S3 storage:
 
@@ -44,8 +45,8 @@ Add this file under ``config/packages/liip_imagine.yaml`` in order to make Liip-
     liip_imagine:
         loaders:
             aws_s3:
-                stream:
-                    wrapper: gaufrette://sylius_image/
+                flysystem:
+                    filesystem_service: sylius.storage
         resolvers:
             aws_s3:
                 aws_s3:
