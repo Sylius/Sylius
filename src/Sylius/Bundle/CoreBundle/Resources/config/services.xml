@@ -69,7 +69,6 @@
         </service>
         <service id="Sylius\Component\Core\Uploader\ImageUploaderInterface" alias="sylius.image_uploader" />
 
-        <service id="Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface" alias="Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter" />
         <service id="Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter">
             <argument type="service" id="sylius.storage" />
         </service>

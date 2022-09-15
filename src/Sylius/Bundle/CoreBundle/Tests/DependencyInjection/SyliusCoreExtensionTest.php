@@ -17,6 +17,9 @@ use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExten
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
+use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
+use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
+use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 
 final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
@@ -103,6 +106,36 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         $this->assertContainerBuilderHasParameter('sylius_core.catalog_promotions.batch_size', 100);
+    }
+
+    /** @test */
+    public function it_aliases_default_filesystem_adapter_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
+    }
+
+    /** @test */
+    public function it_aliases_flysystem_filesystem_adapter_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['filesystem' => ['adapter' => 'flysystem']]);
+
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
+    }
+
+    /** @test */
+    public function it_aliases_gaufrette_filesystem_adapter_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['filesystem' => ['adapter' => 'gaufrette']]);
+
+        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, GaufretteFilesystemAdapter::class);
     }
 
     protected function getContainerExtensions(): array
