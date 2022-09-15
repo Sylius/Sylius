@@ -86,3 +86,11 @@ In this section we keep track of the reasons, why some restrictions were added t
    ```
 
   References: https://github.com/Sylius/Sylius/issues/13211
+
+- `api-platform/core:2.7.0`:
+
+   The FQCN of `ApiPlatform\Core\Metadata\Resource\ResourceNameCollection` has changed to:
+   `ApiPlatform\Metadata\Resource\ResourceNameCollection` and due to this fact
+   `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer` 
+   references this class throws an exception
+  `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`
