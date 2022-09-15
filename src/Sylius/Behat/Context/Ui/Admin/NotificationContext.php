@@ -51,15 +51,15 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
+     * @Then I should be notified that it :has been successfully deleted
+     * @Then I should be notified that they :have been successfully deleted
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(string $hasHave): void
     {
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::success(),
-            'has been successfully deleted.',
+            sprintf('%s been successfully deleted.', $hasHave),
         );
     }
 

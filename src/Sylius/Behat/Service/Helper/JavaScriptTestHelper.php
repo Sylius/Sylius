@@ -16,6 +16,7 @@ namespace Sylius\Behat\Service\Helper;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Exception\NotificationExpectationMismatchException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 
@@ -42,7 +43,12 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
             $notificationChecker->checkNotification($message, $type);
         };
 
-        $this->waitUntilExceptionDisappears($callable, ElementNotFoundException::class, $timeout);
+        $this->waitUntilExceptionDisappears(
+            $callable,
+            ElementNotFoundException::class,
+            $timeout,
+            $type,
+        );
     }
 
     public function waitUntilPageOpens(PageInterface $page, ?array $options = [], ?int $timeout = null): void
@@ -54,7 +60,12 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         $this->waitUntilExceptionDisappears($callable, UnexpectedPageException::class, $timeout);
     }
 
-    private function waitUntilExceptionDisappears(callable $callable, string $exceptionClass, ?int $timeout = null): void
+    private function waitUntilExceptionDisappears(
+        callable $callable,
+        string $exceptionClass,
+        ?int $timeout = null,
+        NotificationType $type = null,
+    ): void
     {
         $start = microtime(true);
         $timeout ??= $this->defaultTimeout;
@@ -63,6 +74,8 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         do {
             try {
                 $callable();
+            } catch (NotificationExpectationMismatchException $exception) {
+                throw new NotificationExpectationMismatchException($type, $exception->getMessage());
             } catch (\Exception $exception) {
                 if ($exception instanceof $exceptionClass) {
                     usleep($this->microsecondsInterval);
