@@ -35,10 +35,8 @@ use Zenstruck\Foundry\Proxy;
  * @method static AddressInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AddressInterface|Proxy create(array|callable $attributes = [])
  */
-interface AddressFactoryInterface
+interface AddressFactoryInterface extends WithFirstNameInterface
 {
-    public function withFirstName(string $firstName): self;
-
     public function withLastName(string $lastName): self;
 
     public function withPhoneNumber(string $phoneNumber): self;

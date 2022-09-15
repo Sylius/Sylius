@@ -34,7 +34,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static AdminUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AdminUserInterface|Proxy create(array|callable $attributes = [])
  */
-interface AdminUserFactoryInterface
+interface AdminUserFactoryInterface extends WithFirstNameInterface
 {
     public function withEmail(string $email): self;
 
@@ -47,8 +47,6 @@ interface AdminUserFactoryInterface
     public function withPassword(string $password): self;
 
     public function withApiAccess(): self;
-
-    public function withFirstName(string $firstName): self;
 
     public function withLastName(string $lastName): self;
 

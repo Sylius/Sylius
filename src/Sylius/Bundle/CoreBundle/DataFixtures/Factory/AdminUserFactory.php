@@ -41,6 +41,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithFirstNameTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -85,11 +87,6 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
     public function withApiAccess(): self
     {
         return $this->addState(['api' => true]);
-    }
-
-    public function withFirstName(string $firstName): self
-    {
-        return $this->addState(['first_name' => $firstName]);
     }
 
     public function withLastName(string $lastName): self

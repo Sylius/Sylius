@@ -40,6 +40,8 @@ use Zenstruck\Foundry\Proxy;
  */
 final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithFirstNameTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -58,11 +60,6 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
     public function withEmail(string $email): self
     {
         return $this->addState(['email' => $email]);
-    }
-
-    public function withFirstName(string $firstName): self
-    {
-        return $this->addState(['first_name' => $firstName]);
     }
 
     public function withLastName(string $lastName): self
