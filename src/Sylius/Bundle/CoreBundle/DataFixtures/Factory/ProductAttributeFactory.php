@@ -42,6 +42,7 @@ use Zenstruck\Foundry\Proxy;
 class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
+    use WithNameTrait;
 
     private static ?string $modelClass = null;
 
@@ -61,11 +62,6 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
     public function withType(string $type): self
     {
         return $this->addState(['type' => $type]);
-    }
-
-    public function withName(string $name): self
-    {
-        return $this->addState(['name' => $name]);
     }
 
     public function translatable(): self

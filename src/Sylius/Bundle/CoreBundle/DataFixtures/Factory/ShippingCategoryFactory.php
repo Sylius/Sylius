@@ -40,6 +40,7 @@ use Zenstruck\Foundry\Proxy;
 class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
+    use WithNameTrait;
 
     private static ?string $modelClass = null;
 
@@ -51,11 +52,6 @@ class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withName(string $name): self
-    {
-        return $this->addState(['name' => $name]);
     }
 
     public function withDescription(string $description): self

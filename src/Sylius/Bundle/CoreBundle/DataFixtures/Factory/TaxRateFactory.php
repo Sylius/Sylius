@@ -44,6 +44,7 @@ use Zenstruck\Foundry\Proxy;
 class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
+    use WithNameTrait;
 
     private static ?string $modelClass = null;
 
@@ -59,11 +60,6 @@ class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, Fa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withName(string $name): self
-    {
-        return $this->addState(['name' => $name]);
     }
 
     public function withAmount(float $amount): self
