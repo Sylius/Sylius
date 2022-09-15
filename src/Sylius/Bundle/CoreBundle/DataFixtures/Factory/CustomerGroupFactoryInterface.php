@@ -34,7 +34,6 @@ use Zenstruck\Foundry\Proxy;
  * @method static CustomerGroupInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CustomerGroupInterface|Proxy create(array|callable $attributes = [])
  */
-interface CustomerGroupFactoryInterface extends WithCodeInterface
+interface CustomerGroupFactoryInterface extends WithCodeInterface, WithNameInterface
 {
-    public function withName(string $name): self;
 }

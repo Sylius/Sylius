@@ -43,6 +43,7 @@ use Zenstruck\Foundry\Proxy;
 class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
+    use WithNameTrait;
 
     private static ?string $modelClass = null;
 
@@ -58,11 +59,6 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withName(string $name): self
-    {
-        return $this->addState(['name' => $name]);
     }
 
     public function withSlug(string $slug): self
