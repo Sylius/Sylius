@@ -41,6 +41,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class ProductAttributeFactory extends ModelFactory implements ProductAttributeFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCodeTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -54,11 +56,6 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function withType(string $type): self

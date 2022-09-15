@@ -39,6 +39,8 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCodeTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $customerGroupFactory)
@@ -49,11 +51,6 @@ final class CustomerGroupFactory extends ModelFactory implements CustomerGroupFa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function withName(string $name): self

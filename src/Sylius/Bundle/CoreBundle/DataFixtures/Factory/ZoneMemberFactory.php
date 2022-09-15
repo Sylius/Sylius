@@ -39,6 +39,8 @@ use Zenstruck\Foundry\Proxy;
  */
 final class ZoneMemberFactory extends ModelFactory implements ZoneMemberFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCodeTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(private FactoryInterface $zoneMemberFactory, private ZoneFactoryInterface $zoneFactory)
@@ -49,11 +51,6 @@ final class ZoneMemberFactory extends ModelFactory implements ZoneMemberFactoryI
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function belongsTo(Proxy|ZoneInterface|string $zone): self

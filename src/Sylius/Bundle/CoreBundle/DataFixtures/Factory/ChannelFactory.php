@@ -43,6 +43,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
 {
+    use WithCodeTrait;
+
     public function __construct(
         private ChannelResourceFactory $channelFactory,
         private ChannelFactoryDefaultValuesInterface $factoryDefaultValues,
@@ -50,11 +52,6 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         private ChannelFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     public function withName(string $name): self

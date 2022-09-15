@@ -38,6 +38,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCodeTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -55,11 +57,6 @@ class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, Fact
     public function withDefaultCode(): self
     {
         return $this->addState(['code' => $this->baseLocaleCode]);
-    }
-
-    public function withCode(string $code): self
-    {
-        return $this->addState(['code' => $code]);
     }
 
     protected function getDefaults(): array

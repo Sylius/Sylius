@@ -34,10 +34,8 @@ use Zenstruck\Foundry\Proxy;
  * @method static ZoneInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ZoneInterface|Proxy create(array|callable $attributes = [])
  */
-interface ZoneFactoryInterface
+interface ZoneFactoryInterface extends WithCodeInterface
 {
-    public function withCode(string $code): self;
-
     public function withMembers(array $members, string $type): self;
 
     public function withCountries(array $countries): self;
