@@ -29,7 +29,7 @@ references related issues.
    This version contains service with a wrong constructor arguments:
    `Invalid definition for service ".container.private.profiler": argument 4 of "JMS\SerializerBundle\Debug\DataCollector::__construct()" accepts "JMS\SerializerBundle\Debug\TraceableDriver", "JMS\SerializerBundle\Debug\TraceableMetadataFactory" passed.`
 
-   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/844
+   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
 
  - `symfony/serializer:4.4.19|5.2.2`:
 
