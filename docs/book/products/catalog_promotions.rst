@@ -310,8 +310,12 @@ After changes in CatalogPromotion, we dispatch proper message with delay calcula
 
 .. warning::
 
-    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main``
+    To enable asynchronous Catalog Promotion, remember about running messenger consumer in a separate process, use the command: ``php bin/console messenger:consume main catalog_promotion_removal``
     For more information check official `Symfony docs <https://symfony.com/doc/current/messenger.html#consuming-messages-running-the-worker>`_
+
+.. note::
+
+    The reason why we use two transports is explained below in the Catalog Promotion removal section.
 
 Catalog promotion synchronicity
 -------------------------------
@@ -350,6 +354,21 @@ Any changes in Catalog Promotion cause recalculations of entire Product Catalog 
 .. note::
 
     If you want to reapply Catalog Promotion manually you can refer to the :ref:`How to create a Catalog Promotion Scope and Action? <how-to-create-a-catalog-promotion-scope-and-action>` section
+
+Removal of catalog promotion
+---------------------------------------
+
+Removal of the catalog promotion consists in turning off the promotion, recalculation of the catalog
+and the actual removal of the promotion resource. By using catalog promotions in asynchronous mode,
+it is necessary to start the worker for two transports, the **main** transport is responsible for recalculation of the catalog
+and the **catalog_promotion_removal** transport is self explanatory. The order of transports provided as the command arguments is important,
+it is responsible for the priority of consumed messages:
+
+.. code-block:: bash
+
+    php bin/console messenger:consume main catalog_promotion_removal
+
+For synchronous processing, no additional configuration is required.
 
 How to manage catalog promotion priority?
 -----------------------------------------
