@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Filesystem\Adapter;
 use Gaufrette\FilesystemInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
+use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
 class GaufretteFilesystemAdapterSpec extends ObjectBehavior
 {
@@ -69,7 +70,7 @@ class GaufretteFilesystemAdapterSpec extends ObjectBehavior
         $filesystem->delete('/path/to/some-file')->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(FileNotFoundException::class)
             ->during('delete', ['/path/to/some-file'])
         ;
     }

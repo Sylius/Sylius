@@ -17,6 +17,7 @@ use enshrined\svgSanitize\Sanitizer;
 use Gaufrette\FilesystemInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
+use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -71,7 +72,7 @@ class ImageUploader implements ImageUploaderInterface
 
         $fileContent = $this->sanitizeContent(file_get_contents($file->getPathname()), $file->getMimeType());
 
-        if (null !== $image->getPath() && $this->has($image->getPath())) {
+        if (null !== $image->getPath() && $this->filesystem->has($image->getPath())) {
             $this->remove($image->getPath());
         }
 
@@ -88,7 +89,7 @@ class ImageUploader implements ImageUploaderInterface
     {
         try {
             $this->filesystem->delete($path);
-        } catch (\InvalidArgumentException) {
+        } catch (FileNotFoundException) {
             return false;
         }
 
@@ -102,11 +103,6 @@ class ImageUploader implements ImageUploaderInterface
         }
 
         return $fileContent;
-    }
-
-    private function has(string $path): bool
-    {
-        return $this->filesystem->has($path);
     }
 
     /**

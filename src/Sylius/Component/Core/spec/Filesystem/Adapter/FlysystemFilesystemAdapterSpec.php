@@ -5,6 +5,7 @@ namespace spec\Sylius\Component\Core\Filesystem\Adapter;
 use League\Flysystem\FilesystemOperator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
+use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
 class FlysystemFilesystemAdapterSpec extends ObjectBehavior
 {
@@ -53,7 +54,7 @@ class FlysystemFilesystemAdapterSpec extends ObjectBehavior
         $filesystem->delete('/path/to/some-file')->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(FileNotFoundException::class)
             ->during('delete', ['/path/to/some-file'])
         ;
     }

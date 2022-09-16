@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Filesystem\Adapter;
 
 use League\Flysystem\FilesystemOperator;
+use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
 class FlysystemFilesystemAdapter implements FilesystemAdapterInterface
 {
@@ -34,7 +35,7 @@ class FlysystemFilesystemAdapter implements FilesystemAdapterInterface
     public function delete(string $location): void
     {
         if (!$this->has($location)) {
-            throw new \InvalidArgumentException(sprintf('Cannot delete nonexistent file "%s".', $location));
+            throw new FileNotFoundException($location);
         }
 
         $this->filesystem->delete($location);

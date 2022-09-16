@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Filesystem\Adapter;
 
 use Gaufrette\FilesystemInterface;
+use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
 /**
  * @deprecated since version 1.12, to be removed in 2.0. Use {@link FilesystemInterface} instead.
@@ -42,7 +43,7 @@ class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
     public function delete(string $location): void
     {
         if (!$this->has($location)) {
-            throw new \InvalidArgumentException(sprintf('Cannot delete nonexistent file "%s".', $location));
+            throw new FileNotFoundException($location);
         }
 
         $this->filesystem->delete($location);
