@@ -64,6 +64,18 @@ final class NotificationContext implements Context
     }
 
     /**
+     * @Then I should be notified that the removal operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
+    {
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been requested. This process can take a while depending on the number of affected products.',
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been failed deleted :name
      */
     public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
