@@ -67,6 +67,6 @@ final class SelectAttributeTypeTest extends TypeTestCase
         );
         $view = $form->createView();
 
-        Assert::assertSame($expectedLabels, array_map(fn (ChoiceView $choiceView): string => $choiceView->label, $view->vars['choices']));
+        Assert::assertSame($expectedLabels, array_map(fn (ChoiceView $choiceView): string => (string) $choiceView->label, $view->vars['choices']));
     }
 }

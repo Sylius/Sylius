@@ -42,7 +42,7 @@ class ProductSlugController extends AbstractController
         }
 
         return new JsonResponse([
-            'slug' => $this->get('sylius.generator.slug')->generate($name),
+            'slug' => $this->container->get('sylius.generator.slug')->generate($name),
         ]);
     }
 }

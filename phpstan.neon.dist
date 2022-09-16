@@ -24,6 +24,8 @@ parameters:
 
         # Deprecated classes
         - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
+        - 'src/Sylius/Bundle/UserBundle/Security/UserPasswordEncoder.php'
 
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
+        - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'

@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
         if ($this->authenticationUtils !== null) {
             $authenticationUtils = $this->authenticationUtils;
         } else {
-            $authenticationUtils = $this->get('security.authentication_utils');
+            $authenticationUtils = $this->container->get('security.authentication_utils');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -62,7 +62,7 @@ class SecurityController extends AbstractController
         if ($this->formFactory !== null) {
             $form = $this->formFactory->createNamed('', $formType);
         } else {
-            $form = $this->get('form.factory')->createNamed('', $formType);
+            $form = $this->container->get('form.factory')->createNamed('', $formType);
         }
 
         return $this->render($template, [

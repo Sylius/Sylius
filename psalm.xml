@@ -107,6 +107,9 @@
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Core\User\AdvancedUserInterface" /> <!-- deprecated in Symfony 4.1 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
+                <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
             </errorLevel>
         </DeprecatedInterface>
         <DeprecatedMethod>
@@ -153,6 +156,9 @@
         <UndefinedMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getSession" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\RequestEvent::isMasterRequest" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\ExceptionEvent::isMasterRequest" />
+                <referencedMethod name="Symfony\Component\HttpKernel\Event\ResponseEvent::isMasterRequest" />
             </errorLevel>
         </UndefinedMethod>
 
@@ -207,6 +213,13 @@
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::variableNode" />
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::children" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::integerNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeDefinition::variableNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\VariableNodeParentInterface::end" />
             </errorLevel>
         </PossiblyUndefinedMethod>
 
@@ -225,6 +238,11 @@
                 <referencedFunction name="Symfony\Component\PasswordHasher\PasswordHasherInterface::hash" />
             </errorLevel>
         </TooManyArguments>
+        <UndefinedClass>
+            <errorLevel type="info">
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" />
+            </errorLevel>
+        </UndefinedClass>
 
         <!-- level 6 issues - really bad things -->
 
