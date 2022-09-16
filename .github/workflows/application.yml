@@ -272,7 +272,7 @@ jobs:
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
                     mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
-            
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -387,7 +387,7 @@ jobs:
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
                     mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
-                    
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -659,7 +659,7 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["14.x", "16.x"]
+                node: ["16.x", "18.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
@@ -819,8 +819,8 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["14.x", "16.x"]
-                mysql: [ "5.7", "8.0" ]                        
+                node: ["16.x", "18.x"]
+                mysql: [ "5.7", "8.0" ]
 
         env:
             APP_ENV: test_cached
