@@ -17,9 +17,9 @@ use Gaufrette\FilesystemInterface;
 use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
 /**
- * @deprecated since version 1.12, to be removed in 2.0. Use {@link FilesystemInterface} instead.
+ * @deprecated since version 1.12, to be removed in 2.0. Use {@link FlysystemFilesystemAdapter} instead.
  */
-class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
+final class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
 {
     public function __construct(private FilesystemInterface $filesystem)
     {

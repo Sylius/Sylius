@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Filesystem\Adapter;
 use League\Flysystem\FilesystemOperator;
 use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
-class FlysystemFilesystemAdapter implements FilesystemAdapterInterface
+final class FlysystemFilesystemAdapter implements FilesystemAdapterInterface
 {
     public function __construct(private FilesystemOperator $filesystem)
     {

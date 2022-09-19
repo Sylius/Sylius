@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
-class GaufretteFilesystemAdapterSpec extends ObjectBehavior
+final class GaufretteFilesystemAdapterSpec extends ObjectBehavior
 {
     function let(FilesystemInterface $filesystem): void
     {
