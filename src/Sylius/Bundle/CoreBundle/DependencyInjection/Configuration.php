@@ -66,6 +66,18 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('filesystem')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('adapter')
+                            ->defaultValue('default')
+                            ->validate()
+                                ->ifNotInArray(['default', 'flysystem', 'gaufrette'])
+                                ->thenInvalid('Expected adapter "default", "flysystem" or "gaufrette", but %s passed.')
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

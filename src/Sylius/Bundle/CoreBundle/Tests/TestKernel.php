@@ -20,6 +20,7 @@ use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
+use League\FlysystemBundle\FlysystemBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
 use Payum\Bundle\PayumBundle\PayumBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
@@ -103,6 +104,7 @@ final class TestKernel extends BaseKernel
             new JMSSerializerBundle(),
             new FOSRestBundle(),
             new KnpGaufretteBundle(),
+            new FlysystemBundle(),
             new LiipImagineBundle(),
             new PayumBundle(),
             new StofDoctrineExtensionsBundle(),

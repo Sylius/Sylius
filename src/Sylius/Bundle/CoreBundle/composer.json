@@ -33,6 +33,7 @@
         "jms/serializer-bundle": "^3.5",
         "knplabs/gaufrette": "^0.8",
         "knplabs/knp-gaufrette-bundle": "^0.7",
+        "league/flysystem-bundle": "^2.4",
         "liip/imagine-bundle": "^2.3",
         "sonata-project/block-bundle": "^4.2",
         "swiftmailer/swiftmailer": "^6.2",

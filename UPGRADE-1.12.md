@@ -33,8 +33,8 @@ are now included in every env starting with `test` keyword. If you wish to not h
 with test or remove these services with complier pass.
 
 6. The following listeners have been removed as they are not used anymore:
-- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener`
-- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionUpdateFailedMessageListener`
+   - `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener`
+   - `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionUpdateFailedMessageListener`
 
 7. The `Sylius\Component\Promotion\Event\CatalogPromotionFailed` has been removed as it is not used anymore.
 
@@ -73,6 +73,9 @@ with test or remove these services with complier pass.
    
         + - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
     ```
+
+9. Passing a `Gaufrette\Filesystem` to `Sylius\Component\Core\Uploader\ImageUploader` constructor is deprecated since
+Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter` instead.
 
 ### Asset management changes
 

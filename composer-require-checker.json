@@ -20,7 +20,8 @@
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
-    "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface"
+    "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface",
+    "League\\Flysystem\\FilesystemOperator"
   ],
   "php-core-extensions" : [
     "Core",
