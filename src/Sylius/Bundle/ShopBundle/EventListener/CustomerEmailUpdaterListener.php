@@ -23,8 +23,8 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -34,7 +34,7 @@ final class CustomerEmailUpdaterListener
         private GeneratorInterface $tokenGenerator,
         private ChannelContextInterface $channelContext,
         private EventDispatcherInterface $eventDispatcher,
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         private SectionProviderInterface $uriBasedSectionContext,
         private TokenStorageInterface $tokenStorage,
     ) {
@@ -98,7 +98,7 @@ final class CustomerEmailUpdaterListener
             $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
             /** @var FlashBagInterface $flashBag */
-            $flashBag = $this->session->getBag('flashes');
+            $flashBag = $this->requestStack->getSession()->getBag('flashes');
             $flashBag->add('success', 'sylius.user.verify_email_request');
         }
     }

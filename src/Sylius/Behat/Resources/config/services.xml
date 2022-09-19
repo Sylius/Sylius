@@ -32,7 +32,7 @@
         </service>
 
         <service id="sylius.behat.admin_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">admin</argument>
         </service>
@@ -43,7 +43,7 @@
         </service>
 
         <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" public="false">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">shop</argument>
         </service>
