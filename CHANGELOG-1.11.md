@@ -1,5 +1,67 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.8 (2022-09-19)
+
+#### Details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- [#14196](https://github.com/Sylius/Sylius/issues/14196) [Documentation] Add naming conventions to contributing section ([@GSadee](https://github.com/GSadee))
+- [#14202](https://github.com/Sylius/Sylius/issues/14202) [Bundle][Attribute]It will also listen on the product attribute objec… ()
+- [#14211](https://github.com/Sylius/Sylius/issues/14211) [Behat] Extract javascript driver check ([@Zales0123](https://github.com/Zales0123))
+- [#14212](https://github.com/Sylius/Sylius/issues/14212) Adjust PR template file for 1.11 and 1.12 branches ([@Zales0123](https://github.com/Zales0123))
+- [#14213](https://github.com/Sylius/Sylius/issues/14213) [bug]Send request to GUS with https ([@Ferror](https://github.com/Ferror))
+- [#14214](https://github.com/Sylius/Sylius/issues/14214) [API] Remove redundant validation config for the command that does not exist ([@GSadee](https://github.com/GSadee))
+- [#14216](https://github.com/Sylius/Sylius/issues/14216) [Documentation] Minor fixes to naming conventions page ([@GSadee](https://github.com/GSadee))
+- [#14217](https://github.com/Sylius/Sylius/issues/14217) [CatalogPromotion] Fix too early data setting during catalog promotion form submission ([@lchrusciel](https://github.com/lchrusciel))
+- [#14220](https://github.com/Sylius/Sylius/issues/14220) [CS][DX] Refactor ()
+- [#14223](https://github.com/Sylius/Sylius/issues/14223) [Maintenance] Use getObject instead of getEntity on doctrine events ([@lchrusciel](https://github.com/lchrusciel))
+- [#14225](https://github.com/Sylius/Sylius/issues/14225) [Minor][Behat] Attributes deletion scenario improvements ([@lchrusciel](https://github.com/lchrusciel))
+- [#14233](https://github.com/Sylius/Sylius/issues/14233) [CS][DX] Refactor ()
+- [#14236](https://github.com/Sylius/Sylius/issues/14236) [API] Remove problematic mapping path ([@coldic3](https://github.com/coldic3))
+- [#14237](https://github.com/Sylius/Sylius/issues/14237) Add coupon channel eligibility checker ([@TheMilek](https://github.com/TheMilek), [@PILLOWPET](https://github.com/PILLOWPET))
+- [#14240](https://github.com/Sylius/Sylius/issues/14240) [Checkout][Addressing] Fix duplicated email validation errors ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14245](https://github.com/Sylius/Sylius/issues/14245) [DOCS] How to run async task added in installation ([@arti0090](https://github.com/arti0090))
+- [#14248](https://github.com/Sylius/Sylius/issues/14248) [UI] Fix autocomplete empty value ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14250](https://github.com/Sylius/Sylius/issues/14250) [docs]Recommend cron jobs values ([@Ferror](https://github.com/Ferror))
+- [#14254](https://github.com/Sylius/Sylius/issues/14254) [Adjustment] Adjustment cloning resets ID and timestamps ([@coldic3](https://github.com/coldic3))
+- [#14277](https://github.com/Sylius/Sylius/issues/14277) [ProductAttributes] Change translatable status to yes/no in ProductAttributes grid ([@TheMilek](https://github.com/TheMilek))
+- [#14295](https://github.com/Sylius/Sylius/issues/14295) [Config] Mark SenderInterface as excluded in psalm.xml ([@Rafikooo](https://github.com/Rafikooo))
+- [#14301](https://github.com/Sylius/Sylius/issues/14301) [Behat][Fix] Check notification expectation in JavaScriptTestHelper ([@Rafikooo](https://github.com/Rafikooo))
+- [#14309](https://github.com/Sylius/Sylius/issues/14309) Conflict api-platform/core 2.7.0 ([@loic425](https://github.com/loic425), [@Rafikooo](https://github.com/Rafikooo))
+Deprecated: Return type of Pimple\Container::offsetGet($id) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 98
+Deprecated: Return type of Pimple\Container::offsetSet($id, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 79
+Deprecated: Return type of Pimple\Container::offsetUnset($id) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 143
+Deprecated: Return type of Symfony\Component\Console\Helper\HelperSet::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/console/Helper/HelperSet.php on line 104
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1121
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetExists($option) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1081
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetGet($option) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 843
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetSet($option, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1095
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetUnset($option) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1105
+Deprecated: Return type of Symfony\Component\Process\Process::getIterator($flags = 0) should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/process/Process.php on line 567
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 323
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 315
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetExists($name) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 279
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetGet($name) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 287
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetSet($offset, $command) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 295
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetUnset($name) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 307
+Working on Sylius/Sylius (branch 1.11)
+
 ## v1.11.7 (2022-07-28)
 
 #### Details
