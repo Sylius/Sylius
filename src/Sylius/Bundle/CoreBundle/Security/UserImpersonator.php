@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Security;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,7 +27,7 @@ final class UserImpersonator implements UserImpersonatorInterface
     private string $firewallContextName;
 
     public function __construct(
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         string $firewallContextName,
         private EventDispatcherInterface $eventDispatcher,
     ) {
@@ -53,8 +53,8 @@ final class UserImpersonator implements UserImpersonatorInterface
             );
         }
 
-        $this->session->set($this->sessionTokenParameter, serialize($token));
-        $this->session->save();
+        $this->requestStack->getSession()->set($this->sessionTokenParameter, serialize($token));
+        $this->requestStack->getSession()->save();
 
         $this->eventDispatcher->dispatch(new UserEvent($user), UserEvents::SECURITY_IMPERSONATE);
     }

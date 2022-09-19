@@ -17,12 +17,12 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class CartSessionStorage implements CartStorageInterface
 {
     public function __construct(
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         private string $sessionKeyName,
         private OrderRepositoryInterface $orderRepository,
     ) {
@@ -30,13 +30,13 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function hasForChannel(ChannelInterface $channel): bool
     {
-        return $this->session->has($this->getCartKeyName($channel));
+        return $this->requestStack->getSession()->has($this->getCartKeyName($channel));
     }
 
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
-            $cartId = $this->session->get($this->getCartKeyName($channel));
+            $cartId = $this->requestStack->getSession()->get($this->getCartKeyName($channel));
 
             return $this->orderRepository->findCartByChannel($cartId, $channel);
         }
@@ -46,12 +46,12 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
-        $this->session->set($this->getCartKeyName($channel), $cart->getId());
+        $this->requestStack->getSession()->set($this->getCartKeyName($channel), $cart->getId());
     }
 
     public function removeForChannel(ChannelInterface $channel): void
     {
-        $this->session->remove($this->getCartKeyName($channel));
+        $this->requestStack->getSession()->remove($this->getCartKeyName($channel));
     }
 
     private function getCartKeyName(ChannelInterface $channel): string

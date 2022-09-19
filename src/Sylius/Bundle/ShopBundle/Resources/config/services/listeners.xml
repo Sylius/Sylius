@@ -26,7 +26,7 @@
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="security.token_storage" />
             <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="eraseVerification" />
