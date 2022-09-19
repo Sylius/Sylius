@@ -24,7 +24,7 @@ final class AjaxContext implements Context
 {
     public function __construct(
         private AbstractBrowser $client,
-        private RequestStack    $requestStack,
+        private RequestStack $requestStack,
     ) {
     }
 
