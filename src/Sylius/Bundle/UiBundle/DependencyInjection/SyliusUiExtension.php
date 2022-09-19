@@ -19,10 +19,11 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusUiExtension extends Extension
+final class SyliusUiExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -72,5 +73,23 @@ final class SyliusUiExtension extends Extension
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        if (true === $container->getParameter('sylius_ui.use_webpack')) {
+            $container->prependExtensionConfig('framework', [
+                'assets' => [
+                    'packages' => [
+                        'shop' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/shop/manifest.json',
+                        ],
+                        'admin' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
+                        ],
+                    ]
+                ]
+            ]);
+        }
     }
 }

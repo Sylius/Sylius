@@ -786,7 +786,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    GULP_ENV=prod yarn build
+                    yarn encore production
 
             -
                 name: Make filesystem readonly
@@ -807,10 +807,10 @@ jobs:
                     path: etc/build/
                     if-no-files-found: ignore
 
-    test-webpack-build:
+    test-gulp-build:
         runs-on: ubuntu-latest
 
-        name: "Test Webpack build (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
+        name: "Test Gulp build (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
 
         timeout-minutes: 25
 
@@ -905,7 +905,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    yarn run encore production
+                    GULP_ENV=prod yarn build
 
     notify-about-build-failure:
         runs-on: ubuntu-latest

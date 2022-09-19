@@ -1,5 +1,10 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/events.yaml" }
+    - { resource: "@SyliusUiBundle/Resources/config/app/parameters.yaml" }
+
+twig:
+    globals:
+        use_webpack: '%sylius_ui.use_webpack%'
 
 sylius_grid:
     templates:
