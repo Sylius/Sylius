@@ -52,12 +52,6 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
         try {
             $this->generator->generate($product);
         } catch (VariantWithNoOptionsValuesException $exception) {
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
-
             $this->getFlashBag()->add('error', $exception->getMessage());
         }
     }
