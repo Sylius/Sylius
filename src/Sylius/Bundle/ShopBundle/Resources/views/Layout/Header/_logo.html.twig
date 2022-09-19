@@ -1,3 +1,11 @@
-<div class="column">
-    <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" /></a>
-</div>
+{% if use_webpack %}
+    <div class="column">
+        <a href="{{ path('sylius_shop_homepage') }}">
+            <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
+        </a>
+    </div>
+{% else %}
+    <div class="column">
+        <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" /></a>
+    </div>
+{% endif %}

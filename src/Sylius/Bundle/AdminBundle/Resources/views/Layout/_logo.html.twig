@@ -1,5 +1,13 @@
-<a class="item" href="{{ path('sylius_admin_dashboard') }}" style="padding: 13px 0;">
-    <div style="max-width: 90px; margin: 0 auto;">
-        <img src="{{ asset('assets/admin/img/admin-logo.svg') }}" class="ui fluid image">
-    </div>
-</a>
+{% if use_webpack %}
+    <a class="item" href="{{ path('sylius_admin_dashboard') }}" style="padding: 13px 0;">
+        <div style="max-width: 90px; margin: 0 auto;">
+            <img src="{{ asset('build/admin/images/admin-logo.svg', 'admin') }}" class="ui fluid image">
+        </div>
+    </a>
+{% else %}
+    <a class="item" href="{{ path('sylius_admin_dashboard') }}" style="padding: 13px 0;">
+        <div style="max-width: 90px; margin: 0 auto;">
+            <img src="{{ asset('assets/admin/img/admin-logo.svg') }}" class="ui fluid image">
+        </div>
+    </a>
+{% endif %}
