@@ -64,7 +64,6 @@ final class ExchangeRateType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        /** @psalm-suppress DeprecatedConstant */
         $resolver->setDefault('rounding_mode', \NumberFormatter::ROUND_HALFEVEN);
     }
 
