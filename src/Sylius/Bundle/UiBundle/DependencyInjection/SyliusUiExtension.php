@@ -53,18 +53,19 @@ final class SyliusUiExtension extends Extension
 
             foreach ($eventConfiguration['blocks'] as $blockName => $details) {
                 $details['name'] = $blockName;
-                $details['eventName'] = $eventName;
+                $details['event_name'] = $eventName;
 
                 $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
+                /** @psalm-var array{name: string, event_name: string, template: string, context: array, context_provider_class: string, priority: int, enabled: bool} $details */
                 $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
                     $details['name'],
-                    $details['eventName'],
+                    $details['event_name'],
                     $details['template'],
                     $details['context'],
+                    $details['context_provider_class'],
                     $details['priority'],
                     $details['enabled'],
                 ]);

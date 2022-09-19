@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
@@ -36,8 +37,8 @@ final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry,
         TemplateBlockRendererInterface $templateBlockRenderer,
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], ContextProviderInterface::class, 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], ContextProviderInterface::class, 0, true);
 
         $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 

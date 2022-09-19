@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
+use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
+use Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider;
+
 /**
  * @experimental
  */
@@ -23,6 +26,7 @@ final class TemplateBlock
         private string $eventName,
         private ?string $template,
         private ?array $context,
+        private ?string $contextProviderClass,
         private ?int $priority,
         private ?bool $enabled,
     ) {
@@ -56,6 +60,11 @@ final class TemplateBlock
         return $this->context ?? [];
     }
 
+    public function getContextProviderClass(): string
+    {
+        return $this->contextProviderClass ?? ContextProviderInterface::class;
+    }
+
     public function getPriority(): int
     {
         return $this->priority ?? 0;
@@ -81,6 +90,7 @@ final class TemplateBlock
             $block->eventName,
             $block->template ?? $this->template,
             $block->context ?? $this->context,
+            $block->contextProviderClass ?? $this->contextProviderClass,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,
         );

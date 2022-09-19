@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
+use Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider;
 use Sylius\Bundle\UiBundle\DependencyInjection\SyliusUiExtension;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
@@ -25,11 +27,12 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
     public function it_configures_the_multiple_event_block_listener_service_with_events_and_blocks_data(): void
     {
         $this->container->setParameter('kernel.debug', true);
+        $this->container->register('sample.context.provider', DefaultContextProvider::class);
 
         $this->load(['events' => [
             'first_event' => ['blocks' => [
                 'first_block' => ['template' => 'first.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
-                'second_block' => ['template' => 'second.html.twig', 'context' => ['foo' => 'bar'], 'enabled' => true, 'priority' => 0],
+                'second_block' => ['template' => 'second.html.twig', 'context' => ['foo' => 'bar'], 'context_provider_class' => 'sample.context.provider', 'enabled' => true, 'priority' => 0],
             ]],
             'second_event' => ['blocks' => [
                 'another_block' => ['template' => 'another.html.twig', 'context' => [], 'enabled' => true, 'priority' => 0],
@@ -41,11 +44,11 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             0,
             [
                 'first_event' => [
-                    'first_block' => new Definition(TemplateBlock::class, ['first_block', 'first_event', 'first.html.twig', [], 0, true]),
-                    'second_block' => new Definition(TemplateBlock::class, ['second_block', 'first_event', 'second.html.twig', ['foo' => 'bar'], 0, true]),
+                    'first_block' => new Definition(TemplateBlock::class, ['first_block', 'first_event', 'first.html.twig', [], ContextProviderInterface::class, 0, true]),
+                    'second_block' => new Definition(TemplateBlock::class, ['second_block', 'first_event', 'second.html.twig', ['foo' => 'bar'], 'sample.context.provider', 0, true]),
                 ],
                 'second_event' => [
-                    'another_block' => new Definition(TemplateBlock::class, ['another_block', 'second_event', 'another.html.twig', [], 0, true]),
+                    'another_block' => new Definition(TemplateBlock::class, ['another_block', 'second_event', 'another.html.twig', [], ContextProviderInterface::class, 0, true]),
                 ],
             ],
         );
@@ -69,10 +72,10 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
             TemplateBlockRegistryInterface::class,
             0,
             ['event_name' => [
-                'first_block' => new Definition(TemplateBlock::class, ['first_block', 'event_name', 'first.html.twig', [], 5, true]),
-                'second_block' => new Definition(TemplateBlock::class, ['second_block', 'event_name', 'second.html.twig', [], 0, true]),
-                'third_block' => new Definition(TemplateBlock::class, ['third_block', 'event_name', 'third.html.twig', [], 0, true]),
-                'fourth_block' => new Definition(TemplateBlock::class, ['fourth_block', 'event_name', 'fourth.html.twig', [], -5, true]),
+                'first_block' => new Definition(TemplateBlock::class, ['first_block', 'event_name', 'first.html.twig', [], ContextProviderInterface::class, 5, true]),
+                'second_block' => new Definition(TemplateBlock::class, ['second_block', 'event_name', 'second.html.twig', [], ContextProviderInterface::class, 0, true]),
+                'third_block' => new Definition(TemplateBlock::class, ['third_block', 'event_name', 'third.html.twig', [], ContextProviderInterface::class, 0, true]),
+                'fourth_block' => new Definition(TemplateBlock::class, ['fourth_block', 'event_name', 'fourth.html.twig', [], ContextProviderInterface::class, -5, true]),
             ]],
         );
     }

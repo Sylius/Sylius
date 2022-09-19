@@ -74,6 +74,18 @@ final class TemplateEventTest extends KernelTestCase
     }
 
     /** @test */
+    public function it_passes_context_with_custom_context_provider_defined_in_block_configuration_during_rendering(): void
+    {
+        // See Kernel.php for the configuration resulting in those lines
+        $expectedLines = [
+            'Block: option1=foo, option2=bar',
+        ];
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('customContextProvider.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
+
+    /** @test */
     public function it_renders_multiple_events_at_once(): void
     {
         // See Kernel.php for the configuration resulting in those lines
