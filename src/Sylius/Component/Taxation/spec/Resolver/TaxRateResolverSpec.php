@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxation\Checker\TaxRateDateCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -22,9 +24,9 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository): void
+    function let(RepositoryInterface $taxRateRepository, TaxRateDateCheckerInterface $taxRateDateChecker): void
     {
-        $this->beConstructedWith($taxRateRepository);
+        $this->beConstructedWith($taxRateRepository, $taxRateDateChecker);
     }
 
     function it_implements_tax_rate_resolver_interface(): void
@@ -33,27 +35,60 @@ final class TaxRateResolverSpec extends ObjectBehavior
     }
 
     function it_returns_tax_rate_for_given_taxable_category(
-        $taxRateRepository,
+        RepositoryInterface $taxRateRepository,
+        TaxRateDateCheckerInterface $taxRateDateChecker,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
-        TaxRateInterface $taxRate,
+        TaxRateInterface $firstTaxRate,
+        TaxRateInterface $secondTaxRate,
+        TaxRateInterface $thirdTaxRate
     ): void {
         $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn($taxRate);
+        $taxRateRepository
+            ->findBy(['category' => $taxCategory])
+            ->shouldBeCalled()
+            ->willReturn([$firstTaxRate, $secondTaxRate, $thirdTaxRate])
+        ;
+//
+//        $now = new \DateTime();
+//        $calendar->now()->willReturn($now);
+//
+//        $firstTaxRate->isInDate($now)->willReturn(false);
+//        $secondTaxRate->isInDate($now)->willReturn(true);
+//        $thirdTaxRate->isInDate($now)->willReturn(true);
+//
+//        $this->resolve($taxable)->shouldReturn($secondTaxRate);
 
-        $this->resolve($taxable)->shouldReturn($taxRate);
+        $taxRateDateChecker->check([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->willReturn($firstTaxRate);
+
+        $this->resolve($taxable)->shouldReturn($firstTaxRate);
     }
 
-    function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
-        $taxRateRepository,
-        TaxableInterface $taxable,
-        TaxCategoryInterface $taxCategory,
-    ): void {
-        $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn(null);
-
-        $this->resolve($taxable)->shouldReturn(null);
-    }
+//    function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
+//        RepositoryInterface $taxRateRepository,
+//        DateTimeProviderInterface $calendar,
+//        TaxableInterface $taxable,
+//        TaxCategoryInterface $taxCategory,
+//        TaxRateInterface $firstTaxRate,
+//        TaxRateInterface $secondTaxRate,
+//        TaxRateInterface $thirdTaxRate
+//    ): void {
+//        $taxable->getTaxCategory()->willReturn($taxCategory);
+//        $taxRateRepository
+//            ->findBy(['category' => $taxCategory])
+//            ->shouldBeCalled()
+//            ->willReturn([$firstTaxRate, $secondTaxRate, $thirdTaxRate])
+//        ;
+//
+//        $now = new \DateTime();
+//        $calendar->now()->willReturn($now);
+//
+//        $firstTaxRate->isInDate($now)->willReturn(false);
+//        $secondTaxRate->isInDate($now)->willReturn(false);
+//        $thirdTaxRate->isInDate($now)->willReturn(false);
+//
+//        $this->resolve($taxable)->shouldReturn(null);
+//    }
 
     function it_returns_null_if_taxable_does_not_belong_to_any_category(
         TaxableInterface $taxable,

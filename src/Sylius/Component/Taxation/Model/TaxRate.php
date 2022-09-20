@@ -40,6 +40,10 @@ class TaxRate implements TaxRateInterface
     /** @var string|null */
     protected $calculator;
 
+    protected ?\DateTimeInterface $startDate = null;
+
+    protected ?\DateTimeInterface $endDate = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -119,5 +123,42 @@ class TaxRate implements TaxRateInterface
     public function getLabel(): ?string
     {
         return sprintf('%s (%s%%)', $this->name, $this->getAmountAsPercentage());
+    }
+
+    public function getStartDate(): ?\DateTimeInterface
+    {
+        return $this->startDate;
+    }
+
+    public function setStartDate(?\DateTimeInterface $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(?\DateTimeInterface $endDate): void
+    {
+        $this->endDate = $endDate;
+    }
+
+    public function isInDate(\DateTimeInterface $date): bool
+    {
+        if (null === $this->startDate && null === $this->endDate) {
+            return true;
+        }
+
+        if (null === $this->startDate && null !== $this->endDate) {
+            return $date <= $this->endDate;
+        }
+
+        if (null === $this->endDate) {
+            return $date >= $this->startDate;
+        }
+
+        return $this->startDate <= $date && $this->endDate >= $date;
     }
 }

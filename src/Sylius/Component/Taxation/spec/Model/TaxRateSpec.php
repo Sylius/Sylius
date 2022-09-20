@@ -124,4 +124,33 @@ final class TaxRateSpec extends ObjectBehavior
 
         $this->getLabel()->shouldReturn('Test tax (23%)');
     }
+
+    function it_has_start_date(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
+
+        $this->setStartDate($startDate);
+        $this->getStartDate()->shouldReturn($startDate);
+    }
+
+    function it_has_end_date(): void
+    {
+        $endDate = new \DateTime('01-01-2022');
+
+        $this->setEndDate($endDate);
+        $this->getEndDate()->shouldReturn($endDate);
+    }
+
+    function it_can_be_in_date(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
+        $endDate = new \DateTime('01-03-2022');
+
+        $this->setStartDate($startDate);
+        $this->setEndDate($endDate);
+
+        $this->isInDate(new \DateTime('12-12-2021'))->shouldReturn(false);
+        $this->isInDate(new \DateTime('02-02-2022'))->shouldReturn(true);
+        $this->isInDate(new \DateTime('03-03-2022'))->shouldReturn(false);
+    }
 }

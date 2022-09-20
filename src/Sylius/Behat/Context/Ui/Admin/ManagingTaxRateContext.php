@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
@@ -56,6 +57,15 @@ final class ManagingTaxRateContext implements Context
     public function iSpecifyItsAmountAs($amount = null)
     {
         $this->createPage->specifyAmount($amount ?? '');
+    }
+
+    /**
+     * @When I make it start at :startDate and end at :endDate
+     */
+    public function iMakeItStartAtAndEndAt(string $startDate, string $endDate): void
+    {
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
+        $this->createPage->specifyEndDate(new \DateTime($endDate));
     }
 
     /**
@@ -232,6 +242,14 @@ final class ManagingTaxRateContext implements Context
     public function iShouldBeNotifiedThatIsInvalid(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('The tax rate %s is invalid.', $element));
+    }
+
+    /**
+     * @Then I should be notified that tax rate should not end before it starts
+     */
+    public function iShouldBeNotifiedThatTaxRateShouldNotEndBeforeItStarts(): void
+    {
+        $this->assertFieldValidationMessage('end_date', 'The tax rate should not end before it starts');
     }
 
     /**
