@@ -141,7 +141,7 @@ final class TaxRateSpec extends ObjectBehavior
         $this->getEndDate()->shouldReturn($endDate);
     }
 
-    function it_can_be_in_date(): void
+    function it_can_be_in_date_when_both_dates_are_defined(): void
     {
         $startDate = new \DateTime('01-01-2022');
         $endDate = new \DateTime('01-03-2022');
@@ -152,5 +152,16 @@ final class TaxRateSpec extends ObjectBehavior
         $this->isInDate(new \DateTime('12-12-2021'))->shouldReturn(false);
         $this->isInDate(new \DateTime('02-02-2022'))->shouldReturn(true);
         $this->isInDate(new \DateTime('03-03-2022'))->shouldReturn(false);
+    }
+
+    function it_can_be_in_date_when_one_date_is_defined(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
+
+        $this->setStartDate($startDate);
+        $this->setEndDate(null);
+
+        $this->isInDate(new \DateTime('12-12-2021'))->shouldReturn(false);
+        $this->isInDate(new \DateTime('02-02-2022'))->shouldReturn(true);
     }
 }

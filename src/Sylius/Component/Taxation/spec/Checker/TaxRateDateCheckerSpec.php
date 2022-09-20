@@ -36,7 +36,7 @@ class TaxRateDateCheckerSpec extends ObjectBehavior
         $this->check([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->shouldReturn(null);
     }
 
-    function it_returns_tax_rate_if_its_in_date(
+    function it_returns_tax_rate_if_it_is_in_date(
         DateTimeProviderInterface $calendar,
         TaxRateInterface $firstTaxRate,
         TaxRateInterface $secondTaxRate,
