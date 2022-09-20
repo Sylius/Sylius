@@ -324,7 +324,7 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted()
     {
-        $this->notificationChecker->checkNotification('Error Cannot delete, the zone is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification('Error Cannot delete, the Zone is in use.', NotificationType::failure());
     }
 
     /**
