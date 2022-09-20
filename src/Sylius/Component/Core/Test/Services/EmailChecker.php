@@ -44,7 +44,11 @@ final class EmailChecker implements EmailCheckerInterface
 
         foreach ($messages as $email) {
             if ($this->isMessageTo($email, $recipient)) {
-                return str_contains($email->getHtmlBody(), $message);
+                $emailTextContent = trim(preg_replace('/\n+\s+/', ' ', strip_tags($email->getHtmlBody())));
+
+                if (str_contains($emailTextContent, $message)) {
+                    return true;
+                }
             }
         }
 
