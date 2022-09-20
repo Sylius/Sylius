@@ -20,6 +20,4 @@ interface EmailCheckerInterface
     public function hasMessageTo(string $message, string $recipient): bool;
 
     public function countMessagesTo(string $recipient): int;
-
-    public function getSpoolDirectory(): string;
 }

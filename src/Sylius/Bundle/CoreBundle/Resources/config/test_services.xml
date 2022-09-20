@@ -13,16 +13,21 @@
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
         <!--Paypal-->
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator" />
 
+        <!--Mailer messages checking-->
         <service id="sylius.behat.email_checker" class="Sylius\Component\Core\Test\Services\EmailChecker">
-            <argument>%kernel.cache_dir%/spool</argument>
+            <argument type="service" id="test.mailer_pool" />
+        </service>
+        <service id="sylius.behat.message_send_cacher" class="Sylius\Component\Core\Test\Services\MessageSendCacher">
+            <argument type="service" id="test.mailer_pool" />
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <!--Default Store Data-->

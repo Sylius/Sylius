@@ -6,7 +6,7 @@ default:
         ui_checkout:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
