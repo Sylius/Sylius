@@ -22,15 +22,20 @@ use Twig\Environment;
  */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    public function __construct(private Environment $twig, private ContextProviderInterface $contextProvider)
+    public function __construct(private Environment $twig, private iterable $contextProviders)
     {
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string
     {
-        return $this->twig->render(
-            $templateBlock->getTemplate(),
-            $this->contextProvider->provide($context, $templateBlock->getContext()),
-        );
+        foreach ($this->contextProviders as $contextProvider) {
+            if (!$contextProvider instanceof ContextProviderInterface || !$contextProvider->supports($templateBlock)) {
+                continue;
+            }
+
+            $context = $contextProvider->provide($context, $templateBlock);
+        }
+
+        return $this->twig->render($templateBlock->getTemplate(), $context);
     }
 }

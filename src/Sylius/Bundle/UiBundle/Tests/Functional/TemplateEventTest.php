@@ -78,7 +78,7 @@ final class TemplateEventTest extends KernelTestCase
     {
         // See Kernel.php for the configuration resulting in those lines
         $expectedLines = [
-            'Block: option1=foo, option2=bar',
+            'Block: option1=foo, option2=baz, custom=yolo',
         ];
         $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('customContextProvider.txt.twig'))));
 

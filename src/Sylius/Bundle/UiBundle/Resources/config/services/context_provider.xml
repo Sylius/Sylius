@@ -15,6 +15,11 @@
     <services>
         <defaults public="true" />
 
-        <service class="Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider" id="Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface" />
+        <service
+            id="Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface"
+            class="Sylius\Bundle\UiBundle\ContextProvider\DefaultContextProvider"
+        >
+            <tag name="sylius.ui.template_event.context_provider" />
+        </service>
     </services>
 </container>

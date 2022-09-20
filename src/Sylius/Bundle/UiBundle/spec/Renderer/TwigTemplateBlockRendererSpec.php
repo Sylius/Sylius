@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
@@ -21,9 +22,15 @@ use Twig\Environment;
 
 final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 {
-    function let(Environment $twig, ContextProviderInterface $contextProvider): void
-    {
-        $this->beConstructedWith($twig, $contextProvider);
+    function let(
+        Environment $twig,
+        ContextProviderInterface $firstContextProvider,
+        ContextProviderInterface $secondContextProvider,
+    ): void {
+        $this->beConstructedWith($twig, [$firstContextProvider, $secondContextProvider]);
+
+        $firstContextProvider->supports(Argument::type(TemplateBlock::class))->willReturn(true);
+        $secondContextProvider->supports(Argument::type(TemplateBlock::class))->willReturn(false);
     }
 
     function it_is_a_template_block_renderer(): void
@@ -31,15 +38,23 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
         $this->shouldImplement(TemplateBlockRendererInterface::class);
     }
 
-    function it_renders_a_template_block(Environment $twig, ContextProviderInterface $contextProvider): void
-    {
+    function it_renders_a_template_block(
+        Environment $twig,
+        ContextProviderInterface $firstContextProvider,
+        ContextProviderInterface $secondContextProvider,
+    ): void {
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true);
+
         $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true])->willReturn('Block content');
 
-        $contextProvider->provide(['sample' => 'Hello', 'switch' => true], ['sample' => 'Hi', 'switch' => true])->willReturn(['sample' => 'Hello', 'switch' => true]);
+        $firstContextProvider
+            ->provide(['sample' => 'Hello', 'switch' => true], $templateBlock)
+            ->willReturn(['sample' => 'Hello', 'switch' => true])
+            ->shouldBeCalled()
+        ;
 
-        $this->render(
-            new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true),
-            ['sample' => 'Hello', 'switch' => true],
-        )->shouldReturn('Block content');
+        $secondContextProvider->provide(Argument::any())->shouldNotBeCalled();
+
+        $this->render($templateBlock, ['sample' => 'Hello', 'switch' => true])->shouldReturn('Block content');
     }
 }
