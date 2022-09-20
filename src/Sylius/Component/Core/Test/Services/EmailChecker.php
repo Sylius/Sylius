@@ -13,29 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Test\Services;
 
-use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Mime\Email;
 use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    public function __construct(private string $spoolDirectory)
+    public function __construct(private CacheItemPoolInterface $cache)
     {
     }
 
     public function hasRecipient(string $recipient): bool
     {
-        $this->assertRecipientIsValid($recipient);
+        $messages = $this->getMailerMessages();
 
-        try {
-            $messages = $this->getMessages($this->spoolDirectory);
-            foreach ($messages as $message) {
-                if ($this->isMessageTo($message, $recipient)) {
-                    return true;
-                }
+        foreach ($messages as $email) {
+            if ($this->isMessageTo($email, $recipient)) {
+                return true;
             }
-        } catch (DirectoryNotFoundException) {
         }
 
         return false;
@@ -45,16 +40,11 @@ final class EmailChecker implements EmailCheckerInterface
     {
         $this->assertRecipientIsValid($recipient);
 
-        $messages = $this->getMessages($this->spoolDirectory);
-        foreach ($messages as $sentMessage) {
-            if ($this->isMessageTo($sentMessage, $recipient)) {
-                $body = strip_tags($sentMessage->getBody());
-                $body = str_replace("\n", ' ', $body);
-                $body = preg_replace('/ {2,}/', ' ', $body);
+        $messages = $this->getMailerMessages();
 
-                if (str_contains($body, $message)) {
-                    return true;
-                }
+        foreach ($messages as $email) {
+            if ($this->isMessageTo($email, $recipient)) {
+                return str_contains($email->getHtmlBody(), $message);
             }
         }
 
@@ -66,10 +56,10 @@ final class EmailChecker implements EmailCheckerInterface
         $this->assertRecipientIsValid($recipient);
 
         $messagesCount = 0;
+        $messages = $this->getMailerMessages();
 
-        $messages = $this->getMessages($this->spoolDirectory);
-        foreach ($messages as $message) {
-            if ($this->isMessageTo($message, $recipient)) {
+        foreach ($messages as $email) {
+            if ($this->isMessageTo($email, $recipient)) {
                 ++$messagesCount;
             }
         }
@@ -77,14 +67,15 @@ final class EmailChecker implements EmailCheckerInterface
         return $messagesCount;
     }
 
-    public function getSpoolDirectory(): string
+    private function isMessageTo(Email $message, string $recipient): bool
     {
-        return $this->spoolDirectory;
-    }
+        foreach ($message->getTo() as $toRecipient) {
+            if ($recipient === $toRecipient->getAddress()) {
+                return true;
+            }
+        }
 
-    private function isMessageTo(object $message, string $recipient): bool
-    {
-        return array_key_exists($recipient, $message->getTo());
+        return false;
     }
 
     /**
@@ -100,18 +91,9 @@ final class EmailChecker implements EmailCheckerInterface
         );
     }
 
-    private function getMessages(string $directory): array
+    /** @return Email[] */
+    private function getMailerMessages(): array
     {
-        $finder = new Finder();
-        $finder->files()->name('*.message')->in($directory);
-        Assert::notEq($finder->count(), 0, sprintf('No message files found in %s.', $directory));
-        $messages = [];
-
-        /** @var SplFileInfo $file */
-        foreach ($finder as $file) {
-            $messages[] = unserialize($file->getContents());
-        }
-
-        return $messages;
+        return $this->cache->hasItem(MessageSendCacher::CACHE_KEY) ? $this->cache->getItem(MessageSendCacher::CACHE_KEY)->get() : [];
     }
 }

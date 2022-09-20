@@ -23,9 +23,8 @@
             <argument type="service" id="Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface" />
         </service>
 
-        <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
-            <argument type="service" id="sylius.behat.email_checker"/>
-            <argument type="service" id="filesystem" />
+        <service id="sylius.behat.context.hook.mailer" class="Sylius\Behat\Context\Hook\MailerContext">
+            <argument type="service" id="test.mailer_pool"/>
         </service>
     </services>
 </container>
