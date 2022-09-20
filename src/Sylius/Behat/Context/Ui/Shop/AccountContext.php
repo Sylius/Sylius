@@ -220,13 +220,13 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should be notified that the password should be at least 4 characters long
+     * @Then I should be notified that the password should be at least :length characters long
      */
-    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length)
     {
         Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'new_password',
-            'Password must be at least 4 characters long.',
+            sprintf('Password must be at least %s characters long.', $length),
         ));
     }
 
