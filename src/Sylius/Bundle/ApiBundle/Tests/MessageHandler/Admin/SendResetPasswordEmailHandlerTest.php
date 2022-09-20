@@ -16,12 +16,10 @@ namespace Sylius\Bundle\ApiBundle\Tests\MessageHandler\Admin;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler;
 use Sylius\Component\Core\Model\AdminUser;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
@@ -35,11 +33,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
         }
 
+        $container = self::getContainer();
+
         /** @var TranslatorInterface $translator */
-        $translator = $this->getContainer()->get('translator');
+        $translator = $container->get('translator');
 
         /** @var SenderInterface $emailSender */
-        $emailSender = $this->getContainer()->get('sylius.email_sender');
+        $emailSender = $container->get('sylius.email_sender');
 
         $adminUser = new AdminUser();
         $adminUser->setEmail('sylius@example.com');
@@ -58,15 +58,18 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US',
         ));
 
-        $this->assertEmailCount(1);
-        $email = $this->getMailerMessage();
-        $this->assertEmailAddressContains($email, 'To', 'sylius@example.com');
-        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'));
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'sylius@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
+            $translator->trans('sylius.email.admin_password_reset.to_reset_your_password_token', [], null, 'en_US'),
+        );
     }
 
     private function isItSwiftmailerTestEnv(): bool
     {
-        $env = $this->getContainer()->getParameter('kernel.environment');
+        $env = self::getContainer()->getParameter('kernel.environment');
 
         return $env === 'test_with_swiftmailer';
     }

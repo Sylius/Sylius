@@ -18,11 +18,9 @@ use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
@@ -32,20 +30,10 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_account_verification_token_email_without_hostname(): void
     {
-        $this->markTestSkipped('EmailChecker fixed required');
-
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem.public');
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -78,11 +66,13 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         )
         );
 
-        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
             $translator->trans('sylius.email.verification_token.verify_your_email_address', [], null, 'en_US'),
-            'user@example.com'
-        ));
+        );
     }
 
     /**
@@ -90,20 +80,10 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
      */
     public function it_sends_account_verification_token_email_with_hostname(): void
     {
-        $this->markTestSkipped('EmailChecker fixed required');
-
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem.public');
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -136,10 +116,12 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         )
         );
 
-        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
-            $translator->trans('sylius.email.verification_token.to_verify_your_email_address', [], null, 'en_US'),
-            'user@example.com'
-        ));
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
+            $translator->trans('sylius.email.verification_token.verify_your_email_address', [], null, 'en_US'),
+        );
     }
 }
