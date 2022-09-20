@@ -17,7 +17,6 @@ class TaxRateDateChecker implements TaxRateDateCheckerInterface
     public function check(array $taxRates): ?TaxRateInterface
     {
         $now = $this->calendar->now();
-        $now = new \DateTime("23-09-2022");
 
         /** @var TaxRateInterface $taxRate */
         foreach ($taxRates as $key => $taxRate) {
