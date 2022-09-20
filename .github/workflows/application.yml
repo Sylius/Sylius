@@ -242,6 +242,7 @@ jobs:
                 php: ["8.0"]
                 symfony: ["^5.4"]
                 postgres: ["13.3"]
+                node: ["16.x"]
 
         env:
             APP_ENV: test_cached
@@ -298,6 +299,40 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
+
+            -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
 
             -
                 name: Dump the environment
@@ -357,6 +392,7 @@ jobs:
                 symfony: ["^5.4"]
                 mariadb: ["10.4.10"]
                 dbal: ["2", "3"]
+                node: ["16.x"]
 
         env:
             APP_ENV: test_cached
@@ -419,6 +455,40 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
+
+            -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
 
             -
                 name: Dump the environment
@@ -500,6 +570,7 @@ jobs:
                 mysql: ["5.7", "8.0"]
                 twig: ["3.x"]
                 dbal: ["3"]
+                node: ["16.x"]
                 include:
                     -
                         php: "8.0"
@@ -585,6 +656,40 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
+
+            -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
 
             -
                 name: Dump the environment
