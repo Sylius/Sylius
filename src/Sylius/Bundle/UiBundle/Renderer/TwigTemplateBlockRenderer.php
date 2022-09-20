@@ -15,27 +15,22 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Environment;
-use Webmozart\Assert\Assert;
 
 /**
  * @experimental
  */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    public function __construct(private Environment $twig, private ContainerInterface $container)
+    public function __construct(private Environment $twig, private ContextProviderInterface $contextProvider)
     {
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string
     {
-        $contextProvider = $this->container->get($templateBlock->getContextProviderClass());
-        Assert::isInstanceOf($contextProvider, ContextProviderInterface::class);
-
         return $this->twig->render(
             $templateBlock->getTemplate(),
-            $contextProvider->provide($context, $templateBlock->getContext()),
+            $this->contextProvider->provide($context, $templateBlock->getContext()),
         );
     }
 }

@@ -116,7 +116,6 @@ final class Kernel extends HttpKernel
                             'option1' => 'foo',
                             'option2' => 'bar',
                         ],
-                        'context_provider_class' => OverrideContextProvider::class,
                     ],
                 ],
             ],

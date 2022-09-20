@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 
@@ -37,7 +36,7 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
         $templateBlockRenderer->render(Argument::cetera())->willReturn('Block content');
 
         $this->render(
-            new TemplateBlock('block_name', 'event_name', 'block.html.twig', [], ContextProviderInterface::class, 0, true),
+            new TemplateBlock('block_name', 'event_name', 'block.html.twig', [], 0, true),
             ['foo' => 'bar'],
         )->shouldReturn(
             '<!-- BEGIN BLOCK | event name: "event_name", block name: "block_name", template: "block.html.twig", priority: 0 -->' . "\n" .
@@ -52,7 +51,7 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
         $templateBlockRenderer->render(Argument::cetera())->willReturn('Block content');
 
         $this->render(
-            new TemplateBlock('block_name', 'event_name', 'block.txt.twig', [], ContextProviderInterface::class, 0, true),
+            new TemplateBlock('block_name', 'event_name', 'block.txt.twig', [], 0, true),
             ['foo' => 'bar'],
         )->shouldReturn('Block content');
     }

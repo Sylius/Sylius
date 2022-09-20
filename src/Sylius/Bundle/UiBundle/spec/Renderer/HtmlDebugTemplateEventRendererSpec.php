@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
@@ -36,8 +35,8 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry,
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], ContextProviderInterface::class, 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.html.twig', [], ContextProviderInterface::class, 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.html.twig', [], 0, true);
 
         $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
@@ -55,8 +54,8 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateEventRendererInterface $templateEventRenderer,
         TemplateBlockRegistryInterface $templateBlockRegistry,
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], ContextProviderInterface::class, 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.txt.twig', [], ContextProviderInterface::class, 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.txt.twig', [], 0, true);
 
         $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 
