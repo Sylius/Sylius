@@ -148,7 +148,6 @@ Frontend
 
     frontend/admin-js-and-css
     frontend/google-analytics.rst
-    frontend/webpack.rst
 
 .. include:: /cookbook/frontend/map.rst.inc
 
