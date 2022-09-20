@@ -69,6 +69,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US',
         ));
 
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
+            $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
+        );
         $this->assertEmailCount(1);
         $email = $this->getMailerMessage();
         $this->assertEmailAddressContains($email, 'To', 'user@example.com');

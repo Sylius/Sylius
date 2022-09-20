@@ -12,10 +12,8 @@
 namespace Sylius\Tests\Api\Shop;
 
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Response;
 
 final class SendContactRequestTest extends JsonApiTestCase
@@ -25,17 +23,7 @@ final class SendContactRequestTest extends JsonApiTestCase
     /** @test */
     public function it_sends_contact_request(): void
     {
-        $this->markTestSkipped('EmailChecker fixed required');
-
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem.public');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
+        self::getContainer();
 
         $this->loadFixturesFromFiles(['channel.yaml']);
 
@@ -57,23 +45,14 @@ final class SendContactRequestTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-        self::assertSame(1, $emailChecker->countMessagesTo('web@sylius.com'));
+        self::assertEmailCount(1);
+        self::assertEmailAddressContains(self::getMailerMessage(), 'To', 'web@sylius.com');
     }
 
     /** @test */
     public function it_sends_contact_request_as_logged_in_user(): void
     {
-        $this->markTestSkipped('EmailChecker fixed required');
-
-        $container = self::bootKernel()->getContainer();
-
-        /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem.public');
-
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
+        self::getContainer();
 
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'authentication/customer.yaml']);
 
@@ -97,6 +76,7 @@ final class SendContactRequestTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-        self::assertSame(1, $emailChecker->countMessagesTo('web@sylius.com'));
+        self::assertEmailCount(1);
+        self::assertEmailAddressContains(self::getMailerMessage(), 'To', 'web@sylius.com');
     }
 }
