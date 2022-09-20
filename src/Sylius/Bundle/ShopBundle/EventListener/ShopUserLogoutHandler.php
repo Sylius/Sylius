@@ -14,34 +14,21 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Http\Event\LogoutEvent;
-use Symfony\Component\Security\Http\HttpUtils;
 
 final class ShopUserLogoutHandler
 {
     public function __construct(
-        private HttpUtils $httpUtils,
-        private string $targetUrl,
         private ChannelContextInterface $channelContext,
         private CartStorageInterface $cartStorage,
-        private TokenStorageInterface $tokenStorage,
     ) {
     }
 
-    public function onLogout(LogoutEvent $logoutEvent): void
+    public function onLogout(): void
     {
-        if ($logoutEvent->getResponse() !== null) {
-            return;
-        }
-
+        /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
         $this->cartStorage->removeForChannel($channel);
-
-        $this->tokenStorage->setToken(null);
-
-        $response = $this->httpUtils->createRedirectResponse($logoutEvent->getRequest(), $this->targetUrl);
-        $logoutEvent->setResponse($response);
     }
 }
