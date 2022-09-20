@@ -453,27 +453,22 @@ jobs:
             -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
-                continue-on-error: true
 
             -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
-                continue-on-error: true
 
             -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
-                continue-on-error: true
 
             -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
-                continue-on-error: true
 
             -
                 name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
-                continue-on-error: true
 
             -
                 name: Upload Behat logs
