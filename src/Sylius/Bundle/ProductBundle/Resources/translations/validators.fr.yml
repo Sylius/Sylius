@@ -10,7 +10,7 @@ sylius:
             not_blank: Veuillez entrer le slug du produit.
             unique: Le slug du produit doit être unique.
         code:
-            not_blank: Veillez introduire le code du produit.
+            not_blank: Veuillez introduire le code du produit.
             regex: Le code du produit peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code du produit doit être unique.
         name:
