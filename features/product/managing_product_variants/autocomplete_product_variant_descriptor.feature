@@ -7,7 +7,7 @@ Feature: Product variants autocomplete
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a "Snake" configurable product
-        And this product has "Ouroboros", "Boomslang" and "Bimini" variants
+        And this product has "Ouroboros", "Cobra" and "Bimini" variants
         And I am logged in as an administrator
 
     @api
@@ -18,20 +18,20 @@ Feature: Product variants autocomplete
 
     @api
     Scenario: Getting a hint when looking for product variants
-        When I look for a variant with "bo" in descriptor within the "Snake" product
+        When I look for a variant with "ob" in descriptor within the "Snake" product
         Then I should see 2 product variants on the list
-        And I should see the product variants named "Ouroboros" and "Boomslang" on the list
+        And I should see the product variants named "Ouroboros" and "Cobra" on the list
 
     @api
     Scenario: Getting a hint when looking for product variants
-        Given the product "Snake" also has a "Python" variant with code "TIMOR"
+        Given the product "Snake" also has a "Python" variant with code "timor"
         When I look for a variant with "ti" in descriptor within the "Snake" product
         Then I should see 1 product variant on the list
         And I should see the product variant named "Python" on the list
 
     @api
     Scenario: Getting a hint when looking for product variants
-        Given the product "Snake" also has a nameless variant with code "CERBERUS"
+        Given the product "Snake" also has a nameless variant with code "cerberus"
         When I look for a variant with "cer" in descriptor within the "Snake" product
         Then I should see 1 product variant on the list
-        And I should see the product variant labeled "Snake (CERBERUS)" on the list
+        And I should see the product variant labeled "Snake (cerberus)" on the list

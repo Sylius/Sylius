@@ -104,7 +104,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse()
     {
-        $this->notificationChecker->checkNotification('Cannot delete, the payment method is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
     }
 
     /**

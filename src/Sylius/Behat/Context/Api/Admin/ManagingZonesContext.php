@@ -409,6 +409,7 @@ final class ManagingZonesContext implements Context
 
     /**
      * @Then I should be notified that this zone cannot be deleted
+     * @Then I should be notified that the zone is in use and cannot be deleted
      */
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
     {
