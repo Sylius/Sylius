@@ -11,9 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Test\Services;
+namespace Sylius\Behat\Service\Checker;
 
 use Psr\Cache\CacheItemPoolInterface;
+use Sylius\Behat\Service\MessageSendCacher;
 use Symfony\Component\Mime\Email;
 use Webmozart\Assert\Assert;
 

@@ -21,15 +21,6 @@
         <!--Paypal-->
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\RandomInvoiceNumberGenerator" />
 
-        <!--Mailer messages checking-->
-        <service id="sylius.behat.email_checker" class="Sylius\Component\Core\Test\Services\EmailChecker">
-            <argument type="service" id="test.mailer_pool" />
-        </service>
-        <service id="sylius.behat.message_send_cacher" class="Sylius\Component\Core\Test\Services\MessageSendCacher">
-            <argument type="service" id="test.mailer_pool" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
         <!--Default Store Data-->
         <service id="sylius.behat.factory.default_united_states_channel" class="Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory">
             <argument type="service" id="sylius.repository.channel" />
