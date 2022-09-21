@@ -33,7 +33,7 @@ final class SendContactRequestHandlerTest extends KernelTestCase
             $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
         }
 
-        $container = self::bootKernel()->getContainer();
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
@@ -61,15 +61,15 @@ final class SendContactRequestHandlerTest extends KernelTestCase
 
         $sendContactEmailHandler($sendContactRequest);
 
-        $this->assertEmailCount(1);
-        $email = $this->getMailerMessage();
-        $this->assertEmailAddressContains($email, 'To', 'shop@example.com');
-        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'));
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'shop@example.com');
+        self::assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.contact_request.content', [], null, 'en_US'));
     }
 
     private function isItSwiftmailerTestEnv(): bool
     {
-        $env = $this->getContainer()->getParameter('kernel.environment');
+        $env = self::getContainer()->getParameter('kernel.environment');
 
         return $env === 'test_with_swiftmailer';
     }
