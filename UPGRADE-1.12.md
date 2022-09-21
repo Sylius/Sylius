@@ -84,6 +84,17 @@ with test or remove these services with complier pass.
 9. Passing a `Gaufrette\Filesystem` to `Sylius\Component\Core\Uploader\ImageUploader` constructor is deprecated since
 Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter` instead.
 
+10. Gaufrette is no longer used by Sylius in favour of Flysystem. If you want to use Gaufrette in your project, you need
+    to set:
+
+    ```yaml
+    sylius_core:
+        filesystem:
+            adapter: gaufrette
+    ```
+    
+    in your `config/packages/_sylius.yaml` file.
+
 ### Frontend toolset changes
 
 #### Dependencies update
