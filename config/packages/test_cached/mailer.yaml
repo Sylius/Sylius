@@ -1,3 +1,2 @@
-framework:
-    mailer:
-        dsn: 'null://null'
+imports:
+    - { resource: "../test/mailer.yaml" }
