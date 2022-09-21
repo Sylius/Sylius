@@ -241,7 +241,7 @@ jobs:
             matrix:
                 php: ["8.0"]
                 symfony: ["^5.4"]
-                postgres: ["13.3"]
+                postgres: ["13.8"]
 
         env:
             APP_ENV: test_cached
