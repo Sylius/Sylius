@@ -16,8 +16,6 @@ namespace Sylius\Bundle\UserBundle\Security;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
-use Symfony\Component\PasswordHasher\LegacyPasswordHasherInterface;
-use Webmozart\Assert\Assert;
 
 final class UserPasswordHasher implements UserPasswordHasherInterface
 {
@@ -29,8 +27,13 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
     {
         /** @psalm-suppress InvalidArgument */
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
-        Assert::isInstanceOf($passwordHasher, LegacyPasswordHasherInterface::class);
 
+        /**
+         * @phpstan-ignore-next-line
+         * Method hash on PasswordHasherInterface has only one parameter, here we are calling with two for some
+         * LegacyPasswordHasherInterface. Anyway this error can be suppressed as in PHP it is not considered as an error
+         * pass more parameters than expecting (LegacyPasswordHasherInterface)
+         */
         return $passwordHasher->hash($user->getPlainPassword());
     }
 }
