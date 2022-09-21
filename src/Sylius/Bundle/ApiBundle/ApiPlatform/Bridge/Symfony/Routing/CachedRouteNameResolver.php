@@ -49,8 +49,10 @@ final class CachedRouteNameResolver implements RouteNameResolverInterface
         );
 
         return $this->getCached($cacheKey, function () use ($resourceClass, $operationType, $context) {
-            /** @psalm-suppress TooManyArguments */
-            /** @phpstan-ignore-next-line */
+            /**
+             * @psalm-suppress TooManyArguments
+             * @phpstan-ignore-next-line
+             */
             return $this->decorated->getRouteName($resourceClass, $operationType, $context);
         });
     }

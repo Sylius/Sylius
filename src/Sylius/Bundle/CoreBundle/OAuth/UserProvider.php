@@ -82,9 +82,10 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
-        /** @var SyliusUserInterface $user */
+        /** @var SyliusUserInterface|object $user */
         $user = $this->userFactory->createNew();
-        Assert::isInstanceOf($user, UserInterface::class);
+        Assert::isInstanceOf($user, SyliusUserInterface::class);
+        Assert::methodExists($user, 'getUsername');
 
         $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
 

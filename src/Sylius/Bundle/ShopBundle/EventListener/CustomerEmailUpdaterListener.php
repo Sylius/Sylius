@@ -60,7 +60,7 @@ final class CustomerEmailUpdaterListener
         /** @var ShopUserInterface|null $user */
         $user = $customer->getUser();
         Assert::isInstanceOf($user, ShopUserInterface::class);
-        Assert::isInstanceOf($user, UserInterface::class);
+        Assert::methodExists($user, 'getUsername');
 
         if ($customer->getEmail() !== $user->getUsername()) {
             $user->setVerifiedAt(null);

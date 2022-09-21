@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,17 +61,18 @@ final class UserDeleteListener
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
     {
+        Assert::isInstanceOf($user, ResourceInterface::class);
         Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
         }
 
-        /** @var UserInterface&SymfonyUserInterface $loggedUser */
         $loggedUser = $token->getUser();
-        if (!$loggedUser) {
+        if ($loggedUser === null) {
             return false;
         }
+        Assert::isInstanceOf($loggedUser, ResourceInterface::class);
 
         return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
     }

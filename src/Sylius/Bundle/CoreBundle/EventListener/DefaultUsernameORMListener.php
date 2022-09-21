@@ -55,7 +55,7 @@ final class DefaultUsernameORMListener
                 continue;
             }
 
-            if (!$user instanceof UserInterface) {
+            if (!method_exists($user, 'getUsername')) {
                 continue;
             }
             if ($customer->getEmail() === $user->getUsername() && $customer->getEmailCanonical() === $user->getUsernameCanonical()) {
