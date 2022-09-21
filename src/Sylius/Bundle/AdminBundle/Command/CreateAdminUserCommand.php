@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Command;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,7 +13,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\Container;
 
 #[AsCommand(
     name: 'sylius:admin-user:create',
@@ -25,7 +25,7 @@ class CreateAdminUserCommand extends Command
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
         private RepositoryInterface $localeRepository,
-        private Container $container,
+        private FactoryInterface $adminUserFactory,
     ) {
         parent::__construct();
     }
@@ -62,7 +62,7 @@ class CreateAdminUserCommand extends Command
         $password = $this->io->askHidden('Password');
 
         /** @var AdminUserInterface $adminUser */
-        $adminUser = $this->container->get('sylius.factory.admin_user')->createNew();
+        $adminUser = $this->adminUserFactory->createNew();
 
         $adminUser->setEmail($email);
         $adminUser->setPlainPassword($password);
@@ -81,7 +81,7 @@ class CreateAdminUserCommand extends Command
         $enabled = $this->io->confirm('Do you want to enabled this admin user?', true);
         $adminUser->setEnabled($enabled);
 
-        $this->container->get('sylius.repository.admin_user')->add($adminUser);
+        $this->adminUserRepository->add($adminUser);
 
         $this->io->success(sprintf('Admin user %s was successfully created', $adminUser->getEmail()));
 

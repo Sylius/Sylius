@@ -31,7 +31,7 @@
         <service id="Sylius\Bundle\AdminBundle\Command\CreateAdminUserCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="service_container" />
+            <argument type="service" id="sylius.factory.admin_user" />
             <tag name="console.command" />
         </service>
 
