@@ -413,7 +413,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Error Cannot delete, the promotion coupon is in use.',
+            'Error Cannot delete, the Promotion coupon is in use.',
             NotificationType::failure(),
         );
     }

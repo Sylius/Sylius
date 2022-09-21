@@ -453,7 +453,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatItIsInUse()
     {
-        $this->notificationChecker->checkNotification('Cannot delete, the shipping method is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification('Cannot delete, the Shipping method is in use.', NotificationType::failure());
     }
 
     /**

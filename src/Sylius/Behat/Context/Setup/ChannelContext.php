@@ -87,12 +87,17 @@ final class ChannelContext implements Context
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/
-     * @Given the store operates on a channel identified by :code code
      * @Given the store (also) operates on a(nother) channel named :channelName with hostname :hostname
+     * @Given the store operates on a channel identified by :channelCode code
      */
-    public function theStoreOperatesOnAChannelNamed(string $channelName, string $currencyCode = null, string $hostname = null): void
-    {
-        $channelCode = StringInflector::nameToLowercaseCode($channelName);
+    public function theStoreOperatesOnAChannelNamed(
+        string $channelName = null,
+        string $currencyCode = null,
+        string $hostname = null,
+        string $channelCode = null
+    ): void {
+        $channelCode = $channelCode ?? StringInflector::nameToLowercaseCode($channelName);
+        $channelName = $channelName ?? $channelCode;
         $defaultData = $this->defaultChannelFactory->create($channelCode, $channelName, $currencyCode);
 
         $defaultData['channel']->setHostname($hostname);
