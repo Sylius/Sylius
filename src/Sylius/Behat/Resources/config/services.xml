@@ -95,5 +95,14 @@
             <argument>100000</argument>
             <argument>7</argument>
         </service>
+
+        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Checker\EmailChecker">
+            <argument type="service" id="test.mailer_pool" />
+        </service>
+
+        <service id="sylius.behat.message_send_cacher" class="Sylius\Behat\Service\MessageSendCacher">
+            <argument type="service" id="test.mailer_pool" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
