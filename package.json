@@ -51,8 +51,9 @@
   },
   "engineStrict": true,
   "scripts": {
-    "watch": "gulp watch",
-    "build": "gulp build",
+    "watch": "encore dev --watch",
+    "build": "encore dev",
+    "build:prod": "encore production",
     "gulp": "gulp build",
     "lint": "yarn lint:js",
     "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js",
