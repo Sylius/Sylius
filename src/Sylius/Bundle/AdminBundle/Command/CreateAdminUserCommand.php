@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Command;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -70,10 +71,7 @@ class CreateAdminUserCommand extends Command
         $adminUser->setFirstName($firstName);
         $adminUser->setLastName($lastName);
 
-        $locales = [];
-        foreach ($this->localeRepository->findAll() as $locale) {
-            $locales[] = $locale->getCode();
-        }
+        $locales = array_map(static fn (Locale $locale) => $locale->getCode(), $this->localeRepository->findAll());
 
         $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
         $adminUser->setLocaleCode($localeCode);
