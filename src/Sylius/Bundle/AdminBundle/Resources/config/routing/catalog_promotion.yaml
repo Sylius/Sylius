@@ -26,6 +26,19 @@ sylius_admin_catalog_promotion_show:
             template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
             permission: true
 
+sylius_admin_catalog_promotion_product_variant_index:
+    path: /catalog-promotions/{id}/variants
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            section: admin
+            grid: sylius_admin_product_variant_with_catalog_promotion
+            template: "@SyliusAdmin/CatalogPromotion/ProductVariant/index.html.twig"
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_discounts_on_product_catalog
+
 sylius_admin_catalog_promotion_delete:
     path: /catalog-promotions/{code}
     methods: [DELETE]

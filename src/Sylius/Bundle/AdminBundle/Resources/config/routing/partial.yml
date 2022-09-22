@@ -2,6 +2,10 @@ sylius_admin_partial_address:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/address.yml"
     prefix: /address
 
+sylius_admin_partial_catalog_promotion:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/catalog_promotion.yml"
+    prefix: /catalog-promotions
+
 sylius_admin_partial_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/channel.yml"
     prefix: /channels

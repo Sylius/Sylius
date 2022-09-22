@@ -970,6 +970,24 @@ sylius_ui:
                     context:
                         event: sylius.admin.product.index.after_taxon_tree
 
+        sylius.admin.catalog_promotion.product_variant.index.content:
+            blocks:
+                header:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/_headerWidget.html.twig"
+                    priority: 20
+                content:
+                    template: "@SyliusAdmin/Crud/Index/_content.html.twig"
+                    priority: 10 
+
+        sylius.admin.catalog_promotion.product_variant.index.header.content:
+            blocks:
+                content:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/Header/_content.html.twig"
+                    priority: 20
+                breadcrumb:
+                    template: "@SyliusAdmin/CatalogPromotion/ProductVariant/Index/Header/_breadcrumb.html.twig"
+                    priority: 10
+
         sylius.admin.catalog_promotion.show.content:
             blocks:
                 header:

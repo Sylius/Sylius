@@ -25,6 +25,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant_with_catalog_promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/shipment.yml" }
