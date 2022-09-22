@@ -45,7 +45,7 @@ final class ImagesRemoveListenerSpec extends ObjectBehavior
         ImageInterface $image,
         ProductInterface $product,
     ): void {
-        $event->getObjectManager()->willReturn($entityManager);
+        $event->getEntityManager()->willReturn($entityManager);
         $entityManager->getUnitOfWork()->willReturn($unitOfWork);
         $unitOfWork->getScheduledEntityDeletions()->willReturn([$image, $product]);
 
