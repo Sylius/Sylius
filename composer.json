@@ -179,6 +179,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
+        "api-platform/core": "2.7.0",
         "doctrine/doctrine-bundle": "2.3.0",
         "jms/serializer-bundle": "3.9.0 || 4.1.0",
         "symfony/doctrine-bridge": "4.4.16",
