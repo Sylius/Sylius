@@ -25,6 +25,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -34,10 +35,13 @@ final class CustomerEmailUpdaterListener
         private GeneratorInterface $tokenGenerator,
         private ChannelContextInterface $channelContext,
         private EventDispatcherInterface $eventDispatcher,
-        private RequestStack $requestStack,
+        private RequestStack|SessionInterface $requestStackOrSession,
         private SectionProviderInterface $uriBasedSectionContext,
         private TokenStorageInterface $tokenStorage,
     ) {
+        if ($requestStackOrSession instanceof SessionInterface) {
+            trigger_deprecation('sylius/shop-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function eraseVerification(GenericEvent $event): void
@@ -97,8 +101,14 @@ final class CustomerEmailUpdaterListener
         if (!$user->isEnabled() && !$user->isVerified() && null !== $user->getEmailVerificationToken()) {
             $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
+            if ($this->requestStackOrSession instanceof SessionInterface) {
+                $session = $this->requestStackOrSession;
+            } else {
+                $session = $this->requestStackOrSession->getSession();
+            }
+
             /** @var FlashBagInterface $flashBag */
-            $flashBag = $this->requestStack->getSession()->getBag('flashes');
+            $flashBag = $session->getBag('flashes');
             $flashBag->add('success', 'sylius.user.verify_email_request');
         }
     }
