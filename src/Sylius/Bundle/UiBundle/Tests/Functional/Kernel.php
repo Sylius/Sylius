@@ -41,8 +41,6 @@ final class Kernel extends HttpKernel
 
     protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
     {
-        $containerBuilder->setParameter('sylius_ui.use_webpack', true);
-
         $containerBuilder->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
         ]);
