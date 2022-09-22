@@ -55,6 +55,47 @@ final class SyliusCoreConfigurationTest extends TestCase
         );
     }
 
+    /** @test */
+    public function it_sets_default_filesystem_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['filesystem' => ['adapter' => 'default']],
+            'filesystem',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_define_filesystem_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'default']]],
+            ['filesystem' => ['adapter' => 'default']],
+            'filesystem',
+        );
+
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'flysystem']]],
+            ['filesystem' => ['adapter' => 'flysystem']],
+            'filesystem',
+        );
+
+        $this->assertProcessedConfigurationEquals(
+            [['filesystem' => ['adapter' => 'gaufrette']]],
+            ['filesystem' => ['adapter' => 'gaufrette']],
+            'filesystem',
+        );
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_define_invalid_filesystem_adapter(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [['filesystem' => ['adapter' => 'yolo']]],
+            'Expected adapter "default", "flysystem" or "gaufrette", but "yolo" passed.'
+        );
+    }
+
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

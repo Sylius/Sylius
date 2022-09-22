@@ -206,6 +206,15 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I remove ("[^"]+" variant) from the (cart)$/
+     */
+    public function iRemoveVariantFromTheCart(ProductVariantInterface $variant, string $tokenValue): void
+    {
+        $itemResponse = $this->getOrderItemResponseFromProductVariantInCart($variant, $tokenValue);
+        $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
+    }
+
+    /**
      * @When I pick up (my )cart (again)
      * @When I pick up cart in the :localeCode locale
      * @When the visitor picks up the cart
@@ -847,6 +856,20 @@ final class CartContext implements Context
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
             if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
+
+    private function getOrderItemResponseFromProductVariantInCart(ProductVariantInterface $variant, string $tokenValue): ?array
+    {
+        $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items');
+
+        foreach ($items as $item) {
+            $response = $this->getProductVariantForItem($item);
+            if ($this->responseChecker->hasValue($response, 'code', $variant->getCode())) {
                 return $item;
             }
         }

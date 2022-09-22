@@ -45,6 +45,13 @@ doctrine:
                         WEEK: Sylius\Bundle\CoreBundle\Doctrine\DQL\Week
                         YEAR: Sylius\Bundle\CoreBundle\Doctrine\DQL\Year
 
+flysystem:
+    storages:
+        sylius.storage:
+            adapter: 'local'
+            options:
+                directory: '%sylius_core.images_dir%'
+
 knp_gaufrette:
     adapters:
         sylius_image:

@@ -90,9 +90,8 @@ security:
                 remember_me_parameter: _remember_me
             logout:
                 path: sylius_shop_logout
-                target: sylius_shop_login
+                target: sylius_shop_homepage
                 invalidate_session: false
-                success_handler: sylius.handler.shop_user_logout
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

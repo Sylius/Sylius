@@ -33,46 +33,56 @@ are now included in every env starting with `test` keyword. If you wish to not h
 with test or remove these services with complier pass.
 
 6. The following listeners have been removed as they are not used anymore:
-- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener`
-- `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionUpdateFailedMessageListener`
+   - `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionFailedListener`
+   - `Sylius\Bundle\CoreBundle\CatalogPromotion\Listener\CatalogPromotionUpdateFailedMessageListener`
 
 7. The `Sylius\Component\Promotion\Event\CatalogPromotionFailed` has been removed as it is not used anymore.
 
 8. Due to updating to Symfony 6 security file was changed to use the updated security system so you need to adjust your `config/packages/security.yaml` file:
     
-    ```diff
+   ```diff
    security:
-        - always_authenticate_before_granting: true
-        + enable_authenticator_manager: true
+   -   always_authenticate_before_granting: true
+   +   enable_authenticator_manager: true
    ```
 
    and you need to adjust all of your firewalls like that:
 
    ```diff
-        admin:
-            # ...
-            form_login:
-                # ...
-                - csrf_token_generator: security.csrf.token_manager
-                + enable_csrf: true
-                # ...
-        new_api_admin_user:
-            # ...
-            - anonymous: true
-            + entry_point: jwt
-            # ...
-            - guard:
-                 # ...
-            + jwt: true
+   admin:
+       # ...
+       form_login:
+           # ...
+   -       csrf_token_generator: security.csrf.token_manager
+   +       enable_csrf: true
+           # ...
+   new_api_admin_user:
+       # ...
+   -   anonymous: true
+   +   entry_point: jwt
+       # ...
+   -   guard:
+   -       authenticators:
+   -           # ...
+   +   jwt: true
+   shop:
+       logout:
+       path: sylius_shop_logout
+   -   target: sylius_shop_login
+   +   target: sylius_shop_homepage
+       invalidate_session: false
+   -   success_handler: sylius.handler.shop_user_logout
    ```
    
     and also you need to adjust all of your access_control like that:
     
-    ```diff
-        - - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
-   
-        + - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
-    ```
+   ```diff
+   - - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY } 
+   + - { path: "%sylius.security.admin_regex%/forgotten-password", role: PUBLIC_ACCESS }
+   ```
+
+9. Passing a `Gaufrette\Filesystem` to `Sylius\Component\Core\Uploader\ImageUploader` constructor is deprecated since
+Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter` instead.
 
 ### Frontend toolset changes
 

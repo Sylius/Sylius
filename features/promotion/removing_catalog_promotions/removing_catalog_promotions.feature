@@ -16,7 +16,7 @@ Feature: Removing a catalog promotions
     @api @ui
     Scenario: Removing an expired catalog promotion
         Given it is "2022-08-22" now
-        And the catalog promotion "Winter sale" operates between "2021-12-20" and "2021-12-30"
+        And the catalog promotion "Winter Sale" operates between "2021-12-20" and "2021-12-30"
         When I request the removal of "Winter Sale" catalog promotion
         Then I should be notified that the removal operation has started successfully
         And there should be an empty list of catalog promotions
@@ -32,7 +32,7 @@ Feature: Removing a catalog promotions
     @api @ui
     Scenario: Removing an active catalog promotion in the time range
         Given it is "2022-12-15" now
-        And the catalog promotion "Winter sale" operates between "2022-12-01" and "2022-12-30"
+        And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2022-12-30"
         When I request the removal of "Winter Sale" catalog promotion
         Then I should be notified that the removal operation has started successfully
         And there should be an empty list of catalog promotions
@@ -41,7 +41,7 @@ Feature: Removing a catalog promotions
     @api @ui
     Scenario: Removing a scheduled catalog promotion
         Given it is "2022-08-22" now
-        And the catalog promotion "Winter sale" operates between "2022-12-01" and "2023-02-28"
+        And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2023-02-28"
         When I request the removal of "Winter Sale" catalog promotion
         Then I should be notified that the removal operation has started successfully
         And there should be an empty list of catalog promotions

@@ -236,12 +236,12 @@ jobs:
     test-application-without-frontend-postgres:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }})"
         strategy:
             matrix:
                 php: ["8.0"]
                 symfony: ["^5.4"]
-                postgres: ["13.3"]
+                postgres: ["13.8"]
                 node: ["16.x"]
 
         env:
@@ -269,7 +269,8 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   name: Install Symfony CLI
+            -   
+                name: Install Symfony CLI
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
                     mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
@@ -356,31 +357,34 @@ jobs:
                     bin/console doctrine:schema:validate
                     bin/console doctrine:migrations:sync-metadata-storage
 
-            -   name: Test installer
+            -   
+                name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
-            -   name: Load fixtures
+            -   
+                name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -   name: Run PHPUnit
+            -   
+                name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
 
-            -   name: Run CLI Behat
-                if: ${{ false }}
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" --rerun
+            -   
+                name: Run CLI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
 
-            -   name: Run non-JS Behat
-                if: ${{ false }}
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" --rerun
+            -   
+                name: Run non-JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --rerun
 
-            -   name: Upload Behat logs
+            -   
+                name: Upload Behat logs
                 uses: actions/upload-artifact@v2
                 if: failure()
                 with:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
                     path: etc/build/
                     if-no-files-found: ignore
-                continue-on-error: true
 
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest
@@ -523,27 +527,22 @@ jobs:
             -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
-                continue-on-error: true
 
             -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
-                continue-on-error: true
 
             -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
-                continue-on-error: true
 
             -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
-                continue-on-error: true
 
             -
                 name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
-                continue-on-error: true
 
             -
                 name: Upload Behat logs
