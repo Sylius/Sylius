@@ -80,6 +80,28 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.admin_user" />
 
+        <service id="sylius.data_fixtures.factory.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionFactory">
+            <argument type="service" id="sylius.factory.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.catalog_promotion" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion" />
+
+        <service id="sylius.data_fixtures.factory_default_values.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion" />
+
+        <service id="sylius.data_fixtures.factory_transformer.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionFactoryTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion" />
+
+        <service id="sylius.data_fixtures.factory_updater.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion" />
+
         <service id="sylius.data_fixtures.factory.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
             <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
