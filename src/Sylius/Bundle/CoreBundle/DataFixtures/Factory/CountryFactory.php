@@ -39,6 +39,7 @@ use Zenstruck\Foundry\Proxy;
 class CountryFactory extends ModelFactory implements CountryFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
+    use ToggableTrait;
 
     private static ?string $modelClass = null;
 
@@ -50,16 +51,6 @@ class CountryFactory extends ModelFactory implements CountryFactoryInterface, Fa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function enabled(): self
-    {
-        return $this->addState(['enabled' => true]);
-    }
-
-    public function disabled(): self
-    {
-        return $this->addState(['enabled' => false]);
     }
 
     protected function getDefaults(): array

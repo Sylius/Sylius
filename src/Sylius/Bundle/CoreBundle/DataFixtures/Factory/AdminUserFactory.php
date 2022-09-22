@@ -41,6 +41,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use ToggableTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -65,16 +67,6 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
     public function withUsername(string $username): self
     {
         return $this->addState(['username' => $username]);
-    }
-
-    public function enabled(): self
-    {
-        return $this->addState(['enabled' => true]);
-    }
-
-    public function disabled(): self
-    {
-        return $this->addState(['enabled' => false]);
     }
 
     public function withPassword(string $password): self

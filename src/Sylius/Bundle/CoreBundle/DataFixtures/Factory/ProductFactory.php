@@ -42,6 +42,7 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use ToggableTrait;
 
     public function __construct(
         private FactoryInterface $productFactory,
@@ -50,16 +51,6 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         private ProductFactoryUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
-    }
-
-    public function enabled(): self
-    {
-        return $this->addState(['enabled' => true]);
-    }
-
-    public function disabled(): self
-    {
-        return $this->addState(['enabled' => false]);
     }
 
     public function tracked(): self

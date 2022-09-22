@@ -35,15 +35,11 @@ use Zenstruck\Foundry\Proxy;
  * @method static ChannelInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ChannelInterface|Proxy create(array|callable $attributes = [])
  */
-interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface
+interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface, ToggableInterface
 {
     public function withHostname(string $hostname): self;
 
     public function withColor(string $color): self;
-
-    public function enabled(): self;
-
-    public function disabled(): self;
 
     public function withSkippingShippingStepAllowed(): self;
 
