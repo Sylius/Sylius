@@ -34,15 +34,11 @@ use Zenstruck\Foundry\Proxy;
  * @method static AdminUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AdminUserInterface|Proxy create(array|callable $attributes = [])
  */
-interface AdminUserFactoryInterface
+interface AdminUserFactoryInterface extends ToggableInterface
 {
     public function withEmail(string $email): self;
 
     public function withUsername(string $username): self;
-
-    public function enabled(): self;
-
-    public function disabled(): self;
 
     public function withPassword(string $password): self;
 

@@ -45,6 +45,7 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use ToggableTrait;
 
     public function __construct(
         private ChannelResourceFactory $channelFactory,
@@ -63,16 +64,6 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
     public function withColor(string $color): self
     {
         return $this->addState(['color' => $color]);
-    }
-
-    public function enabled(): self
-    {
-        return $this->addState(['enabled' => true]);
-    }
-
-    public function disabled(): self
-    {
-        return $this->addState(['enabled' => false]);
     }
 
     public function withSkippingShippingStepAllowed(): self
