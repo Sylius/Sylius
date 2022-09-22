@@ -1,6 +1,5 @@
 imports:
     - { resource: "@SyliusUiBundle/Resources/config/app/events.yaml" }
-    - { resource: "@SyliusUiBundle/Resources/config/app/parameters.yaml" }
 
 twig:
     globals:

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UiBundle\DependencyInjection;
 use Laminas\Stdlib\SplPriorityQueue;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -77,7 +78,11 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
 
     public function prepend(ContainerBuilder $container): void
     {
-        if (true === $container->getParameter('sylius_ui.use_webpack')) {
+        $useWebpack = $this->getCurrentConfiguration($container)['use_webpack'] ?? true;
+
+        $container->setParameter('sylius_ui.use_webpack', $useWebpack);
+
+        if (true === $useWebpack) {
             $container->prependExtensionConfig('framework', [
                 'assets' => [
                     'packages' => [
@@ -91,5 +96,15 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                 ]
             ]);
         }
+    }
+
+    private function getCurrentConfiguration(ContainerBuilder $container): array
+    {
+        /** @var ConfigurationInterface $configuration */
+        $configuration = $this->getConfiguration([], $container);
+
+        $configs = $container->getExtensionConfig($this->getAlias());
+
+        return $this->processConfiguration($configuration, $configs);
     }
 }

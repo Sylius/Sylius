@@ -115,16 +115,16 @@ Therefore you need to update your code to follow this change.
 Example changes we made in our codebase to adjust it to the new version of dependencies might be found [here](https://github.com/Sylius/Sylius/pull/14319/files).
 Remember, when you face any issues while updating your dependencies you might ask for help in our [Slack](https://sylius-devs.slack.com/) channel.
 
-#### Webpack becomes our default build tool 🎉
+#### Webpack becomes our default build tool
 
 `1.12` comes with a long-awaited change - Webpack becomes our default build tool. 
 
 If you want to stay with Gulp, you can do it by following the steps below:
+
 1. Go to `config/packages/_sylius.yaml` file and add the following line:
    ```yaml
-   parameters:
-      #...
-      sylius_ui.use_webpack: false
+   sylius_ui:
+      use_webpack: false
    ```
 
 If you decide to use Webpack, you need to follow the steps below:
