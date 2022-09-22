@@ -18,25 +18,41 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorage implements CartStorageInterface
 {
     public function __construct(
-        private RequestStack $requestStack,
+        private RequestStack|SessionInterface $requestStackOrSession,
         private string $sessionKeyName,
         private OrderRepositoryInterface $orderRepository,
     ) {
+        if ($requestStackOrSession instanceof SessionInterface) {
+            trigger_deprecation('sylius/core-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function hasForChannel(ChannelInterface $channel): bool
     {
-        return $this->requestStack->getSession()->has($this->getCartKeyName($channel));
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            $session = $this->requestStackOrSession;
+        } else {
+            $session = $this->requestStackOrSession->getSession();
+        }
+
+        return $session->has($this->getCartKeyName($channel));
     }
 
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
-            $cartId = $this->requestStack->getSession()->get($this->getCartKeyName($channel));
+            if ($this->requestStackOrSession instanceof SessionInterface) {
+                $session = $this->requestStackOrSession;
+            } else {
+                $session = $this->requestStackOrSession->getSession();
+            }
+
+            $cartId = $session->get($this->getCartKeyName($channel));
 
             return $this->orderRepository->findCartByChannel($cartId, $channel);
         }
@@ -46,12 +62,24 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
-        $this->requestStack->getSession()->set($this->getCartKeyName($channel), $cart->getId());
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            $session = $this->requestStackOrSession;
+        } else {
+            $session = $this->requestStackOrSession->getSession();
+        }
+
+        $session->set($this->getCartKeyName($channel), $cart->getId());
     }
 
     public function removeForChannel(ChannelInterface $channel): void
     {
-        $this->requestStack->getSession()->remove($this->getCartKeyName($channel));
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            $session = $this->requestStackOrSession;
+        } else {
+            $session = $this->requestStackOrSession->getSession();
+        }
+
+        $session->remove($this->getCartKeyName($channel));
     }
 
     private function getCartKeyName(ChannelInterface $channel): string

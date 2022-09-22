@@ -17,6 +17,7 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,12 +28,16 @@ final class UserImpersonator implements UserImpersonatorInterface
     private string $firewallContextName;
 
     public function __construct(
-        private RequestStack $requestStack,
+        private RequestStack|SessionInterface $requestStackOrSession,
         string $firewallContextName,
         private EventDispatcherInterface $eventDispatcher,
     ) {
         $this->sessionTokenParameter = sprintf('_security_%s', $firewallContextName);
         $this->firewallContextName = $firewallContextName;
+
+        if ($requestStackOrSession instanceof SessionInterface) {
+            trigger_deprecation('sylius/core-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', SessionInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function impersonate(UserInterface $user): void
@@ -53,8 +58,14 @@ final class UserImpersonator implements UserImpersonatorInterface
             );
         }
 
-        $this->requestStack->getSession()->set($this->sessionTokenParameter, serialize($token));
-        $this->requestStack->getSession()->save();
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            $session = $this->requestStackOrSession;
+        } else {
+            $session = $this->requestStackOrSession->getSession();
+        }
+
+        $session->set($this->sessionTokenParameter, serialize($token));
+        $session->save();
 
         $this->eventDispatcher->dispatch(new UserEvent($user), UserEvents::SECURITY_IMPERSONATE);
     }
