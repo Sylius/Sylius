@@ -20,23 +20,34 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 trigger_deprecation('sylius/user-bundle', '1.12', 'The "%s" class is deprecated, use "%s" instead.', UserPasswordEncoder::class, UserPasswordHasher::class);
 
+/**
+ * @deprecated since Sylius 1.12, use {@link UserPasswordHasher} instead
+ */
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {
-    public function __construct(private EncoderFactoryInterface|PasswordHasherFactoryInterface $encoderFactory)
+    public function __construct(private EncoderFactoryInterface|PasswordHasherFactoryInterface $encoderOrPasswordHasherFactory)
     {
+        if ($this->encoderOrPasswordHasherFactory instanceof EncoderFactoryInterface) {
+            return;
+        }
+
+        throw new \InvalidArgumentException(
+            sprintf(
+                'Using the "%s" class with "%s" argument is prohibited since Sylius 1.12, use "%s" service instead.',
+                self::class,
+                PasswordHasherFactoryInterface::class,
+                UserPasswordHasher::class
+            )
+        );
     }
 
     public function encode(CredentialsHolderInterface $user): string
     {
-        if ($this->encoderFactory instanceof PasswordHasherFactoryInterface) {
-            /** @psalm-suppress InvalidArgument */
-            $passwordHasher = $this->encoderFactory->getPasswordHasher($user::class);
-
-            return $passwordHasher->hash($user->getPlainPassword(), $user->getSalt());
-        }
-
-        /** @psalm-suppress InvalidArgument */
-        $encoder = $this->encoderFactory->getEncoder($user);
+        /**
+         * @psalm-suppress InvalidArgument
+         * @psalm-suppress UndefinedMethod
+         */
+        $encoder = $this->encoderOrPasswordHasherFactory->getEncoder($user);
 
         return $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());
     }
