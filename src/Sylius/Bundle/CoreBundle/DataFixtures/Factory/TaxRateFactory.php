@@ -45,6 +45,7 @@ class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, Fa
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithZoneTrait;
 
     private static ?string $modelClass = null;
 
@@ -80,11 +81,6 @@ class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, Fa
     public function withCalculator(string $calculator): self
     {
         return $this->addState(['calculator' => $calculator]);
-    }
-
-    public function withZone(Proxy|ZoneInterface|string $zone): self
-    {
-        return $this->addState(['zone' => $zone]);
     }
 
     public function withCategory(Proxy|TaxCategoryInterface|string $category): self
