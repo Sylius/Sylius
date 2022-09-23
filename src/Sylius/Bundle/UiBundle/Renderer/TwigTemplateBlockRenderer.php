@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
+use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Twig\Environment;
 
@@ -21,15 +22,20 @@ use Twig\Environment;
  */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
-    public function __construct(private Environment $twig)
+    public function __construct(private Environment $twig, private iterable $contextProviders)
     {
     }
 
     public function render(TemplateBlock $templateBlock, array $context = []): string
     {
-        return $this->twig->render(
-            $templateBlock->getTemplate(),
-            array_replace($templateBlock->getContext(), $context),
-        );
+        foreach ($this->contextProviders as $contextProvider) {
+            if (!$contextProvider instanceof ContextProviderInterface || !$contextProvider->supports($templateBlock)) {
+                continue;
+            }
+
+            $context = $contextProvider->provide($context, $templateBlock);
+        }
+
+        return $this->twig->render($templateBlock->getTemplate(), $context);
     }
 }

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
+use Sylius\Bundle\UiBundle\Tests\Functional\src\CustomContextProvider;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -41,6 +42,8 @@ final class Kernel extends HttpKernel
 
     protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
     {
+        $containerBuilder->register(CustomContextProvider::class)->addTag('sylius.ui.template_event.context_provider');
+
         $containerBuilder->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
         ]);
@@ -102,6 +105,17 @@ final class Kernel extends HttpKernel
                     'second' => [
                         'context' => ['value' => 42],
                         'priority' => 5,
+                    ],
+                ],
+            ],
+            'custom_context_provider' => [
+                'blocks' => [
+                    'block' => [
+                        'template' => 'blocks/customContextProvider/block.txt.twig',
+                        'context' => [
+                            'option1' => 'foo',
+                            'option2' => 'bar',
+                        ],
                     ],
                 ],
             ],
