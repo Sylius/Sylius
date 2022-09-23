@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.data_fixtures.factory_updater.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.address" />
+
+        <service id="sylius.data_fixtures.factory_updater.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdater">
+            <argument type="service" id="sylius.factory.avatar_image" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="sylius.image_uploader" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.admin_user" />
+
+        <service id="sylius.data_fixtures.factory_updater.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion" />
+
+        <service id="sylius.data_fixtures.factory_updater.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion_action" />
+
+        <service id="sylius.data_fixtures.factory_updater.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionScopeFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionScopeFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.catalog_promotion_scope" />
+
+        <service id="sylius.data_fixtures.factory_updater.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.channel" />
+
+        <service id="sylius.data_fixtures.factory_updater.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.factory.product_variant" />
+            <argument type="service" id="sylius.factory.channel_pricing" />
+            <argument type="service" id="sylius.generator.product_variant" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.product" />
+
+        <service id="sylius.data_fixtures.factory_updater.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.promotion_rule" />
+
+        <service id="sylius.data_fixtures.factory_updater.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ShippingMethodFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ShippingMethodFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.shipping_method" />
+
+        <service id="sylius.data_fixtures.factory_updater.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.tax_rate" />
+    </services>
+</container>

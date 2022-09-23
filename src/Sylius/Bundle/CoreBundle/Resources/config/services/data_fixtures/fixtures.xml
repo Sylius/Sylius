@@ -12,11 +12,11 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="data_fixtures/default_values.xml" />
-        <import resource="data_fixtures/factories.xml" />
-        <import resource="data_fixtures/fixtures.xml" />
-        <import resource="data_fixtures/transformers.xml" />
-        <import resource="data_fixtures/updaters.xml" />
-    </imports>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.data_fixtures.shop_configuration" class="Sylius\Bundle\CoreBundle\DataFixtures\ShopConfigurationFixtures">
+            <tag name="doctrine.fixture.orm" />
+        </service>
+    </services>
 </container>

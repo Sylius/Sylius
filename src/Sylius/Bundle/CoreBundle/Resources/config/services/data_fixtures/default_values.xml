@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.data_fixtures.factory_default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.country" />
+            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.address" />
+
+        <service id="sylius.data_fixtures.factory_default_values.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValues">
+            <argument>%locale%</argument>
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.admin_user" />
+
+        <service id="sylius.data_fixtures.factory_default_values.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion" />
+
+        <service id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
+
+        <service id="sylius.data_fixtures.factory_default_values.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionScopeFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionScopeFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_scope" />
+
+        <service id="sylius.data_fixtures.factory_default_values.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument type="service" id="sylius.data_fixtures.factory.currency" />
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.catalog_promotion_scope" />
+
+        <service id="sylius.data_fixtures.factory_default_values.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.product" />
+
+        <service id="sylius.data_fixtures.factory_default_values.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.promotion_rule" />
+
+        <service id="sylius.data_fixtures.factory_default_values.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ShippingMethodFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ShippingMethodFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.shipping_method" />
+
+        <service id="sylius.data_fixtures.factory_default_values.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.tax_rate" />
+    </services>
+</container>

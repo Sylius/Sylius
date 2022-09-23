@@ -30,11 +30,11 @@ final class TaxRateFactoryTransformer implements TaxRateFactoryTransformerInterf
         $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
 
         if (is_string($attributes['zone'])) {
-            $attributes['zone'] = $this->zoneFactory->randomOrCreate(['code' => $attributes['zone']]);
+            $attributes['zone'] = $this->zoneFactory::randomOrCreate(['code' => $attributes['zone']]);
         }
 
         if (is_string($attributes['category'])) {
-            $attributes['category'] = $this->taxCategoryFactory->randomOrCreate(['code' => $attributes['category']]);
+            $attributes['category'] = $this->taxCategoryFactory::randomOrCreate(['code' => $attributes['category']]);
         }
 
         return $attributes;
