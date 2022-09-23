@@ -147,3 +147,21 @@ If you decide to use Webpack, you need to follow the steps below:
    ```
    
 **Remember!**  Every project is different, so you might need to adjust your code to work with Webpack.
+
+#### For plugin developers - `use_webpack` Twig's global
+
+We have introduced a new `use_webpack` global for Twig templates. It allows you to check if Webpack is declared as a build tool
+to dynamically serve assets from the correct directory.
+
+**Example:**
+```html
+<div class="column">
+    <a href="{{ path('sylius_shop_homepage') }}">
+        {% if use_webpack %}
+            <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
+        {% else %}
+            <img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" />
+        {% endif %}
+    </a>
+</div>
+```

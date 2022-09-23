@@ -23,6 +23,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
 final class Kernel extends HttpKernel
 {
@@ -36,6 +37,7 @@ final class Kernel extends HttpKernel
             new TwigBundle(),
             new SonataBlockBundle(),
             new SyliusUiBundle(),
+            new WebpackEncoreBundle(),
         ];
     }
 
@@ -106,6 +108,10 @@ final class Kernel extends HttpKernel
                 ],
             ],
         ]]);
+
+        $containerBuilder->loadFromExtension('webpack_encore', [
+            'output_path' => '%kernel.project_dir%/public/build',
+        ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
