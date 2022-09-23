@@ -102,6 +102,15 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
 
+        <service id="sylius.data_fixtures.factory.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactory">
+            <argument type="service" id="sylius.factory.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.factory_default_values.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.factory_transformer.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.factory_updater.payment_method" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactoryInterface" alias="sylius.data_fixtures.factory.payment_method" />
+
         <service id="sylius.data_fixtures.factory.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactory">
             <argument type="service" id="sylius.factory.product" />
             <argument type="service" id="sylius.data_fixtures.factory_default_values.product" />
