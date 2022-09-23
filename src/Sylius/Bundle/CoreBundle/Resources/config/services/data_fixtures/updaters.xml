@@ -39,6 +39,11 @@
         <service id="sylius.data_fixtures.factory_updater.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.channel" />
 
+        <service id="sylius.data_fixtures.factory_updater.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PaymentMethodFactoryUpdater">
+            <argument type="service" id="sylius.repository.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PaymentMethodFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.payment_method" />
+
         <service id="sylius.data_fixtures.factory_updater.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdater">
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.factory.product_variant" />

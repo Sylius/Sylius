@@ -40,6 +40,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.channel" />
 
+        <service id="sylius.data_fixtures.factory_transformer.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFactoryTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.payment_method" />
+
         <service id="sylius.data_fixtures.factory_transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformer">
             <argument type="service" id="sylius.generator.slug" />
         </service>
