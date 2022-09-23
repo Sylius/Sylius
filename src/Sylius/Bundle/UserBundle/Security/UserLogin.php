@@ -58,6 +58,7 @@ class UserLogin implements UserLoginInterface
             );
         }
 
+        /** @psalm-suppress NullArgument */
         return new UsernamePasswordToken(
             $user,
             null,
