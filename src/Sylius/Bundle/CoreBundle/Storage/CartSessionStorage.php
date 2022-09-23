@@ -34,11 +34,7 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function hasForChannel(ChannelInterface $channel): bool
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
+        $session = $this->getSession();
 
         return $session->has($this->getCartKeyName($channel));
     }
@@ -46,11 +42,7 @@ final class CartSessionStorage implements CartStorageInterface
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
+            $session = $this->getSession();
 
             $cartId = $session->get($this->getCartKeyName($channel));
 
@@ -62,22 +54,14 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
+        $session = $this->getSession();
 
         $session->set($this->getCartKeyName($channel), $cart->getId());
     }
 
     public function removeForChannel(ChannelInterface $channel): void
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
+        $session = $this->getSession();
 
         $session->remove($this->getCartKeyName($channel));
     }
@@ -85,5 +69,14 @@ final class CartSessionStorage implements CartStorageInterface
     private function getCartKeyName(ChannelInterface $channel): string
     {
         return sprintf('%s.%s', $this->sessionKeyName, $channel->getCode());
+    }
+
+    private function getSession(): SessionInterface
+    {
+        if ($this->requestStackOrSession instanceof SessionInterface) {
+            return $this->requestStackOrSession;
+        }
+
+        return $this->requestStackOrSession->getSession();
     }
 }
