@@ -48,3 +48,11 @@ Naming
 * Prefix Twig templates that are partial blocks with `_`,
 * Use fully qualified class name (FQCN) of an interface as a service name of newly created service or FQCN of class
   if there are multiple implementations of a given interface unless it is inconsistent with the current scope of Sylius.
+
+Template Events
+---------------
+
+* Priorities of blocks should be increased by a step of 10.
+* A block between two existing blocks should use the priority that is in the middle point between the two blocks. For
+  example if you want to add a block between two blocks with priorities 10 and 20, you should use 15 as a priority.
+* If you want to add a block at the beginning of a template, you should use a priority of 5.
