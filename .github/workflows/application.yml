@@ -269,7 +269,7 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   
+            -
                 name: Install Symfony CLI
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
@@ -357,27 +357,27 @@ jobs:
                     bin/console doctrine:schema:validate
                     bin/console doctrine:migrations:sync-metadata-storage
 
-            -   
+            -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
-            -   
+            -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -   
+            -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
 
-            -   
+            -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
 
-            -   
+            -
                 name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --rerun
 
-            -   
+            -
                 name: Upload Behat logs
                 uses: actions/upload-artifact@v2
                 if: failure()
@@ -763,7 +763,7 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["16.x", "18.x"]
+                node: ["14.x", "16.x", "18.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
