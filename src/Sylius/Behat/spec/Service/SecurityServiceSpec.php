@@ -19,16 +19,17 @@ use Sylius\Behat\Service\SecurityService;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityServiceSpec extends ObjectBehavior
 {
     function let(
-        SessionInterface $session,
+        RequestStack $requestStack,
         CookieSetterInterface $cookieSetter,
     ) {
-        $this->beConstructedWith($session, $cookieSetter, 'shop');
+        $this->beConstructedWith($requestStack, $cookieSetter, 'shop');
     }
 
     function it_is_initializable()
@@ -42,6 +43,7 @@ final class SecurityServiceSpec extends ObjectBehavior
     }
 
     function it_logs_user_in(
+        RequestStack $requestStack,
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
         ShopUserInterface $shopUser,
@@ -50,6 +52,7 @@ final class SecurityServiceSpec extends ObjectBehavior
         $shopUser->getPassword()->willReturn('xyz');
         $shopUser->__serialize()->willReturn(['serialized_user']);
 
+        $requestStack->getSession()->willReturn($session);
         $session->set('_security_shop', Argument::any())->shouldBeCalled();
         $session->save()->shouldBeCalled();
 
@@ -61,9 +64,11 @@ final class SecurityServiceSpec extends ObjectBehavior
     }
 
     function it_logs_user_out(
+        RequestStack $requestStack,
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
     ) {
+        $requestStack->getSession()->willReturn($session);
         $session->set('_security_shop', null)->shouldBeCalled();
         $session->save()->shouldBeCalled();
         $session->getName()->willReturn('MOCKEDSID');
@@ -74,8 +79,10 @@ final class SecurityServiceSpec extends ObjectBehavior
     }
 
     function it_throws_token_not_found_exception(
+        RequestStack $requestStack,
         SessionInterface $session,
     ) {
+        $requestStack->getSession()->willReturn($session);
         $session->get('_security_shop')->willReturn(null);
 
         $this->shouldThrow(TokenNotFoundException::class)->during('getCurrentToken');

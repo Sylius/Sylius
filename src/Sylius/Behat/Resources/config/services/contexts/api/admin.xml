@@ -20,7 +20,7 @@
 
         <service id="sylius.behat.context.api.admin.ajax" class="Sylius\Behat\Context\Api\Admin\AjaxContext">
             <argument type="service" id="test.client" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
         </service>
 
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
@@ -99,7 +99,7 @@
 
         <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
             <argument type="service" id="test.client" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
 

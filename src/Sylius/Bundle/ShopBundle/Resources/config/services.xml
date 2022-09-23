@@ -40,7 +40,7 @@
         </service>
 
         <service id="sylius.storage.cart_session" class="Sylius\Bundle\CoreBundle\Storage\CartSessionStorage">
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.order" />
         </service>
