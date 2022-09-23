@@ -40,7 +40,7 @@
         "doctrine/event-manager": "^1.1",
         "doctrine/inflector": "^1.4 || ^2.0",
         "doctrine/migrations": "^3.0",
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.13",
         "doctrine/persistence": "^2.3",
         "egulias/email-validator": "^3.1",
         "enshrined/svg-sanitize": "^0.15.4",
