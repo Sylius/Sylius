@@ -25,6 +25,7 @@ sylius_admin_catalog_promotion_show:
             section: admin
             template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
             permission: true
+            alias: catalog_promotion
 
 sylius_admin_catalog_promotion_delete:
     path: /catalog-promotions/{code}
@@ -34,3 +35,4 @@ sylius_admin_catalog_promotion_delete:
         _sylius:
             section: admin
             permission: true
+            alias: catalog_promotion
