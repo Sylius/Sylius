@@ -52,5 +52,4 @@
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
 
-/.idea
 .idea
