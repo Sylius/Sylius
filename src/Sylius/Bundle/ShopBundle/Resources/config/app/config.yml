@@ -11,6 +11,10 @@ imports:
 parameters:
     sylius.security.shop_regex: "^/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++"
 
+webpack_encore:
+    builds:
+        shop: '%kernel.project_dir%/public/build/shop'
+
 sylius_grid:
     templates:
         action:
