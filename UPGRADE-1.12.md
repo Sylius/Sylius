@@ -91,7 +91,7 @@ Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem
 In `1.12` we have updated our frontend dependencies to the latest versions. This means that you might need to update your dependencies as well.
 The full list of all dependencies can be found in the [package.json](./package.json) file.
 
-Due to a fact every project is different, we cannot provide a list of all changes that might be needed. However, we have prepared a list of the most common changes that might be needed.
+Because every project is different, we cannot provide a list of all changes that might be needed. However, we have prepared a short list of fixes for the most common issues.
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
 ([node-sass](https://sass-lang.com/blog/libsass-is-deprecated) is deprecated and incompatible with many systems).
