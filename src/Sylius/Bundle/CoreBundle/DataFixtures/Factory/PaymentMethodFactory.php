@@ -43,6 +43,7 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
 
     private static ?string $modelClass = null;
 

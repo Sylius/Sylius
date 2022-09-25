@@ -24,6 +24,7 @@ final class PaymentMethodFactoryDefaultValues implements PaymentMethodFactoryDef
         return [
             'code' => null,
             'name' => (string) $faker->words(3, true),
+            'description' => $faker->sentence(),
         ];
     }
 }
