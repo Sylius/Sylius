@@ -43,6 +43,7 @@ class CatalogPromotionFactory extends ModelFactory implements CatalogPromotionFa
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
     use ToggableTrait;
     use WithChannelTrait;
 
@@ -65,11 +66,6 @@ class CatalogPromotionFactory extends ModelFactory implements CatalogPromotionFa
     public function withLabel(string $label): self
     {
         return $this->addState(['label' => $label]);
-    }
-
-    public function withDescription(string $description): self
-    {
-        return $this->addState(['description' => $description]);
     }
 
     public function withScopes(array $scopes): self

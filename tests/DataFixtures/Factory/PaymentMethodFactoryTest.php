@@ -35,6 +35,8 @@ final class PaymentMethodFactoryTest extends KernelTestCase
 
         $this->assertInstanceOf(PaymentMethodInterface::class, $paymentMethod->object());
         $this->assertNotNull($paymentMethod->getCode());
+        $this->assertNotNull($paymentMethod->getName());
+        $this->assertNotNull($paymentMethod->getDescription());
     }
 
     /** @test */
@@ -52,5 +54,14 @@ final class PaymentMethodFactoryTest extends KernelTestCase
         $paymentMethod = PaymentMethodFactory::new()->withName('Payment method 2')->create();
 
         $this->assertEquals('Payment method 2', $paymentMethod->getName());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_description(): void
+    {
+        LocaleFactory::new()->withCode('en_US')->create();
+        $paymentMethod = PaymentMethodFactory::new()->withDescription('Credit card')->create();
+
+        $this->assertEquals('Credit card', $paymentMethod->getDescription());
     }
 }

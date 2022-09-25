@@ -42,6 +42,7 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
     use ToggableTrait;
 
     public function __construct(
@@ -71,11 +72,6 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
     public function withShortDescription(string $shortDescription): self
     {
         return $this->addState(['short_description' => $shortDescription]);
-    }
-
-    public function withDescription(string $description): self
-    {
-        return $this->addState(['description' => $description]);
     }
 
     public function withVariantSelectionMethod(string $variantSelectionMethod): self

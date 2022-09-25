@@ -41,6 +41,7 @@ class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFa
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
 
     private static ?string $modelClass = null;
 
@@ -52,11 +53,6 @@ class ShippingCategoryFactory extends ModelFactory implements ShippingCategoryFa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withDescription(string $description): self
-    {
-        return $this->addState(['description' => $description]);
     }
 
     protected function getDefaults(): array

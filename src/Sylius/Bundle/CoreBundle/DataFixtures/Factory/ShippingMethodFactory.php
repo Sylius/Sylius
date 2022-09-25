@@ -44,6 +44,7 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
     use WithZoneTrait;
     use WithTaxCategoryTrait;
     use WithChannelTrait;
@@ -62,11 +63,6 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withDescription(string $description): self
-    {
-        return $this->addState(['description' => $description]);
     }
 
     public function withCategory(Proxy|ShippingCategoryInterface|string $category): self

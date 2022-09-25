@@ -44,6 +44,7 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use WithDescriptionTrait;
 
     private static ?string $modelClass = null;
 
@@ -64,11 +65,6 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
     public function withSlug(string $slug): self
     {
         return $this->addState(['slug' => $slug]);
-    }
-
-    public function withDescription(string $description): self
-    {
-        return $this->addState(['description' => $description]);
     }
 
     public function withTranslations(array $translations): self

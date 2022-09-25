@@ -37,6 +37,7 @@ final class PaymentMethodFactoryUpdater implements PaymentMethodFactoryUpdaterIn
             $paymentMethod->setFallbackLocale($localeCode);
 
             $paymentMethod->setName($attributes['name']);
+            $paymentMethod->setDescription($attributes['description']);
         }
     }
 
