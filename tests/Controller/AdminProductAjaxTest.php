@@ -16,6 +16,8 @@ namespace Sylius\Tests\Controller;
 use ApiTestCase\JsonApiTestCase;
 use Exception;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -59,10 +61,20 @@ final class AdminProductAjaxTest extends JsonApiTestCase
 
     private function authenticateAdminUser(): void
     {
-        $adminUserRepository = self::$container->get('sylius.repository.admin_user');
+        $adminUserRepository = self::$kernel->getContainer()->get('sylius.repository.admin_user');
         $user = $adminUserRepository->findOneByEmail('admin@sylius.com');
 
-        $session = self::$container->get('session');
+        $requestStack = self::$kernel->getContainer()->get('request_stack');
+        try {
+            $session = $requestStack->getSession();
+        } catch (SessionNotFoundException) {
+            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
+            $request = new Request();
+            $request->setSession($session);
+            $requestStack->push($request);
+            $session = $requestStack->getSession();
+        }
+
         $firewallName = 'admin';
         $firewallContext = 'admin';
 

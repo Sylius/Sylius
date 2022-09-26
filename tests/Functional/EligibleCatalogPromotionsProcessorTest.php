@@ -33,10 +33,9 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     {
         self::$client = static::createClient();
         self::$client->followRedirects(true);
-        self::$container = self::$client->getContainer();
 
         /** @var LoaderInterface $fixtureLoader */
-        $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $fixtureLoader = self::$kernel->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
 
         $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/scheduled_catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
     }
@@ -45,7 +44,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     public function it_provides_catalog_promotions_with_precision_to_seconds(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
-        $eligibleCatalogPromotionsProvider = self::$container->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 00:00:02');
 
@@ -73,7 +72,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     public function it_provides_catalog_promotions_with_precision_to_seconds_for_end_date(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
-        $eligibleCatalogPromotionsProvider = self::$container->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
 
         file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 23:59:58');
 

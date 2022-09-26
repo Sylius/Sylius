@@ -29,7 +29,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
-        $catalogPromotionAnnouncer = self::$container->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
         $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
 
         $this->assertSame('processing', $catalogPromotion->getState());
@@ -43,7 +43,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
         $catalogPromotion = $this->getCatalogPromotion();
 
         /** @var CatalogPromotionAnnouncer $catalogPromotionAnnouncer */
-        $catalogPromotionAnnouncer = self::$container->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
+        $catalogPromotionAnnouncer = self::$kernel->getContainer()->get('Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface');
         $catalogPromotionAnnouncer->dispatchCatalogPromotionCreatedEvent($catalogPromotion);
 
         $this->assertSame('active', $catalogPromotion->getState());
@@ -52,7 +52,7 @@ final class CatalogPromotionAnnouncerTest extends AbstractWebTestCase
     private function getCatalogPromotion(): CatalogPromotionInterface
     {
         /** @var LoaderInterface $fixtureLoader */
-        $fixtureLoader = self::$container->get('fidry_alice_data_fixtures.loader.doctrine');
+        $fixtureLoader = self::$kernel->getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
         $fixtures = $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
 
         /** @var CatalogPromotion $catalogPromotion */
