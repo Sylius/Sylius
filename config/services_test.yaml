@@ -8,3 +8,6 @@ services:
     session_factory.public:
         alias: session.factory
         public: true
+    sylius.command_bus.public:
+        alias: sylius.command_bus
+        public: true

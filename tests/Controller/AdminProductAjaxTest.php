@@ -63,17 +63,7 @@ final class AdminProductAjaxTest extends JsonApiTestCase
     {
         $adminUserRepository = self::$kernel->getContainer()->get('sylius.repository.admin_user');
         $user = $adminUserRepository->findOneByEmail('admin@sylius.com');
-
-        $requestStack = self::$kernel->getContainer()->get('request_stack');
-        try {
-            $session = $requestStack->getSession();
-        } catch (SessionNotFoundException) {
-            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
-            $request = new Request();
-            $request->setSession($session);
-            $requestStack->push($request);
-            $session = $requestStack->getSession();
-        }
+        $session = self::$kernel->getContainer()->get('request_stack')->getSession();
 
         $firewallName = 'admin';
         $firewallContext = 'admin';
@@ -90,5 +80,20 @@ final class AdminProductAjaxTest extends JsonApiTestCase
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $requestStack = self::$kernel->getContainer()->get('request_stack');
+        try {
+            $requestStack->getSession();
+        } catch (SessionNotFoundException) {
+            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
+            $request = new Request();
+            $request->setSession($session);
+            $requestStack->push($request);
+        }
     }
 }
