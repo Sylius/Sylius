@@ -78,7 +78,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         TokenInterface $token,
         ReviewInterface $review,
         CustomerInterface $customer,
-        UserInterface $existingUser
+        UserInterface $existingUser,
     ): void {
         $constraint = new UniqueReviewerEmail();
 
