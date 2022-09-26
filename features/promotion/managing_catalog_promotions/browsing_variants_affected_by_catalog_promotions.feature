@@ -20,15 +20,14 @@ Feature: Browsing variants affected by catalog promotions
         Given there is a catalog promotion "PHP T-Shirt promotion" that reduces price by "50%" and applies on "PHP T-Shirt" variant
         When I browse variants affected by catalog promotion "PHP T-Shirt promotion"
         Then there should be 1 product variant on the list
-        And the product variant "PHP T-Shirt" should be in the registry
+        And it should be the "PHP T-Shirt" product variant
 
     @ui @api
     Scenario: Browsing product variants affected by a catalog promotion applied on products
         Given there is a catalog promotion "T-Shirt promotion" that reduces price by "20%" and applies on "T-Shirt" product
         When I browse variants affected by catalog promotion "T-Shirt promotion"
         Then there should be 2 product variants on the list
-        And the product variant "PHP T-Shirt" should be in the registry
-        And the product variant "Sylius T-Shirt" should be in the registry
+        And it should be "PHP T-Shirt" and "Sylius T-Shirt" product variants
 
     @ui @api
     Scenario: Browsing product variants affected by a catalog promotion applied on taxons
@@ -37,12 +36,12 @@ Feature: Browsing variants affected by catalog promotions
         Then there should be 3 product variants on the list
 
     @ui @api
-    Scenario: Not seeing product variants with exclusive promotions applied on list from normal ones????
+    Scenario: Browsing product variants affected by a catalog promotion when its scope overlaps with an exclusive promotion
         Given there is a catalog promotion "T-Shirt promotion" that reduces price by "20%" and applies on "T-Shirt" product
         And there is an exclusive catalog promotion "Sylius T-Shirt promotion" with priority 100 that reduces price by "30%" and applies on "Sylius T-Shirt" variant
         When I browse variants affected by catalog promotion "T-Shirt promotion"
         Then there should be 1 product variant on the list
-        And the product variant "PHP T-Shirt" should be in the registry
+        And it should be the "PHP T-Shirt" product variant
 
     @ui @no-api
     Scenario: Accessing the product details page through affected product variants list

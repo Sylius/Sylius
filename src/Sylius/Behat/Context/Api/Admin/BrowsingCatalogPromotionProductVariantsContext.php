@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class BrowsingCatalogPromotionProductVariantsContext implements Context
@@ -53,14 +52,18 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     }
 
     /**
-     * @Then the product variant :variant should be in the registry
+     * @Then it should be the :variantName product variant
+     * @Then it should be :firstVariant and :secondVariant product variants
      */
-    public function theProductVariantShouldBeInTheRegistry(ProductVariantInterface $variant): void
+    public function theProductVariantShouldBeInTheRegistry(string ...$variantsNames): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->getLastResponse(),
-            'code',
-            $variant->getCode(),
-        ));
+        foreach ($variantsNames as $variantName) {
+            Assert::true($this->responseChecker->hasItemWithTranslation(
+                $this->client->getLastResponse(),
+                'en_US',
+                'name',
+                $variantName,
+            ));
+        }
     }
 }

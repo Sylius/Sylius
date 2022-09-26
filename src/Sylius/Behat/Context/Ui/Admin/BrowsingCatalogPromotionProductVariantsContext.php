@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 final class BrowsingCatalogPromotionProductVariantsContext implements Context
 {
     public function __construct(
-        private IndexPageInterface $catalogPromotionProductVariantIndex,
+        private IndexPageInterface $catalogPromotionProductVariantIndexPage,
         private ShowPageInterface $productShowPage,
     ) {
     }
@@ -34,7 +34,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
      */
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->catalogPromotionProductVariantIndex->open(['id' => $catalogPromotion->getId()]);
+        $this->catalogPromotionProductVariantIndexPage->open(['id' => $catalogPromotion->getId()]);
     }
 
     /**
@@ -42,8 +42,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
      */
     public function iWantToViewTheProductOfVariant(ProductVariantInterface $variant): void
     {
-        $actions = $this->catalogPromotionProductVariantIndex->getActionsForResource(['code' => $variant->getCode()]);
-        $actions->clickLink('Show product');
+        $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getCode());
     }
 
     /**
@@ -52,19 +51,22 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     public function thereShouldBeProductVariantsOnTheList(int $count): void
     {
         Assert::same(
-            $this->catalogPromotionProductVariantIndex->countItems(),
+            $this->catalogPromotionProductVariantIndexPage->countItems(),
             $count,
         );
     }
 
     /**
-     * @Then the product variant :variant should be in the registry
+     * @Then it should be the :variantName product variant
+     * @Then it should be :firstVariant and :secondVariant product variants
      */
-    public function theProductVariantShouldBeInTheRegistry(ProductVariantInterface $variant): void
+    public function theProductVariantShouldBeInTheRegistry(string ...$variantsNames): void
     {
-        Assert::true($this->catalogPromotionProductVariantIndex->isSingleResourceOnPage([
-            'code' => $variant->getCode(),
-        ]));
+        foreach ($variantsNames as $variantName) {
+            Assert::true($this->catalogPromotionProductVariantIndexPage->isSingleResourceOnPage([
+                'name' => $variantName,
+            ]));
+        }
     }
 
     /**
