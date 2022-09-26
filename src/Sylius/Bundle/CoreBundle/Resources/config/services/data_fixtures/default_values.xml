@@ -56,6 +56,12 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValuesInterface" alias="sylius.data_fixtures.default_values.product" />
 
+        <service id="sylius.data_fixtures.default_values.product_association" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductAssociationDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.product_association_type" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductAssociationDefaultValuesInterface" alias="sylius.data_fixtures.default_values.product_association" />
+
         <service id="sylius.data_fixtures.default_values.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PromotionDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>

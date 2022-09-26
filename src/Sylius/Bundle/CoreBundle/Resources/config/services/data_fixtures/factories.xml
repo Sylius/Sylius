@@ -120,6 +120,16 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface" alias="sylius.data_fixtures.factory.product" />
 
+        <service id="sylius.data_fixtures.factory.product_association" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationFactory">
+            <argument type="service" id="sylius.factory.product_association" />
+            <argument type="service" id="sylius.data_fixtures.default_values.product_association" />
+            <argument type="service" id="sylius.data_fixtures.transformer.product_association" />
+            <argument type="service" id="sylius.data_fixtures.updater.product_association" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationFactoryInterface" alias="sylius.data_fixtures.factory.product_association" />
+
+
         <service id="sylius.data_fixtures.factory.product_association_type" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactory">
             <argument type="service" id="sylius.factory.product_association_type" />
             <argument type="service" id="sylius.repository.locale" />
