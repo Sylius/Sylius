@@ -3,7 +3,11 @@
 {% elseif product.images.first %}
     {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
 {% else %}
-    {% set path = asset('assets/shop/img/200x200.png') %}
+    {% if use_webpack %}
+        {% set path = asset('build/shop/images/200x200.png', 'shop') %}
+    {% else %}
+        {% set path = asset('assets/shop/img/200x200.png') %}
+    {% endif %}
 {% endif %}
 
 <img src="{{ path }}" {{ sylius_test_html_attribute('main-image') }} alt="{{ product.name }}" class="ui bordered image" />

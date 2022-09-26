@@ -2,7 +2,11 @@
 
 {% block content %}
     <h2 class="ui center aligned icon header">
-        <img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" />
+        {% if use_webpack %}
+            <img src="{{ asset('build/shop/images/logo.png', 'shop') }}" alt="Sylius logo" class="ui small image" />
+        {% else %}
+            <img src="{{ asset('assets/shop/img/logo.png') }}" alt="Sylius logo" class="ui small image" />
+        {% endif %}
         <br/><br/>
         {{ 'sylius.ui.the_page_you_are_looking_for_is_forbidden'|trans }}
     </h2>
