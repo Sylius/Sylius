@@ -2,7 +2,7 @@ sylius_admin_partial_order_latest:
     path: /latest/{count}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:indexAction
+        _controller: sylius.controller.order::indexAction
         _sylius:
             repository:
                 method: findLatest
@@ -15,7 +15,7 @@ sylius_admin_partial_order_latest_in_channel:
     path: /latest/{channelCode}/{count}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:indexAction
+        _controller: sylius.controller.order::indexAction
         _sylius:
             repository:
                 method: findLatestInChannel

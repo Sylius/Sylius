@@ -2,7 +2,7 @@ sylius_admin_partial_address_log_entry_index:
     path: /log-entry/{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.address_log_entry:indexAction
+        _controller: sylius.controller.address_log_entry::indexAction
         _sylius:
             template: "@SyliusUi/Grid/_history.html.twig"
             grid: sylius_admin_address_log_entry

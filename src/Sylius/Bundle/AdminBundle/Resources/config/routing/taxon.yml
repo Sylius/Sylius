@@ -17,7 +17,7 @@ sylius_admin_taxon_index:
     path: /taxons/
     methods: [GET]
     defaults:
-        _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController:redirectAction
+        _controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
         route: sylius_admin_taxon_create
         permanent: true
 
@@ -25,7 +25,7 @@ sylius_admin_taxon_create_for_parent:
     path: /taxons/new/{id}
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.taxon:createAction
+        _controller: sylius.controller.taxon::createAction
         _sylius:
             section: admin
             permission: true

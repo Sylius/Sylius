@@ -17,7 +17,7 @@ sylius_admin_payment_complete:
     path: /payments/{id}/complete
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
             event: complete
             section: admin
