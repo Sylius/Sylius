@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use ApiTestCase\JsonApiTestCase;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminTaxonAjaxTest extends JsonApiTestCase
+final class AdminTaxonAjaxTest extends SessionAwareAjaxTest
 {
     /** @test */
     public function it_denies_access_to_taxons_for_not_authenticated_user(): void
@@ -105,20 +102,5 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $requestStack = self::$kernel->getContainer()->get('request_stack');
-        try {
-            $requestStack->getSession();
-        } catch (SessionNotFoundException) {
-            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
-            $request = new Request();
-            $request->setSession($session);
-            $requestStack->push($request);
-        }
     }
 }

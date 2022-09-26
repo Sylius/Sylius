@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminProductAjaxTest extends JsonApiTestCase
+final class AdminProductAjaxTest extends SessionAwareAjaxTest
 {
     /**
      * @test
@@ -80,20 +80,5 @@ final class AdminProductAjaxTest extends JsonApiTestCase
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $requestStack = self::$kernel->getContainer()->get('request_stack');
-        try {
-            $requestStack->getSession();
-        } catch (SessionNotFoundException) {
-            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
-            $request = new Request();
-            $request->setSession($session);
-            $requestStack->push($request);
-        }
     }
 }
