@@ -47,7 +47,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
 
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
@@ -78,7 +78,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
 
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
@@ -124,7 +124,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
 
         $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
 
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 

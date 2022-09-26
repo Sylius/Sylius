@@ -84,10 +84,10 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
 
     private function authenticateAdminUser(): void
     {
-        $adminUserRepository = self::$container->get('sylius.repository.admin_user');
+        $adminUserRepository = self::$kernel->getContainer()->get('sylius.repository.admin_user');
         $user = $adminUserRepository->findOneByEmail('admin@sylius.com');
 
-        $session = self::$container->get('session');
+        $session = self::$kernel->getContainer()->get('request_stack')->getSession();
         $firewallName = 'admin';
         $firewallContext = 'admin';
 

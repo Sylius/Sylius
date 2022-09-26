@@ -5,3 +5,6 @@ imports:
 # see https://github.com/FriendsOfBehat/SymfonyExtension/issues/88
 services:
     Symfony\Component\BrowserKit\AbstractBrowser: '@test.client'
+    session_factory.public:
+        alias: session.factory
+        public: true
