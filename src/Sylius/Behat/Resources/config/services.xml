@@ -35,6 +35,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">admin</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
         </service>
 
         <service id="sylius.behat.api_security" class="Sylius\Behat\Service\ApiSecurityService" public="true">
@@ -46,6 +47,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument type="string">shop</argument>
+            <argument type="service" id="session.factory" on-invalid="null" />
         </service>
 
         <service id="Sylius\Behat\Service\SessionManagerInterface" class="Sylius\Behat\Service\SessionManager" public="false">
