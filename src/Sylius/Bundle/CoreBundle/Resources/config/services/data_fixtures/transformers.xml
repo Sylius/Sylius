@@ -48,6 +48,15 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.product" />
 
+        <service id="sylius.data_fixtures.factory_transformer.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionFactoryTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.promotion_action" />
+            <argument type="service" id="sylius.factory.promotion_coupon" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion" />
+
+        <service id="sylius.data_fixtures.factory_transformer.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionActionFactoryTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionActionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion_action" />
+
         <service id="sylius.data_fixtures.factory_transformer.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformer" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion_rule" />
 
