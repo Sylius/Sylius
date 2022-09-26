@@ -5,7 +5,7 @@ sylius_shop_ajax_user_check_action:
     path: /check
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop_user:showAction
+        _controller: sylius.controller.shop_user::showAction
         _format: json
         _sylius:
             repository:

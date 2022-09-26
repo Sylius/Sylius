@@ -13,7 +13,7 @@ sylius_shop_homepage:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.homepage:indexAction
+        _controller: sylius.controller.shop.homepage::indexAction
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
@@ -52,10 +52,10 @@ sylius_shop_switch_currency:
     path: /switch-currency/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.currency_switch:switchAction
+        _controller: sylius.controller.shop.currency_switch::switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.shop.locale_switch:switchAction
+        _controller: sylius.controller.shop.locale_switch::switchAction

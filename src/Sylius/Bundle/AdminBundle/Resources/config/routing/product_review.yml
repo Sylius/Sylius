@@ -20,7 +20,7 @@ sylius_admin_product_review_accept:
     path: /product-review/{id}/accept
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _controller: sylius.controller.product_review::applyStateMachineTransitionAction
         _sylius:
             permission: true
             state_machine:
@@ -33,7 +33,7 @@ sylius_admin_product_review_reject:
     path: /product-review/{id}/reject
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _controller: sylius.controller.product_review::applyStateMachineTransitionAction
         _sylius:
             permission: true
             state_machine:

@@ -2,7 +2,7 @@ sylius_admin_partial_channel_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.channel:indexAction
+        _controller: sylius.controller.channel::indexAction
         _sylius:
             repository:
                 method: findAll
