@@ -648,7 +648,13 @@ jobs:
                 name: Run PHPUnit
                 run: |
                     bin/console cache:pool:clear cache.global_clearer
-                    vendor/bin/phpunit --debug
+                    vendor/bin/phpunit tests/Functional/
+
+            -
+                name: Run PHPUnit
+                run: |
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/phpunit tests/Fixture/
 
             -
                 name: Run CLI Behat
