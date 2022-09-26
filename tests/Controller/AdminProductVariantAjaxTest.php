@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminProductVariantAjaxTest extends JsonApiTestCase
+final class AdminProductVariantAjaxTest extends SessionAwareAjaxTest
 {
     /** @test */
     public function it_denies_access_to_product_variants_for_not_authenticated_user(): void
@@ -98,20 +98,5 @@ final class AdminProductVariantAjaxTest extends JsonApiTestCase
 
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $requestStack = self::$kernel->getContainer()->get('request_stack');
-        try {
-            $requestStack->getSession();
-        } catch (SessionNotFoundException) {
-            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
-            $request = new Request();
-            $request->setSession($session);
-            $requestStack->push($request);
-        }
     }
 }
