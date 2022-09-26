@@ -65,8 +65,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         string $exceptionClass,
         ?int $timeout = null,
         NotificationType $type = null,
-    ): void
-    {
+    ): void {
         $start = microtime(true);
         $timeout ??= $this->defaultTimeout;
         $end = $start + $timeout;
