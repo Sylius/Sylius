@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace spec\Sylius\Component\Taxation\Checker;
@@ -9,7 +18,7 @@ use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateCheckerInterface;
 
-class TaxRateDateCheckerSpec extends ObjectBehavior
+final class TaxRateDateCheckerSpec extends ObjectBehavior
 {
     function let(DateTimeProviderInterface $calendar): void
     {
@@ -20,35 +29,22 @@ class TaxRateDateCheckerSpec extends ObjectBehavior
     {
         $this->shouldImplement(TaxRateDateCheckerInterface::class);
     }
-    function it_returns_null_if_tax_rate_is_not_in_date(
-        DateTimeProviderInterface $calendar,
-        TaxRateInterface $firstTaxRate,
-        TaxRateInterface $secondTaxRate,
-        TaxRateInterface $thirdTaxRate
-    ): void {
-        $now = new \DateTime();
-        $calendar->now()->willReturn($now);
 
-        $firstTaxRate->isInDate($now)->willReturn(false);
-        $secondTaxRate->isInDate($now)->willReturn(false);
-        $thirdTaxRate->isInDate($now)->willReturn(false);
+    function it_can_be_in_date_when_both_dates_are_defined(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
+        $endDate = new \DateTime('01-03-2022');
 
-        $this->check([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->shouldReturn(null);
+        $this->isInDate(new \DateTime('12-12-2021'), $startDate, $endDate)->shouldReturn(false);
+        $this->isInDate(new \DateTime('02-02-2022'), $startDate, $endDate)->shouldReturn(true);
+        $this->isInDate(new \DateTime('03-03-2022'), $startDate, $endDate)->shouldReturn(false);
     }
 
-    function it_returns_tax_rate_if_it_is_in_date(
-        DateTimeProviderInterface $calendar,
-        TaxRateInterface $firstTaxRate,
-        TaxRateInterface $secondTaxRate,
-        TaxRateInterface $thirdTaxRate
-    ): void {
-        $now = new \DateTime();
-        $calendar->now()->willReturn($now);
+    function it_can_be_in_date_when_one_date_is_defined(): void
+    {
+        $startDate = new \DateTime('01-01-2022');
 
-        $firstTaxRate->isInDate($now)->willReturn(false);
-        $secondTaxRate->isInDate($now)->willReturn(true);
-        $thirdTaxRate->isInDate($now)->willReturn(false);
-
-        $this->check([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->shouldReturn($secondTaxRate);
+        $this->isInDate(new \DateTime('12-12-2021'), $startDate, null)->shouldReturn(false);
+        $this->isInDate(new \DateTime('02-02-2022'), $startDate, null)->shouldReturn(true);
     }
 }

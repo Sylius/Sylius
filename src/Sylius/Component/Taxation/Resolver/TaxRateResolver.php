@@ -23,7 +23,7 @@ class TaxRateResolver implements TaxRateResolverInterface
 {
     public function __construct(
         protected RepositoryInterface $taxRateRepository,
-        protected TaxRateDateCheckerInterface $taxRateDateChecker
+        protected ?TaxRateDateCheckerInterface $taxRateDateChecker = null
     ) {
     }
 
@@ -35,8 +35,12 @@ class TaxRateResolver implements TaxRateResolverInterface
 
         $criteria = array_merge(['category' => $category], $criteria);
 
-        $taxRates = $this->taxRateRepository->findBy($criteria);
+        if ($this->taxRateDateChecker) {
+            $taxRates = $this->taxRateRepository->findBy($criteria);
 
-        return $this->taxRateDateChecker->check($taxRates);
+            return $this->taxRateDateChecker->filter($taxRates);
+        }
+
+        return $this->taxRateRepository->findOneBy($criteria);
     }
 }

@@ -39,7 +39,7 @@
 
         <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
-            <argument type="service" id="sylius.tax_rate_date_checker" />
+            <argument type="service" id="sylius.tax_rate_date_checker" on-invalid="null" />
         </service>
         <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
 

@@ -49,7 +49,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
             ->willReturn([$firstTaxRate, $secondTaxRate, $thirdTaxRate])
         ;
 
-        $taxRateDateChecker->check([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->willReturn($firstTaxRate);
+        $taxRateDateChecker->filter([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->willReturn($firstTaxRate);
 
         $this->resolve($taxable)->shouldReturn($firstTaxRate);
     }

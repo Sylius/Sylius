@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
-
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
@@ -14,7 +13,7 @@ final class Version20220912091947 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Adding start and end date to tax rates';
     }
 
     public function up(Schema $schema): void

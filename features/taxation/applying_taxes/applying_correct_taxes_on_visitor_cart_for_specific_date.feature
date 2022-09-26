@@ -2,7 +2,7 @@
 Feature: Apply correct taxes on visitor cart for specific date
     In order to buy goods with correct taxes applied
     As a Visitor
-    I want to have correct taxes applied to my order
+    I want to have up-to-date taxes applied to my order
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -29,4 +29,3 @@ Feature: Apply correct taxes on visitor cart for specific date
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$115.00"
         And my cart taxes should be "$15.00"
-

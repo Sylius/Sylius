@@ -153,21 +153,4 @@ class TaxRate implements TaxRateInterface
 
         $this->endDate = $endDate;
     }
-
-    public function isInDate(DateTimeInterface $date): bool
-    {
-        if (null === $this->startDate && null === $this->endDate) {
-            return true;
-        }
-
-        if (null === $this->startDate) {
-            return $date <= $this->endDate;
-        }
-
-        if (null === $this->endDate) {
-            return $date >= $this->startDate;
-        }
-
-        return $this->startDate <= $date && $this->endDate >= $date;
-    }
 }

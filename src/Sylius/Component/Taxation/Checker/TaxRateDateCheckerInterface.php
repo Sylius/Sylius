@@ -8,5 +8,5 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 interface TaxRateDateCheckerInterface
 {
-    public function check(array $taxRates): ?TaxRateInterface;
+    public function filter(array $taxRates): ?TaxRateInterface;
 }
