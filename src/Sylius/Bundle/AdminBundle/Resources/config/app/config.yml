@@ -40,6 +40,10 @@ parameters:
     sylius_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
     sylius.security.admin_regex: "^/%sylius_admin.path_name%"
 
+webpack_encore:
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+
 sylius_grid:
     templates:
         action:

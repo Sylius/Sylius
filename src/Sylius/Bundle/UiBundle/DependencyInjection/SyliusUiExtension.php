@@ -16,13 +16,15 @@ namespace Sylius\Bundle\UiBundle\DependencyInjection;
 use Laminas\Stdlib\SplPriorityQueue;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusUiExtension extends Extension
+final class SyliusUiExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -72,5 +74,37 @@ final class SyliusUiExtension extends Extension
         }
 
         $templateBlockRegistryDefinition->setArgument(0, $blocksForEvents);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $useWebpack = $this->getCurrentConfiguration($container)['use_webpack'] ?? true;
+
+        $container->setParameter('sylius_ui.use_webpack', $useWebpack);
+
+        if (true === $useWebpack) {
+            $container->prependExtensionConfig('framework', [
+                'assets' => [
+                    'packages' => [
+                        'shop' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/shop/manifest.json',
+                        ],
+                        'admin' => [
+                            'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
+                        ],
+                    ]
+                ]
+            ]);
+        }
+    }
+
+    private function getCurrentConfiguration(ContainerBuilder $container): array
+    {
+        /** @var ConfigurationInterface $configuration */
+        $configuration = $this->getConfiguration([], $container);
+
+        $configs = $container->getExtensionConfig($this->getAlias());
+
+        return $this->processConfiguration($configuration, $configs);
     }
 }

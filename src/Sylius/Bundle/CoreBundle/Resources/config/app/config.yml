@@ -17,6 +17,7 @@ imports:
     - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusUiBundle/Resources/config/app/config.yml" }
 
     - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
     - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }

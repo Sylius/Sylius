@@ -40,6 +40,7 @@
         "symfony/security-core": "^5.4",
         "symfony/security-bundle": "^5.4",
         "symfony/templating": "^5.4",
+        "symfony/webpack-encore-bundle": "^1.15",
         "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
