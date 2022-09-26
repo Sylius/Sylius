@@ -34,7 +34,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static CatalogPromotionInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CatalogPromotionInterface|Proxy create(array|callable $attributes = [])
  */
-interface CatalogPromotionFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, ToggableInterface, WithChannelInterface
+interface CatalogPromotionFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, ToggableInterface, WithChannelsInterface
 {
     public function withLabel(string $label): self;
 

@@ -37,6 +37,9 @@ final class PaymentMethodFactoryTest extends KernelTestCase
         $this->assertNotNull($paymentMethod->getCode());
         $this->assertNotNull($paymentMethod->getName());
         $this->assertNotNull($paymentMethod->getDescription());
+        $this->assertNull($paymentMethod->getInstructions());
+        $this->assertSame('Offline', $paymentMethod->getGatewayConfig()->getGatewayName());
+        $this->assertCount(3, $paymentMethod->getChannels());
     }
 
     /** @test */
@@ -63,5 +66,63 @@ final class PaymentMethodFactoryTest extends KernelTestCase
         $paymentMethod = PaymentMethodFactory::new()->withDescription('Credit card')->create();
 
         $this->assertEquals('Credit card', $paymentMethod->getDescription());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_instructions(): void
+    {
+        LocaleFactory::new()->withCode('en_US')->create();
+        $paymentMethod = PaymentMethodFactory::new()->withInstructions('Bank account: 0000 1111 2222 3333')->create();
+
+        $this->assertEquals('Bank account: 0000 1111 2222 3333', $paymentMethod->getInstructions());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_gateway_name(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->withGatewayName('Online')->create();
+
+        $this->assertEquals('Online', $paymentMethod->getGatewayConfig()->getGatewayName());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_gateway_factory(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->withGatewayFactory('online')->create();
+
+        $this->assertEquals('online', $paymentMethod->getGatewayConfig()->getFactoryName());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_gateway_config(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->withGatewayConfig(['foo' => 'fighters'])->create();
+
+        $this->assertEquals(['foo' => 'fighters'], $paymentMethod->getGatewayConfig()->getConfig());
+    }
+
+    /** @test */
+    function it_creates_enabled_payment_method(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->enabled()->create();
+
+        $this->assertTrue($paymentMethod->isEnabled());
+    }
+
+    /** @test */
+    function it_creates_disabled_payment_method(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->disabled()->create();
+
+        $this->assertFalse($paymentMethod->isEnabled());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_channels(): void
+    {
+        $channel = ChannelFactory::createOne();
+        $paymentMethod = PaymentMethodFactory::new()->withChannels([$channel])->create();
+
+        $this->assertCount(1, $paymentMethod->getChannels());
     }
 }

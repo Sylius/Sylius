@@ -30,7 +30,11 @@ final class PaymentMethodFactoryUpdater implements PaymentMethodFactoryUpdaterIn
 
     public function update(PaymentMethodInterface $paymentMethod, array $attributes): void
     {
+        $paymentMethod->getGatewayConfig()->setGatewayName($attributes['gateway_name']);
+        $paymentMethod->getGatewayConfig()->setConfig($attributes['gateway_config']);
+
         $paymentMethod->setCode($attributes['code']);
+        $paymentMethod->setEnabled($attributes['enabled']);
 
         foreach ($this->getLocales() as $localeCode) {
             $paymentMethod->setCurrentLocale($localeCode);
@@ -38,6 +42,11 @@ final class PaymentMethodFactoryUpdater implements PaymentMethodFactoryUpdaterIn
 
             $paymentMethod->setName($attributes['name']);
             $paymentMethod->setDescription($attributes['description']);
+            $paymentMethod->setInstructions($attributes['instructions']);
+        }
+
+        foreach ($attributes['channels'] as $channel) {
+            $paymentMethod->addChannel($channel);
         }
     }
 

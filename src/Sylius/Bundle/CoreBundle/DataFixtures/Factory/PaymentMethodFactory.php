@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFacto
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PaymentMethodFactoryUpdaterInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface as ResourceFactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -44,11 +44,13 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
     use WithCodeTrait;
     use WithNameTrait;
     use WithDescriptionTrait;
+    use ToggableTrait;
+    use WithChannelsTrait;
 
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $paymentMethodFactory,
+        private ResourceFactoryInterface $paymentMethodFactory,
         private PaymentMethodFactoryDefaultValuesInterface $factoryDefaultValues,
         private PaymentMethodFactoryTransformerInterface $factoryTransformer,
         private PaymentMethodFactoryUpdaterInterface $factoryUpdater,
@@ -59,6 +61,26 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
+    }
+
+    public function withInstructions(string $instructions): self
+    {
+        return $this->addState(['instructions' => $instructions]);
+    }
+
+    public function withGatewayName(string $gatewayName): self
+    {
+        return $this->addState(['gateway_name' => $gatewayName]);
+    }
+
+    public function withGatewayFactory(string $gatewayFactory): self
+    {
+        return $this->addState(['gateway_factory' => $gatewayFactory]);
+    }
+
+    public function withGatewayConfig(array $gatewayConfig): self
+    {
+        return $this->addState(['gateway_config' => $gatewayConfig]);
     }
 
     protected function getDefaults(): array
@@ -83,8 +105,7 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
                 return $this->transform($attributes);
             })
             ->instantiateWith(function(array $attributes): PaymentMethodInterface {
-                /** @var PaymentMethodInterface $paymentMethod */
-                $paymentMethod = $this->paymentMethodFactory->createNew();
+                $paymentMethod = $this->paymentMethodFactory->createWithGateway($attributes['gateway_factory']);
 
                 $this->update($paymentMethod, $attributes);
 

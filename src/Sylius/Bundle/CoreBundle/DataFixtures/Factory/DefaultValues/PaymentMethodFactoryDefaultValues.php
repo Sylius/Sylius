@@ -19,12 +19,22 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 
 final class PaymentMethodFactoryDefaultValues implements PaymentMethodFactoryDefaultValuesInterface
 {
+    public function __construct(private ChannelFactoryInterface $channelFactory)
+    {
+    }
+
     public function getDefaults(Generator $faker): array
     {
         return [
             'code' => null,
             'name' => (string) $faker->words(3, true),
             'description' => $faker->sentence(),
+            'instructions' => null,
+            'gateway_name' => 'Offline',
+            'gateway_factory' => 'offline',
+            'gateway_config' => [],
+            'enabled' => $faker->boolean(90),
+            'channels' => $this->channelFactory::all(),
         ];
     }
 }

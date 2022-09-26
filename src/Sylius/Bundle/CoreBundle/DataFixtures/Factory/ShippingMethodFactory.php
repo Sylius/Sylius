@@ -47,7 +47,7 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
     use WithDescriptionTrait;
     use WithZoneTrait;
     use WithTaxCategoryTrait;
-    use WithChannelTrait;
+    use WithChannelsTrait;
 
     private static ?string $modelClass = null;
 
