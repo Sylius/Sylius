@@ -89,7 +89,9 @@
             <errorLevel type="info">
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
+                <referencedClass name="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder"/>
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Routing\RouteCollectionBuilder" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface" /> <!-- deprecated in Symfony 5.3 -->
@@ -101,6 +103,7 @@
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
