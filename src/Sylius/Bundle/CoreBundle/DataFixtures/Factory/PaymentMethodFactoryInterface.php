@@ -34,6 +34,13 @@ use Zenstruck\Foundry\Proxy;
  * @method static PaymentMethodInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method PaymentMethodInterface|Proxy create(array|callable $attributes = [])
  */
-interface PaymentMethodFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface
+interface PaymentMethodFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, ToggableInterface, WithChannelsInterface
 {
+    public function withInstructions(string $instructions): self;
+
+    public function withGatewayName(string $gatewayName): self;
+
+    public function withGatewayFactory(string $gatewayFactory): self;
+
+    public function withGatewayConfig(array $gatewayConfig): self;
 }

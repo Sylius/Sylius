@@ -11,7 +11,7 @@ use Zenstruck\Foundry\Proxy;
 /**
  * @mixin ModelFactory
  */
-trait WithChannelTrait
+trait WithChannelsTrait
 {
     public function withChannels(array $channels): self
     {

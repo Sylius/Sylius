@@ -45,7 +45,7 @@ class CatalogPromotionFactory extends ModelFactory implements CatalogPromotionFa
     use WithNameTrait;
     use WithDescriptionTrait;
     use ToggableTrait;
-    use WithChannelTrait;
+    use WithChannelsTrait;
 
     private static ?string $modelClass = null;
 
