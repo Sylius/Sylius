@@ -53,6 +53,12 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.product" />
 
+        <service id="sylius.data_fixtures.factory_updater.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.promotion" />
+
+        <service id="sylius.data_fixtures.factory_updater.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionActionFactoryUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionActionFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.promotion_action" />
+
         <service id="sylius.data_fixtures.factory_updater.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdaterInterface" alias="sylius.data_fixtures.factory_updater.promotion_rule" />
 

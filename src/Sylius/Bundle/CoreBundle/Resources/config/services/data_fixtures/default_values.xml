@@ -53,6 +53,14 @@
         <service id="sylius.data_fixtures.factory_default_values.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValues" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.product" />
 
+        <service id="sylius.data_fixtures.factory_default_values.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionFactoryDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.promotion" />
+
+        <service id="sylius.data_fixtures.factory_default_values.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionActionFactoryDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionActionFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.promotion_action" />
+
         <service id="sylius.data_fixtures.factory_default_values.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValues" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValuesInterface" alias="sylius.data_fixtures.factory_default_values.promotion_rule" />
 

@@ -46,6 +46,7 @@ class CatalogPromotionFactory extends ModelFactory implements CatalogPromotionFa
     use WithDescriptionTrait;
     use ToggableTrait;
     use WithChannelsTrait;
+    use WithPriorityTrait;
 
     private static ?string $modelClass = null;
 
@@ -76,11 +77,6 @@ class CatalogPromotionFactory extends ModelFactory implements CatalogPromotionFa
     public function withActions(array $actions): self
     {
         return $this->addState(['actions' => $actions]);
-    }
-
-    public function withPriority(int $priority): self
-    {
-        return $this->addState(['priority' => $priority]);
     }
 
     public function exclusive(): self
