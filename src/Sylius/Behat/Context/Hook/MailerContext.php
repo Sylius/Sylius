@@ -18,9 +18,8 @@ use Psr\Cache\CacheItemPoolInterface;
 
 final class MailerContext implements Context
 {
-    public function __construct(
-        private CacheItemPoolInterface $cache
-    ) {
+    public function __construct(private CacheItemPoolInterface $cache)
+    {
     }
 
     /**
