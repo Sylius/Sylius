@@ -57,6 +57,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductUpdaterInterface" alias="sylius.data_fixtures.updater.product" />
 
+        <service id="sylius.data_fixtures.updater.product_association" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAssociationUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAssociationUpdaterInterface" alias="sylius.data_fixtures.updater.product_association" />
+
         <service id="sylius.data_fixtures.updater.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\PromotionUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\PromotionUpdaterInterface" alias="sylius.data_fixtures.updater.promotion" />
 
