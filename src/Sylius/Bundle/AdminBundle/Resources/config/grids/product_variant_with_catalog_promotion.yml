@@ -50,3 +50,10 @@ sylius_grid:
                                 route: sylius_admin_product_show
                                 parameters:
                                     id: resource.product.id
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: resource.product.id
