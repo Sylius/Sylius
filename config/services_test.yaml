@@ -11,3 +11,6 @@ services:
     sylius.command_bus.public:
         alias: sylius.command_bus
         public: true
+    filesystem.public:
+        alias: filesystem
+        public: true

@@ -28,7 +28,7 @@ final class SendContactRequestTest extends JsonApiTestCase
         $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $filesystem = $container->get('filesystem.public');
 
         /** @var EmailChecker $emailChecker */
         $emailChecker = $container->get('sylius.behat.email_checker');
@@ -64,7 +64,7 @@ final class SendContactRequestTest extends JsonApiTestCase
         $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $filesystem = $container->get('filesystem.public');
 
         /** @var EmailChecker $emailChecker */
         $emailChecker = $container->get('sylius.behat.email_checker');

@@ -35,7 +35,7 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $filesystem = $container->get('filesystem.public');
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
@@ -91,7 +91,7 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $container = self::bootKernel()->getContainer();
 
         /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $filesystem = $container->get('filesystem.public');
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
