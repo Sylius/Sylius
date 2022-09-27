@@ -3,4 +3,4 @@ swiftmailer:
     logging: true
     spool:
         type: file
-        path: '%kernel.cache_dir%/spool'
+        path: "%kernel.cache_dir%/spool"
