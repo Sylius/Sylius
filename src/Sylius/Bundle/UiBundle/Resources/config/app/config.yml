@@ -6,7 +6,7 @@ webpack_encore:
 
 twig:
     globals:
-        use_webpack: '%sylius_ui.use_webpack%'
+        use_webpack: false
 
 sylius_grid:
     templates:
