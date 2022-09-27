@@ -45,6 +45,14 @@ final class ZoneFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_zone_with_given_name(): void
+    {
+        $zone = ZoneFactory::new()->withName('World')->create();
+
+        $this->assertEquals('World', $zone->getName());
+    }
+
+    /** @test */
     function it_creates_zone_with_new_members(): void
     {
         $zone = ZoneFactory::new()->withMembers(['united_states', 'france'])->create();

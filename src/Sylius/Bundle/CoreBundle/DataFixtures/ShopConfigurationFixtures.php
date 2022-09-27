@@ -16,8 +16,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultGeographicalStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface;
 
 final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInterface
@@ -25,6 +25,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
     public function __construct(
         private DefaultLocalesStoryInterface $defaultLocalesStory,
         private DefaultCurrenciesStoryInterface $defaultCurrenciesStory,
+        private DefaultGeographicalStoryInterface $defaultGeographicalStory,
     ) {
     }
 
@@ -32,6 +33,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
     {
         $this->defaultLocalesStory->build();
         $this->defaultCurrenciesStory->build();
+        $this->defaultGeographicalStory->build();
     }
 
     public static function getGroups(): array

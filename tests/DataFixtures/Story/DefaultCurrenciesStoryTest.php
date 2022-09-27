@@ -47,8 +47,8 @@ final class DefaultCurrenciesStoryTest extends KernelTestCase
     {
         /** @var RepositoryInterface $currencyRepository */
         $currencyRepository = self::getContainer()->get('sylius.repository.currency');
-        $locale = $currencyRepository->findOneBy(['code' => $currencyCode]);
+        $currency = $currencyRepository->findOneBy(['code' => $currencyCode]);
 
-        $this->assertNotNull($locale, sprintf('Currency "%s" should be on database but it does not.', $currencyCode));
+        $this->assertNotNull($currency, sprintf('Currency "%s" should be on database but it does not.', $currencyCode));
     }
 }
