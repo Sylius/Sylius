@@ -18,6 +18,7 @@
         <service id="sylius.data_fixtures.shop_configuration" class="Sylius\Bundle\CoreBundle\DataFixtures\ShopConfigurationFixtures">
             <argument type="service" id="sylius.data_fixtures.story.default_locales" />
             <argument type="service" id="sylius.data_fixtures.story.default_currencies" />
+            <argument type="service" id="sylius.data_fixtures.story.default_geographical" />
             <tag name="doctrine.fixture.orm" />
         </service>
     </services>
