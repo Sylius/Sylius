@@ -119,21 +119,6 @@ jobs:
                     base: old-composer.lock
 
             -
-                name: Show diff in comment to PR
-                uses: marocchino/sticky-pull-request-comment@v2
-                if: ${{ steps.composer_diff.outputs.composer_diff_exit_code != 0 }}
-                with:
-                    recreate: true
-                    header: composer-diff # Creates a collapsed comment with the report
-                    message: |
-                        <details>
-                        <summary>Composer package changes</summary>
-
-                        ${{ steps.composer_diff.outputs.composer_diff }}
-
-                        </details>
-
-            -
                 name: Check for security vulnerabilities
                 run: symfony security:check
                 if: always() && steps.end-of-setup.outcome == 'success'
