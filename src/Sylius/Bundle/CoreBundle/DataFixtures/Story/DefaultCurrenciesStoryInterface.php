@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Story;
 
-interface DefaultLocalesStoryInterface extends StoryInterface
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
+use Zenstruck\Foundry\Story;
+
+interface DefaultCurrenciesStoryInterface extends StoryInterface
 {
-    public function getDefaultLocaleCodes(): array;
+    public function getDefaultCurrencyCodes(): array;
 }

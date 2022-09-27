@@ -29,7 +29,7 @@ final class DefaultLocalesStory extends Story implements DefaultLocalesStoryInte
         }
     }
 
-    protected function getDefaultLocaleCodes(): array
+    public function getDefaultLocaleCodes(): array
     {
         $defaultLocaleCodes = [
             'en_US',

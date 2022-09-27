@@ -15,6 +15,11 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.data_fixtures.story.default_currencies" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStory">
+            <argument type="service" id="sylius.data_fixtures.factory.currency" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface" alias="sylius.data_fixtures.story.default_currencies" />
+
         <service id="sylius.data_fixtures.story.default_locales" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStory">
             <argument type="service" id="sylius.data_fixtures.factory.locale" />
             <argument>%sylius_locale.locale%</argument>
