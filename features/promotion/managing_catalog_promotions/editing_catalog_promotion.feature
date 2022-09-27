@@ -83,6 +83,13 @@ Feature: Editing catalog promotion
         And this catalog promotion should have "$10.00" of fixed discount in the "United States" channel
 
     @api @ui
+    Scenario: Being unable to edit catalog promotion if it is currently being processed
+        Given the catalog promotion "Christmas sale" is currently being processed
+        When I try to rename the "Christmas sale" catalog promotion to "Black Friday"
+        Then I should not be able to edit it due to wrong state
+        And this catalog promotion name should still be "Christmas sale"
+
+    @api @ui
     Scenario: Being unable to change end date to earlier then start date
         Given the catalog promotion "Christmas sale" operates between "2021-12-20" and "2021-12-30"
         When I want to modify a catalog promotion "Christmas sale"

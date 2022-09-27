@@ -103,6 +103,23 @@ jobs:
                 id: end-of-setup
 
             -
+                name: Create empty manifest.json files (AdminBundle, CoreBundle)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: matrix.package == 'Bundle/AdminBundle' || matrix.package == 'Bundle/CoreBundle'
+                run: |
+                    mkdir -p public/build/admin public/build/shop
+                    echo "{}" >> public/build/shop/manifest.json
+                    echo "{}" >> public/build/admin/manifest.json
+            -
+                name: Create empty manifest.json files (ApiBundle)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: matrix.package == 'Bundle/ApiBundle'
+                run: |
+                    mkdir -p test/public/build/admin test/public/build/shop
+                    echo "{}" >> test/public/build/shop/manifest.json
+                    echo "{}" >> test/public/build/admin/manifest.json
+
+            -
                 name: Run PHPArkitect
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: vendor/phparkitect/phparkitect/bin-stub/phparkitect check

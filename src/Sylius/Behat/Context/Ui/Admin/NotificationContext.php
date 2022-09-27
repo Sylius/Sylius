@@ -51,15 +51,27 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
+     * @Then I should be notified that it :has been successfully deleted
+     * @Then I should be notified that they :have been successfully deleted
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(string $hasHave): void
     {
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::success(),
-            'has been successfully deleted.',
+            sprintf('%s been successfully deleted.', $hasHave),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the removal operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
+    {
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been requested. This process can take a while depending on the number of affected products.',
         );
     }
 
@@ -71,7 +83,7 @@ final class NotificationContext implements Context
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::failure(),
-            'Cannot delete, the ' . $name . ' is in use.',
+            'Cannot delete, the ' . ucfirst($name) . ' is in use.',
         );
     }
 }

@@ -24,12 +24,12 @@ references related issues.
 
    References: https://github.com/doctrine/DoctrineBundle/issues/1305
 
- - `jms/serializer-bundle:3.9`:
+ - `jms/serializer-bundle:4.1.0`:
 
-   This version automatically registered DocBlockDriver, which is always turned on, while docblocks used in our code are not usable with it. Sample error:
-   `Can't use incorrect type object for collection in Doctrine\ORM\PersistentCollection:owner`
+   This version contains service with a wrong constructor arguments:
+   `Invalid definition for service ".container.private.profiler": argument 4 of "JMS\SerializerBundle\Debug\DataCollector::__construct()" accepts "JMS\SerializerBundle\Debug\TraceableDriver", "JMS\SerializerBundle\Debug\TraceableMetadataFactory" passed.`
 
-   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/844
+   References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
 
  - `symfony/serializer:4.4.19|5.2.2`:
 
@@ -63,3 +63,11 @@ references related issues.
 
    These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
+
+ - `api-platform/core:2.7.0`:
+
+   The FQCN of `ApiPlatform\Core\Metadata\Resource\ResourceNameCollection` has changed to:
+   `ApiPlatform\Metadata\Resource\ResourceNameCollection` and due to this fact
+   `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer` 
+   references this class throws an exception
+  `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`

@@ -11,11 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Promotion\Event;
+namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
-class CatalogPromotionFailed
+interface CatalogPromotionRemovalProcessorInterface
 {
-    public function __construct(public string $code)
-    {
-    }
+    public function removeCatalogPromotion(string $catalogPromotionCode): void;
 }

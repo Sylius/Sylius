@@ -1,4 +1,7 @@
 sylius_grid:
+    templates:
+        action:
+            delete_catalog_promotion: "@SyliusAdmin/Grid/deleteCatalogPromotion.html.twig"
     grids:
         sylius_admin_catalog_promotion:
             driver:
@@ -88,5 +91,21 @@ sylius_grid:
                 item:
                     show:
                         type: show
+                    show_variants:
+                        type: show
+                        label: sylius.ui.list_variants
+                        options:
+                            link:
+                                route: sylius_admin_catalog_promotion_product_variant_index
+                                parameters:
+                                    id: resource.id
                     update:
                         type: update
+                    delete:
+                        type: delete_catalog_promotion
+                        options:
+                            link:
+                                route: sylius_admin_catalog_promotion_delete
+                                parameters:
+                                    code: resource.code
+                            state: resource.state

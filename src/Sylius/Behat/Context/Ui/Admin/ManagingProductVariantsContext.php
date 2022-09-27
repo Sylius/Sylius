@@ -278,7 +278,7 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the product variant is in use.',
+            'Cannot delete, the Product variant is in use.',
             NotificationType::failure(),
         );
     }

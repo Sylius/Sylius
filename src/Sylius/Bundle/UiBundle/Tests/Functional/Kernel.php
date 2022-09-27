@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
+use Sylius\Bundle\UiBundle\Tests\Functional\src\CustomContextProvider;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -23,6 +24,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 
 final class Kernel extends HttpKernel
 {
@@ -36,11 +38,14 @@ final class Kernel extends HttpKernel
             new TwigBundle(),
             new SonataBlockBundle(),
             new SyliusUiBundle(),
+            new WebpackEncoreBundle(),
         ];
     }
 
     protected function configureContainer(ContainerBuilder $containerBuilder, LoaderInterface $loader): void
     {
+        $containerBuilder->register(CustomContextProvider::class)->addTag('sylius.ui.template_event.context_provider');
+
         $containerBuilder->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',
         ]);
@@ -105,7 +110,22 @@ final class Kernel extends HttpKernel
                     ],
                 ],
             ],
+            'custom_context_provider' => [
+                'blocks' => [
+                    'block' => [
+                        'template' => 'blocks/customContextProvider/block.txt.twig',
+                        'context' => [
+                            'option1' => 'foo',
+                            'option2' => 'bar',
+                        ],
+                    ],
+                ],
+            ],
         ]]);
+
+        $containerBuilder->loadFromExtension('webpack_encore', [
+            'output_path' => '%kernel.project_dir%/public/build',
+        ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void

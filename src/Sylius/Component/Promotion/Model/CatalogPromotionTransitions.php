@@ -23,8 +23,6 @@ final class CatalogPromotionTransitions
 
     public const TRANSITION_DEACTIVATE = 'deactivate';
 
-    public const TRANSITION_FAIL = 'fail';
-
     private function __construct()
     {
     }

@@ -22,6 +22,8 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPrice
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -69,7 +71,6 @@ final class CatalogPromotionContext implements Context
     public function itIsEnabled(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setEnabled(true);
-
         $this->entityManager->flush();
 
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
@@ -81,10 +82,9 @@ final class CatalogPromotionContext implements Context
     public function thisCatalogPromotionIsDisabled(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setEnabled(false);
+        $this->entityManager->flush();
 
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
-
-        $this->entityManager->flush();
     }
 
     /**
@@ -202,7 +202,7 @@ final class CatalogPromotionContext implements Context
             $variantCodes[] = $variant->getCode();
         }
 
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -218,7 +218,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -230,7 +230,7 @@ final class CatalogPromotionContext implements Context
         ChannelInterface $channel,
         ProductVariantInterface $variant,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -246,7 +246,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -258,7 +258,7 @@ final class CatalogPromotionContext implements Context
         ChannelInterface $channel,
         ProductInterface $product,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -274,7 +274,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -286,7 +286,7 @@ final class CatalogPromotionContext implements Context
         ChannelInterface $channel,
         TaxonInterface $taxon,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -302,20 +302,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
-    }
-
-    /**
-     * @Given catalog promotion :catalogPromotion has failed processing
-     */
-    public function catalogPromotionHasFailedProcessing(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
-
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
-        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_FAIL);
-
-        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -327,7 +314,7 @@ final class CatalogPromotionContext implements Context
         float $discount,
         TaxonInterface $taxon,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -343,7 +330,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -355,7 +342,7 @@ final class CatalogPromotionContext implements Context
         float $discount,
         ProductVariantInterface $variant,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             name: $name,
             channels: [$channel->getCode()],
             scopes: [[
@@ -370,7 +357,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -529,7 +516,7 @@ final class CatalogPromotionContext implements Context
         float $discount,
         ProductInterface $product,
     ): void {
-        $this->createCatalogPromotion(
+        $catalogPromotion = $this->createCatalogPromotion(
             $name,
             null,
             [],
@@ -545,7 +532,7 @@ final class CatalogPromotionContext implements Context
 
         $this->entityManager->flush();
 
-        $this->eventBus->dispatch(new CatalogPromotionCreated(StringInflector::nameToCode($name)));
+        $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
     /**
@@ -707,8 +694,8 @@ final class CatalogPromotionContext implements Context
     ): void {
         $catalogPromotion->setStartDate(new \DateTime($startDate));
         $catalogPromotion->setEndDate(new \DateTime($endDate));
-
         $this->entityManager->flush();
+
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -720,6 +707,7 @@ final class CatalogPromotionContext implements Context
         $catalogPromotion->setStartDate(new \DateTime($startDate));
 
         $this->entityManager->flush();
+
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -729,8 +717,8 @@ final class CatalogPromotionContext implements Context
     public function theCatalogPromotionEndedAt(CatalogPromotionInterface $catalogPromotion, string $endDate): void
     {
         $catalogPromotion->setEndDate(new \DateTime($endDate));
-
         $this->entityManager->flush();
+
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
@@ -769,7 +757,19 @@ final class CatalogPromotionContext implements Context
         }
 
         $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
         $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_ACTIVATE);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given the catalog promotion :catalogPromotion is currently being processed
+     */
+    public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $stateMachine = $this->stateMachineFactory->get($catalogPromotion, CatalogPromotionTransitions::GRAPH);
+        $stateMachine->apply(CatalogPromotionTransitions::TRANSITION_PROCESS);
 
         $this->entityManager->flush();
     }

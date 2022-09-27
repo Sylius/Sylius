@@ -29,7 +29,7 @@ backend:
 
 frontend:
 	yarn install --pure-lockfile
-	GULP_ENV=prod yarn build
+	yarn encore production
 
 behat: behat-cli behat-non-js behat-js
 

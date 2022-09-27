@@ -12,7 +12,6 @@
 /docs/.doctrees
 
 /composer.lock
-/node_modules
 
 /etc/build/*
 !/etc/build/.gitignore
@@ -52,4 +51,10 @@
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
 
-.idea
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

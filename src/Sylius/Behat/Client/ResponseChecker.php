@@ -62,6 +62,11 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $this->getResponseContentValue($response, 'hydra:description');
     }
 
+    public function isAccepted(Response $response): bool
+    {
+        return $response->getStatusCode() === Response::HTTP_ACCEPTED;
+    }
+
     public function isCreationSuccessful(Response $response): bool
     {
         return $response->getStatusCode() === Response::HTTP_CREATED;

@@ -236,12 +236,13 @@ jobs:
     test-application-without-frontend-postgres:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }})"
         strategy:
             matrix:
                 php: ["8.0"]
                 symfony: ["^5.4"]
-                postgres: ["13.3"]
+                postgres: ["13.8"]
+                node: ["16.x"]
 
         env:
             APP_ENV: test_cached
@@ -268,11 +269,12 @@ jobs:
                     tools: symfony
                     coverage: none
 
-            -   name: Install Symfony CLI
+            -
+                name: Install Symfony CLI
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
                     mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
-            
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -300,6 +302,40 @@ jobs:
                 run: composer update --no-interaction --no-scripts
 
             -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
+
+            -
                 name: Dump the environment
                 run: |
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
@@ -321,31 +357,34 @@ jobs:
                     bin/console doctrine:schema:validate
                     bin/console doctrine:migrations:sync-metadata-storage
 
-            -   name: Test installer
+            -
+                name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
-            -   name: Load fixtures
+            -
+                name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
 
-            -   name: Run PHPUnit
+            -
+                name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
 
-            -   name: Run CLI Behat
-                if: ${{ false }}
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo&&~@managing_product_variants_ajax" --rerun
+            -
+                name: Run CLI Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
 
-            -   name: Run non-JS Behat
-                if: ${{ false }}
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@managing_product_variants_ajax" --rerun
+            -
+                name: Run non-JS Behat
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --rerun
 
-            -   name: Upload Behat logs
+            -
+                name: Upload Behat logs
                 uses: actions/upload-artifact@v2
                 if: failure()
                 with:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
                     path: etc/build/
                     if-no-files-found: ignore
-                continue-on-error: true
 
     test-application-without-frontend-mariadb:
         runs-on: ubuntu-latest
@@ -357,6 +396,7 @@ jobs:
                 symfony: ["^5.4"]
                 mariadb: ["10.4.10"]
                 dbal: ["2", "3"]
+                node: ["16.x"]
 
         env:
             APP_ENV: test_cached
@@ -387,7 +427,7 @@ jobs:
                 run: |
                     curl -sS https://get.symfony.com/cli/installer | bash
                     mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
-                    
+
             -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
@@ -419,6 +459,40 @@ jobs:
             -
                 name: Install PHP dependencies
                 run: composer update --no-interaction --no-scripts
+
+            -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
 
             -
                 name: Dump the environment
@@ -453,27 +527,22 @@ jobs:
             -
                 name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
-                continue-on-error: true
 
             -
                 name: Load fixtures
                 run: bin/console sylius:fixtures:load default --no-interaction
-                continue-on-error: true
 
             -
                 name: Run PHPUnit
                 run: vendor/bin/phpunit --colors=always
-                continue-on-error: true
 
             -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
-                continue-on-error: true
 
             -
                 name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
-                continue-on-error: true
 
             -
                 name: Upload Behat logs
@@ -500,6 +569,7 @@ jobs:
                 mysql: ["5.7", "8.0"]
                 twig: ["3.x"]
                 dbal: ["3"]
+                node: ["16.x"]
                 include:
                     -
                         php: "8.0"
@@ -587,6 +657,40 @@ jobs:
                 run: composer update --no-interaction --no-scripts
 
             -
+                name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -
+                name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -
+                name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -
+                name: Install JS dependencies
+                run: yarn install
+
+            -
+                name: Validate Yarn packages
+                run: yarn check
+
+            -
+                name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
+
+            -
                 name: Dump the environment
                 run: |
                     echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
@@ -659,7 +763,7 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["14.x", "16.x"]
+                node: ["14.x", "16.x", "18.x"]
                 mysql: ["5.7", "8.0"]
 
         env:
@@ -786,7 +890,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    GULP_ENV=prod yarn build
+                    yarn encore production
 
             -
                 name: Make filesystem readonly
@@ -807,10 +911,10 @@ jobs:
                     path: etc/build/
                     if-no-files-found: ignore
 
-    test-webpack-build:
+    test-gulp-build:
         runs-on: ubuntu-latest
 
-        name: "Test Webpack build (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
+        name: "Test Gulp build (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Node ${{ matrix.node }})"
 
         timeout-minutes: 25
 
@@ -819,8 +923,8 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4"]
-                node: ["14.x", "16.x"]
-                mysql: [ "5.7", "8.0" ]                        
+                node: ["16.x", "18.x"]
+                mysql: [ "5.7", "8.0" ]
 
         env:
             APP_ENV: test_cached
@@ -905,7 +1009,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    yarn run encore production
+                    GULP_ENV=prod yarn build
 
     notify-about-build-failure:
         runs-on: ubuntu-latest

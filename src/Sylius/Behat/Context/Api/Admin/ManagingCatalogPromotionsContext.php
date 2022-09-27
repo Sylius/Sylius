@@ -899,6 +899,25 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I request the removal of :catalogPromotion catalog promotion
+     */
+    public function iRequestTheRemovalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->delete(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
+    }
+
+    /**
+     * @Then I should be notified that the removal operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
+    {
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Removal operation has not started successfully',
+        );
+    }
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions

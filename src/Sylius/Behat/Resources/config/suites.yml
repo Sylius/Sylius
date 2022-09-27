@@ -43,6 +43,7 @@ imports:
     - suites/api/promotion/managing_catalog_promotions.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
+    - suites/api/promotion/removing_catalog_promotions.yml
     - suites/api/shipping/applying_shipping_method_rules.yml
     - suites/api/shipping/viewing_shipping_methods.yml
     - suites/api/shipping/managing_shipments.yml
@@ -118,6 +119,7 @@ imports:
     - suites/ui/promotion/managing_promotion_coupons.yml
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/receiving_discount.yml
+    - suites/ui/promotion/removing_catalog_promotions.yml
     - suites/ui/shipping/applying_shipping_fee.yml
     - suites/ui/shipping/applying_shipping_method_rules.yml
     - suites/ui/shipping/viewing_shipping_methods.yml

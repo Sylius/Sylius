@@ -21,7 +21,7 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.shop_user.token_generator.email_verification" />
             <argument type="service" id="sylius.command_bus" />
@@ -66,7 +66,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface"/>
             <argument type="service" id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
@@ -129,7 +129,7 @@
             <argument type="service" id="sylius.factory.product_review" />
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

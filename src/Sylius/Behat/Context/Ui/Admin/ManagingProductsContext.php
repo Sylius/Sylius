@@ -376,7 +376,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the product is in use.',
+            'Cannot delete, the Product is in use.',
             NotificationType::failure(),
         );
     }

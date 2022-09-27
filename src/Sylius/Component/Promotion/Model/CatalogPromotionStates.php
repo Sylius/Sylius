@@ -21,8 +21,6 @@ final class CatalogPromotionStates
 
     public const STATE_ACTIVE = 'active';
 
-    public const STATE_FAILED = 'failed';
-
     private function __construct()
     {
     }

@@ -21,6 +21,7 @@ use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
+use League\FlysystemBundle\FlysystemBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
 use Payum\Bundle\PayumBundle\PayumBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
@@ -63,6 +64,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
 use winzou\Bundle\StateMachineBundle\winzouStateMachineBundle;
 
 final class TestKernel extends BaseKernel
@@ -105,6 +107,7 @@ final class TestKernel extends BaseKernel
             new JMSSerializerBundle(),
             new FOSRestBundle(),
             new KnpGaufretteBundle(),
+            new FlysystemBundle(),
             new LiipImagineBundle(),
             new PayumBundle(),
             new StofDoctrineExtensionsBundle(),
@@ -117,6 +120,7 @@ final class TestKernel extends BaseKernel
             new SyliusLabsDoctrineMigrationsExtraBundle(),
             new KnpMenuBundle(),
             new SyliusAdminBundle(),
+            new WebpackEncoreBundle(),
         ];
     }
 

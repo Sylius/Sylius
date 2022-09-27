@@ -49,13 +49,25 @@ final class MainMenuBuilder
         ;
 
         $catalog
-            ->addChild('taxons', ['route' => 'sylius_admin_taxon_create'])
+            ->addChild('taxons', ['route' => 'sylius_admin_taxon_create', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_taxon_create_for_parent'],
+                ['route' => 'sylius_admin_taxon_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.catalog.taxons')
             ->setLabelAttribute('icon', 'folder')
         ;
 
         $catalog
-            ->addChild('products', ['route' => 'sylius_admin_product_index'])
+            ->addChild('products', ['route' => 'sylius_admin_product_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_product_create'],
+                ['route' => 'sylius_admin_product_create_simple'],
+                ['route' => 'sylius_admin_product_update'],
+                ['route' => 'sylius_admin_product_show'],
+                ['route' => 'sylius_admin_product_variant_index'],
+                ['route' => 'sylius_admin_product_variant_create'],
+                ['route' => 'sylius_admin_product_variant_update'],
+                ['route' => 'sylius_admin_product_variant_generate'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.catalog.products')
             ->setLabelAttribute('icon', 'cube')
         ;
@@ -67,19 +79,28 @@ final class MainMenuBuilder
         ;
 
         $catalog
-            ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index'])
+            ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_product_attribute_create'],
+                ['route' => 'sylius_admin_product_attribute_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.catalog.attributes')
             ->setLabelAttribute('icon', 'cubes')
         ;
 
         $catalog
-            ->addChild('options', ['route' => 'sylius_admin_product_option_index'])
+            ->addChild('options', ['route' => 'sylius_admin_product_option_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_product_option_create'],
+                ['route' => 'sylius_admin_product_option_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.catalog.options')
             ->setLabelAttribute('icon', 'options')
         ;
 
         $catalog
-            ->addChild('association_types', ['route' => 'sylius_admin_product_association_type_index'])
+            ->addChild('association_types', ['route' => 'sylius_admin_product_association_type_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_product_association_type_create'],
+                ['route' => 'sylius_admin_product_association_type_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.catalog.association_types')
             ->setLabelAttribute('icon', 'tasks')
         ;
@@ -93,13 +114,20 @@ final class MainMenuBuilder
         ;
 
         $customers
-            ->addChild('customers', ['route' => 'sylius_admin_customer_index'])
+            ->addChild('customers', ['route' => 'sylius_admin_customer_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_customer_create'],
+                ['route' => 'sylius_admin_customer_update'],
+                ['route' => 'sylius_admin_customer_show'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.customers.customers')
             ->setLabelAttribute('icon', 'users')
         ;
 
         $customers
-            ->addChild('groups', ['route' => 'sylius_admin_customer_group_index'])
+            ->addChild('groups', ['route' => 'sylius_admin_customer_group_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_customer_group_create'],
+                ['route' => 'sylius_admin_customer_group_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.customers.groups')
             ->setLabelAttribute('icon', 'archive')
         ;
@@ -113,19 +141,32 @@ final class MainMenuBuilder
         ;
 
         $marketing
-            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
+            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_promotion_create'],
+                ['route' => 'sylius_admin_promotion_update'],
+                ['route' => 'sylius_admin_promotion_coupon_index'],
+                ['route' => 'sylius_admin_promotion_coupon_create'],
+                ['route' => 'sylius_admin_promotion_coupon_update'],
+                ['route' => 'sylius_admin_promotion_coupon_generate'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.marketing.cart_promotions')
             ->setLabelAttribute('icon', 'in cart')
         ;
 
         $marketing
-            ->addChild('catalog_promotions', ['route' => 'sylius_admin_catalog_promotion_index'])
+            ->addChild('catalog_promotions', ['route' => 'sylius_admin_catalog_promotion_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_catalog_promotion_create'],
+                ['route' => 'sylius_admin_catalog_promotion_update'],
+                ['route' => 'sylius_admin_catalog_promotion_show'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.marketing.catalog_promotions')
             ->setLabelAttribute('icon', 'bookmark')
         ;
 
         $marketing
-            ->addChild('product_reviews', ['route' => 'sylius_admin_product_review_index'])
+            ->addChild('product_reviews', ['route' => 'sylius_admin_product_review_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_product_review_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.marketing.product_reviews')
             ->setLabelAttribute('icon', 'newspaper')
         ;
@@ -139,7 +180,11 @@ final class MainMenuBuilder
         ;
 
         $sales
-            ->addChild('orders', ['route' => 'sylius_admin_order_index'])
+            ->addChild('orders', ['route' => 'sylius_admin_order_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_order_update'],
+                ['route' => 'sylius_admin_order_show'],
+                ['route' => 'sylius_admin_order_history'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.sales.orders')
             ->setLabelAttribute('icon', 'cart')
         ;
@@ -151,7 +196,9 @@ final class MainMenuBuilder
         ;
 
         $sales
-            ->addChild('shipments', ['route' => 'sylius_admin_shipment_index'])
+            ->addChild('shipments', ['route' => 'sylius_admin_shipment_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_shipment_show'],
+            ]]])
             ->setLabel('sylius.ui.shipments')
             ->setLabelAttribute('icon', 'truck')
         ;
@@ -165,73 +212,109 @@ final class MainMenuBuilder
         ;
 
         $configuration
-            ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
+            ->addChild('channels', ['route' => 'sylius_admin_channel_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_channel_create'],
+                ['route' => 'sylius_admin_channel_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.channels')
             ->setLabelAttribute('icon', 'random')
         ;
 
         $configuration
-            ->addChild('countries', ['route' => 'sylius_admin_country_index'])
+            ->addChild('countries', ['route' => 'sylius_admin_country_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_country_create'],
+                ['route' => 'sylius_admin_country_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.countries')
             ->setLabelAttribute('icon', 'flag')
         ;
 
         $configuration
-            ->addChild('zones', ['route' => 'sylius_admin_zone_index'])
+            ->addChild('zones', ['route' => 'sylius_admin_zone_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_zone_create'],
+                ['route' => 'sylius_admin_zone_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.zones')
             ->setLabelAttribute('icon', 'world')
         ;
 
         $configuration
-            ->addChild('currencies', ['route' => 'sylius_admin_currency_index'])
+            ->addChild('currencies', ['route' => 'sylius_admin_currency_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_currency_create'],
+                ['route' => 'sylius_admin_currency_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.currencies')
             ->setLabelAttribute('icon', 'dollar')
         ;
 
         $configuration
-            ->addChild('exchange_rates', ['route' => 'sylius_admin_exchange_rate_index'])
+            ->addChild('exchange_rates', ['route' => 'sylius_admin_exchange_rate_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_exchange_rate_create'],
+                ['route' => 'sylius_admin_exchange_rate_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.exchange_rates')
             ->setLabelAttribute('icon', 'sliders')
         ;
 
         $configuration
-            ->addChild('locales', ['route' => 'sylius_admin_locale_index'])
+            ->addChild('locales', ['route' => 'sylius_admin_locale_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_locale_create'],
+                ['route' => 'sylius_admin_locale_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.locales')
             ->setLabelAttribute('icon', 'translate')
         ;
 
         $configuration
-            ->addChild('payment_methods', ['route' => 'sylius_admin_payment_method_index'])
+            ->addChild('payment_methods', ['route' => 'sylius_admin_payment_method_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_payment_method_create'],
+                ['route' => 'sylius_admin_payment_method_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.payment_methods')
             ->setLabelAttribute('icon', 'payment')
         ;
 
         $configuration
-            ->addChild('shipping_methods', ['route' => 'sylius_admin_shipping_method_index'])
+            ->addChild('shipping_methods', ['route' => 'sylius_admin_shipping_method_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_shipping_method_create'],
+                ['route' => 'sylius_admin_shipping_method_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.shipping_methods')
             ->setLabelAttribute('icon', 'shipping')
         ;
 
         $configuration
-            ->addChild('shipping_categories', ['route' => 'sylius_admin_shipping_category_index'])
+            ->addChild('shipping_categories', ['route' => 'sylius_admin_shipping_category_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_shipping_category_create'],
+                ['route' => 'sylius_admin_shipping_category_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.shipping_categories')
             ->setLabelAttribute('icon', 'list layout')
         ;
 
         $configuration
-            ->addChild('tax_categories', ['route' => 'sylius_admin_tax_category_index'])
+            ->addChild('tax_categories', ['route' => 'sylius_admin_tax_category_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_tax_category_create'],
+                ['route' => 'sylius_admin_tax_category_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.tax_categories')
             ->setLabelAttribute('icon', 'tags')
         ;
 
         $configuration
-            ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
+            ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_tax_rate_create'],
+                ['route' => 'sylius_admin_tax_rate_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'money')
         ;
 
         $configuration
-            ->addChild('admin_users', ['route' => 'sylius_admin_admin_user_index'])
+            ->addChild('admin_users', ['route' => 'sylius_admin_admin_user_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_admin_user_create'],
+                ['route' => 'sylius_admin_admin_user_update'],
+            ]]])
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
             ->setLabelAttribute('icon', 'lock')
         ;

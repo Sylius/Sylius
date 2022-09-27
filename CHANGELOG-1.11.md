@@ -1,5 +1,33 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.8 (2022-09-19)
+
+#### Details
+
+- [#14196](https://github.com/Sylius/Sylius/issues/14196) [Documentation] Add naming conventions to contributing section ([@GSadee](https://github.com/GSadee))
+- [#14202](https://github.com/Sylius/Sylius/issues/14202) [Bundle][Attribute]It will also listen on the product attribute objec… ()
+- [#14211](https://github.com/Sylius/Sylius/issues/14211) [Behat] Extract javascript driver check ([@Zales0123](https://github.com/Zales0123))
+- [#14212](https://github.com/Sylius/Sylius/issues/14212) Adjust PR template file for 1.11 and 1.12 branches ([@Zales0123](https://github.com/Zales0123))
+- [#14213](https://github.com/Sylius/Sylius/issues/14213) [bug]Send request to GUS with https ([@Ferror](https://github.com/Ferror))
+- [#14214](https://github.com/Sylius/Sylius/issues/14214) [API] Remove redundant validation config for the command that does not exist ([@GSadee](https://github.com/GSadee))
+- [#14216](https://github.com/Sylius/Sylius/issues/14216) [Documentation] Minor fixes to naming conventions page ([@GSadee](https://github.com/GSadee))
+- [#14217](https://github.com/Sylius/Sylius/issues/14217) [CatalogPromotion] Fix too early data setting during catalog promotion form submission ([@lchrusciel](https://github.com/lchrusciel))
+- [#14220](https://github.com/Sylius/Sylius/issues/14220) [CS][DX] Refactor ()
+- [#14223](https://github.com/Sylius/Sylius/issues/14223) [Maintenance] Use getObject instead of getEntity on doctrine events ([@lchrusciel](https://github.com/lchrusciel))
+- [#14225](https://github.com/Sylius/Sylius/issues/14225) [Minor][Behat] Attributes deletion scenario improvements ([@lchrusciel](https://github.com/lchrusciel))
+- [#14233](https://github.com/Sylius/Sylius/issues/14233) [CS][DX] Refactor ()
+- [#14236](https://github.com/Sylius/Sylius/issues/14236) [API] Remove problematic mapping path ([@coldic3](https://github.com/coldic3))
+- [#14237](https://github.com/Sylius/Sylius/issues/14237) Add coupon channel eligibility checker ([@TheMilek](https://github.com/TheMilek), [@PILLOWPET](https://github.com/PILLOWPET))
+- [#14240](https://github.com/Sylius/Sylius/issues/14240) [Checkout][Addressing] Fix duplicated email validation errors ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14245](https://github.com/Sylius/Sylius/issues/14245) [DOCS] How to run async task added in installation ([@arti0090](https://github.com/arti0090))
+- [#14248](https://github.com/Sylius/Sylius/issues/14248) [UI] Fix autocomplete empty value ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14250](https://github.com/Sylius/Sylius/issues/14250) [docs]Recommend cron jobs values ([@Ferror](https://github.com/Ferror))
+- [#14254](https://github.com/Sylius/Sylius/issues/14254) [Adjustment] Adjustment cloning resets ID and timestamps ([@coldic3](https://github.com/coldic3))
+- [#14277](https://github.com/Sylius/Sylius/issues/14277) [ProductAttributes] Change translatable status to yes/no in ProductAttributes grid ([@TheMilek](https://github.com/TheMilek))
+- [#14295](https://github.com/Sylius/Sylius/issues/14295) [Config] Mark SenderInterface as excluded in psalm.xml ([@Rafikooo](https://github.com/Rafikooo))
+- [#14301](https://github.com/Sylius/Sylius/issues/14301) [Behat][Fix] Check notification expectation in JavaScriptTestHelper ([@Rafikooo](https://github.com/Rafikooo))
+- [#14309](https://github.com/Sylius/Sylius/issues/14309) Conflict api-platform/core 2.7.0 ([@loic425](https://github.com/loic425), [@Rafikooo](https://github.com/Rafikooo))
+
 ## v1.11.7 (2022-07-28)
 
 #### Details

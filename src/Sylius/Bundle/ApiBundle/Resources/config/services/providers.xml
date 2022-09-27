@@ -18,12 +18,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\CustomerProvider">
-            <argument type="service" id="sylius.canonicalizer" />
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.customer" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" class="Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <argument>%sylius.security.new_api_route%</argument>

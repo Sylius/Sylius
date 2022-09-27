@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface as BaseProductVariantRepositoryInterface;
 
@@ -22,4 +23,9 @@ interface ProductVariantRepositoryInterface extends BaseProductVariantRepository
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder;
 
     public function findByTaxon(TaxonInterface $taxon): array;
+
+    public function createCatalogPromotionListQueryBuilder(
+        string $locale,
+        CatalogPromotionInterface $catalogPromotion,
+    ): QueryBuilder;
 }

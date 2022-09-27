@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->fixXmlConfig('event')
             ->children()
+                ->booleanNode('use_webpack')->defaultTrue()->end()
                 ->arrayNode('events')
                     ->useAttributeAsKey('event_name')
                     ->arrayPrototype()

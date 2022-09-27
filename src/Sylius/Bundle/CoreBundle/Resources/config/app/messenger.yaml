@@ -1,18 +1,30 @@
 framework:
     messenger:
-        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
-
         transports:
-        # https://symfony.com/doc/current/messenger.html#transport-configuration
-            main: '%env(MESSENGER_TRANSPORT_DSN)%'
-
+            main: 
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                failure_transport: 'main_failed'
+            main_failed: 
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: 'main_failed'
+            catalog_promotion_removal: 
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                failure_transport: 'catalog_promotion_removal_failed'
+                options:
+                    queue_name: 'catalog_promotion_removal'
+            catalog_promotion_removal_failed:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    queue_name: 'catalog_promotion_removal_failed'
+        reset_on_message: true
         routing:
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion': catalog_promotion_removal
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main
             'Sylius\Component\Promotion\Event\CatalogPromotionUpdated': main
-
         default_bus: sylius.command_bus
         buses:
             sylius.command_bus: &command_bus

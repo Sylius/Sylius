@@ -16,10 +16,20 @@ testing, and implementation. Docker significantly reduces the delay between writ
 
     Make sure you have `Docker <https://docs.docker.com/get-docker/>`_ installed on your local machine.
 
+Project Setup
+-------------
+
+Clone Sylius-Standard repository or if you are using GitHub you can use the *Use this template* button that will create new repository
+with Sylius-Standard content.
+
+.. code-block:: bash
+
+    git clone git@github.com:Sylius/Sylius-Standard.git your_project_name
+
 Development
 -----------
 
-Sylius Standard comes with the `multi-stage build <https://docs.docker.com/develop/develop-images/multistage-build/>`_.
+`Sylius Standard <https://github.com/Sylius/Sylius-Standard>`_ comes with the `multi-stage build <https://docs.docker.com/develop/develop-images/multistage-build/>`_.
 You can execute it via the ``docker compose up -d`` command in your favorite terminal. Please note that the speed of building images
 and initializing containers depends on your local machine and internet connection - it may take some time. Then enter ``localhost`` in your browser or execute ``open localhost`` in your terminal.
 

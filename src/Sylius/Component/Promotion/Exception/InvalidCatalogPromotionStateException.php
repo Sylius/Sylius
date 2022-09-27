@@ -11,12 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Provider;
+namespace Sylius\Component\Promotion\Exception;
 
-use Sylius\Component\Core\Model\CustomerInterface;
-
-/** @experimental */
-interface CustomerProviderInterface
+final class InvalidCatalogPromotionStateException extends \RuntimeException
 {
-    public function provide(string $email): CustomerInterface;
 }
