@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\UserBundle\Security;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
-use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
@@ -25,11 +24,6 @@ final class UserPasswordHasherSpec extends ObjectBehavior
     function let(PasswordHasherFactoryInterface $passwordHasherFactory): void
     {
         $this->beConstructedWith($passwordHasherFactory);
-    }
-
-    function it_implements_user_password_encoder_interface(): void
-    {
-        $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
 
     function it_implements_user_password_hasher_interface(): void
@@ -43,9 +37,8 @@ final class UserPasswordHasherSpec extends ObjectBehavior
         CredentialsHolderInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
-        $user->getSalt()->willReturn('typicalSalt');
         $passwordHasherFactory->getPasswordHasher($user->getWrappedObject()::class)->willReturn($passwordHasher);
-        $passwordHasher->hash('topSecretPlainPassword', 'typicalSalt')->willReturn('topSecretHashedPassword');
+        $passwordHasher->hash('topSecretPlainPassword')->willReturn('topSecretHashedPassword');
 
         $this->hash($user)->shouldReturn('topSecretHashedPassword');
     }
