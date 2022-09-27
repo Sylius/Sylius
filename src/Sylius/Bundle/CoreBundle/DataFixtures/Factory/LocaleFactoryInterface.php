@@ -36,4 +36,5 @@ use Zenstruck\Foundry\Proxy;
  */
 interface LocaleFactoryInterface extends WithCodeInterface
 {
+    public function withDefaultCode(): self;
 }

@@ -172,6 +172,7 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/TaxRateFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Story/DefaultLocalesStory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/AddressTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ChannelTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/PromotionTransformer.php" />
