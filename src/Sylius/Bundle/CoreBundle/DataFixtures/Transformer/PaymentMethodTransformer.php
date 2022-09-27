@@ -31,8 +31,9 @@ final class PaymentMethodTransformer implements PaymentMethodTransformerInterfac
         $channels = [];
         foreach ($attributes['channels'] as $channel) {
             if (\is_string($channel)) {
-                $channels[] = $this->channelFactory::findOrCreate(['code' => $channel]);
+                $channel = $this->channelFactory::findOrCreate(['code' => $channel]);
             }
+            $channels[] = $channel;
         }
         $attributes['channels'] = $channels;
 
