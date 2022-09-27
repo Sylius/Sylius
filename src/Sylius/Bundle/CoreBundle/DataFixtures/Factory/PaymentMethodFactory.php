@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PaymentMethodFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PaymentMethodFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PaymentMethodDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PaymentMethodTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\PaymentMethodUpdaterInterface;
+use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface as ResourceFactoryInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface as ResourceFactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -50,10 +50,10 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
     private static ?string $modelClass = null;
 
     public function __construct(
-        private ResourceFactoryInterface $paymentMethodFactory,
-        private PaymentMethodFactoryDefaultValuesInterface $factoryDefaultValues,
-        private PaymentMethodFactoryTransformerInterface $factoryTransformer,
-        private PaymentMethodFactoryUpdaterInterface $factoryUpdater,
+        private ResourceFactoryInterface            $paymentMethodFactory,
+        private PaymentMethodDefaultValuesInterface $factoryDefaultValues,
+        private PaymentMethodTransformerInterface   $factoryTransformer,
+        private PaymentMethodUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

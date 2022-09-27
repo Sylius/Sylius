@@ -25,54 +25,54 @@
 
         <service id="sylius.data_fixtures.factory.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory">
             <argument type="service" id="sylius.factory.address" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.address" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.address" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.address" />
+            <argument type="service" id="sylius.data_fixtures.default_values.address" />
+            <argument type="service" id="sylius.data_fixtures.transformer.address" />
+            <argument type="service" id="sylius.data_fixtures.updater.address" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactoryInterface" alias="sylius.data_fixtures.factory.address" />
 
         <service id="sylius.data_fixtures.factory.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactory">
             <argument type="service" id="sylius.factory.admin_user" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.admin_user" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.admin_user" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.default_values.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.transformer.admin_user" />
+            <argument type="service" id="sylius.data_fixtures.updater.admin_user" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\AdminUserFactoryInterface" alias="sylius.data_fixtures.factory.admin_user" />
 
         <service id="sylius.data_fixtures.factory.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionFactory">
             <argument type="service" id="sylius.factory.catalog_promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.catalog_promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.default_values.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.transformer.catalog_promotion" />
+            <argument type="service" id="sylius.data_fixtures.updater.catalog_promotion" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion" />
 
         <service id="sylius.data_fixtures.factory.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.catalog_promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.default_values.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.transformer.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.updater.catalog_promotion_action" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_action" />
 
         <service id="sylius.data_fixtures.factory.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactory">
             <argument type="service" id="sylius.factory.catalog_promotion_scope" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.catalog_promotion_scope" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.catalog_promotion_scope"/>
-            <argument type="service" id="sylius.data_fixtures.factory_updater.catalog_promotion_scope" />
+            <argument type="service" id="sylius.data_fixtures.default_values.catalog_promotion_scope" />
+            <argument type="service" id="sylius.data_fixtures.transformer.catalog_promotion_scope"/>
+            <argument type="service" id="sylius.data_fixtures.updater.catalog_promotion_scope" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactoryInterface" alias="sylius.data_fixtures.factory.catalog_promotion_scope" />
 
         <service id="sylius.data_fixtures.factory.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory">
             <argument type="service" id="sylius.factory.channel" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.channel" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.channel" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.channel" />
+            <argument type="service" id="sylius.data_fixtures.default_values.channel" />
+            <argument type="service" id="sylius.data_fixtures.transformer.channel" />
+            <argument type="service" id="sylius.data_fixtures.updater.channel" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
@@ -104,18 +104,18 @@
 
         <service id="sylius.data_fixtures.factory.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactory">
             <argument type="service" id="sylius.factory.payment_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.payment_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.payment_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.default_values.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.transformer.payment_method" />
+            <argument type="service" id="sylius.data_fixtures.updater.payment_method" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactoryInterface" alias="sylius.data_fixtures.factory.payment_method" />
 
         <service id="sylius.data_fixtures.factory.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactory">
             <argument type="service" id="sylius.factory.product" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.product" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.product" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.product" />
+            <argument type="service" id="sylius.data_fixtures.default_values.product" />
+            <argument type="service" id="sylius.data_fixtures.transformer.product" />
+            <argument type="service" id="sylius.data_fixtures.updater.product" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface" alias="sylius.data_fixtures.factory.product" />
@@ -146,27 +146,27 @@
 
         <service id="sylius.data_fixtures.factory.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionFactory">
             <argument type="service" id="sylius.factory.promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.promotion" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.promotion" />
+            <argument type="service" id="sylius.data_fixtures.default_values.promotion" />
+            <argument type="service" id="sylius.data_fixtures.transformer.promotion" />
+            <argument type="service" id="sylius.data_fixtures.updater.promotion" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionFactoryInterface" alias="sylius.data_fixtures.factory.promotion" />
 
         <service id="sylius.data_fixtures.factory.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactory">
             <argument type="service" id="sylius.factory.promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.promotion_action" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.default_values.promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.transformer.promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.updater.promotion_action" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.promotion_action" />
 
         <service id="sylius.data_fixtures.factory.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactory">
             <argument type="service" id="sylius.factory.promotion_rule" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.promotion_rule" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.promotion_rule" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.promotion_rule" />
+            <argument type="service" id="sylius.data_fixtures.default_values.promotion_rule" />
+            <argument type="service" id="sylius.data_fixtures.transformer.promotion_rule" />
+            <argument type="service" id="sylius.data_fixtures.updater.promotion_rule" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactoryInterface" alias="sylius.data_fixtures.factory.promotion_rule" />
@@ -179,9 +179,9 @@
 
         <service id="sylius.data_fixtures.factory.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingMethodFactory">
             <argument type="service" id="sylius.factory.shipping_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.shipping_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.shipping_method" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.shipping_method" />
+            <argument type="service" id="sylius.data_fixtures.default_values.shipping_method" />
+            <argument type="service" id="sylius.data_fixtures.transformer.shipping_method" />
+            <argument type="service" id="sylius.data_fixtures.updater.shipping_method" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingMethodFactoryInterface" alias="sylius.data_fixtures.factory.shipping_method" />
@@ -208,9 +208,9 @@
 
         <service id="sylius.data_fixtures.factory.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactory">
             <argument type="service" id="sylius.factory.tax_rate" />
-            <argument type="service" id="sylius.data_fixtures.factory_default_values.tax_rate" />
-            <argument type="service" id="sylius.data_fixtures.factory_transformer.tax_rate" />
-            <argument type="service" id="sylius.data_fixtures.factory_updater.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.default_values.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.transformer.tax_rate" />
+            <argument type="service" id="sylius.data_fixtures.updater.tax_rate" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxRateFactoryInterface" alias="sylius.data_fixtures.factory.tax_rate" />

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ChannelFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ChannelFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ChannelDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdaterInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface as ChannelResourceFactory;
 use Sylius\Component\Core\Model\Channel;
@@ -48,10 +48,10 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
     use ToggableTrait;
 
     public function __construct(
-        private ChannelResourceFactory $channelFactory,
-        private ChannelFactoryDefaultValuesInterface $factoryDefaultValues,
-        private ChannelFactoryTransformerInterface $factoryTransformer,
-        private ChannelFactoryUpdaterInterface $factoryUpdater,
+        private ChannelResourceFactory        $channelFactory,
+        private ChannelDefaultValuesInterface $factoryDefaultValues,
+        private ChannelTransformerInterface   $factoryTransformer,
+        private ChannelUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

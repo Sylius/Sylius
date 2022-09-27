@@ -15,62 +15,62 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.data_fixtures.factory_transformer.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AddressFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AddressFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.address" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface" alias="sylius.data_fixtures.transformer.address" />
 
-        <service id="sylius.data_fixtures.factory_transformer.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AdminUserTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.admin_user" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AdminUserTransformerInterface" alias="sylius.data_fixtures.transformer.admin_user" />
 
-        <service id="sylius.data_fixtures.factory_transformer.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion" />
+        <service id="sylius.data_fixtures.transformer.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformerInterface" alias="sylius.data_fixtures.transformer.catalog_promotion" />
 
-        <service id="sylius.data_fixtures.factory_transformer.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion_action" />
+        <service id="sylius.data_fixtures.transformer.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionActionTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionActionTransformerInterface" alias="sylius.data_fixtures.transformer.catalog_promotion_action" />
 
-        <service id="sylius.data_fixtures.factory_transformer.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionScopeFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionScopeFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.catalog_promotion_scope" />
+        <service id="sylius.data_fixtures.transformer.catalog_promotion_scope" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionScopeTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionScopeTransformerInterface" alias="sylius.data_fixtures.transformer.catalog_promotion_scope" />
 
-        <service id="sylius.data_fixtures.factory_transformer.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ChannelFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.channel" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
-        <service id="sylius.data_fixtures.factory_transformer.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PaymentMethodFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.payment_method" />
+        <service id="sylius.data_fixtures.transformer.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PaymentMethodTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PaymentMethodTransformerInterface" alias="sylius.data_fixtures.transformer.payment_method" />
 
-        <service id="sylius.data_fixtures.factory_transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformer">
             <argument type="service" id="sylius.generator.slug" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.product" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformerInterface" alias="sylius.data_fixtures.transformer.product" />
 
-        <service id="sylius.data_fixtures.factory_transformer.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.promotion_action" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionTransformerInterface" alias="sylius.data_fixtures.transformer.promotion" />
 
-        <service id="sylius.data_fixtures.factory_transformer.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionActionFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionActionFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion_action" />
+        <service id="sylius.data_fixtures.transformer.promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionActionTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionActionTransformerInterface" alias="sylius.data_fixtures.transformer.promotion_action" />
 
-        <service id="sylius.data_fixtures.factory_transformer.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformer" />
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.promotion_rule" />
+        <service id="sylius.data_fixtures.transformer.promotion_rule" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionRuleTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionRuleTransformerInterface" alias="sylius.data_fixtures.transformer.promotion_rule" />
 
-        <service id="sylius.data_fixtures.factory_transformer.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ShippingMethodFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
             <argument type="service" id="sylius.data_fixtures.factory.shipping_category" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ShippingMethodFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.shipping_method" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface" alias="sylius.data_fixtures.transformer.shipping_method" />
 
-        <service id="sylius.data_fixtures.factory_transformer.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformer">
+        <service id="sylius.data_fixtures.transformer.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformerInterface" alias="sylius.data_fixtures.factory_transformer.tax_rate" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformerInterface" alias="sylius.data_fixtures.transformer.tax_rate" />
     </services>
 </container>

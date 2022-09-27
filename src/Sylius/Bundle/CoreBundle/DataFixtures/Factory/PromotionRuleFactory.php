@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\PromotionRuleFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\PromotionRuleFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\PromotionRuleFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PromotionRuleDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionRuleTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\PromotionRuleUpdaterInterface;
 use Sylius\Component\Promotion\Model\PromotionRule;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -44,10 +44,10 @@ class PromotionRuleFactory extends ModelFactory implements PromotionRuleFactoryI
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $promotionRuleFactory,
-        private PromotionRuleFactoryDefaultValuesInterface $factoryDefaultValues,
-        private PromotionRuleFactoryTransformerInterface $factoryTransformer,
-        private PromotionRuleFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface                    $promotionRuleFactory,
+        private PromotionRuleDefaultValuesInterface $factoryDefaultValues,
+        private PromotionRuleTransformerInterface   $factoryTransformer,
+        private PromotionRuleUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

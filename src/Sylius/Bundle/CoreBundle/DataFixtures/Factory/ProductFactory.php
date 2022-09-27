@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ProductFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductUpdaterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
@@ -46,10 +46,10 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
     use ToggableTrait;
 
     public function __construct(
-        private FactoryInterface $productFactory,
-        private ProductFactoryDefaultValuesInterface $factoryDefaultValues,
-        private ProductFactoryTransformerInterface $factoryTransformer,
-        private ProductFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface              $productFactory,
+        private ProductDefaultValuesInterface $factoryDefaultValues,
+        private ProductTransformerInterface   $factoryTransformer,
+        private ProductUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

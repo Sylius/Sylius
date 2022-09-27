@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AddressFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AddressFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AddressFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdaterInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -45,10 +45,10 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $addressFactory,
-        private AddressFactoryDefaultValuesInterface $factoryDefaultValues,
-        private AddressFactoryTransformerInterface $factoryTransformer,
-        private AddressFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface              $addressFactory,
+        private AddressDefaultValuesInterface $factoryDefaultValues,
+        private AddressTransformerInterface   $factoryTransformer,
+        private AddressUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }
