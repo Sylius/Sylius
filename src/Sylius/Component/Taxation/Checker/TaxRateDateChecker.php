@@ -42,16 +42,8 @@ final class TaxRateDateChecker implements TaxRateDateCheckerInterface
 
     public function isInDate(DateTimeInterface $date, ?DateTimeInterface $startDate, ?DateTimeInterface $endDate): bool
     {
-        if (null === $startDate && null === $endDate) {
-            return true;
-        }
-
-        if (null === $startDate) {
-            return $date <= $endDate;
-        }
-
         if (null === $endDate) {
-            return $date >= $startDate;
+            return $startDate <= $date;
         }
 
         return $startDate <= $date && $endDate >= $date;

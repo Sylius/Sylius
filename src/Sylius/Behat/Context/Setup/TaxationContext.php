@@ -67,7 +67,7 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone starting at :endDate
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone starting at :startDate
      */
     public function storeHasTaxRateWithinZoneStartingAt(
         string $taxRateName,
@@ -230,13 +230,8 @@ final class TaxationContext implements Context
         $taxRate->setCategory($taxCategory);
         $taxRate->setCalculator('default');
         $taxRate->setIncludedInPrice($includedInPrice);
-
-        if (null !== $startDate) {
-            $taxRate->setStartDate($startDate);
-        }
-        if (null !== $endDate) {
-            $taxRate->setEndDate($endDate);
-        }
+        $taxRate->setStartDate($startDate);
+        $taxRate->setEndDate($endDate);
 
         $this->taxRateRepository->add($taxRate);
 
