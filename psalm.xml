@@ -166,12 +166,14 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/CatalogPromotionFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/ChannelFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/PaymentMethodFactoryDefaultValues.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/PromotionFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/ShippingMethodFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/DefaultValues/TaxRateFactoryDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ShopUserFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/TaxRateFactory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/AddressFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/ChannelFactoryTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/PromotionFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/ShippingMethodFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/Transformer/TaxRateFactoryTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Factory/ZoneMemberFactory.php" />
