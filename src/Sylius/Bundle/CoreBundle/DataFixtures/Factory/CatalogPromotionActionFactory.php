@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\CatalogPromotionActionFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\CatalogPromotionActionFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\CatalogPromotionActionFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CatalogPromotionActionDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionActionTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CatalogPromotionActionUpdaterInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionAction;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -35,10 +35,10 @@ class CatalogPromotionActionFactory extends ModelFactory implements CatalogPromo
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $catalogPromotionActionFactory,
-        private CatalogPromotionActionFactoryDefaultValuesInterface $factoryDefaultValues,
-        private CatalogPromotionActionFactoryTransformerInterface $factoryTransformer,
-        private CatalogPromotionActionFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface                             $catalogPromotionActionFactory,
+        private CatalogPromotionActionDefaultValuesInterface $factoryDefaultValues,
+        private CatalogPromotionActionTransformerInterface   $factoryTransformer,
+        private CatalogPromotionActionUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

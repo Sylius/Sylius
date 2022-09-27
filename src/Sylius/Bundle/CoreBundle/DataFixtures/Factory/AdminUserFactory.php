@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\AdminUserFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\AdminUserFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\AdminUserFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AdminUserDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AdminUserTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\AdminUserUpdaterInterface;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -46,10 +46,10 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $adminUserFactory,
-        private AdminUserFactoryDefaultValuesInterface $factoryDefaultValues,
-        private AdminUserFactoryTransformerInterface $factoryTransformer,
-        private AdminUserFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface                $adminUserFactory,
+        private AdminUserDefaultValuesInterface $factoryDefaultValues,
+        private AdminUserTransformerInterface   $factoryTransformer,
+        private AdminUserUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

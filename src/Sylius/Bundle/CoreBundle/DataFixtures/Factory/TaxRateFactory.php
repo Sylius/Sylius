@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\TaxRateFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\TaxRateFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\TaxRateFactoryUpdaterInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxRateDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdaterInterface;
 use Sylius\Component\Core\Model\TaxRate;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -50,10 +49,10 @@ class TaxRateFactory extends ModelFactory implements TaxRateFactoryInterface, Fa
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $countryFactory,
-        private TaxRateFactoryDefaultValuesInterface $factoryDefaultValues,
-        private TaxRateFactoryTransformerInterface $factoryTransformer,
-        private TaxRateFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface              $countryFactory,
+        private TaxRateDefaultValuesInterface $factoryDefaultValues,
+        private TaxRateTransformerInterface   $factoryTransformer,
+        private TaxRateUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }

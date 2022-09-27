@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\DefaultValues\ShippingMethodFactoryDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ShippingMethodFactoryTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ShippingMethodFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShippingMethodDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShippingMethodUpdaterInterface;
 use Sylius\Component\Core\Model\ShippingMethod;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -52,10 +52,10 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface $catalogPromotionFactory,
-        private ShippingMethodFactoryDefaultValuesInterface $factoryDefaultValues,
-        private ShippingMethodFactoryTransformerInterface $factoryTransformer,
-        private ShippingMethodFactoryUpdaterInterface $factoryUpdater,
+        private FactoryInterface                     $catalogPromotionFactory,
+        private ShippingMethodDefaultValuesInterface $factoryDefaultValues,
+        private ShippingMethodTransformerInterface   $factoryTransformer,
+        private ShippingMethodUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
     }
