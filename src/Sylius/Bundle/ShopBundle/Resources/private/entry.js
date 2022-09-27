@@ -12,8 +12,11 @@ import './js/app';
 import 'sylius/ui-resources/sass/main.scss';
 import './scss/style.scss';
 
-import 'sylius/ui-resources/img/logo.png';
 import 'sylius/ui-resources/img/avatar.png';
+import 'sylius/ui-resources/img/logo.png';
+import 'sylius/ui-resources/img/50x50.png';
+import 'sylius/ui-resources/img/200x200.png';
+import 'sylius/ui-resources/img/400x300.png';
 
 import './img/homepage-banner.jpg';
 import './img/sylius-plus-banner.png';
