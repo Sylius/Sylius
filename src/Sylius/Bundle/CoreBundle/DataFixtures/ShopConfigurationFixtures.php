@@ -17,18 +17,21 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface;
 
 final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInterface
 {
     public function __construct(
         private DefaultLocalesStoryInterface $defaultLocalesStory,
+        private DefaultCurrenciesStoryInterface $defaultCurrenciesStory,
     ) {
     }
 
     public function load(ObjectManager $manager): void
     {
         $this->defaultLocalesStory->build();
+        $this->defaultCurrenciesStory->build();
     }
 
     public static function getGroups(): array
