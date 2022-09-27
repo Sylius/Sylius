@@ -124,6 +124,12 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter" public="true">
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter" public="true">
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />

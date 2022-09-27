@@ -51,6 +51,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-variants</attribute>
+                <attribute name="filters">
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_variant:read</attribute>
                 </attribute>

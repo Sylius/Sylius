@@ -91,6 +91,14 @@ sylius_grid:
                 item:
                     show:
                         type: show
+                    show_variants:
+                        type: show
+                        label: sylius.ui.list_variants
+                        options:
+                            link:
+                                route: sylius_admin_catalog_promotion_product_variant_index
+                                parameters:
+                                    id: resource.id
                     update:
                         type: update
                     delete:
