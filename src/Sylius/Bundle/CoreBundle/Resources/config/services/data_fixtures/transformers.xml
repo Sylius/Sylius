@@ -69,6 +69,7 @@
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
             <argument type="service" id="sylius.data_fixtures.factory.shipping_category" />
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface" alias="sylius.data_fixtures.transformer.shipping_method" />
 
