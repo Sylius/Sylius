@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultAdminUsersStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultChannelsStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCustomerGroupsStoryInterface;
@@ -38,6 +39,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         private DefaultShippingMethodsStoryInterface $defaultShippingMethodsStory,
         private DefaultCustomerGroupsStoryInterface $defaultCustomerGroupsStory,
         private DefaultShopUsersStoryInterface $defaultShopUsersStory,
+        private DefaultAdminUsersStoryInterface $defaultAdminUsersStory,
     ) {
     }
 
@@ -52,6 +54,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         $this->defaultShippingMethodsStory->build();
         $this->defaultCustomerGroupsStory->build();
         $this->defaultShopUsersStory->build();
+        $this->defaultAdminUsersStory->build();
     }
 
     public static function getGroups(): array

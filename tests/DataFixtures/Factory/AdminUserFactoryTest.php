@@ -114,4 +114,12 @@ final class AdminUserFactoryTest extends KernelTestCase
         $this->assertNotNull($adminUser->getAvatar());
         $this->assertStringEndsWith('luke.jpg', $adminUser->getAvatar()->getPath());
     }
+
+    /** @test */
+    function it_creates_admin_user_with_given_locale_code(): void
+    {
+        $adminUser = AdminUserFactory::new()->withLocaleCode('fr_FR')->create();
+
+        $this->assertEquals('fr_FR', $adminUser->getLocaleCode());
+    }
 }

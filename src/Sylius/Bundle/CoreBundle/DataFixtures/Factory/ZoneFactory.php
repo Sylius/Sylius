@@ -57,19 +57,9 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
 
     public function withMembers(array $members, string $type = ZoneInterface::TYPE_ZONE): self
     {
-        $data = [];
-
-        foreach ($members as $member) {
-            if (\is_string($member)) {
-                $member = ZoneMemberFactory::createOne(['code' => $member]);
-            }
-
-            $data[] = $member;
-        }
-
         return $this->addState([
             'type' => $type,
-            'members' => $data
+            'members' => $members,
         ]);
     }
 
@@ -104,6 +94,18 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
         return $this
             ->beforeInstantiate(function (array $attributes): array {
                 $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
+
+                $members = [];
+
+                foreach ($attributes['members'] as $member) {
+                    if (\is_string($member)) {
+                        $member = ZoneMemberFactory::findOrCreate(['code' => $member]);
+                    }
+
+                    $members[] = $member;
+                }
+
+                $attributes['members'] = $members;
 
                 return $attributes;
             })
