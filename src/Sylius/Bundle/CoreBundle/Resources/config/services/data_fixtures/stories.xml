@@ -59,5 +59,10 @@
             <argument type="service" id="sylius.data_fixtures.factory.shipping_method" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShippingMethodsStoryInterface" alias="sylius.data_fixtures.story.default_shipping_methods" />
+
+        <service id="sylius.data_fixtures.story.default_shop_users" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShopUsersStory">
+            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShopUsersStoryInterface" alias="sylius.data_fixtures.story.default_shop_users" />
     </services>
 </container>
