@@ -13,51 +13,41 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Story;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Zenstruck\Foundry\Story;
 
-final class DefaultChannelStory extends Story implements DefaultGeographicalStoryInterface
+final class DefaultChannelsStory extends Story implements DefaultChannelsStoryInterface
 {
     public function __construct(
-        private CountryFactoryInterface $countryFactory,
-        private ZoneFactoryInterface $zoneFactory,
+        private ChannelFactoryInterface $channelFactory,
+        private string $basedLocaleCode,
+        private string $fixturesHostname,
+        private ?string $fixturesThemeName,
     ) {
     }
 
     public function build(): void
     {
-        foreach ($this->getDefaultCountryCodes() as $countryCode) {
-            $this->countryFactory::new()->withCode($countryCode)->create();
-        }
-
-        $this->zoneFactory::new()
-            ->withName('United States of America')
-            ->withCountries(['US'])
+        $this->channelFactory::new()
+            ->withName('Fashion Web Store')
+            ->withCode('FASHION_WEB')
+            ->withLocales([$this->basedLocaleCode])
+            ->withCurrencies(['USD'])
+            ->enabled()
+            ->withHostname($this->fixturesHostname)
+            ->withThemeName($this->fixturesThemeName)
+            ->withShopBillingData([
+                'company' => 'Sylius',
+                'tax_id' => '0001112222',
+                'country_code' => 'US',
+                'street' => 'Test St. 15',
+                'city' => 'eCommerce Town',
+                'postcode' => '00 33 22',
+            ])
+            ->withMenuTaxon('MENU_CATEGORY')
+            ->withContactPhoneNumber('+41 123 456 789')
+            ->withContactEmail('contact@example.com')
             ->create()
         ;
-
-        $this->zoneFactory::new()
-            ->withName('Rest of the World')
-            ->withCountries($this->getDefaultCountryCodes())
-            ->create()
-        ;
-    }
-
-    public function getDefaultCountryCodes(): array
-    {
-        return [
-            'FR',
-            'DE',
-            'AU',
-            'CA',
-            'MX',
-            'NZ',
-            'PT',
-            'ES',
-            'CN',
-            'GB',
-            'PL',
-        ];
     }
 }

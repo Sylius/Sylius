@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Story;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
-use Sylius\Component\Addressing\Model\Zone;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -75,7 +75,7 @@ final class DefaultGeographicalStoryTest extends KernelTestCase
         $this->assertEquals('PL', $zone->getMembers()->last()->getCode());
     }
 
-    private function getZoneByCode(string $code): ?Zone
+    private function getZoneByCode(string $code): ?ZoneInterface
     {
         /** @var RepositoryInterface $zoneRepository */
         $zoneRepository = self::getContainer()->get('sylius.repository.zone');

@@ -9,5 +9,5 @@ use Zenstruck\Foundry\Proxy;
 
 interface WithTaxCategoryInterface
 {
-    public function withTaxCategory(Proxy|TaxCategoryInterface|string $taxCategory): self;
+    public function withTaxCategory(Proxy|TaxCategoryInterface|string $taxCategory): static;
 }

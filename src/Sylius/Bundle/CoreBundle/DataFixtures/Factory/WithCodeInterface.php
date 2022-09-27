@@ -6,5 +6,5 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithCodeInterface
 {
-    public function withCode(string $code): self;
+    public function withCode(string $code): static;
 }

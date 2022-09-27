@@ -11,7 +11,7 @@ use Zenstruck\Foundry\ModelFactory;
  */
 trait WithCodeTrait
 {
-    public function withCode(string $code): self
+    public function withCode(string $code): static
     {
         return $this->addState(['code' => $code]);
     }

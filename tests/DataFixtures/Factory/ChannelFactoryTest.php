@@ -14,9 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Locale\Model\Locale;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
@@ -213,5 +217,65 @@ final class ChannelFactoryTest extends KernelTestCase
         $channel = ChannelFactory::new()->withShopBillingData($shopBillingData)->create();
 
         $this->assertEquals('Sylius', $channel->getShopBillingData()->getCompany());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_proxy_locales(): void
+    {
+        $locale = LocaleFactory::createOne();
+        $channel = ChannelFactory::new()->withLocales([$locale])->create();
+
+        $this->assertEquals($locale->object(), $channel->getLocales()->first());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_locales_as_string(): void
+    {
+        $channel = ChannelFactory::new()->withLocales(['fr_FR'])->create();
+
+        $this->assertEquals('fr_FR', $channel->getLocales()->first()->getCode());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_proxy_currencies(): void
+    {
+        $currency = CurrencyFactory::createOne();
+        $channel = ChannelFactory::new()->withCurrencies([$currency])->create();
+
+        $this->assertEquals($currency->object(), $channel->getCurrencies()->first());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_currencies_as_string(): void
+    {
+        $channel = ChannelFactory::new()->withCurrencies(['USD'])->create();
+
+        $this->assertEquals('USD', $channel->getCurrencies()->first()->getCode());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_proxy_menu_taxon(): void
+    {
+        $taxon = TaxonFactory::createOne();
+        $channel = ChannelFactory::new()->withMenuTaxon($taxon)->create();
+
+        $this->assertEquals($taxon->object(), $channel->getMenuTaxon());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_menu_taxon(): void
+    {
+        $taxon = TaxonFactory::createOne()->object();
+        $channel = ChannelFactory::new()->withMenuTaxon($taxon)->create();
+
+        $this->assertEquals($taxon, $channel->getMenuTaxon());
+    }
+
+    /** @test */
+    function it_creates_channel_with_given_menu_taxon_as_string(): void
+    {
+        $channel = ChannelFactory::new()->withMenuTaxon('MENU_CATEGORY')->create();
+
+        $this->assertEquals('MENU_CATEGORY', $channel->getMenuTaxon()->getCode());
     }
 }

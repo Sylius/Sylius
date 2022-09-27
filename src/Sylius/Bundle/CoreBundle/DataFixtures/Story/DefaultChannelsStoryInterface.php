@@ -11,11 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
+namespace Sylius\Bundle\CoreBundle\DataFixtures\Story;
 
-interface ToggableInterface
+interface DefaultChannelsStoryInterface extends StoryInterface
 {
-    public function enabled(): static;
-
-    public function disabled(): static;
 }

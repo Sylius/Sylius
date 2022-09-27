@@ -16,9 +16,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultChannelsStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultGeographicalStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultMenuTaxonStoryInterface;
 
 final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInterface
 {
@@ -26,6 +28,8 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         private DefaultLocalesStoryInterface $defaultLocalesStory,
         private DefaultCurrenciesStoryInterface $defaultCurrenciesStory,
         private DefaultGeographicalStoryInterface $defaultGeographicalStory,
+        private DefaultMenuTaxonStoryInterface $defaultMenuTaxonStory,
+        private DefaultChannelsStoryInterface $defaultChannelsStory,
     ) {
     }
 
@@ -34,6 +38,8 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         $this->defaultLocalesStory->build();
         $this->defaultCurrenciesStory->build();
         $this->defaultGeographicalStory->build();
+        $this->defaultMenuTaxonStory->build();
+        $this->defaultChannelsStory->build();
     }
 
     public static function getGroups(): array

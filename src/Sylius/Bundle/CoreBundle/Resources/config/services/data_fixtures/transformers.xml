@@ -37,6 +37,9 @@
         <service id="sylius.data_fixtures.transformer.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument type="service" id="sylius.data_fixtures.factory.currency" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
