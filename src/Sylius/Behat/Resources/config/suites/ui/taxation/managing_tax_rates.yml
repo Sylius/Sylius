@@ -6,6 +6,7 @@ default:
         ui_managing_tax_rates:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.tax_category

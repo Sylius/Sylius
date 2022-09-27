@@ -6,6 +6,7 @@ default:
         ui_paying_for_order:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
