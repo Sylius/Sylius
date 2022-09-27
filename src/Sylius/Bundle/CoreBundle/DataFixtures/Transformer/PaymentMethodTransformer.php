@@ -13,15 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 
 final class PaymentMethodTransformer implements PaymentMethodTransformerInterface
 {
+    public function __construct(private ChannelFactoryInterface $channelFactory)
+    {
+    }
+
     public function transform(array $attributes): array
     {
         if (null === $attributes['code']) {
             $attributes['code'] = StringInflector::nameToCode($attributes['name']);
         }
+
+        $channels = [];
+        foreach ($attributes['channels'] as $channel) {
+            if (\is_string($channel)) {
+                $channels[] = $this->channelFactory::findOrCreate(['code' => $channel]);
+            }
+        }
+        $attributes['channels'] = $channels;
 
         return $attributes;
     }

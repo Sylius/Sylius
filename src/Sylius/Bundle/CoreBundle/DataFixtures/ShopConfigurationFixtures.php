@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultGeographicalStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultMenuTaxonStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultPaymentMethodsStoryInterface;
 
 final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInterface
 {
@@ -30,6 +31,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         private DefaultGeographicalStoryInterface $defaultGeographicalStory,
         private DefaultMenuTaxonStoryInterface $defaultMenuTaxonStory,
         private DefaultChannelsStoryInterface $defaultChannelsStory,
+        private DefaultPaymentMethodsStoryInterface $defaultPaymentMethodsStory,
     ) {
     }
 
@@ -40,6 +42,7 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         $this->defaultGeographicalStory->build();
         $this->defaultMenuTaxonStory->build();
         $this->defaultChannelsStory->build();
+        $this->defaultPaymentMethodsStory->build();
     }
 
     public static function getGroups(): array
