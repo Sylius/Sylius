@@ -16,6 +16,7 @@
         <import resource="data_fixtures/default_values.xml" />
         <import resource="data_fixtures/factories.xml" />
         <import resource="data_fixtures/fixtures.xml" />
+        <import resource="data_fixtures/stories.xml" />
         <import resource="data_fixtures/transformers.xml" />
         <import resource="data_fixtures/updaters.xml" />
     </imports>

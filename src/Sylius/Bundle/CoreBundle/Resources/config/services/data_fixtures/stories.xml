@@ -15,9 +15,10 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.data_fixtures.shop_configuration" class="Sylius\Bundle\CoreBundle\DataFixtures\ShopConfigurationFixtures">
-            <argument type="service" id="sylius.data_fixtures.story.default_locales" />
-            <tag name="doctrine.fixture.orm" />
+        <service id="sylius.data_fixtures.story.default_locales" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStory">
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument>%sylius_locale.locale%</argument>
         </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface" alias="sylius.data_fixtures.story.default_locales" />
     </services>
 </container>
