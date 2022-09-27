@@ -73,7 +73,7 @@
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
-        "sylius-labs/polyfill-symfony-security": "dev-handle-properly-symfony-6-case",
+        "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/calendar": "^0.3 || ^0.4",
         "sylius/fixtures-bundle": "^1.7.0 || ^1.8@beta",
         "sylius/grid": "^1.11 || ^1.12@alpha",
@@ -324,7 +324,6 @@
         }
     },
     "repositories": [
-        { "type": "vcs", "url": "git@github.com:Zales0123/SymfonyMockerContainer.git" },
-        { "type": "vcs", "url": "git@github.com:Zales0123/PolyfillSymfonySecurity.git" }
+        { "type": "vcs", "url": "git@github.com:Zales0123/SymfonyMockerContainer.git" }
     ]
 }
