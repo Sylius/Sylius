@@ -27,7 +27,9 @@ final class DefaultGeographicalStory extends Story implements DefaultGeographica
 
     public function build(): void
     {
-        foreach ($this->getDefaultCountryCodes() as $countryCode) {
+        $countryCodes = $this->getDefaultCountryCodes();
+
+        foreach ($countryCodes as $countryCode) {
             $this->countryFactory::new()->withCode($countryCode)->create();
         }
 
@@ -37,9 +39,11 @@ final class DefaultGeographicalStory extends Story implements DefaultGeographica
             ->create()
         ;
 
+        \array_shift($countryCodes);
+
         $this->zoneFactory::new()
             ->withName('Rest of the World')
-            ->withCountries($this->getDefaultCountryCodes())
+            ->withCountries($countryCodes)
             ->create()
         ;
     }
@@ -47,6 +51,7 @@ final class DefaultGeographicalStory extends Story implements DefaultGeographica
     public function getDefaultCountryCodes(): array
     {
         return [
+            'US',
             'FR',
             'DE',
             'AU',

@@ -94,6 +94,11 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
         return $this->addState(['avatar' => $avatar]);
     }
 
+    public function withLocaleCode(string $localeCode): self
+    {
+        return $this->addState(['locale_code' => $localeCode]);
+    }
+
     protected function getDefaults(): array
     {
         return $this->factoryDefaultValues->getDefaults(self::faker());

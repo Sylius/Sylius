@@ -15,6 +15,12 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.data_fixtures.story.default_admin_users" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultAdminUsersStory">
+            <argument type="service" id="sylius.data_fixtures.factory.admin_user" />
+            <argument>%sylius_locale.locale%</argument>
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultAdminUsersStoryInterface" alias="sylius.data_fixtures.story.default_admin_users" />
+
         <service id="sylius.data_fixtures.story.default_channels" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultChannelsStory">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
             <argument>%sylius_locale.locale%</argument>

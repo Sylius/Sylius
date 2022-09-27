@@ -49,4 +49,6 @@ interface AdminUserFactoryInterface extends ToggableInterface
     public function withLastName(string $lastName): self;
 
     public function withAvatar(string $avatar): self;
+
+    public function withLocaleCode(string $localeCode): self;
 }
