@@ -21,6 +21,7 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface as ChannelResourceF
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -46,6 +47,8 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
     use WithCodeTrait;
     use WithNameTrait;
     use ToggableTrait;
+    use WithLocalesTrait;
+    use WithCurrenciesTrait;
 
     public function __construct(
         private ChannelResourceFactory        $channelFactory,
@@ -91,7 +94,7 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         return $this->addState(['tax_calculation_strategy' => $taxCalculationStrategy]);
     }
 
-    public function withThemeName(string $themeName): self
+    public function withThemeName(?string $themeName): self
     {
         return $this->addState(['theme_name' => $themeName]);
     }
@@ -109,6 +112,11 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
     public function withShopBillingData(Proxy|ShopBillingDataInterface|array $shopBillingData): self
     {
         return $this->addState(['shop_billing_data' => $shopBillingData]);
+    }
+
+    public function withMenuTaxon(Proxy|TaxonInterface|string $menuTaxon): self
+    {
+        return $this->addState(['menu_taxon' => $menuTaxon]);
     }
 
     protected function getDefaults(): array

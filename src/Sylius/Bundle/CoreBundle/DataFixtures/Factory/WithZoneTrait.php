@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithZoneTrait
 {
-    public function withZone(Proxy|ZoneInterface|string $zone): self
+    public function withZone(Proxy|ZoneInterface|string $zone): static
     {
         return $this->addState(['zone' => $zone]);
     }

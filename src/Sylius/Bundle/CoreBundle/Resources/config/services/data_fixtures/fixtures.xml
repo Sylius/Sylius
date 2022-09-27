@@ -19,6 +19,8 @@
             <argument type="service" id="sylius.data_fixtures.story.default_locales" />
             <argument type="service" id="sylius.data_fixtures.story.default_currencies" />
             <argument type="service" id="sylius.data_fixtures.story.default_geographical" />
+            <argument type="service" id="sylius.data_fixtures.story.default_menu_taxon" />
+            <argument type="service" id="sylius.data_fixtures.story.default_channels" />
             <tag name="doctrine.fixture.orm" />
         </service>
     </services>

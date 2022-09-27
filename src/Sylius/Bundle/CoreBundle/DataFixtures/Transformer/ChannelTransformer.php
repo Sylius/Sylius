@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 
@@ -22,6 +25,9 @@ final class ChannelTransformer implements ChannelTransformerInterface
     public function __construct(
         private ZoneFactoryInterface $zoneFactory,
         private ShopBillingDataFactoryInterface $shopBillingDataFactory,
+        private TaxonFactoryInterface $taxonFactory,
+        private LocaleFactoryInterface $localeFactory,
+        private CurrencyFactoryInterface $currencyFactory,
     ) {
     }
 
@@ -30,13 +36,37 @@ final class ChannelTransformer implements ChannelTransformerInterface
         $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
         $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
 
-        if (is_string($attributes['default_tax_zone'])) {
-            $attributes['default_tax_zone'] = $this->zoneFactory::randomOrCreate(['code' => $attributes['default_tax_zone']]);
+        if (\is_string($attributes['default_tax_zone'])) {
+            $attributes['default_tax_zone'] = $this->zoneFactory::findOrCreate(['code' => $attributes['default_tax_zone']]);
         }
 
         if (is_array($attributes['shop_billing_data'])) {
             $attributes['shop_billing_data'] = $this->shopBillingDataFactory->create($attributes['shop_billing_data']);
         }
+
+        if (\is_string($attributes['menu_taxon'])) {
+            $attributes['menu_taxon'] = $this->taxonFactory::findOrCreate(['code' => $attributes['menu_taxon']]);
+        }
+
+        $locales = [];
+        foreach ($attributes['locales'] as $locale) {
+            if (\is_string($locale)) {
+                $locale = $this->localeFactory::findOrCreate(['code' => $locale]);
+            }
+
+            $locales[] = $locale;
+        }
+        $attributes['locales'] = $locales;
+
+        $currencies = [];
+        foreach ($attributes['currencies'] as $currency) {
+            if (\is_string($currency)) {
+                $currency = $this->currencyFactory::findOrCreate(['code' => $currency]);
+            }
+
+            $currencies[] = $currency;
+        }
+        $attributes['currencies'] = $currencies;
 
         return $attributes;
     }

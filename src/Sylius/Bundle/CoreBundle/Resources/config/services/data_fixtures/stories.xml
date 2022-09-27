@@ -15,6 +15,14 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.data_fixtures.story.default_channels" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultChannelsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument>%sylius_locale.locale%</argument>
+            <argument>%env(resolve:SYLIUS_FIXTURES_HOSTNAME)%</argument>
+            <argument>%env(resolve:SYLIUS_FIXTURES_THEME_NAME)%</argument>
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultChannelsStoryInterface" alias="sylius.data_fixtures.story.default_channels" />
+
         <service id="sylius.data_fixtures.story.default_currencies" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStory">
             <argument type="service" id="sylius.data_fixtures.factory.currency" />
         </service>
@@ -31,5 +39,11 @@
             <argument>%sylius_locale.locale%</argument>
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultLocalesStoryInterface" alias="sylius.data_fixtures.story.default_locales" />
+
+        <service id="sylius.data_fixtures.story.default_menu_taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultMenuTaxonStory">
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultMenuTaxonStoryInterface" alias="sylius.data_fixtures.story.default_menu_taxon" />
+
     </services>
 </container>

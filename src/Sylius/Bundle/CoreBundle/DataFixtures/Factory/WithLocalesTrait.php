@@ -8,7 +8,13 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
-interface WithZoneInterface
+/**
+ * @mixin ModelFactory
+ */
+trait WithLocalesTrait
 {
-    public function withZone(Proxy|ZoneInterface|string $zone): static;
+    public function withLocales(array $locales): static
+    {
+        return $this->addState(['locales' => $locales]);
+    }
 }

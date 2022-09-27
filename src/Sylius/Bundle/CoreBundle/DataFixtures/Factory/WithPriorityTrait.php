@@ -11,7 +11,7 @@ use Zenstruck\Foundry\ModelFactory;
  */
 trait WithPriorityTrait
 {
-    public function withPriority(int $priority): self
+    public function withPriority(int $priority): static
     {
         return $this->addState(['priority' => $priority]);
     }

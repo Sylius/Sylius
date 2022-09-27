@@ -42,7 +42,7 @@ final class DefaultLocalesStoryTest extends KernelTestCase
         $this->assertLocaleIsOnDatabase('zh_CN');
     }
 
-    private function assertLocaleIsOnDatabase(string $localeCode)
+    private function assertLocaleIsOnDatabase(string $localeCode): void
     {
         /** @var RepositoryInterface $localeRepository */
         $localeRepository = self::getContainer()->get('sylius.repository.locale');

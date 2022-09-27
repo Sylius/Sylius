@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-interface WithPriorityInterface
+interface WithLocalesInterface
 {
-    public function withPriority(int $priority): static;
+    public function withLocales(array $locales): static;
 }

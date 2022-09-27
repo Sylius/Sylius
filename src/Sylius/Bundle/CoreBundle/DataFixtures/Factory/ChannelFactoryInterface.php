@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShopBillingDataInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -35,7 +37,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ChannelInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ChannelInterface|Proxy create(array|callable $attributes = [])
  */
-interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface, ToggableInterface
+interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface, ToggableInterface, WithLocalesInterface, WithCurrenciesInterface
 {
     public function withHostname(string $hostname): self;
 
@@ -51,9 +53,13 @@ interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface, 
 
     public function withTaxCalculationStrategy(string $taxCalculationStrategy): self;
 
-    public function withThemeName(string $themeName): self;
+    public function withThemeName(?string $themeName): self;
 
     public function withContactEmail(string $contactEmail): self;
 
     public function withContactPhoneNumber(string $contactPhoneNumber): self;
+
+    public function withShopBillingData(Proxy|ShopBillingDataInterface|array $shopBillingData): self;
+
+    public function withMenuTaxon(Proxy|TaxonInterface|string $menuTaxon): self;
 }
