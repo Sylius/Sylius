@@ -6,6 +6,7 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
+
 /**
  * Auto-generated Migration: Please modify to your needs!
  */

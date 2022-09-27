@@ -142,15 +142,8 @@ class TaxRate implements TaxRateInterface
         return $this->endDate;
     }
 
-    /**
-     * @throws Exception
-     */
     public function setEndDate(?DateTimeInterface $endDate): void
     {
-        if ($this->startDate != null && $endDate < $this->startDate) {
-            throw new Exception("The tax rate should not end before it starts");
-        }
-
         $this->endDate = $endDate;
     }
 }

@@ -27,7 +27,7 @@ final class TaxRateDateChecker implements TaxRateDateCheckerInterface
     public function filter(array $taxRates): ?TaxRateInterface
     {
         $taxRates = array_filter($taxRates, function ($taxRate){
-            if ($this->isInDate($this->calendar->now(), $taxRate->getStartDate(), $taxRate->getEndDate())) {
+            if ($this->isInDate($this->calendar->now(), $taxRate)) {
                 return $taxRate;
             }
         });
@@ -37,18 +37,13 @@ final class TaxRateDateChecker implements TaxRateDateCheckerInterface
         return $taxRates[0] ?? null;
     }
 
-    public function isInDate(DateTimeInterface $date, ?DateTimeInterface $startDate, ?DateTimeInterface $endDate): bool
+    public function isInDate(DateTimeInterface $date, TaxRateInterface $taxRate): bool
     {
-        if (null === $startDate && null === $endDate) {
-            return true;
-        }
-
-        if (null === $startDate) {
-            return $date <= $endDate;
-        }
+        $startDate = $taxRate->getStartDate();
+        $endDate = $taxRate->getEndDate();
 
         if (null === $endDate) {
-            return $date >= $startDate;
+            return $startDate <= $date;
         }
 
         return $startDate <= $date && $endDate >= $date;

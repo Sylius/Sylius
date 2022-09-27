@@ -362,4 +362,12 @@ final class ManagingTaxRateContext implements Context
     {
         $this->createPage->chooseIncludedInPrice();
     }
+
+    /**
+     * @Then I should be notified that tax rate should not end before it starts
+     */
+    public function iShouldBeNotifiedThatTaxRateShouldNotEndBeforeItStarts(): void
+    {
+        $this->assertFieldValidationMessage('end_date', 'The tax rate should not end before it starts');
+    }
 }
