@@ -173,7 +173,7 @@ final class ResettingPasswordContext implements Context
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length): void
     {
         $this->assertResponseHasValidationMessageForNewPassword(
-            sprintf('Password must be at least %s characters long.', $length)
+            sprintf('Password must be at least %s characters long.', $length),
         );
     }
 
