@@ -179,6 +179,7 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Story/DefaultLocalesStory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Story/DefaultMenuTaxonStory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Story/DefaultPaymentMethodsStory.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Story/DefaultShopUsersStory.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/AddressTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ChannelTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/PaymentMethodTransformer.php" />

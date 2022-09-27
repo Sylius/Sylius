@@ -24,6 +24,7 @@
             <argument type="service" id="sylius.data_fixtures.story.default_payment_methods" />
             <argument type="service" id="sylius.data_fixtures.story.default_shipping_methods" />
             <argument type="service" id="sylius.data_fixtures.story.default_customer_groups" />
+            <argument type="service" id="sylius.data_fixtures.story.default_shop_users" />
             <tag name="doctrine.fixture.orm" />
         </service>
     </services>
