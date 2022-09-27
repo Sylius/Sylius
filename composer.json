@@ -246,7 +246,8 @@
             "dev-master": "1.12-dev"
         },
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "require": "^5.4"
         }
     },
     "autoload": {
