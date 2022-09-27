@@ -29,7 +29,7 @@ final class ProductTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -54,7 +54,7 @@ final class ProductTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 

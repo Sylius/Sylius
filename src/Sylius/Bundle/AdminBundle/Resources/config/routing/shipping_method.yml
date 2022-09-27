@@ -20,7 +20,7 @@ sylius_admin_shipping_method_archive:
     path: /shipping-methods/{id}/archive
     methods: [PATCH]
     defaults:
-        _controller: sylius.controller.shipping_method:updateAction
+        _controller: sylius.controller.shipping_method::updateAction
         _sylius:
             section: admin
             permission: true

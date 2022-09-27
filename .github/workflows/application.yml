@@ -633,7 +633,7 @@ jobs:
                 name: Run PHPUnit
                 run: |
                     bin/console cache:pool:clear cache.global_clearer
-                    vendor/bin/phpunit --debug
+                    vendor/bin/phpunit
 
             -
                 name: Run CLI Behat

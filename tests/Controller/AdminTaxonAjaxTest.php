@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use ApiTestCase\JsonApiTestCase;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminTaxonAjaxTest extends JsonApiTestCase
+final class AdminTaxonAjaxTest extends SessionAwareAjaxTest
 {
     /** @test */
     public function it_denies_access_to_taxons_for_not_authenticated_user(): void
@@ -84,10 +83,10 @@ final class AdminTaxonAjaxTest extends JsonApiTestCase
 
     private function authenticateAdminUser(): void
     {
-        $adminUserRepository = self::$container->get('sylius.repository.admin_user');
+        $adminUserRepository = self::$kernel->getContainer()->get('sylius.repository.admin_user');
         $user = $adminUserRepository->findOneByEmail('admin@sylius.com');
 
-        $session = self::$container->get('session');
+        $session = self::$kernel->getContainer()->get('request_stack')->getSession();
         $firewallName = 'admin';
         $firewallContext = 'admin';
 

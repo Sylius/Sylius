@@ -5,7 +5,7 @@ sylius_admin_partial_promotion_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.promotion:showAction
+        _controller: sylius.controller.promotion::showAction
         _sylius:
             template: $template
             vars: $vars

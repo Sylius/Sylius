@@ -75,7 +75,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/en_US/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
-        Assert::assertSame('sha512', $shopUserRepository->findOneByEmail('oliver@doe.com')->getEncoderName());
+        Assert::assertSame('argon2i', $shopUserRepository->findOneByEmail('oliver@doe.com')->getEncoderName());
     }
 
     /** @test */
@@ -103,7 +103,7 @@ final class UpdatingUserPasswordEncoderTest extends WebTestCase
 
         Assert::assertSame(200, $this->client->getResponse()->getStatusCode());
         Assert::assertSame('/admin/', parse_url($this->client->getCrawler()->getUri(), \PHP_URL_PATH));
-        Assert::assertSame('sha512', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
+        Assert::assertSame('argon2i', $adminUserRepository->findOneByEmail('user@example.com')->getEncoderName());
     }
 
     /** @test */

@@ -83,7 +83,7 @@ final class ChannelsTest extends JsonApiTestCase
     private function getLoggedHeader(): array
     {
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
 
         return array_merge($header, self::CONTENT_TYPE_HEADER);
