@@ -14,29 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Story;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactoryInterface;
 use Zenstruck\Foundry\Story;
 
-final class DefaultPaymentMethodsStory extends Story implements DefaultPaymentMethodsStoryInterface
+final class DefaultCustomerGroupsStory extends Story implements DefaultCustomerGroupsStoryInterface
 {
-    public function __construct(private PaymentMethodFactoryInterface $paymentMethodFactory)
+    public function __construct(private CustomerGroupFactoryInterface $customerGroupFactory)
     {
     }
 
     public function build(): void
     {
-        $this->paymentMethodFactory::new()
-            ->withCode('cash_on_delivery')
-            ->withName('Cash on delivery')
-            ->withChannels(['FASHION_WEB'])
+        $this->customerGroupFactory::new()
+            ->withCode('retail')
+            ->withName('Retail')
             ->create()
         ;
 
-        $this->paymentMethodFactory::new()
-            ->withCode('bank_transfer')
-            ->withName('Bank transfer')
-            ->withChannels(['FASHION_WEB'])
-            ->enabled()
+        $this->customerGroupFactory::new()
+            ->withCode('wholesale')
+            ->withName('Wholesale')
             ->create()
         ;
     }

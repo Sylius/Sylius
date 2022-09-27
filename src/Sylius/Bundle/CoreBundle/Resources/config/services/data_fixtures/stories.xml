@@ -28,6 +28,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCurrenciesStoryInterface" alias="sylius.data_fixtures.story.default_currencies" />
 
+        <service id="sylius.data_fixtures.story.default_customer_groups" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCustomerGroupsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultCustomerGroupsStoryInterface" alias="sylius.data_fixtures.story.default_customer_groups" />
+
         <service id="sylius.data_fixtures.story.default_geographical" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultGeographicalStory">
             <argument type="service" id="sylius.data_fixtures.factory.country" />
             <argument type="service" id="sylius.data_fixtures.factory.zone" />

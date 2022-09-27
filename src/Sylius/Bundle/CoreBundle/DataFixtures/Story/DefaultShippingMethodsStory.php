@@ -27,22 +27,22 @@ final class DefaultShippingMethodsStory extends Story implements DefaultShipping
     public function build(): void
     {
         $this->shippingMethodFactory::new()
-            ->withName('UPS')
             ->withCode('ups')
+            ->withName('UPS')
             ->withChannels(['FASHION_WEB'])
             ->create()
         ;
 
         $this->shippingMethodFactory::new()
-            ->withName('DHL Express')
             ->withCode('dhl_express')
+            ->withName('DHL Express')
             ->withChannels(['FASHION_WEB'])
             ->create()
         ;
 
         $this->shippingMethodFactory::new()
-            ->withName('FedEx')
             ->withCode('fedex')
+            ->withName('FedEx')
             ->withChannels(['FASHION_WEB'])
             ->create()
         ;
