@@ -16,10 +16,7 @@ namespace Sylius\Bundle\UiBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class LegacySonataBlockPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void

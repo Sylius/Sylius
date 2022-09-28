@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
-/**
- * @experimental
- */
 final class TemplateBlock
 {
     public function __construct(

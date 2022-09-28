@@ -15,10 +15,7 @@ namespace Sylius\Bundle\UiBundle\DataCollector;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class TemplateBlockRenderingHistory
 {
     /** @psalm-var list<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */

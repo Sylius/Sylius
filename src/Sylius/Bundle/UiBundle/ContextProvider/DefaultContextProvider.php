@@ -15,9 +15,6 @@ namespace Sylius\Bundle\UiBundle\ContextProvider;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 
-/**
- * @experimental
- */
 final class DefaultContextProvider implements ContextProviderInterface
 {
     public function provide(array $templateContext, TemplateBlock $templateBlock): array
