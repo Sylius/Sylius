@@ -90,7 +90,7 @@
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/deprecation-contracts": "^2.5",
         "symfony/doctrine-bridge": "^5.4 || ^6.0",
-        "symfony/doctrine-messenger": "^6.0",
+        "symfony/doctrine-messenger": "^5.4 || ^6.0",
         "symfony/event-dispatcher": "^5.4 || ^6.0",
         "symfony/expression-language": "^5.4 || ^6.0",
         "symfony/filesystem": "^5.4 || ^6.0",
@@ -247,8 +247,7 @@
             "dev-master": "1.12-dev"
         },
         "symfony": {
-            "allow-contrib": false,
-            "require": "^6.0"
+            "allow-contrib": false
         }
     },
     "autoload": {
