@@ -35,7 +35,7 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
         }
 
-        $container = self::bootKernel()->getContainer();
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
@@ -69,15 +69,18 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US',
         ));
 
-        $this->assertEmailCount(1);
-        $email = $this->getMailerMessage();
-        $this->assertEmailAddressContains($email, 'To', 'user@example.com');
-        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'));
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains(
+            $email,
+            $translator->trans('sylius.email.password_reset.to_reset_your_password_token', [], null, 'en_US'),
+        );
     }
 
     private function isItSwiftmailerTestEnv(): bool
     {
-        $env = $this->getContainer()->getParameter('kernel.environment');
+        $env = self::getContainer()->getParameter('kernel.environment');
 
         return $env === 'test_with_swiftmailer';
     }

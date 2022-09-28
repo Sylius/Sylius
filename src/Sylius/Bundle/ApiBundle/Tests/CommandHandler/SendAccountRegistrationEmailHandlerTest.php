@@ -18,17 +18,16 @@ use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\EmailChecker;
+use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
 {
-    use MailerAssertionsTrait;
+    use SwiftmailerAssertionTrait;
 
     /** @test */
     public function it_sends_account_registration_email(): void
@@ -37,7 +36,7 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
         }
 
-        $container = self::bootKernel()->getContainer();
+        $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
@@ -73,10 +72,10 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             ),
         );
 
-        $this->assertEmailCount(1);
-        $email = $this->getMailerMessage();
-        $this->assertEmailAddressContains($email, 'To', 'user@example.com');
-        $this->assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.user_registration.start_shopping', [], null, 'en_US'));
+        self::assertEmailCount(1);
+        $email = self::getMailerMessage();
+        self::assertEmailAddressContains($email, 'To', 'user@example.com');
+        self::assertEmailHtmlBodyContains($email, $translator->trans('sylius.email.user_registration.start_shopping', [], null, 'en_US'));
     }
 
     /** @test */
@@ -86,7 +85,9 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             $this->markTestSkipped('Test is relevant only for the environment with swiftmailer');
         }
 
-        $container = self::bootKernel()->getContainer();
+        $container = self::getContainer();
+
+        self::setSpoolDirectory($container->getParameter('kernel.cache_dir') . '/spool');
 
         /** @var Filesystem $filesystem */
         $filesystem = $container->get('test.filesystem.public');
@@ -94,10 +95,7 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
 
-        /** @var EmailChecker $emailChecker */
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
+        $filesystem->remove(self::getSpoolDirectory());
 
         $emailSender = $container->get('sylius.email_sender');
 
@@ -130,16 +128,16 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
             ),
         );
 
-        self::assertSame(1, $emailChecker->countMessagesTo('user@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
+        self::assertSpooledMessagesCountWithRecipient(1, 'user@example.com');
+        self::assertSpooledMessageWithContentHasRecipient(
             $translator->trans('sylius.email.user_registration.start_shopping', [], null, 'en_US'),
             'user@example.com',
-        ));
+        );
     }
 
     private function isItSwiftmailerTestEnv(): bool
     {
-        $env = $this->getContainer()->getParameter('kernel.environment');
+        $env = self::getContainer()->getParameter('kernel.environment');
 
         return $env === 'test_with_swiftmailer';
     }

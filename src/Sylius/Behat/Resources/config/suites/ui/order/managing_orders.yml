@@ -6,7 +6,8 @@ default:
         ui_managing_orders:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.session
+                - sylius.behat.context.hook.mailer
                 - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.setup.admin_security

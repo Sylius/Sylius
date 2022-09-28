@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Tests\MessageHandler\Admin;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler;
 use Sylius\Component\Core\Model\AdminUser;
+use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -24,6 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 {
+    use SwiftmailerAssertionTrait;
+
     /** @test */
     public function it_sends_password_reset_token_email(): void
     {
@@ -74,12 +77,12 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 
         $container = self::bootKernel()->getContainer();
 
+        self::setSpoolDirectory($container->getParameter('kernel.cache_dir') . '/spool');
+
         /** @var Filesystem $filesystem */
-        $filesystem = $container->get('filesystem');
+        $filesystem = $container->get('test.filesystem.public');
 
-        $emailChecker = $container->get('sylius.behat.email_checker');
-
-        $filesystem->remove($emailChecker->getSpoolDirectory());
+        $filesystem->remove(self::getSpoolDirectory());
 
         /** @var TranslatorInterface $translator */
         $translator = $container->get('translator');
@@ -104,11 +107,11 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             'en_US',
         ));
 
-        self::assertSame(1, $emailChecker->countMessagesTo('sylius@example.com'));
-        self::assertTrue($emailChecker->hasMessageTo(
+        self::assertSpooledMessagesCountWithRecipient(1, 'sylius@example.com');
+        self::assertSpooledMessageWithContentHasRecipient(
             $translator->trans('sylius.email.admin_password_reset.to_reset_your_password', [], null, 'en_US'),
             'sylius@example.com',
-        ));
+        );
     }
 
     private static function isItSwiftmailerTestEnv(): bool
