@@ -38,7 +38,7 @@ final class DefaultShopUsersStoryTest extends KernelTestCase
 
         $defaultShopUsersStory->build();
 
-        $shopUser = $this->getCustomerGroupByCode('shop@example.com');
+        $shopUser = $this->getShopUserByEmail('shop@example.com');
         $this->assertNotNull($shopUser, sprintf('Shop user "%s" was not found but it should.', 'shop@example.com'));
         $this->assertNotNull($shopUser->getCustomer());
         $this->assertEquals('John', $shopUser->getCustomer()->getFirstName());
@@ -46,7 +46,7 @@ final class DefaultShopUsersStoryTest extends KernelTestCase
         $this->assertNotNull($shopUser->getPassword());
     }
 
-    private function getCustomerGroupByCode(string $email): ?ShopUserInterface
+    private function getShopUserByEmail(string $email): ?ShopUserInterface
     {
         /** @var UserRepositoryInterface $shopUserRepository */
         $shopUserRepository = self::getContainer()->get('sylius.repository.shop_user');
