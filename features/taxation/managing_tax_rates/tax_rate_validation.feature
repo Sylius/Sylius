@@ -90,3 +90,13 @@ Feature: Tax rate validation
         And I try to add it
         Then I should be notified that amount is invalid
         And tax rate with name "Food and Beverage Tax Rates" should not be added
+
+    @ui
+    Scenario: Trying to add a new tax rate with end date before start date
+        When I want to create a new tax rate
+        And I name it "Food and Beverage Tax Rates"
+        And I specify its amount as -20%
+        And I make it start at "31-12-2023" and end at "01-01-2023"
+        And I try to add it
+        Then I should be notified that tax rate should not end before it starts
+        And tax rate with name "Food and Beverage Tax Rates" should not be added
