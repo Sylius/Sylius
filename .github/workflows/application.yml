@@ -142,7 +142,10 @@ jobs:
             -
                 name: Run non-JS Behat
                 run: |
-                    vendor/bin/behat features/account/ --tags="~@javascript && ~@todo" --colors --strict --no-interaction -vvv -f progress || vendor/bin/behat features/account/ --tags="~@javascript && ~@todo" --colors --strict --no-interaction -vvv -f progress --rerun
+                    vendor/bin/behat features/account/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress || vendor/bin/behat features/account/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress --rerun
+                    vendor/bin/behat features/addressing/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress || vendor/bin/behat features/addressing/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress --rerun
+                    vendor/bin/behat features/admin/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress || vendor/bin/behat features/admin/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress --rerun
+                    vendor/bin/behat features/cart/ --tags="~@javascript&&~@todo" --colors --strict --no-interaction -vvv -f progress || vendor/bin/behat features/cart/ --tags="~@javascript && ~@todo" --colors --strict --no-interaction -vvv -f progress --rerun
 
             -
                 name: Upload Behat logs
