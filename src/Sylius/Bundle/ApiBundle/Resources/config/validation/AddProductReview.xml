@@ -25,6 +25,7 @@
                 <option name="max">5</option>
                 <option name="minMessage">sylius.review.rating.range</option>
                 <option name="maxMessage">sylius.review.rating.range</option>
+                <option name="notInRangeMessage">sylius.review.rating.range</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

@@ -20,7 +20,7 @@ sylius_admin_catalog_promotion_show:
     path: /catalog-promotions/{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.catalog_promotion:showAction
+        _controller: sylius.controller.catalog_promotion::showAction
         _sylius:
             section: admin
             template: "@SyliusAdmin/CatalogPromotion/show.html.twig"

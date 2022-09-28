@@ -60,7 +60,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}/archive</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:archive</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::archive</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
@@ -70,7 +70,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}/restore</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:restore</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface::restore</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores archived Shipping Method</attribute>
                 </attribute>
