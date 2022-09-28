@@ -26,14 +26,11 @@ final class TaxRateDateChecker implements TaxRateDateCheckerInterface
 
     public function filter(array $taxRates): ?TaxRateInterface
     {
-        $now = $this->calendar->now();
-
-        /** @var TaxRateInterface $taxRate */
-        foreach ($taxRates as $key => $taxRate) {
-            if (!$this->isInDate($now, $taxRate->getStartDate(), $taxRate->getEndDate())) {
-                unset($taxRates[$key]);
+        $taxRates = array_filter($taxRates, function ($taxRate){
+            if ($this->isInDate($this->calendar->now(), $taxRate->getStartDate(), $taxRate->getEndDate())) {
+                return $taxRate;
             }
-        }
+        });
 
         $taxRates = array_values($taxRates);
 
