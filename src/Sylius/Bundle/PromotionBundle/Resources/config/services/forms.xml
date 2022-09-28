@@ -22,6 +22,9 @@
         <parameter key="sylius.form.type.promotion.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.promotion_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.promotion_action.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
@@ -71,6 +74,13 @@
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
             <argument>%sylius.form.type.promotion.validation_groups%</argument>
+            <argument>Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType">
+            <argument>%sylius.model.promotion_translation.class%</argument>
+            <argument>%sylius.form.type.promotion_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 

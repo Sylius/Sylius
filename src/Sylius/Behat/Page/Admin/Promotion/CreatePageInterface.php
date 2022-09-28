@@ -20,6 +20,8 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     public function specifyCode(string $code): void;
 
+    public function specifyLabel(string $label, string $locale): void;
+
     public function nameIt(string $name): void;
 
     public function addRule(?string $ruleName): void;

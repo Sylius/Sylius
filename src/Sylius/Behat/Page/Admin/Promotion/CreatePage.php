@@ -27,6 +27,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
+    public function specifyLabel(string $label, string $locale): void
+    {
+        $this->getDocument()->fillField(sprintf('sylius_promotion_translations_%s_label', $locale), $label);
+    }
+
     public function addRule(?string $ruleName): void
     {
         $count = count($this->getCollectionItems('rules'));
