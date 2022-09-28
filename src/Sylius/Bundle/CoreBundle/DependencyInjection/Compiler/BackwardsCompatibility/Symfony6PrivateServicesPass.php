@@ -29,6 +29,10 @@ final class Symfony6PrivateServicesPass implements CompilerPassInterface
             $this->makeServicePublic('session.factory', $container);
             $this->makeServicePublic('sylius.command_bus', $container);
         }
+
+        $tokenStorage = $container->getDefinition('security.token_storage');
+        $tokenStorage->clearTag('kernel.reset');
+        $container->setDefinition('security.token_storage', $tokenStorage);
     }
 
     private function makeServicePublic(string $serviceId, ContainerBuilder $container): void
