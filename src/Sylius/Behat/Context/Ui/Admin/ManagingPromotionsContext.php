@@ -24,6 +24,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -36,6 +37,7 @@ final class ManagingPromotionsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
+        private LocaleConverterInterface $localeConverter,
     ) {
     }
 
@@ -105,6 +107,14 @@ final class ManagingPromotionsContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
+    }
+
+    /**
+     * @When I specify its label as :label in :localeCode locale
+     */
+    public function iSpecifyItsLabelInLocaleCode(string $label, string $localeCode): void
+    {
+        $this->createPage->specifyLabel($label, $this->localeConverter->convertNameToCode($localeCode));
     }
 
     /**

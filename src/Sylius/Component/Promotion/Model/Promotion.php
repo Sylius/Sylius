@@ -16,10 +16,15 @@ namespace Sylius\Component\Promotion\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 class Promotion implements PromotionInterface
 {
-    use TimestampableTrait;
+    use TimestampableTrait, TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+        getTranslation as private doGetTranslation;
+    }
 
     /** @var mixed */
     protected $id;
@@ -87,6 +92,8 @@ class Promotion implements PromotionInterface
 
     public function __construct()
     {
+        $this->initializeTranslationsCollection();
+
         $this->createdAt = new \DateTime();
 
         /** @var ArrayCollection<array-key, PromotionCouponInterface> $this->coupons */
@@ -309,5 +316,19 @@ class Promotion implements PromotionInterface
     public function setAppliesToDiscounted(bool $applyOnDiscounted): void
     {
         $this->appliesToDiscounted = $applyOnDiscounted;
+    }
+
+    /** @return PromotionTranslationInterface */
+    public function getTranslation(?string $locale = null): TranslationInterface
+    {
+        /** @var PromotionTranslationInterface $translation */
+        $translation = $this->doGetTranslation($locale);
+
+        return $translation;
+    }
+
+    protected function createTranslation(): PromotionTranslationInterface
+    {
+        return new PromotionTranslation();
     }
 }
