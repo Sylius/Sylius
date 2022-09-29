@@ -46,14 +46,12 @@ class TaxRateResolver implements TaxRateResolverInterface
 
     private function checkFetchedTaxRates(array $taxRates): ?TaxRateInterface
     {
-        $taxRates = array_filter($taxRates, function ($taxRate) {
+        foreach ($taxRates as $taxRate) {
             if ($this->taxRateDateChecker->isEligible($taxRate)) {
                 return $taxRate;
             }
-        });
+        }
 
-        $taxRates = array_values($taxRates);
-
-        return $taxRates[0] ?? null;
+        return null;
     }
 }
