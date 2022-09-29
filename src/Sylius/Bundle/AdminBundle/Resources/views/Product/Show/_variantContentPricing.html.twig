@@ -11,6 +11,7 @@
                 <td class="gray text"><strong>{{ 'sylius.ui.channels'|trans }}</strong></td>
                 <td class="gray text"><strong>{{ 'sylius.ui.price'|trans }}</strong></td>
                 <td class="gray text"><strong>{{ 'sylius.ui.original_price'|trans }}</strong></td>
+                <td class="gray text"><strong>{{ 'sylius.ui.discounted_by'|trans }}</strong></td>
             </tr>
             {% set currencies = sylius_channels_currencies() %}
             {% for channelPricing in variant.channelPricings %}
@@ -25,6 +26,7 @@
                     {% else %}
                         <td><span class="gray text">-</span></td>
                     {% endif %}
+                    {% include '@SyliusAdmin/Product/Show/_appliedPromotions.html.twig' %}
                 </tr>
             {% endfor %}
             </tbody>
