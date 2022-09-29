@@ -1,11 +1,12 @@
 @managing_promotions
-Feature: Adding promotions in different languages
+Feature: Adding promotion in different languages
     In order to see the label of promotion in specific language
     As an Administrator
     I want to be able to add a promotion and specify labels in different languages
 
     Background:
         Given the store operates on a single channel in "United States"
+        And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And I am logged in as an administrator
 
     @ui @javascript @no-api
@@ -17,3 +18,4 @@ Feature: Adding promotions in different languages
         And I add it
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should appear in the registry
+        And the "Full metal promotion" promotion should have a label "W pełni metalowa promocja" in "Polish (Poland)" locale

@@ -118,6 +118,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When the :promotion promotion should have a label :label in :locale locale
+     */
+    public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $locale): void
+    {
+        $this->updatePage->open(['id' => $promotion->getId()]);
+        $this->createPage->hasLabel($label, $this->localeConverter->convertNameToCode($locale));
+    }
+
+    /**
      * @When I add the "Has at least one from taxons" rule configured with :firstTaxon
      * @When I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
      */

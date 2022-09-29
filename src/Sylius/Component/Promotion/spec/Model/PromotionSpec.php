@@ -22,6 +22,12 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
 final class PromotionSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_a_promotion(): void
     {
         $this->shouldImplement(PromotionInterface::class);
