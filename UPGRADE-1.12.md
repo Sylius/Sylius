@@ -84,6 +84,8 @@ with test or remove these services with complier pass.
 9. Passing a `Gaufrette\Filesystem` to `Sylius\Component\Core\Uploader\ImageUploader` constructor is deprecated since
 Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter` instead.
 
+10. Not passing `Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface` to `Sylius\Component\Taxation\Resolver\TaxRateResolver` is deprecated since Sylius 1.12 and will be prohibited in 2.0
+
 ### Frontend toolset changes
 
 #### Dependencies update
