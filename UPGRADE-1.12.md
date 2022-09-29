@@ -178,3 +178,24 @@ to dynamically serve assets from the correct directory.
     </a>
 </div>
 ```
+
+## Testing suite
+
+#### Behat changes
+
+As the default mailer integration has been changed from Swiftmailer to Symfony Mailer, the following changes have to be applied.
+
+1. Remove the `config/packages/test/swiftmailer.yaml` file
+2. Add a `config/packages/test/mailer.yaml` file with:
+   ```yml
+   framework:
+       mailer:
+           dsn: 'null://null'
+       cache:
+           pools:
+               test.mailer_pool:
+                   adapter: cache.adapter.filesystem
+   ```
+3. Change all occurrences of `sylius.behat.context.hook.email_spool` to `sylius.behat.context.hook.mailer`.
+
+Due to the changes in Symfony's session handling you might need to add the `sylius.behat.context.hook.session` context to your suites.
