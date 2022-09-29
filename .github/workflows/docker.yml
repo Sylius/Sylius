@@ -1,0 +1,46 @@
+name: Docker Based Pipeline
+
+on:
+    push:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
+    pull_request:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
+
+jobs:
+    static-analyze:
+        name: Execute Static Analyze on Docker Compose
+        runs-on: ubuntu-latest
+        env:
+            COMPOSE_FILE: docker-compose.test.yml
+
+        steps:
+            -
+                name: Checkout Code
+                uses: actions/checkout@v2
+
+            -
+                name: Run PHPUnit, PHPSpec and Psalm
+                # docker-compose -f docker-compose.test.yml --profile static-analyze run static
+                run: docker compose --profile static-analyze run static
+
+    integration:
+        name: Execute Behat Tests on Docker Compose
+        runs-on: ubuntu-latest
+        env:
+            COMPOSE_FILE: docker-compose.test.yml
+
+        steps:
+            -
+                name: Checkout Code
+                uses: actions/checkout@v2
+
+            -
+                name: Run Behat
+                # docker-compose -f docker-compose.test.yml --profile integration run behat
+                run: docker-compose --profile integration run behat
