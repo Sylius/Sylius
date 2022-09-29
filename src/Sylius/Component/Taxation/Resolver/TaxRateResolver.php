@@ -38,13 +38,13 @@ class TaxRateResolver implements TaxRateResolverInterface
         if ($this->taxRateDateChecker) {
             $taxRates = $this->taxRateRepository->findBy($criteria);
 
-            return $this->checkFetchedTaxRates($taxRates);
+            return $this->provideEligibleTaxRate($taxRates);
         }
 
         return $this->taxRateRepository->findOneBy($criteria);
     }
 
-    private function checkFetchedTaxRates(array $taxRates): ?TaxRateInterface
+    private function provideEligibleTaxRate(array $taxRates): ?TaxRateInterface
     {
         foreach ($taxRates as $taxRate) {
             if ($this->taxRateDateChecker->isEligible($taxRate)) {

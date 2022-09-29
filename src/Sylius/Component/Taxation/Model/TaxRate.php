@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Model;
 
-use DateTimeInterface;
-use Exception;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class TaxRate implements TaxRateInterface
@@ -42,7 +40,7 @@ class TaxRate implements TaxRateInterface
     /** @var string|null */
     protected $calculator;
 
-    protected ?DateTimeInterface $startDate = null;
+    protected ?\DateTimeInterface $startDate = null;
 
     protected ?\DateTimeInterface $endDate = null;
 
@@ -127,22 +125,22 @@ class TaxRate implements TaxRateInterface
         return sprintf('%s (%s%%)', $this->name, $this->getAmountAsPercentage());
     }
 
-    public function getStartDate(): ?DateTimeInterface
+    public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(?DateTimeInterface $startDate): void
+    public function setStartDate(?\DateTimeInterface $startDate): void
     {
         $this->startDate = $startDate;
     }
 
-    public function getEndDate(): ?DateTimeInterface
+    public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(?DateTimeInterface $endDate): void
+    public function setEndDate(?\DateTimeInterface $endDate): void
     {
         $this->endDate = $endDate;
     }

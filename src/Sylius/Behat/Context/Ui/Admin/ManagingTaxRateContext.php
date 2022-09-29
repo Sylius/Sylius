@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use DateTime;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
@@ -64,8 +63,8 @@ final class ManagingTaxRateContext implements Context
      */
     public function iMakeItStartAtAndEndAt(string $startDate, string $endDate): void
     {
-        $this->createPage->specifyStartDate(new DateTime($startDate));
-        $this->createPage->specifyEndDate(new DateTime($endDate));
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
+        $this->createPage->specifyEndDate(new \DateTime($endDate));
     }
 
     /**
@@ -73,7 +72,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSetTheStartDateTo(string $startDate): void
     {
-        $this->createPage->specifyStartDate(new DateTime($startDate));
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
     }
 
     /**
@@ -81,7 +80,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iSetTheEndDateTo(string $endDate): void
     {
-        $this->createPage->specifyStartDate(new DateTime($endDate));
+        $this->createPage->specifyStartDate(new \DateTime($endDate));
     }
 
     /**

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Model;
 
-use DateTimeInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -44,11 +43,11 @@ interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, R
 
     public function getLabel(): ?string;
 
-    public function getStartDate(): ?DateTimeInterface;
+    public function getStartDate(): ?\DateTimeInterface;
 
-    public function setStartDate(?DateTimeInterface $startDate): void;
+    public function setStartDate(?\DateTimeInterface $startDate): void;
 
-    public function getEndDate(): ?DateTimeInterface;
+    public function getEndDate(): ?\DateTimeInterface;
 
-    public function setEndDate(?DateTimeInterface $endDate): void;
+    public function setEndDate(?\DateTimeInterface $endDate): void;
 }

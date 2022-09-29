@@ -1,5 +1,5 @@
 @applying_taxes
-Feature: Apply correct taxes on visitor cart for specific date
+Feature: Applying correct taxes on visitor cart for a specific date
     In order to buy goods with correct taxes applied
     As a Visitor
     I want to have up-to-date taxes applied to my order
@@ -17,14 +17,14 @@ Feature: Apply correct taxes on visitor cart for specific date
         And it belongs to "Clothes" tax category
 
     @ui @api
-    Scenario: Proper taxes for taxed product
+    Scenario: Applying proper taxes for product
         Given it is "01-11-2022" now
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
     @ui @api
-    Scenario: Proper taxes for taxed product after specific date
+    Scenario: Applying proper taxes for product
         Given it is "02-02-2023" now
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$115.00"

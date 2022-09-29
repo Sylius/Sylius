@@ -35,8 +35,7 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
         TaxRateInterface $taxRate1,
         TaxRateInterface $taxRate2,
         DateTimeProviderInterface $calendar
-    ): void
-    {
+    ): void {
         $calendar->now()->willReturn(new DateTime('01-02-2022'));
         $startDate = new DateTime('01-01-2022');
         $endDate = new DateTime('01-03-2022');
@@ -52,7 +51,7 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($taxRate2)->shouldReturn(false);
     }
 
-    function it_can_be_in_date_when_one_date_is_defined(
+    function it_can_be_in_date_when_only_start_date_is_defined(
         TaxRateInterface $taxRate1,
         TaxRateInterface $taxRate2,
         DateTimeProviderInterface $calendar
@@ -69,5 +68,24 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
 
         $this->isEligible($taxRate1)->shouldReturn(true);
         $this->isEligible($taxRate2)->shouldReturn(false);
+    }
+
+    function it_can_be_in_date_when_only_end_date_is_defined(
+        TaxRateInterface $taxRate1,
+        TaxRateInterface $taxRate2,
+        DateTimeProviderInterface $calendar
+    ): void
+    {
+        $calendar->now()->willReturn(new DateTime('01-02-2022'));
+        $endDate = new DateTime('01-01-2022');
+        $taxRate1->getStartDate()->willReturn(null);
+        $taxRate1->getEndDate()->willReturn($endDate);
+
+        $endDate2 = new DateTime('21-09-2029');
+        $taxRate2->getStartDate()->willReturn(null);
+        $taxRate2->getEndDate()->willReturn($endDate2);
+
+        $this->isEligible($taxRate1)->shouldReturn(false);
+        $this->isEligible($taxRate2)->shouldReturn(true);
     }
 }
