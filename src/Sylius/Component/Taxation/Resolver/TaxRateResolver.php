@@ -15,7 +15,7 @@ namespace Sylius\Component\Taxation\Resolver;
 
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxation\Checker\TaxRateDateCheckerInterface;
+use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
@@ -23,7 +23,7 @@ class TaxRateResolver implements TaxRateResolverInterface
 {
     public function __construct(
         protected RepositoryInterface $taxRateRepository,
-        protected ?TaxRateDateCheckerInterface $taxRateDateChecker = null
+        protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null
     ) {
     }
 
@@ -38,9 +38,22 @@ class TaxRateResolver implements TaxRateResolverInterface
         if ($this->taxRateDateChecker) {
             $taxRates = $this->taxRateRepository->findBy($criteria);
 
-            return $this->taxRateDateChecker->filter($taxRates);
+            return $this->checkFetchedTaxRates($taxRates);
         }
 
         return $this->taxRateRepository->findOneBy($criteria);
+    }
+
+    private function checkFetchedTaxRates(array $taxRates): ?TaxRateInterface
+    {
+        $taxRates = array_filter($taxRates, function ($taxRate) {
+            if ($this->taxRateDateChecker->isEligible($taxRate)) {
+                return $taxRate;
+            }
+        });
+
+        $taxRates = array_values($taxRates);
+
+        return $taxRates[0] ?? null;
     }
 }
