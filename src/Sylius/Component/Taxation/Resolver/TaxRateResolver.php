@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Resolver;
 
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
@@ -25,6 +24,9 @@ class TaxRateResolver implements TaxRateResolverInterface
         protected RepositoryInterface $taxRateRepository,
         protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null
     ) {
+        if ($this->taxRateDateChecker === null) {
+            @trigger_error('Not passing TaxRateDateEligibilityCheckerInterface through constructor is deprecated in Sylius 1.12 and it will be prohibited in Sylius 2.0');
+        }
     }
 
     public function resolve(TaxableInterface $taxable, array $criteria = []): ?TaxRateInterface
