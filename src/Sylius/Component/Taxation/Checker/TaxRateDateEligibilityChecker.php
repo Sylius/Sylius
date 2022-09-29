@@ -29,10 +29,6 @@ final class TaxRateDateEligibilityChecker implements TaxRateDateEligibilityCheck
         $startDate = $taxRate->getStartDate();
         $endDate = $taxRate->getEndDate();
 
-        if (null === $endDate) {
-            return $startDate <= $date;
-        }
-
-        return $startDate <= $date && $endDate >= $date;
+        return (null === $startDate || $startDate <= $date) && (null === $endDate || $endDate >= $date);
     }
 }
