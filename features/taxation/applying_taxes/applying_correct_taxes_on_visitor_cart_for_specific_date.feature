@@ -1,5 +1,5 @@
 @applying_taxes
-Feature: Apply correct taxes on visitor cart for specific date
+Feature: Applying correct taxes on visitor cart for a specific date
     In order to buy goods with correct taxes applied
     As a Visitor
     I want to have up-to-date taxes applied to my order
