@@ -15,7 +15,7 @@ namespace Sylius\Component\Taxation\Checker;
 
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-interface TaxRateDateCheckerInterface
+interface TaxRateDateEligibilityCheckerInterface
 {
-    public function filter(array $taxRates): ?TaxRateInterface;
+    public function isEligible(TaxRateInterface $taxRate): bool;
 }

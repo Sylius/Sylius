@@ -17,28 +17,16 @@ use DateTimeInterface;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
-final class TaxRateDateChecker implements TaxRateDateCheckerInterface
+final class TaxRateDateEligibilityChecker implements TaxRateDateEligibilityCheckerInterface
 {
     public function __construct(
         protected DateTimeProviderInterface $calendar,
     ) {
     }
 
-    public function filter(array $taxRates): ?TaxRateInterface
+    public function isEligible(TaxRateInterface $taxRate): bool
     {
-        $taxRates = array_filter($taxRates, function ($taxRate){
-            if ($this->isInDate($this->calendar->now(), $taxRate)) {
-                return $taxRate;
-            }
-        });
-
-        $taxRates = array_values($taxRates);
-
-        return $taxRates[0] ?? null;
-    }
-
-    public function isInDate(DateTimeInterface $date, TaxRateInterface $taxRate): bool
-    {
+        $date = $this->calendar->now();
         $startDate = $taxRate->getStartDate();
         $endDate = $taxRate->getEndDate();
 
