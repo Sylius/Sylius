@@ -55,6 +55,7 @@ final class CatalogPromotionContext implements Context
 
     /**
      * @Given there is a catalog promotion with :code code and :name name
+     * @Given there is also a catalog promotion with :code code and :name name
      */
     public function thereIsACatalogPromotionWithCodeAndName(string $code, string $name): void
     {
