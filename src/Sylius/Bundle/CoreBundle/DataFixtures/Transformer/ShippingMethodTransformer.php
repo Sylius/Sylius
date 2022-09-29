@@ -17,10 +17,14 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 
 final class ShippingMethodTransformer implements ShippingMethodTransformerInterface
 {
+    use TransformNameToCodeAttributeTrait;
+    use TransformZoneAttributeTrait;
+    use TransformTaxCategoryAttributeTrait;
+    use TransformChannelsAttributeTrait;
+
     public function __construct(
         private ZoneFactoryInterface $zoneFactory,
         private TaxCategoryFactoryInterface $taxCategoryFactory,
@@ -31,30 +35,19 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
 
     public function transform(array $attributes): array
     {
-        if (null === $attributes['code']) {
-            $attributes['code'] = StringInflector::nameToCode($attributes['name']);
-        }
+        $attributes = $this->transformNameToCodeAttribute($attributes);
+        $attributes = $this->transformZoneAttribute($attributes);
+        $attributes = $this->transformTaxCategoryAttribute($attributes);
+        $attributes = $this->transformCategoryAttributes($attributes);
 
-        if (\is_string($attributes['zone'])) {
-            $attributes['zone'] = $this->zoneFactory::findOrCreate(['code' => $attributes['zone']]);
-        }
+        return $this->transformChannelsAttribute($attributes);
+    }
 
-        if (\is_string($attributes['tax_category'])) {
-            $attributes['tax_category'] = $this->taxCategoryFactory::findOrCreate(['code' => $attributes['tax_category']]);
-        }
-
+    private function transformCategoryAttributes(array $attributes): array
+    {
         if (\is_string($attributes['category'])) {
             $attributes['category'] = $this->shippingCategoryFactory::findOrCreate(['code' => $attributes['category']]);
         }
-
-        $channels = [];
-        foreach ($attributes['channels'] as $channel) {
-            if (\is_string($channel)) {
-                $channel = $this->channelFactory::findOrCreate(['code' => $channel]);
-            }
-            $channels[] = $channel;
-        }
-        $attributes['channels'] = $channels;
 
         return $attributes;
     }

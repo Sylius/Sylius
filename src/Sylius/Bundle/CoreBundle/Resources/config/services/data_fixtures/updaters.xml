@@ -50,6 +50,10 @@
             <argument type="service" id="sylius.factory.channel_pricing" />
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.factory.product_taxon" />
+            <argument type="service" id="sylius.factory.product_image" />
+            <argument type="service" id="file_locator" />
+            <argument type="service" id="sylius.image_uploader" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductUpdaterInterface" alias="sylius.data_fixtures.updater.product" />
 

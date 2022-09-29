@@ -14,10 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class ProductDefaultValues implements ProductDefaultValuesInterface
 {
+    public function __construct(
+        private ChannelFactoryInterface $channelFactory,
+        private TaxonFactoryInterface $taxonFactory,
+    ) {
+    }
+
     public function getDefaults(Generator $faker): array
     {
         return [
@@ -30,6 +38,13 @@ final class ProductDefaultValues implements ProductDefaultValuesInterface
             'description' => $faker->paragraphs(3, true),
             'variant_selection_method' => ProductInterface::VARIANT_SELECTION_MATCH,
             'shipping_required' => true,
+            'tax_category' => null,
+            'channels' => [$this->channelFactory::randomOrCreate()],
+            'product_options' => [],
+            'product_attributes' => [],
+            'main_taxon' => $this->taxonFactory::randomOrCreate(),
+            'taxa' => [$this->taxonFactory::randomOrCreate()],
+            'images' => [],
         ];
     }
 }

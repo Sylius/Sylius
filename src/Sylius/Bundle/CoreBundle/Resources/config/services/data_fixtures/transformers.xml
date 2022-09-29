@@ -50,6 +50,13 @@
 
         <service id="sylius.data_fixtures.transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformer">
             <argument type="service" id="sylius.generator.slug" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_attribute" />
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument type="service" id="sylius.factory.product_attribute_value" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_option" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformerInterface" alias="sylius.data_fixtures.transformer.product" />
 

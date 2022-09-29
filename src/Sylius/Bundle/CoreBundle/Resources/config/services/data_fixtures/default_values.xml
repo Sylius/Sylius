@@ -50,7 +50,10 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PaymentMethodDefaultValuesInterface" alias="sylius.data_fixtures.default_values.payment_method" />
 
-        <service id="sylius.data_fixtures.default_values.product" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValues" />
+        <service id="sylius.data_fixtures.default_values.product" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+        </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValuesInterface" alias="sylius.data_fixtures.default_values.product" />
 
         <service id="sylius.data_fixtures.default_values.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PromotionDefaultValues">

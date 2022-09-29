@@ -18,25 +18,17 @@ use Sylius\Component\Core\Formatter\StringInflector;
 
 final class PaymentMethodTransformer implements PaymentMethodTransformerInterface
 {
+    use TransformNameToCodeAttributeTrait;
+    use TransformChannelsAttributeTrait;
+
     public function __construct(private ChannelFactoryInterface $channelFactory)
     {
     }
 
     public function transform(array $attributes): array
     {
-        if (null === $attributes['code']) {
-            $attributes['code'] = StringInflector::nameToCode($attributes['name']);
-        }
+        $attributes = $this->transformNameToCodeAttribute($attributes);
 
-        $channels = [];
-        foreach ($attributes['channels'] as $channel) {
-            if (\is_string($channel)) {
-                $channel = $this->channelFactory::findOrCreate(['code' => $channel]);
-            }
-            $channels[] = $channel;
-        }
-        $attributes['channels'] = $channels;
-
-        return $attributes;
+        return $this->transformChannelsAttribute($attributes);
     }
 }
