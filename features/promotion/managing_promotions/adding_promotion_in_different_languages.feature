@@ -1,6 +1,6 @@
 @managing_promotions
 Feature: Adding promotion in different languages
-    In order to see the label of promotion in specific language
+    In order to see the label of promotion in a specific language
     As an Administrator
     I want to be able to add a promotion and specify labels in different languages
 
