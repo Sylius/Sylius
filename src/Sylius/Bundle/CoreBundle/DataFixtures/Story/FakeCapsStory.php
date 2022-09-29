@@ -15,9 +15,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Story;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Zenstruck\Foundry\Story;
 
 final class FakeCapsStory extends Story implements FakeCapsStoryInterface
@@ -93,27 +92,29 @@ final class FakeCapsStory extends Story implements FakeCapsStoryInterface
         $this->productAttributeFactory::new()
             ->withCode('cap_brand')
             ->withName('Cap brand')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('cap_collection')
             ->withName('Cap collection')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('cap_material')
             ->withName('Cap material')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
     }
 
     private function createProducts(): void
     {
+        $year = date('Y');
+
         $this->productFactory::new()
             ->withName('Knitted burgundy winter cap')
             ->withTaxCategory('other')
@@ -122,7 +123,7 @@ final class FakeCapsStory extends Story implements FakeCapsStoryInterface
             ->withTaxa(['caps', 'caps_with_pompons'])
             ->withProductAttributes([
                 'cap_brand'=> 'You are breathtaking',
-                'cap_collection' => 'Sylius Winter 2019',
+                'cap_collection' => 'Sylius Winter '.$year,
                 'cap_material' => '100% wool',
             ])
             ->withImages([
@@ -139,7 +140,7 @@ final class FakeCapsStory extends Story implements FakeCapsStoryInterface
             ->withTaxa(['caps', 'simple_caps'])
             ->withProductAttributes([
                 'cap_brand'=> 'Modern Wear',
-                'cap_collection' => 'Sylius Winter 2019',
+                'cap_collection' => 'Sylius Winter '.$year,
                 'cap_material' => '100% wool',
             ])
             ->withImages([
@@ -156,7 +157,7 @@ final class FakeCapsStory extends Story implements FakeCapsStoryInterface
             ->withTaxa(['caps', 'caps_with_pompons'])
             ->withProductAttributes([
                 'cap_brand'=> 'Celsius Small',
-                'cap_collection' => 'Sylius Winter 2019',
+                'cap_collection' => 'Sylius Winter '.$year,
                 'cap_material' => '100% wool',
             ])
             ->withImages([
@@ -173,7 +174,7 @@ final class FakeCapsStory extends Story implements FakeCapsStoryInterface
             ->withTaxa(['caps', 'simple_caps'])
             ->withProductAttributes([
                 'cap_brand'=> 'Date & Banana',
-                'cap_collection' => 'Sylius Winter 2019',
+                'cap_collection' => 'Sylius Winter '.$year,
                 'cap_material' => '100% cashmere',
             ])
             ->withImages([

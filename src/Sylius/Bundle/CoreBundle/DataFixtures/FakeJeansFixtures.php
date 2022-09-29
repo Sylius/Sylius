@@ -20,7 +20,8 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStoryInterface;
 
 final class FakeJeansFixtures extends Fixture implements FixtureGroupInterface
 {
-    public function __construct(private FakeJeansStoryInterface $fakeJeansStory) {
+    public function __construct(private FakeJeansStoryInterface $fakeJeansStory)
+    {
     }
 
     public function load(ObjectManager $manager): void

@@ -18,20 +18,21 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeDressesStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeTShirtsStoryInterface;
 
-final class FakeDressesFixtures extends Fixture implements FixtureGroupInterface
+final class FakeTShirtsFixtures extends Fixture implements FixtureGroupInterface
 {
-    public function __construct(private FakeDressesStoryInterface $fakeDressesStory)
+    public function __construct(private FakeTShirtsStoryInterface $fakeTShirtsStory)
     {
     }
 
     public function load(ObjectManager $manager): void
     {
-        $this->fakeDressesStory->build();
+        $this->fakeTShirtsStory->build();
     }
 
     public static function getGroups(): array
     {
-        return ['fake', 'fake_products', 'fake_dresses'];
+        return ['fake', 'fake_products', 'fake_t_shirts'];
     }
 }
