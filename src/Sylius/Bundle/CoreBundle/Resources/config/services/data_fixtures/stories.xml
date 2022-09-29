@@ -103,5 +103,13 @@
             <argument type="service" id="sylius.data_fixtures.factory.product" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStoryInterface" alias="sylius.data_fixtures.story.fake_jeans" />
+
+        <service id="sylius.data_fixtures.story.fake_t_shirts" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeTShirtsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_attribute"  />
+            <argument type="service" id="sylius.data_fixtures.factory.product_option" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeTShirtsStoryInterface" alias="sylius.data_fixtures.story.fake_t_shirts" />
     </services>
 </container>

@@ -17,7 +17,8 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterfa
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Attribute\AttributeType\IntegerAttributeType;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Zenstruck\Foundry\Story;
 
 final class FakeDressesStory extends Story implements FakeDressesStoryInterface
@@ -65,28 +66,28 @@ final class FakeDressesStory extends Story implements FakeDressesStoryInterface
         $this->productAttributeFactory::new()
             ->withCode('dress_brand')
             ->withName('Dress brand')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('dress_collection')
             ->withName('Dress collection')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('dress_material')
             ->withName('Dress material')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('length')
             ->withName('Length')
-            ->withType(AttributeValueInterface::STORAGE_INTEGER)
+            ->withType(IntegerAttributeType::TYPE)
             ->create()
         ;
     }
@@ -120,6 +121,8 @@ final class FakeDressesStory extends Story implements FakeDressesStoryInterface
 
     private function createProducts(): void
     {
+        $year = date('Y');
+
         $this->productFactory::new()
             ->withName('Beige strappy summer dress')
             ->withTaxCategory('clothing')
@@ -128,7 +131,7 @@ final class FakeDressesStory extends Story implements FakeDressesStoryInterface
             ->withTaxa(['dresses'])
             ->withProductAttributes([
                 'dress_brand'=> 'You are breathtaking',
-                'dress_collection' => 'Sylius Winter 2019',
+                'dress_collection' => 'Sylius Winter '.$year,
                 'dress_material' => '100% polyester',
             ])
             ->withProductOptions([
@@ -149,7 +152,7 @@ final class FakeDressesStory extends Story implements FakeDressesStoryInterface
             ->withTaxa(['dresses'])
             ->withProductAttributes([
                 'dress_brand'=> 'You are breathtaking',
-                'dress_collection' => 'Sylius Winter 2019',
+                'dress_collection' => 'Sylius Winter '.$year,
                 'dress_material' => '100% wool',
             ])
             ->withProductOptions([
@@ -170,7 +173,7 @@ final class FakeDressesStory extends Story implements FakeDressesStoryInterface
             ->withTaxa(['dresses'])
             ->withProductAttributes([
                 'dress_brand'=> 'You are breathtaking',
-                'dress_collection' => 'Sylius Winter 2019',
+                'dress_collection' => 'Sylius Winter '.$year,
                 'dress_material' => '100% polyester',
                 'length' => 100
             ])

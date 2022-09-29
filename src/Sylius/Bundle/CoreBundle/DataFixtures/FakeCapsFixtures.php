@@ -20,7 +20,8 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCapsStoryInterface;
 
 final class FakeCapsFixtures extends Fixture implements FixtureGroupInterface
 {
-    public function __construct(private FakeCapsStoryInterface $fakeCapsStory) {
+    public function __construct(private FakeCapsStoryInterface $fakeCapsStory)
+    {
     }
 
     public function load(ObjectManager $manager): void

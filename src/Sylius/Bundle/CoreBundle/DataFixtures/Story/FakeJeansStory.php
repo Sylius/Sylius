@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterfa
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Zenstruck\Foundry\Story;
 
 final class FakeJeansStory extends Story implements FakeJeansStoryInterface
@@ -94,21 +94,21 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
         $this->productAttributeFactory::new()
             ->withCode('jeans_brand')
             ->withName('Jeans brand')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('jeans_collection')
             ->withName('Jeans collection')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
 
         $this->productAttributeFactory::new()
             ->withCode('jeans_material')
             ->withName('Jeans material')
-            ->withType(AttributeValueInterface::STORAGE_TEXT)
+            ->withType(TextAttributeType::TYPE)
             ->create()
         ;
     }
@@ -131,6 +131,8 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
 
     private function createProducts(): void
     {
+        $year = date('Y');
+
         $this->productFactory::new()
             ->withName('911M regular fit jeans')
             ->withTaxCategory('clothing')
@@ -139,7 +141,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'men_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'You are breathtaking',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -159,7 +161,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'men_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'Modern Wear',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -179,7 +181,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'men_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'Celsius Small',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -199,7 +201,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'men_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'Date & Banana',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -219,7 +221,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'women_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'You are breathtaking',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -239,7 +241,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'women_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'You are breathtaking',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -259,7 +261,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'women_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'Modern Wear',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
@@ -279,7 +281,7 @@ final class FakeJeansStory extends Story implements FakeJeansStoryInterface
             ->withTaxa(['jeans', 'women_jeans'])
             ->withProductAttributes([
                 'jeans_brand'=> 'Modern Wear',
-                'jeans_collection' => 'Sylius Winter 2019',
+                'jeans_collection' => 'Sylius Winter '.$year,
                 'jeans_material' => '100% jeans',
             ])
             ->withProductOptions([
