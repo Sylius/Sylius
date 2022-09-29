@@ -17,9 +17,6 @@ use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/**
- * @experimental
- */
 final class TemplateEventExtension extends AbstractExtension
 {
     public function __construct(private TemplateEventRendererInterface $templateEventRenderer)

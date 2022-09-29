@@ -15,10 +15,7 @@ namespace Sylius\Bundle\UiBundle\DataCollector;
 
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class TraceableTemplateEventRenderer implements TemplateEventRendererInterface
 {
     public function __construct(

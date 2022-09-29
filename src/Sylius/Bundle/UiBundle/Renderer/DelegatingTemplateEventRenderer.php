@@ -15,9 +15,6 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 
-/**
- * @experimental
- */
 final class DelegatingTemplateEventRenderer implements TemplateEventRendererInterface
 {
     public function __construct(private TemplateBlockRegistryInterface $templateBlockRegistry, private TemplateBlockRendererInterface $templateBlockRenderer)

@@ -17,10 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class TemplateBlockDataCollector extends DataCollector
 {
     public function __construct(private TemplateBlockRenderingHistory $templateBlockRenderingHistory)
