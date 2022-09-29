@@ -122,10 +122,10 @@ git repository and create your first commit:
             (>&2
                 # Setup everything to use the Node installation
                 unset NPM_CONFIG_PREFIX
-                export NVM_DIR=${SYMFONY_APP_DIR}/.nvm GULP_ENV=prod
+                export NVM_DIR=${SYMFONY_APP_DIR}/.nvm
                 set +x && . "${NVM_DIR}/nvm.sh" use --lts && set -x
                 # Starting from here, everything is setup to use the same Node
-                yarn build
+                yarn build:prod
             )
 
         deploy: |
@@ -196,7 +196,6 @@ Additional tips:
 ~~~~~~~~~~~~~~~~
 
 * SymfonyCloud can serve gzipped versions of your static assets. Make sure to save your assets in the same folder, but with a .gz suffix.
-  The ``gulp-gzip`` node package comes very helpful integrating saving of .gz versions of your assets.
 
 Learn more
 ----------

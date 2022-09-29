@@ -66,7 +66,10 @@ Installing assets
 
 In order to see a fully functional frontend you will need to install its assets.
 
-**Sylius** uses `Gulp`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
+**Sylius** uses `Webpack`_ to build frontend assets using `Yarn`_ as a JavaScript package manager.
+
+.. note::
+    If you want to read more, you can read a :doc:`chapter of our Book devoted to the Sylius' frontend </book/frontend/index>`.
 
 Having Yarn installed, go to your project directory to install the dependencies:
 
@@ -124,5 +127,6 @@ Contributing
 If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
 .. _Gulp: http://gulpjs.com/
+.. _Webpack: https://webpack.js.org/
 .. _Yarn: https://yarnpkg.com/lang/en/
 .. _Composer: http://packagist.org

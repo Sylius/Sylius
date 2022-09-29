@@ -95,7 +95,9 @@ Because every project is different, we cannot provide a list of all changes that
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
 ([node-sass](https://sass-lang.com/blog/libsass-is-deprecated) is deprecated and incompatible with many systems).
-Therefore you need to update your code to follow this change.
+Therefore, you need to update your code to follow this change.
+
+**NOTE!** `yarn build` is not used to build gulp anymore, and its default behavior is to build assets using Webpack. If you want to build assets using Gulp run `yarn gulp` instead.
 
 1. Follow [this guide](https://github.com/dlmanning/gulp-sass/tree/master#migrating-to-version-5) to upgrade your
    code when using gulp-sass this is an example:
