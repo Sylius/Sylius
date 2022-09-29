@@ -34,13 +34,13 @@ final class TaxRateResolverSpec extends ObjectBehavior
     }
 
     function it_returns_tax_rate_for_given_taxable_category(
-        RepositoryInterface                    $taxRateRepository,
+        RepositoryInterface $taxRateRepository,
         TaxRateDateEligibilityCheckerInterface $taxRateDateChecker,
-        TaxableInterface                       $taxable,
-        TaxCategoryInterface                   $taxCategory,
-        TaxRateInterface                       $firstTaxRate,
-        TaxRateInterface                       $secondTaxRate,
-        TaxRateInterface                       $thirdTaxRate
+        TaxableInterface $taxable,
+        TaxCategoryInterface $taxCategory,
+        TaxRateInterface $firstTaxRate,
+        TaxRateInterface $secondTaxRate,
+        TaxRateInterface $thirdTaxRate
     ): void {
         $taxable->getTaxCategory()->willReturn($taxCategory);
         $taxRateRepository

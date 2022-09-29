@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Component\Taxation\Model;
 
 use DateTimeInterface;
-use Exception;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 class TaxRate implements TaxRateInterface
@@ -44,7 +43,7 @@ class TaxRate implements TaxRateInterface
 
     protected ?DateTimeInterface $startDate = null;
 
-    protected ?\DateTimeInterface $endDate = null;
+    protected ?DateTimeInterface $endDate = null;
 
     public function __construct()
     {

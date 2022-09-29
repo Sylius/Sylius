@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Checker;
 
-use DateTimeInterface;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
