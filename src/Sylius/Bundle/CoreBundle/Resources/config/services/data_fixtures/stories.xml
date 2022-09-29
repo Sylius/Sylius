@@ -70,5 +70,38 @@
             <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShopUsersStoryInterface" alias="sylius.data_fixtures.story.default_shop_users" />
+
+        <service id="sylius.data_fixtures.story.default_tax_rates" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxRatesStory">
+            <argument type="service" id="sylius.data_fixtures.factory.tax_rate" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxRatesStoryInterface" alias="sylius.data_fixtures.story.default_tax_rates" />
+
+        <service id="sylius.data_fixtures.story.default_tax_categories" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxCategoriesStory">
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxCategoriesStoryInterface" alias="sylius.data_fixtures.story.default_tax_categories" />
+
+        <service id="sylius.data_fixtures.story.fake_caps" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCapsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_attribute"  />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCapsStoryInterface" alias="sylius.data_fixtures.story.fake_caps" />
+
+        <service id="sylius.data_fixtures.story.fake_dresses" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeDressesStory">
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_attribute"  />
+            <argument type="service" id="sylius.data_fixtures.factory.product_option" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeDressesStoryInterface" alias="sylius.data_fixtures.story.fake_dresses" />
+
+        <service id="sylius.data_fixtures.story.fake_jeans" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStory">
+            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.product_attribute"  />
+            <argument type="service" id="sylius.data_fixtures.factory.product_option" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStoryInterface" alias="sylius.data_fixtures.story.fake_jeans" />
     </services>
 </container>

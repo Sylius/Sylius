@@ -22,6 +22,10 @@ use Sylius\Component\Core\Formatter\StringInflector;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
+    use TransformNameToCodeAttributeTrait;
+    use TransformLocalesAttributeTrait;
+    use TransformCurrenciesAttributeTrait;
+
     public function __construct(
         private ZoneFactoryInterface $zoneFactory,
         private ShopBillingDataFactoryInterface $shopBillingDataFactory,
@@ -33,7 +37,7 @@ final class ChannelTransformer implements ChannelTransformerInterface
 
     public function transform(array $attributes): array
     {
-        $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
+        $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
 
         if (\is_string($attributes['default_tax_zone'])) {
@@ -48,26 +52,8 @@ final class ChannelTransformer implements ChannelTransformerInterface
             $attributes['menu_taxon'] = $this->taxonFactory::findOrCreate(['code' => $attributes['menu_taxon']]);
         }
 
-        $locales = [];
-        foreach ($attributes['locales'] as $locale) {
-            if (\is_string($locale)) {
-                $locale = $this->localeFactory::findOrCreate(['code' => $locale]);
-            }
+        $attributes = $this->transformLocalesAttribute($attributes);
 
-            $locales[] = $locale;
-        }
-        $attributes['locales'] = $locales;
-
-        $currencies = [];
-        foreach ($attributes['currencies'] as $currency) {
-            if (\is_string($currency)) {
-                $currency = $this->currencyFactory::findOrCreate(['code' => $currency]);
-            }
-
-            $currencies[] = $currency;
-        }
-        $attributes['currencies'] = $currencies;
-
-        return $attributes;
+        return $this->transformCurrenciesAttribute($attributes);
     }
 }

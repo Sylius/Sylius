@@ -16,7 +16,9 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductUpdaterInterface;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -44,12 +46,15 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
     use WithNameTrait;
     use WithDescriptionTrait;
     use ToggableTrait;
+    use WithTaxCategoryTrait;
+    use WithChannelsTrait;
+    use WithTaxaTrait;
 
     public function __construct(
-        private FactoryInterface              $productFactory,
+        private FactoryInterface $productFactory,
         private ProductDefaultValuesInterface $factoryDefaultValues,
-        private ProductTransformerInterface   $factoryTransformer,
-        private ProductUpdaterInterface       $factoryUpdater,
+        private ProductTransformerInterface  $factoryTransformer,
+        private ProductUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
     }
@@ -89,6 +94,26 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         return $this->addState(['shipping_required' => false]);
     }
 
+    public function withMainTaxon(Proxy|TaxonInterface|string $mainTaxon): self
+    {
+        return $this->addState(['main_taxon' => $mainTaxon]);
+    }
+
+    public function withProductAttributes(array $productAttributes): self
+    {
+        return $this->addState(['product_attributes' => $productAttributes]);
+    }
+
+    public function withProductOptions(array $productOptions): self
+    {
+        return $this->addState(['product_options' => $productOptions]);
+    }
+
+    public function withImages(array $images): self
+    {
+        return $this->addState(['images' => $images]);
+    }
+
     protected function getDefaults(): array
     {
         return $this->factoryDefaultValues->getDefaults(self::faker());
@@ -124,6 +149,6 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
 
     protected static function getClass(): string
     {
-        return ProductInterface::class;
+        return Product::class;
     }
 }

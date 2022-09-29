@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -34,7 +35,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ProductInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ProductInterface|Proxy create(array|callable $attributes = [])
  */
-interface ProductFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, ToggableInterface
+interface ProductFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, ToggableInterface, WithTaxCategoryInterface, WithChannelsInterface, WithTaxaInterface
 {
     public function tracked(): self;
 
@@ -49,4 +50,12 @@ interface ProductFactoryInterface extends WithCodeInterface, WithNameInterface, 
     public function withShippingRequired(): self;
 
     public function withShippingNotRequired(): self;
+
+    public function withMainTaxon(Proxy|TaxonInterface|string $mainTaxon): self;
+
+    public function withProductAttributes(array $productAttributes): self;
+
+    public function withProductOptions(array $productOptions): self;
+
+    public function withImages(array $images): self;
 }

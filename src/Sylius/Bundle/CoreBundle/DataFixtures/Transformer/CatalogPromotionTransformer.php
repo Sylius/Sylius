@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Component\Core\Formatter\StringInflector;
-
 final class CatalogPromotionTransformer implements CatalogPromotionTransformerInterface
 {
+    use TransformNameToCodeAttributeTrait;
+
     public function transform(array $attributes): array
     {
-        if (null === $attributes['code']) {
-            $attributes['code'] = StringInflector::nameToCode($attributes['name']);
-        }
+        $attributes = $this->transformNameToCodeAttribute($attributes);
 
         if (null === $attributes['label']) {
             $attributes['label'] = $attributes['name'];

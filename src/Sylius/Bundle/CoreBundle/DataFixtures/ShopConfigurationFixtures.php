@@ -26,6 +26,8 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultMenuTaxonStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultPaymentMethodsStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShippingMethodsStoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultShopUsersStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxCategoriesStoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultTaxRatesStoryInterface;
 
 final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInterface
 {
@@ -40,6 +42,8 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         private DefaultCustomerGroupsStoryInterface $defaultCustomerGroupsStory,
         private DefaultShopUsersStoryInterface $defaultShopUsersStory,
         private DefaultAdminUsersStoryInterface $defaultAdminUsersStory,
+        private DefaultTaxCategoriesStoryInterface $defaultTaxCategoriesStory,
+        private DefaultTaxRatesStoryInterface $defaultTaxRatesStory,
     ) {
     }
 
@@ -55,6 +59,8 @@ final class ShopConfigurationFixtures extends Fixture implements FixtureGroupInt
         $this->defaultCustomerGroupsStory->build();
         $this->defaultShopUsersStory->build();
         $this->defaultAdminUsersStory->build();
+        $this->defaultTaxCategoriesStory->build();
+        $this->defaultTaxRatesStory->build();
     }
 
     public static function getGroups(): array

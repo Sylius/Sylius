@@ -26,6 +26,23 @@
             <argument type="service" id="sylius.data_fixtures.story.default_customer_groups" />
             <argument type="service" id="sylius.data_fixtures.story.default_shop_users" />
             <argument type="service" id="sylius.data_fixtures.story.default_admin_users" />
+            <argument type="service" id="sylius.data_fixtures.story.default_tax_categories" />
+            <argument type="service" id="sylius.data_fixtures.story.default_tax_rates" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <service id="sylius.data_fixtures.fake_caps" class="Sylius\Bundle\CoreBundle\DataFixtures\FakeCapsFixtures">
+            <argument type="service" id="sylius.data_fixtures.story.fake_caps" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <service id="sylius.data_fixtures.fake_dresses" class="Sylius\Bundle\CoreBundle\DataFixtures\FakeDressesFixtures">
+            <argument type="service" id="sylius.data_fixtures.story.fake_dresses" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <service id="sylius.data_fixtures.fake_jeans" class="Sylius\Bundle\CoreBundle\DataFixtures\FakeJeansFixtures">
+            <argument type="service" id="sylius.data_fixtures.story.fake_jeans" />
             <tag name="doctrine.fixture.orm" />
         </service>
     </services>
