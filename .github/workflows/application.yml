@@ -1024,7 +1024,7 @@ jobs:
                 name: Build assets
                 run: |
                     bin/console assets:install public -vvv
-                    GULP_ENV=prod yarn build
+                    yarn run encore production
 
     notify-about-build-failure:
         runs-on: ubuntu-latest

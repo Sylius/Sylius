@@ -24,7 +24,7 @@ final class Symfony6PrivateServicesPass implements CompilerPassInterface
         $this->makeServicePublic('security.token_storage', $container);
         $this->makeServicePublic('validator', $container);
 
-        if (str_starts_with($container->getParameter('kernel.environment'), 'test')) {
+        if (str_starts_with((string) $container->getParameter('kernel.environment'), 'test')) {
             $this->makeServicePublic('filesystem', $container);
             $this->makeServicePublic('session.factory', $container);
             $this->makeServicePublic('sylius.command_bus', $container);
