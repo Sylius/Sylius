@@ -145,7 +145,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItemInSection($channel, 'admin')]);
     }
 
     /**
@@ -155,7 +155,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $channels = $this->responseChecker->getValue($this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()), 'channels');
 
-        foreach (array_keys($channels, $this->iriConverter->getIriFromItem($channel)) as $key) {
+        foreach (array_keys($channels, $this->iriConverter->getIriFromItemInSection($channel, 'admin')) as $key) {
             unset($channels[$key]);
         }
 
@@ -1193,7 +1193,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel),
+                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
@@ -1212,7 +1212,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel),
+                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName()),
         );
