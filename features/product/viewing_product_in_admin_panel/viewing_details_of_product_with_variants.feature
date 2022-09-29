@@ -41,8 +41,8 @@ Feature: Viewing details of a product with variants
     Scenario: Viewing variants block
         When I access "Iron Shield" product page
         Then I should see 2 variants
-        And I should see "Iron shield - very big" variant with code "123456789-xl", priced "$25.00" and current stock 5
-        And I should see "Iron shield - very small" variant with code "123456789-xs", priced "$15.00" and current stock 12
+        And I should see "Iron shield - very big" variant with code "123456789-xl", priced "$25.00" and current stock 5 and in "United States" channel
+        And I should see "Iron shield - very small" variant with code "123456789-xs", priced "$15.00" and current stock 12 and in "United States" channel
 
     @ui @javascript
     Scenario: Viewing media block

@@ -329,11 +329,22 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see :variantName variant with code :code, priced :price and current stock :currentStock
+     * @Then I should see :variantName variant with code :code, priced :price and current stock :currentStock and in :channel channel
      */
-    public function iShouldSeeVariantWithCodePriceAndCurrentStock(string $variantName, string $code, string $price, string $currentStock): void
-    {
-        Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentStock($variantName, $code, $price, $currentStock));
+    public function iShouldSeeVariantWithCodePriceAndCurrentStock(
+        string $variantName,
+        string $code,
+        string $price,
+        string $currentStock,
+        string $channel,
+    ): void {
+        Assert::true($this->variantsElement->hasProductVariantWithCodePriceAndCurrentStock(
+            $variantName,
+            $code,
+            $price,
+            $currentStock,
+            $channel,
+        ));
     }
 
     /**

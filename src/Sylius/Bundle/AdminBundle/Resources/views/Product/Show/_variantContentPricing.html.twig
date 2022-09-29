@@ -16,7 +16,7 @@
             {% for channelPricing in variant.channelPricings %}
                 <tr class="pricing">
                     <td class="five wide gray text">
-                        <strong>{{ channelPricing.channelCode }}</strong>
+                        <strong>{{ channelPricing.channelCode|sylius_channel_name }}</strong>
                     </td>
                     {% set channelCode = channelPricing.channelCode %}
                     <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
