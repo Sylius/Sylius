@@ -72,4 +72,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 
     public function checkIfActionConfigurationFormIsVisible(): bool;
+
+    public function hasLabel(string $label, string $locale): bool;
 }

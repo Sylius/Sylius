@@ -29,6 +29,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyLabel(string $label, string $locale): void
     {
+        $this->getDocument()->find('css', 'div[data-locale="' . $locale . '"]')->click();
+
         $this->getDocument()->fillField(sprintf('sylius_promotion_translations_%s_label', $locale), $label);
     }
 
@@ -189,6 +191,18 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function checkIfActionConfigurationFormIsVisible(): bool
     {
         return $this->hasElement('amount');
+    }
+
+    public function hasLabel(string $label, string $locale): bool
+    {
+        $this->getDocument()->find('css', 'div[data-locale="' . $locale . '"]')->click();
+
+        $labelElement = $this->getDocument()->find('css', sprintf('label:contains("%s")', $label));
+        if (null === $labelElement) {
+            return false;
+        }
+
+        return $labelElement->hasClass(sprintf('sylius-locale-%s', $locale));
     }
 
     protected function getDefinedElements(): array

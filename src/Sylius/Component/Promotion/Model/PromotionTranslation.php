@@ -17,13 +17,14 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 
 class PromotionTranslation extends AbstractTranslation implements PromotionTranslationInterface
 {
-    protected mixed $id;
+    /** @var mixed */
+    protected $id;
 
     protected ?string $label = null;
 
     protected ?string $description = null;
 
-    public function getId(): mixed
+    public function getId()
     {
         return $this->id;
     }
