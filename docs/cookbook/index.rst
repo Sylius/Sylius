@@ -146,8 +146,9 @@ Frontend
 .. toctree::
     :hidden:
 
-    frontend/admin-js-and-css
     frontend/google-analytics.rst
+    frontend/migrating-to-webpack
+    frontend/staying-with-gulp
 
 .. include:: /cookbook/frontend/map.rst.inc
 

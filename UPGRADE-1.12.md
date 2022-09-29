@@ -88,7 +88,9 @@ Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem
 
 We updated gulp-sass plugin as well as the sass implementation we use to be compatible with most installation
 ([node-sass](https://sass-lang.com/blog/libsass-is-deprecated) is deprecated and incompatible with many systems).
-Therefore you need to update your code to follow this change.
+Therefore, you need to update your code to follow this change.
+
+**NOTE!** `yarn build` is not used to build gulp anymore, and its default behavior is to build assets using Webpack. If you want to build assets using Gulp run `yarn gulp` instead.
 
 1. Change the gulp-sass version you are using to `^5.1.0` (package.json file)
    ```diff

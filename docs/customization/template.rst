@@ -236,7 +236,7 @@ That's it. Your new block should appear in the view.
 
 .. tip::
 
-    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
+    Learn more about adding custom JS & CSS in the cookbook :doc:`here </book/frontend/managing-assets>`.
 
 What more can I do with the Sylius Template Events?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
