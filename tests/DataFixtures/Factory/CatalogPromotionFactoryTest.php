@@ -81,16 +81,35 @@ final class CatalogPromotionFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_catalog_promotion_with_given_channels_as_proxy(): void
+    {
+        $channel = ChannelFactory::createOne();
+        $catalogPromotion = CatalogPromotionFactory::new()->withChannels([$channel])->create();
+
+        $firstChannel = $catalogPromotion->getChannels()->first() ?: null;
+        $this->assertEquals($channel->object(), $firstChannel);
+    }
+
+    /** @test */
     function it_creates_catalog_promotion_with_given_channels(): void
     {
-        $channel = ChannelFactory::new()->withCode('default')->create();
+        $channel = ChannelFactory::createOne()->object();
         $catalogPromotion = CatalogPromotionFactory::new()->withChannels([$channel])->create();
+
+        $firstChannel = $catalogPromotion->getChannels()->first() ?: null;
+        $this->assertEquals($channel, $firstChannel);
+    }
+
+    /** @test */
+    function it_creates_catalog_promotion_with_given_channels_as_string(): void
+    {
+        $catalogPromotion = CatalogPromotionFactory::new()->withChannels(['default'])->create();
 
         $this->assertEquals('default', $catalogPromotion->getChannels()->first()->getCode());
     }
 
     /** @test */
-    function it_creates_catalog_promotion_with_given_scopes(): void
+    function it_creates_catalog_promotion_with_given_scopes_as_proxy(): void
     {
         $scope = CatalogPromotionScopeFactory::createOne();
         $catalogPromotion = CatalogPromotionFactory::new()->withScopes([$scope])->create();
@@ -99,12 +118,80 @@ final class CatalogPromotionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_catalog_promotion_with_given_actions(): void
+    function it_creates_catalog_promotion_with_given_scopes(): void
+    {
+        $scope = CatalogPromotionScopeFactory::createOne()->object();
+        $catalogPromotion = CatalogPromotionFactory::new()->withScopes([$scope])->create();
+
+        $this->assertEquals($scope, $catalogPromotion->getScopes()->first());
+    }
+
+    /** @test */
+    function it_creates_catalog_promotion_with_given_scopes_as_array(): void
+    {
+        $catalogPromotion = CatalogPromotionFactory::new()->withScopes([
+            [
+                'type' => 'for_variants',
+                'configuration' => [
+                    'variants' => [
+                        '000F_office_grey_jeans-variant-0',
+                        '000F_office_grey_jeans-variant-1',
+                        '000F_office_grey_jeans-variant-2',
+                    ],
+                ],
+            ],
+        ])->create();
+
+        $firstScope = $catalogPromotion->getScopes()->first() ?: null;
+
+        $this->assertNotNull($firstScope);
+        $this->assertEquals('for_variants', $firstScope->getType());
+        $this->assertEquals([
+            'variants' => [
+                '000F_office_grey_jeans-variant-0',
+                '000F_office_grey_jeans-variant-1',
+                '000F_office_grey_jeans-variant-2',
+            ],
+        ], $firstScope->getConfiguration());
+    }
+
+    /** @test */
+    function it_creates_catalog_promotion_with_given_actions_as_proxy(): void
     {
         $action = CatalogPromotionActionFactory::createOne();
         $catalogPromotion = CatalogPromotionFactory::new()->withActions([$action])->create();
 
         $this->assertEquals($action->object(), $catalogPromotion->getActions()->first());
+    }
+
+    /** @test */
+    function it_creates_catalog_promotion_with_given_actions(): void
+    {
+        $action = CatalogPromotionActionFactory::createOne()->object();
+        $catalogPromotion = CatalogPromotionFactory::new()->withActions([$action])->create();
+
+        $this->assertEquals($action, $catalogPromotion->getActions()->first());
+    }
+
+    /** @test */
+    function it_creates_catalog_promotion_with_given_actions_as_array(): void
+    {
+        $catalogPromotion = CatalogPromotionFactory::new()->withActions([
+            [
+                'type' => 'percentage_discount',
+                'configuration' => [
+                    'amount' => 0.5,
+                ],
+            ],
+        ])->create();
+
+        $firstAction = $catalogPromotion->getActions()->first() ?: null;
+
+        $this->assertNotNull($firstAction);
+        $this->assertEquals('percentage_discount', $firstAction->getType());
+        $this->assertEquals([
+            'amount' => 0.5,
+        ], $firstAction->getConfiguration());
     }
 
     /** @test */

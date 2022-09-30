@@ -46,6 +46,12 @@
             <tag name="doctrine.fixture.orm" />
         </service>
 
+        <service id="sylius.data_fixtures.fake_promotions" class="Sylius\Bundle\CoreBundle\DataFixtures\FakePromotionsFixtures">
+            <argument type="service" id="sylius.data_fixtures.story.fake_promotions" />
+            <argument type="service" id="sylius.data_fixtures.story.fake_catalog_promotions" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
         <service id="sylius.data_fixtures.fake_t_shirts" class="Sylius\Bundle\CoreBundle\DataFixtures\FakeTShirtsFixtures">
             <argument type="service" id="sylius.data_fixtures.story.fake_t_shirts" />
             <tag name="doctrine.fixture.orm" />

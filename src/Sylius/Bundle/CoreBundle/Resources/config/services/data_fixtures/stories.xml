@@ -88,6 +88,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCapsStoryInterface" alias="sylius.data_fixtures.story.fake_caps" />
 
+        <service id="sylius.data_fixtures.story.fake_catalog_promotions" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCatalogPromotionsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.catalog_promotion" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeCatalogPromotionsStoryInterface" alias="sylius.data_fixtures.story.fake_catalog_promotions" />
+
         <service id="sylius.data_fixtures.story.fake_dresses" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeDressesStory">
             <argument type="service" id="sylius.data_fixtures.factory.taxon" />
             <argument type="service" id="sylius.data_fixtures.factory.product_attribute"  />
@@ -103,6 +108,11 @@
             <argument type="service" id="sylius.data_fixtures.factory.product" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeJeansStoryInterface" alias="sylius.data_fixtures.story.fake_jeans" />
+
+        <service id="sylius.data_fixtures.story.fake_promotions" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakePromotionsStory">
+            <argument type="service" id="sylius.data_fixtures.factory.promotion" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakePromotionsStoryInterface" alias="sylius.data_fixtures.story.fake_promotions" />
 
         <service id="sylius.data_fixtures.story.fake_t_shirts" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\FakeTShirtsStory">
             <argument type="service" id="sylius.data_fixtures.factory.taxon" />
