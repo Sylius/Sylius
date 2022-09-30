@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use DateTime;
+use Sylius\Behat\Element\Admin\TaxRate\FilterElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
@@ -29,6 +30,7 @@ final class ManagingTaxRateContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
+        private FilterElementInterface $filterElement
     ) {
     }
 
@@ -139,6 +141,17 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]));
+    }
+    /**
+     *
+     * @Then I should not see a tax rate with name :name
+     */
+    public function iShouldNotSeeATaxRateWithName(string $taxRateName): void
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]),
+            sprintf('Tax rate with name "%s" has been found, but should not.', $taxRateName),
+        );
     }
 
     /**
@@ -361,5 +374,49 @@ final class ManagingTaxRateContext implements Context
     public function iChooseOption()
     {
         $this->createPage->chooseIncludedInPrice();
+    }
+
+    /**
+     * @When /^I filter tax rates by (end|start) date from "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterTaxRatesByDateFrom(string $dateType, string $date): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateFrom($date);
+        } else {
+            $this->filterElement->specifyEndDateFrom($date);
+        }
+
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter tax rates by (end|start) date up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterTaxRatesByDateUpTo(string $dateType, string $date): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateTo($date);
+        } else {
+            $this->filterElement->specifyEndDateTo($date);
+        }
+
+        $this->filterElement->filter();
+    }
+
+    /**
+     * @When /^I filter tax rates by (end|start) date from "(\d{4}-\d{2}-\d{2})" up to "(\d{4}-\d{2}-\d{2})"$/
+     */
+    public function iFilterTaxRatesByDateFromDateToDate(string $dateType, string $fromDate, string $toDate): void
+    {
+        if ('start' === $dateType) {
+            $this->filterElement->specifyStartDateFrom($fromDate);
+            $this->filterElement->specifyStartDateTo($toDate);
+        } else {
+            $this->filterElement->specifyEndDateFrom($fromDate);
+            $this->filterElement->specifyEndDateTo($toDate);
+        }
+
+        $this->filterElement->filter();
     }
 }
