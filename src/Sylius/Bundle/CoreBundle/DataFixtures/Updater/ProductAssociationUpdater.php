@@ -21,5 +21,9 @@ final class ProductAssociationUpdater implements ProductAssociationUpdaterInterf
     {
         $productAssociation->setType($attributes['type']);
         $productAssociation->setOwner($attributes['owner']);
+
+        foreach ($attributes['associated_products'] as $product) {
+            $productAssociation->addAssociatedProduct($product);
+        }
     }
 }

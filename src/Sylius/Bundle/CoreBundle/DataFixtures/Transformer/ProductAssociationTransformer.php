@@ -13,10 +13,56 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
+
 final class ProductAssociationTransformer implements ProductAssociationTransformerInterface
 {
+    public function __construct(
+        private ProductAssociationTypeFactoryInterface $associationTypeFactory,
+        private ProductFactoryInterface $productFactory,
+    ) {
+    }
+
     public function transform(array $attributes): array
     {
+        $attributes = $this->transformAssociationTypeAttribute($attributes);
+        $attributes = $this->transformAssociatedProductsAttribute($attributes);
+
+        return $this->transformOwnerAttribute($attributes);
+    }
+
+    private function transformAssociationTypeAttribute(array $attributes): array
+    {
+        if (\is_string($attributes['type'])) {
+            $attributes['type'] = $this->associationTypeFactory::findOrCreate(['code' => $attributes['type']]);
+        }
+
+        return $attributes;
+    }
+
+    private function transformOwnerAttribute(array $attributes): array
+    {
+        if (\is_string($attributes['owner'])) {
+            $attributes['owner'] = $this->productFactory::findOrCreate(['code' => $attributes['owner']]);
+        }
+
+        return $attributes;
+    }
+
+    private function transformAssociatedProductsAttribute(array $attributes): array
+    {
+        $products = [];
+        foreach ($attributes['associated_products'] as $product) {
+            if (\is_string($product)) {
+                $product = $this->productFactory::findOrCreate(['code' => $product]);
+            }
+
+            $products[] = $product;
+        }
+
+        $attributes['associated_products'] = $products;
+
         return $attributes;
     }
 }

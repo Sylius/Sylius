@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductAssociationDefaultValuesInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Transformer\ProductAssociationTransformerInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\Updater\ProductAssociationFactoryUpdaterInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAssociationTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAssociationUpdaterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociation;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
@@ -47,9 +47,9 @@ class ProductAssociationFactory extends ModelFactory implements ProductAssociati
 
     public function __construct(
         private FactoryInterface $ProductAssociationFactory,
-        private ProductAssociationDefaultValuesInterface $factoryDefaultValues,
-        private ProductAssociationTransformerInterface $factoryTransformer,
-        private ProductAssociationFactoryUpdaterInterface $factoryUpdater,
+        private ProductAssociationDefaultValuesInterface $defaultValues,
+        private ProductAssociationTransformerInterface $transformer,
+        private ProductAssociationUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -69,19 +69,24 @@ class ProductAssociationFactory extends ModelFactory implements ProductAssociati
         return $this->addState(['owner' => $owner]);
     }
 
+    public function withAssociatedProducts(array $associatedProducts): self
+    {
+        return $this->addState(['associated_products' => $associatedProducts]);
+    }
+
     protected function getDefaults(): array
     {
-        return $this->factoryDefaultValues->getDefaults(self::faker());
+        return $this->defaultValues->getDefaults(self::faker());
     }
 
     protected function transform(array $attributes): array
     {
-        return $this->factoryTransformer->transform($attributes);
+        return $this->transformer->transform($attributes);
     }
 
     protected function update(ProductAssociationInterface $ProductAssociation, array $attributes): void
     {
-        $this->factoryUpdater->update($ProductAssociation, $attributes);
+        $this->updater->update($ProductAssociation, $attributes);
     }
 
     protected function initialize(): self
