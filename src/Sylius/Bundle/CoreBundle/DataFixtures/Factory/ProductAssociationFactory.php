@@ -84,9 +84,9 @@ class ProductAssociationFactory extends ModelFactory implements ProductAssociati
         return $this->transformer->transform($attributes);
     }
 
-    protected function update(ProductAssociationInterface $ProductAssociation, array $attributes): void
+    protected function update(ProductAssociationInterface $productAssociation, array $attributes): void
     {
-        $this->updater->update($ProductAssociation, $attributes);
+        $this->updater->update($productAssociation, $attributes);
     }
 
     protected function initialize(): self
@@ -96,12 +96,12 @@ class ProductAssociationFactory extends ModelFactory implements ProductAssociati
                 return $this->transform($attributes);
             })
             ->instantiateWith(function(array $attributes): ProductAssociationInterface {
-                /** @var ProductAssociationInterface $ProductAssociation */
-                $ProductAssociation = $this->ProductAssociationFactory->createNew();
+                /** @var ProductAssociationInterface $productAssociation */
+                $productAssociation = $this->ProductAssociationFactory->createNew();
 
-                $this->update($ProductAssociation, $attributes);
+                $this->update($productAssociation, $attributes);
 
-                return $ProductAssociation;
+                return $productAssociation;
             })
         ;
     }
