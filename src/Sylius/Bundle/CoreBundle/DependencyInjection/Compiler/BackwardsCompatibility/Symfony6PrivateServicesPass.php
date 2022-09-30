@@ -17,10 +17,7 @@ final class Symfony6PrivateServicesPass implements CompilerPassInterface
 
         $this->makeServicePublic('form.factory', $container);
         $this->makeServicePublic('security.authorization_checker', $container);
-        $this->makeServicePublic('security.authorization_checker', $container);
         $this->makeServicePublic('security.csrf.token_manager', $container);
-        $this->makeServicePublic('security.csrf.token_manager', $container);
-        $this->makeServicePublic('security.token_storage', $container);
         $this->makeServicePublic('security.token_storage', $container);
         $this->makeServicePublic('validator', $container);
 
