@@ -27,6 +27,8 @@ final class DefaultShopUsersStory extends Story implements DefaultShopUsersStory
 
     public function build(): void
     {
+        $this->shopUserFactory::createMany(20);
+
         $this->shopUserFactory::new()
             ->withEmail('shop@example.com')
             ->withFirstName('John')
