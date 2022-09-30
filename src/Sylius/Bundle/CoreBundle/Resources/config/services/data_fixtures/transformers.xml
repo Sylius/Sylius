@@ -70,6 +70,12 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAssociationTransformerInterface" alias="sylius.data_fixtures.transformer.product_association" />
 
+        <service id="sylius.data_fixtures.transformer.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformerInterface" alias="sylius.data_fixtures.transformer.product_review" />
+
         <service id="sylius.data_fixtures.transformer.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.promotion_action" />
             <argument type="service" id="sylius.data_fixtures.factory.promotion_rule" />

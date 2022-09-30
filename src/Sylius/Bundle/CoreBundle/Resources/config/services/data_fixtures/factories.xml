@@ -129,6 +129,14 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationFactoryInterface" alias="sylius.data_fixtures.factory.product_association" />
 
+        <service id="sylius.data_fixtures.factory.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductReviewFactory">
+            <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.data_fixtures.default_values.product_review" />
+            <argument type="service" id="sylius.data_fixtures.transformer.product_review" />
+            <argument type="service" id="sylius.data_fixtures.updater.product_review" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductReviewFactoryInterface" alias="sylius.data_fixtures.factory.product_review" />
 
         <service id="sylius.data_fixtures.factory.product_association_type" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactory">
             <argument type="service" id="sylius.factory.product_association_type" />
