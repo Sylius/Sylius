@@ -40,7 +40,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ProductInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ProductInterface|Proxy create(array|callable $attributes = [])
  */
-class ProductFactory extends ModelFactory implements ProductFactoryInterface
+class ProductFactory extends ModelFactory implements ProductFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
     use WithNameTrait;
@@ -50,6 +50,8 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
     use WithChannelsTrait;
     use WithTaxaTrait;
 
+    private static ?string $modelClass = null;
+
     public function __construct(
         private FactoryInterface $productFactory,
         private ProductDefaultValuesInterface $factoryDefaultValues,
@@ -57,6 +59,11 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
         private ProductUpdaterInterface $factoryUpdater,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function tracked(): self
@@ -149,6 +156,6 @@ class ProductFactory extends ModelFactory implements ProductFactoryInterface
 
     protected static function getClass(): string
     {
-        return Product::class;
+        return self::$modelClass ?? Product::class;
     }
 }
