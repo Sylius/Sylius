@@ -50,10 +50,10 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
     private static ?string $modelClass = null;
 
     public function __construct(
-        private ResourceFactoryInterface            $paymentMethodFactory,
-        private PaymentMethodDefaultValuesInterface $factoryDefaultValues,
-        private PaymentMethodTransformerInterface   $factoryTransformer,
-        private PaymentMethodUpdaterInterface       $factoryUpdater,
+        private ResourceFactoryInterface $paymentMethodFactory,
+        private PaymentMethodDefaultValuesInterface $defaultValues,
+        private PaymentMethodTransformerInterface $transformer,
+        private PaymentMethodUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -85,17 +85,17 @@ class PaymentMethodFactory extends ModelFactory implements PaymentMethodFactoryI
 
     protected function getDefaults(): array
     {
-        return $this->factoryDefaultValues->getDefaults(self::faker());
+        return $this->defaultValues->getDefaults(self::faker());
     }
 
     protected function transform(array $attributes): array
     {
-        return $this->factoryTransformer->transform($attributes);
+        return $this->transformer->transform($attributes);
     }
 
     protected function update(PaymentMethodInterface $PaymentMethod, array $attributes): void
     {
-        $this->factoryUpdater->update($PaymentMethod, $attributes);
+        $this->updater->update($PaymentMethod, $attributes);
     }
 
     protected function initialize(): self

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\LocaleUpdaterInterface;
 use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -45,6 +48,9 @@ class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, Fact
     public function __construct(
         private FactoryInterface $localeFactory,
         private string $baseLocaleCode,
+        private LocaleDefaultValuesInterface $defaultValues,
+        private LocaleTransformerInterface $transformer,
+        private LocaleUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -61,19 +67,30 @@ class LocaleFactory extends ModelFactory implements LocaleFactoryInterface, Fact
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => self::faker()->unique()->locale(),
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(LocaleInterface $locale, array $attributes): void
+    {
+        $this->updater->update($locale, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function(array $attributes): array {
+                return $this->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): LocaleInterface {
                 /** @var LocaleInterface $locale */
                 $locale = $this->localeFactory->createNew();
 
-                $locale->setCode($attributes['code']);
+                $this->update($locale, $attributes);
 
                 return $locale;
             })

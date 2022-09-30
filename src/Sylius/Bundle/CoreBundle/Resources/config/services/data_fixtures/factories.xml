@@ -98,6 +98,9 @@
         <service id="sylius.data_fixtures.factory.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory">
             <argument type="service" id="sylius.factory.locale" />
             <argument>%sylius_locale.locale%</argument>
+            <argument type="service" id="sylius.data_fixtures.default_values.locale" />
+            <argument type="service" id="sylius.data_fixtures.transformer.locale" />
+            <argument type="service" id="sylius.data_fixtures.updater.locale" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />

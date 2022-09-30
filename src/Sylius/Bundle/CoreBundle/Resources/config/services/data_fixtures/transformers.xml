@@ -47,6 +47,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
+        <service id="sylius.data_fixtures.transformer.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformerInterface" alias="sylius.data_fixtures.transformer.locale" />
+
         <service id="sylius.data_fixtures.transformer.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PaymentMethodTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>
