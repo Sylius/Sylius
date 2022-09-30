@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
+use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -33,7 +34,7 @@ final class CustomerProvider implements CustomerProviderInterface
         $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
 
         if ($customer === null) {
-            throw new \RuntimeException(sprintf('Customer with email "%s" does not exist.', $email));
+            throw CustomerNotFoundException::notFound($email);
         }
 
         return $customer;

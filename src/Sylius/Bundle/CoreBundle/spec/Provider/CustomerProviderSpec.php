@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Provider\CustomerProvider;
+use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -49,6 +50,6 @@ final class CustomerProviderSpec extends ObjectBehavior
         $canonicalizer->canonicalize('Adam@syLius.com')->willReturn('adam@sylius.com');
         $customerRepository->findOneBy(['emailCanonical' => 'adam@sylius.com'])->willReturn(null);
 
-        $this->shouldThrow(\RuntimeException::class)->during('provide', ['Adam@syLius.com']);
+        $this->shouldThrow(CustomerNotFoundException::class)->during('provide', ['Adam@syLius.com']);
     }
 }

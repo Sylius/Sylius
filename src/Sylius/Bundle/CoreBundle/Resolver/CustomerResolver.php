@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Resolver;
 
 use Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface;
+use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -29,7 +30,7 @@ final class CustomerResolver implements CustomerResolverInterface
     {
         try {
             return $this->customerProvider->provide($email);
-        } catch (\RuntimeException) {
+        } catch (CustomerNotFoundException) {
             /** @var CustomerInterface $customer */
             $customer = $this->customerFactory->createNew();
             $customer->setEmail($email);

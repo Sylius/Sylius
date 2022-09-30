@@ -17,6 +17,5 @@ use Sylius\Component\Core\Model\CustomerInterface;
 
 interface CustomerProviderInterface
 {
-    /** @throws \RuntimeException */
     public function provide(string $email): CustomerInterface;
 }

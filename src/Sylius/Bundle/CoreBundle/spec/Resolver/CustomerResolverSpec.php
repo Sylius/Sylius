@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Resolver;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
+use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -38,7 +39,7 @@ final class CustomerResolverSpec extends ObjectBehavior
         CustomerProviderInterface $customerProvider,
         CustomerInterface $customer,
     ): void {
-        $customerProvider->provide('WILL.SMITH@example.com')->willThrow(\RuntimeException::class);
+        $customerProvider->provide('WILL.SMITH@example.com')->willThrow(CustomerNotFoundException::class);
         $customerFactory->createNew()->willReturn($customer);
         $customer->setEmail('WILL.SMITH@example.com')->shouldBeCalled();
 

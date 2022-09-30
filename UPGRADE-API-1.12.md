@@ -1,7 +1,7 @@
 # UPGRADE FROM `v1.11.X` TO `v1.12.0`
 
 1. The `Sylius\Bundle\ApiBundle\DataProvider\CartShippingMethodsSubresourceDataProvider` has been removed and replaced by `Sylius\Bundle\ApiBundle\DataProvider\ShippingMethodsCollectionDataProvider`.
-   src/Sylius/Bundle/CoreBundle/spec/Provider/CustomerProviderSpec.php
+
 1. The `Sylius\Bundle\ApiBundle\Provider\CustomerProviderInterface` has been refactored and moved to `CoreBundle` use `Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface` instead.
 
 1. The `Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer` logic and constructor has been changed due to refactor above.
