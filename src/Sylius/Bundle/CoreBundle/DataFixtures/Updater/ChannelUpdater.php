@@ -34,6 +34,10 @@ final class ChannelUpdater implements ChannelUpdaterInterface
         $channel->setMenuTaxon($attributes['menu_taxon']);
 
         $channel->setDefaultLocale($attributes['default_locale']);
+
+        // Ensure Default locale is on available locale
+        $channel->addLocale($attributes['default_locale']);
+
         foreach ($attributes['locales'] as $locale) {
             $channel->addLocale($locale);
         }
