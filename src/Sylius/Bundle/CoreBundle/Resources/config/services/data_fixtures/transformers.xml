@@ -25,7 +25,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AdminUserTransformerInterface" alias="sylius.data_fixtures.transformer.admin_user" />
 
-        <service id="sylius.data_fixtures.transformer.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformer" />
+        <service id="sylius.data_fixtures.transformer.catalog_promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.catalog_promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.factory.catalog_promotion_scope" />
+        </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformerInterface" alias="sylius.data_fixtures.transformer.catalog_promotion" />
 
         <service id="sylius.data_fixtures.transformer.catalog_promotion_action" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionActionTransformer" />
@@ -62,7 +66,9 @@
 
         <service id="sylius.data_fixtures.transformer.promotion" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.promotion_action" />
+            <argument type="service" id="sylius.data_fixtures.factory.promotion_rule" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionTransformerInterface" alias="sylius.data_fixtures.transformer.promotion" />
 

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactory;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -156,16 +157,69 @@ final class PromotionFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_shipping_method_with_given_rules(): void
+    function it_creates_shipping_method_with_given_rules_as_proxy(): void
     {
         $promotionRule = PromotionRuleFactory::createOne();
         $promotion = PromotionFactory::new()->withRules([$promotionRule])->create();
 
-        $this->assertEquals($promotionRule->object(), $promotion->getRules()->first());
+        $firstRule = $promotion->getRules()->first() ?: null;
+        $this->assertNotNull($firstRule);
+        $this->assertEquals($promotionRule->object(), $firstRule);
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_rules(): void
+    {
+        $promotionRule = PromotionRuleFactory::createOne()->object();
+        $promotion = PromotionFactory::new()->withRules([$promotionRule])->create();
+
+        $firstRule = $promotion->getRules()->first() ?: null;
+        $this->assertNotNull($firstRule);
+        $this->assertEquals($promotionRule, $firstRule);
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_rules_as_array(): void
+    {
+        $promotion = PromotionFactory::new()->withRules([
+            [
+                'type' => 'item_total',
+                'configuration' => [
+                    'FASHION_WEB' => ['amount' => 100.00],
+                ]
+            ],
+        ])->create();
+
+        $firstRule = $promotion->getRules()->first() ?: null;
+        $this->assertNotNull($firstRule);
+        $this->assertEquals('item_total', $firstRule->getType());
+        $this->assertEquals([
+            'FASHION_WEB' => ['amount' => 10000],
+        ], $firstRule->getConfiguration());
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_actions_as_proxy(): void
+    {
+        $promotionAction = PromotionActionFactory::createOne();
+        $promotion = PromotionFactory::new()->withActions([$promotionAction])->create();
+
+        $firstAction = $promotion->getActions()->first() ?: null;
+        $this->assertEquals($promotionAction->object(), $firstAction);
     }
 
     /** @test */
     function it_creates_shipping_method_with_given_actions(): void
+    {
+        $promotionAction = PromotionActionFactory::createOne()->object();
+        $promotion = PromotionFactory::new()->withActions([$promotionAction])->create();
+
+        $firstAction = $promotion->getActions()->first() ?: null;
+        $this->assertEquals($promotionAction, $firstAction);
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_actions_as_array(): void
     {
         $promotion = PromotionFactory::new()->withActions([
             [
@@ -173,7 +227,6 @@ final class PromotionFactoryTest extends KernelTestCase
             ],
         ])->create();
 
-        /** @var PromotionActionInterface $firstAction */
         $firstAction = $promotion->getActions()->first();
         $this->assertEquals(['foo' => 'fighters'], $firstAction->getConfiguration());
     }
