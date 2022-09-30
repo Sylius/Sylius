@@ -45,6 +45,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ChannelDefaultValuesInterface" alias="sylius.data_fixtures.default_values.catalog_promotion_scope" />
 
+        <service id="sylius.data_fixtures.default_values.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValuesInterface" alias="sylius.data_fixtures.default_values.locale" />
+
         <service id="sylius.data_fixtures.default_values.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PaymentMethodDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>
