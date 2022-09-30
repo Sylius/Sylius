@@ -14,11 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 final class ProductAssociationDefaultValues implements ProductAssociationDefaultValuesInterface
 {
+    public function __construct(
+        private ProductAssociationTypeFactoryInterface $associationTypeFactory,
+        private ProductFactoryInterface $productFactory,
+    ) {
+    }
+
     public function getDefaults(Generator $faker): array
     {
-        return [];
+        return [
+            'type' => $this->associationTypeFactory::randomOrCreate(),
+            'owner' => $this->productFactory::randomOrCreate(),
+            'associated_products' => [],
+        ];
     }
 }

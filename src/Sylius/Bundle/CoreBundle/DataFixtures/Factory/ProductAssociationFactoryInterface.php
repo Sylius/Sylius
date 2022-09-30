@@ -41,4 +41,6 @@ interface ProductAssociationFactoryInterface
     public function withType(Proxy|ProductAssociationTypeInterface|string $owner): self;
 
     public function withOwner(Proxy|ProductInterface|string $owner): self;
+
+    public function withAssociatedProducts(array $associatedProducts): self;
 }

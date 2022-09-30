@@ -163,7 +163,8 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/CatalogPromotionDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/ChannelDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/PaymentMethodDefaultValues.php" />
-                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/ProductsDefaultValues.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/ProductAssociationDefaultValues.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/ProductDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/PromotionDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/ShippingMethodDefaultValues.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/DefaultValues/TaxRateDefaultValues.php" />
@@ -177,6 +178,7 @@
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/AddressTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ChannelTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/PaymentMethodTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ProductAssociationTransformer" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ProductTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/PromotionTransformer.php" />
                 <file name="src/Sylius/Bundle/CoreBundle/DataFixtures/Transformer/ShippingMethodTransformer.php" />
