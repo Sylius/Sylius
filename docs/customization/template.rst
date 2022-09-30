@@ -291,11 +291,11 @@ depending on the customer's birthday:
 
         use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
         use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-        use Sylius\Bundle\CoreBundle\Context\CustomerContext;
+        use Sylius\Component\Customer\Context\CustomerContextInterface;
 
         final class GreetingContextProvider implements ContextProviderInterface
         {
-            public function __construct(private CustomerContext $customerContext)
+            public function __construct(private CustomerContextInterface $customerContext)
             {
             }
 
