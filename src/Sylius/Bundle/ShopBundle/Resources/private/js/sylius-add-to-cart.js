@@ -36,9 +36,16 @@ $.fn.extend({
         validationElement.removeClass('hidden');
         let validationMessage = '';
 
-        Object.entries(response.errors.errors).forEach(([, message]) => {
-          validationMessage += message;
-        });
+        if (response.hasOwnProperty('errors')) {
+          Object.entries(response.errors.errors).forEach(([, message]) => {
+            validationMessage += message;
+          });
+        } else if (response.hasOwnProperty('message')) {
+          validationMessage = response.message;
+        } else {
+          validationMessage = 'Could not add your item to the cart.';
+        }
+
         validationElement.html(validationMessage);
         $(element).removeClass('loading');
       },
