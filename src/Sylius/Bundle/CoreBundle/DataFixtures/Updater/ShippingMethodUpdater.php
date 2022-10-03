@@ -37,6 +37,7 @@ final class ShippingMethodUpdater implements ShippingMethodUpdaterInterface
         $shippingMethod->setTaxCategory($attributes['tax_category']);
         $shippingMethod->setCategory($attributes['category']);
         $shippingMethod->setArchivedAt($attributes['archived_at']);
+        $shippingMethod->setEnabled($attributes['enabled']);
 
         foreach ($this->getLocales() as $localeCode) {
             $shippingMethod->setCurrentLocale($localeCode);

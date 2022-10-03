@@ -16,6 +16,9 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Updater;
 use Faker\Factory;
 use Faker\Generator;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingMethodFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -44,7 +47,9 @@ final class OrderUpdater implements OrderUpdaterInterface
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
         private StateMachineFactoryInterface $stateMachineFactory,
-        private FactoryInterface $addressFactory,
+        private AddressFactoryInterface $addressFactory,
+        private ShippingMethodFactoryInterface $shippingMethodFactory,
+        private ProductFactoryInterface $productFactory,
     ) {
         $this->faker = Factory::create();
     }
@@ -71,7 +76,7 @@ final class OrderUpdater implements OrderUpdaterInterface
         // $this->generateItems($order);
 
         $this->address($order, $country->getCode());
-        // $this->selectShipping($order, $createdAt);
+        $this->selectShipping($order, $createdAt);
         $this->selectPayment($order, $createdAt);
         $this->completeCheckout($order);
 
@@ -86,10 +91,12 @@ final class OrderUpdater implements OrderUpdaterInterface
         $channel = $order->getChannel();
         $products = $this->productRepository->findLatestByChannel($channel, $order->getLocaleCode(), 100);
         if (0 === count($products)) {
-            throw new \InvalidArgumentException(sprintf(
-                'You have no enabled products at the channel "%s", but they are required to create an orders for that channel',
-                $channel->getCode(),
-            ));
+            $products[] = $this->productFactory::new()
+                ->enabled()
+                ->withChannels([$channel])
+                ->create()
+                ->object()
+            ;
         }
 
         $generatedItems = [];
@@ -121,13 +128,11 @@ final class OrderUpdater implements OrderUpdaterInterface
     private function address(OrderInterface $order, string $countryCode): void
     {
         /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-        $address->setFirstName($this->faker->firstName);
-        $address->setLastName($this->faker->lastName);
-        $address->setStreet($this->faker->streetAddress);
-        $address->setCountryCode($countryCode);
-        $address->setCity($this->faker->city);
-        $address->setPostcode($this->faker->postcode);
+        $address = $this->addressFactory::new()
+            ->withCountryCode($countryCode)
+            ->create()
+            ->object()
+        ;
 
         $order->setShippingAddress($address);
         $order->setBillingAddress(clone $address);
@@ -145,10 +150,12 @@ final class OrderUpdater implements OrderUpdaterInterface
         $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
 
         if (count($shippingMethods) === 0) {
-            throw new \InvalidArgumentException(sprintf(
-                'You have no shipping method available for the channel with code "%s", but they are required to proceed an order',
-                $channel->getCode(),
-            ));
+            $shippingMethods[] = $this->shippingMethodFactory::new()
+                ->enabled()
+                ->withChannels([$channel])
+                ->create()
+                ->object()
+            ;
         }
 
         $shippingMethod = $this->faker->randomElement($shippingMethods);

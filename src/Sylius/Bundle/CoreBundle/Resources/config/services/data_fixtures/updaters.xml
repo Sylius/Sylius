@@ -46,7 +46,9 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.data_fixtures.factory.address" />
+            <argument type="service" id="sylius.data_fixtures.factory.shipping_method" />
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\OrderUpdaterInterface" alias="sylius.data_fixtures.updater.order" />
 

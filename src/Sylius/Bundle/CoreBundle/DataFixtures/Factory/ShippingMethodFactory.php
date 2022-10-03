@@ -48,14 +48,15 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
     use WithZoneTrait;
     use WithTaxCategoryTrait;
     use WithChannelsTrait;
+    use ToggableTrait;
 
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface                     $catalogPromotionFactory,
-        private ShippingMethodDefaultValuesInterface $factoryDefaultValues,
-        private ShippingMethodTransformerInterface   $factoryTransformer,
-        private ShippingMethodUpdaterInterface       $factoryUpdater,
+        private FactoryInterface $shippingMethodFactory,
+        private ShippingMethodDefaultValuesInterface $defaultValues,
+        private ShippingMethodTransformerInterface $transformer,
+        private ShippingMethodUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -77,17 +78,17 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
 
     protected function getDefaults(): array
     {
-        return $this->factoryDefaultValues->getDefaults(self::faker());
+        return $this->defaultValues->getDefaults(self::faker());
     }
 
     protected function transform(array $attributes): array
     {
-        return $this->factoryTransformer->transform($attributes);
+        return $this->transformer->transform($attributes);
     }
 
     protected function update(ShippingMethodInterface $shippingMethod, array $attributes): void
     {
-        $this->factoryUpdater->update($shippingMethod, $attributes);
+        $this->updater->update($shippingMethod, $attributes);
     }
 
     protected function initialize(): self
@@ -98,7 +99,7 @@ class ShippingMethodFactory extends ModelFactory implements ShippingMethodFactor
             })
             ->instantiateWith(function(array $attributes): ShippingMethodInterface {
                 /** @var ShippingMethodInterface $shippingMethod */
-                $shippingMethod = $this->catalogPromotionFactory->createNew();
+                $shippingMethod = $this->shippingMethodFactory->createNew();
 
                 $this->update($shippingMethod, $attributes);
 

@@ -45,6 +45,7 @@ final class ShippingMethodFactoryTest extends KernelTestCase
         $this->assertCount(3, $shippingMethod->getChannels());
         $this->assertSame('flat_rate', $shippingMethod->getCalculator());
         $this->assertCount(3, $shippingMethod->getConfiguration());
+        $this->assertTrue($shippingMethod->isEnabled());
     }
 
     /** @test */
@@ -167,5 +168,21 @@ final class ShippingMethodFactoryTest extends KernelTestCase
         $shippingMethod = ShippingMethodFactory::new()->withArchiveDate($archivedAt)->create();
 
         $this->assertEquals($archivedAt, $shippingMethod->getArchivedAt());
+    }
+
+    /** @test */
+    function it_creates_enabled_shipping_method(): void
+    {
+        $shippingMethod = ShippingMethodFactory::new()->enabled()->create();
+
+        $this->assertTrue($shippingMethod->isEnabled());
+    }
+
+    /** @test */
+    function it_creates_disabled_shipping_method(): void
+    {
+        $shippingMethod = ShippingMethodFactory::new()->disabled()->create();
+
+        $this->assertFalse($shippingMethod->isEnabled());
     }
 }

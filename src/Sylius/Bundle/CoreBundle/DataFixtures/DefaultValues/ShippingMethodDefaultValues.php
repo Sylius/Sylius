@@ -37,6 +37,7 @@ final class ShippingMethodDefaultValues implements ShippingMethodDefaultValuesIn
             'calculator' => null,
             'channels' => $this->channelFactory::all(),
             'archived_at' => null,
+            'enabled' => true,
         ];
     }
 }
