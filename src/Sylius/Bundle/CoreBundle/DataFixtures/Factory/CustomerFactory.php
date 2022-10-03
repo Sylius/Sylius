@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CustomerDefaultValuesInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -44,6 +45,7 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
     public function __construct(
         private FactoryInterface $customerFactory,
         private CustomerGroupFactoryInterface $customerGroupFactory,
+        private CustomerDefaultValuesInterface $defaultValues,
     ) {
         parent::__construct();
     }
@@ -110,17 +112,7 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
 
     protected function getDefaults(): array
     {
-        return [
-            'email' => self::faker()->email(),
-            'first_name' => self::faker()->firstName(),
-            'last_name' => self::faker()->lastName(),
-            'enabled' => true,
-            'password' => 'password123',
-            'customer_group' => $this->customerGroupFactory::randomOrCreate(),
-            'gender' => CustomerInterface::UNKNOWN_GENDER,
-            'phone_number' => self::faker()->phoneNumber(),
-            'birthday' => self::faker()->dateTimeBetween('-80 years', '-18 years'),
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
     }
 
     protected function initialize(): self
