@@ -35,7 +35,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ShippingMethodInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ShippingMethodInterface|Proxy create(array|callable $attributes = [])
  */
-interface ShippingMethodFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, WithZoneInterface, WithTaxCategoryInterface, WithChannelsInterface
+interface ShippingMethodFactoryInterface extends WithCodeInterface, WithNameInterface, WithDescriptionInterface, WithZoneInterface, WithTaxCategoryInterface, WithChannelsInterface, ToggableInterface
 {
     public function withCategory(Proxy|ShippingCategoryInterface|string $category): self;
 

@@ -16,9 +16,8 @@ namespace Sylius\Tests\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\OrderFactory;
-
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -32,6 +31,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_default_values(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         ChannelFactory::createOne();
         $order = OrderFactory::createOne();
 
@@ -44,6 +44,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_channel_as_proxy(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $channel = ChannelFactory::createOne();
         $order = OrderFactory::new()->withChannel($channel)->create();
 
@@ -53,6 +54,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_channel(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $channel = ChannelFactory::createOne()->object();
         $order = OrderFactory::new()->withChannel($channel)->create();
 
@@ -62,6 +64,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_channel_as_string(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $order = OrderFactory::new()->withChannel('default')->create();
 
         $this->assertEquals('default', $order->getChannel()->getCode());
@@ -70,6 +73,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_customer_as_proxy(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $customer = CustomerFactory::createOne();
         $order = OrderFactory::new()->withCustomer($customer)->create();
 
@@ -79,6 +83,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_customer(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $customer = CustomerFactory::createOne()->object();
         $order = OrderFactory::new()->withCustomer($customer)->create();
 
@@ -88,6 +93,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_customer_as_string(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $order = OrderFactory::new()->withCustomer('john.doe@example.com')->create();
 
         $this->assertEquals('john.doe@example.com', $order->getCustomer()->getEmail());
@@ -96,6 +102,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_country_as_proxy(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $country = CountryFactory::new()->withCode('FR')->create();
         $order = OrderFactory::new()->withCountry($country)->create();
 
@@ -105,6 +112,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_country(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $country = CountryFactory::new()->withCode('FR')->create()->object();
         $order = OrderFactory::new()->withCountry($country)->create();
 
@@ -114,6 +122,7 @@ final class OrderFactoryTest extends KernelTestCase
     /** @test */
     function it_creates_order_with_given_country_as_string(): void
     {
+        LocaleFactory::new()->withDefaultCode()->create();
         $order = OrderFactory::new()->withCountry('FR')->create();
 
         $this->assertEquals('FR', $order->getBillingAddress()?->getCountryCode());
