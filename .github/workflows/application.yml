@@ -24,7 +24,7 @@ jobs:
     static-checks:
         runs-on: ubuntu-latest
 
-        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), API Platform ${{ matrix.api-platform }})"
 
         timeout-minutes: 10
 
@@ -33,6 +33,12 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
+                api-platform: ["^2.7"]
+                
+                include:
+                    -   php: "8.1"
+                        symfony: "^5.4"
+                        api-platform: "~2.6.0"
 
         steps:
             -
@@ -60,6 +66,11 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Restrict API Platform version
+                if: matrix.api-platform != ''
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
@@ -170,12 +181,18 @@ jobs:
     classes-specifictions:
         runs-on: ubuntu-latest
 
-        name: "Classes specifications (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+        name: "Classes specifications (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), API Platform ${{ matrix.api-platform }})"
         strategy:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
+                api-platform: ["^2.7"]
+                
+                include:
+                    -   php: "8.1"
+                        symfony: "^5.4"
+                        api-platform: "~2.6.0"
 
         steps:
             -   uses: actions/checkout@v2
@@ -195,6 +212,12 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Restrict API Platform version
+                if: matrix.api-platform != ''
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+
             -   name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -427,7 +450,7 @@ jobs:
     test-application-without-frontend-mysql:
         runs-on: ubuntu-latest
 
-        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }})"
+        name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}), API Platform ${{ matrix.api-platform }})"
 
         timeout-minutes: 25
 
@@ -436,8 +459,16 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
+                api-platform: ["^2.7"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
+                
+                include:
+                    -   php: "8.1"
+                        symfony: "^5.4"
+                        api-platform: "~2.6.0"
+                        node: "14.x"
+                        mysql: "8.0"
 
         env:
             APP_ENV: test_cached
@@ -475,6 +506,11 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Restrict API Platform version
+                if: matrix.api-platform != ''
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
