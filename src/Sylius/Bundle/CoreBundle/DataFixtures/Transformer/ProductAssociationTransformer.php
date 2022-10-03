@@ -18,6 +18,8 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 final class ProductAssociationTransformer implements ProductAssociationTransformerInterface
 {
+    use TransformProductAttributeTrait;
+
     public function __construct(
         private ProductAssociationTypeFactoryInterface $associationTypeFactory,
         private ProductFactoryInterface $productFactory,
@@ -29,22 +31,13 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
         $attributes = $this->transformAssociationTypeAttribute($attributes);
         $attributes = $this->transformAssociatedProductsAttribute($attributes);
 
-        return $this->transformOwnerAttribute($attributes);
+        return $this->transformProductAttribute($attributes, 'owner');
     }
 
     private function transformAssociationTypeAttribute(array $attributes): array
     {
         if (\is_string($attributes['type'])) {
             $attributes['type'] = $this->associationTypeFactory::findOrCreate(['code' => $attributes['type']]);
-        }
-
-        return $attributes;
-    }
-
-    private function transformOwnerAttribute(array $attributes): array
-    {
-        if (\is_string($attributes['owner'])) {
-            $attributes['owner'] = $this->productFactory::findOrCreate(['code' => $attributes['owner']]);
         }
 
         return $attributes;

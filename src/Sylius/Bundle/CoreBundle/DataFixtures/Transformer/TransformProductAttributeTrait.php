@@ -10,10 +10,10 @@ trait TransformProductAttributeTrait
 {
     private ProductFactoryInterface $productFactory;
 
-    private function transformProductOptionsAttribute(array $attributes): array
+    private function transformProductAttribute(array $attributes, string $attributeKey = 'product'): array
     {
-        if (\is_string($attributes['product'])) {
-            $attributes['product'] = $this->productFactory::findOrCreate(['code' => $attributes['product']]);
+        if (\is_string($attributes[$attributeKey])) {
+            $attributes[$attributeKey] = $this->productFactory::findOrCreate(['code' => $attributes[$attributeKey]]);
         }
 
         return $attributes;

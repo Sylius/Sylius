@@ -77,6 +77,14 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
 
+        <service id="sylius.data_fixtures.factory.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactory">
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface" alias="sylius.data_fixtures.factory.customer" />
+
+
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />
             <tag name="foundry.factory" />
@@ -104,6 +112,15 @@
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface" alias="sylius.data_fixtures.factory.locale" />
+
+        <service id="sylius.data_fixtures.factory.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\OrderFactory">
+            <argument type="service" id="sylius.factory.order" />
+            <argument type="service" id="sylius.data_fixtures.default_values.order" />
+            <argument type="service" id="sylius.data_fixtures.transformer.order" />
+            <argument type="service" id="sylius.data_fixtures.updater.order" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\OrderFactoryInterface" alias="sylius.data_fixtures.factory.order" />
 
         <service id="sylius.data_fixtures.factory.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PaymentMethodFactory">
             <argument type="service" id="sylius.factory.payment_method" />

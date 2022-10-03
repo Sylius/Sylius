@@ -42,6 +42,8 @@ use Zenstruck\Foundry\Proxy;
  */
 class AddressFactory extends ModelFactory implements AddressFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithCustomerTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -106,13 +108,6 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
     public function withProvinceCode(string $provinceCode): self
     {
         return $this->addState(['province_code' => $provinceCode]);
-    }
-
-    public function withCustomer(Proxy|CustomerInterface|string $customer): self
-    {
-        return $this->addState(function () use ($customer): array {
-            return ['customer' => $customer];
-        });
     }
 
     protected function getDefaults(): array

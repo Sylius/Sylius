@@ -14,28 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
 
-final class ProductReviewDefaultValues implements ProductReviewDefaultValuesInterface
+final class OrderDefaultValues implements OrderDefaultValuesInterface
 {
     public function __construct(
+        private ChannelFactoryInterface $channelFactory,
         private CustomerFactoryInterface $customerFactory,
-        private ProductFactoryInterface $productFactory,
+        private CountryFactoryInterface $countryFactory,
     ) {
     }
 
     public function getDefaults(Generator $faker): array
     {
         return [
-            'title' => $faker->words(3, true),
-            'rating' => $faker->numberBetween(1, 5),
-            'comment' => $faker->sentences(3, true),
-            'author' => $this->customerFactory::randomOrCreate(),
-            'product' => $this->productFactory::randomOrCreate(),
-            'status' => null,
+            'channel' => $this->channelFactory::randomOrCreate(),
+            'customer' => $this->customerFactory::randomOrCreate(),
+            'country' => $this->countryFactory::randomOrCreate(),
+            'complete_date' => $faker->dateTimeBetween('-1 years', 'now'),
+            'fulfilled' => false,
         ];
     }
 }

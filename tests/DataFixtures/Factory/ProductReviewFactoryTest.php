@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductReviewFactory;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -70,10 +70,20 @@ final class ProductReviewFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_product_review_with_given_author_as_proxy(): void
+    {
+        LocaleFactory::new()->withCode('en_US')->create();
+        $author = CustomerFactory::createOne();
+        $productReview = ProductReviewFactory::new()->withAuthor($author)->create();
+
+        $this->assertEquals($author->object(), $productReview->getAuthor());
+    }
+
+    /** @test */
     function it_creates_product_review_with_given_author(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
-        $author = ShopUserFactory::createOne()->getCustomer();
+        $author = CustomerFactory::createOne()->object();
         $productReview = ProductReviewFactory::new()->withAuthor($author)->create();
 
         $this->assertEquals($author, $productReview->getAuthor());
