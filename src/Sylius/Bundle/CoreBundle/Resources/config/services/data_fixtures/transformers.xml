@@ -47,6 +47,13 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
+        <service id="sylius.data_fixtures.transformer.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer" />
+            <argument type="service" id="sylius.data_fixtures.factory.country" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformerInterface" alias="sylius.data_fixtures.transformer.order" />
+
         <service id="sylius.data_fixtures.transformer.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformer" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformerInterface" alias="sylius.data_fixtures.transformer.locale" />
 
@@ -74,7 +81,7 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAssociationTransformerInterface" alias="sylius.data_fixtures.transformer.product_association" />
 
         <service id="sylius.data_fixtures.transformer.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer" />
             <argument type="service" id="sylius.data_fixtures.factory.product" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformerInterface" alias="sylius.data_fixtures.transformer.product_review" />

@@ -35,7 +35,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static AddressInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AddressInterface|Proxy create(array|callable $attributes = [])
  */
-interface AddressFactoryInterface
+interface AddressFactoryInterface extends WithCustomerInterface
 {
     public function withFirstName(string $firstName): self;
 
@@ -56,6 +56,4 @@ interface AddressFactoryInterface
     public function withProvinceName(string $provinceName): self;
 
     public function withProvinceCode(string $provinceCode): self;
-
-    public function withCustomer(Proxy|CustomerInterface|string $customer): self;
 }

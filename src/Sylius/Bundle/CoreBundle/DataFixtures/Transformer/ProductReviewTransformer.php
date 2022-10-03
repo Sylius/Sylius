@@ -13,32 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
 
 final class ProductReviewTransformer implements ProductReviewTransformerInterface
 {
     use TransformProductAttributeTrait;
+    use TransformCustomerAttributeTrait;
 
     public function __construct(
-        private ShopUserFactoryInterface $shopUserFactory,
-        private ProductFactoryInterface $productFactory,
+        private CustomerFactoryInterface $customerFactory,
+        private ProductFactoryInterface  $productFactory,
     ) {
     }
 
     public function transform(array $attributes): array
     {
-        $attributes = $this->transformAuthorAttribute($attributes);
+        $attributes = $this->transformCustomerAttribute($attributes, 'author');
 
-        return $this->transformProductOptionsAttribute($attributes);
-    }
-
-    private function transformAuthorAttribute(array $attributes): array
-    {
-        if (\is_string($attributes['author'])) {
-            $attributes['author'] = $this->shopUserFactory::findOrCreate(['email' => $attributes['author']])->getCustomer();
-        }
-
-        return $attributes;
+        return $this->transformProductAttribute($attributes);
     }
 }

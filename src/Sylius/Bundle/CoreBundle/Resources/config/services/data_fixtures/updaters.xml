@@ -39,6 +39,17 @@
         <service id="sylius.data_fixtures.updater.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdaterInterface" alias="sylius.data_fixtures.updater.channel" />
 
+        <service id="sylius.data_fixtures.updater.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\OrderUpdater">
+            <argument type="service" id="sylius.factory.order_item" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.factory.address" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\OrderUpdaterInterface" alias="sylius.data_fixtures.updater.order" />
+
         <service id="sylius.data_fixtures.updater.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\LocaleUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\LocaleUpdaterInterface" alias="sylius.data_fixtures.updater.locale" />
 

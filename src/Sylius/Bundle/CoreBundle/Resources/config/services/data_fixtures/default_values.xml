@@ -48,6 +48,13 @@
         <service id="sylius.data_fixtures.default_values.locale" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValues" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValuesInterface" alias="sylius.data_fixtures.default_values.locale" />
 
+        <service id="sylius.data_fixtures.default_values.order" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\OrderDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer" />
+            <argument type="service" id="sylius.data_fixtures.factory.country" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\OrderDefaultValuesInterface" alias="sylius.data_fixtures.default_values.order" />
+
         <service id="sylius.data_fixtures.default_values.payment_method" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PaymentMethodDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
         </service>
@@ -66,7 +73,7 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductAssociationDefaultValuesInterface" alias="sylius.data_fixtures.default_values.product_association" />
 
         <service id="sylius.data_fixtures.default_values.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductReviewDefaultValues">
-            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer" />
             <argument type="service" id="sylius.data_fixtures.factory.product" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductReviewDefaultValuesInterface" alias="sylius.data_fixtures.default_values.product_review" />
