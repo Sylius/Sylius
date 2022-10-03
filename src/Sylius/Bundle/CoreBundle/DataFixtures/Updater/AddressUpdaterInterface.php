@@ -17,5 +17,5 @@ use Sylius\Component\Core\Model\AddressInterface;
 
 interface AddressUpdaterInterface
 {
-    public function update(AddressInterface $address): void;
+    public function update(AddressInterface $address, array $attributes): void;
 }

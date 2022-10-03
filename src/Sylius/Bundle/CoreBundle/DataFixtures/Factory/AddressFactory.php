@@ -120,9 +120,9 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
         return $this->factoryTransformer->transform($attributes);
     }
 
-    protected function update(AddressInterface $address): void
+    protected function update(AddressInterface $address, array $attributes): void
     {
-        $this->factoryUpdater->update($address);
+        $this->factoryUpdater->update($address, $attributes);
     }
 
     protected function initialize(): self
@@ -134,22 +134,10 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
             ->instantiateWith(function(array $attributes): AddressInterface {
                 /** @var AddressInterface $address */
                 $address = $this->addressFactory->createNew();
-                $address->setFirstName($attributes['first_name']);
-                $address->setLastName($attributes['last_name']);
-                $address->setPhoneNumber($attributes['phone_number']);
-                $address->setCompany($attributes['company']);
-                $address->setStreet($attributes['street']);
-                $address->setCity($attributes['city']);
-                $address->setPostcode($attributes['postcode']);
-                $address->setCountryCode($attributes['country_code']);
-                $address->setProvinceName($attributes['province_name']);
-                $address->setProvinceCode($attributes['province_code']);
-                $address->setCustomer($attributes['customer']);
+
+                $this->update($address, $attributes);
 
                 return $address;
-            })
-            ->afterInstantiate(function(AddressInterface $address): void {
-                $this->update($address);
             })
         ;
     }
