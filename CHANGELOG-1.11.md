@@ -1,5 +1,52 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.9 (2022-10-03)
+
+#### Details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- [#14243](https://github.com/Sylius/Sylius/issues/14243) Revert temporary build fix ([@TheMilek](https://github.com/TheMilek))
+- [#14310](https://github.com/Sylius/Sylius/issues/14310) [Docs] Release cycle changes ([@Zales0123](https://github.com/Zales0123))
+- [#14321](https://github.com/Sylius/Sylius/issues/14321) [CS][DX] Refactor ()
+- [#14324](https://github.com/Sylius/Sylius/issues/14324) [Admin] Improve highlighting menu items ([@GSadee](https://github.com/GSadee))
+- [#14331](https://github.com/Sylius/Sylius/issues/14331) [Docs] Add conventions for Template Events ([@coldic3](https://github.com/coldic3))
+- [#14346](https://github.com/Sylius/Sylius/issues/14346) [Maintenance] Bump doctrine/orm minimal version to 2.13 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14377](https://github.com/Sylius/Sylius/issues/14377) [Products][Admin][UI] Display the channel name instead of the channel code in the variant list ([@Rafikooo](https://github.com/Rafikooo))
+- [#14390](https://github.com/Sylius/Sylius/issues/14390) [GitHub Actions] Add builds for API Platform ~2.6.0 ([@GSadee](https://github.com/GSadee))
+Deprecated: Return type of Pimple\Container::offsetGet($id) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 98
+Deprecated: Return type of Pimple\Container::offsetSet($id, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 79
+Deprecated: Return type of Pimple\Container::offsetUnset($id) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 143
+Deprecated: Return type of Symfony\Component\Console\Helper\HelperSet::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/console/Helper/HelperSet.php on line 104
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1121
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetExists($option) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1081
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetGet($option) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 843
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetSet($option, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1095
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetUnset($option) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1105
+Deprecated: Return type of Symfony\Component\Process\Process::getIterator($flags = 0) should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/process/Process.php on line 567
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 323
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 315
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetExists($name) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 279
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetGet($name) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 287
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetSet($offset, $command) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 295
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetUnset($name) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 307
+Working on Sylius/Sylius (branch 1.11)
+
 ## v1.11.8 (2022-09-19)
 
 #### Details
