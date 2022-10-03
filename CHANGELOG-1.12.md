@@ -1,5 +1,42 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.0-ALPHA.2 (2022-10-03)
+
+#### Details
+
+- [#13663](https://github.com/Sylius/Sylius/issues/13663) Admin update form action configurable ([@bigboss86](https://github.com/bigboss86))
+- [#14243](https://github.com/Sylius/Sylius/issues/14243) Revert temporary build fix ([@TheMilek](https://github.com/TheMilek))
+- [#14253](https://github.com/Sylius/Sylius/issues/14253) [Maintenance][Security] Update shop logout handling ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14302](https://github.com/Sylius/Sylius/issues/14302) [maintenance]Do not continue-on-error pipeline ([@Ferror](https://github.com/Ferror))
+- [#14312](https://github.com/Sylius/Sylius/issues/14312) [maintenance]Unify very similar behat steps ([@Ferror](https://github.com/Ferror))
+- [#14313](https://github.com/Sylius/Sylius/issues/14313) [docs]Mention to clone Sylius-Standard repository to start the project ([@Ferror](https://github.com/Ferror))
+- [#14315](https://github.com/Sylius/Sylius/issues/14315) [Maintenance] Improve note in UPGRADE file about changes in security.yaml ([@GSadee](https://github.com/GSadee))
+- [#14319](https://github.com/Sylius/Sylius/issues/14319) [Maintenance] Update JS dependencies
+- [#14320](https://github.com/Sylius/Sylius/issues/14320) [CS][DX] Refactor ()
+- [#14321](https://github.com/Sylius/Sylius/issues/14321) [CS][DX] Refactor ()
+- [#14324](https://github.com/Sylius/Sylius/issues/14324) [Admin] Improve highlighting menu items ([@GSadee](https://github.com/GSadee))
+- [#14325](https://github.com/Sylius/Sylius/issues/14325) [UI] removed important flag from the button class ([@Rafikooo](https://github.com/Rafikooo))
+- [#14328](https://github.com/Sylius/Sylius/issues/14328) [Template][Events] Introduce Context Providers for Template Blocks ([@coldic3](https://github.com/coldic3))
+- [#14330](https://github.com/Sylius/Sylius/issues/14330) [Maintenance] Allow to choose whether use Webpack or Gulp ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14331](https://github.com/Sylius/Sylius/issues/14331) [Docs] Add conventions for Template Events ([@coldic3](https://github.com/coldic3))
+- [#14333](https://github.com/Sylius/Sylius/issues/14333) [Docs] Remove migrating to webpack page from docs ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14336](https://github.com/Sylius/Sylius/issues/14336) Enable Behat tests in PostgreSQL workflow ([@GSadee](https://github.com/GSadee))
+- [#14339](https://github.com/Sylius/Sylius/issues/14339) [GitHub Actions] Bump up PostgreSQL version in workflow to the current one ([@GSadee](https://github.com/GSadee))
+- [#14344](https://github.com/Sylius/Sylius/issues/14344) [Behat][PostgreSQL] Fix removing items from cart ([@GSadee](https://github.com/GSadee))
+- [#14346](https://github.com/Sylius/Sylius/issues/14346) [Maintenance] Bump doctrine/orm minimal version to 2.13 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14349](https://github.com/Sylius/Sylius/issues/14349) [Admin][CatalogPromotion] Browsing affected product variants ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14351](https://github.com/Sylius/Sylius/issues/14351) [Catalog Promotions] Add `_sylius.alias` to the routings ([@coldic3](https://github.com/coldic3))
+- [#14357](https://github.com/Sylius/Sylius/issues/14357) [Maintenance] Add missing images to the Webpack's build process ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14361](https://github.com/Sylius/Sylius/issues/14361) [Maintenance] Fix setting sylius_ui.use_webpack parameter ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14373](https://github.com/Sylius/Sylius/issues/14373) [Docs] Add Context Providers to the template customization guide ([@coldic3](https://github.com/coldic3))
+- [#14374](https://github.com/Sylius/Sylius/issues/14374) [UI] Remove experimental tag from template events related services ([@GSadee](https://github.com/GSadee))
+- [#14377](https://github.com/Sylius/Sylius/issues/14377) [Products][Admin][UI] Display the channel name instead of the channel code in the variant list ([@Rafikooo](https://github.com/Rafikooo))
+- [#14378](https://github.com/Sylius/Sylius/issues/14378) [Products][CatalogPromotions] Catalog promotion details on both simple and configurable products ([@Rafikooo](https://github.com/Rafikooo))
+- [#14385](https://github.com/Sylius/Sylius/issues/14385) [Docs] Refactor example Context Provider ([@coldic3](https://github.com/coldic3))
+- [#14390](https://github.com/Sylius/Sylius/issues/14390) [GitHub Actions] Add builds for API Platform ~2.6.0 ([@GSadee](https://github.com/GSadee))
+- [#14392](https://github.com/Sylius/Sylius/issues/14392) Fix build after API Platform 2.7.1 release ([@lchrusciel](https://github.com/lchrusciel), [@GSadee](https://github.com/GSadee))
+- [#14396](https://github.com/Sylius/Sylius/issues/14396) [CS][DX] Refactor ([@bot](https://github.com/bot)@[@sylius](https://github.com/sylius).[@org](https://github.com/org))
+
 ## v1.12.0-ALPHA.1 (2022-09-19)
 
 #### Details
