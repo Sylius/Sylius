@@ -91,7 +91,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    private function getAppliedCatalogPromotions(string $variantName,string $channelName): array
+    private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);
 
@@ -103,7 +103,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         /** @var NodeElement|null $pricingRow */
         $pricingRow = $this->getDocument()->find(
             'css',
-            sprintf('tr:contains("%s") + tr', $variantName)
+            sprintf('tr:contains("%s") + tr', $variantName),
         );
 
         $pricingRow = $pricingRow->find('css', sprintf('td:contains("%s")', $channelName));

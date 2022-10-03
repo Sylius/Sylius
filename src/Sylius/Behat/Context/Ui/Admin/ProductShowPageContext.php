@@ -391,7 +391,7 @@ final class ProductShowPageContext implements Context
     ): void {
         Assert::inArray(
             $catalogPromotion->getName(),
-            $this->pricingElement->getCatalogPromotionsNamesForChannel($channelName)
+            $this->pricingElement->getCatalogPromotionsNamesForChannel($channelName),
         );
 
         $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);
@@ -408,7 +408,7 @@ final class ProductShowPageContext implements Context
     ): void {
         Assert::inArray(
             $catalogPromotion->getName(),
-            $this->productShowPage->getAppliedCatalogPromotionsNames($variantName, $channelName)
+            $this->productShowPage->getAppliedCatalogPromotionsNames($variantName, $channelName),
         );
 
         $url = $this->urlGenerator->generate('sylius_admin_catalog_promotion_show', ['id' => $catalogPromotion->getId()]);

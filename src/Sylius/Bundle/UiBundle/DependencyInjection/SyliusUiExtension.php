@@ -90,8 +90,8 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                         'admin' => [
                             'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
                         ],
-                    ]
-                ]
+                    ],
+                ],
             ]);
         }
     }
