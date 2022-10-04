@@ -277,7 +277,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric($element)
     {
-        $this->assertFieldValidationMessage($element, 'This value is not valid.');
+        $this->assertFieldValidationMessage($element, 'Please enter a valid money amount.');
     }
 
     /**
@@ -738,11 +738,7 @@ final class ManagingPromotionsContext implements Context
         Assert::same($this->updatePage->getActionValidationErrorsCount($channel->getCode()), $count);
     }
 
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
