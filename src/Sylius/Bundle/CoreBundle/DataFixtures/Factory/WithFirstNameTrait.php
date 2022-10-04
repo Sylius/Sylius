@@ -18,10 +18,10 @@ use Zenstruck\Foundry\ModelFactory;
 /**
  * @mixin ModelFactory
  */
-trait WithDescriptionTrait
+trait WithFirstNameTrait
 {
-    public function withDescription(string $description): static
+    public function withFirstName(string $firstName): self
     {
-        return $this->addState(['description' => $description]);
+        return $this->addState(['first_name' => $firstName]);
     }
 }

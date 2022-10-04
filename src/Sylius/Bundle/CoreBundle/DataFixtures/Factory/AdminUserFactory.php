@@ -42,14 +42,17 @@ use Zenstruck\Foundry\Proxy;
 class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use ToggableTrait;
+    use WithEmailTrait;
+    use WithFirstNameTrait;
+    use WithLastNameTrait;
 
     private static ?string $modelClass = null;
 
     public function __construct(
-        private FactoryInterface                $adminUserFactory,
-        private AdminUserDefaultValuesInterface $factoryDefaultValues,
-        private AdminUserTransformerInterface   $factoryTransformer,
-        private AdminUserUpdaterInterface       $factoryUpdater,
+        private FactoryInterface $adminUserFactory,
+        private AdminUserDefaultValuesInterface $defaultValues,
+        private AdminUserTransformerInterface $transformer,
+        private AdminUserUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -57,11 +60,6 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withEmail(string $email): self
-    {
-        return $this->addState(['email' => $email]);
     }
 
     public function withUsername(string $username): self
@@ -79,16 +77,6 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
         return $this->addState(['api' => true]);
     }
 
-    public function withFirstName(string $firstName): self
-    {
-        return $this->addState(['first_name' => $firstName]);
-    }
-
-    public function withLastName(string $lastName): self
-    {
-        return $this->addState(['last_name' => $lastName]);
-    }
-
     public function withAvatar(string $avatar): self
     {
         return $this->addState(['avatar' => $avatar]);
@@ -101,17 +89,17 @@ class AdminUserFactory extends ModelFactory implements AdminUserFactoryInterface
 
     protected function getDefaults(): array
     {
-        return $this->factoryDefaultValues->getDefaults(self::faker());
+        return $this->defaultValues->getDefaults(self::faker());
     }
 
     protected function transform(array $attributes): array
     {
-        return $this->factoryTransformer->transform($attributes);
+        return $this->transformer->transform($attributes);
     }
 
     protected function update(AdminUserInterface $adminUser, $attributes): void
     {
-        $this->factoryUpdater->update($adminUser, $attributes);
+        $this->updater->update($adminUser, $attributes);
     }
 
     protected function initialize(): self

@@ -6,5 +6,5 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithChannelsInterface
 {
-    public function withChannels(array $channels): static;
+    public function withChannels(array $channels): self;
 }

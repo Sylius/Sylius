@@ -14,7 +14,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithChannelTrait
 {
-    public function withChannel(Proxy|ChannelInterface|string $channel): static
+    public function withChannel(Proxy|ChannelInterface|string $channel): self
     {
         return $this->addState(['channel' => $channel]);
     }

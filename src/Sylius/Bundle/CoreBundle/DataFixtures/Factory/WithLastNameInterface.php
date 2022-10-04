@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-interface WithCurrenciesInterface
+interface WithLastNameInterface
 {
     /**
      * @return $this
      */
-    public function withCurrencies(array $currencies): self;
+    public function withLastName(string $lastName): self;
 }

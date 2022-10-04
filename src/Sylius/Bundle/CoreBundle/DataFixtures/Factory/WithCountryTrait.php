@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithCountryTrait
 {
-    public function withCountry(Proxy|CountryInterface|string $country): static
+    public function withCountry(Proxy|CountryInterface|string $country): self
     {
         return $this->addState(['country' => $country]);
     }

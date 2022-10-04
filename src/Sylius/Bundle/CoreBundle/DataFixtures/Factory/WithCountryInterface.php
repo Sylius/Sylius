@@ -9,5 +9,8 @@ use Zenstruck\Foundry\Proxy;
 
 interface WithCountryInterface
 {
-    public function withCountry(Proxy|CountryInterface|string $country): static;
+    /**
+     * @return $this
+     */
+    public function withCountry(Proxy|CountryInterface|string $country): self;
 }

@@ -43,6 +43,11 @@ use Zenstruck\Foundry\Proxy;
 final class CustomerFactory extends ModelFactory implements CustomerFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithEmailTrait;
+    use WithFirstNameTrait;
+    use WithLastNameTrait;
+    use FemaleTrait;
+    use MaleTrait;
+    use WithPhoneNumberTrait;
 
     private static ?string $modelClass = null;
 
@@ -58,31 +63,6 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withFirstName(string $firstName): self
-    {
-        return $this->addState(['first_name' => $firstName]);
-    }
-
-    public function withLastName(string $lastName): self
-    {
-        return $this->addState(['last_name' => $lastName]);
-    }
-
-    public function male(): self
-    {
-        return $this->addState(['gender' => CustomerInterface::MALE_GENDER]);
-    }
-
-    public function female(): self
-    {
-        return $this->addState(['gender' => CustomerInterface::FEMALE_GENDER]);
-    }
-
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        return $this->addState(['phone_number' => $phoneNumber]);
     }
 
     public function withBirthday(\DateTimeInterface|string $birthday): self

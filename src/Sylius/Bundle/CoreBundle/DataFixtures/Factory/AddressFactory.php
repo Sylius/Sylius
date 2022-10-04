@@ -43,6 +43,9 @@ use Zenstruck\Foundry\Proxy;
 class AddressFactory extends ModelFactory implements AddressFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCustomerTrait;
+    use WithFirstNameTrait;
+    use WithLastNameTrait;
+    use WithPhoneNumberTrait;
 
     private static ?string $modelClass = null;
 
@@ -58,21 +61,6 @@ class AddressFactory extends ModelFactory implements AddressFactoryInterface, Fa
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withFirstName(string $firstName): self
-    {
-        return $this->addState(['first_name' => $firstName]);
-    }
-
-    public function withLastName(string $lastName): self
-    {
-        return $this->addState(['last_name' => $lastName]);
-    }
-
-    public function withPhoneNumber(string $phoneNumber): self
-    {
-        return $this->addState(['phone_number' => $phoneNumber]);
     }
 
     public function withCompany(string $company): self

@@ -13,7 +13,10 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithChannelsTrait
 {
-    public function withChannels(array $channels): static
+    /**
+     * @return $this
+     */
+    public function withChannels(array $channels): self
     {
         return $this->addState(['channels' => $channels]);
     }
