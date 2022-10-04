@@ -258,7 +258,7 @@ class UserController extends ResourceController
     protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
-        $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
+        $this->container->get('request_stack')->getSession()->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     /**

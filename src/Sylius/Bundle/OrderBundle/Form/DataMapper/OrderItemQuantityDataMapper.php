@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Form\DataMapper;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 
@@ -47,7 +48,7 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
         }
 
         if (!empty($formsOtherThanQuantity)) {
-            $this->propertyPathDataMapper->mapFormsToData($formsOtherThanQuantity, $viewData);
+            $this->propertyPathDataMapper->mapFormsToData(new ArrayCollection($formsOtherThanQuantity), $viewData);
         }
     }
 }

@@ -18,7 +18,7 @@ abstract class SessionAwareAjaxTest extends JsonApiTestCase
         try {
             $requestStack->getSession();
         } catch (SessionNotFoundException) {
-            $session = self::$kernel->getContainer()->get('session_factory.public')->createSession();
+            $session = self::$kernel->getContainer()->get('session.factory')->createSession();
             $request = new Request();
             $request->setSession($session);
             $requestStack->push($request);

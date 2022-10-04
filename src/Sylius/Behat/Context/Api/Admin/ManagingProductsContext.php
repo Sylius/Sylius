@@ -417,7 +417,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromItem($productOption), $productFromResponse['options'], true),
+            in_array($this->iriConverter->getIriFromItemInSection($productOption, 'admin'), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }

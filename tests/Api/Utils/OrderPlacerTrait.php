@@ -30,7 +30,7 @@ trait OrderPlacerTrait
     protected function placeOrder(string $tokenValue, string $email = 'sylius@example.com'): void
     {
         /** @var MessageBusInterface $commandBus */
-        $commandBus = $this->get('sylius.command_bus.public');
+        $commandBus = $this->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
         $pickupCartCommand->setChannelCode('WEB');

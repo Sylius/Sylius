@@ -5,20 +5,20 @@ on:
         -
             cron: "0 2 * * MON" # Run at 2am every Monday
     workflow_dispatch: ~
-    
+
 jobs:
     coding-standard:
         runs-on: ubuntu-latest
-        
+
         name: "Coding standard refactor"
-        
+
         timeout-minutes: 5
-        
+
         strategy:
             fail-fast: false
             matrix:
                 branch: ["1.11", "1.12"]
-        
+
         steps:
             -
                 uses: actions/checkout@v3
