@@ -9,10 +9,10 @@ use Zenstruck\Foundry\ModelFactory;
 /**
  * @mixin ModelFactory
  */
-trait WithCommentTrait
+trait WithLastNameTrait
 {
-    public function withComment(string $comment): self
+    public function withLastName(string $lastName): self
     {
-        return $this->addState(['comment' => $comment]);
+        return $this->addState(['last_name' => $lastName]);
     }
 }

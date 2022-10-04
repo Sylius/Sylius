@@ -6,5 +6,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithCommentInterface
 {
-    public function withComment(string $comment): static;
+    /**
+     * @return $this
+     */
+    public function withComment(string $comment): self;
 }

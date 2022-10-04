@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithCurrenciesTrait
 {
-    public function withCurrencies(array $currencies): static
+    public function withCurrencies(array $currencies): self
     {
         return $this->addState(['currencies' => $currencies]);
     }

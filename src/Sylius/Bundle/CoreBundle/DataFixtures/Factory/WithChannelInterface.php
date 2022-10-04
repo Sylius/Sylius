@@ -9,5 +9,8 @@ use Zenstruck\Foundry\Proxy;
 
 interface WithChannelInterface
 {
-    public function withChannel(Proxy|ChannelInterface|string $channel): static;
+    /**
+     * @return $this
+     */
+    public function withChannel(Proxy|ChannelInterface|string $channel): self;
 }

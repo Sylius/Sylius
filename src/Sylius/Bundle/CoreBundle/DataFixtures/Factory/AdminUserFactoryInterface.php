@@ -34,19 +34,13 @@ use Zenstruck\Foundry\Proxy;
  * @method static AdminUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AdminUserInterface|Proxy create(array|callable $attributes = [])
  */
-interface AdminUserFactoryInterface extends ToggableInterface
+interface AdminUserFactoryInterface extends ToggableInterface, WithEmailInterface, WithFirstNameInterface, WithLastNameInterface
 {
-    public function withEmail(string $email): self;
-
     public function withUsername(string $username): self;
 
     public function withPassword(string $password): self;
 
     public function withApiAccess(): self;
-
-    public function withFirstName(string $firstName): self;
-
-    public function withLastName(string $lastName): self;
 
     public function withAvatar(string $avatar): self;
 
