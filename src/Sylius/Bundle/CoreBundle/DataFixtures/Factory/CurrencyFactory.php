@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CurrencyDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CurrencyTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CurrencyUpdaterInterface;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -43,8 +46,12 @@ class CurrencyFactory extends ModelFactory implements CurrencyFactoryInterface, 
 
     private static ?string $modelClass = null;
 
-    public function __construct(private FactoryInterface $currencyFactory)
-    {
+    public function __construct(
+        private FactoryInterface $currencyFactory,
+        private CurrencyDefaultValuesInterface $defaultValues,
+        private CurrencyTransformerInterface $transformer,
+        private CurrencyUpdaterInterface $updater,
+    ) {
         parent::__construct();
     }
 
@@ -55,19 +62,30 @@ class CurrencyFactory extends ModelFactory implements CurrencyFactoryInterface, 
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => self::faker()->unique()->currencyCode(),
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(CurrencyInterface $currency, array $attributes): void
+    {
+        $this->updater->update($currency, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): CurrencyInterface {
                 /** @var CurrencyInterface $currency */
                 $currency = $this->currencyFactory->createNew();
 
-                $currency->setCode($attributes['code']);
+                $this->update($currency, $attributes);
 
                 return $currency;
             })

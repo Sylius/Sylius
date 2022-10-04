@@ -42,6 +42,9 @@
         <service id="sylius.data_fixtures.updater.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CountryUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CountryUpdaterInterface" alias="sylius.data_fixtures.updater.country" />
 
+        <service id="sylius.data_fixtures.updater.currency" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CurrencyUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CurrencyUpdaterInterface" alias="sylius.data_fixtures.updater.currency" />
+
         <service id="sylius.data_fixtures.updater.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdaterInterface" alias="sylius.data_fixtures.updater.customer" />
 
