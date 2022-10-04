@@ -20,7 +20,7 @@ class CustomerNotFoundException extends \RuntimeException
         parent::__construct($message ?: 'Customer could not be found.', 0, $previousException);
     }
 
-    public static function notFound(string $email): self
+    public static function withEmail(string $email): self
     {
         return new self(sprintf('Customer with email "%s" does not exist.', $email));
     }

@@ -34,7 +34,7 @@ final class CustomerProvider implements CustomerProviderInterface
         $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
 
         if ($customer === null) {
-            throw CustomerNotFoundException::notFound($email);
+            throw CustomerNotFoundException::withEmail($email);
         }
 
         return $customer;
