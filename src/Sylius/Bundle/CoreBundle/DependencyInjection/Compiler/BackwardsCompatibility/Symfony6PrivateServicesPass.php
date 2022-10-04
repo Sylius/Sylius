@@ -20,12 +20,6 @@ final class Symfony6PrivateServicesPass implements CompilerPassInterface
         $this->makeServicePublic('security.csrf.token_manager', $container);
         $this->makeServicePublic('security.token_storage', $container);
         $this->makeServicePublic('validator', $container);
-
-        if (str_starts_with((string) $container->getParameter('kernel.environment'), 'test')) {
-            $this->makeServicePublic('filesystem', $container);
-            $this->makeServicePublic('session.factory', $container);
-            $this->makeServicePublic('sylius.command_bus', $container);
-        }
     }
 
     private function makeServicePublic(string $serviceId, ContainerBuilder $container): void
