@@ -30,8 +30,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -39,7 +37,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private MessageBusInterface $messageBus,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -1173,14 +1170,6 @@ final class ManagingCatalogPromotionsContext implements Context
             ['products' => [$product->getCode()]],
             $this->responseChecker->getCollection($this->client->getLastResponse())[0]['scopes'][0]['configuration'],
         );
-    }
-
-    /**
-     * @Then this catalog promotion should be usable
-     */
-    public function thisCatalogPromotionShouldBeUsable(): void
-    {
-        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
     }
 
     /**

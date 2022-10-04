@@ -914,14 +914,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then this catalog promotion should be usable
-     */
-    public function thisCatalogPromotionShouldBeUsable(): void
-    {
-        // Intentionally left blank
-    }
-
-    /**
      * @Then the catalog promotion :catalogPromotionName should be available in channel :channelName
      */
     public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
