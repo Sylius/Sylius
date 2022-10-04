@@ -6,5 +6,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithLocalesInterface
 {
-    public function withLocales(array $locales): static;
+    /**
+     * @return $this
+     */
+    public function withLocales(array $locales): self;
 }

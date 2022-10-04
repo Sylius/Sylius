@@ -20,12 +20,12 @@ use Zenstruck\Foundry\ModelFactory;
  */
 trait ToggableTrait
 {
-    public function enabled(): static
+    public function enabled(): self
     {
         return $this->addState(['enabled' => true]);
     }
 
-    public function disabled(): static
+    public function disabled(): self
     {
         return $this->addState(['enabled' => false]);
     }

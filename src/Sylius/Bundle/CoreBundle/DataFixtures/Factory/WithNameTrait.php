@@ -11,7 +11,7 @@ use Zenstruck\Foundry\ModelFactory;
  */
 trait WithNameTrait
 {
-    public function withName(string $name): static
+    public function withName(string $name): self
     {
         return $this->addState(['name' => $name]);
     }

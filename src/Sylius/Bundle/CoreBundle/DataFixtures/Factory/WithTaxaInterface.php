@@ -6,5 +6,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithTaxaInterface
 {
-    public function withTaxa(array $taxa): static;
+    /**
+     * @return $this
+     */
+    public function withTaxa(array $taxa): self;
 }

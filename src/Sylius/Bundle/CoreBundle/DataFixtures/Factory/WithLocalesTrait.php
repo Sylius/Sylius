@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithLocalesTrait
 {
-    public function withLocales(array $locales): static
+    public function withLocales(array $locales): self
     {
         return $this->addState(['locales' => $locales]);
     }

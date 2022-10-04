@@ -9,10 +9,10 @@ use Zenstruck\Foundry\ModelFactory;
 /**
  * @mixin ModelFactory
  */
-trait WithStatusTrait
+trait WithEmailTrait
 {
-    public function withStatus(string $status): self
+    public function withEmail(string $email): self
     {
-        return $this->addState(['status' => $status]);
+        return $this->addState(['email' => $email]);
     }
 }

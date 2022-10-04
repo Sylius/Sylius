@@ -10,5 +10,8 @@ use Zenstruck\Foundry\Proxy;
 
 interface WithZoneInterface
 {
-    public function withZone(Proxy|ZoneInterface|string $zone): static;
+    /**
+     * @return $this
+     */
+    public function withZone(Proxy|ZoneInterface|string $zone): self;
 }

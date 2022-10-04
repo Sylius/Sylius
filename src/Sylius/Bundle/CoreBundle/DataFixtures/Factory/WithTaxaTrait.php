@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithTaxaTrait
 {
-    public function withTaxa(array $taxa): static
+    public function withTaxa(array $taxa): self
     {
         return $this->addState(['taxa' => $taxa]);
     }
