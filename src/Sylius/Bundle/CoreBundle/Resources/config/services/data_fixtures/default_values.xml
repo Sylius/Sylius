@@ -100,6 +100,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShippingMethodDefaultValuesInterface" alias="sylius.data_fixtures.default_values.shipping_method" />
 
+        <service id="sylius.data_fixtures.default_values.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShopUserDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.default_values.customer" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShopUserDefaultValuesInterface" alias="sylius.data_fixtures.default_values.shop_user" />
+
         <service id="sylius.data_fixtures.default_values.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxRateDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />

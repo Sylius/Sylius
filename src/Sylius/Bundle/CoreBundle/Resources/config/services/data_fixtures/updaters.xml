@@ -98,6 +98,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShippingMethodUpdaterInterface" alias="sylius.data_fixtures.updater.shipping_method" />
 
+        <service id="sylius.data_fixtures.updater.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShopUserUpdater">
+            <argument type="service" id="sylius.data_fixtures.updater.customer" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShopUserUpdaterInterface" alias="sylius.data_fixtures.updater.shop_user" />
+
         <service id="sylius.data_fixtures.updater.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdaterInterface" alias="sylius.data_fixtures.updater.tax_rate" />
     </services>

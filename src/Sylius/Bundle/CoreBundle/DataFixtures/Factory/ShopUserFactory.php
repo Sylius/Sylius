@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShopUserDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShopUserTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShopUserUpdaterInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
@@ -45,7 +48,9 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
     public function __construct(
         private FactoryInterface $shopUserFactory,
         private FactoryInterface $customerFactory,
-        private CustomerGroupFactoryInterface $customerGroupFactory,
+        private ShopUserDefaultValuesInterface $defaultValues,
+        private ShopUserTransformerInterface $transformer,
+        private ShopUserUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -87,7 +92,7 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
 
     public function withBirthday(\DateTimeInterface|string $birthday): self
     {
-        if (is_string($birthday)) {
+        if (\is_string($birthday)) {
             $birthday = new \DateTimeImmutable($birthday);
         }
 
@@ -101,50 +106,39 @@ final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInter
 
     public function withCustomerGroup(Proxy|CustomerGroupInterface|string $customerGroup): self
     {
-        return $this->addState(function () use ($customerGroup): array {
-            if (is_string($customerGroup)) {
-                return ['customer_group' => $this->customerGroupFactory::randomOrCreate(['code' => $customerGroup])];
-            }
-
-            return ['customer_group' => $customerGroup];
-        });
+        return $this->addState(['customer_group' => $customerGroup]);
     }
 
     protected function getDefaults(): array
     {
-        return [
-            'email' => self::faker()->email(),
-            'first_name' => self::faker()->firstName(),
-            'last_name' => self::faker()->lastName(),
-            'enabled' => true,
-            'password' => 'password123',
-            'customer_group' => $this->customerGroupFactory::randomOrCreate(),
-            'gender' => CustomerInterface::UNKNOWN_GENDER,
-            'phone_number' => self::faker()->phoneNumber(),
-            'birthday' => self::faker()->dateTimeBetween('-80 years', '-18 years'),
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(ShopUserInterface $shopUser, array $attributes): void
+    {
+        $this->updater->update($shopUser, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
-            ->instantiateWith(function(array $attributes): ShopUserInterface {
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transformer->transform($attributes);
+            })
+            ->instantiateWith(function (array $attributes): ShopUserInterface {
                 /** @var CustomerInterface $customer */
                 $customer = $this->customerFactory->createNew();
-                $customer->setEmail($attributes['email']);
-                $customer->setFirstName($attributes['first_name']);
-                $customer->setLastName($attributes['last_name']);
-                $customer->setGroup($attributes['customer_group']);
-                $customer->setGender($attributes['gender']);
-                $customer->setPhoneNumber($attributes['phone_number']);
-                $customer->setBirthday($attributes['birthday']);
 
                 /** @var ShopUserInterface $user */
                 $user = $this->shopUserFactory->createNew();
-                $user->setPlainPassword($attributes['password']);
-                $user->setEnabled($attributes['enabled']);
-                $user->addRole('ROLE_USER');
                 $user->setCustomer($customer);
+
+                $this->update($user, $attributes);
 
                 return $user;
             })
