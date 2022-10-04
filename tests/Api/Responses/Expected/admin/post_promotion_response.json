@@ -28,7 +28,6 @@
         "@type": "PromotionTranslation",
         "id": @integer@,
         "label": "T-Shirts discount",
-        "description": "50% discount on every T-Shirt",
         "locale": "en_US",
         "translatable": "\/api\/v2\/admin\/promotions\/@string@"
     }

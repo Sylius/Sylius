@@ -27,11 +27,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    public function specifyLabel(string $label, string $locale): void
+    public function specifyLabel(string $label, string $localeCode): void
     {
-        $this->getDocument()->find('css', 'div[data-locale="' . $locale . '"]')->click();
+        $this->getDocument()->find('css', 'div[data-locale="' . $localeCode . '"]')->click();
 
-        $this->getDocument()->fillField(sprintf('sylius_promotion_translations_%s_label', $locale), $label);
+        $this->getDocument()->fillField(sprintf('sylius_promotion_translations_%s_label', $localeCode), $label);
     }
 
     public function addRule(?string $ruleName): void
@@ -193,16 +193,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $this->hasElement('amount');
     }
 
-    public function hasLabel(string $label, string $locale): bool
+    public function hasLabel(string $label, string $localeCode): bool
     {
-        $this->getDocument()->find('css', 'div[data-locale="' . $locale . '"]')->click();
+        $this->getDocument()->find('css', 'div[data-locale="' . $localeCode . '"]')->click();
 
         $labelElement = $this->getDocument()->find('css', sprintf('label:contains("%s")', $label));
         if (null === $labelElement) {
             return false;
         }
 
-        return $labelElement->hasClass(sprintf('sylius-locale-%s', $locale));
+        return $labelElement->hasClass(sprintf('sylius-locale-%s', $localeCode));
     }
 
     protected function getDefinedElements(): array
