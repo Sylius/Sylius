@@ -39,6 +39,9 @@
         <service id="sylius.data_fixtures.updater.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdaterInterface" alias="sylius.data_fixtures.updater.channel" />
 
+        <service id="sylius.data_fixtures.updater.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdaterInterface" alias="sylius.data_fixtures.updater.customer" />
+
         <service id="sylius.data_fixtures.updater.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\OrderUpdater">
             <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />

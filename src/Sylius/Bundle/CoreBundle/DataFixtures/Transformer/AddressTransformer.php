@@ -13,20 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
 
 final class AddressTransformer implements AddressTransformerInterface
 {
-    public function __construct(private ShopUserFactoryInterface $shopUserFactory)
+    use TransformCustomerAttributeTrait;
+
+    public function __construct(private CustomerFactoryInterface $customerFactory)
     {
     }
 
     public function transform(array $attributes): array
     {
-        if (\is_string($attributes['customer'])) {
-            $attributes['customer'] = $this->shopUserFactory::findOrCreate(['email' => $attributes['customer']])->getCustomer();
-        }
-
-        return $attributes;
+        return $this->transformCustomerAttribute($attributes);
     }
 }
