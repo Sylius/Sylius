@@ -14,6 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\PaymentMethodDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelsTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PaymentMethodTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\PaymentMethodUpdaterInterface;
 use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface as ResourceFactoryInterface;

@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Component\Locale\Model\Locale;
-use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

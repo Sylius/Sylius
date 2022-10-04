@@ -13,6 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelsInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithTaxCategoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithZoneInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Zenstruck\Foundry\ModelFactory;

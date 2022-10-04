@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AdminUserDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithEmailTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AdminUserTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\AdminUserUpdaterInterface;
 use Sylius\Component\Core\Model\AdminUser;

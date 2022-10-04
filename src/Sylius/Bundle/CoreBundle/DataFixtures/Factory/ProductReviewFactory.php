@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductReviewDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCommentTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithProductTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithStatusTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithTitleTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductReviewUpdaterInterface;
 use Sylius\Component\Core\Model\ProductReview;

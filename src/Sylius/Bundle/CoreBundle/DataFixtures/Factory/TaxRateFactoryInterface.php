@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithZoneInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Zenstruck\Foundry\ModelFactory;

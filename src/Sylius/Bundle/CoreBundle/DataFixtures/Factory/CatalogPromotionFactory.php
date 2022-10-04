@@ -14,6 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CatalogPromotionDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelsTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPriorityTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CatalogPromotionUpdaterInterface;
 use Sylius\Component\Core\Model\CatalogPromotion;

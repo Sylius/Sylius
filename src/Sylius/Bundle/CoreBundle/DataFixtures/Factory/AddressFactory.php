@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCustomerTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPhoneNumberTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdaterInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxRateDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithZoneTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdaterInterface;
 use Sylius\Component\Core\Model\TaxRate;

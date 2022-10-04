@@ -14,11 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CustomerDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\FemaleTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\MaleTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithEmailTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPhoneNumberTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdaterInterface;
 use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

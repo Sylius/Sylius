@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\OrderDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCountryTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCustomerTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\OrderUpdaterInterface;
 use Sylius\Component\Core\Model\Order;

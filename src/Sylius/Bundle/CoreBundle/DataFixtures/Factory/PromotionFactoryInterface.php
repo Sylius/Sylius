@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelsInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPriorityInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
