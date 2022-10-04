@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\LocaleDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\LocaleTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\LocaleUpdaterInterface;
 use Sylius\Component\Locale\Model\Locale;
