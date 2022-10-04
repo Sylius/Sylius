@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ProductAttributeDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\TranslatableTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAttributeTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAttributeUpdaterInterface;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -45,13 +46,15 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
 {
     use WithCodeTrait;
     use WithNameTrait;
+    use TranslatableTrait;
 
     private static ?string $modelClass = null;
 
     public function __construct(
         private AttributeFactoryInterface $productAttributeFactory,
-        private RepositoryInterface $localeRepository,
-        private array $attributeTypes,
+        private ProductAttributeDefaultValuesInterface $defaultValues,
+        private ProductAttributeTransformerInterface $transformer,
+        private ProductAttributeUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -66,16 +69,6 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
         return $this->addState(['type' => $type]);
     }
 
-    public function translatable(): self
-    {
-        return $this->addState(['translatable' => true]);
-    }
-
-    public function untranslatable(): self
-    {
-        return $this->addState(['translatable' => false]);
-    }
-
     public function withConfiguration(array $configuration): self
     {
         return $this->addState(['configuration' => $configuration]);
@@ -83,35 +76,30 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => null,
-            'name' => self::faker()->words(3, true),
-            'type' => self::faker()->randomElement(array_keys($this->attributeTypes)),
-            'translatable' => true,
-            'configuration' => [],
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(ProductAttributeInterface $productAttribute, array $attributes): void
+    {
+        $this->updater->update($productAttribute, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): ProductAttributeInterface {
-                $code = $attributes['code'] ?? StringInflector::nameToCode($attributes['name']);
-
                 /** @var ProductAttributeInterface $productAttribute */
                 $productAttribute = $this->productAttributeFactory->createTyped($attributes['type']);
 
-                $productAttribute->setCode($code);
-                $productAttribute->setTranslatable($attributes['translatable']);
-
-                foreach ($this->getLocales() as $localeCode) {
-                    $productAttribute->setCurrentLocale($localeCode);
-                    $productAttribute->setFallbackLocale($localeCode);
-
-                    $productAttribute->setName($attributes['name']);
-                }
-
-                $productAttribute->setConfiguration($attributes['configuration']);
+                $this->update($productAttribute, $attributes);
 
                 return $productAttribute;
             })
@@ -121,14 +109,5 @@ class ProductAttributeFactory extends ModelFactory implements ProductAttributeFa
     protected static function getClass(): string
     {
         return self::$modelClass ?? ProductAttribute::class;
-    }
-
-    private function getLocales(): iterable
-    {
-        /** @var LocaleInterface[] $locales */
-        $locales = $this->localeRepository->findAll();
-        foreach ($locales as $locale) {
-            yield $locale->getCode();
-        }
     }
 }

@@ -33,6 +33,8 @@ final class ProductAttributeFactoryTest extends KernelTestCase
         $this->assertInstanceOf(ProductAttributeInterface::class, $productAttribute->object());
         $this->assertNotNull($productAttribute->getCode());
         $this->assertTrue($productAttribute->isTranslatable());
+        $this->assertCount(1, $productAttribute->getTranslations());
+        $this->assertNotNull($productAttribute->getTranslation('en_US')->getName());
     }
 
     /** @test */

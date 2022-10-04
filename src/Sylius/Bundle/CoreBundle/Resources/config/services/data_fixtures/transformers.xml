@@ -91,6 +91,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAssociationTransformerInterface" alias="sylius.data_fixtures.transformer.product_association" />
 
+        <service id="sylius.data_fixtures.transformer.product_attribute" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAttributeTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAttributeTransformerInterface" alias="sylius.data_fixtures.transformer.product_attribute" />
+
         <service id="sylius.data_fixtures.transformer.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.customer" />
             <argument type="service" id="sylius.data_fixtures.factory.product" />
