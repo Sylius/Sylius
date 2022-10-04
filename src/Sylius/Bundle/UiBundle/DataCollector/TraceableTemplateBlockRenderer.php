@@ -16,10 +16,7 @@ namespace Sylius\Bundle\UiBundle\DataCollector;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class TraceableTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
     public function __construct(

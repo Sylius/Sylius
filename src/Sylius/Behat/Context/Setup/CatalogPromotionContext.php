@@ -22,8 +22,6 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPrice
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -57,6 +55,7 @@ final class CatalogPromotionContext implements Context
 
     /**
      * @Given there is a catalog promotion with :code code and :name name
+     * @Given there is also a catalog promotion with :code code and :name name
      */
     public function thereIsACatalogPromotionWithCodeAndName(string $code, string $name): void
     {

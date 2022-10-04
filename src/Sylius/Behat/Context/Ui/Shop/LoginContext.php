@@ -266,7 +266,7 @@ final class LoginContext implements Context
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(
             'password',
-            sprintf('Password must be at least %s characters long.', $length)
+            sprintf('Password must be at least %s characters long.', $length),
         ));
     }
 

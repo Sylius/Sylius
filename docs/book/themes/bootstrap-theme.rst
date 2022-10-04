@@ -2,7 +2,6 @@ Theming with BootstrapTheme
 ---------------------------
 
 This tutorial will guide you on how to create your own theme based on `BootstrapTheme <https://github.com/Sylius/BootstrapTheme>`_ using Webpack.
-If you haven't used Webpack yet, :doc:`here </cookbook/frontend/webpack>` you can learn how to do it.
 
 Tutorial is divided into 3 parts:
 

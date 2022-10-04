@@ -16,10 +16,7 @@ namespace Sylius\Bundle\UiBundle\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/**
- * @internal
- * @experimental
- */
+/** @internal */
 final class LegacySonataBlockExtension extends AbstractExtension
 {
     /** @var array */

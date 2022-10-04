@@ -52,7 +52,7 @@ If the need arises, you can obviously change these settings later.
 3. Install Node Dependencies
 ----------------------------
 
-Sylius requires several Node packages, which also needs to be installed and updated before setting up the shop. In addition, I also need to start and setup Gulp.
+Sylius requires several Node packages, which also needs to be installed and updated before setting up the shop. In addition, I also need to start and setup Webpack.
 
 Now move to the myshop folder by using ``cd myshop`` and run the following command ``yarn install``. Once the command finishes, run the next command, ``yarn build``.
 

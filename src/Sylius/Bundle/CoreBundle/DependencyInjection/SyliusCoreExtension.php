@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
-use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -75,10 +74,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->setAlias(
             FilesystemAdapterInterface::class,
-            match($config['filesystem']['adapter']) {
+            match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
                 'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
-            }
+            },
         );
     }
 

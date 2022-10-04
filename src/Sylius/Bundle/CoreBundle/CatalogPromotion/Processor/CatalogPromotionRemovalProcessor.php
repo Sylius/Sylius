@@ -54,8 +54,8 @@ final class CatalogPromotionRemovalProcessor implements CatalogPromotionRemovalP
             throw new InvalidCatalogPromotionStateException(
                 sprintf(
                     'Catalog promotion with code "%s" cannot be removed as it is now being processed.',
-                    $catalogPromotionCode
-                )
+                    $catalogPromotionCode,
+                ),
             );
         }
 

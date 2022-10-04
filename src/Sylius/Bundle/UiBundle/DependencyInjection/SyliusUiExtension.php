@@ -41,8 +41,6 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
     }
 
     /**
-     * @experimental
-     *
      * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
@@ -78,7 +76,7 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
 
     public function prepend(ContainerBuilder $container): void
     {
-        $useWebpack = $this->getCurrentConfiguration($container)['use_webpack'] ?? true;
+        $useWebpack = $this->isWebpackEnabled($container);
 
         $container->setParameter('sylius_ui.use_webpack', $useWebpack);
 
@@ -92,19 +90,23 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                         'admin' => [
                             'json_manifest_path' => '%kernel.project_dir%/public/build/admin/manifest.json',
                         ],
-                    ]
-                ]
+                    ],
+                ],
             ]);
         }
     }
 
-    private function getCurrentConfiguration(ContainerBuilder $container): array
+    private function isWebpackEnabled(ContainerBuilder $container): bool
     {
         /** @var ConfigurationInterface $configuration */
-        $configuration = $this->getConfiguration([], $container);
-
         $configs = $container->getExtensionConfig($this->getAlias());
 
-        return $this->processConfiguration($configuration, $configs);
+        foreach (array_reverse($configs) as $config) {
+            if (isset($config['use_webpack'])) {
+                return (bool) $config['use_webpack'];
+            }
+        }
+
+        return true;
     }
 }

@@ -94,7 +94,7 @@ final class ChannelContext implements Context
         string $channelName = null,
         string $currencyCode = null,
         string $hostname = null,
-        string $channelCode = null
+        string $channelCode = null,
     ): void {
         $channelCode = $channelCode ?? StringInflector::nameToLowercaseCode($channelName);
         $channelName = $channelName ?? $channelCode;

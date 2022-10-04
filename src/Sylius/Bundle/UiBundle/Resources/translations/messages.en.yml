@@ -252,6 +252,7 @@ sylius:
         disable: 'Disable'
         disabled: 'Disabled'
         discount: 'Discount'
+        discounted_by: 'Discounted by'
         discounted_unit_price: 'Discounted unit price'
         display: 'Display'
         distributed_order_discount: 'Distributed order discount'

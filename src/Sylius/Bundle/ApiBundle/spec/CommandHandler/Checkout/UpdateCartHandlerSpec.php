@@ -37,7 +37,7 @@ final class UpdateCartHandlerSpec extends ObjectBehavior
             $orderRepository,
             $orderAddressModifier,
             $orderPromotionCodeAssigner,
-            $customerResolver
+            $customerResolver,
         );
     }
 

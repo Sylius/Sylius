@@ -33,7 +33,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 final class ApiCartBlamerListenerSpec extends ObjectBehavior
@@ -70,8 +69,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                     $token->getWrappedObject(),
                     $request->getWrappedObject(),
                     null,
-                    'new_api_shop_user'
-                )
+                    'new_api_shop_user',
+                ),
             ])
         ;
     }
@@ -113,8 +112,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 
@@ -142,8 +141,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 
@@ -170,8 +169,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 
@@ -196,8 +195,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 
@@ -222,8 +221,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 
@@ -248,8 +247,8 @@ final class ApiCartBlamerListenerSpec extends ObjectBehavior
                 $token->getWrappedObject(),
                 $request->getWrappedObject(),
                 null,
-                'new_api_shop_user'
-            )
+                'new_api_shop_user',
+            ),
         );
     }
 }
