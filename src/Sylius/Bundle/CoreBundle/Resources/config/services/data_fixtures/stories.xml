@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.data_fixtures.story.default_admin_users" class="Sylius\Bundle\CoreBundle\DataFixtures\Story\DefaultAdminUsersStory">
             <argument type="service" id="sylius.data_fixtures.factory.admin_user" />

@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.data_fixtures.transformer.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.customer" />
@@ -132,5 +132,8 @@
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformerInterface" alias="sylius.data_fixtures.transformer.tax_rate" />
+
+        <service id="sylius.data_fixtures.transformer.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxonTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxonTransformerInterface" alias="sylius.data_fixtures.transformer.taxon" />
     </services>
 </container>

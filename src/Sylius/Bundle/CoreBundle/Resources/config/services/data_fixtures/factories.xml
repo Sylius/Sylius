@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <instanceof id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\FactoryWithModelClassAwareInterface">
             <configurator service="Sylius\Bundle\CoreBundle\DataFixtures\Factory\Configurator" method="configure"/>
@@ -267,7 +267,9 @@
             <argument type="service" id="sylius.factory.taxon" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="sylius.generator.taxon_slug" />
+            <argument type="service" id="sylius.data_fixtures.default_values.taxon" />
+            <argument type="service" id="sylius.data_fixtures.transformer.taxon" />
+            <argument type="service" id="sylius.data_fixtures.updater.taxon" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface" alias="sylius.data_fixtures.factory.taxon" />
