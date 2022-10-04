@@ -24,7 +24,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -37,7 +36,6 @@ final class ManagingPromotionsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
-        private LocaleConverterInterface $localeConverter,
     ) {
     }
 
@@ -114,16 +112,16 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsLabelInLocaleCode(string $label, string $localeCode): void
     {
-        $this->createPage->specifyLabel($label, $this->localeConverter->convertNameToCode($localeCode));
+        $this->createPage->specifyLabel($label, $localeCode);
     }
 
     /**
-     * @When the :promotion promotion should have a label :label in :locale locale
+     * @When the :promotion promotion should have a label :label in :localeCode locale
      */
-    public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $locale): void
+    public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $localeCode): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
-        $this->createPage->hasLabel($label, $this->localeConverter->convertNameToCode($locale));
+        $this->createPage->hasLabel($label, $localeCode);
     }
 
     /**

@@ -26,12 +26,6 @@
             <group>admin:promotion:update</group>
         </attribute>
 
-        <attribute name="description">
-            <group>admin:promotion:read</group>
-            <group>admin:promotion:create</group>
-            <group>admin:promotion:update</group>
-        </attribute>
-
         <attribute name="locale">
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>

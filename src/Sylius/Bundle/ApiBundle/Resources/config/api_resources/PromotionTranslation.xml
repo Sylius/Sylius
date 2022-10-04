@@ -29,7 +29,6 @@
 
         <property name="id" identifier="true" writable="false" />
         <property name="label" identifier="false" />
-        <property name="description" identifier="false" />
         <property name="locale" identifier="false" required="true" />
     </resource>
 </resources>

@@ -22,8 +22,6 @@ class PromotionTranslation extends AbstractTranslation implements PromotionTrans
 
     protected ?string $label = null;
 
-    protected ?string $description = null;
-
     public function getId()
     {
         return $this->id;
@@ -37,15 +35,5 @@ class PromotionTranslation extends AbstractTranslation implements PromotionTrans
     public function setLabel(?string $label): void
     {
         $this->label = $label;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): void
-    {
-        $this->description = $description;
     }
 }

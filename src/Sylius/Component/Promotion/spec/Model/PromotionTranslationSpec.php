@@ -39,10 +39,4 @@ final class PromotionTranslationSpec extends ObjectBehavior
         $this->setLabel('Mugs discount');
         $this->getLabel()->shouldReturn('Mugs discount');
     }
-
-    function its_description_is_mutable(): void
-    {
-        $this->setDescription('Discount on every mug.');
-        $this->getDescription()->shouldReturn('Discount on every mug.');
-    }
 }

@@ -69,7 +69,6 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="label">string</attribute>
-                        <attribute name="description">string</attribute>
                         <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>

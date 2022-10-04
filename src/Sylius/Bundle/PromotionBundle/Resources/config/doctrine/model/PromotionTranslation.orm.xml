@@ -18,6 +18,5 @@
         </id>
 
         <field name="label" nullable="true" />
-        <field name="description" nullable="true" />
     </mapped-superclass>
 </doctrine-mapping>

@@ -27,10 +27,6 @@ final class PromotionTranslationType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.label',
                 'required' => false,
             ])
-            ->add('description', TextareaType::class, [
-                'label' => 'sylius.form.promotion.description',
-                'required' => false,
-            ])
         ;
     }
 
