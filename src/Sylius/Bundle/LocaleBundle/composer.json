@@ -36,7 +36,7 @@
         "twig/twig": "^1.0"
     },
     "require-dev": {
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.13",
         "friendsofphp/proxy-manager-lts": "^1.0.7",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",

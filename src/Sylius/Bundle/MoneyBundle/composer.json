@@ -36,7 +36,7 @@
         "twig/twig": "^1.0"
     },
     "require-dev": {
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "dev-support-symfony-6",
