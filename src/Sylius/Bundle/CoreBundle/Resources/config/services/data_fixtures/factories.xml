@@ -79,12 +79,12 @@
 
         <service id="sylius.data_fixtures.factory.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactory">
             <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
             <argument type="service" id="sylius.data_fixtures.default_values.customer" />
+            <argument type="service" id="sylius.data_fixtures.transformer.customer" />
+            <argument type="service" id="sylius.data_fixtures.updater.customer" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface" alias="sylius.data_fixtures.factory.customer" />
-
 
         <service id="sylius.data_fixtures.factory.customer_group" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactory">
             <argument type="service" id="sylius.factory.customer_group" />

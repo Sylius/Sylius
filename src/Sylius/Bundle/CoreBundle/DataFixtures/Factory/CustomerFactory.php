@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CustomerDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CustomerUpdaterInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -44,8 +46,9 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
 
     public function __construct(
         private FactoryInterface $customerFactory,
-        private CustomerGroupFactoryInterface $customerGroupFactory,
         private CustomerDefaultValuesInterface $defaultValues,
+        private CustomerTransformerInterface $transformer,
+        private CustomerUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -101,13 +104,7 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
 
     public function withGroup(Proxy|CustomerGroupInterface|string $customerGroup): self
     {
-        return $this->addState(function () use ($customerGroup): array {
-            if (is_string($customerGroup)) {
-                return ['customer_group' => $this->customerGroupFactory::randomOrCreate(['code' => $customerGroup])];
-            }
-
-            return ['customer_group' => $customerGroup];
-        });
+        return $this->addState(['customer_group' => $customerGroup]);
     }
 
     protected function getDefaults(): array
@@ -115,19 +112,27 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
         return $this->defaultValues->getDefaults(self::faker());
     }
 
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(CustomerInterface $customer, array $attributes): void
+    {
+        $this->updater->update($customer, $attributes);
+    }
+
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): CustomerInterface {
                 /** @var CustomerInterface $customer */
                 $customer = $this->customerFactory->createNew();
-                $customer->setEmail($attributes['email']);
-                $customer->setFirstName($attributes['first_name']);
-                $customer->setLastName($attributes['last_name']);
-                $customer->setGroup($attributes['customer_group']);
-                $customer->setGender($attributes['gender']);
-                $customer->setPhoneNumber($attributes['phone_number']);
-                $customer->setBirthday($attributes['birthday']);
+
+                $this->update($customer, $attributes);
 
                 return $customer;
             })

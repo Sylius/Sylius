@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.data_fixtures.transformer.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.factory.customer" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface" alias="sylius.data_fixtures.transformer.address" />
 
@@ -46,6 +46,11 @@
             <argument type="service" id="sylius.data_fixtures.factory.currency" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
+
+        <service id="sylius.data_fixtures.transformer.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformer">
+            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformerInterface" alias="sylius.data_fixtures.transformer.customer" />
 
         <service id="sylius.data_fixtures.transformer.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.channel" />
