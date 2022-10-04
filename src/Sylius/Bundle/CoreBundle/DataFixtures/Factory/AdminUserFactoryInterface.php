@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithEmailInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

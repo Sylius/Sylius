@@ -14,6 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ChannelDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCurrenciesTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLocalesTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ChannelUpdaterInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;

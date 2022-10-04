@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCommentInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithProductInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithStatusInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithTitleInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Zenstruck\Foundry\ModelFactory;

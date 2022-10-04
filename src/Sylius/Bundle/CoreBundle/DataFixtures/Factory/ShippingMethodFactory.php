@@ -14,6 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ShippingMethodDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithChannelsTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithTaxCategoryTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithZoneTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ShippingMethodUpdaterInterface;
 use Sylius\Component\Core\Model\ShippingMethod;
