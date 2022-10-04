@@ -24,7 +24,7 @@ jobs:
     static-checks:
         runs-on: ubuntu-latest
 
-        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), API Platform ${{ matrix.api-platform }})"
+        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
 
         timeout-minutes: 10
 
@@ -33,13 +33,6 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4", "^6.0"]
-                api-platform: ["^2.7"]
-
-                include:
-                    -
-                        php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
 
         steps:
             -
@@ -67,11 +60,6 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
-
-            -
-                name: Restrict API Platform version
-                if: matrix.api-platform != ''
-                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
