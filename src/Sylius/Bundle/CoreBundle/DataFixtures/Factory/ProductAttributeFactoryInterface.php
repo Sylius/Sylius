@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\TranslatableInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -36,7 +37,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ProductAttributeInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ProductAttributeInterface|Proxy create(array|callable $attributes = [])
  */
-interface ProductAttributeFactoryInterface extends WithCodeInterface, WithNameInterface
+interface ProductAttributeFactoryInterface extends WithCodeInterface, WithNameInterface, TranslatableInterface
 {
     public function withType(string $type): self;
 

@@ -174,8 +174,9 @@
 
         <service id="sylius.data_fixtures.factory.product_attribute" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactory">
             <argument type="service" id="sylius.factory.product_attribute" />
-            <argument type="service" id="sylius.repository.locale" />
-            <argument>%sylius.attribute.attribute_types%</argument>
+            <argument type="service" id="sylius.data_fixtures.default_values.product_attribute" />
+            <argument type="service" id="sylius.data_fixtures.transformer.product_attribute" />
+            <argument type="service" id="sylius.data_fixtures.updater.product_attribute" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface" alias="sylius.data_fixtures.factory.product_attribute" />

@@ -85,6 +85,11 @@
         <service id="sylius.data_fixtures.updater.product_association" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAssociationUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAssociationUpdaterInterface" alias="sylius.data_fixtures.updater.product_association" />
 
+        <service id="sylius.data_fixtures.updater.product_attribute" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAttributeUpdater">
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductAttributeUpdaterInterface" alias="sylius.data_fixtures.updater.product_attribute" />
+
         <service id="sylius.data_fixtures.updater.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ProductReviewUpdater">
             <argument type="service" id="sm.factory" />
         </service>
