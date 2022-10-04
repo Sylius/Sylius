@@ -1,3 +1,3 @@
-* :doc:`/cookbook/frontend/admin-js-and-css`
 * :doc:`/cookbook/frontend/google-analytics`
-* :doc:`/cookbook/frontend/webpack`
+* :doc:`/cookbook/frontend/migrating-to-webpack`
+* :doc:`/cookbook/frontend/staying-with-gulp`

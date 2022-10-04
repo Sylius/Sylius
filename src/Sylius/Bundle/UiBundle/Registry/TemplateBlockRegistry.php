@@ -15,9 +15,6 @@ namespace Sylius\Bundle\UiBundle\Registry;
 
 use Laminas\Stdlib\SplPriorityQueue;
 
-/**
- * @experimental
- */
 final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
 {
     /**

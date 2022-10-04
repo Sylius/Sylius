@@ -17,9 +17,6 @@ use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Twig\Environment;
 
-/**
- * @experimental
- */
 final class TwigTemplateBlockRenderer implements TemplateBlockRendererInterface
 {
     public function __construct(private Environment $twig, private iterable $contextProviders)

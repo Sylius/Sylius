@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class RemoveCatalogPromotionAction
 {
     public function __construct(
-        private CatalogPromotionRemovalProcessorInterface $catalogPromotionRemovalProcessor
+        private CatalogPromotionRemovalProcessorInterface $catalogPromotionRemovalProcessor,
     ) {
     }
 

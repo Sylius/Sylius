@@ -25,7 +25,7 @@ final class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
     {
         @trigger_error(sprintf(
             'The "%s" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use "%s" instead.',
-            GaufretteFilesystemAdapter::class,
+            self::class,
             FlysystemFilesystemAdapter::class,
         ), \E_USER_DEPRECATED);
     }

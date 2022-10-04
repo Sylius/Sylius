@@ -18,5 +18,4 @@ use Sylius\Component\Core\Model\CustomerInterface;
 interface CustomerResolverInterface
 {
     public function resolve(string $email): CustomerInterface;
-
 }

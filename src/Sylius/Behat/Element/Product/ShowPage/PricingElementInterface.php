@@ -18,4 +18,8 @@ interface PricingElementInterface
     public function getPriceForChannel(string $channelName): string;
 
     public function getOriginalPriceForChannel(string $channelName): string;
+
+    public function getCatalogPromotionsNamesForChannel(string $channelName): array;
+
+    public function getCatalogPromotionLinksForChannel(string $channelName): array;
 }

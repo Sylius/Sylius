@@ -41,8 +41,8 @@ final class RemoveInactiveCatalogPromotionHandler
             throw new InvalidCatalogPromotionStateException(
                 sprintf(
                     'Catalog promotion with code "%s" cannot be removed as it is not in an inactive state.',
-                    $catalogPromotion->getCode()
-                )
+                    $catalogPromotion->getCode(),
+                ),
             );
         }
 

@@ -65,7 +65,7 @@ final class CustomerEmailUpdaterListenerSpec extends ObjectBehavior
         ChannelInterface $channel,
         SectionProviderInterface $sectionResolver,
         ShopSection $shopSection,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
     ): void {
         $sectionResolver->getSection()->willReturn($shopSection);
 

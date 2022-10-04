@@ -32,7 +32,8 @@
         "sylius/registry": "^1.5",
         "sylius/resource-bundle": "^1.7",
         "sylius/taxation": "^1.6",
-        "symfony/framework-bundle": "^5.4"
+        "symfony/framework-bundle": "^5.4",
+        "sylius/calendar": "^0.3"
     },
     "conflict": {
         "twig/twig": "^3.0"

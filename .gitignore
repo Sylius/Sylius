@@ -51,7 +51,6 @@
 !/config/jwt/*-test.pem
 ###< lexik/jwt-authentication-bundle ###
 
-
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/

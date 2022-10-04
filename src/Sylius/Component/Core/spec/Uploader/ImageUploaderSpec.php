@@ -25,7 +25,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 final class ImageUploaderSpec extends ObjectBehavior
 {
-    function let(ImageInterface $image): void {
+    function let(ImageInterface $image): void
+    {
         $file = new File(__FILE__);
         $image->getFile()->willReturn($file);
     }

@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Taxation\Resolver;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxation\Checker\TaxRateDateCheckerInterface;
+use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 final class TaxRateResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $taxRateRepository, TaxRateDateCheckerInterface $taxRateDateChecker): void
+    function let(RepositoryInterface $taxRateRepository, TaxRateDateEligibilityCheckerInterface $taxRateDateChecker): void
     {
         $this->beConstructedWith($taxRateRepository, $taxRateDateChecker);
     }
@@ -35,7 +35,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
 
     function it_returns_tax_rate_for_given_taxable_category(
         RepositoryInterface $taxRateRepository,
-        TaxRateDateCheckerInterface $taxRateDateChecker,
+        TaxRateDateEligibilityCheckerInterface $taxRateDateChecker,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $firstTaxRate,
@@ -49,9 +49,11 @@ final class TaxRateResolverSpec extends ObjectBehavior
             ->willReturn([$firstTaxRate, $secondTaxRate, $thirdTaxRate])
         ;
 
-        $taxRateDateChecker->filter([$firstTaxRate, $secondTaxRate, $thirdTaxRate])->willReturn($firstTaxRate);
+        $taxRateDateChecker->isEligible($firstTaxRate)->willReturn(false);
+        $taxRateDateChecker->isEligible($secondTaxRate)->willReturn(true);
+        $taxRateDateChecker->isEligible($thirdTaxRate)->willReturn(true);
 
-        $this->resolve($taxable)->shouldReturn($firstTaxRate);
+        $this->resolve($taxable)->shouldReturn($secondTaxRate);
     }
 
     function it_returns_null_if_taxable_does_not_belong_to_any_category(

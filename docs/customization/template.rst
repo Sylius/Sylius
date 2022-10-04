@@ -236,7 +236,114 @@ That's it. Your new block should appear in the view.
 
 .. tip::
 
-    Learn more about adding custom Admin JS & CSS in the cookbook :doc:`here </cookbook/frontend/admin-js-and-css>`.
+    Learn more about adding custom JS & CSS in the cookbook :doc:`here </book/frontend/managing-assets>`.
+
+Passing variables to the template events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, Sylius Template Events provide all variables from the template. If you want to pass some additional
+variables, you can do it with the ``context`` key in the configuration. Let's greet our customers at the top of
+the homepage:
+
+.. code-block:: twig
+
+    {# templates/greeting.html.twig #}
+
+    <h2>{{ message }}</h2>
+
+.. code-block:: yaml
+
+    # config/packages/sylius_ui.yaml
+
+    sylius_ui:
+        events:
+            sylius.shop.homepage:
+                blocks:
+                    greeting:
+                        template: 'greeting.html.twig'
+                        priority: 70
+                        context:
+                            message: 'Hello!'
+
+However, this simple way of passing variables may not be sufficient when you want to pass some complex data that comes
+as a result of application logic. Perhaps you would like to greet customers with their names. In such cases, you need to
+define your own ``Context Provider``.
+
+Context Providers
+"""""""""""""""""
+
+Context Providers are responsible for providing context to the template events. The default one is the
+``DefaultContextProvider`` which provides all variables from the template and from the context in the block's
+configuration. You can have multiple Context Providers and they will provide their context to the template events with
+the given priority with the ``sylius.ui.template_event.context_provider`` tag.
+
+Let's do something fancier than just greeting customers with a name. Say happy birthday to the customer! To do so,
+create a ``GreetingContextProvider`` that will provide the ``message`` variable from the example above but this time
+depending on the customer's birthday:
+
+    .. code-block:: php
+
+        <?php
+
+        declare(strict_types=1);
+
+        namespace App\ContextProvider;
+
+        use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
+        use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+        use Sylius\Component\Customer\Context\CustomerContextInterface;
+
+        final class GreetingContextProvider implements ContextProviderInterface
+        {
+            public function __construct(private CustomerContextInterface $customerContext)
+            {
+            }
+
+            public function provide(array $templateContext, TemplateBlock $templateBlock): array
+            {
+                $customer = $this->customerContext->getCustomer();
+
+                if (null === $customer) {
+                    return $templateContext;
+                }
+
+                $customerName = $customer->getFirstName() ?? $customer->getFullName();
+
+                if (
+                    null === $customer->getBirthday() ||
+                    $customer->getBirthday()->format("m-d") !== (new \DateTime())->format("m-d")
+                ) {
+                    $templateContext['message'] = sprintf('Hello %s!', $customerName);
+                } else {
+                    $templateContext['message'] = sprintf('Happy Birthday %s!', $customerName);
+                }
+
+                return $templateContext;
+            }
+
+            public function supports(TemplateBlock $templateBlock): bool
+            {
+                return 'sylius.shop.homepage' === $templateBlock->getEventName()
+                    && 'greeting' === $templateBlock->getName();
+            }
+        }
+
+Register the new Context Provider as a service in the ``config/services.yaml``:
+
+    .. code-block:: yaml
+
+        services:
+            # ...
+
+            App\ContextProvider\GreetingContextProvider:
+                arguments:
+                    - '@sylius.context.customer'
+                tags:
+                    - { name: sylius.ui.template_event.context_provider }
+
+Now if the customer's birthday is today, they will be greeted with a happy birthday message.
+
+.. image:: /_images/sylius_template_events_greeting.png
 
 What more can I do with the Sylius Template Events?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -267,7 +374,7 @@ You might think that this is the only way of customisation with the events, but 
                         my_important_block:
                             priority: 1
 
-3. Pass variables:
+3. Access variables:
     You can access variables by using the function:
 
     .. code-block:: html

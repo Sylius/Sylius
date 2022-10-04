@@ -43,7 +43,7 @@ final class ProductVariantCatalogPromotionFilter extends AbstractContextAwareFil
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
-        string $operationName = null
+        string $operationName = null,
     ): void {
         if ('catalogPromotion' !== $property) {
             return;
