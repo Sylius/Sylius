@@ -234,7 +234,9 @@
         <service id="sylius.data_fixtures.factory.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
+            <argument type="service" id="sylius.data_fixtures.default_values.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.transformer.shop_user" />
+            <argument type="service" id="sylius.data_fixtures.updater.shop_user" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface" alias="sylius.data_fixtures.factory.shop_user" />

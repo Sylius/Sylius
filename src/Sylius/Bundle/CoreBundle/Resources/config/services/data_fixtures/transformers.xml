@@ -113,6 +113,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface" alias="sylius.data_fixtures.transformer.shipping_method" />
 
+        <service id="sylius.data_fixtures.transformer.shop_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShopUserTransformer">
+            <argument type="service" id="sylius.data_fixtures.transformer.customer" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShopUserTransformerInterface" alias="sylius.data_fixtures.transformer.shop_user" />
+
         <service id="sylius.data_fixtures.transformer.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.zone" />
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />

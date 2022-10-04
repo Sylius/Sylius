@@ -26,7 +26,7 @@ final class ShopUserFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_customer_with_random_data(): void
+    function it_creates_customer_with_default_values(): void
     {
         $shopUser = ShopUserFactory::createOne();
 
