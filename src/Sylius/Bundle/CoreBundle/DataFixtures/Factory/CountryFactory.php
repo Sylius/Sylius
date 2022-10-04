@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\CountryDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\ToggableTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CountryTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\CountryUpdaterInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -45,8 +48,12 @@ class CountryFactory extends ModelFactory implements CountryFactoryInterface, Fa
 
     private static ?string $modelClass = null;
 
-    public function __construct(private FactoryInterface $countryFactory)
-    {
+    public function __construct(
+        private FactoryInterface $countryFactory,
+        private CountryDefaultValuesInterface $defaultValues,
+        private CountryTransformerInterface $transformer,
+        private CountryUpdaterInterface $updater,
+    ) {
         parent::__construct();
     }
 
@@ -57,21 +64,30 @@ class CountryFactory extends ModelFactory implements CountryFactoryInterface, Fa
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => self::faker()->unique()->countryCode(),
-            'enabled' => self::faker()->boolean(80),
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(CountryInterface $country, array $attributes): void
+    {
+        $this->updater->update($country, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
-            ->instantiateWith(function(array $attributes): CountryInterface {
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transform($attributes);
+            })
+            ->instantiateWith(function (array $attributes): CountryInterface {
                 /** @var Country $country */
                 $country = $this->countryFactory->createNew();
 
-                $country->setCode($attributes['code']);
-                $country->setEnabled($attributes['enabled']);
+                $this->update($country, $attributes);
 
                 return $country;
             })

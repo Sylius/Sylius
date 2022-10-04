@@ -77,6 +77,15 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface" alias="sylius.data_fixtures.factory.channel" />
 
+        <service id="sylius.data_fixtures.factory.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory">
+            <argument type="service" id="sylius.factory.country" />
+            <argument type="service" id="sylius.data_fixtures.default_values.country" />
+            <argument type="service" id="sylius.data_fixtures.transformer.country" />
+            <argument type="service" id="sylius.data_fixtures.updater.country" />
+            <tag name="foundry.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface" alias="sylius.data_fixtures.factory.country" />
+
         <service id="sylius.data_fixtures.factory.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactory">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.data_fixtures.default_values.customer" />
@@ -91,12 +100,6 @@
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactoryInterface" alias="sylius.data_fixtures.factory.customer_group" />
-
-        <service id="sylius.data_fixtures.factory.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory">
-            <argument type="service" id="sylius.factory.country" />
-            <tag name="foundry.factory" />
-        </service>
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface" alias="sylius.data_fixtures.factory.country" />
 
         <service id="sylius.data_fixtures.factory.currency" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactory">
             <argument type="service" id="sylius.factory.currency" />

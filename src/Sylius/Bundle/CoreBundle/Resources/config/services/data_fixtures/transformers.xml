@@ -47,6 +47,9 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
+        <service id="sylius.data_fixtures.transformer.country" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CountryTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CountryTransformerInterface" alias="sylius.data_fixtures.transformer.country" />
+
         <service id="sylius.data_fixtures.transformer.customer" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformer">
             <argument type="service" id="sylius.data_fixtures.factory.customer_group" />
         </service>

@@ -20,7 +20,7 @@ use Zenstruck\Foundry\ModelFactory;
  */
 trait WithDescriptionTrait
 {
-    public function withDescription(string $description): static
+    public function withDescription(string $description): self
     {
         return $this->addState(['description' => $description]);
     }
