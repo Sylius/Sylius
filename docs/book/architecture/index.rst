@@ -9,6 +9,7 @@ that you need to notice.
     :hidden:
 
     architecture
+    drivers
     resource_layer
     state_machine
     translations

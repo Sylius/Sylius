@@ -5,56 +5,15 @@ Architecture Overview
 =====================
 
 Before we dive separately into every Sylius concept, you need to have an overview of how our main application is structured.
-You already know that Sylius is built from components and Symfony bundles, which are integration layers with the framework.
 
-All bundles share the same conventions for naming things and the way of data persistence. Sylius, by default, uses the Doctrine ORM for managing all entities.
+Architectural drivers
+---------------------
 
-For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
+All architectural decisions need to be backed by a valid reason. The fundamental signposts we use to take such choices, are explained
+in :doc:`Architectural Drivers section </book/architecture/drivers>`.
 
-Fullstack Symfony
------------------
-
-.. image:: ../../_images/symfonyfs.png
-    :scale: 15%
-    :align: center
-
-**Sylius** is based on Symfony, which is a leading PHP framework to create web applications. Using Symfony allows
-developers to work better and faster by providing them with certainty of developing an application that is fully compatible
-with the business rules, that is structured, maintainable and upgradable, but also it allows to save time by providing generic re-usable modules.
-
-`Learn more about Symfony <https://symfony.com/what-is-symfony>`_.
-
-Doctrine
---------
-
-.. image:: ../../_images/doctrine.png
-    :align: center
-
-**Doctrine** is a family of PHP libraries focused on providing data persistence layer.
-The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
-One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
-
-To learn more about Doctrine - see `their documentation <https://www.doctrine-project.org/>`_.
-
-Twig
-----
-
-.. image:: ../../_images/twig.png
-    :scale: 30%
-    :align: center
-
-**Twig** is a modern template engine for PHP that is really fast, secure and flexible. Twig is being used by Symfony.
-
-To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
-
-API Platform
-------------
-
-.. image:: ../../_images/api_platform.png
-    :scale: 25%
-    :align: center
-
-**API Platform** is a modern solution for developing high quality APIs. API Platform works by default with Symfony and depends on its components.
+Specific decisions we make during the development are often explained using Architectural Decision Records. They're stored
+in the `main Sylius repository <https://github.com/Sylius/Sylius/tree/1.11/adr>`_ for better visibility.
 
 Architecture
 ------------
@@ -71,6 +30,9 @@ Keep on reading this chapter to learn more about each of its parts: Shop, Admin,
 
 Division into Components, Bundles, Platform
 -------------------------------------------
+
+You already know that Sylius is built from components and Symfony bundles, which are integration layers with the framework.
+All bundles share the same conventions for naming things and the way of data persistence.
 
 Components
 ~~~~~~~~~~
@@ -147,15 +109,3 @@ The most important features of our API:
 
     If you are looking for the Shop API, which is an API operating as a Customer then you will need the official
     `Shop API plugin <https://github.com/Sylius/ShopApiPlugin>`_.
-
-Third Party Libraries
----------------------
-
-Sylius uses a lot of libraries for various tasks:
-
-* `Payum <https://github.com/Payum/Payum>`_ for payments
-* `KnpMenu <https://symfony.com/doc/current/bundles/KnpMenuBundle/index.html>`_ - for shop and admin menus
-* `Gaufrette <https://github.com/KnpLabs/Gaufrette>`_ for filesystem abstraction (store images locally, Amazon S3 or external server)
-* `Imagine <https://github.com/liip/LiipImagineBundle>`_ for images processing, generating thumbnails and cropping
-* `Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_ for pagination
-* `Winzou State Machine <https://github.com/winzou/StateMachineBundle>`_ -  for the state machines handling
