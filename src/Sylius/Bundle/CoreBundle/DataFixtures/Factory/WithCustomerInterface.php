@@ -9,5 +9,8 @@ use Zenstruck\Foundry\Proxy;
 
 interface WithCustomerInterface
 {
-    public function withCustomer(Proxy|CustomerInterface|string $customer): static;
+    /**
+     * @return $this
+     */
+    public function withCustomer(Proxy|CustomerInterface|string $customer): self;
 }

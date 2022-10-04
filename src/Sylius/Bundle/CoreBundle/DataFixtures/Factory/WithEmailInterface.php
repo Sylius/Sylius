@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-interface WithStatusInterface
+interface WithEmailInterface
 {
     /**
      * @return $this
      */
-    public function withStatus(string $status): self;
+    public function withEmail(string $email): self;
 }

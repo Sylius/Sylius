@@ -13,15 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-interface ToggableInterface
-{
-    /**
-     * @return $this
-     */
-    public function enabled(): self;
+use Sylius\Component\Customer\Model\CustomerInterface;
+use Zenstruck\Foundry\ModelFactory;
 
-    /**
-     * @return $this
-     */
-    public function disabled(): self;
+/**
+ * @mixin ModelFactory
+ */
+trait FemaleTrait
+{
+    public function female(): self
+    {
+        return $this->addState(['gender' => CustomerInterface::FEMALE_GENDER]);
+    }
 }

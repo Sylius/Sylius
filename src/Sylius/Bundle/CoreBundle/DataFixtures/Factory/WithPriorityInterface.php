@@ -6,5 +6,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithPriorityInterface
 {
-    public function withPriority(int $priority): static;
+    /**
+     * @return $this
+     */
+    public function withPriority(int $priority): self;
 }

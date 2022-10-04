@@ -13,15 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
-interface ToggableInterface
+interface MaleInterface
 {
     /**
      * @return $this
      */
-    public function enabled(): self;
-
-    /**
-     * @return $this
-     */
-    public function disabled(): self;
+    public function male(): self;
 }

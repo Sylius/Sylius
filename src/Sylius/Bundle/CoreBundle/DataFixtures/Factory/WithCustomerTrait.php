@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithCustomerTrait
 {
-    public function withCustomer(Proxy|CustomerInterface|string $customer): static
+    public function withCustomer(Proxy|CustomerInterface|string $customer): self
     {
         return $this->addState(['customer' => $customer]);
     }

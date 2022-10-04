@@ -42,6 +42,8 @@ use Zenstruck\Foundry\Proxy;
  */
 final class CustomerFactory extends ModelFactory implements CustomerFactoryInterface, FactoryWithModelClassAwareInterface
 {
+    use WithEmailTrait;
+
     private static ?string $modelClass = null;
 
     public function __construct(
@@ -56,11 +58,6 @@ final class CustomerFactory extends ModelFactory implements CustomerFactoryInter
     public static function withModelClass(string $modelClass): void
     {
         self::$modelClass = $modelClass;
-    }
-
-    public function withEmail(string $email): self
-    {
-        return $this->addState(['email' => $email]);
     }
 
     public function withFirstName(string $firstName): self

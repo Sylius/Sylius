@@ -13,7 +13,7 @@ use Zenstruck\Foundry\Proxy;
  */
 trait WithTaxCategoryTrait
 {
-    public function withTaxCategory(Proxy|TaxCategoryInterface|string $taxCategory): static
+    public function withTaxCategory(Proxy|TaxCategoryInterface|string $taxCategory): self
     {
         return $this->addState(['tax_category' => $taxCategory]);
     }

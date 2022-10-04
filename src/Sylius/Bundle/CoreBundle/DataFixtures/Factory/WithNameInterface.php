@@ -6,5 +6,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
 interface WithNameInterface
 {
-    public function withName(string $name): static;
+    /**
+     * @return $this
+     */
+    public function withName(string $name): self;
 }
