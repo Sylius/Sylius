@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.data_fixtures.updater.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdaterInterface" alias="sylius.data_fixtures.updater.address" />
@@ -116,5 +116,13 @@
 
         <service id="sylius.data_fixtures.updater.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdater" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxRateUpdaterInterface" alias="sylius.data_fixtures.updater.tax_rate" />
+
+        <service id="sylius.data_fixtures.updater.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxonUpdater">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <argument type="service" id="sylius.data_fixtures.default_values.taxon" />
+            <argument type="service" id="sylius.factory.taxon" />
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxonUpdaterInterface" alias="sylius.data_fixtures.updater.taxon" />
     </services>
 </container>

@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
         <service id="sylius.data_fixtures.default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValues">
             <argument type="service" id="sylius.data_fixtures.factory.country" />
@@ -121,5 +121,11 @@
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxRateDefaultValuesInterface" alias="sylius.data_fixtures.default_values.tax_rate" />
+
+        <service id="sylius.data_fixtures.default_values.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxonDefaultValues">
+            <argument type="service" id="sylius.data_fixtures.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxonDefaultValuesInterface" alias="sylius.data_fixtures.default_values.taxon" />
     </services>
 </container>

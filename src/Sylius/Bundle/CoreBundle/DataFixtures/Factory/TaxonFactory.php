@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxonDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithDescriptionTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
-use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxonTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxonUpdaterInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
@@ -55,7 +55,9 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
         private FactoryInterface $taxonFactory,
         private RepositoryInterface $taxonRepository,
         private RepositoryInterface $localeRepository,
-        private TaxonSlugGeneratorInterface $taxonSlugGenerator
+        private TaxonDefaultValuesInterface $defaultValues,
+        private TaxonTransformerInterface $transformer,
+        private TaxonUpdaterInterface $updater,
     ) {
         parent::__construct();
     }
@@ -82,30 +84,39 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
 
     protected function getDefaults(): array
     {
-        return [
-            'name' => self::faker()->unique()->words(3, true),
-            'code' => null,
-            'slug' => null,
-            'description' => self::faker()->paragraph,
-            'translations' => [],
-            'children' => [],
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(TaxonInterface $taxon, array $attributes): void
+    {
+        $this->updater->update($taxon, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
+            ->beforeInstantiate(function (array $attributes): array {
+                return $this->transformer->transform($attributes);
+            })
             ->instantiateWith(function(array $attributes): TaxonInterface {
                 return $this->createTaxon($attributes);
             })
         ;
     }
 
-    protected function createTaxon(array $attributes = [], ?TaxonInterface $parentTaxon = null): ?TaxonInterface
+    protected static function getClass(): string
     {
-        $attributes = array_merge($this->getDefaults(), $attributes);
+        return self::$modelClass ?? Taxon::class;
+    }
 
-        $code = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
+    private function createTaxon(array $attributes = []): ?TaxonInterface
+    {
+        $code = $attributes['code'];
 
         /** @var TaxonInterface|null $taxon */
         $taxon = $this->taxonRepository->findOneBy(['code' => $code]);
@@ -115,52 +126,17 @@ class TaxonFactory extends ModelFactory implements TaxonFactoryInterface, Factor
             $taxon = $this->taxonFactory->createNew();
         }
 
-        $taxon->setCode($code);
-
-        if (null !== $parentTaxon) {
-            $taxon->setParent($parentTaxon);
-        }
-
-        // add translation for each defined locales
-        foreach ($this->getLocales() as $localeCode) {
-            $this->createTranslation($taxon, $localeCode, $attributes);
-        }
-
-        // create or replace with custom translations
-        foreach ($attributes['translations'] as $localeCode => $translationAttributes) {
-            $this->createTranslation($taxon, $localeCode, $translationAttributes);
-        }
+        $this->updater->update($taxon, $attributes);
 
         foreach ($attributes['children'] as $childAttributes) {
-            $this->createTaxon($childAttributes, $taxon);
+            $childAttributes['parent'] = $taxon;
+
+            $this::new()
+                ->withAttributes($childAttributes)
+                ->withoutPersisting()
+                ->create();
         }
 
         return $taxon;
-    }
-
-    protected function createTranslation(TaxonInterface $taxon, string $localeCode, array $attributes = []): void
-    {
-        $attributes = array_merge($this->getDefaults(), $attributes);
-
-        $taxon->setCurrentLocale($localeCode);
-        $taxon->setFallbackLocale($localeCode);
-
-        $taxon->setName($attributes['name']);
-        $taxon->setDescription($attributes['description']);
-        $taxon->setSlug($attributes['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
-    }
-
-    protected static function getClass(): string
-    {
-        return self::$modelClass ?? Taxon::class;
-    }
-
-    private function getLocales(): iterable
-    {
-        /** @var LocaleInterface[] $locales */
-        $locales = $this->localeRepository->findAll();
-        foreach ($locales as $locale) {
-            yield $locale->getCode();
-        }
     }
 }
