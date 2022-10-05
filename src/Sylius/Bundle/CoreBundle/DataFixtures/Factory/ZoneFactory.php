@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ZoneDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCodeTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithNameTrait;
-use Sylius\Component\Addressing\Model\Scope;
+use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ZoneTransformerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Updater\ZoneUpdaterInterface;
 use Sylius\Component\Addressing\Model\Zone;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -47,8 +48,12 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
 
     private static ?string $modelClass = null;
 
-    public function __construct(private FactoryInterface $zoneFactory)
-    {
+    public function __construct(
+        private FactoryInterface $zoneFactory,
+        private ZoneDefaultValuesInterface $defaultValues,
+        private ZoneTransformerInterface $transformer,
+        private ZoneUpdaterInterface $updater,
+    ) {
         parent::__construct();
     }
 
@@ -82,47 +87,30 @@ class ZoneFactory extends ModelFactory implements ZoneFactoryInterface, FactoryW
 
     protected function getDefaults(): array
     {
-        return [
-            'code' => null,
-            'name' => self::faker()->word(),
-            'type' => ZoneInterface::TYPE_ZONE,
-            'members' => [],
-            'scope' => Scope::ALL,
-        ];
+        return $this->defaultValues->getDefaults(self::faker());
+    }
+
+    protected function transform(array $attributes): array
+    {
+        return $this->transformer->transform($attributes);
+    }
+
+    protected function update(ZoneInterface $zone, array $attributes): void
+    {
+        $this->updater->update($zone, $attributes);
     }
 
     protected function initialize(): self
     {
         return $this
             ->beforeInstantiate(function (array $attributes): array {
-                $attributes['code'] = $attributes['code'] ?: StringInflector::nameToCode($attributes['name']);
-
-                $members = [];
-
-                foreach ($attributes['members'] as $member) {
-                    if (\is_string($member)) {
-                        $member = ZoneMemberFactory::findOrCreate(['code' => $member]);
-                    }
-
-                    $members[] = $member;
-                }
-
-                $attributes['members'] = $members;
-
-                return $attributes;
+                return $this->transform($attributes);
             })
             ->instantiateWith(function(array $attributes): ZoneInterface {
                 /** @var ZoneInterface $zone */
                 $zone = $this->zoneFactory->createNew();
 
-                $zone->setCode($attributes['code']);
-                $zone->setName($attributes['name']);
-                $zone->setType($attributes['type']);
-                $zone->setScope($attributes['scope']);
-
-                foreach ($attributes['members'] as $member) {
-                    $zone->addMember($member);
-                }
+                $this->update($zone, $attributes);
 
                 return $zone;
             })

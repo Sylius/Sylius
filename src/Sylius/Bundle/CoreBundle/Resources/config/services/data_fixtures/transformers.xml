@@ -135,5 +135,8 @@
 
         <service id="sylius.data_fixtures.transformer.taxon" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxonTransformer" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxonTransformerInterface" alias="sylius.data_fixtures.transformer.taxon" />
+
+        <service id="sylius.data_fixtures.transformer.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ZoneTransformer" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ZoneTransformerInterface" alias="sylius.data_fixtures.transformer.zone" />
     </services>
 </container>
