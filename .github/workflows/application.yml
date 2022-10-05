@@ -555,7 +555,7 @@ jobs:
 
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}), Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x), API Platform ${{ matrix.api-platform }})"
 
-        timeout-minutes: 25
+        timeout-minutes: 35
 
         strategy:
             fail-fast: false
