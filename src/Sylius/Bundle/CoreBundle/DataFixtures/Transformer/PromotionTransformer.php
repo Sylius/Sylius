@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -21,7 +21,7 @@ final class PromotionTransformer implements PromotionTransformerInterface
         private PromotionActionFactoryInterface $promotionActionFactory,
         private PromotionRuleFactoryInterface $promotionRuleFactory,
         private FactoryInterface $couponFactory,
-        private ChannelFactoryInterface $channelFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

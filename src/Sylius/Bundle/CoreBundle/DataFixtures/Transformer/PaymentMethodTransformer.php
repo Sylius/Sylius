@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class PaymentMethodTransformer implements PaymentMethodTransformerInterface
 {
     use TransformNameToCodeAttributeTrait;
     use TransformChannelsAttributeTrait;
 
-    public function __construct(private ChannelFactoryInterface $channelFactory)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
     }
 

@@ -148,10 +148,27 @@ final class PromotionFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_shipping_method_with_given_channels_as_proxy(): void
+    {
+        $channel = ChannelFactory::createOne();
+        $promotion = PromotionFactory::new()->withChannels([$channel])->create();
+
+        $this->assertEquals($channel->object(), $promotion->getChannels()->first());
+    }
+
+    /** @test */
     function it_creates_shipping_method_with_given_channels(): void
     {
-        $channel = ChannelFactory::new()->withCode('default')->create();
+        $channel = ChannelFactory::createOne()->object();
         $promotion = PromotionFactory::new()->withChannels([$channel])->create();
+
+        $this->assertEquals($channel, $promotion->getChannels()->first());
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_channels_as_string(): void
+    {
+        $promotion = PromotionFactory::new()->withChannels(['default'])->create();
 
         $this->assertEquals('default', $promotion->getChannels()->first()->getCode());
     }

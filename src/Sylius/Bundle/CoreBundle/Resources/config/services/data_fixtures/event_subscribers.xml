@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" />
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateChannelByCodeSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateLocaleByCodeSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateProductByCodeSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.product" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateZoneMemberByCodeSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.zone_member" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionActionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactoryInterface;
 
 final class CatalogPromotionTransformer implements CatalogPromotionTransformerInterface
 {
@@ -27,9 +25,9 @@ final class CatalogPromotionTransformer implements CatalogPromotionTransformerIn
     use TransformCatalogPromotionScopesAttributeTrait;
 
     public function __construct(
-        private ChannelFactoryInterface $channelFactory,
         private CatalogPromotionActionFactoryInterface $catalogPromotionActionFactory,
         private CatalogPromotionScopeFactoryInterface $promotionScopeFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

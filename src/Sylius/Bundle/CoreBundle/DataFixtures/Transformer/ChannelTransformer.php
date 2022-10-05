@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
@@ -30,8 +29,8 @@ final class ChannelTransformer implements ChannelTransformerInterface
         private ZoneFactoryInterface $zoneFactory,
         private ShopBillingDataFactoryInterface $shopBillingDataFactory,
         private TaxonFactoryInterface $taxonFactory,
-        private LocaleFactoryInterface $localeFactory,
         private CurrencyFactoryInterface $currencyFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

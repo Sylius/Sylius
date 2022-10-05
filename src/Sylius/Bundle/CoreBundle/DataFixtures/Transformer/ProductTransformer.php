@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -42,12 +41,12 @@ final class ProductTransformer implements ProductTransformerInterface
     public function __construct(
         private SlugGeneratorInterface $slugGenerator,
         private TaxCategoryFactoryInterface $taxCategoryFactory,
-        private ChannelFactoryInterface $channelFactory,
         private TaxonFactoryInterface $taxonFactory,
         private ProductAttributeFactoryInterface $productAttributeFactory,
         private LocaleFactoryInterface $localeFactory,
         private FactoryInterface $productAttributeValueFactory,
         private ProductOptionFactoryInterface $productOptionFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

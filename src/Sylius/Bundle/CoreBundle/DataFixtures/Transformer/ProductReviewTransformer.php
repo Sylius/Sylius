@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 final class ProductReviewTransformer implements ProductReviewTransformerInterface
 {
@@ -23,7 +23,7 @@ final class ProductReviewTransformer implements ProductReviewTransformerInterfac
 
     public function __construct(
         private CustomerFactoryInterface $customerFactory,
-        private ProductFactoryInterface  $productFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
