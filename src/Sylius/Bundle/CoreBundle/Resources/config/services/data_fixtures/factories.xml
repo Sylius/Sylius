@@ -276,6 +276,9 @@
 
         <service id="sylius.data_fixtures.factory.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactory">
             <argument type="service" id="sylius.factory.zone" />
+            <argument type="service" id="sylius.data_fixtures.default_values.zone" />
+            <argument type="service" id="sylius.data_fixtures.transformer.zone" />
+            <argument type="service" id="sylius.data_fixtures.updater.zone" />
             <tag name="foundry.factory" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface" alias="sylius.data_fixtures.factory.zone" />

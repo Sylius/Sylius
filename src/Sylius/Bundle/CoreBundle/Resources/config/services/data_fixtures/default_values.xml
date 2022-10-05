@@ -127,5 +127,8 @@
             <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\TaxonDefaultValuesInterface" alias="sylius.data_fixtures.default_values.taxon" />
+
+        <service id="sylius.data_fixtures.default_values.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ZoneDefaultValues" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\ZoneDefaultValuesInterface" alias="sylius.data_fixtures.default_values.zone" />
     </services>
 </container>

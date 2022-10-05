@@ -124,5 +124,8 @@
             <argument type="service" id="sylius.data_fixtures.factory.locale" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\TaxonUpdaterInterface" alias="sylius.data_fixtures.updater.taxon" />
+
+        <service id="sylius.data_fixtures.updater.zone" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ZoneUpdater" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\ZoneUpdaterInterface" alias="sylius.data_fixtures.updater.zone" />
     </services>
 </container>
