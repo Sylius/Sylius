@@ -153,10 +153,27 @@ final class ShippingMethodFactoryTest extends KernelTestCase
     }
 
     /** @test */
+    function it_creates_shipping_method_with_given_channels_as_proxy(): void
+    {
+        $channel = ChannelFactory::createOne();
+        $shippingMethod = ShippingMethodFactory::new()->withChannels([$channel])->create();
+
+        $this->assertEquals($channel->object(), $shippingMethod->getChannels()->first());
+    }
+
+    /** @test */
     function it_creates_shipping_method_with_given_channels(): void
     {
-        $channel = ChannelFactory::new()->withCode('default')->create();
+        $channel = ChannelFactory::createOne()->object();
         $shippingMethod = ShippingMethodFactory::new()->withChannels([$channel])->create();
+
+        $this->assertEquals($channel, $shippingMethod->getChannels()->first());
+    }
+
+    /** @test */
+    function it_creates_shipping_method_with_given_channel_as_string(): void
+    {
+        $shippingMethod = ShippingMethodFactory::new()->withChannels(['default'])->create();
 
         $this->assertEquals('default', $shippingMethod->getChannels()->first()->getCode());
     }

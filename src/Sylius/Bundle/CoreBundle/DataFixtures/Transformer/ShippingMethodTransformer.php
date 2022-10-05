@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
@@ -29,7 +29,7 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
         private ZoneFactoryInterface $zoneFactory,
         private TaxCategoryFactoryInterface $taxCategoryFactory,
         private ShippingCategoryFactoryInterface $shippingCategoryFactory,
-        private ChannelFactoryInterface $channelFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

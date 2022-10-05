@@ -118,11 +118,28 @@ final class PaymentMethodFactoryTest extends KernelTestCase
     }
 
     /** @test */
-    function it_creates_payment_method_with_given_channels(): void
+    function it_creates_payment_method_with_given_channels_as_proxy(): void
     {
         $channel = ChannelFactory::createOne();
         $paymentMethod = PaymentMethodFactory::new()->withChannels([$channel])->create();
 
-        $this->assertCount(1, $paymentMethod->getChannels());
+        $this->assertEquals($channel->object(), $paymentMethod->getChannels()->first());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_channels(): void
+    {
+        $channel = ChannelFactory::createOne()->object();
+        $paymentMethod = PaymentMethodFactory::new()->withChannels([$channel])->create();
+
+        $this->assertEquals($channel, $paymentMethod->getChannels()->first());
+    }
+
+    /** @test */
+    function it_creates_payment_method_with_given_channels_as_string(): void
+    {
+        $paymentMethod = PaymentMethodFactory::new()->withChannels(['default'])->create();
+
+        $this->assertEquals('default', $paymentMethod->getChannels()->first()->getCode());
     }
 }

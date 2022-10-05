@@ -13,21 +13,38 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactory;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateZoneMemberByCodeEvent;
 
 final class ZoneTransformer implements ZoneTransformerInterface
 {
     use TransformNameToCodeAttributeTrait;
 
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
+    }
+
     public function transform(array $attributes): array
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
 
+        return $this->transformZoneMemberAttribute($attributes);
+    }
+
+    private function transformZoneMemberAttribute(array $attributes): array
+    {
         $members = [];
 
         foreach ($attributes['members'] as $member) {
             if (\is_string($member)) {
-                $member = ZoneMemberFactory::findOrCreate(['code' => $member]);
+                $event = new FindOrCreateZoneMemberByCodeEvent($member);
+                $this->eventDispatcher->dispatch($event);
+
+                if ($event->isPropagationStopped()) {
+                    continue;
+                }
+
+                $member = $event->getZoneMember();
             }
 
             $members[] = $member;
