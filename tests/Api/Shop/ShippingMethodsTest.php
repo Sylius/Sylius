@@ -190,7 +190,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     private function getCartAndPutItemForCustomer(string $tokenValue, string $customer): void
     {
         /** @var MessageBusInterface $commandBus */
-        $commandBus = $this->get('sylius.command_bus');
+        $commandBus = self::getContainer()->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
         $pickupCartCommand->setChannelCode('WEB');
