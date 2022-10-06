@@ -30,6 +30,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - sylius.behat.context.setup.shop_api_security
                 - sylius.behat.context.setup.cart
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\TaxationBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,6 +42,18 @@ final class TaxRateType extends AbstractResourceType
             ])
             ->add('includedInPrice', CheckboxType::class, [
                 'label' => 'sylius.form.tax_rate.included_in_price',
+            ])
+            ->add('startDate', DateTimeType::class, [
+                'label' => 'sylius.form.tax_rate.start_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('endDate', DateTimeType::class, [
+                'label' => 'sylius.form.tax_rate.end_date',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'required' => false,
             ])
         ;
     }

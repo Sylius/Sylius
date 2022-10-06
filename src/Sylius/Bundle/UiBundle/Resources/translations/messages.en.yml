@@ -234,6 +234,7 @@ sylius:
         dashboard: 'Dashboard'
         data: 'Data'
         date: 'Date'
+        date_range: 'Date range'
         datetime: 'Datetime'
         default: 'Default'
         default_address: 'Default address'

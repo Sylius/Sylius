@@ -23,6 +23,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     public function specifyAmount(string $amount): void;
 
+    public function specifyStartDate(\DateTimeInterface $startDate): void;
+
+    public function specifyEndDate(\DateTimeInterface $endDate): void;
+
     public function chooseZone(string $name): void;
 
     public function chooseCategory(string $name): void;
