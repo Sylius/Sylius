@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateChannelByCodeEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateChannelByQueryStringEvent;
 
 trait TransformChannelsAttributeTrait
 {
@@ -16,12 +16,8 @@ trait TransformChannelsAttributeTrait
         $channels = [];
         foreach ($attributes['channels'] as $channel) {
             if (\is_string($channel)) {
-                $event = new FindOrCreateChannelByCodeEvent($channel);
+                $event = new FindOrCreateChannelByQueryStringEvent($channel);
                 $this->eventDispatcher->dispatch($event);
-
-                if ($event->isPropagationStopped()) {
-                    continue;
-                }
 
                 $channel = $event->getChannel();
             }

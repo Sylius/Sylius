@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class AddressTransformer implements AddressTransformerInterface
 {
     use TransformCustomerAttributeTrait;
 
-    public function __construct(private CustomerFactoryInterface $customerFactory)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
     }
 

@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateTaxonByQueryStringEvent;
 
 trait TransformTaxaAttributeTrait
 {
-    private TaxonFactoryInterface $taxonFactory;
+    private EventDispatcherInterface $eventDispatcher;
 
     private function transformTaxaAttribute(array $attributes): array
     {
         $taxa = [];
-        foreach ($attributes['taxons'] ?? $attributes['taxa']  as $taxon) {
+        foreach ($attributes['taxons'] ?? $attributes['taxa'] as $taxon) {
             if (\is_string($taxon)) {
-                $taxon = $this->taxonFactory::findOrCreate(['code' => $taxon]);
+                $event = new FindOrCreateTaxonByQueryStringEvent($taxon);
+                $this->eventDispatcher->dispatch($event);
+
+                $taxon = $event->getTaxon();
             }
             $taxa[] = $taxon;
         }

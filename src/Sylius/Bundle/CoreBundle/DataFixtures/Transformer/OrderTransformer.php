@@ -24,9 +24,8 @@ final class OrderTransformer implements OrderTransformerInterface
     use TransformCountryAttributeTrait;
 
     public function __construct(
-        private CustomerFactoryInterface $customerFactory,
-        private CountryFactoryInterface $countryFactory,
         private EventDispatcherInterface $eventDispatcher,
+        private CountryFactoryInterface $countryFactory,
     ) {
     }
 
@@ -34,8 +33,7 @@ final class OrderTransformer implements OrderTransformerInterface
     {
         $attributes = $this->transformChannelAttribute($attributes);
         $attributes = $this->transformCustomerAttribute($attributes);
-        $attributes = $this->transformCountryAttribute($attributes);
 
-        return $attributes;
+        return $this->transformCountryAttribute($attributes);
     }
 }

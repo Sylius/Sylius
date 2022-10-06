@@ -9,7 +9,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Proxy;
 
-final class FindOrCreateProductByCodeEvent extends Event
+final class FindOrCreateProductByStringEvent extends Event
 {
     private Proxy|ProductInterface|null $product = null;
 

@@ -9,22 +9,22 @@ use Symfony\Contracts\EventDispatcher\Event;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Proxy;
 
-final class FindOrCreateZoneMemberByCodeEvent extends Event
+final class FindOrCreateZoneMemberByQueryStringEvent extends Event
 {
     private Proxy|ZoneMemberInterface|null $zoneMember = null;
 
-    public function __construct(private string $code)
+    public function __construct(private string $queryString)
     {
     }
 
-    public function getCode(): string
+    public function getQueryString(): string
     {
-        return $this->code;
+        return $this->queryString;
     }
 
     public function getZoneMember(): Proxy|ZoneMemberInterface
     {
-        Assert::notNull($this->zoneMember, sprintf('Zone member "%s" has not been found or created.', $this->code));
+        Assert::notNull($this->zoneMember, sprintf('Zone member "%s" has not been found or created.', $this->queryString));
 
         return $this->zoneMember;
     }

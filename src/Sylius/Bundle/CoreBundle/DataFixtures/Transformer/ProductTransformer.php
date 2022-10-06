@@ -15,16 +15,16 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Faker\Generator;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateTaxonByQueryStringEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductTransformer implements ProductTransformerInterface
@@ -40,13 +40,11 @@ final class ProductTransformer implements ProductTransformerInterface
 
     public function __construct(
         private SlugGeneratorInterface $slugGenerator,
-        private TaxCategoryFactoryInterface $taxCategoryFactory,
-        private TaxonFactoryInterface $taxonFactory,
+        private EventDispatcherInterface $eventDispatcher,
         private ProductAttributeFactoryInterface $productAttributeFactory,
-        private LocaleFactoryInterface $localeFactory,
+        private RepositoryInterface $localeRepository,
         private FactoryInterface $productAttributeValueFactory,
         private ProductOptionFactoryInterface $productOptionFactory,
-        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
@@ -66,7 +64,10 @@ final class ProductTransformer implements ProductTransformerInterface
     private function transformMainTaxonAttribute(array $attributes): array
     {
         if (\is_string($attributes['main_taxon'])) {
-            $attributes['main_taxon'] = $this->taxonFactory::findOrCreate(['code' => $attributes['main_taxon']]);
+            $event = new FindOrCreateTaxonByQueryStringEvent($attributes['main_taxon']);
+            $this->eventDispatcher->dispatch($event);
+
+            $attributes['main_taxon'] = $event->getTaxon();
         }
 
         return $attributes;
@@ -148,7 +149,8 @@ final class ProductTransformer implements ProductTransformerInterface
 
     private function getLocales(): iterable
     {
-        foreach ($this->localeFactory::all() as $locale) {
+        /** @var LocaleInterface $locale */
+        foreach ($this->localeRepository->findAll() as $locale) {
             yield $locale->getCode();
         }
     }

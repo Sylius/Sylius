@@ -11,22 +11,22 @@ use Symfony\Contracts\EventDispatcher\Event;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Proxy;
 
-final class FindOrCreateLocaleByCodeEvent extends Event
+final class FindOrCreateLocaleByQueryStringEvent extends Event
 {
     private Proxy|LocaleInterface|null $locale = null;
 
-    public function __construct(private string $code)
+    public function __construct(private string $queryString)
     {
     }
 
-    public function getCode(): string
+    public function getQueryString(): string
     {
-        return $this->code;
+        return $this->queryString;
     }
 
     public function getLocale(): Proxy|LocaleInterface
     {
-        Assert::notNull($this->locale, sprintf('Locale "%s" has not been found or created.', $this->code));
+        Assert::notNull($this->locale, sprintf('Locale "%s" has not been found or created.', $this->queryString));
 
         return $this->locale;
     }

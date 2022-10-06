@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateTaxonByQueryStringEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateZoneByQueryStringEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
@@ -26,11 +26,9 @@ final class ChannelTransformer implements ChannelTransformerInterface
     use TransformCurrenciesAttributeTrait;
 
     public function __construct(
-        private ZoneFactoryInterface $zoneFactory,
-        private ShopBillingDataFactoryInterface $shopBillingDataFactory,
-        private TaxonFactoryInterface $taxonFactory,
-        private CurrencyFactoryInterface $currencyFactory,
         private EventDispatcherInterface $eventDispatcher,
+        private ShopBillingDataFactoryInterface $shopBillingDataFactory,
+        private CurrencyFactoryInterface $currencyFactory,
     ) {
     }
 
@@ -40,7 +38,10 @@ final class ChannelTransformer implements ChannelTransformerInterface
         $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
 
         if (\is_string($attributes['default_tax_zone'])) {
-            $attributes['default_tax_zone'] = $this->zoneFactory::findOrCreate(['code' => $attributes['default_tax_zone']]);
+            $event = new FindOrCreateZoneByQueryStringEvent($attributes['default_tax_zone']);
+            $this->eventDispatcher->dispatch($event);
+
+            $attributes['default_tax_zone'] = $event->getZone();
         }
 
         if (is_array($attributes['shop_billing_data'])) {
@@ -48,7 +49,10 @@ final class ChannelTransformer implements ChannelTransformerInterface
         }
 
         if (\is_string($attributes['menu_taxon'])) {
-            $attributes['menu_taxon'] = $this->taxonFactory::findOrCreate(['code' => $attributes['menu_taxon']]);
+            $event = new FindOrCreateTaxonByQueryStringEvent($attributes['menu_taxon']);
+            $this->eventDispatcher->dispatch($event);
+
+            $attributes['menu_taxon'] = $event->getTaxon();
         }
 
         $attributes = $this->transformLocalesAttribute($attributes);
