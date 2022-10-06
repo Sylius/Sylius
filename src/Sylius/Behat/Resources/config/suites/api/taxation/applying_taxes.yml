@@ -6,6 +6,7 @@ default:
         api_applying_taxes:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
