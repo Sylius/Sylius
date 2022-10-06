@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateZoneMemberByCodeEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateZoneMemberByQueryStringEvent;
 
 final class ZoneTransformer implements ZoneTransformerInterface
 {
@@ -37,12 +37,8 @@ final class ZoneTransformer implements ZoneTransformerInterface
 
         foreach ($attributes['members'] as $member) {
             if (\is_string($member)) {
-                $event = new FindOrCreateZoneMemberByCodeEvent($member);
+                $event = new FindOrCreateZoneMemberByQueryStringEvent($member);
                 $this->eventDispatcher->dispatch($event);
-
-                if ($event->isPropagationStopped()) {
-                    continue;
-                }
 
                 $member = $event->getZoneMember();
             }

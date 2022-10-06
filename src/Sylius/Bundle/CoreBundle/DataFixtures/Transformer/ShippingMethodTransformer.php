@@ -15,8 +15,6 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 
 final class ShippingMethodTransformer implements ShippingMethodTransformerInterface
 {
@@ -26,10 +24,8 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
     use TransformChannelsAttributeTrait;
 
     public function __construct(
-        private ZoneFactoryInterface $zoneFactory,
-        private TaxCategoryFactoryInterface $taxCategoryFactory,
-        private ShippingCategoryFactoryInterface $shippingCategoryFactory,
         private EventDispatcherInterface $eventDispatcher,
+        private ShippingCategoryFactoryInterface $shippingCategoryFactory,
     ) {
     }
 

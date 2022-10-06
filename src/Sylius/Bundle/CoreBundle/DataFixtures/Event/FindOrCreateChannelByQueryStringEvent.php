@@ -10,22 +10,22 @@ use Symfony\Contracts\EventDispatcher\Event;
 use Webmozart\Assert\Assert;
 use Zenstruck\Foundry\Proxy;
 
-final class FindOrCreateChannelByCodeEvent extends Event
+final class FindOrCreateChannelByQueryStringEvent extends Event
 {
     private Proxy|ChannelInterface|null $channel = null;
 
-    public function __construct(private string $code)
+    public function __construct(private string $queryString)
     {
     }
 
-    public function getCode(): string
+    public function getQueryString(): string
     {
-        return $this->code;
+        return $this->queryString;
     }
 
     public function getChannel(): Proxy|ProductInterface
     {
-        Assert::notNull($this->channel, sprintf('Channel "%s" has not been found or created.', $this->code));
+        Assert::notNull($this->channel, sprintf('Channel "%s" has not been found or created.', $this->queryString));
 
         return $this->channel;
     }

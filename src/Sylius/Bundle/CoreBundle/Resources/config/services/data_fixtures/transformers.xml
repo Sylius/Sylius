@@ -16,7 +16,7 @@
         <defaults public="false" />
 
         <service id="sylius.data_fixtures.transformer.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.customer" />
+            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface" alias="sylius.data_fixtures.transformer.address" />
 
@@ -39,11 +39,9 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CatalogPromotionScopeTransformerInterface" alias="sylius.data_fixtures.transformer.catalog_promotion_scope" />
 
         <service id="sylius.data_fixtures.transformer.channel" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
-            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
-            <argument type="service" id="sylius.data_fixtures.factory.currency" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
+            <argument type="service" id="sylius.data_fixtures.factory.currency" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ChannelTransformerInterface" alias="sylius.data_fixtures.transformer.channel" />
 
@@ -59,9 +57,8 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\CustomerTransformerInterface" alias="sylius.data_fixtures.transformer.customer" />
 
         <service id="sylius.data_fixtures.transformer.order" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.customer" />
-            <argument type="service" id="sylius.data_fixtures.factory.country" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.data_fixtures.factory.country" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\OrderTransformerInterface" alias="sylius.data_fixtures.transformer.order" />
 
@@ -75,13 +72,11 @@
 
         <service id="sylius.data_fixtures.transformer.product" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformer">
             <argument type="service" id="sylius.generator.slug" />
-            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
-            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.data_fixtures.factory.product_attribute" />
-            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.data_fixtures.factory.product_option" />
-            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductTransformerInterface" alias="sylius.data_fixtures.transformer.product" />
 
@@ -95,7 +90,6 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductAttributeTransformerInterface" alias="sylius.data_fixtures.transformer.product_attribute" />
 
         <service id="sylius.data_fixtures.transformer.product_review" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.customer" />
             <argument type="service" id="event_dispatcher" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ProductReviewTransformerInterface" alias="sylius.data_fixtures.transformer.product_review" />
@@ -115,10 +109,8 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\PromotionRuleTransformerInterface" alias="sylius.data_fixtures.transformer.promotion_rule" />
 
         <service id="sylius.data_fixtures.transformer.shipping_method" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
-            <argument type="service" id="sylius.data_fixtures.factory.shipping_category" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.data_fixtures.factory.shipping_category" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShippingMethodTransformerInterface" alias="sylius.data_fixtures.transformer.shipping_method" />
 
@@ -128,8 +120,7 @@
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\ShopUserTransformerInterface" alias="sylius.data_fixtures.transformer.shop_user" />
 
         <service id="sylius.data_fixtures.transformer.tax_rate" class="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformer">
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
+            <argument type="service" id="event_dispatcher" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Transformer\TaxRateTransformerInterface" alias="sylius.data_fixtures.transformer.tax_rate" />
 

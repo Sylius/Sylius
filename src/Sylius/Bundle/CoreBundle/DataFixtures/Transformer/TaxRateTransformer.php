@@ -13,17 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class TaxRateTransformer implements TaxRateTransformerInterface
 {
     use TransformNameToCodeAttributeTrait;
     use TransformZoneAttributeTrait;
+    use TransformTaxCategoryAttributeTrait;
 
     public function __construct(
-        private ZoneFactoryInterface $zoneFactory,
-        private TaxCategoryFactoryInterface $taxCategoryFactory,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 
@@ -32,10 +31,6 @@ final class TaxRateTransformer implements TaxRateTransformerInterface
         $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes = $this->transformZoneAttribute($attributes);
 
-        if (is_string($attributes['category'])) {
-            $attributes['category'] = $this->taxCategoryFactory::randomOrCreate(['code' => $attributes['category']]);
-        }
-
-        return $attributes;
+        return $this->transformTaxCategoryAttribute($attributes, 'category');
     }
 }

@@ -21,10 +21,8 @@ final class ProductReviewTransformer implements ProductReviewTransformerInterfac
     use TransformProductAttributeTrait;
     use TransformCustomerAttributeTrait;
 
-    public function __construct(
-        private CustomerFactoryInterface $customerFactory,
-        private EventDispatcherInterface $eventDispatcher,
-    ) {
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function transform(array $attributes): array
