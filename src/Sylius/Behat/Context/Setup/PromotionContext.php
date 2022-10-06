@@ -31,7 +31,9 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PromotionContext implements Context
 {
@@ -43,6 +45,7 @@ final class PromotionContext implements Context
         private TestPromotionFactoryInterface $testPromotionFactory,
         private PromotionRepositoryInterface $promotionRepository,
         private PromotionCouponGeneratorInterface $couponGenerator,
+        private FactoryInterface $promotionTranslationFactory,
         private ObjectManager $objectManager,
     ) {
     }
@@ -967,6 +970,21 @@ final class PromotionContext implements Context
     ): void {
         $promotion->addRule($this->ruleFactory->createItemTotal($firstChannel->getCode(), $firstAmount));
         $promotion->addRule($this->ruleFactory->createItemTotal($secondChannel->getCode(), $secondAmount));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(the promotion) has label translation "([^"]+)" (in the "([^"]+)" locale)$/
+     */
+    public function thePromotionHasTranslation(PromotionInterface $promotion, string $label, string $localeCode): void
+    {
+        /** @var PromotionTranslationInterface $translation */
+        $translation = $this->promotionTranslationFactory->createNew();
+        $translation->setLabel($label);
+        $translation->setLocale($localeCode);
+
+        $promotion->addTranslation($translation);
 
         $this->objectManager->flush();
     }

@@ -217,4 +217,12 @@ final class CheckoutContext implements Context
         $this->registerElement->specifyLastName('Ironfoundersson');
         $this->registerElement->register();
     }
+
+    /**
+     * @Then I should see the promotion label named :label
+     */
+    public function iShouldSeeThePromotionLabelNamed(string $label): void
+    {
+        Assert::true($this->completePage->hasPromotionLabel($label));
+    }
 }

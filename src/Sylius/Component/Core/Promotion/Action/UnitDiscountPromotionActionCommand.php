@@ -68,7 +68,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
             return;
         }
 
-        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $adjustment = $this->createAdjustment($promotion, $unit, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
 
         /** @var OrderItemInterface $orderItem */
         $orderItem = $unit->getOrderItem();
@@ -90,12 +90,13 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
     protected function createAdjustment(
         PromotionInterface $promotion,
+        OrderItemUnitInterface $unit,
         string $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
     ): OrderAdjustmentInterface {
         /** @var OrderAdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
-        $adjustment->setLabel($promotion->getName());
+        $adjustment->setLabel($promotion->getTranslation($unit->getOrderItem()->getOrder()->getLocaleCode())->getLabel());
         $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;

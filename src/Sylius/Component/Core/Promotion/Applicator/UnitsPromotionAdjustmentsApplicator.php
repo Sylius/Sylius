@@ -76,7 +76,11 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
     private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, int $amount): void
     {
         $adjustment = $this->adjustmentFactory
-            ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, $promotion->getName(), $amount)
+            ->createWithData(
+                AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+                $promotion->getTranslation($unit->getOrderItem()->getOrder()->getLocaleCode())->getLabel(),
+                $amount,
+            )
         ;
         $adjustment->setOriginCode($promotion->getCode());
 

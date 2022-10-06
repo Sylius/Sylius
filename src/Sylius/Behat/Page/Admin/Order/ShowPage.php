@@ -392,6 +392,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return  $this->getElement('shipment_shipped_at_date')->getText();
     }
 
+    public function hasPromotionLabel(string $promotionLabel): bool
+    {
+        $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
+
+        return str_contains($promotionDiscountsText, $promotionLabel);
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

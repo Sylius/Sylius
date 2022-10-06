@@ -124,6 +124,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I use the ("([^"]+)" locale)$/
+     */
+    public function iUseTheLocale(string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+    }
+
+    /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
      * @Then the cart total should be :total
@@ -296,14 +304,15 @@ final class CartContext implements Context
      * @Given I added product :product to the cart
      * @Given he added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
+     * @Given /^I have (product "[^"]+") in the cart using ("([^"]+)" locale)$/
      * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @When I add product :product to the cart
      * @When they add product :product to the cart
      */
-    public function iAddProductToTheCart(ProductInterface $product): void
+    public function iAddProductToTheCart(ProductInterface $product, string $localeCode = 'en_US'): void
     {
-        $this->productShowPage->open(['slug' => $product->getSlug()]);
+        $this->productShowPage->open(['slug' => $product->getSlug(), '_locale' => $localeCode]);
         $this->productShowPage->addToCart();
 
         $this->sharedStorage->set('product', $product);

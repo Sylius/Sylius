@@ -231,6 +231,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return str_contains($shippingPromotions->getAttribute('data-html'), $promotionName);
     }
 
+    public function hasPromotionLabel(string $promotionLabel): bool
+    {
+        /** @var NodeElement $shippingPromotions */
+        $label = $this->getElement('promotion_label');
+
+        return str_contains($label->getAttribute('data-html'), $promotionLabel);
+    }
+
     public function tryToOpen(array $urlParameters = []): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
@@ -275,6 +283,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'shipping_total' => '[data-test-shipping-total]',
             'tax_total' => '[data-test-tax-total]',
             'validation_errors' => '[data-test-validation-error]',
+            'promotion_label' => '[data-test-promotion-label]',
         ]);
     }
 
