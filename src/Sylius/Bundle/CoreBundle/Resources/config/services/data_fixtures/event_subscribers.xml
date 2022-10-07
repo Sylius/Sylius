@@ -15,43 +15,13 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateChannelSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.channel" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\CreateShopBillingDataSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateCustomerSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.customer" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateLocaleSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.locale" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateProductSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.product" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateTaxCategorySubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.tax_category" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateTaxonSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.taxon" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateZoneSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.zone" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateZoneMemberSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.zone_member" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateResourceSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.locator" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

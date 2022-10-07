@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateLocaleByQueryStringEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
 
 trait TransformLocalesAttributeTrait
 {
@@ -16,10 +17,10 @@ trait TransformLocalesAttributeTrait
         $locales = [];
         foreach ($attributes['locales'] as $locale) {
             if (\is_string($locale)) {
-                $event = new FindOrCreateLocaleByQueryStringEvent($locale);
+                $event = new FindOrCreateResourceEvent(LocaleFactoryInterface::class, ['code' => $locale]);
                 $this->eventDispatcher->dispatch($event);
 
-                $locale = $event->getLocale();
+                $locale = $event->getResource();
             }
 
             $locales[] = $locale;

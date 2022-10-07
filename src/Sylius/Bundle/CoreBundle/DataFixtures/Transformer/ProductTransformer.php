@@ -15,9 +15,10 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Faker\Generator;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateTaxonByQueryStringEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -64,10 +65,10 @@ final class ProductTransformer implements ProductTransformerInterface
     private function transformMainTaxonAttribute(array $attributes): array
     {
         if (\is_string($attributes['main_taxon'])) {
-            $event = new FindOrCreateTaxonByQueryStringEvent($attributes['main_taxon']);
+            $event = new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $attributes['main_taxon']]);
             $this->eventDispatcher->dispatch($event);
 
-            $attributes['main_taxon'] = $event->getTaxon();
+            $attributes['main_taxon'] = $event->getResource();
         }
 
         return $attributes;
