@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateProductByStringEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 final class ProductAssociationTransformer implements ProductAssociationTransformerInterface
 {
@@ -49,10 +50,10 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
         $products = [];
         foreach ($attributes['associated_products'] as $product) {
             if (\is_string($product)) {
-                $event = new FindOrCreateProductByStringEvent($product);
+                $event = new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $product]);
                 $this->eventDispatcher->dispatch($event);
 
-                $product = $event->getProduct();
+                $product = $event->getResource();
             }
 
             $products[] = $product;

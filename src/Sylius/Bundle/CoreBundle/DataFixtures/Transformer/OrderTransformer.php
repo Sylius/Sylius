@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
 
 final class OrderTransformer implements OrderTransformerInterface
 {
@@ -23,10 +21,8 @@ final class OrderTransformer implements OrderTransformerInterface
     use TransformCustomerAttributeTrait;
     use TransformCountryAttributeTrait;
 
-    public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private CountryFactoryInterface $countryFactory,
-    ) {
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function transform(array $attributes): array

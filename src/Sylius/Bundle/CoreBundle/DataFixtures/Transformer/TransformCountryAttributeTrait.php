@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
 
 trait TransformCountryAttributeTrait
@@ -13,7 +14,10 @@ trait TransformCountryAttributeTrait
     private function transformCountryAttribute(array $attributes): array
     {
         if (\is_string($attributes['country'])) {
-            $attributes['country'] = $this->countryFactory::findOrCreate(['code' => $attributes['country']]);
+            $event = new FindOrCreateResourceEvent(CountryFactoryInterface::class, ['code' => $attributes['country']]);
+            $this->eventDispatcher->dispatch($event);
+
+            $attributes['country'] = $event->getResource();
         }
 
         return $attributes;

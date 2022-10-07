@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateProductByStringEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 trait TransformProductAttributeTrait
 {
@@ -14,10 +15,10 @@ trait TransformProductAttributeTrait
     private function transformProductAttribute(array $attributes, string $attributeKey = 'product'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            $event = new FindOrCreateProductByStringEvent($attributes[$attributeKey]);
+            $event = new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $attributes[$attributeKey]]);
             $this->eventDispatcher->dispatch($event);
 
-            $attributes[$attributeKey] = $event->getProduct();
+            $attributes[$attributeKey] = $event->getResource();
         }
 
         return $attributes;
