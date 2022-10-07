@@ -169,7 +169,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order),
+            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
         ));
     }
 
@@ -181,7 +181,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order),
+            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
         ));
     }
 }

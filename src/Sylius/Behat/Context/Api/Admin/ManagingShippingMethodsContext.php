@@ -381,7 +381,7 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel),
+                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
             ),
             sprintf('Shipping method is not assigned to %s channel', $channel->getName()),
         );

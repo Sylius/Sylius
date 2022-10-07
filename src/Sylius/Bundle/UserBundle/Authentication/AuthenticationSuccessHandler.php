@@ -24,7 +24,7 @@ final class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHan
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['success' => true, 'username' => $token->getUsername()]);
+            return new JsonResponse(['success' => true, 'username' => $token->getUser()->getUsername()]);
         }
 
         return parent::onAuthenticationSuccess($request, $token);

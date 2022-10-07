@@ -30,8 +30,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -39,7 +37,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private MessageBusInterface $messageBus,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
@@ -145,7 +142,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItemInSection($channel, 'admin')]);
     }
 
     /**
@@ -155,7 +152,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $channels = $this->responseChecker->getValue($this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()), 'channels');
 
-        foreach (array_keys($channels, $this->iriConverter->getIriFromItem($channel)) as $key) {
+        foreach (array_keys($channels, $this->iriConverter->getIriFromItemInSection($channel, 'admin')) as $key) {
             unset($channels[$key]);
         }
 
@@ -1176,14 +1173,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then this catalog promotion should be usable
-     */
-    public function thisCatalogPromotionShouldBeUsable(): void
-    {
-        Assert::isInstanceOf($this->messageBus->getDispatchedMessages()[0]['message'], CatalogPromotionCreated::class);
-    }
-
-    /**
      * @Then the catalog promotion :catalogPromotion should be available in channel :channel
      * @Then /^(this catalog promotion) should be available in (channel "[^"]+")$/
      */
@@ -1193,7 +1182,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel),
+                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
@@ -1212,7 +1201,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItem($channel),
+                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName()),
         );

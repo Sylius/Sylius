@@ -15,7 +15,10 @@ namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionFactoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
@@ -24,18 +27,13 @@ final class SecurityService implements SecurityServiceInterface
 {
     private string $sessionTokenVariable;
 
-    private string $firewallContextName;
-
-    /**
-     * @param string $firewallContextName
-     */
     public function __construct(
-        private SessionInterface $session,
+        private RequestStack $requestStack,
         private CookieSetterInterface $cookieSetter,
-        $firewallContextName,
+        private string $firewallContextName,
+        private ?SessionFactoryInterface $sessionFactory = null
     ) {
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
-        $this->firewallContextName = $firewallContextName;
     }
 
     public function logIn(UserInterface $user): void
@@ -52,15 +50,14 @@ final class SecurityService implements SecurityServiceInterface
 
     public function logOut(): void
     {
-        $this->session->set($this->sessionTokenVariable, null);
-        $this->session->save();
-
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+        try {
+            $this->setTokenCookie();
+        } catch (SessionNotFoundException) {}
     }
 
     public function getCurrentToken(): TokenInterface
     {
-        $serializedToken = $this->session->get($this->sessionTokenVariable);
+        $serializedToken = $this->requestStack->getSession()->get($this->sessionTokenVariable);
 
         if (null === $serializedToken) {
             throw new TokenNotFoundException();
@@ -74,11 +71,23 @@ final class SecurityService implements SecurityServiceInterface
         $this->setToken($token);
     }
 
-    private function setToken(TokenInterface $token)
+    private function setToken(TokenInterface $token): void
     {
-        $serializedToken = serialize($token);
-        $this->session->set($this->sessionTokenVariable, $serializedToken);
-        $this->session->save();
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+        if (null !== $this->sessionFactory) {
+            $session = $this->sessionFactory->createSession();
+            $request = new Request();
+            $request->setSession($session);
+            $this->requestStack->push($request);
+        }
+
+        $this->setTokenCookie(serialize($token));
+    }
+
+    private function setTokenCookie($serializedToken = null): void
+    {
+        $session = $this->requestStack->getSession();
+        $session->set($this->sessionTokenVariable, $serializedToken);
+        $session->save();
+        $this->cookieSetter->setCookie($session->getName(), $session->getId());
     }
 }

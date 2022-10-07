@@ -13,6 +13,6 @@ sylius_shop_ajax_render_province_form:
     path: /render-province-form
     methods: [GET]
     defaults:
-        _controller: sylius.controller.province:choiceOrTextFieldFormAction
+        _controller: sylius.controller.province::choiceOrTextFieldFormAction
         _sylius:
             template: "@SyliusShop/Common/Form/_province.html.twig"

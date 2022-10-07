@@ -38,7 +38,7 @@ final class LexicalContext implements Context
      */
     public function getPercentageFromString(string $percentage): float
     {
-        return ((int) $percentage) / 100;
+        return ((float) $percentage / 100);
     }
 
     /**

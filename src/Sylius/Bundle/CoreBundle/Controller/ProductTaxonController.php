@@ -104,6 +104,7 @@ class ProductTaxonController extends ResourceController
     {
         Assert::numeric($position, sprintf('The position "%s" is invalid.', $position));
 
+        /** @var ProductTaxonInterface $productTaxonFromBase */
         $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
         $productTaxonFromBase->setPosition((int) $position);
     }

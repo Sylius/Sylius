@@ -6,6 +6,7 @@ default:
         ui_removing_catalog_promotions:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
                 - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.channel

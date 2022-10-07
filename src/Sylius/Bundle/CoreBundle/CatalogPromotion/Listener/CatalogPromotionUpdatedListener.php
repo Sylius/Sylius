@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Listener;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,6 +33,7 @@ final class CatalogPromotionUpdatedListener
 
     public function __invoke(CatalogPromotionUpdated $event): void
     {
+        /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $event->code]);
 
         if (null === $catalogPromotion) {

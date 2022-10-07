@@ -75,7 +75,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->willReturn($provinceForm)
         ;
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -103,7 +103,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->willReturn($provinceForm)
         ;
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -129,7 +129,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->willReturn($provinceForm)
         ;
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSubmit($event);
     }
@@ -155,7 +155,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
             ->willReturn($provinceForm)
         ;
 
-        $form->add($provinceForm)->shouldBeCalled();
+        $form->add($provinceForm)->willReturn($form)->shouldBeCalled();
 
         $this->preSubmit($event);
     }

@@ -18,13 +18,14 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class CartSessionStorageSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository): void
+    function let(RequestStack $requestStack, OrderRepositoryInterface $orderRepository): void
     {
-        $this->beConstructedWith($session, 'session_key_name', $orderRepository);
+        $this->beConstructedWith($requestStack, 'session_key_name', $orderRepository);
     }
 
     function it_implements_a_cart_storage_interface(): void
@@ -32,10 +33,16 @@ final class CartSessionStorageSpec extends ObjectBehavior
         $this->shouldImplement(CartStorageInterface::class);
     }
 
-    function it_sets_a_cart_in_a_session(SessionInterface $session, ChannelInterface $channel, OrderInterface $cart): void
-    {
+    function it_sets_a_cart_in_a_session(
+        SessionInterface $session,
+        RequestStack $requestStack,
+        ChannelInterface $channel,
+        OrderInterface $cart,
+    ): void {
         $channel->getCode()->willReturn('channel_code');
         $cart->getId()->willReturn(14);
+
+        $requestStack->getSession()->willReturn($session);
 
         $session->set('session_key_name.channel_code', 14)->shouldBeCalled();
 
@@ -44,12 +51,14 @@ final class CartSessionStorageSpec extends ObjectBehavior
 
     function it_returns_a_cart_from_a_session(
         SessionInterface $session,
+        RequestStack $requestStack,
         OrderRepositoryInterface $orderRepository,
         ChannelInterface $channel,
         OrderInterface $cart,
     ): void {
         $channel->getCode()->willReturn('channel_code');
 
+        $requestStack->getSession()->willReturn($session);
         $session->has('session_key_name.channel_code')->willReturn(true);
         $session->get('session_key_name.channel_code')->willReturn(14);
 
@@ -58,10 +67,11 @@ final class CartSessionStorageSpec extends ObjectBehavior
         $this->getForChannel($channel)->shouldReturn($cart);
     }
 
-    function it_removes_a_cart_from_a_session(SessionInterface $session, ChannelInterface $channel): void
+    function it_removes_a_cart_from_a_session(SessionInterface $session, RequestStack $requestStack, ChannelInterface $channel): void
     {
         $channel->getCode()->willReturn('channel_code');
 
+        $requestStack->getSession()->willReturn($session);
         $session->remove('session_key_name.channel_code')->shouldBeCalled();
 
         $this->removeForChannel($channel);

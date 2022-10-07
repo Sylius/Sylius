@@ -51,8 +51,30 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["^5.4"]
+                symfony: ["^5.4", "^6.0"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
+                swiftmailer: [false]
+                include:
+                    -
+                        php: "8.0"
+                        symfony: "^5.4"
+                        package: "Bundle/CoreBundle"
+                        swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/CoreBundle"
+                        swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/ApiBundle"
+                        swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^5.4"
+                        package: "Bundle/AdminBundle"
+                        swiftmailer: true
 
         steps:
             -
@@ -90,6 +112,14 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
 
             -
+                name: Configure Swiftmailer (if needed)
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: |
+                    composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"
+                    echo "APP_ENV=test_with_swiftmailer" >> $GITHUB_ENV
+                if: matrix.swiftmailer == true
+
+            -
                 name: Validate composer.json
                 run: composer validate --ansi --strict
                 working-directory: "src/Sylius/${{ matrix.package }}"
@@ -105,15 +135,7 @@ jobs:
             -
                 name: Create empty manifest.json files (AdminBundle, CoreBundle)
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                if: matrix.package == 'Bundle/AdminBundle' || matrix.package == 'Bundle/CoreBundle'
-                run: |
-                    mkdir -p public/build/admin public/build/shop
-                    echo "{}" >> public/build/shop/manifest.json
-                    echo "{}" >> public/build/admin/manifest.json
-            -
-                name: Create empty manifest.json files (ApiBundle)
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                if: matrix.package == 'Bundle/ApiBundle'
+                if: matrix.package == 'Bundle/AdminBundle' || matrix.package == 'Bundle/CoreBundle' || matrix.package == 'Bundle/ApiBundle'
                 run: |
                     mkdir -p test/public/build/admin test/public/build/shop
                     echo "{}" >> test/public/build/shop/manifest.json
@@ -126,10 +148,17 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success' && matrix.package == 'Bundle/ApiBundle'
 
             -
-                name: Setup Database (for ApiBundle only)
+                name: Setup Database (for ApiBundle)
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                run: test/bin/console doctrine:schema:update --force -e test
-                if: always() && matrix.package == 'Bundle/ApiBundle'
+                run: test/bin/console doctrine:schema:update --force
+                if: matrix.package == 'Bundle/ApiBundle'
+
+            -
+                name: Remove Specifications not supported on Symfony >= 6.0
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: ${{ true != contains( matrix.symfony, '^5.4' ) && matrix.package == 'Bundle/UserBundle' }}
+                run: |
+                    rm spec/Security/UserPasswordEncoderSpec.php
 
             -
                 name: Run PHPSpec

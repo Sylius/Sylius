@@ -29,22 +29,22 @@
         "php": "^8.0",
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/addressing": "^1.6",
-        "sylius/resource-bundle": "^1.7",
-        "symfony/framework-bundle": "^5.4",
-        "symfony/intl": "^5.4"
+        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/intl": "^5.4 || ^6.0"
     },
     "conflict": {
         "twig/twig": "^1.0 || ^3.0"
     },
     "require-dev": {
-        "doctrine/orm": "^2.7",
+        "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4",
-        "symfony/dependency-injection": "^5.4",
-        "symfony/form": "^5.4",
-        "symfony/validator": "^5.4"
+        "polishsymfonycommunity/symfony-mocker-container": "dev-support-symfony-6",
+        "symfony/browser-kit": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/form": "^5.4 || ^6.0",
+        "symfony/validator": "^5.4 || ^6.0"
     },
     "config": {
         "allow-plugins": {
@@ -73,7 +73,8 @@
         {
             "type": "path",
             "url": "../../*/*"
-        }
+        },
+        { "type": "vcs", "url": "git@github.com:Zales0123/SymfonyMockerContainer.git" }
     ],
     "minimum-stability": "dev",
     "prefer-stable": true
