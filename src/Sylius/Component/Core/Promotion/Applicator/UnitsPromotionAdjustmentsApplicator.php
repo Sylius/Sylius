@@ -22,6 +22,7 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 use Webmozart\Assert\Assert;
 
 final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsApplicatorInterface
@@ -75,10 +76,16 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
 
     private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, int $amount): void
     {
+        /** @var OrderInterface $order */
+        $order = $unit->getOrderItem()->getOrder();
+
+        /** @var PromotionTranslationInterface $translation */
+        $translation = $promotion->getTranslation($order->getLocaleCode());
+
         $adjustment = $this->adjustmentFactory
             ->createWithData(
                 AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
-                $promotion->getTranslation($unit->getOrderItem()->getOrder()->getLocaleCode())->getLabel(),
+                $translation->getLabel() ?? $promotion->getName(),
                 $amount,
             )
         ;
