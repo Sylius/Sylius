@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Factory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCustomerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithoutCustomerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPhoneNumberInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Zenstruck\Foundry\ModelFactory;
@@ -38,7 +39,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static AddressInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method AddressInterface|Proxy create(array|callable $attributes = [])
  */
-interface AddressFactoryInterface extends WithCustomerInterface, WithFirstNameInterface, WithLastNameInterface, WithPhoneNumberInterface
+interface AddressFactoryInterface extends WithCustomerInterface, WithoutCustomerInterface, WithFirstNameInterface, WithLastNameInterface, WithPhoneNumberInterface
 {
     public function withCompany(string $company): self;
 

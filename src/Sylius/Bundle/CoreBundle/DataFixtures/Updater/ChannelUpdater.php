@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Updater;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateLocaleTrait;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelUpdater implements ChannelUpdaterInterface
 {
+    use RandomOrCreateLocaleTrait;
+
     public function update(ChannelInterface $channel, array $attributes): void
     {
         $channel->setCode($attributes['code']);
@@ -35,12 +39,12 @@ final class ChannelUpdater implements ChannelUpdaterInterface
 
         $channel->setDefaultLocale($attributes['default_locale']);
 
-        // Ensure Default locale is on available locale
-        $channel->addLocale($attributes['default_locale']);
-
         foreach ($attributes['locales'] as $locale) {
             $channel->addLocale($locale);
         }
+
+        // Ensure Default locale is on available locale
+        $channel->addLocale($attributes['default_locale']);
 
         $channel->setBaseCurrency($attributes['base_currency']);
         foreach ($attributes['currencies'] as $currency) {

@@ -15,7 +15,9 @@
     <services>
         <defaults public="false" />
 
-        <service id="sylius.data_fixtures.updater.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdater" />
+        <service id="sylius.data_fixtures.updater.address" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdater">
+            <argument type="service" id="event_dispatcher" />
+        </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdaterInterface" alias="sylius.data_fixtures.updater.address" />
 
         <service id="sylius.data_fixtures.updater.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\Updater\AdminUserUpdater">

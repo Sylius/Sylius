@@ -4,23 +4,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateCustomerTrait;
 
 trait TransformCustomerAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
+    use FindOrCreateCustomerTrait;
 
     private function transformCustomerAttribute(array $attributes, string $attributeKey = 'customer'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(CustomerFactoryInterface::class, ['email' => $attributes[$attributeKey]])
-            );
-
-            $attributes[$attributeKey] = $event->getResource();
+            $attributes[$attributeKey] = $this->findOrCreateCustomer(['email' => $attributes[$attributeKey]]);
         }
 
         return $attributes;

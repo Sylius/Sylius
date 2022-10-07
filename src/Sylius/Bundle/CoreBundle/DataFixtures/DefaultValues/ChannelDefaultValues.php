@@ -44,7 +44,7 @@ final class ChannelDefaultValues implements ChannelDefaultValuesInterface
             'account_verification_required' => true,
             'default_tax_zone' => $this->zoneFactory::randomOrCreate(['scope' => $faker->boolean() ? Scope::TAX : AddressingScope::ALL]),
             'tax_calculation_strategy' => 'order_items_based',
-            'default_locale' => $this->localeFactory::randomOrCreate(),
+            'default_locale' => null, // $this->localeFactory::randomOrCreate(),
             'locales' => $this->localeFactory::all(),
             'base_currency' => $this->currencyFactory::randomOrCreate(),
             'currencies' => $this->currencyFactory::all(),

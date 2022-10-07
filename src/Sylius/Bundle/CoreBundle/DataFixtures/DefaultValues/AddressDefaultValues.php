@@ -14,17 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
 
 final class AddressDefaultValues implements AddressDefaultValuesInterface
 {
-    public function __construct(
-        private CountryFactoryInterface $countryFactory,
-        private ShopUserFactoryInterface $shopUserFactory,
-    ) {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
@@ -35,10 +27,10 @@ final class AddressDefaultValues implements AddressDefaultValuesInterface
             'street' => $faker->streetAddress(),
             'city' => $faker->city(),
             'postcode' => $faker->postcode(),
-            'country_code' => $this->countryFactory::randomOrCreate()->getCode(),
+            'country_code' => null,
             'province_name' => null,
             'province_code' => null,
-            'customer' => $this->shopUserFactory::randomOrCreate()->getCustomer(),
+            'customer' => '',
         ];
     }
 }

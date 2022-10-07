@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Factory;
 
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\AddressFactory;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactory;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
@@ -102,6 +103,7 @@ final class AddressFactoryTest extends KernelTestCase
         $address = AddressFactory::new()->withCountryCode('US')->create();
 
         $this->assertEquals('US', $address->getCountryCode());
+        $this->assertNotNull(CountryFactory::find(['code' => 'US']));
     }
 
     /** @test */
@@ -144,5 +146,13 @@ final class AddressFactoryTest extends KernelTestCase
         $address = AddressFactory::new()->withCustomer($shopUser->getCustomer())->create();
 
         $this->assertEquals($shopUser->getCustomer(), $address->getCustomer());
+    }
+
+    /** @test */
+    function it_creates_address_without_customer(): void
+    {
+        $address = AddressFactory::new()->withoutCustomer()->create();
+
+        $this->assertNull($address->getCustomer());
     }
 }
