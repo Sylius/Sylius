@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------
+
+by HeahDude at 2022-06-18T06:29:19Z
+
+There will be BC breaks if Symfony 6 is allowed in a new minor without explicit upgrade request from projects based on it (master seems to be targeted without bump https://github.com/Sylius/Sylius/pull/13969/files#diff-035b723a6c827cf63f13f32f9ce11dbaf725c2124dd6a43d0138cb4b42f75054R50).
+
+IMHO a new major is needed to let people opt-in into this upgrade (e.g when Symfony 5.4 deprecations are dealt with, and some Sylius deprecations as well?).
+We should not just let composer choose between 5.4 and 6.0 by upgrading a minor version of Sylius.
+
+---------------------------------------------------------------------------
+
+by HeahDude at 2022-06-18T07:04:46Z
+
+Since Symfony Flex is a requirement, a solution could be to leverage the extra `require` config option.
+Defining it to `5.4.*` in `composer.json` in this PR would allow to let people opt-in and prevent breaking in a minor update.
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-06-21T11:58:27Z
+
+Hey Jules,
+
+thanks for raising concerns. Sylius itself does not require Symfony flex, but we've added it to Sylius-Standard a long time ago. We would probably go with the minor release for Sf6, as we did previously, but people are able to stay with Sf5.4 as you mentioned. However, we will consider a change of this approach for future releases
+
+---------------------------------------------------------------------------
+
+by Chris53897 at 2022-08-17T09:19:54Z
+
+@loic425 Is it possible that you update `sylius/theme-bundle`: "^2.1.1", to "2.3.x-dev".
+As this is a blocker for some symfony 6 components. https://packagist.org/packages/sylius/theme-bundle#v2.2.0
+I do not know if there are more.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-10-07T11:53:40Z
+
+Thank you, Loïc, and everyone else involved in this tremendous effort 🚀 🔥 🏅
