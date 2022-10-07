@@ -24,11 +24,8 @@ final class CatalogPromotionTransformer implements CatalogPromotionTransformerIn
     use TransformCatalogPromotionActionsAttributeTrait;
     use TransformCatalogPromotionScopesAttributeTrait;
 
-    public function __construct(
-        private CatalogPromotionActionFactoryInterface $catalogPromotionActionFactory,
-        private CatalogPromotionScopeFactoryInterface $promotionScopeFactory,
-        private EventDispatcherInterface $eventDispatcher,
-    ) {
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function transform(array $attributes): array

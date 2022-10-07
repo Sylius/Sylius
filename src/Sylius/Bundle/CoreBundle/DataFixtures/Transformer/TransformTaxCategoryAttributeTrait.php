@@ -14,8 +14,10 @@ trait TransformTaxCategoryAttributeTrait
     private function transformTaxCategoryAttribute(array $attributes, string $attributeKey = 'tax_category'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            $event = new FindOrCreateResourceEvent(TaxCategoryFactoryInterface::class, ['code' => $attributes[$attributeKey]]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(TaxCategoryFactoryInterface::class, ['code' => $attributes[$attributeKey]])
+            );
 
             $attributes[$attributeKey] = $event->getResource();
         }

@@ -18,8 +18,6 @@ final class PromotionTransformer implements PromotionTransformerInterface
     use TransformPromotionRulesAttributeTrait;
 
     public function __construct(
-        private PromotionActionFactoryInterface $promotionActionFactory,
-        private PromotionRuleFactoryInterface $promotionRuleFactory,
         private FactoryInterface $couponFactory,
         private EventDispatcherInterface $eventDispatcher,
     ) {

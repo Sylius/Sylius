@@ -16,8 +16,8 @@ trait TransformCurrenciesAttributeTrait
         $currencies = [];
         foreach ($attributes['currencies'] as $currency) {
             if (\is_string($currency)) {
-                $event = new FindOrCreateResourceEvent(CurrencyFactoryInterface::class, ['code' => $currency]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(new FindOrCreateResourceEvent(CurrencyFactoryInterface::class, ['code' => $currency]));
 
                 $currency = $event->getResource();
             }

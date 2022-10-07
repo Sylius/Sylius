@@ -208,7 +208,7 @@
             <argument type="service" id="sylius.data_fixtures.default_values.promotion_action" />
             <argument type="service" id="sylius.data_fixtures.transformer.promotion_action" />
             <argument type="service" id="sylius.data_fixtures.updater.promotion_action" />
-            <tag name="foundry.factory" />
+            <tag name="foundry.factory" key="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface" alias="sylius.data_fixtures.factory.promotion_action" />
 

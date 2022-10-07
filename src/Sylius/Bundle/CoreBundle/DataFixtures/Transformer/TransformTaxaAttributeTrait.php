@@ -17,8 +17,10 @@ trait TransformTaxaAttributeTrait
         $taxa = [];
         foreach ($attributes['taxons'] ?? $attributes['taxa'] as $taxon) {
             if (\is_string($taxon)) {
-                $event = new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $taxon]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $taxon])
+                );
 
                 $taxon = $event->getResource();
             }

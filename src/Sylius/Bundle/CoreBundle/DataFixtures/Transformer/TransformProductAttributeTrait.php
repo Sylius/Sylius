@@ -15,8 +15,10 @@ trait TransformProductAttributeTrait
     private function transformProductAttribute(array $attributes, string $attributeKey = 'product'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            $event = new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $attributes[$attributeKey]]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $attributes[$attributeKey]])
+            );
 
             $attributes[$attributeKey] = $event->getResource();
         }

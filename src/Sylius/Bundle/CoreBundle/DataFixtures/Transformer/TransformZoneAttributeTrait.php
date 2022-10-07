@@ -15,8 +15,10 @@ trait TransformZoneAttributeTrait
     private function transformZoneAttribute(array $attributes): array
     {
         if (\is_string($attributes['zone'])) {
-            $event = new FindOrCreateResourceEvent(ZoneFactoryInterface::class, ['code' => $attributes['zone']]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(ZoneFactoryInterface::class, ['code' => $attributes['zone']])
+            );
 
             $attributes['zone'] = $event->getResource();
         }

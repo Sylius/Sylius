@@ -17,8 +17,10 @@ trait TransformLocalesAttributeTrait
         $locales = [];
         foreach ($attributes['locales'] as $locale) {
             if (\is_string($locale)) {
-                $event = new FindOrCreateResourceEvent(LocaleFactoryInterface::class, ['code' => $locale]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new FindOrCreateResourceEvent(LocaleFactoryInterface::class, ['code' => $locale])
+                );
 
                 $locale = $event->getResource();
             }

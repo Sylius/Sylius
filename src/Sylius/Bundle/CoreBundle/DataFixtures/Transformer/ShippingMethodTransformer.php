@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
 
 final class ShippingMethodTransformer implements ShippingMethodTransformerInterface
@@ -23,10 +24,8 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
     use TransformTaxCategoryAttributeTrait;
     use TransformChannelsAttributeTrait;
 
-    public function __construct(
-        private EventDispatcherInterface $eventDispatcher,
-        private ShippingCategoryFactoryInterface $shippingCategoryFactory,
-    ) {
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function transform(array $attributes): array
@@ -42,7 +41,12 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
     private function transformCategoryAttributes(array $attributes): array
     {
         if (\is_string($attributes['category'])) {
-            $attributes['category'] = $this->shippingCategoryFactory::findOrCreate(['code' => $attributes['category']]);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(ShippingCategoryFactoryInterface::class, ['code' => $attributes['category']])
+            );
+
+            $attributes['category'] = $event->getResource();
         }
 
         return $attributes;

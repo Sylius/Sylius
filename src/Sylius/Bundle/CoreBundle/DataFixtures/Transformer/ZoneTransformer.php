@@ -38,8 +38,10 @@ final class ZoneTransformer implements ZoneTransformerInterface
 
         foreach ($attributes['members'] as $member) {
             if (\is_string($member)) {
-                $event = new FindOrCreateResourceEvent(ZoneMemberFactoryInterface::class, ['code' => $member]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new FindOrCreateResourceEvent(ZoneMemberFactoryInterface::class, ['code' => $member])
+                );
 
                 $member = $event->getResource();
             }

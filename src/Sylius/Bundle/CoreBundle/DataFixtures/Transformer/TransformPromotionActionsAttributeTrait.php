@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
+use Sylius\Bundle\CoreBundle\DataFixtures\Event\CreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionActionFactoryInterface;
 
 trait TransformPromotionActionsAttributeTrait
@@ -15,7 +16,12 @@ trait TransformPromotionActionsAttributeTrait
         $actions = [];
         foreach ($attributes['actions'] as $action) {
             if (\is_array($action)) {
-                $action = $this->promotionActionFactory::new()->withAttributes($action)->create();
+                /** @var CreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new CreateResourceEvent(PromotionActionFactoryInterface::class, $action)
+                );
+
+                $action = $event->getResource();
             }
 
             $actions[] = $action;

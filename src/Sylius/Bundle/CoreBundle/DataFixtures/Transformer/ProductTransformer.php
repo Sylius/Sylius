@@ -42,10 +42,8 @@ final class ProductTransformer implements ProductTransformerInterface
     public function __construct(
         private SlugGeneratorInterface $slugGenerator,
         private EventDispatcherInterface $eventDispatcher,
-        private ProductAttributeFactoryInterface $productAttributeFactory,
         private RepositoryInterface $localeRepository,
         private FactoryInterface $productAttributeValueFactory,
-        private ProductOptionFactoryInterface $productOptionFactory,
     ) {
     }
 
@@ -65,8 +63,10 @@ final class ProductTransformer implements ProductTransformerInterface
     private function transformMainTaxonAttribute(array $attributes): array
     {
         if (\is_string($attributes['main_taxon'])) {
-            $event = new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $attributes['main_taxon']]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $attributes['main_taxon']])
+            );
 
             $attributes['main_taxon'] = $event->getResource();
         }
@@ -78,7 +78,12 @@ final class ProductTransformer implements ProductTransformerInterface
     {
         $productAttributesValues = [];
         foreach ($attributes['product_attributes'] as $code => $value) {
-            $productAttribute = $this->productAttributeFactory::findOrCreate(['code' => $code]);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(ProductAttributeFactoryInterface::class, ['code' => $code])
+            );
+
+            $productAttribute = $event->getResource();
 
             Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
 
