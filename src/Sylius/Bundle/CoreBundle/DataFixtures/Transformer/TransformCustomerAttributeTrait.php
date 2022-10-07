@@ -15,8 +15,11 @@ trait TransformCustomerAttributeTrait
     private function transformCustomerAttribute(array $attributes, string $attributeKey = 'customer'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            $event = new FindOrCreateResourceEvent(CustomerFactoryInterface::class, ['email' => $attributes[$attributeKey]]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(CustomerFactoryInterface::class, ['email' => $attributes[$attributeKey]])
+            );
+
             $attributes[$attributeKey] = $event->getResource();
         }
 

@@ -16,8 +16,10 @@ trait TransformChannelAttributeTrait
     private function transformChannelAttribute(array $attributes): array
     {
         if (\is_string($attributes['channel'])) {
-            $event = new FindOrCreateResourceEvent(ChannelFactoryInterface::class, ['code' => $attributes['channel']]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(ChannelFactoryInterface::class, ['code' => $attributes['channel']])
+            );
 
             $attributes['channel'] = $event->getResource();
         }

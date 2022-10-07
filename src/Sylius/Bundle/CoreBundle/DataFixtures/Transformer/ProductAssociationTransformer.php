@@ -22,10 +22,8 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
 {
     use TransformProductAttributeTrait;
 
-    public function __construct(
-        private ProductAssociationTypeFactoryInterface $associationTypeFactory,
-        private EventDispatcherInterface $eventDispatcher,
-    ) {
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     public function transform(array $attributes): array
@@ -39,7 +37,10 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
     private function transformAssociationTypeAttribute(array $attributes): array
     {
         if (\is_string($attributes['type'])) {
-            $attributes['type'] = $this->associationTypeFactory::findOrCreate(['code' => $attributes['type']]);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(new FindOrCreateResourceEvent(ProductAssociationTypeFactoryInterface::class, ['code' => $attributes['type']]));
+
+            $attributes['type'] = $event->getResource();
         }
 
         return $attributes;
@@ -50,8 +51,10 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
         $products = [];
         foreach ($attributes['associated_products'] as $product) {
             if (\is_string($product)) {
-                $event = new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $product]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $product])
+                );
 
                 $product = $event->getResource();
             }

@@ -314,6 +314,7 @@ final class ProductFactoryTest extends KernelTestCase
     function it_creates_product_with_given_product_options(): void
     {
         LocaleFactory::new()->withCode('en_US')->create();
+
         ProductOptionFactory::new()->withCode('jean_size')->withValues([
             'jeans_size_s' => 'S',
             'jeans_size_m' => 'M',

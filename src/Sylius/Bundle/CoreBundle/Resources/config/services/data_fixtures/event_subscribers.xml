@@ -15,8 +15,8 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\CreateShopBillingDataSubscriber">
-            <argument type="service" id="sylius.data_fixtures.factory.shop_billing_data" />
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\CreateResourceSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.locator" />
             <tag name="kernel.event_subscriber" />
         </service>
 

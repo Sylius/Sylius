@@ -14,8 +14,10 @@ trait TransformCountryAttributeTrait
     private function transformCountryAttribute(array $attributes): array
     {
         if (\is_string($attributes['country'])) {
-            $event = new FindOrCreateResourceEvent(CountryFactoryInterface::class, ['code' => $attributes['country']]);
-            $this->eventDispatcher->dispatch($event);
+            /** @var FindOrCreateResourceEvent $event */
+            $event = $this->eventDispatcher->dispatch(
+                new FindOrCreateResourceEvent(CountryFactoryInterface::class, ['code' => $attributes['country']])
+            );
 
             $attributes['country'] = $event->getResource();
         }

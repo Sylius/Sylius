@@ -17,8 +17,10 @@ trait TransformChannelsAttributeTrait
         $channels = [];
         foreach ($attributes['channels'] as $channel) {
             if (\is_string($channel)) {
-                $event = new FindOrCreateResourceEvent(ChannelFactoryInterface::class, ['code' => $channel]);
-                $this->eventDispatcher->dispatch($event);
+                /** @var FindOrCreateResourceEvent $event */
+                $event = $this->eventDispatcher->dispatch(
+                    new FindOrCreateResourceEvent(ChannelFactoryInterface::class, ['code' => $channel])
+                );
 
                 $channel = $event->getResource();
             }
