@@ -24,8 +24,10 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -36,11 +38,16 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     public function let(
         FormFactoryInterface $formFactory,
         MessageBusInterface $messageBus,
-        FlashBagInterface $flashBag,
+        RequestStack $requestStack,
         RouterInterface $router,
         Environment $twig,
+        Session $session,
+        FlashBagInterface $flashBag,
     ): void {
-        $this->beConstructedWith($formFactory, $messageBus, $flashBag, $router, $twig);
+        $this->beConstructedWith($formFactory, $messageBus, $requestStack, $router, $twig);
+
+        $requestStack->getSession()->willReturn($session);
+        $session->getBag('flashes')->willReturn($flashBag);
     }
 
     public function it_sends_reset_password_request_to_message_bus(
@@ -72,7 +79,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
             ->willReturn(new Envelope(new \stdClass()))
         ;
 
-        $flashBag->set('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
+        $flashBag->add('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
         $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
             'redirect' => 'my_custom_route',
@@ -89,6 +96,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     public function it_is_able_to_send_reset_password_request_when_sylius_redirect_parameter_is_an_array(
         FormFactoryInterface $formFactory,
         MessageBusInterface $messageBus,
+        FlashBagInterface $flashBag,
         RouterInterface $router,
         FormInterface $form,
         Request $request,
@@ -105,6 +113,8 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $form->getData()->shouldBeCalled()->willReturn($passwordResetRequest);
 
         $messageBus->dispatch(Argument::type(RequestResetPasswordEmail::class))->willReturn(new Envelope(new \stdClass()));
+
+        $flashBag->add('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
         $route = 'my_custom_route';
         $parameters = [
@@ -128,6 +138,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     public function it_redirects_to_default_route_if_custom_one_is_not_defined(
         FormFactoryInterface $formFactory,
         MessageBusInterface $messageBus,
+        FlashBagInterface $flashBag,
         RouterInterface $router,
         FormInterface $form,
         Request $request,
@@ -144,6 +155,8 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $form->getData()->shouldBeCalled()->willReturn($passwordResetRequest);
 
         $messageBus->dispatch(Argument::type(RequestResetPasswordEmail::class))->willReturn(new Envelope(new \stdClass()));
+
+        $flashBag->add('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
         $attributesBag->get('_sylius')->shouldBeCalled()->willReturn(null);
         $request->attributes = $attributesBag->getWrappedObject();
@@ -165,7 +178,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
     ): void {
         $formFactory->create(RequestPasswordResetType::class)->willReturn($form);
 
-        $form->handleRequest($request)->willReturn();
+        $form->handleRequest($request)->willReturn($form);
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(false);
 

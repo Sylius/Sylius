@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new Sylius\Bundle\MailerBundle\SyliusMailerBundle(),
@@ -39,12 +38,12 @@ class AppKernel extends Kernel
         $loader->load(__DIR__ . '/config/config.yml');
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return sys_get_temp_dir() . '/SyliusUserBundle/cache/' . $this->getEnvironment();
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return sys_get_temp_dir() . '/SyliusUserBundle/logs';
     }

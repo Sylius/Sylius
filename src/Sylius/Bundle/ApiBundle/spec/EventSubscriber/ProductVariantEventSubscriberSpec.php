@@ -78,6 +78,7 @@ final class ProductVariantEventSubscriberSpec extends ObjectBehavior
         HttpKernelInterface $kernel,
         Request $request,
     ): void {
+        $request->getMethod()->willReturn(Request::METHOD_PUT);
         $eventBus->dispatch(Argument::any())->shouldNotBeCalled();
 
         $this->postWrite(new ViewEvent(

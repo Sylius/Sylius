@@ -46,6 +46,7 @@ final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 
         $form
             ->add('baseCurrency', Argument::type('string'), Argument::withEntry('disabled', true))
+            ->willReturn($form)
             ->shouldBeCalled()
         ;
 
@@ -64,6 +65,7 @@ final class AddBaseCurrencySubscriberSpec extends ObjectBehavior
 
         $form
             ->add('baseCurrency', Argument::type('string'), Argument::withEntry('disabled', false))
+            ->willReturn($form)
             ->shouldBeCalled()
         ;
 

@@ -39,7 +39,7 @@ class UserLogin implements UserLoginInterface
         $this->userChecker->checkPostAuth($user);
 
         $token = $this->createToken($user, $firewallName);
-        if (!$token->isAuthenticated()) {
+        if (null === $token->getUser() || [] === $token->getUser()->getRoles()) {
             throw new AuthenticationException('Unauthenticated token');
         }
 
@@ -58,6 +58,7 @@ class UserLogin implements UserLoginInterface
             );
         }
 
+        /** @psalm-suppress NullArgument */
         return new UsernamePasswordToken(
             $user,
             null,

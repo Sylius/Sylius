@@ -17,6 +17,9 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 trigger_deprecation('sylius/user', '1.12', 'The "%s" class is deprecated, use "%s" instead.', UserPasswordEncoderInterface::class, UserPasswordHasherInterface::class);
 
+/**
+ * @deprecated since Sylius 1.12, use {@link UserPasswordHasherInterface} instead
+ */
 interface UserPasswordEncoderInterface
 {
     public function encode(CredentialsHolderInterface $user): string;

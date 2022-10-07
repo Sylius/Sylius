@@ -29,11 +29,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "behat/transliterator": "^1.1",
+        "behat/transliterator": "^1.3",
         "sylius/attribute": "^1.6",
-        "sylius/resource": "^1.7",
-        "symfony/polyfill-iconv": "^1.6",
-        "webmozart/assert": "^1.8"
+        "sylius/resource": "^1.9 || ^1.10@alpha",
+        "symfony/polyfill-iconv": "^1.17",
+        "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
