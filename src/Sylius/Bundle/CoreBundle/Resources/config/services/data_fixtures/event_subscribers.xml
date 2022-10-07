@@ -15,12 +15,22 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\CreateDefaultLocaleSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.locale" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\CreateResourceSubscriber">
             <argument type="service" id="sylius.data_fixtures.factory.locator" />
             <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\FindOrCreateResourceSubscriber">
+            <argument type="service" id="sylius.data_fixtures.factory.locator" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\DataFixtures\EventSubscriber\RandomOrCreateResourceSubscriber">
             <argument type="service" id="sylius.data_fixtures.factory.locator" />
             <tag name="kernel.event_subscriber" />
         </service>

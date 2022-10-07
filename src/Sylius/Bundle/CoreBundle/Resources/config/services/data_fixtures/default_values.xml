@@ -15,10 +15,7 @@
     <services>
         <defaults public="false" />
 
-        <service id="sylius.data_fixtures.default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValues">
-            <argument type="service" id="sylius.data_fixtures.factory.country" />
-            <argument type="service" id="sylius.data_fixtures.factory.shop_user" />
-        </service>
+        <service id="sylius.data_fixtures.default_values.address" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValues" />
         <service id="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValuesInterface" alias="sylius.data_fixtures.default_values.address" />
 
         <service id="sylius.data_fixtures.default_values.admin_user" class="Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AdminUserDefaultValues">

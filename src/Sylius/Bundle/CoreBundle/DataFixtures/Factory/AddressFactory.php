@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues\AddressDefaultValuesInte
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithCustomerTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithFirstNameTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithLastNameTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithoutCustomerTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\State\WithPhoneNumberTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Transformer\AddressTransformerInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Updater\AddressUpdaterInterface;
@@ -46,6 +47,7 @@ use Zenstruck\Foundry\Proxy;
 class AddressFactory extends ModelFactory implements AddressFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCustomerTrait;
+    use WithoutCustomerTrait;
     use WithFirstNameTrait;
     use WithLastNameTrait;
     use WithPhoneNumberTrait;

@@ -19,9 +19,11 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateLocaleTrait;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
+    use RandomOrCreateLocaleTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformLocalesAttributeTrait;
     use TransformCurrenciesAttributeTrait;
@@ -34,6 +36,10 @@ final class ChannelTransformer implements ChannelTransformerInterface
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
+
+        if (null === $attributes['default_locale']) {
+            $attributes['default_locale'] = $this->randomOrCreateLocale();
+        }
 
         if (\is_string($attributes['default_tax_zone'])) {
             /** @var FindOrCreateResourceEvent $event */
