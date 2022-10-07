@@ -43,6 +43,7 @@ final class XFrameOptionsSubscriber implements EventSubscriberInterface
             return $event->isMainRequest();
         }
 
+        /** @phpstan-ignore-next-line */
         return $event->isMasterRequest();
     }
 }

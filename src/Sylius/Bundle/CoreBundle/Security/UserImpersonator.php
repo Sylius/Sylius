@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 final class UserImpersonator implements UserImpersonatorInterface
 {
@@ -51,6 +52,7 @@ final class UserImpersonator implements UserImpersonatorInterface
                 array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
             );
         } else {
+            Assert::methodExists($user, 'getPassword');
             $token = new UsernamePasswordToken(
                 $user,
                 $user->getPassword(),
