@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Zone Types
 ==========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 There are three zone types available by default:
 

@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Basic Usage
 ===========
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_addressing_matcher_zone-matcher:
 
@@ -18,71 +11,74 @@ system. This service is capable of getting a :ref:`component_addressing_model_zo
 specific for given :ref:`component_addressing_model_address`.
 
 It uses a collaborator implementing Doctrine's
-`ObjectRepository`_ interface to obtain all available zones,
+``ObjectRepository`` interface to obtain all available zones,
 compare them with given :ref:`component_addressing_model_address`
 and return best fitted :ref:`component_addressing_model_zone`.
-
-.. _ObjectRepository: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectRepository.html
 
 First lets make some preparations.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   use Sylius\Component\Addressing\Model\Address;
-   use Sylius\Component\Addressing\Model\Zone;
-   use Sylius\Component\Addressing\Model\ZoneInterface;
-   use Sylius\Component\Addressing\Model\ZoneMember;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+    require dirname(__DIR__) . '/vendor/autoload.php';
 
-   $zoneRepository = new InMemoryRepository(ZoneInterface::class);
-   $zone = new Zone();
-   $zoneMember = new ZoneMember();
+    use Sylius\Component\Addressing\Model\Address;
+    use Sylius\Component\Addressing\Model\Zone;
+    use Sylius\Component\Addressing\Model\ZoneInterface;
+    use Sylius\Component\Addressing\Model\ZoneMember;
+    use Sylius\Component\Resource\Repository\InMemoryRepository;
 
-   $address = new Address();
-   $address->setCountry('US');
+    $zoneRepository = new InMemoryRepository(ZoneInterface::class);
+    $zone = new Zone();
+    $zoneMember = new ZoneMember();
 
-   $zoneMember->setCode('US');
-   $zoneMember->setBelongsTo($zone);
+    $address = new Address();
+    $address->setCountryCode('US');
 
-   $zone->addMember($zoneMember);
+    $zoneMember->setCode('US');
+    $zoneMember->setBelongsTo($zone);
 
-   $zoneRepository->add($zone);
+    $zone->addMember($zoneMember);
+
+    $zoneRepository->add($zone);
 
 Now that we have all the needed parts lets match something.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   use Sylius\Component\Addressing\Matcher\ZoneMatcher;
+    use Sylius\Component\Addressing\Matcher\ZoneMatcher;
 
-   $zoneMatcher = new ZoneMatcher($zoneRepository);
+    $zoneMatcher = new ZoneMatcher($zoneRepository);
 
-   $zoneMatcher->match($address); // returns the best matching zone
-                                  // for the address given, in this case $zone
+    // returns the best matching zone
+    // for the address given, in this case $zone
+    $zoneMatcher->match($address);
 
 **ZoneMatcher** can also return all zones containing given :ref:`component_addressing_model_address`.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   $zoneMatcher->matchAll($address); // returns all zones containing given $address
+    // returns all zones containing given $address
+    $zoneMatcher->matchAll($address);
 
 To be more specific you can provide a ``scope`` which will
-narrow the search only to zones with same corresponding property.
+narrow the search only to zones with the same corresponding property.
 
 .. code-block:: php
 
-   <?php
+    <?php
 
-   $zone->setScope('earth');
+    $zone->setScope('earth');
 
-   $zoneMatcher->match($address, 'earth'); // returns $zone
-   $zoneMatcher->matchAll($address, 'mars'); // returns null as there is no
-                                             // zone with 'mars' scope
+    // returns $zone
+    $zoneMatcher->match($address, 'earth');
+    // returns null as there is no zone with 'mars' scope
+    $zoneMatcher->matchAll($address, 'mars');
 
 .. note::
    This service implements the :ref:`component_addressing_matcher_zone-matcher-interface`.

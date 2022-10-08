@@ -1,12 +1,5 @@
-.. rst-class:: outdated
-
 Models
 ======
-
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
 
 .. _component_addressing_model_address:
 
@@ -29,9 +22,11 @@ concerning customer's address and as default has the following properties:
 +-------------+------------------------------------+
 | company     | Company name                       |
 +-------------+------------------------------------+
-| country     | Country's ISO code                 |
+| countryCode | Country's ISO code                 |
 +-------------+------------------------------------+
-| province    | Province's code                    |
+| provinceCode| Province's code                    |
++-------------+------------------------------------+
+| provinceName| Province's name                    |
 +-------------+------------------------------------+
 | street      | Address' street                    |
 +-------------+------------------------------------+
@@ -46,11 +41,10 @@ concerning customer's address and as default has the following properties:
 
 
 .. note::
-   This model implements the :ref:`component_addressing_model_address-interface`.
 
-   For more detailed information go to `Sylius API Address`_.
+    This model implements the :ref:`component_addressing_model_address-interface`.
 
-.. _Sylius API Address: http://api.sylius.com/Sylius/Component/Addressing/Model/Address.html
+    For more detailed information go to `Sylius Addressing Component Address <https://github.com/Sylius/Addressing/blob/master/Model/Address.php>`_.
 
 .. _component_addressing_model_country:
 
@@ -73,12 +67,12 @@ It should contain all data concerning a country and as default has the following
 +-----------+--------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_country-interface`
-   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API Country`_.
+    This model implements the :ref:`component_addressing_model_country-interface`,
+    `ToggleableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/ToggleableInterface.php>`_.
+    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-.. _Sylius API Country: http://api.sylius.com/Sylius/Component/Addressing/Model/Country.html
+    For more detailed information go to `Sylius Addressing Component Country <https://github.com/Sylius/Addressing/blob/master/Model/Country.php>`_.
 
 .. _component_addressing_model_province:
 
@@ -89,25 +83,26 @@ Smaller area inside a country is represented by a **Province** model.
 You can use it to manage provinces or states and assign it to an address as well.
 It should contain all data concerning a province and as default has the following properties:
 
-+----------+----------------------------------------------+
-| Property | Description                                  |
-+==========+==============================================+
-| id       | Unique id of the province                    |
-+----------+----------------------------------------------+
-| code     | Unique code of the province                  |
-+----------+----------------------------------------------+
-| name     | Province's name                              |
-+----------+----------------------------------------------+
-| country  | The **Country** this province is assigned to |
-+----------+----------------------------------------------+
++-------------+----------------------------------------------+
+| Property    | Description                                  |
++=============+==============================================+
+| id          | Unique id of the province                    |
++-------------+----------------------------------------------+
+| code        | Unique code of the province                  |
++-------------+----------------------------------------------+
+| name        | Province's name                              |
++-------------+----------------------------------------------+
+| abbreviation| Short name of province                       |
++-------------+----------------------------------------------+
+| country     | The **Country** this province is assigned to |
++-------------+----------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_province-interface`
-   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API Province`_.
+    This model implements the :ref:`component_addressing_model_province-interface`
+    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-.. _Sylius API Province: http://api.sylius.com/Sylius/Component/Addressing/Model/Province.html
+    For more detailed information go to `Sylius Addressing Component Province <https://github.com/Sylius/Addressing/blob/master/Model/Province.php>`_.
 
 .. _component_addressing_model_zone:
 
@@ -134,12 +129,10 @@ It should contain all data concerning a zone and as default has the following pr
 +----------+---------------------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_addressing_model_zone-interface`
-   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
+    This model implements the :ref:`component_addressing_model_zone-interface`
+    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API Zone`_.
-
-.. _Sylius API Zone: http://api.sylius.com/Sylius/Component/Addressing/Model/Zone.html
+    For more detailed information go to `Sylius Addressing Component Zone <https://github.com/Sylius/Addressing/blob/master/Model/Zone.php>`_.
 
 .. _component_addressing_model_zone-member:
 
@@ -161,9 +154,8 @@ On default this model has the following properties:
 +-----------+------------------------------------------------------+
 
 .. note::
-   This model implements :ref:`component_addressing_model_zone-member-interface`
-   and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API ZoneMember`_.
+    This model implements :ref:`component_addressing_model_zone-member-interface`
+    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-.. _Sylius API ZoneMember: http://api.sylius.com/Sylius/Component/Addressing/Model/ZoneMember.html
+    For more detailed information go to `Sylius Addressing Component ZoneMember <https://github.com/Sylius/Addressing/blob/master/Model/ZoneMember.php>`_.
