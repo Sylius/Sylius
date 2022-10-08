@@ -67,7 +67,7 @@ Configuring Mailer
 In order to send emails you need to configure Mailer Service. Basically you need to:
 
 1. **Create an account on a mailing service.**
-2. **In your** `.env` file **modify variable** ``MAILER_URL``
+2. **In your** ``.env`` **file modify the** ``MAILER_URL`` **variable.**
 
 .. code-block:: text
 
