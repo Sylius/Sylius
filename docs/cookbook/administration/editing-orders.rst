@@ -31,7 +31,7 @@ If you have troubles of going with shorter instruction, here we will go step by 
 .. note::
 
     The tutorial steps are done on Sylius demo environment under link: https://demo.sylius.com
-    If you want to test if Sylius suits you or try the steps, do not hesitate to check it out by your own.
+    If you want to test if Sylius suits you or try the steps, do not hesitate to check it out on your own.
 
 Impersonate as user and create an order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +90,7 @@ In the end you will be greeted with message that your checkout has been complete
 
 |
 
-Now lets go back to the customer page (where you can click ``show orders`` button) or orders page where you can search for just created order.
+Now let's go back to the customer page (where you can click the ``show orders`` button) or the orders page where you can search for the just-created order.
 
 Here look for ``complete`` button on payment tab:
 
