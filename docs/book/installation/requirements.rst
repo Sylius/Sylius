@@ -76,7 +76,7 @@ Sylius Frontend depends on `npm packages <https://docs.npmjs.com/about-npm>`_ fo
 Current minimum supported version of Node.js is:
 
 +---------------+-----------------------+
-| Node.js       | 14.0+                 |
+| Node.js       | 14.x                  |
 +---------------+-----------------------+
 
 Access rights
