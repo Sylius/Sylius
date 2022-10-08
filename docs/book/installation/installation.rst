@@ -116,6 +116,10 @@ Running asynchronous tasks
 To enable asynchronous tasks (for example for Catalog Promotions), remember about running messenger consumer in a separate process,
 use the command: `php bin/console messenger:consume main`
 
+For production environments, we suggest usage of more robust solution like Supervisor,
+which will ensure that the process is still running even if some failure will occur.
+For more information, please visit `Symfony documentation <https://symfony.com/doc/current/messenger.html#supervisor-configuration>`_.
+
 You can learn more about Catalog Promotions :doc:`Here </book/products/catalog_promotions>`
 
 Contributing
