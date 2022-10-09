@@ -47,13 +47,15 @@ use Zenstruck\Foundry\Proxy;
  * @method static ChannelInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ChannelInterface|Proxy create(array|callable $attributes = [])
  */
-class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
+class ChannelFactory extends ModelFactory implements ChannelFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithCodeTrait;
     use WithNameTrait;
     use ToggableTrait;
     use WithLocalesTrait;
     use WithCurrenciesTrait;
+
+    private static ?string $modelClass = null;
 
     public function __construct(
         private ChannelResourceFactory        $channelFactory,
@@ -62,6 +64,11 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
         private ChannelUpdaterInterface       $factoryUpdater,
     ) {
         parent::__construct();
+    }
+
+    public static function withModelClass(string $modelClass): void
+    {
+        self::$modelClass = $modelClass;
     }
 
     public function withHostname(string $hostname): self
@@ -159,6 +166,6 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface
 
     protected static function getClass(): string
     {
-        return Channel::class;
+        return self::$modelClass ?? Channel::class;
     }
 }
