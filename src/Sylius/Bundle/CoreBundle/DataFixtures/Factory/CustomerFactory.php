@@ -46,7 +46,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static CustomerInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method CustomerInterface|Proxy create(array|callable $attributes = [])
  */
-final class CustomerFactory extends ModelFactory implements CustomerFactoryInterface, FactoryWithModelClassAwareInterface
+class CustomerFactory extends ModelFactory implements CustomerFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithEmailTrait;
     use WithFirstNameTrait;

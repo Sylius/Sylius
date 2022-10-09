@@ -47,7 +47,7 @@ use Zenstruck\Foundry\Proxy;
  * @method static ShopUserInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method ShopUserInterface|Proxy create(array|callable $attributes = [])
  */
-final class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface, FactoryWithModelClassAwareInterface
+class ShopUserFactory extends ModelFactory implements ShopUserFactoryInterface, FactoryWithModelClassAwareInterface
 {
     use WithEmailTrait;
     use FemaleTrait;
