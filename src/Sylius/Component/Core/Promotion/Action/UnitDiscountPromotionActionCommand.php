@@ -103,7 +103,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         /** @var OrderAdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
-        $adjustment->setLabel($translation->getLabel());
+        $adjustment->setLabel($translation->getLabel() ?? $promotion->getName());
         $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;
