@@ -36,7 +36,7 @@ If you have troubles of going with shorter instruction, here we will go step by 
 Impersonate as user and create an order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's start with the steps that will let you impersonate an user and create new order as them.
+Let's start with the steps that will let you impersonate a user and create new order as them.
 
 First, log in as an administrator into the admin panel, go to ``orders`` tab, and find the incorrect order (in this example Order #000000021):
 
