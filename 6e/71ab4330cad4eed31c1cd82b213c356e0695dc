@@ -1,0 +1,87 @@
+---------------------------------------------------------------------------
+
+by coldic3 at 2022-09-23T08:50:00Z
+
+Could you also remove `composer.phar` and `env.local`?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-09-26T09:53:06Z
+
+Can this be reduced to a custom query?
+Are repository methods part of the BC promise?
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-09-26T10:58:34Z
+
+> Can this be reduced to a custom query? Are repository methods part of the BC promise?
+
+There isn't a custom repository for tax rates, so there won't be a BC break.
+The repository could look like this:
+```php
+class TaxRateRepository extends EntityRepository implements TaxRateRepositoryInterface
+{
+    public function findOneByCategoryAndDate(TaxCategoryInterface $taxCategory, ?\DateTimeInterface $date = null): ?TaxRateInterface {
+        if (null === $date) {
+            $date = new \DateTime();
+        }
+
+        $expr = $this->_em->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->where(
+                $expr->andX(
+                    $expr->eq('o.category', ':category'),
+                    $expr->orX(
+                        $expr->isNull('o.startDate'),
+                        $expr->lte('o.startDate', ':date')
+                    ),
+                    $expr->orX(
+                        $expr->isNull('o.endDate'),
+                        $expr->gte('o.endDate', ':date')
+                    ),
+                )
+            )
+            ->setParameter('category', $taxCategory)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+}
+```
+
+However, a way to add the zone in the core bundle is needed, which complicates things a bit. 🤔
+We could add a child repo in the core bundle with another method that also takes in the zone and extracts the common query builder/expression, but the fact that the resolver accepts a criteria array that's passed directly to the `findBy`/`findOneBy` makes things weird.
+
+If we keep the date filter logic in PHP, then I suggest transforming the `TaxRateDateChecker` into an "eligibility checker" (which is common concept in Sylius) that will take a single tax rate and return true if it fulfils the conditions and false otherwise.
+Basically, the checker will contain the logic that's now in `TaxRateDateChecker::isInDate`, which now is a public method that's not part of the abstraction.
+Then the resolver will iterate over the tax rates returned from the repository and return the first one that's eligible.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-10-04T11:23:00Z
+
+🤔 maybe we can avoid the deprecation by decorating the original resolver instead of modifying it? WDYT?
+
+Edit:
+- Add an EligibleTaxRateResolver next to the current TaxRateResolver in the taxation component
+- Add the decoration to the taxation bundle
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-10-05T06:47:56Z
+
+I believe that the deprecation is not a bad option here - of course, it can cause _discomfort_ for the service user, but on the other hand, we transparently inform about important changes in tax rates resolving logic :rocket: Moreover, as the interface allows to return only one tax rate, we could not use the result of the base resolver to filter the ineligible tax rates, as we need an array of them 🖖
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-10-05T09:10:54Z
+
+@Zales0123 my idea was to completely ignore the output from the current resolver, as it remains only for compatibility for those using the service somehow else. Now that I said it out loud it doesn't sound that good anymore.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-10-10T12:20:57Z
+
+Thanks, @everwhatever! :tada:
