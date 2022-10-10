@@ -15,6 +15,16 @@ Entities
 
 .. include:: /cookbook/entities/map.rst.inc
 
+Administration
+--------------
+
+.. toctree::
+    :hidden:
+
+    administration/editing-orders
+
+.. include:: /cookbook/administration/map.rst.inc
+
 Shop
 ----
 
