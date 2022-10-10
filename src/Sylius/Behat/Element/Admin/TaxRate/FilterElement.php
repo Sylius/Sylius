@@ -17,24 +17,14 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 class FilterElement extends Element implements FilterElementInterface
 {
-    public function specifyStartDateFrom(string $date): void
+    public function specifyDateFrom(string $dateType, string $date): void
     {
-        $this->getElement('start_date_from')->setValue($date);
+        $this->getElement(sprintf('%s_date_from', $dateType))->setValue($date);
     }
 
-    public function specifyStartDateTo(string $date): void
+    public function specifyDateTo(string $dateType, string $date): void
     {
-        $this->getElement('start_date_to')->setValue($date);
-    }
-
-    public function specifyEndDateFrom(string $date): void
-    {
-        $this->getElement('end_date_from')->setValue($date);
-    }
-
-    public function specifyEndDateTo(string $date): void
-    {
-        $this->getElement('end_date_to')->setValue($date);
+        $this->getElement(sprintf('%s_date_to', $dateType))->setValue($date);
     }
 
     public function filter(): void

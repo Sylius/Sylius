@@ -23,7 +23,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class TaxationContext implements Context
@@ -35,7 +34,6 @@ final class TaxationContext implements Context
         private RepositoryInterface $taxRateRepository,
         private TaxCategoryRepositoryInterface $taxCategoryRepository,
         private ObjectManager $objectManager,
-        private MessageBusInterface $eventBus,
     ) {
     }
 
@@ -52,11 +50,19 @@ final class TaxationContext implements Context
         ZoneInterface $zone,
         $taxRateCode = null,
         $includedInPrice = false,
-        string $startDate = null,
-        string $endDate = null
+        ?string $startDate = null,
+        ?string $endDate = null
     ) {
-        $this->configureTaxRate($taxCategoryName, $taxRateCode, $taxRateName, $zone, $taxRateAmount, $includedInPrice,
-            new \DateTime($startDate), new \DateTime($endDate));
+        $this->configureTaxRate(
+            $taxCategoryName,
+            $taxRateCode,
+            $taxRateName,
+            $zone,
+            $taxRateAmount,
+            $includedInPrice,
+            $startDate !== null ? new \DateTime($startDate) : null,
+            $endDate !== null ? new \DateTime($endDate) : null,
+        );
     }
 
     /**

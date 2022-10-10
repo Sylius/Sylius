@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
+use Sylius\Behat\Element\Admin\TaxRate\FilterElementInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
@@ -141,8 +141,8 @@ final class ManagingTaxRateContext implements Context
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]));
     }
+
     /**
-     *
      * @Then I should not see a tax rate with name :name
      */
     public function iShouldNotSeeATaxRateWithName(string $taxRateName): void
@@ -388,12 +388,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iFilterTaxRatesByDateFrom(string $dateType, string $date): void
     {
-        if ('start' === $dateType) {
-            $this->filterElement->specifyStartDateFrom($date);
-        } else {
-            $this->filterElement->specifyEndDateFrom($date);
-        }
-
+        $this->filterElement->specifyDateFrom($dateType, $date);
         $this->filterElement->filter();
     }
 
@@ -402,12 +397,7 @@ final class ManagingTaxRateContext implements Context
      */
     public function iFilterTaxRatesByDateUpTo(string $dateType, string $date): void
     {
-        if ('start' === $dateType) {
-            $this->filterElement->specifyStartDateTo($date);
-        } else {
-            $this->filterElement->specifyEndDateTo($date);
-        }
-
+        $this->filterElement->specifyDateTo($dateType, $date);
         $this->filterElement->filter();
     }
 
@@ -416,14 +406,8 @@ final class ManagingTaxRateContext implements Context
      */
     public function iFilterTaxRatesByDateFromDateToDate(string $dateType, string $fromDate, string $toDate): void
     {
-        if ('start' === $dateType) {
-            $this->filterElement->specifyStartDateFrom($fromDate);
-            $this->filterElement->specifyStartDateTo($toDate);
-        } else {
-            $this->filterElement->specifyEndDateFrom($fromDate);
-            $this->filterElement->specifyEndDateTo($toDate);
-        }
-
+        $this->filterElement->specifyDateFrom($dateType, $fromDate);
+        $this->filterElement->specifyDateTo($dateType, $toDate);
         $this->filterElement->filter();
     }
 }

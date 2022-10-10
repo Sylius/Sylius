@@ -15,13 +15,9 @@ namespace Sylius\Behat\Element\Admin\TaxRate;
 
 interface FilterElementInterface
 {
-    public function specifyStartDateFrom(string $date): void;
+    public function specifyDateFrom(string $dateType, string $date): void;
 
-    public function specifyStartDateTo(string $date): void;
-
-    public function specifyEndDateFrom(string $date): void;
-
-    public function specifyEndDateTo(string $date): void;
+    public function specifyDateTo(string $dateType, string $date): void;
 
     public function filter(): void;
 }
