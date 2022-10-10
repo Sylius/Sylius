@@ -18,13 +18,12 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class TaxationContext implements Context
@@ -36,6 +35,7 @@ final class TaxationContext implements Context
         private RepositoryInterface $taxRateRepository,
         private TaxCategoryRepositoryInterface $taxCategoryRepository,
         private ObjectManager $objectManager,
+        private MessageBusInterface $eventBus,
     ) {
     }
 
@@ -148,8 +148,6 @@ final class TaxationContext implements Context
         $taxRate->setStartDate(new \DateTime($startDate));
         $taxRate->setEndDate(new \DateTime($endDate));
         $this->objectManager->flush();
-
-        $this->eventBus->dispatch(new CatalogPromotionUpdated($taxRate->getCode()));
     }
 
     /**
