@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerGroupFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateCustomerGroupTrait;
 
 final class CustomerTransformer implements CustomerTransformerInterface
 {
+    use FindOrCreateCustomerGroupTrait;
+
     public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
     }
@@ -26,12 +27,7 @@ final class CustomerTransformer implements CustomerTransformerInterface
     public function transform(array $attributes): array
     {
         if (\is_string($attributes['customer_group'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(CustomerGroupFactoryInterface::class, ['code' => $attributes['customer_group']])
-            );
-
-            $attributes['customer_group'] = $event->getResource();
+            $attributes['customer_group'] = $this->findOrCreateCustomerGroup($this->eventDispatcher, ['code' => $attributes['customer_group']]);
         }
 
         return $attributes;

@@ -27,9 +27,9 @@ final class OrderTransformer implements OrderTransformerInterface
 
     public function transform(array $attributes): array
     {
-        $attributes = $this->transformChannelAttribute($attributes);
-        $attributes = $this->transformCustomerAttribute($attributes);
+        $attributes = $this->transformChannelAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformCustomerAttribute($this->eventDispatcher, $attributes);
 
-        return $this->transformCountryAttribute($attributes);
+        return $this->transformCountryAttribute($this->eventDispatcher, $attributes);
     }
 }

@@ -27,8 +27,8 @@ final class ProductReviewTransformer implements ProductReviewTransformerInterfac
 
     public function transform(array $attributes): array
     {
-        $attributes = $this->transformCustomerAttribute($attributes, 'author');
+        $attributes = $this->transformCustomerAttribute($this->eventDispatcher, $attributes, 'author');
 
-        return $this->transformProductAttribute($attributes);
+        return $this->transformProductAttribute($this->eventDispatcher, $attributes);
     }
 }

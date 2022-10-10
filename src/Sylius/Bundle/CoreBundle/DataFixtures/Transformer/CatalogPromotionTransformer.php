@@ -31,9 +31,9 @@ final class CatalogPromotionTransformer implements CatalogPromotionTransformerIn
     public function transform(array $attributes): array
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
-        $attributes = $this->transformChannelsAttribute($attributes);
+        $attributes = $this->transformChannelsAttribute($this->eventDispatcher, $attributes);
         $attributes = $this->transformActionsAttribute($attributes);
-        $attributes = $this->transformScopesAttribute($attributes);
+        $attributes = $this->transformScopesAttribute($this->eventDispatcher, $attributes);
 
         if (null === $attributes['label']) {
             $attributes['label'] = $attributes['name'];

@@ -15,11 +15,14 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAssociationTypeFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductAssociationTypeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductTrait;
 
 final class ProductAssociationTransformer implements ProductAssociationTransformerInterface
 {
+    use FindOrCreateProductTrait;
+    use FindOrCreateProductAssociationTypeTrait;
     use TransformProductAttributeTrait;
 
     public function __construct(private EventDispatcherInterface $eventDispatcher)
@@ -31,16 +34,13 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
         $attributes = $this->transformAssociationTypeAttribute($attributes);
         $attributes = $this->transformAssociatedProductsAttribute($attributes);
 
-        return $this->transformProductAttribute($attributes, 'owner');
+        return $this->transformProductAttribute($this->eventDispatcher, $attributes, 'owner');
     }
 
     private function transformAssociationTypeAttribute(array $attributes): array
     {
         if (\is_string($attributes['type'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(new FindOrCreateResourceEvent(ProductAssociationTypeFactoryInterface::class, ['code' => $attributes['type']]));
-
-            $attributes['type'] = $event->getResource();
+            $attributes['type'] = $this->findOrCreateProductAssociationType($this->eventDispatcher, ['code' => $attributes['type']]);
         }
 
         return $attributes;
@@ -51,12 +51,7 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
         $products = [];
         foreach ($attributes['associated_products'] as $product) {
             if (\is_string($product)) {
-                /** @var FindOrCreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(
-                    new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $product])
-                );
-
-                $product = $event->getResource();
+                $product = $this->findOrCreateProduct($this->eventDispatcher, ['code' => $product]);
             }
 
             $products[] = $product;

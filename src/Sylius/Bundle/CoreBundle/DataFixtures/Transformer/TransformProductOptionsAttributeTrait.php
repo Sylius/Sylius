@@ -5,24 +5,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductOptionTrait;
 
 trait TransformProductOptionsAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
+    use FindOrCreateProductOptionTrait;
 
-    private function transformProductOptionsAttribute(array $attributes): array
+    private function transformProductOptionsAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $productOptions = [];
         foreach ($attributes['product_options'] as $productOption) {
             if (\is_string($productOption)) {
-                /** @var FindOrCreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(
-                    new FindOrCreateResourceEvent(ProductOptionFactoryInterface::class, ['code' => $productOption])
-                );
-
-                $productOption = $event->getResource();
+                $productOption = $this->findOrCreateProductOption($eventDispatcher, ['code' => $productOption]);
             }
             $productOptions[] = $productOption;
         }

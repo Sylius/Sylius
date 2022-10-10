@@ -7,20 +7,20 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait FindOrCreateCustomerTrait
+trait FindOrCreateCurrencyTrait
 {
     /**
-     * @return CustomerInterface|Proxy
+     * @return CurrencyInterface|Proxy
      */
-    private function findOrCreateCustomer(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
+    private function findOrCreateCurrency(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new FindOrCreateResourceEvent(CustomerFactoryInterface::class, $attributes)
+            new FindOrCreateResourceEvent(CurrencyFactoryInterface::class, $attributes),
         );
 
         return $event->getResource();

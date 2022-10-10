@@ -4,22 +4,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateCurrencyTrait;
 
 trait TransformCurrenciesAttributeTrait
 {
-    private CurrencyFactoryInterface $currencyFactory;
+    use FindOrCreateCurrencyTrait;
 
-    private function transformCurrenciesAttribute(array $attributes): array
+    private function transformCurrenciesAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $currencies = [];
         foreach ($attributes['currencies'] as $currency) {
             if (\is_string($currency)) {
-                /** @var FindOrCreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(new FindOrCreateResourceEvent(CurrencyFactoryInterface::class, ['code' => $currency]));
-
-                $currency = $event->getResource();
+                $currency = $this->findOrCreateCurrency($eventDispatcher, ['code' => $currency]);
             }
 
             $currencies[] = $currency;

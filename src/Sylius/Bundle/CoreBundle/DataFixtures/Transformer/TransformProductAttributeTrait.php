@@ -7,20 +7,16 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductTrait;
 
 trait TransformProductAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
+    use FindOrCreateProductTrait;
 
-    private function transformProductAttribute(array $attributes, string $attributeKey = 'product'): array
+    private function transformProductAttribute(EventDispatcherInterface $eventDispatcher, array $attributes, string $attributeKey = 'product'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(ProductFactoryInterface::class, ['code' => $attributes[$attributeKey]])
-            );
-
-            $attributes[$attributeKey] = $event->getResource();
+            $attributes[$attributeKey] = $this->findOrCreateProduct($eventDispatcher, ['code' => $attributes[$attributeKey]]);
         }
 
         return $attributes;

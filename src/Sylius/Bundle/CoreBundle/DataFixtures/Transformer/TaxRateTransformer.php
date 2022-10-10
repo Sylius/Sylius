@@ -29,8 +29,8 @@ final class TaxRateTransformer implements TaxRateTransformerInterface
     public function transform(array $attributes): array
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
-        $attributes = $this->transformZoneAttribute($attributes);
+        $attributes = $this->transformZoneAttribute($this->eventDispatcher, $attributes);
 
-        return $this->transformTaxCategoryAttribute($attributes, 'category');
+        return $this->transformTaxCategoryAttribute($this->eventDispatcher, $attributes, 'category');
     }
 }

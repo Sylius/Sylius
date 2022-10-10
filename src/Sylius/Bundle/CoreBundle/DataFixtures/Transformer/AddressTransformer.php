@@ -25,6 +25,6 @@ final class AddressTransformer implements AddressTransformerInterface
 
     public function transform(array $attributes): array
     {
-        return $this->transformCustomerAttribute($attributes);
+        return $this->transformCustomerAttribute($this->eventDispatcher, $attributes);
     }
 }

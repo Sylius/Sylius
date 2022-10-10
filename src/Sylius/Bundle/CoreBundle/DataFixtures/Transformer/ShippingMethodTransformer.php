@@ -16,9 +16,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateShippingCategoryTrait;
 
 final class ShippingMethodTransformer implements ShippingMethodTransformerInterface
 {
+    use FindOrCreateShippingCategoryTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformZoneAttributeTrait;
     use TransformTaxCategoryAttributeTrait;
@@ -31,22 +33,17 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
     public function transform(array $attributes): array
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
-        $attributes = $this->transformZoneAttribute($attributes);
-        $attributes = $this->transformTaxCategoryAttribute($attributes);
+        $attributes = $this->transformZoneAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformTaxCategoryAttribute($this->eventDispatcher, $attributes);
         $attributes = $this->transformCategoryAttributes($attributes);
 
-        return $this->transformChannelsAttribute($attributes);
+        return $this->transformChannelsAttribute($this->eventDispatcher, $attributes);
     }
 
     private function transformCategoryAttributes(array $attributes): array
     {
         if (\is_string($attributes['category'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(ShippingCategoryFactoryInterface::class, ['code' => $attributes['category']])
-            );
-
-            $attributes['category'] = $event->getResource();
+            $attributes['category'] = $this->findOrCreateShippingCategory($this->eventDispatcher, ['code' => $attributes['category']]);
         }
 
         return $attributes;

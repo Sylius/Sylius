@@ -7,22 +7,18 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateChannelTrait;
 
 trait TransformChannelsAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
+    use FindOrCreateChannelTrait;
 
-    private function transformChannelsAttribute(array $attributes): array
+    private function transformChannelsAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $channels = [];
         foreach ($attributes['channels'] as $channel) {
             if (\is_string($channel)) {
-                /** @var FindOrCreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(
-                    new FindOrCreateResourceEvent(ChannelFactoryInterface::class, ['code' => $channel])
-                );
-
-                $channel = $event->getResource();
+                $channel = $this->findOrCreateChannel($eventDispatcher, ['code' => $channel]);
             }
             $channels[] = $channel;
         }

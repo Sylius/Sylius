@@ -10,15 +10,13 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CatalogPromotionScopeFactoryIn
 
 trait TransformCatalogPromotionScopesAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private function transformScopesAttribute(array $attributes): array
+    private function transformScopesAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $scopes = [];
         foreach ($attributes['scopes'] as $scope) {
             if (\is_array($scope)) {
                 /** @var CreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(new CreateResourceEvent(CatalogPromotionScopeFactoryInterface::class, $scope));
+                $event = $eventDispatcher->dispatch(new CreateResourceEvent(CatalogPromotionScopeFactoryInterface::class, $scope));
 
                 $scope = $event->getResource();
             }

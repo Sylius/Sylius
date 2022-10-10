@@ -5,22 +5,16 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateZoneTrait;
 
 trait TransformZoneAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
+    use FindOrCreateZoneTrait;
 
-    private function transformZoneAttribute(array $attributes): array
+    private function transformZoneAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         if (\is_string($attributes['zone'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(ZoneFactoryInterface::class, ['code' => $attributes['zone']])
-            );
-
-            $attributes['zone'] = $event->getResource();
+            $attributes['zone'] = $this->findOrCreateZone($eventDispatcher, ['code' => $attributes['zone']]);
         }
 
         return $attributes;

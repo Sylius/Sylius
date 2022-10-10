@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateTaxCategoryTrait;
 
 trait TransformTaxCategoryAttributeTrait
 {
-    private TaxCategoryFactoryInterface $taxCategoryFactory;
+    use FindOrCreateTaxCategoryTrait;
 
-    private function transformTaxCategoryAttribute(array $attributes, string $attributeKey = 'tax_category'): array
+    private function transformTaxCategoryAttribute(EventDispatcherInterface $eventDispatcher, array $attributes, string $attributeKey = 'tax_category'): array
     {
         if (\is_string($attributes[$attributeKey])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(TaxCategoryFactoryInterface::class, ['code' => $attributes[$attributeKey]])
-            );
-
-            $attributes[$attributeKey] = $event->getResource();
+            $attributes[$attributeKey] = $this->findOrCreateTaxCategory($eventDispatcher, ['code' => $attributes[$attributeKey]]);
         }
 
         return $attributes;

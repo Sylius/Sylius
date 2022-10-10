@@ -7,20 +7,20 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait FindOrCreateCustomerTrait
+trait FindOrCreateChannelTrait
 {
     /**
-     * @return CustomerInterface|Proxy
+     * @return ChannelInterface|Proxy
      */
-    private function findOrCreateCustomer(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
+    private function findOrCreateChannel(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new FindOrCreateResourceEvent(CustomerFactoryInterface::class, $attributes)
+            new FindOrCreateResourceEvent(ChannelFactoryInterface::class, $attributes),
         );
 
         return $event->getResource();

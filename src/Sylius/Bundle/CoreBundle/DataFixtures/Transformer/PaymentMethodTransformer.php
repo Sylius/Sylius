@@ -28,6 +28,6 @@ final class PaymentMethodTransformer implements PaymentMethodTransformerInterfac
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
 
-        return $this->transformChannelsAttribute($attributes);
+        return $this->transformChannelsAttribute($this->eventDispatcher, $attributes);
     }
 }

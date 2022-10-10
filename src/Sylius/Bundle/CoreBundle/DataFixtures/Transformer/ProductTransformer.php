@@ -15,10 +15,8 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Faker\Generator;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductAttributeFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductOptionFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductAttributeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateTaxonTrait;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -26,10 +24,11 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Webmozart\Assert\Assert;
 
 final class ProductTransformer implements ProductTransformerInterface
 {
+    use FindOrCreateProductAttributeTrait;
+    use FindOrCreateTaxonTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformNameToSlugAttributeTrait;
     use TransformTaxCategoryAttributeTrait;
@@ -51,11 +50,11 @@ final class ProductTransformer implements ProductTransformerInterface
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes = $this->transformNameToSlugAttribute($attributes);
-        $attributes = $this->transformTaxCategoryAttribute($attributes);
-        $attributes = $this->transformChannelsAttribute($attributes);
+        $attributes = $this->transformTaxCategoryAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformChannelsAttribute($this->eventDispatcher, $attributes);
         $attributes = $this->transformMainTaxonAttribute($attributes);
-        $attributes = $this->transformTaxaAttribute($attributes);
-        $attributes = $this->transformProductOptionsAttribute($attributes);
+        $attributes = $this->transformTaxaAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformProductOptionsAttribute($this->eventDispatcher, $attributes);
 
         return $this->transformProductAttributeValues($attributes);
     }
@@ -63,12 +62,7 @@ final class ProductTransformer implements ProductTransformerInterface
     private function transformMainTaxonAttribute(array $attributes): array
     {
         if (\is_string($attributes['main_taxon'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $attributes['main_taxon']])
-            );
-
-            $attributes['main_taxon'] = $event->getResource();
+            $attributes['main_taxon'] = $this->findOrCreateTaxon($this->eventDispatcher, ['code' => $attributes['main_taxon']]);
         }
 
         return $attributes;
@@ -78,14 +72,7 @@ final class ProductTransformer implements ProductTransformerInterface
     {
         $productAttributesValues = [];
         foreach ($attributes['product_attributes'] as $code => $value) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(ProductAttributeFactoryInterface::class, ['code' => $code])
-            );
-
-            $productAttribute = $event->getResource();
-
-            Assert::notNull($productAttribute, sprintf('Can not find product attribute with code: "%s"', $code));
+            $productAttribute = $this->findOrCreateProductAttribute($this->eventDispatcher, ['code' => $code]);
 
             if (!$productAttribute->isTranslatable()) {
                 $productAttributesValues[] = $this->configureProductAttributeValue($productAttribute->object(), null, $value);

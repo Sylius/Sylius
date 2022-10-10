@@ -15,14 +15,15 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\CreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateTaxonTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateZoneTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateLocaleTrait;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
+    use FindOrCreateTaxonTrait;
+    use FindOrCreateZoneTrait;
     use RandomOrCreateLocaleTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformLocalesAttributeTrait;
@@ -38,16 +39,11 @@ final class ChannelTransformer implements ChannelTransformerInterface
         $attributes['hostname'] = $attributes['hostname'] ?: $attributes['code'] . '.localhost';
 
         if (null === $attributes['default_locale']) {
-            $attributes['default_locale'] = $this->randomOrCreateLocale();
+            $attributes['default_locale'] = $this->randomOrCreateLocale($this->eventDispatcher);
         }
 
         if (\is_string($attributes['default_tax_zone'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(ZoneFactoryInterface::class, ['code' => $attributes['default_tax_zone']])
-            );
-
-            $attributes['default_tax_zone'] = $event->getResource();
+            $attributes['default_tax_zone'] = $this->findOrCreateZone($this->eventDispatcher, ['code' => $attributes['default_tax_zone']]);
         }
 
         if (is_array($attributes['shop_billing_data'])) {
@@ -60,16 +56,11 @@ final class ChannelTransformer implements ChannelTransformerInterface
         }
 
         if (\is_string($attributes['menu_taxon'])) {
-            /** @var FindOrCreateResourceEvent $event */
-            $event = $this->eventDispatcher->dispatch(
-                new FindOrCreateResourceEvent(TaxonFactoryInterface::class, ['code' => $attributes['menu_taxon']])
-            );
-
-            $attributes['menu_taxon'] = $event->getResource();
+            $attributes['menu_taxon'] = $this->findOrCreateTaxon($this->eventDispatcher, ['code' => $attributes['menu_taxon']]);
         }
 
-        $attributes = $this->transformLocalesAttribute($attributes);
+        $attributes = $this->transformLocalesAttribute($this->eventDispatcher, $attributes);
 
-        return $this->transformCurrenciesAttribute($attributes);
+        return $this->transformCurrenciesAttribute($this->eventDispatcher, $attributes);
     }
 }

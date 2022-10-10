@@ -34,7 +34,7 @@ final class AddressUpdater implements AddressUpdaterInterface
         $countryCode = $attributes['country_code'];
 
         if (null !== $countryCode) {
-            $this->findOrCreateCountry(['code' => $countryCode]);
+            $this->findOrCreateCountry($this->eventDispatcher, ['code' => $countryCode]);
         }
 
         $address->setFirstName($attributes['first_name']);
@@ -44,9 +44,13 @@ final class AddressUpdater implements AddressUpdaterInterface
         $address->setStreet($attributes['street']);
         $address->setCity($attributes['city']);
         $address->setPostcode($attributes['postcode']);
-        $address->setCountryCode($countryCode ?? $this->randomOrCreateCountry()->getCode());
+        $address->setCountryCode($countryCode ?? $this->randomOrCreateCountry($this->eventDispatcher)->getCode());
         $address->setProvinceName($attributes['province_name']);
         $address->setProvinceCode($attributes['province_code']);
-        $address->setCustomer('' !== $attributes['customer'] ? $attributes['customer'] : $this->randomOrCreateCustomer()->object());
+        $address->setCustomer(
+            '' !== $attributes['customer']
+                ? $attributes['customer']
+                : $this->randomOrCreateCustomer($this->eventDispatcher)->object()
+        );
     }
 }

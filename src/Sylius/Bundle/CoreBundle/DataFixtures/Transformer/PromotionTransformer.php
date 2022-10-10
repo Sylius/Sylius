@@ -26,9 +26,9 @@ final class PromotionTransformer implements PromotionTransformerInterface
     public function transform(array $attributes): array
     {
         $attributes = $this->transformNameToCodeAttribute($attributes);
-        $attributes = $this->transformActionsAttribute($attributes);
-        $attributes = $this->transformRulesAttribute($attributes);
-        $attributes = $this->transformChannelsAttribute($attributes);
+        $attributes = $this->transformActionsAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformRulesAttribute($this->eventDispatcher, $attributes);
+        $attributes = $this->transformChannelsAttribute($this->eventDispatcher, $attributes);
 
         return $this->transformCouponsAttributes($attributes);
     }

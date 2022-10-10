@@ -10,15 +10,13 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\PromotionRuleFactoryInterface;
 
 trait TransformPromotionRulesAttributeTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private function transformRulesAttribute(array $attributes): array
+    private function transformRulesAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $rules = [];
         foreach ($attributes['rules'] as $rule) {
             if (\is_array($rule)) {
                 /** @var CreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(
+                $event = $eventDispatcher->dispatch(
                     new CreateResourceEvent(PromotionRuleFactoryInterface::class, $rule)
                 );
 

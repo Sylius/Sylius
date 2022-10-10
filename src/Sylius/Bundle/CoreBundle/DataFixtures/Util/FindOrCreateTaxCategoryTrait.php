@@ -7,20 +7,20 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait FindOrCreateCustomerTrait
+trait FindOrCreateTaxCategoryTrait
 {
     /**
-     * @return CustomerInterface|Proxy
+     * @return TaxCategoryInterface|Proxy
      */
-    private function findOrCreateCustomer(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
+    private function findOrCreateTaxCategory(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new FindOrCreateResourceEvent(CustomerFactoryInterface::class, $attributes)
+            new FindOrCreateResourceEvent(TaxCategoryFactoryInterface::class, $attributes),
         );
 
         return $event->getResource();

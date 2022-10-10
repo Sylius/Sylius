@@ -13,14 +13,12 @@ trait TransformLocalesAttributeTrait
 {
     use FindOrCreateLocaleTrait;
 
-    private EventDispatcherInterface $eventDispatcher;
-
-    private function transformLocalesAttribute(array $attributes): array
+    private function transformLocalesAttribute(EventDispatcherInterface $eventDispatcher, array $attributes): array
     {
         $locales = [];
         foreach ($attributes['locales'] as $locale) {
             if (\is_string($locale)) {
-                $locale = $this->findOrCreateLocale(['code' => $locale]);
+                $locale = $this->findOrCreateLocale($eventDispatcher, ['code' => $locale]);
             }
 
             $locales[] = $locale;

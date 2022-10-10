@@ -13,12 +13,10 @@ use Zenstruck\Foundry\Proxy;
 
 trait RandomOrCreateCountryTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private function randomOrCreateCountry(): Proxy|CountryInterface
+    private function randomOrCreateCountry(EventDispatcherInterface $eventDispatcher): Proxy|CountryInterface
     {
         /** @var ResourceEventInterface $event */
-        $event = $this->eventDispatcher->dispatch(
+        $event = $eventDispatcher->dispatch(
             new RandomOrCreateResourceEvent(CountryFactoryInterface::class)
         );
 

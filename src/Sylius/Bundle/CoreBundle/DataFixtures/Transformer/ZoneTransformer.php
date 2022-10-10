@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneMemberFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateZoneMemberTrait;
 
 final class ZoneTransformer implements ZoneTransformerInterface
 {
+    use FindOrCreateZoneMemberTrait;
     use TransformNameToCodeAttributeTrait;
 
     public function __construct(private EventDispatcherInterface $eventDispatcher)
@@ -38,12 +38,7 @@ final class ZoneTransformer implements ZoneTransformerInterface
 
         foreach ($attributes['members'] as $member) {
             if (\is_string($member)) {
-                /** @var FindOrCreateResourceEvent $event */
-                $event = $this->eventDispatcher->dispatch(
-                    new FindOrCreateResourceEvent(ZoneMemberFactoryInterface::class, ['code' => $member])
-                );
-
-                $member = $event->getResource();
+                $member = $this->findOrCreateZoneMember($this->eventDispatcher, ['code' => $member]);
             }
 
             $members[] = $member;

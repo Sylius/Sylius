@@ -13,15 +13,13 @@ use Zenstruck\Foundry\Proxy;
 
 trait FindOrCreateCountryTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
      * @return CountryInterface|Proxy
      */
-    private function findOrCreateCountry(array $attributes): Proxy
+    private function findOrCreateCountry(EventDispatcherInterface $eventDispatcher, array $attributes): Proxy
     {
         /** @var ResourceEventInterface $event */
-        $event = $this->eventDispatcher->dispatch(
+        $event = $eventDispatcher->dispatch(
             new FindOrCreateResourceEvent(CountryFactoryInterface::class, $attributes),
         );
 
