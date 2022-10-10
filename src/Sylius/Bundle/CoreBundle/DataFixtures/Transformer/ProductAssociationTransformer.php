@@ -18,11 +18,15 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductAssociationTypeTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateProductTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateProductAssociationTypeTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateProductTrait;
 
 final class ProductAssociationTransformer implements ProductAssociationTransformerInterface
 {
     use FindOrCreateProductTrait;
     use FindOrCreateProductAssociationTypeTrait;
+    use RandomOrCreateProductTrait;
+    use RandomOrCreateProductAssociationTypeTrait;
     use TransformProductAttributeTrait;
 
     public function __construct(private EventDispatcherInterface $eventDispatcher)
@@ -31,6 +35,14 @@ final class ProductAssociationTransformer implements ProductAssociationTransform
 
     public function transform(array $attributes): array
     {
+        if (null === $attributes['type']) {
+            $attributes['type'] = $this->randomOrCreateProductAssociationType($this->eventDispatcher);
+        }
+
+        if (null === $attributes['owner']) {
+            $attributes['owner'] = $this->randomOrCreateProduct($this->eventDispatcher);
+        }
+
         $attributes = $this->transformAssociationTypeAttribute($attributes);
         $attributes = $this->transformAssociatedProductsAttribute($attributes);
 

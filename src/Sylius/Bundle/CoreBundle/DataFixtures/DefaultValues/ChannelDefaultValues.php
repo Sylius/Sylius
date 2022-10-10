@@ -20,14 +20,14 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Core\Model\Scope;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ChannelDefaultValues implements ChannelDefaultValuesInterface
 {
     public function __construct(
         private ZoneFactoryInterface $zoneFactory,
-        private LocaleFactoryInterface $localeFactory,
-        private CurrencyFactoryInterface $currencyFactory,
-        private TaxonFactoryInterface $taxonFactory,
+        private RepositoryInterface $localeRepository,
+        private RepositoryInterface $currencyRepository,
     ) {
     }
 
@@ -44,15 +44,15 @@ final class ChannelDefaultValues implements ChannelDefaultValuesInterface
             'account_verification_required' => true,
             'default_tax_zone' => $this->zoneFactory::randomOrCreate(['scope' => $faker->boolean() ? Scope::TAX : AddressingScope::ALL]),
             'tax_calculation_strategy' => 'order_items_based',
-            'default_locale' => null, // $this->localeFactory::randomOrCreate(),
-            'locales' => $this->localeFactory::all(),
-            'base_currency' => $this->currencyFactory::randomOrCreate(),
-            'currencies' => $this->currencyFactory::all(),
+            'default_locale' => null,
+            'locales' => $this->localeRepository->findAll(),
+            'base_currency' => null,
+            'currencies' => $this->currencyRepository->findAll(),
             'theme_name' => null,
             'contact_email' => null,
             'contact_phone_number' => null,
             'shop_billing_data' => null,
-            'menu_taxon' => $this->taxonFactory::randomOrCreate(),
+            'menu_taxon' => '',
         ];
     }
 }

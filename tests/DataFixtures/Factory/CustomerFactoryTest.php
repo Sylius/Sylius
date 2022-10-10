@@ -26,7 +26,7 @@ final class CustomerFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_customer_with__default_values(): void
+    function it_creates_customer_with_default_values(): void
     {
         $customer = CustomerFactory::createOne();
 
@@ -131,5 +131,13 @@ final class CustomerFactoryTest extends KernelTestCase
         $customer = CustomerFactory::new()->withGroup($customerGroup)->create();
 
         $this->assertEquals($customerGroup, $customer->getGroup());
+    }
+
+    /** @test */
+    function it_creates_customer_without_group(): void
+    {
+        $customer = CustomerFactory::new()->withoutGroup()->create();
+
+        $this->assertNull($customer->getGroup());
     }
 }

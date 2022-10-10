@@ -14,17 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
 
 final class TaxRateDefaultValues implements TaxRateDefaultValuesInterface
 {
-    public function __construct(
-        private ZoneFactoryInterface $zoneFactory,
-        private TaxCategoryFactoryInterface $taxCategoryFactory,
-    ) {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
@@ -33,8 +25,8 @@ final class TaxRateDefaultValues implements TaxRateDefaultValuesInterface
             'amount' => $faker->randomFloat(2, 0, 0.4),
             'included_in_price' => $faker->boolean(),
             'calculator' => 'default',
-            'zone' => $this->zoneFactory->randomOrCreate(),
-            'category' => $this->taxCategoryFactory->randomOrCreate(),
+            'zone' => null,
+            'category' => null,
         ];
     }
 }

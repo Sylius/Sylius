@@ -8,21 +8,21 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\RandomOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxonFactoryInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait RandomOrCreateLocaleTrait
+trait RandomOrCreateTaxonTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
-     * @return LocaleInterface|Proxy
+     * @return TaxonInterface|Proxy
      */
-    private function randomOrCreateLocale(EventDispatcherInterface $eventDispatcher): Proxy
+    private function randomOrCreateTaxon(EventDispatcherInterface $eventDispatcher): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new RandomOrCreateResourceEvent(LocaleFactoryInterface::class),
+            new RandomOrCreateResourceEvent(TaxonFactoryInterface::class),
         );
 
         return $event->getResource();

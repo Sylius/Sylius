@@ -48,4 +48,6 @@ interface CustomerFactoryInterface extends WithEmailInterface, WithFirstNameInte
     public function withPassword(string $password): self;
 
     public function withGroup(Proxy|CustomerGroupInterface|string $customerGroup): self;
+
+    public function withoutGroup(): self;
 }

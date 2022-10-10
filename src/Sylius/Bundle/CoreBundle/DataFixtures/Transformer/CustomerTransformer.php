@@ -15,10 +15,12 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateCustomerGroupTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateCustomerGroupTrait;
 
 final class CustomerTransformer implements CustomerTransformerInterface
 {
     use FindOrCreateCustomerGroupTrait;
+    use RandomOrCreateCustomerGroupTrait;
 
     public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
@@ -26,6 +28,10 @@ final class CustomerTransformer implements CustomerTransformerInterface
 
     public function transform(array $attributes): array
     {
+        if ('' === $attributes['customer_group']) {
+            $attributes['customer_group'] = $this->randomOrCreateCustomerGroup($this->eventDispatcher);
+        }
+
         if (\is_string($attributes['customer_group'])) {
             $attributes['customer_group'] = $this->findOrCreateCustomerGroup($this->eventDispatcher, ['code' => $attributes['customer_group']]);
         }

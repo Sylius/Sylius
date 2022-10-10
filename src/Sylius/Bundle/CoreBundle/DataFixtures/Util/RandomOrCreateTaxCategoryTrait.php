@@ -7,22 +7,20 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\RandomOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\TaxCategoryFactoryInterface;
+use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait RandomOrCreateLocaleTrait
+trait RandomOrCreateTaxCategoryTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
-     * @return LocaleInterface|Proxy
+     * @return TaxCategoryInterface|Proxy
      */
-    private function randomOrCreateLocale(EventDispatcherInterface $eventDispatcher): Proxy
+    private function randomOrCreateTaxCategory(EventDispatcherInterface $eventDispatcher): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new RandomOrCreateResourceEvent(LocaleFactoryInterface::class),
+            new RandomOrCreateResourceEvent(TaxCategoryFactoryInterface::class),
         );
 
         return $event->getResource();

@@ -7,20 +7,22 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\RandomOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait RandomOrCreateCountryTrait
+trait RandomOrCreateChannelTrait
 {
     /**
-     * @return CountryInterface|Proxy
+     * @return ChannelInterface|Proxy
      */
-    private function randomOrCreateCountry(EventDispatcherInterface $eventDispatcher): Proxy
+    private function randomOrCreateChannel(EventDispatcherInterface $eventDispatcher): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new RandomOrCreateResourceEvent(CountryFactoryInterface::class)
+            new RandomOrCreateResourceEvent(ChannelFactoryInterface::class)
         );
 
         return $event->getResource();

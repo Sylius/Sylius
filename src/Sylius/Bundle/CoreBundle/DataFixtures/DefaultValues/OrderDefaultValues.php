@@ -20,19 +20,12 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
 
 final class OrderDefaultValues implements OrderDefaultValuesInterface
 {
-    public function __construct(
-        private ChannelFactoryInterface $channelFactory,
-        private CustomerFactoryInterface $customerFactory,
-        private CountryFactoryInterface $countryFactory,
-    ) {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
-            'channel' => $this->channelFactory::randomOrCreate(),
-            'customer' => $this->customerFactory::randomOrCreate(),
-            'country' => $this->countryFactory::randomOrCreate(),
+            'channel' => null,
+            'customer' => null,
+            'country' => null,
             'complete_date' => $faker->dateTimeBetween('-1 years', 'now'),
             'fulfilled' => false,
         ];

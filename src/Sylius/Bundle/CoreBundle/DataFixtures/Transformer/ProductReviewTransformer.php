@@ -15,9 +15,13 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateCustomerTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateProductTrait;
 
 final class ProductReviewTransformer implements ProductReviewTransformerInterface
 {
+    use RandomOrCreateCustomerTrait;
+    use RandomOrCreateProductTrait;
     use TransformProductAttributeTrait;
     use TransformCustomerAttributeTrait;
 
@@ -27,6 +31,14 @@ final class ProductReviewTransformer implements ProductReviewTransformerInterfac
 
     public function transform(array $attributes): array
     {
+        if (null === $attributes['author']) {
+            $attributes['author'] = $this->randomOrCreateCustomer($this->eventDispatcher);
+        }
+
+        if (null === $attributes['product']) {
+            $attributes['product'] = $this->randomOrCreateProduct($this->eventDispatcher);
+        }
+
         $attributes = $this->transformCustomerAttribute($this->eventDispatcher, $attributes, 'author');
 
         return $this->transformProductAttribute($this->eventDispatcher, $attributes);

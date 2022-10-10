@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class PaymentMethodDefaultValues implements PaymentMethodDefaultValuesInterface
 {
-    public function __construct(private ChannelFactoryInterface $channelFactory)
+    public function __construct(private RepositoryInterface $channelRepository)
     {
     }
 
@@ -33,7 +34,7 @@ final class PaymentMethodDefaultValues implements PaymentMethodDefaultValuesInte
             'gateway_factory' => 'offline',
             'gateway_config' => [],
             'enabled' => $faker->boolean(90),
-            'channels' => $this->channelFactory::all(),
+            'channels' => $this->channelRepository->findAll(),
         ];
     }
 }

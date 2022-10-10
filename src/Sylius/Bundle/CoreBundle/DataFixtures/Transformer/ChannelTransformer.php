@@ -18,13 +18,17 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Event\CreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopBillingDataFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateTaxonTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateZoneTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateCurrencyTrait;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateLocaleTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateTaxonTrait;
 
 final class ChannelTransformer implements ChannelTransformerInterface
 {
     use FindOrCreateTaxonTrait;
     use FindOrCreateZoneTrait;
+    use RandomOrCreateCurrencyTrait;
     use RandomOrCreateLocaleTrait;
+    use RandomOrCreateTaxonTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformLocalesAttributeTrait;
     use TransformCurrenciesAttributeTrait;
@@ -55,8 +59,16 @@ final class ChannelTransformer implements ChannelTransformerInterface
             $attributes['shop_billing_data'] = $event->getResource();
         }
 
+        if ('' === ($attributes['menu_taxon'])) {
+            $attributes['menu_taxon'] = $this->randomOrCreateTaxon($this->eventDispatcher);
+        }
+
         if (\is_string($attributes['menu_taxon'])) {
             $attributes['menu_taxon'] = $this->findOrCreateTaxon($this->eventDispatcher, ['code' => $attributes['menu_taxon']]);
+        }
+
+        if (null === $attributes['base_currency']) {
+            $attributes['base_currency'] = $this->randomOrCreateCurrency($this->eventDispatcher);
         }
 
         $attributes = $this->transformLocalesAttribute($this->eventDispatcher, $attributes);

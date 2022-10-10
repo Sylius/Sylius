@@ -131,6 +131,11 @@ class ChannelFactory extends ModelFactory implements ChannelFactoryInterface, Fa
         return $this->addState(['menu_taxon' => $menuTaxon]);
     }
 
+    public function withoutMenuTaxon(): self
+    {
+        return $this->addState(['menu_taxon' => null]);
+    }
+
     protected function getDefaults(): array
     {
         return $this->factoryDefaultValues->getDefaults(self::faker());

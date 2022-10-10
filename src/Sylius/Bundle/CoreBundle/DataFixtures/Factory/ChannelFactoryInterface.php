@@ -67,4 +67,6 @@ interface ChannelFactoryInterface extends WithCodeInterface, WithNameInterface, 
     public function withShopBillingData(Proxy|ShopBillingDataInterface|array $shopBillingData): self;
 
     public function withMenuTaxon(Proxy|TaxonInterface|string $menuTaxon): self;
+
+    public function withoutMenuTaxon(): self;
 }

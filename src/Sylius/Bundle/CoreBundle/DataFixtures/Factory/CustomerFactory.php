@@ -90,6 +90,11 @@ class CustomerFactory extends ModelFactory implements CustomerFactoryInterface, 
         return $this->addState(['customer_group' => $customerGroup]);
     }
 
+    public function withoutGroup(): self
+    {
+        return $this->addState(['customer_group' => null]);
+    }
+
     protected function getDefaults(): array
     {
         return $this->defaultValues->getDefaults(self::faker());

@@ -14,9 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateChannelTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateCountryTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateCustomerTrait;
 
 final class OrderTransformer implements OrderTransformerInterface
 {
+    use RandomOrCreateChannelTrait;
+    use RandomOrCreateCountryTrait;
+    use RandomOrCreateCustomerTrait;
     use TransformChannelAttributeTrait;
     use TransformCustomerAttributeTrait;
     use TransformCountryAttributeTrait;
@@ -27,6 +33,18 @@ final class OrderTransformer implements OrderTransformerInterface
 
     public function transform(array $attributes): array
     {
+        if (null === $attributes['channel']) {
+            $attributes['channel'] = $this->randomOrCreateChannel($this->eventDispatcher);
+        }
+
+        if (null === $attributes['customer']) {
+            $attributes['customer'] = $this->randomOrCreateCustomer($this->eventDispatcher);
+        }
+
+        if (null === $attributes['country']) {
+            $attributes['country'] = $this->randomOrCreateCountry($this->eventDispatcher);
+        }
+
         $attributes = $this->transformChannelAttribute($this->eventDispatcher, $attributes);
         $attributes = $this->transformCustomerAttribute($this->eventDispatcher, $attributes);
 

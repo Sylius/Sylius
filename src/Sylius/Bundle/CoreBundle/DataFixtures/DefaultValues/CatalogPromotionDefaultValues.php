@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CatalogPromotionDefaultValues implements CatalogPromotionDefaultValuesInterface
 {
-    public function __construct(private ChannelFactoryInterface $channelFactory)
+    public function __construct(private RepositoryInterface $channelRepository)
     {
     }
 
@@ -29,7 +30,7 @@ final class CatalogPromotionDefaultValues implements CatalogPromotionDefaultValu
             'name' => (string) $faker->words(3, true),
             'label' => null,
             'description' => $faker->sentence(),
-            'channels' => $this->channelFactory::all(),
+            'channels' => $this->channelRepository->findAll(),
             'scopes' => [],
             'actions' => [],
             'priority' => 0,

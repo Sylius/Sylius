@@ -19,17 +19,13 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 final class CustomerDefaultValues implements CustomerDefaultValuesInterface
 {
-    public function __construct(private CustomerGroupFactoryInterface $customerGroupFactory)
-    {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
             'email' => $faker->email(),
             'first_name' => $faker->firstName(),
             'last_name' => $faker->lastName(),
-            'customer_group' => $this->customerGroupFactory::randomOrCreate(),
+            'customer_group' => '',
             'gender' => CustomerInterface::UNKNOWN_GENDER,
             'phone_number' => $faker->phoneNumber(),
             'birthday' => $faker->dateTimeBetween('-80 years', '-18 years'),

@@ -19,17 +19,11 @@ use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
 
 final class ProductAssociationDefaultValues implements ProductAssociationDefaultValuesInterface
 {
-    public function __construct(
-        private ProductAssociationTypeFactoryInterface $associationTypeFactory,
-        private ProductFactoryInterface $productFactory,
-    ) {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
-            'type' => $this->associationTypeFactory::randomOrCreate(),
-            'owner' => $this->productFactory::randomOrCreate(),
+            'type' => null,
+            'owner' => null,
             'associated_products' => [],
         ];
     }

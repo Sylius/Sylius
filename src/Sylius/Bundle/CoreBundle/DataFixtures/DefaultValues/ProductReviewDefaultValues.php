@@ -14,27 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CountryFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CustomerFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ProductFactoryInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShopUserFactoryInterface;
 
 final class ProductReviewDefaultValues implements ProductReviewDefaultValuesInterface
 {
-    public function __construct(
-        private CustomerFactoryInterface $customerFactory,
-        private ProductFactoryInterface $productFactory,
-    ) {
-    }
-
     public function getDefaults(Generator $faker): array
     {
         return [
             'title' => $faker->words(3, true),
             'rating' => $faker->numberBetween(1, 5),
             'comment' => $faker->sentences(3, true),
-            'author' => $this->customerFactory::randomOrCreate(),
-            'product' => $this->productFactory::randomOrCreate(),
+            'author' => null,
+            'product' => null,
             'status' => null,
         ];
     }

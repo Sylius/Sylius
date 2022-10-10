@@ -27,7 +27,7 @@ final class TaxRateFactoryTest extends KernelTestCase
     use Factories;
 
     /** @test */
-    function it_creates_tax_rate(): void
+    function it_creates_tax_rate_with_default_values(): void
     {
         $taxRate = TaxRateFactory::new()->create();
 

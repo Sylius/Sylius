@@ -16,12 +16,12 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ZoneFactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ShippingMethodDefaultValues implements ShippingMethodDefaultValuesInterface
 {
     public function __construct(
-        private ZoneFactoryInterface $zoneFactory,
-        private ChannelFactoryInterface $channelFactory,
+        private RepositoryInterface $channelRepository,
     ) {
     }
 
@@ -31,11 +31,11 @@ final class ShippingMethodDefaultValues implements ShippingMethodDefaultValuesIn
             'code' => null,
             'name' => (string) $faker->words(3, true),
             'description' => $faker->sentence(),
-            'zone' => $this->zoneFactory::randomOrCreate(),
+            'zone' => null,
             'tax_category' => null,
             'category' => null,
             'calculator' => null,
-            'channels' => $this->channelFactory::all(),
+            'channels' => $this->channelRepository->findAll(),
             'archived_at' => null,
             'enabled' => true,
         ];

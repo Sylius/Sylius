@@ -15,10 +15,11 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\DefaultValues;
 
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ChannelFactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class PromotionDefaultValues implements PromotionDefaultValuesInterface
 {
-    public function __construct(private ChannelFactoryInterface $channelFactory)
+    public function __construct(private RepositoryInterface $channelRepository)
     {
     }
 
@@ -34,7 +35,7 @@ final class PromotionDefaultValues implements PromotionDefaultValuesInterface
             'priority' => 0,
             'starts_at' => null,
             'ends_at' => null,
-            'channels' => $this->channelFactory::all(),
+            'channels' => $this->channelRepository->findAll(),
             'rules' => [],
             'coupons' => [],
             'actions' => [],

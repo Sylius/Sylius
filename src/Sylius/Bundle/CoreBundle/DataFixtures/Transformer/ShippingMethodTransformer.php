@@ -17,10 +17,13 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\FindOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Factory\ShippingCategoryFactoryInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Util\FindOrCreateShippingCategoryTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateLocaleTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateZoneTrait;
 
 final class ShippingMethodTransformer implements ShippingMethodTransformerInterface
 {
     use FindOrCreateShippingCategoryTrait;
+    use RandomOrCreateZoneTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformZoneAttributeTrait;
     use TransformTaxCategoryAttributeTrait;
@@ -32,6 +35,10 @@ final class ShippingMethodTransformer implements ShippingMethodTransformerInterf
 
     public function transform(array $attributes): array
     {
+        if (null === $attributes['zone']) {
+            $attributes['zone'] = $this->randomOrCreateZone($this->eventDispatcher);
+        }
+
         $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes = $this->transformZoneAttribute($this->eventDispatcher, $attributes);
         $attributes = $this->transformTaxCategoryAttribute($this->eventDispatcher, $attributes);

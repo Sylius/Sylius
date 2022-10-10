@@ -14,9 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DataFixtures\Transformer;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateTaxCategoryTrait;
+use Sylius\Bundle\CoreBundle\DataFixtures\Util\RandomOrCreateZoneTrait;
 
 final class TaxRateTransformer implements TaxRateTransformerInterface
 {
+    use RandomOrCreateTaxCategoryTrait;
+    use RandomOrCreateZoneTrait;
     use TransformNameToCodeAttributeTrait;
     use TransformZoneAttributeTrait;
     use TransformTaxCategoryAttributeTrait;
@@ -28,6 +32,14 @@ final class TaxRateTransformer implements TaxRateTransformerInterface
 
     public function transform(array $attributes): array
     {
+        if (null === $attributes['zone']) {
+            $attributes['zone'] = $this->randomOrCreateZone($this->eventDispatcher);
+        }
+
+        if (null === $attributes['category']) {
+            $attributes['category'] = $this->randomOrCreateTaxCategory($this->eventDispatcher);
+        }
+
         $attributes = $this->transformNameToCodeAttribute($attributes);
         $attributes = $this->transformZoneAttribute($this->eventDispatcher, $attributes);
 

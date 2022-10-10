@@ -7,22 +7,20 @@ namespace Sylius\Bundle\CoreBundle\DataFixtures\Util;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\RandomOrCreateResourceEvent;
 use Sylius\Bundle\CoreBundle\DataFixtures\Event\ResourceEventInterface;
-use Sylius\Bundle\CoreBundle\DataFixtures\Factory\LocaleFactoryInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Bundle\CoreBundle\DataFixtures\Factory\CurrencyFactoryInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Zenstruck\Foundry\Proxy;
 
-trait RandomOrCreateLocaleTrait
+trait RandomOrCreateCurrencyTrait
 {
-    private EventDispatcherInterface $eventDispatcher;
-
     /**
-     * @return LocaleInterface|Proxy
+     * @return CurrencyInterface|Proxy
      */
-    private function randomOrCreateLocale(EventDispatcherInterface $eventDispatcher): Proxy
+    private function randomOrCreateCurrency(EventDispatcherInterface $eventDispatcher): Proxy
     {
         /** @var ResourceEventInterface $event */
         $event = $eventDispatcher->dispatch(
-            new RandomOrCreateResourceEvent(LocaleFactoryInterface::class),
+            new RandomOrCreateResourceEvent(CurrencyFactoryInterface::class)
         );
 
         return $event->getResource();

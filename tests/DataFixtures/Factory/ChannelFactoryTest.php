@@ -279,4 +279,12 @@ final class ChannelFactoryTest extends KernelTestCase
 
         $this->assertEquals('MENU_CATEGORY', $channel->getMenuTaxon()->getCode());
     }
+
+    /** @test */
+    function it_creates_channel_without_menu_taxon(): void
+    {
+        $channel = ChannelFactory::new()->withoutMenuTaxon()->create();
+
+        $this->assertNull($channel->getMenuTaxon());
+    }
 }
