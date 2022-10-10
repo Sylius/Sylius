@@ -117,3 +117,111 @@ Here is how the response looks like:
    has become nullable.
 
 1. The `Sylius\Bundle\ApiBundle\Assigner\OrderPromoCodeAssignerInterface` has been renamed to `Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface`.
+
+### API clients refactor
+
+#### New way of defining the clients
+
+In the `1.12` version we changed the way of defining API clients in our behat contexts.
+We extended the `Sylius/Behat/Client/ApiClientInterface` methods with extra parameter `$resource`.
+
+  ```diff
+  -  public function index(): Response
+  +  public function index(string $resource): Response
+    
+  -  public function subResourceIndex(string $subResource, string $id): Response;
+  +  public function subResourceIndex(string $resource, string $subResource, string $id): Response;
+    
+  -  public function show(string $id): Response;
+  +  public function show(string $resource, string $id): Response;
+  
+  -  public function delete(string $id): Response;
+  +  public function delete(string $resource, string $id): Response;
+  
+  -  public function applyTransition(string $id, string $transition, array $content = []): Response;
+  +  public function applyTransition(string $resource, string $id, string $transition, array $content = []): Response;
+  
+  -  public function customItemAction(string $id, string $type, string $action): Response;
+  +  public function customItemAction(string $resource, string $id, string $type, string $action): Response;
+  
+  -  public function buildCreateRequest(): void;
+  +  public function buildCreateRequest(string $resource): void;
+  
+  -  public function buildUpdateRequest(string $id): void;
+  +  public function buildUpdateRequest(string $resource, string $id): void;
+  
+  -  public function buildUploadRequest(): void;
+  +  public function buildUploadRequest(string $resource): void;
+  ```
+
+With this change, we reduced the number of clients from one per resource to only **two**, one for the `shop` section and one for the `admin`. To make a call for a specific resource you must pass it inside the methods shown above.
+You can see the actual difference in the example below:
+
+  ```diff
+  -  $this->avatarImagesClient->buildUploadRequest();
+  +  $this->client->buildUploadRequest(Resources::AVATAR_IMAGES);
+  ```
+
+The `Sylius\Behat\Context\Api\Resources` class contains constants for all the defined resources.
+We also removed the `Sylius\Behat\Client\ApiPlatformIriClient` alongside with `Sylius\Behat\Client\ApiIriClientInterface` as it's no more used.
+
+#### Changes in contexts
+
+The constructors of the behat contexts have changed in relation to the above improvements.
+Here is the example change of the constructor of `Sylius\Behat\Context\Api\Admin\ManagingOrdersContext`
+
+  ```diff
+    public function __construct(
+      private ApiClientInterface $client,
+  -   private ApiClientInterface $shipmentsClient,
+  -   private ApiClientInterface $paymentsClient,
+       ...
+    )
+  ```
+
+The list of changed contexts:
+
+###### Admin:
+
+- Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext
+- Sylius\Behat\Context\Api\Admin\ManagingCatalogPromotionsContext
+- Sylius\Behat\Context\Api\Admin\ManagingChannelsContext
+- Sylius\Behat\Context\Api\Admin\ManagingCountriesContext
+- Sylius\Behat\Context\Api\Admin\ManagingCurrenciesContext
+- Sylius\Behat\Context\Api\Admin\ManagingCustomerGroupsContext
+- Sylius\Behat\Context\Api\Admin\ManagingExchangeRatesContext
+- Sylius\Behat\Context\Api\Admin\ManagingLocalesContext
+- Sylius\Behat\Context\Api\Admin\ManagingOrdersContext
+- Sylius\Behat\Context\Api\Admin\ManagingPaymentsContext
+- Sylius\Behat\Context\Api\Admin\ManagingProductAssociationTypesContext
+- Sylius\Behat\Context\Api\Admin\ManagingProductOptionsContext
+- Sylius\Behat\Context\Api\Admin\ManagingProductReviewsContext
+- Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext
+- Sylius\Behat\Context\Api\Admin\ManagingProductsContext
+- Sylius\Behat\Context\Api\Admin\ManagingPromotionsContext
+- Sylius\Behat\Context\Api\Admin\ManagingShipmentsContext
+- Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext
+- Sylius\Behat\Context\Api\Admin\ManagingShippingMethodsContext
+- Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext
+- Sylius\Behat\Context\Api\Admin\ManagingZonesContext
+
+###### Shop:
+
+- Sylius\Behat\Context\Api\Shop\AddressContext
+- Sylius\Behat\Context\Api\Shop\CartContext
+- Sylius\Behat\Context\Api\Shop\ChannelContext
+- Sylius\Behat\Context\Api\Shop\CheckoutContext
+- Sylius\Behat\Context\Api\Shop\CurrencyContext
+- Sylius\Behat\Context\Api\Shop\CustomerContext
+- Sylius\Behat\Context\Api\Shop\HomepageContext
+- Sylius\Behat\Context\Api\Shop\LocaleContext
+- Sylius\Behat\Context\Api\Shop\LoginContext
+- Sylius\Behat\Context\Api\Shop\OrderContext
+- Sylius\Behat\Context\Api\Shop\OrderItemContext
+- Sylius\Behat\Context\Api\Shop\PaymentContext
+- Sylius\Behat\Context\Api\Shop\ProductContext
+- Sylius\Behat\Context\Api\Shop\ProductReviewContext
+- Sylius\Behat\Context\Api\Shop\ProductVariantContext
+- Sylius\Behat\Context\Api\Shop\PromotionContext
+- Sylius\Behat\Context\Api\Shop\RegistrationContext
+- Sylius\Behat\Context\Api\Shop\ShipmentContext
