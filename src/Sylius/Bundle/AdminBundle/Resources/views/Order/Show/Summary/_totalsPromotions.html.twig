@@ -14,7 +14,7 @@
                 {% for label, amount in promotionAdjustments %}
                     <div class="item">
                         <div class="right floated">{{ money.format(amount, order.currencyCode) }}</div>
-                        <div class="content"><strong>{{ label }}</strong>:</div>
+                        <div class="content"><a href="{{ sylius_generate_url_from_adjustment(label) }}"><strong>{{ label }}</strong></a>:</div>
                     </div>
                 {% endfor %}
             </div>
