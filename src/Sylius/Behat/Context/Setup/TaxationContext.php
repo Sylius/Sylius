@@ -39,6 +39,7 @@ final class TaxationContext implements Context
 
     /**
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone with dates between :startDate and :endDate
      * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
      * @Given /^the store has(?:| also) "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
      */
@@ -49,8 +50,19 @@ final class TaxationContext implements Context
         ZoneInterface $zone,
         $taxRateCode = null,
         $includedInPrice = false,
+        ?string $startDate = null,
+        ?string $endDate = null
     ) {
-        $this->configureTaxRate($taxCategoryName, $taxRateCode, $taxRateName, $zone, $taxRateAmount, $includedInPrice);
+        $this->configureTaxRate(
+            $taxCategoryName,
+            $taxRateCode,
+            $taxRateName,
+            $zone,
+            $taxRateAmount,
+            $includedInPrice,
+            $startDate !== null ? new \DateTime($startDate) : null,
+            $endDate !== null ? new \DateTime($endDate) : null,
+        );
     }
 
     /**
@@ -128,6 +140,19 @@ final class TaxationContext implements Context
     {
         $taxRate->setAmount((float) $this->getAmountFromString($amount));
 
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this tax rate) operates between "([^"]+)" and "([^"]+)"$/
+     */
+    public function theTaxRateOperatesBetweenDates(
+        TaxRateInterface $taxRate,
+        string $startDate,
+        string $endDate,
+    ): void {
+        $taxRate->setStartDate(new \DateTime($startDate));
+        $taxRate->setEndDate(new \DateTime($endDate));
         $this->objectManager->flush();
     }
 
