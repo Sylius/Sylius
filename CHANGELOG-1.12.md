@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.0-BETA.1 (2022-10-11)
+
+#### Details
+
+- [#13969](https://github.com/Sylius/Sylius/issues/13969) Symfony 6 support ([@NoResponseMate](https://github.com/NoResponseMate), [@Zales0123](https://github.com/Zales0123), [@Rafikooo](https://github.com/Rafikooo), [@GSadee](https://github.com/GSadee), [@coldic3](https://github.com/coldic3))
+- [#14144](https://github.com/Sylius/Sylius/issues/14144) [Documentation] Fix incorrect translation domain in implementation ([@anned20](https://github.com/anned20))
+- [#14156](https://github.com/Sylius/Sylius/issues/14156) [DOCS] Cookbook of how to modify placed order ([@arti0090](https://github.com/arti0090))
+- [#14197](https://github.com/Sylius/Sylius/issues/14197) [Docs] Describe Sylius architectural drivers ([@Zales0123](https://github.com/Zales0123))
+- [#14246](https://github.com/Sylius/Sylius/issues/14246) [DOCS] Add note about min node version ([@arti0090](https://github.com/arti0090))
+- [#14296](https://github.com/Sylius/Sylius/issues/14296) [Core] Create CustomerProvider ([@AdamKasp](https://github.com/AdamKasp), [@GSadee](https://github.com/GSadee))
+- [#14337](https://github.com/Sylius/Sylius/issues/14337) [Maintenance] Mention Gaufrette filesystem adapter in the upgrade file ([@coldic3](https://github.com/coldic3))
+- [#14338](https://github.com/Sylius/Sylius/issues/14338) Tax rates with dates ([@GSadee](https://github.com/GSadee), [@jakub](https://github.com/jakub)@[@Jakubs-MacBook-Pro](https://github.com/Jakubs-MacBook-Pro).[@local](https://github.com/local))
+- [#14397](https://github.com/Sylius/Sylius/issues/14397) [Docs] Fix 1.12 release dates ([@Zales0123](https://github.com/Zales0123))
+- [#14398](https://github.com/Sylius/Sylius/issues/14398) Allow ramsey/uuid ^4.0 to avoid PHP 8.1 warning ([@vasilvestre](https://github.com/vasilvestre))
+- [#14406](https://github.com/Sylius/Sylius/issues/14406) [API][Behat] Add note about behat client changes ([@TheMilek](https://github.com/TheMilek))
+- [#14407](https://github.com/Sylius/Sylius/issues/14407) [Symfony 6] Remove setting services for test as public ([@Zales0123](https://github.com/Zales0123))
+- [#14410](https://github.com/Sylius/Sylius/issues/14410) [Documentation] Remove the tip about ShopApiPlugin from the architecture page ([@GSadee](https://github.com/GSadee))
+- [#14414](https://github.com/Sylius/Sylius/issues/14414) [Github Actions] Make timeout for non-JS build longer ([@Zales0123](https://github.com/Zales0123))
+- [#14420](https://github.com/Sylius/Sylius/issues/14420) [Hot-fix] Conflict with newest AP that changes a Customer->User response ([@Zales0123](https://github.com/Zales0123))
+- [#14427](https://github.com/Sylius/Sylius/issues/14427) tax rates filter feature ([@everwhatever](https://github.com/everwhatever), [@GSadee](https://github.com/GSadee))
+
 ## v1.12.0-ALPHA.2 (2022-10-03)
 
 #### Details
