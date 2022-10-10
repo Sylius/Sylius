@@ -59,6 +59,31 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @When I make it start at :startDate and end at :endDate
+     */
+    public function iMakeItStartAtAndEndAt(string $startDate, string $endDate): void
+    {
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
+        $this->createPage->specifyEndDate(new \DateTime($endDate));
+    }
+
+    /**
+     * @When I set the start date to :startDate
+     */
+    public function iSetTheStartDateTo(string $startDate): void
+    {
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
+    }
+
+    /**
+     * @When I set the end date to :endDate
+     */
+    public function iSetTheEndDateTo(string $endDate): void
+    {
+        $this->createPage->specifyStartDate(new \DateTime($endDate));
+    }
+
+    /**
      * @When I define it for the :zoneName zone
      * @When I change its zone to :zoneName
      */
@@ -335,5 +360,13 @@ final class ManagingTaxRateContext implements Context
     public function iChooseOption()
     {
         $this->createPage->chooseIncludedInPrice();
+    }
+
+    /**
+     * @Then I should be notified that tax rate should not end before it starts
+     */
+    public function iShouldBeNotifiedThatTaxRateShouldNotEndBeforeItStarts(): void
+    {
+        $this->assertFieldValidationMessage('end_date', 'The tax rate should not end before it starts');
     }
 }

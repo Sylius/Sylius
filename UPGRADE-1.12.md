@@ -95,6 +95,8 @@ Sylius 1.12 and will be prohibited in 2.0. Use `Sylius\Component\Core\Filesystem
     
     in your `config/packages/_sylius.yaml` file.
 
+11. Not passing `Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface` to `Sylius\Component\Taxation\Resolver\TaxRateResolver` is deprecated since Sylius 1.12 and will be prohibited in 2.0
+
 ### Frontend toolset changes
 
 #### Dependencies update

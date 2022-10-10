@@ -42,4 +42,12 @@ interface TaxRateInterface extends CodeAwareInterface, TimestampableInterface, R
     public function setCalculator(?string $calculator): void;
 
     public function getLabel(): ?string;
+
+    public function getStartDate(): ?\DateTimeInterface;
+
+    public function setStartDate(?\DateTimeInterface $startDate): void;
+
+    public function getEndDate(): ?\DateTimeInterface;
+
+    public function setEndDate(?\DateTimeInterface $endDate): void;
 }
