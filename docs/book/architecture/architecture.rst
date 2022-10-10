@@ -91,7 +91,7 @@ Our ``ShopBundle`` is basically a standard B2C interface for everything that hap
 It is made mainly of yaml configurations and templates.
 Also here views have been built using the `SemanticUI <http://semantic-ui.com/>`_.
 
-Api
+API
 ~~~
 
 When we created our API based on API Platform framework we have done everything to offer API as easy as possible to use by developer.
@@ -102,10 +102,3 @@ The most important features of our API:
     * We create all endpoints implementing the REST principles and we are using http verbs (POST, GET, PUT, PATCH, DELETE)
     * Returned responses contain minimal information (developer should extend serialization if need more data)
     * Entire business logic is separated from API - if it necessary we dispatch command instead mixing API logic with business logic
-
-.. tip::
-
-    .. rst-class:: plugin-feature
-
-    If you are looking for the Shop API, which is an API operating as a Customer then you will need the official
-    `Shop API plugin <https://github.com/Sylius/ShopApiPlugin>`_.

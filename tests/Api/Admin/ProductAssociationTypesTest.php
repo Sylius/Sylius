@@ -28,7 +28,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -54,7 +54,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -76,7 +76,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -100,7 +100,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 
@@ -133,7 +133,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
 
         $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
         $header = array_merge($header, self::CONTENT_TYPE_HEADER);
 

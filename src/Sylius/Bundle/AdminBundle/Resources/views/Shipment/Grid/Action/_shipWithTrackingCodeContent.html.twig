@@ -1,5 +1,5 @@
 {% if sm_can(data, 'ship', 'sylius_shipment') %}
-    {{ render(controller('sylius.controller.shipment:updateAction', {
+    {{ render(controller('sylius.controller.shipment::updateAction', {
         '_sylius': {
             'event': 'ship',
             'repository': {

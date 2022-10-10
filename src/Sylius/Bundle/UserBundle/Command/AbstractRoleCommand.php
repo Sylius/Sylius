@@ -60,7 +60,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         if (!$input->getArgument('roles')) {
             $question = new Question('Please enter user\'s roles (separated by space):');
             $question->setValidator(function (?string $roles) {
-                if (strlen($roles) < 1) {
+                if ('' === $roles) {
                     throw new \RuntimeException('The value cannot be blank.');
                 }
 
@@ -137,7 +137,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
      */
     protected function getUserModelClass(string $userType): string
     {
-        $config = $this->getContainer()->getParameter('sylius.user.users');
+        $config = (array) $this->getContainer()->getParameter('sylius.user.users');
         if (empty($config[$userType]['user']['classes']['model'])) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }

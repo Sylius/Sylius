@@ -19,6 +19,7 @@ use Sylius\Bundle\CoreBundle\MessageDispatcher\ResetPasswordDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -29,10 +30,13 @@ final class ResetPasswordAction
     public function __construct(
         private FormFactoryInterface $formFactory,
         private ResetPasswordDispatcherInterface $resetPasswordDispatcher,
-        private FlashBagInterface $flashBag,
+        private FlashBagInterface|RequestStack $requestStackOrFlashBag,
         private RouterInterface $router,
         private Environment $twig,
     ) {
+        if ($this->requestStackOrFlashBag instanceof FlashBagInterface) {
+            trigger_deprecation('sylius/admin-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', FlashBagInterface::class, self::class, RequestStack::class));
+        }
     }
 
     public function __invoke(Request $request, string $token): Response
@@ -46,7 +50,7 @@ final class ResetPasswordAction
 
             $this->resetPasswordDispatcher->dispatch($token, $passwordReset->getPassword());
 
-            $this->flashBag->add('success', 'sylius.admin.password_reset.success');
+            $this->getFlashBag()->add('success', 'sylius.admin.password_reset.success');
 
             $attributes = $request->attributes->get('_sylius');
             $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
@@ -66,5 +70,14 @@ final class ResetPasswordAction
                 'form' => $form->createView(),
             ]),
         );
+    }
+
+    private function getFlashBag(): FlashBagInterface
+    {
+        if ($this->requestStackOrFlashBag instanceof RequestStack) {
+            return $this->requestStackOrFlashBag->getSession()->getBag('flashes');
+        }
+
+        return $this->requestStackOrFlashBag;
     }
 }

@@ -30,7 +30,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function get($id)
     {
         if (property_exists(static::class, 'container')) {
-            return static::$container->get($id);
+            return self::$kernel->getContainer()->get($id);
         }
 
         return parent::get($id);
@@ -51,7 +51,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
         $this->assertIsString($token);
 
-        $authorizationHeader = self::$container->getParameter('sylius.api.authorization_header');
+        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
         $this->assertIsString($authorizationHeader);
 
         return ['HTTP_' . $authorizationHeader => 'Bearer ' . $token];

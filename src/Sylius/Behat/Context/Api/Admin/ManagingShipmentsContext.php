@@ -162,7 +162,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(Resources::SHIPMENTS), [
-                'order' => $this->iriConverter->getIriFromItem($order),
+                'order' => $this->iriConverter->getIriFromItemInSection($order, 'admin'),
                 'state' => strtolower($shippingState),
             ]),
             sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState),
@@ -293,7 +293,7 @@ final class ManagingShipmentsContext implements Context
         return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order),
+            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
         );
     }
 }

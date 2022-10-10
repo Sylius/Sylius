@@ -29,9 +29,11 @@
     ],
     "require": {
         "php": "^8.0",
+        "sylius/calendar": "^0.3 || ^0.4",
         "sylius/registry": "^1.5",
-        "sylius/resource": "^1.7",
-        "sylius/calendar": "^0.3"
+        "sylius/calendar": "^0.3",
+
+        "sylius/resource": "^1.9 || ^1.10@alpha"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"

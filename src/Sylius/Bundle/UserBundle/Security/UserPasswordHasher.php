@@ -14,26 +14,20 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
-use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
-final class UserPasswordHasher implements UserPasswordEncoderInterface, UserPasswordHasherInterface
+final class UserPasswordHasher implements UserPasswordHasherInterface
 {
     public function __construct(private PasswordHasherFactoryInterface $passwordHasherFactory)
     {
     }
 
-    public function encode(CredentialsHolderInterface $user): string
-    {
-        return $this->hash($user);
-    }
-
     public function hash(CredentialsHolderInterface $user): string
     {
         /** @psalm-suppress InvalidArgument */
-        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user);
+        $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
 
-        return $passwordHasher->hash($user->getPlainPassword(), $user->getSalt());
+        return $passwordHasher->hash($user->getPlainPassword());
     }
 }

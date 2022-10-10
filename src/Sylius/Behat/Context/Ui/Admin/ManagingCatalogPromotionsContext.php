@@ -702,14 +702,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that a discount amount is not valid
-     */
-    public function iShouldBeNotifiedThatADiscountAmountIsNotValid(): void
-    {
-        Assert::same($this->formElement->getValidationMessage(), 'This value is not valid.');
-    }
-
-    /**
      * @Then I should be notified that a discount amount should be configured for at least one channel
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
@@ -919,14 +911,6 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
-    }
-
-    /**
-     * @Then this catalog promotion should be usable
-     */
-    public function thisCatalogPromotionShouldBeUsable(): void
-    {
-        // Intentionally left blank
     }
 
     /**

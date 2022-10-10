@@ -42,7 +42,7 @@ final class RegisterCalculatorsPassSpec extends ObjectBehavior
         $calculator->addMethodCall(
             'register',
             Argument::type('array'),
-        )->shouldBeCalled();
+        )->willReturn($calculator)->shouldBeCalled();
 
         $container->setParameter(
             'sylius.tax_calculators',

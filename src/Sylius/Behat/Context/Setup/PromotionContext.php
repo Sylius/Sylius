@@ -356,9 +356,9 @@ final class PromotionContext implements Context
      */
     public function thisPromotionGivesPercentageDiscountOnEveryProductInTheChannelAndInTheChannel(
         PromotionInterface $promotion,
-        int $firstPercentage,
+        float $firstPercentage,
         ChannelInterface $firstChannel,
-        int $secondPercentage,
+        float $secondPercentage,
         ChannelInterface $secondChannel,
     ): void {
         /** @var PromotionActionInterface $action */

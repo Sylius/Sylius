@@ -6,6 +6,7 @@ default:
         ui_managing_product_variants:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.currency

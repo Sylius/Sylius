@@ -6,6 +6,7 @@ default:
         ui_managing_currencies:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.currency
                 - sylius.behat.context.transform.shared_storage

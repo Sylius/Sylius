@@ -22,7 +22,7 @@
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
-            <argument type="service" id="session" />
+            <argument type="service" id="request_stack" />
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 

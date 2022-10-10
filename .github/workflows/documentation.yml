@@ -19,11 +19,11 @@ on:
 jobs:
     test:
         runs-on: ubuntu-latest
-        
+
         name: "Build"
 
         timeout-minutes: 10
-        
+
         steps:
             -
                 uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
         timeout-minutes: 5
 
         steps:
-            -   
+            -
                 name: "Process data"
                 id: process-data
                 shell: bash
@@ -56,7 +56,7 @@ jobs:
                     echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
                     echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
 
-            -   
+            -
                 name: "Notify on Slack"
                 uses: edge/simple-slack-notify@master
                 env:

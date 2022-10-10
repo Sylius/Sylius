@@ -20,7 +20,7 @@ sylius_admin_zone_create:
     path: /zones/{type}/new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.zone:createAction
+        _controller: sylius.controller.zone::createAction
         _sylius:
             section: admin
             factory:

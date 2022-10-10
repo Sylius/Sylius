@@ -2,7 +2,7 @@ sylius_admin_ajax_product_variants_update_position:
     path: /update
     methods: [PUT]
     defaults:
-        _controller: sylius.controller.product_variant:updatePositionsAction
+        _controller: sylius.controller.product_variant::updatePositionsAction
         _format: json
         _sylius:
             permission: true
@@ -11,7 +11,7 @@ sylius_admin_ajax_product_variants_by_phrase:
     path: /search
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -27,7 +27,7 @@ sylius_admin_ajax_all_product_variants_by_phrase:
     path: /search-all
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -43,7 +43,7 @@ sylius_admin_ajax_product_variants_by_codes:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]
@@ -56,7 +56,7 @@ sylius_admin_ajax_all_product_variants_by_codes:
     path: /all
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _format: json
         _sylius:
             serialization_groups: [Autocomplete]

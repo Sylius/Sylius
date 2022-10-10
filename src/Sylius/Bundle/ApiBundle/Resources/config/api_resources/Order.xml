@@ -83,7 +83,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/orders/{tokenValue}/cancel</attribute>
                 <attribute name="input">false</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface:cancel</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface::cancel</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:order:update</attribute>
                 </attribute>

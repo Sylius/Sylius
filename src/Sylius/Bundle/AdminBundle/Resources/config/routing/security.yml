@@ -2,7 +2,7 @@ sylius_admin_login:
     path: /login
     methods: [GET]
     defaults:
-        _controller: sylius.controller.security:loginAction
+        _controller: sylius.controller.security::loginAction
         _sylius:
             template: "@SyliusAdmin/Security/login.html.twig"
             permission: true
@@ -12,7 +12,7 @@ sylius_admin_login_check:
     path: /login-check
     methods: [POST]
     defaults:
-        _controller: sylius.controller.security:checkAction
+        _controller: sylius.controller.security::checkAction
 
 sylius_admin_logout:
     path: /logout

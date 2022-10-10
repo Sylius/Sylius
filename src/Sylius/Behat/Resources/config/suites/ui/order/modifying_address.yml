@@ -6,6 +6,7 @@ default:
         ui_modifying_address:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.session
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency

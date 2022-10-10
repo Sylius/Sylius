@@ -6,7 +6,7 @@ default:
         api_customer_requesting_contact:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - sylius.behat.context.hook.email_spool
+                - sylius.behat.context.hook.mailer
 
                 - sylius.behat.context.transform.shared_storage
 
