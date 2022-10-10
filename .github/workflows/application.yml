@@ -60,6 +60,12 @@ jobs:
                     coverage: none
 
             -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
+
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
@@ -206,6 +212,12 @@ jobs:
                     tools: symfony
                     coverage: none
 
+            -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
+
             -   name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
@@ -270,6 +282,12 @@ jobs:
                     extensions: intl, gd, opcache, pgsql, pdo_pgsql
                     tools: symfony
                     coverage: none
+
+            -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
 
             -
                 name: Restrict Symfony version
@@ -355,6 +373,12 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+
+            -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
 
             -
                 name: Restrict Symfony version
@@ -500,6 +524,12 @@ jobs:
                     coverage: none
 
             -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
+
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
@@ -634,6 +664,12 @@ jobs:
                     extensions: intl, gd, opcache, mysql, pdo_mysql
                     tools: symfony
                     coverage: none
+
+            -
+                name: Install Symfony CLI
+                run: |
+                    wget https://github.com/symfony-cli/symfony-cli/releases/download/v5.4.14/symfony-cli_5.4.14_amd64.deb
+                    sudo dpkg -i symfony-cli_5.4.14_amd64.deb
 
             -
                 name: Restrict Symfony version
