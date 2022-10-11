@@ -42,6 +42,11 @@
             <argument type="service" id="sylius.behat.request_factory" />
         </service>
 
+        <service id="Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_channels" class="Sylius\Behat\Context\Api\Admin\ManagingChannelsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />

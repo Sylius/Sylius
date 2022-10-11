@@ -26,6 +26,7 @@ final class ManagingProductTaxonsContext implements Context
 
     /**
      * @When I change that the :product product belongs to the :taxon taxon
+     * @When I add :taxon taxon to the :product product
      */
     public function iChangeThatTheProductBelongsToTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
     {

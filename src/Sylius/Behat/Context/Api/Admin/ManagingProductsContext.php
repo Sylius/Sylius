@@ -382,6 +382,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $productTaxonId = $this->getProductTaxonId($product);
+
+        $response = $this->client->show(Resources::PRODUCT_TAXONS, (string) $productTaxonId);
+        $productTaxonUrl = $this->responseChecker->getValue($response, 'taxon');
+        $productTaxonCodes = explode('/', $productTaxonUrl);
+
+        Assert::same(array_pop($productTaxonCodes), $taxon->getCode());
+    }
+
+    /**
      * @Then /^(this product) name should be "([^"]+)"$/
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name): void
@@ -546,5 +560,13 @@ final class ManagingProductsContext implements Context
     private function getLastResponse(): Response
     {
         return $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+    }
+
+    private function getProductTaxonId(ProductInterface $product): string
+    {
+        $productResponse = $this->client->show(Resources::PRODUCTS, (string)$product->getCode());
+        $productTaxonUrl = explode('/', $this->responseChecker->getValue($productResponse, 'productTaxons')[0]);
+
+        return array_pop($productTaxonUrl);
     }
 }
