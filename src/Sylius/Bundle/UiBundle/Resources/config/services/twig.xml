@@ -46,5 +46,15 @@
             <argument>%sylius_ui.sonata_block.whitelisted_variables%</argument>
             <tag name="twig.extension" />
         </service>
+
+        <service id="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Storage\FilterStorage" />
+            <argument type="service" id="router" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
+            <argument type="service" id="request_stack" />
+        </service>
     </services>
 </container>
