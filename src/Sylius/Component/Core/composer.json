@@ -49,7 +49,7 @@
         "sylius/shipping": "^1.6",
         "sylius/taxation": "^1.6",
         "sylius/taxonomy": "^1.6",
-        "sylius/user": "^1.6 || ^1.12@beta",
+        "sylius/user": "^1.12@beta",
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/mime": "^5.4 || ^6.0",
         "symfony/string": "^5.4 || ^6.0",
