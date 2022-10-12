@@ -22,7 +22,7 @@ final class RedirectPathExtensionTest extends KernelTestCase
         $container->get('request_stack')->push($request);
 
         $this->redirectPathExtension = $container->get('Sylius\Bundle\UiBundle\Twig\RedirectPathExtension');
-        $container->get('Sylius\Bundle\AdminBundle\Storage\FilterStorage')->set(['criteria' => ['enabled' => true]]);
+        $container->get('Sylius\Bundle\UiBundle\Storage\FilterStorage')->set(['criteria' => ['enabled' => true]]);
     }
 
     /** @test */

@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\AdminBundle\Storage;
+namespace Sylius\Bundle\UiBundle\spec\Storage;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AdminBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
