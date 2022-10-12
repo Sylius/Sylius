@@ -326,6 +326,15 @@ sylius_ui:
                     context:
                         event: sylius.admin.login.after_content
 
+        sylius.admin.login.form.content:
+            blocks:
+                divider:
+                    template: "@SyliusAdmin/_divider.html.twig"
+                    priority: 0
+                request_password_reset:
+                    template: "@SyliusAdmin/Security/Form/_requestPasswordResetButton.html.twig"
+                    priority: 0
+
         sylius.admin.dashboard.header.content:
             blocks:
                 legacy:

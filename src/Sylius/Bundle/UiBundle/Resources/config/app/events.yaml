@@ -52,9 +52,3 @@ sylius_ui:
                 submit:
                     template: "@SyliusUi/Security/Form/_submit.html.twig"
                     priority: 10
-                divider:
-                    template: "@SyliusAdmin/_divider.html.twig"
-                    priority: 0
-                request_password_reset:
-                    template: "@SyliusAdmin/Security/Form/_requestPasswordResetButton.html.twig"
-                    priority: 0
