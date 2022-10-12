@@ -21,8 +21,6 @@ final class FlashBagProvider
             return $requestStackSessionOrFlashBag->getBag('flashes');
         }
 
-        if ($requestStackSessionOrFlashBag instanceof RequestStack) {
-            return $requestStackSessionOrFlashBag->getSession()->getBag('flashes');
-        }
+        return $requestStackSessionOrFlashBag->getSession()->getBag('flashes');
     }
 }
