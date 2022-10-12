@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Storage;
 
+use Sylius\Bundle\CoreBundle\Provider\SessionProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -34,25 +35,13 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function hasForChannel(ChannelInterface $channel): bool
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
-
-        return $session->has($this->getCartKeyName($channel));
+        return SessionProvider::getSession($this->requestStackOrSession)->has($this->getCartKeyName($channel));
     }
 
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
     {
         if ($this->hasForChannel($channel)) {
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
-
-            $cartId = $session->get($this->getCartKeyName($channel));
+            $cartId = SessionProvider::getSession($this->requestStackOrSession)->get($this->getCartKeyName($channel));
 
             return $this->orderRepository->findCartByChannel($cartId, $channel);
         }
@@ -62,24 +51,12 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function setForChannel(ChannelInterface $channel, OrderInterface $cart): void
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
-
-        $session->set($this->getCartKeyName($channel), $cart->getId());
+        SessionProvider::getSession($this->requestStackOrSession)->set($this->getCartKeyName($channel), $cart->getId());
     }
 
     public function removeForChannel(ChannelInterface $channel): void
     {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
-
-        $session->remove($this->getCartKeyName($channel));
+        SessionProvider::getSession($this->requestStackOrSession)->remove($this->getCartKeyName($channel));
     }
 
     private function getCartKeyName(ChannelInterface $channel): string

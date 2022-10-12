@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Security;
 
+use Sylius\Bundle\CoreBundle\Provider\SessionProvider;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -58,12 +59,7 @@ final class UserImpersonator implements UserImpersonatorInterface
             );
         }
 
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            $session = $this->requestStackOrSession;
-        } else {
-            $session = $this->requestStackOrSession->getSession();
-        }
-
+        $session = SessionProvider::getSession($this->requestStackOrSession);
         $session->set($this->sessionTokenParameter, serialize($token));
         $session->save();
 

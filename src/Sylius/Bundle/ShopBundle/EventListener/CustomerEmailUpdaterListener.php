@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\EventListener;
 
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\ShopBundle\SectionResolver\ShopSection;
 use Sylius\Bundle\UserBundle\UserEvents;
@@ -101,14 +102,7 @@ final class CustomerEmailUpdaterListener
         if (!$user->isEnabled() && !$user->isVerified() && null !== $user->getEmailVerificationToken()) {
             $this->eventDispatcher->dispatch(new GenericEvent($user), UserEvents::REQUEST_VERIFICATION_TOKEN);
 
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
-
-            /** @var FlashBagInterface $flashBag */
-            $flashBag = $session->getBag('flashes');
+            $flashBag = FlashBagProvider::getFlashBag($this->requestStackOrSession);
             $flashBag->add('success', 'sylius.user.verify_email_request');
         }
     }

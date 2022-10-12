@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Action;
 
 use Sylius\Bundle\AdminBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,17 +57,11 @@ final class ResendOrderConfirmationEmailAction
 
         $this->orderEmailManager->sendConfirmationEmail($order);
 
-        $this->getFlashBag()->add('success', 'sylius.email.order_confirmation_resent');
+        FlashBagProvider
+            ::getFlashBag($this->requestStackOrSession)
+            ->add('success', 'sylius.email.order_confirmation_resent')
+        ;
 
         return new RedirectResponse($request->headers->get('referer'));
-    }
-
-    private function getFlashBag(): FlashBagInterface
-    {
-        if ($this->requestStackOrSession instanceof RequestStack) {
-            return $this->requestStackOrSession->getSession()->getBag('flashes');
-        }
-
-        return $this->requestStackOrSession->getBag('flashes');
     }
 }

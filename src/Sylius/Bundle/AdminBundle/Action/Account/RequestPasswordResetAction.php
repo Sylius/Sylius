@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Action\Account;
 use Sylius\Bundle\AdminBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\AdminBundle\Form\RequestPasswordResetType;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,7 +55,10 @@ final class RequestPasswordResetAction
 
             $this->messageBus->dispatch($requestPasswordResetMessage);
 
-            $this->getFlashBag()->add('success', 'sylius.admin.request_reset_password.success');
+            FlashBagProvider
+                ::getFlashBag($this->requestStackOrFlashBag)
+                ->add('success', 'sylius.admin.request_reset_password.success')
+            ;
 
             $options = $request->attributes->get('_sylius');
             $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
@@ -74,14 +78,5 @@ final class RequestPasswordResetAction
                 'form' => $form->createView(),
             ]),
         );
-    }
-
-    private function getFlashBag(): FlashBagInterface
-    {
-        if ($this->requestStackOrFlashBag instanceof RequestStack) {
-            return $this->requestStackOrFlashBag->getSession()->getBag('flashes');
-        }
-
-        return $this->requestStackOrFlashBag;
     }
 }
