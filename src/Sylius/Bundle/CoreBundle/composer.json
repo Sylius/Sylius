@@ -62,7 +62,7 @@
         "sylius/taxonomy-bundle": "^1.6",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/theme-bundle": "^2.1.1 || ^2.3",
-        "sylius/ui-bundle": "^1.6",
+        "sylius/ui-bundle": "^1.6 || ^1.12@beta",
         "sylius/user-bundle": "^1.6 || ^1.12@beta",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/intl": "^5.4 || ^6.0",
