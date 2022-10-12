@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Twig;
+namespace Sylius\Bundle\UiBundle\Twig;
 
-use Sylius\Bundle\AdminBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;

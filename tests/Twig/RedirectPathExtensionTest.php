@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Twig;
 
-use Sylius\Bundle\AdminBundle\Twig\RedirectPathExtension;
+use Sylius\Bundle\UiBundle\Twig\RedirectPathExtension;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,8 +21,8 @@ final class RedirectPathExtensionTest extends KernelTestCase
         $request->setSession($session);
         $container->get('request_stack')->push($request);
 
-        $this->redirectPathExtension = $container->get('Sylius\Bundle\AdminBundle\Twig\RedirectPathExtension');
-        $container->get('Sylius\Bundle\AdminBundle\Storage\FilterStorage')->set(['criteria' => ['enabled' => true]]);
+        $this->redirectPathExtension = $container->get('Sylius\Bundle\UiBundle\Twig\RedirectPathExtension');
+        $container->get('Sylius\Bundle\UiBundle\Storage\FilterStorage')->set(['criteria' => ['enabled' => true]]);
     }
 
     /** @test */
