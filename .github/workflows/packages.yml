@@ -189,19 +189,17 @@ jobs:
                 
             -
                 name: Check the existence of Test application
-                working-directory: "src/Sylius/${{ matrix.package }}"
                 id: test_application_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
-                    files: "Tests/Functional/console, test/app/console"
+                    files: "src/Sylius/${{ matrix.package }}/Tests/Functional/console, src/Sylius/${{ matrix.package }}/test/app/console"
                     
             -
                 name: Check the existence of Twig templates
-                working-directory: "src/Sylius/${{ matrix.package }}"
                 id: templates_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
-                    files: "*.html.twig"       
+                    files: "src/Sylius/${{ matrix.package }}/Resources/views/*.html.twig"       
             
             -
                 name: Lint Twig templates
