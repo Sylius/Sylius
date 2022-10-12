@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Twig;
+namespace Sylius\Bundle\UiBundle\Twig;
 
 use Sylius\Bundle\AdminBundle\Storage\FilterStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
