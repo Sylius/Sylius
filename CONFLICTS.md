@@ -30,38 +30,17 @@ references related issues.
    `Invalid definition for service ".container.private.profiler": argument 4 of "JMS\SerializerBundle\Debug\DataCollector::__construct()" accepts "JMS\SerializerBundle\Debug\TraceableDriver", "JMS\SerializerBundle\Debug\TraceableMetadataFactory" passed.`
 
    References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
-
- - `symfony/serializer:4.4.19|5.2.2`:
-
-   These versions of Symfony Serializer introduces a bug with trying to access some private properties that don't have getters.
+ 
+ - `symfony/dependency-injection:5.4.5`:
    
-   References: https://github.com/symfony/symfony/pull/40004
-
- - `symfony/doctrine-bridge:4.4.16`:
-
-   This version of Doctrine Bridge introduces a bug that causes an issue related to `ChannelPricing` mapping.
-
-   References: https://github.com/Sylius/Sylius/issues/11970, https://github.com/symfony/symfony/issues/38861
-
- - `symfony/property-info:4.4.22|5.2.7`:
-
-   These versions of Symfony PropertyInfo Component introduce a bug with resolving wrong namespace for some translation entities 
-   in Swagger UI docs for API.
-   
-   The potential solution would be to explicitly define these translation entities as API resources with proper serialization.
-
-   Probably introduced in: https://github.com/symfony/symfony/pull/40811
-
- - `symfony/dependency-injection:4.4.38|5.4.5`:
-   
-   These versions are causing a problem with mink session:
+   This version is causing a problem with mink session:
   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
    Psalm error: 
    `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
- - `symfony/framework-bundle:^4.4.38|^5.4.5`:
+ - `symfony/framework-bundle:^5.4.5`:
 
-   These versions are causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
+   This version is causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
 
  - `api-platform/core:2.7.0`:
