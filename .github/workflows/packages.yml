@@ -185,6 +185,29 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
+                
+                
+            -
+                name: Check the existence of Test application
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                id: test_application_existence_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "Tests/Functional/console, test/app/console"
+                    
+            -
+                name: Check the existence of Twig templates
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                id: templates_existence_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "*.html.twig"       
+            
+            -
+                name: Lint Twig templates
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: steps.templates_existence_check.outputs.files_exists == 'true' && steps.test_application_existence_check.outputs.files_exists == 'true'
+                run: Tests/Functional/console lint:twig Resources/views || test/app/console lint:twig Resources/views
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
