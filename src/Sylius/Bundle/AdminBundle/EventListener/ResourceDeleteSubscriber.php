@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -76,7 +77,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $this->getFlashBag()->add('error', [
+        FlashBagProvider::getFlashBag($this->requestStackOrSession)->add('error', [
             'message' => 'sylius.resource.delete_error',
             'parameters' => ['%resource%' => $resourceName],
         ]);
@@ -121,14 +122,5 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
     private function isAdminSection(array $syliusParameters): bool
     {
         return array_key_exists('section', $syliusParameters) && 'admin' === $syliusParameters['section'];
-    }
-
-    private function getFlashBag(): FlashBagInterface
-    {
-        if ($this->requestStackOrSession instanceof RequestStack) {
-            return $this->requestStackOrSession->getSession()->getBag('flashes');
-        }
-
-        return $this->requestStackOrSession->getBag('flashes');
     }
 }

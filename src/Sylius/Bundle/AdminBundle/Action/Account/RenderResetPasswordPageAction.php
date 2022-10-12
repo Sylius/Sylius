@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Action\Account;
 
 use Sylius\Bundle\AdminBundle\Form\Type\ResetPasswordType;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -66,7 +67,10 @@ final class RenderResetPasswordPageAction
 
     private function handleExpiredPasswordRequest(Request $request): RedirectResponse
     {
-        $this->getFlashBag()->add('error', 'sylius.admin.password_reset.token_expired');
+        FlashBagProvider
+            ::getFlashBag($this->requestStackOrFlashBag)
+            ->add('error', 'sylius.admin.password_reset.token_expired')
+        ;
 
         $attributes = $request->attributes->get('_sylius');
         $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
@@ -79,14 +83,5 @@ final class RenderResetPasswordPageAction
         }
 
         return new RedirectResponse($this->router->generate($redirect));
-    }
-
-    private function getFlashBag(): FlashBagInterface
-    {
-        if ($this->requestStackOrFlashBag instanceof RequestStack) {
-            return $this->requestStackOrFlashBag->getSession()->getBag('flashes');
-        }
-
-        return $this->requestStackOrFlashBag;
     }
 }

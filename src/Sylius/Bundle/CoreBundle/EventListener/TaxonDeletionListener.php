@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
@@ -46,14 +47,8 @@ final class TaxonDeletionListener
 
         $channel = $this->channelRepository->findOneBy(['menuTaxon' => $taxon]);
         if ($channel !== null) {
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
-
             /** @var FlashBagInterface $flashes */
-            $flashes = $session->getBag('flashes');
+            $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
             $flashes->add('error', 'sylius.taxon.menu_taxon_delete');
 
             $event->stopPropagation();
@@ -71,14 +66,7 @@ final class TaxonDeletionListener
         }
 
         if (!empty($updatedPromotionCodes)) {
-            if ($this->requestStackOrSession instanceof SessionInterface) {
-                $session = $this->requestStackOrSession;
-            } else {
-                $session = $this->requestStackOrSession->getSession();
-            }
-
-            /** @var FlashBagInterface $flashes */
-            $flashes = $session->getBag('flashes');
+            $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
             $flashes->add('info', [
                 'message' => 'sylius.promotion.update_rules',
                 'parameters' => ['%codes%' => implode(', ', array_unique($updatedPromotionCodes))],
