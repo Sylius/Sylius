@@ -368,6 +368,11 @@ it is responsible for the priority of consumed messages:
 
     php bin/console messenger:consume main catalog_promotion_removal
 
+Each transport has its own failure transport, which is responsible for storing messages that haven't been processed for some reason.
+For the **main** transport it is the **main_failed** transport and for the **catalog_promotion_removal** transport it is the **catalog_promotion_removal_failed** transport.
+
+You can read more about failure handling in the `Symfony Messenger documentation <https://symfony.com/doc/current/messenger.html#retries-failures>`_.
+
 For synchronous processing, no additional configuration is required.
 
 How to manage catalog promotion priority?
