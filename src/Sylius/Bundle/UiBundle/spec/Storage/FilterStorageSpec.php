@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\UiBundle\spec\Storage;
+namespace spec\Sylius\Bundle\UiBundle\Storage;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
