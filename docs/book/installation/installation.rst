@@ -61,6 +61,24 @@ After everything is in place, run the following command to install Sylius:
     to change these before running the installation command, set the ``locale`` and ``sylius_installer_currency`` parameters in the ``config/services.yaml`` file.
     From now on all the prices will be stored in the database in USD as integers, and all the products will have to be added with a base american english name translation.
 
+Configuring Mailer
+------------------
+
+In order to send emails you need to configure Mailer Service. Basically you need to:
+
+1. **Create an account on a mailing service.**
+2. **In your** ``.env`` **file modify the** ``MAILER_URL`` **variable.**
+
+.. code-block:: text
+
+    MAILER_URL=gmail://username:password@local
+
+.. note::
+
+    Email delivery is disabled for test, dev and staging environments by default. The prod environment has delivery turned on.
+
+You can learn more about configuring mailer service in :doc:`How to configure mailer? </cookbook/emails/mailer>`
+
 Installing assets
 -----------------
 
