@@ -38,6 +38,10 @@ jobs:
             -
                 name: Run ECS
                 run: vendor/bin/ecs check --fix src/Sylius
+                
+            -
+                name: Run Package alias
+                run: vendor/bin/monorepo-builder package-alias
 
             -
                 name: Create Pull Request
