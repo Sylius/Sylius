@@ -35,7 +35,7 @@ final class ResetPasswordAction
         private Environment $twig,
     ) {
         if ($this->requestStackOrFlashBag instanceof FlashBagInterface) {
-            trigger_deprecation('sylius/admin-bundle', '2.0', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', FlashBagInterface::class, self::class, RequestStack::class));
+            trigger_deprecation('sylius/admin-bundle', '1.12', sprintf('Passing an instance of %s as constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', FlashBagInterface::class, self::class, RequestStack::class));
         }
     }
 
