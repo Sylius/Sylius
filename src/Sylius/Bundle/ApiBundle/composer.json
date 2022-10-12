@@ -2,10 +2,7 @@
     "name": "sylius/api-bundle",
     "type": "symfony-bundle",
     "description": "APIs management for Symfony projects.",
-    "keywords": [
-        "api",
-        "rest"
-    ],
+    "keywords": ["api", "rest"],
     "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
@@ -58,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.7-dev"
+            "dev-master": "1.9-dev"
         }
     },
     "autoload": {
