@@ -111,12 +111,12 @@ To actually use it overwrite ``sylius_admin_product_create_simple`` route like b
                 section: admin
                 factory:
                     method: createDisabled # like here for example
-                template: SyliusAdminBundle:Crud:create.html.twig
+                template: "@SyliusAdmin/Crud/create.html.twig"
                 redirect: sylius_admin_product_update
                 vars:
                     subheader: sylius.ui.manage_your_product_catalog
                     templates:
-                        form: SyliusAdminBundle:Product:_form.html.twig
+                        form: "@SyliusAdmin/Product/_form.html.twig"
                     route:
                         name: sylius_admin_product_create_simple
 
