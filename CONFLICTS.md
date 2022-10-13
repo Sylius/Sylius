@@ -94,3 +94,7 @@ In this section we keep track of the reasons, why some restrictions were added t
    `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer` 
    references this class throws an exception
   `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`
+
+- `api-platform/core:2.7.2`:
+
+  Due to the changes in the skolem IRI generation (see [this PR](https://github.com/api-platform/core/pull/5046))
