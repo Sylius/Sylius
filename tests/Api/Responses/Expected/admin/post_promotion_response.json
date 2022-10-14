@@ -19,5 +19,16 @@
     "actions": [],
     "appliesToDiscounted": false,
     "createdAt": @string@,
-    "updatedAt": @string@
+    "updatedAt": @string@,
+    "translations": {
+        "en_US": "\/api\/v2\/admin\/promotion-translations\/@integer@"
+    },
+    "translation": {
+        "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+        "@type": "PromotionTranslation",
+        "id": @integer@,
+        "label": "T-Shirts discount",
+        "locale": "en_US",
+        "translatable": "\/api\/v2\/admin\/promotions\/@string@"
+    }
 }

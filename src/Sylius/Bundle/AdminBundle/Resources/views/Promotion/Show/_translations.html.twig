@@ -1,0 +1,21 @@
+<div class="ui hidden divider"></div>
+
+<div class="ui styled fluid accordion">
+    {% for translation in promotion.translations %}
+        <div class="title">
+            <i class="dropdown icon"></i>
+            <i class="{{ translation.locale|slice(-2)|lower }} flag"></i>
+            {{ translation.locale|sylius_locale_name }}
+        </div>
+        <div class="ui content">
+            <table class="ui very basic celled table">
+                <tbody>
+                <tr>
+                    <td class="three wide"><strong class="gray text">{{ 'sylius.ui.label'|trans }}</strong></td>
+                    <td>{{ translation.label }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+</div>

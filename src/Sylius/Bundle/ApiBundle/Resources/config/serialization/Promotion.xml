@@ -74,5 +74,11 @@
         <attribute name="channels">
             <group>admin:promotion:read</group>
         </attribute>
+
+        <attribute name="translations">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
+        </attribute>
     </class>
 </serializer>

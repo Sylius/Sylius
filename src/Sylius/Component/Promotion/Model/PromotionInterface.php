@@ -17,8 +17,9 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
-interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, TranslatableInterface, ResourceInterface
 {
     public function getName(): ?string;
 

@@ -24,6 +24,7 @@ sylius:
             description: Description
             ends_at: Ends at
             exclusive: Exclusive
+            label: Label
             name: Name
             priority: Priority
             rules: Rules
