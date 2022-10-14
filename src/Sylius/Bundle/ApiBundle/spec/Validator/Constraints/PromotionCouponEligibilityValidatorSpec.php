@@ -71,8 +71,6 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
 
-        $cart->setPromotionCoupon($promotionCoupon)->shouldBeCalled();
-
         $appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)->willReturn(true);
 
         $executionContext->buildViolation(Argument::any())->shouldNotBeCalled();
@@ -98,8 +96,6 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn($promotionCoupon);
         $orderRepository->findCartByTokenValue('token')->willReturn($cart);
-
-        $cart->setPromotionCoupon($promotionCoupon)->shouldBeCalled();
 
         $appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)->willReturn(false);
 

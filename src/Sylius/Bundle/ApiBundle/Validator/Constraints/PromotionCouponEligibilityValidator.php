@@ -49,8 +49,6 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 
-        $cart->setPromotionCoupon($promotionCoupon);
-
         if (!$this->appliedCouponEligibilityChecker->isEligible($promotionCoupon, $cart)) {
             $this->context
                 ->buildViolation($constraint->message)
