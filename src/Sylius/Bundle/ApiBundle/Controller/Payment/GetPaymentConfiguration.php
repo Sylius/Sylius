@@ -34,7 +34,7 @@ final class GetPaymentConfiguration
         /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->findOneByOrderToken(
             $request->attributes->get('paymentId'),
-            $request->attributes->get('id'),
+            $request->attributes->get('tokenValue'),
         );
 
         Assert::notNull($payment);
