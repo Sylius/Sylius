@@ -162,6 +162,7 @@
         "api-platform/core": "2.7.0 || 2.7.2",
         "doctrine/doctrine-bundle": "2.3.0",
         "jms/serializer-bundle": "3.9.0",
+        "polishsymfonycommunity/symfony-mocker-container": "1.0.6",
         "symfony/doctrine-bridge": "4.4.16",
         "symfony/framework-bundle": "^4.4.38 || ^5.4.5",
         "symfony/password-hasher": "^6.0",
