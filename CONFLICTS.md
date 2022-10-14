@@ -98,3 +98,13 @@ In this section we keep track of the reasons, why some restrictions were added t
 - `api-platform/core:2.7.2`:
 
   Due to the changes in the skolem IRI generation (see [this PR](https://github.com/api-platform/core/pull/5046))
+
+- `polishsymfonycommunity/symfony-mocker-container:1.0.6`:
+
+  ```
+  PHP Fatal error:  Declaration of PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer::has(string $id): bool 
+  must be compatible with Symfony\Component\DependencyInjection\Container::has($id) 
+  in /home/runner/work/Sylius/Sylius/vendor/polishsymfonycommunity/symfony-mocker-container/src/DependencyInjection/MockerContainer.php on line 64
+  ```
+
+  References: https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/issues/20
