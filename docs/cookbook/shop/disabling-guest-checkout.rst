@@ -46,7 +46,7 @@ We will modify the same file as in example on top, the ``security.yaml``:
     The "main" path (in this example ``"%sylius.security.new_api_shop_regex%/.*"`` ) should be at the very end of the configuration
     with the same route, otherwise this would not work.
 
-Now when an anonymous user will try to use other checkout routes he will be informed that he is not authenticated:
+Now when an anonymous user will try to use other checkout routes they will be informed that they are not authenticated:
 
 .. code-block:: bash
 
