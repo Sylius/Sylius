@@ -225,3 +225,175 @@ The list of changed contexts:
 - Sylius\Behat\Context\Api\Shop\PromotionContext
 - Sylius\Behat\Context\Api\Shop\RegistrationContext
 - Sylius\Behat\Context\Api\Shop\ShipmentContext
+
+### Creating Request refactored
+
+We removed some methods from `Sylius\Behat\Client\RequestInterface`.
+All of them have their corresponding implementation in `Sylius\Behat\Client\RequestFactory`.
+
+ ```diff
+ -    public static function index(
+ -      ?string $section,
+ -       string $resource,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function subResourceIndex(?string $section, string $resource, string $id, string $subResource): self;
+
+ -   public static function show(
+ -       ?string $section,
+ -       string $resource,
+ -       string $id,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function create(
+ -       ?string $section,
+ -       string $resource,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function update(
+ -       ?string $section,
+ -       string $resource,
+ -       string $id,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function delete(
+ -       ?string $section,
+ -       string $resource,
+ -       string $id,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function transition(?string $section, string $resource, string $id, string $transition): self;
+
+ -   public static function customItemAction(?string $section, string $resource, string $id, string $type, string $action): self;
+
+ -   public static function upload(
+ -       ?string $section,
+ -       string $resource,
+ -       string $authorizationHeader,
+ -       ?string $token = null
+ -   ): self;
+
+ -   public static function custom(string $url, string $method, array $additionalHeaders = [], ?string $token = null): self;
+ ```
+
+#### Changes in ApiPlatformClient
+
+Followed by this change the constructor of `Sylius\Behat\Client\ApiPlatformClient` also changed:
+
+ ```diff
+     public function __construct(
+            private AbstractBrowser $client,
+            private SharedStorageInterface $sharedStorage,
+ +          private RequestFactoryInterface $requestFactory,
+            ...
+        ) {
+        }
+ ```
+
+Now we are calling method by parameter `$this->requestFactory` instead of calling `Request` class itself.
+You can see the difference of usage below:
+
+ ```diff
+     public function index(string $resource): Response
+    {
+ -      $this->request = Request::index($this->section, $resource, $this->authorizationHeader, $this->getToken());
+ +      $this->request = $this->requestFactory->index($this->section, $resource, $this->authorizationHeader, $this->getToken());
+
+        return $this->request($this->request);
+    }
+ ```
+
+The `Sylius\Behat\Client\ApiClientInterface::buildUploadRequest` method has been removed, as it's replaced by methods in `Sylius\Behat\Client\RequestBuilder`.
+Example change of usage in `Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext`:
+
+ ```diff
+ -       $this->client->buildUploadRequest(Resources::AVATAR_IMAGES);
+ -       $this->client->addParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+ -       $this->client->addFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
+ -       $response = $this->client->upload();
+        
+ +       $builder = RequestBuilder::create(
+ +           sprintf('/api/v2/%s/%s', 'admin', Resources::AVATAR_IMAGES),
+ +           Request::METHOD_POST,
+ +       );
+ +       $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
+ +       $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
+ +       $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+ +       $builder->withParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+ +       $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
+
+ +       $response = $this->client->request($builder->build());
+ ```
+
+As you can see the builder contains the methods that makes the request responsive for additional headers and parameters.
+
+We also changed the `\Sylius\Behat\Client\ApiClientInterface::request` method visibility to public.
+
+ ```diff
+ -    private function request(RequestInterface $request): Response
+ +    public function request(RequestInterface $request): Response
+ ```
+
+#### Defining ContentType changed
+
+`Sylius\Behat\Client\ContentTypeGuide` provides solution for resolving http methods.
+When we pass the proper `HttpRequest` method inside of the new `Sylius\Behat\Client\ContentTypeGuide::guide` method it returns appropriate json content type:
+
+ ```
+     public function guide(string $method): string
+    {
+        if ($method === HttpRequest::METHOD_PATCH) {
+            return self::PATCH_CONTENT_TYPE;
+        }
+
+        if ($method === HttpRequest::METHOD_PUT) {
+            return self::LINKED_DATA_JSON_CONTENT_TYPE;
+        }
+
+        return self::JSON_CONTENT_TYPE;
+    }
+ ```
+
+Now to define the content type you just need to pass the appropriate `HttpRequest` type inside of the `guide()` method.
+You can see the improvement of usage below:
+
+ ```diff
+  -   ['CONTENT_TYPE' => self::resolveHttpMethod($type)]
+  +   $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide($type));
+ ```
+
+#### Contexts Change
+
+The constructors of the behat contexts have changed in relation to the above improvements.
+
+ ```diff
+    public function __construct(
+    +   private RequestFactoryInterface $requestFactory,
+        ...
+    ) {
+ ```
+
+List of changed contexts:
+
+###### Admin
+
+- Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext
+
+###### Shop
+
+- Sylius\Behat\Context\Api\Shop\CartContext
+- Sylius\Behat\Context\Api\Shop\CheckoutContext
+- Sylius\Behat\Context\Api\Shop\CustomerContext
+- Sylius\Behat\Context\Api\Shop\LoginContext
+- Sylius\Behat\Context\Api\Shop\OrderContext
+- Sylius\Behat\Context\Api\Shop\ProductContext
