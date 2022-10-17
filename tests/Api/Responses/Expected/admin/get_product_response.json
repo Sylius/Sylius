@@ -4,6 +4,7 @@
     "@type": "Product",
     "productTaxons": [],
     "mainTaxon": null,
+    "channels": [],
     "reviews": [],
     "images": [],
     "id": @integer@,
