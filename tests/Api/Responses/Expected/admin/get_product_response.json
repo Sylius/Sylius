@@ -4,7 +4,9 @@
     "@type": "Product",
     "productTaxons": [],
     "mainTaxon": null,
-    "channels": [],
+    "channels": [
+      "\/api\/v2\/admin\/channels\/@string@"
+    ],
     "reviews": [],
     "images": [],
     "id": @integer@,
