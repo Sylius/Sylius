@@ -79,6 +79,9 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: The usage limit by customer must be greater than or equal to 1.
     review:
         author:
             not_blank: Please enter your email.
