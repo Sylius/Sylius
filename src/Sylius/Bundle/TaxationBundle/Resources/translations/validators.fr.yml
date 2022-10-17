@@ -15,6 +15,7 @@ sylius:
         name:
             not_blank: Veuillez entrer le nom de la taxe.
         amount:
+            invalid: Le taux de taxe doit être supérieur ou égal à 0.
             not_blank: Veuillez entrer le taux de la taxe.
         calculator:
             not_blank: Veuillez sélectionner le calculateur de la taxe.
