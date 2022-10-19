@@ -4,7 +4,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreateShipmentProcessor;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreateShipmentAfterOrderCreateProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Workflow\Event\Event;
@@ -19,7 +19,7 @@ class CreateShipmentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CreateShipmentProcessor::class);
+        $this->shouldHaveType(CreateShipmentAfterOrderCreateProcessor::class);
     }
 
     function it_creates_shipment(

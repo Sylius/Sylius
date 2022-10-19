@@ -4,7 +4,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreatePaymentProcessor;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreatePaymentAfterOrderCreateProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -18,7 +18,7 @@ class CreatePaymentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(CreatePaymentProcessor::class);
+        $this->shouldHaveType(CreatePaymentAfterOrderCreateProcessor::class);
     }
 
     function it_creates_payment(

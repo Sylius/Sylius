@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\CreateOrderListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\OrderCheckout\AfterComplete\CreateOrderProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -19,7 +19,7 @@ final class CreateOrderListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(CreateOrderListener::class);
+        $this->shouldHaveType(CreateOrderProcessor::class);
     }
 
     function it_creates_orders(

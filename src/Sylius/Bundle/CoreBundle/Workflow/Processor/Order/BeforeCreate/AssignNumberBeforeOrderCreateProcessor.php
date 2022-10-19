@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate;
 
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeOrderCreateProcessorInterface;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class AssignNumberProcessor implements BeforeOrderCreateProcessorInterface
+final class AssignNumberBeforeOrderCreateProcessor implements BeforeOrderCreateProcessorInterface
 {
     public function __construct(private OrderNumberAssignerInterface $orderNumberAssigner)
     {

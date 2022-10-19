@@ -6,19 +6,20 @@ namespace Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
-use Symfony\Component\Workflow\WorkflowInterface;
 
-final class CreateOrderListener
+final class AfterOrderCheckoutCompleteListener
 {
-    public function __construct(private WorkflowInterface $syliusOrderWorkflow,)
+    public function __construct(private iterable $processors)
     {
     }
 
-    public function createOrder(Event $event): void
+    public function process(Event $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        $this->syliusOrderWorkflow->apply($order, 'create');
+        foreach ($this->processors as $processor) {
+            $processor->process($order);
+        }
     }
 }

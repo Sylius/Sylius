@@ -29,11 +29,11 @@
                  priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\CreateOrderListener">
-            <argument type="service" id="state_machine.sylius_order" />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterOrderCheckoutCompleteListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.order_checkout.after_complete" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_order_checkout.completed.complete"
-                 method="createOrder"
+                 method="process"
                  priority="-100" />
         </service>
     </services>

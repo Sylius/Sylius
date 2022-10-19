@@ -13,12 +13,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignNumberProcessor">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignNumberBeforeOrderCreateProcessor">
             <argument type="service" id="sylius.order_number_assigner" />
             <tag name="sylius.workflow.order.before_create" priority="-200" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignTokenProcessor">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignTokenBeforeOrderCreateProcessor">
             <argument type="service" id="sylius.unique_id_based_order_token_assigner" />
             <tag name="sylius.workflow.order.before_create" priority="-100" />
         </service>

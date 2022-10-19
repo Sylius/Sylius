@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Workflow;
+namespace Sylius\Bundle\CoreBundle\Workflow\Processor\Order;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-interface ProcessorInterface
+interface OrderProcessorInterface
 {
     public function process(OrderInterface $order): void;
 }
