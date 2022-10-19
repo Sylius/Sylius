@@ -25,6 +25,11 @@
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\HoldInventoryReactor">
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+            <tag name="sylius.workflow.reactor.after_placed_order" priority="-400" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\IncrementPromotionUsagesReactor">
+            <argument type="service" id="sylius.promotion_usage_modifier" />
             <tag name="sylius.workflow.reactor.after_placed_order" priority="-300" />
         </service>
 
@@ -36,6 +41,16 @@
         <service id="Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\RequestShippingReactor">
             <argument type="service" id="state_machine.sylius_order_shipping" />
             <tag name="sylius.workflow.reactor.after_placed_order" priority="-800" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\SaveAddressesOnCustomerReactor">
+            <argument type="service" id="sylius.customer_order_addresses_saver" />
+            <tag name="sylius.workflow.reactor.after_placed_order" priority="-200" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\SetOrderImmutableNamesReactor">
+            <argument type="service" id="sylius.order_item_names_setter" />
+            <tag name="sylius.workflow.reactor.after_placed_order" priority="-100" />
         </service>
     </services>
 </container>
