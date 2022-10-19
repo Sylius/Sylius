@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
 
-use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterOrderCreateProcessorInterface;
+use Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\AfterPlacedOrderReactorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 
 final class AfterOrderCreateListener
 {
-    /** @param AfterOrderCreateProcessorInterface[] $processors */
-    public function __construct(private iterable $processors)
+    /** @param AfterPlacedOrderReactorInterface[] $reactors */
+    public function __construct(private iterable $reactors)
     {
     }
 
@@ -29,8 +29,8 @@ final class AfterOrderCreateListener
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        foreach ($this->processors as $processor) {
-            $processor->process($order);
+        foreach ($this->reactors as $reactor) {
+            $reactor->react($order);
         }
     }
 }
