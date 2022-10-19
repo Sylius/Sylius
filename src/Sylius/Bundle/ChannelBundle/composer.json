@@ -26,7 +26,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/channel": "^1.6",
+        "sylius/channel": "^1.12",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
@@ -48,7 +48,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.9-dev"
+            "dev-master": "1.12-dev"
         }
     },
     "autoload": {

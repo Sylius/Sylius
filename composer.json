@@ -241,9 +241,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.13-dev"
-        },
         "symfony": {
             "allow-contrib": false
         }
