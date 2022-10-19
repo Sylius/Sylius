@@ -16,3 +16,7 @@ sylius_api:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_resource:
+    settings:
+        state_machine_component: symfony
