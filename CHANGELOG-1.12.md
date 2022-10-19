@@ -1,5 +1,31 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.0-RC.1 (2022-10-19)
+
+#### Details
+
+- [#14188](https://github.com/Sylius/Sylius/issues/14188) [DOCS]  Disabling guest api checkout ([@arti0090](https://github.com/arti0090))
+- [#14247](https://github.com/Sylius/Sylius/issues/14247) [DOCS] Add info about mailer in installation doc ([@arti0090](https://github.com/arti0090))
+- [#14362](https://github.com/Sylius/Sylius/issues/14362) Using the new template namespace syntax in the doc ([@mamazu](https://github.com/mamazu))
+- [#14382](https://github.com/Sylius/Sylius/issues/14382) [Maintenance] Out-of-date composer conflicts cleanup ([@Rafikooo](https://github.com/Rafikooo))
+- [#14384](https://github.com/Sylius/Sylius/issues/14384) [API] Use tokenValue instead of id ([@Prometee](https://github.com/Prometee))
+- [#14415](https://github.com/Sylius/Sylius/issues/14415) [Behat] Add calendar hook to suites using calendar ([@GSadee](https://github.com/GSadee))
+- [#14421](https://github.com/Sylius/Sylius/issues/14421) [DOCS] Add info about supervisors ([@arti0090](https://github.com/arti0090))
+- [#14426](https://github.com/Sylius/Sylius/issues/14426) [Docs][CatalogPromotions][Messenger] Failure transports ([@Rafikooo](https://github.com/Rafikooo))
+- [#14430](https://github.com/Sylius/Sylius/issues/14430) [DX] Fix versions for triggered deprecations ([@coldic3](https://github.com/coldic3))
+- [#14431](https://github.com/Sylius/Sylius/issues/14431) Fix reference to Admin bundle on ui bundle ([@loic425](https://github.com/loic425))
+- [#14433](https://github.com/Sylius/Sylius/issues/14433) Fix - move RedirectPathExtension from Admin bundle to Ui bundle ([@loic425](https://github.com/loic425))
+- [#14438](https://github.com/Sylius/Sylius/issues/14438) Coding style and configurations fixes and improvements after Symfony 6 support merge ([@Zales0123](https://github.com/Zales0123))
+- [#14440](https://github.com/Sylius/Sylius/issues/14440) [Parameters] bin/console debug:container --env-vars command fixed ([@Rafikooo](https://github.com/Rafikooo))
+- [#14442](https://github.com/Sylius/Sylius/issues/14442) [Hot-fix] Conflict with the newest AP that changes a Customer->User response ([@GSadee](https://github.com/GSadee))
+- [#14443](https://github.com/Sylius/Sylius/issues/14443) [API][Behat] Add note about behat request changes ([@TheMilek](https://github.com/TheMilek))
+- [#14444](https://github.com/Sylius/Sylius/issues/14444) Remove SymfonyMockerContainer fork ([@Zales0123](https://github.com/Zales0123))
+- [#14445](https://github.com/Sylius/Sylius/issues/14445) [Hot-fix] Conflict with the SymfonyMockerContainer 1.0.6 due to incompatible version with Symfony 4.x ([@GSadee](https://github.com/GSadee))
+- [#14458](https://github.com/Sylius/Sylius/issues/14458) Fix packages branch-aliases ([@Zales0123](https://github.com/Zales0123))
+- [#14459](https://github.com/Sylius/Sylius/issues/14459) [Hot-fix] Do not fail scenario after 422 response page ([@Zales0123](https://github.com/Zales0123))
+- [#14462](https://github.com/Sylius/Sylius/issues/14462) Open [CI] Tests for Symfony ~6.0.0 and static checks for APIP ~2.6.0 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14464](https://github.com/Sylius/Sylius/issues/14464) Change all package versions to 1.12 ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.12.0-BETA.1 (2022-10-11)
 
 #### Details
