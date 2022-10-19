@@ -24,7 +24,7 @@ jobs:
     static-checks:
         runs-on: ubuntu-latest
 
-        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+        name: "Static checks (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, API Platform ${{ matrix.api-platform }})"
 
         timeout-minutes: 10
 
@@ -33,11 +33,17 @@ jobs:
             matrix:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4", "^6.0"]
+                api-platform: ["^2.7"]
 
                 include:
                     -
                         php: "8.1"
                         symfony: "~6.0.0"
+                        api-platform: "^2.7"
+                    -
+                        php: "8.1"
+                        symfony: "^6.0"
+                        api-platform: "~2.6.0"
 
         steps:
             -
@@ -595,6 +601,14 @@ jobs:
                     -
                         php: "8.1"
                         symfony: "^5.4"
+                        api-platform: "~2.6.0"
+                        twig: "3.x"
+                        mysql: "8.0"
+                        dbal: "3"
+
+                    -
+                        php: "8.1"
+                        symfony: "^6.0"
                         api-platform: "~2.6.0"
                         twig: "3.x"
                         mysql: "8.0"
