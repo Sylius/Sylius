@@ -1,16 +1,16 @@
 <?php
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\CreateShipmentListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreateShipmentProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class CreateShipmentListenerSpec extends ObjectBehavior
+class CreateShipmentProcessorSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusShipmentWorkflow): void
     {
@@ -19,18 +19,15 @@ class CreateShipmentListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CreateShipmentListener::class);
+        $this->shouldHaveType(CreateShipmentProcessor::class);
     }
 
     function it_creates_shipment(
-        Event $event,
         OrderInterface $order,
         WorkflowInterface $syliusShipmentWorkflow,
         ShipmentInterface $firstShipment,
         ShipmentInterface $secondShipment,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $order->getShipments()->willReturn(new ArrayCollection([
             $firstShipment->getWrappedObject(),
             $secondShipment->getWrappedObject(),
@@ -39,6 +36,6 @@ class CreateShipmentListenerSpec extends ObjectBehavior
         $syliusShipmentWorkflow->apply($firstShipment, 'create')->shouldBeCalled();
         $syliusShipmentWorkflow->apply($secondShipment, 'create')->shouldBeCalled();
 
-        $this->createShipment($event);
+        $this->process($order);
     }
 }

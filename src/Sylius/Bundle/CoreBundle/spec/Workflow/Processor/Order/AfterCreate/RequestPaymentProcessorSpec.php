@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\RequestPaymentListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\RequestPaymentProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-final class RequestPaymentListenerSpec extends ObjectBehavior
+final class RequestPaymentProcessorSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusOrderPaymentWorkflow): void
     {
@@ -19,18 +18,15 @@ final class RequestPaymentListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(RequestPaymentListener::class);
+        $this->shouldHaveType(RequestPaymentProcessor::class);
     }
 
     function it_requests_payment(
-        Event $event,
         OrderInterface $order,
         WorkflowInterface $syliusOrderPaymentWorkflow,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $syliusOrderPaymentWorkflow->apply($order, 'request_payment')->shouldBeCalled();
 
-        $this->requestPayment($event);
+        $this->process($order);
     }
 }

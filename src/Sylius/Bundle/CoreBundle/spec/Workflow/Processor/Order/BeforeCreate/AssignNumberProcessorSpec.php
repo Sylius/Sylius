@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AssignNumberListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignNumberProcessor;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
-use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\Workflow\Event\Event;
+use Sylius\Component\Core\Model\OrderInterface;
 
-final class AssignNumberListenerSpec extends ObjectBehavior
+final class AssignNumberProcessorSpec extends ObjectBehavior
 {
     function let(OrderNumberAssignerInterface $orderNumberAssigner): void
     {
@@ -19,18 +18,15 @@ final class AssignNumberListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(AssignNumberListener::class);
+        $this->shouldHaveType(AssignNumberProcessor::class);
     }
 
     function it_assigns_order_numbers(
-        Event $event,
         OrderInterface $order,
         OrderNumberAssignerInterface $orderNumberAssigner,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $orderNumberAssigner->assignNumber($order)->shouldBeCalled();
 
-        $this->assignNumber($event);
+        $this->process($order);
     }
 }

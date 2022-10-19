@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AssignTokenListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\BeforeCreate\AssignTokenProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface;
-use Symfony\Component\Workflow\Event\Event;
 
-final class AssignTokenListenerSpec extends ObjectBehavior
+final class AssignTokenProcessorSpec extends ObjectBehavior
 {
     function let(OrderTokenAssignerInterface $orderTokenAssigner): void
     {
@@ -19,18 +18,15 @@ final class AssignTokenListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(AssignTokenListener::class);
+        $this->shouldHaveType(AssignTokenProcessor::class);
     }
 
     function it_assigns_order_tokens(
-        Event $event,
         OrderInterface $order,
         OrderTokenAssignerInterface $orderTokenAssigner,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $orderTokenAssigner->assignTokenValue($order)->shouldBeCalled();
 
-        $this->assignToken($event);
+        $this->process($order);
     }
 }

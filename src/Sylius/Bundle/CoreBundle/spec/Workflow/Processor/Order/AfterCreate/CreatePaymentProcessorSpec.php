@@ -1,16 +1,15 @@
 <?php
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\CreatePaymentListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\CreatePaymentProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class CreatePaymentListenerSpec extends ObjectBehavior
+class CreatePaymentProcessorSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusPaymentWorkflow): void
     {
@@ -19,18 +18,15 @@ class CreatePaymentListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(CreatePaymentListener::class);
+        $this->shouldHaveType(CreatePaymentProcessor::class);
     }
 
     function it_creates_payment(
-        Event $event,
         OrderInterface $order,
         WorkflowInterface $syliusPaymentWorkflow,
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $order->getPayments()->willReturn(new ArrayCollection([
             $firstPayment->getWrappedObject(),
             $secondPayment->getWrappedObject(),
@@ -39,6 +35,6 @@ class CreatePaymentListenerSpec extends ObjectBehavior
         $syliusPaymentWorkflow->apply($firstPayment, 'create')->shouldBeCalled();
         $syliusPaymentWorkflow->apply($secondPayment, 'create')->shouldBeCalled();
 
-        $this->createPayment($event);
+        $this->process($order);
     }
 }

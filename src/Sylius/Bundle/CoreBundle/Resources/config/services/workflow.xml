@@ -12,15 +12,8 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
-        <defaults public="false" />
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\ProductReview\UpdateRatingListener">
-            <argument type="service" id="sylius.product_review.average_rating_updater" />
-            <tag name="kernel.event_listener"
-                 event="workflow.sylius_product_review.completed.accept"
-                 method="updateFromReview"
-                 priority="-100" />
-        </service>
-    </services>
+    <imports>
+        <import resource="workflows/listeners/**/*" />
+        <import resource="workflows/processors/**/*" />
+    </imports>
 </container>

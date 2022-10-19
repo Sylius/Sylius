@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\Order\RequestShippingListener;
+use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterCreate\RequestShippingProcessor;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 final class RequestShippingListenerSpec extends ObjectBehavior
@@ -19,18 +18,15 @@ final class RequestShippingListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(RequestShippingListener::class);
+        $this->shouldHaveType(RequestShippingProcessor::class);
     }
 
     function it_requests_shipping(
-        Event $event,
         OrderInterface $order,
         WorkflowInterface $syliusOrderShippingWorkflow,
     ): void {
-        $event->getSubject()->willReturn($order);
-
         $syliusOrderShippingWorkflow->apply($order, 'request_shipping')->shouldBeCalled();
 
-        $this->requestShipping($event);
+        $this->process($order);
     }
 }
