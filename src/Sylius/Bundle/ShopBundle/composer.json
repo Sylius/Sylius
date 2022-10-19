@@ -27,8 +27,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "sylius/core-bundle": "^1.7",
-        "sylius/ui-bundle": "^1.6",
+        "sylius/core-bundle": "^1.12",
+        "sylius/ui-bundle": "^1.12",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.15",

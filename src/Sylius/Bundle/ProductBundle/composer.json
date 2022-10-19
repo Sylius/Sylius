@@ -28,9 +28,9 @@
     "require": {
         "php": "^8.0",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/attribute-bundle": "^1.6",
-        "sylius/locale-bundle": "^1.6",
-        "sylius/product": "^1.6",
+        "sylius/attribute-bundle": "^1.12",
+        "sylius/locale-bundle": "^1.12",
+        "sylius/product": "^1.12",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
