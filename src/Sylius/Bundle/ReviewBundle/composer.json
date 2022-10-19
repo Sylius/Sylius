@@ -42,8 +42,8 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
-        "sylius/review": "^1.6",
-        "sylius/user-bundle": "^1.6 || dev-symfony-6",
+        "sylius/review": "^1.12",
+        "sylius/user-bundle": "^1.12",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {

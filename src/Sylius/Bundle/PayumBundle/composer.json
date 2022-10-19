@@ -32,10 +32,10 @@
         "payum/payum": "^1.7.2",
         "payum/payum-bundle": "^2.5",
         "php-http/guzzle6-adapter": "^2.0",
-        "sylius/core": "^1.6 || dev-symfony-6",
-        "sylius/currency": "^1.6 || dev-symfony-6",
-        "sylius/order-bundle": "^1.6 || dev-symfony-6",
-        "sylius/payment-bundle": "^1.6 || dev-symfony-6",
+        "sylius/core": "^1.12",
+        "sylius/currency": "^1.12",
+        "sylius/order-bundle": "^1.12",
+        "sylius/payment-bundle": "^1.12",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha"
     },
     "require-dev": {

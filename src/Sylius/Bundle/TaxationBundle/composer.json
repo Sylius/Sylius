@@ -32,7 +32,7 @@
         "sylius/calendar": "^0.3 || ^0.4",
         "sylius/registry": "^1.5",
         "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
-        "sylius/taxation": "^1.6",
+        "sylius/taxation": "^1.12",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {
