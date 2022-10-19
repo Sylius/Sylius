@@ -87,6 +87,7 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
             )
             ->addFilter(
                 StringFilter::create('search', ['translation.name'])
+                    ->setLabel(false)
                     ->addFormOption('type', 'contains')
             );
     }
