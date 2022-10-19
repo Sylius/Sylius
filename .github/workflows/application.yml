@@ -34,6 +34,11 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^5.4", "^6.0"]
 
+                include:
+                    -
+                        php: "8.1"
+                        symfony: "~6.0.0"
+
         steps:
             -
                 uses: actions/checkout@v2
@@ -181,10 +186,10 @@ jobs:
                     args: check
                 if: always() && steps.end-of-setup.outcome == 'success'
 
-    classes-specifictions:
+    classes-specifications:
         runs-on: ubuntu-latest
 
-        name: "Classes specifications (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), API Platform ${{ matrix.api-platform }})"
+        name: "Classes specifications (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, API Platform ${{ matrix.api-platform }})"
         strategy:
             fail-fast: false
             matrix:
@@ -193,6 +198,10 @@ jobs:
                 api-platform: ["^2.7"]
 
                 include:
+                    -
+                        php: "8.1"
+                        symfony: "~6.0.0"
+                        api-platform: "^2.7"
                     -
                         php: "8.1"
                         symfony: "^5.4"
@@ -587,7 +596,15 @@ jobs:
                         php: "8.1"
                         symfony: "^5.4"
                         api-platform: "~2.6.0"
-                        node: "14.x"
+                        twig: "3.x"
+                        mysql: "8.0"
+                        dbal: "3"
+
+                    -
+                        php: "8.1"
+                        symfony: "~6.0.0"
+                        api-platform: "^2.7"
+                        twig: "3.x"
                         mysql: "8.0"
                         dbal: "3"
 
@@ -640,6 +657,12 @@ jobs:
                 run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
 
             -
+                name: Restrict Twig version
+                if: matrix.twig != ''
+                run: |
+                    composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts --no-interaction
+
+            -
                 name: Get Composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -652,12 +675,6 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
-
-            -
-                name: Restrict Twig version
-                if: matrix.twig != ''
-                run: |
-                    composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts --no-interaction
 
             -
                 name: Install PHP dependencies
@@ -744,7 +761,6 @@ jobs:
             -
                 name: Run CLI Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
-                continue-on-error: true
 
             -
                 name: Run non-JS Behat
@@ -773,6 +789,13 @@ jobs:
                 symfony: ["^5.4", "^6.0"]
                 node: ["16.x", "18.x"]
                 mysql: ["5.7", "8.0"]
+
+                include:
+                    -
+                        php: "8.1"
+                        symfony: "~6.0.0"
+                        node: "18.x"
+                        mysql: "8.0"
 
         env:
             APP_ENV: test_cached
