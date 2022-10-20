@@ -73,6 +73,17 @@ jobs:
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
             -
+                name: Restrict API Platform version for global composer
+                if: matrix.api-platform != '^2.7'
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+
+            -
+                name: Restrict API Platform version for ApiBundle
+                if: matrix.api-platform != '^2.7'
+                run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+                working-directory: "src/Sylius/Bundle/ApiBundle"
+
+            -
                 name: Get Composer cache directory
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
                 id: composer-cache
