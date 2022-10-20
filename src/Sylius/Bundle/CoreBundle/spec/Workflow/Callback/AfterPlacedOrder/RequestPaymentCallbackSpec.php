@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\RequestPaymentReactor;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\RequestPaymentCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-final class RequestPaymentReactorSpec extends ObjectBehavior
+final class RequestPaymentCallbackSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusOrderPaymentWorkflow): void
     {
@@ -18,7 +18,7 @@ final class RequestPaymentReactorSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(RequestPaymentReactor::class);
+        $this->shouldHaveType(RequestPaymentCallback::class);
     }
 
     function it_requests_payment(
@@ -27,6 +27,6 @@ final class RequestPaymentReactorSpec extends ObjectBehavior
     ): void {
         $syliusOrderPaymentWorkflow->apply($order, 'request_payment')->shouldBeCalled();
 
-        $this->react($order);
+        $this->run($order);
     }
 }

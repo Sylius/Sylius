@@ -1,15 +1,15 @@
 <?php
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\CreateShipmentReactor;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\CreateShipmentCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class CreateShipmentReactorSpec extends ObjectBehavior
+class CreateShipmentCallbackSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusShipmentWorkflow): void
     {
@@ -18,7 +18,7 @@ class CreateShipmentReactorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CreateShipmentReactor::class);
+        $this->shouldHaveType(CreateShipmentCallback::class);
     }
 
     function it_creates_shipment(
@@ -35,6 +35,6 @@ class CreateShipmentReactorSpec extends ObjectBehavior
         $syliusShipmentWorkflow->apply($firstShipment, 'create')->shouldBeCalled();
         $syliusShipmentWorkflow->apply($secondShipment, 'create')->shouldBeCalled();
 
-        $this->react($order);
+        $this->run($order);
     }
 }

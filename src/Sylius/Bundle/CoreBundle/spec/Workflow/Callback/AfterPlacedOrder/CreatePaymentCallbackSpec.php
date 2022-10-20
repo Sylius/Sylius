@@ -1,15 +1,15 @@
 <?php
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Reactor\AfterPlacedOrder\CreatePaymentReactor;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\CreatePaymentCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-class CreatePaymentReactorSpec extends ObjectBehavior
+class CreatePaymentCallbackSpec extends ObjectBehavior
 {
     function let(WorkflowInterface $syliusPaymentWorkflow): void
     {
@@ -18,7 +18,7 @@ class CreatePaymentReactorSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(CreatePaymentReactor::class);
+        $this->shouldHaveType(CreatePaymentCallback::class);
     }
 
     function it_creates_payment(
@@ -35,6 +35,6 @@ class CreatePaymentReactorSpec extends ObjectBehavior
         $syliusPaymentWorkflow->apply($firstPayment, 'create')->shouldBeCalled();
         $syliusPaymentWorkflow->apply($secondPayment, 'create')->shouldBeCalled();
 
-        $this->react($order);
+        $this->run($order);
     }
 }
