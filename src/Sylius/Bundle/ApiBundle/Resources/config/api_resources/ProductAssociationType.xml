@@ -17,13 +17,6 @@
 >
     <resource class="%sylius.model.product_association_type.class%" shortName="ProductAssociationType">
         <attribute name="route_prefix">admin</attribute>
-
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>admin:product_association_type:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
@@ -32,10 +25,16 @@
                 <attribute name="filters">
                     <attribute>sylius.api.product_association_type_filter</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:create</attribute>
                 </attribute>
@@ -45,10 +44,16 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:update</attribute>
                 </attribute>
