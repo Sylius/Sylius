@@ -15,18 +15,10 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\BeforePlacedOrderListener">
-            <argument type="tagged_iterator" tag="sylius.workflow.callback.before_placed_order"  />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterCompletedCheckoutListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_completed_checkout" />
             <tag name="kernel.event_listener"
-                 event="workflow.sylius_order.transition.create"
-                 method="call"
-                 priority="-100" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AfterPlacedOrderListener">
-            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_placed_order" />
-            <tag name="kernel.event_listener"
-                 event="workflow.sylius_order.completed.create"
+                 event="workflow.sylius_order_checkout.completed.complete"
                  method="call"
                  priority="-100" />
         </service>

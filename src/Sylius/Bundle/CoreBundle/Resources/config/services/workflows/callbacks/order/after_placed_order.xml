@@ -12,7 +12,10 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <services>
+        <defaults public="false" />
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\CreatePaymentCallback">
             <argument type="service" id="state_machine.sylius_payment" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-600" />

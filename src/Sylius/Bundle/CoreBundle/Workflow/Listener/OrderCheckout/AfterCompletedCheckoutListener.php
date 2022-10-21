@@ -8,14 +8,14 @@ use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout\AfterCompl
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 
-final class AfterOrderCheckoutCompleteListener
+final class AfterCompletedCheckoutListener
 {
     /** @param AfterCompletedCheckoutCallbackInterface[] $callbacks */
     public function __construct(private iterable $callbacks)
     {
     }
 
-    public function process(Event $event): void
+    public function call(Event $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

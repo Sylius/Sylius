@@ -24,7 +24,7 @@ final class AfterPlacedOrderListener
     {
     }
 
-    public function process(Event $event): void
+    public function call(Event $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

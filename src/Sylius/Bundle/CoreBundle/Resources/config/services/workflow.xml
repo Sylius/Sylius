@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="workflows/listeners/order_checkout_listeners.xml" />
         <import resource="workflows/listeners/order_listeners.xml" />
 
         <import resource="workflows/callbacks/order/after_placed_order.xml" />
