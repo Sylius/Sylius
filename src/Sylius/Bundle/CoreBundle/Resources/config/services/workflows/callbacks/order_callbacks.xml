@@ -26,11 +26,6 @@
             <tag name="sylius.workflow.callback.before_placed_order" priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreateOrderCallback">
-            <argument type="service" id="state_machine.sylius_order" />
-            <tag name="sylius.workflow.callback.after_completed_checkout" priority="-400" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderInventoryCallback">
             <argument type="service" id="sylius.inventory.order_inventory_operator" />
             <tag name="sylius.workflow.callback.after_canceled_order" priority="-200" />
