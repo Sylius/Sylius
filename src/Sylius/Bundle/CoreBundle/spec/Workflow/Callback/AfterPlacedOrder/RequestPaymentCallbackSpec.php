@@ -34,7 +34,20 @@ final class RequestPaymentCallbackSpec extends ObjectBehavior
         OrderInterface $order,
         WorkflowInterface $syliusOrderPaymentWorkflow,
     ): void {
+        $syliusOrderPaymentWorkflow->can($order, 'request_payment')->willReturn(true);
+
         $syliusOrderPaymentWorkflow->apply($order, 'request_payment')->shouldBeCalled();
+
+        $this->call($order);
+    }
+
+    function it_does_nothing_when_transition_cannot_be_applied(
+        OrderInterface $order,
+        WorkflowInterface $syliusOrderPaymentWorkflow,
+    ): void {
+        $syliusOrderPaymentWorkflow->can($order, 'request_payment')->willReturn(false);
+
+        $syliusOrderPaymentWorkflow->apply($order, 'request_payment')->shouldNotBeCalled();
 
         $this->call($order);
     }

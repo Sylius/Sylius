@@ -30,5 +30,13 @@
                  method="call"
                  priority="-100" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AfterCanceledOrderListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_canceled_order"  />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order.transition.cancel"
+                 method="call"
+                 priority="-100" />
+        </service>
     </services>
 </container>

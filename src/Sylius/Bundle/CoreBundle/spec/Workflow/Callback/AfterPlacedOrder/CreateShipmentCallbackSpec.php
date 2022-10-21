@@ -43,7 +43,10 @@ class CreateShipmentCallbackSpec extends ObjectBehavior
             $secondShipment->getWrappedObject(),
         ]));
 
-        $syliusShipmentWorkflow->apply($firstShipment, 'create')->shouldBeCalled();
+        $syliusShipmentWorkflow->can($firstShipment, 'create')->willReturn(false);
+        $syliusShipmentWorkflow->can($secondShipment, 'create')->willReturn(true);
+
+        $syliusShipmentWorkflow->apply($firstShipment, 'create')->shouldNotBeCalled();
         $syliusShipmentWorkflow->apply($secondShipment, 'create')->shouldBeCalled();
 
         $this->call($order);

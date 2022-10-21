@@ -43,7 +43,10 @@ class CreatePaymentCallbackSpec extends ObjectBehavior
             $secondPayment->getWrappedObject(),
         ]));
 
-        $syliusPaymentWorkflow->apply($firstPayment, 'create')->shouldBeCalled();
+        $syliusPaymentWorkflow->can($firstPayment, 'create')->willReturn(false);
+        $syliusPaymentWorkflow->can($secondPayment, 'create')->willReturn(true);
+
+        $syliusPaymentWorkflow->apply($firstPayment, 'create')->shouldNotBeCalled();
         $syliusPaymentWorkflow->apply($secondPayment, 'create')->shouldBeCalled();
 
         $this->call($order);

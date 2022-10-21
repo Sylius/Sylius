@@ -17,6 +17,8 @@ final class RequestPaymentCallback implements AfterPlacedOrderCallbackInterface
 
     public function call(OrderInterface $order): void
     {
-        $this->syliusOrderPaymentWorkflow->apply($order, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        if ($this->syliusOrderPaymentWorkflow->can($order, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)) {
+            $this->syliusOrderPaymentWorkflow->apply($order, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        }
     }
 }
