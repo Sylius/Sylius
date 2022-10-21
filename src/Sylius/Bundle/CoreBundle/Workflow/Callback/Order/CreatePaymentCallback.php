@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder;
+namespace Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use Sylius\Bundle\CoreBundle\Workflow\Processor\Order\AfterOrderCreateProcessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;

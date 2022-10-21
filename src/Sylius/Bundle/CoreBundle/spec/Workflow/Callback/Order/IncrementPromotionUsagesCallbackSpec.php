@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\IncrementPromotionUsagesCallback;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\IncrementPromotionUsagesCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 

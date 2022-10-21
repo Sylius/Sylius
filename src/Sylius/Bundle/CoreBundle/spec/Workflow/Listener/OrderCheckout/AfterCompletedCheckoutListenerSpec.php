@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout\AfterCompletedCheckoutCallbackInterface;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterCompletedCheckoutCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterShippedOrderListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;

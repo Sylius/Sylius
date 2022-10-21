@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
 
-use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\AfterPlacedOrderCallbackInterface;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterPlacedOrderCallbackInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 

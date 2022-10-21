@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Workflow\Callback\BeforePlacedOrder;
+namespace Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use Sylius\Component\Core\Model\OrderInterface;
 

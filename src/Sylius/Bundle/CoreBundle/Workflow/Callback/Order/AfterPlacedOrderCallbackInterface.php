@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout;
+namespace Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-interface AfterCompletedCheckoutCallbackInterface
+interface AfterPlacedOrderCallbackInterface
 {
     public function call(OrderInterface $order): void;
 }

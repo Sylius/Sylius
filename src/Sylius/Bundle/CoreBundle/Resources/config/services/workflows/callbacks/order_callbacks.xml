@@ -16,17 +16,17 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\BeforePlacedOrder\AssignNumberCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignNumberCallback">
             <argument type="service" id="sylius.order_number_assigner" />
             <tag name="sylius.workflow.callback.before_placed_order" priority="-200" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\BeforePlacedOrder\AssignTokenCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignTokenCallback">
             <argument type="service" id="sylius.unique_id_based_order_token_assigner" />
             <tag name="sylius.workflow.callback.before_placed_order" priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout\CreateOrderCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreateOrderCallback">
             <argument type="service" id="state_machine.sylius_order" />
             <tag name="sylius.workflow.callback.after_completed_checkout" priority="-400" />
         </service>
@@ -66,47 +66,42 @@
             <tag name="sylius.workflow.callback.after_shipped_order" priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping\ResolveOrderShippingStateCallback">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolverInterface" />
-            <tag name="sylius.workflow.callback.after_shipped" priority="-100" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\CreatePaymentCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreatePaymentCallback">
             <argument type="service" id="state_machine.sylius_payment" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-600" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\CreateShipmentCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreateShipmentCallback">
             <argument type="service" id="state_machine.sylius_shipment" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-500" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\HoldInventoryCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\HoldInventoryCallback">
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-400" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\IncrementPromotionUsagesCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\IncrementPromotionUsagesCallback">
             <argument type="service" id="sylius.promotion_usage_modifier" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-300" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\RequestPaymentCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\RequestPaymentCallback">
             <argument type="service" id="state_machine.sylius_order_payment" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-700" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\RequestShippingCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\RequestShippingCallback">
             <argument type="service" id="state_machine.sylius_order_shipping" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-800" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\SaveAddressesOnCustomerCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SaveAddressesOnCustomerCallback">
             <argument type="service" id="sylius.customer_order_addresses_saver" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-200" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\SetOrderImmutableNamesCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SetOrderImmutableNamesCallback">
             <argument type="service" id="sylius.order_item_names_setter" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-100" />
         </service>
