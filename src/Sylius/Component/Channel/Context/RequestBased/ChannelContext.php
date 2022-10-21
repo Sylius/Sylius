@@ -48,6 +48,7 @@ final class ChannelContext implements ChannelContextInterface
         if (\method_exists($this->requestStack, 'getMainRequest')) {
             $mainRequest = $this->requestStack->getMainRequest();
         } else {
+            /** @phpstan-ignore-next-line */
             $mainRequest = $this->requestStack->getMasterRequest();
         }
         if (null === $mainRequest) {

@@ -382,10 +382,10 @@ final class ProductAttributeContext implements Context
         ?string $localeCode = 'en_US',
         bool $translatable = true,
     ): ProductAttributeValueInterface {
-        /** @var ProductAttributeValueInterface $attributeValue */
         $attribute->setTranslatable($translatable);
         $this->objectManager->persist($attribute);
 
+        /** @var ProductAttributeValueInterface $attributeValue */
         $attributeValue = $this->productAttributeValueFactory->createNew();
         $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);

@@ -40,6 +40,7 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         if (\method_exists($event, 'isMainRequest')) {
             $isMainRequest = $event->isMainRequest();
         } else {
+            /** @phpstan-ignore-next-line */
             $isMainRequest = $event->isMasterRequest();
         }
         if (!$isMainRequest) {

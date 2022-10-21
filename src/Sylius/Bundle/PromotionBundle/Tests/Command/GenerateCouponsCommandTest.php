@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Tests\Command;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -29,10 +30,10 @@ class GenerateCouponsCommandTest extends KernelTestCase
 
     private CommandTester $commandTester;
 
-    /** @var PromotionRepositoryInterface */
+    /** @var PromotionRepositoryInterface|MockObject */
     private $promotionRepository;
 
-    /** @var PromotionCouponGeneratorInterface */
+    /** @var PromotionCouponGeneratorInterface|MockObject */
     private $couponGenerator;
 
     public function setup(): void

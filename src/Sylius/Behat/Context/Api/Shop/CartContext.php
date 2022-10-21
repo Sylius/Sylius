@@ -825,7 +825,7 @@ final class CartContext implements Context
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
-                $item,
+                serialize($item),
             );
         }
 
@@ -839,7 +839,7 @@ final class CartContext implements Context
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
-                $item,
+                serialize($item),
             );
         }
 

@@ -28,6 +28,12 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
         /** @psalm-suppress InvalidArgument */
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
 
+        /**
+         * @phpstan-ignore-next-line
+         * Method hash on PasswordHasherInterface has only one parameter, here we are calling with two for some
+         * LegacyPasswordHasherInterface. Anyway this error can be suppressed as in PHP it is not considered as an error
+         * pass more parameters than expecting (LegacyPasswordHasherInterface)
+         */
         return $passwordHasher->hash($user->getPlainPassword());
     }
 }

@@ -98,7 +98,6 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
 
     private function isWebpackEnabled(ContainerBuilder $container): bool
     {
-        /** @var ConfigurationInterface $configuration */
         $configs = $container->getExtensionConfig($this->getAlias());
 
         foreach (array_reverse($configs) as $config) {

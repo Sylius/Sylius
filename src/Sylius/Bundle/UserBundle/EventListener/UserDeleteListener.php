@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
@@ -59,17 +61,19 @@ final class UserDeleteListener
 
     private function isTryingToDeleteLoggedInUser(UserInterface $user): bool
     {
+        Assert::isInstanceOf($user, ResourceInterface::class);
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
         }
 
         $loggedUser = $token->getUser();
-        if (!$loggedUser) {
+        if ($loggedUser === null) {
             return false;
         }
+        Assert::isInstanceOf($loggedUser, ResourceInterface::class);
 
-        /** @var UserInterface $loggedUser */
         return $loggedUser->getId() === $user->getId() && $loggedUser->getRoles() === $user->getRoles();
     }
 }

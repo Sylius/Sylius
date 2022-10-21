@@ -71,7 +71,6 @@ class ProductTaxonController extends ResourceController
             /** @var Session $session */
             $session = $request->getSession();
 
-            /** @var ProductTaxonInterface $productTaxon */
             foreach ($productTaxons as $id => $position) {
                 try {
                     $this->updatePositions($position, $id);

@@ -69,6 +69,7 @@ final class AdminFilterSubscriber implements EventSubscriberInterface
             return $event->isMainRequest();
         }
 
+        /** @phpstan-ignore-next-line */
         return $event->isMasterRequest();
     }
 
