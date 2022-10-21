@@ -11,19 +11,19 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Listener\OrderShipping;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout\AfterCompletedCheckoutCallbackInterface;
-use Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterShippedOrderListener;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping\AfterShippedOrderCallbackInterface;
+use Sylius\Bundle\CoreBundle\Workflow\Listener\OrderShipping\AfterShippedOrderListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 
-final class AfterCompletedCheckoutListenerSpec extends ObjectBehavior
+final class AfterShippedOrderListenerSpec extends ObjectBehavior
 {
     function let(
-        AfterCompletedCheckoutCallbackInterface $firstCallback,
-        AfterCompletedCheckoutCallbackInterface $secondCallback,
+        AfterShippedOrderCallbackInterface $firstCallback,
+        AfterShippedOrderCallbackInterface $secondCallback,
     ): void {
         $this->beConstructedWith([$firstCallback->getWrappedObject(), $secondCallback->getWrappedObject()]);
     }
@@ -36,8 +36,8 @@ final class AfterCompletedCheckoutListenerSpec extends ObjectBehavior
     function it_calls_every_callbacks(
         Event $event,
         OrderInterface $order,
-        AfterCompletedCheckoutCallbackInterface $firstCallback,
-        AfterCompletedCheckoutCallbackInterface $secondCallback,
+        AfterShippedOrderCallbackInterface $firstCallback,
+        AfterShippedOrderCallbackInterface $secondCallback,
     ): void {
         $event->getSubject()->willReturn($order);
 

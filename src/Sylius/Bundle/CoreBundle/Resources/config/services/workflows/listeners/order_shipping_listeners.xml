@@ -12,13 +12,15 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\AfterCompletedCheckout\CreateOrderCallback">
-            <argument type="service" id="state_machine.sylius_order" />
-            <tag name="sylius.workflow.callback.after_completed_checkout" priority="-400" />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderShipping\AfterShippedOrderListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_shipped_order" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_shipping.completed.ship"
+                 method="call"
+                 priority="-100" />
         </service>
     </services>
 </container>
