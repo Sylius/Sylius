@@ -38,8 +38,9 @@ class ProvinceController extends ResourceController
             throw new AccessDeniedException();
         }
 
-        /** @var CountryInterface $country */
-        if (!$country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode])) {
+        /** @var CountryInterface|null $country */
+        $country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode]);
+        if ($country === null) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 

@@ -29,6 +29,7 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
         if (\method_exists($this->requestStack, 'getMainRequest')) {
             $request = $this->requestStack->getMainRequest();
         } else {
+            /** @phpstan-ignore-next-line */
             $request = $this->requestStack->getMasterRequest();
         }
         if (null === $request) {

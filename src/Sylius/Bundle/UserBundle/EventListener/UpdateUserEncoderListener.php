@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Webmozart\Assert\Assert;
 
 final class UpdateUserEncoderListener
 {
@@ -40,6 +41,7 @@ final class UpdateUserEncoderListener
             return;
         }
 
+        Assert::methodExists($user, 'getEncoderName');
         if ($user->getEncoderName() === $this->recommendedEncoderName) {
             return;
         }

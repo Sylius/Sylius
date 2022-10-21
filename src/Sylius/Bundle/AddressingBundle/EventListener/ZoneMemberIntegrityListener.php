@@ -71,6 +71,7 @@ final class ZoneMemberIntegrityListener
     {
         // bc-layer for Symfony 4
         if (!method_exists(RequestStack::class, 'getSession')) {
+            /** @phpstan-ignore-next-line */
             return $this->requestStack->getMasterRequest()->getSession();
         }
 

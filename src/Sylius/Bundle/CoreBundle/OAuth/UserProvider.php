@@ -69,6 +69,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             return $this->createUserByOAuthUserResponse($response);
         }
 
+        /** @phpstan-ignore-next-line */
         throw new UserNotFoundException('Email is null or not provided');
     }
 
@@ -82,8 +83,10 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
-        /** @var SyliusUserInterface $user */
+        /** @var SyliusUserInterface|object $user */
         $user = $this->userFactory->createNew();
+        Assert::isInstanceOf($user, SyliusUserInterface::class);
+        Assert::methodExists($user, 'getUsername');
 
         $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
 

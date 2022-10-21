@@ -22,6 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class ShippingPercentageDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
@@ -48,6 +49,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
         $result = false;
         foreach ($subject->getShipments() as $shipment) {
             $maxDiscount = $shipment->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) + $shipment->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+            Assert::integer($maxDiscount);
             if ($maxDiscount < 0) {
                 continue;
             }
