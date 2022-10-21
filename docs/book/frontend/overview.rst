@@ -3,7 +3,7 @@ Overview
 
 .. note::
 
-    If you're still using Gulp consider switching to Webpack (as it became our default build tool) using :doc:`our guide </cookbook/frontend/migrating-to-webpack>`.
+    If you're still using Gulp consider switching to Webpack (as it became our default build tool) using :doc:`our guide </cookbook/frontend/migrating-to-webpack-1-12-or-later>`.
 
 Requirements
 ------------

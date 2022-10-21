@@ -1,12 +1,12 @@
-How to migrate from Gulp to Webpack
-===================================
+How to migrate from Gulp to Webpack (Sylius 1.12 or later)
+==========================================================
 
 Now we will walk through the process of migrating your project from Gulp to Webpack.
 
 .. note::
 
-    This guide assumes your project is using Gulp as a build tool. If you created a project using templates made for Sylius 1.12
-    no additional steps are required.
+    This guide assumes your project is using Gulp as a build tool and you are using Sylius 1.12 or later.
+    If you are using Sylius 1.11 or earlier check our :doc:`/cookbook/frontend/migrating-to-webpack-1-11-or-earlier` guide.
 
 .. warning::
 
@@ -19,12 +19,12 @@ Now we will walk through the process of migrating your project from Gulp to Webp
 **2.** Remove the following files from you project:
 
 * ``.babelrc``
-* ``gulpfile.js``
+* ``gulpfile.babel.js``
 * ``yarn.lock``
 * ``public/assets``
 * ``node_modules``
 
-**3.** Make sure you have ``webpack.config.js`` file. If not, copy it from `Sylius/Sylius-Standard repository <https://github.com/Sylius/Sylius-Standard/blob/1.12/webpack.config.js>`_.
+**3.** Create a ``webpack.config.js`` file (or if you already have existing one, replace its content) using `webpack.config.js in the Sylius/Sylius-Standard repository <https://github.com/Sylius/Sylius-Standard/blob/1.12/webpack.config.js>`_ as a reference.
 
 **4.** Create assets directory with the following structure:
 
@@ -92,6 +92,11 @@ Now we will walk through the process of migrating your project from Gulp to Webp
 
     {{ encore_entry_link_tags('shop-entry', null, 'shop') }}
     {{ encore_entry_link_tags('app-shop-entry', null, 'app.shop') }}
+
+.. warning::
+
+    Files mentioned above are the most common ones that need to be overridden. Keep in mind, across your project you might
+    have other files using the old paths. You will have to find and adjust them manually.
 
 **7.** Run the following commands:
 
