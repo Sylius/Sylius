@@ -33,3 +33,4 @@ parameters:
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
         - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'
+        - '/Parameter \$framework of anonymous function has invalid type Symfony\\Config\\FrameworkConfig\./'
