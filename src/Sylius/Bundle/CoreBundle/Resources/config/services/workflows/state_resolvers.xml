@@ -22,6 +22,11 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" alias="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolver" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderPaymentStateResolver">
+            <argument type="service" id="state_machine.sylius_order_payment" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderPaymentStateResolverInterface" alias="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderPaymentStateResolver" />
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolver">
             <argument type="service" id="state_machine.sylius_order_shipping" />
         </service>

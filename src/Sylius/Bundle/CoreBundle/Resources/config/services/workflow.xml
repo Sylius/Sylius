@@ -16,11 +16,13 @@
         <import resource="workflows/listeners/order_checkout_listeners.xml" />
         <import resource="workflows/listeners/order_listeners.xml" />
         <import resource="workflows/listeners/order_shipping_listeners.xml" />
+        <import resource="workflows/listeners/payment_listeners.xml" />
         <import resource="workflows/listeners/shipment_listeners.xml" />
 
         <import resource="workflows/callbacks/order_callbacks.xml" />
         <import resource="workflows/callbacks/order_checkout_callbacks.xml" />
         <import resource="workflows/callbacks/order_shipping_callbacks.xml" />
+        <import resource="workflows/callbacks/payment_callbacks.xml" />
         <import resource="workflows/callbacks/shipment_callbacks.xml" />
 
         <import resource="workflows/state_resolvers.xml" />
