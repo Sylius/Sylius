@@ -22,10 +22,6 @@
             <attribute name="position">ASC</attribute>
         </attribute>
 
-        <attribute name="normalization_context">
-            <attribute name="groups">admin:shipping_method:read</attribute>
-        </attribute>
-
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
@@ -46,6 +42,9 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_method:update</attribute>
                 </attribute>
@@ -64,6 +63,9 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Archives Shipping Method</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="admin_restore">
@@ -73,6 +75,9 @@
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface:restore</attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Restores archived Shipping Method</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -94,6 +99,9 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
+                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_method:create</attribute>
                 </attribute>
