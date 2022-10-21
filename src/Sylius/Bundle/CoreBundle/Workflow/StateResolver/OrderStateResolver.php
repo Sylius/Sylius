@@ -26,7 +26,6 @@ final class OrderStateResolver implements OrderStateResolverInterface
         }
     }
 
-    /** TODO Maybe we can use workflow guards instead */
     private function canOrderBeFulfilled(OrderInterface $order): bool
     {
         return

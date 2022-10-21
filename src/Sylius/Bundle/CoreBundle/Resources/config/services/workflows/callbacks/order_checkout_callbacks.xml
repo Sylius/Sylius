@@ -24,5 +24,15 @@
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\SaveCheckoutCompletionDateCallback">
             <tag name="sylius.workflow.callback.after_completed_checkout" priority="-300" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\ControlPaymentStateCallback">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" />
+            <tag name="sylius.workflow.callback.after_completed_checkout" priority="-200" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\ControlShippingStateCallback">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" />
+            <tag name="sylius.workflow.callback.after_completed_checkout" priority="-100" />
+        </service>
     </services>
 </container>

@@ -15,13 +15,20 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolver">
+            <argument type="service" id="state_machine.sylius_order_checkout" />
+            <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
+            <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement"  />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" alias="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolver" />
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolver">
-            <argument type="service" id="state_machine.sylius_order_shipping"  />
+            <argument type="service" id="state_machine.sylius_order_shipping" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolverInterface" alias="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolver" />
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolver">
-            <argument type="service" id="state_machine.sylius_order"  />
+            <argument type="service" id="state_machine.sylius_order" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolverInterface" alias="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolver" />
     </services>
