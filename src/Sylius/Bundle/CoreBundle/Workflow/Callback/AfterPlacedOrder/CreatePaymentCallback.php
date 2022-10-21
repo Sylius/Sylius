@@ -15,7 +15,7 @@ final class CreatePaymentCallback implements AfterPlacedOrderCallbackInterface
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         foreach ($order->getPayments() as $payment) {
             $this->syliusPaymentWorkflow->apply($payment, PaymentTransitions::TRANSITION_CREATE);

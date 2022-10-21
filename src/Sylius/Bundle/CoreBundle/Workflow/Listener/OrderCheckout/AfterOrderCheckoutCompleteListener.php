@@ -10,8 +10,8 @@ use Symfony\Component\Workflow\Event\Event;
 
 final class AfterOrderCheckoutCompleteListener
 {
-    /** @param AfterCompletedCheckoutCallbackInterface[] $reactors */
-    public function __construct(private iterable $reactors)
+    /** @param AfterCompletedCheckoutCallbackInterface[] $callbacks */
+    public function __construct(private iterable $callbacks)
     {
     }
 
@@ -20,8 +20,8 @@ final class AfterOrderCheckoutCompleteListener
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        foreach ($this->reactors as $reactor) {
-            $reactor->react($order);
+        foreach ($this->callbacks as $callback) {
+            $callback->call($order);
         }
     }
 }

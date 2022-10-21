@@ -15,7 +15,7 @@ final class RequestShippingCallback implements AfterPlacedOrderCallbackInterface
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         $this->syliusOrderShippingWorkflow->apply($order, OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
     }

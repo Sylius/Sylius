@@ -16,7 +16,7 @@ final class SaveAddressesOnCustomerCallback implements AfterPlacedOrderCallbackI
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         $this->addressesSaver->saveAddresses($order);
     }

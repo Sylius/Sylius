@@ -17,10 +17,10 @@ use Sylius\Bundle\CoreBundle\Workflow\Callback\BeforePlacedOrder\BeforePlacedOrd
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 
-final class BeforeOrderCreateListener
+final class BeforePlacedOrderListener
 {
-    /** @param BeforePlacedOrderCallbackInterface[] $reactors */
-    public function __construct(private iterable $reactors)
+    /** @param BeforePlacedOrderCallbackInterface[] $callbacks */
+    public function __construct(private iterable $callbacks)
     {
     }
 
@@ -29,8 +29,8 @@ final class BeforeOrderCreateListener
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        foreach ($this->reactors as $reactor) {
-            $reactor->run($order);
+        foreach ($this->callbacks as $callback) {
+            $callback->call($order);
         }
     }
 }

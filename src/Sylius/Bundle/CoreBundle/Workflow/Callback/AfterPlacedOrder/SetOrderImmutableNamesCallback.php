@@ -13,7 +13,7 @@ final class SetOrderImmutableNamesCallback implements AfterPlacedOrderCallbackIn
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         $this->orderItemNamesSetter->__invoke($order);
     }

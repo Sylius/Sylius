@@ -13,16 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\BeforeOrderCreateListener">
-            <argument type="tagged_iterator" tag="sylius.workflow.reactor.before_placed_order"  />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\BeforePlacedOrderListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.before_placed_order"  />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_order.transition.create"
                  method="process"
                  priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AfterOrderCreateListener">
-            <argument type="tagged_iterator" tag="sylius.workflow.reactor.after_placed_order" />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Order\AfterPlacedOrderListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_placed_order" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_order.completed.create"
                  method="process"
@@ -30,7 +30,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterOrderCheckoutCompleteListener">
-            <argument type="tagged_iterator" tag="sylius.workflow.reactor.after_completed_checkout" />
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_completed_checkout" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_order_checkout.completed.complete"
                  method="process"

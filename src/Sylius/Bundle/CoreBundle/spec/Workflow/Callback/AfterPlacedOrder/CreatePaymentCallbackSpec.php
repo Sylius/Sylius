@@ -35,6 +35,6 @@ class CreatePaymentCallbackSpec extends ObjectBehavior
         $syliusPaymentWorkflow->apply($firstPayment, 'create')->shouldBeCalled();
         $syliusPaymentWorkflow->apply($secondPayment, 'create')->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

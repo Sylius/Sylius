@@ -27,6 +27,6 @@ final class RequestShippingCallbackSpec extends ObjectBehavior
     ): void {
         $syliusOrderShippingWorkflow->apply($order, 'request_shipping')->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

@@ -8,5 +8,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface AfterCompletedCheckoutCallbackInterface
 {
-    public function run(OrderInterface $order): void;
+    public function call(OrderInterface $order): void;
 }

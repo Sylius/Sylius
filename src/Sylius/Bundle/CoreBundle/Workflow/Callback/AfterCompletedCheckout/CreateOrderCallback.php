@@ -14,7 +14,7 @@ final class CreateOrderCallback implements AfterCompletedCheckoutCallbackInterfa
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         $this->syliusOrderWorkflow->apply($order, OrderTransitions::TRANSITION_CREATE);
     }

@@ -17,10 +17,10 @@ use Sylius\Bundle\CoreBundle\Workflow\Callback\AfterPlacedOrder\AfterPlacedOrder
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
 
-final class AfterOrderCreateListener
+final class AfterPlacedOrderListener
 {
-    /** @param AfterPlacedOrderCallbackInterface[] $reactors */
-    public function __construct(private iterable $reactors)
+    /** @param AfterPlacedOrderCallbackInterface[] $callbacks */
+    public function __construct(private iterable $callbacks)
     {
     }
 
@@ -29,8 +29,8 @@ final class AfterOrderCreateListener
         /** @var OrderInterface $order */
         $order = $event->getSubject();
 
-        foreach ($this->reactors as $reactor) {
-            $reactor->run($order);
+        foreach ($this->callbacks as $callback) {
+            $callback->call($order);
         }
     }
 }

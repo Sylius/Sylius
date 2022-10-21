@@ -27,6 +27,6 @@ final class AssignTokenCallbackSpec extends ObjectBehavior
     ): void {
         $orderTokenAssigner->assignTokenValue($order)->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

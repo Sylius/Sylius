@@ -8,5 +8,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface AfterPlacedOrderCallbackInterface
 {
-    public function run(OrderInterface $order): void;
+    public function call(OrderInterface $order): void;
 }

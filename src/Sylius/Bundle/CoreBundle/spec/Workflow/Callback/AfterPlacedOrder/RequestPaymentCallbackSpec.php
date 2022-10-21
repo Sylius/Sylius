@@ -27,6 +27,6 @@ final class RequestPaymentCallbackSpec extends ObjectBehavior
     ): void {
         $syliusOrderPaymentWorkflow->apply($order, 'request_payment')->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

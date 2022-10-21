@@ -27,6 +27,6 @@ final class AssignNumberCallbackSpec extends ObjectBehavior
     ): void {
         $orderNumberAssigner->assignNumber($order)->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

@@ -13,7 +13,7 @@ final class AssignNumberCallback implements BeforePlacedOrderCallbackInterface
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         $this->orderNumberAssigner->assignNumber($order);
     }

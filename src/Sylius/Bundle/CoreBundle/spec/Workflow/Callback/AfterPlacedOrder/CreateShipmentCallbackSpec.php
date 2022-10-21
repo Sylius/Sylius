@@ -35,6 +35,6 @@ class CreateShipmentCallbackSpec extends ObjectBehavior
         $syliusShipmentWorkflow->apply($firstShipment, 'create')->shouldBeCalled();
         $syliusShipmentWorkflow->apply($secondShipment, 'create')->shouldBeCalled();
 
-        $this->run($order);
+        $this->call($order);
     }
 }

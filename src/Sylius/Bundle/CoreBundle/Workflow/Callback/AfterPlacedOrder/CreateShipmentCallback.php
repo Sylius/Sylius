@@ -15,7 +15,7 @@ final class CreateShipmentCallback implements AfterPlacedOrderCallbackInterface
     {
     }
 
-    public function run(OrderInterface $order): void
+    public function call(OrderInterface $order): void
     {
         foreach ($order->getShipments() as $shipment) {
             $this->syliusShipmentWorkflow->apply($shipment, ShipmentTransitions::TRANSITION_CREATE);
