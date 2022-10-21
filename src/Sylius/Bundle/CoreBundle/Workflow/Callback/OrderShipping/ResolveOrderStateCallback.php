@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
+namespace Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping;
 
-use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping\AfterShippedOrderCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 

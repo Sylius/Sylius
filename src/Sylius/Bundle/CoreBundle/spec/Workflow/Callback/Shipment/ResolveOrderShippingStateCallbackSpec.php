@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping;
+namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping\ResolveOrderShippingStateCallback;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\ResolveOrderShippingStateCallback;
 use Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;

@@ -56,11 +56,6 @@
             <tag name="sylius.workflow.callback.after_canceled_order" priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\ResolveOrderStateCallback">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolverInterface" />
-            <tag name="sylius.workflow.callback.after_shipped_order" priority="-100" />
-        </service>
-
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreatePaymentCallback">
             <argument type="service" id="state_machine.sylius_payment" />
             <tag name="sylius.workflow.callback.after_placed_order" priority="-600" />

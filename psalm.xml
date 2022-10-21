@@ -188,6 +188,7 @@
         <UndefinedClass>
             <errorLevel type="info">
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" />
+                <referencedClass name="Symfony\Config\FrameworkConfig" />
             </errorLevel>
         </UndefinedClass>
 
