@@ -158,6 +158,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
+    public function isTaxonChosen(string $taxonName): bool
+    {
+        $productTaxonsElement = $this->getElement('product_taxons');
+
+        $taxonName = str_replace('-', '_', $taxonName);
+
+        return $taxonName === $productTaxonsElement->getValue();
+    }
+
     public function disableTracking(): void
     {
         $this->getElement('tracked')->uncheck();

@@ -47,6 +47,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function isMainTaxonChosen(string $taxonName): bool;
 
+    public function isTaxonChosen(string $taxonName): bool;
+
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
     public function selectProductTaxon(TaxonInterface $taxon): void;

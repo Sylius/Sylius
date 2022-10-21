@@ -382,6 +382,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $response = $this->client->show(Resources::PRODUCT_TAXON, (string) $product->getProductTaxons()->current()->getId());
+
+        $productTaxonUrl = $this->responseChecker->getValue($response, 'taxon');
+        $productTaxonCodes = explode('/', $productTaxonUrl);
+
+        Assert::same(array_pop($productTaxonCodes), $taxon->getCode());
+    }
+
+    /**
      * @Then /^(this product) name should be "([^"]+)"$/
      */
     public function thisProductNameShouldBe(ProductInterface $product, string $name): void
