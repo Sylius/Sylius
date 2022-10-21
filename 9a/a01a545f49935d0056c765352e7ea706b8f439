@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2022-10-20T13:18:59Z
+
+Hi @mtarld I now look at your PR you talked to me during the forum PHP. This seems great, could you add a PHPUnit tests for that? https://github.com/Sylius/Sylius/blob/1.11/tests/Api/Shop/OrdersTest.php
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-10-20T21:41:40Z
+
+Hey Mathias,
+
+thanks a lot for this fix. It is a quite important one!
+
+---------------------------------------------------------------------------
+
+by loic425 at 2022-10-21T07:36:46Z
+
+@mtarld Could you rebase your PR please?
+
+---------------------------------------------------------------------------
+
+by mtarld at 2022-10-21T07:40:23Z
+
+@loic425, I just rebased the branch, do you still want me to update the tests? (I may have time for it today)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-10-21T12:56:54Z
+
+Thank you, Mathias! :tada:
