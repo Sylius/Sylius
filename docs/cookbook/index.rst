@@ -157,7 +157,8 @@ Frontend
     :hidden:
 
     frontend/google-analytics.rst
-    frontend/migrating-to-webpack
+    frontend/migrating-to-webpack-1-11-or-earlier
+    frontend/migrating-to-webpack-1-12-or-later
     frontend/staying-with-gulp
 
 .. include:: /cookbook/frontend/map.rst.inc
