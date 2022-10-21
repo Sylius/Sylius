@@ -1,0 +1,33 @@
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-06-06T08:29:26Z
+
+Almost ready. Needs https://github.com/SyliusLabs/PolyfillSymfonyFrameworkBundle/pull/3 to be completed.
+I'm not sure if to exclude the paths of the PHP files in the tests directories or add them to the baseline.
+
+---------------------------------------------------------------------------
+
+by Ferror at 2022-09-15T17:27:33Z
+
+@lruozzi9 can you please resolve conflicts?
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2022-09-21T12:22:35Z
+
+Hi @lruozzi9!
+Thank you for Your contribution!
+We see still some builds are failing, are you still pushing this forward?
+cheers 🍻
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2022-09-21T14:48:06Z
+
+Hello @TheMilek! After giving Psalm some blows with a hammer now looks ok!
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-10-21T05:27:14Z
+
+Thanks, Lorenzo! :1st_place_medal:
