@@ -34,5 +34,15 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" />
             <tag name="sylius.workflow.callback.after_completed_checkout" priority="-100" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\ProcessCartCallback">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <tag name="sylius.workflow.callback.after_selected_shipping" priority="-200" />
+            <tag name="sylius.workflow.callback.after_addressed" priority="-200" />
+            <tag name="sylius.workflow.callback.after_selected_payment" priority="-200" />
+            <tag name="sylius.workflow.callback.after_skipped_shipping" priority="-200" />
+            <tag name="sylius.workflow.callback.after_skipped_payment" priority="-200" />
+            <tag name="sylius.workflow.callback.after_selected_shipping" priority="-200" />
+        </service>
     </services>
 </container>

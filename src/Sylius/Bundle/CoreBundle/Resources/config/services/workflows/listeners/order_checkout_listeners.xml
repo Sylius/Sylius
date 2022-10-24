@@ -15,10 +15,50 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterAddressedListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_addressed" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_checkout.completed.address"
+                 method="call"
+                 priority="-100" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterCompletedCheckoutListener">
             <argument type="tagged_iterator" tag="sylius.workflow.callback.after_completed_checkout" />
             <tag name="kernel.event_listener"
                  event="workflow.sylius_order_checkout.completed.complete"
+                 method="call"
+                 priority="-100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterSelectedPaymentListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_selected_payment" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_checkout.completed.select_payment"
+                 method="call"
+                 priority="-100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterSelectedShippingListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_selected_shipping" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_checkout.completed.select_shipping"
+                 method="call"
+                 priority="-100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterSkippedPaymentListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_skipped_payment" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_checkout.completed.skip_payment"
+                 method="call"
+                 priority="-100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout\AfterSkippedShippingListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_skipped_shipping" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_order_checkout.completed.skip_shipping"
                  method="call"
                  priority="-100" />
         </service>
