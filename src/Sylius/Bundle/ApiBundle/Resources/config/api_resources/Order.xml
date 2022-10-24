@@ -33,7 +33,10 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\PickupCart</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:order:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:order:create</attribute>
@@ -106,7 +109,9 @@
                 <attribute name="messenger">input</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart</attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:cart:add_item</attribute>
@@ -128,7 +133,10 @@
                     <attribute name="groups">shop:cart:select_shipping_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects shipping methods for particular shipment</attribute>
@@ -162,7 +170,10 @@
                     <attribute name="groups">shop:cart:select_payment_method</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Selects payment methods for particular payment</attribute>
@@ -261,7 +272,10 @@
                     <attribute name="groups">shop:cart:complete</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Completes checkout</attribute>
@@ -342,7 +356,10 @@
                     <attribute name="groups">shop:cart:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">shop:cart:read</attribute>
+                    <attribute name="groups">
+                        <attribute>shop:order:read</attribute>
+                        <attribute>shop:cart:read</attribute>
+                    </attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="summary">Addresses cart to given location, logged in Customer does not have to provide an email. Applies coupon to cart.</attribute>
