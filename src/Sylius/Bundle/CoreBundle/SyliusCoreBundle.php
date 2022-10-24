@@ -21,6 +21,7 @@ use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
@@ -75,14 +76,15 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new CircularDependencyBreakingErrorListenerPass());
-        $container->addCompilerPass(new LazyCacheWarmupPass());
-        $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
-        $container->addCompilerPass(new TranslatableEntityLocalePass());
         $container->addCompilerPass(new IgnoreAnnotationsPass());
-        $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
-        $container->addCompilerPass(new RegisterUriBasedSectionResolverPass());
+        $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new LiipImageFiltersPass());
+        $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
+        $container->addCompilerPass(new RegisterUriBasedSectionResolverPass());
+        $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
+        $container->addCompilerPass(new Symfony5AuthenticationManagerPass());
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
+        $container->addCompilerPass(new TranslatableEntityLocalePass());
     }
 
     /**
