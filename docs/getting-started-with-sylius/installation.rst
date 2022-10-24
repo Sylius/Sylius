@@ -37,6 +37,17 @@ It will create a ``MyFirstShop`` directory with a brand new Sylius application i
     Beware! The next step includes the database setup. It will set your database credentials
     (username, password, and database name) in the file with environment variables (``.env`` is the most basic one).
 
+.. warning::
+    Specific Sylius versions may support various Symfony versions. To make sure the correct Symfony version will be
+    installed (Symfony 6.0 for example) use:
+
+    .. code-block:: bash
+
+        composer config extra.symfony.require "^6.0"
+        composer update
+
+    Otherwise, you may face the problem of having Symfony components of the wrong version installed.
+
 To launch a Sylius application initial data has to be set up: an administrator account and base locale.
 Run the Sylius installation command to do that.
 
