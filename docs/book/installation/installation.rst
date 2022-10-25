@@ -47,6 +47,17 @@ the contents of that new file should look like the following snippet:
 
     DATABASE_URL=mysql://username:password@host/my_custom_sylius_database
 
+.. warning::
+    Specific Sylius versions may support various Symfony versions. To make sure the correct Symfony version will be
+    installed (Symfony 6.0 for example) use:
+
+    .. code-block:: bash
+
+        composer config extra.symfony.require "^6.0"
+        composer update
+
+    Otherwise, you may face the problem of having Symfony components of the wrong version installed.
+
 After everything is in place, run the following command to install Sylius:
 
 .. code-block:: bash
