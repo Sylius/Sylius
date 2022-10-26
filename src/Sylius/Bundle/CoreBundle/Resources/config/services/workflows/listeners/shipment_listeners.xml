@@ -15,6 +15,14 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Shipment\BeforeShippedListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.before_shipped" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_shipment.transition.ship"
+                 method="call"
+                 priority="-100" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Shipment\AfterShippedListener">
             <argument type="tagged_iterator" tag="sylius.workflow.callback.after_shipped" />
             <tag name="kernel.event_listener"

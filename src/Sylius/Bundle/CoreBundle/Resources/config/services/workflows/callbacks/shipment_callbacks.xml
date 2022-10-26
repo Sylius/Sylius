@@ -16,6 +16,11 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\AssignDateCallback">
+            <argument type="service" id="sylius.shipping_date_assigner" />
+            <tag name="sylius.workflow.callback.before_shipped" priority="-200" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\ResolveOrderShippingStateCallback">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolverInterface" />
             <tag name="sylius.workflow.callback.after_shipped" priority="-100" />
