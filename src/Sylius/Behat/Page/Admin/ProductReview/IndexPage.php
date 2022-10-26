@@ -28,6 +28,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getActionButtonsField($parameters)->pressButton('Reject');
     }
 
+    public function chooseState(string $state): void
+    {
+        $this->getElement('filter_state')->selectOption($state);
+    }
+
     private function getActionButtonsField(array $parameters): NodeElement
     {
         $tableAccessor = $this->getTableAccessor();
@@ -37,4 +42,12 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         return $tableAccessor->getFieldFromRow($table, $row, 'actions');
     }
+
+    protected function getDefinedElements(): array
+    {
+        return parent::getDefinedElements() + [
+            'filter_state' => '#criteria_status',
+        ];
+    }
+
 }
