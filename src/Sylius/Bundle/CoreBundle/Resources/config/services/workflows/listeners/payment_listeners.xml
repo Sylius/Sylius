@@ -15,6 +15,22 @@
     <services>
         <defaults public="false" />
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Payment\AfterFailedPaymentListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_failed_payment" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_payment.completed.fail"
+                 method="call"
+                 priority="-100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Payment\AfterCanceledPaymentListener">
+            <argument type="tagged_iterator" tag="sylius.workflow.callback.after_canceled_payment" />
+            <tag name="kernel.event_listener"
+                 event="workflow.sylius_payment.completed.cancel"
+                 method="call"
+                 priority="-100" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Listener\Payment\AfterAuthorizedPaymentListener">
             <argument type="tagged_iterator" tag="sylius.workflow.callback.after_authorized_payment" />
             <tag name="kernel.event_listener"
