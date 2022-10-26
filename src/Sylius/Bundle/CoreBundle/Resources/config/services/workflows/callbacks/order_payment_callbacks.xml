@@ -20,5 +20,10 @@
             <argument type="service" id="sylius.custom_inventory.order_inventory_operator" />
             <tag name="sylius.workflow.callback.after_paid" priority="-200" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderPayment\ResolveOrderStateCallback">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolverInterface" />
+            <tag name="sylius.workflow.callback.after_paid" priority="-100" />
+        </service>
     </services>
 </container>
