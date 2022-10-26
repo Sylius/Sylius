@@ -51,9 +51,33 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $orderManager->remove($firstCart);
-        $orderManager->remove($secondCart);
-        $orderManager->flush();
+        $orderManager->remove($firstCart)->shouldBeCalledOnce();
+        $orderManager->remove($secondCart)->shouldBeCalledOnce();
+        $orderManager->flush()->shouldBeCalledOnce();
+
+        $eventDispatcher
+            ->dispatch(Argument::any(), SyliusExpiredCartsEvents::POST_REMOVE)
+            ->shouldBeCalled()
+        ;
+
+        $this->remove();
+    }
+
+    function it_removes_carts_in_batches(
+        OrderRepositoryInterface $orderRepository,
+        ObjectManager $orderManager,
+        EventDispatcher $eventDispatcher,
+        OrderInterface $cart,
+    ): void {
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn(array_fill(0, 200, $cart));
+
+        $eventDispatcher
+            ->dispatch(Argument::any(), SyliusExpiredCartsEvents::PRE_REMOVE)
+            ->shouldBeCalled()
+        ;
+
+        $orderManager->remove(Argument::type(OrderInterface::class))->shouldBeCalledTimes(200);
+        $orderManager->flush()->shouldBeCalledTimes(2);
 
         $eventDispatcher
             ->dispatch(Argument::any(), SyliusExpiredCartsEvents::POST_REMOVE)
