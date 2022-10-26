@@ -27,6 +27,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         private ObjectManager $orderManager,
         private EventDispatcherInterface $eventDispatcher,
         private string $expirationPeriod,
+        private int $batchSize = 100,
     ) {
     }
 
@@ -36,8 +37,13 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
 
         $this->eventDispatcher->dispatch(new GenericEvent($expiredCarts), SyliusExpiredCartsEvents::PRE_REMOVE);
 
+        $interval = 0;
         foreach ($expiredCarts as $expiredCart) {
             $this->orderManager->remove($expiredCart);
+            if ($interval !== 0 && $interval % $this->batchSize === 0) {
+                $this->orderManager->flush();
+            }
+            $interval++;
         }
 
         $this->orderManager->flush();
