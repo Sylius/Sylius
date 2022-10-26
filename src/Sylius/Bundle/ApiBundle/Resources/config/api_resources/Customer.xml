@@ -87,6 +87,6 @@
         <property name="fullName" writable="false" />
         <property name="defaultAddress" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
-        <property name="user" readable="true" />
+        <property name="user" readable="true" iri="true" />
     </resource>
 </resources>
