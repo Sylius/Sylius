@@ -86,5 +86,4 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
 
         $this->remove();
     }
-
 }

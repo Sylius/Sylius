@@ -47,7 +47,9 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
             }
         }
 
-        $this->orderManager->flush();
+        if ($interval % $this->batchSize !== 0) {
+            $this->orderManager->flush();
+        }
 
         $this->eventDispatcher->dispatch(new GenericEvent($expiredCarts), SyliusExpiredCartsEvents::POST_REMOVE);
     }
