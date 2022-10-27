@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterPlacedOrderCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreatePaymentCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -30,6 +31,11 @@ class CreatePaymentCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(CreatePaymentCallback::class);
+    }
+
+    function it_is_called_after_placed_order(): void
+    {
+        $this->shouldImplement(AfterPlacedOrderCallbackInterface::class);
     }
 
     function it_creates_payment(

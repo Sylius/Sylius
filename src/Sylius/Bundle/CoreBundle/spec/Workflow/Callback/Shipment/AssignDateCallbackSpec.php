@@ -6,6 +6,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\AssignDateCallback;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\BeforeShippedCallbackInterface;
 use Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssignerInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
@@ -19,6 +20,11 @@ final class AssignDateCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(AssignDateCallback::class);
+    }
+
+    function it_is_called_before_shipped(): void
+    {
+        $this->shouldImplement(BeforeShippedCallbackInterface::class);
     }
 
     function it_assigns_date_for_shipping(

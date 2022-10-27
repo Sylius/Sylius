@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\ProductReview;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\ProductReview\AfterAcceptedReviewCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\ProductReview\UpdateRatingCallback;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -19,6 +20,11 @@ final class UpdateRatingCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(UpdateRatingCallback::class);
+    }
+
+    function it_is_called_after_accepted_review(): void
+    {
+        $this->shouldImplement(AfterAcceptedReviewCallbackInterface::class);
     }
 
     function it_updates_rating(

@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignTokenCallback;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\BeforePlacedOrderCallbackInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface;
 
@@ -28,6 +29,11 @@ final class AssignTokenCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(AssignTokenCallback::class);
+    }
+
+    function it_is_called_before_placed_order(): void
+    {
+        $this->shouldImplement(BeforePlacedOrderCallbackInterface::class);
     }
 
     function it_assigns_order_tokens(

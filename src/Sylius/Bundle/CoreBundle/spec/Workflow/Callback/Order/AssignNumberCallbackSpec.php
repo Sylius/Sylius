@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignNumberCallback;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\BeforePlacedOrderCallbackInterface;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -28,6 +29,11 @@ final class AssignNumberCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(AssignNumberCallback::class);
+    }
+
+    function it_is_called_before_placed_order(): void
+    {
+        $this->shouldImplement(BeforePlacedOrderCallbackInterface::class);
     }
 
     function it_assigns_order_numbers(

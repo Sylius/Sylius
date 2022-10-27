@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\AfterShippedCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Shipment\ResolveOrderShippingStateCallback;
 use Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderShippingStateResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -20,6 +21,11 @@ final class ResolveOrderShippingStateCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(ResolveOrderShippingStateCallback::class);
+    }
+
+    function it_is_called_after_shipped(): void
+    {
+        $this->shouldImplement(AfterShippedCallbackInterface::class);
     }
 
     function it_resolves_order_shipping_state(

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterCanceledOrderCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderPaymentCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -19,6 +20,11 @@ final class CancelOrderPaymentCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(CancelOrderPaymentCallback::class);
+    }
+
+    function it_is_called_after_canceled_order(): void
+    {
+        $this->shouldImplement(AfterCanceledOrderCallbackInterface::class);
     }
 
     function it_cancels_payment(

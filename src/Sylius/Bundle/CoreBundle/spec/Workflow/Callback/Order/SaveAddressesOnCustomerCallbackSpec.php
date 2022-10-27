@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterPlacedOrderCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SaveAddressesOnCustomerCallback;
 use Sylius\Component\Core\Customer\OrderAddressesSaverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -28,6 +29,11 @@ final class SaveAddressesOnCustomerCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(SaveAddressesOnCustomerCallback::class);
+    }
+
+    function it_is_called_after_placed_order(): void
+    {
+        $this->shouldImplement(AfterPlacedOrderCallbackInterface::class);
     }
 
     function it_saves_addresses_on_customer(

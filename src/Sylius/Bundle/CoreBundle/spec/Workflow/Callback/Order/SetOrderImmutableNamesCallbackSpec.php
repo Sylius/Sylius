@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\Order;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterPlacedOrderCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SetOrderImmutableNamesCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Order\OrderItemNamesSetterInterface;
@@ -28,6 +29,11 @@ final class SetOrderImmutableNamesCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(SetOrderImmutableNamesCallback::class);
+    }
+
+    function it_is_called_after_placed_order(): void
+    {
+        $this->shouldImplement(AfterPlacedOrderCallbackInterface::class);
     }
 
     function it_sets_order_immutable_names(
