@@ -40,6 +40,11 @@
             <tag name="sylius.workflow.callback.after_completed_checkout" priority="-300" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\SkipShippingCallback">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" />
+            <tag name="sylius.workflow.callback.after_addressed" priority="-400" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\SkipPaymentCallback">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface" />
             <tag name="sylius.workflow.callback.after_completed_checkout" priority="-400" />

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\AfterCompletedCheckoutCallbackInterface;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\ControlPaymentStateCallback;
 use Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderCheckoutStateResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -19,6 +20,11 @@ final class ControlPaymentStateCallbackSpec extends ObjectBehavior
     function it_is_initializable(): void
     {
         $this->shouldHaveType(ControlPaymentStateCallback::class);
+    }
+
+    function it_is_called_after_completed_checkout(): void
+    {
+        $this->shouldImplement(AfterCompletedCheckoutCallbackInterface::class);
     }
 
     function it_resolves_order_checkout_state(
