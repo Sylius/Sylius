@@ -20,3 +20,4 @@ sylius_shop:
 sylius_resource:
     settings:
         state_machine_component: symfony
+        #state_machine_component: winzou

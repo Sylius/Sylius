@@ -16,84 +16,88 @@
     <services>
         <defaults public="false" />
 
+        <!-- Before -->
+
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignNumberCallback">
             <argument type="service" id="sylius.order_number_assigner" />
-            <tag name="sylius.workflow.callback.before_placed_order" priority="-200" />
+            <tag name="sylius.workflow.callback.before_placed_order" priority="-100" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AssignTokenCallback">
             <argument type="service" id="sylius.unique_id_based_order_token_assigner" />
-            <tag name="sylius.workflow.callback.before_placed_order" priority="-100" />
+            <tag name="sylius.workflow.callback.before_placed_order" priority="-200" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderInventoryCallback">
-            <argument type="service" id="sylius.inventory.order_inventory_operator" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-200" />
-        </service>
+        <!-- After -->
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderPaymentCallback">
-            <argument type="service" id="state_machine.sylius_order_payment" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-400" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderShipmentCallback">
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\RequestShippingCallback">
             <argument type="service" id="state_machine.sylius_order_shipping" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-300" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelPaymentCallback">
-            <argument type="service" id="state_machine.sylius_payment" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-600" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelShipmentCallback">
-            <argument type="service" id="state_machine.sylius_shipment" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-500" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\DecrementPromotionsUsagesCallback">
-            <argument type="service" id="sylius.promotion_usage_modifier" />
-            <tag name="sylius.workflow.callback.after_canceled_order" priority="-100" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreatePaymentCallback">
-            <argument type="service" id="state_machine.sylius_payment" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-600" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreateShipmentCallback">
-            <argument type="service" id="state_machine.sylius_shipment" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-500" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\HoldInventoryCallback">
-            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-400" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\IncrementPromotionUsagesCallback">
-            <argument type="service" id="sylius.promotion_usage_modifier" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-300" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-100" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\RequestPaymentCallback">
             <argument type="service" id="state_machine.sylius_order_payment" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-700" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-200" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\RequestShippingCallback">
-            <argument type="service" id="state_machine.sylius_order_shipping" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-800" />
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreatePaymentCallback">
+            <argument type="service" id="state_machine.sylius_payment" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-300" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CreateShipmentCallback">
+            <argument type="service" id="state_machine.sylius_shipment" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-400" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\HoldInventoryCallback">
+            <argument type="service" id="sylius.custom_inventory.order_inventory_operator.inner" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-500" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\IncrementPromotionUsagesCallback">
+            <argument type="service" id="sylius.promotion_usage_modifier" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-600" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SaveAddressesOnCustomerCallback">
             <argument type="service" id="sylius.customer_order_addresses_saver" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-200" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-700" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\SetOrderImmutableNamesCallback">
             <argument type="service" id="sylius.order_item_names_setter" />
-            <tag name="sylius.workflow.callback.after_placed_order" priority="-100" />
+            <tag name="sylius.workflow.callback.after_placed_order" priority="-800" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelPaymentCallback">
+            <argument type="service" id="state_machine.sylius_payment" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-900" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelShipmentCallback">
+            <argument type="service" id="state_machine.sylius_shipment" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-1000" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderPaymentCallback">
+            <argument type="service" id="state_machine.sylius_order_payment" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-1100" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderShipmentCallback">
+            <argument type="service" id="state_machine.sylius_order_shipping" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-1200" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\CancelOrderInventoryCallback">
+            <argument type="service" id="sylius.inventory.order_inventory_operator" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-1300" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Order\DecrementPromotionsUsagesCallback">
+            <argument type="service" id="sylius.promotion_usage_modifier" />
+            <tag name="sylius.workflow.callback.after_canceled_order" priority="-1400" />
         </service>
     </services>
 </container>
