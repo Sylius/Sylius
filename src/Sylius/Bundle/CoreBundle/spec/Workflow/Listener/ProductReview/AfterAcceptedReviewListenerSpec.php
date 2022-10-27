@@ -33,6 +33,11 @@ final class AfterAcceptedReviewListenerSpec extends ObjectBehavior
         $this->shouldHaveType(AfterAcceptedReviewListener::class);
     }
 
+    function it_throws_an_exception_on_non_supported_callback(\stdClass $callback): void
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('__construct', [[$callback->getWrappedObject()]]);
+    }
+
     function it_calls_every_callbacks(
         Event $event,
         ReviewInterface $productReview,

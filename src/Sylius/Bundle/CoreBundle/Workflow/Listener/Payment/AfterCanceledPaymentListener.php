@@ -7,12 +7,14 @@ namespace Sylius\Bundle\CoreBundle\Workflow\Listener\Payment;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Payment\AfterCanceledPaymentCallbackInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Workflow\Event\Event;
+use Webmozart\Assert\Assert;
 
 final class AfterCanceledPaymentListener
 {
     /** @param AfterCanceledPaymentCallbackInterface[] $callbacks */
     public function __construct(private iterable $callbacks)
     {
+        Assert::allIsInstanceOf($callbacks, AfterCanceledPaymentCallbackInterface::class);
     }
 
     public function call(Event $event): void

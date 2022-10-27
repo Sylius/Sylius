@@ -16,12 +16,14 @@ namespace Sylius\Bundle\CoreBundle\Workflow\Listener\Order;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\Order\AfterPlacedOrderCallbackInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
+use Webmozart\Assert\Assert;
 
 final class AfterPlacedOrderListener
 {
     /** @param AfterPlacedOrderCallbackInterface[] $callbacks */
     public function __construct(private iterable $callbacks)
     {
+        Assert::allIsInstanceOf($callbacks, AfterPlacedOrderCallbackInterface::class);
     }
 
     public function call(Event $event): void

@@ -7,12 +7,14 @@ namespace Sylius\Bundle\CoreBundle\Workflow\Listener\OrderCheckout;
 use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\AfterCompletedCheckoutCallbackInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
+use Webmozart\Assert\Assert;
 
 final class AfterCompletedCheckoutListener
 {
     /** @param AfterCompletedCheckoutCallbackInterface[] $callbacks */
     public function __construct(private iterable $callbacks)
     {
+        Assert::allIsInstanceOf($callbacks, AfterCompletedCheckoutCallbackInterface::class);
     }
 
     public function call(Event $event): void

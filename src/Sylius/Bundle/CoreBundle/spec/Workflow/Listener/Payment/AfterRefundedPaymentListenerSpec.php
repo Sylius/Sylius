@@ -33,6 +33,11 @@ final class AfterRefundedPaymentListenerSpec extends ObjectBehavior
         $this->shouldHaveType(AfterRefundedPaymentListener::class);
     }
 
+    function it_throws_an_exception_on_non_supported_callback(\stdClass $callback): void
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('__construct', [[$callback->getWrappedObject()]]);
+    }
+
     function it_calls_every_callbacks(
         Event $event,
         PaymentInterface $payment,

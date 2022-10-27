@@ -8,12 +8,14 @@ use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderCheckout\AfterAddressedCallb
 use Sylius\Bundle\CoreBundle\Workflow\Callback\OrderPayment\AfterPaidCallbackInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\Event;
+use Webmozart\Assert\Assert;
 
 final class AfterPaidListener
 {
     /** @param AfterPaidCallbackInterface[] $callbacks */
     public function __construct(private iterable $callbacks)
     {
+        Assert::allIsInstanceOf($callbacks, AfterPaidCallbackInterface::class);
     }
 
     public function call(Event $event): void
