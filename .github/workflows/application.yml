@@ -116,14 +116,6 @@ jobs:
                 if: always() && steps.end-of-setup.outcome == 'success'
 
             -
-                name: Generate composer diff
-                uses: IonBazan/composer-diff-action@v1
-                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
-                id: composer_diff
-                with:
-                    base: old-composer.lock
-
-            -
                 name: Check for security vulnerabilities
                 run: symfony security:check
                 if: always() && steps.end-of-setup.outcome == 'success'
