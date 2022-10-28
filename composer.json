@@ -77,7 +77,7 @@
         "sylius/calendar": "^0.3 || ^0.4",
         "sylius/fixtures-bundle": "^1.7.0 || ^1.8@beta",
         "sylius/grid": "^1.11 || ^1.12@alpha",
-        "sylius/grid-bundle": "^1.11 || ^1.12@alpha",
+        "sylius/grid-bundle": "^1.11 || ^1.12@dev",
         "sylius/mailer": "^1.8 || ^2.0@beta",
         "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
         "sylius/registry": "^1.5",

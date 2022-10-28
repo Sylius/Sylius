@@ -46,7 +46,7 @@
         "sylius/currency-bundle": "^1.12",
         "sylius/customer-bundle": "^1.12",
         "sylius/fixtures-bundle": "^1.7.0 || ^1.8@beta",
-        "sylius/grid-bundle": "^1.11 || ^1.12@alpha",
+        "sylius/grid-bundle": "^1.11 || ^1.12@dev",
         "sylius/inventory-bundle": "^1.12",
         "sylius/locale-bundle": "^1.12",
         "sylius/money-bundle": "^1.12",
