@@ -34,7 +34,7 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
@@ -74,7 +74,7 @@ jobs:
 
             -
                 name: Get Composer cache directory
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
                 id: composer-cache
 
             -
@@ -188,7 +188,7 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
@@ -220,7 +220,7 @@ jobs:
 
             -   name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
                 uses: actions/cache@v2
@@ -282,7 +282,7 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
@@ -367,7 +367,7 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
@@ -462,7 +462,7 @@ jobs:
                 api-platform: ["^2.7"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
@@ -515,7 +515,7 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
@@ -654,7 +654,7 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
@@ -678,7 +678,7 @@ jobs:
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
@@ -763,8 +763,8 @@ jobs:
                 id: process-data
                 shell: bash
                 run: |
-                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
-                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
 
             -
                 name: "Notify on Slack"
