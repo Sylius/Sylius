@@ -18,7 +18,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\OrderShipping\ResolveOrderStateCallback">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderStateResolverInterface" />
-            <tag name="sylius.workflow.callback.after_shipped_order" priority="-100" />
+            <tag name="sylius.workflow.callback.after_shipped_order" priority="100" />
         </service>
     </services>
 </container>

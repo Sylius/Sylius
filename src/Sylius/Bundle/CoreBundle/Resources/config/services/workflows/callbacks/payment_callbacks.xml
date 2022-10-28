@@ -18,16 +18,16 @@
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Payment\ProcessOrderCallback">
             <argument type="service" id="sylius.order_processing.order_payment_processor.after_checkout" />
-            <tag name="sylius.workflow.callback.after_failed_payment" priority="-100" />
-            <tag name="sylius.workflow.callback.after_canceled_payment" priority="-100" />
+            <tag name="sylius.workflow.callback.after_failed_payment" priority="100" />
+            <tag name="sylius.workflow.callback.after_canceled_payment" priority="100" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\Payment\ResolveOrderPaymentStateCallback">
             <argument type="service" id="Sylius\Bundle\CoreBundle\Workflow\StateResolver\OrderPaymentStateResolverInterface" />
-            <tag name="sylius.workflow.callback.after_completed_payment" priority="-100" />
-            <tag name="sylius.workflow.callback.after_processed_payment" priority="-100" />
-            <tag name="sylius.workflow.callback.after_refunded_payment" priority="-100" />
-            <tag name="sylius.workflow.callback.after_authorized_payment" priority="-100" />
+            <tag name="sylius.workflow.callback.after_completed_payment" priority="100" />
+            <tag name="sylius.workflow.callback.after_processed_payment" priority="100" />
+            <tag name="sylius.workflow.callback.after_refunded_payment" priority="100" />
+            <tag name="sylius.workflow.callback.after_authorized_payment" priority="100" />
         </service>
     </services>
 </container>

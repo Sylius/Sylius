@@ -18,7 +18,7 @@
 
         <service id="Sylius\Bundle\CoreBundle\Workflow\Callback\ProductReview\UpdateRatingCallback">
             <argument type="service" id="sylius.product_review.average_rating_updater" />
-            <tag name="sylius.workflow.callback.after_accepted_review" priority="-100" />
+            <tag name="sylius.workflow.callback.after_accepted_review" priority="100" />
         </service>
     </services>
 </container>
