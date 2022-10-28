@@ -28,7 +28,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: "Provide the list"
@@ -56,7 +56,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Setup PHP
@@ -72,7 +72,7 @@ jobs:
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-package-${{ matrix.package }}-composer-${{ hashFiles(format('src/Sylius/{0}/composer.json', matrix.package)) }}
@@ -122,14 +122,14 @@ jobs:
             -
                 name: Check the existence of phpunit.xml.dist
                 id: phpunit_xml_dist_existence_check
-                uses: andstor/file-existence-action@v1
+                uses: andstor/file-existence-action@v2
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml.dist"
 
             -
                 name: Check the existence of phpunit.xml
                 id: phpunit_xml_existence_check
-                uses: andstor/file-existence-action@v1
+                uses: andstor/file-existence-action@v2
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
 
