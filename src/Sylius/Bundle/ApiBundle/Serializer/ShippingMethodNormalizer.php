@@ -68,7 +68,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
         }
 
         if (!isset($filters['tokenValue']) || !isset($filters['shipmentId'])) {
-            return;
+            return null;
         }
 
         /** @var ChannelInterface $channel */

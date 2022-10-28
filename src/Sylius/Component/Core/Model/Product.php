@@ -149,6 +149,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 
@@ -272,7 +273,10 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
-        return parent::getTranslation($locale);
+        $productTranslation = parent::getTranslation($locale);
+        Assert::isInstanceOf($productTranslation, ProductTranslationInterface::class);
+
+        return $productTranslation;
     }
 
     /**

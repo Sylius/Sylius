@@ -123,7 +123,10 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getEntityManager($userType)->getRepository($class);
+        $userRepository = $this->getEntityManager($userType)->getRepository($class);
+        Assert::isInstanceOf($userRepository, UserRepositoryInterface::class);
+
+        return $userRepository;
     }
 
     protected function getAvailableUserTypes(): array

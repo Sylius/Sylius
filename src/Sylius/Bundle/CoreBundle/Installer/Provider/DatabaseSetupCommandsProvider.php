@@ -21,6 +21,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
@@ -131,6 +132,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getEntityManager(): EntityManagerInterface
     {
-        return $this->doctrineRegistry->getManager();
+        $objectManager = $this->doctrineRegistry->getManager();
+        Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
+
+        return $objectManager;
     }
 }

@@ -6,7 +6,7 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
-    level: 2
+    level: 3
 
     reportUnmatchedIgnoredErrors: false
 

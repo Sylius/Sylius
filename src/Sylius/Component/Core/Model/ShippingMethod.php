@@ -70,6 +70,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
      */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 
