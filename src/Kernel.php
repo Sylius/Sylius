@@ -22,19 +22,6 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    private const CONFIG_EXTS = '.{php,xml,yaml,yml}';
-
-    public function registerBundles(): iterable
-    {
-        /** @psalm-suppress UnresolvableInclude */
-        $contents = require $this->getProjectDir() . '/config/bundles.php';
-        foreach ($contents as $class => $envs) {
-            if (isset($envs['all']) || isset($envs[$this->environment])) {
-                yield new $class();
-            }
-        }
-    }
-
     protected function getContainerBaseClass(): string
     {
         if ($this->isTestEnvironment() && class_exists(MockerContainer::class)) {
