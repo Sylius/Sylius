@@ -17,7 +17,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class ProductPriceOrderFilter extends AbstractContextAwareFilter
@@ -29,10 +31,14 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
         QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         string $operationName = null,
+        array $context = [],
     ): void {
         if ('order' !== $property || !isset($value['price'])) {
             return;
         }
+
+        Assert::keyExists($context, ContextKeys::CHANNEL);
+        $channel = $context[ContextKeys::CHANNEL];
 
         $entityRepository = $queryBuilder->getEntityManager()->getRepository(ProductInterface::class);
 
@@ -59,8 +65,10 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                     str_replace(sprintf(':%s', $productIdParameterName), sprintf('%s.id', $rootAlias), $subQuery->getDQL()),
                 ),
             )
+            ->andWhere('channelPricing.channelCode = :channelCode')
             ->orderBy('channelPricing.price', $value['price'])
             ->setParameter($enabledParameterName, true)
+            ->setParameter('channelCode', $channel->getCode())
         ;
     }
 
