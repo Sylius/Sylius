@@ -22,8 +22,29 @@ Feature: Sorting listed products on multiple channels
         And this product's price in "Germany" channel is "$20.00"
 
     @api @ui
-    Scenario: Sorting products by their prices with ascending order
+    Scenario: Sorting products by their prices with ascending order on channel Poland
         When I change my current channel to "Poland"
+        And I browse products from taxon "Sylius merch"
+        And I sort products by the lowest price first
+        Then I should see 2 products in the list
+        And the first product on the list should have name "Sylius Con shirt"
+
+    Scenario: Sorting products by their prices with descending order on channel Poland
+        When I change my current channel to "Poland"
+        And I browse products from taxon "Sylius merch"
+        And I sort products by the lowest price first
+        Then I should see 2 products in the list
+        And the first product on the list should have name "Sylius Con stickers"
+
+    Scenario: Sorting products by their prices with ascending order on channel Germany
+        When I change my current channel to "Germany"
+        And I browse products from taxon "Sylius merch"
+        And I sort products by the lowest price first
+        Then I should see 2 products in the list
+        And the first product on the list should have name "Sylius Con stickers"
+
+    Scenario: Sorting products by their prices with descending order on channel Germany
+        When I change my current channel to "Germany"
         And I browse products from taxon "Sylius merch"
         And I sort products by the lowest price first
         Then I should see 2 products in the list
