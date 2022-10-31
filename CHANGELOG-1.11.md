@@ -1,5 +1,30 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.10 (2022-10-31)
+
+#### Details
+
+- [#14144](https://github.com/Sylius/Sylius/issues/14144) [Documentation] Fix incorrect translation domain in implementation ([@anned20](https://github.com/anned20))
+- [#14156](https://github.com/Sylius/Sylius/issues/14156) [DOCS] Cookbook of how to modify placed order ([@arti0090](https://github.com/arti0090))
+- [#14197](https://github.com/Sylius/Sylius/issues/14197) [Docs] Describe Sylius architectural drivers ([@Zales0123](https://github.com/Zales0123))
+- [#14246](https://github.com/Sylius/Sylius/issues/14246) [DOCS] Add note about min node version ([@arti0090](https://github.com/arti0090))
+- [#14247](https://github.com/Sylius/Sylius/issues/14247) [DOCS] Add info about mailer in installation doc ([@arti0090](https://github.com/arti0090))
+- [#14362](https://github.com/Sylius/Sylius/issues/14362) Using the new template namespace syntax in the doc ([@mamazu](https://github.com/mamazu))
+- [#14384](https://github.com/Sylius/Sylius/issues/14384) [API] Use tokenValue instead of id ([@Prometee](https://github.com/Prometee))
+- [#14397](https://github.com/Sylius/Sylius/issues/14397) [Docs] Fix 1.12 release dates ([@Zales0123](https://github.com/Zales0123))
+- [#14402](https://github.com/Sylius/Sylius/issues/14402) [Api] fix order normalization groups ([@mtarld](https://github.com/mtarld))
+- [#14410](https://github.com/Sylius/Sylius/issues/14410) [Documentation] Remove the tip about ShopApiPlugin from the architecture page ([@GSadee](https://github.com/GSadee))
+- [#14415](https://github.com/Sylius/Sylius/issues/14415) [Behat] Add calendar hook to suites using calendar ([@GSadee](https://github.com/GSadee))
+- [#14421](https://github.com/Sylius/Sylius/issues/14421) [DOCS] Add info about supervisors ([@arti0090](https://github.com/arti0090))
+- [#14442](https://github.com/Sylius/Sylius/issues/14442) [Hot-fix] Conflict with the newest AP that changes a Customer->User response ([@GSadee](https://github.com/GSadee))
+- [#14445](https://github.com/Sylius/Sylius/issues/14445) [Hot-fix] Conflict with the SymfonyMockerContainer 1.0.6 due to incompatible version with Symfony 4.x ([@GSadee](https://github.com/GSadee))
+- [#14454](https://github.com/Sylius/Sylius/issues/14454) [Behat] Move scenario from Plus ([@TheMilek](https://github.com/TheMilek))
+- [#14471](https://github.com/Sylius/Sylius/issues/14471) [Api] fixed normalization/denormalization resources groups ([@mtarld](https://github.com/mtarld))
+- [#14476](https://github.com/Sylius/Sylius/issues/14476) Delay 1.12 release for a few days ([@Zales0123](https://github.com/Zales0123))
+- [#14479](https://github.com/Sylius/Sylius/issues/14479) [Maintenance] Allow APIP 2.7.2 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14482](https://github.com/Sylius/Sylius/issues/14482) Adding batching to the expired carts remover v2 ([@mamazu](https://github.com/mamazu), [@lchrusciel](https://github.com/lchrusciel))
+- [#14496](https://github.com/Sylius/Sylius/issues/14496) [README] Switch Sylius naming from platform to framework ([@lchrusciel](https://github.com/lchrusciel))
+
 ## v1.11.9 (2022-10-03)
 
 #### Details
