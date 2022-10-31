@@ -37,12 +37,6 @@ references related issues.
    
    References: https://github.com/symfony/symfony/pull/40004
 
- - `symfony/doctrine-bridge:4.4.16`:
-
-   This version of Doctrine Bridge introduces a bug that causes an issue related to `ChannelPricing` mapping.
-
-   References: https://github.com/Sylius/Sylius/issues/11970, https://github.com/symfony/symfony/issues/38861
-
  - `symfony/property-info:4.4.22|5.2.7`:
 
    These versions of Symfony PropertyInfo Component introduce a bug with resolving wrong namespace for some translation entities 
