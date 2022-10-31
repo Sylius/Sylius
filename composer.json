@@ -75,7 +75,7 @@
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/calendar": "^0.3 || ^0.4",
-        "sylius/fixtures-bundle": "^1.7.0 || ^1.8@beta",
+        "sylius/fixtures-bundle": "^1.7",
         "sylius/grid": "^1.11",
         "sylius/grid-bundle": "^1.11",
         "sylius/mailer": "^1.8 || ^2.0@beta",
