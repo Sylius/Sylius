@@ -1,5 +1,30 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.0 (2022-10-31)
+
+#### Details
+
+- [#14053](https://github.com/Sylius/Sylius/issues/14053) Upgrade phpstan to level 2 ([@lruozzi9](https://github.com/lruozzi9))
+- [#14400](https://github.com/Sylius/Sylius/issues/14400) [Maintenance] `extra.symfony.require` configuration introduced ([@Rafikooo](https://github.com/Rafikooo))
+- [#14402](https://github.com/Sylius/Sylius/issues/14402) [Api] fix order normalization groups ([@mtarld](https://github.com/mtarld))
+- [#14454](https://github.com/Sylius/Sylius/issues/14454) [Behat] Move scenario from Plus ([@TheMilek](https://github.com/TheMilek))
+- [#14461](https://github.com/Sylius/Sylius/issues/14461) Update documentation about migrating to Webpack ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14463](https://github.com/Sylius/Sylius/issues/14463) [maintenance] - Remove Staging configs ([@Ferror](https://github.com/Ferror))
+- [#14465](https://github.com/Sylius/Sylius/issues/14465) [CI] Restrict APIP version in static checks ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14468](https://github.com/Sylius/Sylius/issues/14468) Lower hashing alogirthm memory cost in test ([@Zales0123](https://github.com/Zales0123))
+- [#14471](https://github.com/Sylius/Sylius/issues/14471) [Api] fixed normalization/denormalization resources groups ([@mtarld](https://github.com/mtarld))
+- [#14472](https://github.com/Sylius/Sylius/issues/14472) Bring back security.authentication_manager alias if needed ([@Zales0123](https://github.com/Zales0123))
+- [#14473](https://github.com/Sylius/Sylius/issues/14473) Fixes in Order serialization after changes on 1.11 ([@Zales0123](https://github.com/Zales0123))
+- [#14476](https://github.com/Sylius/Sylius/issues/14476) Delay 1.12 release for a few days ([@Zales0123](https://github.com/Zales0123))
+- [#14477](https://github.com/Sylius/Sylius/issues/14477) [Docs] Add warning about restricting Symfony version before Sylius installation ([@coldic3](https://github.com/coldic3))
+- [#14479](https://github.com/Sylius/Sylius/issues/14479) [Maintenance] Allow APIP 2.7.2 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14481](https://github.com/Sylius/Sylius/issues/14481) Adding batching to the expired carts remover ([@mamazu](https://github.com/mamazu))
+- [#14482](https://github.com/Sylius/Sylius/issues/14482) Adding batching to the expired carts remover v2 ([@mamazu](https://github.com/mamazu), [@lchrusciel](https://github.com/lchrusciel))
+- [#14490](https://github.com/Sylius/Sylius/issues/14490) [Maintenance] Kernel cleanup ([@Rafikooo](https://github.com/Rafikooo))
+- [#14496](https://github.com/Sylius/Sylius/issues/14496) [README] Switch Sylius naming from platform to framework ([@lchrusciel](https://github.com/lchrusciel))
+- [#14498](https://github.com/Sylius/Sylius/issues/14498) Allow stable Resource (1.10), Grid (1.12) and Fixtures (1.8) ([@Zales0123](https://github.com/Zales0123))
+- [#14499](https://github.com/Sylius/Sylius/issues/14499) Separate pipeline for non-JS tests on unstable Symfony version ([@Zales0123](https://github.com/Zales0123))
+
 ## v1.12.0-RC.1 (2022-10-19)
 
 #### Details
