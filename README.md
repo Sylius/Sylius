@@ -4,7 +4,7 @@
     </a>
 </h1>
 
-Sylius is an Open Source eCommerce platform on top of [**Symfony**](https://symfony.com). 
+Sylius is an Open Source eCommerce framework on top of [**Symfony**](https://symfony.com). 
 
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for applications tailored to your business requirements. 
 Powerful REST API allows for easy integrations and creating unique customer experience on any device.
@@ -34,7 +34,7 @@ Get Sylius support on [Slack](https://sylius.com/slack), [Forum](https://forum.s
 
 Stay updated by following our [Twitter](https://twitter.com/Sylius) and [Facebook](https://www.facebook.com/SyliusEcommerce/).
 
-Would like to help us and build the most developer-friendly eCommerce platform? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/book/index.html#contributing)!
+Would like to help us and build the most developer-friendly eCommerce framework? Start from reading our [Contributing Guide](https://docs.sylius.com/en/latest/book/index.html#contributing)!
 
 👮 Security issues
 ------------------
