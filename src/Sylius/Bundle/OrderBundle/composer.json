@@ -32,7 +32,7 @@
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius/money-bundle": "^1.12",
         "sylius/order": "^1.12",
-        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
+        "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/templating": "^5.4 || ^6.0"
     },
