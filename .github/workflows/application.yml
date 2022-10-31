@@ -962,6 +962,160 @@ jobs:
                     path: etc/build/
                     if-no-files-found: ignore
 
+    test-application-without-frontend-unstable-symfony:
+        runs-on: ubuntu-latest
+
+        name: "Test non-JS application with the unstable Symfony version"
+
+        timeout-minutes: 35
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [ "8.1" ]
+                symfony: [ "^6.2" ]
+                api-platform: [ "^2.7" ]
+                mysql: [ "8.0" ]
+                twig: [ "3.x" ]
+                dbal: [ "3" ]
+                node: [ "16.x" ]
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   uses: actions/checkout@v2
+
+            -   name: Shutdown default MySQL
+                run: sudo service mysql stop
+
+            -   name: Setup MySQL
+                uses: mirromutth/mysql-action@v1.1
+                with:
+                    mysql version: "${{ matrix.mysql }}"
+                    mysql root password: "root"
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "${{ matrix.php }}"
+                    ini-values: date.timezone=Europe/Warsaw, opcache.enable=1, opcache.enable_cli=0, opcache.memory_consumption=512, opcache.max_accelerated_files=65407, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
+                    tools: symfony
+                    coverage: none
+
+            -   name: Restrict Symfony version
+                if: matrix.symfony != ''
+                run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
+                    composer config minimum-stability beta
+                    composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   name: Cache Composer
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
+            -   name: Install PHP dependencies
+                run: composer update --no-interaction --no-scripts
+
+            -   name: Setup Node
+                uses: actions/setup-node@v2
+                with:
+                    node-version: "${{ matrix.node }}"
+
+            -   name: Get Yarn cache directory
+                id: yarn-cache
+                run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            -   name: Cache Yarn
+                uses: actions/cache@v2
+                with:
+                    path: ${{ steps.yarn-cache.outputs.dir }}
+                    key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            -   name: Install JS dependencies
+                run: yarn install
+
+            -   name: Validate Yarn packages
+                run: yarn check
+
+            -   name: Build assets
+                run: |
+                    bin/console assets:install public -vvv
+                    yarn encore production
+
+            -   name: Dump the environment
+                run: |
+                    echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
+                    composer dump-env $APP_ENV
+
+            -   name: Warmup cache
+                run: bin/console cache:warmup
+
+            -   name: Make filesystem readonly
+                run: chmod -R 555 app bin config docs features src templates tests translations vendor
+
+            -   name: Prepare application database
+                run: |
+                    APP_DEBUG=1 bin/console doctrine:database:create -vvv
+                    bin/console doctrine:migrations:migrate -n -vvv
+
+            -   name: Test provided migrations
+                run: |
+                    bin/console doctrine:migrations:migrate first --no-interaction
+                    bin/console doctrine:migrations:migrate latest --no-interaction
+
+            -   name: Validate Database Schema
+                run: bin/console doctrine:schema:validate -vvv
+
+            -   name: Run PHPUnit
+                run: |
+                    bin/console cache:pool:clear cache.global_clearer
+                    vendor/bin/phpunit
+
+            -   name: Run non-JS Behat
+                run: |
+                    vendor/bin/behat features/account/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/addressing/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/admin/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/channel/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/checkout/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/contact/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/currency/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/customer/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/homepage/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/inventory/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/locale/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/order/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/payment/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/product/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/promotion/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/shipping/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/taxation/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/taxonomy/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                    vendor/bin/behat features/user/ --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli"
+                continue-on-error: true
+
+            -   name: Upload Behat logs
+                uses: actions/upload-artifact@v2
+                if: failure()
+                with:
+                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
+                    path: etc/build/
+                    if-no-files-found: ignore
+
     test-gulp-build:
         runs-on: ubuntu-latest
 
