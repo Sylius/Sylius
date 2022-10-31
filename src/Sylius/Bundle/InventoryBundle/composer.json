@@ -28,7 +28,7 @@
     "require": {
         "php": "^8.0",
         "sylius/inventory": "^1.12",
-        "sylius/resource-bundle": "^1.9 || ^1.10@alpha",
+        "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/templating": "^5.4 || ^6.0",
         "symfony/validator": "^5.4 || ^6.0"
