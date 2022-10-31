@@ -1,5 +1,64 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.10 (2022-10-31)
+
+#### Details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- [#14144](https://github.com/Sylius/Sylius/issues/14144) [Documentation] Fix incorrect translation domain in implementation ([@anned20](https://github.com/anned20))
+- [#14156](https://github.com/Sylius/Sylius/issues/14156) [DOCS] Cookbook of how to modify placed order ([@arti0090](https://github.com/arti0090))
+- [#14197](https://github.com/Sylius/Sylius/issues/14197) [Docs] Describe Sylius architectural drivers ([@Zales0123](https://github.com/Zales0123))
+- [#14246](https://github.com/Sylius/Sylius/issues/14246) [DOCS] Add note about min node version ([@arti0090](https://github.com/arti0090))
+- [#14247](https://github.com/Sylius/Sylius/issues/14247) [DOCS] Add info about mailer in installation doc ([@arti0090](https://github.com/arti0090))
+- [#14362](https://github.com/Sylius/Sylius/issues/14362) Using the new template namespace syntax in the doc ([@mamazu](https://github.com/mamazu))
+- [#14384](https://github.com/Sylius/Sylius/issues/14384) [API] Use tokenValue instead of id ([@Prometee](https://github.com/Prometee))
+- [#14397](https://github.com/Sylius/Sylius/issues/14397) [Docs] Fix 1.12 release dates ([@Zales0123](https://github.com/Zales0123))
+- [#14402](https://github.com/Sylius/Sylius/issues/14402) [Api] fix order normalization groups ([@mtarld](https://github.com/mtarld))
+- [#14410](https://github.com/Sylius/Sylius/issues/14410) [Documentation] Remove the tip about ShopApiPlugin from the architecture page ([@GSadee](https://github.com/GSadee))
+- [#14415](https://github.com/Sylius/Sylius/issues/14415) [Behat] Add calendar hook to suites using calendar ([@GSadee](https://github.com/GSadee))
+- [#14421](https://github.com/Sylius/Sylius/issues/14421) [DOCS] Add info about supervisors ([@arti0090](https://github.com/arti0090))
+- [#14442](https://github.com/Sylius/Sylius/issues/14442) [Hot-fix] Conflict with the newest AP that changes a Customer->User response ([@GSadee](https://github.com/GSadee))
+- [#14445](https://github.com/Sylius/Sylius/issues/14445) [Hot-fix] Conflict with the SymfonyMockerContainer 1.0.6 due to incompatible version with Symfony 4.x ([@GSadee](https://github.com/GSadee))
+- [#14454](https://github.com/Sylius/Sylius/issues/14454) [Behat] Move scenario from Plus ([@TheMilek](https://github.com/TheMilek))
+- [#14471](https://github.com/Sylius/Sylius/issues/14471) [Api] fixed normalization/denormalization resources groups ([@mtarld](https://github.com/mtarld))
+- [#14476](https://github.com/Sylius/Sylius/issues/14476) Delay 1.12 release for a few days ([@Zales0123](https://github.com/Zales0123))
+- [#14479](https://github.com/Sylius/Sylius/issues/14479) [Maintenance] Allow APIP 2.7.2 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14482](https://github.com/Sylius/Sylius/issues/14482) Adding batching to the expired carts remover v2 ([@mamazu](https://github.com/mamazu), [@lchrusciel](https://github.com/lchrusciel))
+- [#14496](https://github.com/Sylius/Sylius/issues/14496) [README] Switch Sylius naming from platform to framework ([@lchrusciel](https://github.com/lchrusciel))
+Deprecated: Return type of Pimple\Container::offsetGet($id) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 98
+Deprecated: Return type of Pimple\Container::offsetSet($id, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 79
+Deprecated: Return type of Pimple\Container::offsetUnset($id) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/pimple/pimple/src/Pimple/Container.php on line 143
+Deprecated: Return type of Symfony\Component\Console\Helper\HelperSet::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/console/Helper/HelperSet.php on line 104
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1121
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetExists($option) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1081
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetGet($option) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 843
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetSet($option, $value) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1095
+Deprecated: Return type of Symfony\Component\OptionsResolver\OptionsResolver::offsetUnset($option) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/options-resolver/OptionsResolver.php on line 1105
+Deprecated: Return type of Symfony\Component\Process\Process::getIterator($flags = 0) should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/symfony/process/Process.php on line 567
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 323
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 315
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetExists($name) should either be compatible with ArrayAccess::offsetExists(mixed $offset): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 279
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetGet($name) should either be compatible with ArrayAccess::offsetGet(mixed $offset): mixed, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 287
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetSet($offset, $command) should either be compatible with ArrayAccess::offsetSet(mixed $offset, mixed $value): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 295
+Deprecated: Return type of Webmozart\Console\Api\Command\CommandCollection::offsetUnset($name) should either be compatible with ArrayAccess::offsetUnset(mixed $offset): void, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/mpzalewski/.hubkit/vendor/webmozart/console/src/Api/Command/CommandCollection.php on line 307
+Working on Sylius/Sylius (branch 1.11)
+
 ## v1.11.9 (2022-10-03)
 
 #### Details
