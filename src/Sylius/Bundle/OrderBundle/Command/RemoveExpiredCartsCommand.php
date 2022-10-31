@@ -45,7 +45,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
             trigger_deprecation(
                 'sylius/order-bundle',
                 '1.12',
-                sprintf('Not injecting the expiration time into %s', self::class),
+                sprintf('Not injecting the expiration time into %s is deprecated and will be mandatory from 2.0', self::class),
             );
             $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
         } else {
@@ -61,7 +61,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
             trigger_deprecation(
                 'sylius/order-bundle',
                 '1.12',
-                sprintf('Not injecting the %s into the %s. Is deprecated', ExpiredCartsRemoverInterface::class, self::class)
+                sprintf('Not injecting the %s into the %s is deprecated and will be mandatory from 2.0', ExpiredCartsRemoverInterface::class, self::class)
             );
             $this->getContainer()->get('sylius.expired_carts_remover')->remove();
         } else {
