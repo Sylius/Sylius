@@ -3,21 +3,6 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
- - `symfony/cache": "^6.0`, "symfony/amqp-messenger": "^6.0", "symfony/doctrine-messenger": "^6.0", 
-"symfony/error-handler": "^6.0", "symfony/redis-messenger": "^6.0", "symfony/stopwatch": "^6.0", "symfony/twig-bridge": "^6.0", 
-"symfony/var-dumper": "^6.0", "symfony/var-exporter": "^6.0",:
-
-   These libraries still happen to be installed with Sylius if no flex is used. As we don't support Sf6 yet they are conflicted. Installation of symfony/cache v6.0 results with following error:
-   ```
-   Uncaught Error: Class "Symfony\Component\Cache\DoctrineProvider" not found
-   ```
-   
- - `symfony/password-hasher": "^6.0`:
-
-   Symfony in version 5.3 change password hashing logic, and in version 6.0 they removed BC layer
-   
-   References: https://github.com/Sylius/Sylius/pull/13358
-
  - `doctrine/doctrine-bundle:2.3.0`:
 
    This version makes Gedmo Doctrine Extensions fail (tree and position behaviour mostly).
@@ -31,7 +16,7 @@ references related issues.
 
    References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
  
- - `symfony/dependency-injection:5.4.5`:
+ - `symfony/dependency-injection:^5.4.5`:
    
    This version is causing a problem with mink session:
   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
