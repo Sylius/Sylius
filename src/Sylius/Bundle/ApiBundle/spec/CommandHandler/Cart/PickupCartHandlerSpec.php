@@ -81,7 +81,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
         $customer->getDefaultAddress()->willReturn($address);
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
@@ -126,7 +126,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
         $customer->getDefaultAddress()->willReturn(null);
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
@@ -165,7 +165,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $customerRepository->findOneBy(['email' => 'sample@email.com'])->willReturn($customer);
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
 
         $cartFactory->createNew()->willReturn($cart);
         $cart->setCustomer($customer)->shouldNotBeCalled();
@@ -194,7 +194,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channel->getBaseCurrency()->willReturn($currency);
         $channel->getDefaultLocale()->willReturn($locale);
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
@@ -235,7 +235,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $locale->getCode()->willReturn('en_US');
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
@@ -274,7 +274,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $locales = new ArrayCollection([]);
         $channel->getLocales()->willReturn($locales);
 
-        $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
+        $cartRepository->findLatestCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
         $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');

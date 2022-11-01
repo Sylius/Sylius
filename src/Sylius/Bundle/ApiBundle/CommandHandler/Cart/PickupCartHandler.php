@@ -55,7 +55,7 @@ final class PickupCartHandler implements MessageHandlerInterface
 
         if ($customer !== null) {
             /** @var OrderInterface|null $cart */
-            $cart = $this->cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
+            $cart = $this->cartRepository->findLatestCartByChannelAndCustomer($channel, $customer);
             if ($cart !== null) {
                 return $cart;
             }
