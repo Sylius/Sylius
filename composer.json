@@ -214,7 +214,7 @@
         "phpstan/phpstan-webmozart-assert": "^1.1",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "psalm/plugin-mockery": "0.7.0",
+        "psalm/plugin-mockery": "0.10.0",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^0.12.20",
         "stripe/stripe-php": "^8.1",
