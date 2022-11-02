@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.admin.grid.address_log_entry" class="Sylius\Bundle\AdminBundle\Grid\AddressLogEntryGrid">
+            <argument>%sylius.model.address_log_entry.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.admin_user" class="Sylius\Bundle\AdminBundle\Grid\AdminUserGrid">
+            <argument>%sylius.model.admin_user.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.catalog_promotion" class="Sylius\Bundle\AdminBundle\Grid\CatalogPromotionGrid">
+            <argument>%sylius.model.catalog_promotion.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.channel" class="Sylius\Bundle\AdminBundle\Grid\ChannelGrid">
+            <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.country" class="Sylius\Bundle\AdminBundle\Grid\CountryGrid">
+            <argument>%sylius.model.country.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.currency" class="Sylius\Bundle\AdminBundle\Grid\CurrencyGrid">
+            <argument>%sylius.model.currency.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.customer" class="Sylius\Bundle\AdminBundle\Grid\CustomerGrid">
+            <argument>%sylius.model.customer.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.customer_group" class="Sylius\Bundle\AdminBundle\Grid\CustomerGroupGrid">
+            <argument>%sylius.model.customer_group.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.customer_order" class="Sylius\Bundle\AdminBundle\Grid\CustomerOrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.exchange_rate" class="Sylius\Bundle\AdminBundle\Grid\ExchangeRateGrid">
+            <argument>%sylius.model.exchange_rate.class%</argument>
+            <argument>%sylius.model.currency.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.inventory" class="Sylius\Bundle\AdminBundle\Grid\InventoryGrid">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.locale" class="Sylius\Bundle\AdminBundle\Grid\LocaleGrid">
+            <argument>%sylius.model.locale.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.order" class="Sylius\Bundle\AdminBundle\Grid\OrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.payment" class="Sylius\Bundle\AdminBundle\Grid\PaymentGrid">
+            <argument>%sylius.model.payment.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.payment_method" class="Sylius\Bundle\AdminBundle\Grid\PaymentMethodGrid">
+            <argument>%sylius.model.payment_method.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_association_type" class="Sylius\Bundle\AdminBundle\Grid\ProductAssociationTypeGrid">
+            <argument>%sylius.model.product_association_type.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_attribute" class="Sylius\Bundle\AdminBundle\Grid\ProductAttributeGrid">
+            <argument>%sylius.model.product_attribute.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_from_taxon" class="Sylius\Bundle\AdminBundle\Grid\ProductFromTaxonGrid">
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product" class="Sylius\Bundle\AdminBundle\Grid\ProductGrid">
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_option" class="Sylius\Bundle\AdminBundle\Grid\ProductOptionGrid">
+            <argument>%sylius.model.product_option.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_review" class="Sylius\Bundle\AdminBundle\Grid\ProductReviewGrid">
+            <argument>%sylius.model.product_review.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_variant" class="Sylius\Bundle\AdminBundle\Grid\ProductVariantGrid">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.product_variant_with_catalog_promotion" class="Sylius\Bundle\AdminBundle\Grid\ProductVariantWithCatalogPromotionGrid">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.promotion_coupon" class="Sylius\Bundle\AdminBundle\Grid\PromotionCouponGrid">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.promotion" class="Sylius\Bundle\AdminBundle\Grid\PromotionGrid">
+            <argument>%sylius.model.promotion.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.shipment" class="Sylius\Bundle\AdminBundle\Grid\ShipmentGrid">
+            <argument>%sylius.model.shipment.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.shippingCategory" class="Sylius\Bundle\AdminBundle\Grid\ShippingCategoryGrid">
+            <argument>%sylius.model.shipping_category.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.shipping_method" class="Sylius\Bundle\AdminBundle\Grid\ShippingMethodGrid">
+            <argument>%sylius.model.shipping_method.class%</argument>
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.tax_category" class="Sylius\Bundle\AdminBundle\Grid\TaxCategoryGrid">
+            <argument>%sylius.model.tax_category.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.tax_rate" class="Sylius\Bundle\AdminBundle\Grid\TaxRateGrid">
+            <argument>%sylius.model.tax_rate.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="sylius.admin.grid.zone" class="Sylius\Bundle\AdminBundle\Grid\ZoneGrid">
+            <argument>%sylius.model.zone.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+    </services>
+</container>
