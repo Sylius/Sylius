@@ -27,7 +27,8 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * Reproduction of the Payum Core StorageExtension behaviour for Sylius payments
+ * Reproduction of the Payum Core StorageExtension behaviour to apply Sylius payment state machine
+ * at the very end of a Payum request
  *
  * @see \Payum\Core\Extension\StorageExtension
  */
@@ -119,7 +120,6 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
     private function updatePaymentState(PaymentInterface $payment, string $nextState): void
     {
         $stateMachine = $this->factory->get($payment, PaymentTransitions::GRAPH);
-
         Assert::isInstanceOf($stateMachine, StateMachineInterface::class);
 
         $transition = $stateMachine->getTransitionToState($nextState);
@@ -132,12 +132,9 @@ final class UpdatePaymentStateExtension implements ExtensionInterface
 
     private function scheduleForProcessingIfSupported(PaymentInterface $payment): void
     {
+        /** @var int|null $id */
         $id = $payment->getId();
         if (null === $id) {
-            return;
-        }
-
-        if (false === is_int($id)) {
             return;
         }
 
