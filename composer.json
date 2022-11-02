@@ -114,6 +114,7 @@
         "symfony/property-info": "^5.4 || ^6.0",
         "symfony/proxy-manager-bridge": "^5.4 || ^6.0",
         "symfony/routing": "^5.4 || ^6.0",
+        "symfony/runtime": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/security-core": "^5.4 || ^6.0",
         "symfony/security-csrf": "^5.4 || ^6.0",
@@ -240,7 +241,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "symfony/flex": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "symfony/runtime": false
         }
     },
     "extra": {
