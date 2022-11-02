@@ -49,5 +49,4 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             'filter_state' => '#criteria_status',
         ];
     }
-
 }
