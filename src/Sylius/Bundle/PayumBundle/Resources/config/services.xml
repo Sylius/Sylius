@@ -28,9 +28,13 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
-            <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
+        <service id="sylius.payum.guzzle_http.client" class="GuzzleHttp\Client" public="false" />
+
+        <service id="sylius.payum.guzzle.http_client" class="Payum\Core\Bridge\Guzzle\HttpClient">
+            <argument type="service" id="sylius.payum.guzzle_http.client"/>
         </service>
+
+        <service id="sylius.payum.http_client" alias="sylius.payum.guzzle.http_client"/>
 
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
