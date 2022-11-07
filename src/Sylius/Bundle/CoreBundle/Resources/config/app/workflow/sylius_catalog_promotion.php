@@ -12,6 +12,8 @@
 declare(strict_types=1);
 
 use Sylius\Component\Core\Model\CatalogPromotion;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
+use Sylius\Component\Promotion\Model\CatalogPromotionTransitions;
 use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $framework): void {
@@ -19,20 +21,20 @@ return static function (FrameworkConfig $framework): void {
     $catalogPromotion
         ->type('state_machine')
         ->supports([CatalogPromotion::class])
-        ->initialMarking([Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE]);
+        ->initialMarking([CatalogPromotionStates::STATE_INACTIVE]);
 
     $catalogPromotion->markingStore()
         ->type('method')
         ->property('state');
 
-    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE);
-    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE);
-    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_PROCESSING);
+    $catalogPromotion->place()->name(CatalogPromotionStates::STATE_ACTIVE);
+    $catalogPromotion->place()->name(CatalogPromotionStates::STATE_INACTIVE);
+    $catalogPromotion->place()->name(CatalogPromotionStates:: STATE_PROCESSING);
 
     $catalogPromotion->transition()
-        ->name(Sylius\Component\Promotion\Model\CatalogPromotionTransitions::TRANSITION_ACTIVATE)
-        ->from([Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_PROCESSING])
-        ->to([Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_ACTIVE]);
+        ->name(CatalogPromotionTransitions::TRANSITION_ACTIVATE)
+        ->from([CatalogPromotionStates:: STATE_PROCESSING])
+        ->to([CatalogPromotionStates:: STATE_ACTIVE]);
 
     $catalogPromotion->transition()
         ->name('deactivate')
