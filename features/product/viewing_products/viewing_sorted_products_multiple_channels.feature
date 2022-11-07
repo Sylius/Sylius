@@ -33,7 +33,7 @@ Feature: Sorting listed products on multiple channels
     Scenario: Sorting products by their prices with descending order on channel Poland
         When I change my current channel to "Poland"
         And I browse products from taxon "Sylius merch"
-        And I sort products by the lowest price first
+        And I sort products by the highest price first
         Then I should see 2 products in the list
         And the first product on the list should have name "Sylius Con stickers"
 
@@ -49,6 +49,6 @@ Feature: Sorting listed products on multiple channels
     Scenario: Sorting products by their prices with descending order on channel Germany
         When I change my current channel to "Germany"
         And I browse products from taxon "Sylius merch"
-        And I sort products by the lowest price first
+        And I sort products by the highest price first
         Then I should see 2 products in the list
         And the first product on the list should have name "Sylius Con shirt"
