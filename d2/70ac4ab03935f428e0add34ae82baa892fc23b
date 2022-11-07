@@ -1,0 +1,54 @@
+---------------------------------------------------------------------------
+
+by acornforth at 2022-01-20T15:43:30Z
+
+Would this be more likely to attract the attention of the core team and be reviewed/merged is if was properly labelled as a Bug Fix ? I am unable to do it.
+
+---------------------------------------------------------------------------
+
+by stloyd at 2022-01-20T15:46:59Z
+
+I can confirm this issue, was doing similar adjustment to email to prevent duplication of users with same email.
+
+---------------------------------------------------------------------------
+
+by Roshyo at 2022-01-20T15:55:17Z
+
+Could you come up with some test about this scenario please ?
+
+---------------------------------------------------------------------------
+
+by acornforth at 2022-01-25T10:00:11Z
+
+While I can justify submitting this fix i already made during my work hours, my workload is quite heavy at the moment, and any tests i write would have to be done on my own time, and i don't have much at the moment, which means i can't get to it for a while. If anyone else can add the required tests and get this merged i'm sure it will be appreciated. Unfortunately i cannot right now.
+
+---------------------------------------------------------------------------
+
+by SirDomin at 2022-05-10T10:34:45Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "issue_13201"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by SirDomin at 2022-05-10T11:28:52Z
+
+The problem occurs on PostgreSQL only, all mysql builds seems to be working correctly, /cc @Ferror
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-05-10T11:34:00Z
+
+Can be continued after #13786
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-07T07:11:28Z
+
+Thank you, Andrew! :tada:
