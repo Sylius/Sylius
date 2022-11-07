@@ -230,6 +230,7 @@
             <argument>%sylius.form.type.customer_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.canonicalizer" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_checkout_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerCheckoutGuestType">
@@ -237,6 +238,7 @@
             <argument>%sylius.form.type.customer_checkout_guest.validation_groups%</argument>
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.canonicalizer" />
             <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_simple_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType">

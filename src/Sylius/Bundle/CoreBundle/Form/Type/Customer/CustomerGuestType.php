@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -29,6 +30,7 @@ final class CustomerGuestType extends AbstractResourceType
         array $validationGroups,
         private RepositoryInterface $customerRepository,
         private FactoryInterface $customerFactory,
+        private CanonicalizerInterface $canonicalizer
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -46,8 +48,10 @@ final class CustomerGuestType extends AbstractResourceType
                     return;
                 }
 
+                $emailCanonical = $this->canonicalizer->canonicalize($data['email']);
+
                 /** @var CustomerInterface|null $customer */
-                $customer = $this->customerRepository->findOneBy(['email' => $data['email']]);
+                $customer = $this->customerRepository->findOneBy(['emailCanonical' => $emailCanonical]);
 
                 // assign existing customer or create a new one
                 $form = $event->getForm();
