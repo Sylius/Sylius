@@ -19,20 +19,20 @@ return static function (FrameworkConfig $framework): void {
     $catalogPromotion
         ->type('state_machine')
         ->supports([CatalogPromotion::class])
-        ->initialMarking(['active']);
+        ->initialMarking([Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE]);
 
     $catalogPromotion->markingStore()
         ->type('method')
         ->property('state');
 
-    $catalogPromotion->place()->name('active');
-    $catalogPromotion->place()->name('inactive');
-    $catalogPromotion->place()->name('processing');
+    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE);
+    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE);
+    $catalogPromotion->place()->name(Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_PROCESSING);
 
     $catalogPromotion->transition()
-        ->name('activate')
-        ->from(['processing'])
-        ->to(['active']);
+        ->name(Sylius\Component\Promotion\Model\CatalogPromotionTransitions::TRANSITION_ACTIVATE)
+        ->from([Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_PROCESSING])
+        ->to([Sylius\Component\Promotion\Model\CatalogPromotionStates:: STATE_ACTIVE]);
 
     $catalogPromotion->transition()
         ->name('deactivate')
