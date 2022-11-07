@@ -53,6 +53,9 @@ flysystem:
             options:
                 directory: '%sylius_core.images_dir%'
 
+framework:
+    workflows: null
+
 knp_gaufrette:
     adapters:
         sylius_image:
