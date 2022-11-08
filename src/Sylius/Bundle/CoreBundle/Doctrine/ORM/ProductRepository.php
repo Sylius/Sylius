@@ -61,7 +61,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         bool $includeAllDescendants = false,
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
-            ->distinct()
             ->addSelect('translation')
             ->addSelect('productTaxon')
             ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
@@ -82,6 +81,14 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             $queryBuilder
                 ->andWhere('productTaxon.taxon = :taxon')
                 ->setParameter('taxon', $taxon)
+            ;
+        }
+
+        if (empty($sorting)) {
+            $queryBuilder
+                ->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.taxon = :taxonId')
+                ->orderBy('productTaxons.position', 'ASC')
+                ->setParameter('taxonId', $taxon->getId())
             ;
         }
 
