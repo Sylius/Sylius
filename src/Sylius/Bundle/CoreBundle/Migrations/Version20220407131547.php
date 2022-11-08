@@ -27,9 +27,7 @@ final class Version20220407131547 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        if (!$schema->hasTable('messenger_messages')) {
-            return;
-        }
+        $this->skipIf(!$schema->hasTable('messenger_messages'), 'messenger_messages table was not found');
 
         $existingIndexes = $this->getExistingIndexesNames('messenger_messages');
 
