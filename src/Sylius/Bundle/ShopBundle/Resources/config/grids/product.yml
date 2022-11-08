@@ -15,6 +15,7 @@ sylius_grid:
                             taxon: "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
                             locale: "expr:service('sylius.context.locale').getLocaleCode()"
                             sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
+                            includeAllDescendants: "expr:parameter('sylius_shop.product_grid.include_all_descendants')"
             sorting:
                 position: asc
             limits: [9, 18, 27]
