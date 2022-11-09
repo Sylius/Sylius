@@ -26,6 +26,7 @@ return static function (ECSConfig $config): void {
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',
         VisibilityRequiredFixer::class => ['*Spec.php'],
         '**/var/*',
+        'src/Sylius/Behat/Service/Converter/IriConverter.php',
     ]);
     $config->ruleWithConfiguration(
         HeaderCommentFixer::class,
