@@ -721,6 +721,19 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product)'s price in ("[^"]+" channel) is ("[^"]+")$/
+     */
+    public function theProductPriceInChannelIs(ProductInterface $product, ChannelInterface $channel, int $price)
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        $channelPricing->setPrice($price);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^the ("[^"]+" product)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
      * @Given /^(it)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
