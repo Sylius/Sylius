@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2022-11-07T16:47:58Z
+
+Hi Joost,
+
+Looks good overall, there's just one thing.
+Could you add the `@api @ui` tags to the other scenarios inside `viewing_sorted_products_multiple_channels.feature`?
+Right now only the `Sorting products by their prices with ascending order on channel Poland` gets run.
+I highly doubt they'd fail, but just to be sure.
+
+Cheers
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-09T06:42:03Z
+
+Thank you, Joost! :tada:
