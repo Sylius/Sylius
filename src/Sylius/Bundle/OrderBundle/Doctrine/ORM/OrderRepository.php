@@ -115,13 +115,14 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, int $limit): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.state = :state')
             ->andWhere('o.updatedAt < :terminalDate')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('terminalDate', $terminalDate)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;

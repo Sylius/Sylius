@@ -33,21 +33,14 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
 
     public function remove(): void
     {
-        $expiredCarts = $this->orderRepository->findCartsNotModifiedSince(new \DateTime('-' . $this->expirationPeriod));
 
-        $this->eventDispatcher->dispatch(new GenericEvent($expiredCarts), SyliusExpiredCartsEvents::PRE_REMOVE);
-
-        $interval = 0;
-        foreach ($expiredCarts as $expiredCart) {
-            $this->orderManager->remove($expiredCart);
-            $interval++;
-            
-            if ($interval % $this->batchSize === 0) {
-                $this->orderManager->flush();
+        $expiredDate = new \DateTime('-' . $this->expirationPeriod);
+        while ([] !== ($expiredCarts = $this->orderRepository->findCartsNotModifiedSince($expiredDate, $this->batchSize))) {
+            $this->eventDispatcher->dispatch(new GenericEvent($expiredCarts), SyliusExpiredCartsEvents::PRE_REMOVE);
+            foreach ($expiredCarts as $expiredCart) {
+                $this->orderManager->remove($expiredCart);
             }
-        }
 
-        if ($interval % $this->batchSize !== 0) {
             $this->orderManager->flush();
         }
 

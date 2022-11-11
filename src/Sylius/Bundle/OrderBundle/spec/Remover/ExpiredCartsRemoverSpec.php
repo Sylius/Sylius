@@ -41,10 +41,11 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         OrderInterface $firstCart,
         OrderInterface $secondCart,
     ): void {
-        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn([
-            $firstCart,
-            $secondCart,
-        ]);
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'), 100)
+            ->shouldBeCalledTimes(2)
+            ->willReturn([ $firstCart, $secondCart ])
+            ->willReturn([])
+        ;
 
         $eventDispatcher
             ->dispatch(Argument::any(), SyliusExpiredCartsEvents::PRE_REMOVE)
@@ -69,7 +70,12 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         EventDispatcher $eventDispatcher,
         OrderInterface $cart,
     ): void {
-        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'))->willReturn(array_fill(0, 200, $cart));
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'), 100)
+            ->shouldBeCalledTimes(3)
+            ->willReturn(array_fill(0, 100, $cart))
+            ->willReturn(array_fill(0, 100, $cart))
+            ->willReturn([])
+        ;
 
         $eventDispatcher
             ->dispatch(Argument::any(), SyliusExpiredCartsEvents::PRE_REMOVE)
