@@ -15,7 +15,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 +---------------+-----------------------+
 | PHP           | ^8.0                  |
 +---------------+-----------------------+
-| sylius/sylius | ^1.10.1               |
+| sylius/sylius | ~1.11.2               |
 +---------------+-----------------------+
 | Symfony       | ^4.4 || ^5.4          |
 +---------------+-----------------------+
@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.7" --no-update
+    composer require "sylius/plus:^1.0.0-ALPHA.8" --no-update
     composer update --no-scripts
     composer sync-recipes
 
@@ -122,7 +122,6 @@ Installing Sylius Plus as a plugin to a Sylius application
 
     use Doctrine\Common\Collections\ArrayCollection;
     use Doctrine\ORM\Mapping as ORM;
-    use Sylius\Component\Channel\Model\ChannelAwareInterface;
     use Sylius\Component\Core\Model\AdminUser as BaseAdminUser;
     use Sylius\Component\Core\Model\AdminUserInterface;
     use Sylius\Plus\ChannelAdmin\Domain\Model\AdminChannelAwareTrait;
@@ -136,12 +135,12 @@ Installing Sylius Plus as a plugin to a Sylius application
      * @ORM\Entity
      * @ORM\Table(name="sylius_admin_user")
      */
-    class AdminUser extends BaseAdminUser implements AdminUserInterface, RbacAdminUserInterface, ChannelAwareInterface, LastLoginIpAwareInterface
+    class AdminUser extends BaseAdminUser implements AdminUserInterface, RbacAdminUserInterface, LastLoginIpAwareInterface
     {
         use AdminChannelAwareTrait;
         use LastLoginIpAwareTrait;
-        use ToggleablePermissionCheckerTrait;
         use RoleableTrait;
+        use ToggleablePermissionCheckerTrait;
 
         public function __construct()
         {
@@ -176,9 +175,9 @@ Installing Sylius Plus as a plugin to a Sylius application
      */
     class Channel extends BaseChannel implements ChannelInterface, ReturnsChannelInterface, BusinessUnitsChannelInterface, CustomerPoolsChannelInterface
     {
-        use ReturnRequestsAllowedAwareTrait;
-        use CustomerPoolAwareTrait;
         use BusinessUnitAwareTrait;
+        use CustomerPoolAwareTrait;
+        use ReturnRequestsAllowedAwareTrait;
     }
 
 .. code-block:: php
