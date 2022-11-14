@@ -14,18 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
-use Sylius\Component\Addressing\Model\Scope;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 class Version20161209095131 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->addSql(sprintf("UPDATE sylius_zone SET scope = '%s' where scope IS NULL", Scope::ALL));
+        $this->addSql("UPDATE sylius_zone SET scope = 'all' WHERE scope IS NULL");
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql(sprintf("UPDATE sylius_zone SET scope = NULL where scope = '%s'", Scope::ALL));
+        $this->addSql("UPDATE sylius_zone SET scope = NULL WHERE scope = 'all'");
     }
 }
