@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.customer_group.create" class="%sylius.behat.page.admin.customer_group.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.customer_group.create" class="%sylius.behat.page.admin.customer_group.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_customer_group_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer_group.index" class="%sylius.behat.page.admin.customer_group.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\CustomerGroup\CreatePageInterface" alias="sylius.behat.page.admin.customer_group.create" />
+
+        <service id="sylius.behat.page.admin.customer_group.index" class="%sylius.behat.page.admin.customer_group.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_customer_group_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.customer_group.update" class="%sylius.behat.page.admin.customer_group.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\CustomerGroup\IndexPageInterface" alias="sylius.behat.page.admin.customer_group.index" />
+
+        <service id="sylius.behat.page.admin.customer_group.update" class="%sylius.behat.page.admin.customer_group.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_customer_group_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\CustomerGroup\UpdatePageInterface" alias="sylius.behat.page.admin.customer_group.update" />
     </services>
 </container>

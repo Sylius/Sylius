@@ -17,10 +17,11 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.inventory.index" class="%sylius.behat.page.admin.inventory.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="sylius.behat.page.admin.inventory.index" class="%sylius.behat.page.admin.inventory.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_inventory_index</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Inventory\IndexPageInterface" alias="sylius.behat.page.admin.inventory.index" />
     </services>
 </container>

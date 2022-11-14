@@ -19,16 +19,21 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
+        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_zone_create</argument>
         </service>
-        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+        <service id="Sylius\Behat\Page\Admin\Zone\CreatePageInterface" alias="sylius.behat.page.admin.zone.create" />
+
+        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_zone_index</argument>
         </service>
-        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
+        <service id="Sylius\Behat\Page\Admin\Zone\IndexPageInterface" alias="sylius.behat.page.admin.zone.index" />
+
+        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update">
             <argument type="string">sylius_admin_zone_update</argument>
         </service>
+        <service id="Sylius\Behat\Page\Admin\Zone\UpdatePageInterface" alias="sylius.behat.page.admin.zone.update" />
     </services>
 </container>
