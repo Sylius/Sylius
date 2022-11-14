@@ -21,8 +21,6 @@ class Version20161209095131 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
         $this->addSql(sprintf("UPDATE sylius_zone SET scope = '%s' where scope IS NULL", Scope::ALL));
     }
 
