@@ -75,6 +75,24 @@ final class PaymentMethodFixtureTest extends TestCase
     /**
      * @test
      */
+    public function payment_method_channels_are_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['channels' => ['CHN-1', 'CHN-2']]]]], 'custom.*.channels');
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => []]]]],
+            ['custom' => [['channels' => []]]],
+            'custom.*.channels',
+        );
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => null]]]],
+            ['custom' => [[]]],
+            'custom.*.channels',
+        );
+    }
+
+    /**
+     * @test
+     */
     public function payment_method_instructions_configuration_must_by_string(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['instructions' => 'test']]]], 'custom.*.instructions');

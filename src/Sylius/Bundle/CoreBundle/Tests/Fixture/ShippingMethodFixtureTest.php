@@ -75,6 +75,24 @@ final class ShippingMethodFixtureTest extends TestCase
     /**
      * @test
      */
+    public function shipping_method_channels_are_optional(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['channels' => ['CHN-1', 'CHN-2']]]]], 'custom.*.channels');
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => []]]]],
+            ['custom' => [['channels' => []]]],
+            'custom.*.channels',
+        );
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => null]]]],
+            ['custom' => [[]]],
+            'custom.*.channels',
+        );
+    }
+
+    /**
+     * @test
+     */
     public function shipping_method_calculator_configuration_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['calculator' => [
