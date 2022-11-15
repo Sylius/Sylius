@@ -37,7 +37,7 @@ final class ProductVariantChoiceType extends AbstractType
             ->setDefaults([
                 'choices' => fn (Options $options): iterable => $options['product']->getVariants(),
                 'choice_value' => 'code',
-                'choice_label' => fn (ProductVariantInterface $variant): string => $variant->getName(),
+                'choice_label' => fn (ProductVariantInterface $variant): string => $variant->getName() ?? $variant->getDescriptor(),
                 'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,
