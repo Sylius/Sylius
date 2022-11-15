@@ -114,7 +114,6 @@
         "symfony/property-info": "^5.4 || ^6.0",
         "symfony/proxy-manager-bridge": "^5.4 || ^6.0",
         "symfony/routing": "^5.4 || ^6.0",
-        "symfony/runtime": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/security-core": "^5.4 || ^6.0",
         "symfony/security-csrf": "^5.4 || ^6.0",
@@ -224,6 +223,7 @@
         "symfony/debug-bundle": "^5.4 || ^6.0",
         "symfony/dotenv": "^5.4 || ^6.0",
         "symfony/flex": "^1.7",
+        "symfony/runtime": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
         "symplify/monorepo-builder": "^11.0",
         "vimeo/psalm": "^4.19"
@@ -240,8 +240,8 @@
         },
         "sort-packages": true,
         "allow-plugins": {
-            "symfony/flex": true,
             "dealerdirect/phpcodesniffer-composer-installer": false,
+            "symfony/flex": true,
             "symfony/runtime": true
         }
     },
