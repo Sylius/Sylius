@@ -33,6 +33,6 @@ class Kernel extends BaseKernel
 
     private function isTestEnvironment(): bool
     {
-        return str_contains($this->getEnvironment(), 'test');
+        return str_starts_with($this->getEnvironment(), 'test');
     }
 }
