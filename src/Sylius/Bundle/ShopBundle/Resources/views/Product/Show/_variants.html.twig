@@ -13,7 +13,7 @@
         {% set channelPricing = variant.getChannelPricingForChannel(sylius.channel) %}
         <tr {{ sylius_test_html_attribute('product-variants-row') }}>
             <td>
-                {{ variant.name }}
+                {{ variant.name|default(variant.descriptor) }}
                 {% if product.hasOptions() %}
                     <div class="ui horizontal divided list">
                         {% for optionValue in variant.optionValues %}

@@ -9,7 +9,7 @@
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}">
             <div class="sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>{{ item.productName }}</div>
-            <span class="sub header sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code') }}>
+            <span class="sub header sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code', variant.code) }}>
                 {{ variant.code }}
             </span>
         </a>
