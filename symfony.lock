@@ -170,9 +170,6 @@
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"
     },
-    "fig/link-util": {
-        "version": "1.1.0"
-    },
     "friends-of-behat/mink": {
         "version": "v1.8.0"
     },
@@ -375,9 +372,6 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v3.5.2"
-    },
-    "paragonie/random_compat": {
-        "version": "v2.0.18"
     },
     "payum/iso4217": {
         "version": "1.0.1"

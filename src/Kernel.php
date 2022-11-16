@@ -24,7 +24,7 @@ class Kernel extends BaseKernel
 
     protected function getContainerBaseClass(): string
     {
-        if ($this->isTestEnvironment() && class_exists(MockerContainer::class)) {
+        if (class_exists(MockerContainer::class) && $this->isTestEnvironment()) {
             return MockerContainer::class;
         }
 
@@ -33,6 +33,6 @@ class Kernel extends BaseKernel
 
     private function isTestEnvironment(): bool
     {
-        return 0 === strpos($this->getEnvironment(), 'test');
+        return str_starts_with($this->getEnvironment(), 'test');
     }
 }

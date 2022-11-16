@@ -28,12 +28,12 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: "Provide the list"
                 id: create-list
-                run: echo "::set-output name=packages::$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)"
+                run: echo "packages=$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c .)" >> $GITHUB_OUTPUT
 
         outputs:
             packages: "${{ steps.create-list.outputs.packages }}"
@@ -78,7 +78,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Setup PHP
@@ -90,11 +90,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-package-${{ matrix.package }}-composer-${{ hashFiles(format('src/Sylius/{0}/composer.json', matrix.package)) }}
@@ -168,14 +168,14 @@ jobs:
             -
                 name: Check the existence of phpunit.xml.dist
                 id: phpunit_xml_dist_existence_check
-                uses: andstor/file-existence-action@v1
+                uses: andstor/file-existence-action@v2
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml.dist"
 
             -
                 name: Check the existence of phpunit.xml
                 id: phpunit_xml_existence_check
-                uses: andstor/file-existence-action@v1
+                uses: andstor/file-existence-action@v2
                 with:
                     files: "src/Sylius/${{ matrix.package }}/phpunit.xml"
 
@@ -202,8 +202,8 @@ jobs:
                 id: process-data
                 shell: bash
                 run: |
-                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
-                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
 
             -
                 name: "Notify on Slack"
