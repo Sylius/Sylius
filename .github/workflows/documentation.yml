@@ -26,7 +26,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Install documentation dependencies
@@ -53,8 +53,8 @@ jobs:
                 id: process-data
                 shell: bash
                 run: |
-                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
-                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
 
             -
                 name: "Notify on Slack"
