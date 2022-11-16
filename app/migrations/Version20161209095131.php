@@ -14,45 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
-use Sylius\Component\Addressing\Model\Scope;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-class Version20161209095131 extends AbstractMigration implements ContainerAwareInterface
+class Version20161209095131 extends AbstractMigration
 {
-    /** @var ContainerInterface */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     public function up(Schema $schema): void
     {
-        $zoneRepository = $this->container->get('sylius.repository.zone');
-        $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
-
-        /** @var ZoneInterface $zone */
-        foreach ($zoneRepository->findBy(['scope' => null]) as $zone) {
-            $zone->setScope(Scope::ALL);
-        }
-
-        $entityManager->flush();
+        $this->addSql("UPDATE sylius_zone SET scope = 'all' WHERE scope IS NULL");
     }
 
     public function down(Schema $schema): void
     {
-        $zoneRepository = $this->container->get('sylius.repository.zone');
-        $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
-
-        /** @var ZoneInterface $zone */
-        foreach ($zoneRepository->findBy(['scope' => Scope::ALL]) as $zone) {
-            $zone->setScope('');
-        }
-
-        $entityManager->flush();
+        $this->addSql("UPDATE sylius_zone SET scope = NULL WHERE scope = 'all'");
     }
 }
