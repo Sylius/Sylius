@@ -319,7 +319,7 @@ final class CartContext implements Context
 
         $this->sharedStorage->set('product', $product);
         foreach ($product->getVariants() as $variant) {
-            if ($variant->getName() === $variantName) {
+            if ($variantName === ($variant->getName() ?? $variant->getDescriptor())) {
                 $this->sharedStorage->set('variant', $variant);
 
                 break;

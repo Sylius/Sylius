@@ -19,3 +19,15 @@ Feature: Adding a product with selected variant to the cart
         And this item should have name "T-Shirt banana"
         And this item should have variant "Small logo"
         And this item should have code "SMALL_LOGO"
+
+    @ui @no-api
+    Scenario: Adding a product with multiple nameless variants to the cart
+        Given the store has a "T-shirt banana" configurable product
+        And this product has a nameless variant with code "banana-s"
+        And this product also has a nameless variant with code "banana-m"
+        When I add "T-shirt banana (banana-m)" variant of this product to the cart
+        Then I should be on my cart summary page
+        And I should be notified that the product has been successfully added
+        And there should be one item in my cart
+        And this item should have name "T-shirt banana"
+        And this item should have code "banana-m"
