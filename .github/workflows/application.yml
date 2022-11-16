@@ -34,7 +34,7 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
@@ -42,11 +42,11 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Get branch name
-                uses: tj-actions/branch-names@v5.2
+                uses: tj-actions/branch-names@v6.2
                 id: branch-name
 
             -
@@ -74,12 +74,12 @@ jobs:
 
             -
                 name: Get Composer cache directory
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
                 id: composer-cache
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -88,7 +88,7 @@ jobs:
 
             -
                 name: Cache composer.lock
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: composer.lock
                     key: ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
@@ -96,7 +96,7 @@ jobs:
                         ${{ steps.branch-name.outputs.base_ref_branch }}-${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-lock
             -
                 name: Check existence of composer.lock
-                uses: andstor/file-existence-action@v1
+                uses: andstor/file-existence-action@v2
                 id: check-old-composer-lock-existence
                 with:
                     files: composer.lock
@@ -114,14 +114,6 @@ jobs:
                 name: Validate composer.json
                 run: composer validate --strict --no-check-version
                 if: always() && steps.end-of-setup.outcome == 'success'
-
-            -
-                name: Generate composer diff
-                uses: IonBazan/composer-diff-action@v1
-                if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
-                id: composer_diff
-                with:
-                    base: old-composer.lock
 
             -
                 name: Check for security vulnerabilities
@@ -167,7 +159,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Run PHPArkitect
@@ -188,14 +180,14 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
                         api-platform: "~2.6.0"
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -220,10 +212,10 @@ jobs:
 
             -   name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -252,7 +244,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
             -
                 name: Shutdown default MySQL
                 run: sudo service mysql stop
@@ -282,11 +274,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -337,7 +329,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
             -
                 name: Shutdown default MySQL
                 run: sudo service mysql stop
@@ -367,11 +359,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -439,7 +431,7 @@ jobs:
 
             -
                 name: Upload Behat logs
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v3
                 if: failure()
                 with:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
@@ -462,7 +454,7 @@ jobs:
                 api-platform: ["^2.7"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
-                
+
                 include:
                     -   php: "8.1"
                         symfony: "^5.4"
@@ -476,7 +468,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Shutdown default MySQL
@@ -515,11 +507,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -584,7 +576,7 @@ jobs:
 
             -
                 name: Upload Behat logs
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v3
                 if: failure()
                 with:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
@@ -612,7 +604,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Shutdown default MySQL
@@ -654,11 +646,11 @@ jobs:
             -
                 name: Get Composer cache directory
                 id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -671,18 +663,18 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v1
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
@@ -739,7 +731,7 @@ jobs:
 
             -
                 name: Upload Behat logs
-                uses: actions/upload-artifact@v2
+                uses: actions/upload-artifact@v3
                 if: failure()
                 with:
                     name: "Behat logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
@@ -763,8 +755,8 @@ jobs:
                 id: process-data
                 shell: bash
                 run: |
-                    echo "::set-output name=branch::$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')"
-                    echo "::set-output name=sha::$(echo ${{ github.sha }} | cut -c 1-12)"
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
 
             -
                 name: "Notify on Slack"
