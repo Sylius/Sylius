@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by coldic3 at 2022-11-14T09:47:06Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "issue/12985-migration-in-corebundle"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by coldic3 at 2022-11-14T09:47:42Z
+
+Hey @hasukmistry,
+thanks a lot for the PR! I've added a few additional changes and removed  `Sylius\Component\Addressing\Model\Scope` from migrations to operate just on raw queries without any dependencies to the code base itself.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-16T12:34:56Z
+
+Thanks, Hasmukh! :1st_place_medal:
