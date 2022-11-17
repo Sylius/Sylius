@@ -23,7 +23,7 @@ references related issues.
    Psalm error: 
    `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
- - `symfony/framework-bundle:^5.4.5`:
+ - `symfony/framework-bundle:5.4.5`:
 
    This version is causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
