@@ -383,6 +383,7 @@ so we can use an API Key provided in form.
         # src/Resources/config/services.yaml
         
         Acme\SyliusExamplePlugin\Payum\Action\CaptureAction:
+            public: true
             arguments:
                 - '@sylius.http_client'
             tags:
