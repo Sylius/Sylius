@@ -54,7 +54,7 @@ class PaymentFixture extends AbstractFixture
         /**
          * @psalm-suppress UndefinedMagicMethod
          *
-         * @var PaymentInterface
+         * @var PaymentInterface $payment
          */
         foreach ($payments as $payment) {
             if ($this->faker->boolean($options['percentage_completed'])) {
