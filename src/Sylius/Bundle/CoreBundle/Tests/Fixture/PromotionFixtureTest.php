@@ -102,6 +102,16 @@ final class PromotionFixtureTest extends TestCase
     public function promotion_channels_are_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['channels' => ['channel_1', 'channel_2']]]]], 'custom.*.channels');
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => []]]]],
+            ['custom' => [['channels' => []]]],
+            'custom.*.channels',
+        );
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['channels' => null]]]],
+            ['custom' => [[]]],
+            'custom.*.channels',
+        );
     }
 
     /**
