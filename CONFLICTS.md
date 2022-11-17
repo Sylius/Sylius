@@ -16,14 +16,14 @@ references related issues.
 
    References: https://github.com/schmittjoh/JMSSerializerBundle/issues/902
  
- - `symfony/dependency-injection:^5.4.5`:
+ - `symfony/dependency-injection:5.4.5`:
    
    This version is causing a problem with mink session:
   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
    Psalm error: 
    `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
- - `symfony/framework-bundle:^5.4.5`:
+ - `symfony/framework-bundle:5.4.5`:
 
    This version is causing a problem with returning null as token from `Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage`
    which leads to wrong solving path prefix by `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` in API scenarios
