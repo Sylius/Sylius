@@ -25,9 +25,9 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <field name="price" column="price" type="integer" nullable="true" />
-        <field name="originalPrice" column="original_price" type="integer" nullable="true" />
-        <field name="minimumPrice" column="minimum_price" type="integer" nullable="true">
+        <field name="price" column="price" type="bigint" nullable="true" />
+        <field name="originalPrice" column="original_price" type="bigint" nullable="true" />
+        <field name="minimumPrice" column="minimum_price" type="bigint" nullable="true">
             <options>
                 <option name="default">0</option>
             </options>
