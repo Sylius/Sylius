@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by coldic3 at 2022-11-16T15:06:42Z
+
+I would be for adding it to `custom_fixtures.yaml`, eg.:
+```yaml
+payments:
+    options:
+        percentage_completed: 75
+```
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2022-11-17T22:19:15Z
+
+> I would be for adding it to `custom_fixtures.yaml`, eg.:
+>
+> ```yaml
+> payments:
+>     options:
+>         percentage_completed: 75
+> ```
+
+Good point! Handled now 😅
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-18T07:21:52Z
+
+Thank you, Kamil! :tada:
