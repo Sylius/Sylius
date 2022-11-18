@@ -6,6 +6,7 @@ Sylius Bundles Documentation
 
     SyliusAddressingBundle/index
     SyliusAttributeBundle/index
+    SyliusCalendarBundle/index
     SyliusCustomerBundle/index
     SyliusInventoryBundle/index
     SyliusOrderBundle/index

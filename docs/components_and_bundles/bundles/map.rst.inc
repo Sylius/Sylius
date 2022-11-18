@@ -1,5 +1,6 @@
 * :doc:`/components_and_bundles/bundles/SyliusAddressingBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusAttributeBundle/index`
+* :doc:`/components_and_bundles/bundles/SyliusCalendarBundle/index`
 * :doc:`/components_and_bundles/bundles/SyliusCustomerBundle/index`
 * `SyliusFixturesBundle <https://github.com/Sylius/SyliusFixturesBundle/blob/master/docs/index.md>`_
 * `SyliusGridBundle <https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md>`_
