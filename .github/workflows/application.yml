@@ -266,7 +266,7 @@ jobs:
             matrix:
                 php: ["8.0"]
                 symfony: ["^5.4", "^6.0"]
-                postgres: ["13.8"]
+                postgres: ["13.9", "14.6"]
                 node: ["16.x"]
 
         env:
