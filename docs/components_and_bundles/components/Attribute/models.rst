@@ -32,7 +32,7 @@ Every attribute is represented by the **Attribute** model which by default has t
     This model uses the `TranslatableTrait <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableTrait.php>`_
     and implements the :ref:`component_attribute_model_attribute-interface`.
 
-    For more detailed information go to `Sylius Attribute Component Attribute`<https://github.com/Sylius/Attribute/blob/master/Model/Attribute.php>`_.
+    For more detailed information go to `Sylius Attribute Component Attribute <https://github.com/Sylius/Attribute/blob/master/Model/Attribute.php>`_.
 
 .. attention::
     Attribute's type is an alias of AttributeType service.
@@ -78,7 +78,7 @@ It has the following properties:
 .. note::
    This model implements the :ref:`component_attribute_model_attribute-value-interface`.
 
-    For more detailed information go to `Sylius Attribute Component AttributeValue`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeValue.php>`_.
+    For more detailed information go to `Sylius Attribute Component AttributeValue <https://github.com/Sylius/Attribute/blob/master/Model/AttributeValue.php>`_.
 
 .. _component_attribute_model_attribute-translation:
 
@@ -100,4 +100,4 @@ model which has the following properties:
    This model extends the `AbstractTranslation <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/AbstractTranslation.php>`_ class
    and implements the :ref:`component_attribute_model_attribute-translation-interface`.
 
-   For more detailed information go to `Sylius Attribute Component AttributeTranslation`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslation.php>`_.
+   For more detailed information go to `Sylius Attribute Component AttributeTranslation <https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslation.php>`_.

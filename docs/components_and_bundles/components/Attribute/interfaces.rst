@@ -17,7 +17,7 @@ used for describing a product's attribute.
     `ToggleableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/ToggleableInterface.php>`_
     and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-    For more detailed information go to `Sylius Attribute Component AttributeInterface`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeInterface.php>`_.
+    For more detailed information go to `Sylius Attribute Component AttributeInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeInterface.php>`_.
 
 .. _component_attribute_model_attribute-value-interface:
 
@@ -30,7 +30,7 @@ with a model implementing the :ref:`component_attribute_model_attribute-subject-
 e.g. the :ref:`component_product_model_product`.
 
 .. note::
-    For more detailed information go to `Sylius Attribute Component AttributeValueInterface`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeValueInterface.php>`_.
+    For more detailed information go to `Sylius Attribute Component AttributeValueInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeValueInterface.php>`_.
 
 .. _component_attribute_model_attribute-translation-interface:
 
@@ -41,7 +41,7 @@ This interface should be implemented by models maintaining a translation
 of an :ref:`component_attribute_model_attribute` for specified locale.
 
 .. note::
-    For more detailed information go to `Sylius Attribute Component AttributeTranslationInterface`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslationInterface.php>`_.
+    For more detailed information go to `Sylius Attribute Component AttributeTranslationInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeTranslationInterface.php>`_.
 
 .. _component_attribute_model_attribute-subject-interface:
 
@@ -54,4 +54,4 @@ various :ref:`component_attribute_model_attribute-value` objects.
 It will ask you to implement the management of :ref:`component_attribute_model_attribute-value` models.
 
 .. note::
-    For more detailed information go to `Sylius Attribute Component AttributeSubjectInterface`<https://github.com/Sylius/Attribute/blob/master/Model/AttributeSubjectInterface.php>`_.
+    For more detailed information go to `Sylius Attribute Component AttributeSubjectInterface <https://github.com/Sylius/Attribute/blob/master/Model/AttributeSubjectInterface.php>`_.
