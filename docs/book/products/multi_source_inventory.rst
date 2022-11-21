@@ -59,15 +59,16 @@ Inventory Source resolving
 
 The current implementation provides one main resolver, that can use multiple inventory sources filters.
 
-There are two filters provided by default:
+There are three filters provided by default:
 
 * *Sufficient*, with ``priority = 0``, that provides all inventory sources able to handle all ordered products;
 * *EnabledChannel*, with ``priority = 8``, that provides inventory sources enabled for the current channel;
+* *Priority*, with ``priority = -256``, that sorts filtered inventory sources based on their priority;
 
 Filters always return an array of inventory sources, however resolver picks the first of them or throws an
 ``UnresolvedInventorySource`` exception if no inventory source can be resolved.
 
-It's possible to add more inventory sources filter, with higher or lower priority. Such a service must implement Sylius\Plus\Inventory\Application\Filter\InventorySourcesFilterInterface and be registered with sylius_plus.inventory.inventory_sources_filter tag, with priority attribute set.
+It's possible to add more inventory sources filter, with higher or lower priority. Such a service must implement ``Sylius\Plus\Inventory\Application\Filter\InventorySourcesFilterInterface`` and be registered with ``sylius_plus.inventory.inventory_sources_filter`` tag, with priority attribute set.
 
 .. note::
 
@@ -102,6 +103,7 @@ This fixture creates Inventory Sources without products (empty) enabled in chose
    hamburg_warehouse:
       code: 'hamburg_warehouse'
       name: 'Hamburg Warehouse'
+      priority: 10
       channels:
          - 'HOME_WEB'
          - 'FASHION_WEB'
