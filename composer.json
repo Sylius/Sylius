@@ -181,8 +181,8 @@
         "api-platform/core": "2.7.0",
         "doctrine/doctrine-bundle": "2.3.0",
         "jms/serializer-bundle": "4.1.0",
-        "symfony/framework-bundle": "^5.4.5",
-        "symfony/dependency-injection": "^5.4.5",
+        "symfony/framework-bundle": "5.4.5",
+        "symfony/dependency-injection": "5.4.5",
         "liip/imagine-bundle": "2.7.0"
     },
     "require-dev": {
