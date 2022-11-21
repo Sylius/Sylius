@@ -91,6 +91,19 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I filter by group :groupName
+     * @When I filter by groups :firstGroup and :secondGroup
+     */
+    public function iFilterByGroup(string ...$groupsNames): void
+    {
+        foreach ($groupsNames as $groupName) {
+            $this->indexPage->specifyFilterGroup($groupName);
+        }
+
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then the customer :customer should appear in the store
      * @Then the customer :customer should still have this email
      */
@@ -180,8 +193,9 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then /^I should see (\d+) customers in the list$/
+     * @Then /^I should see a single customer on the list$/
      */
-    public function iShouldSeeCustomersInTheList($amountOfCustomers)
+    public function iShouldSeeCustomersInTheList($amountOfCustomers = 1)
     {
         Assert::same($this->indexPage->countItems(), (int) $amountOfCustomers);
     }
