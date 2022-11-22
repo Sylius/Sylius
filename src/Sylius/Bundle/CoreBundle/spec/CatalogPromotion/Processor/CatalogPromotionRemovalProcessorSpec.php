@@ -126,12 +126,12 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
         $this->beConstructedWith($catalogPromotionRepository, $eventBus, $commandBus);
 
         $this
-            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing an instance of %s as second constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, CatalogPromotionRemovalProcessor::class, CatalogPromotionRemovalAnnouncerInterface::class))
+            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing an instance of %s as second constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, CatalogPromotionRemovalProcessor::class, CatalogPromotionRemovalAnnouncerInterface::class))
             ->duringInstantiation()
         ;
 
         $this
-            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing third constructor argument for %s is deprecated as of Sylius 1.12 and will be removed in 2.0.', CatalogPromotionRemovalProcessor::class))
+            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing third constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0.', CatalogPromotionRemovalProcessor::class))
             ->duringInstantiation()
         ;
     }
