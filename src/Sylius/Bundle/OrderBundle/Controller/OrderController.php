@@ -38,6 +38,13 @@ class OrderController extends ResourceController
             $cart = $this->getOrderRepository()->findCartById($cart->getId());
         }
 
+        $this->getEventDispatcher()->dispatch(new GenericEvent($cart), SyliusCartEvents::CART_SUMMARY);
+        $event = $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $cart);
+        $eventResponse = $event->getResponse();
+        if (null !== $eventResponse) {
+            return $eventResponse;
+        }
+
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($cart));
         }
