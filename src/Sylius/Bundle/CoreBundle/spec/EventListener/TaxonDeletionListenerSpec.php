@@ -123,4 +123,15 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
 
         $this->removeTaxonFromPromotionRules($event);
     }
+
+    function it_changes_taxon_position_to_minus_one_if_base_position_is_zero(
+        GenericEvent $event,
+        TaxonInterface $taxon,
+    ): void {
+        $event->getSubject()->willReturn($taxon);
+        $taxon->getPosition()->willReturn(0);
+        $taxon->setPosition(-1)->shouldBeCalled();
+
+        $this->handleRemovingRootTaxonAtPositionZero($event);
+    }
 }
