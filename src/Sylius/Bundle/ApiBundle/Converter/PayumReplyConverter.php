@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Converter;
 
+use LogicException;
 use Payum\Core\Bridge\Symfony\Reply\HttpResponse as SymfonyHttpResponse;
 use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Reply\ReplyInterface;
@@ -34,17 +35,26 @@ final class PayumReplyConverter implements PayumReplyConverterInterface
     public function convert(ReplyInterface $reply): JsonResponse
     {
         if ($reply instanceof SymfonyHttpResponse) {
+            $response = $reply->getResponse();
             $reply = new HttpResponse(
-                $reply->getResponse()->getContent(),
-                $reply->getResponse()->getStatusCode(),
-                $reply->getResponse()->headers->all(),
+                $response->getContent(),
+                $response->getStatusCode(),
+                $response->headers->all(),
             );
         }
 
-        return new JsonResponse([
-            'content' => $reply->getContent(),
-            'statusCode' => $reply->getStatusCode(),
-            'headers' => $reply->getHeaders(),
-        ]);
+        if ($reply instanceof HttpResponse) {
+            return new JsonResponse([
+                'content' => $reply->getContent(),
+                'statusCode' => $reply->getStatusCode(),
+                'headers' => $reply->getHeaders(),
+            ]);
+        }
+
+        throw new LogicException(sprintf(
+            'This "%s" is not an instanceof "%s", please make your gateway reply a Payum HttpResponse.',
+            get_class($reply),
+            HttpResponse::class
+        ));
     }
 }
