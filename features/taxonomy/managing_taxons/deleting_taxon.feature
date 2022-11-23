@@ -6,6 +6,7 @@ Feature: Deleting a taxon
 
     Background:
         Given I am logged in as an administrator
+        And the store operates on a channel named "Web Store"
 
     @ui @javascript
     Scenario: Deleted taxon should disappear from the registry
@@ -27,7 +28,16 @@ Feature: Deleting a taxon
     @ui @javascript
     Scenario: Being unable to delete a menu taxon of a channel
         Given the store classifies its products as "T-Shirts" and "Caps"
-        And the store operates on a channel named "Web Store"
         And channel "Web Store" has menu taxon "Caps"
         When I try to delete taxon named "Caps"
         Then I should be notified that I cannot delete a menu taxon of any channel
+
+    @ui @javascript
+    Scenario: Deleting root taxon above menu taxon
+        Given the store has "Main Category" taxonomy
+        And the store has "Clothes Category" taxonomy
+        And channel "Web Store" has menu taxon "Main Category"
+        When I want to see all taxons in store
+        And I move down "Main Category" taxon
+        And I delete taxon named "Clothes Category"
+        Then the taxon named "Clothes Category" should no longer exist in the registry

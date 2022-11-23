@@ -267,6 +267,10 @@ final class ManagingTaxonsContext implements Context
      */
     public function taxonNamedShouldNotBeAdded($name)
     {
+        if (!$this->createPage->isOpen()) {
+            $this->createPage->open();
+        }
+
         Assert::same($this->createPage->countTaxonsByName($name), 0);
     }
 
