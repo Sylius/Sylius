@@ -31,8 +31,9 @@ final class CapturePayment
 
     /**
      * This controller is design to reproduce what Payum `CaptureController` is doing
-     * If the Capture is not triggering a `Reply` then invalidate the token and return
-     * the Token's after url else return the reply and token info.
+     * If the "Capture" request is not triggering a `Reply` (but return `null`) then
+     * invalidate the token and return build a redirect reply to the "Token's after url"
+     * else return the "Reply" itself.
      *
      * @see \Payum\Bundle\PayumBundle\Controller\CaptureController::doAction
      */
