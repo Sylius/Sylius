@@ -73,4 +73,15 @@ final class TaxonDeletionListener
             ]);
         }
     }
+
+    public function handleRemovingRootTaxonAtPositionZero(GenericEvent $event): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $event->getSubject();
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        if ($taxon->getPosition() === 0) {
+            $taxon->setPosition(-1);
+        }
+    }
 }
