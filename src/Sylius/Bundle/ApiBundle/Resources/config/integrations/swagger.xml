@@ -132,5 +132,15 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer.inner" />
             <argument type="service" id="sylius.repository.locale" />
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\PayumCaptureDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PayumCaptureDocumentationNormalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
     </services>
 </container>
