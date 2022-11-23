@@ -38,6 +38,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
 
     /**
      * @var ArrayCollection
+     *
      * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
      */
     protected $appliedPromotions;
