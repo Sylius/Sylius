@@ -57,7 +57,7 @@ final class PayumReplyConverter implements PayumReplyConverterInterface
         }
 
         throw new LogicException(sprintf(
-            'This "%s" is not an instanceof "%s", please make your gateway reply a Payum HttpResponse.',
+            'This "%s" is not an instance of "%s", please make your gateway reply a Payum HttpResponse.',
             get_class($reply),
             HttpResponse::class
         ));
