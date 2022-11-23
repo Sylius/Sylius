@@ -36,10 +36,15 @@ final class PayumReplyConverter implements PayumReplyConverterInterface
     {
         if ($reply instanceof SymfonyHttpResponse) {
             $response = $reply->getResponse();
+
+            $content = $response->getContent();
+            /** @var string[] $headers */
+            $headers = $response->headers->all();
+
             $reply = new HttpResponse(
-                $response->getContent(),
+                $content === false ? '' : $content,
                 $response->getStatusCode(),
-                $response->headers->all(),
+                $headers,
             );
         }
 
