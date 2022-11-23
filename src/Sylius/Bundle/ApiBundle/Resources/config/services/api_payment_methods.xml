@@ -21,5 +21,10 @@
         <service id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider">
             <argument type="tagged_iterator" tag="sylius.api.payment_method_handler" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Provider\CaptureUrlPaymentConfigurationProvider" decorates="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CaptureUrlPaymentConfigurationProvider.inner" />
+            <argument type="service" id="payum" />
+        </service>
     </services>
 </container>
