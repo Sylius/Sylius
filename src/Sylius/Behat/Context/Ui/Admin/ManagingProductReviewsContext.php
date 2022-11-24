@@ -48,6 +48,22 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I choose :state as a status filter
+     */
+    public function iChooseStateAsStatusFilter(string $state): void
+    {
+        $this->indexPage->chooseState($state);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
      * @When I delete them
      */
     public function iDeleteThem(): void
