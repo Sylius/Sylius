@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by ehibes at 2022-11-23T16:13:47Z
+
+Behat test is failing with api context.
+IMO it is normal, since the API controller does not use the same method of the repository.
+So we have to create a ProductCollectionDataProvider for the api part to use the right query builder.
+
+@GSadee @coldic3 Could you accept this pull request for the shop part, even if we open a new issue/PR for the api part?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-24T09:40:47Z
+
+> Behat test is failing with api context. IMO it is normal, since the API controller does not use the same method of the repository. So we have to create a ProductCollectionDataProvider for the api part to use the right query builder.
+>
+> @GSadee @coldic3 Could you accept this pull request for the shop part, even if we open a new issue/PR for the api part?
+
+Yes, as the API part requires additional and slightly different work to fix the issue, we could do that in a separate PR 👌🏻
+
+---------------------------------------------------------------------------
+
+by Rafikooo at 2022-11-24T10:54:33Z
+
+It would be nice if you tidy up your commits better, for instance, squash or reset all commits `git reset HEAD~8` and then commit them again with a more descriptive commit message
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-11-24T12:14:38Z
+
+Thanks, @everwhatever! :tada:
