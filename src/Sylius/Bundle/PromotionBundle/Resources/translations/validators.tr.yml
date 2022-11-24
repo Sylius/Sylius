@@ -31,8 +31,6 @@ sylius:
             min: Oluşturulacak kuponların miktarı en az {{ limit }} olmalıdır.
             not_blank: Lütfen oluşturulacak kuponların miktarını giriniz.
         code_length:
-            min: Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.
-            max: Kupon kodu {{ limit }} karakterden uzun olamaz.
             not_blank: Kupon kod uzunluğunu giriniz.
         usage_limit:
             min: Oluşturulan Kuponlar kullanım sınırı en az olması gerekir {{ limit }}.

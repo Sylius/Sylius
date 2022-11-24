@@ -31,8 +31,6 @@ sylius:
             min: Ilość kuponów rabatowych do wygenerowania musi wynosić co najmniej {{ limit }}.
             not_blank: Wprowadź ilość kuponów rabatowych do wygenerowania.
         code_length:
-            min: Kod kuponu rabatowego musi składać się co najmniej z {{ limit }} znaków.
-            max: Kod kuponu rabatowego nie może zawierać więcej niż {{ limit }} znaków.
             not_blank: Wprowadź długość kodu kuponu rabatowego.
         usage_limit:
             min: Ilość dostępnych do wykorzystania kodów rabatowych musi wynosić co najmniej {{ limit }}.

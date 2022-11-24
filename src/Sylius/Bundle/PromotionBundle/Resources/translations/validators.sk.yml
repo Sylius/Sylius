@@ -31,8 +31,6 @@ sylius:
             min: Počet kupónov na vygenerovanie musí byť minimálne {{ limit }}.
             not_blank: Prosím, zadajte počet kupónov na vygenerovanie.
         code_length:
-            min: Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
-            max: Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
             not_blank: Prosím, zadajte dĺžku kódu kupónu.
         usage_limit:
             min: Limit využitia vygenerovaných kupónov musí byť najmenej {{ limit }}.

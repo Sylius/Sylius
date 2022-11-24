@@ -31,8 +31,6 @@ sylius:
             min: Fjöldi afsláttarkóða verður að vera a.m.k. {{ limit }}.
             not_blank: Vinsamlega sláðu inn fjölda afsláttarkóða.
         code_length:
-            min: Afsláttarkóði þarf að vera að minnsta kosti {{ limit }} stafir.
-            max: Afsláttarkóði má ekki vera lengri en {{ limit }} stafir.
             not_blank: Vinsamlega sláðu inn lengd afsláttarkóða.
         usage_limit:
             min: Notkunartakmörkun verður að vera a.m.k. {{ limit }}.

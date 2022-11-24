@@ -31,8 +31,6 @@ sylius:
             min: 待生成的优惠券数量必须至少为 {{ limit }}。
             not_blank: 请输入想要生成的优惠券的数量。
         code_length:
-            min: 优惠券代码必须至少 {{ limit }} 个字符长。
-            max: 优惠券代码必须不能超过 {{ limit }} 个字符。
             not_blank: 优惠券代码不能为空。
         usage_limit:
             min: 生成的优惠券必须至少使用 {{ limit }} 次。

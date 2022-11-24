@@ -34,8 +34,6 @@ sylius:
             min: Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.
             not_blank: Voer het aantal te genereren coupons in.
         code_length:
-            min: Couponcode moet ten minste {{ limit }} tekens lang zijn.
-            max: Couponcode mag niet meer dan {{ limit }} karakters bevatten.
             not_blank: Voer de lengte van de couponcode in.
         possible_generation_amount: Ongeldige lengte van de kortingscode of aantal kortingsbonnen. Het is niet mogelijk om %expectedAmount% unieke coupons met code lengte %codeLength%te genereren. De mogelijke hoeveelheid om te genereren is %possibleAmount%.
         usage_limit:

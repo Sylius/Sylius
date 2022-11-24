@@ -31,8 +31,6 @@ sylius:
             min: Total de cupons para gerar deve ser pelo menos {{ limit }}.
             not_blank: Por favor, digite o total de cupons para gerar.
         code_length:
-            min: Código do cupom deve ter pelo menos {{ limit }} caracteres.
-            max: Código de cupom não deve ter mais de {{ limit }} caracteres.
             not_blank: Por favor digite o tamanho do código de cupom.
         usage_limit:
             min: Limite de uso de cupons gerados deve ser pelo menos {{ limit }}.

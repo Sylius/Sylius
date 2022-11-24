@@ -50,8 +50,6 @@ sylius:
             min: La nombre de code promos à générer doit être au moins de {{ limit }}.
             not_blank: Veuillez saisir le nombre de code promo à générer.
         code_length:
-            min: Le code du code promo doit être au moins de {{ limit }} caractères.
-            max: Le code du code promo ne doit pas faire plus de {{ limit }} caractères.
             not_blank: Veuillez saisir la longueur du code pour le code promo.
         possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:

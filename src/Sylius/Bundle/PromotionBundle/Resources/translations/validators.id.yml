@@ -31,8 +31,6 @@ sylius:
             min: Jumlah kupon yang dihasilkan harus paling sedikit {{ limit }}.
             not_blank: Harap masukkan jumlah kupon yang akan dihasilkan.
         code_length:
-            min: Kode kupon harus paling sedikit {{ limit }} karakternya panjang.
-            max: Kode kupon tidak boleh lebih dari karakter {{ limit }}.
             not_blank: Harap masukkan panjang kode kupon.
         usage_limit:
             min: Batas penggunaan kupon yang dihasilkan minimal harus {{ limit }}.
