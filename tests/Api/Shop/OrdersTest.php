@@ -225,11 +225,19 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_allows_to_patch_orders_address(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
         $tokenValue = 'nAWw2jewpA';
 
-        $this->placeOrder($tokenValue, 'oliver@doe.com');
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
 
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
@@ -246,15 +254,13 @@ final class OrdersTest extends JsonApiTestCase
         ];
 
         $this->client->request(
-            'PUT',
-            '/api/v2/shop/orders/nAWw2jewpA',
-            [],
-            [],
-            [
+            method: 'PUT',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: [
                 'CONTENT_TYPE' => 'application/ld+json',
                 'HTTP_ACCEPT' => 'application/ld+json',
             ],
-            json_encode([
+            content: json_encode([
                 'email' => 'oliver@doe.com',
                 'billingAddress' => $billingAddress,
             ])
