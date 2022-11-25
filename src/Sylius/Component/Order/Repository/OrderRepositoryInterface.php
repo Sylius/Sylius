@@ -40,7 +40,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
     /**
      * @return array|OrderInterface[]
      */
-    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array;
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, int $limit = -1): array;
 
     public function createCartQueryBuilder(): QueryBuilder;
 
