@@ -242,7 +242,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "symfony/thanks": false
         }
     },
     "extra": {
