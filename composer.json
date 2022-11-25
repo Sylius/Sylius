@@ -228,7 +228,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "symfony/flex": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "symfony/thanks": false
         }
     },
     "extra": {
