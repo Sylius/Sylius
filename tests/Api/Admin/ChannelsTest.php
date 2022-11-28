@@ -23,6 +23,51 @@ final class ChannelsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
+    public function it_gets_a_channel(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = $this->getLoggedHeader();
+
+        /** @var ChannelInterface $channel */
+        $channel = $fixtures['channel_web'];
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
+            [],
+            [],
+            $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/channel/get_channel_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_channels(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'GET',
+            '/api/v2/admin/channels',
+            [],
+            [],
+            $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/channel/get_channels_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_creates_a_channel(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
@@ -37,18 +82,31 @@ final class ChannelsTest extends JsonApiTestCase
             json_encode([
                 'name' => 'Web Store',
                 'code' => 'WEB',
+                'description' => 'Lorem ipsum',
+                'hostname' => 'test.com',
+                'color' => 'blue',
+                'enabled' => true,
                 'baseCurrency' => '/api/v2/admin/currencies/USD',
                 'defaultLocale' => '/api/v2/admin/locales/en_US',
                 'taxCalculationStrategy' => 'order_items_based',
-                'shippingAddressInCheckoutRequired' => true,
+                'currencies' => [],
+                'locales' => [],
+                'themeName' => 'garish',
+                'contactEmail' => 'contact@test.com',
+                'contactPhoneNumber' => '1-800-00-00-00',
+                'skippingShippingStepAllowed' => false,
+                'skippingPaymentStepAllowed' => true,
+                'accountVerificationRequired' => true,
+                'shippingAddressInCheckoutRequired' => false,
+                'menuTaxon' => null,
 
             ], JSON_THROW_ON_ERROR)
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/post_channel_response',
-            Response::HTTP_CREATED
+            'admin/channel/post_channel_response',
+            Response::HTTP_CREATED,
         );
     }
 
@@ -75,7 +133,7 @@ final class ChannelsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/put_channel_response',
+            'admin/channel/put_channel_response',
             Response::HTTP_OK
         );
     }
