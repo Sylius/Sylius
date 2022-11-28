@@ -8,7 +8,7 @@
     "phoneNumber":"666111333",
     "company":"Potato Corp.",
     "countryCode":"US",
-    "provinceCode":null,
+    "provinceCode":"US-MI",
     "provinceName":null,
     "street":"Top secret",
     "city":"Nebraska",

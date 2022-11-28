@@ -1,0 +1,9 @@
+{
+    "@context": "\/api\/v2\/contexts\/Country",
+    "@id": "\/api\/v2\/admin\/countries\/IE",
+    "@type": "Country",
+    "code": "IE",
+    "enabled": true,
+    "name": "Ireland",
+    "provinces": []
+}
