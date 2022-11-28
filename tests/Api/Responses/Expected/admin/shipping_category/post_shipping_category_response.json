@@ -1,0 +1,10 @@
+{
+    "@context": "\/api\/v2\/contexts\/ShippingCategory",
+    "@id": "\/api\/v2\/admin\/shipping-categories\/ultra",
+    "@type": "ShippingCategory",
+    "code": "ultra",
+    "name": "Ultra",
+    "description": null,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

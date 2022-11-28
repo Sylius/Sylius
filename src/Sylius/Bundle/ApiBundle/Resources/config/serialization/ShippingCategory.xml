@@ -16,9 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Shipping\Model\ShippingCategory">
-        <attribute name="id">
-            <group>admin:shipping_category:read</group>
-        </attribute>
         <attribute name="code">
             <group>admin:shipping_category:read</group>
             <group>admin:shipping_category:create</group>
