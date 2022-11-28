@@ -16,6 +16,14 @@
             <group>admin:promotion:read</group>
         </attribute>
 
+        <attribute name="createdAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="updatedAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
         <attribute name="name">
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
@@ -44,6 +52,10 @@
         </attribute>
 
         <attribute name="usageLimit">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="used">
             <group>admin:promotion:read</group>
         </attribute>
 
