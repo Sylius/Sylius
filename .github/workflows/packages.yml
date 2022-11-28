@@ -115,6 +115,7 @@ jobs:
                 name: Configure Swiftmailer (if needed)
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 run: |
+                    composer require --no-progress --no-update --no-scripts --no-plugins "sylius/mailer-bundle:^1.8"
                     composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"
                     echo "APP_ENV=test_with_swiftmailer" >> $GITHUB_ENV
                 if: matrix.swiftmailer == true
