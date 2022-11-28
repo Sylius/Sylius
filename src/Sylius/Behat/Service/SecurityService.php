@@ -31,7 +31,7 @@ final class SecurityService implements SecurityServiceInterface
         private RequestStack $requestStack,
         private CookieSetterInterface $cookieSetter,
         private string $firewallContextName,
-        private ?SessionFactoryInterface $sessionFactory = null
+        private ?SessionFactoryInterface $sessionFactory = null,
     ) {
         $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
     }
@@ -52,7 +52,8 @@ final class SecurityService implements SecurityServiceInterface
     {
         try {
             $this->setTokenCookie();
-        } catch (SessionNotFoundException) {}
+        } catch (SessionNotFoundException) {
+        }
     }
 
     public function getCurrentToken(): TokenInterface

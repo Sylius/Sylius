@@ -52,7 +52,7 @@ class ProductAttributeController extends ResourceController
 
         /** @var ProductAttribute[] $attributes */
         $attributes = $this->repository->findBy([
-            'code' => $request->query->all('sylius_product_attribute_choice')
+            'code' => $request->query->all('sylius_product_attribute_choice'),
         ]);
 
         if (empty($attributes)) {

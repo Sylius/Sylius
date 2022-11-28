@@ -29,7 +29,7 @@ final class ManagingTaxRateContext implements Context
         private CreatePageInterface $createPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private FilterElementInterface $filterElement
+        private FilterElementInterface $filterElement,
     ) {
     }
 

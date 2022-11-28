@@ -25,19 +25,10 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
 {
     public function isRoot(): bool;
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getRoot(): ?self;
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getParent(): ?self;
 
-    /**
-     * @param TaxonInterface|null $taxon
-     */
     public function setParent(?self $taxon): void;
 
     /**

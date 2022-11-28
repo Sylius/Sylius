@@ -31,6 +31,7 @@ final class PaypalContext implements Context
 
     /**
      * @When /^I confirm my order with paypal payment$/
+     *
      * @Given /^I have confirmed my order with paypal payment$/
      */
     public function iConfirmMyOrderWithPaypalPayment()
@@ -62,6 +63,7 @@ final class PaypalContext implements Context
 
     /**
      * @Given /^I have cancelled (?:|my )PayPal payment$/
+     *
      * @When /^I cancel (?:|my )PayPal payment$/
      */
     public function iCancelMyPaypalPayment()

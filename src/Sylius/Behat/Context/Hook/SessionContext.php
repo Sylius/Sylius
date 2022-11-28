@@ -24,7 +24,7 @@ final class SessionContext implements Context
 {
     public function __construct(
         private RequestStack $requestStack,
-        private ?SessionFactoryInterface $sessionFactory = null
+        private ?SessionFactoryInterface $sessionFactory = null,
     ) {
     }
 

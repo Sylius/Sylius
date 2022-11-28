@@ -49,6 +49,7 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @Given I am browsing exchange rates of the store
+     *
      * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */

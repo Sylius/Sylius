@@ -33,6 +33,7 @@ final class CheckoutShippingContext implements Context
     /**
      * @Given I completed the shipping step with :shippingMethodName shipping method
      * @Given I have proceeded selecting :shippingMethodName shipping method
+     *
      * @When I proceed with :shippingMethodName shipping method
      */
     public function iHaveProceededSelectingShippingMethod(string $shippingMethodName): void
@@ -43,6 +44,7 @@ final class CheckoutShippingContext implements Context
 
     /**
      * @Given I have selected :shippingMethodName shipping method
+     *
      * @When I select :shippingMethodName shipping method
      */
     public function iSelectShippingMethod(string $shippingMethodName): void
