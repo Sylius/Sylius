@@ -299,9 +299,15 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_to_patch_orders_address(): void
+    public function it_allows_to_replace_orders_address(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -324,22 +330,20 @@ final class OrdersTest extends JsonApiTestCase
             'phoneNumber'=> '666111333',
             'company'=> 'Potato Corp.',
             'countryCode'=> $country->getCode(),
+            'provinceCode' => 'US-MI',
             'street'=> 'Top secret',
             'city'=> 'Nebraska',
-            'postcode'=> '12343'
+            'postcode'=> '12343',
         ];
 
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/shop/orders/nAWw2jewpA',
-            server: [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-            ],
+            server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'oliver@doe.com',
                 'billingAddress' => $billingAddress,
-            ])
+            ], JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
