@@ -18,6 +18,7 @@ use Twig\TwigFunction;
 
 /**
  * @internal
+ *
  * @experimental
  */
 final class LegacySonataBlockExtension extends AbstractExtension

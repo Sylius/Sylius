@@ -30,7 +30,7 @@ final class CustomerCheckoutGuestType extends AbstractResourceType
         array $validationGroups,
         private RepositoryInterface $customerRepository,
         private FactoryInterface $customerFactory,
-        private CanonicalizerInterface $canonicalizer
+        private CanonicalizerInterface $canonicalizer,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }

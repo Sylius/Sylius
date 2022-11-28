@@ -46,6 +46,7 @@ final class CheckoutPaymentContext implements Context
 
     /**
      * @Given I completed the payment step with :paymentMethodName payment method
+     *
      * @When /^I choose "([^"]*)" payment method$/
      */
     public function iChoosePaymentMethod(string $paymentMethodName): void

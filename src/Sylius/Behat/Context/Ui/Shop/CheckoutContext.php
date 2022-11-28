@@ -55,6 +55,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I chose :shippingMethodname shipping method
+     *
      * @When I proceed selecting :shippingMethodName shipping method
      */
     public function iProceedSelectingShippingMethod(string $shippingMethodName): void
@@ -64,6 +65,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I have proceeded selecting :paymentMethodName payment method
+     *
      * @When I proceed selecting :paymentMethodName payment method
      */
     public function iProceedSelectingPaymentMethod($paymentMethodName)
@@ -75,6 +77,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
      * @Given I proceeded with :shippingMethodName shipping method and :paymentMethodName payment
+     *
      * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
      */
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
@@ -86,6 +89,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      * @Given I have proceeded through checkout process
+     *
      * @When I proceed through checkout process
      * @When I proceed through checkout process in the :localeCode locale
      * @When I proceed through checkout process in the :localeCode locale with email :email

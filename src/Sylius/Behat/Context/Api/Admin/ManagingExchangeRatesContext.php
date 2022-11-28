@@ -32,6 +32,7 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @When /^I want to edit (this exchange rate)$/
+     *
      * @Given /^I am editing (this exchange rate)$/
      */
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
@@ -43,6 +44,7 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @Given I am browsing exchange rates of the store
+     *
      * @When I browse exchange rates
      * @When I browse exchange rates of the store
      */

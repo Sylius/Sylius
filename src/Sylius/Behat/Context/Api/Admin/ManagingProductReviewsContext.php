@@ -47,6 +47,7 @@ final class ManagingProductReviewsContext implements Context
 
     /**
      * @When I change its title to :title
+     *
      * @when I remove its title
      */
     public function iChangeItsTitleTo(?string $title = ''): void
@@ -56,6 +57,7 @@ final class ManagingProductReviewsContext implements Context
 
     /**
      * @When I change its comment to :comment
+     *
      * @when I remove its comment
      */
     public function iChangeItsCommentTo(?string $comment = ''): void

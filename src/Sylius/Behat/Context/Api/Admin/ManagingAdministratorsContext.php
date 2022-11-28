@@ -37,6 +37,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @Given /^I am editing (my) details$/
+     *
      * @When /^I want to edit (this administrator)$/
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void

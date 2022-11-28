@@ -89,6 +89,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
      * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment
+     *
      * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
      */
     public function iProceedOrderWithShippingMethodAndPayment(
@@ -101,9 +102,11 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I am at the checkout addressing step
+     *
      * @When I complete the payment step
      * @When I complete the shipping step
      * @When I go to the checkout addressing step
+     *
      * @Then there should be information about no available shipping methods
      * @Then I should be informed that my order cannot be shipped to this address
      * @Then I should not be able to address an order with an empty cart
@@ -136,6 +139,7 @@ final class CheckoutContext implements Context
     /**
      * @When I specify the email as :email
      * @When /^the (?:customer|visitor) specify the email as "([^"]+)"$/
+     *
      * @Given /^the (?:customer|visitor) has specified the email as "([^"]+)"$/
      */
     public function iSpecifyTheEmailAs(?string $email): void
@@ -148,6 +152,7 @@ final class CheckoutContext implements Context
      * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     *
      * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
@@ -249,6 +254,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
+     *
      * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
      */
     public function iCompleteAddressingStepWithEmail(string $email, AddressInterface $address): void
@@ -270,7 +276,9 @@ final class CheckoutContext implements Context
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      * @When /^the (?:customer|visitor) completes the addressing step$/
+     *
      * @Given /^the (?:customer|visitor) has completed the addressing step$/
+     *
      * @When the visitor try to complete the addressing step in the customer cart
      */
     public function iCompleteTheAddressingStep(): void
@@ -304,6 +312,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I confirmed my order
+     *
      * @When I confirm my order
      * @When I try to confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
@@ -325,12 +334,16 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I completed the shipping step with :shippingMethod shipping method
+     *
      * @When I proceed with :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      * @When /^the (?:visitor|customer) proceed with ("[^"]+" shipping method)$/
+     *
      * @Given /^the (?:visitor|customer) has proceeded ("[^"]+" shipping method)$/
+     *
      * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      * @When I try to change shipping method to :shippingMethod
+     *
      * @Given I proceed selecting :shippingMethod shipping method
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -421,12 +434,15 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I completed the payment step with :paymentMethod payment method
+     *
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
      * @When I have proceeded selecting :paymentMethod payment method
      * @When I proceed selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
+     *
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
+     *
      * @When I try to change payment method to :paymentMethod payment
      * @When I change payment method to :paymentMethod after checkout
      */

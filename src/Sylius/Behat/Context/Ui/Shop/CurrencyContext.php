@@ -25,6 +25,7 @@ final class CurrencyContext implements Context
 
     /**
      * @When I switch to the :currencyCode currency
+     *
      * @Given I changed my currency to :currencyCode
      */
     public function iSwitchTheCurrencyToTheCurrency($currencyCode)

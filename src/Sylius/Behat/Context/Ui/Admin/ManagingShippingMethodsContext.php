@@ -341,6 +341,7 @@ final class ManagingShippingMethodsContext implements Context
 
     /**
      * @Given I am browsing shipping methods
+     *
      * @When I browse shipping methods
      * @When I want to browse shipping methods
      */
@@ -391,6 +392,7 @@ final class ManagingShippingMethodsContext implements Context
     /**
      * @When I switch the way shipping methods are sorted :sortType by :field
      * @When I sort the shipping methods :sortType by :field
+     *
      * @Given the shipping methods are already sorted :sortType by :field
      */
     public function iSortShippingMethodsBy(string $sortType, string $field): void

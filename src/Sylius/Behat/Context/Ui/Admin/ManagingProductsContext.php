@@ -234,6 +234,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Given I am browsing products
+     *
      * @When I browse products
      * @When I want to browse products
      */

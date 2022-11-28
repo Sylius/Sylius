@@ -35,6 +35,7 @@ final class ManagingPaymentsContext implements Context
 
     /**
      * @Given I am browsing payments
+     *
      * @When I browse payments
      */
     public function iAmBrowsingPayments(): void

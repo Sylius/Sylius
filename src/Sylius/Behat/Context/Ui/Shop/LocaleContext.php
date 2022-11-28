@@ -27,6 +27,7 @@ final class LocaleContext implements Context
     /**
      * @Given I switched the shop's locale to :name
      * @Given I have switched to the :name locale
+     *
      * @When I switch to the :name locale
      * @When I change my locale to :name
      */

@@ -24,6 +24,7 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
      * Blocks within an event should be sorted by their priority descending.
      *
      * @var TemplateBlock[][]
+     *
      * @psalm-var array<string, array<string, TemplateBlock>>
      */
     private $eventsToTemplateBlocks;
@@ -65,6 +66,7 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
 
     /**
      * @param string[] $eventNames
+     *
      * @psalm-param non-empty-list<string> $eventNames
      *
      * @return TemplateBlock[]
@@ -73,6 +75,7 @@ final class TemplateBlockRegistry implements TemplateBlockRegistryInterface
     {
         /**
          * @var TemplateBlock[]
+         *
          * @psalm-var array<string, TemplateBlock> $finalizedTemplateBlocks
          */
         $finalizedTemplateBlocks = [];

@@ -31,6 +31,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
 
     /**
      * @test
+     *
      * @depends it_can_be_instantiated
      */
     public function it_can_calculate_the_subtotal_of_order_items(OrderItemsSubtotalCalculator $calculator): void
@@ -44,6 +45,7 @@ final class OrderItemsSubtotalCalculatorTest extends MockeryTestCase
 
     /**
      * @test
+     *
      * @depends it_can_be_instantiated
      */
     public function it_can_calculate_a_subtotal_if_there_are_no_order_items(
