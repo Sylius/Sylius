@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,51 @@ use Symfony\Component\HttpFoundation\Response;
 final class PromotionTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
+
+    /** @test */
+    public function it_gets_a_promotion(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $header = $this->getLoggedHeader();
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
+            [],
+            [],
+            $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/get_promotion_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_promotions(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $header = $this->getLoggedHeader();
+
+        $this->client->request(
+            'GET',
+            '/api/v2/admin/promotions',
+            [],
+            [],
+            $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/get_promotions_response',
+            Response::HTTP_OK,
+        );
+    }
 
     /** @test */
     public function it_creates_promotion(): void
@@ -42,13 +88,13 @@ final class PromotionTest extends JsonApiTestCase
                     'label' => 'T-Shirts discount',
                 ]],
 
-            ], JSON_THROW_ON_ERROR)
+            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/post_promotion_response',
-            Response::HTTP_CREATED
+            'admin/promotion/post_promotion_response',
+            Response::HTTP_CREATED,
         );
     }
 

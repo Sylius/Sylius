@@ -26,6 +26,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:promotion:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_get">
