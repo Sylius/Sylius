@@ -1,3 +1,7 @@
 Sylius\Component\Currency\Model\Currency:
     currency_usd:
         code: 'USD'
+    currency_gbp:
+        code: 'GBP'
+    currency_eur:
+        code: 'EUR'
