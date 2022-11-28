@@ -192,7 +192,7 @@ jobs:
                 id: test_application_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
-                    files: "src/Sylius/${{ matrix.package }}/Tests/Functional/console, src/Sylius/${{ matrix.package }}/test/app/console"
+                    files: "src/Sylius/${{ matrix.package }}/**/console"
                     
             -
                 name: Check the existence of Twig templates
