@@ -1,0 +1,7 @@
+{
+    "@context": "\/api\/v2\/contexts\/Locale",
+    "@id": "\/api\/v2\/admin\/locales\/ga_IE",
+    "@type": "Locale",
+    "code": "ga_IE",
+    "name": "Irish (Ireland)"
+}
