@@ -16,9 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Taxation\Model\TaxCategory">
-        <attribute name="id">
-            <group>admin:tax_category:read</group>
-        </attribute>
         <attribute name="createdAt">
             <group>admin:tax_category:read</group>
         </attribute>
