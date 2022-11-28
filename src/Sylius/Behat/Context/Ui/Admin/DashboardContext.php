@@ -27,6 +27,7 @@ final class DashboardContext implements Context
 
     /**
      * @Given I am on the administration dashboard
+     *
      * @When I (try to )open administration dashboard
      */
     public function iOpenAdministrationDashboard(): void

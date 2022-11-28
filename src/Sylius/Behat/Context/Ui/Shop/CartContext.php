@@ -45,6 +45,7 @@ final class CartContext implements Context
 
     /**
      * @Given I am on the summary of my cart page
+     *
      * @When /^I see the summary of my (?:|previous )cart$/
      * @When /^I check details of my cart$/
      */
@@ -83,6 +84,7 @@ final class CartContext implements Context
 
     /**
      * @Given I removed product :productName from the cart
+     *
      * @When I remove product :productName from the cart
      */
     public function iRemoveProductFromTheCart(string $productName): void
@@ -272,6 +274,7 @@ final class CartContext implements Context
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
      * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
+     *
      * @When I add product :product to the cart
      * @When they add product :product to the cart
      */
@@ -309,6 +312,7 @@ final class CartContext implements Context
     /**
      * @When I add :variantName variant of product :product to the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
+     *
      * @Given I have :variantName variant of product :product in the cart
      * @Given /^I have "([^"]+)" variant of (this product) in the cart$/
      */
@@ -338,6 +342,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
+     *
      * @When /^I add(?:|ed)(?:| again) (\d+) (products "([^"]+)") to the cart$/
      */
     public function iAddProductsToTheCart($quantity, ProductInterface $product)
@@ -420,6 +425,7 @@ final class CartContext implements Context
     /**
      * @Given I have :product with :productOption :productOptionValue in the cart
      * @Given I have product :product with product option :productOption :productOptionValue in the cart
+     *
      * @When I add :product with :productOption :productOptionValue to the cart
      */
     public function iAddThisProductWithToTheCart(

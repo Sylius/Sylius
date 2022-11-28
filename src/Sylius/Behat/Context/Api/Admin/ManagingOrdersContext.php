@@ -41,6 +41,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Given /^I am viewing the summary of (this order)$/
+     *
      * @When I view the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order): void

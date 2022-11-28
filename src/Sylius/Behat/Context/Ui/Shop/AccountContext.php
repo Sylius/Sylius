@@ -232,6 +232,7 @@ final class AccountContext implements Context
 
     /**
      * @Given I am browsing my orders
+     *
      * @When I browse my orders
      */
     public function iBrowseMyOrders(): void

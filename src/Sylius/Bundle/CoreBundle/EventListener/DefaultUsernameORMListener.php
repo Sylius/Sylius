@@ -19,8 +19,6 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * Keeps user's username synchronized with email.

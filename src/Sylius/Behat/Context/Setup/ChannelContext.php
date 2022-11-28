@@ -241,6 +241,7 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
+     *
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      * @When customer view shop on :channel channel
      * @When I am in the :channel channel

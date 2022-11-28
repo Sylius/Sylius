@@ -22,7 +22,7 @@ class TaxRateResolver implements TaxRateResolverInterface
 {
     public function __construct(
         protected RepositoryInterface $taxRateRepository,
-        protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null
+        protected ?TaxRateDateEligibilityCheckerInterface $taxRateDateChecker = null,
     ) {
         if ($this->taxRateDateChecker === null) {
             @trigger_error('Not passing TaxRateDateEligibilityCheckerInterface through constructor is deprecated in Sylius 1.12 and it will be prohibited in Sylius 2.0');

@@ -257,6 +257,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Given I am modifying a channel :channel
+     *
      * @When I want to modify a channel :channel
      * @When /^I want to modify (this channel)$/
      */
