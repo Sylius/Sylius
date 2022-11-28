@@ -192,7 +192,7 @@ jobs:
                 id: test_application_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
-                    files: "src/Sylius/${{ matrix.package }}/**/console"
+                    files: "src/Sylius/${{ matrix.package }}/Tests/Functional/console"
                     
             -
                 name: Check the existence of Twig templates
@@ -205,7 +205,7 @@ jobs:
                 name: Lint Twig templates
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.templates_existence_check.outputs.files_exists == 'true' && steps.test_application_existence_check.outputs.files_exists == 'true'
-                run: Tests/Functional/console lint:twig Resources/views || test/app/console lint:twig Resources/views
+                run: Tests/Functional/console lint:twig Resources/views
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
