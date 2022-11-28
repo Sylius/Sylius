@@ -48,7 +48,7 @@ final class AddressesGetTest extends JsonApiTestCase
             array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
         );
 
-        $this->assertResponse($this->client->getResponse(), 'shop/get_addresses_response');
+        $this->assertResponse($this->client->getResponse(), 'shop/address/get_addresses_response');
     }
 
     /** @test */
@@ -70,6 +70,6 @@ final class AddressesGetTest extends JsonApiTestCase
             array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
         );
 
-        $this->assertResponse($this->client->getResponse(), 'shop/get_an_address_response');
+        $this->assertResponse($this->client->getResponse(), 'shop/address/get_an_address_response');
     }
 }
