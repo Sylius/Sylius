@@ -11,3 +11,7 @@ sylius_addressing:
             classes:
                 model: Sylius\Component\Core\Model\Address
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\AddressRepository
+        address_log_entry:
+            classes:
+                model: Sylius\Component\Addressing\Model\AddressLogEntry
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepository
