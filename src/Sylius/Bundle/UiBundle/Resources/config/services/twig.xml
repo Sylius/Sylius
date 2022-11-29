@@ -56,5 +56,7 @@
         <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
             <argument type="service" id="request_stack" />
         </service>
+
+        <service id="Sylius\Bundle\UiBundle\Twig\UndefinedCallableHandler" public="false" />
     </services>
 </container>
