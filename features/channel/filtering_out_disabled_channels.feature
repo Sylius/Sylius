@@ -13,6 +13,7 @@ Feature: Filtering out disabled channels
 
     @ui @api
     Scenario: Seeing Furniture shop products
-        When I check latest products
+        When I browse the "Furniture" channel
+        And I check latest products
         Then I should see "Old Wardrobe" product
         And I should not see "Black T-Shirt" product
