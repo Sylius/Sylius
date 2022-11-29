@@ -1,0 +1,72 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductReview",
+    "@id": "\/api\/v2\/shop\/product-reviews",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Greatest product!",
+            "rating": 3,
+            "comment": "I have never bought anything better.",
+            "author": "\/api\/v2\/shop\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/shop\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "Could be better",
+            "rating": 4,
+            "comment": "No real problems, but I feel it is a little lacking",
+            "author": "\/api\/v2\/shop\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/shop\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
+            "@type": "ProductReview",
+            "id": @integer@,
+            "title": "This review was definitely not bought",
+            "rating": 5,
+            "comment": "Bestest thing you could ever imagine!",
+            "author": "\/api\/v2\/shop\/customers\/@integer@",
+            "status": "accepted",
+            "reviewSubject": "\/api\/v2\/shop\/products\/MUG",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 3,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/product-reviews{?reviewSubject,reviewSubject[],order[createdAt]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "reviewSubject",
+                "property": "reviewSubject",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "reviewSubject[]",
+                "property": "reviewSubject",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            }
+        ]
+    }
+}
