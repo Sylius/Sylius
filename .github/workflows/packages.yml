@@ -211,7 +211,7 @@ jobs:
                 name: Lint Twig templates
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.templates_existence_check.outputs.files_exists == 'true' && steps.test_application_existence_check.outputs.files_exists == 'true'
-                run: Tests/Functional/console lint:twig Resources/views
+                run: Tests/Functional/console lint:twig ${{ matrix.twig_templates_path }}
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
