@@ -39,9 +39,6 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:create</attribute>
                 </attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_association_type:read</attribute>
-                </attribute>
             </collectionOperation>
         </collectionOperations>
 
