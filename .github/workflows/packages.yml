@@ -54,6 +54,7 @@ jobs:
                 symfony: ["^5.4", "^6.0"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
                 swiftmailer: [false]
+                twig_templates_path: ["Resources/views"]
                 include:
                     -
                         php: "8.0"
@@ -75,6 +76,11 @@ jobs:
                         symfony: "^5.4"
                         package: "Bundle/AdminBundle"
                         swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^6.0"
+                        package: "Bundle/UiBundle"
+                        twig_templates_path: "Resources/views/Form/semantic_ui_layout.html.twig"                       
 
         steps:
             -
@@ -199,7 +205,7 @@ jobs:
                 id: templates_existence_check
                 uses: andstor/file-existence-action@v1
                 with:
-                    files: "src/Sylius/${{ matrix.package }}/Resources/views/*.html.twig"       
+                    files: "src/Sylius/${{ matrix.package }}/${{ matrix.twig_templates_path }}"       
             
             -
                 name: Lint Twig templates

@@ -1,0 +1,131 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_help(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="ui red {% if form.parent is not empty %}pointing {% endif %}label sylius-validation-error" {{ sylius_test_html_attribute('validation-error') }} {% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui toggle checkbox">
+            {{- form_widget(form) -}}
+            {{- form_label(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui radio checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock radio_row %}
+
+{% block money_widget -%}
+    <div class="ui labeled input">
+        <div class="ui label">{{ currency }}</div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock money_widget %}
+
+{% block choice_row -%}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {% set attr = attr|merge({'class': attr.class|default ~ ' ui dropdown'}) %}
+        {{- form_widget(form, {'attr': attr}) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock choice_row %}
+
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="{% if required %}required {% endif %}grouped fields">
+            {%- for child in form %}
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        {{- form_widget(child, sylius_test_form_attribute('option')) -}}
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                    </div>
+                </div>
+            {% endfor -%}
+        </div>
+    </div>
+{%- endblock choice_widget_expanded -%}
+
+{% block percent_widget -%}
+    <div class="ui right labeled input">
+        {{- form_widget(form) -}}
+        <div class="ui basic label">%</div>
+    </div>
+{%- endblock percent_widget %}
+
+{% block collection_widget -%}
+    {% from '@SyliusResource/Macros/notification.html.twig' import error %}
+    {% import _self as self %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% apply spaceless %}
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                data-prototype-name='{{ prototype.vars.name }}'
+            {%- endif -%}
+        >
+            {{ error(form.vars.errors) }}
+
+            {% if prototypes|default is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden" data-form-prototype="{{ key }}"
+                           value="{{ self.collection_item(subPrototype, allow_delete, button_delete_label, subPrototype.vars.name)|e }}"
+                           data-subprototype-name="{{ subPrototype.vars.name }}"
+                    />
+                {% endfor %}
+            {% endif %}
+
+            <div data-form-collection="list">
+                {% for child in form %}
+                    {{ self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% if prototype is defined and allow_add %}
+                <a href="#" class="ui labeled icon button" data-form-collection="add">
+                    <i class="plus square outline icon"></i>
+                    {{ button_add_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endapply %}
+{%- endblock collection_widget %}
+
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+    {% apply spaceless %}
+        <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endapply %}
+{% endmacro %}
