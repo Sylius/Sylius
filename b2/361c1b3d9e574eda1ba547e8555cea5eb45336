@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-11-18T13:48:32Z
+
+Hi @diimpp!
+Why do you think this service should be marked as public?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-18T14:56:51Z
+
+Hello @jakubtobiasz,
+
+I cannot tell you exact reason why custom payum actions should be registered as public, but that's the way with SyliusPayumBundle custom actions https://github.com/Sylius/Sylius/blob/23dc8d6915b2540f88ffceb7b9ea9a3214543837/src/Sylius/Bundle/PayumBundle/Resources/config/services/action.xml#L8
+ as well in my personal experience I was forced to do the same for my custom actions.
+
+There are two service definitions in this doc, xml and yaml. Xml contains correct `public` definition, while yaml misses it. (See related ticket)
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-28T18:19:14Z
+
+@jakubtobiasz hi, what can be done to merge it early? Do you need second review for core team?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-11-28T20:33:37Z
+
+@diimpp yep, more votes needed, I pinged the team.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-11-29T06:40:07Z
+
+Thank you, Dmitri! :tada:
