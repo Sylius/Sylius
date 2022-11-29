@@ -5,27 +5,26 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Command;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Intl\Locales;
 
 #[AsCommand(
     name: 'sylius:admin-user:create',
     description: 'Create a new admin user'
 )]
-class CreateAdminUserCommand extends Command
+final class CreateAdminUserCommand extends Command
 {
     private SymfonyStyle $io;
 
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
-        private RepositoryInterface $localeRepository,
         private FactoryInterface $adminUserFactory,
     ) {
         parent::__construct();
@@ -38,6 +37,12 @@ class CreateAdminUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if (!$input->isInteractive()) {
+            $this->io->error('This command should be run interactively.');
+
+            return Command::FAILURE;
+        }
+
         $this->io->title('Admin user creation');
 
         $confirm = $this->io->confirm('Do you want to create an admin user ?', true);
@@ -46,10 +51,7 @@ class CreateAdminUserCommand extends Command
             return Command::INVALID;
         }
 
-        do {
-            $email = $this->io->ask('Email', null);
-        }
-        while (!$this->validateEmail($email));
+        $email = $this->io->askQuestion($this->createEmailQuestion());
 
         if ($this->checkIfAdminUserExists($email)) {
             $this->io->error(sprintf('Admin user with email address %s already exists.', $email));
@@ -57,9 +59,9 @@ class CreateAdminUserCommand extends Command
             return COMMAND::FAILURE;
         }
 
-        $userName = $this->io->ask('Username', null);
-        $firstName = $this->io->ask('Firstname', null);
-        $lastName = $this->io->ask('Lastname', null);
+        $userName = $this->io->ask('Username');
+        $firstName = $this->io->ask('Firstname');
+        $lastName = $this->io->ask('Lastname');
         $password = $this->io->askHidden('Password');
 
         /** @var AdminUserInterface $adminUser */
@@ -71,7 +73,7 @@ class CreateAdminUserCommand extends Command
         $adminUser->setFirstName($firstName);
         $adminUser->setLastName($lastName);
 
-        $locales = array_map(static fn (Locale $locale) => $locale->getCode(), $this->localeRepository->findAll());
+        $locales = Locales::getNames();
 
         $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
         $adminUser->setLocaleCode($localeCode);
@@ -86,15 +88,21 @@ class CreateAdminUserCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function validateEmail(string $email): bool
+    private function createEmailQuestion(): Question
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->io->error('Email address is not valid. Please, enter a valid address');
+        $question = new Question('Email');
+        $question->setValidator(function (string $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->io->error('Email address is not valid. Please, enter a valid address');
 
-            return false;
-        }
+                return false;
+            }
 
-        return true;
+            return $email;
+        });
+        $question->setMaxAttempts(3);
+
+        return $question;
     }
 
     private function checkIfAdminUserExists(string $email): bool

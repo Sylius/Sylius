@@ -37,10 +37,6 @@ final class CreateAdminUserCommandTest extends TestCase
 
         $this->factory->method('createNew')->willReturn(new AdminUser());
 
-        $locale = new Locale();
-        $locale->setCode('en_US');
-        $this->localeRepository->method('findAll')->willReturn([$locale]);
-
         $this->command->setInputs([
             'Do you want to create an admin user ?' => 'yes',
             'Email' => 'sylius@example.com',
@@ -72,14 +68,19 @@ final class CreateAdminUserCommandTest extends TestCase
         self::assertEquals(Command::INVALID, $this->command->execute([]));
     }
 
+    /**
+     * @test
+     */
+    public function it_does_not_create_an_admin_user_if_command_is_not_interactive(): void
+    {
+        self::assertEquals(Command::FAILURE, $this->command->execute([], ['interactive' => false]));
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->userRepository = $this->getMockBuilder(UserRepositoryInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->localeRepository = $this->getMockBuilder(RepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->factory = $this->getMockBuilder(FactoryInterface::class)
@@ -88,7 +89,6 @@ final class CreateAdminUserCommandTest extends TestCase
 
         $this->command = new CommandTester(new CreateAdminUserCommand(
             $this->userRepository,
-            $this->localeRepository,
             $this->factory
         ));
     }
