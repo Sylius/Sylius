@@ -1,0 +1,35 @@
+Sylius\Component\Core\Model\Product:
+    product_mug:
+        fallbackLocale: en_US
+        currentLocale: en
+        code: MUG
+
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
+
+Sylius\Component\Core\Model\ProductReview:
+    customer_review:
+        title: "Greatest product!"
+        comment: "I have never bought anything better."
+        rating: 3
+        status: "accepted"
+        author: "@customer_oliver"
+        reviewSubject: "@product_mug"
+    second_review:
+        title: "Could be better"
+        comment: "No real problems, but I feel it is a little lacking"
+        rating: 4
+        status: "accepted"
+        author: "@customer_oliver"
+        reviewSubject: "@product_mug"
+    third_review:
+        title: "This review was definitely not bought"
+        comment: "Bestest thing you could ever imagine!"
+        rating: 5
+        status: "accepted"
+        author: "@customer_oliver"
+        reviewSubject: "@product_mug"
