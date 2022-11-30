@@ -6,7 +6,6 @@
         {
             "@id": "\/api\/v2\/shop\/taxons\/MUG",
             "@type": "Taxon",
-            "id": "@integer@",
             "code": "MUG",
             "children": [],
             "name": "Mugs",
@@ -16,7 +15,6 @@
         {
             "@id": "\/api\/v2\/shop\/taxons\/HAT",
             "@type": "Taxon",
-            "id": "@integer@",
             "code": "HAT",
             "children": [],
             "name": "Hats",
@@ -26,7 +24,6 @@
         {
             "@id": "\/api\/v2\/shop\/taxons\/T_SHIRTS",
             "@type": "Taxon",
-            "id": "@integer@",
             "code": "T_SHIRTS",
             "children": [
                 "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS",
