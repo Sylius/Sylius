@@ -39,6 +39,7 @@ final class ChannelContext implements Context
 
     /**
      * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
      */
     public function iVisitChannelHomepage(ChannelInterface $channel): void
     {
