@@ -1,0 +1,48 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/admin\/product-variants",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-variants/MUG",
+            "@type": "ProductVariant",
+            "code": "MUG",
+            "product": "\/api\/v2\/admin\/products\/MUG_SW",
+            "channelPricings": {
+                "WEB": {
+                    "@id": "/api/v2/admin/channel-pricings/@integer@",
+                    "@type": "ChannelPricing",
+                    "id": @integer@,
+                    "channelCode": "WEB",
+                    "price": 2000,
+                    "originalPrice": null,
+                    "minimumPrice": 0
+                }
+            },
+            "optionValues": [],
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-variant-translation\/@integer@",
+                    "@type": "ProductVariantTranslation",
+                    "id": "@integer@",
+                    "name": "Mug",
+                    "locale": "en_US"
+                }
+            }
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-variants{?catalogPromotion}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "catalogPromotion",
+                "property": null,
+                "required": false
+            }
+        ]
+    }
+}
