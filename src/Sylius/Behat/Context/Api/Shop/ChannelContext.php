@@ -43,6 +43,8 @@ final class ChannelContext implements Context
      */
     public function iVisitChannelHomepage(ChannelInterface $channel): void
     {
+        $this->sharedStorage->set('hostname', $channel->getHostname());
+
         $this->client->show($channel->getCode());
     }
 
