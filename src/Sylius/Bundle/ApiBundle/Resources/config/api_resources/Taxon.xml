@@ -22,6 +22,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -48,6 +51,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:taxon:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon:read</attribute>
+                </attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
@@ -65,6 +71,17 @@
         <property name="slug" required="true" />
         <property name="description" required="true" />
         <property name="children" readableLink="false" />
-        <property name="translations" readable="true" writable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                        <attribute name="slug">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>
