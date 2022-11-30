@@ -154,6 +154,11 @@
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
+        <service id="sylius.custom_factory.order" class="Sylius\Component\Core\Factory\OrderFactory" decorates="sylius.factory.order" decoration-priority="256" public="false">
+            <argument type="service" id="sylius.custom_factory.order.inner" />
+            <argument type="service" id="sylius.unique_id_based_order_token_assigner" />
+        </service>
+
         <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.channel.inner" />
             <argument>order_items_based</argument>

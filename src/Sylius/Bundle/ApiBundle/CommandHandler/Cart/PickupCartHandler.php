@@ -27,6 +27,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Security\Core\Security;
 
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
@@ -36,8 +37,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         private OrderRepositoryInterface $cartRepository,
         private ChannelRepositoryInterface $channelRepository,
         private ObjectManager $orderManager,
-        private RandomnessGeneratorInterface $generator,
-        private CustomerRepositoryInterface $customerRepository,
+        private CustomerRepositoryInterface $customerRepository
     ) {
     }
 
@@ -70,7 +70,10 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart->setChannel($channel);
         $cart->setLocaleCode($this->getLocaleCode($pickupCart->localeCode, $channel));
         $cart->setCurrencyCode($currency->getCode());
-        $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
+
+        if ($pickupCart->tokenValue !== null) {
+            $cart->setTokenValue($pickupCart->tokenValue);
+        }
 
         if ($customer !== null) {
             $cart->setCustomerWithAuthorization($customer);

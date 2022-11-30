@@ -219,7 +219,7 @@ final class CartContext implements Context
      * @When I pick up cart in the :localeCode locale
      * @When the visitor picks up the cart
      */
-    public function iPickUpMyCart(?string $localeCode = null): void
+    public function iPickUpMyCart(?string $localeCode = null, ?string $email = null): void
     {
         $this->pickupCart($localeCode);
     }
@@ -764,13 +764,16 @@ final class CartContext implements Context
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
-    private function pickupCart(?string $localeCode = null): string
+    private function pickupCart(?string $localeCode = null, ?string $email = null): string
     {
         $request = $this->requestFactory->custom(
             sprintf('%s/shop/orders', $this->apiUrlPrefix),
             HttpRequest::METHOD_POST,
             $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : [],
         );
+        if (null !== $email) {
+            $request->setContent(['email' => $email]);
+        }
         $this->shopClient->executeCustomRequest($request);
 
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');

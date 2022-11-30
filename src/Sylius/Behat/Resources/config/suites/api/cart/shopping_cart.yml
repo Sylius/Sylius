@@ -19,6 +19,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.transform.cart
+                - sylius.behat.context.api.shop.composite_cart
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product

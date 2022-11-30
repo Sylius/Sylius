@@ -38,7 +38,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
         CustomerRepositoryInterface $customerRepository,
     ): void {
         $this->beConstructedWith(
@@ -46,7 +45,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
             $cartRepository,
             $channelRepository,
             $orderManager,
-            $generator,
             $customerRepository,
         );
     }
@@ -62,7 +60,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         CustomerInterface $customer,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
         CustomerRepositoryInterface $customerRepository,
         OrderInterface $cart,
         ChannelInterface $channel,
@@ -83,7 +80,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
@@ -95,7 +91,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -108,7 +103,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         CustomerInterface $customer,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
         CustomerRepositoryInterface $customerRepository,
         OrderInterface $cart,
         ChannelInterface $channel,
@@ -128,7 +122,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
@@ -140,7 +133,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -181,7 +173,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -196,7 +187,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
@@ -207,7 +197,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -219,7 +208,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $orderManager,
-        RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -237,7 +225,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
         $locale->getCode()->willReturn('en_US');
 
@@ -246,7 +233,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
-        $cart->setTokenValue('urisafestr')->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 
@@ -257,7 +243,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         FactoryInterface $cartFactory,
         OrderRepositoryInterface $cartRepository,
         ChannelRepositoryInterface $channelRepository,
-        RandomnessGeneratorInterface $generator,
         OrderInterface $cart,
         ChannelInterface $channel,
         CurrencyInterface $currency,
@@ -276,7 +261,6 @@ final class PickupCartHandlerSpec extends ObjectBehavior
 
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, Argument::any())->shouldNotBeCalled(null);
 
-        $generator->generateUriSafeString(10)->willReturn('urisafestr');
         $currency->getCode()->willReturn('USD');
 
         $cartFactory->createNew()->willReturn($cart);

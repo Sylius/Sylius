@@ -49,6 +49,14 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
+        <service id="sylius.behat.context.api.shop.composite_cart" class="Sylius\Behat\Context\Api\Shop\CompositeCartContext">
+            <argument type="service" id="sylius.behat.context.api.shop.cart" />
+            <argument type="service" id="sylius.behat.context.ui.shop.cart" />
+            <argument type="service" id="sylius.behat.context.setup.shop_security" />
+            <argument type="service" id="sylius.behat.context.setup.shop_api_security" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
         <service id="sylius.behat.context.api.shop.customer" class="Sylius\Behat\Context\Api\Shop\CustomerContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="sylius.behat.shared_storage" />
