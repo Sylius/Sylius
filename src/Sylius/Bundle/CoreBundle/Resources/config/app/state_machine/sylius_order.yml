@@ -26,11 +26,6 @@ winzou_state_machine:
                     do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]
                     priority: -200
-                sylius_assign_token:
-                    on: ["create"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValueIfNotSet"]
-                    args: ["object"]
-                    priority: -100
             after:
                 sylius_request_shipping:
                     on: ["create"]

@@ -17,37 +17,38 @@ class CompositeCartContext implements Context
         private ShopSecurityContext $uiSecurityContext,
         private ShopSecurityContext $apiSecurityContext,
         private SharedStorageInterface $sharedStorage,
-    ) {}
+    ) {
+    }
 
     /**
-     * @Then /^I pick up my cart from the API$/
+     * @Given /^I add (this product) to the cart on the UI$/
      */
-    public function iPickupMyCartFromTheApi()
+    public function iAddThisProductToTheCartOnTheUi(ProductInterface $product): void
+    {
+        $this->uiCartContext->iAddProductToTheCart($product);
+    }
+
+    /**
+     * @When I pick up my cart in the API
+     */
+    public function iPickupMyCartFromTheApi(): void
     {
         $this->apiCartContext->iPickUpMyCart(email: $this->sharedStorage->get('user')->getEmail());
     }
 
     /**
-     * @Then /^I can continue the order on the API$/
+     * @Then I should be able to continue placing the same order in the API
      */
-    public function iCanContinueTheOrderOnTheApi()
+    public function iCanContinueTheOrderOnTheApi(): void
     {
         $tokenValue = $this->sharedStorage->get('cart_token');
         Assert::notNull($tokenValue, 'Expect token value to be not null when pickup cart from API');
     }
 
     /**
-     * @When /^I add (this product) to the cart on the UI$/
+     * @Then I am a logged in customer on the API and the UI
      */
-    public function iAddThisProductToTheCartOnTheUi(ProductInterface $product)
-    {
-        $this->uiCartContext->iAddProductToTheCart($product);
-    }
-
-    /**
-     * @Then /^I am a logged in customer on the API and the UI$/
-     */
-    public function IAmALoggedInCustomerOnTheApiAndTheUi()
+    public function IAmALoggedInCustomerOnTheApiAndTheUi(): void
     {
         $this->apiSecurityContext->iAmLoggedInCustomer();
         $this->uiSecurityContext->iAmLoggedInAs($this->sharedStorage->get('user')->getEmail());

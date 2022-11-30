@@ -1,3 +1,8 @@
+# UPGRADE FROM `v1.12.X` TO `v1.12.4`
+
+1. The class `PickupCartHandler` constructor signature changed and does not take the `RandomnessGeneratorInterface`.
+   However, it now uses the `CustomerRepositoryInterface`.
+
 # UPGRADE FROM `v1.12.X` TO `v1.12.2`
 
 1. All entities and their relationships have a default order by identifier if no order is specified. You can disable

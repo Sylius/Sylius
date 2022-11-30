@@ -37,7 +37,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         private OrderRepositoryInterface $cartRepository,
         private ChannelRepositoryInterface $channelRepository,
         private ObjectManager $orderManager,
-        private CustomerRepositoryInterface $customerRepository
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 

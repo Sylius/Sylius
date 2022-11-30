@@ -11,16 +11,13 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class OrderFactory implements FactoryInterface
 {
-    private FactoryInterface $decoratedFactory;
-    private OrderTokenAssignerInterface $tokenAssigner;
-
-    public function __construct(FactoryInterface $decoratedFactory, OrderTokenAssignerInterface $tokenAssigner)
-    {
-        $this->decoratedFactory = $decoratedFactory;
-        $this->tokenAssigner = $tokenAssigner;
+    public function __construct(
+        private FactoryInterface $decoratedFactory,
+        private OrderTokenAssignerInterface $tokenAssigner
+    ) {
     }
 
-    public function createNew()
+    public function createNew(): OrderInterface
     {
         $order = $this->decoratedFactory->createNew();
 
