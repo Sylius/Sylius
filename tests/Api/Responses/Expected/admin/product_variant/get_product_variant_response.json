@@ -2,7 +2,6 @@
     "@context":"\/api\/v2\/contexts\/ProductVariant",
     "@id":"\/api\/v2\/admin\/product-variants\/MUG",
     "@type":"ProductVariant",
-    "id":"@integer@",
     "code":"MUG",
     "product":"\/api\/v2\/admin\/products\/MUG_SW",
     "channelPricings": {
@@ -11,8 +10,8 @@
             "@type": "ChannelPricing",
             "id": @integer@,
             "channelCode": "WEB",
-            "price": 3000,
-            "originalPrice": 4000,
+            "price": 2000,
+            "originalPrice": null,
             "minimumPrice": 0
         }
     },
