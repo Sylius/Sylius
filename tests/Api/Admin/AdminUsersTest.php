@@ -29,15 +29,13 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/authentication-token',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/authentication-token',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'email' => 'api@example.com',
                 'password' => 'sylius'
-            ])
+            ], JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -51,12 +49,10 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
 
         $this->client->request(
-            Request::METHOD_POST,
-            '/api/v2/admin/reset-password-requests',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
+            method: Request::METHOD_POST,
+            uri: '/api/v2/admin/reset-password-requests',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'email' => 'api@example.com',
             ], JSON_THROW_ON_ERROR),
         );
@@ -69,9 +65,9 @@ final class AdminUsersTest extends JsonApiTestCase
     public function it_gets_administrators(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('GET', '/api/v2/admin/administrators', [], [], $header,);
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/administrators', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -84,17 +80,15 @@ final class AdminUsersTest extends JsonApiTestCase
     public function it_gets_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var AdminUserInterface $administrator */
         $administrator = $fixtures['admin_user_wilhelm'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -108,15 +102,13 @@ final class AdminUsersTest extends JsonApiTestCase
     public function it_creates_an_administrator(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/administrators',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/administrators',
+            server: $header,
+            content: json_encode([
                 'email' => 'j.api@test.com',
                 'username' => 'johnApi',
                 'plainPassword' => 'very-secure',
@@ -138,18 +130,16 @@ final class AdminUsersTest extends JsonApiTestCase
     public function it_updates_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var AdminUserInterface $administrator */
         $administrator = $fixtures['admin_user_wilhelm'];
 
         $this->client->request(
-            'PUT',
-            sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
                 'email' => 'j.api@test.com',
                 'username' => 'johnApi',
                 'plainPassword' => 'very-secure',
@@ -171,28 +161,17 @@ final class AdminUsersTest extends JsonApiTestCase
     public function it_deletes_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var AdminUserInterface $administrator */
         $administrator = $fixtures['admin_user_wilhelm'];
 
         $this->client->request(
-            'DELETE',
-            sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
-            [],
-            [],
-            $header
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

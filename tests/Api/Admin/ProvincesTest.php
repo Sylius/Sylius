@@ -26,17 +26,15 @@ final class ProvincesTest extends JsonApiTestCase
     public function it_gets_a_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProvinceInterface $province */
         $province = $fixtures['province_US_WY'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/provinces/%s', $province->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/provinces/%s', $province->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,19 +48,16 @@ final class ProvincesTest extends JsonApiTestCase
     public function it_updates_an_existing_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProvinceInterface $province */
         $province = $fixtures['province_US_MI'];
 
-        $header = $this->getLoggedHeader();
-
         $this->client->request(
-            'PUT',
-            '/api/v2/admin/provinces/' . $province->getCode(),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/admin/provinces/' . $province->getCode(),
+            server: $header,
+            content: json_encode([
                 'abbreviation' => 'Minn.',
             ], JSON_THROW_ON_ERROR),
         );
@@ -72,14 +67,5 @@ final class ProvincesTest extends JsonApiTestCase
             'admin/province/put_province_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

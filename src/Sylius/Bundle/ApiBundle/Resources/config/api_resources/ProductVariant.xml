@@ -30,11 +30,11 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-variants/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_variant:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_variant:read</attribute>
                 </attribute>
             </itemOperation>
 

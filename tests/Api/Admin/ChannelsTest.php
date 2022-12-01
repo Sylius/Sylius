@@ -26,17 +26,15 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_a_channel(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,14 +48,12 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_gets_channels(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'GET',
-            '/api/v2/admin/channels',
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: '/api/v2/admin/channels',
+            server: $header,
         );
 
         $this->assertResponse(
@@ -71,15 +67,13 @@ final class ChannelsTest extends JsonApiTestCase
     public function it_creates_a_channel(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml', 'locale.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/channels',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/channels',
+            server: $header,
+            content: json_encode([
                 'name' => 'Web Store',
                 'code' => 'WEB',
                 'description' => 'Lorem ipsum',
@@ -100,7 +94,7 @@ final class ChannelsTest extends JsonApiTestCase
                 'shippingAddressInCheckoutRequired' => false,
                 'menuTaxon' => null,
 
-            ], JSON_THROW_ON_ERROR)
+            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -118,32 +112,21 @@ final class ChannelsTest extends JsonApiTestCase
         /** @var ChannelInterface $channel */
         $channel = $fixtures['channel_web'];
 
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'PUT',
-            '/api/v2/admin/channels/' . $channel->getCode(),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/admin/channels/' . $channel->getCode(),
+            server: $header,
+            content: json_encode([
                 'shippingAddressInCheckoutRequired' => true,
-            ], JSON_THROW_ON_ERROR)
+            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/channel/put_channel_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

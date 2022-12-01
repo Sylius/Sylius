@@ -26,17 +26,15 @@ final class ShippingCategoriesTest extends JsonApiTestCase
     public function it_gets_a_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $fixtures['shipping_category_special'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/shipping-categories/%s', $shippingCategory->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/shipping-categories/%s', $shippingCategory->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,15 +48,9 @@ final class ShippingCategoriesTest extends JsonApiTestCase
     public function it_gets_shipping_categories(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/shipping-categories',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/shipping-categories', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -71,15 +63,13 @@ final class ShippingCategoriesTest extends JsonApiTestCase
     public function it_creates_a_shipping_category(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/shipping-categories',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/shipping-categories',
+            server: $header,
+            content: json_encode([
                 'code' => 'ultra',
                 'name' => 'Ultra',
             ], JSON_THROW_ON_ERROR),
@@ -100,15 +90,13 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $fixtures['shipping_category_default'];
 
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'PUT',
-            '/api/v2/admin/shipping-categories/' . $shippingCategory->getCode(),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/admin/shipping-categories/' . $shippingCategory->getCode(),
+            server: $header,
+            content: json_encode([
                 'name' => 'Not so default',
             ], JSON_THROW_ON_ERROR),
         );
@@ -118,14 +106,5 @@ final class ShippingCategoriesTest extends JsonApiTestCase
             'admin/shipping_category/put_shipping_category_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

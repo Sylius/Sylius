@@ -33,11 +33,11 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-association-types</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_association_type:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -62,11 +62,11 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-association-types/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_association_type:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_association_type:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_association_type:read</attribute>
                 </attribute>
             </itemOperation>
 

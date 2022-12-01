@@ -26,17 +26,15 @@ final class CountriesTest extends JsonApiTestCase
     public function it_gets_a_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var CountryInterface $country */
         $country = $fixtures['country_DE'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/countries/%s', $country->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/countries/%s', $country->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,15 +48,9 @@ final class CountriesTest extends JsonApiTestCase
     public function it_gets_countries(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/countries',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/countries', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -71,15 +63,13 @@ final class CountriesTest extends JsonApiTestCase
     public function it_creates_a_country(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/countries',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/countries',
+            server: $header,
+            content: json_encode([
                 'code' => 'IE',
                 'enabled' => true,
             ], JSON_THROW_ON_ERROR),
@@ -96,19 +86,16 @@ final class CountriesTest extends JsonApiTestCase
     public function it_updates_an_existing_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
 
-        $header = $this->getLoggedHeader();
-
         $this->client->request(
-            'PUT',
-            '/api/v2/admin/countries/' . $country->getCode(),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/admin/countries/' . $country->getCode(),
+            server: $header,
+            content: json_encode([
                 'enabled' => false,
                 'provinces' => [[
                     'code' => 'US-WA',
@@ -123,14 +110,5 @@ final class CountriesTest extends JsonApiTestCase
             'admin/country/put_country_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

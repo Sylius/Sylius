@@ -23,7 +23,7 @@ final class LocalesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
-        $this->client->request('GET', '/api/v2/shop/locales', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/locales', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_locales_response', Response::HTTP_OK);
@@ -34,7 +34,7 @@ final class LocalesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
-        $this->client->request('GET', '/api/v2/shop/locales/en_US', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/locales/en_US', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_locale_response', Response::HTTP_OK);

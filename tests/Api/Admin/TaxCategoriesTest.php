@@ -26,17 +26,15 @@ final class TaxCategoriesTest extends JsonApiTestCase
     public function it_gets_a_tax_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_category.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var TaxCategoryInterface $taxCategory */
         $taxCategory = $fixtures['tax_category_special'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/tax-categories/%s', $taxCategory->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/tax-categories/%s', $taxCategory->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,15 +48,9 @@ final class TaxCategoriesTest extends JsonApiTestCase
     public function it_gets_tax_categories(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_category.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/tax-categories',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/tax-categories', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -71,15 +63,13 @@ final class TaxCategoriesTest extends JsonApiTestCase
     public function it_creates_a_tax_category(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/tax-categories',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/tax-categories',
+            server: $header,
+            content: json_encode([
                 'code' => 'ultra',
                 'name' => 'Ultra',
             ], JSON_THROW_ON_ERROR),
@@ -100,15 +90,13 @@ final class TaxCategoriesTest extends JsonApiTestCase
         /** @var TaxCategoryInterface $taxCategory */
         $taxCategory = $fixtures['tax_category_default'];
 
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'PUT',
-            '/api/v2/admin/tax-categories/' . $taxCategory->getCode(),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: '/api/v2/admin/tax-categories/' . $taxCategory->getCode(),
+            server: $header,
+            content: json_encode([
                 'name' => 'Not so default',
             ], JSON_THROW_ON_ERROR),
         );
@@ -118,14 +106,5 @@ final class TaxCategoriesTest extends JsonApiTestCase
             'admin/tax_category/put_tax_category_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }
