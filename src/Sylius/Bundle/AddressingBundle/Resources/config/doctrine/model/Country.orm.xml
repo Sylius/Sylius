@@ -16,6 +16,7 @@
     <mapped-superclass name="Sylius\Component\Addressing\Model\Country" table="sylius_country">
         <indexes>
             <index columns="code" />
+            <index columns="enabled" />
         </indexes>
 
         <id name="id" column="id" type="integer">

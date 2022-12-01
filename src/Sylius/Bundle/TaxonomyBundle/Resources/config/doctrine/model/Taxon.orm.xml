@@ -18,6 +18,10 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Taxonomy\Model\Taxon" table="sylius_taxon">
+        <indexes>
+            <index columns="enabled" />
+        </indexes>
+        
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

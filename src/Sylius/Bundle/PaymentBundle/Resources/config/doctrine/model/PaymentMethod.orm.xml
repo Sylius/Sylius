@@ -14,6 +14,9 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Payment\Model\PaymentMethod" table="sylius_payment_method">
+        <indexes>
+            <index columns="enabled" />
+        </indexes>
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
