@@ -14,6 +14,8 @@ jobs:
         
         timeout-minutes: 5
         
+        if: github.repository == 'Sylius/Sylius'
+        
         strategy:
             fail-fast: false
             matrix:
