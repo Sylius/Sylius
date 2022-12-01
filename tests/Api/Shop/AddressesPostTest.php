@@ -17,10 +17,13 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AddressesPostTest extends JsonApiTestCase
 {
+    use ShopUserLoginTrait;
+
     /** @test */
     public function it_denies_access_to_a_create_an_address_for_not_authenticated_user(): void
     {
@@ -31,12 +34,10 @@ final class AddressesPostTest extends JsonApiTestCase
         $bodyRequest = $this->createBodyRequest($country->getCode());
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/addresses',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode($bodyRequest)
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -54,22 +55,24 @@ final class AddressesPostTest extends JsonApiTestCase
         /** @var ProvinceInterface $province */
         $province = $fixtures['province_US_MI'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $bodyRequest = $this->createBodyRequest($country->getCode(), $province->getCode());
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/addresses',
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
-            json_encode($bodyRequest)
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/address/create_address_with_province_code_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $response,
+            'shop/address/create_address_with_province_code_response',
+            Response::HTTP_CREATED,
+        );
     }
 
     /** @test */
@@ -81,22 +84,24 @@ final class AddressesPostTest extends JsonApiTestCase
         /** @var CountryInterface $country */
         $country = $fixtures['country_DE'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $bodyRequest = $this->createBodyRequest($country->getCode(), provinceName: 'Munich');
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/addresses',
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
-            json_encode($bodyRequest)
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/address/create_address_with_province_name_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $response,
+            'shop/address/create_address_with_province_name_response',
+            Response::HTTP_CREATED,
+        );
     }
 
     /** @test */
@@ -108,28 +113,30 @@ final class AddressesPostTest extends JsonApiTestCase
         /** @var CountryInterface $country */
         $country = $fixtures['country_DE'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
         $bodyRequest = $this->createBodyRequest($country->getCode());
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/addresses',
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER),
-            json_encode($bodyRequest)
+            method: 'POST',
+            uri: '/api/v2/shop/addresses',
+            server: $header,
+            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
 
-        $this->assertResponse($response, 'shop/address/create_address_without_province_response', Response::HTTP_CREATED);
+        $this->assertResponse(
+            $response,
+            'shop/address/create_address_without_province_response',
+            Response::HTTP_CREATED,
+        );
     }
 
     private function createBodyRequest(
         string $countryCode,
         ?string $provinceCode = null,
-        ?string $provinceName = null
+        ?string $provinceName = null,
     ): array {
         return [
             'firstName' => 'TEST',

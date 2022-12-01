@@ -27,7 +27,7 @@ final class LocalesTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
 
-        $this->client->request('GET', '/api/v2/admin/locales');
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/locales');
 
         $response = $this->client->getResponse();
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
@@ -37,17 +37,15 @@ final class LocalesTest extends JsonApiTestCase
     public function it_gets_a_locale(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var LocaleInterface $locale */
         $locale = $fixtures['locale_ga'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/locales/%s', $locale->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/locales/%s', $locale->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -60,15 +58,9 @@ final class LocalesTest extends JsonApiTestCase
     public function it_gets_locales(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/locales',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/locales', server: $header);
 
         $this->assertResponse($this->client->getResponse(), 'admin/locale/get_locales_response', Response::HTTP_OK);
     }
@@ -77,15 +69,13 @@ final class LocalesTest extends JsonApiTestCase
     public function it_creates_a_locale(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/locales',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/locales',
+            server: $header,
+            content: json_encode([
                 'code' => 'is_IS',
             ], JSON_THROW_ON_ERROR),
         );
@@ -95,14 +85,5 @@ final class LocalesTest extends JsonApiTestCase
             'admin/locale/post_locale_response',
             Response::HTTP_CREATED,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

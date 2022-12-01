@@ -24,16 +24,13 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_gets_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_review.yaml');
-
         /** @var ReviewInterface $review */
         $review = $fixtures['customer_review'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/product-reviews/%s', $review->getId()),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-reviews/%s', $review->getId()),
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $this->assertResponse(
@@ -48,7 +45,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_review.yaml');
 
-        $this->client->request('GET', '/api/v2/shop/product-reviews', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/product-reviews', server: self::CONTENT_TYPE_HEADER);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -61,17 +58,14 @@ final class ProductReviewsTest extends JsonApiTestCase
     public function it_creates_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_variant.yaml']);
-
         /** @var ProductInterface $product */
         $product = $fixtures['product'];
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/product-reviews',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/shop/product-reviews',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
                 'title' => 'Greatest product!',
                 'rating' => 3,
                 'comment' => 'I\'ve never bought anything better.',

@@ -26,17 +26,15 @@ final class CurrenciesTest extends JsonApiTestCase
     public function it_gets_a_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var CurrencyInterface $currency */
         $currency = $fixtures['currency_gbp'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/currencies/%s', $currency->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/currencies/%s', $currency->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,15 +48,9 @@ final class CurrenciesTest extends JsonApiTestCase
     public function it_gets_currencies(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/currencies',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/currencies', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -71,15 +63,13 @@ final class CurrenciesTest extends JsonApiTestCase
     public function it_creates_a_currency(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/currencies',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/currencies',
+            server: $header,
+            content: json_encode([
                 'code' => 'KRW',
             ], JSON_THROW_ON_ERROR),
         );
@@ -89,14 +79,5 @@ final class CurrenciesTest extends JsonApiTestCase
             'admin/currency/post_currency_response',
             Response::HTTP_CREATED,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

@@ -26,25 +26,20 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_gets_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $fixtures['product_association_type'];
-        $this->client->request('GET',
-            sprintf('/api/v2/admin/product-association-types/%s', $associationType->getCode()),
-            [],
-            [],
-            $header
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/product-association-types/%s', $associationType->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_product_association_type_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -52,17 +47,12 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_returns_nothing_if_association_type_not_found(): void
     {
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
-
-        $this->client->request('GET',
-            '/api/v2/admin/product-association-types/wrong input',
-            [],
-            [],
-            $header
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/product-association-types/wrong input',
+            server: $header,
         );
 
         $response = $this->client->getResponse();
@@ -74,23 +64,14 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_returns_product_association_type_collection(): void
     {
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
-
-        $this->client->request('GET',
-            '/api/v2/admin/product-association-types',
-            [],
-            [],
-            $header
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/product-association-types', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_product_association_type_collection_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -98,32 +79,26 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_creates_product_association_type(): void
     {
         $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
-            'POST',
-            '/api/v2/admin/product-association-types',
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'POST',
+            uri: '/api/v2/admin/product-association-types',
+            server: $header,
+            content: json_encode([
                 'code' => 'TEST',
                 'translations' => ['en_US' => [
                     'name' => 'test',
                     'description' => 'test description',
                     'locale' => 'en_US'
                 ]]
-            ], JSON_THROW_ON_ERROR)
+            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/post_product_association_type_response',
-            Response::HTTP_CREATED
+            Response::HTTP_CREATED,
         );
     }
 
@@ -131,34 +106,28 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
     public function it_updates_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
-
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductAssociationTypeInterface $associationType */
         $associationType = $fixtures['product_association_type'];
         $this->client->request(
-            'PUT',
-            sprintf('/api/v2/admin/product-association-types/%s', $associationType->getCode()),
-            [],
-            [],
-            $header,
-            json_encode([
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-association-types/%s', $associationType->getCode()),
+            server: $header,
+            content: json_encode([
                 'code' => 'TEST',
                 'translations' => ['en_US' => [
                     'name' => 'test',
                     'description' => 'test description',
                     'locale' => 'de_DE'
                 ]]
-            ], JSON_THROW_ON_ERROR)
+            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/put_product_association_type_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

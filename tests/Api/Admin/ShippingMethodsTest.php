@@ -31,17 +31,15 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
         ]);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -60,9 +58,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
         ]);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request('GET', '/api/v2/admin/shipping-methods', [], [], $header);
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/shipping-methods', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -80,17 +78,15 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
         ]);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
         $this->client->request(
-            'PATCH',
-            sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()),
-            [],
-            [],
-            $header,
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -109,24 +105,20 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'country.yaml',
             'shipping_method.yaml',
         ]);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $fixtures['shipping_method_ups'];
 
         $this->client->request(
-            'PATCH',
-            sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()),
-            [],
-            [],
-            $header,
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/shipping-methods/%s/archive', $shippingMethod->getCode()),
+            server: $header,
         );
         $this->client->request(
-            'PATCH',
-            sprintf('/api/v2/admin/shipping-methods/%s/restore', $shippingMethod->getCode()),
-            [],
-            [],
-            $header,
+            method: 'PATCH',
+            uri: sprintf('/api/v2/admin/shipping-methods/%s/restore', $shippingMethod->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -134,14 +126,5 @@ final class ShippingMethodsTest extends JsonApiTestCase
             'admin/shipping_method/restore_shipping_method_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }

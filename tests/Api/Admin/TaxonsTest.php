@@ -26,17 +26,15 @@ final class TaxonsTest extends JsonApiTestCase
     public function it_gets_a_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var TaxonInterface $taxon */
         $taxon = $fixtures['category_taxon'];
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
-            [],
-            [],
-            $header,
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            server: $header,
         );
 
         $this->assertResponse(
@@ -50,29 +48,14 @@ final class TaxonsTest extends JsonApiTestCase
     public function it_gets_taxons(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
-        $header = $this->getLoggedHeader();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/admin/taxons',
-            [],
-            [],
-            $header,
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/taxons', server: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/taxon/get_taxons_response',
             Response::HTTP_OK,
         );
-    }
-
-    private function getLoggedHeader(): array
-    {
-        $token = $this->logInAdminUser('api@example.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
-
-        return array_merge($header, self::CONTENT_TYPE_HEADER);
     }
 }
