@@ -223,7 +223,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         Assert::notNull($products);
 
-        return $productName === $products->find('css', sprintf('[data-test-product-name="%s"]', $productName))->getText();
+        return $productName === $products->find('css', sprintf('[data-test-product-name="%s"]', $productName))?->getText();
     }
 
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool

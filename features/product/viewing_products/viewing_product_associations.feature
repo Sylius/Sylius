@@ -31,7 +31,7 @@ Feature: Viewing product's associations
         Then I should see the product association "Akcesoria" with products "LG headphones" and "LG earphones"
         And I should also see the product association "Alternatywy" with products "LG G4" and "LG G5"
 
-    @ui @todo
+    @ui
     Scenario: Viewing a detailed page with product's associations within current channel
         Given I am browsing channel "Notebook Store"
         When I view product "LG Gram"
