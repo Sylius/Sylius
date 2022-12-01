@@ -98,3 +98,10 @@ In this section we keep track of the reasons, why some restrictions were added t
   ```
 
   References: https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/issues/20
+
+- `friends-of-behat/symfony-extension:^2.4`:
+
+  Some scenarios with anonymous customers started to fail after this release. Potentially it is related to
+  [this PR](https://github.com/FriendsOfBehat/SymfonyExtension/pull/190), but it need to be investigated (and fixed)
+
+  Example failing build: https://github.com/Zales0123/Sylius/actions/runs/3590609125/jobs/6044176431
