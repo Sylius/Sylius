@@ -1,0 +1,20 @@
+{
+    "@context": "\/api\/v2\/contexts\/CustomerGroup",
+    "@id": "\/api\/v2\/admin\/customer-groups",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/customer-groups\/premium",
+            "@type": "CustomerGroup",
+            "code": "premium",
+            "name": "Premium"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/customer-groups\/vip",
+            "@type": "CustomerGroup",
+            "code": "vip",
+            "name": "VIP"
+        }
+    ],
+    "hydra:totalItems": 2
+}
