@@ -1,0 +1,53 @@
+{
+    "@context": "\/api\/v2\/contexts\/ExchangeRate",
+    "@id": "\/api\/v2\/admin\/exchange-rates",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
+            "@type": "ExchangeRate",
+            "id": @integer@,
+            "ratio": 4.44,
+            "sourceCurrency": "\/api\/v2\/admin\/currencies\/USD",
+            "targetCurrency": "\/api\/v2\/admin\/currencies\/PLN"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
+            "@type": "ExchangeRate",
+            "id": @integer@,
+            "ratio": 0.7,
+            "sourceCurrency": "\/api\/v2\/admin\/currencies\/USD",
+            "targetCurrency": "\/api\/v2\/admin\/currencies\/GBP"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
+            "@type": "ExchangeRate",
+            "id": @integer@,
+            "ratio": 0.15,
+            "sourceCurrency": "\/api\/v2\/admin\/currencies\/CNY",
+            "targetCurrency": "\/api\/v2\/admin\/currencies\/USD"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
+            "@type": "ExchangeRate",
+            "id": @integer@,
+            "ratio": 2.37,
+            "sourceCurrency": "\/api\/v2\/admin\/currencies\/GBP",
+            "targetCurrency": "\/api\/v2\/admin\/currencies\/BTN"
+        }
+    ],
+    "hydra:totalItems": 4,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/exchange-rates{?currencyCode}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "currencyCode",
+                "property": "currencyCode",
+                "required": false
+            }
+        ]
+    }
+}
