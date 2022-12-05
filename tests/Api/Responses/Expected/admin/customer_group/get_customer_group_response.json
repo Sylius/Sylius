@@ -1,0 +1,7 @@
+{
+    "@context": "\/api\/v2\/contexts\/CustomerGroup",
+    "@id": "\/api\/v2\/admin\/customer-groups\/vip",
+    "@type": "CustomerGroup",
+    "code": "vip",
+    "name": "VIP"
+}
