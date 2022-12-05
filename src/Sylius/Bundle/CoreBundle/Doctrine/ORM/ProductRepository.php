@@ -108,7 +108,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                  ->innerJoin('m.variants', 'v')
                  ->andWhere('m.id = :product_id')
                  ->andWhere('v.enabled = :enabled')
-             ;
+            ;
 
             $queryBuilder
                 ->addSelect('variant')
