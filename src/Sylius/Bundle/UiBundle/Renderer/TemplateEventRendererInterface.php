@@ -20,6 +20,7 @@ interface TemplateEventRendererInterface
 {
     /**
      * @param string[] $eventNames
+     *
      * @psalm-param non-empty-list<string> $eventNames
      */
     public function render(array $eventNames, array $context = []): string;

@@ -25,6 +25,7 @@ class ProductVariantController extends ResourceController
 {
     /**
      * @throws HttpException
+     *
      * @psalm-suppress DeprecatedMethod
      */
     public function updatePositionsAction(Request $request): Response

@@ -20,15 +20,18 @@ interface TemplateBlockRegistryInterface
 {
     /**
      * @return TemplateBlock[][]
+     *
      * @psalm-return array<string, array<string, TemplateBlock>>
      */
     public function all(): array;
 
     /**
      * @param string[] $eventNames
+     *
      * @psalm-param non-empty-list<string> $eventNames
      *
      * @return TemplateBlock[]
+     *
      * @psalm-return list<TemplateBlock>
      */
     public function findEnabledForEvents(array $eventNames): array;

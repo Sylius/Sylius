@@ -40,8 +40,8 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         $interval = 0;
         foreach ($expiredCarts as $expiredCart) {
             $this->orderManager->remove($expiredCart);
-            $interval++;
-            
+            ++$interval;
+
             if ($interval % $this->batchSize === 0) {
                 $this->orderManager->flush();
             }
