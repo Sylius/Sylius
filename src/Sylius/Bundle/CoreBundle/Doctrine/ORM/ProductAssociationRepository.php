@@ -29,6 +29,7 @@ class ProductAssociationRepository extends EntityRepository implements ProductAs
             ->innerJoin('associatedProduct.channels', 'channel')
             ->andWhere('o.id = :associationId')
             ->andWhere('product.id = :productId')
+            ->andWhere('associatedProduct.enabled = 1')
             ->andWhere('channel = :channel')
             ->setParameter('associationId', $associationId)
             ->setParameter('productId', $productId)
