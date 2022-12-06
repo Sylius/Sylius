@@ -37,3 +37,12 @@ Feature: Viewing product's associations
         When I view product "LG Gram"
         Then I should see the product association "Alternatives" with product "LG AC Adapter"
         And I should not see the product association "Alternatives" with product "LG headphones"
+
+    @ui
+    Scenario: Viewing a detailed page with enabled associated products only
+        Given the "LG G4" product is disabled
+        And I am browsing channel "Smartphone Store"
+        When I view product "LG G3"
+        Then I should see the product association "Accessories" with products "LG headphones" and "LG earphones"
+        And I should also see the product association "Alternatives" with product "LG G5"
+        And I should not see the product association "Alternatives" with product "LG G4"
