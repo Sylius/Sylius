@@ -7,14 +7,14 @@ Feature: Viewing product's associations
     Background:
         Given the store operates on a channel named "Smartphone Store"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
-        And the store has a product "LG G3"
-        And the store has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
+        And the store also operates on another channel named "Notebook Store"
+        And the "Smartphone Store" channel has a product "LG G3"
+        And the "Smartphone Store" channel has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
+        And the "Notebook Store" channel has "LG Gram" and "LG AC Adapter" products
         And the store has a product association type named "Accessories" in "English (United States)" locale and "Akcesoria" in "Polish (Poland)" locale
         And the store has also a product association type named "Alternatives" in "English (United States)" locale and "Alternatywy" in "Polish (Poland)" locale
         And the product "LG G3" has an association "Accessories" with products "LG headphones" and "LG earphones"
         And the product "LG G3" has also an association "Alternatives" with products "LG G4" and "LG G5"
-        And the store also operates on another channel named "Notebook Store"
-        And the store has "LG Gram" and "LG AC Adapter" products
         And the product "LG Gram" has an association "Alternatives" with products "LG AC Adapter" and "LG headphones"
 
     @ui
