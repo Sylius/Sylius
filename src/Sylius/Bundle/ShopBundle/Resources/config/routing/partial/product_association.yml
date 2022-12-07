@@ -9,8 +9,7 @@ sylius_shop_partial_product_association_show:
         _sylius:
             template: $template
             repository:
-                method: ["expr:service('sylius.repository.product_association')", "findAssociatedProductsWithinChannel"]
+                method: ["expr:service('sylius.repository.product_association')", "findWithProductsWithinChannel"]
                 arguments: 
                     - $id
-                    - $productId
                     - "expr:service('sylius.context.channel').getChannel()"

@@ -20,19 +20,14 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 
 class ProductAssociationRepository extends EntityRepository implements ProductAssociationRepositoryInterface
 {
-    public function findAssociatedProductsWithinChannel($associationId, $productId, ChannelInterface $channel): ProductAssociationInterface
+    public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface
     {
         return $this->createQueryBuilder('o')
             ->addSelect('associatedProduct')
-            ->innerJoin('o.owner', 'product')
-            ->innerJoin('o.associatedProducts', 'associatedProduct')
-            ->innerJoin('associatedProduct.channels', 'channel')
+            ->innerJoin('o.associatedProducts', 'associatedProduct', 'WITH', 'associatedProduct.enabled = true')
+            ->innerJoin('associatedProduct.channels', 'channel', 'WITH', 'channel = :channel')
             ->andWhere('o.id = :associationId')
-            ->andWhere('product.id = :productId')
-            ->andWhere('associatedProduct.enabled = 1')
-            ->andWhere('channel = :channel')
             ->setParameter('associationId', $associationId)
-            ->setParameter('productId', $productId)
             ->setParameter('channel', $channel)
             ->getQuery()
             ->getOneOrNullResult()

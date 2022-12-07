@@ -19,5 +19,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface ProductAssociationRepositoryInterface extends RepositoryInterface
 {
-    public function findAssociatedProductsWithinChannel($associationId, $productId, ChannelInterface $channel): ProductAssociationInterface;
+    public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface;
 }
