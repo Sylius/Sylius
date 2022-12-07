@@ -15,18 +15,18 @@ The **name and description** fields need to be translatable.
 2. Generate the SupplierTranslation entity
 ------------------------------------------
 
-Symfony, the framework Sylius uses, provides the `SensioGeneratorBundle <https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html>`_,
+Symfony, the framework Sylius uses, provides the `Symfony MakerBundle <https://symfony.com/bundles/SymfonyMakerBundle/current/index.html>`_,
 that simplifies the process of adding a model.
 
 .. warning::
 
-    Remember to have the ``SensioGeneratorBundle`` imported in the AppKernel, as it is not there by default.
+    Remember to have the ``MakerBundle`` imported in the AppKernel, as it is not there by default.
 
 You need to use such a command in your project directory.
 
 .. code-block:: bash
 
-    php bin/console generate:doctrine:entity
+    php bin/console make:entity
 
 The generator will ask you for the entity name and fields. See how it should look like to match our assumptions.
 
