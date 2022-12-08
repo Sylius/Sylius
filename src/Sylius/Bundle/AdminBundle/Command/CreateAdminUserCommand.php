@@ -38,14 +38,14 @@ final class CreateAdminUserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$input->isInteractive()) {
-            $this->io->error('This command should be run interactively.');
+            $this->io->error('This command must be run interactively.');
 
             return Command::FAILURE;
         }
 
         $this->io->title('Admin user creation');
 
-        $confirm = $this->io->confirm('Do you want to create an admin user ?', true);
+        $confirm = $this->io->confirm('Do you want to create an admin user?', true);
 
         if (!$confirm) {
             return Command::INVALID;
@@ -60,8 +60,8 @@ final class CreateAdminUserCommand extends Command
         }
 
         $userName = $this->io->ask('Username');
-        $firstName = $this->io->ask('Firstname');
-        $lastName = $this->io->ask('Lastname');
+        $firstName = $this->io->ask('First name');
+        $lastName = $this->io->ask('Last name');
         $password = $this->io->askHidden('Password');
 
         /** @var AdminUserInterface $adminUser */
@@ -78,7 +78,7 @@ final class CreateAdminUserCommand extends Command
         $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
         $adminUser->setLocaleCode($localeCode);
 
-        $enabled = $this->io->confirm('Do you want to enabled this admin user?', true);
+        $enabled = $this->io->confirm('Do you want to enable this admin user?', true);
         $adminUser->setEnabled($enabled);
 
         $this->adminUserRepository->add($adminUser);

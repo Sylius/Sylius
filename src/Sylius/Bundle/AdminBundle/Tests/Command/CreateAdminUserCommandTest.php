@@ -25,9 +25,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 final class CreateAdminUserCommandTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_creates_an_admin_user(): void
     {
         $this->userRepository
