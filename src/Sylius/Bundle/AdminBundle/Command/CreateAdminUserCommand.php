@@ -6,6 +6,7 @@ namespace Sylius\Bundle\AdminBundle\Command;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -26,6 +27,7 @@ final class CreateAdminUserCommand extends Command
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
         private FactoryInterface $adminUserFactory,
+        private CanonicalizerInterface $canonicalizer,
     ) {
         parent::__construct();
     }
@@ -45,18 +47,12 @@ final class CreateAdminUserCommand extends Command
 
         $this->io->title('Admin user creation');
 
-        $confirm = $this->io->confirm('Do you want to create an admin user?', true);
-
-        if (!$confirm) {
-            return Command::INVALID;
-        }
-
         $email = $this->io->askQuestion($this->createEmailQuestion());
 
-        if ($this->checkIfAdminUserExists($email)) {
+        if ($this->checkIfAdminUserExists($this->canonicalizer->canonicalize($email))) {
             $this->io->error(sprintf('Admin user with email address %s already exists.', $email));
 
-            return COMMAND::FAILURE;
+            return Command::INVALID;
         }
 
         $userName = $this->io->ask('Username');
@@ -91,11 +87,9 @@ final class CreateAdminUserCommand extends Command
     private function createEmailQuestion(): Question
     {
         $question = new Question('Email');
-        $question->setValidator(function (string $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->io->error('Email address is not valid. Please, enter a valid address');
-
-                return false;
+        $question->setValidator(function (?string $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $email === null) {
+                throw new \InvalidArgumentException('The e-mail address provided is invalid. Please try again.');
             }
 
             return $email;
