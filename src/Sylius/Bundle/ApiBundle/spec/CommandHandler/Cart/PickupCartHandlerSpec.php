@@ -168,7 +168,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer)->willReturn($cart);
 
         $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer($customer)->shouldNotBeCalled();
+        $cart->setCustomerWithAuthorization($customer)->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldNotBeCalled();
 
         $orderManager->persist($cart)->shouldNotBeCalled();
@@ -203,7 +203,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $channel->getLocales()->willReturn(new ArrayCollection([$locale->getWrappedObject()]));
 
         $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
@@ -242,7 +242,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $locale->getCode()->willReturn('en_US');
 
         $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
@@ -280,7 +280,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $currency->getCode()->willReturn('USD');
 
         $cartFactory->createNew()->willReturn($cart);
-        $cart->setCustomer(Argument::any())->shouldNotBeCalled();
+        $cart->setCustomerWithAuthorization(Argument::any())->shouldNotBeCalled();
         $cart->setChannel($channel)->shouldBeCalled();
 
         $this
