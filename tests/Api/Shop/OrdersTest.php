@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -61,6 +62,46 @@ final class OrdersTest extends JsonApiTestCase
         $commandBus->dispatch($updateCartCommand);
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_gets_an_order_as_a_guest_with_a_customer_that_is_already_registered(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        $address = new Address();
+        $address->setFirstName('John');
+        $address->setLastName('Doe');
+        $address->setCity('New York');
+        $address->setStreet('Avenue');
+        $address->setCountryCode('US');
+        $address->setPostcode('90000');
+
+        $updateCartCommand = new UpdateCart('oliver@doe.com', $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($updateCartCommand);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: self::CONTENT_TYPE_HEADER,
+        );
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
@@ -219,5 +260,53 @@ final class OrdersTest extends JsonApiTestCase
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/updated_payment_method_on_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
+    public function it_allows_to_patch_orders_address(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        /** @var CountryInterface $country */
+        $country = $fixtures['country_US'];
+
+        $billingAddress = [
+            'firstName'=> 'Jane',
+            'lastName'=> 'Doe',
+            'phoneNumber'=> '666111333',
+            'company'=> 'Potato Corp.',
+            'countryCode'=> $country->getCode(),
+            'street'=> 'Top secret',
+            'city'=> 'Nebraska',
+            'postcode'=> '12343'
+        ];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: [
+                'CONTENT_TYPE' => 'application/ld+json',
+                'HTTP_ACCEPT' => 'application/ld+json',
+            ],
+            content: json_encode([
+                'email' => 'oliver@doe.com',
+                'billingAddress' => $billingAddress,
+            ])
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/updated_billing_address_on_order_response', Response::HTTP_OK);
     }
 }

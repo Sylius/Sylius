@@ -32,7 +32,7 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         $this->beConstructedWith($userContext);
     }
 
-    function it_applies_conditions_to_get_order_with_state_cart_and_without_user_if_current_user_is_null(
+    function it_applies_conditions_to_get_order_with_no_user_or_no_customer_or_conjunction_of_customer_and_created_by_guest_as_true_if_authenticated_user_is_null(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -61,14 +61,17 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
         ;
 
         $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
-            ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
-            ->shouldBeCalled()
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
             ->willReturn($queryBuilder)
         ;
 
