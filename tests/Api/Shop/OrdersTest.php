@@ -68,6 +68,46 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_an_order_as_a_guest_with_a_customer_that_is_already_registered(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = $this->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        $address = new Address();
+        $address->setFirstName('John');
+        $address->setLastName('Doe');
+        $address->setCity('New York');
+        $address->setStreet('Avenue');
+        $address->setCountryCode('US');
+        $address->setPostcode('90000');
+
+        $updateCartCommand = new UpdateCart('oliver@doe.com', $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($updateCartCommand);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
+    }
+
+    /** @test */
     public function it_gets_order_items(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
