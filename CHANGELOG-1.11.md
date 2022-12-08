@@ -1,5 +1,43 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.11 (2022-12-08)
+
+#### Details
+
+- [#12611](https://github.com/Sylius/Sylius/issues/12611) Change on from string to array, consistent with other definitions ([@stefandoorn](https://github.com/stefandoorn))
+- [#13187](https://github.com/Sylius/Sylius/issues/13187) issue/12985-migration-in-corebundle ([@coldic3](https://github.com/coldic3))
+- [#13202](https://github.com/Sylius/Sylius/issues/13202) [Core][Checkout] fixed #13201 ([@acornforth](https://github.com/acornforth), [@SirDomin](https://github.com/SirDomin))
+- [#14435](https://github.com/Sylius/Sylius/issues/14435) Include 1.13 branch in the PR template ([@Zales0123](https://github.com/Zales0123))
+- [#14474](https://github.com/Sylius/Sylius/issues/14474) :arrow_up: Upgrade gaufrette version (PHP 8+ compat) ([@Nek-](https://github.com/Nek-), [@coldic3](https://github.com/coldic3))
+- [#14486](https://github.com/Sylius/Sylius/issues/14486) [Cart] Set the created_by_guest flag as false if the cart was created by a customer authenticated via access token ([@nicolalazzaro](https://github.com/nicolalazzaro))
+- [#14488](https://github.com/Sylius/Sylius/issues/14488) [Maintenance][CI] Remove deprecations ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14489](https://github.com/Sylius/Sylius/issues/14489) [Api] Sorting products by price should be per channel ([@j92](https://github.com/j92))
+- [#14500](https://github.com/Sylius/Sylius/issues/14500) [Docs] Update inventory source resolving ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14501](https://github.com/Sylius/Sylius/issues/14501) [Maintenance] Removal of direct unneeded dependency on proxy manager LTS ([@lchrusciel](https://github.com/lchrusciel))
+- [#14514](https://github.com/Sylius/Sylius/issues/14514) [Behat][API] Add missing channels suite to imports ([@GSadee](https://github.com/GSadee))
+- [#14516](https://github.com/Sylius/Sylius/issues/14516) [Docs] Update release cycle with 1.12 and 1.13 info ([@Zales0123](https://github.com/Zales0123))
+- [#14523](https://github.com/Sylius/Sylius/issues/14523) Product taxon position don't affect parent taxon ([@everwhatever](https://github.com/everwhatever))
+- [#14527](https://github.com/Sylius/Sylius/issues/14527) [GitHub Actions] Add 1.13 branch to "Refactor" workflow ([@coldic3](https://github.com/coldic3))
+- [#14536](https://github.com/Sylius/Sylius/issues/14536) [Maintenance][Fixture] Allow using default values with optional array nodes ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14538](https://github.com/Sylius/Sylius/issues/14538) [Product] Fix product variant choice labels ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14543](https://github.com/Sylius/Sylius/issues/14543) [Maintenance] Fix type casting in migrations ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14544](https://github.com/Sylius/Sylius/issues/14544) [Doc] Fix Supported versions table ([@oallain](https://github.com/oallain))
+- [#14545](https://github.com/Sylius/Sylius/issues/14545) [Migrations] Remove usage of non existent AbstractMigration ([@GSadee](https://github.com/GSadee))
+- [#14548](https://github.com/Sylius/Sylius/issues/14548) Fix removing the root taxon, when the second one is Menu Taxon of the channel ([@TheMilek](https://github.com/TheMilek))
+- [#14554](https://github.com/Sylius/Sylius/issues/14554) Fix service definition at custom-payment-gateway ([@diimpp](https://github.com/diimpp))
+- [#14563](https://github.com/Sylius/Sylius/issues/14563) Add repository option to product_image node ([@TheMilek](https://github.com/TheMilek))
+- [#14567](https://github.com/Sylius/Sylius/issues/14567) [Core] Fix invalid catalog promotion repository service id ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14570](https://github.com/Sylius/Sylius/issues/14570) [CS][DX] Fix ECS refactoring ([@coldic3](https://github.com/coldic3))
+- [#14573](https://github.com/Sylius/Sylius/issues/14573) [API] Fix ProductReview normalization context ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14574](https://github.com/Sylius/Sylius/issues/14574) [API] Fix missing address serialization for phone number and company name ([@andrehoffmann30](https://github.com/andrehoffmann30), [@coldic3](https://github.com/coldic3))
+- [#14586](https://github.com/Sylius/Sylius/issues/14586) [DX] Unify default repo classes for resources ([@coldic3](https://github.com/coldic3))
+- [#14595](https://github.com/Sylius/Sylius/issues/14595) [Fix] Filtering out disabled channel scenario ([@Rafikooo](https://github.com/Rafikooo))
+- [#14596](https://github.com/Sylius/Sylius/issues/14596) [Orders] Cart not found for registered user ([@Rafikooo](https://github.com/Rafikooo))
+- [#14600](https://github.com/Sylius/Sylius/issues/14600) [ProductAssociation] Show product associations within current channel only ([@coldic3](https://github.com/coldic3))
+- [#14602](https://github.com/Sylius/Sylius/issues/14602) [GitHub Actions] Restrict "Refactor" workflow to Sylius/Sylius repo ([@coldic3](https://github.com/coldic3))
+- [#14614](https://github.com/Sylius/Sylius/issues/14614) Run behat using dual session as javascript scenario ([@Rafikooo](https://github.com/Rafikooo))
+- [#14618](https://github.com/Sylius/Sylius/issues/14618) Use MakerBundle instead of SensioGeneratorBundle ([@hmonglee](https://github.com/hmonglee))
+
 ## v1.11.10 (2022-10-31)
 
 #### Details
