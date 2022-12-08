@@ -5,9 +5,9 @@ Feature: Viewing product's associations
     I want to see related products when viewing product details
 
     Background:
-        Given the store operates on a channel named "Smartphone Store"
+        Given the store operates on a channel named "Smartphone Store" with hostname "smartphone.shop"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
-        And the store also operates on another channel named "Notebook Store"
+        And the store also operates on another channel named "Notebook Store" with hostname "notebook.shop"
         And the "Smartphone Store" channel has a product "LG G3"
         And the "Smartphone Store" channel has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
         And the "Notebook Store" channel has "LG Gram" and "LG AC Adapter" products
