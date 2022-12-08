@@ -747,6 +747,27 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        $this->iShouldSeeTheProductAssociationWithProducts($productAssociationName, [$product]);
+    }
+
+    /**
+     * @Then /^I should(?:| also) not see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldNotSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        Assert::true(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('Association "%s" has not been found.', $productAssociationName),
+        );
+
+        $this->assertProductIsNotInAssociation($product->getName(), $productAssociationName);
+    }
+
+    /**
      * @Then /^average rating of (product "[^"]+") should be (\d+)$/
      */
     public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating): void
@@ -900,6 +921,18 @@ final class ProductContext implements Context
             $this->showPage->hasProductInAssociation($productName, $productAssociationName),
             sprintf(
                 'There should be an associated product "%s" under association "%s" but it does not.',
+                $productName,
+                $productAssociationName,
+            ),
+        );
+    }
+
+    private function assertProductIsNotInAssociation($productName, $productAssociationName): void
+    {
+        Assert::false(
+            $this->showPage->hasProductInAssociation($productName, $productAssociationName),
+            sprintf(
+                'Association "%s" should not contain product "%s" but it does.',
                 $productName,
                 $productAssociationName,
             ),

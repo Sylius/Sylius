@@ -245,6 +245,9 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this channel) has "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" products$/
+     * @Given /^the ("[^"]+" channel) has a product "([^"]+)"$/
+     * @Given /^the ("[^"]+" channel) has "([^"]+)" and "([^"]+)" products$/
+     * @Given /^the ("[^"]+" channel) has "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" products$/
      */
     public function thisChannelHasProducts(ChannelInterface $channel, ...$productsNames)
     {
