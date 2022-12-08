@@ -1,2 +1,5 @@
+sylius_user:
+    encoder: plaintext
+
 sylius_api:
     enabled: true

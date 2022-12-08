@@ -113,7 +113,7 @@ class User implements UserInterface, \Stringable
 
     public function __construct()
     {
-        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
+        $this->salt = '';
 
         /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
