@@ -75,7 +75,7 @@ final class OrdersTest extends JsonApiTestCase
         $tokenValue = 'nAWw2jewpA';
 
         /** @var MessageBusInterface $commandBus */
-        $commandBus = $this->get('sylius.command_bus');
+        $commandBus = self::getContainer()->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
@@ -306,7 +306,7 @@ final class OrdersTest extends JsonApiTestCase
         $tokenValue = 'nAWw2jewpA';
 
         /** @var MessageBusInterface $commandBus */
-        $commandBus = $this->get('sylius.command_bus');
+        $commandBus = self::getContainer()->get('sylius.command_bus');
 
         $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
