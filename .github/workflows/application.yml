@@ -31,7 +31,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.0", "8.1", "8.2"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
 
@@ -105,10 +105,15 @@ jobs:
                 run: mv composer.lock old-composer.lock
                 if: steps.check-old-composer-lock-existence.outputs.files_exists == 'true'
 
-            -
-                name: Install PHP dependencies
+            -   name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
                 id: end-of-setup
+
+            -   name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
+                id: end-of-setup-8-2
 
             -
                 name: Validate composer.json
@@ -155,7 +160,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.0", "8.1", "8.2"]
 
         steps:
             -
@@ -177,7 +182,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.0", "8.1", "8.2"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
 
@@ -221,9 +226,16 @@ jobs:
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+
             -   name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
                 id: end-of-setup
+
+            -   name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
+                id: end-of-setup-8-2
 
             -   name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
@@ -234,7 +246,7 @@ jobs:
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgresSQL ${{ matrix.postgres }})"
         strategy:
             matrix:
-                php: ["8.0"]
+                php: ["8.1"]
                 symfony: ["^5.4"]
                 postgres: ["13.3"]
 
@@ -285,9 +297,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -
-                name: Install PHP dependencies
+            -   name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
+
+            -   name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
 
             -
                 name: Dump the environment
@@ -319,7 +335,7 @@ jobs:
         name: "Test non-JS application (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }})"
         strategy:
             matrix:
-                php: ["8.0"]
+                php: ["8.1"]
                 symfony: ["^5.4"]
                 mariadb: ["10.4.10"]
 
@@ -370,9 +386,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -
-                name: Install PHP dependencies
+            -   name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
+
+            -   name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
 
             -
                 name: Dump the environment
@@ -449,13 +469,18 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.1", "8.2"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
 
                 include:
+                    -   php: "8.0"
+                        symfony: "^5.4"
+                        api-platform: "~2.6.0"
+                        node: "14.x"
+                        mysql: "8.0"
                     -   php: "8.1"
                         symfony: "^5.4"
                         api-platform: "~2.6.0"
@@ -520,7 +545,13 @@ jobs:
 
             -
                 name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
+
+            -
+                name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
 
             -
                 name: Dump the environment
@@ -593,11 +624,17 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ["8.0", "8.1"]
+                php: ["8.1", "8.2"]
                 symfony: ["^4.4", "^5.4"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
 
+                include:
+                    -   php: "8.0"
+                        symfony: "^5.4"
+                        api-platform: "~2.6.0"
+                        node: "14.x"
+                        mysql: "8.0"
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
@@ -657,9 +694,13 @@ jobs:
                     restore-keys: |
                         ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
 
-            -
-                name: Install PHP dependencies
+            -   name: Install PHP dependencies
+                if: matrix.php != '8.2'
                 run: composer update --no-interaction --no-scripts
+
+            -   name: Install PHP 8.2 dependencies
+                if: matrix.php == '8.2'
+                run: composer update --no-interaction --no-scripts --ignore-platform-req=php
 
             -
                 name: Setup Node
