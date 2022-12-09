@@ -44,6 +44,3 @@ security:
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
         - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }
-
-sylius_user:
-    encoder: plaintext
