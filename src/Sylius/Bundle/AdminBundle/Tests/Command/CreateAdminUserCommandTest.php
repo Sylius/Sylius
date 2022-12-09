@@ -34,7 +34,7 @@ final class CreateAdminUserCommandTest extends TestCase
     private CommandTester $command;
 
     /** @test */
-    public function it_creates_an_admin_user(): void
+    public function it_creates_an_admin_user_if_accepted_in_the_summary(): void
     {
         $this->canonicalizer
             ->method('canonicalize')
@@ -51,15 +51,48 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->factory->method('createNew')->willReturn(new AdminUser());
 
         $this->command->setInputs([
-            'Do you want to create an admin user ?' => 'yes',
-            'Email' => 'SYLius@exaMPLE.com',
-            'Username' => 'Sylius',
-            'Firstname' => 'Sylius',
-            'Lastname' => 'Admin',
-            'Password' => 'sylius',
+            'email' => 'SYLius@exaMPLE.com',
+            'username' => 'Sylius',
+            'firstname' => 'Sylius',
+            'lastname' => 'Admin',
+            'password' => 'sylius',
+            'local_code' => 'en_US',
+            'admin_user_enabled' => 'yes',
+            'creation_confirmation' => 'yes',
         ]);
 
         self::assertEquals(Command::SUCCESS, $this->command->execute([]));
+    }
+
+    /** @test */
+    public function it_does_not_create_an_admin_user_if_declined_in_the_summary(): void
+    {
+        $this->canonicalizer
+            ->method('canonicalize')
+            ->with('SYLius@exaMPLE.com')
+            ->willReturn('sylius@example.com')
+        ;
+
+        $this->userRepository
+            ->method('findOneByEmail')
+            ->with('sylius@example.com')
+            ->willReturn(null)
+        ;
+
+        $this->factory->method('createNew')->willReturn(new AdminUser());
+
+        $this->command->setInputs([
+            'email' => 'SYLius@exaMPLE.com',
+            'username' => 'Sylius',
+            'firstname' => 'Sylius',
+            'lastname' => 'Admin',
+            'password' => 'sylius',
+            'local_code' => 'en_US',
+            'admin_user_enabled' => 'yes',
+            'creation_confirmation' => 'no',
+        ]);
+
+        self::assertEquals(Command::INVALID, $this->command->execute([]));
     }
 
     /** @test */
@@ -71,21 +104,13 @@ final class CreateAdminUserCommandTest extends TestCase
             ->willReturn('sylius@example.com')
         ;
 
-        $adminUser = new AdminUser();
-
         $this->userRepository
             ->method('findOneByEmail')
             ->with('sylius@example.com')
-            ->willReturn($adminUser);
+            ->willReturn(new AdminUser())
+        ;
 
-        $this->command->setInputs([
-            'Do you want to create an admin user ?' => 'yes',
-            'Email' => 'SYLius@exaMPLE.com',
-            'Username' => 'Sylius',
-            'Firstname' => 'Sylius',
-            'Lastname' => 'Admin',
-            'Password' => 'sylius',
-        ]);
+        $this->command->setInputs(['email' => 'SYLius@exaMPLE.com']);
 
         self::assertEquals(Command::INVALID, $this->command->execute([]));
     }
@@ -93,7 +118,7 @@ final class CreateAdminUserCommandTest extends TestCase
     /** @test */
     public function it_throws_an_exception_if_provided_email_is_not_valid(): void
     {
-        $this->command->setInputs(['Email' => 'invalid-email']);
+        $this->command->setInputs(['email' => 'invalid-email']);
 
         self::expectException(\Exception::class);
 
@@ -113,6 +138,7 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->userRepository = $this->getMockBuilder(UserRepositoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
+
         $this->factory = $this->getMockBuilder(FactoryInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
