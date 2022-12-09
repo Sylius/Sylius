@@ -64,9 +64,6 @@ Future release
 | 1.13    | Oct 31, 2022         | ???                    | ???                |
 +---------+----------------------+------------------------+--------------------+
 
-.. image:: ../../_images/planned_1_12_scope.png
-   :align: center
-
 Supported versions
 ------------------
 
