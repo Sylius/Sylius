@@ -38,7 +38,7 @@ class User implements UserInterface, \Stringable
     /**
      * Random data that is used as an additional input to a function that hashes a password.
      *
-     * @var string
+     * @var string|null
      */
     protected $salt;
 
@@ -113,7 +113,7 @@ class User implements UserInterface, \Stringable
 
     public function __construct()
     {
-        $this->salt = '';
+        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
 
         /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
@@ -180,7 +180,7 @@ class User implements UserInterface, \Stringable
         return (string) $this->usernameCanonical;
     }
 
-    public function getSalt(): string
+    public function getSalt(): ?string
     {
         return $this->salt;
     }

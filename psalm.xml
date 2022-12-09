@@ -124,6 +124,12 @@
         </MissingConstructor>
         <MissingParamType errorLevel="info" />
 
+        <DuplicateClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Component/User/Model/CredentialsHolderInterface.php" />
+            </errorLevel>
+        </DuplicateClass>
+
         <RedundantConditionGivenDocblockType errorLevel="info" />
 
         <!-- level 4 issues - points to possible deficiencies in logic, higher false-positives -->
