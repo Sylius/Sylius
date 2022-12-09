@@ -7,6 +7,7 @@ namespace Sylius\Bundle\AdminBundle\Command;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -77,11 +78,19 @@ final class CreateAdminUserCommand extends Command
         $enabled = $this->io->confirm('Do you want to enable this admin user?', true);
         $adminUser->setEnabled($enabled);
 
-        $this->adminUserRepository->add($adminUser);
+        $this->showSummary($adminUser);
 
-        $this->io->success(sprintf('Admin user %s was successfully created', $adminUser->getEmail()));
+        if ($this->adminCreationConfirmed()) {
+            $this->adminUserRepository->add($adminUser);
 
-        return Command::SUCCESS;
+            $this->io->success('Admin user has been successfully created.');
+
+            return Command::SUCCESS;
+        }
+
+        $this->io->error('Admin user creation has been aborted.');
+
+        return Command::INVALID;
     }
 
     private function createEmailQuestion(): Question
@@ -102,5 +111,36 @@ final class CreateAdminUserCommand extends Command
     private function checkIfAdminUserExists(string $email): bool
     {
         return null !== $this->adminUserRepository->findOneByEmail($email);
+    }
+
+    private function showSummary(AdminUserInterface $adminUser): void
+    {
+        /**
+         * @psalm-suppress UndefinedInterfaceMethod
+         * @phpstan-ignore-next-line
+         */
+        $username = $adminUser->getUsername();
+
+        $this->io->writeln('The following admin user will be created:');
+        $this->io->table(
+            [
+                'Email', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled'
+            ],
+            [
+                [
+                    $adminUser->getEmail(),
+                    $username,
+                    $adminUser->getFirstName(),
+                    $adminUser->getLastName(),
+                    $adminUser->getLocaleCode(),
+                    $adminUser->isEnabled() ? 'Yes' : 'No',
+                ]
+            ],
+        );
+    }
+
+    private function adminCreationConfirmed(): bool
+    {
+        return $this->io->confirm('Do you want to save this admin user?');
     }
 }
