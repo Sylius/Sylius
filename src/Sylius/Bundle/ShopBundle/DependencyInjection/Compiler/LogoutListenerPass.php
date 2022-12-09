@@ -24,7 +24,14 @@ final class LogoutListenerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('security.event_dispatcher.shop')) {
+        if (!$container->hasParameter('sylius_shop.firewall_context_name')) {
+            return;
+        }
+
+        $firewallName = (string) $container->getParameter('sylius_shop.firewall_context_name');
+        $securityDispatcherId = sprintf('security.event_dispatcher.%s', $firewallName);
+
+        if (!$container->hasDefinition($securityDispatcherId)) {
             return;
         }
 
@@ -34,7 +41,7 @@ final class LogoutListenerPass implements CompilerPassInterface
         ]);
         $logoutListener->addTag('kernel.event_listener', [
             'event' => LogoutEvent::class,
-            'dispatcher' => 'security.event_dispatcher.shop',
+            'dispatcher' => $securityDispatcherId,
             'method' => 'onLogout',
         ]);
         $logoutListener->setPublic(true);

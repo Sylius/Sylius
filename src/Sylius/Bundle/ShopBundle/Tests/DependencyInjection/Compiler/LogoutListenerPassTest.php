@@ -22,8 +22,18 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
 final class LogoutListenerPassTest extends AbstractCompilerPassTestCase
 {
     /** @test */
+    public function it_does_nothing_when_no_shop_firewall_context_name_parameter_is_present(): void
+    {
+        $this->compile();
+
+        $this->assertContainerBuilderNotHasService('sylius.handler.shop_user_logout');
+    }
+
+    /** @test */
     public function it_does_nothing_when_no_shop_firewall_event_dispatcher_is_present(): void
     {
+        $this->container->setParameter('sylius_shop.firewall_context_name', 'shop_firewall');
+
         $this->compile();
 
         $this->assertContainerBuilderNotHasService('sylius.handler.shop_user_logout');
@@ -32,7 +42,8 @@ final class LogoutListenerPassTest extends AbstractCompilerPassTestCase
     /** @test */
     public function it_adds_logout_listener_when_shop_firewall_event_dispatcher_is_present(): void
     {
-        $this->container->setDefinition('security.event_dispatcher.shop', new Definition());
+        $this->container->setParameter('sylius_shop.firewall_context_name', 'shop_firewall');
+        $this->container->setDefinition('security.event_dispatcher.shop_firewall', new Definition());
 
         $this->compile();
 
@@ -41,7 +52,7 @@ final class LogoutListenerPassTest extends AbstractCompilerPassTestCase
             'kernel.event_listener',
             [
                 'event' => LogoutEvent::class,
-                'dispatcher' => 'security.event_dispatcher.shop',
+                'dispatcher' => 'security.event_dispatcher.shop_firewall',
                 'method' => 'onLogout',
             ],
         );
