@@ -50,34 +50,16 @@ final class CreateAdminUserCommand extends Command
 
         $email = $this->io->askQuestion($this->createEmailQuestion());
 
-        if ($this->checkIfAdminUserExists($this->canonicalizer->canonicalize($email))) {
+        if ($this->adminUserExists($this->canonicalizer->canonicalize($email))) {
             $this->io->error(sprintf('Admin user with email address %s already exists.', $email));
 
             return Command::INVALID;
         }
 
-        $userName = $this->io->ask('Username');
-        $firstName = $this->io->ask('First name');
-        $lastName = $this->io->ask('Last name');
-        $password = $this->io->askHidden('Password');
-
         /** @var AdminUserInterface $adminUser */
         $adminUser = $this->adminUserFactory->createNew();
 
-        $adminUser->setEmail($email);
-        $adminUser->setPlainPassword($password);
-        $adminUser->setUsername($userName);
-        $adminUser->setFirstName($firstName);
-        $adminUser->setLastName($lastName);
-
-        $locales = Locales::getNames();
-
-        $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
-        $adminUser->setLocaleCode($localeCode);
-
-        $enabled = $this->io->confirm('Do you want to enable this admin user?', true);
-        $adminUser->setEnabled($enabled);
-
+        $this->setAdminUserData($adminUser, $email);
         $this->showSummary($adminUser);
 
         if ($this->adminCreationConfirmed()) {
@@ -108,9 +90,31 @@ final class CreateAdminUserCommand extends Command
         return $question;
     }
 
-    private function checkIfAdminUserExists(string $email): bool
+    private function adminUserExists(string $email): bool
     {
         return null !== $this->adminUserRepository->findOneByEmail($email);
+    }
+
+    private function setAdminUserData(AdminUserInterface $adminUser, string $email): void
+    {
+        $userName = $this->io->ask('Username');
+        $firstName = $this->io->ask('First name');
+        $lastName = $this->io->ask('Last name');
+        $password = $this->io->askHidden('Password');
+
+        $adminUser->setEmail($email);
+        $adminUser->setPlainPassword($password);
+        $adminUser->setUsername($userName);
+        $adminUser->setFirstName($firstName);
+        $adminUser->setLastName($lastName);
+
+        $locales = Locales::getNames();
+
+        $localeCode = $this->io->choice('Select the locale code', $locales, 'en_US');
+        $adminUser->setLocaleCode($localeCode);
+
+        $enabled = $this->io->confirm('Do you want to enable this admin user?', true);
+        $adminUser->setEnabled($enabled);
     }
 
     private function showSummary(AdminUserInterface $adminUser): void
