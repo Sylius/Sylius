@@ -38,7 +38,9 @@ class User implements UserInterface, \Stringable
     /**
      * Random data that is used as an additional input to a function that hashes a password.
      *
-     * @var string
+     * @deprecated since 1.13 and will be removed in Sylius 2.0, modern hashing algorithms do not require salt
+     *
+     * @var string|null
      */
     protected $salt;
 
@@ -113,8 +115,6 @@ class User implements UserInterface, \Stringable
 
     public function __construct()
     {
-        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
-
         /** @var ArrayCollection<array-key, UserOAuthInterface> $this->oauthAccounts */
         $this->oauthAccounts = new ArrayCollection();
 
@@ -180,8 +180,12 @@ class User implements UserInterface, \Stringable
         return (string) $this->usernameCanonical;
     }
 
-    public function getSalt(): string
+    /**
+     * @deprecated since 1.13 and will be removed in Sylius 2.0, modern hashing algorithms do not require salt
+     */
+    public function getSalt(): ?string
     {
+        /** @psalm-suppress DeprecatedProperty */
         return $this->salt;
     }
 
@@ -390,7 +394,6 @@ class User implements UserInterface, \Stringable
     {
         return [
             $this->password,
-            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->locked,
@@ -418,7 +421,6 @@ class User implements UserInterface, \Stringable
 
         [
             $this->password,
-            $this->salt,
             $this->usernameCanonical,
             $this->username,
             $this->locked,

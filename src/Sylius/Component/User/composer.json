@@ -35,7 +35,7 @@
     "require": {
         "php": "^8.0",
         "doctrine/collections": "^1.6",
-        "sylius-labs/polyfill-symfony-security": "^1.1",
+        "sylius-labs/polyfill-symfony-security": "dev-fix/user-salt-interface",
         "sylius/resource": "^1.9",
         "symfony/polyfill-mbstring": "^1.17",
         "symfony/security-core": "^5.4 || ^6.0"
@@ -70,6 +70,10 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:coldic3/PolyfillSymfonySecurity.git"
         }
     ],
     "minimum-stability": "dev",

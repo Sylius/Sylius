@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security;
 
+use Sylius\Bundle\UserBundle\Security\UserPasswordHasher;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Webmozart\Assert\Assert;
+
+
+trigger_deprecation('sylius/user', '1.13', 'The "%s" class is deprecated.', UserPbkdf2PasswordEncoder::class, UserPasswordHasher::class);
 
 /**
  * Pbkdf2PasswordEncoder uses the PBKDF2 (Password-Based Key Derivation Function 2).
@@ -24,6 +28,8 @@ use Webmozart\Assert\Assert;
  *
  * But also warrants a warning, using PBKDF2 (with a high number of iterations) slows down the process.
  * PBKDF2 should be used with caution and care.
+ *
+ * @deprecated since Sylius 1.13, use {@link UserPasswordHasher} instead
  */
 final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 {

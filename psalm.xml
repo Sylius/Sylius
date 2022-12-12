@@ -34,6 +34,7 @@
                 <referencedClass name="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder"/>
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
+                <referencedClass name="Sylius\Component\User\Security\UserPbkdf2PasswordEncoder" />
                 <referencedClass name="Symfony\Component\Routing\RouteCollectionBuilder" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface" /> <!-- deprecated in Symfony 5.3 -->
@@ -121,6 +122,12 @@
             </errorLevel>
         </MissingConstructor>
         <MissingParamType errorLevel="info" />
+
+        <DuplicateClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Component/User/Model/CredentialsHolderInterface.php" />
+            </errorLevel>
+        </DuplicateClass>
 
         <RedundantConditionGivenDocblockType errorLevel="info" />
 

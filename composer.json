@@ -73,7 +73,7 @@
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
-        "sylius-labs/polyfill-symfony-security": "^1.1",
+        "sylius-labs/polyfill-symfony-security": "dev-fix/user-salt-interface",
         "sylius/calendar": "^0.3 || ^0.4",
         "sylius/fixtures-bundle": "^1.7",
         "sylius/grid": "^1.11",
@@ -228,6 +228,12 @@
         "symplify/monorepo-builder": "^11.0",
         "vimeo/psalm": "^4.19"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:coldic3/PolyfillSymfonySecurity.git"
+        }
+    ],
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
         "ext-intl": "For better performance than using Symfony Polyfill Component",

@@ -62,6 +62,10 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:coldic3/PolyfillSymfonySecurity.git"
         }
     ],
     "minimum-stability": "dev",
