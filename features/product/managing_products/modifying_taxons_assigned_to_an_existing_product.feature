@@ -1,5 +1,5 @@
 @managing_products
-Feature: Modifying taxons assigned to an exisiting product
+Feature: Modifying taxons assigned to an existing product
     In order to specify in which taxon a product is available
     As an Administrator
     I want to be able to change taxon of a product

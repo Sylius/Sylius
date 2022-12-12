@@ -389,8 +389,8 @@ final class ManagingProductsContext implements Context
         $productTaxonId = $this->getProductTaxonId($product);
 
         $response = $this->client->show(Resources::PRODUCT_TAXONS, (string) $productTaxonId);
-        $productTaxonUrl = $this->responseChecker->getValue($response, 'taxon');
-        $productTaxonCodes = explode('/', $productTaxonUrl);
+        $productTaxonIri = $this->responseChecker->getValue($response, 'taxon');
+        $productTaxonCodes = explode('/', $productTaxonIri);
 
         Assert::same(array_pop($productTaxonCodes), $taxon->getCode());
     }
