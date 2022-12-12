@@ -22,7 +22,7 @@ final class CustomerProvider implements CustomerProviderInterface
 {
     public function __construct(
         private CustomerRepositoryInterface $customerRepository,
-        private CanonicalizerInterface $canonicalizer
+        private CanonicalizerInterface $canonicalizer,
     ) {
     }
 
@@ -40,4 +40,3 @@ final class CustomerProvider implements CustomerProviderInterface
         return $customer;
     }
 }
-

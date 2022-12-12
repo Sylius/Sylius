@@ -45,7 +45,8 @@ if (Kernel::MAJOR_VERSION === 5) {
 
             $passwordEncoder
                 ->encodePassword('topSecretPlainPassword', 'typicalSalt')
-                ->willReturn('topSecretEncodedPassword');
+                ->willReturn('topSecretEncodedPassword')
+            ;
 
             $this->encode($user)->shouldReturn('topSecretEncodedPassword');
         }

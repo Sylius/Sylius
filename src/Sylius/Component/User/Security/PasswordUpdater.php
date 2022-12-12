@@ -26,7 +26,7 @@ final class PasswordUpdater implements PasswordUpdaterInterface
                 '1.12',
                 'The "%s" class is deprecated, use "%s" instead.',
                 UserPasswordEncoderInterface::class,
-                UserPasswordHasherInterface::class
+                UserPasswordHasherInterface::class,
             );
         }
     }

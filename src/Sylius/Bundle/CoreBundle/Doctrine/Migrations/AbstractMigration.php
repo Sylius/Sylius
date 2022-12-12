@@ -51,6 +51,7 @@ abstract class AbstractMigration extends BaseAbstractMigration
 
         /**
          * @phpstan-ignore-next-line
+         *
          * @psalm-suppress InvalidClass
          */
         if (class_exists(\Doctrine\DBAL\Platforms\MySQLPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySQLPlatform::class, true)) {
@@ -59,6 +60,7 @@ abstract class AbstractMigration extends BaseAbstractMigration
 
         /**
          * @phpstan-ignore-next-line
+         *
          * @psalm-suppress InvalidClass
          */
         if (class_exists(\Doctrine\DBAL\Platforms\MySqlPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySqlPlatform::class, true)) {

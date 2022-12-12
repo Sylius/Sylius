@@ -30,7 +30,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_updates_user_profile_with_hashed_password_if_using_symfony_6(
         UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userPasswordHasher);
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
@@ -45,7 +45,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_updates_user_profile_with_encoded_password_if_using_symfony_5_4(
         UserPasswordEncoderInterface $userPasswordEncoder,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userPasswordEncoder);
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
@@ -60,7 +60,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_does_nothing_if_plain_password_is_empty(
         UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userPasswordHasher);
         $user->getPlainPassword()->willReturn('');
@@ -75,7 +75,7 @@ final class PasswordUpdaterSpec extends ObjectBehavior
 
     function it_does_nothing_if_plain_password_is_null(
         UserPasswordHasherInterface $userPasswordHasher,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->beConstructedWith($userPasswordHasher);
         $user->getPlainPassword()->willReturn(null);
