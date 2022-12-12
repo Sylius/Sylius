@@ -1,13 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-security:
-    password_hashers:
-        argon2i: argon2i
-
-sylius_user:
-    encoder: argon2i
-
 jms_serializer:
     metadata:
         directories:

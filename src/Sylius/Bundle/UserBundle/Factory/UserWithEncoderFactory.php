@@ -17,10 +17,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @deprecated since 1.13 as UserInterface::setEncoderName() is deprecated as well
+ */
 final class UserWithEncoderFactory implements FactoryInterface
 {
     public function __construct(private FactoryInterface $decoratedUserFactory, private string $encoderName)
     {
+        trigger_deprecation('sylius/user-bundle', '1.13', 'The "%s" class is deprecated as "%s::setEncoderName()" is deprecated as well', UserWithEncoderFactory::class, UserInterface::class);
     }
 
     public function createNew(): UserInterface

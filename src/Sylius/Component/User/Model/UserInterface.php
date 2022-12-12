@@ -110,6 +110,9 @@ interface UserInterface extends
 
     public function addOAuthAccount(UserOAuthInterface $oauth): void;
 
+    /**
+     * @deprecated since Sylius 1.12
+     */
     public function setEncoderName(?string $encoderName): void;
 
     public function __serialize(): array;

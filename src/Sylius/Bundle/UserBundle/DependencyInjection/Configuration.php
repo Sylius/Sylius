@@ -34,7 +34,7 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('encoder')->defaultNull()->end()
+                ->scalarNode('encoder')->defaultNull()->setDeprecated('sylius/user-bundle', '1.13')->end()
             ->end()
         ;
 
@@ -55,7 +55,7 @@ final class Configuration implements ConfigurationInterface
                                 ->addDefaultsIfNotSet()
                                 ->children()
                                     ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
-                                    ->scalarNode('encoder')->defaultNull()->end()
+                                    ->scalarNode('encoder')->defaultNull()->setDeprecated('sylius/user-bundle', '1.13')->end()
                                     ->variableNode('options')->end()
                                     ->arrayNode('resetting')
                                         ->addDefaultsIfNotSet()

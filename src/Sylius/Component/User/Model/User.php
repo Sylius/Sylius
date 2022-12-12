@@ -108,7 +108,10 @@ class User implements UserInterface, \Stringable
     /** @var string|null */
     protected $emailCanonical;
 
-    /** @var string|null */
+    /**
+     * @var string|null
+     * @deprecated since Sylius 1.13
+     */
     protected $encoderName;
 
     public function __construct()
@@ -373,11 +376,17 @@ class User implements UserInterface, \Stringable
         }
     }
 
+    /**
+     * @deprecated since Sylius 1.13
+     */
     public function getEncoderName(): ?string
     {
         return $this->encoderName;
     }
 
+    /**
+     * @deprecated since Sylius 1.13
+     */
     public function setEncoderName(?string $encoderName): void
     {
         $this->encoderName = $encoderName;
@@ -396,7 +405,6 @@ class User implements UserInterface, \Stringable
             $this->locked,
             $this->enabled,
             $this->id,
-            $this->encoderName,
         ];
     }
 
@@ -424,7 +432,6 @@ class User implements UserInterface, \Stringable
             $this->locked,
             $this->enabled,
             $this->id,
-            $this->encoderName,
         ] = $serialized;
     }
 

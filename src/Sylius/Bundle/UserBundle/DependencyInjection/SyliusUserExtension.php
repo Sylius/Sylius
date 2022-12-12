@@ -50,7 +50,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
         $this->createParameters($config['resources'], $container);
         $this->createServices($config['resources'], $container);
-        $this->loadEncodersAwareServices($config['encoder'], $config['resources'], $container);
     }
 
     private function resolveResources(array $resources, ContainerBuilder $container): array
@@ -86,20 +85,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
     {
         foreach ($resources as $userType => $config) {
             $this->createResettingTokenParameters($userType, $config['user'], $container);
-        }
-    }
-
-    private function loadEncodersAwareServices(?string $globalEncoder, array $resources, ContainerBuilder $container): void
-    {
-        foreach ($resources as $userType => $config) {
-            $encoder = $config['user']['encoder'] ?? $globalEncoder;
-
-            if (null === $encoder || false === $encoder) {
-                continue;
-            }
-
-            $this->overwriteResourceFactoryWithEncoderAwareFactory($container, $userType, $encoder);
-            $this->registerUpdateUserEncoderListener($container, $userType, $encoder, $config);
         }
     }
 
@@ -248,39 +233,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $emailOrNameBasedProviderDefinition = new ChildDefinition($abstractProviderServiceId);
         $emailOrNameBasedProviderDefinition->setClass(UsernameOrEmailProvider::class);
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
-    }
-
-    private function overwriteResourceFactoryWithEncoderAwareFactory(ContainerBuilder $container, string $userType, string $encoder): void
-    {
-        $factoryServiceId = sprintf('sylius.factory.%s_user', $userType);
-
-        $factoryDefinition = new Definition(
-            UserWithEncoderFactory::class,
-            [
-                $container->getDefinition($factoryServiceId),
-                $encoder,
-            ],
-        );
-        $factoryDefinition->setPublic(true);
-
-        $container->setDefinition($factoryServiceId, $factoryDefinition);
-    }
-
-    private function registerUpdateUserEncoderListener(ContainerBuilder $container, string $userType, string $encoder, array $resourceConfig): void
-    {
-        $updateUserEncoderListenerDefinition = new Definition(UpdateUserEncoderListener::class, [
-            new Reference(sprintf('sylius.manager.%s_user', $userType)),
-            $encoder,
-            $resourceConfig['user']['classes']['model'],
-            $resourceConfig['user']['classes']['interface'],
-            '_password',
-        ]);
-        $updateUserEncoderListenerDefinition->addTag('kernel.event_listener', ['event' => SecurityEvents::INTERACTIVE_LOGIN]);
-
-        $container->setDefinition(
-            sprintf('sylius.%s_user.listener.update_user_encoder', $userType),
-            $updateUserEncoderListenerDefinition,
-        );
     }
 
     private function createResettingTokenParameters(string $userType, array $config, ContainerBuilder $container)
