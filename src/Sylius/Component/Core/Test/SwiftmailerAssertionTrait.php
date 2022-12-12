@@ -60,7 +60,7 @@ trait SwiftmailerAssertionTrait
         throw new ExpectationFailedException(sprintf(
             'No message spooled with recipient "%s" and content "%s"',
             $recipient,
-            $message
+            $message,
         ));
     }
 

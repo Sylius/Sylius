@@ -16,8 +16,8 @@ namespace spec\Sylius\Component\Taxation\Checker;
 use DateTime;
 use PhpSpec\ObjectBehavior;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
 {
@@ -34,7 +34,7 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
     function it_can_be_in_date_when_both_dates_are_defined(
         TaxRateInterface $taxRate1,
         TaxRateInterface $taxRate2,
-        DateTimeProviderInterface $calendar
+        DateTimeProviderInterface $calendar,
     ): void {
         $calendar->now()->willReturn(new DateTime('01-02-2022'));
         $startDate = new DateTime('01-01-2022');
@@ -54,9 +54,8 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
     function it_can_be_in_date_when_only_start_date_is_defined(
         TaxRateInterface $taxRate1,
         TaxRateInterface $taxRate2,
-        DateTimeProviderInterface $calendar
-    ): void
-    {
+        DateTimeProviderInterface $calendar,
+    ): void {
         $calendar->now()->willReturn(new DateTime('01-02-2022'));
         $startDate = new DateTime('01-01-2022');
         $taxRate1->getStartDate()->willReturn($startDate);
@@ -73,9 +72,8 @@ final class TaxRateDateEligibilityCheckerSpec extends ObjectBehavior
     function it_can_be_in_date_when_only_end_date_is_defined(
         TaxRateInterface $taxRate1,
         TaxRateInterface $taxRate2,
-        DateTimeProviderInterface $calendar
-    ): void
-    {
+        DateTimeProviderInterface $calendar,
+    ): void {
         $calendar->now()->willReturn(new DateTime('01-02-2022'));
         $endDate = new DateTime('01-01-2022');
         $taxRate1->getStartDate()->willReturn(null);

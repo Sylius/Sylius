@@ -83,6 +83,7 @@ final class ResponseChecker implements ResponseCheckerInterface
         if (!$response instanceof JWTAuthenticationFailureResponse) {
             return false;
         }
+
         return
             $response->getMessage() === 'JWT Token not found' &&
             $response->getStatusCode() === Response::HTTP_UNAUTHORIZED;

@@ -51,7 +51,7 @@ final class TaxationContext implements Context
         $taxRateCode = null,
         $includedInPrice = false,
         ?string $startDate = null,
-        ?string $endDate = null
+        ?string $endDate = null,
     ) {
         $this->configureTaxRate(
             $taxCategoryName,
@@ -73,7 +73,7 @@ final class TaxationContext implements Context
         string $taxRateAmount,
         string $taxCategoryName,
         ZoneInterface $zone,
-        string $endDate
+        string $endDate,
     ) {
         $this->configureTaxRate($taxCategoryName, null, $taxRateName, $zone, $taxRateAmount, false, null, new \DateTime($endDate));
     }
@@ -86,7 +86,7 @@ final class TaxationContext implements Context
         string $taxRateAmount,
         string $taxCategoryName,
         ZoneInterface $zone,
-        string $startDate
+        string $startDate,
     ) {
         $this->configureTaxRate($taxCategoryName, StringInflector::nameToCode($taxRateName), $taxRateName, $zone, $taxRateAmount, false, new \DateTime($startDate));
     }
