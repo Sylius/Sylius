@@ -71,9 +71,9 @@ final class OrderEmailManagerTest extends KernelTestCase
                 '%s %s %s',
                 $translator->trans('sylius.email.order_confirmation.your_order_number', [], null, self::LOCALE_CODE),
                 self::ORDER_NUMBER,
-                $translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, self::LOCALE_CODE)
+                $translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, self::LOCALE_CODE),
             ),
-            preg_replace('/\s+/', ' ', strip_tags($email->getHtmlBody()))
+            preg_replace('/\s+/', ' ', strip_tags($email->getHtmlBody())),
         );
     }
 

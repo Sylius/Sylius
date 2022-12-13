@@ -21,7 +21,7 @@ final class Symfony5AuthenticationManagerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if ($container->has('security.authentication.manager')){
+        if ($container->has('security.authentication.manager')) {
             $container->setAlias('security.authentication_manager', 'security.authentication.manager');
         }
     }
