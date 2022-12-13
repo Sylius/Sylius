@@ -1,0 +1,15 @@
+---------------------------------------------------------------------------
+
+by stefantalen at 2022-12-08T12:14:13Z
+
+Thinking about this, should it even be the responsibility of Sylius to create these tables through a migration?
+
+>The ability to automatically generate a migration for the messenger_messages table was introduced in Symfony 5.1 and DoctrineBundle 2.1.
+
+https://symfony.com/doc/5.4/messenger.html#doctrine-transport
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-12-13T12:38:36Z
+
+Thank you, Stefan! :tada:
