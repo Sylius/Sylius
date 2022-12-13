@@ -25,9 +25,7 @@ final class Version20220407131547 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        if (!$schema->hasTable('messenger_messages')) {
-            return;
-        }
+        $this->skipIf(!$schema->hasTable('messenger_messages'), 'messenger_messages table was not found');
 
         $existingIndexes = $this->getExistingIndexesNames('messenger_messages');
 
