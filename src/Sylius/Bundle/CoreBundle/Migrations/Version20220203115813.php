@@ -30,7 +30,9 @@ final class Version20220203115813 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        if ($this->isUsingDoctrineTransport() && !$schema->hasTable('messenger_messages')) {
+        $this->skipIf(!$this->isUsingDoctrineTransport(), 'MESSENGER_TRANSPORT_DSN was not found or is not using Doctrine');
+
+        if (!$schema->hasTable('messenger_messages')) {
             $this->addSql('CREATE TABLE messenger_messages (id BIGINT AUTO_INCREMENT NOT NULL, body LONGTEXT NOT NULL, headers LONGTEXT NOT NULL, queue_name VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, available_at DATETIME NOT NULL, delivered_at DATETIME DEFAULT NULL, INDEX IDX_75EA56E016BA31DB (delivered_at), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         }
     }
