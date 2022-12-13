@@ -40,7 +40,7 @@ final class TaxRateResolverSpec extends ObjectBehavior
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $firstTaxRate,
         TaxRateInterface $secondTaxRate,
-        TaxRateInterface $thirdTaxRate
+        TaxRateInterface $thirdTaxRate,
     ): void {
         $taxable->getTaxCategory()->willReturn($taxCategory);
         $taxRateRepository

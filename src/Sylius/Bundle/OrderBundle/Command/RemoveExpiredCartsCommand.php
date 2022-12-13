@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Command;
 
+use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 
 /**
  * @final
@@ -61,7 +61,7 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
             trigger_deprecation(
                 'sylius/order-bundle',
                 '1.12',
-                sprintf('Not injecting the %s into the %s is deprecated and will be mandatory from 2.0', ExpiredCartsRemoverInterface::class, self::class)
+                sprintf('Not injecting the %s into the %s is deprecated and will be mandatory from 2.0', ExpiredCartsRemoverInterface::class, self::class),
             );
             $this->getContainer()->get('sylius.expired_carts_remover')->remove();
         } else {
@@ -71,4 +71,3 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
         return 0;
     }
 }
-

@@ -36,8 +36,8 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
                 'Using the "%s" class with "%s" argument is prohibited since Sylius 1.12, use "%s" service instead.',
                 self::class,
                 PasswordHasherFactoryInterface::class,
-                UserPasswordHasher::class
-            )
+                UserPasswordHasher::class,
+            ),
         );
     }
 

@@ -17,8 +17,8 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
+use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,

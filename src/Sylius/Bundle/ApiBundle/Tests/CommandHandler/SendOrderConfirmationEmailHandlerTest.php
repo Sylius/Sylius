@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 {

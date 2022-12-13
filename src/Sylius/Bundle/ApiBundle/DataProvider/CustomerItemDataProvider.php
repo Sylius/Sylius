@@ -36,7 +36,7 @@ final class CustomerItemDataProvider implements RestrictedDataProviderInterface,
         /** @var ShopUserInterface|null $user */
         $user = $this->userContext->getUser();
 
-        if ($user instanceof AdminUserInterface && $user instanceOf SymfonyUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($user instanceof AdminUserInterface && $user instanceof SymfonyUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return $this->customerRepository->find($id);
         }
 
