@@ -1,0 +1,31 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-04T23:09:15Z
+
+@stefandoorn can you confirm this is still not working?
+AFAIK the code related to bulk actions was changed in the meantime, including the confirmation modal.
+Now the modal is bound by a data attribute: `data-bulk-action-requires-confirmation`.
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2022-11-07T07:13:28Z
+
+Ahhh -- do you have the commit where it got changed, @vvasiloi? I can check, but I'm not on the last version.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-07T11:12:21Z
+
+@stefandoorn I checked again and that logic was never changed, so it's probably still a bug: https://github.com/Sylius/Sylius/blob/60f806c36ce7ee4c1f5aa444e3cc46490e566c32/src/Sylius/Bundle/UiBundle/Resources/private/js/sylius-bulk-action-require-confirmation.js
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2022-11-07T19:10:01Z
+
+Ok! Great :)
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2022-12-13T11:45:37Z
+
+Thanks, Stefan! :1st_place_medal:
