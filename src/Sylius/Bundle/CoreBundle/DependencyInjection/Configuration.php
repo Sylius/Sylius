@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\AvatarImageRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
