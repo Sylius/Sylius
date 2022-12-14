@@ -46,3 +46,11 @@ Feature: Viewing product's associations
         Then I should see the product association "Accessories" with products "LG headphones" and "LG earphones"
         And I should also see the product association "Alternatives" with product "LG G5"
         And I should not see the product association "Alternatives" with product "LG G4"
+
+    @ui
+    Scenario: Viewing a detailed page while an empty association exists
+        Given products "LG G4" and "LG G5" are disabled
+        And I am browsing channel "Smartphone Store"
+        When I view product "LG G3"
+        Then I should see the product association "Accessories" with products "LG headphones" and "LG earphones"
+        And I should not see the product association "Alternatives"
