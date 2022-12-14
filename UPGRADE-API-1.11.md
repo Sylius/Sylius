@@ -392,3 +392,13 @@
 
 1. Added response body field `originalUnitPrice` to the following endpoint:
    - `'GET', '/api/v2/admin/orders/{tokenValue}'`
+
+# UPGRADE FROM `v1.11.11` TO `v1.11.12`
+
+1. So far, on production environment when any non-validation related error occurred, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` was used, even on API Platform endpoints.
+    Now, depending on the path of the request, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` or `ApiPlatform\Hydra\Serializer\ErrorNormalizer` is used. If your code
+    rely on the previous behavior, you should add the following configuration to your `config/packages/_sylius.yaml` file:
+    ```yaml
+    sylius_api:
+        legacy_error_handling: true
+    ```

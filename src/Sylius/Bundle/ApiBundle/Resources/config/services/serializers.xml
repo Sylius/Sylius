@@ -32,6 +32,12 @@
             <tag name="serializer.normalizer" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer.inner" />
+            <argument type="service" id="request_stack" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="api_platform.iri_converter" />
@@ -62,6 +68,12 @@
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer" decorates="fos_rest.serializer.flatten_exception_normalizer">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer.inner" />
+            <argument type="service" id="request_stack" />
+            <argument>%sylius.security.new_api_route%</argument>
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ShippingMethodNormalizer">
