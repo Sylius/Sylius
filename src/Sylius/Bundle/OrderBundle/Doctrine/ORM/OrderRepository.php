@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
@@ -115,7 +116,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, int $limit = -1): array
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, ?int $limit = null): array
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->andWhere('o.state = :state')
@@ -124,7 +125,8 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->setParameter('terminalDate', $terminalDate)
         ;
 
-        if ($limit > 0) {
+        if (null !== $limit) {
+            Assert::positiveInteger($limit);
             $queryBuilder->setMaxResults($limit);
         }
 
