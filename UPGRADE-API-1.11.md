@@ -402,3 +402,22 @@
     sylius_api:
         legacy_error_handling: true
     ```
+   
+    Example response before bugfix:
+    ```json
+    {
+        "code": 500,
+        "message": "Internal Server Error"
+    }
+    ```
+   
+    Example response after bugfix:
+    ```json
+    {
+        "@context": "/api/v2/contexts/Error",
+        "@type": "hydra:Error",
+        "hydra:title": "An error occurred",
+        "hydra:description": "Internal Server Error"
+    }
+    ```
+    The status code is passed along the response as an HTTP status code, and the `message` value is returned in a `hydra:description` field.
