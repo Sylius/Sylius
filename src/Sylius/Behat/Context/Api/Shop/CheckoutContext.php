@@ -1117,7 +1117,7 @@ final class CheckoutContext implements Context
 
         Assert::same($response->getStatusCode(), 404);
 
-        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+        Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
     /**
