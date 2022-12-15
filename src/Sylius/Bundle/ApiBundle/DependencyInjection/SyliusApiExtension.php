@@ -27,6 +27,7 @@ final class SyliusApiExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
+        $container->setParameter('sylius_api.legacy_error_handling', $config['legacy_error_handling']);
         $container->setParameter('sylius_api.product_image_prefix', $config['product_image_prefix']);
         $container->setParameter(
             'sylius_api.filter_eager_loading_extension.restricted_resources',
