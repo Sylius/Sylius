@@ -25,14 +25,9 @@ final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterfac
     ) {
     }
 
-    public function supportsNormalization($data, $format = null, array $context = [])
+    public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        if (method_exists($this->requestStack, 'getMainRequest')) {
-            $path = $this->requestStack->getMainRequest()->getPathInfo();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $path = $this->requestStack->getMasterRequest()->getPathInfo();
-        }
+        $path = $this->requestStack->getMainRequest()->getPathInfo();
 
         if (str_starts_with($path, $this->newApiRoute)) {
             return false;

@@ -247,9 +247,10 @@ final class ProductVariantContext implements Context
      */
     public function iShouldNotSeeVariant(ProductVariantInterface $variant): void
     {
-        $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
+        $response = $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
+
         Assert::same(
-            $content['code'],
+            $response->getStatusCode(),
             404,
             sprintf('%s variant should be disabled', $variant->getName()),
         );
