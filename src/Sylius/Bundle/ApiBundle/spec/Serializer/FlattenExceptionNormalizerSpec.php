@@ -40,12 +40,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
 
         $request->getPathInfo()->willReturn('/api/v2/products');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $normalizer->supportsNormalization('data', 'format', ['context'])->shouldNotBeCalled();
 
@@ -61,15 +56,10 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
 
         $request->getPathInfo()->willReturn('/api/v1/products');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            /** @phpstan-ignore-next-line */
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
-        $normalizer->supportsNormalization('data', 'format', ['context'])->shouldBeCalled();
+        $normalizer->supportsNormalization('data', 'format', ['context'])->shouldBeCalled()->willReturn(true);
 
-        $this->supportsNormalization('data', 'format', ['context']);
+        $this->supportsNormalization('data', 'format', ['context'])->shouldReturn(true);
     }
 }

@@ -117,7 +117,7 @@ final class ResettingPasswordContext implements Context
 
         Assert::same($lastResponse->getStatusCode(), Response::HTTP_INTERNAL_SERVER_ERROR);
         $message = $this->responseChecker->getError($lastResponse);
-        Assert::startsWith($message, 'No user found with reset token: ');
+        Assert::startsWith($message, 'Internal Server Error');
     }
 
     /**

@@ -32,14 +32,9 @@ final class HydraErrorNormalizer implements NormalizerInterface, CacheableSuppor
         return $this->decorated->normalize($object, $format, $context);
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
-        if (method_exists($this->requestStack, 'getMainRequest')) {
-            $path = $this->requestStack->getMainRequest()->getPathInfo();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $path = $this->requestStack->getMasterRequest()->getPathInfo();
-        }
+        $path = $this->requestStack->getMainRequest()->getPathInfo();
 
         if (!str_starts_with($path, $this->newApiRoute)) {
             return false;
