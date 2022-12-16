@@ -22,9 +22,9 @@ class ProductAssociationRepository extends EntityRepository implements ProductAs
 {
     public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface
     {
-        return $this->createQueryBuilder('o')
+        $productAssociation = $this->createQueryBuilder('o')
             ->addSelect('associatedProduct')
-            ->innerJoin('o.associatedProducts', 'associatedProduct', 'WITH', 'associatedProduct.enabled = true')
+            ->leftJoin('o.associatedProducts', 'associatedProduct', 'WITH', 'associatedProduct.enabled = true')
             ->innerJoin('associatedProduct.channels', 'channel', 'WITH', 'channel = :channel')
             ->andWhere('o.id = :associationId')
             ->setParameter('associationId', $associationId)
@@ -32,5 +32,12 @@ class ProductAssociationRepository extends EntityRepository implements ProductAs
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        if (null === $productAssociation) {
+            $productAssociation = $this->find($associationId);
+            $productAssociation->clearAssociatedProducts();
+        }
+
+        return $productAssociation;
     }
 }

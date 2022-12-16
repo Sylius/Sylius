@@ -747,6 +747,17 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should not see the product association "([^"]+)"$/
+     */
+    public function iShouldNotSeeTheProductAssociationWithProducts(string $productAssociationName): void
+    {
+        Assert::false(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('There should not be an association named "%s" but it does.', $productAssociationName),
+        );
+    }
+
+    /**
      * @Then /^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/
      */
     public function iShouldSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void

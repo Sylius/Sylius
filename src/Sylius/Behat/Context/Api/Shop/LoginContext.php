@@ -272,7 +272,7 @@ final class LoginContext implements Context
         // token is removed when used
         Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'No user found with reset token: ');
+        Assert::startsWith($message, 'Internal Server Error');
     }
 
     private function addLocale(string $locale): void
