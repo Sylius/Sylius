@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -270,9 +271,9 @@ final class LoginContext implements Context
         $this->client->executeCustomRequest($this->request);
 
         // token is removed when used
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'Internal Server Error');
+        Assert::startsWith($message, 'No user found with reset token:');
     }
 
     private function addLocale(string $locale): void
