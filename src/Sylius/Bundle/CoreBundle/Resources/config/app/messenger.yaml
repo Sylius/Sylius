@@ -19,8 +19,9 @@ framework:
                     queue_name: 'catalog_promotion_removal_failed'
         reset_on_message: true
         routing:
-            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState': main
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion': main
+            'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion': catalog_promotion_removal
             'Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion': catalog_promotion_removal
             'Sylius\Component\Promotion\Event\CatalogPromotionCreated': main
             'Sylius\Component\Promotion\Event\CatalogPromotionEnded': main

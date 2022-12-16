@@ -15,12 +15,16 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -29,71 +33,51 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
 {
     public function let(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
     ): void {
-        $this->beConstructedWith($catalogPromotionRepository, $commandBus, $eventBus);
+        $this->beConstructedWith($catalogPromotionRepository, $catalogPromotionRemovalAnnouncer);
     }
 
-    public function it_removes_an_active_catalog_promotion_by_disabling_it_and_dispatching_catalog_promotion_ended_event_and_remove_inactive_catalog_promotion_command(
+    public function it_implements_catalog_promotion_removal_processor_interface(): void
+    {
+        $this->shouldImplement(CatalogPromotionRemovalProcessorInterface::class);
+    }
+
+    public function it_removes_an_active_catalog_promotion(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_ACTIVE);
 
-        $catalogPromotion->getState()->willReturn('active');
-
-        $catalogPromotion->setEnabled(false)->shouldBeCalled();
-
-        $event = new CatalogPromotionEnded('CATALOG_PROMOTION_CODE');
-        $command = new RemoveInactiveCatalogPromotion('CATALOG_PROMOTION_CODE');
-
-        $eventBus->dispatch($event)->willReturn(new Envelope($event));
-        $commandBus->dispatch($command)->willReturn(new Envelope($command));
+        $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion)->shouldBeCalled();
 
         $this->removeCatalogPromotion('CATALOG_PROMOTION_CODE');
     }
 
-    public function it_removes_an_inactive_catalog_promotion_by_dispatching_remove_inactive_catalog_promotion_command_without_recalculating_the_catalog(
+    public function it_removes_an_inactive_catalog_promotion(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_INACTIVE);
 
-        $catalogPromotion->getState()->willReturn('inactive');
-
-        $catalogPromotion->setEnabled(Argument::any())->shouldNotBeCalled();
-
-        $event = new CatalogPromotionEnded('CATALOG_PROMOTION_CODE');
-        $command = new RemoveInactiveCatalogPromotion('CATALOG_PROMOTION_CODE');
-
-        $eventBus->dispatch($event)->shouldNotBeCalled();
-        $commandBus->dispatch($command)->willReturn(new Envelope($command));
+        $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion)->shouldBeCalled();
 
         $this->removeCatalogPromotion('CATALOG_PROMOTION_CODE');
     }
 
-    public function it_does_not_dispatch_any_events_and_commands_if_catalog_promotion_from_command_does_not_exist(
+    public function it_does_not_dispatch_catalog_promotion_removal_if_catalog_promotion_from_command_does_not_exist(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn(null);
-
         $catalogPromotion->getState()->shouldNotBeCalled();
 
-        $catalogPromotion->setEnabled(Argument::any())->shouldNotBeCalled();
-
-        $event = new CatalogPromotionUpdated('CATALOG_PROMOTION_CODE');
-        $command = new RemoveInactiveCatalogPromotion('CATALOG_PROMOTION_CODE');
-
-        $eventBus->dispatch($event)->shouldNotBeCalled();
-        $commandBus->dispatch($command)->shouldNotBeCalled();
+        $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval(Argument::any())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(CatalogPromotionNotFoundException::class)
@@ -103,21 +87,13 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_catalog_promotion_is_being_processed(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
+        $catalogPromotion->getState()->willReturn(CatalogPromotionStates::STATE_PROCESSING);
 
-        $catalogPromotion->getState()->willReturn('processing');
-
-        $catalogPromotion->setEnabled(Argument::any())->shouldNotBeCalled();
-
-        $event = new CatalogPromotionEnded('CATALOG_PROMOTION_CODE');
-        $command = new RemoveInactiveCatalogPromotion('CATALOG_PROMOTION_CODE');
-
-        $eventBus->dispatch($event)->shouldNotBeCalled();
-        $commandBus->dispatch($command)->shouldNotBeCalled();
+        $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval(Argument::any())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(InvalidCatalogPromotionStateException::class)
@@ -127,25 +103,36 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_catalog_promotion_state_is_out_of_invalid_one(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $commandBus,
-        MessageBusInterface $eventBus,
+        CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
-
         $catalogPromotion->getState()->willReturn('invalid_state');
 
-        $catalogPromotion->setEnabled(Argument::any())->shouldNotBeCalled();
-
-        $event = new CatalogPromotionEnded('CATALOG_PROMOTION_CODE');
-        $command = new RemoveInactiveCatalogPromotion('CATALOG_PROMOTION_CODE');
-
-        $eventBus->dispatch($event)->shouldNotBeCalled();
-        $commandBus->dispatch($command)->shouldNotBeCalled();
+        $catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval(Argument::any())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(\DomainException::class)
             ->during('removeCatalogPromotion', ['CATALOG_PROMOTION_CODE'])
+        ;
+    }
+
+    public function it_deprecates_passing_message_busses(
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        MessageBusInterface $eventBus,
+        MessageBusInterface $commandBus,
+    ): void
+    {
+        $this->beConstructedWith($catalogPromotionRepository, $eventBus, $commandBus);
+
+        $this
+            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing an instance of %s as second constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, CatalogPromotionRemovalProcessor::class, CatalogPromotionRemovalAnnouncerInterface::class))
+            ->duringInstantiation()
+        ;
+
+        $this
+            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing third constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0.', CatalogPromotionRemovalProcessor::class))
+            ->duringInstantiation()
         ;
     }
 }
