@@ -24,7 +24,7 @@ final class ProductReviewsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_gets_product_review(): void
+    public function it_gets_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);

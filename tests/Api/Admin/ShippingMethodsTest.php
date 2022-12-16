@@ -70,7 +70,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_archives_a_shipping_methods(): void
+    public function it_archives_a_shipping_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -97,7 +97,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_restores_a_shipping_methods(): void
+    public function it_restores_a_shipping_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',

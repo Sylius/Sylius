@@ -18,7 +18,7 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-final class PromotionTest extends JsonApiTestCase
+final class PromotionsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 

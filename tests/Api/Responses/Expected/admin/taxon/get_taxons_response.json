@@ -6,9 +6,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "CATEGORY",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -26,9 +27,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/MUG",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "MUG",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -36,7 +38,7 @@
                     "slug": "categories/mugs",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -50,9 +52,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/HAT",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "HAT",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -60,7 +63,7 @@
                     "slug": "categories/hats",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -74,9 +77,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "T_SHIRTS",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -84,7 +88,7 @@
                     "slug": "categories/t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -101,9 +105,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "MEN_T_SHIRTS",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -111,7 +116,7 @@
                     "slug": "categories/t-shirts/men-t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -125,9 +130,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "WOMEN_T_SHIRTS",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -135,7 +141,7 @@
                     "slug": "categories/t-shirts/women-t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -149,9 +155,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/BRAND",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "BRAND",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -159,7 +166,7 @@
                     "slug": "brands",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
-                "de_DE" : {
+                "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,
@@ -173,9 +180,10 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/de%3Flol=xd%23boom",
             "@type": "Taxon",
+            "id": "@integer@",
             "code": "de?lol=xd#boom",
             "translations": {
-                "en_US" : {
+                "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
                     "@type": "TaxonTranslation",
                     "id": @integer@,

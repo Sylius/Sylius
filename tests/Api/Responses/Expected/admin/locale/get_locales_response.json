@@ -6,18 +6,21 @@
         {
             "@id": "\/api\/v2\/admin\/locales\/en_US",
             "@type": "Locale",
+            "id": "@integer@",
             "code": "en_US",
             "name": "English (United States)"
         },
         {
             "@id": "\/api\/v2\/admin\/locales\/pl_PL",
             "@type": "Locale",
+            "id": "@integer@",
             "code": "pl_PL",
             "name": "Polish (Poland)"
         },
         {
             "@id": "\/api\/v2\/admin\/locales\/ga_IE",
             "@type": "Locale",
+            "id": "@integer@",
             "code": "ga_IE",
             "name": "Irish (Ireland)"
         }
