@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -31,6 +32,7 @@ use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 final class OrderSpec extends ObjectBehavior
 {
@@ -134,13 +136,33 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldNotHaveShipment($shipment);
     }
 
-    function it_removes_shipments(ShipmentInterface $shipment): void
+    function it_removes_shipments_with_units(
+        ShipmentInterface $shipment,
+        ShipmentUnitInterface $shipmentUnit
+    ): void
     {
         $this->addShipment($shipment);
         $this->hasShipment($shipment)->shouldReturn(true);
+        $shipment->getUnits()->willReturn(new ArrayCollection([$shipmentUnit->getWrappedObject()]));
 
         $this->removeShipments();
 
+        $shipment->removeUnit(Argument::any())->shouldBeCalled();
+        $this->hasShipment($shipment)->shouldReturn(false);
+    }
+
+    function it_removes_shipments_without_units(
+        ShipmentInterface $shipment,
+        ShipmentUnitInterface $shipmentUnit
+    ): void
+    {
+        $this->addShipment($shipment);
+        $this->hasShipment($shipment)->shouldReturn(true);
+        $shipment->getUnits()->willReturn(new ArrayCollection([]));
+
+        $this->removeShipments();
+
+        $shipment->removeUnit()->shouldNotBeCalled();
         $this->hasShipment($shipment)->shouldReturn(false);
     }
 
