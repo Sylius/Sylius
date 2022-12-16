@@ -1,0 +1,48 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-25T12:14:54Z
+
+@lchrusciel you pretty much described how https://github.com/Setono/SyliusCatalogPromotionPlugin works. Was that your inspiration? 😄
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2022-11-25T12:27:54Z
+
+Great minds think alike 😅 You probably won't believe me, but I haven't checked it. It just seems like the natural direction of async processing. But that exposes our different issue, we should check our environment much more often
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-25T12:50:51Z
+
+> if I may propose some design, it would go like that:
+>
+>     1. Customer clicks delete operation
+>
+>     2. it changes the state of catalog promotion to something like: "during deletion", disables it, generates a unique **Operation ID** and triggers processing of product variants with this ID + unique **Batch ID** for each batch (so we are introducing batch processing tracing here and new table)
+>
+>     3. If the **Batch ID** and **Operation ID** is present during batch processing, at the end of the operation, the batch processor is removing its item (based on **Batch ID**) from the newly created table and sends an acknowledgement of it into the system (with **Operation ID**)
+>
+>     4. We are introducing a ProcessManager, which listens to the acknowledgements dispatched by the previous step. At this point, we are checking the number of processes with the same **Operation ID**. If it is larger than 0, then we are leaving the processor. Otherwise, we are triggering the removal of catalog promotion command
+>
+>     5. We are removing catalog promotion
+>
+>
+> This process, on paper, should be free of deadlocks and race conditions, as we are moving to the next stage one by one. Also, the removal and adding of rows should be concurrent if we provide a different ID than autoincremented. Let me know what do you think about such an architecture
+
+That's starting to sound like a component to treat messenger as job queue with a plugin for sylius. :) I like it and I've actually have similar solution in my project and of similar need: We need to expose messengers handlers result/status to UI/admin users in non-technical manner.
+<details><summary>UI example</summary>
+
+![image](https://user-images.githubusercontent.com/870747/203984727-e2fb5a08-68a9-43ea-a4be-2fe0dfe7f7fa.png)
+![image](https://user-images.githubusercontent.com/870747/203984916-bba69556-04f3-44d7-879d-5e47951f4a3b.png)
+![image](https://user-images.githubusercontent.com/870747/203985177-89545fff-0eca-438f-95d6-d9557a6a398e.png)
+</details>
+
+If it will be developed in this direction, then I will suggest to separate `process` states (new(awaiting_processing),processing,completed,cancelled,failed) and actual job payload states like for the catalog promotions.
+
+I would have introduced new `Process` entity with serializable `Result` dto and messenger's middleware/stamps to track progress (As such, it's should be possible to track any dispatches from current handler, so there shouldn't be a need to identify batches, any dispatched messages will be child processes to parent process) and on messenger's worker side it should be possible to listen for SIGTERM/SIGKILL to cancel/fail current process.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-12-16T07:52:32Z
+
+Thank you, Kevin! :tada:
