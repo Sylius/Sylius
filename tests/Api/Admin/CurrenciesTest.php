@@ -23,7 +23,7 @@ final class CurrenciesTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_gets_a_country(): void
+    public function it_gets_a_currency(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'currency.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);

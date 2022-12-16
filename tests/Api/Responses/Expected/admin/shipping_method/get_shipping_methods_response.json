@@ -6,6 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
             "@type": "ShippingMethod",
+            "id": "@integer@",
             "code": "UPS",
             "position": 0,
             "calculator": "flat_rate",
@@ -34,6 +35,7 @@
         {
             "@id": "\/api\/v2\/admin\/shipping-methods\/DHL",
             "@type": "ShippingMethod",
+            "id": "@integer@",
             "code": "DHL",
             "position": 1,
             "calculator": "flat_rate",

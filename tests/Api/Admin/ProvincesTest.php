@@ -23,7 +23,7 @@ final class ProvincesTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_gets_a_country(): void
+    public function it_gets_a_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);

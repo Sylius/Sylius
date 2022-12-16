@@ -2,9 +2,10 @@
     "@context": "\/api\/v2\/contexts\/Taxon",
     "@id": "\/api\/v2\/admin\/taxons\/CATEGORY",
     "@type": "Taxon",
+    "id": "@integer@",
     "code": "CATEGORY",
     "translations": {
-        "en_US" : {
+        "en_US": {
             "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
             "@type": "TaxonTranslation",
             "id": @integer@,
