@@ -38,7 +38,7 @@
         "doctrine/orm": "^2.13",
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0",

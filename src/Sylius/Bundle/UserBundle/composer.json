@@ -57,7 +57,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/security-bundle": "^5.4 || ^6.0",
         "symfony/mailer": "^5.4 || ^6.0"
