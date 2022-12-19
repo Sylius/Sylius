@@ -7,7 +7,8 @@
         {% set attributes = {} %}
 
         {% for child in form %}
-            {% set code = child.vars.data.attribute.code %}
+            {# Required prefix for numeric keys (e.g., array_merge(['1' => 'a'], ['1' => 'a'])) #}
+            {% set code = '#' ~ child.vars.data.attribute.code %}
 
             {% if attributes[code] is not defined %}
                 {% set attributes = attributes|merge({ (code): [] }) %}
@@ -17,6 +18,7 @@
         {% endfor %}
 
         {% for key, attribute in attributes %}
+            {% set key = key|trim('#', 'left') %}
             <div class="attributes-group" data-attribute-code="{{ key }}">
                 <div class="attributes-header">
                     <strong>{{ attribute[0].value.vars.label }}</strong>
