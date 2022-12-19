@@ -59,27 +59,13 @@ default:
                                     w3c: false # https://github.com/Sylius/Sylius/issues/10561
                 panther:
                     panther:
-                        options:
-                            browser: 'chrome'
-                            webServerDir: '%paths.base%/public'
-                            external_base_uri: https://127.0.0.1:8080/'
-                        kernel_options:
-                            APP_ENV: test_cached
-                            APP_DEBUG: false
                         manager_options:
                             connection_timeout_in_ms: 5000
                             request_timeout_in_ms: 120000
+                            chromedriver_arguments:
+                                - --log-path=etc/build/chromedriver.log
+                                - --verbose
                             capabilities:
-                                browserName: chrome
-                                browser: chrome
-                                extra_capabilities:
-                                    chromeOptions:
-                                        args:
-                                            - "--window-size=2880,1800"
-                                            - "--headless"
-                                            - "start-fullscreen"
-                                            - "start-maximized"
-                                            - "no-sandbox"
                                 acceptSslCerts: true
                                 acceptInsecureCerts: true
                                 unexpectedAlertBehaviour: accept
