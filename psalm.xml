@@ -98,6 +98,7 @@
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Core\Exception\UsernameNotFoundException" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Doctrine\ORM\Event\LifecycleEventArgs" /> <!-- deprecated in doctrine/orm 2.14 -->
             </errorLevel>
         </DeprecatedClass>
         <DeprecatedInterface>
