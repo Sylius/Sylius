@@ -36,6 +36,7 @@
     "require-dev": {
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
