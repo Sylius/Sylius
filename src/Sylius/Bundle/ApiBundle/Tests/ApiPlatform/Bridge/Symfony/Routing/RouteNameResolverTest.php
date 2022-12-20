@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Tests\ApiPlatform\Bridge\Symfony\Routing;
 
 use ApiPlatform\Core\Api\OperationType;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\RouteNameResolver;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Symfony\Component\Routing\Route;
@@ -23,6 +24,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class RouteNameResolverTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Tests\Converter;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -23,6 +24,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class IriToIdentifierConverterTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
