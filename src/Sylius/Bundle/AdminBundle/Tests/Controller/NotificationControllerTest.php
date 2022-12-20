@@ -18,6 +18,7 @@ use GuzzleHttp\Exception\ConnectException;
 use Http\Message\MessageFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Message\RequestInterface;
@@ -29,6 +30,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     private ObjectProphecy $client;
 
     private ObjectProphecy $messageFactory;
