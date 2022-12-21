@@ -57,7 +57,10 @@ final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer implements 
         /** @var UserInterface|null $user */
         $user = $this->userContext->getUser();
         if ($user instanceof ShopUserInterface) {
-            return $user->getCustomer();
+            $customer = $user->getCustomer();
+            Assert::nullOrIsInstanceOf($customer, CustomerInterface::class);
+
+            return $customer;
         }
 
         return null;

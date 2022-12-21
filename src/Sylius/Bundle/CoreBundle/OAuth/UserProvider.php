@@ -57,7 +57,10 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         ]);
 
         if ($oauth instanceof UserOAuthInterface) {
-            return $oauth->getUser();
+            $user = $oauth->getUser();
+            Assert::isInstanceOf($user, UserInterface::class);
+
+            return $user;
         }
 
         if (null !== $response->getEmail()) {
@@ -79,6 +82,8 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
+     * @return SyliusUserInterface&UserInterface
+     *
      * Ad-hoc creation of user.
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
@@ -128,11 +133,14 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     }
 
     /**
+     * @return SyliusUserInterface&UserInterface
+     *
      * Attach OAuth sign-in provider account to existing user.
      */
     private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
+        Assert::isInstanceOf($user, UserInterface::class);
         Assert::isInstanceOf($user, SyliusUserInterface::class);
 
         /** @var UserOAuthInterface $oauth */

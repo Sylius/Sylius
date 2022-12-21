@@ -59,9 +59,15 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
     private function getFlashBag(): FlashBagInterface
     {
         if ($this->requestStackOrSession instanceof RequestStack) {
-            return $this->requestStackOrSession->getSession()->getBag('flashes');
+            $flashBag = $this->requestStackOrSession->getSession()->getBag('flashes');
+            Assert::isInstanceOf($flashBag, FlashBagInterface::class);
+
+            return $flashBag;
         }
 
-        return $this->requestStackOrSession->getBag('flashes');
+        $flashBag = $this->requestStackOrSession->getBag('flashes');
+        Assert::isInstanceOf($flashBag, FlashBagInterface::class);
+
+        return $flashBag;
     }
 }

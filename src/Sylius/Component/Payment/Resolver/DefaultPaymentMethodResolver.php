@@ -17,6 +17,7 @@ use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
@@ -33,7 +34,9 @@ final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolver
         if (empty($paymentMethods)) {
             throw new UnresolvedDefaultPaymentMethodException();
         }
+        $paymentMethod = $paymentMethods[0];
+        Assert::isInstanceOf($paymentMethod, PaymentMethodInterface::class);
 
-        return $paymentMethods[0];
+        return $paymentMethod;
     }
 }

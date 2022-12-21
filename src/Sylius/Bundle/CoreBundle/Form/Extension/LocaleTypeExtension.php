@@ -66,9 +66,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         return Locales::getName($code);
     }
 
-    /**
-     * @return array|LocaleInterface[]
-     */
+    /** @return string[] */
     private function getAvailableLocales(): array
     {
         $availableLocales = Locales::getNames();

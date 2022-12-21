@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\Address as BaseAddress;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Webmozart\Assert\Assert;
 
 class Address extends BaseAddress implements AddressInterface
 {
@@ -28,6 +29,7 @@ class Address extends BaseAddress implements AddressInterface
 
     public function setCustomer(?BaseCustomerInterface $customer): void
     {
+        Assert::nullOrIsInstanceOf($customer, CustomerInterface::class);
         $this->customer = $customer;
     }
 }

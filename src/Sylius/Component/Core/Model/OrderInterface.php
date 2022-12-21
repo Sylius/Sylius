@@ -132,6 +132,8 @@ interface OrderInterface extends
      * @psalm-return Collection<array-key, OrderItemInterface>
      *
      * @psalm-suppress ImplementedReturnTypeMismatch
+     *
+     * @phpstan-ignore-next-line
      */
     public function getItems(): Collection;
 
