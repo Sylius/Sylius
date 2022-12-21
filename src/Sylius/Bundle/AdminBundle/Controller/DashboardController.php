@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
+use Webmozart\Assert\Assert;
 
 final class DashboardController
 {
@@ -71,9 +72,15 @@ final class DashboardController
     private function findChannelByCodeOrFindFirst(?string $channelCode): ?ChannelInterface
     {
         if (null !== $channelCode) {
-            return $this->channelRepository->findOneByCode($channelCode);
+            $channel = $this->channelRepository->findOneByCode($channelCode);
+            Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+            return $channel;
         }
 
-        return $this->channelRepository->findOneBy([]);
+        $channel = $this->channelRepository->findOneBy([]);
+        Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
+
+        return $channel;
     }
 }

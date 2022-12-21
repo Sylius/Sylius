@@ -80,9 +80,7 @@ final class CountryTypeExtension extends AbstractTypeExtension
         return Countries::getName($code);
     }
 
-    /**
-     * @return array|CountryInterface[]
-     */
+    /** @return string[] */
     private function getAvailableCountries(): array
     {
         $availableCountries = Countries::getNames();

@@ -41,6 +41,7 @@ class Promotion extends BasePromotion implements PromotionInterface
      */
     public function getChannels(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->channels;
     }
 

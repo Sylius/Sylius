@@ -57,11 +57,14 @@ final class LocaleStrippingRouter implements RouterInterface, WarmableInterface
         return $this->router->getRouteCollection();
     }
 
-    public function warmUp($cacheDir): void
+    /** @return string[] */
+    public function warmUp($cacheDir): array
     {
         if ($this->router instanceof WarmableInterface) {
-            $this->router->warmUp($cacheDir);
+            return $this->router->warmUp($cacheDir);
         }
+
+        return [];
     }
 
     private function removeUnusedQueryArgument(string $url, string $key, string $value): string

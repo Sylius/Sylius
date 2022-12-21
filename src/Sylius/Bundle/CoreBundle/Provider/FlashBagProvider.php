@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Provider;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Webmozart\Assert\Assert;
 
 final class FlashBagProvider
 {
@@ -27,9 +28,15 @@ final class FlashBagProvider
         }
 
         if ($requestStackSessionOrFlashBag instanceof SessionInterface) {
-            return $requestStackSessionOrFlashBag->getBag('flashes');
+            $flashBag = $requestStackSessionOrFlashBag->getBag('flashes');
+            Assert::isInstanceOf($flashBag, FlashBagInterface::class);
+
+            return $flashBag;
         }
 
-        return $requestStackSessionOrFlashBag->getSession()->getBag('flashes');
+        $flashBag = $requestStackSessionOrFlashBag->getSession()->getBag('flashes');
+        Assert::isInstanceOf($flashBag, FlashBagInterface::class);
+
+        return $flashBag;
     }
 }

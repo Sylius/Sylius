@@ -128,6 +128,7 @@ class Order extends BaseOrder implements OrderInterface
 
     public function setChannel(?BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         $this->channel = $channel;
     }
 
@@ -208,6 +209,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getPayments(): Collection
     {
+        /** @phpstan-ignore-next-line */
         return $this->payments;
     }
 

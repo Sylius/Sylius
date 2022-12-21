@@ -14,15 +14,22 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\Provider;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Webmozart\Assert\Assert;
 
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         if (filter_var($uniqueIdentifier, \FILTER_VALIDATE_EMAIL)) {
-            return $this->userRepository->findOneByEmail($uniqueIdentifier);
+            $user = $this->userRepository->findOneByEmail($uniqueIdentifier);
+            Assert::nullOrIsInstanceOf($user, UserInterface::class);
+
+            return $user;
         }
 
-        return $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
+        $user = $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);
+        Assert::nullOrIsInstanceOf($user, UserInterface::class);
+
+        return $user;
     }
 }

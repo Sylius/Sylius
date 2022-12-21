@@ -23,6 +23,7 @@ use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
+use Webmozart\Assert\Assert;
 
 final class OrderPaymentProvider implements OrderPaymentProviderInterface
 {
@@ -72,8 +73,10 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     {
         try {
             $payment->setOrder($order);
+            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
+            Assert::isInstanceOf($paymentMethod, PaymentMethodInterface::class);
 
-            return $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
+            return $paymentMethod;
         } catch (UnresolvedDefaultPaymentMethodException) {
             return null;
         }

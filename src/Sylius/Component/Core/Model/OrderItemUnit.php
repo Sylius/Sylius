@@ -41,6 +41,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 
     public function setShipment(?BaseShipmentInterface $shipment): void
     {
+        Assert::nullOrIsInstanceOf($shipment, ShipmentInterface::class);
         $this->shipment = $shipment;
     }
 
