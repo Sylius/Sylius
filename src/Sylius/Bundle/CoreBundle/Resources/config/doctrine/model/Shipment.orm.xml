@@ -20,6 +20,10 @@
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
 
         <one-to-many field="adjustments" target-entity="Sylius\Component\Core\Model\AdjustmentInterface" mapped-by="shipment" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>

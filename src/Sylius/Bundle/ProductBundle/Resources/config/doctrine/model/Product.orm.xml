@@ -24,6 +24,9 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
 
         <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" mapped-by="product" orphan-removal="true">
@@ -31,7 +34,8 @@
                 <cascade-all />
             </cascade>
             <order-by>
-                <order-by-field name="position" direction="ASC" />
+                <order-by-field name="position" />
+                <order-by-field name="id" />
             </order-by>
         </one-to-many>
 
@@ -40,7 +44,8 @@
                 <cascade-persist />
             </cascade>
             <order-by>
-                <order-by-field name="position" direction="ASC" />
+                <order-by-field name="position" />
+                <order-by-field name="id" />
             </order-by>
             <join-table name="sylius_product_options">
                 <join-columns>
@@ -52,6 +57,15 @@
             </join-table>
         </many-to-many>
 
+        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+        </one-to-many>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
@@ -60,12 +74,6 @@
             <gedmo:timestampable on="update"/>
         </field>
         <field name="enabled" column="enabled" type="boolean" />
-
-        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
     </mapped-superclass>
 
 </doctrine-mapping>

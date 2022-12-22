@@ -38,6 +38,10 @@
             <join-column name="menu_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
         <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface" fetch="EAGER">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_channel_currencies">
                 <join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
