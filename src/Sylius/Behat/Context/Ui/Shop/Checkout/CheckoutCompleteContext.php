@@ -238,7 +238,7 @@ final class CheckoutCompleteContext implements Context
      */
     public function myOrderLocaleShouldBe(LocaleInterface $locale): void
     {
-        Assert::true($this->completePage->hasLocale($locale->getName()));
+        Assert::true($this->completePage->hasLocale($locale->getName($locale->getCode())));
     }
 
     /**
