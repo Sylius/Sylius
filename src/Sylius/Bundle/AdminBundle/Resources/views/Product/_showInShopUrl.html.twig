@@ -1,0 +1,13 @@
+{% if product.slug is empty %}
+    <div class="item" title="{{ 'sylius.ui.no_slug_for_channel'|trans }}">
+        <i class="remove icon"></i>
+        {{ 'sylius.ui.no_url_in'|trans }} {{ channel.name }}
+    </div>
+{% else %}
+    {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product.slug, '_locale': channel.defaultLocale.code}), channel) %}
+    <a href="{{ url|raw }}" class="item" target="_blank">
+        <i class="angle right icon"></i>
+        {{ 'sylius.ui.show_in'|trans }}
+        {{ channel.name }} ({{ channel.code }})
+    </a>
+{% endif %}

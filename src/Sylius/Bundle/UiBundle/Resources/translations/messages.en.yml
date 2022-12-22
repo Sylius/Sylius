@@ -788,6 +788,8 @@ sylius:
         show_all: 'Show all'
         show_deleted: 'Show deleted'
         show_in: 'Show in'
+        no_url_in: 'No url in'
+        no_slug_for_channel: 'There is no slug for this channel. Please configure one to use this function.'
         show_in_store: 'Show in store'
         show_metadata: 'Show metadata'
         show_order_details: 'Show order details'
