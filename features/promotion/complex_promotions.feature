@@ -43,7 +43,7 @@ Feature: Receiving a discount based on a configured promotion
         And it gives "10%" off on every product classified as "Jackets" if order contains any product classified as "Trousers"
         When I add product "Iron Maiden trousers" to the cart
         And I add product "Black Sabbath jacket" to the cart
-        Then product "Black Sabbath jacket" price should be decreased by "$10.00"
+        Then product "Black Sabbath jacket" price should be discounted by "$10.00"
         And my cart total should be "$170.00"
 
     @ui @api
@@ -60,8 +60,8 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "Formal attire pack"
         And it gives "10%" off on every product classified as "Formal attire" or "Dresses" if order contains any product classified as "Trousers" or "Jackets"
         When I add products "Rammstein bow tie", "Metallica dress" and "Iron Maiden trousers" to the cart
-        Then product "Metallica dress" price should be decreased by "$5.00"
-        And product "Rammstein bow tie" price should be decreased by "$1.00"
+        Then product "Metallica dress" price should be discounted by "$5.00"
+        And product "Rammstein bow tie" price should be discounted by "$1.00"
         And my cart total should be "$134.00"
 
     @ui @api
@@ -70,6 +70,6 @@ Feature: Receiving a discount based on a configured promotion
         And it gives "10%" off on every product classified as "Jackets" and "$20.00" discount on every order
         When I add product "Iron Maiden trousers" to the cart
         And I add product "Black Sabbath jacket" to the cart
-        Then product "Black Sabbath jacket" price should be decreased by "$10.00"
+        Then product "Black Sabbath jacket" price should be discounted by "$10.00"
         And my discount should be "-$30.00"
         And my cart total should be "$150.00"

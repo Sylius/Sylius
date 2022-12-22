@@ -78,7 +78,7 @@ final class DashboardController
             return $channel;
         }
 
-        $channel = $this->channelRepository->findOneBy([]);
+        $channel = $this->channelRepository->findBy([], ['id' => 'ASC'], 1)[0] ?? null;
         Assert::nullOrIsInstanceOf($channel, ChannelInterface::class);
 
         return $channel;
