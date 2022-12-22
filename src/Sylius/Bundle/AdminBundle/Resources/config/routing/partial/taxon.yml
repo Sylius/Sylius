@@ -9,7 +9,7 @@ sylius_admin_partial_taxon_tree:
         _sylius:
             template: $template
             repository:
-                method: findRootNodes
+                method: findHydratedRootNodes
             permission: true
 
 sylius_admin_partial_taxon_show:
