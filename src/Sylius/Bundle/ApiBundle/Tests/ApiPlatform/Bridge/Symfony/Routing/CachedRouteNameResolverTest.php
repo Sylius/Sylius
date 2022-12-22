@@ -18,6 +18,7 @@ use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use ApiPlatform\Core\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Routing\CachedRouteNameResolver;
@@ -26,6 +27,8 @@ use Symfony\Component\Cache\Exception\CacheException;
 
 final class CachedRouteNameResolverTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

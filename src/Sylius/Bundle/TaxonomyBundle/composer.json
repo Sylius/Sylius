@@ -40,7 +40,7 @@
     "require-dev": {
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^5.4 || ^6.0"
     },
     "config": {

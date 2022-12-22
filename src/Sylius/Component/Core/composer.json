@@ -58,7 +58,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "symfony/property-access": "^5.4 || ^6.0"
     },
     "config": {
