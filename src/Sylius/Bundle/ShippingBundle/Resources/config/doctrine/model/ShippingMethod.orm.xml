@@ -27,6 +27,9 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
 
         <field name="categoryRequirement" column="category_requirement" type="integer" />
