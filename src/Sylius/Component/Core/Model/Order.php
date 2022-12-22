@@ -300,6 +300,13 @@ class Order extends BaseOrder implements OrderInterface
 
     public function removeShipments(): void
     {
+        // Disassociate OrderItemUnit from all shipments before removal
+        foreach ($this->shipments as $shipment) {
+            foreach ($shipment->getUnits() as $unit) {
+                $shipment->removeUnit($unit);
+            }
+        }
+        
         $this->shipments->clear();
     }
 
