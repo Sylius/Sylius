@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-06-17T20:04:50Z
+
+@Creeperface01 we need a small fix in `AvailableProductOptionValuesResolverSpec` 🖖
+
+---------------------------------------------------------------------------
+
+by Creeperface01 at 2021-11-21T18:03:28Z
+
+> @Creeperface01 we need a small fix in `AvailableProductOptionValuesResolverSpec` 🖖
+
+@Zales0123 Is it ok now?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-12-22T11:34:14Z
+
+For future readers:
+We are aware of the problem with one of builds configuration, and we are sure it is not related to this PR, so I merge it :).
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2022-12-22T11:34:38Z
+
+Thank you, @Creeperface01! :tada:
