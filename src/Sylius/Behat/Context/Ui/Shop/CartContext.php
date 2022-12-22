@@ -254,6 +254,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^(product "[^"]+") price should be discounted by ("[^"]+")$/
+     */
+    public function itsPriceShouldBeDiscountedBy(ProductInterface $product, $amount)
+    {
+        $this->summaryPage->open();
+
+        $quantity = $this->summaryPage->getQuantity($product->getName());
+        $discountedUnitPrice = $this->summaryPage->getItemUnitPrice($product->getName());
+        $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
+
+        Assert::same($discountedUnitPrice, ($quantity * $regularUnitPrice) - $amount);
+    }
+
+    /**
      * @Then /^(product "[^"]+") price should not be decreased$/
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product)

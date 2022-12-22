@@ -534,6 +534,16 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^(product "[^"]+") price should be discounted by ("[^"]+")$/
+     */
+    public function itsPriceShouldBeDiscountedBy(ProductInterface $product, int $amount): void
+    {
+        $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
+
+        $this->compareItemPrice($product->getName(), $pricing - $amount, 'discountedUnitPrice');
+    }
+
+    /**
      * @Then /^(its|theirs) subtotal price should be decreased by ("[^"]+")$/
      */
     public function itsSubtotalPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
@@ -957,9 +967,9 @@ final class CartContext implements Context
         foreach ($items as $item) {
             if ($item['productName'] === $productName) {
                 Assert::same($item[$priceType], $productPrice);
-            }
 
-            return;
+                return;
+            }
         }
 
         throw new \InvalidArgumentException('Expected product does not exist');
