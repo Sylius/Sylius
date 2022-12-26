@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 
 final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
 {
-    public function __construct (
+    public function __construct(
         private ContextAwareNormalizerInterface $decorated,
         private RequestStack $requestStack,
         private string $newApiRoute,

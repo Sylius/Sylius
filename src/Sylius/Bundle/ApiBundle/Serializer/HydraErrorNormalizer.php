@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class HydraErrorNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
-    public function __construct (
+    public function __construct(
         /** @var NormalizerInterface&CacheableSupportsMethodInterface */
         private NormalizerInterface $decorated,
         private RequestStack $requestStack,
@@ -47,7 +47,6 @@ final class HydraErrorNormalizer implements NormalizerInterface, CacheableSuppor
 
         return $this->decorated->supportsNormalization($data, $format);
     }
-
 
     public function hasCacheableSupportsMethod(): bool
     {
