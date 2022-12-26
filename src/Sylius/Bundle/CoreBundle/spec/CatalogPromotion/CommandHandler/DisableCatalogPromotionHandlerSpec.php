@@ -13,16 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler;
 
-use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
-use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class DisableCatalogPromotionHandlerSpec extends ObjectBehavior

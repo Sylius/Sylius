@@ -14,22 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\DisableCatalogPromotion;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\UpdateCatalogPromotionState;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionCreated;
-use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\DelayStamp;
 
 final class CatalogPromotionRemovalAnnouncerSpec extends ObjectBehavior
 {

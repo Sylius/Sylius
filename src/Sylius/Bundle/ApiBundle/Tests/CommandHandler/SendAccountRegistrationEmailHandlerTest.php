@@ -29,7 +29,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
 {
     use ProphecyTrait;
-
     use SwiftmailerAssertionTrait;
 
     /** @test */

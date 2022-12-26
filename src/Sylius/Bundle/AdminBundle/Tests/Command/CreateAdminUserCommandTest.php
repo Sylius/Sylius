@@ -137,15 +137,18 @@ final class CreateAdminUserCommandTest extends TestCase
 
         $this->userRepository = $this->getMockBuilder(UserRepositoryInterface::class)
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMock()
+        ;
 
         $this->factory = $this->getMockBuilder(FactoryInterface::class)
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMock()
+        ;
 
         $this->canonicalizer = $this->getMockBuilder(CanonicalizerInterface::class)
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMock()
+        ;
 
         $this->command = new CommandTester(new CreateAdminUserCommand(
             $this->userRepository,

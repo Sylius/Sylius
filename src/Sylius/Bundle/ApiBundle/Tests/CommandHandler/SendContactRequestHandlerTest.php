@@ -26,7 +26,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class SendContactRequestHandlerTest extends KernelTestCase
 {
     use ProphecyTrait;
-
     use MailerAssertionsTrait;
 
     /** @test */

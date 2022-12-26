@@ -16,17 +16,13 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
-use Sylius\Component\Promotion\Event\CatalogPromotionUpdated;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
-use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
@@ -121,8 +117,7 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         MessageBusInterface $eventBus,
         MessageBusInterface $commandBus,
-    ): void
-    {
+    ): void {
         $this->beConstructedWith($catalogPromotionRepository, $eventBus, $commandBus);
 
         $this
