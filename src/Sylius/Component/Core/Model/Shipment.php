@@ -46,6 +46,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function getOrder(): ?BaseOrderInterface
     {
         Assert::nullOrIsInstanceOf($this->order, OrderInterface::class);
+
         return $this->order;
     }
 
