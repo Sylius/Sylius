@@ -18,7 +18,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotion as BaseCatalogPromotion;
 use Sylius\Component\Promotion\Model\CatalogPromotionTranslation;
-use Webmozart\Assert\Assert;
 
 class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionInterface
 {
