@@ -27,7 +27,6 @@ use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 final class SendOrderConfirmationEmailHandlerTest extends KernelTestCase
 {
     use ProphecyTrait;
-
     use MailerAssertionsTrait;
 
     /** @test */

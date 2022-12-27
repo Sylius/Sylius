@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Command;
@@ -7,7 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Command;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,7 +27,7 @@ use Symfony\Component\Intl\Locales;
 
 #[AsCommand(
     name: 'sylius:admin-user:create',
-    description: 'Create a new admin user'
+    description: 'Create a new admin user',
 )]
 final class CreateAdminUserCommand extends Command
 {
@@ -79,7 +87,7 @@ final class CreateAdminUserCommand extends Command
     {
         $question = new Question('Email');
         $question->setValidator(function (?string $email) {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL) || $email === null) {
+            if (!filter_var($email, \FILTER_VALIDATE_EMAIL) || $email === null) {
                 throw new \InvalidArgumentException('The e-mail address provided is invalid. Please try again.');
             }
 
@@ -121,6 +129,7 @@ final class CreateAdminUserCommand extends Command
     {
         /**
          * @psalm-suppress UndefinedInterfaceMethod
+         *
          * @phpstan-ignore-next-line
          */
         $username = $adminUser->getUsername();
@@ -128,7 +137,7 @@ final class CreateAdminUserCommand extends Command
         $this->io->writeln('The following admin user will be created:');
         $this->io->table(
             [
-                'Email', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled'
+                'Email', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled',
             ],
             [
                 [
@@ -138,7 +147,7 @@ final class CreateAdminUserCommand extends Command
                     $adminUser->getLastName(),
                     $adminUser->getLocaleCode(),
                     $adminUser->isEnabled() ? 'Yes' : 'No',
-                ]
+                ],
             ],
         );
     }

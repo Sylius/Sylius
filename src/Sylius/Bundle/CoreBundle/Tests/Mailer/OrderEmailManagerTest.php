@@ -27,7 +27,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class OrderEmailManagerTest extends KernelTestCase
 {
     use ProphecyTrait;
-
     use SwiftmailerAssertionTrait;
 
     private const RECIPIENT_EMAIL = 'test@example.com';

@@ -34,7 +34,7 @@ final class RemoveInactiveCatalogPromotionHandler
                 'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0. Use "%s" instead.',
                 self::class,
                 RemoveCatalogPromotionHandler::class,
-            )
+            ),
         );
     }
 

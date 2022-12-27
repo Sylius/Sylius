@@ -28,7 +28,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 {
     use ProphecyTrait;
-
     use MailerAssertionsTrait;
 
     /** @test */
