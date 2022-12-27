@@ -43,9 +43,8 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
     ): void {
         $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTimeInterface'), 100)->willReturn(
             [$firstCart, $secondCart],
-            []
+            [],
         );
-
 
         $eventDispatcher
             ->dispatch(Argument::any(), SyliusExpiredCartsEvents::PRE_REMOVE)
@@ -76,7 +75,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
             ->willReturn(
                 array_fill(0, 100, $cart),
                 array_fill(0, 100, $cart),
-                []
+                [],
             )
         ;
 
