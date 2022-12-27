@@ -67,7 +67,6 @@ final class ProductContext implements Context
      * @Given the store has a product :productName
      * @Given the store has a :productName product
      * @Given I added a product :productName
-     * @Given the store has a :productName product priced at :price
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */

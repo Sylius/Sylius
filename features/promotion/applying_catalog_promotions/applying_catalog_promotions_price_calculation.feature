@@ -7,13 +7,13 @@ Feature: Applying percentage catalog promotions
     Background:
         Given the store operates on a single channel in "United States"
         And the store classifies its products as "Soft Drinks"
-        And the store has a "Orange Juice" product priced at "$20"
+        And the store has a product "Orange Juice" priced at "$20"
         And this product belongs to "Soft Drinks"
-        And the store has a "Apple Juice" product priced at "$20.25"
+        And the store has a product "Apple Juice" priced at "$20.25"
         And this product belongs to "Soft Drinks"
-        And the store has a "Peach Juice" product priced at "$10.50"
+        And the store has a product "Peach Juice" priced at "$10.50"
         And this product belongs to "Soft Drinks"
-        And the store has a "Mango Juice" product priced at "$9.94"
+        And the store has a product "Mango Juice" priced at "$9.94"
         And this product belongs to "Soft Drinks"
         And there is a catalog promotion "Drinks sale" that reduces price by "15%" and applies on "Soft Drinks" taxon
 
