@@ -74,7 +74,7 @@ final class HydraErrorNormalizerSpec extends ObjectBehavior
 
     function it_decorates_has_cacheable_supports_method(
         NormalizerInterface $normalizer,
-        RequestStack $requestStack
+        RequestStack $requestStack,
     ): void {
         $normalizer->implement(CacheableSupportsMethodInterface::class);
 
