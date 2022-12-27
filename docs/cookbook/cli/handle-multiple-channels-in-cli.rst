@@ -7,13 +7,12 @@ Your primary goal should be to avoid such cases, but if you have to, there is a 
 What is our goal?
 -----------------
 
-To accomplish this task, we have to create a custom channel context available only from the CLI context. But this concrete channel context cannot only return a channel,
-but also has to allow to pass a channel code as an argument (which we will get from the console command). This way, we can use the channel context in our services.
+We have to create a custom channel context available only from the CLI context. This channel context should allow setting a channel code (which we will do inside the console command). This way, we can use the channel context in our services.
 
 1. Custom Channel Context
 -------------------------
 
-First, we need to create a custom channel context. Let's remind our requirements:
+First, we need to create a channel context. Let's remind the requirements:
 
     * available only from the CLI
     * there must be a way to pass in a channel code
@@ -102,9 +101,9 @@ Now, we have to configure our custom channel context as a service:
 2. Usage of the new custom channel context in a console command
 ---------------------------------------------------------------
 
-Now, we can use our custom channel context in our console command. For proof of our concept we will create a DummyCommand,
-which will take a channel code as an option and will dispatch a dummy event. This event is handled by an event subscriber using
-the channel context to get the channel and print its name.
+For our example, we will create a DummyCommand which will take a channel code as an option
+and dispatch a dummy event. This event is handled by a subscriber using
+the channel context to print the channel's name.
 
 You command might look like this:
 
@@ -149,9 +148,7 @@ You command might look like this:
                 $this->cliBasedChannelContext->setChannelCode($channelCode);
             }
 
-            // it isn't important what happens inside the event subscriber.
-            // It just gets channel from the channel context service
-            // and prints its name
+            // The subscriber just gets a channel from the channel context
             $this->dispatcher->dispatch(new DummyEvent());
 
             return Command::SUCCESS;
@@ -162,9 +159,10 @@ The output of the example is following:
 
 .. code-block:: bash
 
-    /app $ bin/console app:dummy -c MAGIC_WEB
+    $ bin/console app:dummy -c MAGIC_WEB
     Hi! I am Dummy Event Subscriber. I am using Channel Context.
     Your channel name is: Magic Web Channel
-    /app $ bin/console app:dummy -c FASHION_WEB
+
+    $ bin/console app:dummy -c FASHION_WEB
     Hi! I am Dummy Event Subscriber. I am using Channel Context.
     Your channel name is: Fashion Web Store
