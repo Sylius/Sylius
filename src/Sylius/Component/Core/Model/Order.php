@@ -306,7 +306,7 @@ class Order extends BaseOrder implements OrderInterface
                 $shipment->removeUnit($unit);
             }
         }
-        
+
         $this->shipments->clear();
     }
 

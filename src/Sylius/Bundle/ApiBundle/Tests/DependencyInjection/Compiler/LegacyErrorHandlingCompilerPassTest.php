@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
-use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\FlattenExceptionNormalizerDecoratorCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
 use Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer;
 use Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer;

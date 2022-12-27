@@ -156,9 +156,8 @@ final class OrderSpec extends ObjectBehavior
 
     function it_removes_shipments_with_units(
         ShipmentInterface $shipment,
-        ShipmentUnitInterface $shipmentUnit
-    ): void
-    {
+        ShipmentUnitInterface $shipmentUnit,
+    ): void {
         $this->addShipment($shipment);
         $this->hasShipment($shipment)->shouldReturn(true);
         $shipment->getUnits()->willReturn(new ArrayCollection([$shipmentUnit->getWrappedObject()]));
@@ -171,9 +170,8 @@ final class OrderSpec extends ObjectBehavior
 
     function it_removes_shipments_without_units(
         ShipmentInterface $shipment,
-        ShipmentUnitInterface $shipmentUnit
-    ): void
-    {
+        ShipmentUnitInterface $shipmentUnit,
+    ): void {
         $this->addShipment($shipment);
         $this->hasShipment($shipment)->shouldReturn(true);
         $shipment->getUnits()->willReturn(new ArrayCollection([]));
