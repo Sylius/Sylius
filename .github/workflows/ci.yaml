@@ -1,0 +1,84 @@
+name: Continuous Integration
+
+on:
+    pull_request:
+        paths-ignore:
+            - "adr/**"
+            - "docs/**"
+            - "*.md"
+    schedule:
+        -
+            cron: "0 1 * * 6" # Run at 1am every Saturday
+    workflow_dispatch: ~
+    push: ~
+    
+concurrency:
+    group: ci-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    static-checks:
+        name: Static checks
+        uses: ./.github/workflows/ci_static-checks.yml
+    e2e-mariadb:
+        name: End-to-end tests (MariaDB)
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-mariadb.yml
+    e2e-mysql:
+        name: End-to-end tests (MySQL)
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-mysql.yml
+    e2e-pgsql:
+        name: End-to-end tests (PostgreSQL)
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-pgsql.yml
+    e2e-customs:
+        name: End-to-end tests (Customs)
+        needs: static-checks
+        uses: ./.github/workflows/ci_e2e-customs.yml
+    packages:
+        name: Packages
+        needs: static-checks
+        uses: ./.github/workflows/ci_packages.yml
+    notify-about-build-failure:
+        name: "Notify about build failure"
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-customs]
+        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+
+        steps:
+            -   name: "Process data"
+                id: process-data
+                shell: bash
+                run: |
+                    echo "branch=$(echo ${{ github.ref }} | sed 's/refs\/heads\///g' | sed 's/refs\/tags\///g')" >> $GITHUB_OUTPUT
+                    echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
+
+            -   name: "Notify on Slack"
+                uses: edge/simple-slack-notify@master
+                env:
+                    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+                if: env.SLACK_WEBHOOK_URL != null
+                with:
+                    channel: "#builds"
+                    username: "GitHub Actions"
+                    text: |
+                        *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
+
+                        ${{ needs.static-checks.result == 'success' && ':+1:' || ':x:' }} Static Checks
+                        ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
+                        ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
+                        ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
+                        ${{ needs.e2e-customs.result == 'success' && ':+1:' || ':x:' }} End-to-End (Customs)
+
+                        _ _ _ _ _ _ _
+                    color: "danger"
+                    fields: |
+                        [
+                            { "title": "Repository", "value": "<https://github.com/${{ github.repository }} | ${{ github.repository }}>", "short": true },
+                            { "title": "Action", "value": "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }}>", "short": true },
+                            { "title": "Reference", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.process-data.outputs.branch }} | ${{ steps.process-data.outputs.branch }}>", "short": true },
+                            { "title": "Commit", "value": "<https://github.com/${{ github.repository }}/commit/${{ github.sha }} | ${{ steps.process-data.outputs.sha }}>", "short": true },
+                            { "title": "Event", "value": "${{ github.event_name }}", "short": true }
+                        ]
