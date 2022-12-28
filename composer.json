@@ -189,10 +189,11 @@
     "require-dev": {
         "behat/behat": "^3.6.1",
         "behat/mink-selenium2-driver": "^1.4",
+        "consolidation/robo": "^3.0|^4.0",
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
-        "doctrine/data-fixtures": "^1.4",
         "doctrine/cache": "^1.10",
+        "doctrine/data-fixtures": "^1.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "friends-of-behat/mink-debug-extension": "^2.0",
