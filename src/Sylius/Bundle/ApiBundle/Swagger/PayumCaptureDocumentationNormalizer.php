@@ -45,7 +45,7 @@ final class PayumCaptureDocumentationNormalizer implements NormalizerInterface
     <form action="...">
         <p>
             <label>
-            Crédit card details:
+            Credit card details:
             <input type="text" name="cc-details">
             </label>
         </p>
