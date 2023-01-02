@@ -13,20 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Checker;
 
-use Psr\Cache\CacheItemPoolInterface;
-use Sylius\Behat\Service\MessageSendCacher;
+use Sylius\Behat\Service\Provider\EmailMessagesProviderInterface;
 use Symfony\Component\Mime\Email;
 use Webmozart\Assert\Assert;
 
 final class EmailChecker implements EmailCheckerInterface
 {
-    public function __construct(private CacheItemPoolInterface $cache)
+    public function __construct(private EmailMessagesProviderInterface $emailMessagesProvider)
     {
     }
 
     public function hasRecipient(string $recipient): bool
     {
-        $messages = $this->getMailerMessages();
+        $messages = $this->emailMessagesProvider->provide();
 
         foreach ($messages as $email) {
             if ($this->isMessageTo($email, $recipient)) {
@@ -41,7 +40,7 @@ final class EmailChecker implements EmailCheckerInterface
     {
         $this->assertRecipientIsValid($recipient);
 
-        $messages = $this->getMailerMessages();
+        $messages = $this->emailMessagesProvider->provide();
 
         foreach ($messages as $email) {
             if ($this->isMessageTo($email, $recipient)) {
@@ -61,7 +60,7 @@ final class EmailChecker implements EmailCheckerInterface
         $this->assertRecipientIsValid($recipient);
 
         $messagesCount = 0;
-        $messages = $this->getMailerMessages();
+        $messages = $this->emailMessagesProvider->provide();
 
         foreach ($messages as $email) {
             if ($this->isMessageTo($email, $recipient)) {
@@ -94,11 +93,5 @@ final class EmailChecker implements EmailCheckerInterface
             filter_var($recipient, \FILTER_VALIDATE_EMAIL),
             'Given recipient is not a valid email address.',
         );
-    }
-
-    /** @return Email[] */
-    private function getMailerMessages(): array
-    {
-        return $this->cache->hasItem(MessageSendCacher::CACHE_KEY) ? $this->cache->getItem(MessageSendCacher::CACHE_KEY)->get() : [];
     }
 }
