@@ -37,6 +37,16 @@
             <tag name="console.command" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="sylius.factory.admin_user" />
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="validator" />
+
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
             <tag name="sylius.context.locale" priority="128" />
