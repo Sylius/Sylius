@@ -28,6 +28,8 @@
             <argument type="service" id="sylius.factory.payum_get_status_action" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Converter\PayumReplyConverter" />
+        <service id="sylius.api.converter.payum_reply" class="Sylius\Bundle\ApiBundle\Converter\PayumReplyConverter" />
+        <service id="Sylius\Bundle\ApiBundle\Converter\PayumReplyConverterInterface" alias="sylius.api.converter.payum_reply" />
+
     </services>
 </container>
