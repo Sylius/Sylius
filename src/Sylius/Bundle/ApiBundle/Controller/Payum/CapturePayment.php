@@ -30,8 +30,11 @@ final class CapturePayment
     }
 
     /**
-     * This controller is design to reproduce what Payum `CaptureController` is doing
-     * If the "Capture" request is not triggering a `Reply` (but return `null`) then
+     * This controller is design to reproduce what Payum `CaptureController` is doing.
+     * The only difference is that here we `catchReply=true`, meaning if a ReplyInterface is thrown
+     * then it is caught to convert the $reply to a JSON object.
+     *
+     * If the "Capture" Payum request is not triggering a `Reply` (but return `null`) then
      * invalidate the token and return a redirect reply to the "Token's after url"
      * else return the "Reply" itself.
      *

@@ -20,12 +20,15 @@
 
         <service id="Sylius\Bundle\ApiBundle\Controller\Payum\CapturePayment" public="true">
             <argument type="service" id="payum" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Converter\PayumReplyConverter" />
+            <argument type="service" id="sylius.api.converter.payum_reply" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\Payum\AfterPayPayment" public="true">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.factory.payum_get_status_action" />
+            <argument type="service" id="sylius.factory.payum_resolve_next_route" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.api.converter.payum_reply" />
         </service>
 
         <service id="sylius.api.converter.payum_reply" class="Sylius\Bundle\ApiBundle\Converter\PayumReplyConverter" />
