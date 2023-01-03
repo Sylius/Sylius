@@ -15,6 +15,7 @@ namespace Sylius\Component\Addressing\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class CountryProvincesDeletionChecker implements CountryProvincesDeletionCheckerInterface
@@ -27,6 +28,7 @@ final class CountryProvincesDeletionChecker implements CountryProvincesDeletionC
 
     public function isDeletable(CountryInterface $country): bool
     {
+        /** @var ProvinceInterface[] $provinces */
         $provinces = $this->provinceRepository->findBy(['country' => $country]);
 
         $countryProvincesCodes = $country->getProvinces()
