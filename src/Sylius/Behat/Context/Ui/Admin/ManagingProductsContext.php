@@ -656,6 +656,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^the (product "[^"]+") should have the "([^"]+)" taxon$/
+     */
+    public function thisProductTaxonShouldBe(ProductInterface $product, string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+        $currentPage->open(['id' => $product->getId()]);
+
+        Assert::true($currentPage->isTaxonChosen($taxonName));
+    }
+
+    /**
      * @Then /^inventory of (this product) should not be tracked$/
      */
     public function thisProductShouldNotBeTracked(ProductInterface $product)

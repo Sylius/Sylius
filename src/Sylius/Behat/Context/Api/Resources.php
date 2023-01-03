@@ -53,6 +53,8 @@ final class Resources
 
     public const PRODUCT_OPTIONS = 'product-options';
 
+    public const PRODUCT_TAXONS = 'product-taxons';
+
     public const PRODUCT_REVIEWS = 'product-reviews';
 
     public const PRODUCT_VARIANTS = 'product-variants';
