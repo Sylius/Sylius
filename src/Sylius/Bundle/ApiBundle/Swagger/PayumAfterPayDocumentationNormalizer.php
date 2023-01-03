@@ -48,7 +48,7 @@ final class PayumAfterPayDocumentationNormalizer implements NormalizerInterface
                 'statusCode' => [
                     'type' => 'integer',
                     'readOnly' => true,
-                    'example' => 200,
+                    'example' => 302,
                 ],
                 'headers' => [
                     'type' => 'object',
@@ -57,7 +57,7 @@ final class PayumAfterPayDocumentationNormalizer implements NormalizerInterface
                     ],
                     'readOnly' => true,
                     'example' => [
-                        'Content-Type' => 'text/html',
+                        'Location' => '/api/v2/order/my_token_123/pay',
                         'X-Custom-Header' => 'foo',
                     ],
                 ],
