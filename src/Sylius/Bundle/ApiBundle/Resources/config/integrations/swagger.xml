@@ -142,5 +142,15 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PayumCaptureDocumentationNormalizer.inner" />
             <argument>%sylius.security.new_api_route%</argument>
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\Swagger\PayumAfterPayDocumentationNormalizer"
+            decorates="api_platform.swagger.normalizer.documentation"
+            autoconfigure="false"
+            decoration-priority="20"
+        >
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PayumAfterPayDocumentationNormalizer.inner" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
     </services>
 </container>
