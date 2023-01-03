@@ -98,14 +98,7 @@ commits.
 Choose the right Base Branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before starting to work on a patch, you must determine on which branch you need to work. It will be:
-
-* ``1.7``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
-* ``master``, if you are adding a new feature.
-
-.. note::
-
-    All bug fixes merged into the ``1.7`` maintenance branch are also merged into ``master`` on a regular basis.
+Before starting to work on a patch, you must create a new branch from the most recent version branch that is available (which is currently 1.13).
 
 Create a Topic Branch
 ~~~~~~~~~~~~~~~~~~~~~
