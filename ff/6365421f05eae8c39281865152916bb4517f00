@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-03T07:38:50Z
+
+> It is a potential BC break IMO, so this comment is probably still valid: [#10704 (comment)](https://github.com/Sylius/Sylius/pull/10704#issuecomment-540441237) but wdyt @Zales0123 @lchrusciel?
+
+This is not covered by the BC promise, but I can provide a compatibility layer nonetheless, so if it is overridden with the current name it will still work as expected, but also trigger a deprecation.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-03T13:11:58Z
+
+Easier said than done... I didn't find a precedent for this, so I came up with this idea of writing a compiler pass that will alter the parameter that stores the state machine configuration as a BC layer. Let me know what you think.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-03-04T18:34:27Z
+
+@GSadee I added the BC layer.
+@loic425 I added the tests for the pass.
+
+---------------------------------------------------------------------------
+
+by Rafikooo at 2022-09-27T19:25:32Z
+
+Hi Folks! Yes, this typo hurts the eye, however, the problematic of the change due to the BC policy is too big compared to the benefit of no typo, so we decided to abandon this topic until the release of Sylius 2.0 💃
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-09-28T07:44:20Z
+
+I made it BC, even though it's not covered by the BC promise. What's wrong with it?
+
+---------------------------------------------------------------------------
+
+by Rafikooo at 2022-12-09T13:56:51Z
+
+After more reports from the community, we decided to reconsider this PR again :)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-01-03T14:21:00Z
+
+Thank you, Victor! :tada:
