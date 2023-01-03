@@ -102,7 +102,7 @@ final class PickupCartHandlerSpec extends ObjectBehavior
         $cart->setCurrencyCode('USD')->shouldBeCalled();
         $cart->setLocaleCode('en_US')->shouldBeCalled();
         $cart->setTokenValue('urisafestr')->shouldBeCalled();
-        $cart->setCreatedByGuest(false)->shouldBeCalled();
+        $cart->setCreatedByGuest(true)->shouldNotBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
 

@@ -74,11 +74,7 @@ final class PickupCartHandler implements MessageHandlerInterface
         $cart->setCurrencyCode($currency->getCode());
         $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
 
-        if ($customer !== null) {
-            $cart->setCustomerWithAuthorization($customer);
-            $cart->setBillingAddress($this->getDefaultAddress($customer));
-        }
-        $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
+        $this->checkIfCustomerIsAGueast($customer, $cart);
 
         $this->orderManager->persist($cart);
 
@@ -126,5 +122,17 @@ final class PickupCartHandler implements MessageHandlerInterface
         }
 
         return null;
+    }
+
+    public function checkIfCustomerIsAGueast(?CustomerInterface $customer, OrderInterface $cart): void
+    {
+        if ($customer !== null) {
+            $cart->setCustomerWithAuthorization($customer);
+            $cart->setBillingAddress($this->getDefaultAddress($customer));
+
+            return;
+        }
+
+        $cart->setCreatedByGuest($this->createdByGuestFlagResolver->resolveFlag());
     }
 }
