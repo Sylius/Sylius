@@ -60,18 +60,27 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
             ->willReturn($expr)
         ;
 
-        $expr
-            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
-            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        $queryBuilder
+            ->setParameter('createdByGuest', true)
+            ->shouldBeCalled()
+            ->willReturn($expr)
         ;
 
         $expr
-            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
-            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
         ;
 
         $queryBuilder
-            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = :createdByGuest)')
+            ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
 
