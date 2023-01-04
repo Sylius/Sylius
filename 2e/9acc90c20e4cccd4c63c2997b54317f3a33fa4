@@ -1,0 +1,20 @@
+---------------------------------------------------------------------------
+
+by GSadee at 2023-01-04T07:26:33Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "SYL-2541"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+[SYL-2541]: https://sylius.atlassian.net/browse/SYL-2541?atlOrigin=eyJpIjoiNWRkNTljNzYxNjVmNDY3MDlhMDU5Y2ZhYzA5YTRkZjUiLCJwIjoiZ2l0aHViLWNvbS1KU1cifQ
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-01-04T10:26:57Z
+
+Thank you, Jan! :tada:
