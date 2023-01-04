@@ -20,7 +20,7 @@ use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-class CountryDataPersisterSpec extends ObjectBehavior
+final class CountryDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
