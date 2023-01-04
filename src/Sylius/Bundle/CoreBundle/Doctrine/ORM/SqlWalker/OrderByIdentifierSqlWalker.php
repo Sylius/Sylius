@@ -23,15 +23,15 @@ use Doctrine\ORM\Query\SqlWalker;
 
 final class OrderByIdentifierSqlWalker extends SqlWalker
 {
-    public function walkSelectStatement(SelectStatement $ast)
+    public function walkSelectStatement(SelectStatement $AST)
     {
         $dqlAlias = $this->getDqlAlias();
 
-        if (null !== $dqlAlias && $this->isOrderByIdentifierAllowed($ast)) {
-            $this->appendOrderByIdentifier($ast, $dqlAlias);
+        if (null !== $dqlAlias && $this->isOrderByIdentifierAllowed($AST)) {
+            $this->appendOrderByIdentifier($AST, $dqlAlias);
         }
 
-        return parent::walkSelectStatement($ast);
+        return parent::walkSelectStatement($AST);
     }
 
     private function appendOrderByIdentifier(SelectStatement $ast, string $dqlAlias): void
@@ -62,6 +62,7 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
      */
     private function getDqlAlias(): ?string
     {
+        /** @psalm-suppress UndefinedDocblockClass */
         foreach ($this->getQueryComponents() as $dqlAlias => $queryComponent) {
             if (null === ($queryComponent['parent'] ?? null) && 0 === ($queryComponent['nestingLevel'] ?? 0)) {
                 return $dqlAlias;
