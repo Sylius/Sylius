@@ -35,6 +35,7 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
+        - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\CustomerStatisticsController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\Dashboard\\StatisticsController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\DashboardController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'
