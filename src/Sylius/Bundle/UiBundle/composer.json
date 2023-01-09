@@ -43,6 +43,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
+        "doctrine/annotations": "^2.0",
         "twig/twig": "^1.0"
     },
     "require-dev": {
