@@ -15,11 +15,12 @@ namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterface
 {
     public function __construct(
-        private ContextAwareNormalizerInterface $decorated,
+        private ContextAwareNormalizerInterface|NormalizerInterface $decorated,
         private RequestStack $requestStack,
         private string $newApiRoute,
     ) {
