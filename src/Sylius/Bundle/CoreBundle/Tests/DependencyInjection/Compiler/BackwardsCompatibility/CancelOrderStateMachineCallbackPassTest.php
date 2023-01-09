@@ -79,9 +79,10 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
         $this->setParameter('sm.configs', $this->smConfigs);
 
         $this->expectDeprecation();
-        $this->expectDeprecationMessage(sprintf('Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
+        $this->expectDeprecationMessage(sprintf(
+            'Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
             'winzou_state_machine.sylius_order.callbacks.after.sylis_cancel_order',
-            'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order'
+            'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order',
         ));
 
         $this->compile();
@@ -96,16 +97,16 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
         $smConfigs = $this->container->getParameter('sm.configs');
         $this->assertFalse(
             isset($smConfigs['sylius_order']['callbacks']['after']['sylis_cancel_order']),
-            'State machine "sylius_order" should not have "sylis_cancel_order" callback configured.'
+            'State machine "sylius_order" should not have "sylis_cancel_order" callback configured.',
         );
         $this->assertTrue(
             isset($smConfigs['sylius_order']['callbacks']['after']['sylius_cancel_order']),
-            'State machine "sylius_order" should have "sylius_cancel_order" callback configured.'
+            'State machine "sylius_order" should have "sylius_cancel_order" callback configured.',
         );
         $this->assertEquals(
             $this->smConfigs['sylius_order']['callbacks']['after']['sylis_cancel_order'],
             $smConfigs['sylius_order']['callbacks']['after']['sylius_cancel_order'],
-            'State machine "sylius_order" should have the "sylis_cancel_order" callback moved to "sylius_cancel_order".'
+            'State machine "sylius_order" should have the "sylis_cancel_order" callback moved to "sylius_cancel_order".',
         );
     }
 
