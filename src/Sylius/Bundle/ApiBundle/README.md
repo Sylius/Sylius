@@ -51,6 +51,7 @@ Testing
 
 To test locally, run commands:
 ```bash
+(apt install php-sqlite3)
 (cd src/Sylius/Bundle/ApiBundle && composer install)
 (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:database:create -e test)
 (cd src/Sylius/Bundle/ApiBundle/test && bin/console doctrine:schema:update --force -e test)
