@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility;
@@ -19,12 +28,13 @@ final class CancelOrderStateMachineCallbackPass implements CompilerPassInterface
         $smConfigs = $container->getParameter('sm.configs');
 
         if (isset($smConfigs['sylius_order']['callbacks']['after']['sylis_cancel_order'])) {
-            trigger_error(
-                sprintf('Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
+            @trigger_error(
+                sprintf(
+                    'Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
                     'winzou_state_machine.sylius_order.callbacks.after.sylis_cancel_order',
-                    'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order'
+                    'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order',
                 ),
-                \E_USER_DEPRECATED
+                \E_USER_DEPRECATED,
             );
 
             $smConfigs['sylius_order']['callbacks']['after']['sylius_cancel_order'] = $smConfigs['sylius_order']['callbacks']['after']['sylis_cancel_order'];
