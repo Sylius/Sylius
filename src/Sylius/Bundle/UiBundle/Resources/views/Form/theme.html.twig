@@ -1,7 +1,14 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block form_row -%}
-    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+    {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' field'}) %}
+    {% if required %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' required'}) %}
+    {% endif %}
+    {% if (not compound or force_error|default(false)) and not valid %}
+        {% set row_attr=row_attr|merge({'class': row_attr.class|default ~ ' error'}) %}
+    {% endif %}
+    <div {% with {attr: row_attr} %}{{ block('attributes') }}{% endwith %}>
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
         {{- form_help(form) -}}
