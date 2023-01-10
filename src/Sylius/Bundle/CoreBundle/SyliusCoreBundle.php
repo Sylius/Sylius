@@ -50,7 +50,9 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     {
         parent::boot();
 
-        $this->setSqlWalker();
+        if ($this->container->getParameter('sylius_core.order_by_identifier')) {
+            $this->setDefaultOutputWalker(OrderByIdentifierSqlWalker::class);
+        }
 
         $factory = InflectorFactory::create();
         $factory->withPluralRules(new Ruleset(
@@ -87,14 +89,14 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         return 'Sylius\Component\Core\Model';
     }
 
-    private function setSqlWalker(): void
+    private function setDefaultOutputWalker(string $outputWalkerClass): void
     {
         $this->container
             ->get('doctrine.orm.entity_manager')
             ->getConfiguration()
             ->setDefaultQueryHint(
                 Query::HINT_CUSTOM_OUTPUT_WALKER,
-                OrderByIdentifierSqlWalker::class
+                $outputWalkerClass,
             )
         ;
     }
