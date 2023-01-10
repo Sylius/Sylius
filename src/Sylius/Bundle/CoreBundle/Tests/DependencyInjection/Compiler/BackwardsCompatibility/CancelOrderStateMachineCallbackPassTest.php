@@ -74,7 +74,9 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
         ],
     ];
 
-    public function test_it_triggers_deprecation_error_when_old_callback_name_is_used(): void
+
+    /** @test */
+    public function it_triggers_deprecation_error_when_old_callback_name_is_used(): void
     {
         $this->setParameter('sm.configs', $this->smConfigs);
 
@@ -88,7 +90,8 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
         $this->compile();
     }
 
-    public function test_it_converts_from_old_name_to_new_name(): void
+    /** @test */
+    public function it_converts_from_old_name_to_new_name(): void
     {
         $this->setParameter('sm.configs', $this->smConfigs);
         $this->expectDeprecation();
