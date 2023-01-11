@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Tests\MessageHandler\Admin;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
 use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserHandler;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -77,14 +78,11 @@ final class CreateAdminUserHandlerTest extends TestCase
 
         $createAdminUserHandler = $this->createAdminUserHandler();
 
-        $handlerResult = $createAdminUserHandler($this->createAdminUserMessage());
-
-        self::assertSame(false, $handlerResult->hasViolations());
-        self::assertSame([], $handlerResult->getViolationMessages());
+        $createAdminUserHandler($this->createAdminUserMessage());
     }
 
     /** @test */
-    public function it_does_not_create_an_admin_user_if_violates_any_constraints(): void
+    public function it_throws_an_exception_if_violates_any_constraints(): void
     {
         $firstConstraintViolation = new ConstraintViolation('first_violation_error', '', [], '', '', '');
         $secondConstraintViolation = new ConstraintViolation('second_violation_error', '', [], '', '', '');
@@ -97,10 +95,10 @@ final class CreateAdminUserHandlerTest extends TestCase
 
         $createAdminUserHandler = $this->createAdminUserHandler();
 
-        $handlerResult = $createAdminUserHandler($this->createAdminUserMessage());
+        self::expectException(CreateAdminUserFailedException::class);
+        self::expectExceptionMessage('first_violation_error' . PHP_EOL . 'second_violation_error');
 
-        self::assertSame(true, $handlerResult->hasViolations());
-        self::assertSame(['first_violation_error', 'second_violation_error'], $handlerResult->getViolationMessages());
+        $createAdminUserHandler($this->createAdminUserMessage());
     }
 
     private function arrangePartially(ConstraintViolationList $validationErrorsList): void
