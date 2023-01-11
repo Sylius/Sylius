@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\MessageHandler;
 
+use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
 use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -34,7 +35,7 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(CreateAdminUser $command): CreateAdminUserResult
+    public function __invoke(CreateAdminUser $command): void
     {
         $adminUser = $this->setUpAdminUser($command);
 
@@ -43,12 +44,10 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
         if ($constraintViolationList->count()) {
             $violationMessages = $this->getViolationMessages($constraintViolationList);
 
-            return new CreateAdminUserResult(true, $violationMessages);
+            throw new CreateAdminUserFailedException(implode(PHP_EOL, [...$violationMessages]));
         }
 
         $this->adminUserRepository->add($adminUser);
-
-        return new CreateAdminUserResult(false);
     }
 
     private function setUpAdminUser(CreateAdminUser $command): AdminUserInterface

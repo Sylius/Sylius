@@ -16,11 +16,12 @@ namespace Sylius\Bundle\AdminBundle\Tests\Command;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Command\CreateAdminUserCommand;
+use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
 use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
-use Sylius\Bundle\AdminBundle\MessageHandler\CreateAdminUserResult;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
@@ -139,10 +140,6 @@ final class CreateAdminUserCommandTest extends TestCase
             'creation_confirmation' => self::NO,
         ]);
 
-        $createAdminUserCommandResult = $this->createMock(CreateAdminUserResult::class);
-        $createAdminUserCommandResult->expects($this->never())->method('hasViolations');
-        $createAdminUserCommandResult->expects($this->never())->method('getViolationMessages');
-
         $this->messageBus->expects($this->never())->method('dispatch');
 
         self::assertSame(Command::INVALID, $this->command->execute([]));
@@ -154,14 +151,6 @@ final class CreateAdminUserCommandTest extends TestCase
     {
         $adminUserData = $this->getDefaultAdminUserDataSetup();
 
-        $createAdminUserCommandResult = $this->createMock(CreateAdminUserResult::class);
-        $createAdminUserCommandResult->expects($this->once())->method('hasViolations')->willReturn(true);
-        $createAdminUserCommandResult
-            ->expects($this->once())
-            ->method('getViolationMessages')
-            ->willReturn(['some violation message', 'another violation message'])
-        ;
-
         $this->command->setInputs($this->getDefaultCommandInputsSetup());
 
         $message = new CreateAdminUser(...array_values($adminUserData));
@@ -169,10 +158,15 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->messageBus->expects($this->once())
             ->method('dispatch')
             ->with($message)
-            ->willReturn(new Envelope($message, [new HandledStamp($createAdminUserCommandResult, 'handler')]))
+            ->willThrowException(new HandlerFailedException(
+                new Envelope($message),
+                [new CreateAdminUserFailedException('Some validation error')]
+            ))
         ;
 
         $this->command->execute([]);
+
+        self::assertSame(Command::FAILURE, $this->command->getStatusCode());
     }
 
     /** @test */
@@ -183,10 +177,6 @@ final class CreateAdminUserCommandTest extends TestCase
 
     private function assertSuccessfulCommandExecution(array $adminUserData, array $commandInputs): void
     {
-        $createAdminUserCommandResult = $this->createMock(CreateAdminUserResult::class);
-        $createAdminUserCommandResult->expects($this->once())->method('hasViolations')->willReturn(false);
-        $createAdminUserCommandResult->expects($this->never())->method('getViolationMessages');
-
         $this->command->setInputs($commandInputs);
 
         $message = new CreateAdminUser(...array_values($adminUserData));
@@ -194,7 +184,7 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->messageBus->expects($this->once())
             ->method('dispatch')
             ->with($message)
-            ->willReturn(new Envelope($message, [new HandledStamp($createAdminUserCommandResult, 'handler')]))
+            ->willReturn(new Envelope($message, [new HandledStamp(self::anything(), 'handler')]))
         ;
 
         $this->command->execute([]);
