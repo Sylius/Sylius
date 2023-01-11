@@ -33,6 +33,7 @@ parameters:
 
         # To investigate, occurs after release of doctrine/orm 2.14, the processing of these classes ends with exit code 143
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
+        - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
