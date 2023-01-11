@@ -35,3 +35,8 @@ references related issues.
    `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer` 
    references this class throws an exception
   `Class "ApiPlatform\Core\Metadata\Resource\ResourceNameCollection" not found`
+
+- `doctrine/migrations:3.5.3`:
+
+  This version is causing a problem with migrations and results in throwing a `Doctrine\Migrations\Exception\MetadataStorageError` exception e.g. when executing `sylius:install` command.
+  References: https://github.com/doctrine/migrations/issues/1302
