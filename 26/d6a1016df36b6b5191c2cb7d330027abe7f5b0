@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by loic425 at 2023-01-12T13:28:25Z
+
+@jakubtobiasz That's weird cause that should fail here https://github.com/Sylius/Sylius/blob/1.13/phparkitect.php#L33
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-01-12T14:02:59Z
+
+Thanks, Jakub! :tada:
