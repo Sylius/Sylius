@@ -33,7 +33,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
      */
     public function it_return_all_choices(): void
     {
-        $this->assertChoicesLabels(['value 1'], [
+        $this->assertChoicesLabels(['value 1 (val1)'], [
             'configuration' => [
                 'multiple' => false,
                 'min' => null,
