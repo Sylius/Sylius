@@ -66,14 +66,18 @@ $(document).ready(() => {
     $('.ui.tabular.menu .item').tab();
   }, 50);
 
-  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
+  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', (event) => {
+    const name = $(event.target).closest('form').attr('name');
+
     setTimeout(() => {
-      $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
+      $(`select[name^="${name}[actions]"][name$="[type]"]`).last().change();
     }, 50);
   });
-  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
+  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', (event) => {
+    const name = $(event.target).closest('form').attr('name');
+
     setTimeout(() => {
-      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+      $(`select[name^="${name}[rules]"][name$="[type]"]`).last().change();
     }, 50);
   });
   $('#sylius_shipping_method_rules > a[data-form-collection="add"]').on('click', () => {
