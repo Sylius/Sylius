@@ -84,9 +84,9 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
                 sprintf('%s.customer IS NULL', $rootAlias),
                 $queryBuilder->expr()->andX(
                     sprintf('%s.customer IS NOT NULL', $rootAlias),
-                    sprintf('%s.createdByGuest = :createdByGuest', $rootAlias)
+                    sprintf('%s.createdByGuest = true', $rootAlias)
                 )
-            ))->setParameter('createdByGuest', true)
+            ))
         ;
 
         if ($operationName !== 'shop_select_payment_method') {
