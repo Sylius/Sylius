@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
+final class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 {
     function let(
         RequestStack $requestStack,

@@ -21,7 +21,7 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
+final class CountryProvincesDeletionCheckerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $zoneMemberRepository,

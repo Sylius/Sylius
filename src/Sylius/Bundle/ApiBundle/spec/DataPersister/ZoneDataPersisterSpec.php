@@ -20,7 +20,7 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-class ZoneDataPersisterSpec extends ObjectBehavior
+final class ZoneDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
