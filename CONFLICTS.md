@@ -99,6 +99,12 @@ In this section we keep track of the reasons, why some restrictions were added t
 
   References: https://github.com/PolishSymfonyCommunity/SymfonyMockerContainer/issues/20
 
+- `doctrine/annotations:^2.0`:
+
+  This version results in the following error:
+  `Error: Call to undefined method Doctrine\Common\Annotations\AnnotationRegistry::registerLoader()`
+   when running tests with `phpunit:8.5.x` in SyliusUiBundle
+
 - `doctrine/migrations:3.5.3`:
 
   This version is causing a problem with migrations and results in throwing a `Doctrine\Migrations\Exception\MetadataStorageError` exception e.g. when executing `sylius:install` command.
