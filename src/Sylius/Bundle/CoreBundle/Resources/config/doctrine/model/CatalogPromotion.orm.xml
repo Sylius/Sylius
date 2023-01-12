@@ -17,6 +17,10 @@
 >
     <mapped-superclass name="Sylius\Component\Core\Model\CatalogPromotion" table="sylius_catalog_promotion">
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_catalog_promotion_channels">
                 <join-columns>
                     <join-column name="catalog_promotion_id" nullable="false" on-delete="CASCADE" />

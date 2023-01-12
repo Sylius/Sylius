@@ -43,6 +43,36 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
+    public function it_enables_order_by_identifier_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['order_by_identifier' => true],
+            'order_by_identifier',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_enable_order_by_identifier(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['order_by_identifier' => true]],
+            ['order_by_identifier' => true],
+            'order_by_identifier',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_disable_order_by_identifier(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['order_by_identifier' => false]],
+            ['order_by_identifier' => false],
+            'order_by_identifier',
+        );
+    }
+
+    /** @test */
     public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 'rep']]]);

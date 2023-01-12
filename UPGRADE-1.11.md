@@ -1,3 +1,12 @@
+# UPGRADE FROM `v1.11.11` TO `v1.11.12`
+
+1. All entities and their relationships have a default order by identifier if no order is specified. You can disable
+this behavior by setting the `sylius_core.order_by_identifier` parameter to `false`:
+```yaml
+sylius_core:
+    order_by_identifier: false
+```
+
 # UPGRADE FROM `v1.11.7` TO `v1.11.8`
 
 1. Cloning `Sylius\Component\Order\Model\Adjustment` resets values of fields `id`, `createdAt` and `updatedAt`.

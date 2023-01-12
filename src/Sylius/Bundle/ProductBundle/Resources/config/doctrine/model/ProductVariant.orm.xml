@@ -38,6 +38,10 @@
         </many-to-one>
 
         <many-to-many target-entity="Sylius\Component\Product\Model\ProductOptionValueInterface" field="optionValues">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_product_variant_option_value">
                 <join-columns>
                     <join-column name="variant_id" referenced-column-name="id" unique="false" nullable="false" on-delete="CASCADE" />
