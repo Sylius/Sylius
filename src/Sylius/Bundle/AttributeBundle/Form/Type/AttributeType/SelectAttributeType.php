@@ -80,7 +80,7 @@ final class SelectAttributeType extends AbstractType
 
                     foreach ($options['configuration']['choices'] as $key => $choice) {
                         if (isset($choice[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
-                            $choices[$key] = $choice[$localeCode];
+                            $choices[$key] = sprintf('%s (%s)', $choice[$localeCode], $key);
 
                             continue;
                         }
@@ -89,7 +89,7 @@ final class SelectAttributeType extends AbstractType
                             continue;
                         }
 
-                        $choices[$key] = $choice[$this->defaultLocaleCode];
+                        $choices[$key] = sprintf('%s (%s)', $choice[$this->defaultLocaleCode], $key);
                     }
 
                     $choices = array_flip($choices);
