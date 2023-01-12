@@ -114,6 +114,12 @@ class Order extends BaseOrder implements OrderInterface
         $this->customer = $customer;
     }
 
+    public function setCustomerWithAuthorization(?BaseCustomerInterface $customer): void
+    {
+        $this->setCustomer($customer);
+        $this->createdByGuest = false;
+    }
+
     public function getChannel(): ?BaseChannelInterface
     {
         return $this->channel;
@@ -460,9 +466,14 @@ class Order extends BaseOrder implements OrderInterface
         return $total;
     }
 
-    public function getCreatedByGuest(): bool
+    public function isCreatedByGuest(): bool
     {
         return $this->createdByGuest;
+    }
+
+    public function getCreatedByGuest(): bool
+    {
+        return $this->isCreatedByGuest();
     }
 
     public function setCreatedByGuest(bool $createdByGuest): void

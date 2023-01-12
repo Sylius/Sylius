@@ -51,10 +51,28 @@ final class OrderSpec extends ObjectBehavior
         $this->getCustomer()->shouldReturn(null);
     }
 
-    function its_allows_defining_customer(CustomerInterface $customer): void
+    function it_allows_defining_customer(CustomerInterface $customer): void
     {
         $this->setCustomer($customer);
         $this->getCustomer()->shouldReturn($customer);
+    }
+
+    function it_allows_defining_authorized_customer(CustomerInterface $customer): void
+    {
+        $this->setCustomerWithAuthorization($customer);
+        $this->getCustomer()->shouldReturn($customer);
+        $this->isCreatedByGuest()->shouldReturn(false);
+    }
+
+    function its_created_by_guest_customer_by_default(): void
+    {
+        $this->isCreatedByGuest()->shouldReturn(true);
+    }
+
+    function it_allows_to_mutate_create_by_guest_field(): void
+    {
+        $this->setCreatedByGuest(false);
+        $this->isCreatedByGuest()->shouldReturn(false);
     }
 
     function its_customer_can_be_nullable(): void

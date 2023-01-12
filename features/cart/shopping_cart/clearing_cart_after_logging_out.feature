@@ -7,16 +7,27 @@ Feature: Clearing cart after logging out
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Stark T-shirt" priced at "$12.00"
-        And I am a logged in customer
-        And I have product "Stark T-Shirt" in the cart
 
     @ui
     Scenario: Clearing cart after logging out
+        Given I am a logged in customer
+        And I have product "Stark T-Shirt" in the cart
         When I log out
         And I see the summary of my cart
         Then my cart should be empty
 
     @api
     Scenario: Clearing cart after logging out
+        Given I am a logged in customer
+        And I have product "Stark T-Shirt" in the cart
         When I log out
-        Then I don't have access to see the summary of my previous cart
+        Then I should not have access to the summary of my previous cart
+
+    @api
+    Scenario: Blocking access to cart if logged user did any action over it (what can be treated as signing it)
+        Given there is a user "john@snow.com"
+        When I add this product to the cart
+        And I log in as "john@snow.com" with "sylius" password
+        And I add this product to the cart
+        And I log out
+        Then I should not have access to the summary of my previous cart

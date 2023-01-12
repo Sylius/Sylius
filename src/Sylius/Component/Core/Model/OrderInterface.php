@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
@@ -112,6 +113,10 @@ interface OrderInterface extends
     public function getCustomerIp(): ?string;
 
     public function setCustomerIp(?string $customerIp): void;
+
+    public function setCustomerWithAuthorization(?BaseCustomerInterface $customer): void;
+
+    public function isCreatedByGuest(): bool;
 
     public function getCreatedByGuest(): bool;
 
