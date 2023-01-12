@@ -26,12 +26,20 @@
         </field>
 
         <one-to-many field="productTaxons" target-entity="Sylius\Component\Core\Model\ProductTaxonInterface" mapped-by="product" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>
         </one-to-many>
 
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_product_channels">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
@@ -47,6 +55,10 @@
         </many-to-one>
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImageInterface" mapped-by="owner" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>

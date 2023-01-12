@@ -26,6 +26,10 @@
         </field>
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="owner" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>

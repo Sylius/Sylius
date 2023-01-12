@@ -31,11 +31,19 @@
         </one-to-one>
 
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="customer">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all />
             </cascade>
         </one-to-many>
         <one-to-many field="addresses" target-entity="Sylius\Component\Addressing\Model\AddressInterface" mapped-by="customer">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all />
             </cascade>
