@@ -26,6 +26,10 @@
         </many-to-one>
 
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_shipping_method_channels">
                 <join-columns>
                     <join-column name="shipping_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
