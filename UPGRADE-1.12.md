@@ -1,3 +1,12 @@
+# UPGRADE FROM `v1.12.X` TO `v1.12.2`
+
+1. All entities and their relationships have a default order by identifier if no order is specified. You can disable
+   this behavior by setting the `sylius_core.order_by_identifier` parameter to `false`:
+```yaml
+sylius_core:
+    order_by_identifier: false
+```
+
 # UPGRADE FROM `v1.11.X` TO `v1.12.0`
 
 ## Main update
