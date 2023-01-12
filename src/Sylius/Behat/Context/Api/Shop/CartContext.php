@@ -297,7 +297,7 @@ final class CartContext implements Context
     /**
      * @Then /^I should not have access to the summary of my (previous cart)$/
      */
-    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
+    public function iShouldNotHaveAccessToTheSummaryOfMyCart(string $tokenValue): void
     {
         Assert::same($this->shopClient->show(Resources::ORDERS, $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
