@@ -26,6 +26,7 @@ use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
+use Webmozart\Assert\Assert;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
@@ -317,9 +318,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate): array
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null): array
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->where('o.checkoutState = :checkoutState')
             ->andWhere('o.paymentState = :paymentState')
             ->andWhere('o.state = :orderState')
@@ -328,9 +329,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('paymentState', OrderPaymentStates::STATE_AWAITING_PAYMENT)
             ->setParameter('orderState', OrderInterface::STATE_NEW)
             ->setParameter('terminalDate', $terminalDate)
-            ->getQuery()
-            ->getResult()
         ;
+
+        if (null !== $limit) {
+            Assert::positiveInteger($limit);
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function findCartForSummary($id): ?OrderInterface
