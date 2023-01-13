@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.13 (2023-01-13)
+
+#### Details
+
+- [#14715](https://github.com/Sylius/Sylius/issues/14715) [Core] Fix default query hint config ([@coldic3](https://github.com/coldic3))
+
 ## v1.11.12 (2023-01-13)
 
 #### Details
