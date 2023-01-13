@@ -95,8 +95,8 @@ final class SyliusCoreBundle extends AbstractResourceBundle
             ->get('doctrine.orm.entity_manager')
             ->getConfiguration()
             ->setDefaultQueryHint(
-                Query::HINT_CUSTOM_OUTPUT_WALKER,
-                $outputWalkerClass,
+                Query::HINT_CUSTOM_TREE_WALKERS,
+                [$outputWalkerClass],
             )
         ;
     }
