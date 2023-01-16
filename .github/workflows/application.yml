@@ -322,18 +322,18 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v2
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
@@ -476,18 +476,18 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v2
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
@@ -699,18 +699,18 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v2
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
@@ -977,7 +977,7 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
             -   name: Shutdown default MySQL
                 run: sudo service mysql stop
@@ -1010,7 +1010,7 @@ jobs:
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
             -   name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -1021,16 +1021,16 @@ jobs:
                 run: composer update --no-interaction --no-scripts
 
             -   name: Setup Node
-                uses: actions/setup-node@v2
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -   name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -   name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
@@ -1129,7 +1129,7 @@ jobs:
 
         steps:
             -
-                uses: actions/checkout@v2
+                uses: actions/checkout@v3
 
             -
                 name: Shutdown default MySQL
@@ -1167,7 +1167,7 @@ jobs:
 
             -
                 name: Cache Composer
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json') }}
@@ -1180,18 +1180,18 @@ jobs:
 
             -
                 name: Setup Node
-                uses: actions/setup-node@v2
+                uses: actions/setup-node@v3
                 with:
                     node-version: "${{ matrix.node }}"
 
             -
                 name: Get Yarn cache directory
                 id: yarn-cache
-                run: echo "::set-output name=dir::$(yarn cache dir)"
+                run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
             -
                 name: Cache Yarn
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: ${{ steps.yarn-cache.outputs.dir }}
                     key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
