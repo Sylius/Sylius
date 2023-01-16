@@ -125,7 +125,6 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->willReturn($queryBuilder)
         ;
 
-
         $queryBuilder
             ->expr()
             ->shouldBeCalled()
