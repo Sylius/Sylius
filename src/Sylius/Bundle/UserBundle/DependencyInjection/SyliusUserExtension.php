@@ -75,7 +75,7 @@ final class SyliusUserExtension extends AbstractResourceExtension
 
             $this->createTokenGenerators($userType, $config['user'], $container);
             $this->createReloaders($userType, $container);
-            $this->createLastLoginListeners($userType, $userClass, $container);
+            $this->createLastLoginListeners($userType, $userClass, $config['user'], $container);
             $this->createProviders($userType, $userClass, $container);
             $this->createUserDeleteListeners($userType, $container);
         }
@@ -190,13 +190,14 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $container->setDefinition($reloaderListenerServiceId, $userReloaderListenerDefinition);
     }
 
-    private function createLastLoginListeners(string $userType, string $userClass, ContainerBuilder $container): void
+    private function createLastLoginListeners(string $userType, string $userClass, array $config, ContainerBuilder $container): void
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
         $lastLoginListenerServiceId = sprintf('sylius.listener.%s_user_last_login', $userType);
+        $lastLoginTrackingInterval = isset($config['login_tracking_interval']) ? new \DateInterval($config['login_tracking_interval']) : null;
 
         $lastLoginListenerDefinition = new Definition(UserLastLoginSubscriber::class);
-        $lastLoginListenerDefinition->setArguments([new Reference($managerServiceId), $userClass]);
+        $lastLoginListenerDefinition->setArguments([new Reference($managerServiceId), $userClass, $lastLoginTrackingInterval]);
         $lastLoginListenerDefinition->addTag('kernel.event_subscriber');
         $container->setDefinition($lastLoginListenerServiceId, $lastLoginListenerDefinition);
     }
