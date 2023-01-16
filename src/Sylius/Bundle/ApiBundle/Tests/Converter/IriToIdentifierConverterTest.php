@@ -44,6 +44,7 @@ final class IriToIdentifierConverterTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider invalidIdentifierValues
      */
     public function it_treats_non_string_values_as_not_identifiers(mixed $invalidValue): void
