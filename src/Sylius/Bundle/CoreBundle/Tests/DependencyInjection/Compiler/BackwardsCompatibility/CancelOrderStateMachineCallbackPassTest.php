@@ -74,7 +74,6 @@ class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCa
         ],
     ];
 
-
     /** @test */
     public function it_triggers_deprecation_error_when_old_callback_name_is_used(): void
     {
