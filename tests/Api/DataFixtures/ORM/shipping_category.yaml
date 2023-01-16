@@ -1,0 +1,8 @@
+Sylius\Component\Shipping\Model\ShippingCategory:
+    shipping_category_default:
+        code: 'default'
+        name: 'Default'
+    shipping_category_special:
+        code: 'special'
+        name: 'Special'
+        description: 'For special care'

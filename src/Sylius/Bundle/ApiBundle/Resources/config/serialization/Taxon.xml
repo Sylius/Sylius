@@ -12,8 +12,6 @@
         <attribute name="code">
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
-            <group>admin:taxon:create</group>
-            <group>admin:taxon:update</group>
         </attribute>
         <attribute name="name">
             <group>shop:taxon:read</group>
@@ -28,6 +26,7 @@
             <group>admin:taxon:read</group>
         </attribute>
         <attribute name="children">
+            <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
         </attribute>
     </class>

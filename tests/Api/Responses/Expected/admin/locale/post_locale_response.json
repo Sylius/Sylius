@@ -1,0 +1,8 @@
+{
+    "@context": "\/api\/v2\/contexts\/Locale",
+    "@id": "\/api\/v2\/admin\/locales\/is_IS",
+    "@type": "Locale",
+    "id": "@integer@",
+    "code": "is_IS",
+    "name": "Icelandic (Iceland)"
+}

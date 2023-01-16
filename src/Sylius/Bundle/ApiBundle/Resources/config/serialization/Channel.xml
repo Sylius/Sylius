@@ -26,6 +26,10 @@
             <group>admin:channel:create</group>
             <group>shop:channel:read</group>
         </attribute>
+        <attribute name="enabled">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
         <attribute name="description">
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
