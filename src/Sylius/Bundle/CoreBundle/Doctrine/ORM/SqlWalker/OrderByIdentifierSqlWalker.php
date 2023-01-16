@@ -41,7 +41,7 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
         $expression = new PathExpression(
             PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION,
             $dqlAlias,
-            $metadata->getSingleIdentifierFieldName()
+            $metadata->getSingleIdentifierFieldName(),
         );
         $expression->type = PathExpression::TYPE_STATE_FIELD;
 
