@@ -61,14 +61,14 @@ $(document).ready(() => {
     containerSelector: '.configuration',
   });
 
-  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', (event) => {
+  $('#actions').find('a[data-form-collection="add"]').on('click', (event) => {
     const name = $(event.target).closest('form').attr('name');
 
     setTimeout(() => {
       $(`select[name^="${name}[actions]"][name$="[type]"]`).last().change();
     }, 50);
   });
-  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', (event) => {
+  $('#rules').find('a[data-form-collection="add"]').on('click', (event) => {
     const name = $(event.target).closest('form').attr('name');
 
     setTimeout(() => {
