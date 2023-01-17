@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
                 - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+                - Sylius\Behat\Context\Api\Admin\ManagingProductTaxonsContext
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
