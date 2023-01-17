@@ -41,6 +41,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
+        Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
     collection:
         pagination:
