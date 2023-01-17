@@ -653,7 +653,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^the (product "[^"]+") should have the "([^"]+)" taxon$/
+     * @Then the product :product should have the :taxon taxon
      */
     public function thisProductTaxonShouldBe(ProductInterface $product, string $taxonName): void
     {

@@ -24,8 +24,8 @@ final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterf
 {
     public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
-        private MessageBusInterface $eventBus
-    ){
+        private MessageBusInterface $eventBus,
+    ) {
     }
 
     public function supports($data, array $context = []): bool
