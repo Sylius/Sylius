@@ -228,6 +228,7 @@
             <argument type="service" id="sm.factory" />
             <argument>%sylius_order.order_expiration_period%</argument>
             <argument type="service" id="logger" />
+            <argument type="service" id="sylius.manager.order" />
         </service>
         <service id="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface" alias="sylius.unpaid_orders_state_updater" />
 
