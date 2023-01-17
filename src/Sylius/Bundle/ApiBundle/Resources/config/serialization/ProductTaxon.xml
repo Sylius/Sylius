@@ -11,6 +11,14 @@
         </attribute>
         <attribute name="taxon">
             <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:update</group>
+            <group>admin:product_taxon:create</group>
+            <group>shop:product_taxon:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:update</group>
+            <group>admin:product_taxon:create</group>
             <group>shop:product_taxon:read</group>
         </attribute>
     </class>
