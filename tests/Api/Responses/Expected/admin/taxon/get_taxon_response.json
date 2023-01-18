@@ -11,7 +11,8 @@
             "id": @integer@,
             "name": "Categories",
             "slug": "categories",
-            "description": "Some description Lorem ipsum dolor sit amet."
+            "description": "Some description Lorem ipsum dolor sit amet.",
+            "locale": "en_US"
         }
     },
     "children": [

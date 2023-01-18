@@ -15,7 +15,8 @@
                     "id": @integer@,
                     "name": "Categories",
                     "slug": "categories",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 }
             },
             "children": [
@@ -36,7 +37,8 @@
                     "id": @integer@,
                     "name": "Mugs",
                     "slug": "categories/mugs",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -44,7 +46,8 @@
                     "id": @integer@,
                     "name": "Tassen",
                     "slug": "tassen",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
                 }
             },
             "children": []
@@ -61,7 +64,8 @@
                     "id": @integer@,
                     "name": "Hats",
                     "slug": "categories/hats",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -69,7 +73,8 @@
                     "id": @integer@,
                     "name": "Hüte",
                     "slug": "hute",
-                    "description": null
+                    "description": null,
+                    "locale": "de_DE"
                 }
             },
             "children": []
@@ -86,7 +91,8 @@
                     "id": @integer@,
                     "name": "T-Shirts",
                     "slug": "categories/t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -94,7 +100,8 @@
                     "id": @integer@,
                     "name": "T-Shirts",
                     "slug": "t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
                 }
             },
             "children": [
@@ -114,7 +121,8 @@
                     "id": @integer@,
                     "name": "Men T-Shirts",
                     "slug": "categories/t-shirts/men-t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -122,7 +130,8 @@
                     "id": @integer@,
                     "name": "Männer T-Shirts",
                     "slug": "männer-t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
                 }
             },
             "children": []
@@ -139,7 +148,8 @@
                     "id": @integer@,
                     "name": "Women T-Shirts",
                     "slug": "categories/t-shirts/women-t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -147,7 +157,8 @@
                     "id": @integer@,
                     "name": "Frauen T-Shirts",
                     "slug": "frauen-t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
                 }
             },
             "children": []
@@ -164,7 +175,8 @@
                     "id": @integer@,
                     "name": "Brands",
                     "slug": "brands",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 },
                 "de_DE": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -172,7 +184,8 @@
                     "id": @integer@,
                     "name": "Marken",
                     "slug": "marken",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
                 }
             },
             "children": []
@@ -189,7 +202,8 @@
                     "id": @integer@,
                     "name": "Yet another taxon",
                     "slug": "yet_another_taxons",
-                    "description": "Some description Lorem ipsum dolor sit amet."
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
                 }
             },
             "children": []
