@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AddressingBundle\EventListener;
 
-use InvalidArgumentException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
@@ -182,7 +181,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
             // SessionNotFoundException is not available in Symfony 4.4
             $this
-                ->shouldThrow(InvalidArgumentException::class)
+                ->shouldThrow(\InvalidArgumentException::class)
                 ->during('protectFromRemovingZone', [$event])
             ;
         } else {
@@ -210,7 +209,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
             // SessionNotFoundException is not available in Symfony 4.4
             $this
-                ->shouldThrow(InvalidArgumentException::class)
+                ->shouldThrow(\InvalidArgumentException::class)
                 ->during('protectFromRemovingProvinceWithinCountry', [$event])
             ;
         } else {
