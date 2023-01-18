@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -71,7 +72,11 @@ final class ZoneMemberIntegrityListener
     {
         // bc-layer for Symfony 4
         if (!method_exists(RequestStack::class, 'getSession')) {
-            return $this->requestStack->getMasterRequest()->getSession();
+            $request = $this->requestStack->getMasterRequest();
+            if (null === $request) {
+                throw new SessionNotFoundException();
+            }
+            return $request->getSession();
         }
 
         return $this->requestStack->getSession();
