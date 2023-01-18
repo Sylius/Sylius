@@ -15,6 +15,7 @@
     <imports>
         <import resource="contexts/api.xml" />
         <import resource="contexts/cli.xml" />
+        <import resource="contexts/composite.xml" />
         <import resource="contexts/domain.xml" />
         <import resource="contexts/hook.xml" />
         <import resource="contexts/setup.xml" />
