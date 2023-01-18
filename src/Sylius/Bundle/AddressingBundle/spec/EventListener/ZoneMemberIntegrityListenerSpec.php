@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\AddressingBundle\EventListener;
 
+use InvalidArgumentException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
 use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
@@ -178,14 +179,20 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         if (!method_exists(RequestStack::class, 'getSession')) {
             $requestStack->getMasterRequest()->willReturn(null);
+
+            // SessionNotFoundException is not available in Symfony 4.4
+            $this
+                ->shouldThrow(InvalidArgumentException::class)
+                ->during('protectFromRemovingZone', [$event])
+            ;
         } else {
             $requestStack->getSession()->willThrow(new SessionNotFoundException());
-        }
 
-        $this
-            ->shouldThrow(SessionNotFoundException::class)
-            ->during('protectFromRemovingZone', [$event])
-        ;
+            $this
+                ->shouldThrow(SessionNotFoundException::class)
+                ->during('protectFromRemovingZone', [$event])
+            ;
+        }
     }
 
     function it_throws_an_exception_if_no_session_is_available_during_province_protection(
@@ -200,13 +207,19 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         if (!method_exists(RequestStack::class, 'getSession')) {
             $requestStack->getMasterRequest()->willReturn(null);
+
+            // SessionNotFoundException is not available in Symfony 4.4
+            $this
+                ->shouldThrow(InvalidArgumentException::class)
+                ->during('protectFromRemovingProvinceWithinCountry', [$event])
+            ;
         } else {
             $requestStack->getSession()->willThrow(new SessionNotFoundException());
-        }
 
-        $this
-            ->shouldThrow(SessionNotFoundException::class)
-            ->during('protectFromRemovingProvinceWithinCountry', [$event])
-        ;
+            $this
+                ->shouldThrow(SessionNotFoundException::class)
+                ->during('protectFromRemovingProvinceWithinCountry', [$event])
+            ;
+        }
     }
 }
