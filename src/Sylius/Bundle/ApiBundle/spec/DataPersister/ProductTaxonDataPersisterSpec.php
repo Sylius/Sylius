@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class ProductTaxonDataPersisterSpec extends ObjectBehavior
+final class ProductTaxonDataPersisterSpec extends ObjectBehavior
 {
     function let(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
