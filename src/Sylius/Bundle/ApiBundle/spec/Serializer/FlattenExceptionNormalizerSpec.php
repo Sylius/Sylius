@@ -72,4 +72,21 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
 
         $this->supportsNormalization('data', 'format', ['context']);
     }
+
+    function it_doesnt_support_normalization_when_no_request_is_available(
+        ContextAwareNormalizerInterface $normalizer,
+        RequestStack $requestStack,
+    ): void {
+        $this->beConstructedWith($normalizer, $requestStack, '/api/v2');
+
+        if (method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn(null);
+        } else {
+            $requestStack->getMasterRequest()->willReturn(null);
+        }
+
+        $normalizer->supportsNormalization('data', 'format', ['context'])->shouldNotBeCalled();
+
+        $this->supportsNormalization('data', 'format', ['context']);
+    }
 }

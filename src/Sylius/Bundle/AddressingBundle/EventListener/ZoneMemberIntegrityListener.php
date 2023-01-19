@@ -71,7 +71,10 @@ final class ZoneMemberIntegrityListener
     {
         // bc-layer for Symfony 4
         if (!method_exists(RequestStack::class, 'getSession')) {
-            return $this->requestStack->getMasterRequest()->getSession();
+            $request = $this->requestStack->getMasterRequest();
+            Assert::notNull($request, 'No main request available to get a session !');
+
+            return $request->getSession();
         }
 
         return $this->requestStack->getSession();
