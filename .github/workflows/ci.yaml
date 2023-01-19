@@ -33,9 +33,9 @@ jobs:
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-pgsql.yml
     e2e-customs:
-        name: End-to-end tests (Customs)
+        name: End-to-end tests (Custom)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-customs.yml
+        uses: ./.github/workflows/ci_e2e-custom.yml
     packages:
         name: Packages
         needs: static-checks
