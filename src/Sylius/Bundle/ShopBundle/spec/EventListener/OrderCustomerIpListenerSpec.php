@@ -51,4 +51,23 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
             ->during('assignCustomerIpToOrder', [$event])
         ;
     }
+
+    function it_throws_exception_if_request_is_null(
+        OrderInterface $order,
+        GenericEvent $event,
+        RequestStack $requestStack,
+    ): void {
+        $event->getSubject()->willReturn($order);
+
+        if (method_exists(RequestStack::class, 'getMainRequest')) {
+            $requestStack->getMainRequest()->willReturn(null);
+        } else {
+            $requestStack->getMasterRequest()->willReturn(null);
+        }
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('assignCustomerIpToOrder', [$event])
+        ;
+    }
 }
