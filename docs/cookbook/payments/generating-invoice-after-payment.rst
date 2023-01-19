@@ -146,12 +146,12 @@ Let's start first with EventListeners that will override the default ones:
     # config/services.yaml
     services:
         sylius_invoicing_plugin.listener.order_payment_paid:
-        class: App\EventListener\OrderPaymentPaidListener
-        arguments:
-            - '@sylius_invoicing_plugin.creator.invoice'
-            - '@sylius.command_bus'
-        tags:
-            - { name: messenger.message_handler }
+            class: App\EventListener\OrderPaymentPaidListener
+            arguments:
+                - '@sylius_invoicing_plugin.creator.invoice'
+                - '@sylius.command_bus'
+            tags:
+                - { name: messenger.message_handler }
 
         sylius_invoicing_plugin.event_listener.order_placed:
             class: App\EventListener\NoInvoiceOnOrderPlacedListener
