@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-01-19T12:33:55Z
+
+Hi @pjurasek!
+Thanks for your contribution
+
+I've made some adjustments and as soon as the CI pass we'll merge this PR :).
+
+- I've changed the base to 1.13 (current main branch), and rebased to apply newest changes
+- I removed non-English translations, as they should be made via crowdin
+
+Once again, thanks :).
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-01-19T14:04:45Z
+
+Thank you, Petr! :tada:
