@@ -16,6 +16,9 @@ namespace Sylius\Component\Core\Factory;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<PromotionActionInterface>
+ */
 interface PromotionActionFactoryInterface extends FactoryInterface
 {
     public function createFixedDiscount(int $amount, string $channelCode): PromotionActionInterface;

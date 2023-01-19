@@ -52,16 +52,14 @@ interface OrderInterface extends
     public function setPaymentState(?string $paymentState): void;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<int<0, max>, OrderItemUnitInterface>
      */
     public function getItemUnits(): Collection;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
+     * @param ProductVariantInterface $variant
      *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<int<0, max>, OrderItemUnitInterface>
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;
 

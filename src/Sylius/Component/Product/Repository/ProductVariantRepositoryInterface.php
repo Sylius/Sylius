@@ -18,6 +18,9 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<ProductVariantInterface>
+ */
 interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;

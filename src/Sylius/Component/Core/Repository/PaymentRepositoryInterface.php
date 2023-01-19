@@ -18,6 +18,9 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<PaymentInterface>
+ */
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;

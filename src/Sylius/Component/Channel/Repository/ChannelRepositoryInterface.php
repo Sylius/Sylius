@@ -16,6 +16,9 @@ namespace Sylius\Component\Channel\Repository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<ChannelInterface>
+ */
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
     /** @deprecated since Sylius 1.11, use the `findOneEnabledByHostname` method instead */

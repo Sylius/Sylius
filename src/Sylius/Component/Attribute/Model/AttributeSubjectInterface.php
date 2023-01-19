@@ -25,9 +25,11 @@ interface AttributeSubjectInterface
     public function getAttributes(): Collection;
 
     /**
-     * @return Collection|AttributeValueInterface[]
+     * @param string $localeCode
+     * @param string $fallbackLocaleCode
+     * @param string|null $baseLocaleCode
      *
-     * @psalm-return Collection<array-key, AttributeValueInterface>
+     * @return Collection<int<0, max>, AttributeValueInterface>
      */
     public function getAttributesByLocale(
         string $localeCode,

@@ -47,7 +47,7 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
         try {
             $parameters = $this->router->match($iri);
         } catch (RoutingExceptionInterface $e) {
-            throw new NoRouteMatchesException(sprintf('No route matches "%s".', $iri), (int) $e->getCode(), $e);
+            throw new NoRouteMatchesException(sprintf('No route matches "%s".', $iri), $e->getCode(), $e);
         }
 
         if (!isset($parameters['_api_resource_class'])) {
@@ -61,9 +61,10 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
         $attributes = AttributesExtractor::extractAttributes($parameters);
 
         try {
+            /** @var array<int|string> $identifiers */
             $identifiers = $this->extractIdentifiers($parameters, $attributes);
         } catch (InvalidIdentifierException $e) {
-            throw new InvalidArgumentException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
 
         if (count($identifiers) > 1) {

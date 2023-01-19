@@ -17,6 +17,9 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<OrderItemUnitInterface>
+ */
 interface OrderItemUnitFactoryInterface extends FactoryInterface
 {
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface;

@@ -16,6 +16,9 @@ namespace Sylius\Component\Core\Repository;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<ImageInterface>
+ */
 interface AvatarImageRepositoryInterface extends RepositoryInterface
 {
     public function findOneByOwnerId(string $id): ?ImageInterface;

@@ -16,6 +16,9 @@ namespace Sylius\Component\Taxation\Repository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
+/**
+ * @extends RepositoryInterface<TaxCategoryInterface>
+ */
 interface TaxCategoryRepositoryInterface extends RepositoryInterface
 {
     /**

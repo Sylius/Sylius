@@ -16,6 +16,9 @@ namespace Sylius\Component\Currency\Repository;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<ExchangeRateInterface>
+ */
 interface ExchangeRateRepositoryInterface extends RepositoryInterface
 {
     public function findOneWithCurrencyPair(string $firstCurrencyCode, string $secondCurrencyCode): ?ExchangeRateInterface;

@@ -169,6 +169,13 @@ class Product implements ProductInterface, \Stringable
         return $this->attributes;
     }
 
+    /**
+     * @param string $localeCode
+     * @param string $fallbackLocaleCode
+     * @param string|null $baseLocaleCode
+     *
+     * @return Collection<int<0, max>, AttributeValueInterface>
+     */
     public function getAttributesByLocale(
         string $localeCode,
         string $fallbackLocaleCode,

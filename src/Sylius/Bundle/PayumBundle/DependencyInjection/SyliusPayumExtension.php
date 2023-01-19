@@ -47,6 +47,7 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
                 continue;
             }
 
+            /** @var string $gatewayKey */
             foreach (array_keys($config['gateways']) as $gatewayKey) {
                 $gateways[$gatewayKey] = 'sylius.payum_gateway.' . $gatewayKey;
             }

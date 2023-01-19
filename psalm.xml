@@ -51,9 +51,12 @@
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
+                <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" /> <!-- Deprecated, but no substitution provided -->
             </errorLevel>
         </DeprecatedInterface>
         <DeprecatedMethod>
@@ -217,6 +220,17 @@
                 <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="SyliusLabs\AssociationHydrator\AssociationHydrator::__construct" />
                 <referencedFunction name="Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" />
+            </errorLevel>
+
+            <!-- Psalm has problems with figuring out types, but they're ok -->
+            <errorLevel type="suppress">
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::all" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::findBy" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::findOneBy" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::getOneBy" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::randomOne" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::randomOneOrNull" />
+                <referencedFunction name="Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption::randomOnes" />
             </errorLevel>
         </InvalidArgument>
 

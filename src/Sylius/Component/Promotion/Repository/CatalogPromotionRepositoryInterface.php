@@ -14,8 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Promotion\Repository;
 
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<CatalogPromotionInterface>
+ */
 interface CatalogPromotionRepositoryInterface extends RepositoryInterface
 {
     /**

@@ -17,6 +17,9 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<AddressInterface>
+ */
 interface AddressRepositoryInterface extends RepositoryInterface
 {
     /**

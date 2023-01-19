@@ -16,6 +16,9 @@ namespace Sylius\Component\Product\Repository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<ProductInterface>
+ */
 interface ProductRepositoryInterface extends RepositoryInterface
 {
     /**

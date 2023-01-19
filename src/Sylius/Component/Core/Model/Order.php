@@ -181,9 +181,12 @@ class Order extends BaseOrder implements OrderInterface
         $this->paymentState = $paymentState;
     }
 
+    /**
+     * @return Collection<int<0, max>, OrderItemUnitInterface>
+     */
     public function getItemUnits(): Collection
     {
-        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
+        /** @var Collection<int<0, max>, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */
@@ -196,6 +199,11 @@ class Order extends BaseOrder implements OrderInterface
         return $units;
     }
 
+    /**
+     * @param ProductVariantInterface $variant
+     *
+     * @return Collection<int<0, max>, OrderItemUnitInterface>
+     */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection
     {
         return $this->getItemUnits()->filter(function (OrderItemUnitInterface $itemUnit) use ($variant): bool {

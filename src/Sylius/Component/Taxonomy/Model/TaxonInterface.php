@@ -32,9 +32,7 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function setParent(?self $taxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<int<0, max>, TaxonInterface>
      */
     public function getAncestors(): Collection;
 

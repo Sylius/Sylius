@@ -16,6 +16,9 @@ namespace Sylius\Component\Channel\Factory;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<ChannelInterface>
+ */
 interface ChannelFactoryInterface extends FactoryInterface
 {
     public function createNamed(string $name): ChannelInterface;

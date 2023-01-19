@@ -33,7 +33,7 @@ final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterf
         return $data instanceof ProductTaxonInterface;
     }
 
-    public function persist($data, array $context = [])
+    public function persist($data, array $context = []): void
     {
         /** @var ProductInterface $product */
         $product = $data->getProduct();

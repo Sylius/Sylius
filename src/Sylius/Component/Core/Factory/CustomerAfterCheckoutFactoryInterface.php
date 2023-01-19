@@ -17,6 +17,9 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<CustomerInterface>
+ */
 interface CustomerAfterCheckoutFactoryInterface extends FactoryInterface
 {
     public function createAfterCheckout(OrderInterface $order): CustomerInterface;

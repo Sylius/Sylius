@@ -18,6 +18,9 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+/**
+ * @extends FactoryInterface<ReviewInterface>
+ */
 interface ReviewFactoryInterface extends FactoryInterface
 {
     public function createForSubject(ReviewableInterface $subject): ReviewInterface;

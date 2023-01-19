@@ -17,6 +17,9 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @extends RepositoryInterface<OrderItemUnitInterface>
+ */
 interface OrderItemUnitRepositoryInterface extends RepositoryInterface
 {
     public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface;

@@ -16,6 +16,9 @@ namespace Sylius\Component\Attribute\Factory;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<AttributeInterface>
+ */
 interface AttributeFactoryInterface extends FactoryInterface
 {
     public function createTyped(string $type): AttributeInterface;

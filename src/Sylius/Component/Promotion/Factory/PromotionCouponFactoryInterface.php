@@ -17,6 +17,9 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @extends FactoryInterface<PromotionCouponInterface>
+ */
 interface PromotionCouponFactoryInterface extends FactoryInterface
 {
     /**

@@ -18,6 +18,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+/**
+ * @extends RepositoryInterface<ReviewInterface>
+ */
 interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
     /**

@@ -16,6 +16,9 @@ namespace Sylius\Component\User\Repository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 
+/**
+ * @extends RepositoryInterface<UserInterface>
+ */
 interface UserRepositoryInterface extends RepositoryInterface
 {
     public function findOneByEmail(string $email): ?UserInterface;
