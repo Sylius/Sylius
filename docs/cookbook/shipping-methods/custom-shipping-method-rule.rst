@@ -17,6 +17,7 @@ The new rule needs a RuleChecker class:
 
     namespace App\Shipping\Checker\Rule;
 
+    use Sylius\Component\Shipping\Checker\Rule\RuleCheckerInterface;
     use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
     final class TotalVolumeLessThanOrEqualRuleChecker implements RuleCheckerInterface
