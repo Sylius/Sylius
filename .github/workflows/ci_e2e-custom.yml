@@ -1,4 +1,4 @@
-name: End-to-End (Customs)
+name: End-to-End (Custom)
 
 on:
     workflow_dispatch: ~
@@ -7,7 +7,7 @@ on:
 jobs:
     behat-no-js-unstable-symfony:
         runs-on: ubuntu-latest
-        name: "Test Application without JS (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} [Unstable], MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }})"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} [Unstable], MySQL ${{ matrix.mysql }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false

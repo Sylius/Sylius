@@ -7,7 +7,7 @@ on:
 jobs:
     behat-no-js:
         runs-on: ubuntu-latest
-        name: "Test Application without JS (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }})"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -104,7 +104,7 @@ jobs:
 
     behat-ui-js:
         runs-on: ubuntu-latest
-        name: "Test UI Application with JS (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }})"
+        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false

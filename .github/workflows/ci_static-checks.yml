@@ -7,7 +7,7 @@ on:
 jobs:
     static-checks:
         runs-on: ubuntu-latest
-        name: "Static checks"
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, API Platform ${{ matrix.api-platform }}"
         strategy:
             fail-fast: false
             matrix:
