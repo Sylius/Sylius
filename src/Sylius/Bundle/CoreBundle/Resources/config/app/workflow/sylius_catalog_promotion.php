@@ -29,7 +29,7 @@ return static function (FrameworkConfig $framework): void {
 
     $catalogPromotion->place()->name(CatalogPromotionStates::STATE_ACTIVE);
     $catalogPromotion->place()->name(CatalogPromotionStates::STATE_INACTIVE);
-    $catalogPromotion->place()->name(CatalogPromotionStates:: STATE_PROCESSING);
+    $catalogPromotion->place()->name(CatalogPromotionStates::STATE_PROCESSING);
 
     $catalogPromotion->transition()
         ->name(CatalogPromotionTransitions::TRANSITION_ACTIVATE)
