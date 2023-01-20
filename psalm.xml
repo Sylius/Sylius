@@ -62,7 +62,6 @@
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
                 <referencedMethod name="Sylius\Component\Mailer\Sender\SenderInterface::send"/>
                 <referencedMethod name="Symfony\Component\HttpFoundation\JsonResponse::create" /> <!-- deprecated in Symfony 5.1 -->
-                <referencedMethod name="Symfony\Component\HttpFoundation\RequestStack::getMasterRequest" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\KernelEvent::isMasterRequest" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\AbstractToken::isAuthenticated" /> <!-- deprecated in Symfony 5.4 -->
                 <referencedMethod name="Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUsername" /> <!-- deprecated in Symfony 5.3 -->

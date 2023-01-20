@@ -59,11 +59,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
     ): void {
         $event->getSubject()->willReturn($order);
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)

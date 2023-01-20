@@ -30,13 +30,7 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
 
     public function getChannel(): ChannelInterface
     {
-        if (\method_exists($this->requestStack, 'getMainRequest')) {
-            $objectIdentifier = $this->requestStack->getMainRequest();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $objectIdentifier = $this->requestStack->getMasterRequest();
-        }
-
+        $objectIdentifier = $this->requestStack->getMainRequest();
         if (null === $objectIdentifier) {
             return $this->decoratedChannelContext->getChannel();
         }
