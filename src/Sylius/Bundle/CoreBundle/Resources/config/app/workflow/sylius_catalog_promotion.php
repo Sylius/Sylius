@@ -33,16 +33,19 @@ return static function (FrameworkConfig $framework): void {
 
     $catalogPromotion->transition()
         ->name(CatalogPromotionTransitions::TRANSITION_ACTIVATE)
-        ->from([CatalogPromotionStates:: STATE_PROCESSING])
-        ->to([CatalogPromotionStates:: STATE_ACTIVE]);
+        ->from([CatalogPromotionStates::STATE_PROCESSING])
+        ->to([CatalogPromotionStates::STATE_ACTIVE])
+    ;
 
     $catalogPromotion->transition()
-        ->name('deactivate')
-        ->from(['processing'])
-        ->to(['inactive']);
+        ->name(CatalogPromotionTransitions::TRANSITION_DEACTIVATE)
+        ->from([CatalogPromotionStates::STATE_PROCESSING])
+        ->to([CatalogPromotionStates::STATE_INACTIVE])
+    ;
 
     $catalogPromotion->transition()
-        ->name('process')
-        ->from(['inactive', 'active'])
-        ->to(['processing']);
+        ->name(CatalogPromotionTransitions::TRANSITION_PROCESS)
+        ->from([CatalogPromotionStates::STATE_INACTIVE, CatalogPromotionStates::STATE_ACTIVE])
+        ->to([CatalogPromotionStates::STATE_PROCESSING])
+    ;
 };
