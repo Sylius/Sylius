@@ -41,64 +41,6 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
     }
 
     /** @test */
-    public function it_has_activate_transition(): void
-    {
-        /** @var StateMachine $symfonyStateMachine */
-        $symfonyStateMachine = $this->getSymfonyStateMachine();
-
-        $winzouStateMachineConfig = $this->getWinzouStateMachineConfig();
-
-        $this->assertEquals('activate', $symfonyStateMachine->getDefinition()->getTransitions()[0]->getName());
-        $this->assertEquals(['processing'], $symfonyStateMachine->getDefinition()->getTransitions()[0]->getFroms());
-        $this->assertEquals(['active'], $symfonyStateMachine->getDefinition()->getTransitions()[0]->getTos());
-
-        $this->assertEquals([
-            'from' => ['processing'],
-            'to' => 'active',
-        ], $winzouStateMachineConfig['transitions']['activate']);
-    }
-
-    /** @test */
-    public function it_has_deactivate_transition(): void
-    {
-        /** @var StateMachine $symfonyStateMachine */
-        $symfonyStateMachine = $this->getSymfonyStateMachine();
-
-        $winzouStateMachineConfig = $this->getWinzouStateMachineConfig();
-
-        $this->assertEquals('deactivate', $symfonyStateMachine->getDefinition()->getTransitions()[1]->getName());
-        $this->assertEquals(['processing'], $symfonyStateMachine->getDefinition()->getTransitions()[1]->getFroms());
-        $this->assertEquals(['inactive'], $symfonyStateMachine->getDefinition()->getTransitions()[1]->getTos());
-
-        $this->assertEquals([
-            'from' => ['processing'],
-            'to' => 'inactive',
-        ], $winzouStateMachineConfig['transitions']['deactivate']);
-    }
-
-    /** @test */
-    public function it_has_process_transition(): void
-    {
-        /** @var StateMachine $symfonyStateMachine */
-        $symfonyStateMachine = $this->getSymfonyStateMachine();
-
-        $winzouStateMachineConfig = $this->getWinzouStateMachineConfig();
-
-        $this->assertEquals('process', $symfonyStateMachine->getDefinition()->getTransitions()[2]->getName());
-        $this->assertEquals(['inactive'], $symfonyStateMachine->getDefinition()->getTransitions()[2]->getFroms());
-        $this->assertEquals(['processing'], $symfonyStateMachine->getDefinition()->getTransitions()[2]->getTos());
-
-        $this->assertEquals('process', $symfonyStateMachine->getDefinition()->getTransitions()[3]->getName());
-        $this->assertEquals(['active'], $symfonyStateMachine->getDefinition()->getTransitions()[3]->getFroms());
-        $this->assertEquals(['processing'], $symfonyStateMachine->getDefinition()->getTransitions()[3]->getTos());
-
-        $this->assertEquals([
-            'from' => ['inactive', 'active'],
-            'to' => 'processing',
-        ], $winzouStateMachineConfig['transitions']['process']);
-    }
-
-    /** @test */
     public function it_can_pass_from_processing_to_active(): void
     {
         /** @var StateMachine $symfonyStateMachine */
