@@ -25,13 +25,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class CreateAdminUserHandler implements MessageHandlerInterface
 {
-    private const GROUPS = ['sylius', 'sylius_user_create'];
-
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
         private FactoryInterface $adminUserFactory,
         private CanonicalizerInterface $canonicalizer,
         private ValidatorInterface $validator,
+        private array $validationGroups
     ) {
     }
 
@@ -39,7 +38,7 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
     {
         $adminUser = $this->setUpAdminUser($command);
 
-        $constraintViolationList = $this->validator->validate($adminUser, null, self::GROUPS);
+        $constraintViolationList = $this->validator->validate($adminUser, null, $this->validationGroups);
 
         if ($constraintViolationList->count()) {
             $violationMessages = $this->getViolationMessages($constraintViolationList);

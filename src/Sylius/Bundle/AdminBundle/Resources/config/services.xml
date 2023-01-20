@@ -25,6 +25,10 @@
         <parameter key="sylius.ajax.product.autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.product.variant_autocomplete_limit">25</parameter>
         <parameter key="sylius.ajax.customer_group.autocomplete_limit">25</parameter>
+        <parameter key="sylius.message.admin_user_create.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_create</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -41,6 +45,7 @@
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="validator" />
+            <argument>%sylius.message.admin_user_create.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

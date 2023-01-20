@@ -135,6 +135,7 @@ final class CreateAdminUserHandlerTest extends TestCase
             $this->adminUserFactory,
             $this->canonicalizer,
             $this->validator,
+            self::GROUPS,
         );
     }
 
