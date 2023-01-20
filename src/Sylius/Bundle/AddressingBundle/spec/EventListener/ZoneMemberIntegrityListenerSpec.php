@@ -48,12 +48,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $requestStack->getMasterRequest()->willReturn($request);
-            $request->getSession()->willReturn($session);
-        } else {
-            $requestStack->getSession()->willReturn($session);
-        }
+        $requestStack->getSession()->willReturn($session);
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -78,12 +73,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
         ZoneInterface $zone,
         Request $request,
     ): void {
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $requestStack->getMasterRequest()->willReturn($request);
-            $request->getSession()->willReturn($session);
-        } else {
-            $requestStack->getSession()->willReturn($session);
-        }
+        $requestStack->getSession()->willReturn($session);
 
         $event->getSubject()->willReturn($zone);
 
@@ -118,12 +108,7 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $requestStack->getMasterRequest()->willReturn($request);
-            $request->getSession()->willReturn($session);
-        } else {
-            $requestStack->getSession()->willReturn($session);
-        }
+        $requestStack->getSession()->willReturn($session);
 
         $session->getBag('flashes')->willReturn($flashes);
 
@@ -176,22 +161,12 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
 
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $requestStack->getMasterRequest()->willReturn(null);
+        $requestStack->getSession()->willThrow(new SessionNotFoundException());
 
-            // SessionNotFoundException is not available in Symfony 4.4
-            $this
-                ->shouldThrow(\InvalidArgumentException::class)
-                ->during('protectFromRemovingZone', [$event])
-            ;
-        } else {
-            $requestStack->getSession()->willThrow(new SessionNotFoundException());
-
-            $this
-                ->shouldThrow(SessionNotFoundException::class)
-                ->during('protectFromRemovingZone', [$event])
-            ;
-        }
+        $this
+            ->shouldThrow(SessionNotFoundException::class)
+            ->during('protectFromRemovingZone', [$event])
+        ;
     }
 
     function it_throws_an_exception_if_no_session_is_available_during_province_protection(
@@ -204,21 +179,11 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
 
         $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
 
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $requestStack->getMasterRequest()->willReturn(null);
+        $requestStack->getSession()->willThrow(new SessionNotFoundException());
 
-            // SessionNotFoundException is not available in Symfony 4.4
-            $this
-                ->shouldThrow(\InvalidArgumentException::class)
-                ->during('protectFromRemovingProvinceWithinCountry', [$event])
-            ;
-        } else {
-            $requestStack->getSession()->willThrow(new SessionNotFoundException());
-
-            $this
-                ->shouldThrow(SessionNotFoundException::class)
-                ->during('protectFromRemovingProvinceWithinCountry', [$event])
-            ;
-        }
+        $this
+            ->shouldThrow(SessionNotFoundException::class)
+            ->during('protectFromRemovingProvinceWithinCountry', [$event])
+        ;
     }
 }

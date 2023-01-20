@@ -69,11 +69,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith($normalizer, $requestStack, '/api/v2');
 
-        if (method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $normalizer->supportsNormalization('data', 'format', ['context'])->shouldNotBeCalled();
 

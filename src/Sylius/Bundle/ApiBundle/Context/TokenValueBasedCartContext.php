@@ -50,12 +50,7 @@ final class TokenValueBasedCartContext implements CartContextInterface
 
     private function getMainRequest(): Request
     {
-        if (\method_exists($this->requestStack, 'getMainRequest')) {
-            $mainRequest = $this->requestStack->getMainRequest();
-        } else {
-            /** @phpstan-ignore-next-line */
-            $mainRequest = $this->requestStack->getMasterRequest();
-        }
+        $mainRequest = $this->requestStack->getMainRequest();
         if (null === $mainRequest) {
             throw new CartNotFoundException('There is no main request on request stack.');
         }

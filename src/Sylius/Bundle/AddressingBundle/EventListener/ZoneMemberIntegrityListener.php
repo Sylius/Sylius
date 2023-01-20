@@ -69,14 +69,6 @@ final class ZoneMemberIntegrityListener
 
     private function getSession(): SessionInterface
     {
-        // bc-layer for Symfony 4
-        if (!method_exists(RequestStack::class, 'getSession')) {
-            $request = $this->requestStack->getMasterRequest();
-            Assert::notNull($request, 'No main request available to get a session !');
-
-            return $request->getSession();
-        }
-
         return $this->requestStack->getSession();
     }
 }
