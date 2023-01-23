@@ -83,6 +83,8 @@ final class TaxonFilterSpec extends ObjectBehavior
         $queryBuilder->addOrderBy('productTaxon.position')->shouldNotBeCalled();
 
         $taxon->getRoot()->willReturn($taxonRoot);
+        $taxon->getLeft()->willReturn(null);
+        $taxon->getRight()->willReturn(null);
         $queryBuilder->setParameter('taxonRoot', $taxonRoot)->willReturn($queryBuilder);
 
         $this->filterProperty(
