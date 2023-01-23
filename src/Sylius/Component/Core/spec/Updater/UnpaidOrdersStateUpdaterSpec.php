@@ -39,7 +39,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
             '10 months',
             $logger,
             $objectManager,
-            100
+            100,
         );
     }
 
