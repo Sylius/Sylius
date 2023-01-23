@@ -18,13 +18,19 @@ Feature: Viewing products from specific taxon sorted by position
         And this product is in "Toys" taxon at 2nd position
         And this product is in "Soft Toys" taxon at 2nd position
 
-    @ui
-    Scenario: Seeing sorted product on list from a specific taxon
-        When I browse products from taxon "Toys"
+    @api @ui
+    Scenario: Seeing sorted product on list from a specific taxon code
+        When I browse products from product taxon code "Toys"
         Then I should see 3 products in the list
         And they should have order like "Old pug", "Young pug" and "Small pug"
 
-    @ui
+    @ui @api
+    Scenario: Seeing sorted product on list from a child taxon code
+        When I browse products from product taxon code "Soft Toys"
+        Then I should see 3 products in the list
+        And they should have order like "Small pug", "Young pug" and "Old pug"
+
+    @api @ui
     Scenario: Seeing sorted product on list from a child taxon
         When I browse products from taxon "Soft Toys"
         Then I should see 3 products in the list
