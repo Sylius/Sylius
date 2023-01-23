@@ -16,34 +16,34 @@ concurrency:
 jobs:
     static-checks:
         name: Static checks
-        uses: ./.github/workflows/ci_static-checks.yml
+        uses: ./.github/workflows/ci_static-checks.yaml
         with:
             type: minimal
     e2e-mariadb:
         name: End-to-end tests (MariaDB)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-mariadb.yml
+        uses: ./.github/workflows/ci_e2e-mariadb.yaml
         with:
             type: minimal
     e2e-mysql:
         name: End-to-end tests (MySQL)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-mysql.yml
+        uses: ./.github/workflows/ci_e2e-mysql.yaml
         with:
             type: minimal
     e2e-pgsql:
         name: End-to-end tests (PostgreSQL)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-pgsql.yml
+        uses: ./.github/workflows/ci_e2e-pgsql.yaml
         with:
             type: minimal
     e2e-customs:
         name: End-to-end tests (Custom)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-custom.yml
+        uses: ./.github/workflows/ci_e2e-custom.yaml
     packages:
         name: Packages
         needs: static-checks
-        uses: ./.github/workflows/ci_packages.yml
+        uses: ./.github/workflows/ci_packages.yaml
         with:
             type: minimal
