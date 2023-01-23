@@ -582,7 +582,7 @@ jobs:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
                     path: etc/build/
                     if-no-files-found: ignore
-
+                    
     test-application-with-frontend:
         runs-on: ubuntu-latest
 
