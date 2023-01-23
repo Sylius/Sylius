@@ -16,7 +16,6 @@ namespace Sylius\Bundle\LocaleBundle\Context;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
