@@ -2,19 +2,36 @@ name: End-to-End (PostgreSQL)
 
 on:
     workflow_dispatch: ~
-    workflow_call: ~
+    workflow_call:
+        inputs:
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
 
 jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   uses: actions/checkout@v3
+            -   name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-pgsql'
+
     behat-no-js:
+        needs: get-matrix
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
-            matrix:
-                php: ["8.0"]
-                symfony: ["^5.4", "^6.0"]
-                postgres: ["13.9", "14.6"]
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: test_cached
