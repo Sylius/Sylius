@@ -44,6 +44,8 @@ final class TaxonFilter extends AbstractContextAwareFilter
             return;
         }
 
+        $taxon = null;
+
         try {
             /** @var TaxonInterface $taxon */
             $taxon = $this->iriConverter->getItemFromIri($value);
@@ -58,13 +60,23 @@ final class TaxonFilter extends AbstractContextAwareFilter
             ->addSelect('productTaxon')
             ->innerJoin(sprintf('%s.productTaxons', $alias), 'productTaxon')
             ->innerJoin('productTaxon.taxon', 'taxon')
-            ->andWhere('taxon.left >= :taxonLeft')
-            ->andWhere('taxon.right <= :taxonRight')
             ->andWhere('taxon.root = :taxonRoot')
-            ->setParameter('taxonLeft', $taxon->getLeft())
-            ->setParameter('taxonRight', $taxon->getRight())
             ->setParameter('taxonRoot', $taxonRoot)
         ;
+
+        if (null !== $taxon && null !== $taxon->getLeft()) {
+            $queryBuilder
+                ->andWhere('taxon.left >= :taxonLeft')
+                ->setParameter('taxonLeft', $taxon->getLeft())
+            ;
+        }
+
+        if (null !== $taxon && null !== $taxon->getRight()) {
+            $queryBuilder
+                ->andWhere('taxon.right <= :taxonRight')
+                ->setParameter('taxonRight', $taxon->getRight())
+            ;
+        }
 
         if (null !== $taxonRoot && empty($context['filters']['order'])) {
             $queryBuilder->addOrderBy('productTaxon.position');
