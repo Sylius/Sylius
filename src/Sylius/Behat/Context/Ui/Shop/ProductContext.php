@@ -169,6 +169,7 @@ final class ProductContext implements Context
 
     /**
      * @When I browse products from taxon :taxon
+     * @When I browse products from product taxon code :taxon
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon): void
     {
