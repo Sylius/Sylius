@@ -35,11 +35,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_if_main_request_is_not_found(RequestStack $requestStack): void
     {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn(null);
-        } else {
-            $requestStack->getMasterRequest()->willReturn(null);
-        }
+        $requestStack->getMainRequest()->willReturn(null);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
     }
@@ -48,11 +44,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
         RequestStack $requestStack,
         Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $request->headers = new HeaderBag();
 
@@ -64,11 +56,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $request->headers = new HeaderBag(['ACCEPT_LANGUAGE' => 'en_US']);
 
@@ -82,11 +70,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
         LocaleProviderInterface $localeProvider,
         Request $request,
     ): void {
-        if (\method_exists(RequestStack::class, 'getMainRequest')) {
-            $requestStack->getMainRequest()->willReturn($request);
-        } else {
-            $requestStack->getMasterRequest()->willReturn($request);
-        }
+        $requestStack->getMainRequest()->willReturn($request);
 
         $request->headers = new HeaderBag(['Accept-Language' => 'pl_PL']);
 

@@ -109,6 +109,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I browse products from product taxon code :taxon
+     */
+    public function iBrowseProductsFromProductTaxonCode(TaxonInterface $taxon): void
+    {
+        $this->client->index(Resources::PRODUCTS);
+        $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
+        $this->client->filter();
+    }
+
+    /**
      * @When I browse products from non existing taxon
      */
     public function iBrowseProductsFromNonExistingTaxon(): void
