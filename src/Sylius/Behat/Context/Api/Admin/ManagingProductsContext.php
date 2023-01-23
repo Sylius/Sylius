@@ -564,7 +564,7 @@ final class ManagingProductsContext implements Context
 
     private function getProductTaxonId(ProductInterface $product): string
     {
-        $productResponse = $this->client->show(Resources::PRODUCTS, (string)$product->getCode());
+        $productResponse = $this->client->show(Resources::PRODUCTS, (string) $product->getCode());
         $productTaxonUrl = explode('/', $this->responseChecker->getValue($productResponse, 'productTaxons')[0]);
 
         return array_pop($productTaxonUrl);
