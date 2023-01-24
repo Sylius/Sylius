@@ -54,6 +54,8 @@ jobs:
                 symfony: ["^5.4", "^6.0"]
                 package: "${{ fromJson(needs.list.outputs.packages) }}"
                 swiftmailer: [false]
+                twig_linter: [false]
+                twig_templates_path: ["Resources/views"]
                 include:
                     -
                         php: "8.0"
@@ -75,6 +77,12 @@ jobs:
                         symfony: "^5.4"
                         package: "Bundle/AdminBundle"
                         swiftmailer: true
+                    -
+                        php: "8.1"
+                        symfony: "^6.0"
+                        package: "Bundle/UiBundle"
+                        twig_linter: true
+                        twig_templates_path: "Resources/views/Form/semantic_ui_layout.html.twig"                       
 
         steps:
             -
@@ -185,6 +193,27 @@ jobs:
                 working-directory: "src/Sylius/${{ matrix.package }}"
                 if: steps.phpunit_xml_dist_existence_check.outputs.files_exists == 'true' || steps.phpunit_xml_existence_check.outputs.files_exists == 'true'
                 run: vendor/bin/phpunit --colors=always
+                
+                
+            -
+                name: Check the existence of Test application
+                id: test_application_existence_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/Tests/Functional/console"
+                    
+            -
+                name: Check the existence of Twig templates
+                id: templates_existence_check
+                uses: andstor/file-existence-action@v1
+                with:
+                    files: "src/Sylius/${{ matrix.package }}/${{ matrix.twig_templates_path }}"       
+            
+            -
+                name: Lint Twig templates
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                if: steps.templates_existence_check.outputs.files_exists == 'true' && steps.test_application_existence_check.outputs.files_exists == 'true' && matrix.twig_linter == true
+                run: Tests/Functional/console lint:twig ${{ matrix.twig_templates_path }}
 
     notify-about-build-failure:
         runs-on: ubuntu-latest
