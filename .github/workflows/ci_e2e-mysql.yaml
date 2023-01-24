@@ -2,47 +2,37 @@ name: End-to-End (MySQL)
 
 on:
     workflow_dispatch: ~
-    workflow_call: ~
+    workflow_call:
+        inputs:
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
 
 jobs:
+    get-matrix:
+        runs-on: ubuntu-latest
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   uses: actions/checkout@v3
+            -
+                name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-mysql'
+
     behat-no-js:
+        needs: get-matrix
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
-            matrix:
-                php: [ "8.0", "8.1" ]
-                symfony: [ "^5.4", "^6.0" ]
-                api-platform: [ "^2.7" ]
-                mysql: [ "5.7", "8.0" ]
-                twig: [ "^3.3" ]
-                dbal: [ "^3.0" ]
-                include:
-                    -   php: "8.0"
-                        symfony: "^5.4"
-                        api-platform: "^2.7"
-                        twig: "^2.12"
-                        mysql: "5.7"
-                        dbal: "^3.0"
-                    -   php: "8.0"
-                        symfony: "^5.4"
-                        api-platform: "^2.7"
-                        twig: "^2.12"
-                        mysql: "5.7"
-                        dbal: "^2.7"
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-                        twig: "^3.3"
-                        mysql: "8.0"
-                        dbal: "^3.0"
-                    -   php: "8.1"
-                        symfony: "^6.0"
-                        api-platform: "~2.6.0"
-                        twig: "^3.3"
-                        mysql: "8.0"
-                        dbal: "^3.0"
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: test_cached
@@ -103,45 +93,13 @@ jobs:
                     if-no-files-found: ignore
 
     behat-ui-js:
+        needs: get-matrix
         runs-on: ubuntu-latest
         name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
-            matrix:
-                php: [ "8.0", "8.1" ]
-                symfony: [ "^5.4", "^6.0" ]
-                api-platform: [ "^2.7" ]
-                mysql: [ "5.7", "8.0" ]
-                twig: [ "3.x" ]
-                dbal: [ "3" ]
-                include:
-                    -   php: "8.0"
-                        symfony: "^5.4"
-                        api-platform: "^2.7"
-                        twig: "2.x"
-                        mysql: "5.7"
-                        dbal: "3"
-                    -   php: "8.0"
-                        symfony: "^5.4"
-                        api-platform: "^2.7"
-                        twig: "2.x"
-                        mysql: "5.7"
-                        dbal: "2"
-
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-                        twig: "3.x"
-                        mysql: "8.0"
-                        dbal: "3"
-
-                    -   php: "8.1"
-                        symfony: "^6.0"
-                        api-platform: "~2.6.0"
-                        twig: "3.x"
-                        mysql: "8.0"
-                        dbal: "3"
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
         
         env:
             APP_ENV: test_cached

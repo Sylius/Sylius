@@ -1,25 +1,41 @@
-name: End-to-End (MariaDB)
+name: End-to-End (PostgreSQL)
 
 on:
     workflow_dispatch: ~
-    workflow_call: ~
+    workflow_call:
+        inputs:
+            type:
+                description: "Type of the build"
+                required: true
+                type: string
 
 jobs:
-    behat-no-js:
+    get-matrix:
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, DBAL ${{ matrix.dbal }}"
+        name: "Get matrix"
+        outputs:
+            matrix: ${{ steps.matrix.outputs.prop }}
+        steps:
+            -   uses: actions/checkout@v3
+            -   name: "Get matrix"
+                id: matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-pgsql'
+
+    behat-no-js:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
-            matrix:
-                php: ["8.0"]
-                symfony: ["^5.4", "^6.0"]
-                mariadb: ["10.4.10"]
-                dbal: ["^2.7", "^3.0"]
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
 
         steps:
             -
@@ -28,17 +44,13 @@ jobs:
             -   name: Get Composer cache directory
                 id: composer-cache
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-                
+
             -   name: "Restore dependencies"
                 uses: actions/cache@v3
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
-                
-            -   name: Restrict packages
-                if: matrix.dbal == '^2.7'
-                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
 
             -   name: Build application
                 uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
@@ -47,8 +59,8 @@ jobs:
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
-                    database: "mariadb"
-                    database_version: ${{ matrix.mariadb }}
+                    database: "postgresql"
+                    database_version: ${{ matrix.postgres }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
 
@@ -65,6 +77,6 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}), DBAL ${{ matrix.dbal }}"
+                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }})"
                     path: etc/build/
                     if-no-files-found: ignore

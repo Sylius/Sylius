@@ -1,49 +1,52 @@
-name: Continuous Integration
+name: Continuous Integration (Full)
 
 on:
-    pull_request:
-        paths-ignore:
-            - "adr/**"
-            - "docs/**"
-            - "*.md"
     schedule:
         -
-            cron: "0 1 * * 6" # Run at 1am every Saturday
+            cron: "0 1 * * *" # Run every day at 1am
     workflow_dispatch: ~
-    push: ~
-    
+
 concurrency:
-    group: ci-${{ github.workflow }}-${{ github.ref }}
+    group: ci-${{ github.workflow }}-${{ github.ref }}-full
     cancel-in-progress: true
 
 jobs:
     static-checks:
         name: Static checks
-        uses: ./.github/workflows/ci_static-checks.yml
+        uses: ./.github/workflows/ci_static-checks.yaml
+        with:
+            type: full
     e2e-mariadb:
         name: End-to-end tests (MariaDB)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-mariadb.yml
+        uses: ./.github/workflows/ci_e2e-mariadb.yaml
+        with:
+            type: full
     e2e-mysql:
         name: End-to-end tests (MySQL)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-mysql.yml
+        uses: ./.github/workflows/ci_e2e-mysql.yaml
+        with:
+            type: full
     e2e-pgsql:
         name: End-to-end tests (PostgreSQL)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-pgsql.yml
+        uses: ./.github/workflows/ci_e2e-pgsql.yaml
+        with:
+            type: full
     e2e-customs:
         name: End-to-end tests (Custom)
         needs: static-checks
-        uses: ./.github/workflows/ci_e2e-custom.yml
+        uses: ./.github/workflows/ci_e2e-custom.yaml
     packages:
         name: Packages
         needs: static-checks
-        uses: ./.github/workflows/ci_packages.yml
-    notify-about-build-failure:
-        name: "Notify about build failure"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-customs]
-        if: failure() && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'release')
+        uses: ./.github/workflows/ci_packages.yaml
+        with:
+            type: full
+    notify-about-build-status:
+        name: "Notify about build status"
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-customs, packages]
         runs-on: ubuntu-latest
         timeout-minutes: 5
 
@@ -61,7 +64,7 @@ jobs:
                     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
                 if: env.SLACK_WEBHOOK_URL != null
                 with:
-                    channel: "#builds"
+                    channel: "#daily-build"
                     username: "GitHub Actions"
                     text: |
                         *<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }} #${{ github.run_number }} build on ${{ github.repository }} repository has failed for ${{ steps.process-data.outputs.branch }} branch.>*
@@ -70,7 +73,8 @@ jobs:
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
-                        ${{ needs.e2e-customs.result == 'success' && ':+1:' || ':x:' }} End-to-End (Customs)
+                        ${{ needs.e2e-customs.result == 'success' && ':+1:' || ':x:' }} End-to-End (Custom)
+                        ${{ needs.e2e-customs.packages == 'success' && ':+1:' || ':x:' }} Packages
 
                         _ _ _ _ _ _ _
                     color: "danger"
