@@ -1,3 +1,16 @@
+# UPGRADE FROM `v1.12.X` TO `v1.12.4`
+
+1. The default configuration of Symfony Messenger has changed,
+   it is now separated for each transport and can be set via environmental variables:
+
+    ```diff
+        - MESSENGER_TRANSPORT_DSN=doctrine://default
+        + SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN=doctrine://default
+        + SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN=doctrine://default?queue_name=main_failed
+        + SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN=doctrine://default?queue_name=catalog_promotion_removal
+        + SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN=doctrine://default?queue_name=catalog_promotion_removal_failed
+    ```
+
 # UPGRADE FROM `v1.12.X` TO `v1.12.2`
 
 1. All entities and their relationships have a default order by identifier if no order is specified. You can disable

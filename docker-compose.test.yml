@@ -22,7 +22,10 @@ services:
             APP_DEBUG: 0
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
-            MESSENGER_TRANSPORT_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN: "sync://"
+            SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN: "sync://"
         volumes:
             - ./:/app:delegated
             - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
