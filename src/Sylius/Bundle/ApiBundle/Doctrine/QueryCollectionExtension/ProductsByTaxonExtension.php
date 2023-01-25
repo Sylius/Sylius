@@ -64,13 +64,13 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
                 sprintf('%s.productTaxons', $rootAlias),
                 $productTaxonAliasName,
                 'WITH',
-                sprintf('%s.product = %s.id', $productTaxonAliasName, $rootAlias)
+                sprintf('%s.product = %s.id', $productTaxonAliasName, $rootAlias),
             )
             ->leftJoin(
                 sprintf('%s.taxon', $productTaxonAliasName),
                 $taxonAliasName,
                 'WITH',
-                sprintf('%s.code = :%s', $taxonAliasName, $taxonCodeParameterName)
+                sprintf('%s.code = :%s', $taxonAliasName, $taxonCodeParameterName),
             )
             ->orderBy(sprintf('%s.position', $productTaxonAliasName), 'ASC')
             ->setParameter($taxonCodeParameterName, $taxonCode)

@@ -231,5 +231,4 @@ final class ActionBasedDiscountApplicatorSpec extends ObjectBehavior
 
         $this->applyDiscountOnChannelPricing($catalogPromotion, $action, $channelPricing);
     }
-
 }

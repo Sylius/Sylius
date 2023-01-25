@@ -89,7 +89,7 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         $queryNameGenerator->generateJoinAlias('taxon')->shouldBeCalled()->willReturn('taxon');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
-        $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);;
+        $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', 'taxon.code = :taxonCode')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);
