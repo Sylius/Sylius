@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class ZoneDenormalizerSpec extends ObjectBehavior
+final class ZoneDenormalizerSpec extends ObjectBehavior
 {
     function let(IriConverterInterface $iriConverter): void
     {

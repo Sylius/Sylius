@@ -19,7 +19,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class ZoneDeletionCheckerSpec extends ObjectBehavior
+final class ZoneDeletionCheckerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $zoneMemberRepository): void
     {

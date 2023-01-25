@@ -54,6 +54,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.12-dev"
+        },
+        "symfony": {
+            "require": "^5.4"
         }
     },
     "autoload": {
