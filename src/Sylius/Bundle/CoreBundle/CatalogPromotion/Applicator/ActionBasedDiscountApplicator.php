@@ -40,6 +40,10 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
             }
         }
 
+        if ($channelPricing->getAppliedPromotions()->isEmpty() && $channelPricing->getOriginalPrice() !== null) {
+            $channelPricing->setPrice($channelPricing->getOriginalPrice());
+        }
+
         try {
             $price = $this->priceCalculator->calculate($channelPricing, $action);
         } catch (ActionBasedPriceCalculatorNotFoundException) {
