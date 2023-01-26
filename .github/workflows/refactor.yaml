@@ -50,7 +50,7 @@ jobs:
                     title: '[CS][DX] Refactor'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [refactor.yml](/Sylius/Sylius/blob/1.12/.github/workflows/refactor.yml).
+                        For more details see [refactor.yaml](/Sylius/Sylius/blob/1.12/.github/workflows/refactor.yaml).
                     labels: |
                         DX
                         Enhancement
