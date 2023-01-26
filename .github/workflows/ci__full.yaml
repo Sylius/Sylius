@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/workflows/ci_e2e-pgsql.yaml
         with:
             type: full
-    e2e-customs:
+    e2e-custom:
         name: End-to-end tests (Custom)
         needs: static-checks
         uses: ./.github/workflows/ci_e2e-custom.yaml
@@ -74,8 +74,8 @@ jobs:
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
-                        ${{ needs.e2e-customs.result == 'success' && ':+1:' || ':x:' }} End-to-End (Custom)
-                        ${{ needs.e2e-customs.packages == 'success' && ':+1:' || ':x:' }} Packages
+                        ${{ needs.e2e-custom.result == 'success' && ':+1:' || ':x:' }} End-to-End (Custom)
+                        ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
 
                         _ _ _ _ _ _ _
                     color: "danger"
