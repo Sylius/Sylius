@@ -56,6 +56,7 @@ final class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->scalarNode('templates')->defaultValue('SyliusUserBundle:User')->end()
                                     ->scalarNode('encoder')->defaultNull()->end()
+                                    ->scalarNode('login_tracking_interval')->defaultNull()->end()
                                     ->variableNode('options')->end()
                                     ->arrayNode('resetting')
                                         ->addDefaultsIfNotSet()
