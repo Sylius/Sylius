@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'محتوا'
-            subject: 'درخواست پشتیبانی'
         order_confirmation:
             subject: 'تایید سفارش'
         password_reset:

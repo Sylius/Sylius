@@ -3,9 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Tartalom'
-            subject: 'Kapcsolatfelvételi kérelem'
         order_confirmation:
             subject: 'Rendelés visszaigazolás'
             view_order_or_change_payment_method: 'Megrendelés megtekintése vagy fizetési mód változtatása'

@@ -81,7 +81,7 @@ class RoboFile extends Tasks
         }
 
         if ('Bundle/ApiBundle' === $package) {
-            $task->exec('test/bin/console doctrine:schema:update --force');
+            $task->exec('Tests/Application/bin/console doctrine:schema:update --force -e test');
         }
 
         if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {

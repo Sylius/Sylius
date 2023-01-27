@@ -3,8 +3,6 @@
 
 sylius:
     email:
-        contact_request:
-            content: 'Sadržaj'
         password_reset:
             hello: 'Zdravo'
         verification_token:
