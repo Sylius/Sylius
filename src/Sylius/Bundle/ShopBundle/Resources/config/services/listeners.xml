@@ -64,6 +64,7 @@
             <argument type="service" id="sylius.manager.order" />
             <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="check" />
         </service>
+        <service id="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface" alias="sylius.listener.order_integrity_checker" />
 
         <service id="sylius.order_locale_assigner" class="Sylius\Bundle\ShopBundle\EventListener\OrderLocaleAssigner">
             <argument type="service" id="sylius.context.locale" />
