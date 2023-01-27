@@ -28,7 +28,7 @@ final class AuthenticationSuccessListenerSpec extends ObjectBehavior
         $this->beConstructedWith($iriConverter);
     }
 
-    function it_adds_customers_id_to_shop_authentication_token_response(
+    function it_adds_customers_to_shop_authentication_token_response(
         IriConverterInterface $iriConverter,
         ShopUserInterface $shopUser,
         CustomerInterface $customer,
