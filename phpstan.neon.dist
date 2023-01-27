@@ -15,6 +15,7 @@ parameters:
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
+        - '**/Bundle/*/Tests/Application/**/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'
         - '**/Bundle/*/Tests/Functional/var/**.php'
 

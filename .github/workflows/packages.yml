@@ -111,7 +111,7 @@ jobs:
             -
                 name: Setup Database (for ApiBundle only)
                 working-directory: "src/Sylius/${{ matrix.package }}"
-                run: test/bin/console doctrine:schema:update --force -e test
+                run: Tests/Application/bin/console doctrine:schema:update --force -e test
                 if: always() && matrix.package == 'Bundle/ApiBundle'
 
             -
