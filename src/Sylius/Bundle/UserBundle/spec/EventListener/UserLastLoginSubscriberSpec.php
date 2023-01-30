@@ -137,7 +137,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         TokenInterface $token,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $token->getUser()->willReturn($user);
 
@@ -156,7 +156,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         UserEvent $event,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $user->getLastLogin()->willReturn(null);
 
@@ -176,7 +176,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         TokenInterface $token,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $token->getUser()->willReturn($user);
 
@@ -196,7 +196,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         UserEvent $event,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $lastLogin = (new \DateTime())->modify('-6 hours');
         $user->getLastLogin()->willReturn($lastLogin);
@@ -217,7 +217,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         TokenInterface $token,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $token->getUser()->willReturn($user);
 
@@ -237,7 +237,7 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         UserEvent $event,
         UserInterface $user,
     ): void {
-        $this->beConstructedWith($userManager, UserInterface::class, new \DateInterval('P1D'));
+        $this->beConstructedWith($userManager, UserInterface::class, 'P1D');
 
         $lastLogin = (new \DateTime())->modify('-3 days');
         $user->getLastLogin()->willReturn($lastLogin);

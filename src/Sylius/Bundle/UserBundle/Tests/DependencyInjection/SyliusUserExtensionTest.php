@@ -118,7 +118,7 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
         $adminLastLoginSubscriber = $this->container->getDefinition('sylius.listener.admin_user_last_login');
         Assert::assertSame(UserLastLoginSubscriber::class, $adminLastLoginSubscriber->getClass());
         Assert::assertSame('AdminUserClass', $adminLastLoginSubscriber->getArgument(1));
-        Assert::assertEquals(new \DateInterval('P1D'), $adminLastLoginSubscriber->getArgument(2));
+        Assert::assertEquals('P1D', $adminLastLoginSubscriber->getArgument(2));
 
         $customLastLoginSubscriber = $this->container->getDefinition('sylius.listener.custom_user_last_login');
         Assert::assertSame(UserLastLoginSubscriber::class, $customLastLoginSubscriber->getClass());
