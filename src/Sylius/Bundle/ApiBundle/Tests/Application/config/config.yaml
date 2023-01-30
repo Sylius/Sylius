@@ -8,7 +8,7 @@ parameters:
     locale: en_US
     database_driver: pdo_sqlite
     database_path: "%kernel.project_dir%/var/db.sql"
-    kernel.api_bundle_path: '%kernel.project_dir%/../'
+    kernel.api_bundle_path: '%kernel.project_dir%/../../'
 
 api_platform:
     enable_swagger_ui: false
