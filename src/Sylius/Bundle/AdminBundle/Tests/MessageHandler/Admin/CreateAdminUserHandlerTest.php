@@ -96,7 +96,7 @@ final class CreateAdminUserHandlerTest extends TestCase
         $createAdminUserHandler = $this->createAdminUserHandler();
 
         self::expectException(CreateAdminUserFailedException::class);
-        self::expectExceptionMessage('first_violation_error' . PHP_EOL . 'second_violation_error');
+        self::expectExceptionMessage('first_violation_error' . \PHP_EOL . 'second_violation_error');
 
         $createAdminUserHandler($this->createAdminUserMessage());
     }

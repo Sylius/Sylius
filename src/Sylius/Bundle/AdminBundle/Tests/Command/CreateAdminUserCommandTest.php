@@ -54,7 +54,7 @@ final class CreateAdminUserCommandTest extends TestCase
         $this->messageBus = $this->createMock(MessageBusInterface::class);
 
         $this->command = new CommandTester(
-            new CreateAdminUserCommand($this->messageBus, self::LOCALE_CODE)
+            new CreateAdminUserCommand($this->messageBus, self::LOCALE_CODE),
         );
     }
 
@@ -78,7 +78,7 @@ final class CreateAdminUserCommandTest extends TestCase
                 'first_email_entry' => 'invalid-email',
                 'second_email_entry' => 'still-invalid-email',
             ],
-            $this->getDefaultCommandInputsSetup()
+            $this->getDefaultCommandInputsSetup(),
         );
 
         $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
@@ -120,7 +120,7 @@ final class CreateAdminUserCommandTest extends TestCase
             'password' => self::PASSWORD,
             'locale_code' => self::LOCALE_CODE,
             'admin_user_enabled' => self::YES,
-            'creation_confirmation' => self::YES
+            'creation_confirmation' => self::YES,
         ];
 
         $this->assertSuccessfulCommandExecution($adminUserData, $commandInputs);
@@ -160,7 +160,7 @@ final class CreateAdminUserCommandTest extends TestCase
             ->with($message)
             ->willThrowException(new HandlerFailedException(
                 new Envelope($message),
-                [new CreateAdminUserFailedException('Some validation error')]
+                [new CreateAdminUserFailedException('Some validation error')],
             ))
         ;
 
