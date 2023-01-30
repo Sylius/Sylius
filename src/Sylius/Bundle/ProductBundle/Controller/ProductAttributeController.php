@@ -110,7 +110,7 @@ class ProductAttributeController extends ResourceController
                 $attributeForm,
                 null,
                 [
-                    'label' => $attribute->getName(),
+                    'label' => $attribute->getTranslation($localeCode)->getName(),
                     'configuration' => $attribute->getConfiguration(),
                     'locale_code' => $localeCode,
                 ],
