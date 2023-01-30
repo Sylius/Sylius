@@ -71,9 +71,10 @@ final class CreateAdminUserCommand extends Command
         try {
             $this->handle(new CreateAdminUser(...array_values($adminUserData)));
         } catch (HandlerFailedException $exception) {
-            $this->io->error($exception
+            $this->io->error(
+                $exception
                 ->getNestedExceptionOfClass(CreateAdminUserFailedException::class)[0]
-                ->getMessage()
+                ->getMessage(),
             );
 
             return Command::FAILURE;
@@ -90,12 +91,12 @@ final class CreateAdminUserCommand extends Command
 
         $adminUserData['email'] = $this->io->askQuestion($this->createEmailQuestion());
         $adminUserData['username'] = $this->io->askQuestion(
-            $this->createQuestionWithNonBlankValidator('Username')
+            $this->createQuestionWithNonBlankValidator('Username'),
         );
         $adminUserData['first_name'] = $this->io->ask('First name');
         $adminUserData['last_name'] = $this->io->ask('Last name');
         $adminUserData['plain_password'] = $this->io->askQuestion(
-            $this->createQuestionWithNonBlankValidator('Password', true)
+            $this->createQuestionWithNonBlankValidator('Password', true),
         );
 
         $localeCodes = Locales::getNames();

@@ -108,7 +108,7 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
                         'login_tracking_interval' => 'P1D',
                         'classes' => [
                             'model' => 'AdminUserClass',
-                        ]
+                        ],
                     ],
                 ],
                 'custom' => [],
