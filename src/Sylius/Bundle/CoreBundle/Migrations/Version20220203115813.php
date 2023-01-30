@@ -22,9 +22,13 @@ use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 final class Version20220203115813 extends AbstractMigration
 {
     private const OLD_TRANSPORT_DSN = 'MESSENGER_TRANSPORT_DSN';
+
     private const MAIN_DSN = 'SYLIUS_MESSENGER_TRANSPORT_MAIN_DSN';
+
     private const MAIN_FAILED_DSN = 'SYLIUS_MESSENGER_TRANSPORT_MAIN_FAILED_DSN';
+
     private const CATALOG_PROMOTION_REMOVAL_DSN = 'SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN';
+
     private const CATALOG_PROMOTION_REMOVAL_FAILED_DSN = 'SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN';
 
     public function getDescription(): string
