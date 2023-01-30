@@ -29,6 +29,7 @@ import './sylius-notification';
 import './sylius-product-images-preview';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
+import customCollapse from './sylius-custom-collapse';
 
 import StatisticsComponent from './sylius-statistics';
 import SyliusTaxonomyTree from './sylius-taxon-tree';
@@ -144,6 +145,8 @@ $(document).ready(() => {
   const dashboardStatistics = new StatisticsComponent(document.querySelector('.stats'));
 
   $('.sylius-admin-menu').searchable('.sylius-admin-menu-search-input');
+
+  customCollapse('#sidebar .item .header', '#sidebar .item', 'open', false);
 });
 
 window.$ = $;
