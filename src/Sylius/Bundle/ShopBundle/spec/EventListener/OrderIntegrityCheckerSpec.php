@@ -19,6 +19,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,6 +33,11 @@ final class OrderIntegrityCheckerSpec extends ObjectBehavior
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $this->beConstructedWith($router, $orderManager, $orderPromotionsIntegrityChecker);
+    }
+
+    function it_implements_order_integrity_checker_interface(): void
+    {
+        $this->shouldImplement(OrderIntegrityCheckerInterface::class);
     }
 
     function it_does_nothing_if_given_order_has_valid_promotion_applied(
