@@ -74,14 +74,12 @@ class RoboFile extends Tasks
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
-            mkdir(sprintf('%s/test/public/build/admin', $packagePath), 0777, true);
-            mkdir(sprintf('%s/test/public/build/shop', $packagePath), 0777, true);
-            file_put_contents(sprintf('%s/test/public/build/admin/manifest.json', $packagePath), '{}');
-            file_put_contents(sprintf('%s/test/public/build/shop/manifest.json', $packagePath), '{}');
+            $this->createTestAssets(sprintf('%s/Tests/Application', $packagePath));
+            $this->createTestAssets(sprintf('%s/test', $packagePath)); // Remove after all test apps have been moved
         }
 
         if ('Bundle/ApiBundle' === $package) {
-            $task->exec('Tests/Application/bin/console doctrine:schema:update --force -e test');
+            $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
         }
 
         if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {
@@ -95,6 +93,14 @@ class RoboFile extends Tasks
         }
 
         return $task->run();
+    }
+
+    private function createTestAssets(string $testAppDirectory): void
+    {
+        mkdir(sprintf('%s/public/build/admin', $testAppDirectory), 0777, true);
+        mkdir(sprintf('%s/public/build/shop', $testAppDirectory), 0777, true);
+        file_put_contents(sprintf('%s/public/build/admin/manifest.json', $testAppDirectory), '{}');
+        file_put_contents(sprintf('%s/public/build/shop/manifest.json', $testAppDirectory), '{}');
     }
 
     private function startGroup(string $groupName): void
