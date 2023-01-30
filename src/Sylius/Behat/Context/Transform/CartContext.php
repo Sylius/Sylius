@@ -15,11 +15,15 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-final class CartTokenContext implements Context
+final class CartContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private SharedStorageInterface $sharedStorage,
+    ) {
     }
 
     /**
@@ -44,5 +48,18 @@ final class CartTokenContext implements Context
         }
 
         return $this->provideCartToken();
+    }
+
+    /**
+     * @Transform /^(the customer's cart)$/
+     */
+    public function provideCart(): ?OrderInterface
+    {
+        $cartToken = $this->provideCartToken();
+        if (null === $cartToken) {
+            return null;
+        }
+
+        return $this->orderRepository->findOneBy(['tokenValue' => $cartToken]);
     }
 }
