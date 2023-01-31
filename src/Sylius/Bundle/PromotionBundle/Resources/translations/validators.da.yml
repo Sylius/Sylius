@@ -31,6 +31,8 @@ sylius:
             min: Mængden af kuponer skal være mindst {{ limit }}.
             not_blank: Angiv mængden af kuponer til at generere.
         code_length:
+            min: Kuponkode skal være mindst {{ limit }} tegn lang.
+            max: Kuponkode kan ikke være længere end {{ limit }} tegn.
             not_blank: Angiv venligst kuponkode længde.
         usage_limit:
             min: Brugsgrænse for genererede kuponer skal mindst {{ limit }}.

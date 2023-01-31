@@ -31,6 +31,8 @@ sylius:
             min: Broj kupona za generirati mora biti najmanje {{ limit }}.
             not_blank: Molimo unesite broj kupona za generiranje.
         code_length:
+            min: Kod kupona mora imati najmanje {{ limit }} znakova.
+            max: Kod kupona ne smije biti duži od {{ limit }} znakova.
             not_blank: Molimo unesite duljinu koda kupona.
         usage_limit:
             min: Vrijeme valjanosti generiranih kupona mora biti najmanje {{ limit }}.

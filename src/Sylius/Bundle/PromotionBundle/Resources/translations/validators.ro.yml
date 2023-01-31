@@ -34,6 +34,8 @@ sylius:
             min: Pot fi generate minim {{ limit }} cupoane.
             not_blank: Introdu numărul de cupoane ce trebuie generate.
         code_length:
+            min: Codul cuponului trebuie să conțină cel puţin {{ limit }} caractere.
+            max: Codul cuponului nu poate depăși {{ limit }} de caractere.
             not_blank: Vă rugăm să introduceţi lungimea codului promoţional.
         possible_generation_amount: Valoare gresita pentru lungime sau valoare cod cupoane. Nu putem genera cupoane unice in valoare de %expectedAmount% avand lungime cod cupon %codeLength%. Putem genera cupoane de maxim %possibleAmount%.
         usage_limit:
