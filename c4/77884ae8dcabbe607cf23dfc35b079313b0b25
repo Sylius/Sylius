@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by diimpp at 2022-12-13T18:15:31Z
+
+@Zales0123 Hi, can we mention removal of translation min,max messages as BC break instead? Or is it a part of hard BC policy?
+
+My point is why leave dead <s>code</s>message, if it's unused by the app since `1.6.0`. (symfony/*: ^3.4|^4.3)
+While it's possible, that somebody made use of `Coupon code must be at least {{ limit }} characters long.` in their custom promotion validation, it doesn't look likely.
+
+But I will update PR to keep them, if it's required.
+
+P.S. In related https://github.com/Sylius/Sylius/pull/14584 I've changed `sylius.review.rating.range` to `sylius.review.rating.not_in_range` -- Do I keep old trans key as well?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-01-26T12:09:33Z
+
+Hi @diimpp!
+Thanks for your contribution. We decided we should leave the message keys. We don't use them, maybe you aren't either. But it doesn't change in some projects they might be used across the system, and we shouldn't break these places. Thanks in advance!
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-01-31T15:34:57Z
+
+Thank you, Dmitri! :tada:
