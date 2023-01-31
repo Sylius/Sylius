@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle;
 
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\InjectContainerIntoControllersPass;
+use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\PayumStoragePaymentAliasPass;
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\RegisterGatewayConfigTypePass;
 use Sylius\Bundle\PayumBundle\DependencyInjection\Compiler\UseTweakedDoctrineStoragePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -36,5 +37,6 @@ final class SyliusPayumBundle extends AbstractResourceBundle
         $container->addCompilerPass(new InjectContainerIntoControllersPass());
         $container->addCompilerPass(new RegisterGatewayConfigTypePass());
         $container->addCompilerPass(new UseTweakedDoctrineStoragePass());
+        $container->addCompilerPass(new PayumStoragePaymentAliasPass());
     }
 }
