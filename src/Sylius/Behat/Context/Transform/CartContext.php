@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
@@ -51,15 +52,18 @@ final class CartContext implements Context
     }
 
     /**
-     * @Transform /^(the customer's cart)$/
+     * @Transform /^(customer's latest cart)$/
      */
-    public function provideCart(): ?OrderInterface
+    public function provideLatestCart(): ?OrderInterface
     {
-        $cartToken = $this->provideCartToken();
-        if (null === $cartToken) {
-            return null;
-        }
+        $carts = $this->orderRepository->findBy(
+            ['state' => OrderInterface::STATE_CART],
+            ['createdAt' => 'DESC'],
+            1,
+        );
 
-        return $this->orderRepository->findOneBy(['tokenValue' => $cartToken]);
+        Assert::count($carts, 1);
+
+        return $carts[0];
     }
 }
