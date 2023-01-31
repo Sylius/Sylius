@@ -47,7 +47,7 @@ jobs:
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-customs, packages]
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-custom, packages]
         runs-on: ubuntu-latest
         timeout-minutes: 5
 
