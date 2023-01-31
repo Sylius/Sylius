@@ -74,7 +74,16 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
 
+        if ('' === $value) {
+            return;
+        }
+
         $this->getElement('attribute_value', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->setValue($value);
+    }
+
+    public function selectAttributeValue(string $attributeName, string $value, string $localeCode): void
+    {
+        $this->getElement('attribute_value_select', ['%attributeName%' => $attributeName, '%localeCode%' => $localeCode])->selectOption($value);
     }
 
     public function addNonTranslatableAttribute(string $attributeName, string $value): void
@@ -253,6 +262,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute' => '.attribute',
             'attribute_delete_button' => '#attributesContainer .attributes-group .attributes-header:contains("%attributeName%") button',
             'attribute_value' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] input',
+            'attribute_value_select' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% %localeCode%"] select',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'channel_checkbox' => '.checkbox:contains("%channelName%") input',
             'code' => '#sylius_product_code',

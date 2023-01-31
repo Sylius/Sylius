@@ -158,6 +158,45 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @Given /^(this product attribute)'s "([^"]+)" value is labeled "([^"]+)" in the ("[^"]+" locale)$/
+     */
+    public function thisProductAttributeValueIsLabeledInTheLocale(
+        ProductAttributeInterface $attribute,
+        string $value,
+        string $label,
+        string $localeCode,
+    ): void {
+        $uuid = $this->getSelectAttributeValueUuidByChoiceValue($attribute, $value);
+
+        $configuration = $attribute->getConfiguration();
+        $choices[$uuid] = $configuration['choices'][$uuid] + [$localeCode => $label];
+        $configuration['choices'] = $choices;
+
+        $attribute->setConfiguration($configuration);
+    }
+
+    private function getSelectAttributeValueUuidByChoiceValue(
+        ProductAttributeInterface $attribute,
+        string $value,
+    ): string {
+        $choices = $attribute->getConfiguration()['choices'] ?? [];
+
+        foreach ($choices as $uuid => $choice) {
+            foreach ($choice as $choiceValue) {
+                if ($value === $choiceValue) {
+                    return $uuid;
+                }
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'Value "%s" not found in attribute %s',
+            $value,
+            $attribute->getName(),
+        ));
+    }
+
+    /**
      * @Given /^(this product attribute) has set min value as (\d+) and max value as (\d+)$/
      */
     public function thisAttributeHasSetMinValueAsAndMaxValueAs(ProductAttributeInterface $attribute, $min, $max)
