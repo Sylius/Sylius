@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\Order\HistoryPageInterface;
 use Sylius\Behat\Page\Admin\Order\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
+use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -36,6 +37,7 @@ final class ManagingOrdersContext implements Context
         private ShowPageInterface $showPage,
         private UpdatePageInterface $updatePage,
         private HistoryPageInterface $historyPage,
+        private ErrorPageInterface $errorPage,
         private NotificationCheckerInterface $notificationChecker,
         private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
@@ -65,6 +67,14 @@ final class ManagingOrdersContext implements Context
     public function iSeeTheOrder(OrderInterface $order)
     {
         $this->showPage->open(['id' => $order->getId()]);
+    }
+
+    /**
+     * @When /^I try to view the summary of the (customer's latest cart)$/
+     */
+    public function iTryToViewTheSummaryOfTheCustomersLatestCart(OrderInterface $cart): void
+    {
+        $this->showPage->tryToOpen(['id' => $cart->getId()]);
     }
 
     /**
@@ -933,6 +943,14 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeTheShippingDateAs(string $dateTime): void
     {
         Assert::same($this->showPage->getShippedAtDate(), $dateTime);
+    }
+
+    /**
+     * @Then I should be informed that the order does not exist
+     */
+    public function iShouldBeInformedThatTheOrderDoesNotExist(): void
+    {
+        Assert::same($this->errorPage->getCode(), 404);
     }
 
     /**
