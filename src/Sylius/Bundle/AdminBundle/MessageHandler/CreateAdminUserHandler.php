@@ -30,7 +30,7 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
         private FactoryInterface $adminUserFactory,
         private CanonicalizerInterface $canonicalizer,
         private ValidatorInterface $validator,
-        private array $validationGroups
+        private array $validationGroups,
     ) {
     }
 
@@ -43,7 +43,7 @@ final class CreateAdminUserHandler implements MessageHandlerInterface
         if ($constraintViolationList->count()) {
             $violationMessages = $this->getViolationMessages($constraintViolationList);
 
-            throw new CreateAdminUserFailedException(implode(PHP_EOL, [...$violationMessages]));
+            throw new CreateAdminUserFailedException(implode(\PHP_EOL, [...$violationMessages]));
         }
 
         $this->adminUserRepository->add($adminUser);
