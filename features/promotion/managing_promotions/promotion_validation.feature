@@ -63,7 +63,7 @@ Feature: Promotion validation
         And promotion with name "Christmas sale" should not be added
 
     @ui @javascript
-    Scenario: Trying to add a new promotion without specifying a item percentage discount
+    Scenario: Trying to add a new promotion without specifying an item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
         And I name it "Christmas sale"

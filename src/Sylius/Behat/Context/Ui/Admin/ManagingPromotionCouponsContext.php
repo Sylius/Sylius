@@ -362,7 +362,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then I should be notified that generate code length is out of range
      */
-    public function iShouldBeNotifiedThatCodeLengthIsOutOfRange()
+    public function iShouldBeNotifiedThatCodeLengthIsOutOfRange(): void
     {
         Assert::true($this->generatePage->checkCodeLengthValidation('Coupon code length must be between 1 and 40.'));
     }
