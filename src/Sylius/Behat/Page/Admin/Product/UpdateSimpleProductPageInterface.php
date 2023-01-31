@@ -37,6 +37,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function getAttributeValue(string $attributeName, string $localeCode): string;
 
+    public function getAttributeSelectText(string $attributeName, string $localeCode): string;
+
     public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 
     public function getNumberOfAttributes(): int;
