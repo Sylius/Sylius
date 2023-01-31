@@ -513,6 +513,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that a percentage discount value must be between 0% and 100%
      * @Then I should be notified that a percentage discount value must be at least 0%
      * @Then I should be notified that the maximum value of a percentage discount is 100%
      */
