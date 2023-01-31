@@ -23,11 +23,14 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 final class UserLastLoginSubscriber implements EventSubscriberInterface
 {
+    private ?\DateInterval $trackInterval;
+
     public function __construct(
         private ObjectManager $userManager,
         private string $userClass,
-        private ?\DateInterval $trackInterval,
+        ?string $trackInterval,
     ) {
+        $this->trackInterval = null === $trackInterval ? null : new \DateInterval($trackInterval);
     }
 
     public static function getSubscribedEvents(): array

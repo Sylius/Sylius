@@ -15,6 +15,7 @@ Configuration reference
 
     sylius_user:
         driver: doctrine/orm
+        encoder: argon2i
         resources:
             admin:
                 user:
@@ -26,6 +27,8 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
+                    encoder: null
+                    login_tracking_interval: null
                     resetting:
                         token:
                             ttl: P1D
@@ -48,6 +51,8 @@ Configuration reference
                         controller: Sylius\Bundle\UserBundle\Controller\UserController
                         factory: Sylius\Component\Resource\Factory\Factory
                     templates: 'SyliusUserBundle:User'
+                    encoder: null
+                    login_tracking_interval: null
                     resetting:
                         token:
                             ttl: P1D
@@ -69,6 +74,8 @@ Configuration reference
                         factory: Sylius\Component\Resource\Factory\Factory
                         form: Sylius\Bundle\UserBundle\Form\Type\UserType
                     templates: 'SyliusUserBundle:User'
+                    encoder: false
+                    login_tracking_interval: null
                     resetting:
                         token:
                             ttl: P1D

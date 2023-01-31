@@ -202,10 +202,13 @@ final class SyliusUserExtension extends AbstractResourceExtension
     {
         $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
         $lastLoginListenerServiceId = sprintf('sylius.listener.%s_user_last_login', $userType);
-        $lastLoginTrackingInterval = isset($config['login_tracking_interval']) ? new \DateInterval($config['login_tracking_interval']) : null;
 
         $lastLoginListenerDefinition = new Definition(UserLastLoginSubscriber::class);
-        $lastLoginListenerDefinition->setArguments([new Reference($managerServiceId), $userClass, $lastLoginTrackingInterval]);
+        $lastLoginListenerDefinition->setArguments([
+            new Reference($managerServiceId),
+            $userClass,
+            $config['login_tracking_interval'] ?? null,
+        ]);
         $lastLoginListenerDefinition->addTag('kernel.event_subscriber');
         $container->setDefinition($lastLoginListenerServiceId, $lastLoginListenerDefinition);
     }
