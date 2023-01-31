@@ -54,7 +54,7 @@ final class CartContext implements Context
     /**
      * @Transform /^(customer's latest cart)$/
      */
-    public function provideLatestCart(): ?OrderInterface
+    public function provideLatestCart(): OrderInterface
     {
         $carts = $this->orderRepository->findBy(
             ['state' => OrderInterface::STATE_CART],

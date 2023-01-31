@@ -72,7 +72,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When /^I try to view the summary of the (customer's latest cart)$/
      */
-    public function iTryToViewTheSummaryOfTheCustomersLatestCart(?OrderInterface $cart): void
+    public function iTryToViewTheSummaryOfTheCustomersLatestCart(OrderInterface $cart): void
     {
         $this->showPage->tryToOpen(['id' => $cart->getId()]);
     }
