@@ -1,0 +1,131 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-18T18:23:37Z
+
+Is it really necessary to hide them? The links can be generated with `/`.
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-18T18:26:43Z
+
+What's the point in visual part of the feature, if it's not functional? There will be bug report, that button doesn't work for sure :)
+
+Similar feature at product page was done in the same way
+https://github.com/Sylius/Sylius/blob/e8e0dd2efed74cb955c55ead5d3e098591364cbc/src/Sylius/Bundle/AdminBundle/Resources/views/Product/_showInShopButton.html.twig#L3
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-18T18:29:52Z
+
+Ah, understood your point with `<a href="/">`, so url will work, but there is nothing at this url? and for example in my projects front-end and admin are at different domain names, this will not work.
+
+I would prefer to hide it cleanly.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-18T20:02:11Z
+
+You still have the right domain name in the channel configuration, don't you?
+So this should work: `{{ sylius_channel_url('/', channel) }}`
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-22T17:07:50Z
+
+@CoderMaggie Hi, please give a direction for this feature
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-22T19:19:19Z
+
+@diimpp can you ask the users of your project if navigating to the channel domain would be useful?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-22T19:43:02Z
+
+> @diimpp can you ask the users of your project if navigating to the channel domain would be useful?
+
+I already know the answer for single channel case -- it's not, I've even implemented "Open product in front-end" with custom routing to project's domain, but they still go to a front-end's homepage and search product by `code`. Repeatedly for years. :)
+If we're speaking about catalog managers, then admin panel is just a necessary evil for them and they think and work around a front-end.
+
+But if somebody has a multi-channel as multi-website for real, then at least for back-end developers it would be easy to open website by clicking at admin panel. I still can't imagine, that content managers will go to admin panel first.
+
+My only concern with suggested approach is that we're doing some assumptions about a front-end, while it's no longer sylius problem.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-22T20:37:35Z
+
+@diimpp Yes, we're making an assumption and I think it will hold for most uses cases and the others will heavily customize everything anyway. I think it's a safe choice. We will probably never get any real feedback about it because, as you said yourself, most admin users don't really care.
+
+---------------------------------------------------------------------------
+
+by CoderMaggie at 2022-11-23T15:30:32Z
+
+If there's a way to make the link work regardless of the ShopBundle's presence then I'd go for it. Would @vvasiloi's suggestion fix it (links to the channels' hostnames)?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2022-11-23T16:06:43Z
+
+> If there's a way to make the link work regardless of the ShopBundle's presence then I'd go for it. Would @vvasiloi's suggestion fix it (links to the channels' hostnames)?
+
+Yes, but only if hostname is present on a channel, which is not a required field.
+Additional case if some of the channels have hostname and some not, but whole list of channels will be rendered.
+
+Current approach for channels without hostname is to generate relative url to shop homepage, e.g. `https://example.com/admin` --> `https://example.com/`, which gives me idea to keep as is, but only replace `sylius_shop_homepage` route with hardcoded `/` address.
+
+```twig
+{% if sylius_bundle_loaded_checker('SyliusShopBundle') %}
+    {% set homepageUrl = {{ sylius_channel_url(path('sylius_shop_homepage'), channel) }} %}
+{% else %}
+    {% set homepageUrl = {{ sylius_channel_url('/', channel) }} %}
+{% endif %}
+
+ <a href="{{ homepageUrl }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
+```
+
+@vvasiloi what do you think?
+
+Edit: Yep, that's what Victor basically offered from the start, I will re-work the PR.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-23T19:41:13Z
+
+> Yes, but only if hostname is present on a channel, which is not a required field.
+> Additional case if some of the channels have hostname and some not, but whole list of channels will be rendered.
+
+@diimpp the channels without hostname are already filtered out, so it should not be an issue.
+
+I would write it like this:
+```twig
+{# this can be set outside the loop, because it doesn't depend on the channel #}
+{% set homepage_path = sylius_bundle_loaded_checker('SyliusShopBundle') ? path('sylius_shop_homepage') : '/' %}
+
+<a href="{{ sylius_channel_url(homepage_path, channel) }}" target="_blank" class="item">{{ 'sylius.ui.view_your_store'|trans }}</a>
+```
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-01-26T14:45:46Z
+
+My bad, I unnecessarily bumped this PR to 1.13. No need to do anything.
+
+---
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-19"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-01-31T13:10:54Z
+
+Thank you, Dmitri! :1st_place_medal:
