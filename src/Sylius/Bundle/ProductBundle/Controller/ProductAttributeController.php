@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
