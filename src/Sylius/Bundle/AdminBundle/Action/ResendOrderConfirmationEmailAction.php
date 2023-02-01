@@ -44,7 +44,7 @@ final class ResendOrderConfirmationEmailAction
         }
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->find($orderId);
+        $order = $this->orderRepository->findOrderById($orderId);
         if ($order === null) {
             throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $orderId));
         }
