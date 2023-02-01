@@ -35,6 +35,13 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
                 'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc'
             )
         );
+
+        self::assertStringEndsWith(
+            'ORDER BY m0_.email DESC, m0_.id ASC',
+            $this->generateSql(
+                'select u.id, (CASE WHEN u.id = 1 THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc'
+            )
+        );
     }
 
     /** @test */
