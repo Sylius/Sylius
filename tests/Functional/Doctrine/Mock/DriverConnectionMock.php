@@ -45,4 +45,12 @@ class DriverConnectionMock implements Connection
     public function rollBack()
     {
     }
+
+    public function errorCode()
+    {
+    }
+
+    public function errorInfo()
+    {
+    }
 }

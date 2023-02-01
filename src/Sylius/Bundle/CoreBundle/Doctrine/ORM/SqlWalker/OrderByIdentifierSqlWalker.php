@@ -64,7 +64,11 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
     {
         /** @psalm-suppress UndefinedDocblockClass */
         foreach ($this->getQueryComponents() as $dqlAlias => $queryComponent) {
-            if (null === ($queryComponent['parent'] ?? null) && 0 === ($queryComponent['nestingLevel'] ?? 0)) {
+            if (
+                isset($queryComponent['metadata']) &&
+                null === ($queryComponent['parent'] ?? null) &&
+                0 === ($queryComponent['nestingLevel'] ?? 0)
+            ) {
                 return $dqlAlias;
             }
         }
