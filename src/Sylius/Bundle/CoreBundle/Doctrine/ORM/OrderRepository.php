@@ -39,18 +39,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    public function findOrderById(string $id): ?OrderInterface
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.id = :id')
-            ->andWhere('o.state != :state')
-            ->setParameter('id', $id)
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
     public function createListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -78,6 +66,18 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('customerId', $customerId)
             ->setParameter('channelId', $channelId)
             ->setParameter('state', OrderInterface::STATE_CART)
+        ;
+    }
+
+    public function findOrderById($id): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.id = :id')
+            ->andWhere('o.state != :state')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 
