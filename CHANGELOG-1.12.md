@@ -1,5 +1,51 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.4 (2023-02-02)
+
+#### Details
+
+- [#12996](https://github.com/Sylius/Sylius/issues/12996) Remove sylius.model.shop_billing_data.class ([@vvasiloi](https://github.com/vvasiloi))
+- [#13448](https://github.com/Sylius/Sylius/issues/13448) Remove wrong trailing space in test attribute ([@mmenozzi](https://github.com/mmenozzi))
+- [#13835](https://github.com/Sylius/Sylius/issues/13835) chore: Replace NBSP by Space in doc ([@sad270](https://github.com/sad270))
+- [#14122](https://github.com/Sylius/Sylius/issues/14122) [AUTO] Updated translations from Crowdin (master) ([@SyliusBot](https://github.com/SyliusBot))
+- [#14174](https://github.com/Sylius/Sylius/issues/14174) [Admin] Fix 500 error when showing cart in admin panel ([@lchrusciel](https://github.com/lchrusciel))
+- [#14381](https://github.com/Sylius/Sylius/issues/14381) [Maintenance] Note behat changes due to Mailer usage ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14416](https://github.com/Sylius/Sylius/issues/14416) [Product] Fixed product attribute translations #11570 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14556](https://github.com/Sylius/Sylius/issues/14556) Hide "View in your store" widget in case ShopBundle disabled ([@diimpp](https://github.com/diimpp))
+- [#14562](https://github.com/Sylius/Sylius/issues/14562) Update embedding products snippet in documentation ([@qhayat](https://github.com/qhayat))
+- [#14576](https://github.com/Sylius/Sylius/issues/14576) Fix notInRangeMessage usage for a few Range validations ([@diimpp](https://github.com/diimpp), [@GSadee](https://github.com/GSadee))
+- [#14577](https://github.com/Sylius/Sylius/issues/14577) Product taxon position don't affect parent taxon - API ([@everwhatever](https://github.com/everwhatever))
+- [#14667](https://github.com/Sylius/Sylius/issues/14667) [Maintenance][CI] Remove github actions deprecations ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14716](https://github.com/Sylius/Sylius/issues/14716) [Messenger] Use parameters in the configuration ([@Rafikooo](https://github.com/Rafikooo))
+- [#14717](https://github.com/Sylius/Sylius/issues/14717) [CS][DX] Refactor
+- [#14719](https://github.com/Sylius/Sylius/issues/14719) [CS][DX] Refactor
+- [#14721](https://github.com/Sylius/Sylius/issues/14721) Added forgotten import to docblock. ([@kkevindev](https://github.com/kkevindev))
+- [#14722](https://github.com/Sylius/Sylius/issues/14722) [User] Allow configuring `lastLogin` tracking frequency ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14730](https://github.com/Sylius/Sylius/issues/14730) [UI][DX] Extract form collection event handlers to the separate module ([@coldic3](https://github.com/coldic3))
+- [#14731](https://github.com/Sylius/Sylius/issues/14731) [Fix] Request stack with null request ([@Prometee](https://github.com/Prometee))
+- [#14733](https://github.com/Sylius/Sylius/issues/14733) Update generating-invoice-after-payment.rst ([@cwa-cc](https://github.com/cwa-cc))
+- [#14735](https://github.com/Sylius/Sylius/issues/14735) Refactor not to use RequestStack::getMasterRequest() ([@GSadee](https://github.com/GSadee))
+- [#14736](https://github.com/Sylius/Sylius/issues/14736) Updated UPGRADE-1.11.md to add a BC Break on channel pricing ([@devantoine](https://github.com/devantoine))
+- [#14739](https://github.com/Sylius/Sylius/issues/14739) [CS][DX] Refactor
+- [#14740](https://github.com/Sylius/Sylius/issues/14740) [CS][DX] Refactor
+- [#14745](https://github.com/Sylius/Sylius/issues/14745) Fix static analysis after upmerge ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14746](https://github.com/Sylius/Sylius/issues/14746) Optimize jeans_04.svg size ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14749](https://github.com/Sylius/Sylius/issues/14749) Port of Sylius 1.13 CI to Sylius 1.12 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14751](https://github.com/Sylius/Sylius/issues/14751) Fix applying catalog promotions when there is no applied promotions and price differ from original price ([@TheMilek](https://github.com/TheMilek))
+- [#14752](https://github.com/Sylius/Sylius/issues/14752) Fix workflows file extensions after downmerge ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14753](https://github.com/Sylius/Sylius/issues/14753) Fix typo in notify-about-build-status workflow job ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14755](https://github.com/Sylius/Sylius/issues/14755) [Maintenance][ApiBundle] Move test app into `Tests` dir ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14762](https://github.com/Sylius/Sylius/issues/14762) Add missing interface to OrderIntegrityChecker ([@Zales0123](https://github.com/Zales0123))
+- [#14767](https://github.com/Sylius/Sylius/issues/14767) [CS][DX] Refactor
+- [#14768](https://github.com/Sylius/Sylius/issues/14768) [CS][DX] Refactor
+- [#14770](https://github.com/Sylius/Sylius/issues/14770) Fix typo in notify-about-build-status workflow job ([@GSadee](https://github.com/GSadee))
+- [#14772](https://github.com/Sylius/Sylius/issues/14772) [Maintenance][ApiBundle] Update test app config ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14773](https://github.com/Sylius/Sylius/issues/14773) [Maintenance][UserBundle] Fix UserLastLoginSubscriber arguments ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14779](https://github.com/Sylius/Sylius/issues/14779) [Admin] Change homepage path variable to use snake case ([@GSadee](https://github.com/GSadee))
+- [#14780](https://github.com/Sylius/Sylius/issues/14780) [Product] Add missing LocaleContextInterface in ProductAttributeController after upmerge from 1.11 ([@GSadee](https://github.com/GSadee))
+- [#14782](https://github.com/Sylius/Sylius/issues/14782) Fix the wrong DQL alias in OrderByIdentifierSqlWalker ([@coldic3](https://github.com/coldic3))
+- [#14783](https://github.com/Sylius/Sylius/issues/14783) [Admin] Fix 500 when resending order confirmation email for a cart ([@NoResponseMate](https://github.com/NoResponseMate))
+
 ## v1.12.3 (2023-01-13)
 
 #### Details
