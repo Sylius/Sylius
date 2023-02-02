@@ -86,10 +86,11 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
                     'de_DE' => 'de text4',
                     'zu_ZA' => 'zu text4',
                 ],
+                'uuid5' => [],
             ],
         ]);
 
-        $productAttributeValue->getValue()->willReturn(['uuid1', 'uuid2', 'uuid3', 'uuid4']);
+        $productAttributeValue->getValue()->willReturn(['uuid1', 'uuid2', 'uuid3', 'uuid4', 'uuid5']);
 
         $productAttributeValue->getLocaleCode()->willReturn('pl_PL');
         $localeProvider->getDefaultLocaleCode()->willReturn('fr_FR');
@@ -101,6 +102,7 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
                 'fr text2',
                 'en text3',
                 'de text4',
+                null
             ],
         ]);
     }
