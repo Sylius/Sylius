@@ -86,7 +86,9 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
                     'de_DE' => 'de text4',
                     'zu_ZA' => 'zu text4',
                 ],
-                'uuid5' => [],
+                'uuid5' => [
+                    'fr_FR' => null
+                ],
             ],
         ]);
 
