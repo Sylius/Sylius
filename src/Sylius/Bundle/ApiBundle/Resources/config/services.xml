@@ -47,7 +47,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\OrderTokenValueAwareInputCommandDataTransformer">
-            <tag name="sylius.api.command_data_transformer" />
+            <tag name="sylius.api.command_data_transformer" priority="1000" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataTransformer\ShipmentIdAwareInputCommandDataTransformer">

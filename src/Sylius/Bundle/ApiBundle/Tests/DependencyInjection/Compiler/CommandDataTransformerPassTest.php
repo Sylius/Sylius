@@ -20,9 +20,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_collects_tagged_command_data_transformer_services(): void
     {
         $this->setDefinition(
@@ -46,6 +44,45 @@ final class CommandDataTransformerPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument(
             'sylius.api.data_transformer.command_aware_input_data_transformer',
             1,
+            'sylius.api.command_data_transformer.service.second',
+        );
+    }
+
+    /** @test */
+    public function it_collects_tagged_command_data_transformer_services_with_priorities(): void
+    {
+        $this->setDefinition(
+            'sylius.api.command_data_transformer.service.first',
+            (new Definition())->addTag('sylius.api.command_data_transformer', ['priority' => 20]),
+        );
+
+        $this->setDefinition(
+            'sylius.api.command_data_transformer.service.second',
+            (new Definition())->addTag('sylius.api.command_data_transformer', ['priority' => 10]),
+        );
+
+        $this->setDefinition(
+            'sylius.api.command_data_transformer.service.third',
+            (new Definition())->addTag('sylius.api.command_data_transformer', ['priority' => 30]),
+        );
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.api.data_transformer.command_aware_input_data_transformer',
+            0,
+            'sylius.api.command_data_transformer.service.third',
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.api.data_transformer.command_aware_input_data_transformer',
+            1,
+            'sylius.api.command_data_transformer.service.first',
+        );
+
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius.api.data_transformer.command_aware_input_data_transformer',
+            2,
             'sylius.api.command_data_transformer.service.second',
         );
     }
