@@ -1,9 +1,6 @@
 name: Continuous Integration (Full)
 
 on:
-    schedule:
-        -
-            cron: "0 1 * * *" # Run every day at 1am
     workflow_dispatch: ~
 
 concurrency:
