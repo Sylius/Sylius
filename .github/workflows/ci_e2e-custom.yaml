@@ -2,7 +2,13 @@ name: End-to-End (Custom)
 
 on:
     workflow_dispatch: ~
-    workflow_call: ~
+    workflow_call:
+        inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
 
 jobs:
     behat-no-js-unstable-symfony:
@@ -21,7 +27,14 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: Get Composer cache directory

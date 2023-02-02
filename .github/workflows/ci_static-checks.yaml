@@ -4,6 +4,11 @@ on:
     workflow_dispatch: ~
     workflow_call:
         inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
             type:
                 description: "Type of the build"
                 required: true
@@ -16,7 +21,16 @@ jobs:
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
         steps:
-            -   uses: actions/checkout@v3
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v3
+
             -
                 name: "Get matrix"
                 id: matrix
@@ -33,7 +47,14 @@ jobs:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
         steps:
-            -
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: "Setup PHP"
