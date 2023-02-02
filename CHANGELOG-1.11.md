@@ -1,5 +1,32 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.14 (2023-02-02)
+
+#### Details
+
+- [#12996](https://github.com/Sylius/Sylius/issues/12996) Remove sylius.model.shop_billing_data.class ([@vvasiloi](https://github.com/vvasiloi))
+- [#13448](https://github.com/Sylius/Sylius/issues/13448) Remove wrong trailing space in test attribute ([@mmenozzi](https://github.com/mmenozzi))
+- [#13835](https://github.com/Sylius/Sylius/issues/13835) chore: Replace NBSP by Space in doc ([@sad270](https://github.com/sad270))
+- [#14174](https://github.com/Sylius/Sylius/issues/14174) [Admin] Fix 500 error when showing cart in admin panel ([@lchrusciel](https://github.com/lchrusciel))
+- [#14416](https://github.com/Sylius/Sylius/issues/14416) [Product] Fixed product attribute translations #11570 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14576](https://github.com/Sylius/Sylius/issues/14576) Fix notInRangeMessage usage for a few Range validations ([@diimpp](https://github.com/diimpp), [@GSadee](https://github.com/GSadee))
+- [#14577](https://github.com/Sylius/Sylius/issues/14577) Product taxon position don't affect parent taxon - API ([@everwhatever](https://github.com/everwhatever))
+- [#14719](https://github.com/Sylius/Sylius/issues/14719) [CS][DX] Refactor
+- [#14721](https://github.com/Sylius/Sylius/issues/14721) Added forgotten import to docblock. ([@kkevindev](https://github.com/kkevindev))
+- [#14722](https://github.com/Sylius/Sylius/issues/14722) [User] Allow configuring `lastLogin` tracking frequency ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14730](https://github.com/Sylius/Sylius/issues/14730) [UI][DX] Extract form collection event handlers to the separate module ([@coldic3](https://github.com/coldic3))
+- [#14731](https://github.com/Sylius/Sylius/issues/14731) [Fix] Request stack with null request ([@Prometee](https://github.com/Prometee))
+- [#14736](https://github.com/Sylius/Sylius/issues/14736) Updated UPGRADE-1.11.md to add a BC Break on channel pricing ([@devantoine](https://github.com/devantoine))
+- [#14740](https://github.com/Sylius/Sylius/issues/14740) [CS][DX] Refactor
+- [#14746](https://github.com/Sylius/Sylius/issues/14746) Optimize jeans_04.svg size ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14751](https://github.com/Sylius/Sylius/issues/14751) Fix applying catalog promotions when there is no applied promotions and price differ from original price ([@TheMilek](https://github.com/TheMilek))
+- [#14755](https://github.com/Sylius/Sylius/issues/14755) [Maintenance][ApiBundle] Move test app into `Tests` dir ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14762](https://github.com/Sylius/Sylius/issues/14762) Add missing interface to OrderIntegrityChecker ([@Zales0123](https://github.com/Zales0123))
+- [#14768](https://github.com/Sylius/Sylius/issues/14768) [CS][DX] Refactor
+- [#14773](https://github.com/Sylius/Sylius/issues/14773) [Maintenance][UserBundle] Fix UserLastLoginSubscriber arguments ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14782](https://github.com/Sylius/Sylius/issues/14782) Fix the wrong DQL alias in OrderByIdentifierSqlWalker ([@coldic3](https://github.com/coldic3))
+- [#14783](https://github.com/Sylius/Sylius/issues/14783) [Admin] Fix 500 when resending order confirmation email for a cart ([@NoResponseMate](https://github.com/NoResponseMate))
+
 ## v1.11.13 (2023-01-13)
 
 #### Details
