@@ -49,7 +49,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
         $data['value'] = match ($object->getType()) {
             SelectAttributeType::TYPE => $this->normalizeSelectValue($object, $context),
             DateAttributeType::TYPE => $object->getValue()->format('Y-m-d'),
-            default => $data['value'],
+            default => $data['value'] ?? null,
         };
 
         return $data;
