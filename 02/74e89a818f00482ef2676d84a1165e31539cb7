@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by dawkaa at 2023-02-02T10:23:16Z
+
+Hi dude, how to test the CI on the local environment?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-02-02T11:53:51Z
+
+@dawkaa my latest PRs are aiming to provide complete CI for GHA. Maybe some day I'll try to provide better experience locally, but for now, you have to run each command manually.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-02-02T14:03:34Z
+
+Thanks, Jakub! :tada:
