@@ -35,6 +35,8 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function countByCustomer(CustomerInterface $customer): int;
 
+    public function findOrderById($id): ?OrderInterface;
+
     /**
      * @return array|OrderInterface[]
      */
