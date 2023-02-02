@@ -41,6 +41,10 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
                     'type' => 'string',
                     'readOnly' => true,
                 ],
+                'adminUser' => [
+                    'type' => 'string',
+                    'readOnly' => true,
+                ],
             ],
         ];
 

@@ -164,5 +164,10 @@
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
         </service>
+
+        <service id="sylius.listener.admin_api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        </service>
     </services>
 </container>
