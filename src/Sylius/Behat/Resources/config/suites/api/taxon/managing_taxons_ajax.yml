@@ -3,7 +3,7 @@
 
 default:
     suites:
-        api_managing_taxons:
+        managing_taxons_ajax:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -12,9 +12,9 @@ default:
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.taxonomy
-                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.admin_security
 
-                - sylius.behat.context.api.admin.managing_taxons
+                - sylius.behat.context.api.admin.ajax_taxons
             filters:
-                tags: "@managing_taxons&&@api"
+                tags: "@managing_taxons_ajax&&@api"
             javascript: false

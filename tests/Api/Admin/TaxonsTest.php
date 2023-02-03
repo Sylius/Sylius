@@ -87,4 +87,38 @@ final class TaxonsTest extends JsonApiTestCase
             Response::HTTP_CREATED,
         );
     }
+
+    /** @test */
+    public function it_deletes_a_taxon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['mug_taxon'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_tries_to_delete_a_menu_taxon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['category_taxon'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CONFLICT);
+    }
 }

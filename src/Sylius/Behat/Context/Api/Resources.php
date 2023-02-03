@@ -75,6 +75,8 @@ final class Resources
 
     public const SHIPPING_METHODS = 'shipping-methods';
 
+    public const TAXONS = 'taxons';
+
     public const TAX_CATEGORIES = 'tax-categories';
 
     public const TAX_RATES = 'tax-rates';

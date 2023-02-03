@@ -14,79 +14,90 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\BrowserKit\AbstractBrowser;
-use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
     public function __construct(
-        private AbstractBrowser $client,
         private RequestStack $requestStack,
         private ResponseCheckerInterface $responseChecker,
+        private ApiClientInterface $apiClient,
     ) {
     }
 
     /**
-     * @When I look for a taxon with :phrase in name
+     * @When I remove taxon named :name
+     * @When I delete taxon named :name
+     * @When I try to delete taxon named :name
      */
-    public function iTypeIn($phrase): void
+    public function iRemoveTaxonNamed(string $name): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
-        $this->client->request('GET', '/admin/ajax/taxons/search', ['phrase' => $phrase], [], ['ACCEPT' => 'application/json']);
+        $code = StringInflector::nameToLowercaseCode($name);
+
+        $this->apiClient->delete(Resources::TAXONS, $code);
     }
 
     /**
-     * @When I want to get taxon with :code code
+     * @Then /^taxon named "([^"]+)" should not be added$/
+     * @Then the taxon named :name should no longer exist in the registry
      */
-    public function iWantToGetTaxonWithCode($code): void
+    public function taxonNamedShouldNotBeAdded(string $name): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
-        $this->client->request('GET', '/admin/ajax/taxons/leaf', ['code' => $code], [], ['ACCEPT' => 'application/json']);
+        $code = StringInflector::nameToLowercaseCode($name);
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->apiClient->index(Resources::TAXONS), 'code', $code),
+        );
     }
 
     /**
-     * @When /^I want to get children from (taxon "[^"]+")/
+     * @Then /^the ("[^"]+" taxon) should appear in the registry$/
      */
-    public function iWantToGetChildrenFromTaxon(TaxonInterface $taxon): void
+    public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
-        $this->client->request('GET', '/admin/ajax/taxons/leafs', ['parentCode' => $taxon->getCode()], [], ['ACCEPT' => 'application/json']);
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->apiClient->index(Resources::TAXONS), 'code', $taxon->getCode()),
+        );
     }
 
     /**
-     * @When I want to get taxon root
+     * @Then I should be notified that I cannot delete a menu taxon of any channel
      */
-    public function iWantToGetTaxonRoot(): void
+    public function iShouldBeNotifiedThatICannotDeleteAMenuTaxonOfAnyChannel(): void
     {
-        $this->client->getCookieJar()->set(new Cookie($this->requestStack->getSession()->getName(), $this->requestStack->getSession()->getId()));
-        $this->client->request('GET', '/admin/ajax/taxons/root-nodes', [], [], ['ACCEPT' => 'application/json']);
+        $lastResponse = $this->apiClient->getLastResponse();
+
+        Assert::false($this->responseChecker->isDeletionSuccessful($lastResponse));
     }
 
     /**
-     * @Then /^I should see (\d+) taxons on the list$/
+     * @When I want to see all taxons in store
      */
-    public function iShouldSeeTaxonsInTheList($number): void
+    public function iWantToSeeAllTaxonsInStore(): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getResponse());
-
-        Assert::eq(count($response), $number);
+        $this->apiClient->index(Resources::TAXONS);
     }
 
     /**
-     * @Then I should see the taxon named :firstName in the list
-     * @Then I should see the taxon named :firstName and :secondName in the list
-     * @Then I should see the taxon named :firstName, :secondName and :thirdName in the list
-     * @Then I should see the taxon named :firstName, :secondName, :thirdName and :fourthName in the list
+     * @When I move down :taxonName taxon
      */
-    public function iShouldSeeTheTaxonNamedAnd(...$expectedTaxonNames): void
+    public function iMoveDownTaxon(string $taxonName): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getResponse());
-        $taxonNames = array_column($response, 'name');
+        $lastResponse = $this->apiClient->getLastResponse();
+        $code = StringInflector::nameToLowercaseCode($taxonName);
 
-        Assert::allOneOf($expectedTaxonNames, $taxonNames);
+        $taxon = $this->responseChecker->getCollectionItemsWithValue($lastResponse, 'code', $code);
+        $position = $taxon[0]['position'];
+
+        $this->apiClient->buildUpdateRequest(Resources::TAXONS, $code);
+        $this->apiClient->addRequestData('position', $position + 1);
+
+        $this->apiClient->update();
     }
 }

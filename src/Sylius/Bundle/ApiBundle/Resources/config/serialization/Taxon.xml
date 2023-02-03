@@ -47,5 +47,9 @@
             <group>admin:taxon:create</group>
             <group>admin:taxon:update</group>
         </attribute>
+        <attribute name="position">
+            <group>admin:taxon:read</group>
+            <group>admin:taxon:update</group>
+        </attribute>
     </class>
 </serializer>

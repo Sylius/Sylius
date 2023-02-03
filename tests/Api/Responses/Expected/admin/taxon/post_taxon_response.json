@@ -5,6 +5,7 @@
     "id": @integer@,
     "code": "WATCHES",
     "children": [],
+    "position": @integer@,
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",

@@ -56,6 +56,11 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/taxons/{code}</attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/taxons/{code}</attribute>
@@ -71,6 +76,7 @@
         <property name="slug" required="true" />
         <property name="description" required="true" />
         <property name="children" readableLink="false" />
+        <property name="position" writable="true" />
         <property name="translations" readable="true" writable="true">
             <attribute name="openapi_context">
                 <attribute name="type">object</attribute>
