@@ -23,7 +23,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
 
         <service id="sylius.behat.page" class="FriendsOfBehat\PageObjectExtension\Page\Page" abstract="true">
             <argument type="service" id="behat.mink.default_session" />
