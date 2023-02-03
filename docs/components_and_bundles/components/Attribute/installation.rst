@@ -1,16 +1,14 @@
-.. rst-class:: outdated
-
 Installation
 ============
 
-.. danger::
-
-   We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
-   You can help us making documentation up to date via Sylius Github. Thank you!
-
 You can install the component in 2 different ways:
 
-* :doc:`Install it via Composer </components_and_bundles/components/general/using_components>` (``sylius/attribute`` on `Packagist`_).
+* :doc:`Install it via Composer </components_and_bundles/components/general/using_components>` (``sylius/attribute`` on `Packagist`_) via command
+
+.. code-block:: bash
+
+    composer require sylius/attribute
+
 * Use the official Git repository (https://github.com/Sylius/Attribute).
 
 .. include:: /components_and_bundles/components/require_autoload.rst.inc
