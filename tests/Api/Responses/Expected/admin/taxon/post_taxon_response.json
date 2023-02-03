@@ -1,0 +1,19 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/admin\/taxons\/WATCHES",
+    "@type": "Taxon",
+    "id": @integer@,
+    "code": "WATCHES",
+    "children": [],
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+            "@type": "TaxonTranslation",
+            "id": @integer@,
+            "name": "Watches",
+            "slug": "watches",
+            "description": null,
+            "locale": "en_US"
+        }
+    }
+}

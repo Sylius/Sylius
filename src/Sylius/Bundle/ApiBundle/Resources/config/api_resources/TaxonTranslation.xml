@@ -36,5 +36,6 @@
         <property name="name" required="true" />
         <property name="slug" required="true" />
         <property name="description" required="false" />
+        <property name="locale" required="true" />
     </resource>
 </resources>

@@ -58,4 +58,33 @@ final class TaxonsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_creates_a_taxon(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/taxons',
+            server: $header,
+            content: json_encode([
+                'code' => 'WATCHES',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Watches',
+                        'slug' => 'watches',
+                        'locale' => 'en_US'
+                    ]
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/post_taxon_response',
+            Response::HTTP_CREATED,
+        );
+    }
 }
