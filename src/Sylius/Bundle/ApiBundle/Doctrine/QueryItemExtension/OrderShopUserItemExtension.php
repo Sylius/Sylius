@@ -41,13 +41,12 @@ final class OrderShopUserItemExtension implements QueryItemExtensionInterface
             return;
         }
 
-        $rootAlias = $queryBuilder->getRootAliases()[0];
         $user = $this->userContext->getUser();
-
         if (!$user instanceof ShopUserInterface) {
             return;
         }
 
+        $rootAlias = $queryBuilder->getRootAliases()[0];
         $customerParameterName = $queryNameGenerator->generateParameterName('customer');
 
         $queryBuilder

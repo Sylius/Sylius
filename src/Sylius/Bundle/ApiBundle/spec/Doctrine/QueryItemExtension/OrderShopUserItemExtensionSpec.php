@@ -32,7 +32,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
         $this->beConstructedWith($userContext);
     }
 
-    function it_filters_carts_for_shop_users_to_the_one_owned_by_them_for_methods_other_then_get(
+    function it_filters_carts_for_shop_users_to_the_one_owned_by_them_for_methods_other_than_get(
         UserContextInterface $userContext,
         QueryBuilder $queryBuilder,
         ShopUserInterface $shopUser,
@@ -173,7 +173,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_does_nothing_if_object_passed_is_different_then_order(
+    function it_does_nothing_if_object_passed_is_different_than_order(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
