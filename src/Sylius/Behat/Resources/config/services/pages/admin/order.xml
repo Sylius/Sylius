@@ -20,8 +20,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
         <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_order_index</argument>
         </service>

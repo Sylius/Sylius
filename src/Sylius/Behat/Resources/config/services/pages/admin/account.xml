@@ -17,8 +17,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
         <service id="sylius.behat.page.admin.login" class="Sylius\Behat\Page\Admin\Account\LoginPage" parent="sylius.behat.symfony_page" />
         <service id="Sylius\Behat\Page\Admin\Account\LoginPageInterface" alias="sylius.behat.page.admin.login" />
 

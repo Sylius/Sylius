@@ -18,8 +18,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
         <service id="sylius.behat.page.admin.shipment.index" class="%sylius.behat.page.admin.shipment.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_shipment_index</argument>
         </service>

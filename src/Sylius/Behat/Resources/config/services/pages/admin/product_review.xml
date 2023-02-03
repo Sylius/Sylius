@@ -18,8 +18,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
         <service id="sylius.behat.page.admin.product_review.index" class="%sylius.behat.page.admin.product_review.index.class%" parent="sylius.behat.page.admin.crud.index">
             <argument type="string">sylius_admin_product_review_index</argument>
         </service>

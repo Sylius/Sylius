@@ -19,9 +19,7 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
-        <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create">
+         <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_promotion_create</argument>
         </service>
         <service id="Sylius\Behat\Page\Admin\Promotion\CreatePageInterface" alias="sylius.behat.page.admin.promotion.create" />

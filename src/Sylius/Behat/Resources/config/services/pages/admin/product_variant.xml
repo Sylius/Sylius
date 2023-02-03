@@ -20,8 +20,6 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
         <service id="sylius.behat.page.admin.product_variant.create" class="%sylius.behat.page.admin.product_variant.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_product_variant_create</argument>
         </service>

@@ -20,9 +20,7 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
-        <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create">
+         <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_promotion_coupon_create</argument>
         </service>
         <service id="Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface" alias="sylius.behat.page.admin.promotion_coupon.create" />

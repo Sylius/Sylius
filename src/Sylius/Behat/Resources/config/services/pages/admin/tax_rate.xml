@@ -19,9 +19,7 @@
     </parameters>
 
     <services>
-        <defaults public="false" />
-
-        <service id="sylius.behat.page.admin.tax_rate.create" class="%sylius.behat.page.admin.tax_rate.create.class%" parent="sylius.behat.page.admin.crud.create">
+         <service id="sylius.behat.page.admin.tax_rate.create" class="%sylius.behat.page.admin.tax_rate.create.class%" parent="sylius.behat.page.admin.crud.create">
             <argument type="string">sylius_admin_tax_rate_create</argument>
         </service>
         <service id="Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface" alias="sylius.behat.page.admin.tax_rate.create" />
