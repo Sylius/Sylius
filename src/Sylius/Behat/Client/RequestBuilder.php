@@ -26,8 +26,8 @@ final class RequestBuilder
     private array $files = [];
 
     private function __construct(
-      private string $uri,
-      private string $method
+        private string $uri,
+        private string $method,
     ) {
     }
 
