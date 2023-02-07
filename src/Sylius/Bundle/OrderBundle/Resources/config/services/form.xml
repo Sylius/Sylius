@@ -60,6 +60,8 @@
             <argument>%sylius.model.order_item.class%</argument>
             <argument>%sylius.form.type.cart_item.validation_groups%</argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
             <tag name="form.type" />
         </service>
     </services>

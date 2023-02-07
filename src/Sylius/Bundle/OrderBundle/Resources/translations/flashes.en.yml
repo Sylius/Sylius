@@ -7,3 +7,4 @@ sylius:
         cannot_modify: 'An order has already been submitted for the cart you were trying to modify.'
         remove_item: 'Item has been removed from cart'
         save: 'The cart has been successfully updated'
+        quantity_out_of_stock: 'Product does not have sufficient stock'

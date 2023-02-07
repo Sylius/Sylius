@@ -13,10 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class CartItemType extends AbstractResourceType
 {
@@ -24,6 +29,8 @@ class CartItemType extends AbstractResourceType
         string $dataClass,
         array $validationGroups,
         private DataMapperInterface $dataMapper,
+        public EntityManagerInterface $entityManager,
+        public OrderItemQuantityModifierInterface $itemQuantityModifier
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -35,6 +42,31 @@ class CartItemType extends AbstractResourceType
                 'attr' => ['min' => 1],
                 'label' => 'sylius.ui.quantity',
             ])
+            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
+                $orderItem = $event->getData();
+
+                if (!$orderItem) {
+                    return;
+                }
+
+                $orderItemQuantity = $orderItem->getQuantity();
+
+                $variantId = $orderItem->getVariant()->getId();
+                $variant = $this->entityManager->getRepository(ProductVariant::class)->findOneBy(['id' => $variantId]);
+                $variantStock = $variant->getOnHand();
+
+                $uow = $this->entityManager->getUnitOfWork();
+                $oldOrder = $uow->getOriginalEntityData($orderItem);
+                $oldQuantity = $oldOrder['quantity'] ?? null;
+
+                if (!$oldQuantity) {
+                    return;
+                }
+
+                if ($orderItemQuantity > $variantStock) {
+                    $this->itemQuantityModifier->modify($orderItem, $oldQuantity);
+                }
+            })
             ->setDataMapper($this->dataMapper)
         ;
     }

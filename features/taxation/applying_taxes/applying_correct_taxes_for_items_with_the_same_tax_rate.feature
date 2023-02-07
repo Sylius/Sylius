@@ -10,8 +10,10 @@ Feature: Apply correct taxes for items with the same tax rate
         And the store has "VAT" tax rate of 23% for "Clothes" within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
+        And there are 10 units of product "PHP T-Shirt" available in the inventory
         And the store has a product "Symfony Hat" priced at "$30.00"
         And it belongs to "Clothes" tax category
+        And there are 8 units of product "Symfony Hat" available in the inventory
 
     @ui @api
     Scenario: Proper taxes for taxed product
