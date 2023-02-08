@@ -15,9 +15,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius_core.factory.order" class="Sylius\Bundle\CoreBundle\Factory\OrderFactory" decorates="sylius.factory.order">
-            <argument type="service" id="sylius_core.factory.order.inner" />
+        <service id="sylius.custom_factory.order" class="Sylius\Bundle\CoreBundle\Factory\OrderFactory" decorates="sylius.factory.order">
+            <argument type="service" id="sylius.custom_factory.order.inner" />
         </service>
-        <service id="Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface" alias="sylius_core.factory.order" />
+        <service id="Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface" alias="sylius.custom_factory.order" />
     </services>
 </container>
