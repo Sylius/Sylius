@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -27,12 +28,13 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
     public function __construct(
-        private FactoryInterface $cartFactory,
+        private OrderFactoryInterface $cartFactory,
         private OrderRepositoryInterface $cartRepository,
         private ChannelRepositoryInterface $channelRepository,
         private ObjectManager $orderManager,
@@ -41,41 +43,43 @@ final class PickupCartHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(PickupCart $pickupCart)
+    public function __invoke(PickupCart $pickupCart): OrderInterface
     {
-        /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
+        Assert::notNull($channel);
 
         $customer = null;
-
         if ($pickupCart->getEmail() !== null) {
             /** @var CustomerInterface|null $customer */
             $customer = $this->customerRepository->findOneBy(['email' => $pickupCart->getEmail()]);
         }
 
-        if ($customer !== null) {
-            /** @var OrderInterface|null $cart */
-            $cart = $this->cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
-            if ($cart !== null) {
-                return $cart;
-            }
+        if (null === $customer) {
+            return $this->createCart($channel, null, $pickupCart);
         }
 
-        /** @var OrderInterface $cart */
-        $cart = $this->cartFactory->createNew();
+        $activeCart = $this->cartRepository->findLatestNotEmptyCartByChannelAndCustomer($channel, $customer);
 
-        /** @var CurrencyInterface $currency */
-        $currency = $channel->getBaseCurrency();
-
-        $cart->setChannel($channel);
-        $cart->setLocaleCode($this->getLocaleCode($pickupCart->localeCode, $channel));
-        $cart->setCurrencyCode($currency->getCode());
-        $cart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
-
-        if ($customer !== null) {
-            $cart->setCustomerWithAuthorization($customer);
-            $cart->setBillingAddress($this->getDefaultAddress($customer));
+        if (null === $activeCart) {
+            return $this->createCart($channel, $customer, $pickupCart);
         }
+
+        if (null === $activeCart->getTokenValue()) {
+            $activeCart->setTokenValue($pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10));
+            $this->orderManager->persist($activeCart);
+        }
+
+        return $activeCart;
+    }
+
+    private function createCart(ChannelInterface $channel, ?CustomerInterface $customer, PickupCart $pickupCart): OrderInterface
+    {
+        $cart = $this->cartFactory->createNewCart(
+            $channel,
+            $customer,
+            $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
+            $pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10)
+        );
 
         $this->orderManager->persist($cart);
 
@@ -112,16 +116,4 @@ final class PickupCartHandler implements MessageHandlerInterface
         return $localeCode;
     }
 
-    private function getDefaultAddress(CustomerInterface $customer): ?AddressInterface
-    {
-        $defaultAddress = $customer->getDefaultAddress();
-        if (null !== $defaultAddress) {
-            $clonedAddress = clone $defaultAddress;
-            $clonedAddress->setCustomer(null);
-
-            return $clonedAddress;
-        }
-
-        return null;
-    }
 }
