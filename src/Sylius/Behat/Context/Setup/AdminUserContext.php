@@ -71,6 +71,7 @@ final class AdminUserContext implements Context
 
     /**
      * @Given /^(this administrator) account is disabled$/
+     * @When /^(this administrator) account becomes disabled$/
      */
     public function thisAccountIsDisabled(AdminUserInterface $administrator): void
     {

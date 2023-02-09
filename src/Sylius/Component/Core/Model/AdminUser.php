@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\User;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class AdminUser extends User implements AdminUserInterface
+class AdminUser extends User implements AdminUserInterface, EquatableInterface
 {
     /** @var string|null */
     protected $firstName;
@@ -85,5 +87,10 @@ class AdminUser extends User implements AdminUserInterface
     public function setAvatar(?ImageInterface $avatar): void
     {
         $this->setImage($avatar);
+    }
+
+    public function isEqualTo(UserInterface $user): bool
+    {
+        return $user instanceof AdminUserInterface && $this->isEnabled() === $user->isEnabled();
     }
 }

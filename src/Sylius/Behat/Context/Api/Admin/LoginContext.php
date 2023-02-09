@@ -15,12 +15,15 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\BrowserKit\Exception\BadMethodCallException;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
     public function __construct(
         private ApiSecurityClientInterface $apiSecurityClient,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -69,7 +72,12 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->apiSecurityClient->isLoggedIn(), 'Admin should not be logged in, but they are.');
+        try {
+            Assert::false($this->apiSecurityClient->isLoggedIn(), 'Admin should not be logged in, but they are.');
+        } catch (BadMethodCallException) {
+            Assert::same($this->sharedStorage->get('last_response')->getStatusCode(), 401, 'Admin should not be logged in, but they are.');
+        }
+
     }
 
     /**

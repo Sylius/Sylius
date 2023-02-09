@@ -65,6 +65,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I try to browse administrators
+     */
+    public function iTryToBrowseAdministrators(): void
+    {
+        $this->indexPage->tryToOpen();
+    }
+
+    /**
      * @When I specify its name as :username
      * @When I do not specify its name
      */
