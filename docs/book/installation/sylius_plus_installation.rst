@@ -15,19 +15,19 @@ Installing Sylius Plus as a plugin to a Sylius application
 +---------------+-----------------------+
 | PHP           | ^8.0                  |
 +---------------+-----------------------+
-| sylius/sylius | ~1.11.2               |
+| sylius/sylius | ~1.11.2 || ~1.12.0    |
 +---------------+-----------------------+
-| Symfony       | ^4.4 || ^5.4          |
+| Symfony       | ^5.4 || ^6.0          |
 +---------------+-----------------------+
 
 **0.** Prepare project:
 
 .. tip::
 
-    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.11** according to
+    If it is a new project you are initiating, then first install Sylius-Standard in **version ^1.11 or ^1.12** according to
     :doc:`these instructions </book/installation/installation>`.
 
-    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.11``.
+    If you're installing Plus package to an existing project, then make sure you're upgraded to ``sylius/sylius ^1.11`` or ``sylius/sylius ^1.12``.
 
 **1.** Configure access to the private Packagist package in composer by using the Access Token you have been given with your license.
 
@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.8" --no-update
+    composer require "sylius/plus:^1.0.0-ALPHA.9" --no-update
     composer update --no-scripts
     composer sync-recipes
 
