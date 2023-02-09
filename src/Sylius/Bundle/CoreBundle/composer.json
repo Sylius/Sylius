@@ -87,6 +87,7 @@
     },
     "config": {
         "allow-plugins": {
+            "php-http/discovery": false,
             "symfony/flex": true
         }
     },
