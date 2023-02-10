@@ -28,7 +28,8 @@
     "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface",
     "League\\Flysystem\\FilesystemOperator",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
-    "PHPUnit\\Framework\\ExpectationFailedException"
+    "PHPUnit\\Framework\\ExpectationFailedException",
+    "Stripe\\Stripe"
   ],
   "php-core-extensions" : [
     "Core",
