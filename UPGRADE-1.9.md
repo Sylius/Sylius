@@ -63,6 +63,25 @@
 
 1. Remove `getContainerLoader` method from `src/Kernel.php` class if you did not customise it.
 
+1. If you have overridden `@SyliusUi/Resources/views/Form/theme.html.twig`, replace `form_widget(form)` with `block('form_widget')` within
+   `sylius_promotion_rule_widget` and `sylius_promotion_rule_widget` blocks:
+
+```diff
+{% block sylius_promotion_rule_widget %}
+    <div class="ui segment">
+-       {{ form_widget(form) }}
++       {{ block('form_widget') }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_action_widget %}
+    <div class="ui segment">
+-       {{ form_widget(form) }}
++       {{ block('form_widget') }}
+    </div>
+{% endblock %}
+```
+
 #### Upgrades Symfony to v5.2
 
 1. Upgrade Symfony dependencies by:

@@ -14,7 +14,7 @@ Before working on Sylius, set a Symfony friendly environment up with the followi
 software:
 
 * Git
-* PHP version 7.3 or above
+* PHP version 8.0 or above
 * MySQL
 
 Configure Git
@@ -100,12 +100,12 @@ Choose the right Base Branch
 
 Before starting to work on a patch, you must determine on which branch you need to work. It will be:
 
-* ``1.7``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
-* ``master``, if you are adding a new feature.
+* ``{lowest_bugfix_version}``, if you are fixing a bug for an existing feature or want to make a change that falls into the list of acceptable changes in patch versions
+* ``{future_version}``, if you are adding a new feature.
 
 .. note::
 
-    All bug fixes merged into the ``1.7`` maintenance branch are also merged into ``master`` on a regular basis.
+    All bug fixes merged into the ``{lowest_bugfix_version}`` maintenance branch are also merged into ``{future_version}`` on a regular basis.
 
 Create a Topic Branch
 ~~~~~~~~~~~~~~~~~~~~~
@@ -115,7 +115,7 @@ topic branch, starting from the previously chosen base branch:
 
 .. code-block:: bash
 
-    git checkout -b BRANCH_NAME master
+    git switch upstream/{future_version} -c BRANCH_NAME
 
 .. tip::
 
@@ -184,25 +184,19 @@ Rebase your Patch
 Before submitting your patch, update your branch (needed if it takes you a
 while to finish your changes):
 
-If you are basing on the ``master`` branch:
+If you are basing on the ``{future_version}`` branch:
 
 .. code-block:: bash
 
-    git checkout master
-    git fetch upstream
-    git merge upstream/master
-    git checkout BRANCH_NAME
-    git rebase master
+    git checkout BRANCH_NAME # to make sure you're on the right branch
+    git rebase upstream/{future_version}
 
-If you are basing on the ``1.7`` branch:
+If you are basing on the ``{lowest_bugfix_version}`` branch:
 
 .. code-block:: bash
 
-    git checkout 1.7
-    git fetch upstream
-    git merge upstream/1.7
-    git checkout BRANCH_NAME
-    git rebase 1.7
+    git checkout BRANCH_NAME # to make sure you're on the right branch
+    git rebase upstream/{lowest_bugfix_version}
 
 When doing the ``rebase`` command, you might have to fix merge conflicts.
 ``git status`` will show you the *unmerged* files. Resolve all the conflicts,
@@ -224,8 +218,8 @@ Make a Pull Request
 
 .. warning::
 
-    Please remember that bug fixes must be submitted against the ``1.7`` branch,
-    but features and deprecations against the ``master`` branch. Just accordingly to which branch you chose as the base branch before.
+    Please remember that bug fixes must be submitted against the ``{lowest_bugfix_version}`` branch,
+    but features and deprecations against the ``{future_version}`` branch. Just accordingly to which branch you chose as the base branch before.
 
 You can now make a pull request on the ``Sylius/Sylius`` GitHub repository.
 
@@ -246,7 +240,7 @@ possible:
 
     | Q               | A
     | --------------- | -----
-    | Branch?         | 1.7 or master
+    | Branch?         | {lowest_bugfix_version} or {future_version}
     | Bug fix?        | no/yes
     | New feature?    | no/yes
     | BC breaks?      | no/yes
@@ -260,7 +254,7 @@ An example submission could now look as follows:
 
     | Q               | A
     | --------------- | -----
-    | Branch?         | 1.7
+    | Branch?         | {lowest_bugfix_version}
     | Bug fix?        | yes
     | New feature?    | no
     | BC breaks?      | no
@@ -315,18 +309,18 @@ Rework your Patch
 ~~~~~~~~~~~~~~~~~
 
 Based on the feedback on the pull request, you might need to rework your
-patch. Before re-submitting the patch, rebase with your base branch (``master`` or ``1.7``), don't merge; and force the push to the origin:
+patch. Before re-submitting the patch, rebase with your base branch (``{future_version}`` or ``{lowest_bugfix_version}``), don't merge; and force the push to the origin:
 
 .. code-block:: bash
 
-    git rebase -f upstream/master
+    git rebase -f upstream/{future_version}
     git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
-    git rebase -f upstream/1.7
+    git rebase -f upstream/{lowest_bugfix_version}
     git push --force-with-lease origin BRANCH_NAME
 
 .. note::
@@ -340,14 +334,14 @@ convert many commits to one commit. To do this, use the rebase command:
 
 .. code-block:: bash
 
-    git rebase -i upstream/master
+    git rebase -i upstream/{future_version}
     git push --force-with-lease origin BRANCH_NAME
 
 or
 
 .. code-block:: bash
 
-    git rebase -i upstream/1.7
+    git rebase -i upstream/{lowest_bugfix_version}
     git push --force-with-lease origin BRANCH_NAME
 
 After you type this command, an editor will popup showing a list of commits:

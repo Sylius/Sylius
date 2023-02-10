@@ -14,6 +14,7 @@ extensions = [
     'sensio.sphinx.phpcode',
     'sphinx_copybutton',
     'sphinxcontrib-redirects',
+    'ultimatereplacement'
 ]
 source_suffix = '.rst'
 master_doc = 'index'
@@ -33,6 +34,10 @@ man_pages = [
 sys.path.append(os.path.abspath('_exts'))
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
-rst_epilog = """
-"""
+ultimate_replacements = {
+    "{future_version}": "1.13",
+    "{current_version}": "1.12",
+    "{lowest_bugfix_version}": "1.12",
+    "{security_patch_version}": "1.11"
+}
 redirects_file = 'redirection_map'

@@ -40,3 +40,8 @@ references related issues.
 
   This version is causing a problem with migrations and results in throwing a `Doctrine\Migrations\Exception\MetadataStorageError` exception e.g. when executing `sylius:install` command.
   References: https://github.com/doctrine/migrations/issues/1302
+
+- `lexik/jwt-authentication-bundle: ^2.18`
+
+  After bumping to this version ApiBundle starts failing due to requesting a non-existing `api_platform.openapi.factory.legacy` service.
+  As we are not using this service across the ApiBundle we added this conflict to unlock the builds, until we investigate the problem.
