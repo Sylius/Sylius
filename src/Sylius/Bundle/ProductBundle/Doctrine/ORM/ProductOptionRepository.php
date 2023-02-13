@@ -40,4 +40,33 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
             ->getResult()
         ;
     }
+
+    public function findByPhraseAndProductCode(string $phrase, string $locale, int $limit = 15): array
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere($expr->orX(
+                'translation.name LIKE :phrase',
+                'o.code LIKE :phrase',
+            ))
+            ->setParameter('phrase', '%' . $phrase . '%')
+            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByOptions(?array $code = []): array
+    {
+        $expr = $this->getEntityManager()->getExpressionBuilder();
+
+        return $this->createQueryBuilder('o')
+            ->andWhere($expr->in('o.code', ':code'))
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

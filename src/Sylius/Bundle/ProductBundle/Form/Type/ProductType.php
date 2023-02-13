@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildAttributesFormSubscriber;
-use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscriber;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -45,7 +44,6 @@ final class ProductType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver))
             ->addEventSubscriber(new SimpleProductSubscriber())
             ->addEventSubscriber(new BuildAttributesFormSubscriber($this->attributeValueFactory, $this->localeProvider))
             ->add('enabled', CheckboxType::class, [
@@ -67,6 +65,14 @@ final class ProductType extends AbstractResourceType
             ])
             ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
+            ])
+            ->add('options', ProductOptionAutocompleteType::class, [
+                'required' => false,
+                'data_class' => null,
+                'disabled' => (null !== $this->variantResolver->getVariant($builder->getData())) && $builder->getData()->hasVariants(),
+                'label' => 'sylius.form.product.options',
+                'multiple' => true,
+                'data' => $builder->getData()->getOptions()
             ])
         ;
     }

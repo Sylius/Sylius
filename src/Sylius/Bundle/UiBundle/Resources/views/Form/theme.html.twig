@@ -199,7 +199,7 @@
 {%- endblock sylius_translations_row %}
 
 {% block sylius_resource_autocomplete_choice_row %}
-    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+    <div class="{% if required %}required {% endif %}{% if disabled %}disabled {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         {{- form_label(form) -}}
         <div
             class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
