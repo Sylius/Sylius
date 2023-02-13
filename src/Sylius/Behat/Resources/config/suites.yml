@@ -10,6 +10,7 @@ imports:
     - suites/api/addressing/managing_countries.yml
     - suites/api/addressing/managing_zones.yml
     - suites/api/admin/login.yml
+    - suites/api/admin/security.yml
     - suites/api/cart/accessing_cart.yml
     - suites/api/cart/shopping_cart.yml
     - suites/api/channel/channels.yml
@@ -80,6 +81,7 @@ imports:
     - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
     - suites/ui/admin/panel.yml
+    - suites/ui/admin/security.yml
     - suites/ui/cart/shopping_cart.yml
     - suites/ui/channel/channels.yml
     - suites/ui/channel/managing_channels.yml
