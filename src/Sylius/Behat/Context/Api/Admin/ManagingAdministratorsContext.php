@@ -51,10 +51,12 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @When I browse administrators
      * @When I want to browse administrators
+     * @When I try to browse administrators
      */
     public function iBrowseAdministrators(): void
     {
         $this->client->index(Resources::ADMINISTRATORS);
+        $this->sharedStorage->set('last_response', $this->client->getLastResponse());
     }
 
     /**

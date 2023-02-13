@@ -25,6 +25,7 @@
 
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
             <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext">
