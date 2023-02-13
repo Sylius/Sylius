@@ -7,6 +7,7 @@ Feature: Reapplying promotion on cart change
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
+        And there are 10 units of product "PHP T-Shirt" available in the inventory
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 

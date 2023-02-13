@@ -534,9 +534,9 @@ final class CartContext implements Context
     /**
      * @Then /^I should be notified that (this product) cannot be updated$/
      */
-    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock()
     {
-        Assert::true($this->summaryPage->hasProductOutOfStockValidationMessage($product));
+        Assert::true($this->summaryPage->hasProductOutOfStockFlashMessage());
     }
 
     /**

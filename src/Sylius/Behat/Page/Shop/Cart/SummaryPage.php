@@ -196,6 +196,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         }
     }
 
+    public function hasProductOutOfStockFlashMessage(): bool
+    {
+        return str_contains($this->getDocument()->getContent(), 'Product does not have sufficient stock');
+    }
+
     public function isEmpty(): bool
     {
         return str_contains($this->getElement('flash_message')->getText(), 'Your cart is empty');

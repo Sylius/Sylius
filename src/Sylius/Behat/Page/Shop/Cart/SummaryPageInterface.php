@@ -68,6 +68,8 @@ interface SummaryPageInterface extends PageInterface
 
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool;
 
+    public function hasProductOutOfStockFlashMessage(): bool;
+
     public function isEmpty(): bool;
 
     public function getQuantity(string $productName): int;

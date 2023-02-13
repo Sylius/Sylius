@@ -14,7 +14,6 @@ Feature: Verifying inventory quantity on cart summary
     Scenario: Being unable to save a cart with product that is out of stock
         Given I have added 3 products "Iron Maiden T-Shirt" in the cart
         When I change product "Iron Maiden T-Shirt" quantity to 6 in my cart
-        And I update my cart
         Then I should be notified that this product cannot be updated
 
     @ui @api
