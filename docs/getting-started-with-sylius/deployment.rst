@@ -10,9 +10,9 @@ Check out our deployment cookbooks:
 .. tip::
 
     - 👉 :doc:`How to deploy Sylius to Platform.sh? </cookbook/deployment/platform-sh>`
-    - 👉 :doc:`How to deploy Sylius to Symfony Cloud? </cookbook/deployment/cloudways>`
-    - 👉 :doc:`How to deploy Sylius to Artifakt? </cookbook/deployment/symfonycloud>`
-    - 👉 :doc:`How to deploy Sylius to Cloudways? </cookbook/deployment/artifakt>`
+    - 👉 :doc:`How to deploy Sylius to Symfony Cloud? </cookbook/deployment/symfonycloud>`
+    - 👉 :doc:`How to deploy Sylius to Artifakt? </cookbook/deployment/artifakt>`
+    - 👉 :doc:`How to deploy Sylius to Cloudways? </cookbook/deployment/cloudways>`
     - 🐳 :doc:`How to deploy Sylius with Docker </cookbook/deployment/docker>`
 
 Learn more about the deployment platforms
