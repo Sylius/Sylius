@@ -3,7 +3,7 @@
 
 default:
     suites:
-        api_shopping_cart:
+        hybrid_shopping_cart:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -28,8 +28,8 @@ default:
 
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.registration
-                - sylius.behat.context.composite.shop.composite_cart
-                - sylius.behat.context.composite.shop.composite_customer
+                - sylius.behat.context.hybrid.shop.composite_cart
+                - sylius.behat.context.hybrid.shop.composite_customer
 
             filters:
-                tags: "@shopping_cart&&@composite"
+                tags: "@shopping_cart&&@hybrid"

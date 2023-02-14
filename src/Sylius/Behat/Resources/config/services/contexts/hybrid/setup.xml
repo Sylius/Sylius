@@ -18,12 +18,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.context.composite.shop.composite_cart" class="Sylius\Behat\Context\Composite\Shop\CompositeCartContext">
+        <service id="sylius.behat.context.hybrid.shop.composite_cart" class="Sylius\Behat\Context\Hybrid\Setup\CartContext">
             <argument type="service" id="sylius.behat.context.api.shop.cart" />
             <argument type="service" id="sylius.behat.context.ui.shop.cart" />
         </service>
 
-        <service id="sylius.behat.context.composite.shop.composite_customer" class="Sylius\Behat\Context\Composite\Shop\CompositeCustomerContext">
+        <service id="sylius.behat.context.hybrid.shop.composite_customer" class="Sylius\Behat\Context\Hybrid\Setup\SecurityContext">
             <argument type="service" id="sylius.behat.context.setup.shop_security" />
             <argument type="service" id="sylius.behat.context.setup.shop_api_security" />
             <argument type="service" id="sylius.behat.shared_storage" />

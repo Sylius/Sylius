@@ -9,19 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Context\Composite\Shop;
+namespace Sylius\Behat\Context\Hybrid\Setup;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Context\Api\Shop\CartContext;
+use Sylius\Behat\Context\Api\Shop\CartContext as ApiShopCartContext;
 use Sylius\Behat\Context\Ui\Shop\CartContext as UiCartContext;
 use Sylius\Component\Core\Model\ProductInterface;
 
-class CompositeCartContext implements Context
+class CartContext implements Context
 {
     public function __construct(
-        private CartContext $apiCartContext,
+        private ApiShopCartContext $apiCartContext,
         private UiCartContext $uiCartContext,
-    ) {}
+    ) {
+    }
 
     /**
      * @When I add :product to the cart on the web store

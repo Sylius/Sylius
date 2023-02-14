@@ -16,6 +16,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
-        <import resource="composite/**/*.xml" />
+        <import resource="hybrid/**/*.xml" />
     </imports>
 </container>
