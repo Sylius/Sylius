@@ -1,3 +1,8 @@
+# UPGRADE FROM `v1.12.X` TO `v1.12.5`
+
+1. For routes `sylius_admin_order_shipment_ship` and `sylius_admin_order_resend_confirmation_email` the missing "/orders"
+    prefix has been added. If you have been using these routes' paths directly, you need to update them.
+
 # UPGRADE FROM `v1.12.X` TO `v1.12.4`
 
 1. The default configuration of Symfony Messenger has changed,
