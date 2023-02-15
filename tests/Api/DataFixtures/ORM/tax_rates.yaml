@@ -1,0 +1,33 @@
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_{NL, BE}:
+        code: <current()>
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu:
+        code: EU
+        name: European Union
+        type: country
+        members: ["@member_NL", "@member_BE"]
+
+
+Sylius\Component\Taxation\Model\TaxCategory:
+    tax_category_{1..3}:
+        code: TC<current()>
+        name: Tax Category <current()>
+        description: <sentence(6)>
+
+Sylius\Component\Core\Model\TaxRate:
+    sales_tax:
+        code: sales_tax
+        name: "Sales Tax 20\\%"
+        zone: "@zone_eu"
+        calculator: "default"
+        category: "@tax_category_1"
+        amount: 0.2
+    regular_tax:
+        code: regular_tax
+        name: "Regular Tax 20\\%"
+        zone: "@zone_eu"
+        calculator: "default"
+        category: "@tax_category_2"
+        amount: 0.2

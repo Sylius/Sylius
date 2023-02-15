@@ -20,5 +20,4 @@ default:
                 - sylius.behat.context.api.admin.managing_tax_rates
 
             filters:
-                tags: "@managing_tax_rates && @api"
-            javascript: false
+                tags: "@managing_tax_rates&&@api"

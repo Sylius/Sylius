@@ -1,0 +1,95 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxRate",
+    "@id": "\/api\/v2\/admin\/tax-rates",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/tax-rates\/sales_tax",
+            "@type": "TaxRate",
+            "zone": "\/api\/v2\/admin\/zones\/EU",
+            "id": @integer@,
+            "code": "sales_tax",
+            "category": "\/api\/v2\/admin\/tax-categories\/TC1",
+            "name": "Sales Tax 20%",
+            "amount": 0.2,
+            "includedInPrice": false,
+            "calculator": "default",
+            "startDate": null,
+            "endDate": null,
+            "createdAt": @datetime@,
+            "updatedAt": @datetime@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/tax-rates\/regular_tax",
+            "@type": "TaxRate",
+            "zone": "\/api\/v2\/admin\/zones\/EU",
+            "id": @integer@,
+            "code": "regular_tax",
+            "category": "\/api\/v2\/admin\/tax-categories\/TC2",
+            "name": "Regular Tax 20%",
+            "amount": 0.2,
+            "includedInPrice": false,
+            "calculator": "default",
+            "startDate": null,
+            "endDate": null,
+            "createdAt": @datetime@,
+            "updatedAt": @datetime@
+        }
+    ],
+        "hydra:totalItems": 2,
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "\/api\/v2\/admin\/tax-rates{?startDate[before],startDate[strictly_before],startDate[after],startDate[strictly_after],endDate[before],endDate[strictly_before],endDate[after],endDate[strictly_after]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                "variable": "startDate[before]",
+                "property": "startDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "startDate[strictly_before]",
+                "property": "startDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "startDate[after]",
+                "property": "startDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "startDate[strictly_after]",
+                "property": "startDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "endDate[before]",
+                "property": "endDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "endDate[strictly_before]",
+                "property": "endDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "endDate[after]",
+                "property": "endDate",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "endDate[strictly_after]",
+                "property": "endDate",
+                "required": false
+            }
+        ]
+    }
+}
