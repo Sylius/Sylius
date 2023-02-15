@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-02-09T12:58:50Z
+
+@GSadee check now 🤔
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-02-13T12:58:09Z
+
+I know, that I commented several days ago with the suggestion of a note, but I still have doubts about this PR. As I wrote, this change is not a BC break according to our BC Promise, however, it can break end applications if someone does not use routing generation, but uses the path.
+IMO, the best solution would be to create new routes and change the problematic ones to be deprecated aliases, ref.: https://symfony.com/doc/current/routing.html#deprecating-route-aliases
+Wdyt?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-02-13T13:18:20Z
+
+> I know, that I commented several days ago with the suggestion of a note, but I still have doubts about this PR. As I wrote, this change is not a BC break according to our BC Promise, however, it can break end applications if someone does not use routing generation, but uses the path. IMO, the best solution would be to create new routes and change the problematic ones to be deprecated aliases, ref.: https://symfony.com/doc/current/routing.html#deprecating-route-aliases Wdyt?
+
+They only allow to deprecate `alias` (route name, not path) and not a real route, while we're changing route path without changing route name. There is no mechanic for proper route deprecation as far as I know.
+
+If it's not covered by BC, then `upgrade` note is more than enough, imo. Both those buttons are covered with csrf, there shouldn't be random users of them.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-02-13T13:34:12Z
+
+@GSadee we can't fix every case when somebody follows the bad practices. If somebody uses the path instead of generating it, then it's a problem on its side, not our 🤷🏼‍♂️.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-02-15T08:01:28Z
+
+Thank you, Jakub! :tada:
