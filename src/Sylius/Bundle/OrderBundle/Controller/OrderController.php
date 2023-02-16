@@ -119,7 +119,6 @@ class OrderController extends ResourceController
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
-
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -242,6 +241,11 @@ class OrderController extends ResourceController
         $orderItemsCollection = $orderItem->toArray();
 
         foreach ($orderItemsCollection as $key => $orderItem) {
+
+            if (!$orderItem->getVariant()->isTracked()){
+                continue;
+            }
+
             $onHand = $orderItem->getVariant()->getOnHand();
 
             $quantity = $form->get('items')->get((string) $key)->get('quantity')->getData();

@@ -7,9 +7,7 @@ Feature: Reverting previously applied discount on cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
-        And there are 8 units of product "PHP T-Shirt" available in the inventory
         And the store has a product "PHP Mug" priced at "$20.00"
-        And there are 8 units of product "PHP Mug" available in the inventory
         And there is a promotion "Christmas promotion"
 
     @ui @api

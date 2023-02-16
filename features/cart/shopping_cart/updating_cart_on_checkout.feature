@@ -7,7 +7,6 @@ Feature:
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana" priced at "$12.54"
-        And there are 5 units of product "T-Shirt banana" available in the inventory
         And I added this product to the cart
 
     @ui @no-api

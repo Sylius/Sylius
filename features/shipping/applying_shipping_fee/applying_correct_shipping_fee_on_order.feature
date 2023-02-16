@@ -7,7 +7,6 @@ Feature: Apply correct shipping fee on order
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
-        And there are 10 units of product "PHP T-Shirt" available in the inventory
         And the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee
         And the store has "UPS" shipping method with "$5.00" fee per unit for "United States" channel

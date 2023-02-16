@@ -20,6 +20,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -44,6 +45,7 @@ class CartItemType extends AbstractResourceType
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
                 $orderItem = $event->getData();
+                $form = $event->getForm();
 
                 if (!$orderItem) {
                     return;
@@ -53,6 +55,11 @@ class CartItemType extends AbstractResourceType
 
                 $variantId = $orderItem->getVariant()->getId();
                 $variant = $this->entityManager->getRepository(ProductVariant::class)->findOneBy(['id' => $variantId]);
+
+                if (false === $variant->isTracked()) {
+                    return;
+                }
+
                 $variantStock = $variant->getOnHand();
 
                 $uow = $this->entityManager->getUnitOfWork();
