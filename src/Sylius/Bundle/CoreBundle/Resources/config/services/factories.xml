@@ -12,14 +12,12 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <imports>
-        <import resource="contexts/api.xml" />
-        <import resource="contexts/cli.xml" />
-        <import resource="contexts/domain.xml" />
-        <import resource="contexts/hook.xml" />
-        <import resource="contexts/hybrid.xml" />
-        <import resource="contexts/setup.xml" />
-        <import resource="contexts/transform.xml" />
-        <import resource="contexts/ui.xml" />
-    </imports>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.custom_factory.order" class="Sylius\Bundle\CoreBundle\Factory\OrderFactory" decorates="sylius.factory.order">
+            <argument type="service" id="sylius.custom_factory.order.inner" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface" alias="sylius.custom_factory.order" />
+    </services>
 </container>

@@ -461,13 +461,18 @@ final class CartContext implements Context
 
     /**
      * @Then there should be one item in my cart
+     * @Then there should be one item named :productName in my cart
      */
-    public function thereShouldBeOneItemInMyCart(): void
+    public function thereShouldBeOneItemInMyCart(?string $productName = null): void
     {
         $response = $this->shopClient->getLastResponse();
         $items = $this->responseChecker->getValue($response, 'items');
 
         Assert::count($items, 1);
+
+        if (null !== $productName) {
+            Assert::same($items[0]['productName'], $productName);
+        }
 
         $this->sharedStorage->set('item', $items[0]);
     }
