@@ -333,16 +333,20 @@ final class ProductContext implements Context
 
     /**
      * @Then I should see :productName product discounted from :originalPrice to :price by :promotionLabel on the list
+     * @Then I should see :productName product discounted from :originalPrice to :price
      */
     public function iShouldSeeProductDiscountedOnTheList(
         string $productName,
         string $originalPrice,
         string $price,
-        string $promotionLabel,
+        ?string $promotionLabel = null,
     ): void {
         Assert::same($this->indexPage->getProductPrice($productName), $price);
         Assert::same($this->indexPage->getProductOriginalPrice($productName), $originalPrice);
-        Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+
+        if ($promotionLabel !== null) {
+            Assert::same($this->indexPage->getProductPromotionLabel($productName), $promotionLabel);
+        }
     }
 
     /**

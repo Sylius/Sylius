@@ -300,6 +300,25 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should see ("[^"]+" product) discounted from ("[^"]+") to ("[^"]+")$/
+     */
+    public function iShouldSeeProductDiscountedFromTo(ProductInterface $product, int $originalPrice, int $price): void
+    {
+        $lastResponse = $this->client->getLastResponse();
+
+        $this->iShouldSeeTheProductWithPrice($product, $price);
+        Assert::true(
+            $this->hasProductWithPrice(
+                $this->responseChecker->getCollection($lastResponse),
+                $originalPrice,
+                $product->getCode(),
+                'originalPrice'
+            ),
+            sprintf('There is no product with %s code and %s original price', $product->getCode(), $originalPrice),
+        );
+    }
+
+    /**
      * @Then /^I should see the (product "[^"]+") with price ("[^"]+")$/
      */
     public function iShouldSeeTheProductWithPrice(ProductInterface $product, int $price): void
