@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by Nek- at 2023-02-15T08:29:37Z
+
+The most important change regarding my PR is that you decided that an order must not always have a tokenValue.
+
+Why?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-02-15T08:47:38Z
+
+@Nek- our decision was to keep the old behavior and fix the bug you reported. The main reason is safety – we fixed the root of the problem and didn't change the behavior of the shop cart.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-02-16T06:44:24Z
+
+Thanks, Jakub! :1st_place_medal:
