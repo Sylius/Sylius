@@ -61,6 +61,8 @@ imports:
     - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
 
+    - suites/hybrid/cart/shopping_cart.yml
+
     - suites/domain/cart/shopping_cart.yml
     - suites/domain/order/managing_orders.yml
     - suites/domain/product/managing_product_variants.yml
