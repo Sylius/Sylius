@@ -82,8 +82,7 @@ Code Examples
 Formats
 ~~~~~~~
 
-Configuration examples should show recommended formats using
-:ref:`configuration blocks <docs-configuration-blocks>`. The recommended formats
+Configuration examples should show recommended formats using code-block`. The recommended formats
 (and their orders) are:
 
 * **Configuration** (including services and routing): YAML
