@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
+use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -31,7 +33,6 @@ class CartItemType extends AbstractResourceType
         array $validationGroups,
         private DataMapperInterface $dataMapper,
         public EntityManagerInterface $entityManager,
-        public OrderItemQuantityModifierInterface $itemQuantityModifier
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -43,35 +44,25 @@ class CartItemType extends AbstractResourceType
                 'attr' => ['min' => 1],
                 'label' => 'sylius.ui.quantity',
             ])
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event): void {
-                $orderItem = $event->getData();
-                $form = $event->getForm();
-
-                if (!$orderItem) {
-                    return;
-                }
-
-                $orderItemQuantity = $orderItem->getQuantity();
-
-                $variantId = $orderItem->getVariant()->getId();
-                $variant = $this->entityManager->getRepository(ProductVariant::class)->findOneBy(['id' => $variantId]);
-
-                if (false === $variant->isTracked()) {
-                    return;
-                }
-
-                $variantStock = $variant->getOnHand();
-
-                $uow = $this->entityManager->getUnitOfWork();
-                $oldOrder = $uow->getOriginalEntityData($orderItem);
-                $oldQuantity = $oldOrder['quantity'] ?? null;
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
+                $newQuantity = $event->getData()['quantity'];
+                $orderItem = $event->getForm()->getData();
+                $oldQuantity = $orderItem->getQuantity();
 
                 if (!$oldQuantity) {
                     return;
                 }
 
-                if ($orderItemQuantity > $variantStock) {
-                    $this->itemQuantityModifier->modify($orderItem, $oldQuantity);
+                $variantId = $orderItem->getVariant()->getId();
+                $variant = $this->entityManager->getRepository(ProductVariant::class)->findOneBy(['id' => $variantId]);
+                $variantStock = $variant->getOnHand();
+
+                if (false === $variant->isTracked()) {
+                    return;
+                }
+
+                if ($newQuantity > $variantStock) {
+                    $event->setData($oldQuantity);
                 }
             })
             ->setDataMapper($this->dataMapper)

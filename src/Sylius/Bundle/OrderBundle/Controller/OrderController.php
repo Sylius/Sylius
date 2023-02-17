@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use Doctrine\ORM\PersistentCollection;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -24,7 +23,6 @@ use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -108,12 +106,6 @@ class OrderController extends ResourceController
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-            }
-
-            if ($this->isInStock($items, $form)) {
-                $this->addTranslatedFlash('error', 'sylius.cart.quantity_out_of_stock');
-
-                return $this->redirectHandler->redirectToResource($configuration, $resource);
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -207,12 +199,6 @@ class OrderController extends ResourceController
         return $this->container->get('event_dispatcher');
     }
 
-    protected function addTranslatedFlash(string $type, string $message): void
-    {
-        $translator = $this->container->get('translator');
-        $this->container->get('request_stack')->getSession()->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
-    }
-
     /**
      * @return mixed
      *
@@ -234,28 +220,5 @@ class OrderController extends ResourceController
         }
 
         return null;
-    }
-
-    private function isInStock(PersistentCollection $orderItem, FormInterface $form): bool
-    {
-        $orderItemsCollection = $orderItem->toArray();
-
-        foreach ($orderItemsCollection as $key => $orderItem) {
-
-            if (!$orderItem->getVariant()->isTracked()){
-                continue;
-            }
-
-            $onHand = $orderItem->getVariant()->getOnHand();
-
-            $quantity = $form->get('items')->get((string) $key)->get('quantity')->getData();
-
-
-            if ($quantity > $onHand){
-                return true;
-            }
-        }
-
-        return false;
     }
 }
