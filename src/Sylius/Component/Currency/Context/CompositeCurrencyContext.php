@@ -13,25 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Currency\Context;
 
-use Laminas\Stdlib\PriorityQueue;
-
 final class CompositeCurrencyContext implements CurrencyContextInterface
 {
-    /**
-     * @var PriorityQueue|CurrencyContextInterface[]
-     *
-     * @psalm-var PriorityQueue<CurrencyContextInterface>
-     */
-    private PriorityQueue $currencyContexts;
+    private iterable $currencyContexts;
 
-    public function __construct()
+    public function __construct(iterable $currencyContexts = [])
     {
-        $this->currencyContexts = new PriorityQueue();
-    }
-
-    public function addContext(CurrencyContextInterface $currencyContext, int $priority = 0): void
-    {
-        $this->currencyContexts->insert($currencyContext, $priority);
+        $this->currencyContexts = $currencyContexts instanceof \Traversable ? iterator_to_array($currencyContexts) : $currencyContexts;
     }
 
     public function getCurrencyCode(): string

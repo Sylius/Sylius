@@ -13,27 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context\RequestBased;
 
-use Laminas\Stdlib\PriorityQueue;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CompositeRequestResolver implements RequestResolverInterface
 {
-    /**
-     * @var PriorityQueue|RequestResolverInterface[]
-     *
-     * @psalm-var PriorityQueue<RequestResolverInterface>
-     */
-    private PriorityQueue $requestResolvers;
+    private iterable $requestResolvers;
 
-    public function __construct()
+    public function __construct(iterable $requestResolvers = [])
     {
-        $this->requestResolvers = new PriorityQueue();
-    }
-
-    public function addResolver(RequestResolverInterface $requestResolver, int $priority = 0): void
-    {
-        $this->requestResolvers->insert($requestResolver, $priority);
+        $this->requestResolvers = $requestResolvers instanceof \Traversable ? iterator_to_array($requestResolvers) : $requestResolvers;
     }
 
     public function findChannel(Request $request): ?ChannelInterface

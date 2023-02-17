@@ -19,7 +19,11 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" decoration-priority="256" public="false" />
+        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" public="false">
+            <argument type="tagged_iterator" tag="sylius.context.currency" />
+        </service>
+        <service id="sylius.context.currency" alias="sylius.context.currency.composite" />
+        <service id="Sylius\Component\Currency\Context\CurrencyContextInterface" alias="sylius.context.currency.composite" />
 
         <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.exchange_rate" />

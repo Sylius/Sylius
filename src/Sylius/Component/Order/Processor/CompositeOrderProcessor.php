@@ -13,26 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Order\Processor;
 
-use Laminas\Stdlib\PriorityQueue;
 use Sylius\Component\Order\Model\OrderInterface;
 
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var PriorityQueue|OrderProcessorInterface[]
-     *
-     * @psalm-var PriorityQueue<OrderProcessorInterface>
-     */
-    private PriorityQueue $orderProcessors;
+    private iterable $orderProcessors;
 
-    public function __construct()
+    public function __construct(iterable $orderProcessors)
     {
-        $this->orderProcessors = new PriorityQueue();
-    }
-
-    public function addProcessor(OrderProcessorInterface $orderProcessor, int $priority = 0): void
-    {
-        $this->orderProcessors->insert($orderProcessor, $priority);
+        $this->orderProcessors = $orderProcessors instanceof \Traversable ? iterator_to_array($orderProcessors) : $orderProcessors;
     }
 
     public function process(OrderInterface $order): void

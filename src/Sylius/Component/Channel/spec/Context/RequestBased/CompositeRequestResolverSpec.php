@@ -36,7 +36,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
     ): void {
         $requestResolver->findChannel($request)->willReturn(null);
 
-        $this->addResolver($requestResolver);
+        $this->beConstructedWith([$requestResolver]);
 
         $this->findChannel($request)->shouldReturn(null);
     }
@@ -52,27 +52,7 @@ final class CompositeRequestResolverSpec extends ObjectBehavior
         $secondRequestResolver->findChannel($request)->willReturn($channel);
         $thirdRequestResolver->findChannel($request)->shouldNotBeCalled();
 
-        $this->addResolver($firstRequestResolver);
-        $this->addResolver($secondRequestResolver);
-        $this->addResolver($thirdRequestResolver);
-
-        $this->findChannel($request)->shouldReturn($channel);
-    }
-
-    function its_nested_request_resolvers_can_have_priority(
-        Request $request,
-        RequestResolverInterface $firstRequestResolver,
-        RequestResolverInterface $secondRequestResolver,
-        RequestResolverInterface $thirdRequestResolver,
-        ChannelInterface $channel,
-    ): void {
-        $firstRequestResolver->findChannel($request)->shouldNotBeCalled();
-        $secondRequestResolver->findChannel($request)->willReturn($channel);
-        $thirdRequestResolver->findChannel($request)->willReturn(null);
-
-        $this->addResolver($firstRequestResolver, -5);
-        $this->addResolver($secondRequestResolver, 0);
-        $this->addResolver($thirdRequestResolver, 5);
+        $this->beConstructedWith([$firstRequestResolver, $secondRequestResolver, $thirdRequestResolver]);
 
         $this->findChannel($request)->shouldReturn($channel);
     }

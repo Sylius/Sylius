@@ -34,7 +34,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
     ): void {
         $currencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
-        $this->addContext($currencyContext);
+        $this->beConstructedWith([$currencyContext]);
 
         $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
@@ -48,25 +48,7 @@ final class CompositeCurrencyContextSpec extends ObjectBehavior
         $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
         $thirdCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
 
-        $this->addContext($firstCurrencyContext);
-        $this->addContext($secondCurrencyContext);
-        $this->addContext($thirdCurrencyContext);
-
-        $this->getCurrencyCode()->shouldReturn('BTC');
-    }
-
-    function its_nested_request_resolvers_can_have_priority(
-        CurrencyContextInterface $firstCurrencyContext,
-        CurrencyContextInterface $secondCurrencyContext,
-        CurrencyContextInterface $thirdCurrencyContext,
-    ): void {
-        $firstCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
-        $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
-        $thirdCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
-
-        $this->addContext($firstCurrencyContext, -5);
-        $this->addContext($secondCurrencyContext, 0);
-        $this->addContext($thirdCurrencyContext, 5);
+        $this->beConstructedWith([$firstCurrencyContext, $secondCurrencyContext, $thirdCurrencyContext]);
 
         $this->getCurrencyCode()->shouldReturn('BTC');
     }

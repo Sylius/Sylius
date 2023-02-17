@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
-use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
-use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -24,6 +22,10 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SyliusOrderExtension extends AbstractResourceExtension
 {
+    public const CART_CONTEXT_TAG = 'sylius.context.cart';
+
+    public const ORDER_PROCESSOR_TAG = 'sylius.order_processor';
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
@@ -40,11 +42,11 @@ final class SyliusOrderExtension extends AbstractResourceExtension
 
         $container
             ->registerForAutoconfiguration(CartContextInterface::class)
-            ->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG)
+            ->addTag(self::CART_CONTEXT_TAG)
         ;
         $container
             ->registerForAutoconfiguration(OrderProcessorInterface::class)
-            ->addTag(RegisterProcessorsPass::PROCESSOR_SERVICE_TAG)
+            ->addTag(self::ORDER_PROCESSOR_TAG)
         ;
     }
 }

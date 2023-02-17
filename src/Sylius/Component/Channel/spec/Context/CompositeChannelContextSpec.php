@@ -35,7 +35,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
     ): void {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
-        $this->addContext($channelContext);
+        $this->beConstructedWith([$channelContext]);
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
@@ -50,26 +50,7 @@ final class CompositeChannelContextSpec extends ObjectBehavior
         $secondChannelContext->getChannel()->willReturn($channel);
         $thirdChannelContext->getChannel()->shouldNotBeCalled();
 
-        $this->addContext($firstChannelContext);
-        $this->addContext($secondChannelContext);
-        $this->addContext($thirdChannelContext);
-
-        $this->getChannel()->shouldReturn($channel);
-    }
-
-    function its_nested_request_resolvers_can_have_priority(
-        ChannelContextInterface $firstChannelContext,
-        ChannelContextInterface $secondChannelContext,
-        ChannelContextInterface $thirdChannelContext,
-        ChannelInterface $channel,
-    ): void {
-        $firstChannelContext->getChannel()->shouldNotBeCalled();
-        $secondChannelContext->getChannel()->willReturn($channel);
-        $thirdChannelContext->getChannel()->willThrow(ChannelNotFoundException::class);
-
-        $this->addContext($firstChannelContext, -5);
-        $this->addContext($secondChannelContext, 0);
-        $this->addContext($thirdChannelContext, 5);
+        $this->beConstructedWith([$firstChannelContext, $secondChannelContext, $thirdChannelContext]);
 
         $this->getChannel()->shouldReturn($channel);
     }

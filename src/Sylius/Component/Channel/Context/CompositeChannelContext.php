@@ -13,26 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Channel\Context;
 
-use Laminas\Stdlib\PriorityQueue;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class CompositeChannelContext implements ChannelContextInterface
 {
-    /**
-     * @var PriorityQueue|ChannelContextInterface[]
-     *
-     * @psalm-var PriorityQueue<ChannelContextInterface>
-     */
-    private PriorityQueue $channelContexts;
+    private iterable $channelContexts;
 
-    public function __construct()
+    public function __construct(iterable $channelContexts = [])
     {
-        $this->channelContexts = new PriorityQueue();
-    }
-
-    public function addContext(ChannelContextInterface $channelContext, int $priority = 0): void
-    {
-        $this->channelContexts->insert($channelContext, $priority);
+        $this->channelContexts = $channelContexts instanceof \Traversable ? iterator_to_array($channelContexts) : $channelContexts;
     }
 
     public function getChannel(): ChannelInterface

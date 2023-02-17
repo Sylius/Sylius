@@ -40,7 +40,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.cart_context_autoconfigured',
-            RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG,
+            SyliusOrderExtension::CART_CONTEXT_TAG,
         );
     }
 
@@ -61,7 +61,7 @@ final class SyliusOrderExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.processor_autoconfigured',
-            RegisterProcessorsPass::PROCESSOR_SERVICE_TAG,
+            SyliusOrderExtension::ORDER_PROCESSOR_TAG,
         );
     }
 

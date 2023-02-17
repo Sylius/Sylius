@@ -37,8 +37,11 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" public="false" />
-        <service id="Sylius\Component\Channel\Context\ChannelContextInterface" alias="sylius.context.channel" />
+        <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" public="false">
+            <argument type="tagged_iterator" tag="sylius.context.channel" />
+        </service>
+        <service id="sylius.context.channel" alias="sylius.context.channel.composite" />
+        <service id="Sylius\Component\Channel\Context\ChannelContextInterface" alias="sylius.context.channel.composite" />
 
         <service id="sylius.context.channel.request_based" class="Sylius\Component\Channel\Context\RequestBased\ChannelContext" public="false">
             <argument type="service" id="sylius.context.channel.request_based.resolver" />
@@ -51,7 +54,10 @@
             <tag name="sylius.context.channel" priority="-128"/>
         </service>
 
-        <service id="sylius.context.channel.request_based.resolver.composite" class="Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver" public="false"/>
+        <service id="sylius.context.channel.request_based.resolver.composite" class="Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver" public="false">
+            <argument type="tagged_iterator" tag="sylius.context.channel.request_based.resolver" />
+        </service>
+        <service id="sylius.context.channel.request_based.resolver" alias="sylius.context.channel.request_based.resolver.composite" />
         <service id="Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface" alias="sylius.context.channel.request_based.resolver.composite" />
 
         <service id="sylius.context.channel.request_based.resolver.hostname_based" class="Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver" public="false">

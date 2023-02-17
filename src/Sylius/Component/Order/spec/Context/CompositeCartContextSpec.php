@@ -34,7 +34,8 @@ final class CompositeCartContextSpec extends ObjectBehavior
         CartContextInterface $cartContext,
     ): void {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
-        $this->addContext($cartContext);
+
+        $this->beConstructedWith([$cartContext]);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
@@ -47,22 +48,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
         $firstCartContext->getCart()->willThrow(CartNotFoundException::class);
         $secondCartContext->getCart()->willReturn($cart);
 
-        $this->addContext($firstCartContext);
-        $this->addContext($secondCartContext);
-
-        $this->getCart()->shouldReturn($cart);
-    }
-
-    function its_cart_contexts_can_have_priority(
-        CartContextInterface $firstCartContext,
-        CartContextInterface $secondCartContext,
-        OrderInterface $cart,
-    ): void {
-        $firstCartContext->getCart()->shouldNotBeCalled();
-        $secondCartContext->getCart()->willReturn($cart);
-
-        $this->addContext($firstCartContext, -1);
-        $this->addContext($secondCartContext, 0);
+        $this->beConstructedWith([$firstCartContext, $secondCartContext]);
 
         $this->getCart()->shouldReturn($cart);
     }
