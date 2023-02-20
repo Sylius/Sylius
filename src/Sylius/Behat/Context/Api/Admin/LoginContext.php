@@ -77,7 +77,6 @@ final class LoginContext implements Context
         } catch (BadMethodCallException) {
             Assert::same($this->sharedStorage->get('last_response')->getStatusCode(), 401, 'Admin should not be logged in, but they are.');
         }
-
     }
 
     /**

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace Sylius\Behat\Context\Hybrid\Setup;
 
 use Behat\Behat\Context\Context;
@@ -20,7 +22,7 @@ class SecurityContext implements Context
     public function __construct(
         private ShopSecurityContext $uiSecurityContext,
         private ShopSecurityContext $apiSecurityContext,
-        private SharedStorageInterface   $sharedStorage,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 

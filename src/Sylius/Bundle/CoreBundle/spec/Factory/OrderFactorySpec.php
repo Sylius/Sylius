@@ -112,7 +112,7 @@ final class OrderFactorySpec extends ObjectBehavior
             $channel->getWrappedObject(),
             null,
             'en_US',
-            'mytoken'
+            'mytoken',
         );
 
         $cart->shouldBeAnInstanceOf(OrderInterface::class);
