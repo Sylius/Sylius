@@ -312,7 +312,7 @@ final class ProductContext implements Context
                 $this->responseChecker->getCollection($lastResponse),
                 $originalPrice,
                 $product->getCode(),
-                'originalPrice'
+                'originalPrice',
             ),
             sprintf('There is no product with %s code and %s original price', $product->getCode(), $originalPrice),
         );
