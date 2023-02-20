@@ -17,15 +17,12 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
@@ -78,7 +75,7 @@ final class PickupCartHandler implements MessageHandlerInterface
             $channel,
             $customer,
             $this->getLocaleCode($pickupCart->getLocaleCode(), $channel),
-            $pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10)
+            $pickupCart->tokenValue ?? $this->generator->generateUriSafeString(10),
         );
 
         $this->orderManager->persist($cart);
@@ -115,5 +112,4 @@ final class PickupCartHandler implements MessageHandlerInterface
 
         return $localeCode;
     }
-
 }

@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class OrderFactory implements OrderFactoryInterface
 {
-    public function __construct (
+    public function __construct(
         private FactoryInterface $decoratedFactory,
     ) {
     }
