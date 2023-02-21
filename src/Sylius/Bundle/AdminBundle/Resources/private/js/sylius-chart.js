@@ -1,4 +1,4 @@
-import 'chart.js/dist/chart.min';
+import Chart from 'chart.js/auto';
 
 const drawChart = function drawChart(canvas, labels = [], values = [], currency) {
   return new Chart(canvas, {
