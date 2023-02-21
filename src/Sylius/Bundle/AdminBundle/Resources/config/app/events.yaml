@@ -608,24 +608,24 @@ sylius_ui:
                 customer:
                     template: "@SyliusAdmin/Order/Show/_customer.html.twig"
                     priority: 50
-                before_addresses_legacy:
-                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 45
-                    context:
-                        event: sylius.admin.order.show.before_addresses
-                addresses:
-                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
-                    priority: 40
                 before_payments_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 35
+                    priority: 45
                     context:
                         event: sylius.admin.order.show.before_payments
                 payments:
                     template: "@SyliusAdmin/Order/Show/_payments.html.twig"
-                    priority: 30
+                    priority: 40
                 shipments:
                     template: "@SyliusAdmin/Order/Show/_shipments.html.twig"
+                    priority: 35
+                before_addresses_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 30
+                    context:
+                        event: sylius.admin.order.show.before_addresses
+                addresses:
+                    template: "@SyliusAdmin/Order/Show/_addresses.html.twig"
                     priority: 20
                 resend_email:
                     template: "@SyliusAdmin/Order/Show/_resendEmail.html.twig"
