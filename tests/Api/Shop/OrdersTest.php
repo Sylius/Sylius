@@ -393,4 +393,30 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponse($response, 'shop/updated_billing_address_on_order_response', Response::HTTP_OK);
     }
+
+    /** @test */
+    public function it_removes_item_from_the_cart(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = self::getContainer()->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+        $commandBus->dispatch($addItemToCartCommand);
+
+        $this->client->request('GET', sprintf('/api/v2/shop/orders/%s', $tokenValue));
+        $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
+
+        $this->client->request('DELETE', sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $itemId));
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
 }

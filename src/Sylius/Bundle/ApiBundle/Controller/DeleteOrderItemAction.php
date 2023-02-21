@@ -34,6 +34,6 @@ final class DeleteOrderItemAction
 
         $this->commandBus->dispatch($command);
 
-        return new JsonResponse();
+        return new JsonResponse(status: Response::HTTP_NO_CONTENT);
     }
 }
