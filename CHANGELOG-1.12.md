@@ -1,5 +1,36 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.5 (2023-02-21)
+
+#### Details
+
+- [#12752](https://github.com/Sylius/Sylius/issues/12752) [ADR] Strategy for resource internationalization in API ([@lchrusciel](https://github.com/lchrusciel))
+- [#13044](https://github.com/Sylius/Sylius/issues/13044) [Maintenance] Added promotion form theme override in UPGRADE-1.9.md ([@SVillette](https://github.com/SVillette))
+- [#13313](https://github.com/Sylius/Sylius/issues/13313) [Behat] add scenario for disabled admin ([@SirDomin](https://github.com/SirDomin))
+- [#13913](https://github.com/Sylius/Sylius/issues/13913) [Architecture] Ensure HTTP errors are not dispatched in command handlers ([@lchrusciel](https://github.com/lchrusciel))
+- [#14026](https://github.com/Sylius/Sylius/issues/14026) [Minor] Typo fixes and small code improvement ([@lchrusciel](https://github.com/lchrusciel), [@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14055](https://github.com/Sylius/Sylius/issues/14055) Fix channel color in fixture ([@iKsSs](https://github.com/iKsSs))
+- [#14531](https://github.com/Sylius/Sylius/issues/14531) Update sylius_plus_installation.rst ([@oallain](https://github.com/oallain))
+- [#14561](https://github.com/Sylius/Sylius/issues/14561) [DOCS] Sylius components attribute ([@arti0090](https://github.com/arti0090))
+- [#14758](https://github.com/Sylius/Sylius/issues/14758) [API] Priorities in data transformers ([@Zales0123](https://github.com/Zales0123))
+- [#14761](https://github.com/Sylius/Sylius/issues/14761) fix(layout): removed admin-layout__topbar height ([@UlrichHP](https://github.com/UlrichHP))
+- [#14784](https://github.com/Sylius/Sylius/issues/14784) [Documentation] Update Sylius versions in release cycle ([@GSadee](https://github.com/GSadee))
+- [#14785](https://github.com/Sylius/Sylius/issues/14785) Remove scheduled full build ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14789](https://github.com/Sylius/Sylius/issues/14789) Fix product attribute value normalizer ([@loic425](https://github.com/loic425))
+- [#14792](https://github.com/Sylius/Sylius/issues/14792) Add adjusting shop regex section to disabling-localised-urls.rst ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14797](https://github.com/Sylius/Sylius/issues/14797) [API] Prepend configuration with API Platform mapping ([@GSadee](https://github.com/GSadee))
+- [#14800](https://github.com/Sylius/Sylius/issues/14800) Fix being unable to pick up latest non-empty cart started in shop and continued in API ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14801](https://github.com/Sylius/Sylius/issues/14801) Add a missing orders prefix to routes in Admin Panel ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14802](https://github.com/Sylius/Sylius/issues/14802) Update versions in the "Submitting a Patch" doc ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14803](https://github.com/Sylius/Sylius/issues/14803) Logout Admin User after being disabled ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14804](https://github.com/Sylius/Sylius/issues/14804) Fix CI ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14805](https://github.com/Sylius/Sylius/issues/14805) Remove possibility to add Stripe as a payment method when package is missing ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14808](https://github.com/Sylius/Sylius/issues/14808) Fix url in links ([@jaceksieja](https://github.com/jaceksieja))
+- [#14813](https://github.com/Sylius/Sylius/issues/14813) [Shop] Fix displaying discount on list view when original price is lower than current ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14818](https://github.com/Sylius/Sylius/issues/14818) Improve SEO ()
+- [#14820](https://github.com/Sylius/Sylius/issues/14820) [CS][DX] Refactor ()
+- [#14824](https://github.com/Sylius/Sylius/issues/14824) [Orders][API] Change cart item delete HTTP response code to 204 ([@Rafikooo](https://github.com/Rafikooo))
+
 ## v1.12.4 (2023-02-02)
 
 #### Details
