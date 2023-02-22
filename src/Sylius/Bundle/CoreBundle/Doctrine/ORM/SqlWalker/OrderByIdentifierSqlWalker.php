@@ -28,33 +28,49 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
         $dqlAlias = $this->getDqlAlias();
 
         if (null !== $dqlAlias && $this->isOrderByIdentifierAllowed($AST)) {
-            $this->appendOrderByIdentifier($AST, $dqlAlias);
+            $this->appendOrderByIdentifiers($AST, $dqlAlias);
         }
 
         return parent::walkSelectStatement($AST);
     }
 
-    private function appendOrderByIdentifier(SelectStatement $ast, string $dqlAlias): void
+    private function appendOrderByIdentifiers(SelectStatement $ast, string $dqlAlias): void
     {
         $metadata = $this->getMetadataForDqlAlias($dqlAlias);
+        $identifierFieldNames = $metadata->getIdentifierFieldNames();
 
-        $expression = new PathExpression(
-            PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION,
-            $dqlAlias,
-            $metadata->getSingleIdentifierFieldName(),
-        );
-        $expression->type = PathExpression::TYPE_STATE_FIELD;
-
-        $orderById = new OrderByItem($expression);
-        $orderById->type = 'ASC';
+        if (empty($identifierFieldNames)) {
+            return;
+        }
 
         if (null === $ast->orderByClause) {
-            $ast->orderByClause = new OrderByClause([$orderById]);
+            $ast->orderByClause = new OrderByClause([]);
+        }
+
+        if (!$metadata->isIdentifierComposite) {
+            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $identifierFieldNames[0]);
 
             return;
         }
 
-        $ast->orderByClause->orderByItems[] = $orderById;
+        foreach ($identifierFieldNames as $fieldName) {
+            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $fieldName);
+        }
+    }
+
+    private function createOrderByItem(string $dqlAlias, string $fieldName): OrderByItem
+    {
+        $expression = new PathExpression(
+            PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION,
+            $dqlAlias,
+            $fieldName,
+        );
+        $expression->type = PathExpression::TYPE_STATE_FIELD;
+
+        $orderByItem = new OrderByItem($expression);
+        $orderByItem->type = 'ASC';
+
+        return $orderByItem;
     }
 
     /**
