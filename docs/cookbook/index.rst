@@ -49,6 +49,7 @@ Shop
     shop/embedding-products
     shop/facebook-login
     shop/cms
+    shop/vue-storefront
 
 .. include:: /cookbook/shop/map.rst.inc
 
@@ -193,3 +194,4 @@ API
     api/how_force_login_already_registered_user_during_checkout
 
 .. include:: /cookbook/api/map.rst.inc
+

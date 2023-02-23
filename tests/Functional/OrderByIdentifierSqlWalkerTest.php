@@ -45,6 +45,31 @@ class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
     }
 
     /** @test */
+    public function it_appends_order_by_identifier_composite_to_the_query(): void
+    {
+        self::assertStringEndsWith(
+            'ORDER BY c0_.email ASC, c0_.organization_name ASC',
+            $this->generateSql(
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u'
+            )
+        );
+
+        self::assertStringEndsWith(
+            'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
+            $this->generateSql(
+                'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc'
+            )
+        );
+
+        self::assertStringEndsWith(
+            'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
+            $this->generateSql(
+                'select (CASE WHEN u.email = \'admin@example.com\' THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc'
+            )
+        );
+    }
+
+    /** @test */
     public function it_does_not_append_order_by_identifier_to_the_query_if_query_is_grouped(): void
     {
         self::assertStringEndsWith(
