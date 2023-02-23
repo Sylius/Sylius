@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxRate",
+    "@id": "\/api\/v2\/admin\/tax-rates\/sales_tax",
+    "@type": "TaxRate",
+    "zone": "\/api\/v2\/admin\/zones\/EU",
+    "id": "@integer@",
+    "code": "sales_tax",
+    "category": "\/api\/v2\/admin\/tax-categories\/default",
+    "name": "Sales Tax 20\\%",
+    "includedInPrice": false,
+    "amount": 0,
+    "startDate": null,
+    "endDate": null,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

@@ -1,0 +1,33 @@
+Sylius\Component\Core\Model\TaxRate:
+    sales_tax:
+        code: sales_tax
+        name: 'Sales Tax 20\\%'
+        calculator: 'flat_rate'
+        category: "@tax_category_default"
+        zone: '@zone_eu_1'
+    regular_tax:
+        code: regular_tax
+        name: 'Regular Tax 20\\%'
+        calculator: 'flat_rate'
+        category: '@tax_category_special'
+        zone: '@zone_eu_1'
+
+Sylius\Component\Taxation\Model\TaxCategory:
+    tax_category_default:
+        code: 'default'
+        name: 'Default'
+    tax_category_special:
+        code: 'special'
+        name: 'Special'
+        description: 'For peculiar places'
+
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_{NL, BE}:
+        code: <current()>
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu_1:
+        code: EU
+        name: European Union
+        type: country
+        members: ["@member_NL", "@member_BE"]
