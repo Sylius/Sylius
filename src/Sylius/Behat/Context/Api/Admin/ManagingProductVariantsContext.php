@@ -26,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
+    private const FIRST_COLLECTION_ITEM = 0;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -48,6 +50,19 @@ final class ManagingProductVariantsContext implements Context
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I name it :name in :language
+     */
+    public function iNameItIn($name, $language)
+    {
+        $this->client->addRequestData('translations', [
+            $language => [
+                'locale' => $language,
+                'name' => $name,
+            ],
+        ]);
     }
 
     /**
@@ -167,7 +182,10 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Product Variant could not be created',
+            sprintf(
+                'Product Variant could not be created: %s',
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
         );
     }
 
@@ -182,13 +200,34 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^the (?:variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
+     */
+    public function theVariantWithCodeShouldBeNamedIn(string $name, string $language)
+    {
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
+
+        $expectedTranslation = [
+            'locale' => $language,
+            'name' => $name,
+        ];
+
+        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM]['translations'][$language];
+
+        Assert::allInArray(
+            $expectedTranslation,
+            $translationInLocale,
+            sprintf('Expected translation %s, got %s', $expectedTranslation['name'], $translationInLocale['name']),
+        );
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be priced at ("[^"]+") for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
+        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
     }
 
     /**
@@ -198,7 +237,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
+        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
 
     private function updateChannelPricingField(

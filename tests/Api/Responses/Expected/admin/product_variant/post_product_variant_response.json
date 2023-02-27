@@ -17,5 +17,13 @@
     },
     "enabled": true,
     "optionValues": [],
-    "translations": []
+    "translations": {
+        "en_US": {
+            "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@type":"ProductVariantTranslation",
+            "id":"@integer@",
+            "name":"Yellow mug",
+            "locale":"en_US"
+        }
+    }
 }

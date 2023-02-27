@@ -11,7 +11,7 @@ Feature: Adding a new product variant
         And the store has "Fragile" shipping category
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Adding a new product variant
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
@@ -19,9 +19,9 @@ Feature: Adding a new product variant
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
-        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $100.00 for channel "United States"
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at "$100.00" for channel "United States"
 
-    @ui
+    @api @ui
     Scenario: Adding a new product variant with name
         Given the store is also available in "Polish (Poland)"
         When I want to create a new variant of this product
@@ -32,7 +32,7 @@ Feature: Adding a new product variant
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
-        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $100.00 for channel "United States"
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at "$100.00" for channel "United States"
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should be named "Vodka Wyborowa Premium" in "English (United States)" locale
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should be named "Wódka Wyborowa Premium" in "Polish (Poland)" locale
 
