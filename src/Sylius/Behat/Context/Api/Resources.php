@@ -73,7 +73,7 @@ final class Resources
 
     public const TAX_CATEGORIES = 'tax-categories';
 
-    PUBLIC CONST TAX_RATES = 'tax-rates';
+    public const TAX_RATES = 'tax-rates';
 
     public const ZONES = 'zones';
 
