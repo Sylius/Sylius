@@ -30,7 +30,7 @@ class ManagingTaxRatesContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -290,7 +290,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Tax tax rate could not be created'
+            'Tax tax rate could not be created',
         );
     }
 
@@ -304,7 +304,7 @@ class ManagingTaxRatesContext implements Context
 
         Assert::true(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAX_RATES), 'name', $name),
-            sprintf('Tax rate with name %s does not exist', $name)
+            sprintf('Tax rate with name %s does not exist', $name),
         );
     }
 
@@ -315,7 +315,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $taxRate->isIncludedInPrice(),
-            sprintf('Tax rate is not included in price')
+            sprintf('Tax rate is not included in price'),
         );
     }
 
@@ -326,7 +326,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be deleted'
+            'Tax rate could not be deleted',
         );
     }
 
@@ -339,7 +339,7 @@ class ManagingTaxRatesContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAX_RATES), 'name', $name),
-            sprintf('Tax rate with name %s exists', $name)
+            sprintf('Tax rate with name %s exists', $name),
         );
     }
 
@@ -350,7 +350,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be deleted'
+            'Tax rate could not be deleted',
         );
     }
 
@@ -370,11 +370,11 @@ class ManagingTaxRatesContext implements Context
         $response = $this->client->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Tax rate has been created successfully, but it should not'
+            'Tax rate has been created successfully, but it should not',
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'code: The tax rate with given code already exists.'
+            'code: The tax rate with given code already exists.',
         );
     }
 
@@ -386,7 +386,7 @@ class ManagingTaxRatesContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::TAX_RATES), 'code', $code),
             1,
-            sprintf('There is more than one tax rate with code %s', $code)
+            sprintf('There is more than one tax rate with code %s', $code),
         );
     }
 
@@ -397,7 +397,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter tax rate %s.', $element, $element)
+            sprintf('%s: Please enter tax rate %s.', $element, $element),
         );
     }
 
@@ -408,7 +408,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAX_RATES), $element, $code),
-            sprintf('Tax rate with %s %s exist', $element, $code)
+            sprintf('Tax rate with %s %s exist', $element, $code),
         );
     }
 
@@ -419,7 +419,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'zone: Please select tax zone.'
+            'zone: Please select tax zone.',
         );
     }
 
@@ -430,7 +430,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'category: Please select tax category.'
+            'category: Please select tax category.',
         );
     }
 
@@ -441,7 +441,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
-            sprintf('Tax rate with name %s exists', $name)
+            sprintf('Tax rate with name %s exists', $name),
         );
     }
 
@@ -461,7 +461,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'name', $taxRateName),
-            sprintf('Tax rate name is not %s', $taxRateName)
+            sprintf('Tax rate name is not %s', $taxRateName),
         );
     }
 
@@ -482,7 +482,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be edited'
+            'Tax rate could not be edited',
         );
     }
 
@@ -493,7 +493,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'amount', $taxRateAmount),
-            sprintf('Tax rate amount is not %s', $taxRateAmount)
+            sprintf('Tax rate amount is not %s', $taxRateAmount),
         );
     }
 
@@ -504,7 +504,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'category', $this->iriConverter->getIriFromItem($taxCategory)),
-            sprintf('Tax rate is not applicable for %s tax category', $taxCategory)
+            sprintf('Tax rate is not applicable for %s tax category', $taxCategory),
         );
     }
 
@@ -515,7 +515,7 @@ class ManagingTaxRatesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'zone', $this->iriConverter->getIriFromItem($zone)),
-            sprintf('Tax rate is not applicable for %s zone', $zone)
+            sprintf('Tax rate is not applicable for %s zone', $zone),
         );
     }
 }
