@@ -45,7 +45,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_tax_rate_code',
             'name' => '#sylius_tax_rate_name',
             'zone' => '#sylius_tax_rate_zone',
-            'included_in_price' => '#sylius_tax_rate_includedInPrice'
+            'included_in_price' => '#sylius_tax_rate_includedInPrice',
         ]);
     }
 }
