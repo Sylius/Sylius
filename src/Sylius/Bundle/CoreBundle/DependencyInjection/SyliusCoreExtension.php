@@ -93,6 +93,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
+        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -158,6 +159,17 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             'property_naming' => [
                 'id' => 'jms_serializer.identical_property_naming_strategy',
             ],
+        ]);
+    }
+
+    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
+    {
+        if (!$container->hasExtension('sylius_order')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_order', [
+            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
         ]);
     }
 
