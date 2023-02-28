@@ -292,4 +292,37 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /** @test */
+    public function it_does_not_allow_to_update_product_variant_with_invalid_locale_code(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'channelPricings' => ['WEB' => [
+                    'channelCode' => 'WEB',
+                    'price' => 4000,
+                    'originalPrice' => 5000,
+                    'minimumPrice' => 2000,
+                ]],
+                'translations' => [
+                    'NON-EXISTING-LOCALE-CODE' => [
+                        'locale' => 'NON-EXISTING-LOCALE-CODE',
+                        'name' => 'Yellow mug',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
