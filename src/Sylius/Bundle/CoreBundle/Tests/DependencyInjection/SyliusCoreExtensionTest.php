@@ -17,6 +17,7 @@ use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExten
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
+use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
@@ -68,6 +69,33 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     public function it_autoconfigures_prepending_doctrine_migrations_with_proper_migrations_path_for_dev_env(): void
     {
         $this->testPrependingDoctrineMigrations('dev');
+    }
+
+    /**
+     * @test
+     * @dataProvider provideAutoconfigureWithAttributesData
+     */
+    public function it_prepends_sylius_order_bundle_configuration_with_proper_values(bool $value, bool $orderBundleValue): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->container->registerExtension(new SyliusOrderExtension());
+        $this->container->loadFromExtension('sylius_core', [
+            'autoconfigure_with_attributes' => $value,
+        ]);
+        $this->container->loadFromExtension('sylius_order', [
+            'autoconfigure_with_attributes' => $orderBundleValue,
+        ]);
+
+        $this->load();
+
+        $syliusOrderConfig = $this->container->getExtensionConfig('sylius_order');
+        $this->assertEquals($value, $syliusOrderConfig[0]['autoconfigure_with_attributes']);
+    }
+
+    public static function provideAutoconfigureWithAttributesData(): iterable
+    {
+        yield [true, false];
+        yield [false, true];
     }
 
     /** @test */
