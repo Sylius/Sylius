@@ -29,6 +29,7 @@
         <attribute name="translations">
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:update</group>
         </attribute>
         <attribute name="optionValues">
             <group>admin:product_variant:read</group>

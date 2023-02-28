@@ -190,6 +190,20 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
+    {
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            sprintf(
+                'Product Variant could not be edited: %s',
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
+        );
+    }
+
+    /**
      * @Then the :productVariantCode variant of the :product product should appear in the store
      */
     public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void

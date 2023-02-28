@@ -1,30 +1,37 @@
 {
-    "@context":"\/api\/v2\/contexts\/ProductVariant",
-    "@id":"\/api\/v2\/admin\/product-variants\/MUG",
-    "@type":"ProductVariant",
-    "code":"MUG",
-    "product":"\/api\/v2\/admin\/products\/MUG_SW",
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/admin\/product-variants\/MUG",
+    "@type": "ProductVariant",
     "channelPricings": {
         "WEB": {
-            "@id": "/api/v2/admin/channel-pricings/@integer@",
+            "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
             "@type": "ChannelPricing",
             "id": @integer@,
             "channelCode": "WEB",
             "price": 3000,
             "originalPrice": 4000,
             "lowestPriceBeforeDiscount": 2000,
-            "minimumPrice": 0
+            "minimumPrice": 210
         }
     },
-    "optionValues":[],
+    "code": "MUG",
+    "product": "\/api\/v2\/admin\/products\/MUG_SW",
+    "optionValues": [],
     "enabled": true,
     "translations": {
-        "en_US": {
-            "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
-            "@type":"ProductVariantTranslation",
-            "id":"@integer@",
-            "name":"Mug",
-            "locale":"en_US"
+        "de_DE": {
+            "@id": "\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id": @integer@,
+            "name": "Orange Tasse",
+            "locale": "de_DE"
+        },
+        "pl_PL": {
+            "@id": "\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id": @integer@,
+            "name": "Pomarańczowy kubek",
+            "locale": "pl_PL"
         }
     }
 }
