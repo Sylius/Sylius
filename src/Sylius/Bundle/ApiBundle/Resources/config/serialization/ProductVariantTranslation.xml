@@ -19,7 +19,6 @@
         <attribute name="id">
             <group>shop:order:account:read</group>
             <group>admin:order:read</group>
-            <group>admin:product_variant:read</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="name">
