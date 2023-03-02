@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -35,7 +36,11 @@ final class CartSessionStorage implements CartStorageInterface
 
     public function hasForChannel(ChannelInterface $channel): bool
     {
-        return SessionProvider::getSession($this->requestStackOrSession)->has($this->getCartKeyName($channel));
+        try {
+            return SessionProvider::getSession($this->requestStackOrSession)->has($this->getCartKeyName($channel));
+        } catch (SessionNotFoundException) {
+            return false;
+        }
     }
 
     public function getForChannel(ChannelInterface $channel): ?OrderInterface
