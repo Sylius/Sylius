@@ -26,8 +26,7 @@ final class DeleteOrderItemAction
     public function __construct(
         private MessageBusInterface $commandBus,
         private OrderItemRepositoryInterface $orderItemRepository,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): Response
