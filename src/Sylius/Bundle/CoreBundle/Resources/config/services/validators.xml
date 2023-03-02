@@ -67,5 +67,10 @@
         <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>
+
+        <service id="sylius.validator.channel_code_among_existing_ones" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ExistingChannelCodeValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="validator.constraint_validator" alias="sylius_channel_code_among_existing_ones" />
+        </service>
     </services>
 </container>
