@@ -4,6 +4,9 @@ on:
     release:
         types: [created]
 
+env:
+    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
     build:
         runs-on: ubuntu-latest

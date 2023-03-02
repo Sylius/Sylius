@@ -13,6 +13,9 @@ concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-minimal
     cancel-in-progress: true
 
+env:
+    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
     static-checks:
         name: Static checks
