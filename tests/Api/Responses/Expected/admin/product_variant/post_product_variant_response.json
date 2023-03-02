@@ -19,7 +19,7 @@
     "optionValues": [],
     "translations": {
         "en_US": {
-            "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@id":"\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type":"ProductVariantTranslation",
             "id":"@integer@",
             "name":"Yellow mug",

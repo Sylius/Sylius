@@ -20,14 +20,14 @@
     "enabled": true,
     "translations": {
         "de_DE": {
-            "@id": "\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
             "name": "Orange Tasse",
             "locale": "de_DE"
         },
         "pl_PL": {
-            "@id": "\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
             "name": "Pomarańczowy kubek",
