@@ -40,7 +40,7 @@
         "doctrine/event-manager": "^1.1",
         "doctrine/inflector": "^1.4 || ^2.0",
         "doctrine/migrations": "^3.0",
-        "doctrine/orm": "2.15.*@dev",
+        "doctrine/orm": "dev-mapped-superclass-resolve-to-many-lazy-check as 2.15.0",
         "doctrine/persistence": "^2.3",
         "egulias/email-validator": "^3.1",
         "enshrined/svg-sanitize": "^0.15.4",
@@ -135,6 +135,12 @@
         "winzou/state-machine": "^0.4",
         "winzou/state-machine-bundle": "^0.6"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:mpdude/doctrine2.git"
+        }
+    ],
     "replace": {
         "sylius/addressing": "self.version",
         "sylius/addressing-bundle": "self.version",

@@ -39,7 +39,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
-        "doctrine/orm": "2.15.*@dev",
+        "doctrine/orm": "dev-mapped-superclass-resolve-to-many-lazy-check as 2.15.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
@@ -75,6 +75,10 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:mpdude/doctrine2.git"
         }
     ],
     "minimum-stability": "dev",

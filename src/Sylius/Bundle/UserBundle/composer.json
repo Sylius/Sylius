@@ -38,7 +38,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/orm": "2.15.*@dev",
+        "doctrine/orm": "dev-mapped-superclass-resolve-to-many-lazy-check as 2.15.0",
         "egulias/email-validator": "^3.1",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
@@ -96,6 +96,10 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:mpdude/doctrine2.git"
         }
     ],
     "minimum-stability": "dev",
