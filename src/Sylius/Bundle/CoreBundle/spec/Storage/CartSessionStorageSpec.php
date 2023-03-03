@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -31,6 +32,30 @@ final class CartSessionStorageSpec extends ObjectBehavior
     function it_implements_a_cart_storage_interface(): void
     {
         $this->shouldImplement(CartStorageInterface::class);
+    }
+
+    function it_returns_false_when_session_is_not_found_during_checking_if_cart_is_in_session(
+        RequestStack $requestStack,
+        ChannelInterface $channel
+    ): void {
+        $channel->getCode()->willReturn('channel_code');
+
+        $requestStack->getSession()->willThrow(SessionNotFoundException::class);
+
+        $this->hasForChannel($channel)->shouldReturn(false);
+    }
+
+    function it_checks_if_cart_is_in_session(
+        SessionInterface $session,
+        RequestStack $requestStack,
+        ChannelInterface $channel,
+    ): void {
+        $channel->getCode()->willReturn('channel_code');
+
+        $requestStack->getSession()->willReturn($session);
+        $session->has('session_key_name.channel_code')->willReturn(true);
+
+        $this->hasForChannel($channel)->shouldReturn(true);
     }
 
     function it_sets_a_cart_in_a_session(
