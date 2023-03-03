@@ -40,7 +40,7 @@ Installing Sylius Plus as a plugin to a Sylius application
 .. code-block:: bash
 
     composer config repositories.plus composer https://sylius.repo.packagist.com/ShortNameOfYourOrganization/
-    composer require "sylius/plus:^1.0.0-ALPHA.9" --no-update
+    composer require "sylius/plus:^1.0.0@beta" --no-update
     composer update --no-scripts
     composer sync-recipes
 
