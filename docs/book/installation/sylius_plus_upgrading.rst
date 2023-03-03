@@ -12,7 +12,7 @@ Each release comes with an ``UPGRADE.md`` file, which is meant to help in the up
 
         {
             "require": {
-                "sylius/plus": "^1.0.0-ALPHA.7"
+                "sylius/plus": "^1.0.0@beta"
             }
         }
 
