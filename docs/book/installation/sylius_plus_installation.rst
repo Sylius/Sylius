@@ -90,6 +90,9 @@ Installing Sylius Plus as a plugin to a Sylius application
         resource: "@SyliusPlusPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
 
+.. warning:: Skip `sylius_plus_shop` if you are not using SyliusShopBundle
+          and `sylius_plus_admin` if you are not using SyliusAdminBundle.
+
 **6.** Update security providers in ``config/packages/security.yaml``:
 
 .. code-block:: yaml
