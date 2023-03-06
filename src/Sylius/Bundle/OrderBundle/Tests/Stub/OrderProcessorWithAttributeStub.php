@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Tests\Stub;
 
-
 use Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;

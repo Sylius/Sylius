@@ -16,7 +16,7 @@ namespace Sylius\Bundle\OrderBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsCartContext
 {
-    public function __construct (
+    public function __construct(
         private int $priority = 0,
     ) {
     }
