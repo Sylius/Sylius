@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Tests\Stub;
 
-
 use Sylius\Bundle\OrderBundle\Attribute\AsCartContext;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\Order;
