@@ -36,7 +36,7 @@ final class CartSessionStorageSpec extends ObjectBehavior
 
     function it_returns_false_when_session_is_not_found_during_checking_if_cart_is_in_session(
         RequestStack $requestStack,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channel->getCode()->willReturn('channel_code');
 
