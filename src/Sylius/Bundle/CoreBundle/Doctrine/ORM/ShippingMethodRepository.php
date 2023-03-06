@@ -39,6 +39,8 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
+            ->addSelect('rules')
+            ->leftJoin('o.rules', 'rules')
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('zones', $zones)
             ->addOrderBy('o.position', 'ASC')

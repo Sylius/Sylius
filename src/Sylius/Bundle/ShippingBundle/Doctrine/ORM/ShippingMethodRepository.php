@@ -30,4 +30,16 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
             ->getResult()
         ;
     }
+
+    public function findEnabledWithRules(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('rules')
+            ->leftJoin('o.rules', 'rules')
+            ->andWhere('o.enabled = :enabled')
+            ->setParameter('enabled', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
