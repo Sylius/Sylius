@@ -73,6 +73,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
     /**
      * @test
+     *
      * @dataProvider provideAutoconfigureWithAttributesData
      */
     public function it_prepends_sylius_order_bundle_configuration_with_proper_values(bool $value, bool $orderBundleValue): void
