@@ -1,0 +1,11 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-03-08T07:36:38Z
+
+I changed the base from `1.13` to `1.12` as we had mixed feelings what to do with `1.12` as the same problem exists there. We decided as this won't break anything we drop `2.6` support due to detected security issue.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-03-09T20:45:44Z
+
+Thanks, Jakub! :1st_place_medal:
