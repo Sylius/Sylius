@@ -14,14 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\ChannelPricingLogEntryRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactory;
 use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ChannelPricingLogEntry;
+use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductTaxon;
@@ -171,6 +176,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('form')->defaultValue(ChannelPricingType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('channel_pricing_log_entry')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(ChannelPricingLogEntry::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ChannelPricingLogEntryInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ChannelPricingLogEntryRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(ChannelPricingLogEntryFactory::class)->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
