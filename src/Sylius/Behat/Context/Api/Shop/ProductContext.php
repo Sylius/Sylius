@@ -140,8 +140,6 @@ final class ProductContext implements Context
     }
 
     /**
-=======
->>>>>>> 1.11
      * @When I sort products by the lowest price first
      */
     public function iSortProductsByTheLowestPriceFirst(): void
