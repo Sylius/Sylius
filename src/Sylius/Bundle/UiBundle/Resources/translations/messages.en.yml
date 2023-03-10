@@ -352,6 +352,7 @@ sylius:
         filters: 'Filters'
         first_name: 'First name'
         fixed_discount: 'Fixed discount'
+        float: 'Float'
         for_products: 'For products'
         for_taxons: 'For taxons'
         for_variants: 'For variants'
