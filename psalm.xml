@@ -228,6 +228,12 @@
         <!-- level 8 issues - some fatal errors in PHP -->
 
         <MethodSignatureMismatch errorLevel="info" />
+
+        <InvalidStringClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Component/Core/Factory/ChannelPricingLogEntryFactory.php" />
+            </errorLevel>
+        </InvalidStringClass>
     </issueHandlers>
 
     <stubs>
