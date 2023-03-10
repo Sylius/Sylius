@@ -39,7 +39,8 @@ final class OrderStateResolver implements StateResolverInterface
     private function canOrderBeFulfilled(OrderInterface $order): bool
     {
         return
-            OrderPaymentStates::STATE_PAID === $order->getPaymentState() &&
+            (OrderPaymentStates::STATE_PAID === $order->getPaymentState() ||
+            OrderPaymentStates::STATE_PARTIALLY_REFUNDED === $order->getPaymentState()) &&
             OrderShippingStates::STATE_SHIPPED === $order->getShippingState()
         ;
     }
