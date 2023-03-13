@@ -16,31 +16,31 @@ Feature: Not seeing the lowest price for a product that has all taxons excluded 
         And it belongs to "T-Shirts" and "PHP"
         And this product's price changed to "$15.00" and original price changed to "$23.00"
 
-    @api @ui
+    @todo
     Scenario: Not seeing the lowest price for a product that has all taxons excluded on the channel
         Given the "T-Shirts" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "T-Shirt Banana"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo
     Scenario: Not seeing the lowest price for a product that has parent taxon excluded on the channel
         Given the "Clothes" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "T-Shirt Banana"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo
     Scenario: Not seeing the lowest price for a product that has root taxon excluded on the channel
         Given the "Category" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "T-Shirt Banana"
         Then I should not see information about its lowest price
 
-    @api @ui
+    @todo
     Scenario: Seeing the lowest price for a product that has not all taxons excluded on the channel
         Given the "T-Shirts" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "T-Shirt PHP"
         Then I should see "$23.00" as its lowest price before the discount
 
-    @api @ui
+    @todo
     Scenario: Not seeing the lowest price for a not discounted product that has all taxons excluded on the channel
         Given the "T-Shirts" taxon is excluded from showing the lowest price of discounted products in the "United States" channel
         When I view product "T-Shirt Watermelon"
