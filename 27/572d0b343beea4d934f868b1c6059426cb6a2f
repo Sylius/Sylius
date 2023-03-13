@@ -1,0 +1,65 @@
+---------------------------------------------------------------------------
+
+by panigrc at 2019-10-05T21:53:09Z
+
+@pamil thank you :slightly_smiling_face:. I will make the tests and will come back to you.
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2019-10-29T10:32:52Z
+
+@panigrc thank you for the scenarios, but it would be great to also have implementation for them :) 🖖 ☮️
+
+---------------------------------------------------------------------------
+
+by panigrc at 2019-11-13T23:08:05Z
+
+@Zales0123 thank you for pointing that out, I saw that the Behat tests were failing.
+I did a small change with the 1f39662a74880f0577f26ebf191128c7425b4c63 but I didn't find any other places in which I need to implement the scenarios.
+
+I could use a little help to understand how to implement the scenarios.
+
+---------------------------------------------------------------------------
+
+by stale[bot] at 2020-02-11T23:20:08Z
+
+This issue has been automatically marked as stale because it has not had any recent activity. It will be closed in a week if no further activity occurs. Thank you for your contributions.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-01-03T18:40:20Z
+
+Hey @panigrc, do you still want to finish this? I can help with the tests.
+
+---------------------------------------------------------------------------
+
+by panigrc at 2022-11-17T22:12:08Z
+
+Hi @vvasiloi, sorry for not answering sooner your message, I forgot about this PR.
+I haven't used Sylius for a while now and I think it's better to reject this PR.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-11-18T09:20:27Z
+
+@panigrc no problem, maybe someone else will finish it.
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-03-09T12:06:25Z
+
+Hi @panigrc!
+Thank you for the PR 🍻
+I like the feature, I'm going to try to finish it 🚀
+
+---------------------------------------------------------------------------
+
+by panigrc at 2023-03-09T18:43:24Z
+
+@TheMilek  I'm grateful ! It's a long time ago since I pushed this PR.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-03-13T13:07:09Z
+
+Thanks, Nik! :1st_place_medal:
