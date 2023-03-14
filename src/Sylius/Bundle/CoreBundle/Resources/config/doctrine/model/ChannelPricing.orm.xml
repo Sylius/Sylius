@@ -32,6 +32,7 @@
                 <option name="default">0</option>
             </options>
         </field>
+        <field name="lowestPriceBeforeDiscount" column="lowest_price_before_discount" type="integer" nullable="true" />
         <field name="channelCode" column="channel_code" type="string" />
         <many-to-many field="appliedPromotions" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionInterface">
             <order-by>

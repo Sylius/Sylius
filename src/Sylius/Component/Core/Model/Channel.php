@@ -82,6 +82,8 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var TaxonInterface|null */
     protected $menuTaxon;
 
+    protected int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
+
     public function __construct()
     {
         parent::__construct();
@@ -294,5 +296,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setMenuTaxon(?TaxonInterface $menuTaxon): void
     {
         $this->menuTaxon = $menuTaxon;
+    }
+
+    public function getLowestPriceForDiscountedProductsCheckingPeriod(): int
+    {
+        return $this->lowestPriceForDiscountedProductsCheckingPeriod;
+    }
+
+    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void
+    {
+        $this->lowestPriceForDiscountedProductsCheckingPeriod = $periodInDays;
     }
 }
