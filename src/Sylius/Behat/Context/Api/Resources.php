@@ -23,6 +23,8 @@ final class Resources
 
     public const CATALOG_PROMOTIONS = 'catalog-promotions';
 
+    public const CHANNEL_PRICING_LOG_ENTRY = 'channel-pricing-log-entries';
+
     public const CHANNELS = 'channels';
 
     public const CONTACT_REQUESTS = 'contact-requests';

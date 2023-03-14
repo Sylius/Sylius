@@ -64,6 +64,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I set its original price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iSetItsOriginalPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'originalPrice' => $originalPrice,
+                'channelCode' => $channel->getCode(),
+            ],
+        ]);
+    }
+
+    /**
      * @When /^I set its minimum price to ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iSetItsMinimumPriceToForChannel(int $minimumPrice, ChannelInterface $channel): void
@@ -124,6 +137,27 @@ final class ManagingProductVariantsContext implements Context
         ChannelInterface $channel,
     ): void {
         $this->createNewVariantWithPrice($name, $price, $product, $channel);
+    }
+
+    /**
+     * @When I want to modify the :variant product variant
+     */
+    public function iWantToModifyProductVariant(ProductVariantInterface $variant): void
+    {
+        $this->client->buildUpdateRequest(Resources::PRODUCT_VARIANTS, $variant->getCode());
+    }
+
+    /**
+     * @When /^I change its price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iChangeItsPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $originalPrice,
+                'channelCode' => $channel->getCode(),
+            ],
+        ]);
     }
 
     /**
