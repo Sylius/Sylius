@@ -48,9 +48,9 @@ final class ProductOptionValueCollectionType extends AbstractType
             $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
-                'data' => $this->getDefaultDataOption($option, $options['data']),
-                'property_path' => '[' . $i . ']',
                 'block_name' => 'entry',
+                'getter' => fn (Collection $data) => $this->getDefaultDataOption($option, $data),
+                'setter' => fn (Collection $data, ?ProductOptionValueInterface $value) => $this->setDataOption($data, $value),
             ]);
         }
     }
@@ -89,5 +89,23 @@ final class ProductOptionValueCollectionType extends AbstractType
         }
 
         return null;
+    }
+
+    private function setDataOption(Collection $data, ?ProductOptionValueInterface $optionValue): void
+    {
+        if (null === $optionValue) {
+            return;
+        }
+
+        foreach ($data as $option) {
+            if ($option->getOption()->getCode() === $optionValue->getOption()->getCode()) {
+                $data->removeElement($option);
+                $data->add($optionValue);
+
+                return;
+            }
+        }
+
+        $data->add($optionValue);
     }
 }
