@@ -23,12 +23,13 @@
         <import resource="services/emails.xml" />
         <import resource="services/factories.xml" />
         <import resource="services/fixtures.xml" />
-        <import resource="services/fixtures_listeners.xml" />
         <import resource="services/fixtures_factories.xml" />
+        <import resource="services/fixtures_listeners.xml" />
         <import resource="services/form.xml" />
         <import resource="services/installer.xml" />
         <import resource="services/installer_requirements.xml" />
         <import resource="services/listeners.xml" />
+        <import resource="services/logger.xml" />
         <import resource="services/message_handlers.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
