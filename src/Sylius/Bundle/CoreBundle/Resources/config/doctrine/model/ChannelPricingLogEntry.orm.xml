@@ -27,6 +27,9 @@
 
         <many-to-one field="channelPricing" target-entity="Sylius\Component\Core\Model\ChannelPricingInterface">
             <join-column name="channel_pricing_id" nullable="false" on-delete="CASCADE" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
         </many-to-one>
     </mapped-superclass>
 </doctrine-mapping>

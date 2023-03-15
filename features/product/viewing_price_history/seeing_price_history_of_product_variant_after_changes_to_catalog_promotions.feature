@@ -1,4 +1,4 @@
-@managing_catalog_promotions
+@viewing_price_history_after_catalog_promotions
 Feature: Seeing the price history of a product variant after changes to catalog promotions
     In order to be aware of historical variant prices
     As an Administrator
@@ -14,14 +14,14 @@ Feature: Seeing the price history of a product variant after changes to catalog 
         And there is an exclusive catalog promotion "Extra sale" with priority 10 that reduces price by "10%" and applies on "Wyborowa Vodka Lemon" variant
         And I am logged in as an administrator
 
-    @todo
+    @api
     Scenario: Seeing the catalog price history of a variant with many catalog promotions
         And I go to the price history of a variant with code "WYBOROWA_VODKA_EXQUISITE"
         Then I should see 2 log entries in the catalog price history
         And there should be a log entry on the 1st position with the "$5.00" selling price, "$15.00" original price and datetime of the price change
         And there should be a log entry on the 2nd position with the "$40.00" selling price, "$15.00" original price and datetime of the price change
 
-    @todo
+    @api
     Scenario: Seeing the catalog price history of a variant with one catalog promotion
         And I go to the price history of a variant with code "WYBOROWA_VODKA_LEMON"
         Then I should see 2 log entries in the catalog price history

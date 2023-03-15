@@ -1,4 +1,4 @@
-@managing_product_variants
+@viewing_price_history
 Feature: Seeing the correct catalog price history after creating a product variant
     In order to be aware of historical product prices
     As an Administrator
