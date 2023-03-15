@@ -111,14 +111,6 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When /^I delete the (exchange rate between "[^"]+" and "[^"]+")$/
      */
     public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate): void

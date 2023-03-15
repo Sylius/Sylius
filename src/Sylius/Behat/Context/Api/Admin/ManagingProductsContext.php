@@ -166,14 +166,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I filter them by :taxon taxon
      */
     public function iFilterThemByTaxon(TaxonInterface $taxon): void

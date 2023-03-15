@@ -322,14 +322,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse catalog promotions
      */
     public function iBrowseCatalogPromotions(): void

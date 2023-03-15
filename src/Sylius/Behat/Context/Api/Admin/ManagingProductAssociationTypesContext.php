@@ -171,14 +171,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
