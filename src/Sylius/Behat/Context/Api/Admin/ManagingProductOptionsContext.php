@@ -124,14 +124,6 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should see :count product options in the list
      */
     public function iShouldSeeProductOptionsInTheList(int $count): void

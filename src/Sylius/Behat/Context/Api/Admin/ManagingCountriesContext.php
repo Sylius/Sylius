@@ -85,15 +85,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I name the province :provinceName
      */
     public function iNameTheProvince(string $provinceName): void

@@ -255,14 +255,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I sort the shipping methods :sortType by code
      * @When I switch the way shipping methods are sorted :sortType by code
      */

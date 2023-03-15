@@ -97,14 +97,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I specify the current password as :password
      */
     public function iSpecifyTheCurrentPasswordAs(string $password): void

@@ -101,14 +101,6 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse tax categories
      */
     public function iWantToBrowseTaxCategories(): void

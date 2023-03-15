@@ -65,14 +65,6 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I choose :rating as its rating
      */
     public function iChooseAsItsRating(int $rating): void
