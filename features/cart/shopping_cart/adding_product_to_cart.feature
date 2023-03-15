@@ -42,3 +42,9 @@ Feature: Adding a simple product to the cart
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
         And this item should have name "T-Shirt banana"
+
+    @ui @api
+    Scenario: Increasing quantity of an item in cart by adding the product again
+        Given I have product "T-Shirt banana" in the cart
+        When I add this product to the cart
+        Then I should see "T-Shirt banana" with quantity 2 in my cart
