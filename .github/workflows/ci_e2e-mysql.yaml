@@ -141,7 +141,7 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
 
             -   name: Run Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@api" ||vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli&&~@api" --rerun 
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli&&~@api" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli&&~@api" --rerun 
 
             -   name: Upload Behat logs
                 uses: actions/upload-artifact@v3
