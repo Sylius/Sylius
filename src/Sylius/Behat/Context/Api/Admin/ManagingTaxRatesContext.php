@@ -171,15 +171,6 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse tax rates
      */
     public function iBrowseTaxRates(): void

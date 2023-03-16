@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\FloatAttributeType;
-use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -56,7 +55,7 @@ final class FloatAttributeTypeSpec extends ObjectBehavior
         ConstraintViolationInterface $constraintViolation,
         ConstraintViolationListInterface $constraintViolationList,
         ExecutionContextInterface $context,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
     ): void {
         $attributeValue->getAttribute()->willReturn($attribute);
 

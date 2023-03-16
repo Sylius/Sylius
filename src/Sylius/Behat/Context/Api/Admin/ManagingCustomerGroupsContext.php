@@ -73,14 +73,6 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse customer groups
      * @When I want to browse customer groups
      */

@@ -128,15 +128,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $response = $this->client->update();
-        $this->responseChecker->isUpdateSuccessful($response);
-    }
-
-    /**
      * @When I delete administrator with email :adminUser
      */
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void

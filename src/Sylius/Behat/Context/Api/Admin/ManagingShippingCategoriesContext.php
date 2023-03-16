@@ -108,14 +108,6 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should be notified that shipping category with this code already exists
      */
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
