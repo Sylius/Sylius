@@ -111,6 +111,7 @@ imports:
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/payment/managing_payments.yml
     - suites/ui/product/accessing_edit_page_from_product_show_page.yml
+    - suites/ui/product/accessing_price_history.yml
     - suites/ui/product/adding_product_review.yml
     - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
