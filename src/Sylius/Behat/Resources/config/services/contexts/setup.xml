@@ -151,6 +151,7 @@
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="behat.mink.parameters" />
+            <argument type="service" id="sylius.event_bus" />
         </service>
 
         <service id="sylius.behat.context.setup.product_association" class="Sylius\Behat\Context\Setup\ProductAssociationContext">

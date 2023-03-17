@@ -91,4 +91,8 @@ interface ChannelInterface extends
     public function removeCountry(CountryInterface $country): void;
 
     public function hasCountry(CountryInterface $country): bool;
+
+    public function getLowestPriceForDiscountedProductsCheckingPeriod(): int;
+
+    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void;
 }

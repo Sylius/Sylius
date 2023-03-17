@@ -18,6 +18,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Event\ProductUpdated;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -39,6 +40,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -60,6 +62,7 @@ final class ProductContext implements Context
         private ImageUploaderInterface $imageUploader,
         private SlugGeneratorInterface $slugGenerator,
         private \ArrayAccess $minkParameters,
+        private MessageBusInterface $eventBus,
     ) {
     }
 
@@ -1076,6 +1079,162 @@ final class ProductContext implements Context
         $this->saveProduct($product);
     }
 
+    /**
+     * @Given /^(this product) has all possible variants priced at ("[^"]+") with indexed names$/
+     */
+    public function thisProductHasAllPossibleVariantsPricedAtWithIndexedNames(
+        ProductInterface $product,
+        int $price,
+    ): void {
+        try {
+            foreach ($product->getVariants() as $productVariant) {
+                $product->removeVariant($productVariant);
+            }
+
+            $this->productVariantGenerator->generate($product);
+        } catch (\InvalidArgumentException) {
+            /** @var ProductVariantInterface $productVariant */
+            $productVariant = $this->productVariantFactory->createNew();
+
+            $product->addVariant($productVariant);
+        }
+
+        $i = 0;
+        /** @var ProductVariantInterface $productVariant */
+        foreach ($product->getVariants() as $productVariant) {
+            $productVariant->setCode(sprintf('%s-variant-%d', $product->getCode(), $i));
+            $productVariant->setName(sprintf('%s variant %d', $product->getName(), $i));
+
+            foreach ($product->getChannels() as $channel) {
+                $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+            }
+
+            ++$i;
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product) is now priced at ("[^"]+") and originally priced at ("[^"]+")$/
+     */
+    public function theProductIsPricedAtAndOriginallyPricedAt(
+        ProductInterface $product,
+        int $price,
+        int $originalPrice,
+    ): void {
+        $channelPricing = $this->getChannelPricingFromProduct($product);
+
+        $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice($originalPrice);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the (product "[^"]+") has a "([^"]+)" variant priced at ("[^"]+") and originally priced at ("[^"]+")$/
+     */
+    public function theProductHasVariantPricedAtAndOriginallyPricedAt(
+        ProductInterface $product,
+        string $productVariantName,
+        int $price,
+        int $originalPrice,
+    ): void {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice($originalPrice);
+        $channelPricing->setChannelCode($this->sharedStorage->get('channel')->getCode());
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantFactory->createNew();
+        $variant->setName($productVariantName);
+        $variant->setCode(StringInflector::nameToUppercaseCode($productVariantName));
+        $variant->setProduct($product);
+        $variant->setOnHand(0);
+        $variant->addChannelPricing($channelPricing);
+        $variant->setShippingRequired(true);
+
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
+        $product->addVariant($variant);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product)'s price changed to ("[^"]+")$/
+     */
+    public function thisProductsPriceChangedTo(ProductInterface $product, int $price): void
+    {
+        $channelPricing = $this->getChannelPricingFromProduct($product);
+        $channelPricing->setPrice($price);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product)'s price changed to ("[^"]+") and original price changed to ("[^"]+")$/
+     */
+    public function thisProductsPriceChangedToAndOriginalPriceChangedTo(
+        ProductInterface $product,
+        int $price,
+        int $originalPrice,
+    ): void {
+        $channelPricing = $this->getChannelPricingFromProduct($product);
+
+        $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice($originalPrice);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this variant)'s price changed to ("[^"]+") and original price changed to ("[^"]+")$/
+     */
+    public function thisVariantsPriceChangedToAndOriginalPriceChangedTo(
+        ProductVariantInterface $productVariant,
+        int $price,
+        int $originalPrice,
+    ): void {
+        $channelPricing = $this->getChannelPricingFromVariant($productVariant);
+
+        $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice($originalPrice);
+
+        /** @var ProductInterface $product */
+        $product = $productVariant->getProduct();
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product)'s price changed to ("[^"]+") and original price was removed$/
+     */
+    public function thisProductsPriceChangedToAndOriginalPriceWasRemoved(ProductInterface $product, $price): void
+    {
+        $channelPricing = $this->getChannelPricingFromProduct($product);
+        $channelPricing->setPrice($price);
+        $channelPricing->setOriginalPrice(null);
+
+        $this->saveProduct($product);
+    }
+
+    private function getChannelPricingFromProduct(ProductInterface $product): ChannelPricingInterface
+    {
+        $variant = $this->defaultVariantResolver->getVariant($product);
+        Assert::notNull($variant);
+
+        return $this->getChannelPricingFromVariant($variant);
+    }
+
+    private function getChannelPricingFromVariant(ProductVariantInterface $productVariant): ChannelPricingInterface
+    {
+        $channelPricing = $productVariant->getChannelPricings()->first();
+        Assert::isInstanceOf($channelPricing, ChannelPricingInterface::class);
+
+        return $channelPricing;
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
@@ -1147,6 +1306,8 @@ final class ProductContext implements Context
     private function saveProduct(ProductInterface $product)
     {
         $this->productRepository->add($product);
+        $this->eventBus->dispatch(new ProductUpdated($product->getCode()));
+        $this->sharedStorage->set('variant', $product->getVariants()->first());
         $this->sharedStorage->set('product', $product);
     }
 
@@ -1238,10 +1399,7 @@ final class ProductContext implements Context
         $productVariant->addTranslation($translation);
     }
 
-    /**
-     * @return ChannelPricingInterface
-     */
-    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null)
+    private function createChannelPricingForChannel(int $price, ChannelInterface $channel = null): ChannelPricingInterface
     {
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
