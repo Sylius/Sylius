@@ -561,5 +561,9 @@
         <service id="Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext">
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
         </service>
+
+        <service id="Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext" public="true">
+            <argument type="service" id="sylius.behat.page.admin.channel_pricing_log_entry.index" />
+        </service>
     </services>
 </container>

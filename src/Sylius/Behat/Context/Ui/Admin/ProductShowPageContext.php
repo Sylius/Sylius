@@ -108,6 +108,24 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @When I access the price history of a simple product for :channelName channel
+     */
+    public function iAccessThePriceHistoryIndexPageOfSimpleProductForChannel(string $channelName): void
+    {
+        $pricingRow = $this->pricingElement->getSimpleProductPricingRowForChannel($channelName);
+        $pricingRow->clickLink('Show');
+    }
+
+    /**
+     * @When I access the price history of a product variant :variantName for :channelName channel
+     */
+    public function iAccessThePriceHistoryIndexPageOfVariantForChannel(string $variantName, string $channelName): void
+    {
+        $pricingRow = $this->pricingElement->getVariantPricingRowForChannel($variantName, $channelName);
+        $pricingRow->clickLink('Show');
+    }
+
+    /**
      * @Then I should see this product's product page
      */
     public function iShouldSeeThisProductPage(ProductInterface $product): void
