@@ -174,6 +174,53 @@ final class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see :lowestPriceBeforeDiscount as its lowest price before the discount in :channelName channel
+     */
+    public function iShouldSeeAsItsLowestPriceBeforeTheDiscountInChannel(
+        string $lowestPriceBeforeDiscount,
+        string $channelName,
+    ): void {
+        Assert::same($this->pricingElement->getLowestPriceBeforeDiscountForChannel($channelName), $lowestPriceBeforeDiscount);
+    }
+
+    /**
+     * @Then I should not see the lowest price before the discount in :channelName channel
+     */
+    public function iShouldNotSeeTheLowestPriceBeforeTheDiscountInChannel(string $channelName): void
+    {
+        Assert::same($this->pricingElement->getLowestPriceBeforeDiscountForChannel($channelName), '-');
+    }
+
+    /**
+     * @Then I should see the lowest price before the discount of :lowestPriceBeforeDiscount for :variantName variant in :channelName channel
+     */
+    public function iShouldSeeVariantWithTheLowestPriceBeforeTheDiscountOfInChannel(
+        string $lowestPriceBeforeDiscount,
+        string $variantName,
+        string $channelName,
+    ): void {
+        Assert::true($this->variantsElement->hasProductVariantWithLowestPriceBeforeDiscountInChannel(
+            $variantName,
+            $lowestPriceBeforeDiscount,
+            $channelName,
+        ));
+    }
+
+    /**
+     * @Then I should not see the lowest price before the discount for :variantName variant in :channelName channel
+     */
+    public function iShouldNotSeeTheLowestPriceBeforeTheDiscountForVariantInChannel(
+        string $variantName,
+        string $channelName,
+    ): void {
+        Assert::true($this->variantsElement->hasProductVariantWithLowestPriceBeforeDiscountInChannel(
+            $variantName,
+            '-',
+            $channelName,
+        ));
+    }
+
+    /**
      * @Then I should not see price for channel :channelName
      */
     public function iShouldNotSeePriceForChannel(string $channelName): void
