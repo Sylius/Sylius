@@ -29,6 +29,7 @@ final class FloatAttributeType extends AbstractType
         $resolver
             ->setDefaults([
                 'label' => false,
+                'html5' => true,
             ])
             ->setRequired('configuration')
             ->setDefined('locale_code')
