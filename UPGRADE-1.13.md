@@ -41,3 +41,6 @@
         }
     }
    ```
+6. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface` 
+   to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
+   as a first argument is deprecated.

@@ -56,7 +56,6 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.canonicalizer" />
         </service>
-
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\IntegerDistributorInterface" alias="sylius.integer_distributor" />
 
@@ -204,7 +203,12 @@
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
         <service id="Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface" alias="sylius.customer_ip_assigner" />
 
-        <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
+        <service
+            id="sylius.calculator.product_variant_price"
+            class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator"
+        >
+            <argument type="service" id="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface" />
+        </service>
         <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
         <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
