@@ -351,7 +351,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
+     * @Given /^I have(?:| added) (\d+) (product(?:|s) "([^"]+)") (?:to|in) the cart$/
      * @When /^I add(?:|ed)(?:| again) (\d+) (products "([^"]+)") to the cart$/
      */
     public function iAddProductsToTheCart($quantity, ProductInterface $product)
@@ -536,7 +536,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
-        Assert::true($this->summaryPage->hasProductOutOfStockValidationMessage($product));
+        Assert::true($this->summaryPage->hasItemWithInsufficientStock($product->getName()));
     }
 
     /**

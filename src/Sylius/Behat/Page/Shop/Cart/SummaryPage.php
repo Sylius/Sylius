@@ -185,6 +185,13 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return $this->hasItemWith($code, '[data-test-product-variant-code]');
     }
 
+    public function hasItemWithInsufficientStock(string $productName): bool
+    {
+        $product = $this->getElement('product_row', ['%name%' => $productName]);
+
+        return str_contains($product->getText(), 'Insufficient stock');
+    }
+
     public function hasProductOutOfStockValidationMessage(ProductInterface $product): bool
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
