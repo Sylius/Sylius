@@ -121,6 +121,7 @@ class OrderController extends ResourceController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->resetChangesOnCart($resource);
+            $this->addFlash('error', 'sylius.cart.not_recalculated');
         }
 
         if (!$configuration->isHtmlRequest()) {
