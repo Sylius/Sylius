@@ -36,6 +36,7 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
     }
 
     function it_provides_array_containing_product_variant_options_map_with_corresponding_price(
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
         ChannelInterface $channel,
         ProductInterface $tShirt,
         ProductOptionValueInterface $black,
@@ -46,7 +47,6 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
         ProductVariantInterface $whiteSmallTShirt,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
     ): void {
         $tShirt->getEnabledVariants()->willReturn(new ArrayCollection([
             $blackSmallTShirt->getWrappedObject(),
@@ -75,12 +75,16 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
         $productVariantPriceCalculator->calculateOriginal($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($blackSmallTShirt, ['channel' => $channel])->willReturn(500);
         $productVariantPriceCalculator->calculate($whiteSmallTShirt, ['channel' => $channel])->willReturn(1500);
         $productVariantPriceCalculator->calculateOriginal($whiteSmallTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($whiteSmallTShirt, ['channel' => $channel])->willReturn(400);
         $productVariantPriceCalculator->calculate($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
         $productVariantPriceCalculator->calculateOriginal($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($blackLargeTShirt, ['channel' => $channel])->willReturn(300);
         $productVariantPriceCalculator->calculate($whiteLargeTShirt, ['channel' => $channel])->willReturn(2500);
         $productVariantPriceCalculator->calculateOriginal($whiteLargeTShirt, ['channel' => $channel])->willReturn(3000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($whiteLargeTShirt, ['channel' => $channel])->willReturn(200);
 
         $black->getOptionCode()->willReturn('t_shirt_color');
         $white->getOptionCode()->willReturn('t_shirt_color');
@@ -97,28 +101,33 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_color' => 'black',
                 't_shirt_size' => 'small',
                 'value' => 1000,
+                'lowest-price-before-discount' => 500,
             ],
             [
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'small',
                 'value' => 1500,
+                'lowest-price-before-discount' => 400,
                 'original-price' => 2000,
             ],
             [
                 't_shirt_color' => 'black',
                 't_shirt_size' => 'large',
                 'value' => 2000,
+                'lowest-price-before-discount' => 300,
             ],
             [
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'large',
                 'value' => 2500,
+                'lowest-price-before-discount' => 200,
                 'original-price' => 3000,
             ],
         ]);
     }
 
     function it_provides_array_containing_product_variant_options_map_with_corresponding_price_and_applied_promotions(
+        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
         ChannelInterface $channel,
         ProductInterface $tShirt,
         ProductOptionValueInterface $black,
@@ -129,7 +138,6 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
         ProductVariantInterface $whiteSmallTShirt,
-        ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
         CatalogPromotionInterface $winterCatalogPromotion,
         CatalogPromotionInterface $summerCatalogPromotion,
     ): void {
@@ -165,12 +173,16 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 
         $productVariantPriceCalculator->calculate($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
         $productVariantPriceCalculator->calculateOriginal($blackSmallTShirt, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($blackSmallTShirt, ['channel' => $channel])->willReturn(500);
         $productVariantPriceCalculator->calculate($whiteSmallTShirt, ['channel' => $channel])->willReturn(1500);
         $productVariantPriceCalculator->calculateOriginal($whiteSmallTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($whiteSmallTShirt, ['channel' => $channel])->willReturn(400);
         $productVariantPriceCalculator->calculate($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
         $productVariantPriceCalculator->calculateOriginal($blackLargeTShirt, ['channel' => $channel])->willReturn(2000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($blackLargeTShirt, ['channel' => $channel])->willReturn(300);
         $productVariantPriceCalculator->calculate($whiteLargeTShirt, ['channel' => $channel])->willReturn(2500);
         $productVariantPriceCalculator->calculateOriginal($whiteLargeTShirt, ['channel' => $channel])->willReturn(3000);
+        $productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($whiteLargeTShirt, ['channel' => $channel])->willReturn(200);
 
         $black->getOptionCode()->willReturn('t_shirt_color');
         $white->getOptionCode()->willReturn('t_shirt_color');
@@ -188,11 +200,13 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_size' => 'small',
                 'value' => 1000,
                 'applied_promotions' => [$winterCatalogPromotion],
+                'lowest-price-before-discount' => 500,
             ],
             [
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'small',
                 'value' => 1500,
+                'lowest-price-before-discount' => 400,
                 'original-price' => 2000,
             ],
             [
@@ -200,11 +214,13 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
                 't_shirt_size' => 'large',
                 'value' => 2000,
                 'applied_promotions' => [$summerCatalogPromotion],
+                'lowest-price-before-discount' => 300,
             ],
             [
                 't_shirt_color' => 'white',
                 't_shirt_size' => 'large',
                 'value' => 2500,
+                'lowest-price-before-discount' => 200,
                 'original-price' => 3000,
             ],
         ]);

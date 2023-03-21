@@ -13,12 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Calculator;
 
+use Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
+    public function __construct(
+        private ?ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker = null,
+    ) {
+        if ($this->productVariantLowestPriceDisplayChecker === null) {
+            @trigger_error(sprintf('Not passing a $productVariantLowestPriceDisplayChecker to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
+    }
+
     public function calculate(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');
@@ -54,5 +65,27 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         }
 
         throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $context['channel']);
+    }
+
+    public function calculateLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
+    {
+        Assert::keyExists($context, 'channel');
+        $channel = $context['channel'];
+        Assert::isInstanceOf($channel, ChannelInterface::class);
+
+        /** @var ChannelPricingInterface|null $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        if (null === $channelPricing) {
+            throw MissingChannelConfigurationException::createForProductVariantChannelPricing($productVariant, $channel);
+        }
+
+        if (
+            $this->productVariantLowestPriceDisplayChecker === null ||
+            !$this->productVariantLowestPriceDisplayChecker->isLowestPriceDisplayable($productVariant, $context)
+        ) {
+            return null;
+        }
+
+        return $channelPricing->getLowestPriceBeforeDiscount();
     }
 }

@@ -16,6 +16,9 @@ namespace Sylius\Component\Core\Calculator;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+/**
+ * @method int|null calculateLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context) Not implementing it is deprecated since Sylius 1.13 and will be required in Sylius 2.0.
+ */
 interface ProductVariantPricesCalculatorInterface extends ProductVariantPriceCalculatorInterface
 {
     /**

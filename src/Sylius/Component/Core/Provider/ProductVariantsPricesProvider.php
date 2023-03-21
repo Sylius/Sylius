@@ -45,24 +45,34 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
 
         /** @var ProductOptionValueInterface $option */
         foreach ($variant->getOptionValues() as $option) {
-            $optionMap[$option->getOptionCode()] = $option->getCode();
+            /** @var string $optionCode */
+            $optionCode = $option->getOptionCode();
+            $optionMap[$optionCode] = $option->getCode();
         }
 
         $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $channel]);
         $optionMap['value'] = $price;
 
-        if ($this->productVariantPriceCalculator instanceof ProductVariantPricesCalculatorInterface) {
-            $originalPrice = $this->productVariantPriceCalculator->calculateOriginal($variant, ['channel' => $channel]);
-
-            if ($originalPrice > $price) {
-                $optionMap['original-price'] = $originalPrice;
-            }
-        }
-
         /** @var ArrayCollection $appliedPromotions */
         $appliedPromotions = $variant->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
             $optionMap['applied_promotions'] = $appliedPromotions->toArray();
+        }
+
+        if (!$this->productVariantPriceCalculator instanceof ProductVariantPricesCalculatorInterface) {
+            return $optionMap;
+        }
+
+        $lowestPriceBeforeDiscount = $this->productVariantPriceCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]);
+
+        if ($lowestPriceBeforeDiscount !== null) {
+            $optionMap['lowest-price-before-discount'] = $lowestPriceBeforeDiscount;
+        }
+
+        $originalPrice = $this->productVariantPriceCalculator->calculateOriginal($variant, ['channel' => $channel]);
+
+        if ($originalPrice > $price) {
+            $optionMap['original-price'] = $originalPrice;
         }
 
         return $optionMap;

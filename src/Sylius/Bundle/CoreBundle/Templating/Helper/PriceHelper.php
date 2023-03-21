@@ -52,6 +52,24 @@ class PriceHelper extends Helper
         ;
     }
 
+    public function getLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
+    {
+        Assert::keyExists($context, 'channel');
+        Assert::isInstanceOf($this->productVariantPriceCalculator, ProductVariantPricesCalculatorInterface::class);
+
+        return $this
+            ->productVariantPriceCalculator
+            ->calculateLowestPriceBeforeDiscount($productVariant, $context)
+        ;
+    }
+
+    public function hasLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): bool
+    {
+        Assert::keyExists($context, 'channel');
+
+        return null !== $this->getLowestPriceBeforeDiscount($productVariant, $context);
+    }
+
     /**
      * @throws \InvalidArgumentException
      */
