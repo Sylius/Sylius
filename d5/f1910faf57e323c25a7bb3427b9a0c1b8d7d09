@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+
+by JoppeDC at 2023-03-16T13:17:31Z
+
+That would mean you're `POST`-ing something else on the page? Since it does check for the `POST` method first.
+
+Besides that, adding this check would be good imo.
+
+---------------------------------------------------------------------------
+
+by smashou at 2023-03-17T13:25:01Z
+
+@JoppeDC I think it's because ` spam bots` are trying to `POST` a lot of things. It generate a lot of noise in log files.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-03-21T10:18:02Z
+
+Thank you, Julien! :1st_place_medal:
