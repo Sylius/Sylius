@@ -51,7 +51,7 @@ class OrderItemController extends ResourceController
             $configuration->getFormOptions(),
         );
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             /** @var AddToCartCommandInterface $addToCartCommand */
             $addToCartCommand = $form->getData();
             [$cart, $orderItem] = [$addToCartCommand->getCart(), $addToCartCommand->getCartItem()];
