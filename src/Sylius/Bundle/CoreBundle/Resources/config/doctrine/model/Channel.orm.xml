@@ -32,13 +32,27 @@
         <field
             name="lowestPriceForDiscountedProductsCheckingPeriod"
             column="lowest_price_for_discounted_products_checking_period"
-            type="boolean"
+            type="integer"
         >
             <options>
                 <option name="default">30</option>
             </options>
         </field>
-
+        <field name="lowestPriceForDiscountedProductsVisible" column="lowest_price_for_discounted_products_visible" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+        <many-to-many field="taxonsExcludedFromShowingLowestPrice" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
+            <join-table name="sylius_channel_excluded_taxons">
+                <join-columns>
+                    <join-column name="channel_id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="taxon_id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
