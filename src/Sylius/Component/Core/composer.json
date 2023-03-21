@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "enshrined/svg-sanitize": "^0.15.4",
+        "enshrined/svg-sanitize": "^0.15.4 || ^0.16",
         "knplabs/gaufrette": "^0.8 || ^0.9 || ^0.10 || ^0.11",
         "payum/payum": "^1.6",
         "php-http/guzzle6-adapter": "^2.0",
