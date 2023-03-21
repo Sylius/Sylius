@@ -51,7 +51,7 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserChangePasswordType::class);
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             return $this->handleChangePassword($request, $configuration, $user, $changePassword->getNewPassword());
         }
 
@@ -100,7 +100,7 @@ class UserController extends ResourceController
         $formType = $this->getSyliusAttribute($request, 'form', UserResetPasswordType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             return $this->handleResetPassword($request, $configuration, $user, $passwordReset->getPassword());
         }
 
@@ -213,7 +213,7 @@ class UserController extends ResourceController
             Assert::notNull($template, 'Template is not configured.');
         }
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
             $userRepository = $this->repository;
 
             /** @var UserRepositoryInterface $userRepository */
