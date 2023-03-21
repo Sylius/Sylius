@@ -20,6 +20,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class Channel extends BaseChannel implements ChannelInterface
 {
@@ -82,7 +83,11 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var TaxonInterface|null */
     protected $menuTaxon;
 
+    protected Collection $taxonsExcludedFromShowingLowestPrice;
+
     protected int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
+
+    protected bool $lowestPriceForDiscountedProductsVisible = true;
 
     public function __construct()
     {
@@ -94,6 +99,8 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->locales = new ArrayCollection();
         /** @var ArrayCollection<array-key, CountryInterface> $this->countries */
         $this->countries = new ArrayCollection();
+        /** @var ArrayCollection<array-key, TaxonInterface> $this->taxonsExcludedFromShowingLowestPrice */
+        $this->taxonsExcludedFromShowingLowestPrice = new ArrayCollection();
     }
 
     public function getBaseCurrency(): ?CurrencyInterface
@@ -306,5 +313,44 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void
     {
         $this->lowestPriceForDiscountedProductsCheckingPeriod = $periodInDays;
+    }
+
+    public function isLowestPriceForDiscountedProductsVisible(): bool
+    {
+        return $this->lowestPriceForDiscountedProductsVisible;
+    }
+
+    public function setLowestPriceForDiscountedProductsVisible(bool $visible = true): void
+    {
+        $this->lowestPriceForDiscountedProductsVisible = $visible;
+    }
+
+    public function getTaxonsExcludedFromShowingLowestPrice(): Collection
+    {
+        return $this->taxonsExcludedFromShowingLowestPrice;
+    }
+
+    public function hasTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): bool
+    {
+        return $this->taxonsExcludedFromShowingLowestPrice->contains($taxon);
+    }
+
+    public function addTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void
+    {
+        if (!$this->hasTaxonExcludedFromShowingLowestPrice($taxon)) {
+            $this->taxonsExcludedFromShowingLowestPrice->add($taxon);
+        }
+    }
+
+    public function removeTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void
+    {
+        if ($this->hasTaxonExcludedFromShowingLowestPrice($taxon)) {
+            $this->taxonsExcludedFromShowingLowestPrice->removeElement($taxon);
+        }
+    }
+
+    public function clearTaxonsExcludedFromShowingLowestPrice(): void
+    {
+        $this->taxonsExcludedFromShowingLowestPrice->clear();
     }
 }
