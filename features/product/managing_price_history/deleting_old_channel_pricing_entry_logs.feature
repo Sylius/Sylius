@@ -14,18 +14,18 @@ Feature: Deleting old channel pricing entry logs
         And on "2022-04-20" its original price has been removed
         And it is "2022-04-29" now
 
-    @todo @domain
+    @domain
     Scenario: Deleting price history older than 90 days
         When I delete price history older than 90 days
         Then there should be 5 price history entries for this product
 
-    @todo @domain
+    @domain
     Scenario: Deleting price history older than 30 days
         When I delete price history older than 30 days
         Then there should be 2 price history entries for this product
         And this product should have no entry with original price changed to "$25.00"
 
-    @todo @domain
+    @domain
     Scenario: Deleting price history older than 1 day
         When I delete price history older than 1 day
         Then this product's price history should be empty

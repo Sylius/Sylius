@@ -45,6 +45,7 @@
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
         <parameter key="env(SYLIUS_UNSECURED_URLS)">yes</parameter>
         <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
+        <parameter key="sylius.channel_pricing_log_entry.old_logs_removal_batch_size">100</parameter>
     </parameters>
 
     <services>
@@ -228,6 +229,14 @@
             <argument type="service" id="sylius.product_review.average_rating_updater" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface" alias="sylius.reviewer_reviews_remover" />
+
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" class="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover">
+            <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="event_dispatcher" />
+            <argument>%sylius.channel_pricing_log_entry.old_logs_removal_batch_size%</argument>
+        </service>
 
         <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
             <argument type="service" id="sylius.repository.order" />
