@@ -512,6 +512,7 @@
             <argument type="service" id="sylius.behat.page.error" />
             <argument type="service" id="sylius.behat.element.product.index.vertical_menu" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
+            <argument type="service" id="Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.product_attribute" class="Sylius\Behat\Context\Ui\Shop\ProductAttributeContext">
