@@ -35,11 +35,6 @@ jobs:
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
 
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-
         steps:
             -
                 uses: actions/checkout@v3
@@ -180,11 +175,6 @@ jobs:
                 php: ["8.0", "8.1"]
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
-
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
 
         steps:
             -   uses: actions/checkout@v3
@@ -454,13 +444,6 @@ jobs:
                 api-platform: ["^2.7"]
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
-
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-                        node: "14.x"
-                        mysql: "8.0"
 
         env:
             APP_ENV: test_cached
