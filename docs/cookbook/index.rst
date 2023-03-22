@@ -58,6 +58,7 @@ Payments
     payments/refund-process
     payments/custom-field-on-refund-payment
     payments/custom-type-of-refund
+    payments/custom-unit-refund
     payments/custom-invoice
     payments/generating-invoice-after-payment
 
