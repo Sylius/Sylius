@@ -15,5 +15,6 @@
             "description": null,
             "locale": "en_US"
         }
-    }
+    },
+    "enabled": true
 }
