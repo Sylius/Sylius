@@ -37,6 +37,7 @@ final class ManagingLocalesContext implements Context
 
     /**
      * @When I choose :localeCode
+     * @When I set code to :code
      * @When I do not choose a code
      */
     public function iChoose(string $localeCode = ''): void
@@ -100,5 +101,18 @@ final class ManagingLocalesContext implements Context
             'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Please choose locale code.');
+    }
+
+    /**
+     * @Then I should be notified that the code is invalid
+     */
+    public function iShouldBeNotifiedThatTheCodeIsInvalid(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Locale has been created successfully, but it should not',
+        );
+        Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid locale code.');
     }
 }
