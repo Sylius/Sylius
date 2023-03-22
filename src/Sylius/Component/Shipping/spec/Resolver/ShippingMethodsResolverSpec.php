@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
@@ -23,7 +24,7 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
-        ObjectRepository $methodRepository,
+        ShippingMethodRepositoryInterface $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ): void {
         $this->beConstructedWith($methodRepository, $eligibilityChecker);
@@ -35,7 +36,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_returns_all_methods_eligible_for_given_subject(
-        ObjectRepository $methodRepository,
+        ShippingMethodRepositoryInterface $methodRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $method1,
@@ -43,7 +44,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
         ShippingMethodInterface $method3,
     ): void {
         $methods = [$method1, $method2, $method3];
-        $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);
+        $methodRepository->findEnabledWithRules()->shouldBeCalled()->willReturn($methods);
 
         $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(true);
         $eligibilityChecker->isEligible($subject, $method2)->shouldBeCalled()->willReturn(true);

@@ -22,4 +22,9 @@ interface ShippingMethodRepositoryInterface extends RepositoryInterface
      * @return ShippingMethodInterface[]
      */
     public function findByName(string $name, string $locale): array;
+
+    /**
+     * @return ShippingMethodInterface[]
+     */
+    public function findEnabledWithRules(): array;
 }
