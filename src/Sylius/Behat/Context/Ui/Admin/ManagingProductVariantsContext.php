@@ -150,7 +150,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I choose :calculatorName calculator
      */
-    public function iChooseCalculator($calculatorName)
+    public function iChooseCalculator(string $calculatorName): void
     {
         $this->createPage->choosePricingCalculator($calculatorName);
     }
@@ -158,7 +158,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set its :optionName option to :optionValue
      */
-    public function iSetItsOptionAs($optionName, $optionValue)
+    public function iSetItsOptionAs(string $optionName, string $optionValue): void
     {
         $this->createPage->selectOption($optionName, $optionValue);
     }
@@ -223,11 +223,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I choose to show this product in the :channel channel
+     * @When I choose to show this product in the :channelName channel
      */
-    public function iChooseToShowThisProductInTheChannel(string $channel): void
+    public function iChooseToShowThisProductInTheChannel(string $channelName): void
     {
-        $this->updatePage->showProductInChannel($channel);
+        $this->updatePage->showProductInChannel($channelName);
     }
 
     /**
@@ -260,8 +260,8 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in (("[^"]+") channel)$/
      */
     public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost(
-        $nthVariant,
-        $code,
+        int $nthVariant,
+        string $code,
         int $price,
         ChannelInterface $channel,
     ): void {
@@ -272,7 +272,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code): void
+    public function iSpecifyThereAreVariantsIdentifiedByCode(int $nthVariant, string $code): void
     {
         $this->generatePage->specifyCode($nthVariant - 1, $code);
     }
@@ -280,7 +280,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in (("[^"]+") channel)$/
      */
-    public function iSpecifyThereAreVariantsWithCost($nthVariant, int $price, ChannelInterface $channel): void
+    public function iSpecifyThereAreVariantsWithCost(int $nthVariant, int $price, ChannelInterface $channel): void
     {
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channel);
     }
@@ -288,7 +288,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When /^I remove (\d)(?:st|nd|rd|th) variant from the list$/
      */
-    public function iRemoveVariantFromTheList($nthVariant): void
+    public function iRemoveVariantFromTheList(int $nthVariant): void
     {
         $this->generatePage->removeVariant($nthVariant - 1);
     }
@@ -296,7 +296,7 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @When I set its shipping category as :shippingCategoryName
      */
-    public function iSetItsShippingCategoryAs($shippingCategoryName): void
+    public function iSetItsShippingCategoryAs(string $shippingCategoryName): void
     {
         $this->createPage->selectShippingCategory($shippingCategoryName);
     }
