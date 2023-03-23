@@ -88,7 +88,7 @@ $layout-sidebar-width: 260px;
 
         .admin-layout__topbar {
             left: $layout-sidebar-width;
-            width: calc(100% - $layout-sidebar-width);
+            width: calc(100% - #{$layout-sidebar-width});
         }
     }
 }
