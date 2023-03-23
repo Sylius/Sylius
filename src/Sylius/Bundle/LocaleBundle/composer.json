@@ -48,6 +48,11 @@
     "config": {
         "allow-plugins": {
             "symfony/flex": true
+        },
+        "symfony": {
+            "endpoint": [
+                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
+            ]
         }
     },
     "extra": {

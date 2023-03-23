@@ -238,7 +238,10 @@
             "dev-master": "1.11-dev"
         },
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "endpoint": [
+                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
+            ]
         }
     },
     "autoload": {
