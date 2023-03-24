@@ -42,6 +42,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:channel:read</attribute>
                 </attribute>
+                <attribute name="validation_groups">sylius</attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -77,6 +78,7 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:channel:read</attribute>
                 </attribute>
+                <attribute name="validation_groups">sylius</attribute>
             </itemOperation>
         </itemOperations>
 

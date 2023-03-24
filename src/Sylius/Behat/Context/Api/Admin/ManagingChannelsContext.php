@@ -265,8 +265,8 @@ final class ManagingChannelsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Channel could not be created',
+            $this->responseChecker->isCreationSuccessful($response = $this->client->getLastResponse()),
+            'Channel could not be created: ' . $response->getContent(),
         );
     }
 

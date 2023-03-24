@@ -24,7 +24,7 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface" />
             <argument type="service" id="sylius.repository.channel_pricing" />
             <argument>%sylius_core.price_history.batch_size%</argument>
-            <tag name="sylius_price_history.entity_observer" />
+            <tag name="sylius.entity_observer" />
         </service>
 
         <service id="sylius.listener.channel_pricing_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">

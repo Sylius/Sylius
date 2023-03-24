@@ -4,5 +4,8 @@ sylius:
             not_blank: Please enter channel code.
             regex: Channel code can only be comprised of letters, numbers, dashes and underscores.
             unique: Channel code has to be unique.
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Value must be greater than {{ compared_value }}'
+            less_than: 'Value must be less than {{ compared_value }}'
         name:
             not_blank: Please enter channel name.
