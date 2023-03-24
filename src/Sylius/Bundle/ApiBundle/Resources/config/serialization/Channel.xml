@@ -111,5 +111,20 @@
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
         </attribute>
+        <attribute name="lowestPriceForDiscountedProductsVisible">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>admin:channel:update</group>
+        </attribute>
+        <attribute name="lowestPriceForDiscountedProductsCheckingPeriod">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>admin:channel:update</group>
+        </attribute>
+        <attribute name="taxonsExcludedFromShowingLowestPrice">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+            <group>admin:channel:update</group>
+        </attribute>
     </class>
 </serializer>

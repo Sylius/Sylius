@@ -54,5 +54,32 @@
                 </option>
             </constraint>
         </property>
+        <getter property="lowestPriceForDiscountedProductsCheckingPeriod">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Type">
+                <option name="value">int</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="LessThan">
+                <option name="value">2147483647</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+                <option name="message">sylius.channel.lowest_price_for_discounted_products_checking_period.less_than</option>
+            </constraint>
+            <constraint name="GreaterThan">
+                <option name="value">0</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+                <option name="message">sylius.channel.lowest_price_for_discounted_products_checking_period.greater_than</option>
+            </constraint>
+        </getter>
     </class>
 </constraint-mapping>

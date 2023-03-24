@@ -16,6 +16,7 @@ Feature: Adding a new channel
         And I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I choose "Euro" as the base currency
+        And I make it available in "English (United States)"
         And I choose "English (United States)" as a default locale
         And I select the "Order items based" as tax calculation strategy
         And I add it
@@ -33,6 +34,7 @@ Feature: Adding a new channel
         And I set its contact phone number as "11331122"
         And I define its color as "blue"
         And I choose "Euro" as the base currency
+        And I make it available in "English (United States)"
         And I choose "English (United States)" as a default locale
         And I choose "United States" and "Poland" as operating countries
         And I select the "Order items based" as tax calculation strategy

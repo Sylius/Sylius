@@ -102,5 +102,10 @@
             </argument>
             <tag name="serializer.normalizer"/>
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ChannelExcludedTaxonsDenormalizer">
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
     </services>
 </container>
