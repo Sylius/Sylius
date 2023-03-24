@@ -455,6 +455,39 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(it|this product)(?:| also) has a variant named "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function itHasVariantNamedIn(ProductInterface $product, string $name, string $locale): void
+    {
+        $productVariant = $this->createProductVariant(
+            $product,
+            $name,
+            100,
+            StringInflector::nameToUppercaseCode($name),
+            $this->sharedStorage->get('channel'),
+        );
+
+        $this->addProductVariantTranslation($productVariant, $name, $locale);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this variant) has no translation in ("[^"]+" locale)$/
+     */
+    public function thisVariantHasNoTranslationIn(ProductVariantInterface $productVariant, string $locale): void
+    {
+        $translation = $productVariant->getTranslation($locale);
+        if ($translation->getLocale() !== $locale) {
+            return;
+        }
+
+        $productVariant->removeTranslation($translation);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") identified by "([^"]+)"$/
      */
     public function theProductHasVariantPricedAtIdentifiedBy(

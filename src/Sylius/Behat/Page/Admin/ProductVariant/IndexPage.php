@@ -53,6 +53,11 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->waitFor(5, fn () => null === $this->getElement('save_configuration_button')->find('css', '.loading'));
     }
 
+    public function countItemsWithNoName(): int
+    {
+        return count($this->getElement('table')->findAll('css', '[data-test-missing-translation-paragraph]'));
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
