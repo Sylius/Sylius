@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -31,6 +32,7 @@ final class TaxonDeletionListener
     public function __construct(
         private SessionInterface|RequestStack $requestStackOrSession,
         private ChannelRepositoryInterface $channelRepository,
+        private ProductRepositoryInterface $productRepository,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters,
     ) {
         $this->ruleUpdaters = $ruleUpdaters;
@@ -83,5 +85,33 @@ final class TaxonDeletionListener
         if ($taxon->getPosition() === 0) {
             $taxon->setPosition(-1);
         }
+    }
+
+    public function protectFromRemovingProductMainTaxon(GenericEvent $event): void
+    {
+        $taxon = $event->getSubject();
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        $productsCount = 20;
+
+        $products = $this->productRepository->findByMainTaxon($taxon, $productsCount);
+
+        if (empty($products)) {
+            return;
+        }
+
+        $inUseProductCodes = [];
+
+        foreach ($products as $product) {
+            $inUseProductCodes[] = $product->getCode();
+        }
+
+        $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
+        $flashes->add('error', [
+            'message' => 'sylius.taxon.main_taxon_delete',
+            'parameters' => ['%codes%' => implode(', ', $inUseProductCodes), '%count%' => $productsCount],
+        ]);
+
+        $event->stopPropagation();
     }
 }

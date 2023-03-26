@@ -225,4 +225,15 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getResult()
         ;
     }
+
+    public function findByMainTaxon(TaxonInterface $taxon, int $count): array
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.mainTaxon = :taxon')
+            ->setParameter('taxon', $taxon)
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

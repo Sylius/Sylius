@@ -44,4 +44,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findOneByCode(string $code): ?ProductInterface;
 
     public function findByTaxon(TaxonInterface $taxon): array;
+
+    public function findByMainTaxon(TaxonInterface $taxon, int $count): ?array;
 }

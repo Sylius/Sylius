@@ -41,3 +41,11 @@ Feature: Deleting a taxon
         And I move down "Main Category" taxon
         And I delete taxon named "Clothes Category"
         Then the taxon named "Clothes Category" should no longer exist in the registry
+
+    @ui @javascript
+    Scenario: Being unable to delete a taxon used as main taxon
+        Given the store classifies its products as "T-Shirts"
+        And the store has a product "Young"
+        And the product "Young" has a main taxon "T-Shirts"
+        When I try to delete taxon named "T-Shirts"
+        Then I should be notified that I cannot delete a taxon used as main taxon for this product

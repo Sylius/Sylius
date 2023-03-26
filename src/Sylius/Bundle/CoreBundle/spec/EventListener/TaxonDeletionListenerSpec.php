@@ -16,8 +16,10 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -28,12 +30,14 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
     function let(
         RequestStack $requestStack,
         ChannelRepositoryInterface $channelRepository,
+        ProductRepositoryInterface $productRepository,
         TaxonAwareRuleUpdaterInterface $hasTaxonRuleUpdater,
         TaxonAwareRuleUpdaterInterface $totalOfItemsFromTaxonRuleUpdater,
     ): void {
         $this->beConstructedWith(
             $requestStack,
             $channelRepository,
+            $productRepository,
             $hasTaxonRuleUpdater,
             $totalOfItemsFromTaxonRuleUpdater,
         );
@@ -142,5 +146,31 @@ final class TaxonDeletionListenerSpec extends ObjectBehavior
         $taxon->setPosition(-1)->shouldBeCalled();
 
         $this->handleRemovingRootTaxonAtPositionZero($event);
+    }
+
+    function it_does_not_allow_to_remove_taxon_if_any_product_has_it_as_a_main_taxon(
+        RequestStack $requestStack,
+        SessionInterface $session,
+        ProductRepositoryInterface $productRepository,
+        GenericEvent $event,
+        TaxonInterface $taxon,
+        ProductInterface $product,
+        FlashBagInterface $flashes
+    ): void {
+        $event->getSubject()->willReturn($taxon);
+
+        $product->getCode()->willReturn('product1');
+
+        $productRepository->findByMainTaxon($taxon, 20)->willReturn([$product]);
+
+        $requestStack->getSession()->willReturn($session);
+        $session->getBag('flashes')->willReturn($flashes);
+        $flashes->add('error', [
+            'message' => 'sylius.taxon.main_taxon_delete',
+            'parameters' => ['%codes%' => 'product1', '%count%' => 20],
+        ])->shouldBeCalled();
+        $event->stopPropagation()->shouldBeCalled();
+
+        $this->protectFromRemovingProductMainTaxon($event);
     }
 }
