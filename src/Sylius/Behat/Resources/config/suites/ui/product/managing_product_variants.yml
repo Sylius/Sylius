@@ -36,6 +36,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.browsing_product_variants
+                - sylius.behat.context.ui.admin.managing_administrator_locale
                 - sylius.behat.context.ui.admin.managing_product_variants
                 - sylius.behat.context.ui.admin.notification
                 - sylius.behat.context.ui.shop.browsing_product
