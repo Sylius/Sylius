@@ -49,6 +49,7 @@ class RoboFile extends Tasks
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
         $useSwiftmailer = getenv('USE_SWIFTMAILER');
+        $unstable = getenv('UNSTABLE');
         $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
 
         if (false === $symfonyVersion) {
@@ -66,6 +67,11 @@ class RoboFile extends Tasks
                 ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "sylius/mailer-bundle:^1.8"')
                 ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"')
             ;
+        }
+
+        if (self::YES === $unstable) {
+            $task->exec('composer config minimum-stability dev');
+            $task->exec('composer config prefer-stable false');
         }
 
         $task

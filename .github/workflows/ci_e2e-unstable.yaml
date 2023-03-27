@@ -1,11 +1,17 @@
-name: End-to-End (Custom)
+name: End-to-End (Unstable)
 
 on:
+    workflow_call:
+        inputs:
+            ignore-failure:
+                description: "Don't fail on error"
+                required: false
+                type: boolean
+                default: false
     workflow_dispatch: ~
-    workflow_call: ~
 
 jobs:
-    behat-no-js-unstable-symfony:
+    behat-no-js-unstable:
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
         timeout-minutes: 45
@@ -39,7 +45,7 @@ jobs:
             -   name: Change minimum-stability to dev
                 run: |
                     composer config minimum-stability dev
-                    composer config prefer-stable true
+                    composer config prefer-stable false
 
             -   name: Build application
                 uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
@@ -53,11 +59,11 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     
             -   name: Run PHPUnit
-                continue-on-error: true
+                continue-on-error: ${{ inputs.ignore-failure }}
                 run: vendor/bin/phpunit --colors=always
 
             -   name: Run non-JS Behat
-                continue-on-error: true
+                continue-on-error: ${{ inputs.ignore-failure }}
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --rerun
 
             -   name: Upload logs
