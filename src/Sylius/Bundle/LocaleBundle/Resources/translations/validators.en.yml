@@ -3,4 +3,5 @@ sylius:
         code:
             not_blank: Please choose locale code.
             regex: Locale code can only be comprised of letters, numbers, dashes and underscores.
+            locale: This value is not a valid locale code.
             unique: Locale code must be unique.

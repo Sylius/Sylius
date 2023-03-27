@@ -23,6 +23,10 @@
                 <option name="message">sylius.locale.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Locale">
+                <option name="message">sylius.locale.code.locale</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Regex">
                 <option name="message">sylius.locale.code.regex</option>
                 <option name="pattern">/^[\w-]*$/</option>
