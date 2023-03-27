@@ -15,7 +15,6 @@ namespace Sylius\Behat\Service\Provider;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Sylius\Behat\Service\MessageSendCacher;
-use Symfony\Component\Mime\Email;
 
 final class EmailMessagesProvider implements EmailMessagesProviderInterface
 {
