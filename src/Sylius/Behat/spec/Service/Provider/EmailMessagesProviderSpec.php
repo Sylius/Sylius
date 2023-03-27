@@ -34,7 +34,7 @@ final class EmailMessagesProviderSpec extends ObjectBehavior
 
     function it_provides_email_messages(
         CacheItemPoolInterface $cacheItemPool,
-        CacheItemInterface $cacheItem
+        CacheItemInterface $cacheItem,
     ): void {
         $emailMessages = [new Email(), new Email(), new Email()];
         $cacheItem->get()->willReturn($emailMessages);
