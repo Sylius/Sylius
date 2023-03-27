@@ -24,8 +24,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :locale')
+            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
             ->andWhere('o.product = :productId')
             ->setParameter('locale', $locale)
             ->setParameter('productId', $productId)

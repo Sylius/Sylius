@@ -644,6 +644,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should (also) see a variant named :name
+     */
+    public function iShouldSeeAVariantNamed(string $name): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then I should (also) see :count variant(s) with no name
+     */
+    public function IShouldSeeCountVariantsWithNoName(int $count = 1): void
+    {
+        Assert::same($this->indexPage->countItemsWithNoName(), $count);
+    }
+
+    /**
      * @param string $element
      * @param string $message
      */
