@@ -26,5 +26,8 @@
     "accountVerificationRequired": true,
     "shippingAddressInCheckoutRequired": false,
     "shopBillingData": null,
-    "menuTaxon": null
+    "menuTaxon": null,
+    "taxonsExcludedFromShowingLowestPrice": [],
+    "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+    "lowestPriceForDiscountedProductsVisible": true
 }

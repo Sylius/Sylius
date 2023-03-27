@@ -13,7 +13,9 @@
     "defaultTaxZone": null,
     "taxCalculationStrategy": "order_items_based",
     "currencies": [],
-    "locales": [],
+    "locales": [
+        "\/api\/v2\/admin\/locales\/en_US"
+    ],
     "countries": [],
     "themeName": "garish",
     "contactEmail": "contact@test.com",
@@ -23,5 +25,8 @@
     "accountVerificationRequired": true,
     "shippingAddressInCheckoutRequired": false,
     "shopBillingData": null,
-    "menuTaxon": null
+    "menuTaxon": null,
+    "taxonsExcludedFromShowingLowestPrice": [],
+    "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+    "lowestPriceForDiscountedProductsVisible": true
 }
