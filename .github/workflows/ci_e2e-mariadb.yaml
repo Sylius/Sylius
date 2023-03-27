@@ -98,10 +98,12 @@ jobs:
             -   name: Run non-JS Behat
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli&&~@no-postgres" --rerun
 
-            -   name: Upload Behat logs
+            -   name: Upload logs
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}), DBAL ${{ matrix.dbal }}"
-                    path: etc/build/
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}), DBAL ${{ matrix.dbal }}"
+                    path: |
+                        etc/build/
+                        var/log
                     if-no-files-found: ignore
