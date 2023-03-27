@@ -119,6 +119,10 @@ class OrderController extends ResourceController
             return $this->redirectHandler->redirectToResource($configuration, $resource);
         }
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->resetChangesOnCart($resource);
+        }
+
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
@@ -132,6 +136,14 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ],
         );
+    }
+
+    private function resetChangesOnCart(OrderInterface $cart): void
+    {
+        $this->manager->refresh($cart);
+        foreach ($cart->getItems() as $item) {
+            $this->manager->refresh($item);
+        }
     }
 
     /**

@@ -532,7 +532,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (this product) cannot be updated$/
+     * @Then /^I should be notified that (this product) has insufficient stock$/
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
