@@ -68,7 +68,7 @@ final class FlattenExceptionNormalizerSpec extends ObjectBehavior
             $requestStack->getMasterRequest()->willReturn($request);
         }
 
-        $normalizer->supportsNormalization('data', 'format', ['context'])->shouldBeCalled();
+        $normalizer->supportsNormalization('data', 'format', ['context'])->willReturn(true)->shouldBeCalled();
 
         $this->supportsNormalization('data', 'format', ['context']);
     }
