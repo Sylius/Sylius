@@ -83,6 +83,11 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var TaxonInterface|null */
     protected $menuTaxon;
 
+    /**
+     * @var Collection|TaxonInterface[]
+     *
+     * @psalm-var Collection<array-key, TaxonInterface>
+     */
     protected Collection $taxonsExcludedFromShowingLowestPrice;
 
     protected int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
@@ -99,7 +104,7 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->locales = new ArrayCollection();
         /** @var ArrayCollection<array-key, CountryInterface> $this->countries */
         $this->countries = new ArrayCollection();
-        /** @var ArrayCollection<array-key, TaxonInterface> $this->taxonsExcludedFromShowingLowestPrice */
+//        /** @var ArrayCollection<array-key, TaxonInterface> $this->taxonsExcludedFromShowingLowestPrice */
         $this->taxonsExcludedFromShowingLowestPrice = new ArrayCollection();
     }
 

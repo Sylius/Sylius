@@ -1,0 +1,7 @@
+{#{% form_theme form '@SyliusPriceHistoryPlugin/Admin/Channel/Form/theme.html.twig' %}#}
+
+<div class="ui attached segment">
+    {{ form_row(form.lowestPriceForDiscountedProductsVisible) }}
+    {{ form_row(form.lowestPriceForDiscountedProductsCheckingPeriod) }}
+    {{ form_row(form.taxonsExcludedFromShowingLowestPrice, {'remote_url': path('sylius_admin_ajax_taxon_by_name_phrase'), 'load_edit_url': path('sylius_admin_ajax_taxon_by_code')}) }}
+</div>
