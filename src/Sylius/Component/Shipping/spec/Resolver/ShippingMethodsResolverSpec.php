@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Shipping\Resolver;
 
-use Doctrine\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 final class ShippingMethodsResolverSpec extends ObjectBehavior

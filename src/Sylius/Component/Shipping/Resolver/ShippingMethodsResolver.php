@@ -29,8 +29,8 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
             @trigger_error(sprintf(
                 'Not implementing "%s" in "%s" is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
                 ShippingMethodRepositoryInterface::class,
-                get_debug_type($this->shippingMethodRepository)
-            ), E_USER_DEPRECATED);
+                get_debug_type($this->shippingMethodRepository),
+            ), \E_USER_DEPRECATED);
         }
     }
 
