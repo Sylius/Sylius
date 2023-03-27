@@ -26,5 +26,8 @@
     "menuTaxon": null,
     "description": "Lorem ipsum",
     "hostname": "localhost",
-    "color": "black"
+    "color": "black",
+    "taxonsExcludedFromShowingLowestPrice": [],
+    "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+    "lowestPriceForDiscountedProductsVisible": true
 }

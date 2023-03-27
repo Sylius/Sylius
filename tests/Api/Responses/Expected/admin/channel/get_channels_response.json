@@ -30,7 +30,10 @@
             "accountVerificationRequired": true,
             "shippingAddressInCheckoutRequired": false,
             "shopBillingData": null,
-            "menuTaxon": null
+            "menuTaxon": null,
+            "taxonsExcludedFromShowingLowestPrice": [],
+            "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+            "lowestPriceForDiscountedProductsVisible": true
         },
         {
             "@id": "\/api\/v2\/admin\/channels\/MOBILE",
@@ -59,7 +62,11 @@
             "accountVerificationRequired": true,
             "shippingAddressInCheckoutRequired": false,
             "shopBillingData": null,
-            "menuTaxon": null
+            "menuTaxon": null,
+            "taxonsExcludedFromShowingLowestPrice": [],
+            "lowestPriceForDiscountedProductsCheckingPeriod": 30,
+            "lowestPriceForDiscountedProductsVisible": true
+
         }
     ],
     "hydra:totalItems": 2
