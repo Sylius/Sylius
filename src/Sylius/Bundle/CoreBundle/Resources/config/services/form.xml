@@ -69,7 +69,9 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
-            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service">
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
+            </argument>
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">

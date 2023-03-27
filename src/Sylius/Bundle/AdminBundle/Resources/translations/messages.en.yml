@@ -8,6 +8,9 @@ sylius:
             your_order_with_number: 'Your order with number'
     form:
         admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Show the lowest price of discounted products prior to the current discount?'
+                period_for_which_the_lowest_price_is_calculated: 'Period for which the lowest price is calculated'
             reset_password:
                 password:
                     label: New password
