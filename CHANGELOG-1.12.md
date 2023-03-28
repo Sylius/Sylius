@@ -1,5 +1,34 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.6 (2023-03-28)
+
+#### Details
+
+- [#11121](https://github.com/Sylius/Sylius/issues/11121) Fixed: Calculator at TaxRate fixtures ([@igormukhingmailcom](https://github.com/igormukhingmailcom))
+- [#13582](https://github.com/Sylius/Sylius/issues/13582) [Documentation] Fix overwriting templates path ([@goncziakos](https://github.com/goncziakos))
+- [#14763](https://github.com/Sylius/Sylius/issues/14763) [Documentation][Cookbook] Add Vue Storefront installation guide ([@bitbager](https://github.com/bitbager))
+- [#14826](https://github.com/Sylius/Sylius/issues/14826) Fix order by composite keys in OrderByIdentifierSqlWalker ([@coldic3](https://github.com/coldic3))
+- [#14835](https://github.com/Sylius/Sylius/issues/14835) [Docs] Add warning to skip redundant routes on Plus installation ([@coldic3](https://github.com/coldic3))
+- [#14838](https://github.com/Sylius/Sylius/issues/14838) [Fix] Take care of no session available in cart storage ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14839](https://github.com/Sylius/Sylius/issues/14839) [Documentation][Plus] Update version of Plus ([@GSadee](https://github.com/GSadee))
+- [#14841](https://github.com/Sylius/Sylius/issues/14841) [CS][DX] Refactor ()
+- [#14842](https://github.com/Sylius/Sylius/issues/14842) Remove ApiPlatform 2.6.x from CI ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14847](https://github.com/Sylius/Sylius/issues/14847) Remove merge conflict comment ([@SebLours](https://github.com/SebLours))
+- [#14849](https://github.com/Sylius/Sylius/issues/14849) Fix a wrong function name in the AuthenticationSuccessListenerSpec ([@dawkaa](https://github.com/dawkaa))
+- [#14850](https://github.com/Sylius/Sylius/issues/14850) [Order] Fix partially refunded payement preventing order to still be … ([@BorbagUskada](https://github.com/BorbagUskada))
+- [#14853](https://github.com/Sylius/Sylius/issues/14853) [Docs] Add guide on how to add another implementation of UnitRefundInterface ([@coldic3](https://github.com/coldic3))
+- [#14855](https://github.com/Sylius/Sylius/issues/14855) Add selecting only Behat scenarios with @javascript tag for JS-based CI ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14857](https://github.com/Sylius/Sylius/issues/14857) Fix LogicException in form validation ([@jurv](https://github.com/jurv))
+- [#14859](https://github.com/Sylius/Sylius/issues/14859) [Order] Ensure correct item in `post_add` event ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14865](https://github.com/Sylius/Sylius/issues/14865) Fix calculating cart after trying to add more product than in stock ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14869](https://github.com/Sylius/Sylius/issues/14869) Typo in fixtures.rst ([@alexandre-castelain](https://github.com/alexandre-castelain))
+- [#14870](https://github.com/Sylius/Sylius/issues/14870) There's no canton in Belgium, it's provinces ([@alexandre-castelain](https://github.com/alexandre-castelain))
+- [#14880](https://github.com/Sylius/Sylius/issues/14880) [Locale][API] Additional locale code validation ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14884](https://github.com/Sylius/Sylius/issues/14884) fix: `encore prod` retrocompat ([@maxperei](https://github.com/maxperei))
+- [#14886](https://github.com/Sylius/Sylius/issues/14886) Add var/log content to artifacts on pipeline fail ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14887](https://github.com/Sylius/Sylius/issues/14887) [Admin][ProductVariant] Switched list rendering from base locale to current ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14891](https://github.com/Sylius/Sylius/issues/14891) Fix dependency security vulerability for enshrined/svg-sanitize package ()
+
 ## v1.12.5 (2023-02-21)
 
 #### Details
