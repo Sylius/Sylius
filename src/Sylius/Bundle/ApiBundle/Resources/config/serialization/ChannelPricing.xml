@@ -42,5 +42,9 @@
             <group>admin:product_variant:update</group>
             <group>admin:product_variant:create</group>
         </attribute>
+
+        <attribute name="lowestPriceBeforeDiscount">
+            <group>admin:product_variant:read</group>
+        </attribute>
     </class>
 </serializer>

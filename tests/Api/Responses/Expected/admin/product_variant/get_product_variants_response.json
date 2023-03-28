@@ -16,6 +16,7 @@
                     "channelCode": "WEB",
                     "price": 2000,
                     "originalPrice": null,
+                    "lowestPriceBeforeDiscount": null,
                     "minimumPrice": 0
                 }
             },
