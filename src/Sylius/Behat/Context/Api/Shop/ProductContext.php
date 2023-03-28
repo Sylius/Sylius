@@ -603,6 +603,34 @@ final class ProductContext implements Context
         Assert::true($this->hasAssociationsWithProducts($associations, $productAssociationName, $products));
     }
 
+    /**
+     * @Then I should not see information about its lowest price
+     */
+    public function iShouldNotSeeInformationAboutItsLowestPrice(): void
+    {
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $variant = $this->responseChecker->getResponseContent(
+            $this->client->showByIri((string) $product['defaultVariant']),
+        );
+
+        Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
+        Assert::same($variant['lowestPriceBeforeDiscount'], null);
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+") as its lowest price before the discount$/
+     */
+    public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(int $lowestPriceBeforeDiscount): void
+    {
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $variant = $this->responseChecker->getResponseContent(
+            $this->client->showByIri((string) $product['defaultVariant']),
+        );
+
+        Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
+        Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);
+    }
+
     private function hasProductWithPrice(
         array $products,
         int $price,

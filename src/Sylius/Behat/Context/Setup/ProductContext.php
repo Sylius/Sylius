@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -76,6 +77,21 @@ final class ProductContext implements Context
     public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null)
     {
         $product = $this->createProduct($productName, $price, $channel);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") belonging to the ("[^"]+" taxon)$/
+     */
+    public function storeHasAProductPricedAtBelongingToTheTaxon(
+        string $productName,
+        int $price = 100,
+        TaxonInterface $taxon,
+    ) {
+        $productTaxon = $this->createProductTaxon($taxon);
+        $product = $this->createProduct($productName, $price);
+        $product->addProductTaxon($taxon);
 
         $this->saveProduct($product);
     }
