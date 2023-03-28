@@ -64,6 +64,10 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
             $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
+            $data['lowestPriceBeforeDiscount'] = $this->priceCalculator->calculateLowestPriceBeforeDiscount(
+                $object,
+                ['channel' => $channel],
+            );
         } catch (MissingChannelConfigurationException) {
             unset($data['price'], $data['originalPrice']);
         }
