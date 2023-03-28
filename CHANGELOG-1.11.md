@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.15 (2023-03-28)
+
+#### Details
+
+- [#14784](https://github.com/Sylius/Sylius/issues/14784) [Documentation] Update Sylius versions in release cycle ([@GSadee](https://github.com/GSadee))
+- [#14871](https://github.com/Sylius/Sylius/issues/14871) Fix dependency security vulerability for enshrined/svg-sanitize package ([@cosminsandu](https://github.com/cosminsandu))
+- [#14876](https://github.com/Sylius/Sylius/issues/14876) Fix CI on Sylius 1.11 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+
 ## v1.11.14 (2023-02-02)
 
 #### Details
