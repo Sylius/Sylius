@@ -301,6 +301,18 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the :taxon taxon is excluded from showing the lowest price of discounted products in the :channel channel
+     */
+    public function theTaxonIsExcludedFromShowingTheLowestPriceOfDiscountedProductsInTheChannel(
+        TaxonInterface $taxon,
+        ChannelInterface $channel,
+    ): void {
+        $channel->addTaxonExcludedFromShowingLowestPrice($taxon);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)
