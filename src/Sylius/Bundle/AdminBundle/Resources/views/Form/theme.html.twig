@@ -46,3 +46,12 @@
         </div>
     {% endfor %}
 {% endblock %}
+
+{% block _sylius_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsCheckingPeriod_widget %}
+    <div class="ui right labeled input">
+        {{ form_widget(form) }}
+        <div class="ui label">
+            {{ 'sylius.ui.days'|trans }}
+        </div>
+    </div>
+{% endblock %}

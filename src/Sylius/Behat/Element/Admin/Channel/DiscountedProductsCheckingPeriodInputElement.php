@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Channel;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-class DiscountedProductsCheckingPeriodInputElement extends Element implements DiscountedProductsCheckingPeriodInputElementInterface
+final class DiscountedProductsCheckingPeriodInputElement extends Element implements DiscountedProductsCheckingPeriodInputElementInterface
 {
     public function specifyPeriod(int $period): void
     {
@@ -30,7 +30,7 @@ class DiscountedProductsCheckingPeriodInputElement extends Element implements Di
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'discounted_products_checking_period' => '#sylius_channel_lowestPriceForDiscountedProductsCheckingPeriod',
+            'discounted_products_checking_period' => '#sylius_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsCheckingPeriod',
         ]);
     }
 }
