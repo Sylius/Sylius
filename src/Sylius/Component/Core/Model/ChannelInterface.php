@@ -93,21 +93,7 @@ interface ChannelInterface extends
 
     public function hasCountry(CountryInterface $country): bool;
 
-    public function getLowestPriceForDiscountedProductsCheckingPeriod(): int;
+    public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void;
 
-    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void;
-
-    public function isLowestPriceForDiscountedProductsVisible(): bool;
-
-    public function setLowestPriceForDiscountedProductsVisible(bool $visible = true): void;
-
-    public function getTaxonsExcludedFromShowingLowestPrice(): Collection;
-
-    public function hasTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): bool;
-
-    public function addTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void;
-
-    public function removeTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void;
-
-    public function clearTaxonsExcludedFromShowingLowestPrice(): void;
+    public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface;
 }
