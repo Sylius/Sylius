@@ -25,7 +25,7 @@
                 {% endif %}
             </td>
             {% set appliedPromotions = channelPricing.appliedPromotions|map(promotion => ({'label': promotion.label, 'description': promotion.description})) %}
-            {% set days = sylius.channel.lowestPriceForDiscountedProductsCheckingPeriod %}
+            {% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
             {% set hasLowestPrice = variant|sylius_has_lowest_price({'channel': sylius.channel})%}
             {% set hasDiscount = variant|sylius_has_discount({'channel': sylius.channel}) %}
 

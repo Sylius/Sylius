@@ -13,7 +13,7 @@
     {{ money.calculatePrice(variant) }}
 </span>
 
-{% set days = sylius.channel.lowestPriceForDiscountedProductsCheckingPeriod %}
+{% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
 {% set hasLowestPrice = variant|sylius_has_lowest_price({'channel': sylius.channel})%}
 
 <div class="ui mini label" id="lowest-price-before-discount"

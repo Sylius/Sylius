@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Checker;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -26,8 +27,13 @@ final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLow
         Assert::keyExists($context, 'channel');
         $channel = $context['channel'];
         Assert::isInstanceOf($channel, ChannelInterface::class);
+        /** @var ChannelPriceHistoryConfigInterface|null $channelPriceHistoryConfig */
+        $channelPriceHistoryConfig = $channel->getChannelPriceHistoryConfig();
 
-        if (!$channel->isLowestPriceForDiscountedProductsVisible()) {
+        if (
+            null === $channelPriceHistoryConfig ||
+            !$channelPriceHistoryConfig->isLowestPriceForDiscountedProductsVisible()
+        ) {
             return false;
         }
 
@@ -38,7 +44,7 @@ final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLow
             return true;
         }
 
-        $excludedTaxons = $channel->getTaxonsExcludedFromShowingLowestPrice();
+        $excludedTaxons = $channelPriceHistoryConfig->getTaxonsExcludedFromShowingLowestPrice();
         if ($excludedTaxons->isEmpty()) {
             return true;
         }
