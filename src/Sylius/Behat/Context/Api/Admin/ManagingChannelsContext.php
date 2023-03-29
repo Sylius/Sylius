@@ -55,27 +55,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I exclude the :taxon taxon from showing the lowest price of discounted products
-     */
-    public function iExcludeTheTaxonFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
-    {
-        $this->iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts([$taxon]);
-    }
-
-    /**
-     * @When /^I exclude the ("[^"]+" and "[^"]+" taxons) from showing the lowest price of discounted products$/
-     */
-    public function iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
-    {
-        $taxonsIris = [];
-        foreach ($taxons as $taxon) {
-            $taxonsIris[] = $this->iriConverter->getIriFromItem($taxon);
-        }
-
-        $this->client->addRequestData('taxonsExcludedFromShowingLowestPrice', $taxonsIris);
-    }
-
-    /**
      * @When I specify its :field as :value
      * @When I :field it :value
      * @When I set its :field as :value
@@ -209,22 +188,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When /^I (enable|disable) showing the lowest price of discounted products$/
-     */
-    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
-    {
-        $this->client->addRequestData('lowestPriceForDiscountedProductsVisible', $visible === 'enable');
-    }
-
-    /**
-     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
-     */
-    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
-    {
-        $this->client->addRequestData('lowestPriceForDiscountedProductsCheckingPeriod', $days);
-    }
-
-    /**
      * @When I add it
      * @When I try to add it
      */
@@ -260,6 +223,28 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When /^I (enable|disable) showing the lowest price of discounted products$/
+     */
+    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
+    {
+        $this->client->addRequestData(
+            'channelPriceHistoryConfig',
+            ['lowestPriceForDiscountedProductsVisible' => $visible === 'enable'],
+        );
+    }
+
+    /**
+     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
+     */
+    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
+    {
+        $this->client->addRequestData(
+            'channelPriceHistoryConfig',
+            ['lowestPriceForDiscountedProductsCheckingPeriod' => $days],
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -268,47 +253,6 @@ final class ManagingChannelsContext implements Context
             $this->responseChecker->isCreationSuccessful($response = $this->client->getLastResponse()),
             'Channel could not be created: ' . $response->getContent(),
         );
-    }
-
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be greater than 0
-     */
-    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeGreaterThanZero(): void
-    {
-        Assert::true($this->responseChecker->hasViolationWithMessage(
-            $this->client->getLastResponse(),
-            'Value must be greater than 0',
-            'lowestPriceForDiscountedProductsCheckingPeriod',
-        ));
-    }
-
-    /**
-     * @Then /^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/
-     * @Then its lowest price for discounted products checking period should be set to :days days
-     */
-    public function theChannelShouldHaveTheLowestPriceForDiscountedProductsCheckingPeriodSetToDays(int $days): void
-    {
-        $lowestPriceForDiscountedProductsCheckingPeriod = $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'lowestPriceForDiscountedProductsCheckingPeriod',
-        );
-
-        Assert::same($lowestPriceForDiscountedProductsCheckingPeriod, $days);
-    }
-
-    /**
-     * @Then /^the ("[^"]+" channel) should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/
-     */
-    public function theChannelShouldHaveTheLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountEnabledOrDisabled(
-        ChannelInterface $channel,
-        string $visible,
-    ): void {
-        $lowestPriceForDiscountedProductsVisible = $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'lowestPriceForDiscountedProductsVisible',
-        );
-
-        Assert::same($lowestPriceForDiscountedProductsVisible, $visible === 'enabled');
     }
 
     /**
@@ -364,48 +308,6 @@ final class ManagingChannelsContext implements Context
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Channel could not be edited',
         );
-    }
-
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be lower
-     */
-    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeLower(): void
-    {
-        Assert::true($this->responseChecker->hasViolationWithMessage(
-            $this->client->getLastResponse(),
-            'Value must be less than 2147483647',
-            'lowestPriceForDiscountedProductsCheckingPeriod',
-        ));
-    }
-
-    /**
-     * @Then /^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/
-     */
-    public function thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
-        iterable $taxons,
-    ): void {
-        $excludedTaxons = $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'taxonsExcludedFromShowingLowestPrice',
-        );
-
-        foreach ($taxons as $taxon) {
-            Assert::true($this->isResourceAdminIriInArray($taxon, $excludedTaxons));
-        }
-    }
-
-    /**
-     * @Then this channel should have :taxon taxon excluded from displaying the lowest price of discounted products
-     */
-    public function thisChannelShouldHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
-        TaxonInterface $taxon,
-    ): void {
-        $excludedTaxons = $this->responseChecker->getValue(
-            $this->client->getLastResponse(),
-            'taxonsExcludedFromShowingLowestPrice',
-        );
-
-        Assert::true($this->isResourceAdminIriInArray($taxon, $excludedTaxons));
     }
 
     private function isResourceAdminIriInArray(ResourceInterface $resource, array $iris): bool

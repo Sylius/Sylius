@@ -24,9 +24,12 @@ final class ChannelFactory implements ChannelFactoryInterface
 {
     public function __construct(
         private FactoryInterface $decoratedFactory,
-        private FactoryInterface $channelPriceHistoryConfigFactory,
         private string $defaultCalculationStrategy,
+        private ?FactoryInterface $channelPriceHistoryConfigFactory = null,
     ) {
+        if (null === $this->channelPriceHistoryConfigFactory) {
+            @trigger_error(sprintf('Not passing a $channelPriceHistoryConfigFactory to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     /**
@@ -38,9 +41,11 @@ final class ChannelFactory implements ChannelFactoryInterface
         $channel = $this->decoratedFactory->createNew();
         $channel->setTaxCalculationStrategy($this->defaultCalculationStrategy);
 
-        /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
-        $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
-        $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
+        if (null !== $this->channelPriceHistoryConfigFactory) {
+            /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
+            $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
+            $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
+        }
 
         return $channel;
     }

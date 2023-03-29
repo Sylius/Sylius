@@ -54,5 +54,8 @@
                 </option>
             </constraint>
         </property>
+        <property name="channelPriceHistoryConfig">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

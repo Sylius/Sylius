@@ -25,7 +25,7 @@ final class ChannelFactorySpec extends ObjectBehavior
         FactoryInterface $decoratedFactory,
         FactoryInterface $channelPriceHistoryConfigFactory,
     ): void {
-        $this->beConstructedWith($decoratedFactory, $channelPriceHistoryConfigFactory, 'order_items_based');
+        $this->beConstructedWith($decoratedFactory, 'order_items_based', $channelPriceHistoryConfigFactory);
     }
 
     function it_implements_channel_factory_interface(): void

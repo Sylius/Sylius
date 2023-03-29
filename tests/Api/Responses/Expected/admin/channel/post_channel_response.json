@@ -26,7 +26,5 @@
     "shippingAddressInCheckoutRequired": false,
     "shopBillingData": null,
     "menuTaxon": null,
-    "taxonsExcludedFromShowingLowestPrice": [],
-    "lowestPriceForDiscountedProductsCheckingPeriod": 30,
-    "lowestPriceForDiscountedProductsVisible": true
+    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
 }

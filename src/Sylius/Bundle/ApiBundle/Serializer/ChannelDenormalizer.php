@@ -13,21 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Webmozart\Assert\Assert;
 
-final class ChannelExcludedTaxonsDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
+/** @experimental */
+final class ChannelDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
 
-    private const ALREADY_CALLED = 'sylius_channel_excluded_taxons_denormalizer_already_called';
+    private const ALREADY_CALLED = 'sylius_channel_denormalizer_already_called';
 
-    public function __construct(private IriConverterInterface $iriConverter)
+    public function __construct(private FactoryInterface $channelPriceHistoryConfigFactory)
     {
     }
 
@@ -47,14 +48,10 @@ final class ChannelExcludedTaxonsDenormalizer implements ContextAwareDenormalize
 
         $channel = $this->denormalizer->denormalize($data, $type, $format, $context);
         Assert::isInstanceOf($channel, ChannelInterface::class);
-
-        $channel->clearTaxonsExcludedFromShowingLowestPrice();
-
-        foreach ($data['taxonsExcludedFromShowingLowestPrice'] ?? [] as $excludedTaxonIri) {
-            /** @var TaxonInterface $taxon */
-            $taxon = $this->iriConverter->getItemFromIri($excludedTaxonIri);
-
-            $channel->addTaxonExcludedFromShowingLowestPrice($taxon);
+        if (null === $channel->getChannelPriceHistoryConfig()) {
+            /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
+            $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
+            $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
         }
 
         return $channel;

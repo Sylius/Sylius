@@ -27,7 +27,5 @@
     "description": "Lorem ipsum",
     "hostname": "localhost",
     "color": "black",
-    "taxonsExcludedFromShowingLowestPrice": [],
-    "lowestPriceForDiscountedProductsCheckingPeriod": 30,
-    "lowestPriceForDiscountedProductsVisible": true
+    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
 }

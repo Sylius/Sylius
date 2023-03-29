@@ -23,7 +23,9 @@ final class Resources
 
     public const CATALOG_PROMOTIONS = 'catalog-promotions';
 
-    public const CHANNEL_PRICING_LOG_ENTRY = 'channel-pricing-log-entries';
+    public const CHANNEL_PRICE_HISTORY_CONFIGS = 'channel-price-history-configs';
+
+    public const CHANNEL_PRICING_LOG_ENTRIES = 'channel-pricing-log-entries';
 
     public const CHANNELS = 'channels';
 

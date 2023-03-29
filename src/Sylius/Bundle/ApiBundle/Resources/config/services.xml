@@ -169,5 +169,9 @@
             <argument type="service" id="api_platform.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
+            <argument type="service" id="validator" />
+        </service>
     </services>
 </container>
