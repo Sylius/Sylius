@@ -195,10 +195,17 @@
             <argument>%sylius.security.new_api_route%</argument>
         </service>
 
-        <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext" public="true">
+        <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
+        </service>
+
+        <service id="Sylius\Behat\Context\Api\Admin\ManagingChannelPriceHistoryConfigsContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
         </service>
     </services>
 </container>

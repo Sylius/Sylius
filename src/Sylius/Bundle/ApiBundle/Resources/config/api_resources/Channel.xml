@@ -117,5 +117,6 @@
             <subresource resourceClass="%sylius.model.shop_billing_data.class%" collection="false" />
         </property>
         <property name="menuTaxon" writable="true" readable="true" />
+        <property name="channelPriceHistoryConfig" writable="true" readable="true" />
     </resource>
 </resources>

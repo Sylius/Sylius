@@ -111,5 +111,9 @@
             <group>admin:channel:read</group>
             <group>admin:channel:create</group>
         </attribute>
+        <attribute name="channelPriceHistoryConfig">
+            <group>admin:channel:read</group>
+            <group>admin:channel:create</group>
+        </attribute>
     </class>
 </serializer>

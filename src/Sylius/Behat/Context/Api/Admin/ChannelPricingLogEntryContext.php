@@ -40,7 +40,7 @@ final class ChannelPricingLogEntryContext implements Context
 
         $this->sharedStorage->set('variant', $productVariant);
 
-        $this->client->index(Resources::CHANNEL_PRICING_LOG_ENTRY);
+        $this->client->index(Resources::CHANNEL_PRICING_LOG_ENTRIES);
         $this->client->addFilter('channelPricing.channelCode', $channel->getCode());
         $this->client->addFilter('channelPricing.productVariant.code', $productVariant->getCode());
         $this->client->filter();
