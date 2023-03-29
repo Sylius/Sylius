@@ -83,16 +83,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var TaxonInterface|null */
     protected $menuTaxon;
 
-    /**
-     * @var Collection|TaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, TaxonInterface>
-     */
-    protected Collection $taxonsExcludedFromShowingLowestPrice;
-
-    protected int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
-
-    protected bool $lowestPriceForDiscountedProductsVisible = true;
+    protected ?ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig = null;
 
     public function __construct()
     {
@@ -104,8 +95,6 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->locales = new ArrayCollection();
         /** @var ArrayCollection<array-key, CountryInterface> $this->countries */
         $this->countries = new ArrayCollection();
-//        /** @var ArrayCollection<array-key, TaxonInterface> $this->taxonsExcludedFromShowingLowestPrice */
-        $this->taxonsExcludedFromShowingLowestPrice = new ArrayCollection();
     }
 
     public function getBaseCurrency(): ?CurrencyInterface
@@ -310,52 +299,13 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->menuTaxon = $menuTaxon;
     }
 
-    public function getLowestPriceForDiscountedProductsCheckingPeriod(): int
+    public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface
     {
-        return $this->lowestPriceForDiscountedProductsCheckingPeriod;
+        return $this->channelPriceHistoryConfig;
     }
 
-    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void
+    public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void
     {
-        $this->lowestPriceForDiscountedProductsCheckingPeriod = $periodInDays;
-    }
-
-    public function isLowestPriceForDiscountedProductsVisible(): bool
-    {
-        return $this->lowestPriceForDiscountedProductsVisible;
-    }
-
-    public function setLowestPriceForDiscountedProductsVisible(bool $visible = true): void
-    {
-        $this->lowestPriceForDiscountedProductsVisible = $visible;
-    }
-
-    public function getTaxonsExcludedFromShowingLowestPrice(): Collection
-    {
-        return $this->taxonsExcludedFromShowingLowestPrice;
-    }
-
-    public function hasTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): bool
-    {
-        return $this->taxonsExcludedFromShowingLowestPrice->contains($taxon);
-    }
-
-    public function addTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void
-    {
-        if (!$this->hasTaxonExcludedFromShowingLowestPrice($taxon)) {
-            $this->taxonsExcludedFromShowingLowestPrice->add($taxon);
-        }
-    }
-
-    public function removeTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void
-    {
-        if ($this->hasTaxonExcludedFromShowingLowestPrice($taxon)) {
-            $this->taxonsExcludedFromShowingLowestPrice->removeElement($taxon);
-        }
-    }
-
-    public function clearTaxonsExcludedFromShowingLowestPrice(): void
-    {
-        $this->taxonsExcludedFromShowingLowestPrice->clear();
+        $this->channelPriceHistoryConfig = $channelPriceHistoryConfig;
     }
 }

@@ -18,6 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -187,5 +188,11 @@ final class ChannelSpec extends ObjectBehavior
     {
         $this->setMenuTaxon($taxon);
         $this->getMenuTaxon()->shouldReturn($taxon);
+    }
+
+    function its_price_history_config_is_mutable(ChannelPriceHistoryConfigInterface $config): void
+    {
+        $this->setChannelPriceHistoryConfig($config);
+        $this->getChannelPriceHistoryConfig()->shouldReturn($config);
     }
 }

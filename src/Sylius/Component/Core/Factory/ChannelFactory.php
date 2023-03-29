@@ -16,13 +16,17 @@ namespace Sylius\Component\Core\Factory;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelInterface as CoreChannelInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ChannelFactory implements ChannelFactoryInterface
 {
-    public function __construct(private FactoryInterface $decoratedFactory, private string $defaultCalculationStrategy)
-    {
+    public function __construct(
+        private FactoryInterface $decoratedFactory,
+        private FactoryInterface $channelPriceHistoryConfigFactory,
+        private string $defaultCalculationStrategy,
+    ) {
     }
 
     /**
@@ -33,6 +37,10 @@ final class ChannelFactory implements ChannelFactoryInterface
         /** @var CoreChannelInterface $channel */
         $channel = $this->decoratedFactory->createNew();
         $channel->setTaxCalculationStrategy($this->defaultCalculationStrategy);
+
+        /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
+        $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
+        $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
 
         return $channel;
     }
