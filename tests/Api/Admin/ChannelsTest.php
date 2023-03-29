@@ -84,7 +84,7 @@ final class ChannelsTest extends JsonApiTestCase
                 'defaultLocale' => '/api/v2/admin/locales/en_US',
                 'taxCalculationStrategy' => 'order_items_based',
                 'currencies' => [],
-                'locales' => [],
+                'locales' => ['/api/v2/admin/locales/en_US'],
                 'themeName' => 'garish',
                 'contactEmail' => 'contact@test.com',
                 'contactPhoneNumber' => '1-800-00-00-00',

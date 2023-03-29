@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingChannelsContext implements Context
@@ -46,6 +47,35 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I want to modify a channel :channel
+     */
+    public function iWantToModifyChannel(ChannelInterface $channel): void
+    {
+        $this->client->buildUpdateRequest(Resources::CHANNELS, $channel->getCode());
+    }
+
+    /**
+     * @When I exclude the :taxon taxon from showing the lowest price of discounted products
+     */
+    public function iExcludeTheTaxonFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
+    {
+        $this->iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts([$taxon]);
+    }
+
+    /**
+     * @When /^I exclude the ("[^"]+" and "[^"]+" taxons) from showing the lowest price of discounted products$/
+     */
+    public function iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
+    {
+        $taxonsIris = [];
+        foreach ($taxons as $taxon) {
+            $taxonsIris[] = $this->iriConverter->getIriFromItem($taxon);
+        }
+
+        $this->client->addRequestData('taxonsExcludedFromShowingLowestPrice', $taxonsIris);
+    }
+
+    /**
      * @When I specify its :field as :value
      * @When I :field it :value
      * @When I set its :field as :value
@@ -62,6 +92,14 @@ final class ManagingChannelsContext implements Context
     public function iChooseAsTheBaseCurrency(CurrencyInterface $currency): void
     {
         $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromItemInSection($currency, 'admin'));
+    }
+
+    /**
+     * @When I make it available in :locale
+     */
+    public function iMakeItAvailableInLocale(LocaleInterface $locale): void
+    {
+        $this->client->addRequestData('locales', [$this->iriConverter->getIriFromItem($locale)]);
     }
 
     /**
@@ -171,7 +209,24 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When /^I (enable|disable) showing the lowest price of discounted products$/
+     */
+    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
+    {
+        $this->client->addRequestData('lowestPriceForDiscountedProductsVisible', $visible === 'enable');
+    }
+
+    /**
+     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
+     */
+    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
+    {
+        $this->client->addRequestData('lowestPriceForDiscountedProductsCheckingPeriod', $days);
+    }
+
+    /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -210,9 +265,50 @@ final class ManagingChannelsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Channel could not be created',
+            $this->responseChecker->isCreationSuccessful($response = $this->client->getLastResponse()),
+            'Channel could not be created: ' . $response->getContent(),
         );
+    }
+
+    /**
+     * @Then I should be notified that the lowest price for discounted products checking period must be greater than 0
+     */
+    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeGreaterThanZero(): void
+    {
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $this->client->getLastResponse(),
+            'Value must be greater than 0',
+            'lowestPriceForDiscountedProductsCheckingPeriod',
+        ));
+    }
+
+    /**
+     * @Then /^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/
+     * @Then its lowest price for discounted products checking period should be set to :days days
+     */
+    public function theChannelShouldHaveTheLowestPriceForDiscountedProductsCheckingPeriodSetToDays(int $days): void
+    {
+        $lowestPriceForDiscountedProductsCheckingPeriod = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'lowestPriceForDiscountedProductsCheckingPeriod',
+        );
+
+        Assert::same($lowestPriceForDiscountedProductsCheckingPeriod, $days);
+    }
+
+    /**
+     * @Then /^the ("[^"]+" channel) should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/
+     */
+    public function theChannelShouldHaveTheLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountEnabledOrDisabled(
+        ChannelInterface $channel,
+        string $visible,
+    ): void {
+        $lowestPriceForDiscountedProductsVisible = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'lowestPriceForDiscountedProductsVisible',
+        );
+
+        Assert::same($lowestPriceForDiscountedProductsVisible, $visible === 'enabled');
     }
 
     /**
@@ -268,5 +364,58 @@ final class ManagingChannelsContext implements Context
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
             'Channel could not be edited',
         );
+    }
+
+    /**
+     * @Then I should be notified that the lowest price for discounted products checking period must be lower
+     */
+    public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeLower(): void
+    {
+        Assert::true($this->responseChecker->hasViolationWithMessage(
+            $this->client->getLastResponse(),
+            'Value must be less than 2147483647',
+            'lowestPriceForDiscountedProductsCheckingPeriod',
+        ));
+    }
+
+    /**
+     * @Then /^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/
+     */
+    public function thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
+        iterable $taxons,
+    ): void {
+        $excludedTaxons = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'taxonsExcludedFromShowingLowestPrice',
+        );
+
+        foreach ($taxons as $taxon) {
+            Assert::true($this->isResourceAdminIriInArray($taxon, $excludedTaxons));
+        }
+    }
+
+    /**
+     * @Then this channel should have :taxon taxon excluded from displaying the lowest price of discounted products
+     */
+    public function thisChannelShouldHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
+        TaxonInterface $taxon,
+    ): void {
+        $excludedTaxons = $this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'taxonsExcludedFromShowingLowestPrice',
+        );
+
+        Assert::true($this->isResourceAdminIriInArray($taxon, $excludedTaxons));
+    }
+
+    private function isResourceAdminIriInArray(ResourceInterface $resource, array $iris): bool
+    {
+        if (method_exists($this->iriConverter, 'getIriFromItemInSection')) {
+            $iri = $this->iriConverter->getIriFromItemInSection($resource, 'admin');
+        } else {
+            $iri = $this->iriConverter->getIriFromItem($resource);
+        }
+
+        return in_array($iri, $iris, true);
     }
 }

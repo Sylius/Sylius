@@ -24,4 +24,10 @@ interface VariantsElementInterface
         string $currentStock,
         string $channel,
     ): bool;
+
+    public function hasProductVariantWithLowestPriceBeforeDiscountInChannel(
+        string $productVariantName,
+        string $lowestPriceBeforeDiscount,
+        string $channelName,
+    ): bool;
 }

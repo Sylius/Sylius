@@ -21,6 +21,7 @@ use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Model\LocalesAwareInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface ChannelInterface extends
     BaseChannelInterface,
@@ -95,4 +96,18 @@ interface ChannelInterface extends
     public function getLowestPriceForDiscountedProductsCheckingPeriod(): int;
 
     public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void;
+
+    public function isLowestPriceForDiscountedProductsVisible(): bool;
+
+    public function setLowestPriceForDiscountedProductsVisible(bool $visible = true): void;
+
+    public function getTaxonsExcludedFromShowingLowestPrice(): Collection;
+
+    public function hasTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): bool;
+
+    public function addTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void;
+
+    public function removeTaxonExcludedFromShowingLowestPrice(TaxonInterface $taxon): void;
+
+    public function clearTaxonsExcludedFromShowingLowestPrice(): void;
 }

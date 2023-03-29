@@ -95,22 +95,5 @@
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="handleRemovingRootTaxonAtPositionZero" />
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\CreateLogEntryOnPriceChangeObserver">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface" />
-            <tag name="sylius.entity_observer" />
-        </service>
-
-        <service id="sylius.listener.channel_pricing_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
-            <argument type="tagged_iterator" tag="sylius.entity_observer" />
-            <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\BeforeDenormalizationChannelValidationListener">
-            <argument type="service" id="validator" />
-            <argument type="service" id="sylius.custom_factory.channel" />
-            <argument>%sylius.channel.validation_groups%</argument>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="3" />
-        </service>
     </services>
 </container>

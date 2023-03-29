@@ -90,12 +90,16 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(500);
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldBeLike(['price' => 1000, 'originalPrice' => 1000, 'inStock' => true]);
+        $this
+            ->normalize($variant, null, [])
+            ->shouldBeLike(['price' => 1000, 'originalPrice' => 1000, 'lowestPriceBeforeDiscount' => 500, 'inStock' => true])
+        ;
     }
 
     function it_returns_original_price_if_is_different_than_price(
@@ -113,12 +117,16 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(100);
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
 
-        $this->normalize($variant, null, [])->shouldBeLike(['price' => 500, 'originalPrice' => 1000, 'inStock' => true]);
+        $this
+            ->normalize($variant, null, [])
+            ->shouldBeLike(['price' => 500, 'originalPrice' => 1000, 'lowestPriceBeforeDiscount' => 100, 'inStock' => true])
+        ;
     }
 
     function it_returns_catalog_promotions_if_applied(
@@ -138,6 +146,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $pricesCalculator->calculate($variant, ['channel' => $channel])->willReturn(500);
         $pricesCalculator->calculateOriginal($variant, ['channel' => $channel])->willReturn(1000);
+        $pricesCalculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(100);
         $catalogPromotion->getCode()->willReturn('winter_sale');
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
@@ -149,6 +158,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
             ->shouldBeLike([
                 'price' => 500,
                 'originalPrice' => 1000,
+                'lowestPriceBeforeDiscount' => 100,
                 'appliedPromotions' => ['/api/v2/shop/catalog-promotions/winter_sale'],
                 'inStock' => true,
             ])

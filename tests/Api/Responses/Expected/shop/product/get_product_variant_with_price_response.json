@@ -10,5 +10,6 @@
     ],
     "price": 2000,
     "originalPrice": 2000,
+    "lowestPriceBeforeDiscount": null,
     "inStock": true
 }

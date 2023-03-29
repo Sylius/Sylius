@@ -25,7 +25,7 @@ final class Version20230314073215 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_channel ADD lowest_price_for_discounted_products_checking_period TINYINT(1) DEFAULT 30 NOT NULL');
+        $this->addSql('ALTER TABLE sylius_channel ADD lowest_price_for_discounted_products_checking_period INT DEFAULT 30 NOT NULL');
     }
 
     public function down(Schema $schema): void

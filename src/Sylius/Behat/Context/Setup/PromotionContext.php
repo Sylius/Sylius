@@ -60,10 +60,11 @@ final class PromotionContext implements Context
     /**
      * @Given /^there is a promotion "([^"]+)" with "Has at least one from taxons" rule (configured with "[^"]+" and "[^"]+")$/
      */
-    public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, array $taxons): void
+    public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, iterable $taxons): void
     {
         $promotion = $this->createPromotion($name);
-        $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
+        $taxonCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($taxons));
+        $rule = $this->ruleFactory->createHasTaxon($taxonCodes);
         $promotion->addRule($rule);
 
         $this->objectManager->flush();
@@ -549,9 +550,11 @@ final class PromotionContext implements Context
     public function thePromotionGivesOffIfOrderContainsProductsClassifiedAsOr(
         PromotionInterface $promotion,
         int $discount,
-        array $taxons,
+        iterable $taxons,
     ): void {
-        $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
+        $taxonCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($taxons));
+
+        $rule = $this->ruleFactory->createHasTaxon($taxonCodes);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -652,11 +655,11 @@ final class PromotionContext implements Context
     public function itGivesOffOnEveryProductClassifiedAsOrIfOrderContainsAnyProductClassifiedAsOr(
         PromotionInterface $promotion,
         float $discount,
-        array $discountTaxons,
-        array $targetTaxons,
+        iterable $discountTaxons,
+        iterable $targetTaxons,
     ): void {
-        $discountTaxonsCodes = [$discountTaxons[0]->getCode(), $discountTaxons[1]->getCode()];
-        $targetTaxonsCodes = [$targetTaxons[0]->getCode(), $targetTaxons[1]->getCode()];
+        $discountTaxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($discountTaxons));
+        $targetTaxonsCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($targetTaxons));
 
         $rule = $this->ruleFactory->createHasTaxon($targetTaxonsCodes);
 

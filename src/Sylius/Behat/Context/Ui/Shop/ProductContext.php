@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Product\IndexPage\VerticalMenuElementInterface;
+use Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
@@ -35,6 +36,7 @@ final class ProductContext implements Context
         private ErrorPageInterface $errorPage,
         private VerticalMenuElementInterface $verticalMenuElement,
         private ChannelContextSetterInterface $channelContextSetter,
+        private LowestPriceInformationElementInterface $lowestPriceInformationElement,
     ) {
     }
 
@@ -923,6 +925,22 @@ final class ProductContext implements Context
     public function iShouldNotBeAbleToClickDisabledMainTaxonInTheBreacrumb(string $taxonName): void
     {
         Assert::false($this->showPage->hasBreadcrumbLink($taxonName));
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" as its lowest price before the discount$/
+     */
+    public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(string $lowestPriceBeforeDiscount): void
+    {
+        Assert::true($this->lowestPriceInformationElement->isThereInformationAboutProductLowestPriceWithPrice($lowestPriceBeforeDiscount));
+    }
+
+    /**
+     * @Then I should not see information about its lowest price
+     */
+    public function iShouldNotSeeInformationAboutItsLowestPrice(): void
+    {
+        Assert::false($this->lowestPriceInformationElement->isThereInformationAboutProductLowestPrice());
     }
 
     /**
