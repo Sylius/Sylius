@@ -18,6 +18,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntry;
 use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
@@ -94,12 +95,15 @@ final class ProductLowestPriceBeforeDiscountProcessorSpec extends ObjectBehavior
         ChannelPricingLogEntryRepositoryInterface $channelPricingLogEntryRepository,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
+        ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig,
         ChannelPricingInterface $channelPricing,
     ): void {
+        $channel->getChannelPriceHistoryConfig()->willReturn($channelPriceHistoryConfig);
+
         $channelPricing->getOriginalPrice()->willReturn(3700);
         $channelPricing->getPrice()->willReturn(2100);
         $channelPricing->getChannelCode()->willReturn('WEB');
-        $channel->getLowestPriceForDiscountedProductsCheckingPeriod()->shouldNotBeCalled();
+        $channelPriceHistoryConfig->getLowestPriceForDiscountedProductsCheckingPeriod()->shouldNotBeCalled();
 
         $channelRepository->findOneByCode('WEB')->willReturn($channel);
         $channelPricingLogEntryRepository->findLatestOneByChannelPricing($channelPricing)->willReturn(null);
@@ -114,15 +118,18 @@ final class ProductLowestPriceBeforeDiscountProcessorSpec extends ObjectBehavior
         ChannelPricingLogEntryRepositoryInterface $channelPricingLogEntryRepository,
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
+        ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig,
         ChannelPricingInterface $channelPricing,
         ChannelPricingLogEntry $latestLogEntry,
     ): void {
+        $channel->getChannelPriceHistoryConfig()->willReturn($channelPriceHistoryConfig);
+
         $channelPricing->getOriginalPrice()->willReturn(3700);
         $channelPricing->getPrice()->willReturn(2100);
         $channelPricing->getChannelCode()->willReturn('WEB');
 
         $channelRepository->findOneByCode('WEB')->willReturn($channel);
-        $channel->getLowestPriceForDiscountedProductsCheckingPeriod()->willReturn(30);
+        $channelPriceHistoryConfig->getLowestPriceForDiscountedProductsCheckingPeriod()->willReturn(30);
 
         $unformattedDate = new \DateTimeImmutable();
         $latestLogEntry->getLoggedAt()->willReturn($unformattedDate);
