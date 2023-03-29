@@ -33,6 +33,12 @@
             <argument type="service" id="sylius.repository.payment"/>
         </service>
 
+        <service id="Sylius\Behat\Context\Domain\ManagingPriceHistoryContext">
+            <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" />
+        </service>
+
         <service id="sylius.behat.context.domain.managing_products" class="Sylius\Behat\Context\Domain\ManagingProductsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.product" />
