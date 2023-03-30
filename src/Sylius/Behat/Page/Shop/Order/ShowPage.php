@@ -23,6 +23,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->hasElement('pay_link');
     }
 
+    public function canBePaid(): bool
+    {
+        return $this->hasPayAction() && !$this->getElement('pay_link')->hasAttribute('disabled');
+    }
+
     public function pay(): void
     {
         $this->getElement('pay_link')->click();
@@ -70,6 +75,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         }
 
         return '';
+    }
+
+    public function getPaymentValidationMessage(): string
+    {
+        $message = '';
+        $validationElements = $this->getDocument()->findAll('css', 'form .items .sylius-validation-error');
+        foreach ($validationElements as $validationElement) {
+            $message .= $validationElement->getText();
+        }
+
+        return $message;
     }
 
     protected function getDefinedElements(): array
