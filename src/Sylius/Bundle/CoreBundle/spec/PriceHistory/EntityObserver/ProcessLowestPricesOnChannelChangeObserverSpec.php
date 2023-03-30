@@ -18,11 +18,12 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\EntityObserverInterface;
 use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-final class ProcessLowestPriceOnCheckingPeriodChangeObserverSpec extends ObjectBehavior
+final class ProcessLowestPricesOnChannelChangeObserverSpec extends ObjectBehavior
 {
     function let(
         ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
@@ -31,22 +32,64 @@ final class ProcessLowestPriceOnCheckingPeriodChangeObserverSpec extends ObjectB
         $this->beConstructedWith($productLowestPriceBeforeDiscountProcessor, $channelPricingRepository, 2);
     }
 
-    function it_implements_on_entity_change_interface(): void
+    function it_is_an_entity_observer(): void
     {
         $this->shouldImplement(EntityObserverInterface::class);
     }
 
-    function it_supports_channel_pricing_interface_only(
-        ChannelInterface $channel,
-        OrderInterface $order,
-    ): void {
-        $this->supports($channel)->shouldReturn(true);
+    function it_does_not_support_anything_other_than_channel_interface(OrderInterface $order): void
+    {
         $this->supports($order)->shouldReturn(false);
     }
 
-    function it_supports_lowest_price_for_discounted_products_checking_period_field(): void
+    function it_does_not_support_a_channel_that_is_currently_being_processed(
+        ChannelInterface $channel,
+    ): void {
+        $channel->getCode()->willReturn('test');
+        $channel->getChannelPriceHistoryConfig()->shouldNotBeCalled();
+
+        $object = $this->object->getWrappedObject();
+        $objectReflection = new \ReflectionObject($object);
+        $property = $objectReflection->getProperty('channelsCurrentlyProcessed');
+        $property->setAccessible(true);
+        $property->setValue($object, ['test' => true]);
+
+        $this->supports($channel)->shouldReturn(false);
+    }
+
+    function it_does_not_support_channels_with_no_price_history_config(ChannelInterface $channel): void
     {
-        $this->observedFields()->shouldReturn(['lowestPriceForDiscountedProductsCheckingPeriod']);
+        $channel->getCode()->willReturn('test');
+        $channel->getChannelPriceHistoryConfig()->willReturn(null);
+
+        $this->supports($channel)->shouldReturn(false);
+    }
+
+    function it_does_not_support_channels_with_existing_price_history_config(
+        ChannelInterface $channel,
+        ChannelPriceHistoryConfigInterface $config,
+    ): void {
+        $channel->getCode()->willReturn('test');
+        $channel->getChannelPriceHistoryConfig()->willReturn($config);
+        $config->getId()->willReturn(12);
+
+        $this->supports($channel)->shouldReturn(false);
+    }
+
+    function it_only_supports_channels_with_new_price_history_config(
+        ChannelInterface $channel,
+        ChannelPriceHistoryConfigInterface $config,
+    ): void {
+        $channel->getCode()->willReturn('test');
+        $channel->getChannelPriceHistoryConfig()->willReturn($config);
+        $config->getId()->willReturn(null);
+
+        $this->supports($channel)->shouldReturn(true);
+    }
+
+    function it_observes_channel_price_history_config_field(): void
+    {
+        $this->observedFields()->shouldReturn(['channelPriceHistoryConfig']);
     }
 
     function it_processes_product_lowest_price_for_each_channel_pricing_within_channel(
@@ -102,7 +145,6 @@ final class ProcessLowestPriceOnCheckingPeriodChangeObserverSpec extends ObjectB
     ): void {
         $channelPricingRepository->findBy(Argument::any())->shouldNotBeCalled();
 
-        $productLowestPriceBeforeDiscountProcessor->process(Argument::any())->shouldNotBeCalled();
         $productLowestPriceBeforeDiscountProcessor->process(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('onChange', [$order]);

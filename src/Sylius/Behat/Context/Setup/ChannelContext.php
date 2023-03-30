@@ -57,7 +57,7 @@ final class ChannelContext implements Context
     ): void {
         /** @var TaxonInterface $taxon */
         foreach ($taxons as $taxon) {
-            $channel->addTaxonExcludedFromShowingLowestPrice($taxon);
+            $channel->getChannelPriceHistoryConfig()->addTaxonExcludedFromShowingLowestPrice($taxon);
         }
 
         $this->channelManager->flush();
@@ -142,7 +142,7 @@ final class ChannelContext implements Context
      */
     public function theChannelHasShowingTheLowestPriceOfDiscountedProducts(ChannelInterface $channel, string $visible)
     {
-        $channel->setLowestPriceForDiscountedProductsVisible($visible === 'enabled');
+        $channel->getChannelPriceHistoryConfig()->setLowestPriceForDiscountedProductsVisible($visible === 'enabled');
 
         $this->channelManager->flush();
     }
@@ -295,7 +295,7 @@ final class ChannelContext implements Context
         ChannelInterface $channel,
         int $days,
     ): void {
-        $channel->setLowestPriceForDiscountedProductsCheckingPeriod($days);
+        $channel->getChannelPriceHistoryConfig()->setLowestPriceForDiscountedProductsCheckingPeriod($days);
 
         $this->channelManager->flush();
     }
@@ -307,7 +307,7 @@ final class ChannelContext implements Context
         TaxonInterface $taxon,
         ChannelInterface $channel,
     ): void {
-        $channel->addTaxonExcludedFromShowingLowestPrice($taxon);
+        $channel->getChannelPriceHistoryConfig()->addTaxonExcludedFromShowingLowestPrice($taxon);
 
         $this->channelManager->flush();
     }

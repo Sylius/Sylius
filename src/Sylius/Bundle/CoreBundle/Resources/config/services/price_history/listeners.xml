@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+        xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -20,9 +24,17 @@
             <tag name="sylius.entity_observer" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPriceOnCheckingPeriodChangeObserver">
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelChangeObserver">
             <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface" />
             <argument type="service" id="sylius.repository.channel_pricing" />
+            <argument>%sylius_core.price_history.batch_size%</argument>
+            <tag name="sylius.entity_observer" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface" />
+            <argument type="service" id="sylius.repository.channel_pricing" />
+            <argument type="service" id="sylius.repository.channel" />
             <argument>%sylius_core.price_history.batch_size%</argument>
             <tag name="sylius.entity_observer" />
         </service>
@@ -30,13 +42,6 @@
         <service id="sylius.listener.channel_pricing_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
             <argument type="tagged_iterator" tag="sylius.entity_observer" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\BeforeDenormalizationChannelValidationListener">
-            <argument type="service" id="validator" />
-            <argument type="service" id="sylius.custom_factory.channel" />
-            <argument>%sylius.channel.validation_groups%</argument>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="3" />
         </service>
     </services>
 </container>

@@ -11,6 +11,7 @@ Sylius\Component\Core\Model\Channel:
         color: 'black'
         enabled: true
         taxCalculationStrategy: 'order_items_based'
+        channelPriceHistoryConfig: '@web_price_history_config'
     channel_mobile:
         code: 'MOBILE'
         name: 'Mobile Channel'
@@ -23,6 +24,14 @@ Sylius\Component\Core\Model\Channel:
         color: 'black'
         enabled: true
         taxCalculationStrategy: 'order_items_based'
+        channelPriceHistoryConfig: '@mobile_price_history_config'
+
+Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
+    web_price_history_config:
+        lowestPriceForDiscountedProductsVisible: false
+    mobile_price_history_config:
+        lowestPriceForDiscountedProductsCheckingPeriod: 25
+        lowestPriceForDiscountedProductsVisible: true
 
 Sylius\Component\Currency\Model\Currency:
     currency_usd:

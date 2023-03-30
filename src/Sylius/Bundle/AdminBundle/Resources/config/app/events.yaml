@@ -986,7 +986,7 @@ sylius_ui:
                     priority: 20
                 content:
                     template: "@SyliusAdmin/Crud/Index/_content.html.twig"
-                    priority: 10 
+                    priority: 10
 
         sylius.admin.catalog_promotion.product_variant.index.header.content:
             blocks:
@@ -1120,7 +1120,7 @@ sylius_ui:
                     template: '@SyliusAdmin/Channel/Form/_lookAndFeel.html.twig'
                     priority: 10
                 price_history:
-                    template: '@SyliusAdmin/Channel/Form/_lowestPrice.html.twig'
+                    template: '@SyliusAdmin/Channel/Form/_priceHistoryConfig.html.twig'
                     priority: 0
 
         sylius.admin.customer.form:

@@ -17,7 +17,7 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
+final class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
     public function excludeTaxon(TaxonInterface $taxon): void
     {
@@ -43,7 +43,7 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends Element implements
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'taxons_excluded_from_showing_lowest_price' => '#sylius_channel_taxonsExcludedFromShowingLowestPrice',
+            'taxons_excluded_from_showing_lowest_price' => '#sylius_channel_channelPriceHistoryConfig_taxonsExcludedFromShowingLowestPrice',
         ]);
     }
 }

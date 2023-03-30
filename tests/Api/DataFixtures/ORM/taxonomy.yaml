@@ -11,6 +11,15 @@ Sylius\Component\Core\Model\Channel:
         menuTaxon: '@category_taxon'
         enabled: true
         taxCalculationStrategy: "order_items_based"
+        channelPriceHistoryConfig: '@web_price_history_config'
+
+Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
+    web_price_history_config:
+        lowestPriceForDiscountedProductsCheckingPeriod: 25
+        lowestPriceForDiscountedProductsVisible: false
+        __calls:
+            - addTaxonExcludedFromShowingLowestPrice: ["@mug_taxon"]
+            - addTaxonExcludedFromShowingLowestPrice: ["@hat_taxon"]
 
 Sylius\Component\Currency\Model\Currency:
     dolar:
