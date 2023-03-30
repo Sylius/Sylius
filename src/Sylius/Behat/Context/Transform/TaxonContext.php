@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,7 +38,7 @@ final class TaxonContext implements Context
      * @Transform /^taxon "([^"]+)"$/
      * @Transform :taxon
      */
-    public function getTaxonByName(string $name)
+    public function getTaxonByName(string $name): TaxonInterface
     {
         $taxons = $this->taxonRepository->findByName($name, $this->locale);
 
@@ -53,7 +54,7 @@ final class TaxonContext implements Context
     /**
      * @Transform /^taxon with "([^"]+)" code$/
      */
-    public function getTaxonByCode(string $code)
+    public function getTaxonByCode(string $code): TaxonInterface
     {
         $taxon = $this->taxonRepository->findOneBy(['code' => $code]);
         Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist.', $code));

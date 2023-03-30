@@ -36,14 +36,16 @@
             parent="sylius.behat.element"
         />
 
-        <service id="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface"
-                 class="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElement"
-                 parent="sylius.behat.element"
+        <service
+            id="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface"
+            class="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElement"
+            parent="sylius.behat.element"
         />
 
-        <service id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
-                 class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
-                 parent="sylius.behat.element"
+        <service
+            id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
+            class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
+            parent="sylius.behat.element"
         />
     </services>
 </container>
