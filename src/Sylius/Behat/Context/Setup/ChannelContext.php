@@ -313,6 +313,14 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^the lowest price of discounted products prior to the current discount is disabled on (this channel)$/
+     */
+    public function theLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountIsDisabledOnThisChannel(ChannelInterface $channel): void
+    {
+        $channel->getChannelPriceHistoryConfig()->setLowestPriceForDiscountedProductsVisible(false);
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)
