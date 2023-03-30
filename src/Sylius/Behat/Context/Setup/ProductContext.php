@@ -64,6 +64,7 @@ final class ProductContext implements Context
         private SlugGeneratorInterface $slugGenerator,
         private \ArrayAccess $minkParameters,
         private MessageBusInterface $eventBus,
+        private ProductTaxonContext $productTaxonContext,
     ) {
     }
 
@@ -74,7 +75,7 @@ final class ProductContext implements Context
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null)
+    public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null): void
     {
         $product = $this->createProduct($productName, $price, $channel);
 
@@ -88,10 +89,9 @@ final class ProductContext implements Context
         string $productName,
         int $price = 100,
         TaxonInterface $taxon,
-    ) {
-        $productTaxon = $this->createProductTaxon($taxon);
+    ): void {
         $product = $this->createProduct($productName, $price);
-        $product->addProductTaxon($taxon);
+        $this->productTaxonContext->itBelongsTo($product, $taxon);
 
         $this->saveProduct($product);
     }

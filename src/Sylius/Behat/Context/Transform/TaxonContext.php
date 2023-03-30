@@ -37,7 +37,7 @@ final class TaxonContext implements Context
      * @Transform /^taxon "([^"]+)"$/
      * @Transform :taxon
      */
-    public function getTaxonByName($name)
+    public function getTaxonByName(string $name)
     {
         $taxons = $this->taxonRepository->findByName($name, $this->locale);
 
@@ -53,7 +53,7 @@ final class TaxonContext implements Context
     /**
      * @Transform /^taxon with "([^"]+)" code$/
      */
-    public function getTaxonByCode($code)
+    public function getTaxonByCode(string $code)
     {
         $taxon = $this->taxonRepository->findOneBy(['code' => $code]);
         Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist.', $code));
@@ -65,8 +65,9 @@ final class TaxonContext implements Context
      * @Transform /^classified as "([^"]+)" or "([^"]+)"$/
      * @Transform /^configured with "([^"]+)" and "([^"]+)"$/
      * @Transform /^"([^"]+)" and "([^"]+)" taxons$/
+     * @Transform /^belongs to "([^"]+)" and "([^"]+)"/
      */
-    public function getTaxonsByNames(...$taxonNames): iterable
+    public function getTaxonsByNames(string ...$taxonNames): iterable
     {
         foreach ($taxonNames as $taxonName) {
             yield $this->getTaxonByName($taxonName);

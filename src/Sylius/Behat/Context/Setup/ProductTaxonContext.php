@@ -44,6 +44,20 @@ final class ProductTaxonContext implements Context
     }
 
     /**
+     * @Given /^(it|this product) (belongs to "[^"]+" and "[^"]+")$/
+     */
+    public function itBelongsToAnd(ProductInterface $product, iterable $taxons)
+    {
+        foreach ($taxons as $taxon) {
+            $productTaxon = $this->createProductTaxon($taxon, $product);
+            $product->addProductTaxon($productTaxon);
+        }
+
+        $this->objectManager->persist($product);
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the product :product has a main taxon :taxon
      * @Given /^(this product) has a main (taxon "[^"]+")$/
      */
@@ -53,12 +67,7 @@ final class ProductTaxonContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param int|null $position
-     *
-     * @return ProductTaxonInterface
-     */
-    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, $position = null)
+    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, ?int $position = null): ProductTaxonInterface
     {
         /** @var ProductTaxonInterface $productTaxon */
         $productTaxon = $this->productTaxonFactory->createNew();
