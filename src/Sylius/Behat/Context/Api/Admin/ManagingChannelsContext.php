@@ -309,15 +309,4 @@ final class ManagingChannelsContext implements Context
             'Channel could not be edited',
         );
     }
-
-    private function isResourceAdminIriInArray(ResourceInterface $resource, array $iris): bool
-    {
-        if (method_exists($this->iriConverter, 'getIriFromItemInSection')) {
-            $iri = $this->iriConverter->getIriFromItemInSection($resource, 'admin');
-        } else {
-            $iri = $this->iriConverter->getIriFromItem($resource);
-        }
-
-        return in_array($iri, $iris, true);
-    }
 }
