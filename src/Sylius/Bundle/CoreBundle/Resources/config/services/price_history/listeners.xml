@@ -43,12 +43,5 @@
             <argument type="tagged_iterator" tag="sylius.entity_observer" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\BeforeDenormalizationChannelValidationListener">
-            <argument type="service" id="validator" />
-            <argument type="service" id="sylius.custom_factory.channel" />
-            <argument>%sylius.channel.validation_groups%</argument>
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="3" />
-        </service>
     </services>
 </container>
