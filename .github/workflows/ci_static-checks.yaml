@@ -24,7 +24,7 @@ jobs:
                 with:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.static-checks'
-    
+
     static-checks:
         needs: get-matrix
         runs-on: ubuntu-latest
@@ -32,6 +32,9 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
         steps:
             -
                 uses: actions/checkout@v3
@@ -51,11 +54,11 @@ jobs:
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
                     composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
-                
+
             -   name: Restrict API Platform version for ApiBundle
                 run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
                 working-directory: "src/Sylius/Bundle/ApiBundle"
-                
+
             -   name: Get Composer cache directory
                 id: composer-cache
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -66,7 +69,7 @@ jobs:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
-                    
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
@@ -96,7 +99,7 @@ jobs:
 
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
-                
+
             -   name: Run PHPSpec
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
