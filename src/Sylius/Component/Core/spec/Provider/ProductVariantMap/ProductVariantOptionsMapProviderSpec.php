@@ -11,20 +11,20 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Provider;
+namespace spec\Sylius\Component\Core\Provider\ProductVariantMap;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Provider\ProductVariantDataMapProviderInterface;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 final class ProductVariantOptionsMapProviderSpec extends ObjectBehavior
 {
     function it_implements_product_variant_options_map_data_provider_interface(): void
     {
-        $this->shouldImplement(ProductVariantDataMapProviderInterface::class);
+        $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
     function it_supports_variants_with_option_values(

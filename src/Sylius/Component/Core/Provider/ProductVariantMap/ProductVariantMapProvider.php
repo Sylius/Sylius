@@ -11,18 +11,26 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Provider;
+namespace Sylius\Component\Core\Provider\ProductVariantMap;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductVariantOptionsMapProvider implements ProductVariantDataMapProviderInterface
+final class ProductVariantMapProvider implements ProductVariantMapProviderInterface
 {
+    /** @param ProductVariantMapProviderInterface[]|iterable $dataMapProviders */
+    public function __construct(private iterable $dataMapProviders)
+    {
+    }
+
     public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
     {
         $data = [];
-        foreach ($variant->getOptionValues() as $optionValue) {
-            $data[$optionValue->getOptionCode()] = $optionValue->getCode();
+
+        foreach ($this->dataMapProviders as $dataMapProvider) {
+            if ($dataMapProvider->supports($variant, $channel)) {
+                $data += $dataMapProvider->provide($variant, $channel);
+            }
         }
 
         return $data;
@@ -30,6 +38,6 @@ final class ProductVariantOptionsMapProvider implements ProductVariantDataMapPro
 
     public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
     {
-        return !$variant->getOptionValues()->isEmpty();
+        return true;
     }
 }

@@ -33,6 +33,7 @@
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
         <import resource="services/price_history.xml" />
+        <import resource="services/product_variant_map.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -168,12 +169,17 @@
         <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
 
         <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
-            <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantDataMapProvider" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
         </service>
         <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
 
         <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsMapHelper" />
             <tag name="twig.extension" />
         </service>
 
@@ -318,28 +324,6 @@
         <service id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" class="Sylius\Bundle\CoreBundle\Resolver\CustomerResolver">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantDataMapProvider">
-            <argument type="tagged_iterator" tag="sylius.product_variant_data_map_provider" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantOptionsMapProvider">
-            <tag name="sylius.product_variant_data_map_provider" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantPriceMapProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-            <tag name="sylius.product_variant_data_map_provider" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantOriginalPriceMapProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-            <tag name="sylius.product_variant_data_map_provider" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantAppliedPromotionsMapProvider">
-            <tag name="sylius.product_variant_data_map_provider" />
         </service>
     </services>
 </container>

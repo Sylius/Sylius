@@ -11,27 +11,25 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Provider;
+namespace Sylius\Component\Core\Provider\ProductVariantMap;
 
-use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductVariantPriceMapProvider implements ProductVariantDataMapProviderInterface
+final class ProductVariantOptionsMapProvider implements ProductVariantMapProviderInterface
 {
-    public function __construct(private ProductVariantPricesCalculatorInterface $calculator)
-    {
-    }
-
     public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
     {
-        return [
-            'value' => $this->calculator->calculate($variant, ['channel' => $channel]),
-        ];
+        $data = [];
+        foreach ($variant->getOptionValues() as $optionValue) {
+            $data[$optionValue->getOptionCode()] = $optionValue->getCode();
+        }
+
+        return $data;
     }
 
     public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
     {
-        return null !== $variant->getChannelPricingForChannel($channel);
+        return !$variant->getOptionValues()->isEmpty();
     }
 }

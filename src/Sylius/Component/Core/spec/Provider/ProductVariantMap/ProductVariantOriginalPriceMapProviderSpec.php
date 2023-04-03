@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Provider;
+namespace spec\Sylius\Component\Core\Provider\ProductVariantMap;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Provider\ProductVariantDataMapProviderInterface;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 
 final class ProductVariantOriginalPriceMapProviderSpec extends ObjectBehavior
 {
@@ -29,7 +29,7 @@ final class ProductVariantOriginalPriceMapProviderSpec extends ObjectBehavior
 
     function it_implements_product_variant_options_map_data_provider_interface(): void
     {
-        $this->shouldImplement(ProductVariantDataMapProviderInterface::class);
+        $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
     function it_does_not_support_variants_with_no_channel_pricing_in_channel(

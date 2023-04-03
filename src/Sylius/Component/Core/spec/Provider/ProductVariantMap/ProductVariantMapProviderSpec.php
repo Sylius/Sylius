@@ -11,19 +11,19 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Provider;
+namespace spec\Sylius\Component\Core\Provider\ProductVariantMap;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Provider\ProductVariantDataMapProviderInterface;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 
-final class ProductVariantDataMapProviderSpec extends ObjectBehavior
+final class ProductVariantMapProviderSpec extends ObjectBehavior
 {
     function let(
-        ProductVariantDataMapProviderInterface $firstProvider,
-        ProductVariantDataMapProviderInterface $secondProvider,
-        ProductVariantDataMapProviderInterface $thirdProvider,
+        ProductVariantMapProviderInterface $firstProvider,
+        ProductVariantMapProviderInterface $secondProvider,
+        ProductVariantMapProviderInterface $thirdProvider,
     ): void {
         $this->beConstructedWith([
             $firstProvider,
@@ -34,7 +34,7 @@ final class ProductVariantDataMapProviderSpec extends ObjectBehavior
 
     function it_implements_product_variant_options_map_data_provider_interface(): void
     {
-        $this->shouldImplement(ProductVariantDataMapProviderInterface::class);
+        $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
     function it_supports_all_variants(
@@ -47,9 +47,9 @@ final class ProductVariantDataMapProviderSpec extends ObjectBehavior
     function it_provides_data_from_all_supported_providers(
         ProductVariantInterface $variant,
         ChannelInterface $channel,
-        ProductVariantDataMapProviderInterface $firstProvider,
-        ProductVariantDataMapProviderInterface $secondProvider,
-        ProductVariantDataMapProviderInterface $thirdProvider,
+        ProductVariantMapProviderInterface $firstProvider,
+        ProductVariantMapProviderInterface $secondProvider,
+        ProductVariantMapProviderInterface $thirdProvider,
     ): void {
         $firstProvider->supports($variant, $channel)->willReturn(true);
         $firstProvider->provide($variant, $channel)->willReturn([
