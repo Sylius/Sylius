@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver;
 
-use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
+use Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver implements EntityObserverInterface
@@ -26,10 +24,8 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver impleme
     private array $configsCurrentlyProcessed = [];
 
     public function __construct(
-        private ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        private RepositoryInterface $channelPricingRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private int $batchSize,
+        private ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher,
     ) {
     }
 
@@ -44,7 +40,7 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver impleme
 
         $this->configsCurrentlyProcessed = [$entity->getId() => true];
 
-        $this->processPeriodUpdate($channel);
+        $this->commandDispatcher->applyWithinChannel($channel);
 
         unset($this->configsCurrentlyProcessed[$entity->getId()]);
     }
@@ -61,27 +57,5 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver impleme
     public function observedFields(): array
     {
         return ['lowestPriceForDiscountedProductsCheckingPeriod'];
-    }
-
-    private function processPeriodUpdate(ChannelInterface $channel): void
-    {
-        $limit = $this->batchSize;
-        $offset = 0;
-
-        do {
-            /** @var ChannelPricingInterface[] $channelPricings */
-            $channelPricings = $this->channelPricingRepository->findBy(
-                ['channelCode' => $channel->getCode()],
-                ['id' => 'ASC'],
-                $limit,
-                $offset,
-            );
-
-            foreach ($channelPricings as $channelPricing) {
-                $this->productLowestPriceBeforeDiscountProcessor->process($channelPricing);
-            }
-
-            $offset += $limit;
-        } while ([] !== $channelPricings);
     }
 }

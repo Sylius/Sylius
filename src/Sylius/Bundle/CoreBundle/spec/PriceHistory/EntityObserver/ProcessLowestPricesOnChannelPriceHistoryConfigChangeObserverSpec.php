@@ -15,28 +15,20 @@ namespace spec\Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface;
 use Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\EntityObserverInterface;
-use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverSpec extends ObjectBehavior
 {
     function let(
-        ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        RepositoryInterface $channelPricingRepository,
         ChannelRepositoryInterface $channelRepository,
+        ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher,
     ): void {
-        $this->beConstructedWith(
-            $productLowestPriceBeforeDiscountProcessor,
-            $channelPricingRepository,
-            $channelRepository,
-            2,
-        );
+        $this->beConstructedWith($channelRepository, $commandDispatcher);
     }
 
     function it_is_an_entity_observer(): void
@@ -83,77 +75,38 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverSpec ext
         $this->observedFields()->shouldReturn(['lowestPriceForDiscountedProductsCheckingPeriod']);
     }
 
-    function it_throws_an_exception_if_entity_is_not_channel_price_history_config_interface(
-        ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        RepositoryInterface $channelPricingRepository,
+    function it_throws_an_exception_when_entity_is_not_a_channel_price_history_config_interface(
+        ChannelRepositoryInterface $channelRepository,
+        ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher,
         OrderInterface $order,
     ): void {
-        $channelPricingRepository->findBy(Argument::any())->shouldNotBeCalled();
-
-        $productLowestPriceBeforeDiscountProcessor->process(Argument::any())->shouldNotBeCalled();
+        $channelRepository->findOneBy(Argument::any())->shouldNotBeCalled();
+        $commandDispatcher->applyWithinChannel(Argument::any())->shouldNotBeCalled();
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('onChange', [$order]);
     }
 
     function it_does_nothing_when_config_has_no_channel_counterpart(
-        ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        RepositoryInterface $channelPricingRepository,
         ChannelRepositoryInterface $channelRepository,
+        ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher,
         ChannelPriceHistoryConfigInterface $config,
     ): void {
         $channelRepository->findOneBy(['channelPriceHistoryConfig' => $config])->willReturn(null);
-        $channelPricingRepository->findBy(Argument::any())->shouldNotBeCalled();
 
-        $productLowestPriceBeforeDiscountProcessor->process(Argument::any())->shouldNotBeCalled();
+        $commandDispatcher->applyWithinChannel(Argument::any())->shouldNotBeCalled();
 
         $this->onChange($config);
     }
 
-    function it_processes_product_lowest_price_for_each_channel_pricing_within_channel(
-        ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        RepositoryInterface $channelPricingRepository,
+    function it_delegates_processing_lowest_prices_to_command_dispatcher(
         ChannelRepositoryInterface $channelRepository,
-        ChannelPriceHistoryConfigInterface $config,
+        ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher,
         ChannelInterface $channel,
-        ChannelPricingInterface $firstChannelPricing,
-        ChannelPricingInterface $secondChannelPricing,
-        ChannelPricingInterface $thirdChannelPricing,
-        ChannelPricingInterface $fourthChannelPricing,
-        ChannelPricingInterface $fifthChannelPricing,
+        ChannelPriceHistoryConfigInterface $config,
     ): void {
-        $channel->getCode()->willReturn('WEB');
         $channelRepository->findOneBy(['channelPriceHistoryConfig' => $config])->willReturn($channel);
 
-        $batches = [
-            [
-                $firstChannelPricing->getWrappedObject(),
-                $secondChannelPricing->getWrappedObject(),
-            ],
-            [
-                $thirdChannelPricing->getWrappedObject(),
-                $fourthChannelPricing->getWrappedObject(),
-            ],
-            [
-                $fifthChannelPricing->getWrappedObject(),
-            ],
-            [],
-        ];
-
-        $batchSize = 2;
-
-        foreach ($batches as $key => $batch) {
-            $channelPricingRepository
-                ->findBy(['channelCode' => 'WEB'], ['id' => 'ASC'], 2, $key * $batchSize)
-                ->willReturn($batch)
-                ->shouldBeCalled()
-            ;
-        }
-
-        $productLowestPriceBeforeDiscountProcessor->process($firstChannelPricing)->shouldBeCalled();
-        $productLowestPriceBeforeDiscountProcessor->process($secondChannelPricing)->shouldBeCalled();
-        $productLowestPriceBeforeDiscountProcessor->process($thirdChannelPricing)->shouldBeCalled();
-        $productLowestPriceBeforeDiscountProcessor->process($fourthChannelPricing)->shouldBeCalled();
-        $productLowestPriceBeforeDiscountProcessor->process($fifthChannelPricing)->shouldBeCalled();
+        $commandDispatcher->applyWithinChannel($channel)->shouldBeCalled();
 
         $this->onChange($config);
     }

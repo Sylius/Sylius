@@ -13,21 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver;
 
-use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
+use Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserverInterface
 {
     private array $channelsCurrentlyProcessed = [];
 
-    public function __construct(
-        private ProductLowestPriceBeforeDiscountProcessorInterface $productLowestPriceBeforeDiscountProcessor,
-        private RepositoryInterface $channelPricingRepository,
-        private int $batchSize,
-    ) {
+    public function __construct(private ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher)
+    {
     }
 
     public function onChange(object $entity): void
@@ -36,7 +31,7 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
 
         $this->channelsCurrentlyProcessed = [(string) $entity->getCode() => true];
 
-        $this->processPeriodUpdate($entity);
+        $this->commandDispatcher->applyWithinChannel($entity);
 
         unset($this->channelsCurrentlyProcessed[(string) $entity->getCode()]);
     }
@@ -61,27 +56,5 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
             (null !== $config = $channel->getChannelPriceHistoryConfig()) &&
             null === $config->getId()
         ;
-    }
-
-    private function processPeriodUpdate(ChannelInterface $channel): void
-    {
-        $limit = $this->batchSize;
-        $offset = 0;
-
-        do {
-            /** @var ChannelPricingInterface[] $channelPricings */
-            $channelPricings = $this->channelPricingRepository->findBy(
-                ['channelCode' => $channel->getCode()],
-                ['id' => 'ASC'],
-                $limit,
-                $offset,
-            );
-
-            foreach ($channelPricings as $channelPricing) {
-                $this->productLowestPriceBeforeDiscountProcessor->process($channelPricing);
-            }
-
-            $offset += $limit;
-        } while ([] !== $channelPricings);
     }
 }
