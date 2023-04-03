@@ -182,7 +182,7 @@
         "doctrine/migrations": "3.5.3",
         "jms/serializer-bundle": "4.1.0",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "symfony/framework-bundle": "5.4.5",
+        "symfony/framework-bundle": "5.4.5 || 6.2.8",
         "symfony/dependency-injection": "5.4.5",
         "liip/imagine-bundle": "2.7.0"
     },
