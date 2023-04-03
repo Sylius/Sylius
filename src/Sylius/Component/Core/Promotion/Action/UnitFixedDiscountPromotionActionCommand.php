@@ -22,19 +22,25 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     public const TYPE = 'unit_fixed_discount';
+
+    /** @var iterable|FilterInterface[] */
+    private iterable $additionalItemFilters;
 
     public function __construct(
         FactoryInterface $adjustmentFactory,
         private FilterInterface $priceRangeFilter,
         private FilterInterface $taxonFilter,
         private FilterInterface $productFilter,
-        private ServiceRegistryInterface $additionalItemFiltersRegistry,
+        iterable $additionalItemFilters,
     ) {
         parent::__construct($adjustmentFactory);
+        Assert::allIsInstanceOf($additionalItemFilters, FilterInterface::class);
+        $this->additionalItemFilters = $additionalItemFilters;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -86,8 +92,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
     private function applyAdditionalItemFilters(array $filteredItems, array $configuration): array
     {
-        /** @var FilterInterface $additionalItemFilter */
-        foreach($this->additionalItemFiltersRegistry->all() as $additionalItemFilter) {
+        foreach($this->additionalItemFilters as $additionalItemFilter) {
             $filteredItems = $additionalItemFilter->filter($filteredItems, $configuration);
         }
 
