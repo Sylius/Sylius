@@ -8,7 +8,12 @@ on:
                 required: false
                 type: boolean
                 default: false
-    workflow_dispatch: ~
+    workflow_dispatch:
+        inputs:
+            ignore-failure:
+                description: "Don't fail on error"
+                type: boolean
+                default: false
 
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-unstable
