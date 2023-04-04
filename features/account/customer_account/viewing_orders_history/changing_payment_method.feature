@@ -21,3 +21,10 @@ Feature: Changing a payment method of a placed order
         When I browse my orders
         And I change my payment method to "Bank Transfer"
         Then I should have "Bank Transfer" payment method on my order
+
+    @ui @api
+    Scenario: Changing a payment method of an order with a disabled payment method
+        Given the payment method "Cash on Delivery" is disabled
+        When I browse my orders
+        And I change my payment method to "Bank Transfer"
+        Then I should have "Bank Transfer" payment method on my order
