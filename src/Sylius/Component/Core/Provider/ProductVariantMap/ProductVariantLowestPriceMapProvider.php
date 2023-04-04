@@ -17,7 +17,7 @@ use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class ProductVariantPriceMapProvider implements ProductVariantMapProviderInterface
+final class ProductVariantLowestPriceMapProvider implements ProductVariantMapProviderInterface
 {
     public function __construct(private ProductVariantPricesCalculatorInterface $calculator)
     {
@@ -26,12 +26,15 @@ final class ProductVariantPriceMapProvider implements ProductVariantMapProviderI
     public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
     {
         return [
-            'value' => $this->calculator->calculate($variant, ['channel' => $channel]),
+            'lowest-price-before-discount' => $this->calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]),
         ];
     }
 
     public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
     {
-        return null !== $variant->getChannelPricingForChannel($channel);
+        return
+            null !== $variant->getChannelPricingForChannel($channel) &&
+            null !== $this->calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])
+        ;
     }
 }

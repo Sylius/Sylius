@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 
-final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
+final class ProductVariantLowestPriceMapProviderSpec extends ObjectBehavior
 {
     function let(ProductVariantPricesCalculatorInterface $calculator): void
     {
@@ -32,30 +32,27 @@ final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
-    function it_supports_variants_with_channel_pricing_in_channel(
-        ChannelInterface $channel,
-        ProductVariantInterface $variantWithoutChannelPricing,
-        ProductVariantInterface $variantWithChannelPricing,
-        ChannelPricingInterface $channelPricing,
-    ): void {
-        $variantWithChannelPricing->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-        $variantWithoutChannelPricing->getChannelPricingForChannel($channel)->willReturn(null);
-
-        $this->supports($variantWithChannelPricing, $channel)->shouldReturn(true);
-        $this->supports($variantWithoutChannelPricing, $channel)->shouldReturn(false);
-    }
-
-    function it_provides_price_of_variant_in_channel(
+    function it_supports_variants_with_lowest_price_in_channel(
+        ProductVariantPricesCalculatorInterface $calculator,
         ChannelInterface $channel,
         ProductVariantInterface $variant,
         ChannelPricingInterface $channelPricing,
-        ProductVariantPricesCalculatorInterface $calculator,
     ): void {
         $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-        $calculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
+        $calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(1000);
+
+        $this->supports($variant, $channel)->shouldReturn(true);
+    }
+
+    function it_provides_lowest_price_of_variant_in_channel(
+        ProductVariantPricesCalculatorInterface $calculator,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant,
+    ): void {
+        $calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(1000);
 
         $this->provide($variant, $channel)->shouldIterateLike([
-            'value' => 1000,
+            'lowest-price-before-discount' => 1000,
         ]);
     }
 }

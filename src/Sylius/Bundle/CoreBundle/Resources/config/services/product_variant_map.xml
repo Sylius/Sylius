@@ -41,5 +41,10 @@
         <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantAppliedPromotionsMapProvider">
             <tag name="sylius.product_variant_data_map_provider" />
         </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMapProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
     </services>
 </container>

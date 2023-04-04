@@ -31,7 +31,7 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
         ChannelInterface $channel,
         ProductVariantInterface $variantWithoutPromotions,
         ProductVariantInterface $variantWithPromotions,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
     ): void {
         $variantWithPromotions->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
             $promotion->getWrappedObject(),
@@ -46,7 +46,7 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
         ChannelInterface $channel,
         ProductVariantInterface $variant,
         PromotionInterface $firstPromotion,
-        PromotionInterface $secondPromotion
+        PromotionInterface $secondPromotion,
     ): void {
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
             $firstPromotion->getWrappedObject(),
