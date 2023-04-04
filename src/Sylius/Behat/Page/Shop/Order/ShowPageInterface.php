@@ -19,6 +19,8 @@ interface ShowPageInterface extends SymfonyPageInterface
 {
     public function hasPayAction(): bool;
 
+    public function canBePaid(): bool;
+
     public function pay(): void;
 
     public function choosePaymentMethod(string $paymentMethodName): void;
@@ -28,4 +30,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getAmountOfItems(): int;
 
     public function getChosenPaymentMethod(): string;
+
+    public function getPaymentValidationMessage(): string;
 }

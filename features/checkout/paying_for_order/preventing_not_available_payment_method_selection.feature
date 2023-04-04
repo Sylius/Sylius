@@ -36,7 +36,7 @@ Feature: Preventing not available payment method selection
         And I should be able to select "Paypal Express Checkout" payment method
 
     @api
-    Scenario: Preventing customer from selecting inexistent payment method
+    Scenario: Preventing customer from selecting nonexistent payment method
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
