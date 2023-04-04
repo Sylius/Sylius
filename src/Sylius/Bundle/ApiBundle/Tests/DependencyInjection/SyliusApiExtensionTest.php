@@ -112,7 +112,7 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
         $apiPlatformConfig = $this->container->getExtensionConfig('api_platform')[0];
 
         $this->assertSame($apiPlatformConfig['mapping']['paths'], [
-            __DIR__ . '../../Resources/config/api_resources/',
+            __DIR__ . '../../Resources/config/api_resources',
         ]);
     }
 
