@@ -35,7 +35,7 @@
             <tag name="sylius.entity_observer" />
         </service>
 
-        <service id="sylius.listener.channel_pricing_change" class="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener">
             <argument type="tagged_iterator" tag="sylius.entity_observer" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
