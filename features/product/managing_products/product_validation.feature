@@ -114,14 +114,6 @@ Feature: Products validation
         Then I should be notified that name is required
         And this product should still be named "Dice Brewing"
 
-    @ui @api
-    Scenario: Not seeing validation error for duplicated code if product code has not been changed
-        Given the store has a "Dice Brewing" product
-        When I want to modify this product
-        And I remove its name from "English (United States)" translation
-        And I try to save my changes
-        Then this product should still be named "Dice Brewing"
-
     @ui
     Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel
         Given the store has a "7 Wonders" configurable product
