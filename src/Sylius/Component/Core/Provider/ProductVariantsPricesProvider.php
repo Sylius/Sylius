@@ -19,12 +19,23 @@ use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
+/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProvider} instead. */
 final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
     public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
+        trigger_deprecation(
+            'sylius/core-bundle',
+            '1.13',
+            sprintf(
+                'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0. Use "%s" instead.',
+                self::class,
+                ProductVariantsMapProvider::class,
+            ),
+        );
     }
 
     public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array
