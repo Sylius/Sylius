@@ -17,10 +17,6 @@
 >
     <services>
         <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider">
-            <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProvider" />
-        </service>
-
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProvider">
             <argument type="tagged_iterator" tag="sylius.product_variant_data_map_provider" />
         </service>
 

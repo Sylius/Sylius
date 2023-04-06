@@ -19,7 +19,8 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantsMapProvider implements ProductVariantsMapProviderInterface
 {
-    public function __construct(private ProductVariantMapProviderInterface $productVariantDataMapProvider)
+    /** @param ProductVariantMapProviderInterface[]|iterable $dataMapProviders */
+    public function __construct(private iterable $dataMapProviders)
     {
     }
 
@@ -29,9 +30,22 @@ final class ProductVariantsMapProvider implements ProductVariantsMapProviderInte
 
         /** @var ProductVariantInterface $variant */
         foreach ($product->getEnabledVariants() as $variant) {
-            $variantsMap[] = $this->productVariantDataMapProvider->provide($variant, $channel);
+            $variantsMap[] = $this->getMapForVariant($variant, $channel);
         }
 
         return $variantsMap;
+    }
+
+    private function getMapForVariant(ProductVariantInterface $variant, ChannelInterface $channel): array
+    {
+        $data = [];
+
+        foreach ($this->dataMapProviders as $dataMapProvider) {
+            if ($dataMapProvider->supports($variant, $channel)) {
+                $data += $dataMapProvider->provide($variant, $channel);
+            }
+        }
+
+        return $data;
     }
 }
