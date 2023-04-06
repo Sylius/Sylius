@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.7 (2023-04-06)
+
+#### Details
+
+- [#14825](https://github.com/Sylius/Sylius/issues/14825) Update sylius-chart.js ([@xXNoceboXx](https://github.com/xXNoceboXx))
+- [#14892](https://github.com/Sylius/Sylius/issues/14892) Improve testing unstable dependencies in CI ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14897](https://github.com/Sylius/Sylius/issues/14897) [Channel] Add "order by" to the "find by" methods ([@coldic3](https://github.com/coldic3))
+- [#14902](https://github.com/Sylius/Sylius/issues/14902) [Order] Prevent paying with a disabled method ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14905](https://github.com/Sylius/Sylius/issues/14905) [Conflict] Add conflict with symfony/framework-bundle:6.2.8 ([@Rafikooo](https://github.com/Rafikooo))
+- [#14910](https://github.com/Sylius/Sylius/issues/14910) Change the ApiPlatform Mapping prepend path ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14912](https://github.com/Sylius/Sylius/issues/14912) [Maintenance][CI] Allow manually dispatching unstable workflow ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14914](https://github.com/Sylius/Sylius/issues/14914) [Orders][API]  OrderItem removal validation ([@Rafikooo](https://github.com/Rafikooo))
+
 ## v1.12.6 (2023-03-28)
 
 #### Details
