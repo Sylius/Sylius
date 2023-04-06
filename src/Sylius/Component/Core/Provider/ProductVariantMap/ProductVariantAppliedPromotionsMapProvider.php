@@ -18,15 +18,19 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantAppliedPromotionsMapProvider implements ProductVariantMapProviderInterface
 {
-    public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
+    public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [
-            'applied_promotions' => $variant->getAppliedPromotionsForChannel($channel)->toArray(),
+            'applied_promotions' => $variant->getAppliedPromotionsForChannel($context['channel'])->toArray(),
         ];
     }
 
-    public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
+    public function supports(ProductVariantInterface $variant, array $context): bool
     {
-        return !$variant->getAppliedPromotionsForChannel($channel)->isEmpty();
+        return
+            isset($context['channel']) &&
+            $context['channel'] instanceof ChannelInterface &&
+            !$variant->getAppliedPromotionsForChannel($context['channel'])->isEmpty()
+        ;
     }
 }

@@ -23,18 +23,20 @@ final class ProductVariantLowestPriceMapProvider implements ProductVariantMapPro
     {
     }
 
-    public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
+    public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [
-            'lowest-price-before-discount' => $this->calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel]),
+            'lowest-price-before-discount' => $this->calculator->calculateLowestPriceBeforeDiscount($variant, $context),
         ];
     }
 
-    public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
+    public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return
-            null !== $variant->getChannelPricingForChannel($channel) &&
-            null !== $this->calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])
+            isset($context['channel']) &&
+            $context['channel'] instanceof ChannelInterface &&
+            null !== $variant->getChannelPricingForChannel($context['channel']) &&
+            null !== $this->calculator->calculateLowestPriceBeforeDiscount($variant, $context)
         ;
     }
 }

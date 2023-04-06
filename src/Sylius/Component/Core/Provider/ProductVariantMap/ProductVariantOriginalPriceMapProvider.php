@@ -23,26 +23,28 @@ final class ProductVariantOriginalPriceMapProvider implements ProductVariantMapP
     {
     }
 
-    public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
+    public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [
-            'original-price' => $this->calculator->calculateOriginal($variant, ['channel' => $channel]),
+            'original-price' => $this->calculator->calculateOriginal($variant, $context),
         ];
     }
 
-    public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
+    public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return
-            null !== $variant->getChannelPricingForChannel($channel) &&
-            $this->isPriceLowerThanOriginalPrice($variant, $channel)
+            isset($context['channel']) &&
+            $context['channel'] instanceof ChannelInterface &&
+            null !== $variant->getChannelPricingForChannel($context['channel']) &&
+            $this->isPriceLowerThanOriginalPrice($variant, $context)
         ;
     }
 
-    private function isPriceLowerThanOriginalPrice(ProductVariantInterface $variant, ChannelInterface $channel): bool
+    private function isPriceLowerThanOriginalPrice(ProductVariantInterface $variant, array $context): bool
     {
         return
-            $this->calculator->calculate($variant, ['channel' => $channel]) <
-            $this->calculator->calculateOriginal($variant, ['channel' => $channel])
+            $this->calculator->calculate($variant, $context) <
+            $this->calculator->calculateOriginal($variant, $context)
         ;
     }
 }

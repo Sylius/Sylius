@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
-use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface;
 
 final class ProductVariantsMapProviderSpec extends ObjectBehavior
@@ -55,33 +54,33 @@ final class ProductVariantsMapProviderSpec extends ObjectBehavior
             $secondVariant->getWrappedObject(),
         ]));
 
-        $firstProvider->supports($firstVariant, $channel)->willReturn(true);
-        $firstProvider->provide($firstVariant, $channel)->willReturn([
+        $firstProvider->supports($firstVariant, ['channel' => $channel])->willReturn(true);
+        $firstProvider->provide($firstVariant, ['channel' => $channel])->willReturn([
             'first-first' => ['some'],
         ]);
 
-        $secondProvider->supports($firstVariant, $channel)->willReturn(false);
-        $secondProvider->provide($firstVariant, $channel)->shouldNotBeCalled();
+        $secondProvider->supports($firstVariant, ['channel' => $channel])->willReturn(false);
+        $secondProvider->provide($firstVariant, ['channel' => $channel])->shouldNotBeCalled();
 
-        $thirdProvider->supports($firstVariant, $channel)->willReturn(true);
-        $thirdProvider->provide($firstVariant, $channel)->willReturn([
+        $thirdProvider->supports($firstVariant, ['channel' => $channel])->willReturn(true);
+        $thirdProvider->provide($firstVariant, ['channel' => $channel])->willReturn([
             'first-third' => ['data'],
         ]);
 
-        $firstProvider->supports($secondVariant, $channel)->willReturn(false);
-        $firstProvider->provide($secondVariant, $channel)->shouldNotBeCalled();
+        $firstProvider->supports($secondVariant, ['channel' => $channel])->willReturn(false);
+        $firstProvider->provide($secondVariant, ['channel' => $channel])->shouldNotBeCalled();
 
-        $secondProvider->supports($secondVariant, $channel)->willReturn(true);
-        $secondProvider->provide($secondVariant, $channel)->willReturn([
+        $secondProvider->supports($secondVariant, ['channel' => $channel])->willReturn(true);
+        $secondProvider->provide($secondVariant, ['channel' => $channel])->willReturn([
             'second-second' => ['more'],
         ]);
 
-        $thirdProvider->supports($secondVariant, $channel)->willReturn(true);
-        $thirdProvider->provide($secondVariant, $channel)->willReturn([
+        $thirdProvider->supports($secondVariant, ['channel' => $channel])->willReturn(true);
+        $thirdProvider->provide($secondVariant, ['channel' => $channel])->willReturn([
             'second-third' => ['data'],
         ]);
 
-        $this->provide($product, $channel)->shouldIterateLike([
+        $this->provide($product, ['channel' => $channel])->shouldIterateLike([
             [
                 'first-first' => ['some'],
                 'first-third' => ['data'],
@@ -89,7 +88,7 @@ final class ProductVariantsMapProviderSpec extends ObjectBehavior
             [
                 'second-second' => ['more'],
                 'second-third' => ['data'],
-            ]
+            ],
         ]);
     }
 }

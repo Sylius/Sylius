@@ -32,6 +32,18 @@ final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
+    function it_does_not_support_context_with_no_channel(
+        ProductVariantInterface $variant,
+    ): void {
+        $this->supports($variant, [])->shouldReturn(false);
+    }
+
+    function it_does_not_support_context_with_channel_that_is_not_a_channel_interface(
+        ProductVariantInterface $variant,
+    ): void {
+        $this->supports($variant, ['channel' => 'not_a_channel'])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_channel_pricing_in_channel(
         ChannelInterface $channel,
         ProductVariantInterface $variantWithoutChannelPricing,
@@ -41,8 +53,8 @@ final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
         $variantWithChannelPricing->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $variantWithoutChannelPricing->getChannelPricingForChannel($channel)->willReturn(null);
 
-        $this->supports($variantWithChannelPricing, $channel)->shouldReturn(true);
-        $this->supports($variantWithoutChannelPricing, $channel)->shouldReturn(false);
+        $this->supports($variantWithChannelPricing, ['channel' => $channel])->shouldReturn(true);
+        $this->supports($variantWithoutChannelPricing, ['channel' => $channel])->shouldReturn(false);
     }
 
     function it_provides_price_of_variant_in_channel(
@@ -54,7 +66,7 @@ final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
         $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $calculator->calculate($variant, ['channel' => $channel])->willReturn(1000);
 
-        $this->provide($variant, $channel)->shouldIterateLike([
+        $this->provide($variant, ['channel' => $channel])->shouldIterateLike([
             'value' => 1000,
         ]);
     }

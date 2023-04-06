@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -24,9 +23,9 @@ class ProductVariantsMapHelper extends Helper
     {
     }
 
-    public function getMap(ProductInterface $product, ChannelInterface $channel): array
+    public function getMap(ProductInterface $product, array $context): array
     {
-        return $this->productVariantsMapProvider->provide($product, $channel);
+        return $this->productVariantsMapProvider->provide($product, $context);
     }
 
     public function getName(): string

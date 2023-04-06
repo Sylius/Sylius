@@ -38,8 +38,8 @@ final class ProductVariantOptionsMapProviderSpec extends ObjectBehavior
         ]));
         $variantWithoutOptions->getOptionValues()->willReturn(new ArrayCollection());
 
-        $this->supports($variantWithOptions, $channel)->shouldReturn(true);
-        $this->supports($variantWithoutOptions, $channel)->shouldReturn(false);
+        $this->supports($variantWithOptions, [])->shouldReturn(true);
+        $this->supports($variantWithoutOptions, [])->shouldReturn(false);
     }
 
     function it_provides_a_map_of_variant_options(
@@ -58,7 +58,7 @@ final class ProductVariantOptionsMapProviderSpec extends ObjectBehavior
             $secondOptionValue->getWrappedObject(),
         ]));
 
-        $this->provide($variant, $channel)->shouldIterateLike([
+        $this->provide($variant, [])->shouldIterateLike([
             'first_option' => 'first_option_value',
             'second_option' => 'second_option_value',
         ]);

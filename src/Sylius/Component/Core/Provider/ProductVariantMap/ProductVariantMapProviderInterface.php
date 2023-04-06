@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Provider\ProductVariantMap;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ProductVariantMapProviderInterface
 {
-    public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array;
+    public function provide(ProductVariantInterface $variant, array $context): array;
 
-    public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool;
+    public function supports(ProductVariantInterface $variant, array $context): bool;
 }

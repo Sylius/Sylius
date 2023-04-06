@@ -23,15 +23,19 @@ final class ProductVariantPriceMapProvider implements ProductVariantMapProviderI
     {
     }
 
-    public function provide(ProductVariantInterface $variant, ChannelInterface $channel): array
+    public function provide(ProductVariantInterface $variant, array $context): array
     {
         return [
-            'value' => $this->calculator->calculate($variant, ['channel' => $channel]),
+            'value' => $this->calculator->calculate($variant, $context),
         ];
     }
 
-    public function supports(ProductVariantInterface $variant, ChannelInterface $channel): bool
+    public function supports(ProductVariantInterface $variant, array $context): bool
     {
-        return null !== $variant->getChannelPricingForChannel($channel);
+        return
+            isset($context['channel']) &&
+            $context['channel'] instanceof ChannelInterface &&
+            null !== $variant->getChannelPricingForChannel($context['channel'])
+        ;
     }
 }

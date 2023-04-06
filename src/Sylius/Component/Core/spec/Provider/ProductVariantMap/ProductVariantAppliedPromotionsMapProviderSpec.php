@@ -27,6 +27,18 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
         $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
+    function it_does_not_support_context_with_no_channel(
+        ProductVariantInterface $variant,
+    ): void {
+        $this->supports($variant, [])->shouldReturn(false);
+    }
+
+    function it_does_not_support_context_with_channel_that_is_not_a_channel_interface(
+        ProductVariantInterface $variant,
+    ): void {
+        $this->supports($variant, ['channel' => 'not_a_channel'])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_applied_promotions(
         ChannelInterface $channel,
         ProductVariantInterface $variantWithoutPromotions,
@@ -38,8 +50,8 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
         ]));
         $variantWithoutPromotions->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
-        $this->supports($variantWithPromotions, $channel)->shouldReturn(true);
-        $this->supports($variantWithoutPromotions, $channel)->shouldReturn(false);
+        $this->supports($variantWithPromotions, ['channel' => $channel])->shouldReturn(true);
+        $this->supports($variantWithoutPromotions, ['channel' => $channel])->shouldReturn(false);
     }
 
     function it_provides_a_map_of_variant_applied_promotions(
@@ -53,7 +65,7 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
             $secondPromotion->getWrappedObject(),
         ]));
 
-        $this->provide($variant, $channel)->shouldIterateLike([
+        $this->provide($variant, ['channel' => $channel])->shouldIterateLike([
             'applied_promotions' => [
                 $firstPromotion,
                 $secondPromotion,
