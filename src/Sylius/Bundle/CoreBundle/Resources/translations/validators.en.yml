@@ -88,6 +88,8 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    product_taxon:
+        unique: This taxon is already assigned to this product.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.

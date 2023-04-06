@@ -21,3 +21,8 @@ Feature: Modifying taxons assigned to an exisiting product
     Scenario: Adding taxons to product
         When I add "Clothes" taxon to the "Shirt" product
         Then the product "Shirt" should have the "Clothes" taxon
+
+    @api @no-ui
+    Scenario: Being prevented from adding the same taxon twice
+        When I try to add "Clothes" taxon to the "T-Shirt" product
+        Then I should be notified that this taxon is already assigned to this product
