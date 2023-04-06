@@ -91,6 +91,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
             <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.repository.order_item" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" public="true">
