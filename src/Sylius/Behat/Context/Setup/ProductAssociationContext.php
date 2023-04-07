@@ -72,6 +72,14 @@ final class ProductAssociationContext implements Context
     }
 
     /**
+     * @Given the store has :firstName product association type
+     */
+    public function theStoreHasProductAssociationType($name)
+    {
+        $this->createProductAssociationType($name);
+    }
+
+    /**
      * @Given /^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (product "[^"]+")$/
      */
     public function theProductHasAnAssociationWithProduct(
