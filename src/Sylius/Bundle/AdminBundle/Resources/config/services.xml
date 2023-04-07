@@ -82,7 +82,10 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.http_client" class="GuzzleHttp\Client" public="false" />
-        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false" />
+        <service id="sylius.http_client" class="Symfony\Component\HttpClient\HttplugClient" public="false" />
+        <service id="sylius.http_message_factory" class="Http\Message\MessageFactory\GuzzleMessageFactory" public="false">
+            <deprecated package="sylius/admin-bundle" version="1.13">The "%service_id%" service is deprecated since 1.13 and will be removed in 2.0. Use "sylius.http_request_factory" instead.</deprecated>
+        </service>
+        <service id="sylius.http_request_factory" class="Symfony\Component\HttpClient\HttplugClient" public="false" />
     </services>
 </container>

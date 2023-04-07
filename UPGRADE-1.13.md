@@ -44,6 +44,7 @@
         }
     }
    ```
+
 1. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface` 
    to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
    as a first argument is deprecated.
@@ -65,3 +66,8 @@
    Subsequently, the `sylius_product_variant_prices` twig function is deprecated, use `sylius_product_variants_map` instead.
 
    To add more data per variant create a service implementing the `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface` and tag it with `sylius.product_variant_data_map_provider`.
+
+1. Using Guzzle has been deprecated in favor of Symfony HTTP Client. Therefore, passing `GuzzleHttp\ClientInterface`
+   to `Sylius\Bundle\AdminBundle\Controller\NotificationController` as a second argument is deprecated.
+
+1. The `sylius.http_message_factory` service has been deprecated. Use `sylius.http_request_factory` instead.

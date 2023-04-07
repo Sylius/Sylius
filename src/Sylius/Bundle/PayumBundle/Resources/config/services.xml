@@ -28,10 +28,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
-            <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
-        </service>
-
+        <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient" />
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>

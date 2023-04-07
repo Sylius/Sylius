@@ -90,7 +90,7 @@
 
         <service id="sylius.controller.admin.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController" public="true">
             <argument type="service" id="sylius.http_client" />
-            <argument type="service" id="sylius.http_message_factory" />
+            <argument type="service" id="sylius.http_request_factory" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
         </service>

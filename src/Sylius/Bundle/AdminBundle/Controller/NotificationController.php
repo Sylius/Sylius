@@ -13,25 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Controller;
 
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\ClientInterface as DeprecatedClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Uri;
-use Http\Message\MessageFactory;
+use Http\Message\RequestFactory;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
 use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationController
 {
-    private Uri $hubUri;
-
     public function __construct(
-        private ClientInterface $client,
-        private MessageFactory $messageFactory,
-        string $hubUri,
+        private ClientInterface|DeprecatedClientInterface $client,
+        private RequestFactory $requestFactory,
+        private string $hubUri,
         private string $environment,
     ) {
-        $this->hubUri = new Uri($hubUri);
+        if ($client instanceof DeprecatedClientInterface) {
+            trigger_deprecation('sylius/admin-bundle', '1.13', 'Using "%s" is deprecated and will be prohibited in 2.0, use "%s" instead.', DeprecatedClientInterface::class, ClientInterface::class);
+        }
     }
 
     public function getVersionAction(Request $request): JsonResponse
@@ -46,7 +47,7 @@ final class NotificationController
 
         $headers = ['Content-Type' => 'application/json'];
 
-        $hubRequest = $this->messageFactory->createRequest(
+        $hubRequest = $this->requestFactory->createRequest(
             Request::METHOD_GET,
             $this->hubUri,
             $headers,
@@ -54,8 +55,12 @@ final class NotificationController
         );
 
         try {
-            $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
-        } catch (GuzzleException) {
+            if ($this->client instanceof DeprecatedClientInterface) {
+                $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
+            } else {
+                $hubResponse = $this->client->sendRequest($hubRequest);
+            }
+        } catch (ClientExceptionInterface|GuzzleException) {
             return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
         }
 

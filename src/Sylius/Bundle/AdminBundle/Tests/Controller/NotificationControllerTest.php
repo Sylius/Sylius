@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ConnectException;
+use Http\Client\Exception\NetworkException;
 use Http\Message\MessageFactory;
+use Http\Message\RequestFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -34,22 +35,26 @@ final class NotificationControllerTest extends TestCase
 
     private ObjectProphecy $client;
 
+    private ObjectProphecy $legacyClient;
+
+    private ObjectProphecy $requestFactory;
+
     private ObjectProphecy $messageFactory;
 
     private NotificationController $controller;
 
+    private NotificationController $legacyController;
+
     private static string $hubUri = 'www.doesnotexist.test.com';
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_returns_an_empty_json_response_upon_client_exception(): void
     {
-        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
+        $this->requestFactory->createRequest(Argument::cetera())
             ->willReturn($this->prophesize(RequestInterface::class)->reveal())
         ;
 
-        $this->client->send(Argument::cetera())->willThrow(ConnectException::class);
+        $this->client->sendRequest(Argument::cetera())->willThrow(NetworkException::class);
 
         $emptyResponse = $this->controller->getVersionAction(new Request());
 
@@ -59,8 +64,54 @@ final class NotificationControllerTest extends TestCase
 
     /**
      * @test
+     *
+     * @legacy This test will be removed in Sylius 2.0.
      */
+    public function it_returns_an_empty_json_response_upon_client_exception_deprecated(): void
+    {
+        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
+            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
+        ;
+
+        $this->legacyClient->send(Argument::cetera())->willThrow(ConnectException::class);
+
+        $emptyResponse = $this->legacyController->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $emptyResponse->getStatusCode());
+        $this->assertEquals('""', $emptyResponse->getContent());
+    }
+
+    /** @test */
     public function it_returns_json_response_from_client_on_success(): void
+    {
+        $content = json_encode(['version' => '9001']);
+
+        $this->requestFactory->createRequest(Argument::cetera())
+            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
+        ;
+
+        /** @var ProphecyInterface|StreamInterface $stream */
+        $stream = $this->prophesize(StreamInterface::class);
+        $stream->getContents()->willReturn($content);
+
+        /** @var ProphecyInterface|ResponseInterface $externalResponse */
+        $externalResponse = $this->prophesize(ResponseInterface::class);
+        $externalResponse->getBody()->willReturn($stream->reveal());
+
+        $this->client->sendRequest(Argument::cetera())->willReturn($externalResponse->reveal());
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals($content, $response->getContent());
+    }
+
+    /**
+     * @test
+     *
+     * @legacy This test will be removed in Sylius 2.0.
+     */
+    public function it_returns_json_response_from_client_on_success_deprecated(): void
     {
         $content = json_encode(['version' => '9001']);
 
@@ -76,9 +127,9 @@ final class NotificationControllerTest extends TestCase
         $externalResponse = $this->prophesize(ResponseInterface::class);
         $externalResponse->getBody()->willReturn($stream->reveal());
 
-        $this->client->send(Argument::cetera())->willReturn($externalResponse->reveal());
+        $this->legacyClient->send(Argument::cetera())->willReturn($externalResponse->reveal());
 
-        $response = $this->controller->getVersionAction(new Request());
+        $response = $this->legacyController->getVersionAction(new Request());
 
         $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
         $this->assertEquals($content, $response->getContent());
@@ -86,11 +137,20 @@ final class NotificationControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->client = $this->prophesize(ClientInterface::class);
+        $this->client = $this->prophesize(\Psr\Http\Client\ClientInterface::class);
+        $this->legacyClient = $this->prophesize(\GuzzleHttp\ClientInterface::class);
+        $this->requestFactory = $this->prophesize(RequestFactory::class);
         $this->messageFactory = $this->prophesize(MessageFactory::class);
 
         $this->controller = new NotificationController(
             $this->client->reveal(),
+            $this->requestFactory->reveal(),
+            self::$hubUri,
+            'environment',
+        );
+
+        $this->legacyController = new NotificationController(
+            $this->legacyClient->reveal(),
             $this->messageFactory->reveal(),
             self::$hubUri,
             'environment',
