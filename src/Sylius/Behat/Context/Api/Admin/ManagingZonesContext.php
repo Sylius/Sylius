@@ -375,17 +375,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Zone could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that it has been successfully deleted
      * @Then I should be notified that they have been successfully deleted
      */

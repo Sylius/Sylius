@@ -297,15 +297,4 @@ final class ManagingChannelsContext implements Context
             $type === 'shipping',
         ));
     }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Channel could not be edited',
-        );
-    }
 }

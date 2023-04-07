@@ -53,13 +53,13 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
+     * @When I name it :name in :localeCode
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn(string $name, string $localeCode): void
     {
         $this->client->addRequestData('translations', [
-            $language => [
-                'locale' => $language,
+            $localeCode => [
+                'locale' => $localeCode,
                 'name' => $name,
             ],
         ]);
@@ -190,20 +190,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            sprintf(
-                'Product Variant could not be edited: %s',
-                $this->responseChecker->getError($this->client->getLastResponse()),
-            ),
-        );
-    }
-
-    /**
      * @Then the :productVariantCode variant of the :product product should appear in the store
      */
     public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void
@@ -216,16 +202,16 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then /^the (?:variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
      */
-    public function theVariantWithCodeShouldBeNamedIn(string $name, string $language)
+    public function theVariantWithCodeShouldBeNamedIn(string $name, string $localeCode): void
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         $expectedTranslation = [
-            'locale' => $language,
+            'locale' => $localeCode,
             'name' => $name,
         ];
 
-        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM]['translations'][$language];
+        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM]['translations'][$localeCode];
 
         Assert::allInArray(
             $expectedTranslation,

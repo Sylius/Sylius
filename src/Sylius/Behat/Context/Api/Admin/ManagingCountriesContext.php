@@ -236,17 +236,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Country could not be edited',
-        );
-    }
-
-    /**
      * @Then /^(this country) should be (enabled|disabled)$/
      */
     public function thisCountryShouldBeDisabled(CountryInterface $country, string $enabled): void

@@ -221,17 +221,6 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping category could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void

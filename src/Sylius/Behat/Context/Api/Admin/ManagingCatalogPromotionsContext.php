@@ -1211,17 +1211,6 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Catalog promotion could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that not all channels are filled
      */
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void

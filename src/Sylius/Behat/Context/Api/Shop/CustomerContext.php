@@ -198,14 +198,6 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
-    }
-
-    /**
      * @Then I should be notified that the verification email has been sent
      */
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void

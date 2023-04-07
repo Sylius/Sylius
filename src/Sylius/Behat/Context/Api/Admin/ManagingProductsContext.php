@@ -252,17 +252,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that this product is in use and cannot be deleted
      */
     public function iShouldBeNotifiedThatThisProductIsInUseAndCannotBeDeleted(): void
