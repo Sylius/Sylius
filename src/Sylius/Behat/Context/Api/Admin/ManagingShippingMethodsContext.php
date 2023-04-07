@@ -440,17 +440,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping method could not be edited',
-        );
-    }
-
-    /**
      * @Then I should be notified that shipping method with this code already exists
      */
     public function iShouldBeNotifiedThatShippingMethodWithThisCodeAlreadyExists(): void

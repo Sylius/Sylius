@@ -467,17 +467,6 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be edited',
-        );
-    }
-
-    /**
      * @Then /^(this tax rate) amount should be ([^"]+)%$/
      */
     public function thisTaxRateAmountShouldBe(TaxRateInterface $taxRate, int $taxRateAmount): void

@@ -266,15 +266,4 @@ final class ManagingProductOptionsContext implements Context
             'Product option could not be created',
         );
     }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product option could not be edited',
-        );
-    }
 }
