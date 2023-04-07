@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 final class ManagingProductTaxonsContext implements Context
 {
@@ -38,7 +39,7 @@ final class ManagingProductTaxonsContext implements Context
 
     /**
      * @When I assign the :taxon taxon to the :product product
-     * @When I add :taxon taxon to the :product product
+     * @When I (try to) add :taxon taxon to the :product product
      */
     public function iAddTaxonToTheProduct(TaxonInterface $taxon, ProductInterface $product): void
     {
@@ -46,5 +47,16 @@ final class ManagingProductTaxonsContext implements Context
         $this->client->addRequestData('taxon', $this->iriConverter->getIriFromItem($taxon));
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
         $this->client->create();
+    }
+
+    /**
+     * @Then I should be notified that this taxon is already assigned to this product
+     */
+    public function iShouldBeNotifiedThatThisTaxonIsAlreadyAssignedToThisProduct(): void
+    {
+        Assert::contains(
+            $this->client->getLastResponse()->getContent(),
+            'This taxon is already assigned to this product.',
+        );
     }
 }
