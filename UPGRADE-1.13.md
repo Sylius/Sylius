@@ -1,19 +1,22 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+1. Starting with Sylius 1.13, the `SyliusPriceHistoryPlugin` is included.
+   If you are currently using the plugin in your project, we recommend following the upgrade guide located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
+
 1. The `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion` command and its handler
    `Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\RemoveInactiveCatalogPromotionHandler` have been deprecated.
    Use `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion` command instead.
 
-2. Passing `Symfony\Component\Messenger\MessageBusInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
+1. Passing `Symfony\Component\Messenger\MessageBusInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second and third argument is deprecated.
 
-3. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
+1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second argument is deprecated.
 
-4. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
+1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as a fifth argument is deprecated.
 
-5. To allow to autoconfigure order processors and cart context and define a priority for them in `1.13` we have introduced
+1. To allow to autoconfigure order processors and cart context and define a priority for them in `1.13` we have introduced
    `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` and `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` attributes. By default, Sylius still configures them using interfaces, but this way you cannot define a priority.
    If you want to define a priority, you need to set the following configuration in your `_sylius.yaml` file:
    ```yaml
@@ -41,6 +44,6 @@
         }
     }
    ```
-6. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface` 
+1. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface` 
    to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
    as a first argument is deprecated.
