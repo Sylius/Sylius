@@ -36,6 +36,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->booleanNode('skipping_shipping_step_allowed')->end()
                 ->booleanNode('skipping_payment_step_allowed')->end()
                 ->booleanNode('account_verification_required')->end()
+                ->booleanNode('shipping_address_in_checkout_required')->end()
                 ->scalarNode('default_locale')->cannotBeEmpty()->end()
                 ->variableNode('locales')
                     ->beforeNormalization()
