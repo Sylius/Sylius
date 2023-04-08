@@ -84,6 +84,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setSkippingShippingStepAllowed($options['skipping_shipping_step_allowed']);
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
         $channel->setAccountVerificationRequired($options['account_verification_required']);
+        $channel->setShippingAddressInCheckoutRequired($options['shipping_address_in_checkout_required']);
 
         if (null !== $this->taxonRepository) {
             $channel->setMenuTaxon($options['menu_taxon']);
@@ -134,6 +135,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('skipping_payment_step_allowed', 'bool')
             ->setDefault('account_verification_required', true)
             ->setAllowedTypes('account_verification_required', 'bool')
+            ->setDefault('shipping_address_in_checkout_required', false)
+            ->setAllowedTypes('shipping_address_in_checkout_required', 'bool')
             ->setDefault(
                 'default_tax_zone',
                 LazyOption::randomOneOrNull($this->zoneRepository, 100, ['scope' => [Scope::TAX, AddressingScope::ALL]]),
