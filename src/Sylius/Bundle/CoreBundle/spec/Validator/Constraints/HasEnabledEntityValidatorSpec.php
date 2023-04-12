@@ -35,15 +35,9 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
         PropertyAccessorInterface $accessor,
         ExecutionContextInterface $context,
     ): void {
-        $this->beConstructedWith($registry);
+        $this->beConstructedWith($registry, $accessor);
 
         $this->initialize($context);
-
-        $object = $this->object->getWrappedObject();
-        $objectReflection = new \ReflectionObject($object);
-        $property = $objectReflection->getProperty('accessor');
-        $property->setAccessible(true);
-        $property->setValue($object, $accessor->getWrappedObject());
     }
 
     public function it_is_a_constraint_validator(): void
