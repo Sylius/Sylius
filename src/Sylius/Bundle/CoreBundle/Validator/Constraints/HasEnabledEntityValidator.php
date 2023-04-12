@@ -24,17 +24,17 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    private PropertyAccessorInterface $accessor;
+    public function __construct(
+        private ManagerRegistry $registry,
+        private ?PropertyAccessorInterface $accessor = null,
+    ) {
+        if (null === $this->accessor) {
+            trigger_deprecation('sylius/core-bundle', '1.13', sprintf('Not passing a PropertyAccessorInterface as the second constructor argument for %s is deprecated as of Sylius 1.13 and will be required in 2.0.', self::class));
 
-    public function __construct(private ManagerRegistry $registry)
-    {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+            $this->accessor = PropertyAccess::createPropertyAccessor();
+        }
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     * @throws ConstraintDefinitionException
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var HasEnabledEntity $constraint */
@@ -74,19 +74,16 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     /**
      * If no entity matched the query criteria or a single entity matched, which is the same as the entity being
      * validated, the entity is the last enabled entity available.
-     *
-     * @param object $entity
      */
-    private function isLastEnabledEntity(array|\Iterator $result, $entity): bool
+    private function isLastEnabledEntity(array|\Iterator $result, object $entity): bool
     {
-        return !\is_countable($result) || 0 === count($result) ||
-        (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)));
+        return
+            !\is_countable($result) || 0 === count($result) ||
+            (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)))
+        ;
     }
 
-    /**
-     * @param object $entity
-     */
-    private function getProperObjectManager(?string $manager, $entity): ObjectManager
+    private function getProperObjectManager(?string $manager, object $entity): ObjectManager
     {
         if ($manager) {
             $objectManager = $this->registry->getManager($manager);
@@ -112,18 +109,19 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private function validateObjectManager(?ObjectManager $objectManager, string $exceptionMessage): void
     {
-        if (!$objectManager) {
+        if (null === $objectManager) {
             throw new ConstraintDefinitionException($exceptionMessage);
         }
     }
 
     /**
-     * @param object $entity
-     *
      * @throws ConstraintDefinitionException
      */
-    private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, string $enabledPropertyPath): void
-    {
+    private function ensureEntityHasProvidedEnabledField(
+        ObjectManager $objectManager,
+        object $entity,
+        string $enabledPropertyPath,
+    ): void {
         $class = $objectManager->getClassMetadata($entity::class);
 
         if (!$class->hasField($enabledPropertyPath) && !$class->hasAssociation($enabledPropertyPath)) {
