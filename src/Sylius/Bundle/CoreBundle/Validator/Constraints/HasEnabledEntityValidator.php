@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
@@ -25,7 +24,7 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    private PropertyAccessor $accessor;
+    private PropertyAccessorInterface $accessor;
 
     public function __construct(private ManagerRegistry $registry)
     {
@@ -40,6 +39,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     {
         /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
+        Assert::object($value, 'This validator can only be used with objects.');
 
         $enabled = $this->accessor->getValue($value, $constraint->enabledPath);
 
@@ -51,10 +51,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
         $this->ensureEntityHasProvidedEnabledField($objectManager, $value, $constraint->enabledPath);
 
-        $criteria = [$constraint->enabledPath => true];
-
         $repository = $objectManager->getRepository($value::class);
-        $results = $repository->{$constraint->repositoryMethod}($criteria);
+        $results = $repository->{$constraint->repositoryMethod}([$constraint->enabledPath => true]);
 
         /* If the result is a MongoCursor, it must be advanced to the first
          * element. Rewinding should have no ill effect if $result is another
@@ -67,7 +65,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         }
 
         if ($this->isLastEnabledEntity($results, $value)) {
-            $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
+            $errorPath = $constraint->errorPath ?? $constraint->enabledPath;
 
             $this->context->buildViolation($constraint->message)->atPath($errorPath)->addViolation();
         }
@@ -88,7 +86,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     /**
      * @param object $entity
      */
-    private function getProperObjectManager(?string $manager, $entity): ?ObjectManager
+    private function getProperObjectManager(?string $manager, $entity): ObjectManager
     {
         if ($manager) {
             $objectManager = $this->registry->getManager($manager);
@@ -126,7 +124,6 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, string $enabledPropertyPath): void
     {
-        /** @var ClassMetadata $class */
         $class = $objectManager->getClassMetadata($entity::class);
 
         if (!$class->hasField($enabledPropertyPath) && !$class->hasAssociation($enabledPropertyPath)) {
