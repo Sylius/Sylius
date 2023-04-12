@@ -75,8 +75,8 @@ class RoboFile extends Tasks
         }
 
         $task
-            ->exec('composer validate --ansi --strict')
             ->exec('composer update --no-scripts --no-interaction')
+            ->exec('composer validate --ansi --strict')
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
@@ -103,10 +103,18 @@ class RoboFile extends Tasks
 
     private function createTestAssets(string $testAppDirectory): void
     {
-        mkdir(sprintf('%s/public/build/admin', $testAppDirectory), 0777, true);
-        mkdir(sprintf('%s/public/build/shop', $testAppDirectory), 0777, true);
-        file_put_contents(sprintf('%s/public/build/admin/manifest.json', $testAppDirectory), '{}');
-        file_put_contents(sprintf('%s/public/build/shop/manifest.json', $testAppDirectory), '{}');
+        $adminBuildDir = sprintf('%s/public/build/admin', $testAppDirectory);
+        $shopBuildDir = sprintf('%s/public/build/shop', $testAppDirectory);
+
+        if (!file_exists($adminBuildDir)) {
+            mkdir($adminBuildDir, 0777, true);
+            file_put_contents(sprintf('%s/manifest.json', $adminBuildDir), '{}');
+        }
+
+        if (!file_exists($shopBuildDir)) {
+            mkdir($shopBuildDir, 0777, true);
+            file_put_contents(sprintf('%s/manifest.json', $shopBuildDir), '{}');
+        }
     }
 
     private function startGroup(string $groupName): void
