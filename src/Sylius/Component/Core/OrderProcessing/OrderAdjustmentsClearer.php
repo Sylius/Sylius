@@ -43,7 +43,7 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
 
     public function process(OrderInterface $order): void
     {
-        if (OrderInterface::STATE_CART !== $order->getState()) {
+        if (!$order->canBeProcessed()) {
             return;
         }
 
