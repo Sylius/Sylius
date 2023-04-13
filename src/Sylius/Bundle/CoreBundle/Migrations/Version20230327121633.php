@@ -25,7 +25,7 @@ final class Version20230327121633 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_user_oauth CHANGE access_token access_token VARCHAR(8192) DEFAULT NULL, CHANGE refresh_token refresh_token VARCHAR(8192) DEFAULT NULL');
+        $this->addSql('ALTER TABLE sylius_user_oauth CHANGE access_token access_token TEXT DEFAULT NULL, CHANGE refresh_token refresh_token TEXT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
