@@ -17,6 +17,7 @@
         <ini name="error_reporting" value="-1" />
 
         <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_DEBUG" value="0"/>
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
         <!-- ###- symfony/framework-bundle ### -->
