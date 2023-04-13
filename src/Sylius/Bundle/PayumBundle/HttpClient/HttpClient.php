@@ -13,16 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\HttpClient;
 
+use Http\Client\HttpClient as BaseHttpClientInterface;
 use Payum\Core\HttpClientInterface;
 use Psr\Http\Message\RequestInterface;
-use Symfony\Component\HttpClient\HttplugClient;
 
 final class HttpClient implements HttpClientInterface
 {
+    public function __construct(private BaseHttpClientInterface $client)
+    {
+    }
+
     public function send(RequestInterface $request)
     {
-        $client = new HttplugClient();
-
-        return $client->sendRequest($request);
+        return $this->client->sendRequest($request);
     }
 }

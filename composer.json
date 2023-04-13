@@ -59,6 +59,7 @@
         "league/flysystem-bundle": "^2.4",
         "lexik/jwt-authentication-bundle": "^2.11",
         "liip/imagine-bundle": "^2.10",
+        "nyholm/psr7": "^1.6",
         "pagerfanta/pagerfanta": "^3.0",
         "payum/payum": "^1.7.2",
         "payum/payum-bundle": "^2.5",

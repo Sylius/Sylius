@@ -23,6 +23,7 @@
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
+    "Http\\Client\\HttpClient",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
     "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface",
