@@ -17,6 +17,7 @@
 
         <service id="sylius.validator.has_enabled_entity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator">
             <argument type="service" id="doctrine" />
+            <argument type="service" id="property_accessor" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
         <service id="sylius.validator.customer_initializer" class="Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer">
