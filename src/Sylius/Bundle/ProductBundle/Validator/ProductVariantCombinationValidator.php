@@ -37,7 +37,8 @@ final class ProductVariantCombinationValidator extends ConstraintValidator
         }
 
         $product = $value->getProduct();
-        if (!$product->hasVariants() || !$product->hasOptions()) {
+
+        if ($product === null || !$product->hasVariants() || !$product->hasOptions()) {
             return;
         }
 

@@ -11,8 +11,18 @@
             "channelCode": "WEB",
             "price": 4000,
             "originalPrice": 5000,
-            "minimumPrice": 2000
+            "minimumPrice": 2000,
+            "lowestPriceBeforeDiscount": null
         }
     },
-    "enabled": true
+    "enabled": true,
+    "optionValues": [],
+    "translations": {
+        "en_US": {
+            "@id":"\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@type":"ProductVariantTranslation",
+            "name":"Yellow mug",
+            "locale":"en_US"
+        }
+    }
 }

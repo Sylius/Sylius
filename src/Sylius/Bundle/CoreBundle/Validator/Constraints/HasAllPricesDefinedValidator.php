@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -22,9 +24,17 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint): void
     {
+        Assert::isInstanceOf($value, ProductVariantInterface::class);
         Assert::isInstanceOf($constraint, HasAllPricesDefined::class);
 
-        $channels = $value->getProduct()->getChannels();
+        /** @var ProductInterface|null $product */
+        $product = $value->getProduct();
+
+        if ($product === null) {
+            return;
+        }
+
+        $channels = $product->getChannels();
 
         foreach ($channels as $channel) {
             /** @var ChannelPricingInterface|null $channelPricing */

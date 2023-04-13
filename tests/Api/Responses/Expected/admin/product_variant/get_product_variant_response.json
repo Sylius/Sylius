@@ -8,7 +8,6 @@
         "WEB": {
             "@id": "/api/v2/admin/channel-pricings/@integer@",
             "@type": "ChannelPricing",
-            "id": @integer@,
             "channelCode": "WEB",
             "price": 2000,
             "originalPrice": null,
@@ -19,9 +18,8 @@
     "optionValues":[],
     "translations": {
         "en_US": {
-            "@id":"\/api\/v2\/admin\/product-variant-translation\/@integer@",
+            "@id":"\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type":"ProductVariantTranslation",
-            "id":"@integer@",
             "name":"Mug",
             "locale":"en_US"
         }

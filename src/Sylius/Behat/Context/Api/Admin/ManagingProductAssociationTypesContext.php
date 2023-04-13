@@ -171,17 +171,6 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product association type could not be edited',
-        );
-    }
-
-    /**
      * @Then /^(this product association type) name should be "([^"]+)"$/
      */
     public function thisProductAssociationTypeNameShouldBe(ProductAssociationTypeInterface $productAssociationType, string $name): void

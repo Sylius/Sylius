@@ -939,7 +939,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->createSimpleProductPage->getChannelPricingValidationMessage(),
-            'You must define price for every channel.',
+            'You must define price for every enabled channel.',
         );
     }
 

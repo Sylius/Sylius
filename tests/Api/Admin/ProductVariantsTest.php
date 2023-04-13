@@ -71,7 +71,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_channel_pricing_of_product_variant(): void
+    public function it_updates_channel_pricing_and_translation_of_a_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -90,7 +90,19 @@ final class ProductVariantsTest extends JsonApiTestCase
                     '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
                     'price' => 3000,
                     'originalPrice' => 4000,
-                ]]
+                    'minimumPrice' => 210,
+                ]],
+                'translations' => [
+                    'pl_PL' => [
+                        '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('pl_PL')->getId()),
+                        'locale' => 'pl_PL',
+                        'name' => 'Pomarańczowy kubek',
+                    ],
+                    'de_DE' => [
+                        'locale' => 'de_DE',
+                        'name' => 'Orange Tasse',
+                    ],
+                ]
             ], JSON_THROW_ON_ERROR),
         );
 
@@ -124,6 +136,12 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'originalPrice' => 5000,
                     'minimumPrice' => 2000,
                 ]],
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                        'name' => 'Yellow mug',
+                    ],
+                ],
             ], JSON_THROW_ON_ERROR),
         );
 
@@ -166,5 +184,145 @@ final class ProductVariantsTest extends JsonApiTestCase
             'admin/product_variant/post_product_variant_disabled_response',
             Response::HTTP_CREATED,
         );
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_product_variant_with_invalid_channel_code(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'product' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'channelPricings' => ['NON-EXISTING-CHANNEL' => [
+                    'channelCode' => 'NON-EXISTING-CHANNEL',
+                    'price' => 4000,
+                ]],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_product_variant_without_channel_code(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'product' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'channelPricings' => [
+                    'NON-EXISTING-CHANNEL' => ['price' => 4000]
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_product_variant_without_product(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'channelPricings' => ['WEB' => [
+                    'channelCode' => 'WEB',
+                    'price' => 4000,
+                ]],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_create_product_variant_with_invalid_locale_code(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'product' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'channelPricings' => ['WEB' => [
+                    'channelCode' => 'WEB',
+                    'price' => 4000,
+                    'originalPrice' => 5000,
+                    'minimumPrice' => 2000,
+                ]],
+                'translations' => [
+                    'NON-EXISTING-LOCALE-CODE' => [
+                        'locale' => 'NON-EXISTING-LOCALE-CODE',
+                        'name' => 'Yellow mug',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_does_not_allow_to_update_product_variant_with_invalid_locale_code(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_variant.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'channelPricings' => ['WEB' => [
+                    'channelCode' => 'WEB',
+                    'price' => 4000,
+                    'originalPrice' => 5000,
+                    'minimumPrice' => 2000,
+                ]],
+                'translations' => [
+                    'NON-EXISTING-LOCALE-CODE' => [
+                        'locale' => 'NON-EXISTING-LOCALE-CODE',
+                        'name' => 'Yellow mug',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

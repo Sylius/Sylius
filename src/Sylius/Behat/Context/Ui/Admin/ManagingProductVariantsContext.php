@@ -502,7 +502,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::same(
             $this->generatePage->getPricesValidationMessage($position - 1),
-            'You must define price for every channel.',
+            'You must define price for every enabled channel.',
         );
     }
 
@@ -524,7 +524,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::contains(
             $this->createPage->getPricesValidationMessage(),
-            'You must define price for every channel.',
+            'You must define price for every enabled channel.',
         );
     }
 

@@ -66,7 +66,7 @@
                     <attribute name="groups">admin:product_variant:create</attribute>
                 </attribute>
                 <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_variant:create</attribute>
+                    <attribute name="groups">admin:product_variant:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -93,7 +93,6 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
-                        <attribute name="slug">string</attribute>
                         <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
