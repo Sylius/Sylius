@@ -95,5 +95,11 @@
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="handleRemovingRootTaxonAtPositionZero" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater" />
+            <tag name="kernel.event_listener" event="sylius.product.post_delete" method="removeProductFromPromotionRules" />
+        </service>
     </services>
 </container>
