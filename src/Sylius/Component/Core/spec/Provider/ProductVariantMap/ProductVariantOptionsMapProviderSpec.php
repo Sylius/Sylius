@@ -15,7 +15,6 @@ namespace spec\Sylius\Component\Core\Provider\ProductVariantMap;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
@@ -27,23 +26,25 @@ final class ProductVariantOptionsMapProviderSpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantMapProviderInterface::class);
     }
 
+    function it_does_not_support_variants_with_no_option_values(ProductVariantInterface $variant): void
+    {
+        $variant->getOptionValues()->willReturn(new ArrayCollection());
+
+        $this->supports($variant, [])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_option_values(
-        ChannelInterface $channel,
-        ProductVariantInterface $variantWithoutOptions,
-        ProductVariantInterface $variantWithOptions,
+        ProductVariantInterface $variant,
         ProductOptionValueInterface $optionValue,
     ): void {
-        $variantWithOptions->getOptionValues()->willReturn(new ArrayCollection([
+        $variant->getOptionValues()->willReturn(new ArrayCollection([
             $optionValue->getWrappedObject(),
         ]));
-        $variantWithoutOptions->getOptionValues()->willReturn(new ArrayCollection());
 
-        $this->supports($variantWithOptions, [])->shouldReturn(true);
-        $this->supports($variantWithoutOptions, [])->shouldReturn(false);
+        $this->supports($variant, [])->shouldReturn(true);
     }
 
     function it_provides_a_map_of_variant_options(
-        ChannelInterface $channel,
         ProductVariantInterface $variant,
         ProductOptionValueInterface $firstOptionValue,
         ProductOptionValueInterface $secondOptionValue,

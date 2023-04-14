@@ -44,17 +44,23 @@ final class ProductVariantPriceMapProviderSpec extends ObjectBehavior
         $this->supports($variant, ['channel' => 'not_a_channel'])->shouldReturn(false);
     }
 
+    function it_does_not_support_variants_with_no_channel_pricing_in_channel(
+        ChannelInterface $channel,
+        ProductVariantInterface $variant,
+    ): void {
+        $variant->getChannelPricingForChannel($channel)->willReturn(null);
+
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_channel_pricing_in_channel(
         ChannelInterface $channel,
-        ProductVariantInterface $variantWithoutChannelPricing,
-        ProductVariantInterface $variantWithChannelPricing,
+        ProductVariantInterface $variant,
         ChannelPricingInterface $channelPricing,
     ): void {
-        $variantWithChannelPricing->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-        $variantWithoutChannelPricing->getChannelPricingForChannel($channel)->willReturn(null);
+        $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
 
-        $this->supports($variantWithChannelPricing, ['channel' => $channel])->shouldReturn(true);
-        $this->supports($variantWithoutChannelPricing, ['channel' => $channel])->shouldReturn(false);
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(true);
     }
 
     function it_provides_price_of_variant_in_channel(

@@ -44,19 +44,37 @@ final class ProductVariantLowestPriceMapProviderSpec extends ObjectBehavior
         $this->supports($variant, ['channel' => 'not_a_channel'])->shouldReturn(false);
     }
 
+    function it_does_not_support_variants_with_no_channel_pricing(
+        ChannelInterface $channel,
+        ProductVariantInterface $variant,
+    ): void {
+        $variant->getChannelPricingForChannel($channel)->willReturn(null);
+
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(false);
+    }
+
+    function it_does_not_support_variants_with_no_lowest_price_in_channel(
+        ProductVariantPricesCalculatorInterface $calculator,
+        ChannelInterface $channel,
+        ProductVariantInterface $variant,
+        ChannelPricingInterface $channelPricing,
+    ): void {
+        $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
+        $calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(null);
+
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_lowest_price_in_channel(
         ProductVariantPricesCalculatorInterface $calculator,
         ChannelInterface $channel,
-        ProductVariantInterface $variantWithoutChannelPricing,
-        ProductVariantInterface $variantWithChannelPricing,
+        ProductVariantInterface $variant,
         ChannelPricingInterface $channelPricing,
     ): void {
-        $variantWithoutChannelPricing->getChannelPricingForChannel($channel)->willReturn(null);
-        $variantWithChannelPricing->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-        $calculator->calculateLowestPriceBeforeDiscount($variantWithChannelPricing, ['channel' => $channel])->willReturn(1000);
+        $variant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
+        $calculator->calculateLowestPriceBeforeDiscount($variant, ['channel' => $channel])->willReturn(1000);
 
-        $this->supports($variantWithChannelPricing, ['channel' => $channel])->shouldReturn(true);
-        $this->supports($variantWithoutChannelPricing, ['channel' => $channel])->shouldReturn(false);
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(true);
     }
 
     function it_provides_lowest_price_of_variant_in_channel(

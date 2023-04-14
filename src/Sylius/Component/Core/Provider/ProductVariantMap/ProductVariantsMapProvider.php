@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantsMapProvider implements ProductVariantsMapProviderInterface
 {
-    /** @param ProductVariantMapProviderInterface[]|iterable $dataMapProviders */
+    /** @param iterable<ProductVariantMapProviderInterface> $dataMapProviders */
     public function __construct(private iterable $dataMapProviders)
     {
     }

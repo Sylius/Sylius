@@ -39,19 +39,25 @@ final class ProductVariantAppliedPromotionsMapProviderSpec extends ObjectBehavio
         $this->supports($variant, ['channel' => 'not_a_channel'])->shouldReturn(false);
     }
 
+    function it_does_not_support_variants_with_no_promotions_applied(
+        ChannelInterface $channel,
+        ProductVariantInterface $variant,
+    ): void {
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
+
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(false);
+    }
+
     function it_supports_variants_with_applied_promotions(
         ChannelInterface $channel,
-        ProductVariantInterface $variantWithoutPromotions,
-        ProductVariantInterface $variantWithPromotions,
+        ProductVariantInterface $variant,
         PromotionInterface $promotion,
     ): void {
-        $variantWithPromotions->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
+        $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([
             $promotion->getWrappedObject(),
         ]));
-        $variantWithoutPromotions->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
 
-        $this->supports($variantWithPromotions, ['channel' => $channel])->shouldReturn(true);
-        $this->supports($variantWithoutPromotions, ['channel' => $channel])->shouldReturn(false);
+        $this->supports($variant, ['channel' => $channel])->shouldReturn(true);
     }
 
     function it_provides_a_map_of_variant_applied_promotions(
