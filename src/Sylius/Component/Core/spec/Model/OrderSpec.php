@@ -832,4 +832,15 @@ final class OrderSpec extends ObjectBehavior
         $this->getTaxIncludedTotal()->shouldReturn(1500);
         $this->getTaxExcludedTotal()->shouldReturn(800);
     }
+
+    function it_can_be_processed(): void
+    {
+        $this->setState(OrderInterface::STATE_CART);
+
+        $this->canBeProcessed()->shouldReturn(true);
+
+        $this->setState(OrderInterface::STATE_NEW);
+
+        $this->canBeProcessed()->shouldReturn(false);
+    }
 }

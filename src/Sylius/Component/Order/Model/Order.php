@@ -315,6 +315,11 @@ class Order implements OrderInterface
         $this->recalculateTotal();
     }
 
+    public function canBeProcessed(): bool
+    {
+        return $this->state === self::STATE_CART;
+    }
+
     /**
      * Items total + Adjustments total.
      */
