@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -58,6 +59,14 @@ final class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
         $this->sharedStorage->remove('product_attributes');
+    }
+
+    /**
+     * @When I try to reach unexistent product
+     */
+    public function iTryToReachUnexistentProduct(): void
+    {
+        $this->client->show(Resources::PRODUCTS, 'unexistent');
     }
 
     /**
@@ -629,6 +638,14 @@ final class ProductContext implements Context
 
         Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
         Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);
+    }
+
+    /**
+     * @Then I should be informed that the product does not exist
+     */
+    public function iShouldBeInformedThatTheProductDoesNotExist(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     private function hasProductWithPrice(
