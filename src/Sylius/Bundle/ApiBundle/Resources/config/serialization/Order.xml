@@ -113,6 +113,13 @@
             <group>shop:order:account:read</group>
         </attribute>
 
+        <attribute name="itemsSubtotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
         <attribute name="taxTotal">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>

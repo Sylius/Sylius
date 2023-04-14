@@ -333,6 +333,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^my (cart) items total should be ("[^"]+")$/
+     */
+    public function myCartItemsTotalShouldBe(string $tokenValue, int $total): void
+    {
+        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
+        $responseTotal = $this->responseChecker->getValue(
+            $response,
+            'itemsSubtotal',
+        );
+
+        Assert::same($total, (int) $responseTotal, 'Expected items totals are not the same. Received message:' . $response->getContent());
+    }
+
+    /**
      * @Then /^my included in price taxes should be ("[^"]+")$/
      */
     public function myIncludedInPriceTaxesShouldBe(int $taxTotal): void
@@ -642,6 +656,17 @@ final class CartContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxExcludedTotal'),
+            $taxTotal,
+        );
+    }
+
+    /**
+     * @Then /^my cart included in price taxes should be ("[^"]+")$/
+     */
+    public function myCartTaxesIncludedInPriceShouldBe(int $taxTotal): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'taxIncludedTotal'),
             $taxTotal,
         );
     }
