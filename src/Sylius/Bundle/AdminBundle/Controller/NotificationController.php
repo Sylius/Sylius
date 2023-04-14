@@ -30,8 +30,8 @@ final class NotificationController
         private string $hubUri,
         private string $environment,
     ) {
-        if ($client instanceof DeprecatedClientInterface) {
-            trigger_deprecation('sylius/admin-bundle', '1.13', 'Using "%s" is deprecated and will be prohibited in 2.0, use "%s" instead.', DeprecatedClientInterface::class, ClientInterface::class);
+        if (!$client instanceof ClientInterface) {
+            trigger_deprecation('sylius/admin-bundle', '1.13', 'Using a service that does not implement "%s" is deprecated and will be prohibited in 2.0.', ClientInterface::class);
         }
     }
 
