@@ -51,3 +51,6 @@
 1. Not passing an instance of `Symfony\Component\PropertyAccess\PropertyAccessorInterface`
    to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
    as the second argument is deprecated.
+
+1. Class `\Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal calculation
+   is now available on the Order model `\Sylius\Component\Core\Model\Order::getItemsSubtotal`.
