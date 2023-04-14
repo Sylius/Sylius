@@ -16,6 +16,7 @@
     "itemsTotal": 0,
     "total": 0,
     "state": "cart",
+    "itemsSubtotal": 0,
     "taxTotal": 0,
     "taxIncludedTotal": 0,
     "taxExcludedTotal": 0,
