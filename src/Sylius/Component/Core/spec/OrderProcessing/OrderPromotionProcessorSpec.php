@@ -32,18 +32,18 @@ final class OrderPromotionProcessorSpec extends ObjectBehavior
 
     function it_processes_promotions(PromotionProcessorInterface $promotionProcessor, OrderInterface $order): void
     {
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->canBeProcessed()->willReturn(true);
 
         $promotionProcessor->process($order)->shouldBeCalled();
 
         $this->process($order);
     }
 
-    function it_does_nothing_if_the_order_is_in_a_state_different_than_cart(
+    function it_does_nothing_if_the_order_cannot_be_processed(
         PromotionProcessorInterface $promotionProcessor,
         OrderInterface $order,
     ): void {
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->canBeProcessed()->willReturn(false);
 
         $promotionProcessor->process($order)->shouldNotBeCalled();
 

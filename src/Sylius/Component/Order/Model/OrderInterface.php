@@ -84,4 +84,6 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function getAdjustmentsTotalRecursively(?string $type = null): int;
 
     public function removeAdjustmentsRecursively(?string $type = null): void;
+
+    public function canBeProcessed(): bool;
 }
