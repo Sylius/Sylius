@@ -57,4 +57,36 @@ final class ChannelContext implements Context
             sprintf('%s/shop/currencies/%s', $this->apiUrlPrefix, $currencyCode),
         );
     }
+
+    /**
+     * @Then I should be able to shop using the :currencyCode currency
+     */
+    public function iShouldBeAbleToShopUsingTheCurrency(string $currencyCode): void
+    {
+        $this->client->index(Resources::CURRENCIES);
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->getLastResponse(),
+                'code',
+                $currencyCode,
+            ),
+        );
+    }
+
+    /**
+     * @Then I should not be able to shop using the :currencyCode currency
+     */
+    public function iShouldNotBeAbleToShopUsingTheCurrency(string $currencyCode): void
+    {
+        $this->client->index(Resources::CURRENCIES);
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->getLastResponse(),
+                'code',
+                $currencyCode,
+            ),
+        );
+    }
 }
