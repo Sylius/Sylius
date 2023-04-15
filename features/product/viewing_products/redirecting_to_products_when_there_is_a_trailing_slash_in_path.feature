@@ -13,7 +13,7 @@ Feature: Redirecting to products when there is a trailing slash in path
         And the store has a product "Plastic Tomato" available in "Poland" channel
         And this product belongs to "Funny"
 
-    @ui
+    @ui @no-api
     Scenario: Redirecting to products when there is a trailing slash in path
         When I try to browse products from taxon "T-Shirts" with a trailing slash in the path
         Then I should be redirected on the product list from taxon "T-Shirts"
