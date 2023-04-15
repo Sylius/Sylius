@@ -42,6 +42,7 @@
                 <referencedClass name="Symfony\Component\Security\Core\Exception\UsernameNotFoundException" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1, probably a bug in psalm, as this is referenced as DeprecatedClass, not an interface -->
                 <referencedClass name="Symfony\Component\HttpFoundation\RequestMatcher" /> <!-- deprecated in Symfony 6.2 -->
+                <referencedClass name="Http\Message\MessageFactory" /> <!-- deprecated in HttpMessage 1.1 -->
             </errorLevel>
         </DeprecatedClass>
         <DeprecatedInterface>
