@@ -62,6 +62,7 @@ final class ProductContext implements Context
         private ProductVariantGeneratorInterface $productVariantGenerator,
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ProductVariantResolverInterface $defaultVariantResolver,
+        private ProductVariantRepositoryInterface $productVariantRepository,
         private ImageUploaderInterface $imageUploader,
         private SlugGeneratorInterface $slugGenerator,
         private \ArrayAccess $minkParameters,
@@ -781,10 +782,15 @@ final class ProductContext implements Context
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
      * @Given /^(this product) price has been changed to ("[^"]+")$/
      */
-    public function theProductChangedItsPriceTo(ProductInterface $product, int $price)
+    public function theProductChangedItsPriceTo(ProductInterface $product, int $price): void
     {
-        /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        /** @var false|ProductInterface $productVariant */
+        $productVariant = $product->getVariants()->first();
+        Assert::isInstanceOf($productVariant, ProductVariantInterface::class);
+
+        $productVariantId = $productVariant->getId();
+
+        $productVariant = $this->productVariantRepository->find($productVariantId);
         $channelPricing = $productVariant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
         $channelPricing->setPrice($price);
 

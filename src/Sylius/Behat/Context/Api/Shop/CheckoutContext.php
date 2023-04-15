@@ -347,7 +347,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->completeOrder();
 
-        if ($response->getStatusCode() === 422) {
+        if ($response->getStatusCode() > 299) {
             return;
         }
 
@@ -496,6 +496,17 @@ final class CheckoutContext implements Context
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
         $this->client->executeCustomRequest($request);
+    }
+
+    /**
+     * @When I have proceeded selecting :paymentMethod payment method
+     * @When I proceed selecting :paymentMethod payment method
+     */
+    public function iHaveProceededSelectingOfflinePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
+        $this->iCompleteTheAddressingStep();
+        $this->iCompleteTheShippingStepWithFirstShippingMethod();
+        $this->iChoosePaymentMethod($paymentMethod);
     }
 
     /**
