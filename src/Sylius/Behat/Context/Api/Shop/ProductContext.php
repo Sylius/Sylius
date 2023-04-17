@@ -648,6 +648,14 @@ final class ProductContext implements Context
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
+    /**
+     * @Then /^I should be informed that the taxon does not exist$/
+     */
+    public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
+    }
+
     private function hasProductWithPrice(
         array $products,
         int $price,
