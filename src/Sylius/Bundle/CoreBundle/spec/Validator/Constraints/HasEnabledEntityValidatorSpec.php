@@ -161,7 +161,6 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
         $constraint->enabledPath = 'enabled';
         $constraint->objectManager = 'custom';
 
-
         $accessor->getValue($entity, 'enabled')->willReturn(false);
         $registry->getManager('custom')->willReturn($manager);
         $manager->getClassMetadata($entity->getWrappedObject()::class)->willReturn($metadata);
@@ -171,7 +170,7 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
 
         $repository->findBy(['enabled' => true])->willReturn([
             $entity->getWrappedObject(),
-            $anotherEntity->getWrappedObject()
+            $anotherEntity->getWrappedObject(),
         ]);
 
         $context->buildViolation(Argument::cetera())->shouldNotBeCalled();
@@ -201,7 +200,7 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
         $manager->getRepository($entity->getWrappedObject()::class)->willReturn($repository);
 
         $repository->findBy(['enabled' => true])->willReturn([
-            $entity->getWrappedObject()
+            $entity->getWrappedObject(),
         ]);
 
         $context->buildViolation($constraint->message)->willReturn($violationBuilder);
@@ -234,7 +233,7 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
         $manager->getRepository($entity->getWrappedObject()::class)->willReturn($repository);
 
         $repository->findBy(['enabled' => true])->willReturn([
-            $entity->getWrappedObject()
+            $entity->getWrappedObject(),
         ]);
 
         $context->buildViolation($constraint->message)->willReturn($violationBuilder);
