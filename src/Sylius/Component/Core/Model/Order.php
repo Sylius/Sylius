@@ -335,6 +335,20 @@ class Order extends BaseOrder implements OrderInterface
         return $this->getTotalQuantity();
     }
 
+    public function getItemsSubtotal(): int
+    {
+        /** @var array<OrderItemInterface> $items */
+        $items = $this->getItems()->toArray();
+
+        return array_reduce(
+            $items,
+            static function (int $subtotal, OrderItemInterface $item): int {
+                return $subtotal + $item->getSubtotal();
+            },
+            0
+        );
+    }
+
     public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;

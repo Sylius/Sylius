@@ -110,6 +110,8 @@ interface OrderInterface extends
 
     public function getOrderPromotionTotal(): int;
 
+    public function getItemsSubtotal(): int;
+
     public function getTokenValue(): ?string;
 
     public function setTokenValue(?string $tokenValue): void;
