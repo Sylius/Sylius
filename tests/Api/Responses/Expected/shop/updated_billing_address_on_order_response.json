@@ -69,6 +69,7 @@
     ],
     "itemsTotal": 6000,
     "total": 6500,
+    "itemsSubtotal": 6000,
     "state": "cart",
     "taxTotal": 0,
     "taxExcludedTotal": 0,
