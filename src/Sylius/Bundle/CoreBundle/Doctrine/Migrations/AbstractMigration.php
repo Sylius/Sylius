@@ -54,7 +54,7 @@ abstract class AbstractMigration extends BaseAbstractMigration
          *
          * @psalm-suppress InvalidClass
          */
-        if (class_exists(\Doctrine\DBAL\Platforms\MySQLPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySQLPlatform::class, true)) {
+        if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySQLPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySQLPlatform::class, true)) {
             return true;
         }
 
@@ -63,10 +63,15 @@ abstract class AbstractMigration extends BaseAbstractMigration
          *
          * @psalm-suppress InvalidClass
          */
-        if (class_exists(\Doctrine\DBAL\Platforms\MySqlPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySqlPlatform::class, true)) {
+        if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySqlPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySqlPlatform::class, true)) {
             return true;
         }
 
         return false;
+    }
+
+    private function classExistsCaseSensitive(string $className): bool
+    {
+        return class_exists(strtolower($className)) && (new \ReflectionClass($className))->getName() === $className;
     }
 }
