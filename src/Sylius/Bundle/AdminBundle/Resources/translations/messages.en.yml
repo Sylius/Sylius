@@ -65,6 +65,7 @@ sylius:
                 PayPal Express Checkout is deprecated. Please, use new
                 <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         sales_summary: Sales summary
+        shipment_for_order: Shipment for order
         statistics:
             day: Day
             lifetime: Lifetime
