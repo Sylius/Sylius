@@ -184,19 +184,24 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I change (product "[^"]+") quantity to (\d+)$/
      * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
-     * @Given I change :productName quantity to :quantity
      * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
      * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
      * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/
      */
-    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, string $tokenValue): void
+    public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, ?string $tokenValue = null): void
     {
+        if (null === $tokenValue && $this->sharedStorage->has('cart_token')) {
+            $tokenValue = $this->sharedStorage->get('cart_token');
+        }
+
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
         $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
     }
 
     /**
+     * @Given /^I removed (product "[^"]+") from the (cart)$/
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
@@ -362,6 +367,7 @@ final class CartContext implements Context
 
     /**
      * @Then /^my (cart) should be empty$/
+     * @Then /^(cart) should be empty with no value$/
      */
     public function myCartShouldBeEmpty(string $tokenValue): void
     {
@@ -686,6 +692,8 @@ final class CartContext implements Context
      * @Then /^my cart shipping total should be ("[^"]+")$/
      * @Then I should not see shipping total for my cart
      * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
+     * @Then there should be no shipping fee
+     * @Then my cart shipping should be for Free
      */
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {

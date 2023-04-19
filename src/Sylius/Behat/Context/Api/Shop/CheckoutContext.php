@@ -377,6 +377,8 @@ final class CheckoutContext implements Context
      * @When /^the visitor try to proceed with ("[^"]+" shipping method) in the customer cart$/
      * @When I try to change shipping method to :shippingMethod
      * @Given I proceed selecting :shippingMethod shipping method
+     * @Given I chose :shippingMethod shipping method
+     * @When I change shipping method to :shippingMethod
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
