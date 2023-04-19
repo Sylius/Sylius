@@ -10,10 +10,11 @@ Feature: Paying offline during checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @ui
+    @ui @api
     Scenario: Successfully placing an order
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart
-        When I proceed selecting "Offline" payment method
+        And I have specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I proceeded with "Free" shipping method and "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
