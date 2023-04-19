@@ -103,6 +103,7 @@ final class CartContext implements Context
 
     /**
      * @Given I change :productName quantity to :quantity
+     * @Given I change product :productName quantity to :quantity
      * @Given I change product :productName quantity to :quantity in my cart
      */
     public function iChangeQuantityTo($productName, $quantity)
