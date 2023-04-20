@@ -31,24 +31,13 @@ jobs:
             -
                 uses: actions/checkout@v3
 
-            -   name: Get Composer cache directory
-                id: composer-cache
-                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-            -   name: "Restore dependencies"
-                uses: actions/cache@v3
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
-                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
-
             -   name: Change minimum-stability to dev
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable false
 
             -   name: Build application
-                uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.0
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"

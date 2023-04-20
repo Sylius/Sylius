@@ -41,17 +41,6 @@ jobs:
         steps:
             -
                 uses: actions/checkout@v3
-                
-            -   name: Get Composer cache directory
-                id: composer-cache
-                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-            -   name: "Restore dependencies"
-                uses: actions/cache@v3
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
-                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
             
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
@@ -62,7 +51,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
                 
             -   name: Build application
-                uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.0
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
