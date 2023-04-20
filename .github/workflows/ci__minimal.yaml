@@ -7,7 +7,9 @@ on:
             - "docs/**"
             - "*.md"
     workflow_dispatch: ~
-    push: ~
+    push:
+        branches-ignore:
+            - 'upmerge/**'
     
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-minimal
