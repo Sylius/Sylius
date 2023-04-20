@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\HttpClient;
 
-use Http\Client\HttpClient as BaseHttpClientInterface;
 use Payum\Core\HttpClientInterface;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 
 final class HttpClient implements HttpClientInterface
 {
-    public function __construct(private BaseHttpClientInterface $client)
+    public function __construct(private ClientInterface $client)
     {
     }
 

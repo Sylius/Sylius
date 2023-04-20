@@ -29,7 +29,7 @@
         <defaults public="true" />
 
         <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
-            <argument type="service" id="Http\Client\HttpClient" />
+            <argument type="service" id="Psr\Http\Client\ClientInterface" />
         </service>
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>

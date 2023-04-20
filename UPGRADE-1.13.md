@@ -53,7 +53,6 @@
    to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
    as the second argument is deprecated.
 
-<<<<<<< HEAD
 1. Class `\Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal calculation
    is now available on the Order model `\Sylius\Component\Core\Model\Order::getItemsSubtotal`.
 
@@ -68,11 +67,25 @@
 
    To add more data per variant create a service implementing the `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface` and tag it with `sylius.product_variant_data_map_provider`.
 
-1. Using Guzzle has been deprecated in favor of Symfony HTTP Client. Therefore, passing `GuzzleHttp\ClientInterface`
-=======
-1. Using Guzzle has been deprecated in favor of Symfony HTTP Client. Therefore, passing Guzzle 6 `GuzzleHttp\ClientInterface`
-   or any other HTTP Client that does not implement `Psr\Http\Client\ClientInterface`
->>>>>>> 577914fa71 ([Admin] Improve deprecations in NotificationController)
-   to `Sylius\Bundle\AdminBundle\Controller\NotificationController` as a second argument is deprecated.
+1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client.
+   Therefore, the constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
-1. The `sylius.http_message_factory` service has been deprecated. Use `sylius.http_request_factory` instead.
+    ```diff
+        public function __construct(
+    -       private ClientInterface $client,
+    -       private MessageFactory $messageFactory,
+    +       private ClientInterface|DeprecatedClientInterface $client,
+    +       private RequestFactoryInterface|MessageFactory $requestFactory,
+            private string $hubUri,
+            private string $environment,
+    +       private ?StreamFactoryInterface $streamFactory = null,
+        ) {
+            ...
+        }
+    ```
+
+1. The `sylius.http_message_factory` service has been deprecated. Use `Psr\Http\Message\RequestFactoryInterface` instead.
+
+1. The `sylius.http_client` has become an alias to `psr18.http_client` service.
+
+1. The `sylius.payum.http_client` has become a service ID of newly created `Sylius\Bundle\PayumBundle\HttpClient\HttpClient`.

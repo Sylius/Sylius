@@ -16,14 +16,15 @@ namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 use GuzzleHttp\Exception\ConnectException;
 use Http\Client\Exception\NetworkException;
 use Http\Message\MessageFactory;
-use Http\Message\RequestFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Sylius\Bundle\AdminBundle\Controller\NotificationController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,6 +42,8 @@ final class NotificationControllerTest extends TestCase
 
     private ObjectProphecy $messageFactory;
 
+    private ObjectProphecy $streamFactory;
+
     private NotificationController $controller;
 
     private NotificationController $legacyController;
@@ -50,9 +53,14 @@ final class NotificationControllerTest extends TestCase
     /** @test */
     public function it_returns_an_empty_json_response_upon_client_exception(): void
     {
-        $this->requestFactory->createRequest(Argument::cetera())
-            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
-        ;
+        $requestInterface = $this->prophesize(RequestInterface::class);
+        $streamInterface = $this->prophesize(StreamInterface::class);
+
+        $this->streamFactory->createStream(Argument::cetera())->willReturn($streamInterface);
+
+        $this->requestFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
+        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
+        $requestInterface->withBody($streamInterface)->willReturn($requestInterface);
 
         $this->client->sendRequest(Argument::cetera())->willThrow(NetworkException::class);
 
@@ -69,9 +77,11 @@ final class NotificationControllerTest extends TestCase
      */
     public function it_returns_an_empty_json_response_upon_client_exception_deprecated(): void
     {
-        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
-            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
-        ;
+        $requestInterface = $this->prophesize(RequestInterface::class);
+
+        $this->messageFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
+        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
+        $requestInterface->withBody(Argument::any())->willReturn($requestInterface);
 
         $this->legacyClient->send(Argument::cetera())->willThrow(ConnectException::class);
 
@@ -86,9 +96,14 @@ final class NotificationControllerTest extends TestCase
     {
         $content = json_encode(['version' => '9001']);
 
-        $this->requestFactory->createRequest(Argument::cetera())
-            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
-        ;
+        $requestInterface = $this->prophesize(RequestInterface::class);
+        $streamInterface = $this->prophesize(StreamInterface::class);
+
+        $this->streamFactory->createStream(Argument::cetera())->willReturn($streamInterface);
+
+        $this->requestFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
+        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
+        $requestInterface->withBody($streamInterface)->willReturn($requestInterface);
 
         /** @var ProphecyInterface|StreamInterface $stream */
         $stream = $this->prophesize(StreamInterface::class);
@@ -115,9 +130,11 @@ final class NotificationControllerTest extends TestCase
     {
         $content = json_encode(['version' => '9001']);
 
-        $this->messageFactory->createRequest(Argument::any(), Argument::cetera())
-            ->willReturn($this->prophesize(RequestInterface::class)->reveal())
-        ;
+        $requestInterface = $this->prophesize(RequestInterface::class);
+
+        $this->messageFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
+        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
+        $requestInterface->withBody(Argument::any())->willReturn($requestInterface);
 
         /** @var ProphecyInterface|StreamInterface $stream */
         $stream = $this->prophesize(StreamInterface::class);
@@ -139,14 +156,16 @@ final class NotificationControllerTest extends TestCase
     {
         $this->client = $this->prophesize(\Psr\Http\Client\ClientInterface::class);
         $this->legacyClient = $this->prophesize(\GuzzleHttp\ClientInterface::class);
-        $this->requestFactory = $this->prophesize(RequestFactory::class);
+        $this->requestFactory = $this->prophesize(RequestFactoryInterface::class);
         $this->messageFactory = $this->prophesize(MessageFactory::class);
+        $this->streamFactory = $this->prophesize(StreamFactoryInterface::class);
 
         $this->controller = new NotificationController(
             $this->client->reveal(),
             $this->requestFactory->reveal(),
             self::$hubUri,
             'environment',
+            $this->streamFactory->reveal(),
         );
 
         $this->legacyController = new NotificationController(

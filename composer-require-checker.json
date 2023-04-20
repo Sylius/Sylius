@@ -30,6 +30,8 @@
     "League\\Flysystem\\FilesystemOperator",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
+    "Psr\\Http\\Message\\RequestFactoryInterface",
+    "Psr\\Http\\Message\\StreamFactoryInterface",
     "Stripe\\Stripe"
   ],
   "php-core-extensions" : [
