@@ -71,7 +71,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
                 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.1
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
