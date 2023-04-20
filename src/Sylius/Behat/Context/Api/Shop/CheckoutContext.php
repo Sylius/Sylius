@@ -379,6 +379,7 @@ final class CheckoutContext implements Context
      * @Given I proceed selecting :shippingMethod shipping method
      * @Given I chose :shippingMethod shipping method
      * @When I change shipping method to :shippingMethod
+     * @When I have proceeded selecting :shippingMethod shipping method
      */
     public function iProceededWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
@@ -474,6 +475,7 @@ final class CheckoutContext implements Context
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
      * @When I try to change payment method to :paymentMethod payment
      * @When I change payment method to :paymentMethod after checkout
+     * @When I retry the payment with :paymentMethod payment method
      */
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {

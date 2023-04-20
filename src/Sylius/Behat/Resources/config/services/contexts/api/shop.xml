@@ -180,5 +180,11 @@
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
         </service>
+
+        <service id="sylius.behat.context.api.shop.checkout.complete" class="Sylius\Behat\Context\Api\Shop\Checkout\CheckoutCompleteContext">
+            <argument type="service" id="sylius.behat.request_factory" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+        </service>
     </services>
 </container>
