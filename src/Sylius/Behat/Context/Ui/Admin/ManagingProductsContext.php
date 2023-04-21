@@ -339,28 +339,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I delete the :product product
-     * @When I try to delete the :product product
-     */
-    public function iDeleteProduct(ProductInterface $product)
-    {
-        $this->sharedStorage->set('product', $product);
-
-        $this->iWantToBrowseProducts();
-        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
-    }
-
-    /**
-     * @When I delete the :product product on filtered page
-     */
-    public function iDeleteProductOnFilteredPage(ProductInterface $product): void
-    {
-        $this->sharedStorage->set('product', $product);
-
-        $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
-    }
-
-    /**
      * @Then /^(this product) should not exist in the product catalog$/
      */
     public function productShouldNotExist(ProductInterface $product)
