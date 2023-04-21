@@ -40,7 +40,7 @@ final class ProductVariantsMapProviderSpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantsMapProviderInterface::class);
     }
 
-    function it_provider_data_for_all_products_enabled_variants(
+    function it_provides_data_for_all_products_enabled_variants(
         ProductVariantMapProviderInterface $firstProvider,
         ProductVariantMapProviderInterface $secondProvider,
         ProductVariantMapProviderInterface $thirdProvider,

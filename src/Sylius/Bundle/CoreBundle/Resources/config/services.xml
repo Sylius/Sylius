@@ -179,7 +179,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsMapHelper" />
+            <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface" />
             <tag name="twig.extension" />
         </service>
 
