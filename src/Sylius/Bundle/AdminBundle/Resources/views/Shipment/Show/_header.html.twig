@@ -1,6 +1,13 @@
 <h1 class="ui header">
     <i class="circular truck icon"></i>
     <div class="content">
-        {{ 'sylius.ui.shipment'|trans ~ ' for ' ~ 'sylius.ui.order'|trans ~ ' #' ~ shipment.order.number}}
+        {{ 'sylius.ui.shipment_for_order'|trans }} #{{ shipment.order.number }}
+        <div class="sub header">
+            <div class="ui horizontal divided list">
+                <div class="item">
+                    {% include '@SyliusAdmin/Common/Label/shipmentState.html.twig' with {'data': shipment.state} %}
+                </div>
+            </div>
+        </div>
     </div>
 </h1>
