@@ -27,7 +27,12 @@ const controlAttributesList = function controlAttributesList() {
 };
 
 const modifyAttributesListOnSelectorElementDelete = function modifyAttributesListOnSelectorElementDelete(removedValue) {
-  $(`#attributesContainer .attributes-group[data-attribute-code="${removedValue}"]`).remove();
+  // Once the enter key pressed on any field in the product page cause an attribute deletion.
+  // When this bug occurs, the value of pageX is equal to 0. So if pageX is not equal to 0, it means the user clicked
+  // on the delete button, so the remove method should be called.
+  if (event.pageX != 0) {
+    $(`#attributesContainer .attributes-group[data-attribute-code="${removedValue}"]`).remove();
+  }
 };
 
 const modifySelectorOnAttributesListElementDelete = function modifySelectorOnAttributesListElementDelete() {
