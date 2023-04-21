@@ -327,10 +327,15 @@
             <argument type="service" id="sylius.behat.page.admin.impersonate_user" />
         </service>
 
+        <service id="Sylius\Behat\Context\Ui\Admin\RemovingProductContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.page.admin.product.index" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.removing_taxons" class="Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext">
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.resetting_password" class="Sylius\Behat\Context\Ui\Admin\ResettingPasswordContext">

@@ -87,6 +87,31 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^there is a promotion "([^"]+)" with "Contains product" rule with (products "[^"]+" and "[^"]+")$/
+     */
+    public function thereIsAPromotionWithContainsProductRuleConfiguredWithProducts(string $name, array $products): void
+    {
+        $promotion = $this->createPromotion($name);
+
+        foreach ($products as $product) {
+            $rule = $this->ruleFactory->createContainsProduct($product->getCode());
+            $promotion->addRule($rule);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^there is a promotion "([^"]+)" with "Contains product" rule with (product "[^"]+")$/
+     */
+    public function thereIsAPromotionWithContainsProductRuleConfiguredWithProduct(
+        string $name,
+        ProductInterface $product,
+    ): void {
+        $this->thereIsAPromotionWithContainsProductRuleConfiguredWithProducts($name, [$product]);
+    }
+
+    /**
      * @Given /^there is a promotion "([^"]+)" with priority ([^"]+)$/
      */
     public function thereIsAPromotionWithPriority(string $promotionName, int $priority): void

@@ -756,6 +756,17 @@ final class ManagingPromotionsContext implements Context
         Assert::same($this->updatePage->getActionValidationErrorsCount($channel->getCode()), $count);
     }
 
+    /**
+     * @Then I should be notified that :promotion promotion has been updated
+     */
+    public function iShouldBeNotifiedThatPromotionsHaveBeenUpdated(PromotionInterface $promotion): void
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('Some rules of the promotions with codes %s have been updated.', $promotion->getCode()),
+            NotificationType::info(),
+        );
+    }
+
     private function assertFieldValidationMessage(string $element, string $expectedMessage)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */

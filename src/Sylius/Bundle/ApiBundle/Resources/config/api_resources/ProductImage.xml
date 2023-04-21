@@ -39,7 +39,6 @@
                             <attribute name="description">Provide one of supported image liip imagine filters.</attribute>
                             <attribute name="schema">
                                 <attribute name="type">string</attribute>
-                                <attribute name="enum" />
                             </attribute>
                         </attribute>
                     </attribute>

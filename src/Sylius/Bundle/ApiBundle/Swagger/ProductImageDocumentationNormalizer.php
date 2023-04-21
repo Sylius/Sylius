@@ -39,17 +39,10 @@ final class ProductImageDocumentationNormalizer implements NormalizerInterface
         $enums = array_keys($enums);
 
         $shopProductImagePath = $this->apiRoute . '/shop/product-images/{id}';
-        $params = $docs['paths'][$shopProductImagePath]['get']['parameters'];
 
-        foreach ($params as &$param) {
-            if ($param['in'] === 'query') {
-                if (is_string($param['schema']['enum']) || $param['schema']['enum'] === null) {
-                    $param['schema']['enum'] = $enums;
-
-                    break;
-                }
-
-                $param['schema']['enum'] = array_merge($param['schema']['enum'], $enums);
+        foreach ($docs['paths'][$shopProductImagePath]['get']['parameters'] as &$param) {
+            if ($param['in'] === 'query' && $param['name'] === 'filter') {
+                $param['schema']['enum'] = $enums;
             }
         }
 
