@@ -249,7 +249,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "php-http/discovery": false,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
             "symfony/thanks": false
         }
     },
