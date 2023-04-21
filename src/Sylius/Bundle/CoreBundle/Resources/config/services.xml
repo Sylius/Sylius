@@ -33,6 +33,7 @@
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
         <import resource="services/price_history.xml" />
+        <import resource="services/product_variant_map.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
@@ -174,6 +175,11 @@
 
         <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsMapHelper" />
             <tag name="twig.extension" />
         </service>
 

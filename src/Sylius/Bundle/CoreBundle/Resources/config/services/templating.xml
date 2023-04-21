@@ -25,6 +25,11 @@
             <tag name="templating.helper" alias="sylius_product_variants_prices" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsMapHelper">
+            <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider" />
+            <tag name="templating.helper" alias="sylius_product_variants_map" />
+        </service>
+
         <service id="sylius.templating.helper.price" class="Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper" lazy="true">
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="templating.helper" alias="sylius_calculate_price" />
