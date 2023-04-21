@@ -345,7 +345,7 @@ class Order extends BaseOrder implements OrderInterface
             static function (int $subtotal, OrderItemInterface $item): int {
                 return $subtotal + $item->getSubtotal();
             },
-            0
+            0,
         );
     }
 
