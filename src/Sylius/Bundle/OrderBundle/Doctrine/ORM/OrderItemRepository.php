@@ -18,6 +18,10 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
 
+/**
+ * @template T of OrderItemInterface
+ * @implements OrderItemRepositoryInterface<T>
+ */
 class OrderItemRepository extends EntityRepository implements OrderItemRepositoryInterface
 {
     public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface

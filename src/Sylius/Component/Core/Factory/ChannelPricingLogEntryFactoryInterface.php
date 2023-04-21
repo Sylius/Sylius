@@ -17,6 +17,10 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of ChannelPricingLogEntryInterface
+ * @extends FactoryInterface<T>
+ */
 interface ChannelPricingLogEntryFactoryInterface extends FactoryInterface
 {
     public function create(

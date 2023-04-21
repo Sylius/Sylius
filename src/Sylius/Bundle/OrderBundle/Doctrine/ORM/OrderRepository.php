@@ -19,6 +19,10 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T of OrderInterface
+ * @implements OrderRepositoryInterface<T>
+ */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
 {
     public function countPlacedOrders(): int

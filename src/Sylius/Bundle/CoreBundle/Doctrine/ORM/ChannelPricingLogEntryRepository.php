@@ -20,6 +20,10 @@ use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T of ChannelPricingLogEntryInterface
+ * @implements ChannelPricingLogEntryRepositoryInterface<T>
+ */
 class ChannelPricingLogEntryRepository extends EntityRepository implements ChannelPricingLogEntryRepositoryInterface
 {
     public function createByChannelPricingIdListQueryBuilder(mixed $channelPricingId): QueryBuilder

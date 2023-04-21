@@ -18,6 +18,10 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
+/**
+ * @template T of ChannelInterface
+ * @implements ChannelRepositoryInterface<T>
+ */
 class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface
 {
     private const ORDER_BY = ['id' => 'ASC'];

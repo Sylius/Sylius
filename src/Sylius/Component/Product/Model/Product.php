@@ -169,6 +169,9 @@ class Product implements ProductInterface, \Stringable
         return $this->attributes;
     }
 
+    /**
+     * @return Collection<array-key, AttributeValueInterface>
+     */
     public function getAttributesByLocale(
         string $localeCode,
         string $fallbackLocaleCode,
@@ -190,7 +193,10 @@ class Product implements ProductInterface, \Stringable
             $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode, $fallbackLocaleCode);
         }
 
-        return new ArrayCollection($attributesWithFallback);
+        /** @var Collection<array-key, AttributeValueInterface> $collection */
+        $collection = new ArrayCollection($attributesWithFallback);
+
+        return $collection;
     }
 
     public function addAttribute(?AttributeValueInterface $attribute): void

@@ -17,6 +17,10 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of OrderInterface
+ * @extends RepositoryInterface<T>
+ */
 interface OrderRepositoryInterface extends RepositoryInterface
 {
     public function countPlacedOrders(): int;

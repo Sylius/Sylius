@@ -18,6 +18,9 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @implements PromotionCouponFactoryInterface<PromotionCouponInterface>
+ */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
     public function __construct(private FactoryInterface $factory)

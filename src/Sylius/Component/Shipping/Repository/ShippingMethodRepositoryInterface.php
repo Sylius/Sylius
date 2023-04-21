@@ -16,6 +16,10 @@ namespace Sylius\Component\Shipping\Repository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
+/**
+ * @template T of ShippingMethodInterface
+ * @extends RepositoryInterface<T>
+ */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**

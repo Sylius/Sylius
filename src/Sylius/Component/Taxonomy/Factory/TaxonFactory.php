@@ -16,6 +16,9 @@ namespace Sylius\Component\Taxonomy\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+/**
+ * @implements TaxonFactoryInterface<TaxonInterface>
+ */
 final class TaxonFactory implements TaxonFactoryInterface
 {
     public function __construct(private FactoryInterface $factory)

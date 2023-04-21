@@ -17,6 +17,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of ProductAssociationInterface
+ * @extends RepositoryInterface<T>
+ */
 interface ProductAssociationRepositoryInterface extends RepositoryInterface
 {
     public function findWithProductsWithinChannel($associationId, ChannelInterface $channel): ProductAssociationInterface;

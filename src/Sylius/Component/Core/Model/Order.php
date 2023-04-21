@@ -183,7 +183,7 @@ class Order extends BaseOrder implements OrderInterface
 
     public function getItemUnits(): Collection
     {
-        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
+        /** @var ArrayCollection<array-key, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */

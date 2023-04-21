@@ -16,6 +16,10 @@ namespace Sylius\Component\Order\Factory;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of AdjustmentInterface
+ * @extends FactoryInterface<T>
+ */
 interface AdjustmentFactoryInterface extends FactoryInterface
 {
     public function createWithData(

@@ -17,6 +17,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @implements FactoryInterface<UserInterface>
+ */
 final class UserWithEncoderFactory implements FactoryInterface
 {
     public function __construct(private FactoryInterface $decoratedUserFactory, private string $encoderName)
