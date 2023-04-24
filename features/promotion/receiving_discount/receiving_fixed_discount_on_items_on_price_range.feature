@@ -8,6 +8,7 @@ Feature: Receiving fixed discount on products from specific price range
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store has a product "PHP Mug" priced at "$20.00"
+        And the store has a product "PHP Sticker" priced at "$5.00"
         And there is a promotion "Christmas promotion"
 
     @ui @api
@@ -23,6 +24,20 @@ Feature: Receiving fixed discount on products from specific price range
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "$10.00"
         And my cart total should be "$90.00"
+
+    @ui @api
+    Scenario: Receiving fixed discount on a single item fulfilling maximum price criteria
+        Given the promotion gives "$10.00" off on every product with maximum price at "$50.00"
+        When I add product "PHP Mug" to the cart
+        Then its price should be decreased by "$10.00"
+        And my cart total should be "$10.00"
+
+    @ui @api
+    Scenario: Receiving fixed discount on a single item with price equal to filter maximum criteria
+        Given the promotion gives "$10.00" off on every product with minimum price at "$20.00"
+        When I add product "PHP Mug" to the cart
+        Then its price should be decreased by "$10.00"
+        And my cart total should be "$10.00"
 
     @ui @api
     Scenario: Receiving fixed discount on a single item fulfilling range price criteria
@@ -80,8 +95,12 @@ Feature: Receiving fixed discount on products from specific price range
         Given the promotion gives "$10.00" off on every product with minimum price at "$80.00"
         And there is a promotion "Mugs promotion"
         And it gives "$5.00" off on every product priced between "$10.00" and "$50.00"
+        And there is a promotion "Stickers promotion"
+        And it gives "$1.00" off on every product with maximum price at "$10.00"
         When I add product "PHP T-Shirt" to the cart
         And I add product "PHP Mug" to the cart
+        And I add product "PHP Sticker" to the cart
         Then product "PHP T-Shirt" price should be decreased by "$10.00"
         And product "PHP Mug" price should be decreased by "$5.00"
-        And my cart total should be "$105.00"
+        And product "PHP Sticker" price should be decreased by "$1.00"
+        And my cart total should be "$109.00"
