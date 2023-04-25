@@ -194,6 +194,7 @@
         "dmore/chrome-mink-driver": "^2.7",
         "doctrine/cache": "^2.2",
         "doctrine/data-fixtures": "^1.4",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "friends-of-behat/mink-debug-extension": "^2.0",
@@ -226,10 +227,12 @@
         "symfony/debug-bundle": "^5.4 || ^6.0",
         "symfony/dotenv": "^5.4 || ^6.0",
         "symfony/flex": "^2.2",
+        "symfony/maker-bundle": "^1.48",
         "symfony/runtime": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
         "symplify/monorepo-builder": "^11.0",
-        "vimeo/psalm": "^4.19"
+        "vimeo/psalm": "^4.19",
+        "zenstruck/foundry": "^1.31"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
