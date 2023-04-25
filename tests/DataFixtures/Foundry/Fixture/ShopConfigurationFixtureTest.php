@@ -27,6 +27,8 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
     /** @test */
     function it_creates_shop_configuration(): void
     {
+        self::bootKernel();
+
         /** @var Fixture $fixture */
         $fixture = self::getContainer()->get('sylius.shop_fixtures.foundry.fixture.shop_configuration');
 
