@@ -22,6 +22,7 @@ return static function (ContainerConfigurator $container) {
     $container->import('shop_fixtures/factories.php');
     $container->import('shop_fixtures/fixtures.php');
     $container->import('shop_fixtures/stories.php');
+    $container->import('shop_fixtures/transformers.php');
 
     $container->services()
 
