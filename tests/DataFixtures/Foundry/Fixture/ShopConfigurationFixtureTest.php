@@ -30,9 +30,9 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
         self::bootKernel();
 
         /** @var Fixture $fixture */
-        $fixture = self::getContainer()->get('sylius.shop_fixtures.foundry.fixture.shop_configuration');
+        $fixture = static::getContainer()->get('sylius.shop_fixtures.foundry.fixture.shop_configuration');
 
-        $fixture->load(self::getContainer()->get('doctrine.orm.entity_manager'));
+        $fixture->load(static::getContainer()->get('doctrine.orm.entity_manager'));
 
         $currencies = $this->getCurrencyRepository()->findAll();
         $countries = $this->getCountryRepository()->findAll();
@@ -43,11 +43,11 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
 
     private function getCurrencyRepository(): RepositoryInterface
     {
-        return self::getContainer()->get('sylius.repository.currency');
+        return static::getContainer()->get('sylius.repository.currency');
     }
 
     private function getCountryRepository(): RepositoryInterface
     {
-        return self::getContainer()->get('sylius.repository.country');
+        return static::getContainer()->get('sylius.repository.country');
     }
 }
