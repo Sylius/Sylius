@@ -16,44 +16,45 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Model\Locale;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
 /**
- * @extends ModelFactory<Locale>
+ * @extends ModelFactory<LocaleInterface>
  *
- * @method        Locale|Proxy create(array|callable $attributes = [])
- * @method static Locale|Proxy createOne(array $attributes = [])
- * @method static Locale|Proxy find(object|array|mixed $criteria)
- * @method static Locale|Proxy findOrCreate(array $attributes)
- * @method static Locale|Proxy first(string $sortedField = 'id')
- * @method static Locale|Proxy last(string $sortedField = 'id')
- * @method static Locale|Proxy random(array $attributes = [])
- * @method static Locale|Proxy randomOrCreate(array $attributes = [])
+ * @method        LocaleInterface|Proxy create(array|callable $attributes = [])
+ * @method static LocaleInterface|Proxy createOne(array $attributes = [])
+ * @method static LocaleInterface|Proxy find(object|array|mixed $criteria)
+ * @method static LocaleInterface|Proxy findOrCreate(array $attributes)
+ * @method static LocaleInterface|Proxy first(string $sortedField = 'id')
+ * @method static LocaleInterface|Proxy last(string $sortedField = 'id')
+ * @method static LocaleInterface|Proxy random(array $attributes = [])
+ * @method static LocaleInterface|Proxy randomOrCreate(array $attributes = [])
  * @method static EntityRepository|RepositoryProxy repository()
- * @method static Locale[]|Proxy[] all()
- * @method static Locale[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Locale[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Locale[]|Proxy[] findBy(array $attributes)
- * @method static Locale[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Locale[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] all()
+ * @method static LocaleInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] createSequence(iterable|callable $sequence)
+ * @method static LocaleInterface[]|Proxy[] findBy(array $attributes)
+ * @method static LocaleInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method static LocaleInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
  *
- * @phpstan-method        Proxy<Locale> create(array|callable $attributes = [])
- * @phpstan-method static Proxy<Locale> createOne(array $attributes = [])
- * @phpstan-method static Proxy<Locale> find(object|array|mixed $criteria)
- * @phpstan-method static Proxy<Locale> findOrCreate(array $attributes)
- * @phpstan-method static Proxy<Locale> first(string $sortedField = 'id')
- * @phpstan-method static Proxy<Locale> last(string $sortedField = 'id')
- * @phpstan-method static Proxy<Locale> random(array $attributes = [])
- * @phpstan-method static Proxy<Locale> randomOrCreate(array $attributes = [])
- * @phpstan-method static RepositoryProxy<Locale> repository()
- * @phpstan-method static list<Proxy<Locale>> all()
- * @phpstan-method static list<Proxy<Locale>> createMany(int $number, array|callable $attributes = [])
- * @phpstan-method static list<Proxy<Locale>> createSequence(iterable|callable $sequence)
- * @phpstan-method static list<Proxy<Locale>> findBy(array $attributes)
- * @phpstan-method static list<Proxy<Locale>> randomRange(int $min, int $max, array $attributes = [])
- * @phpstan-method static list<Proxy<Locale>> randomSet(int $number, array $attributes = [])
+ * @phpstan-method        Proxy<LocaleInterface> create(array|callable $attributes = [])
+ * @phpstan-method static Proxy<LocaleInterface> createOne(array $attributes = [])
+ * @phpstan-method static Proxy<LocaleInterface> find(object|array|mixed $criteria)
+ * @phpstan-method static Proxy<LocaleInterface> findOrCreate(array $attributes)
+ * @phpstan-method static Proxy<LocaleInterface> first(string $sortedField = 'id')
+ * @phpstan-method static Proxy<LocaleInterface> last(string $sortedField = 'id')
+ * @phpstan-method static Proxy<LocaleInterface> random(array $attributes = [])
+ * @phpstan-method static Proxy<LocaleInterface> randomOrCreate(array $attributes = [])
+ * @phpstan-method static RepositoryProxy<LocaleInterface> repository()
+ * @phpstan-method static list<Proxy<LocaleInterface>> all()
+ * @phpstan-method static list<Proxy<LocaleInterface>> createMany(int $number, array|callable $attributes = [])
+ * @phpstan-method static list<Proxy<LocaleInterface>> createSequence(iterable|callable $sequence)
+ * @phpstan-method static list<Proxy<LocaleInterface>> findBy(array $attributes)
+ * @phpstan-method static list<Proxy<LocaleInterface>> randomRange(int $min, int $max, array $attributes = [])
+ * @phpstan-method static list<Proxy<LocaleInterface>> randomSet(int $number, array $attributes = [])
  */
 final class LocaleFactory extends ModelFactory implements FactoryWithModelClassAwareInterface
 {
@@ -64,11 +65,6 @@ final class LocaleFactory extends ModelFactory implements FactoryWithModelClassA
         self::$modelClass = $modelClass;
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function getDefaults(): array
     {
         return [

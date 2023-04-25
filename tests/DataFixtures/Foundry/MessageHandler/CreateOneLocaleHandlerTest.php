@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Foundry\MessageHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneLocale;
-use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,7 +35,7 @@ final class CreateOneLocaleHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Locale|Proxy $locale */
+        /** @var LocaleInterface|Proxy $locale */
         $locale = $bus->dispatch(new CreateOneLocale());
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
@@ -52,7 +51,7 @@ final class CreateOneLocaleHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Locale|Proxy $locale */
+        /** @var LocaleInterface|Proxy $locale */
         $locale = $bus->dispatch((new CreateOneLocale())->withCode('fr_FR'));
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
