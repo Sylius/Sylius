@@ -15,10 +15,12 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory as FoundryDefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory as FoundryDefaultGeographicalStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory as FoundryDefaultLocalesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStoryInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStory;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -48,6 +50,19 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('foundry.story')
         ->alias(FoundryDefaultGeographicalStory::class, 'sylius.shop_fixtures.foundry.story.default_geographical')
+
+        ->set('sylius.shop_fixtures.story.default_locales', DefaultLocalesStory::class)
+            ->args([
+                service('sylius.shop_fixtures.bus.command')
+            ])
+        ->alias(DefaultLocalesStory::class, 'sylius.shop_fixtures.story.default_locales')
+
+        ->set('sylius.shop_fixtures.foundry.story.default_locales', FoundryDefaultLocalesStory::class)
+            ->args([
+                service('sylius.shop_fixtures.story.default_locales')
+            ])
+            ->tag('foundry.story')
+        ->alias(FoundryDefaultLocalesStory::class, 'sylius.shop_fixtures.foundry.story.default_locales')
 
     ;
 };

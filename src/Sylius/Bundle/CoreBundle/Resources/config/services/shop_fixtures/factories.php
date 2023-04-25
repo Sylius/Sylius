@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Configurator\FactoryConfigurat
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CurrencyFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\FactoryWithModelClassAwareInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\LocaleFactory;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -43,5 +44,12 @@ return static function (ContainerConfigurator $container) {
             ->tag('foundry.factory')
         ->alias(CurrencyFactory::class, 'sylius.shop_fixtures.factory.currency')
 
+
+        ->set('sylius.shop_fixtures.factory.locale', LocaleFactory::class)
+//            ->args([
+//                service('sylius.shop_fixtures.default_values.locale')
+//            ])
+            ->tag('foundry.factory')
+        ->alias(LocaleFactory::class, 'sylius.shop_fixtures.factory.locale')
     ;
 };

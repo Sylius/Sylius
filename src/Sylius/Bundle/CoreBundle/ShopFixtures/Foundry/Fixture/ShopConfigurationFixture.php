@@ -18,11 +18,13 @@ use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory;
 
 final class ShopConfigurationFixture extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
+        DefaultLocalesStory::load();
         DefaultCurrenciesStory::load();
         DefaultGeographicalStory::load();
     }

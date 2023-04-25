@@ -34,9 +34,11 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
 
         $fixture->load(static::getContainer()->get('doctrine.orm.entity_manager'));
 
+        $locales = $this->getLocaleRepository()->findAll();
         $currencies = $this->getCurrencyRepository()->findAll();
         $countries = $this->getCountryRepository()->findAll();
 
+        $this->assertCount(8, $locales);
         $this->assertCount(9, $currencies);
         $this->assertCount(12, $countries);
     }
@@ -49,5 +51,10 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
     private function getCountryRepository(): RepositoryInterface
     {
         return static::getContainer()->get('sylius.repository.country');
+    }
+
+    private function getLocaleRepository(): RepositoryInterface
+    {
+        return static::getContainer()->get('sylius.repository.locale');
     }
 }

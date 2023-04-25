@@ -15,6 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCountryHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCurrencyHandler;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneLocaleHandler;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -23,6 +24,9 @@ return static function (ContainerConfigurator $container) {
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
         ->set('sylius.shop_fixtures.command_handler.create_one_currency', CreateOneCurrencyHandler::class)
+        ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
+
+        ->set('sylius.shop_fixtures.command_handler.create_one_locale', CreateOneLocaleHandler::class)
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
     ;
