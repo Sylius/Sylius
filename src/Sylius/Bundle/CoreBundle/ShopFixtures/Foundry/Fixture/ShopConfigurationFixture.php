@@ -17,6 +17,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCustomerGroupsStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory;
 
@@ -27,6 +28,7 @@ final class ShopConfigurationFixture extends Fixture implements FixtureGroupInte
         DefaultLocalesStory::load();
         DefaultCurrenciesStory::load();
         DefaultGeographicalStory::load();
+        DefaultCustomerGroupsStory::load();
     }
 
     public static function getGroups(): array

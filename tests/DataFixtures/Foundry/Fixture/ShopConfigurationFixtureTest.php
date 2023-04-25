@@ -37,15 +37,22 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
         $locales = $this->getLocaleRepository()->findAll();
         $currencies = $this->getCurrencyRepository()->findAll();
         $countries = $this->getCountryRepository()->findAll();
+        $customerGroups = $this->getCustomerGroupRepository()->findAll();
 
         $this->assertCount(8, $locales);
         $this->assertCount(9, $currencies);
         $this->assertCount(12, $countries);
+        $this->assertCount(2, $customerGroups);
     }
 
     private function getCurrencyRepository(): RepositoryInterface
     {
         return static::getContainer()->get('sylius.repository.currency');
+    }
+
+    private function getCustomerGroupRepository(): RepositoryInterface
+    {
+        return static::getContainer()->get('sylius.repository.customer_group');
     }
 
     private function getCountryRepository(): RepositoryInterface

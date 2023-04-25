@@ -16,6 +16,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Configurator\FactoryConfigurator;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CurrencyFactory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CustomerGroupFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\FactoryWithModelClassAwareInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\LocaleFactory;
 
@@ -29,6 +30,13 @@ return static function (ContainerConfigurator $container) {
             ->args([
                 service('sylius.resource_registry')
             ])
+
+        ->set('sylius.shop_fixtures.factory.customer_group', CustomerGroupFactory::class)
+//            ->args([
+//                service('sylius.shop_fixtures.default_values.customer_group')
+//            ])
+            ->tag('foundry.factory')
+        ->alias(CustomerGroupFactory::class, 'sylius.shop_fixtures.factory.customer_group')
 
         ->set('sylius.shop_fixtures.factory.country', CountryFactory::class)
 //            ->args([

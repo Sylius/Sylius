@@ -13,17 +13,33 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCustomerGroupsStory as FoundryDefaultCustomerGroupsStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory as FoundryDefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory as FoundryDefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory as FoundryDefaultLocalesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCustomerGroupsStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCustomerGroupsStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStory;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+
+        ->set('sylius.shop_fixtures.story.default_customer_groups', DefaultCustomerGroupsStory::class)
+            ->args([
+                service('sylius.shop_fixtures.bus.command')
+            ])
+        ->alias(DefaultCustomerGroupsStoryInterface::class, 'sylius.shop_fixtures.story.default_customer_groups')
+
+        ->set('sylius.shop_fixtures.foundry.story.default_customer_groups', FoundryDefaultCustomerGroupsStory::class)
+            ->args([
+                service('sylius.shop_fixtures.story.default_customer_groups')
+            ])
+            ->tag('foundry.story')
+        ->alias(FoundryDefaultCustomerGroupsStory::class, 'sylius.shop_fixtures.foundry.story.default_customer_groups')
 
         ->set('sylius.shop_fixtures.story.default_currencies', DefaultCurrenciesStory::class)
             ->args([
