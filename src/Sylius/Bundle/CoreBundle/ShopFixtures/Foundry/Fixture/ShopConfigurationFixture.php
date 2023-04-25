@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCustomerGroupsStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultShopUsersStory;
 
 final class ShopConfigurationFixture extends Fixture implements FixtureGroupInterface
 {
@@ -29,6 +30,7 @@ final class ShopConfigurationFixture extends Fixture implements FixtureGroupInte
         DefaultCurrenciesStory::load();
         DefaultGeographicalStory::load();
         DefaultCustomerGroupsStory::load();
+        DefaultShopUsersStory::load();
     }
 
     public static function getGroups(): array

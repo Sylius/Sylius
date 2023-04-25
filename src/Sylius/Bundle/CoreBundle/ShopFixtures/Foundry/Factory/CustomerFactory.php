@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository;
+use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\CustomerDefaultValues;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Transformer\CustomerTransformerInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Updater\CustomerUpdaterInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Zenstruck\Foundry\ModelFactory;
@@ -61,7 +63,9 @@ final class CustomerFactory extends ModelFactory implements FactoryWithModelClas
     private static ?string $modelClass = null;
 
     public function __construct(
+        private CustomerDefaultValues $customerDefaultValues,
         private CustomerTransformerInterface $customerTransformer,
+        private CustomerUpdaterInterface $customerUpdater,
     ) {
         parent::__construct();
     }
@@ -73,16 +77,7 @@ final class CustomerFactory extends ModelFactory implements FactoryWithModelClas
 
     protected function getDefaults(): array
     {
-        return [
-            'createdAt' => self::faker()->dateTime(),
-            'firstName' => self::faker()->firstName(),
-            'lastName' => self::faker()->firstName(),
-            'email' => self::faker()->email(),
-            'gender' => CustomerInterface::UNKNOWN_GENDER,
-            'phoneNumber' => self::faker()->phoneNumber(),
-            'birthday' => self::faker()->dateTimeBetween('-80 years', '-18 years'),
-            'subscribedToNewsletter' => self::faker()->boolean(),
-        ];
+        return $this->customerDefaultValues->getDefaultValues(self::faker());
     }
 
     protected function initialize(): self
@@ -90,6 +85,9 @@ final class CustomerFactory extends ModelFactory implements FactoryWithModelClas
         return $this
             ->beforeInstantiate(function (array $attributes): array {
                 return $this->customerTransformer->transform($attributes);
+            })
+            ->afterInstantiate(function (CustomerInterface $customer, array $attributes): void {
+                $this->customerUpdater->update($customer, $attributes);
             })
         ;
     }

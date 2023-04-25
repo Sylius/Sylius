@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCurren
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCustomerGroupHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCustomerHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneLocaleHandler;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneShopUserHandler;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -35,6 +36,9 @@ return static function (ContainerConfigurator $container) {
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
         ->set('sylius.shop_fixtures.command_handler.create_one_locale', CreateOneLocaleHandler::class)
+        ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
+
+        ->set('sylius.shop_fixtures.command_handler.create_one_shop_user', CreateOneShopUserHandler::class)
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
     ;

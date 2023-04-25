@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCustomerGroupsSto
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory as FoundryDefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory as FoundryDefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory as FoundryDefaultLocalesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultShopUsersStory as FoundryDefaultShopUsersStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCustomerGroupsStory;
@@ -24,6 +25,9 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCustomerGroupsStoryInterf
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStoryInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultShopUsersStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultShopUsersStoryInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -71,7 +75,7 @@ return static function (ContainerConfigurator $container) {
             ->args([
                 service('sylius.shop_fixtures.bus.command')
             ])
-        ->alias(DefaultLocalesStory::class, 'sylius.shop_fixtures.story.default_locales')
+        ->alias(DefaultLocalesStoryInterface::class, 'sylius.shop_fixtures.story.default_locales')
 
         ->set('sylius.shop_fixtures.foundry.story.default_locales', FoundryDefaultLocalesStory::class)
             ->args([
@@ -80,5 +84,17 @@ return static function (ContainerConfigurator $container) {
             ->tag('foundry.story')
         ->alias(FoundryDefaultLocalesStory::class, 'sylius.shop_fixtures.foundry.story.default_locales')
 
+        ->set('sylius.shop_fixtures.story.default_shop_users', DefaultShopUsersStory::class)
+            ->args([
+                service('sylius.shop_fixtures.bus.command')
+            ])
+        ->alias(DefaultShopUsersStoryInterface::class, 'sylius.shop_fixtures.story.default_shop_users')
+
+        ->set('sylius.shop_fixtures.foundry.story.default_shop_users', FoundryDefaultShopUsersStory::class)
+            ->args([
+                service('sylius.shop_fixtures.story.default_shop_users')
+            ])
+            ->tag('foundry.story')
+        ->alias(FoundryDefaultShopUsersStory::class, 'sylius.shop_fixtures.foundry.story.default_shop_users')
     ;
 };

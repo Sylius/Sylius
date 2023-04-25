@@ -15,12 +15,25 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\CurrencyDefaultValues;
 use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\CurrencyDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\CustomerDefaultValues;
+use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\CustomerDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\ShopUserDefaultValues;
+use Sylius\Bundle\CoreBundle\ShopFixtures\DefaultValues\ShopUserDefaultValuesInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
 
         ->set('sylius.shop_fixtures.default_values.currency', CurrencyDefaultValues::class)
         ->alias(CurrencyDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.currency')
+
+        ->set('sylius.shop_fixtures.default_values.customer', CustomerDefaultValues::class)
+        ->alias(CustomerDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.customer')
+
+        ->set('sylius.shop_fixtures.default_values.shop_user', ShopUserDefaultValues::class)
+            ->args([
+                service('sylius.shop_fixtures.default_values.customer'),
+            ])
+        ->alias(ShopUserDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.shop_user')
 
     ;
 };
