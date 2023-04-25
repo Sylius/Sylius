@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Foundry\MessageHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCurrency;
-use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,7 +35,7 @@ final class CreateOneCurrencyHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Currency|Proxy $currency */
+        /** @var CurrencyInterface|Proxy $currency */
         $currency = $bus->dispatch(new CreateOneCurrency());
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency->object());
@@ -52,7 +51,7 @@ final class CreateOneCurrencyHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Currency|Proxy $currency */
+        /** @var CurrencyInterface|Proxy $currency */
         $currency = $bus->dispatch((new CreateOneCurrency())->withCode('EUR'));
 
         $this->assertInstanceOf(CurrencyInterface::class, $currency->object());

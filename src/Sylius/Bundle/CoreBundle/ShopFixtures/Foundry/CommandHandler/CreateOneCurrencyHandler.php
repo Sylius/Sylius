@@ -15,14 +15,14 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CurrencyFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCurrencyInterface;
-use Sylius\Component\Currency\Model\Currency;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Zenstruck\Foundry\Proxy;
 
 #[AsMessageHandler]
 final class CreateOneCurrencyHandler
 {
-    public function __invoke(CreateOneCurrencyInterface $command): Currency|Proxy
+    public function __invoke(CreateOneCurrencyInterface $command): CurrencyInterface|Proxy
     {
         return CurrencyFactory::createOne($command->toArray());
     }
