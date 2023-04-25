@@ -50,6 +50,37 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
+     * @When I try to assign an empty taxon to the :product product
+     */
+    public function iTryToAssignAnEmptyTaxonToTheProduct(ProductInterface $product): void
+    {
+        $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->create();
+    }
+
+    /**
+     * @When I try to assign an empty product to the :taxon taxon
+     */
+    public function iTryToAssignAnEmptyProductToTheTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
+        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->create();
+    }
+
+    /**
+     * @Then I should be notified that specifying a :part is required
+     */
+    public function iShouldBeNotifiedThatSpecifyingAIsRequired(string $part): void
+    {
+        Assert::contains(
+            $this->client->getLastResponse()->getContent(),
+            sprintf('Please select a %s.', $part),
+        );
+    }
+
+    /**
      * @Then I should be notified that this taxon is already assigned to this product
      */
     public function iShouldBeNotifiedThatThisTaxonIsAlreadyAssignedToThisProduct(): void

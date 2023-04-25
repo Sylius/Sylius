@@ -90,6 +90,10 @@ sylius:
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     product_taxon:
         unique: This taxon is already assigned to this product.
+        product:
+            not_blank: Please select a product.
+        taxon:
+            not_blank: Please select a taxon.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
