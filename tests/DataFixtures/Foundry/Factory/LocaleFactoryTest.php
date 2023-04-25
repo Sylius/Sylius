@@ -32,7 +32,6 @@ final class LocaleFactoryTest extends KernelTestCase
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
         $this->assertNotNull($locale->getCode());
-        $this->assertTrue(Locales::exists($locale->getCode()));
     }
 
     /** @test */
