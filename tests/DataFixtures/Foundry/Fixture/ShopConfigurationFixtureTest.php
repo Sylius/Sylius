@@ -35,12 +35,19 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
         $fixture->load(self::getContainer()->get('doctrine.orm.entity_manager'));
 
         $currencies = $this->getCurrencyRepository()->findAll();
+        $countries = $this->getCountryRepository()->findAll();
 
         $this->assertCount(9, $currencies);
+        $this->assertCount(12, $countries);
     }
 
     private function getCurrencyRepository(): RepositoryInterface
     {
         return self::getContainer()->get('sylius.repository.currency');
+    }
+
+    private function getCountryRepository(): RepositoryInterface
+    {
+        return self::getContainer()->get('sylius.repository.country');
     }
 }

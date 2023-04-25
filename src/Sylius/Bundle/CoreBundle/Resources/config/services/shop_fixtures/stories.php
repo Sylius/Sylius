@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory as FoundryDefaultCurrenciesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory as FoundryDefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultGeographicalStoryInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -32,6 +35,19 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('foundry.story')
         ->alias(FoundryDefaultCurrenciesStory::class, 'sylius.shop_fixtures.foundry.story.default_currencies')
+
+        ->set('sylius.shop_fixtures.story.default_geographical', DefaultGeographicalStory::class)
+            ->args([
+                service('sylius.shop_fixtures.bus.command')
+            ])
+        ->alias(DefaultGeographicalStoryInterface::class, 'sylius.shop_fixtures.story.default_geographical')
+
+        ->set('sylius.shop_fixtures.foundry.story.default_geographical', FoundryDefaultGeographicalStory::class)
+            ->args([
+                service('sylius.shop_fixtures.story.default_geographical')
+            ])
+            ->tag('foundry.story')
+        ->alias(FoundryDefaultGeographicalStory::class, 'sylius.shop_fixtures.foundry.story.default_geographical')
 
     ;
 };

@@ -17,12 +17,14 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory;
 
 final class ShopConfigurationFixture extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
         DefaultCurrenciesStory::load();
+        DefaultGeographicalStory::load();
     }
 
     public static function getGroups(): array
