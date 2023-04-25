@@ -23,6 +23,12 @@
             <argument type="service" id="request_stack" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.ajax_taxons" class="Sylius\Behat\Context\Api\Admin\AjaxTaxonsContext">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.login" class="Sylius\Behat\Context\Api\Admin\LoginContext">
             <argument type="service" id="sylius.behat.client.admin_api_platform_security_client" />
             <argument type="service" id="sylius.behat.shared_storage" />
@@ -110,9 +116,9 @@
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_taxons" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonsContext">
-            <argument type="service" id="test.client" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">

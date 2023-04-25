@@ -19,6 +19,7 @@
                     "locale": "en_US"
                 }
             },
+            "position": "@integer@",
             "children": [
                 "\/api\/v2\/admin\/taxons\/MUG",
                 "\/api\/v2\/admin\/taxons\/HAT",
@@ -52,7 +53,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/HAT",
@@ -80,7 +82,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
@@ -107,6 +110,7 @@
                     "locale": "de_DE"
                 }
             },
+            "position": "@integer@",
             "children": [
                 "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
                 "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
@@ -139,7 +143,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS",
@@ -167,7 +172,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/BRAND",
@@ -195,7 +201,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/de%3Flol=xd%23boom",
@@ -214,7 +221,8 @@
                 }
             },
             "children": [],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         }
     ],
     "hydra:totalItems": 8

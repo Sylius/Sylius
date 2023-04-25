@@ -50,6 +50,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
