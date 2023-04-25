@@ -15,14 +15,14 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCountryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CountryFactory;
-use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Zenstruck\Foundry\Proxy;
 
 #[AsMessageHandler]
 final class CreateOneCountryHandler
 {
-    public function __invoke(CreateOneCountryInterface $command): Country|Proxy
+    public function __invoke(CreateOneCountryInterface $command): CountryInterface|Proxy
     {
         return CountryFactory::createOne($command->toArray());
     }

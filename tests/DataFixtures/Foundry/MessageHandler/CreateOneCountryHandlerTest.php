@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Foundry\MessageHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCountry;
-use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,7 +35,7 @@ final class CreateOneCountryHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Country|Proxy $country */
+        /** @var CountryInterface|Proxy $country */
         $country = $bus->dispatch(new CreateOneCountry());
 
         $this->assertInstanceOf(CountryInterface::class, $country->object());
@@ -52,7 +51,7 @@ final class CreateOneCountryHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var Country|Proxy $country */
+        /** @var CountryInterface|Proxy $country */
         $country = $bus->dispatch((new CreateOneCountry())->withCode('PL'));
 
         $this->assertInstanceOf(CountryInterface::class, $country->object());

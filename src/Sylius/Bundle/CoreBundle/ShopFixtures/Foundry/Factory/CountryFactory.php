@@ -15,44 +15,45 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\Country;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
 /**
- * @extends ModelFactory<Country>
+ * @extends ModelFactory<CountryInterface>
  *
- * @method        Country|Proxy create(array|callable $attributes = [])
- * @method static Country|Proxy createOne(array $attributes = [])
- * @method static Country|Proxy find(object|array|mixed $criteria)
- * @method static Country|Proxy findOrCreate(array $attributes)
- * @method static Country|Proxy first(string $sortedField = 'id')
- * @method static Country|Proxy last(string $sortedField = 'id')
- * @method static Country|Proxy random(array $attributes = [])
- * @method static Country|Proxy randomOrCreate(array $attributes = [])
+ * @method        CountryInterface|Proxy create(array|callable $attributes = [])
+ * @method static CountryInterface|Proxy createOne(array $attributes = [])
+ * @method static CountryInterface|Proxy find(object|array|mixed $criteria)
+ * @method static CountryInterface|Proxy findOrCreate(array $attributes)
+ * @method static CountryInterface|Proxy first(string $sortedField = 'id')
+ * @method static CountryInterface|Proxy last(string $sortedField = 'id')
+ * @method static CountryInterface|Proxy random(array $attributes = [])
+ * @method static CountryInterface|Proxy randomOrCreate(array $attributes = [])
  * @method static EntityRepository|RepositoryProxy repository()
- * @method static Country[]|Proxy[] all()
- * @method static Country[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Country[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Country[]|Proxy[] findBy(array $attributes)
- * @method static Country[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Country[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static CountryInterface[]|Proxy[] all()
+ * @method static CountryInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static CountryInterface[]|Proxy[] createSequence(iterable|callable $sequence)
+ * @method static CountryInterface[]|Proxy[] findBy(array $attributes)
+ * @method static CountryInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method static CountryInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
  *
- * @phpstan-method        Proxy<Country> create(array|callable $attributes = [])
- * @phpstan-method static Proxy<Country> createOne(array $attributes = [])
- * @phpstan-method static Proxy<Country> find(object|array|mixed $criteria)
- * @phpstan-method static Proxy<Country> findOrCreate(array $attributes)
- * @phpstan-method static Proxy<Country> first(string $sortedField = 'id')
- * @phpstan-method static Proxy<Country> last(string $sortedField = 'id')
- * @phpstan-method static Proxy<Country> random(array $attributes = [])
- * @phpstan-method static Proxy<Country> randomOrCreate(array $attributes = [])
- * @phpstan-method static RepositoryProxy<Country> repository()
- * @phpstan-method static list<Proxy<Country>> all()
- * @phpstan-method static list<Proxy<Country>> createMany(int $number, array|callable $attributes = [])
- * @phpstan-method static list<Proxy<Country>> createSequence(iterable|callable $sequence)
- * @phpstan-method static list<Proxy<Country>> findBy(array $attributes)
- * @phpstan-method static list<Proxy<Country>> randomRange(int $min, int $max, array $attributes = [])
- * @phpstan-method static list<Proxy<Country>> randomSet(int $number, array $attributes = [])
+ * @phpstan-method        Proxy<CountryInterface> create(array|callable $attributes = [])
+ * @phpstan-method static Proxy<CountryInterface> createOne(array $attributes = [])
+ * @phpstan-method static Proxy<CountryInterface> find(object|array|mixed $criteria)
+ * @phpstan-method static Proxy<CountryInterface> findOrCreate(array $attributes)
+ * @phpstan-method static Proxy<CountryInterface> first(string $sortedField = 'id')
+ * @phpstan-method static Proxy<CountryInterface> last(string $sortedField = 'id')
+ * @phpstan-method static Proxy<CountryInterface> random(array $attributes = [])
+ * @phpstan-method static Proxy<CountryInterface> randomOrCreate(array $attributes = [])
+ * @phpstan-method static RepositoryProxy<CountryInterface> repository()
+ * @phpstan-method static list<Proxy<CountryInterface>> all()
+ * @phpstan-method static list<Proxy<CountryInterface>> createMany(int $number, array|callable $attributes = [])
+ * @phpstan-method static list<Proxy<CountryInterface>> createSequence(iterable|callable $sequence)
+ * @phpstan-method static list<Proxy<CountryInterface>> findBy(array $attributes)
+ * @phpstan-method static list<Proxy<CountryInterface>> randomRange(int $min, int $max, array $attributes = [])
+ * @phpstan-method static list<Proxy<CountryInterface>> randomSet(int $number, array $attributes = [])
  */
 final class CountryFactory extends ModelFactory implements FactoryWithModelClassAwareInterface
 {
@@ -63,11 +64,6 @@ final class CountryFactory extends ModelFactory implements FactoryWithModelClass
         self::$modelClass = $modelClass;
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function getDefaults(): array
     {
         return [
