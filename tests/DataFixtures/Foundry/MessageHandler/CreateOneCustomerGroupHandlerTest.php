@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\DataFixtures\Foundry\MessageHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCustomerGroup;
-use Sylius\Component\Customer\Model\CustomerGroup;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -35,7 +34,7 @@ final class CreateOneCustomerGroupHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var CustomerGroup|Proxy $customerGroup */
+        /** @var CustomerGroupInterface|Proxy $customerGroup */
         $customerGroup = $bus->dispatch(new CreateOneCustomerGroup());
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());
@@ -51,7 +50,7 @@ final class CreateOneCustomerGroupHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var CustomerGroup|Proxy $customerGroup */
+        /** @var CustomerGroupInterface|Proxy $customerGroup */
         $customerGroup = $bus->dispatch((new CreateOneCustomerGroup())->withCode('group_a'));
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());
@@ -66,7 +65,7 @@ final class CreateOneCustomerGroupHandlerTest extends KernelTestCase
         /** @var MessageBusInterface $bus */
         $bus = static::getContainer()->get('sylius.shop_fixtures.bus.command');
 
-        /** @var CustomerGroup|Proxy $customerGroup */
+        /** @var CustomerGroupInterface|Proxy $customerGroup */
         $customerGroup = $bus->dispatch((new CreateOneCustomerGroup())->withName('Group A'));
 
         $this->assertInstanceOf(CustomerGroupInterface::class, $customerGroup->object());

@@ -15,14 +15,14 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneCustomerGroupInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CustomerGroupFactory;
-use Sylius\Component\Customer\Model\CustomerGroup;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Zenstruck\Foundry\Proxy;
 
 #[AsMessageHandler]
 final class CreateOneCustomerGroupHandler
 {
-    public function __invoke(CreateOneCustomerGroupInterface $command): CustomerGroup|Proxy
+    public function __invoke(CreateOneCustomerGroupInterface $command): CustomerGroupInterface|Proxy
     {
         return CustomerGroupFactory::createOne($command->toArray());
     }

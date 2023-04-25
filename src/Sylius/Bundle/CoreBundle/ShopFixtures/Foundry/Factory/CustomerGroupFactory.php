@@ -15,44 +15,45 @@ namespace Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory;
 
 use Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerGroupRepository;
 use Sylius\Component\Customer\Model\CustomerGroup;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
 /**
- * @extends ModelFactory<CustomerGroup>
+ * @extends ModelFactory<CustomerGroupInterface>
  *
- * @method        CustomerGroup|Proxy create(array|callable $attributes = [])
- * @method static CustomerGroup|Proxy createOne(array $attributes = [])
- * @method static CustomerGroup|Proxy find(object|array|mixed $criteria)
- * @method static CustomerGroup|Proxy findOrCreate(array $attributes)
- * @method static CustomerGroup|Proxy first(string $sortedField = 'id')
- * @method static CustomerGroup|Proxy last(string $sortedField = 'id')
- * @method static CustomerGroup|Proxy random(array $attributes = [])
- * @method static CustomerGroup|Proxy randomOrCreate(array $attributes = [])
+ * @method        CustomerGroupInterface|Proxy create(array|callable $attributes = [])
+ * @method static CustomerGroupInterface|Proxy createOne(array $attributes = [])
+ * @method static CustomerGroupInterface|Proxy find(object|array|mixed $criteria)
+ * @method static CustomerGroupInterface|Proxy findOrCreate(array $attributes)
+ * @method static CustomerGroupInterface|Proxy first(string $sortedField = 'id')
+ * @method static CustomerGroupInterface|Proxy last(string $sortedField = 'id')
+ * @method static CustomerGroupInterface|Proxy random(array $attributes = [])
+ * @method static CustomerGroupInterface|Proxy randomOrCreate(array $attributes = [])
  * @method static CustomerGroupRepository|RepositoryProxy repository()
- * @method static CustomerGroup[]|Proxy[] all()
- * @method static CustomerGroup[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static CustomerGroup[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static CustomerGroup[]|Proxy[] findBy(array $attributes)
- * @method static CustomerGroup[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static CustomerGroup[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static CustomerGroupInterface[]|Proxy[] all()
+ * @method static CustomerGroupInterface[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static CustomerGroupInterface[]|Proxy[] createSequence(iterable|callable $sequence)
+ * @method static CustomerGroupInterface[]|Proxy[] findBy(array $attributes)
+ * @method static CustomerGroupInterface[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method static CustomerGroupInterface[]|Proxy[] randomSet(int $number, array $attributes = [])
  *
- * @phpstan-method        Proxy<CustomerGroup> create(array|callable $attributes = [])
- * @phpstan-method static Proxy<CustomerGroup> createOne(array $attributes = [])
- * @phpstan-method static Proxy<CustomerGroup> find(object|array|mixed $criteria)
- * @phpstan-method static Proxy<CustomerGroup> findOrCreate(array $attributes)
- * @phpstan-method static Proxy<CustomerGroup> first(string $sortedField = 'id')
- * @phpstan-method static Proxy<CustomerGroup> last(string $sortedField = 'id')
- * @phpstan-method static Proxy<CustomerGroup> random(array $attributes = [])
- * @phpstan-method static Proxy<CustomerGroup> randomOrCreate(array $attributes = [])
- * @phpstan-method static RepositoryProxy<CustomerGroup> repository()
- * @phpstan-method static list<Proxy<CustomerGroup>> all()
- * @phpstan-method static list<Proxy<CustomerGroup>> createMany(int $number, array|callable $attributes = [])
- * @phpstan-method static list<Proxy<CustomerGroup>> createSequence(iterable|callable $sequence)
- * @phpstan-method static list<Proxy<CustomerGroup>> findBy(array $attributes)
- * @phpstan-method static list<Proxy<CustomerGroup>> randomRange(int $min, int $max, array $attributes = [])
- * @phpstan-method static list<Proxy<CustomerGroup>> randomSet(int $number, array $attributes = [])
+ * @phpstan-method        Proxy<CustomerGroupInterface> create(array|callable $attributes = [])
+ * @phpstan-method static Proxy<CustomerGroupInterface> createOne(array $attributes = [])
+ * @phpstan-method static Proxy<CustomerGroupInterface> find(object|array|mixed $criteria)
+ * @phpstan-method static Proxy<CustomerGroupInterface> findOrCreate(array $attributes)
+ * @phpstan-method static Proxy<CustomerGroupInterface> first(string $sortedField = 'id')
+ * @phpstan-method static Proxy<CustomerGroupInterface> last(string $sortedField = 'id')
+ * @phpstan-method static Proxy<CustomerGroupInterface> random(array $attributes = [])
+ * @phpstan-method static Proxy<CustomerGroupInterface> randomOrCreate(array $attributes = [])
+ * @phpstan-method static RepositoryProxy<CustomerGroupInterface> repository()
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> all()
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> createMany(int $number, array|callable $attributes = [])
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> createSequence(iterable|callable $sequence)
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> findBy(array $attributes)
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> randomRange(int $min, int $max, array $attributes = [])
+ * @phpstan-method static list<Proxy<CustomerGroupInterface>> randomSet(int $number, array $attributes = [])
  */
 final class CustomerGroupFactory extends ModelFactory implements FactoryWithModelClassAwareInterface
 {
