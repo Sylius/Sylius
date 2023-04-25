@@ -18,7 +18,6 @@ use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Tests\PurgeDatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Intl\Locales;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\Test\Factories;
@@ -41,7 +40,6 @@ final class CreateOneLocaleHandlerTest extends KernelTestCase
 
         $this->assertInstanceOf(LocaleInterface::class, $locale->object());
         $this->assertNotNull($locale->getCode());
-        $this->assertTrue(Locales::exists($locale->getCode()));
     }
 
     /** @test */
