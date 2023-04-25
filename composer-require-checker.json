@@ -23,6 +23,7 @@
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Doctrine\\Bundle\\FixturesBundle\\Fixture",
+    "Doctrine\\Bundle\\FixturesBundle\\FixtureGroupInterface",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
