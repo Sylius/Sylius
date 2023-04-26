@@ -13,11 +13,14 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Core\Model\Product">
-        <property name="images">
-            <constraint name="Valid" />
-        </property>
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefined">
             <option name="groups">sylius</option>
         </constraint>
+        <property name="images">
+            <constraint name="Valid" />
+        </property>
+        <property name="productTaxons">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>
