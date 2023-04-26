@@ -17,7 +17,6 @@ use Faker\Generator;
 
 final class CurrencyDefaultValues implements CurrencyDefaultValuesInterface
 {
-
     public function getDefaultValues(Generator $faker): array
     {
         return [

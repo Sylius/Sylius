@@ -19,7 +19,6 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
-
         ->set('sylius.shop_fixtures.story.default_currencies', DefaultCurrenciesStory::class)
             ->args([
                 service('sylius.shop_fixtures.bus.command')
@@ -32,6 +31,5 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('foundry.story')
         ->alias(FoundryDefaultCurrenciesStory::class, 'sylius.shop_fixtures.foundry.story.default_currencies')
-
     ;
 };

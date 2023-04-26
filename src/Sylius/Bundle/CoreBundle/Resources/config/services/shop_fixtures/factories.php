@@ -19,7 +19,6 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\FactoryWithModelClassA
 
 return static function (ContainerConfigurator $container) {
     $container->services()
-
         ->instanceof(FactoryWithModelClassAwareInterface::class)
             ->configurator([service('sylius.shop_fixtures.factory.configurator'), 'configure'])
 
@@ -34,6 +33,5 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('foundry.factory')
         ->alias(CurrencyFactory::class, 'sylius.shop_fixtures.factory.currency')
-
     ;
 };

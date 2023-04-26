@@ -17,9 +17,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Fixture\ShopConfigurationFixtu
 
 return static function (ContainerConfigurator $container) {
     $container->services()
-
         ->set('sylius.shop_fixtures.foundry.fixture.shop_configuration', ShopConfigurationFixture::class)
             ->tag('doctrine.fixture.orm')
-
     ;
 };

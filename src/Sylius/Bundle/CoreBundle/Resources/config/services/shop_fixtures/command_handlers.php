@@ -17,9 +17,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCurren
 
 return static function (ContainerConfigurator $container) {
     $container->services()
-
         ->set('sylius.shop_fixtures.command_handler.create_one_currency', CreateOneCurrencyHandler::class)
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
-
     ;
 };
