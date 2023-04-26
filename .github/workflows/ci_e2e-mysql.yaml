@@ -41,7 +41,7 @@ jobs:
     behat-no-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}.x, API Platform ${{ matrix.api-platform }}"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -66,10 +66,6 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
                     
-            -   name: Restrict DBAL
-                if: matrix.dbal == '^2.7'
-                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
-                
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.0
                 with:
@@ -97,7 +93,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}, DBAL ${{ matrix.dbal }}"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}"
                     path: |
                         etc/build/
                         var/log
@@ -106,7 +102,7 @@ jobs:
     behat-ui-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}, API Platform ${{ matrix.api-platform }}"
+        name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -135,10 +131,6 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            -   name: Restrict DBAL
-                if: matrix.dbal == '^2.7'
-                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:${{ matrix.dbal }}"
-
             -   name: Build application
                 uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
                 with:
@@ -158,7 +150,7 @@ jobs:
                 uses: actions/upload-artifact@v3
                 if: failure()
                 with:
-                    name: "Logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}, DBAL ${{ matrix.dbal }})"
+                    name: "Logs (JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }})"
                     path: |
                         etc/build/
                         var/log

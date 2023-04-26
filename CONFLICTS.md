@@ -3,11 +3,6 @@
 This document explains why certain conflicts were added to `composer.json` and
 references related issues.
 
-- `doctrine/migrations:3.5.3`:
-
-  This version is causing a problem with migrations and results in throwing a `Doctrine\Migrations\Exception\MetadataStorageError` exception e.g. when executing `sylius:install` command.
-  References: https://github.com/doctrine/migrations/issues/1302
-
 - `lexik/jwt-authentication-bundle: ^2.18`
 
   After bumping to this version ApiBundle starts failing due to requesting a non-existing `api_platform.openapi.factory.legacy` service.
