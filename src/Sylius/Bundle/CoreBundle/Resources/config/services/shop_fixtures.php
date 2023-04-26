@@ -24,12 +24,10 @@ return static function (ContainerConfigurator $container) {
     $container->import('shop_fixtures/stories.php');
 
     $container->services()
-
         ->set('sylius.shop_fixtures.bus.command', MessengerCommandBus::class)
             ->args([
                 service('sylius.shop_fixtures.command_bus')
             ])
         ->alias(CommandBusInterface::class, 'sylius.shop_fixtures.bus.command')
-
     ;
 };
