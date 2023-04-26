@@ -29,7 +29,7 @@ final class ProductDeletionListener
         private RequestStack $requestStack,
         ProductAwareRuleUpdaterInterface ...$ruleUpdaters,
     ) {
-       $this->ruleUpdaters = $ruleUpdaters;
+        $this->ruleUpdaters = $ruleUpdaters;
     }
 
     public function removeProductFromPromotionRules(GenericEvent $event): void
