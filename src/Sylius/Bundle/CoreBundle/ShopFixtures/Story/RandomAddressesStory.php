@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\ShopFixtures\Story;
 
-use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateManyShopUsers;
-use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateOneShopUser;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Command\CreateManyAddresses;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Symfony\Messenger\CommandBusInterface;
 
-final class DefaultShopUsersStory implements DefaultShopUsersStoryInterface
+final class RandomAddressesStory implements RandomAddressesStoryInterface
 {
     public function __construct(
         private CommandBusInterface $commandBus,
@@ -27,15 +26,7 @@ final class DefaultShopUsersStory implements DefaultShopUsersStoryInterface
     public function create(): void
     {
         $this->commandBus->dispatch(
-            new CreateManyShopUsers(20),
-        );
-
-        $this->commandBus->dispatch(
-            (new CreateOneShopUser())
-                ->withEmail('test@example.com')
-                ->withFirstName('John')
-                ->withLastName('Doe')
-                ->withPassword('sylius')
+            new CreateManyAddresses(10),
         );
     }
 }

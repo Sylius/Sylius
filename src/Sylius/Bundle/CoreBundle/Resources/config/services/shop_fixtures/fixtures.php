@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Fixture\RandomAddressesFixture;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Fixture\ShopConfigurationFixture;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+        ->set('sylius.shop_fixtures.foundry.fixture.random_addresses', RandomAddressesFixture::class)
+            ->tag('doctrine.fixture.orm')
 
         ->set('sylius.shop_fixtures.foundry.fixture.shop_configuration', ShopConfigurationFixture::class)
             ->tag('doctrine.fixture.orm')
-
     ;
 };

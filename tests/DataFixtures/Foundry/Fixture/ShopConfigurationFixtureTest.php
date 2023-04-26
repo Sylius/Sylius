@@ -44,7 +44,7 @@ final class ShopConfigurationFixtureTest extends KernelTestCase
         $this->assertCount(9, $currencies);
         $this->assertCount(12, $countries);
         $this->assertCount(2, $customerGroups);
-        $this->assertCount(1, $customers);
+        $this->assertCount(21, $customers);
     }
 
     private function getCurrencyRepository(): RepositoryInterface

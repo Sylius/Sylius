@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateManyAddressesHandler;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateManyShopUsersHandler;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneAddressHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCountryHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCurrencyHandler;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneCustomerGroupHandler;
@@ -22,6 +25,9 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\CommandHandler\CreateOneShopUs
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+
+        ->set('sylius.shop_fixtures.command_handler.create_one_address', CreateOneAddressHandler::class)
+        ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
         ->set('sylius.shop_fixtures.command_handler.create_one_customer', CreateOneCustomerHandler::class)
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
@@ -41,5 +47,10 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.shop_fixtures.command_handler.create_one_shop_user', CreateOneShopUserHandler::class)
         ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
 
+        ->set('sylius.shop_fixtures.command_handler.create_many_addresses', CreateManyAddressesHandler::class)
+        ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
+
+        ->set('sylius.shop_fixtures.command_handler.create_many_shop_users', CreateManyShopUsersHandler::class)
+        ->tag( name: 'messenger.message_handler', attributes: ['bus' => 'sylius.shop_fixtures.command_bus'])
     ;
 };

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Configurator\FactoryConfigurator;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\AddressFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CurrencyFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CustomerFactory;
@@ -32,6 +33,13 @@ return static function (ContainerConfigurator $container) {
             ->args([
                 service('sylius.resource_registry')
             ])
+
+        ->set('sylius.shop_fixtures.factory.address', AddressFactory::class)
+            ->args([
+                service('sylius.shop_fixtures.default_values.currency'),
+            ])
+            ->tag('foundry.factory')
+        ->alias(AddressFactory::class, 'sylius.shop_fixtures.factory.address')
 
         ->set('sylius.shop_fixtures.factory.currency', CurrencyFactory::class)
             ->args([

@@ -18,6 +18,7 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultCurrenciesStory a
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultGeographicalStory as FoundryDefaultGeographicalStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultLocalesStory as FoundryDefaultLocalesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\DefaultShopUsersStory as FoundryDefaultShopUsersStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Story\RandomAddressesStory as FoundryRandomAddressesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCurrenciesStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultCustomerGroupsStory;
@@ -28,6 +29,8 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultLocalesStoryInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultShopUsersStory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Story\DefaultShopUsersStoryInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\RandomAddressesStory;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Story\RandomAddressesStoryInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -96,5 +99,18 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('foundry.story')
         ->alias(FoundryDefaultShopUsersStory::class, 'sylius.shop_fixtures.foundry.story.default_shop_users')
+
+        ->set('sylius.shop_fixtures.story.random_addresses', RandomAddressesStory::class)
+            ->args([
+                service('sylius.shop_fixtures.bus.command')
+            ])
+        ->alias(RandomAddressesStoryInterface::class, 'sylius.shop_fixtures.story.random_addresses')
+
+        ->set('sylius.shop_fixtures.foundry.story.random_addresses', FoundryRandomAddressesStory::class)
+            ->args([
+                service('sylius.shop_fixtures.story.random_addresses')
+            ])
+            ->tag('foundry.story')
+        ->alias(FoundryRandomAddressesStory::class, 'sylius.shop_fixtures.foundry.story.random_addresses')
     ;
 };
