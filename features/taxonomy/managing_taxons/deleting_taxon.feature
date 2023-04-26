@@ -32,7 +32,7 @@ Feature: Deleting a taxon
         When I try to delete taxon named "Caps"
         Then I should be notified that I cannot delete a menu taxon of any channel
 
-    @todo
+    @api
     Scenario: Deleting a taxon that is a main taxon of a product
         Given the store classifies its products as "T-Shirts"
         And the store has a product "T-Shirts PHP"
