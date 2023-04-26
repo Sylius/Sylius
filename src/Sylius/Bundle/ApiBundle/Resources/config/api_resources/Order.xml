@@ -22,6 +22,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">admin/orders</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.order_number_filter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:order:read</attribute>
                 </attribute>
