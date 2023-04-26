@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
@@ -36,6 +37,7 @@ final class ManagingOrdersContext implements Context
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
+        private OrderRepositoryInterface $orderRepository
     ) {
     }
 
@@ -49,6 +51,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given I am browsing orders
      * @When I browse orders
      */
     public function iBrowseOrders(): void
@@ -310,5 +313,38 @@ final class ManagingOrdersContext implements Context
         $currencyCode = $this->responseChecker->getValue($this->client->show(Resources::ORDERS, $order->getTokenValue()), 'currencyCode');
 
         Assert::same($currencyCode, $currency);
+    }
+
+    /**
+     * @Then I should see an order with :orderNumber number
+     */
+    public function iShouldSeeOrderWithNumber(string $orderNumber)
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'number', $orderNumber),
+            sprintf('No order with number "%s" has been found.', $orderNumber),
+        );
+    }
+
+    /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy($fieldName)
+    {
+        $this->client->addFilter('order[number]', 'asc');
+        $this->client->filter();
+    }
+
+    /**
+     * @Then the first order should have number :number
+     */
+    public function theFirstOrderShouldHaveNumber(string $number)
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
+        $firstItem = $items[0];
+
+        Assert::same($firstItem['number'], str_replace('#', '', $number));
     }
 }

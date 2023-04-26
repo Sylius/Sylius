@@ -25,6 +25,9 @@
                 <attribute name="filters">
                     <attribute>sylius.api.order_number_filter</attribute>
                 </attribute>
+                <attribute name="order">
+                    <attribute name="number">DESC</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:order:read</attribute>
                 </attribute>
