@@ -67,8 +67,17 @@
 
    To add more data per variant create a service implementing the `Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface` and tag it with `sylius.product_variant_data_map_provider`.
 
-1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client.
-   Therefore, the constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
+1. Using Guzzle 6 has been deprecated in favor of Symfony HTTP Client. If you want to still use Guzzle 6 or Guzzle 7,
+   you need to install `composer require php-http/guzzle6-adapter` or `composer require php-http/guzzle7-adapter`
+   depending on your Guzzle version.
+   Subsequently, you need to register the adapter as a `Psr\Http\Client\ClientInterface` service as the following:
+    ```yaml
+        services:    
+            Psr\Http\Client\ClientInterface:
+                class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
+    ```
+
+1. The constructor of `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been changed:
 
     ```diff
         public function __construct(

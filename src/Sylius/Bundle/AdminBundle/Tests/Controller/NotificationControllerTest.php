@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
 use GuzzleHttp\Exception\ConnectException;
-use Http\Client\Exception\NetworkException;
 use Http\Message\MessageFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -62,7 +61,7 @@ final class NotificationControllerTest extends TestCase
         $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
         $requestInterface->withBody($streamInterface)->willReturn($requestInterface);
 
-        $this->client->sendRequest(Argument::cetera())->willThrow(NetworkException::class);
+        $this->client->sendRequest(Argument::cetera())->willThrow(ConnectException::class);
 
         $emptyResponse = $this->controller->getVersionAction(new Request());
 
