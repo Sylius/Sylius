@@ -33,6 +33,7 @@
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Stripe\\Stripe",
+    "Zenstruck\\Foundry\\Factory",
     "Zenstruck\\Foundry\\ModelFactory",
     "Zenstruck\\Foundry\\Story"
   ],
