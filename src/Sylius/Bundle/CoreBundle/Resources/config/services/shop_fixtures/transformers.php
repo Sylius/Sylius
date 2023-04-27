@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CountryTransformer;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CountryTransformerInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CurrencyTransformer;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CurrencyTransformerInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+        ->set('sylius.shop_fixtures.transformer.country', CountryTransformer::class)
+        ->alias(CountryTransformerInterface::class, 'sylius.shop_fixtures.transformer.country')
+
         ->set('sylius.shop_fixtures.transformer.currency', CurrencyTransformer::class)
         ->alias(CurrencyTransformerInterface::class, 'sylius.shop_fixtures.transformer.currency')
     ;

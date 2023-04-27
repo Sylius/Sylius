@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CountryUpdater;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CountryUpdaterInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CurrencyUpdater;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CurrencyUpdaterInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+        ->set('sylius.shop_fixtures.updater.country', CountryUpdater::class)
+        ->alias(CountryUpdaterInterface::class, 'sylius.shop_fixtures.updater.country')
+
         ->set('sylius.shop_fixtures.updater.currency', CurrencyUpdater::class)
         ->alias(CurrencyUpdaterInterface::class, 'sylius.shop_fixtures.updater.currency')
     ;

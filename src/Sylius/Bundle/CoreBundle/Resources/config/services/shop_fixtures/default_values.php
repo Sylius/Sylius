@@ -13,11 +13,16 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CountryDefaultValues;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CountryDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CurrencyDefaultValues;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CurrencyDefaultValuesInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
+        ->set('sylius.shop_fixtures.default_values.country', CountryDefaultValues::class)
+        ->alias(CountryDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.country')
+
         ->set('sylius.shop_fixtures.default_values.currency', CurrencyDefaultValues::class)
         ->alias(CurrencyDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.currency')
     ;

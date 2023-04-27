@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Configurator\FactoryConfigurator;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CountryFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\CurrencyFactory;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Factory\FactoryWithModelClassAwareInterface;
 
@@ -26,6 +27,16 @@ return static function (ContainerConfigurator $container) {
             ->args([
                 service('sylius.resource_registry'),
             ])
+
+        ->set('sylius.shop_fixtures.factory.country', CountryFactory::class)
+            ->args([
+                service('sylius.factory.country'),
+                service('sylius.shop_fixtures.default_values.country'),
+                service('sylius.shop_fixtures.transformer.country'),
+                service('sylius.shop_fixtures.updater.country'),
+            ])
+            ->tag('foundry.factory')
+        ->alias(CountryFactory::class, 'sylius.shop_fixtures.factory.country')
 
         ->set('sylius.shop_fixtures.factory.currency', CurrencyFactory::class)
             ->args([
