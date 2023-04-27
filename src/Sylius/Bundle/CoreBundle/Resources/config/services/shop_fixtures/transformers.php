@@ -17,6 +17,8 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CountryTransformer
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CountryTransformerInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CurrencyTransformer;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\CurrencyTransformerInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\LocaleTransformer;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Transformer\LocaleTransformerInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -25,5 +27,8 @@ return static function (ContainerConfigurator $container) {
 
         ->set('sylius.shop_fixtures.transformer.currency', CurrencyTransformer::class)
         ->alias(CurrencyTransformerInterface::class, 'sylius.shop_fixtures.transformer.currency')
+
+        ->set('sylius.shop_fixtures.transformer.locale', LocaleTransformer::class)
+        ->alias(LocaleTransformerInterface::class, 'sylius.shop_fixtures.transformer.locale')
     ;
 };

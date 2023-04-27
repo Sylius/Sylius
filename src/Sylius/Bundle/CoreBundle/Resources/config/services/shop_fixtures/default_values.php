@@ -17,6 +17,8 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CountryDefaultVa
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CountryDefaultValuesInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CurrencyDefaultValues;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\CurrencyDefaultValuesInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\LocaleDefaultValues;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\DefaultValues\LocaleDefaultValuesInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -25,5 +27,8 @@ return static function (ContainerConfigurator $container) {
 
         ->set('sylius.shop_fixtures.default_values.currency', CurrencyDefaultValues::class)
         ->alias(CurrencyDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.currency')
+
+        ->set('sylius.shop_fixtures.default_values.locale', LocaleDefaultValues::class)
+        ->alias(LocaleDefaultValuesInterface::class, 'sylius.shop_fixtures.default_values.locale')
     ;
 };

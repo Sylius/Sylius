@@ -17,6 +17,8 @@ use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CountryUpdater;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CountryUpdaterInterface;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CurrencyUpdater;
 use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\CurrencyUpdaterInterface;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\LocaleUpdater;
+use Sylius\Bundle\CoreBundle\ShopFixtures\Foundry\Updater\LocaleUpdaterInterface;
 
 return static function (ContainerConfigurator $container) {
     $container->services()
@@ -25,5 +27,8 @@ return static function (ContainerConfigurator $container) {
 
         ->set('sylius.shop_fixtures.updater.currency', CurrencyUpdater::class)
         ->alias(CurrencyUpdaterInterface::class, 'sylius.shop_fixtures.updater.currency')
+
+        ->set('sylius.shop_fixtures.updater.locale', LocaleUpdater::class)
+        ->alias(LocaleUpdaterInterface::class, 'sylius.shop_fixtures.updater.locale')
     ;
 };
