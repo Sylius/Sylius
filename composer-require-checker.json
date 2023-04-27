@@ -3,6 +3,7 @@
     "null", "true", "false",
     "static", "self", "parent",
     "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
+    "service",
     "Swift_Message",
     "ApiPlatform\\Core\\Api\\FilterInterface",
     "ApiPlatform\\Core\\Bridge\\Doctrine\\Orm\\Util\\QueryNameGeneratorInterface",
@@ -21,6 +22,8 @@
     "Behat\\Testwork\\Tester\\Result\\TestResult",
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
+    "Doctrine\\Bundle\\FixturesBundle\\Fixture",
+    "Doctrine\\Bundle\\FixturesBundle\\FixtureGroupInterface",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
@@ -29,7 +32,9 @@
     "League\\Flysystem\\FilesystemOperator",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
-    "Stripe\\Stripe"
+    "Stripe\\Stripe",
+    "Zenstruck\\Foundry\\ModelFactory",
+    "Zenstruck\\Foundry\\Story"
   ],
   "php-core-extensions" : [
     "Core",

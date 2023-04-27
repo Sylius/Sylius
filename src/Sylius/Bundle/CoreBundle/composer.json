@@ -74,6 +74,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
@@ -81,10 +82,12 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/dotenv": "^5.4 || ^6.0"
+        "symfony/dotenv": "^5.4 || ^6.0",
+        "zenstruck/foundry": "^1.31"
     },
     "conflict": {
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5",
+        "zenstruck/foundry": "<1.31"
     },
     "config": {
         "allow-plugins": {
