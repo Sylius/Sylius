@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -50,13 +51,61 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
-     * @Then I should be notified that this taxon is already assigned to this product
+     * @When I try to assign an empty taxon to the :product product
      */
-    public function iShouldBeNotifiedThatThisTaxonIsAlreadyAssignedToThisProduct(): void
+    public function iTryToAssignAnEmptyTaxonToTheProduct(ProductInterface $product): void
+    {
+        $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->create();
+    }
+
+    /**
+     * @When I try to assign an empty product to the :taxon taxon
+     */
+    public function iTryToAssignAnEmptyProductToTheTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
+        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->create();
+    }
+
+    /**
+     * @When /^I try to assign the product taxon of (product "[^"]+") and (taxon "[^"]+") to the (product "[^"]+")$/
+     */
+    public function iTryToAssignTheProductTaxonOfProductAndTaxonToTheProduct(
+        ProductInterface $productTaxonProduct,
+        TaxonInterface $productTaxonTaxon,
+        ProductInterface $product,
+    ): void {
+        $productTaxon = $productTaxonProduct->getProductTaxons()->filter(
+            fn (ProductTaxonInterface $productTaxon) => $productTaxonTaxon === $productTaxon->getTaxon()
+        )->first();
+
+        $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
+        $this->client->addRequestData('productTaxons', [$this->iriConverter->getIriFromItem($productTaxon)]);
+        $this->client->update();
+    }
+
+    /**
+     * @Then I should be notified that specifying a :part is required
+     */
+    public function iShouldBeNotifiedThatSpecifyingAIsRequired(string $part): void
     {
         Assert::contains(
             $this->client->getLastResponse()->getContent(),
-            'This taxon is already assigned to this product.',
+            sprintf('Please select a %s.', $part),
+        );
+    }
+
+    /**
+     * @Then I should be notified that product taxons cannot be duplicated
+     */
+    public function iShouldBeNotifiedThatProductTaxonsCannotBeDuplicated(): void
+    {
+        Assert::contains(
+            $this->client->getLastResponse()->getContent(),
+            'Product taxons cannot be duplicated.',
         );
     }
 }

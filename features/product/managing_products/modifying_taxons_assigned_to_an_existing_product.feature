@@ -1,5 +1,5 @@
 @managing_products
-Feature: Modifying taxons assigned to an exisiting product
+Feature: Modifying taxons assigned to an existing product
     In order to specify in which taxon a product is available
     As an Administrator
     I want to be able to change taxon of a product
@@ -25,4 +25,20 @@ Feature: Modifying taxons assigned to an exisiting product
     @api @no-ui
     Scenario: Being prevented from adding the same taxon twice
         When I try to add "Clothes" taxon to the "T-Shirt" product
-        Then I should be notified that this taxon is already assigned to this product
+        Then I should be notified that product taxons cannot be duplicated
+
+    @api @no-ui
+    Scenario: Being prevented from assigning an empty taxon to a product
+        When I try to assign an empty taxon to the "T-Shirt" product
+        Then I should be notified that specifying a taxon is required
+
+    @api @no-ui
+    Scenario: Being prevented from assigning an empty product to a taxon
+        When I try to assign an empty product to the "Clothes" taxon
+        Then I should be notified that specifying a product is required
+
+    @api @no-ui
+    Scenario: Being unable duplicate a product taxon by getting it from another product
+        Given the product "Shirt" belongs to taxon "Clothes"
+        When I try to assign the product taxon of product "T-Shirt" and taxon "Clothes" to the product "Shirt"
+        Then I should be notified that product taxons cannot be duplicated

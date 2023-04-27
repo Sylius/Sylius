@@ -23,5 +23,17 @@
             <option name="message">sylius.product_taxon.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+        <property name="product">
+            <constraint name="NotBlank">
+                <option name="message">sylius.product_taxon.product.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="taxon">
+            <constraint name="NotBlank">
+                <option name="message">sylius.product_taxon.taxon.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
