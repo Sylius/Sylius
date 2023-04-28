@@ -79,7 +79,7 @@ final class ManagingProductTaxonsContext implements Context
         ProductInterface $product,
     ): void {
         $productTaxon = $productTaxonProduct->getProductTaxons()->filter(
-            fn (ProductTaxonInterface $productTaxon) => $productTaxonTaxon === $productTaxon->getTaxon()
+            fn (ProductTaxonInterface $productTaxon) => $productTaxonTaxon === $productTaxon->getTaxon(),
         )->first();
 
         $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
