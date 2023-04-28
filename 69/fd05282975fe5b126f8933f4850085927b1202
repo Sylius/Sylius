@@ -1,0 +1,12 @@
+---------------------------------------------------------------------------
+
+by coldic3 at 2023-04-21T08:29:30Z
+
+~~In the separate PR, let's add support for Guzzle 7 in composer dependencies and verify it is easily replaceable.~~
+Guzzle 7 support already added.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-04-28T12:50:05Z
+
+Thank you, Kevin! :1st_place_medal:
