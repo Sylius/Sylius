@@ -43,8 +43,18 @@ jobs:
                     composer config minimum-stability dev
                     composer config prefer-stable true
 
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.0
+                if: "${{ inputs.branch != '' && inputs.branch == '1.12 }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.0" >> "$GITHUB_ENV"
+
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.1
+                if: "${{ inputs.branch == '' || inputs.branch == '1.13 }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.1" >> "$GITHUB_ENV"
+
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.1
+                uses: SyliusLabs/BuildTestAppAction@v${{ env.BUILD_TEST_APP_ACTION_VERSION }}
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"

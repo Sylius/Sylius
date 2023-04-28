@@ -66,8 +66,18 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
                     
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.0
+                if: "${{ inputs.branch != '' && inputs.branch == '1.12' }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.0" >> "$GITHUB_ENV"
+
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.1
+                if: "${{ inputs.branch == '' || inputs.branch == '1.13' }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.1" >> "$GITHUB_ENV"
+
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.1
+                uses: SyliusLabs/BuildTestAppAction@v${{ env.BUILD_TEST_APP_ACTION_VERSION }}
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -113,7 +123,14 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
         
         steps:
-            -
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
                 
             -   name: Get Composer cache directory
@@ -131,8 +148,18 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.0
+                if: "${{ inputs.branch != '' && inputs.branch == '1.12' }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.0" >> "$GITHUB_ENV"
+
+            -   name: Set SyliusLabs/BuildTestAppAction version to 2.1
+                if: "${{ inputs.branch == '' || inputs.branch == '1.13' }}"
+                run: |
+                    echo "BUILD_TEST_APP_ACTION_VERSION=2.1" >> "$GITHUB_ENV"
+
             -   name: Build application
-                uses: jakubtobiasz/SyliusBuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v${{ env.BUILD_TEST_APP_ACTION_VERSION }}
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
