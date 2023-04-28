@@ -16,7 +16,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider">
+        <service
+            id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface"
+            class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider"
+        >
             <argument type="tagged_iterator" tag="sylius.product_variant_data_map_provider" />
         </service>
 

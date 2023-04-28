@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsMapHelper;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class ProductVariantsMapExtension extends AbstractExtension
 {
-    public function __construct(private ProductVariantsMapHelper $productVariantsMapHelper)
+    public function __construct(private ProductVariantsMapProviderInterface $productVariantsMapProvider)
     {
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_product_variants_map', [$this->productVariantsMapHelper, 'getMap']),
+            new TwigFunction('sylius_product_variants_map', [$this->productVariantsMapProvider, 'provide']),
         ];
     }
 }

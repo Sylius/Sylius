@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface;
 
-trigger_deprecation('sylius/user', '1.12', 'The "%s" class is deprecated, use "%s" instead.', ProductVariantsPricesProviderInterface::class, ProductVariantsMapProviderInterface::class);
+trigger_deprecation('sylius/core', '1.13', 'The "%s" class is deprecated, use "%s" instead.', ProductVariantsPricesProviderInterface::class, ProductVariantsMapProviderInterface::class);
 
 /** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProviderInterface} instead. */
 interface ProductVariantsPricesProviderInterface
