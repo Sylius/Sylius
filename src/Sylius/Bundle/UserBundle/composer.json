@@ -55,7 +55,6 @@
     "require-dev": {
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "php-http/guzzle6-adapter": "^2.0",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^5.4.21 || ^6.0",
