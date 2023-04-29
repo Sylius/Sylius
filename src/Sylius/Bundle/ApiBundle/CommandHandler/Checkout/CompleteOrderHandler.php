@@ -86,13 +86,4 @@ final class CompleteOrderHandler implements MessageHandlerInterface
 
         return $cart;
     }
-
-    private function orderTotalChanged(OrderInterface $cart): bool
-    {
-        $recalculatedCart = clone $cart;
-        $recalculatedCart->recalculateItemsTotal();
-        $recalculatedCart->recalculateAdjustmentsTotal();
-
-        return $cart->getTotal() === $recalculatedCart->getTotal();
-    }
 }
