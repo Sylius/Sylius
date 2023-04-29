@@ -115,6 +115,7 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
      * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
+     * @When /^I have ("[^"]+" variant) of (product "[^"]+") in the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
@@ -122,6 +123,7 @@ final class CartContext implements Context
         ?string $tokenValue,
     ): void {
         $this->putProductVariantToCart($productVariant, $tokenValue, 1);
+        $this->sharedStorage->set('variant', $productVariant);
     }
 
     /**

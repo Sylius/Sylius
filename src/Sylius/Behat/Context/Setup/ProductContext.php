@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
@@ -59,6 +60,7 @@ final class ProductContext implements Context
         private FactoryInterface $productImageFactory,
         private ObjectManager $objectManager,
         private ProductVariantGeneratorInterface $productVariantGenerator,
+        private ProductVariantRepositoryInterface $productVariantRepository,
         private ProductVariantResolverInterface $defaultVariantResolver,
         private ImageUploaderInterface $imageUploader,
         private SlugGeneratorInterface $slugGenerator,
@@ -1089,6 +1091,8 @@ final class ProductContext implements Context
      */
     public function theSizeColorVariantOfThisProductIsDisabled(ProductVariantInterface $productVariant): void
     {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->productVariantRepository->find($productVariant->getId());
         $productVariant->setEnabled(false);
 
         $this->objectManager->flush();

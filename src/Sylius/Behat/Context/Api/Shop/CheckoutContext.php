@@ -469,7 +469,6 @@ final class CheckoutContext implements Context
      * @Given I completed the payment step with :paymentMethod payment method
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
-     * @When I have proceeded selecting :paymentMethod payment method
      * @When I proceed selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
@@ -502,6 +501,16 @@ final class CheckoutContext implements Context
 
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        $this->iChoosePaymentMethod($paymentMethod);
+    }
+
+    /**
+     * @When I have proceeded selecting :paymentMethod payment method
+     */
+    public function iHaveProceededSelectingPaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
+        $this->addressOrder($this->getArrayWithDefaultAddress());
+        $this->iCompleteTheShippingStepWithFirstShippingMethod();
         $this->iChoosePaymentMethod($paymentMethod);
     }
 
