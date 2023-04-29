@@ -511,6 +511,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When I proceed through checkout process
+     * @When I proceeded through checkout process
      */
     public function iProceedThroughCheckoutProcess(): void
     {

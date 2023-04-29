@@ -16,7 +16,7 @@ Feature: Inform customer about any order total changes during checkout process
     Scenario: Inform customer about order total change due to product price change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
-        And I proceed through checkout process
+        And I proceeded through checkout process
         And this product price has been changed to "$25.00"
         When I confirm my order
         Then my order should not be placed due to changed order total
@@ -25,7 +25,7 @@ Feature: Inform customer about any order total changes during checkout process
     Scenario: Be able to confirm order after information appears
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
-        And I proceed through checkout process
+        And I proceeded through checkout process
         And this product price has been changed to "$25.00"
         And I have confirmed order
         Then my order should not be placed due to changed order total
@@ -34,7 +34,7 @@ Feature: Inform customer about any order total changes during checkout process
     Scenario: Inform customer about order total change due to tax change
         Given I am a logged in customer
         And I added product "PHP T-Shirt" to the cart
-        And I proceed through checkout process
+        And I proceeded through checkout process
         And the "NA VAT" tax rate has changed to 10%
         When I confirm my order
         Then my order should not be placed due to changed order total
