@@ -513,6 +513,21 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product with maximum price at ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesOffOnEveryProductWithMaximumPriceAt(
+        PromotionInterface $promotion,
+        int $discount,
+        int $amount,
+    ): void {
+        $this->createUnitFixedPromotion(
+            $promotion,
+            $discount,
+            $this->getPriceRangeFilterConfiguration(maxAmount: $amount),
+        );
+    }
+
+    /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product priced between ("(?:€|£|\$)[^"]+") and ("(?:€|£|\$)[^"]+")$/
      */
     public function thisPromotionGivesOffOnEveryProductPricedBetween(
@@ -537,6 +552,21 @@ final class PromotionContext implements Context
         int $amount,
     ): void {
         $this->createUnitPercentagePromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product with maximum price at ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionPercentageGivesOffOnEveryProductWithMaximumPriceAt(
+        PromotionInterface $promotion,
+        float $discount,
+        int $amount,
+    ): void {
+        $this->createUnitPercentagePromotion(
+            $promotion,
+            $discount,
+            $this->getPriceRangeFilterConfiguration(maxAmount: $amount),
+        );
     }
 
     /**
@@ -893,9 +923,13 @@ final class PromotionContext implements Context
         return ['filters' => ['products_filter' => ['products' => $productCodes]]];
     }
 
-    private function getPriceRangeFilterConfiguration(int $minAmount, int $maxAmount = null): array
+    private function getPriceRangeFilterConfiguration(?int $minAmount = null, ?int $maxAmount = null): array
     {
-        $configuration = ['filters' => ['price_range_filter' => ['min' => $minAmount]]];
+        $configuration = [];
+
+        if (null !== $minAmount) {
+            $configuration['filters']['price_range_filter']['min'] = $minAmount;
+        }
         if (null !== $maxAmount) {
             $configuration['filters']['price_range_filter']['max'] = $maxAmount;
         }

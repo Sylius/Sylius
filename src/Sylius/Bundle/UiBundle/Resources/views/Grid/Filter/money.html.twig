@@ -1,11 +1,11 @@
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
 
 <div class="sylius-filters__group">
-    {{ form_row(form.greaterThan, {attr: {'placeholder': form.greaterThan.vars.label|trans}, 'label': filter.label|trans ~ ' | ' ~ form.greaterThan.vars.label|trans}) }}
+    {{ form_row(form.greaterThan, {attr: {'placeholder': form.greaterThan.vars.label}, 'label': 'sylius.ui.money_filter', 'label_translation_parameters': {'%label%': filter.label|trans, '%altLabel%': form.greaterThan.vars.label|trans}}) }}
     <div class="disabled field">
         <label>&nbsp;</label>
         <input type="text" value="-" disabled>
     </div>
-    {{ form_row(form.lessThan, {attr: { 'placeholder': form.lessThan.vars.label|trans }}) }}
+    {{ form_row(form.lessThan, {attr: { 'placeholder': form.lessThan.vars.label }}) }}
     {{ form_row(form.currency) }}
 </div>
