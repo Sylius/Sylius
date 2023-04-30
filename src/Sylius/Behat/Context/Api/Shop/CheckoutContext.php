@@ -421,6 +421,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I decide to change my address
+     */
+    public function iDecideToChangeMyAddress(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @Then I should be notified that the order should be addressed first
      */
     public function iShouldBeNotifiedThatTheOrderShouldBeAddressedFirst(): void
@@ -804,6 +812,14 @@ final class CheckoutContext implements Context
     public function iShouldSeeTheThankYouPage(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
+    }
+
+    /**
+     * @Then I should see selected :shippingMethod shipping method
+     */
+    public function iShouldSeeSelectedShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::true($this->hasShippingMethod($shippingMethod));
     }
 
     /**
