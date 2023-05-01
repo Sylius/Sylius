@@ -17,10 +17,6 @@ An example about how to use it is on :ref:`component_shipping_checker-rule-check
 .. note::
     This checker implements the :ref:`component_shipping_checker_rule-checker-interface`.
 
-    For more detailed information go to `Sylius API ItemCountRuleChecker`_.
-
-.. _Sylius API ItemCountRuleChecker: http://api.sylius.com/Sylius/Component/Shipping/Checker/ItemCountRuleChecker.html
-
 ShippingMethodEligibilityChecker
 --------------------------------
 
@@ -89,8 +85,4 @@ This class checks if shipping method rules are capable of shipping given subject
 
 .. note::
     This model implements the :ref:`component_shipping_checker_shipping-method-eligibility-checker-interface`.
-
-    For more detailed information go to `Sylius API ShippingMethodEligibilityChecker`_.
-
-.. _Sylius API ShippingMethodEligibilityChecker: http://api.sylius.com/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityChecker.html
 .. _InvalidArgumentException: https://php.net/manual/en/class.invalidargumentexception.php

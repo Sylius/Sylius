@@ -35,10 +35,6 @@ Shipment has the following properties:
 .. note::
     This model implements the :ref:`component_shipping_model_shipment-interface`.
 
-    For more detailed information go to `Sylius API Shipment`_.
-
-.. _Sylius API Shipment: http://api.sylius.com/Sylius/Component/Shipping/Model/Shipment.html
-
 ShipmentItem
 ------------
 
@@ -63,11 +59,6 @@ ShipmentItems have the following properties:
 
 .. note::
     This model implements the :ref:`component_shipping_model_shipment-item-interface`.
-
-    For more detailed information go to `Sylius API ShipmentItem`_.
-
-.. _Sylius API ShipmentItem: http://api.sylius.com/Sylius/Component/Shipping/Model/ShipmentItem.html
-
 
 ShippingCategory
 ----------------
@@ -98,11 +89,6 @@ ShippingCategory has the following properties:
 
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-category-interface`.
-
-    For more detailed information go to `Sylius API ShippingCategory`_.
-
-.. _Sylius API ShippingCategory: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingCategory.html
-
 
 ShippingMethod
 --------------
@@ -146,10 +132,6 @@ It has the following properties:
     This model implements the :ref:`component_shipping_model_shipping-method-interface` and uses the
     `TranslatableTrait <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TranslatableTrait.php>`_.
 
-    For more detailed information go to `Sylius API ShippingMethod`_.
-
-.. _Sylius API ShippingMethod: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethod.html
-
 ShippingMethodTranslation
 -------------------------
 
@@ -171,9 +153,4 @@ It has the following properties:
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-method-translation-interface` and extends
     `AbstractTranslation <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/AbstractTranslation.php>`_ class.
-
-    Form more information go to `Sylius API ShippingMethodTranslation`_.
-
-.. _Sylius API ShippingMethodTranslation: http://api.sylius.com/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
-
 

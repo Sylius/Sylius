@@ -116,7 +116,7 @@ Accessing the Shop
 ------------------
 
 We strongly recommend using the Symfony Local Web Server by running the ``symfony server:start``
-command and then accessing ``http://127.0.0.1:8000`` in your web browser to see the shop.
+command and then accessing ``https://127.0.0.1:8000`` in your web browser to see the shop.
 
 .. note::
     Get to know more about using Symfony Local Web Server `in the Symfony server documentation <https://symfony.com/doc/current/setup/symfony_server.html>`_.
@@ -159,7 +159,7 @@ Contributing
 
 If you would like to contribute to Sylius - please go to the :doc:`Contribution Guide </book/contributing/index>`
 
-.. _Gulp: http://gulpjs.com/
+.. _Gulp: https://gulpjs.com/
 .. _Webpack: https://webpack.js.org/
 .. _Yarn: https://yarnpkg.com/lang/en/
-.. _Composer: http://packagist.org
+.. _Composer: https://packagist.org

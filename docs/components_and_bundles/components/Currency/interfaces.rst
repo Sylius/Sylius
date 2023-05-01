@@ -22,10 +22,6 @@ name, exchange rate and whether the currency should be enabled or not.
 .. note::
    This interface extends `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_ and `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
 
-   For more detailed information go to `Sylius API CurrencyInterface`_.
-
-.. _Sylius API CurrencyInterface: http://api.sylius.com/Sylius/Component/Currency/Model/CurrencyInterface.html
-
 Service Interfaces
 ------------------
 
@@ -35,11 +31,6 @@ CurrenciesAwareInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Any container used to store, and manage currencies should implement this interface.
-
-.. note::
-   For more detailed information go to `Sylius API CurrenciesAwareInterface`_.
-
-.. _Sylius API CurrenciesAwareInterface: http://api.sylius.com/Sylius/Component/Currency/Model/CurrenciesAwareInterface.html
 
 .. _component_currency_context_currency-context-interface:
 
@@ -55,11 +46,6 @@ It also contains the default storage key:
 | STORAGE_KEY      | _sylius_currency |
 +------------------+------------------+
 
-.. note::
-   For more detailed information go to `Sylius API CurrencyContextInterface`_.
-
-.. _Sylius API CurrencyContextInterface: http://api.sylius.com/Sylius/Component/Currency/Context/CurrencyContextInterface.html
-
 .. _component_currency_converter_currency-converter-interface:
 
 CurrencyConverterInterface
@@ -68,11 +54,6 @@ CurrencyConverterInterface
 This interface should be implemented by any service used to convert
 the amount of money from one currency to another, according to their exchange rates.
 
-.. note::
-   For more detailed information go to `Sylius API CurrencyConverterInterface`_.
-
-.. _Sylius API CurrencyConverterInterface: http://api.sylius.com/Sylius/Component/Currency/Converter/CurrencyConverterInterface.html
-
 .. _component_currency_provider_currency-provider-interface:
 
 CurrencyProviderInterface
@@ -80,8 +61,3 @@ CurrencyProviderInterface
 
 This interface allows you to implement one fast service which gets
 all available currencies from any container you would like.
-
-.. note::
-   For more detailed information go to `Sylius API CurrencyProviderInterface`_.
-
-.. _Sylius API CurrencyProviderInterface: http://api.sylius.com/Sylius/Component/Currency/Provider/CurrencyProviderInterface.html

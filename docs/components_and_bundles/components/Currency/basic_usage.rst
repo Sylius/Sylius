@@ -43,10 +43,6 @@ This behaviour is used just for displaying the *approximate* value in another cu
 
    This service implements the :ref:`component_currency_converter_currency-converter-interface`.
 
-   For more detailed information go to `Sylius API CurrencyConverter`_.
-
-.. _Sylius API CurrencyConverter: http://api.sylius.com/Sylius/Component/Currency/Converter/CurrencyConverter.html
-
 .. caution::
 
    Throws :ref:`component_currency_converter_unavailable-currency-exception`.
@@ -75,7 +71,3 @@ property is set to true and have been inserted in the given repository.
 
 .. note::
    This service implements the :ref:`component_currency_provider_currency-provider-interface`.
-
-   For more detailed information go to `Sylius API CurrencyProvider`_.
-
-.. _Sylius API CurrencyProvider: http://api.sylius.com/Sylius/Component/Currency/Provider/CurrencyProvider.html

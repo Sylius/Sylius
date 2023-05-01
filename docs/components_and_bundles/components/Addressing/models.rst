@@ -48,10 +48,6 @@ concerning customer's address and as default has the following properties:
 .. note::
    This model implements the :ref:`component_addressing_model_address-interface`.
 
-   For more detailed information go to `Sylius API Address`_.
-
-.. _Sylius API Address: http://api.sylius.com/Sylius/Component/Addressing/Model/Address.html
-
 .. _component_addressing_model_country:
 
 Country
@@ -75,10 +71,6 @@ It should contain all data concerning a country and as default has the following
 .. note::
    This model implements the :ref:`component_addressing_model_country-interface`
    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
-
-   For more detailed information go to `Sylius API Country`_.
-
-.. _Sylius API Country: http://api.sylius.com/Sylius/Component/Addressing/Model/Country.html
 
 .. _component_addressing_model_province:
 
@@ -104,10 +96,6 @@ It should contain all data concerning a province and as default has the followin
 .. note::
    This model implements the :ref:`component_addressing_model_province-interface`
    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
-
-   For more detailed information go to `Sylius API Province`_.
-
-.. _Sylius API Province: http://api.sylius.com/Sylius/Component/Addressing/Model/Province.html
 
 .. _component_addressing_model_zone:
 
@@ -137,10 +125,6 @@ It should contain all data concerning a zone and as default has the following pr
    This model implements the :ref:`component_addressing_model_zone-interface`
    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
 
-   For more detailed information go to `Sylius API Zone`_.
-
-.. _Sylius API Zone: http://api.sylius.com/Sylius/Component/Addressing/Model/Zone.html
-
 .. _component_addressing_model_zone-member:
 
 ZoneMember
@@ -163,7 +147,3 @@ On default this model has the following properties:
 .. note::
    This model implements :ref:`component_addressing_model_zone-member-interface`
    and `CodeAwareInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/CodeAwareInterface.php>`_.
-
-   For more detailed information go to `Sylius API ZoneMember`_.
-
-.. _Sylius API ZoneMember: http://api.sylius.com/Sylius/Component/Addressing/Model/ZoneMember.html

@@ -65,8 +65,8 @@ to ensure your plugin's extraordinary quality.
     For the plugins, the suggested way of modifying Sylius is using :doc:`the Customization Guide </customization/index>`.
     There you will find a lot of help while trying to modify templates, state machines, controllers and many, many more.
 
-.. _`Behat`: http://behat.org/en/latest/
-.. _`phpspec`: http://www.phpspec.net/en/stable/
+.. _`Behat`: https://behat.org/en/latest/
+.. _`phpspec`: https://www.phpspec.net/en/stable/
 .. _`PHPUnit`: https://phpunit.de/
 
 .. _book_plugins_creating_plugin_naming_conventions:
@@ -81,7 +81,7 @@ Besides the way you are creating plugins (based on our skeleton or on your own),
  * Bundle class name should start with vendor name, followed by ``Sylius`` and suffixed by ``Plugin`` (instead of ``Bundle``), e.g.: ``VendorNameSyliusInvoicePlugin``.
  * Bundle extension should be named similar, but suffixed by the Symfony standard ``Extension``, e.g.: ``VendorNameSyliusInvoiceExtension``.
  * Bundle class must use the ``Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait`` trait.
- * Namespace should follow `PSR-4 <http://www.php-fig.org/psr/psr-4/>`_. The top-level namespace should be the vendor name. The second-level should be prefixed by ``Sylius`` and suffixed by ``Plugin`` (e.g. ``VendorName\SyliusInvoicePlugin``)
+ * Namespace should follow `PSR-4 <https://www.php-fig.org/psr/psr-4/>`_. The top-level namespace should be the vendor name. The second-level should be prefixed by ``Sylius`` and suffixed by ``Plugin`` (e.g. ``VendorName\SyliusInvoicePlugin``)
 
 .. note::
 
