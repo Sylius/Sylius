@@ -87,8 +87,8 @@ sylius:
     user:
         email:
             unique: Este e-mail já está sendo usado.
-            min: O e-mail deve conter no mínimo {{ min }} caractéres.
-            max: O e-mail deve conter no máximo {{ max }} caratéres.
+            min: O e-mail deve conter no mínimo {{ limit }} caractéres.
+            max: O e-mail deve conter no máximo {{ limit }} caratéres.
             invalid: Este email é inválido.
         username:
             unique: Este nome de utilizador já foi utilizado.
