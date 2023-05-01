@@ -63,7 +63,7 @@ final class NotificationController
             ->withBody(
                 null === $this->streamFactory
                 ? Stream::create($content)
-                : $this->streamFactory->createStream($content)
+                : $this->streamFactory->createStream($content),
             )
         ;
 
