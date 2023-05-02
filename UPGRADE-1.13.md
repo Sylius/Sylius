@@ -98,3 +98,5 @@
 1. The `sylius.http_client` has become an alias to `psr18.http_client` service.
 
 1. The `sylius.payum.http_client` has become a service ID of newly created `Sylius\Bundle\PayumBundle\HttpClient\HttpClient`.
+
+1. Validation translation key `sylius.review.rating.range` has been replaced by `sylius.review.rating.not_in_range` in all places used by Sylius. The `sylius.review.rating.range` has been left for backward compatibility and will be removed in Sylius 2.0.
