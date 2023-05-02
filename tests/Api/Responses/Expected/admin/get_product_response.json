@@ -26,5 +26,9 @@
             "name": "Mug",
             "slug": "mug"
         }
-    }
+    },
+    "shortDescription": null,
+    "name": "Mug",
+    "description": "@string@",
+    "slug": "mug"
 }
