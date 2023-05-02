@@ -23,7 +23,7 @@ Feature: Order products integrity
         Then I should be informed that this product has been disabled
         And I should not see the thank you page
 
-    @ui
+    @ui @api
     Scenario: Preventing customer from completing checkout with no longer available product variant
         Given I have "Small" variant of product "Super Cool T-Shirt" in the cart
         And I have proceeded selecting "Offline" payment method

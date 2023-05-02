@@ -153,6 +153,7 @@
             <argument type="service" id="sylius.factory.product_image" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.generator.product_variant" />
+            <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.generator.slug" />

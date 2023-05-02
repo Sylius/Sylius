@@ -18,7 +18,9 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Webmozart\Assert\Assert;
 
 final class CheckoutCompleteContext implements Context
 {
@@ -43,5 +45,16 @@ final class CheckoutCompleteContext implements Context
         );
 
         $this->client->executeCustomRequest($request);
+    }
+
+    /**
+     * @Then /^I should be informed that (this variant) has been disabled$/
+     */
+    public function iShouldBeInformedThatThisVariantHasBeenDisabled(ProductVariantInterface $productVariant): void
+    {
+        $lastResponseContent = $this->client->getLastResponse()->getContent();
+
+        Assert::string($lastResponseContent);
+        Assert::contains($lastResponseContent, sprintf('This product %s has been disabled.', $productVariant->getName()));
     }
 }
