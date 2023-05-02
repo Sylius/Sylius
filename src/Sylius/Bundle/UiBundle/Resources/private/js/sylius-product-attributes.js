@@ -128,7 +128,7 @@ const setAttributeChoiceListener = function setAttributeChoiceListener() {
 
         $('#sylius_product_attribute_choice').val('');
 
-        addAttributesNumber($.grep(attributeFormElements, a => $(a).hasClass('attribute')).length);
+        addAttributesNumber(attributeFormElements.find('.attribute').length);
         modifySelectorOnAttributesListElementDelete();
 
         $('form').removeClass('loading');
