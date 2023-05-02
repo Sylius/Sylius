@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\PayumBundle\HttpClient;
 
-use Psr\Http\Client\ClientInterface;
 use Payum\Core\HttpClientInterface;
 use PhpSpec\ObjectBehavior;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Sylius\Bundle\PayumBundle\HttpClient\HttpClient;
@@ -40,7 +40,7 @@ final class HttpClientSpec extends ObjectBehavior
     function it_sends_a_request(
         ClientInterface $client,
         RequestInterface $request,
-        ResponseInterface $response
+        ResponseInterface $response,
     ): void {
         $client->sendRequest($request)->willReturn($response);
 
