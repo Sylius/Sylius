@@ -564,7 +564,6 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="translator" />
-            <argument type="service" id="filesystem" />
         </service>
 
         <service

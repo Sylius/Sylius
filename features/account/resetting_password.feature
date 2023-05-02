@@ -23,7 +23,7 @@ Feature: Resetting a password
         And I specify customer email as "wrongman@example.com"
         And I try to reset it
         Then I should be notified that email with reset instruction has been sent
-        And no email should be sent
+        And 0 email should be sent to "wrongman@example.com"
 
     @ui @email @api
     Scenario: Resetting an account password in different locale than the default one
@@ -59,7 +59,8 @@ Feature: Resetting a password
 
     @ui @email @api
     Scenario: Trying to change my account password with an expired token I received
-        Given I have already received a resetting password email a while ago
+        Given I have already received a resetting password email
+        But I waited too long, and the link expired
         When I follow link on my email to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"

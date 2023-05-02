@@ -157,12 +157,10 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given /^(?:(I) have|(this user) has) already received a resetting password email a while ago$/
+     * @Given /^(I) waited too long, and the link expired$/
      */
     public function iWaitedTooMuchTimeToResetMyPassword(UserInterface $user): void
     {
-        $this->prepareUserPasswordResetToken($user);
-
         /** @var \DateTime $passwordRequestedAt */
         $passwordRequestedAt = $user->getPasswordRequestedAt();
         $passwordRequestedAt->sub(new \DateInterval($this->passwordResetTokenTtl));

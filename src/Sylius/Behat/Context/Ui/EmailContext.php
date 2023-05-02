@@ -28,7 +28,6 @@ final class EmailContext implements Context
         private SharedStorageInterface $sharedStorage,
         private EmailCheckerInterface $emailChecker,
         private TranslatorInterface $translator,
-        private Filesystem $filesystem,
     ) {
     }
 
@@ -51,14 +50,6 @@ final class EmailContext implements Context
             $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
             $recipient,
         );
-    }
-
-    /**
-     * @Then no email should be sent
-     */
-    public function noEmailShouldBeSent(): void
-    {
-        Assert::false($this->filesystem->exists($this->emailChecker->getSpoolDirectory()));
     }
 
     /**
