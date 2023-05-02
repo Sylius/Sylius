@@ -40,7 +40,3 @@ concerning channel's data and as default has the following properties:
 
 .. note::
    This model implements :ref:`component_channel_model_channel-interface`.
-
-   For more detailed information go to `Sylius API Channel`_.
-
-.. _Sylius API Channel: http://api.sylius.com/Sylius/Component/Channel/Model/Channel.html

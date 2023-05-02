@@ -14,7 +14,7 @@ How to configure Stripe Credit Card payment?
    We're sorry but **this documentation section is outdated**. Please have that in mind when trying to use it.
    You can help us making documentation up to date via Sylius Github. Thank you!
 
-One of very important payment methods in e-commerce are credit cards. Payments via credit card are in Sylius supported by `Stripe <http://stripe.com/docs>`_.
+One of very important payment methods in e-commerce are credit cards. Payments via credit card are in Sylius supported by `Stripe <https://stripe.com/docs>`_.
 
 Install Stripe
 --------------
@@ -34,7 +34,7 @@ Add a payment method with the Stripe gateway in the Admin Panel
 
 * Create a new payment method, choosing the ``Stripe Credit Card`` gateway from the gateways choice dropdown and enable it for chosen channels.
 
-Go to the ``http://localhost:8000/admin/payment-methods/new/stripe_checkout`` url.
+Go to the ``https://localhost:8000/admin/payment-methods/new/stripe_checkout`` url.
 
 * Fill in the Stripe configuration form with your developer account data (``publishable_key`` and ``secret_key``).
 * Save the new payment method.

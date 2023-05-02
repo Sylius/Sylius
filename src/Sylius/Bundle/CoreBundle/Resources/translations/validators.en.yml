@@ -138,8 +138,8 @@ sylius:
     user:
         email:
             unique: This email is already used.
-            min: Email must have at least {{ min }} characters.
-            max: Email must have at most {{ max }} characters.
+            min: Email must have at least {{ limit }} characters.
+            max: Email must have at most {{ limit }} characters.
             invalid: This email is invalid.
         username:
             unique: This username is already used.

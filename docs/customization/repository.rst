@@ -126,4 +126,4 @@ What happens while overriding Repositories?
 
 .. include:: /customization/plugins.rst
 
-.. _`Query Builder`: http://doctrine-orm.readthedocs.io/projects/doctrine-orm/en/latest/reference/query-builder.html
+.. _`Query Builder`: https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html

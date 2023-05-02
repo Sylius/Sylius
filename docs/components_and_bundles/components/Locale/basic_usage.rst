@@ -39,9 +39,3 @@ The **LocaleProvider** allows you to get all available locales.
 
     $localeProvider->getAvailableLocalesCodes(); //Output will be a collection of available locales
     $localeProvider->isLocaleAvailable('en'); //It will check if that locale is enabled
-
-.. note::
-
-    For more detailed information go to `Sylius API LocaleProvider`_.
-
-.. _Sylius API LocaleProvider: http://api.sylius.com/Sylius/Component/Locale/Provider/LocaleProvider.html

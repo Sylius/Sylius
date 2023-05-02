@@ -67,10 +67,10 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
 
     <?xml version="1.0" encoding="UTF-8"?>
 
-    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                          http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                      xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                                          https://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="Acme\ShopBundle\Entity\Book" table="acme_book">
             <!-- your mappings... -->

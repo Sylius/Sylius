@@ -27,4 +27,4 @@ How to configure a CRON job ?
 
 .. tip::
 
-    Learn more here: `Cron and Crontab usage and examples <http://www.pantz.org/software/cron/croninfo.html>`_.
+    Learn more here: `Cron and Crontab usage and examples <https://www.pantz.org/software/cron/croninfo.html>`_.

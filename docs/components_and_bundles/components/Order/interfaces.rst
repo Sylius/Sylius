@@ -25,10 +25,6 @@ This interface should be implemented by model representing a single Order.
     This interface extends `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_, `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_,
     :ref:`component_order_model_adjustable-interface` and :ref:`component_order_model_comment-aware-interface`
 
-    For more detailed information go to `Sylius API OrderInterface`_.
-
-.. _Sylius API OrderInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderInterface.html
-
 .. _component_order_model_order-aware-interface:
 
 OrderAwareInterface
@@ -36,11 +32,6 @@ OrderAwareInterface
 
 This interface provides basic operations for order management.
 If you want to have orders in your model just implement this interface.
-
-.. note::
-    For more detailed information go to `Sylius API OrderAwareInterface`_.
-
-.. _Sylius API OrderAwareInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderAwareInterface.html
 
 .. _component_order_model_order-item-interface:
 
@@ -52,11 +43,6 @@ This interface should be implemented by model representing a single OrderItem.
 .. note::
     This interface extends the :ref:`component_order_model_order-aware-interface` and the :ref:`component_order_model_adjustable-interface`,
 
-    For more detailed information go to `Sylius API OrderItemInterface`_.
-
-.. _Sylius API OrderItemInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderItemInterface.html
-
-
 .. _component_order_model_order-item-unit-interface:
 
 OrderItemUnitInterface
@@ -67,11 +53,6 @@ This interface should be implemented by model representing a single OrderItemUni
 .. note::
     This interface extends the :ref:`component_order_model_adjustable-interface`,
 
-    For more detailed information go to `Sylius API OrderItemUnitInterface`_.
-
-.. _Sylius API OrderItemUnitInterface: http://api.sylius.com/Sylius/Component/Order/Model/OrderItemUnitInterface.html
-
-
 .. _component_order_model_adjustment-interface:
 
 AdjustmentInterface
@@ -81,10 +62,6 @@ This interface should be implemented by model representing a single Adjustment.
 
 .. note::
     This interface extends the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_.
-
-    For more detailed information go to `Sylius API AdjustmentInterface`_.
-
-.. _Sylius API AdjustmentInterface: http://api.sylius.com/Sylius/Component/Order/Model/AdjustmentInterface.html
 
 .. _component_order_model_adjustable-interface:
 
@@ -98,11 +75,6 @@ For example following models implement this interface:
     * :ref:`component_order_model_order`
     * :ref:`component_order_model_order-item`
 
-.. note::
-    For more detailed information go to `Sylius API AdjustableInterface`_.
-
-.. _Sylius API AdjustableInterface: http://api.sylius.com/Sylius/Component/Order/Model/AdjustableInterface.html
-
 .. _component_order_model_comment-interface:
 
 CommentInterface
@@ -113,10 +85,6 @@ This interface should be implemented by model representing a single Comment.
 .. note::
     This interface extends the `TimestampableInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Model/TimestampableInterface.php>`_
 
-    For more detailed information go to `Sylius API CommentInterface`_.
-
-.. _Sylius API CommentInterface: http://api.sylius.com/Sylius/Component/Order/Model/CommentInterface.html
-
 .. _component_order_model_comment-aware-interface:
 
 CommentAwareInterface
@@ -125,22 +93,12 @@ CommentAwareInterface
 This interface provides basic operations for comments management.
 If you want to have comments in your model just implement this interface.
 
-.. note::
-    For more detailed information go to `Sylius API CommentAwareInterface`_.
-
-.. _Sylius API CommentAwareInterface: http://api.sylius.com/Sylius/Component/Order/Model/CommentAwareInterface.html
-
 .. _component_order_model_identity-interface:
 
 IdentityInterface
 ~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by model representing a single Identity. It can be used for storing external identifications.
-
-.. note::
-    For more detailed information go to `Sylius API IdentityInterface`_.
-
-.. _Sylius API IdentityInterface: http://api.sylius.com/Sylius/Component/Order/Model/IdentityInterface.html
 
 Services Interfaces
 -------------------
@@ -155,7 +113,3 @@ you should create repository class which implements this interface.
 
 .. note::
     This interface extends the `RepositoryInterface <https://github.com/Sylius/SyliusResourceBundle/blob/master/src/Component/Repository/RepositoryInterface.php>`_.
-
-    For more detailed information about the interface go to `Sylius API OrderRepositoryInterface`_.
-
-.. _Sylius API OrderRepositoryInterface: http://api.sylius.com/Sylius/Component/Order/Repository/OrderRepositoryInterface.html
