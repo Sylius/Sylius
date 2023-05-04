@@ -744,30 +744,28 @@ final class CartContext implements Context
     /**
      * @Then /^this product should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueCode): void
+    public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueValue): void
     {
         $item = $this->sharedStorage->get('item');
 
-        $variantData = $this->responseChecker->getResponseContent($this->shopClient->showByIri($item['variant']));
+        $optionValues = $this->responseChecker->getValue($this->shopClient->showByIri($item['variant']), 'optionValues');
 
-        foreach ($variantData['optionValues'] as $optionValueIri) {
+        foreach ($optionValues as $optionValueIri) {
             $optionValue = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValueIri));
 
-            if ($optionValue['code'] !== $expectedOptionValueCode) {
+            if ($optionValue['value'] !== $expectedOptionValueValue) {
                 continue;
             }
 
             $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue['option']));
 
-            if ($option['name'] !== $expectedOptionName) {
-                continue;
+            if ($option['name'] === $expectedOptionName) {
+                return;
             }
-
-            return;
         }
 
         throw new \DomainException(
-            sprintf('Could not find item with option "%s" set to "%s"', $expectedOptionName, $expectedOptionValueCode),
+            sprintf('Could not find item with option "%s" set to "%s"', $expectedOptionName, $expectedOptionValueValue),
         );
     }
 

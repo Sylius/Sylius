@@ -265,10 +265,12 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductPrice(int $price): void
     {
-        Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
-            $price,
-        ));
+        /** @var ProductVariantInterface $checkedVariant */
+        $checkedVariant = $this->sharedStorage->get('product_variant');
+        $variant = $this->fetchItemByIri($this->iriConverter->getIriFromItem($checkedVariant));
+
+        Assert::same($variant['price'], $price);
+        Assert::same($variant['code'], $checkedVariant->getCode());
     }
 
     /**
@@ -571,9 +573,9 @@ final class ProductContext implements Context
     /**
      * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
      */
-    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValueName, string $optionName): void
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValueValue, string $optionName): void
     {
-        Assert::false($this->hasProductOptionWithNameAndValue($optionName, $optionValueName));
+        Assert::false($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue));
     }
 
     /**
@@ -705,7 +707,7 @@ final class ProductContext implements Context
         return false;
     }
 
-    private function hasProductOptionWithNameAndValue(string $expectedOptionName, string $expectedOptionValueCode): bool
+    private function hasProductOptionWithNameAndValue(string $expectedOptionName, string $expectedOptionValueValue): bool
     {
         $response = $this->client->getLastResponse();
 
@@ -718,10 +720,10 @@ final class ProductContext implements Context
 
         foreach ($productVariants as $productVariant) {
             foreach ($productVariant['optionValues'] as $optionValueIri) {
-                $optionValue = $this->fetchItemByIri($optionValueIri);
-                $option = $this->fetchItemByIri($optionValue['option']);
+                $optionValueData = $this->fetchItemByIri($optionValueIri);
+                $optionData = $this->fetchItemByIri($optionValueData['option']);
 
-                if ($option['name'] === $expectedOptionName && $optionValue['code'] === $expectedOptionValueCode) {
+                if ($optionData['name'] === $expectedOptionName && $optionValueData['value'] === $expectedOptionValueValue) {
                     return true;
                 }
             }
