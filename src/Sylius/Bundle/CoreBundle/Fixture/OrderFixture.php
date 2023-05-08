@@ -22,6 +22,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -45,7 +46,7 @@ class OrderFixture extends AbstractFixture
         ObjectManager $orderManager,
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
-        RepositoryInterface $productRepository,
+        ProductRepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,

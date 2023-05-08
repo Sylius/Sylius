@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Webmozart\Assert\Assert;
 
 class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterface
 {
@@ -81,6 +82,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -88,6 +90,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }

@@ -37,6 +37,7 @@ class UserLogin implements UserLoginInterface
     {
         $firewallName = $firewallName ?? 'main';
 
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
 

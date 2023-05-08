@@ -155,6 +155,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -162,6 +163,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Checker\Eligibility;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface as CorePromotionCouponInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -42,7 +43,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
         }
 
         $customer = $promotionSubject->getCustomer();
-        if ($customer === null || $customer->getId() === null) {
+        if (!$customer instanceOf CustomerInterface || $customer->getId() === null) {
             return true;
         }
 

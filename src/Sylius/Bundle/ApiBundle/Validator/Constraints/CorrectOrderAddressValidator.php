@@ -35,6 +35,10 @@ final class CorrectOrderAddressValidator extends ConstraintValidator
         /** @var CorrectOrderAddress $constraint */
         Assert::isInstanceOf($constraint, CorrectOrderAddress::class);
 
+        Assert::nullOrIsInstanceOf($value->billingAddress, AddressInterface::class);
+
+        Assert::nullOrIsInstanceOf($value->shippingAddress, AddressInterface::class);
+
         $this->validateAddress($value->billingAddress, $constraint);
         $this->validateAddress($value->shippingAddress, $constraint);
     }
