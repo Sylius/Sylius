@@ -52,6 +52,7 @@ class ExchangeRate implements ExchangeRateInterface
          *
          * @psalm-suppress DocblockTypeContradiction
          * @psalm-suppress RedundantConditionGivenDocblockType
+         * @phpstan-ignore-next-line We need to support both string and float here.
          */
         return is_string($this->ratio) ? (float) $this->ratio : $this->ratio;
     }

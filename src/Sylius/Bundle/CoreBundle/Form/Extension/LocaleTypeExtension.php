@@ -61,7 +61,7 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         return [LocaleType::class];
     }
 
-    private function getLocaleName(string $code): ?string
+    private function getLocaleName(string $code): string
     {
         return Locales::getName($code);
     }
