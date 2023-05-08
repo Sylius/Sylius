@@ -57,6 +57,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         if (!$channel instanceof ChannelInterface) {
             return $data;
         }
+        Assert::isInstanceOf($channel, ChannelInterface::class);
 
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);

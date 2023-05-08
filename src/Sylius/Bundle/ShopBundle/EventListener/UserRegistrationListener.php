@@ -43,7 +43,7 @@ final class UserRegistrationListener
         Assert::isInstanceOf($customer, CustomerInterface::class);
 
         $user = $customer->getUser();
-        Assert::notNull($user);
+        Assert::isInstanceOf($user, ShopUserInterface::class);
 
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();

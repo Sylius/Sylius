@@ -27,7 +27,7 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -49,7 +49,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
     }
 
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response): SymfonyUserInterface
     {
         $oauth = $this->oauthRepository->findOneBy([
             'provider' => $response->getResourceOwner()->getName(),
@@ -58,14 +58,14 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         if ($oauth instanceof UserOAuthInterface) {
             $user = $oauth->getUser();
-            Assert::isInstanceOf($user, UserInterface::class);
+            Assert::isInstanceOf($user, SymfonyUserInterface::class);
 
             return $user;
         }
 
         if (null !== $response->getEmail()) {
             $user = $this->userRepository->findOneByEmail($response->getEmail());
-            if (null !== $user) {
+            if ($user instanceof SymfonyUserInterface) {
                 return $this->updateUserByOAuthUserResponse($user, $response);
             }
 
@@ -76,13 +76,13 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         throw new UserNotFoundException('Email is null or not provided');
     }
 
-    public function connect(UserInterface $user, UserResponseInterface $response): void
+    public function connect(SymfonyUserInterface $user, UserResponseInterface $response): void
     {
         $this->updateUserByOAuthUserResponse($user, $response);
     }
 
     /**
-     * @return SyliusUserInterface&UserInterface
+     * @return SyliusUserInterface&SymfonyUserInterface
      *
      * Ad-hoc creation of user.
      */
@@ -128,19 +128,20 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $user->setPlainPassword(substr(sha1($response->getAccessToken()), 0, 10));
 
         $user->setEnabled(true);
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
 
         return $this->updateUserByOAuthUserResponse($user, $response);
     }
 
     /**
-     * @return SyliusUserInterface&UserInterface
+     * @return SyliusUserInterface&SymfonyUserInterface
      *
      * Attach OAuth sign-in provider account to existing user.
      */
-    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response): SyliusUserInterface
+    private function updateUserByOAuthUserResponse(SymfonyUserInterface $user, UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
-        Assert::isInstanceOf($user, UserInterface::class);
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         Assert::isInstanceOf($user, SyliusUserInterface::class);
 
         /** @var UserOAuthInterface $oauth */

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\AdminBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\AdminBundle\Event\ProductVariantMenuBuilderEvent;
-use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class ProductVariantFormMenuBuilder

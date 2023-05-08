@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UiBundle\Twig;
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Webmozart\Assert\Assert;
 
 final class TemplateEventExtension extends AbstractExtension
 {
@@ -35,6 +36,11 @@ final class TemplateEventExtension extends AbstractExtension
      */
     public function render(string|array $eventName, array $context = []): string
     {
-        return $this->templateEventRenderer->render((array) $eventName, $context);
+        if (is_string($eventName)) {
+            $eventName = [$eventName];
+        }
+        Assert::notEmpty($eventName);
+
+        return $this->templateEventRenderer->render($eventName, $context);
     }
 }
