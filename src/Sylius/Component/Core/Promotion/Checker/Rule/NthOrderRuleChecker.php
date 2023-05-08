@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -41,7 +42,7 @@ final class NthOrderRuleChecker implements RuleCheckerInterface
         }
 
         $customer = $subject->getCustomer();
-        if (null === $customer) {
+        if (!$customer instanceof CustomerInterface) {
             return false;
         }
 

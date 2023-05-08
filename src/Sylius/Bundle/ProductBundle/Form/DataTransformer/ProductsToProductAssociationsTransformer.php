@@ -22,6 +22,7 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Webmozart\Assert\Assert;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
@@ -129,6 +130,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
         $productAssociation->clearAssociatedProducts();
         foreach ($products as $product) {
+            Assert::isInstanceOf($product, ProductInterface::class);
             $productAssociation->addAssociatedProduct($product);
         }
     }

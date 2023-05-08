@@ -43,7 +43,7 @@ final class PickupCartHandler implements MessageHandlerInterface
     public function __invoke(PickupCart $pickupCart): OrderInterface
     {
         $channel = $this->channelRepository->findOneByCode($pickupCart->getChannelCode());
-        Assert::notNull($channel);
+        Assert::isInstanceOf($channel, ChannelInterface::class);
 
         $customer = null;
         if ($pickupCart->getEmail() !== null) {

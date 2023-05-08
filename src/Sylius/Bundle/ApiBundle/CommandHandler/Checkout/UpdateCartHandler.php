@@ -17,6 +17,7 @@ use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -46,7 +47,9 @@ final class UpdateCartHandler implements MessageHandlerInterface
         }
 
         $billingAddress = $updateCart->getBillingAddress();
+        Assert::nullOrIsInstanceOf($billingAddress, AddressInterface::class);
         $shippingAddress = $updateCart->getShippingAddress();
+        Assert::nullOrIsInstanceOf($shippingAddress, AddressInterface::class);
         if ($billingAddress || $shippingAddress) {
             $order = $this->orderAddressModifier->modify($order, $billingAddress, $shippingAddress);
         }

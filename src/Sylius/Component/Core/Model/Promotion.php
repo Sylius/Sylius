@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Promotion\Model\Promotion as BasePromotion;
+use Webmozart\Assert\Assert;
 
 class Promotion extends BasePromotion implements PromotionInterface
 {
@@ -47,6 +48,7 @@ class Promotion extends BasePromotion implements PromotionInterface
 
     public function addChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if (!$this->hasChannel($channel)) {
             $this->channels->add($channel);
         }
@@ -54,6 +56,7 @@ class Promotion extends BasePromotion implements PromotionInterface
 
     public function removeChannel(BaseChannelInterface $channel): void
     {
+        Assert::isInstanceOf($channel, ChannelInterface::class);
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }
