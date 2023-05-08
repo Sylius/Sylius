@@ -29,6 +29,7 @@ final class ShowAvailablePluginsCommand extends Command
      * @var iterable<PluginInfo>
      *
      * @phpstan-var ArrayCollection<PluginInfo>
+     * @phpstan-ignore-next-line
      *
      * @psalm-var ArrayCollection<array-key, PluginInfo>
      */
