@@ -742,31 +742,33 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
+     * @Then /^this product should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
+    public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueCode): void
     {
         $item = $this->sharedStorage->get('item');
 
-        $variantData = json_decode($this->shopClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $variantData = $this->responseChecker->getResponseContent($this->shopClient->showByIri($item['variant']));
 
-        foreach ($variantData['optionValues'] as $valueIri) {
-            $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        foreach ($variantData['optionValues'] as $optionValueIri) {
+            $optionValue = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValueIri));
 
-            if ($optionValueData['value'] !== $optionValue) {
+            if ($optionValue['code'] !== $expectedOptionValueCode) {
                 continue;
             }
 
-            $optionData = json_decode($this->shopClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+            $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue['option']));
 
-            if ($optionData['name'] !== $optionName) {
+            if ($option['name'] !== $expectedOptionName) {
                 continue;
             }
 
             return;
         }
 
-        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
+        throw new \DomainException(
+            sprintf('Could not find item with option "%s" set to "%s"', $expectedOptionName, $expectedOptionValueCode),
+        );
     }
 
     /**
