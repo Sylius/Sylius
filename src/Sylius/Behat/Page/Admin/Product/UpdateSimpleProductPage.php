@@ -158,7 +158,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
 
