@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\ContentType;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,35 +32,16 @@ final class OrdersTest extends JsonApiTestCase
     use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
+    private MessageBusInterface $commandBus;
+
     /** @test */
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
-
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
-
-        $address = new Address();
-        $address->setFirstName('John');
-        $address->setLastName('Doe');
-        $address->setCity('New York');
-        $address->setStreet('Avenue');
-        $address->setCountryCode('US');
-        $address->setPostcode('90000');
-
-        $updateCartCommand = new UpdateCart('sylius@example.com', $address);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($updateCartCommand);
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+        $this->updateCartWithAddress($tokenValue);
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -72,30 +54,10 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
-
-        $address = new Address();
-        $address->setFirstName('John');
-        $address->setLastName('Doe');
-        $address->setCity('New York');
-        $address->setStreet('Avenue');
-        $address->setCountryCode('US');
-        $address->setPostcode('90000');
-
-        $updateCartCommand = new UpdateCart('oliver@doe.com', $address);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($updateCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+        $this->updateCartWithAddress($tokenValue);
 
         $this->client->request(
             method: 'GET',
@@ -112,18 +74,9 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER);
@@ -137,18 +90,9 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
         $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/adjustments', [], [], self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -161,18 +105,9 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
         /** @var OrderInterface $order */
         $order = $this->get('sylius.repository.order')->findCartByTokenValue($tokenValue);
@@ -200,14 +135,7 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
-
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $this->pickUpCart();
 
         $this->client->request('POST', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER, json_encode([
             'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
@@ -303,17 +231,9 @@ final class OrdersTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
         /** @var CountryInterface $country */
         $country = $fixtures['country_US'];
@@ -351,18 +271,9 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
+        $tokenValue = $this->pickUpCart();
 
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
-
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
 
         $this->client->request('GET', sprintf('/api/v2/shop/orders/%s', $tokenValue));
         $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
@@ -377,18 +288,54 @@ final class OrdersTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
-        $tokenValue = 'nAWw2jewpA';
-
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
-
-        $pickupCartCommand = new PickupCart($tokenValue);
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $tokenValue = $this->pickUpCart();
         $nonExistingOrderItemId = 123;
 
         $this->client->request('DELETE', sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $nonExistingOrderItemId));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->commandBus = self::getContainer()->get('sylius.command_bus');
+    }
+
+    private function pickUpCart(): string
+    {
+        $tokenValue = 'nAWw2jewpA';
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+
+        $this->commandBus->dispatch($pickupCartCommand);
+
+        return $tokenValue;
+    }
+
+    private function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): void
+    {
+        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+
+        $this->commandBus->dispatch($addItemToCartCommand);
+    }
+
+    private function updateCartWithAddress(string $tokenValue): void
+    {
+        $address = new Address();
+        $address->setFirstName('John');
+        $address->setLastName('Doe');
+        $address->setCity('New York');
+        $address->setStreet('Avenue');
+        $address->setCountryCode('US');
+        $address->setPostcode('90000');
+
+        $updateCartCommand = new UpdateCart(email: 'sylius@example.com', billingAddress: $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+
+        $this->commandBus->dispatch($updateCartCommand);
     }
 }
