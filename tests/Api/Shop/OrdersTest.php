@@ -312,6 +312,21 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    /** @test */
+    public function it_does_not_return_payment_configuration_if_invalid_payment_id_passed(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+
+        $this->client->request(
+            'GET',
+            sprintf('/api/v2/shop/orders/%s/payments/%s/configuration', $tokenValue, 'invalid-payment-id'),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
