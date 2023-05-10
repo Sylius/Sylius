@@ -152,7 +152,7 @@ final class ManagingProductsContext implements Context
 
         $productOptions = $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, $product->getCode()), 'options');
 
-        $productOptions[] = $this->iriConverter->getIriFromItem($productOption);
+        $productOptions[] = $this->iriConverter->getIriFromItemInSection($productOption, 'admin');
 
         $this->client->updateRequestData(['options' => $productOptions]);
     }
@@ -162,7 +162,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItem($taxon)]);
+        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromItemInSection($taxon, 'admin')]);
     }
 
     /**
@@ -359,7 +359,7 @@ final class ManagingProductsContext implements Context
 
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($mainTaxon, $this->iriConverter->getIriFromItem($taxon));
+        Assert::same($mainTaxon, $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
     }
 
     /**
@@ -462,7 +462,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getCollectionItemsWithValue(
                 $response,
                 'reviewSubject',
-                $this->iriConverter->getIriFromItem($product),
+                $this->iriConverter->getIriFromItemInSection($product, 'admin'),
             ),
             'Should be no reviews, but some exist',
         );
