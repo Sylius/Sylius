@@ -284,6 +284,22 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_remove_item_from_the_cart_if_invalid_uri_item_parameter_passed(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->client->request('GET', sprintf('/api/v2/shop/orders/%s', $tokenValue));
+
+        $this->client->request('DELETE', sprintf('/api/v2/shop/orders/%s/items/STRING-INSTEAD-OF-ID', $tokenValue));
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
     public function it_returns_unprocessable_entity_status_if_tries_to_remove_an_item_that_not_exist_in_the_order(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
