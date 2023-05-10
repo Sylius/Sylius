@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller\Payment;
 
+use Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException;
 use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class GetPaymentConfiguration
@@ -37,7 +37,9 @@ final class GetPaymentConfiguration
             $request->attributes->get('tokenValue'),
         );
 
-        Assert::notNull($payment);
+        if ($payment === null) {
+            throw new PaymentNotFoundException();
+        }
 
         return new JsonResponse($this->compositePaymentConfigurationProvider->provide($payment));
     }
