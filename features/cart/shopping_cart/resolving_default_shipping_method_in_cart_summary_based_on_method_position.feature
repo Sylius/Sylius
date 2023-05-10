@@ -1,8 +1,8 @@
 @shopping_cart
-Feature: Viewing a cart summary with correct default shipping method based on variant applied
+Feature: Viewing a cart summary with the correct default shipping method
     In order to see details about my order
     As a Visitor
-    I want to be able to see my cart summary with the correct shipping method based on variants
+    I want see my cart summary with the correct shipping method based on its position
 
     Background:
         Given the store operates on a single channel in "United States"
