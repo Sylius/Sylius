@@ -8,6 +8,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.catalog_promotion.class%"
+            sorting:
+                code: asc
             fields:
                 code:
                     type: string
