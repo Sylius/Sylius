@@ -16,8 +16,10 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
+use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 final class ShipmentSpec extends ObjectBehavior
 {
@@ -127,5 +129,36 @@ final class ShipmentSpec extends ObjectBehavior
         $order->recalculateAdjustmentsTotal()->shouldBeCalledTimes(5);
 
         $this->getAdjustmentsTotal()->shouldReturn(300);
+    }
+
+    function it_throws_an_exception_when_shipment_units_are_not_order_item_units_when_getting_shipping_units_total(
+        ShipmentUnitInterface $unit,
+    ): void {
+        $unit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($unit);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('getShippingUnitTotal')
+        ;
+    }
+
+    function it_returns_the_total_of_all_units(
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
+        OrderItemUnitInterface $thirdUnit,
+    ): void {
+        $firstUnit->getTotal()->willReturn(1000);
+        $secondUnit->getTotal()->willReturn(2000);
+        $thirdUnit->getTotal()->willReturn(3000);
+
+        $firstUnit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($firstUnit);
+        $secondUnit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($secondUnit);
+        $thirdUnit->setShipment($this)->shouldBeCalled();
+        $this->addUnit($thirdUnit);
+
+        $this->getShippingUnitTotal()->shouldReturn(6000);
     }
 }
