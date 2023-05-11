@@ -32,24 +32,10 @@ final class UserCartRecalculationListener
     ) {
     }
 
-    /**
-     * @param InteractiveLoginEvent|UserEvent|object $event
-     */
-    public function recalculateCartWhileLogin(object $event): void
+    public function recalculateCartWhileLogin(InteractiveLoginEvent|UserEvent $event): void
     {
         if (!$this->uriBasedSectionContext->getSection() instanceof ShopSection) {
             return;
-        }
-
-        /**
-         * @psalm-suppress DocblockTypeContradiction
-         */
-        if (!$event instanceof InteractiveLoginEvent && !$event instanceof UserEvent) {
-            throw new \TypeError(sprintf(
-                '$event needs to be an instance of "%s" or "%s"',
-                InteractiveLoginEvent::class,
-                UserEvent::class,
-            ));
         }
 
         try {
