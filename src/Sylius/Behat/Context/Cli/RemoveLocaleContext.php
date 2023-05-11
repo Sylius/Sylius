@@ -29,7 +29,7 @@ final class RemoveLocaleContext implements Context
 
     private ?CommandTester $commandTester = null;
 
-    public function __construct (
+    public function __construct(
         KernelInterface $kernel,
         private RepositoryInterface $localeRepository,
         private LocaleConverterInterface $localeConverter,
@@ -62,7 +62,7 @@ final class RemoveLocaleContext implements Context
 
         Assert::contains(
             $this->commandTester?->getDisplay(),
-            sprintf('Locale "%s" has been successfully removed.', $localeCode)
+            sprintf('Locale "%s" has been successfully removed.', $localeCode),
         );
     }
 
@@ -75,7 +75,7 @@ final class RemoveLocaleContext implements Context
 
         Assert::contains(
             $this->commandTester?->getDisplay(),
-            sprintf('Locale "%s" cannot be deleted, as it is used by at least one translation.', $localeCode)
+            sprintf('Locale "%s" cannot be deleted, as it is used by at least one translation.', $localeCode),
         );
     }
 

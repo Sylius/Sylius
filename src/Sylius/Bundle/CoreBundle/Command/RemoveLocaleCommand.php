@@ -26,7 +26,7 @@ final class RemoveLocaleCommand extends Command
 {
     private const NAME = 'sylius:remove-locale';
 
-    public function __construct (
+    public function __construct(
         private RepositoryInterface $localeRepository,
         private LocaleUsageCheckerInterface $localeUsageChecker,
     ) {
@@ -53,7 +53,6 @@ final class RemoveLocaleCommand extends Command
         if (!$helper instanceof QuestionHelper) {
             throw new \RuntimeException('Helper must be an instance of QuestionHelper');
         }
-
 
         if (null === $input->getArgument('locale')) {
             $localeForDeletion = $helper->ask($input, $output, $this->createLocaleForDeletionChoiceQuestion());
@@ -105,7 +104,7 @@ final class RemoveLocaleCommand extends Command
 
         if ($this->localeUsageChecker->isUsed($locale->getCode())) {
             throw new \RuntimeException(
-                sprintf('Locale "%s" cannot be deleted, as it is used by at least one translation.', $locale->getCode())
+                sprintf('Locale "%s" cannot be deleted, as it is used by at least one translation.', $locale->getCode()),
             );
         }
 

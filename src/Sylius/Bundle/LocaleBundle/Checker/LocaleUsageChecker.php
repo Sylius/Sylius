@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleUsageChecker implements LocaleUsageCheckerInterface
 {
-    public function __construct (
+    public function __construct(
         private RepositoryInterface $localeRepository,
         private RegistryInterface $resourceRegistry,
         private EntityManagerInterface $entityManager,
