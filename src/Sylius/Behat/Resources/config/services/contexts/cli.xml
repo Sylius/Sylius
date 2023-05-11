@@ -27,5 +27,12 @@
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.order" />
         </service>
+
+        <service id="sylius.behat.context.cli.remove_locale" class="Sylius\Behat\Context\Cli\RemoveLocaleContext">
+            <argument type="service" id="kernel" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="Sylius\Component\Locale\Converter\LocaleConverterInterface" />
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+        </service>
     </services>
 </container>

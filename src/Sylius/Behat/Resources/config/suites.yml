@@ -63,6 +63,7 @@ imports:
 
     - suites/cli/canceling_unpaid_orders.yml
     - suites/cli/installer.yml
+    - suites/cli/removing_locale.yml
     - suites/cli/showing_available_plugins.yml
 
     - suites/hybrid/cart/shopping_cart.yml
