@@ -25,14 +25,7 @@ final class ShowAvailablePluginsCommand extends Command
 {
     protected static $defaultName = 'sylius:show-available-plugins';
 
-    /**
-     * @var iterable<PluginInfo>
-     *
-     * @phpstan-var ArrayCollection<PluginInfo>
-     * @phpstan-ignore-next-line
-     *
-     * @psalm-var ArrayCollection<array-key, PluginInfo>
-     */
+    /** @var ArrayCollection<array-key, PluginInfo> */
     private Collection $plugins;
 
     protected function configure(): void
@@ -59,7 +52,6 @@ final class ShowAvailablePluginsCommand extends Command
 
     private function configurePlugins(): void
     {
-        /** @var ArrayCollection<array-key, PluginInfo> $this->plugins */
         $this->plugins = new ArrayCollection();
 
         $this->plugins->add(new PluginInfo('<info>Admin Order Creation</info>', 'Creating (and copying) orders in the administration panel.', 'https://github.com/Sylius/AdminOrderCreationPlugin'));
