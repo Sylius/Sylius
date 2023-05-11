@@ -17,11 +17,10 @@ use ApiPlatform\Core\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
@@ -38,7 +37,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
     public function __construct(
         private ProductVariantPricesCalculatorInterface $priceCalculator,
-        private ChannelContextInterface $channelContext,
         private AvailabilityCheckerInterface $availabilityChecker,
         private SectionProviderInterface $uriBasedSectionContext,
         private IriConverterInterface $iriConverter,
@@ -55,9 +53,8 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
 
-        try {
-            $channel = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException) {
+        $channel = $context[ContextKeys::CHANNEL] ?? null;
+        if (!$channel instanceof ChannelInterface) {
             return $data;
         }
 
