@@ -43,7 +43,7 @@ final class PayumController
         private OrderRepositoryInterface $orderRepository,
         private MetadataInterface $orderMetadata,
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private ViewHandlerInterface $viewHandler,
+        private ViewHandlerInterface $viewHandler, /** @phpstan-ignore-line */
         private RouterInterface $router,
         private GetStatusFactoryInterface $getStatusRequestFactory,
         private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory,

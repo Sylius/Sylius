@@ -31,7 +31,7 @@ final class DashboardController
         private ChannelRepositoryInterface $channelRepository,
         private Environment $templatingEngine,
         private RouterInterface $router,
-        private ?SalesDataProviderInterface $salesDataProvider = null,
+        private ?SalesDataProviderInterface $salesDataProvider = null, /** @phpstan-ignore-line */
         private ?StatisticsDataProviderInterface $statisticsDataProvider = null,
     ) {
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use InvalidArgumentException;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
@@ -80,6 +81,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
                 'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
+                default => throw new InvalidArgumentException(sprintf(
+                    'Invalid filesystem adapter "%s" provided.',
+                    $config['filesystem']['adapter']
+                )),
             },
         );
     }
