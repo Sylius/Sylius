@@ -62,7 +62,6 @@ final class ProductContext implements Context
         private ProductVariantGeneratorInterface $productVariantGenerator,
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ProductVariantResolverInterface $defaultVariantResolver,
-        private ProductVariantRepositoryInterface $productVariantRepository,
         private ImageUploaderInterface $imageUploader,
         private SlugGeneratorInterface $slugGenerator,
         private \ArrayAccess $minkParameters,

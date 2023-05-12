@@ -155,7 +155,6 @@
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.product_variant_resolver.default" />
-            <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="behat.mink.parameters" />

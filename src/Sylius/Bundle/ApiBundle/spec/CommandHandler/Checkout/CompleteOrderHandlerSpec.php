@@ -44,12 +44,12 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_order_completion_without_notes(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -82,12 +82,12 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_order_completion_with_notes(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -120,11 +120,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_delays_an_information_about_cart_recalculate(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         MessageBusInterface $commandBus,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        OrderInterface $order,
         CustomerInterface $customer,
         PromotionInterface $promotion,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -166,11 +166,9 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_total_has_changed(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        FactoryInterface $stateMachineFactory,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -190,11 +188,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_order_cannot_be_completed(
         OrderRepositoryInterface $orderRepository,
+        FactoryInterface $stateMachineFactory,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory,
         CustomerInterface $customer,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');

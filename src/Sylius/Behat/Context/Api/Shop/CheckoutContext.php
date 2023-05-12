@@ -477,7 +477,6 @@ final class CheckoutContext implements Context
      * @Given I completed the payment step with :paymentMethod payment method
      * @When I choose :paymentMethod payment method
      * @When I select :paymentMethod payment method
-     * @When I proceed selecting :paymentMethod payment method
      * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
      * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
      * @When I try to change payment method to :paymentMethod payment
@@ -499,17 +498,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I have proceeded selecting :paymentMethod payment method
-     * @When I proceed selecting :paymentMethod payment method
-     */
-    public function iHaveProceededSelectingOfflinePaymentMethod(PaymentMethodInterface $paymentMethod): void
-    {
-        $this->iCompleteTheAddressingStep();
-        $this->iCompleteTheShippingStepWithFirstShippingMethod();
-        $this->iChoosePaymentMethod($paymentMethod);
-    }
-
-    /**
      * @When I proceed through checkout process
      * @When I proceeded through checkout process
      */
@@ -525,6 +513,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I proceed selecting :paymentMethod payment method
      * @When I have proceeded selecting :paymentMethod payment method
      */
     public function iHaveProceededSelectingPaymentMethod(PaymentMethodInterface $paymentMethod): void
