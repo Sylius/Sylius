@@ -327,6 +327,61 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion) has coupon "([^"]+)"$/
+     */
+    public function thisPromotionHasCoupon(PromotionInterface $promotion, string $couponCode): void
+    {
+        $coupon = $this->createCoupon($couponCode);
+        $promotion->addCoupon($coupon);
+
+        $this->sharedStorage->set('coupon', $coupon);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used (\d+) times? per customer$/
+     * @Given /^(this coupon) has no per customer usage limit$/
+     */
+    public function thisCouponCanBeUsedTimesPerCustomer(PromotionCouponInterface $coupon, ?int $usageLimit = null): void
+    {
+        $coupon->setPerCustomerUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used (\d+) times per customer with overall usage limit of (\d+)$/
+     */
+    public function thisCouponCanBeUsedTimesPerCustomerWithOverallUsageLimitOf(
+        PromotionCouponInterface $coupon,
+        int $perCustomerUsageLimit,
+        int $overallUsageLimit,
+    ): void {
+        $this->thisCouponCanBeUsedTimesPerCustomer($coupon, $perCustomerUsageLimit);
+        $this->thisCouponCanBeUsedNTimes($coupon, $overallUsageLimit);
+    }
+
+    /**
+     * @Given /^(this coupon) has been used (\d+) times?$/
+     */
+    public function thisCouponHasBeenUsedTimes(PromotionCouponInterface $coupon, int $used): void
+    {
+        $coupon->setUsed($used);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) expires (on "[^"]+")$/
+     */
+    public function thisCouponExpiresOn(PromotionCouponInterface $coupon, \DateTimeInterface $date): void
+    {
+        $coupon->setExpiresAt($date);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order$/
      */
     public function itGivesFixedDiscountToEveryOrder(PromotionInterface $promotion, int $discount): void
