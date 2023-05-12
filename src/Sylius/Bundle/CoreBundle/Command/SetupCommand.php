@@ -195,8 +195,7 @@ EOT
                 }
 
                 return $value;
-            }
-        ;
+            };
     }
 
     private function createPasswordQuestion(string $message, \Closure $validator): Question

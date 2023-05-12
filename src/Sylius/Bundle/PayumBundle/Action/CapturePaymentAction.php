@@ -77,7 +77,6 @@ final class CapturePaymentAction extends GatewayAwareAction
     {
         return
             $request instanceof Capture &&
-            $request->getModel() instanceof SyliusPaymentInterface
-        ;
+            $request->getModel() instanceof SyliusPaymentInterface;
     }
 }

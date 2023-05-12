@@ -132,8 +132,7 @@ final class LazyOption
                 }
 
                 return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
-            }
-        ;
+            };
     }
 
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
@@ -163,7 +162,6 @@ final class LazyOption
                 }
 
                 return $resource;
-            }
-        ;
+            };
     }
 }

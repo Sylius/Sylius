@@ -40,7 +40,6 @@ final class CatalogPromotionUpdateFailedMessageListener
     {
         return
             $event->willRetry() === false &&
-            $event->getEnvelope()->getMessage() instanceof CatalogPromotionUpdated
-        ;
+            $event->getEnvelope()->getMessage() instanceof CatalogPromotionUpdated;
     }
 }

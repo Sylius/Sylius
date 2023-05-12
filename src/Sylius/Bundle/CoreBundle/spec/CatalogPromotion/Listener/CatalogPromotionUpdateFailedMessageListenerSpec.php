@@ -45,8 +45,7 @@ final class CatalogPromotionUpdateFailedMessageListenerSpec extends ObjectBehavi
             function ($object): bool {
                 return
                     $object->code === 'code' &&
-                    $object instanceof CatalogPromotionFailed
-                ;
+                    $object instanceof CatalogPromotionFailed;
             },
         ))->willReturn(new Envelope($catalogPromotionFailed))->shouldBeCalled();
 

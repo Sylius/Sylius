@@ -84,8 +84,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
             (
                 isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments']) ||
                 isset($subresourceIdentifiers['id'])
-            )
-        ;
+            );
     }
 
     private function isNotAdminGetOperation(array $context): bool

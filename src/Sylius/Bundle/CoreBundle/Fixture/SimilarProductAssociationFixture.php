@@ -37,7 +37,7 @@ class SimilarProductAssociationFixture extends AbstractFixture
             (new OptionsResolver())
                 ->setRequired('amount')
                 ->setAllowedTypes('amount', 'int')
-        ;
+            ;
     }
 
     public function getName(): string

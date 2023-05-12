@@ -69,8 +69,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
         return
             isset(json_decode($response->getContent(), true)['token']) &&
-            $response->getStatusCode() !== Response::HTTP_UNAUTHORIZED
-        ;
+            $response->getStatusCode() !== Response::HTTP_UNAUTHORIZED;
     }
 
     public function getErrorMessage(): string

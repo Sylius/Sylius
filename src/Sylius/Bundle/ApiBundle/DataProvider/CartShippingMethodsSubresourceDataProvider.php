@@ -56,7 +56,6 @@ final class CartShippingMethodsSubresourceDataProvider implements RestrictedData
 
         return
             is_a($resourceClass, ShippingMethodInterface::class, true) &&
-            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments'])
-        ;
+            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['shipments']);
     }
 }

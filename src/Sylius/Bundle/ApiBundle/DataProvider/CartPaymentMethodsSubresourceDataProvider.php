@@ -39,8 +39,7 @@ final class CartPaymentMethodsSubresourceDataProvider implements RestrictedDataP
 
         return
             is_a($resourceClass, PaymentMethodInterface::class, true) &&
-            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['payments'])
-        ;
+            isset($subresourceIdentifiers['tokenValue'], $subresourceIdentifiers['payments']);
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
