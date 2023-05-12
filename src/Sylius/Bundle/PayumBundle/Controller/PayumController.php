@@ -23,7 +23,6 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -43,7 +42,6 @@ final class PayumController
         private OrderRepositoryInterface $orderRepository,
         private MetadataInterface $orderMetadata,
         private RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        private ViewHandlerInterface $viewHandler, /** @phpstan-ignore-line */
         private RouterInterface $router,
         private GetStatusFactoryInterface $getStatusRequestFactory,
         private ResolveNextRouteFactoryInterface $resolveNextRouteRequestFactory,

@@ -21,13 +21,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 /** @experimental */
 final class TaxonDeletionEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private MessageBusInterface $eventBus,
         private ChannelRepositoryInterface $channelRepository,
     ) {
     }
