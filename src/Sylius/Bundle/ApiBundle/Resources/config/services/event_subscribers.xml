@@ -40,7 +40,6 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
-            <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_subscriber" />
         </service>

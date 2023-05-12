@@ -41,10 +41,6 @@ final class LazyOption
         return function (Options $options) use ($repository, $criteria): object {
             $objects = $repository->findBy($criteria);
 
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
-            }
-
             Assert::notEmpty($objects, 'No entities found of type ' . $repository->getClassName());
 
             return $objects[array_rand($objects)];
@@ -63,10 +59,6 @@ final class LazyOption
 
             $objects = $repository->findBy($criteria);
 
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
-            }
-
             return 0 === count($objects) ? null : $objects[array_rand($objects)];
         };
     }
@@ -75,10 +67,6 @@ final class LazyOption
     {
         return function (Options $options) use ($repository, $amount, $criteria): iterable {
             $objects = $repository->findBy($criteria);
-
-            if ($objects instanceof Collection) {
-                $objects = $objects->toArray();
-            }
 
             $selectedObjects = [];
             for (; $amount > 0 && count($objects) > 0; --$amount) {
