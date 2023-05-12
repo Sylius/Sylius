@@ -388,9 +388,6 @@
     "payum/iso4217": {
         "version": "1.0.1"
     },
-    "payum/payum": {
-        "version": "1.6.0"
-    },
     "payum/payum-bundle": {
         "version": "2.4",
         "recipe": {

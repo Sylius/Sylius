@@ -29,7 +29,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "payum/payum": "^1.7.2",
+        "payum/offline": "^1.7.3",
+        "payum/paypal-express-checkout-nvp": "^1.7.3",
         "payum/payum-bundle": "^2.5",
         "sylius/core": "^1.12",
         "sylius/currency": "^1.12",

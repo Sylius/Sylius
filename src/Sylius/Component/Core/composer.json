@@ -31,7 +31,7 @@
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "league/flysystem": "^2.4",
-        "payum/payum": "^1.7.2",
+        "payum/core": "^1.7.3",
         "psr/http-client": "^1.0",
         "psr/http-message": "^1.0",
         "sylius/addressing": "^1.12",
