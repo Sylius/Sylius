@@ -2,7 +2,7 @@
 Feature: Viewing a cart summary with the correct default shipping method
     In order to see details about my order
     As a Visitor
-    I want see my cart summary with the correct shipping method based on its position
+    I want to see my cart summary with the correct shipping method based on its position
 
     Background:
         Given the store operates on a single channel in "United States"
