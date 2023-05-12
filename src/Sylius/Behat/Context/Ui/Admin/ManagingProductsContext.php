@@ -649,7 +649,7 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
         $currentPage->open(['id' => $product->getId()]);
 
-        Assert::true($currentPage->isMainTaxonChosen($taxonName));
+        Assert::true($currentPage->hasMainTaxonWithName($taxonName));
     }
 
     /**

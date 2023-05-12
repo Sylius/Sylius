@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -35,6 +37,7 @@ final class ManagingTaxonsContext implements Context
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
         private JavaScriptTestHelper $testHelper,
+        private UpdateSimpleProductPageInterface $updateSimpleProductPage,
     ) {
     }
 
@@ -205,6 +208,16 @@ final class ManagingTaxonsContext implements Context
         $this->updatePage->open(['id' => $taxon->getId()]);
 
         Assert::true($this->updatePage->hasResourceValues(['slug' => $slug]));
+    }
+
+    /**
+     * @Then the product :product should no longer have a main taxon
+     */
+    public function theProductShouldNoLongerHaveAMainTaxon(ProductInterface $product): void
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::false($this->updateSimpleProductPage->hasMainTaxon());
     }
 
     /**
@@ -448,7 +461,7 @@ final class ManagingTaxonsContext implements Context
         Assert::false($this->updatePage->isEnabled());
     }
 
-    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface
+    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface|UpdateConfigurableProductPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,

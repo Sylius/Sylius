@@ -89,10 +89,24 @@ final class ProductContext implements Context
      */
     public function storeHasAProductPricedAtBelongingToTheTaxon(
         string $productName,
-        int $price = 100,
+        int $price,
         TaxonInterface $taxon,
     ): void {
         $product = $this->createProduct($productName, $price);
+        $this->productTaxonContext->itBelongsTo($product, $taxon);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" belonging to the ("[^"]+" taxon)$/
+     * @Given /^the store(?:| also) has a product "([^"]+)" belonging to (this taxon)$/
+     */
+    public function storeHasAProductBelongingToTheTaxon(
+        string $productName,
+        TaxonInterface $taxon,
+    ): void {
+        $product = $this->createProduct($productName);
         $this->productTaxonContext->itBelongsTo($product, $taxon);
 
         $this->saveProduct($product);
@@ -1293,12 +1307,7 @@ final class ProductContext implements Context
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    /**
-     * @param string $productName
-     *
-     * @return ProductInterface
-     */
-    private function createProduct($productName, int $price = 100, ChannelInterface $channel = null)
+    private function createProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
     {
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');

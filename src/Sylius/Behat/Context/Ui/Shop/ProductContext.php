@@ -261,30 +261,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see in taxon :taxon in the store products :firstProductName and :secondProductName
-     */
-    public function iShouldSeeInTaxonInTheStoreProducts(TaxonInterface $taxon, string ...$productNames): void
-    {
-        $this->iCheckListOfProductsForTaxon($taxon);
-
-        foreach ($productNames as $productName) {
-            Assert::true($this->indexPage->isProductOnList($productName));
-        }
-    }
-
-    /**
-     * @Then I should not see in taxon :taxon in the store products :firstProductName and :secondProductName
-     */
-    public function iShouldNotSeeInTaxonInTheStoreProducts(TaxonInterface $taxon, string ...$productNames): void
-    {
-        $this->iCheckListOfProductsForTaxon($taxon);
-
-        foreach ($productNames as $productName) {
-            Assert::false($this->indexPage->isProductOnList($productName));
-        }
-    }
-
-    /**
      * @Then I should see empty list of products
      */
     public function iShouldSeeEmptyListOfProducts(): void

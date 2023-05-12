@@ -33,6 +33,15 @@ Feature: Deleting a taxon
         Then I should be notified that I cannot delete a menu taxon of any channel
 
     @ui @javascript @api
+    Scenario: Deleting a taxon that is a main taxon of a product
+        Given the store classifies its products as "T-Shirts"
+        And the store has a product "T-Shirts PHP"
+        And this product has a main taxon "T-Shirts"
+        When I delete taxon named "T-Shirts"
+        Then the taxon named "T-Shirts" should no longer exist in the registry
+        And the product "T-Shirts PHP" should no longer have a main taxon
+
+    @ui @javascript @api
     Scenario: Deleting root taxon above menu taxon
         Given the store has "Main Category" taxonomy
         And the store has "Clothes Category" taxonomy
