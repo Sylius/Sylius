@@ -144,6 +144,30 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store(?:| also) allows shipping with "([^"]+)" at position (\d+) with ("[^"]+") fee$/
+     */
+    public function theStoreAllowsShippingMethodWithNameAndPositionAndFee($name, $position, $fee): void
+    {
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $shippingMethod = $this->shippingMethodExampleFactory->create([
+            'name' => $name,
+            'enabled' => true,
+            'zone' => $this->getShippingZone(),
+            'calculator' => [
+                'type' => DefaultCalculators::FLAT_RATE,
+                'configuration' => $configuration,
+            ],
+            'channels' => [$channel],
+        ]);
+
+        $shippingMethod->setPosition((int) $position);
+
+        $this->saveShippingMethod($shippingMethod);
+    }
+
+    /**
      * @Given /^(this shipping method) is named "([^"]+)" in the ("[^"]+" locale)$/
      */
     public function thisShippingMethodIsNamedInLocale(
