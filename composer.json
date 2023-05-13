@@ -49,7 +49,7 @@
         "friendsofsymfony/rest-bundle": "^3.0",
         "gedmo/doctrine-extensions": "^3.2",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
-        "guzzlehttp/psr7": "^1.8",
+        "guzzlehttp/psr7": "^2.5",
         "jms/serializer-bundle": "^4.2",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.7 || ^0.8",
