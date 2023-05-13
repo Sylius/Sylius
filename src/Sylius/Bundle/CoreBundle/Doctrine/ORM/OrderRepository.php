@@ -28,10 +28,14 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template T of OrderInterface
+ * @extends BaseOrderRepository<T>
+ * @implements OrderRepositoryInterface<T>
+ */
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
-    /** @var AssociationHydrator */
-    protected $associationHydrator;
+    protected AssociationHydrator $associationHydrator;
 
     public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {

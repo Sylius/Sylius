@@ -18,6 +18,10 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of ChannelPricingLogEntryInterface
+ * @extends RepositoryInterface<T>
+ */
 interface ChannelPricingLogEntryRepositoryInterface extends RepositoryInterface
 {
     public function createByChannelPricingIdListQueryBuilder(mixed $channelPricingId): QueryBuilder;

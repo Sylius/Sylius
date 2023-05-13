@@ -23,6 +23,11 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
+/**
+ * @template T of ProductInterface
+ * @extends BaseProductRepository<T>
+ * @implements ProductRepositoryInterface<T>
+ */
 class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
 {
     protected AssociationHydrator $associationHydrator;

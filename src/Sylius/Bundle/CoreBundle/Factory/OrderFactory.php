@@ -19,6 +19,9 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements OrderFactoryInterface<OrderInterface>
+ */
 final class OrderFactory implements OrderFactoryInterface
 {
     public function __construct(
@@ -28,7 +31,10 @@ final class OrderFactory implements OrderFactoryInterface
 
     public function createNew(): OrderInterface
     {
-        return $this->decoratedFactory->createNew();
+        /** @var OrderInterface $order */
+        $order = $this->decoratedFactory->createNew();
+
+        return $order;
     }
 
     public function createNewCart(

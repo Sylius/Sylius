@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="2"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
     reportMixedIssues="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -54,6 +56,7 @@
                 <referencedClass name="Http\Message\MessageFactory" /> <!-- deprecated in HttpMessage 1.1 -->
             </errorLevel>
         </DeprecatedClass>
+
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
@@ -62,11 +65,16 @@
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
+                <referencedClass name="Http\Message\MessageFactory" /> <!-- Deprecated in Http\Message 1.1 -->
+                <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" /> <!-- deprecated in Payum 1.3.7 -->
             </errorLevel>
         </DeprecatedInterface>
+
         <DeprecatedMethod>
             <errorLevel type="info">
                 <referencedMethod name="Faker\Generator::__get"/>
@@ -99,11 +107,35 @@
             </errorLevel>
         </InternalClass>
 
+        <InvalidCast>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/ApiBundle/Converter/IriToIdentifierConverter.php" />
+            </errorLevel>
+        </InvalidCast>
+
         <InvalidDocblock>
             <errorLevel type="info">
                 <file name="vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php" />
             </errorLevel>
         </InvalidDocblock>
+
+        <InvalidOperand>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/AdminBundle/MessageHandler/CreateAdminUserHandler.php" />
+            </errorLevel>
+        </InvalidOperand>
+
+        <InvalidPropertyAssignmentValue>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php" />
+            </errorLevel>
+        </InvalidPropertyAssignmentValue>
+
+        <RedundantCast>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/ApiBundle/Converter/IriToIdentifierConverter.php" />
+            </errorLevel>
+        </RedundantCast>
 
         <UndefinedMethod>
             <errorLevel type="suppress">
@@ -116,6 +148,12 @@
 
         <UndefinedInterfaceMethod>
             <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::integerNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::variableNode" />
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getPassword" />
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" />
                 <referencedMethod name="Sylius\Component\User\Model\UserInterface::getUsername" />
@@ -124,6 +162,19 @@
         </UndefinedInterfaceMethod>
 
         <MissingReturnType errorLevel="info" />
+
+        <MissingTemplateParam>
+            <errorLevel type="suppress">
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductTaxonToTaxonTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductVariantsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/TaxonsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductVariantToProductOptionsTransformer.php" />
+                <file name="src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductsToProductAssociationsTransformer.php" />
+                <file name="src/Sylius/Bundle/PromotionBundle/Form/Type/PromotionCouponToCodeType.php" />
+                <file name="src/Sylius/Bundle/UserBundle/Form/UserVerifiedAtToBooleanTransformer.php" />
+            </errorLevel>
+        </MissingTemplateParam>
 
         <PropertyNotSetInConstructor errorLevel="info" />
         <MissingConstructor>

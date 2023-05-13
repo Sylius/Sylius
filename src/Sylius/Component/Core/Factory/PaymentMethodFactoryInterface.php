@@ -16,6 +16,10 @@ namespace Sylius\Component\Core\Factory;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of PaymentMethodInterface
+ * @extends FactoryInterface<T>
+ */
 interface PaymentMethodFactoryInterface extends FactoryInterface
 {
     public function createWithGateway(string $gatewayFactory): PaymentMethodInterface;

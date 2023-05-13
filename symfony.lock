@@ -49,9 +49,6 @@
     "coduo/php-to-string": {
         "version": "3.0.0"
     },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.1"
-    },
     "composer/pcre": {
         "version": "3.0.0"
     },
@@ -975,9 +972,6 @@
     },
     "webmozart/assert": {
         "version": "1.9.1"
-    },
-    "webmozart/path-util": {
-        "version": "2.3.0"
     },
     "willdurand/hateoas": {
         "version": "2.12.0"

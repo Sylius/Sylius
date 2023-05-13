@@ -21,6 +21,10 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
+/**
+ * @template T of OrderInterface
+ * @extends BaseOrderRepositoryInterface<T>
+ */
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;

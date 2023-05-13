@@ -17,6 +17,10 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
+/**
+ * @template T of ChannelPricingLogEntryInterface
+ * @implements ChannelPricingLogEntryFactoryInterface<T>
+ */
 final class ChannelPricingLogEntryFactory implements ChannelPricingLogEntryFactoryInterface
 {
     public function __construct(private string $className)

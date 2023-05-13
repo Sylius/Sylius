@@ -13,8 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Customer\Repository;
 
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of CustomerGroupInterface
+ * @extends RepositoryInterface<T>
+ */
 interface CustomerGroupRepositoryInterface extends RepositoryInterface
 {
     public function findByPhrase(string $phrase, ?int $limit = null): iterable;
