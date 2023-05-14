@@ -33,10 +33,10 @@ jobs:
                 env:
                     BRANCH: ${{ inputs.branch }}
                 run: |
-                    if [ "$BUILD_TYPE" != "1.13" ]; then
-                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
-                    else
+                    if [ "$BRANCH" == "1.12" ]; then
                         echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
                     fi
                 
             -   name: "Checkout (With Branch)"
