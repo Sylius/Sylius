@@ -21,7 +21,9 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 
 /**
  * @template T of PaymentMethodInterface
+ *
  * @extends BasePaymentMethodRepository<T>
+ *
  * @implements PaymentMethodRepositoryInterface<T>
  */
 class PaymentMethodRepository extends BasePaymentMethodRepository implements PaymentMethodRepositoryInterface

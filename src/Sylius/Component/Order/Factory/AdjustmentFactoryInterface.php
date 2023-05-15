@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AdjustmentInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface AdjustmentFactoryInterface extends FactoryInterface

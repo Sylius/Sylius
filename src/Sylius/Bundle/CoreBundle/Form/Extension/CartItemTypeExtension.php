@@ -42,8 +42,7 @@ final class CartItemTypeExtension extends AbstractTypeExtension
             $type =
                 Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod()
                 ? ProductVariantChoiceType::class
-                : ProductVariantMatchType::class
-            ;
+                : ProductVariantMatchType::class;
 
             $builder->add('variant', $type, [
                 'product' => $options['product'],

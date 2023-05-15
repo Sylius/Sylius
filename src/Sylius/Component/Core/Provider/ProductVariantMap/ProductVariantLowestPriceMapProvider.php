@@ -36,7 +36,6 @@ final class ProductVariantLowestPriceMapProvider implements ProductVariantMapPro
             isset($context['channel']) &&
             $context['channel'] instanceof ChannelInterface &&
             null !== $variant->getChannelPricingForChannel($context['channel']) &&
-            null !== $this->calculator->calculateLowestPriceBeforeDiscount($variant, $context)
-        ;
+            null !== $this->calculator->calculateLowestPriceBeforeDiscount($variant, $context);
     }
 }

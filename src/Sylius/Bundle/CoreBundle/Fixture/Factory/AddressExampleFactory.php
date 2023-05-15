@@ -140,6 +140,7 @@ class AddressExampleFactory extends AbstractExampleFactory
 
     /**
      * @param Collection<array-key, ProvinceInterface> $provinces
+     *
      * @throws \InvalidArgumentException
      */
     private function getProvinceCode(Collection $provinces, string $provinceName): string

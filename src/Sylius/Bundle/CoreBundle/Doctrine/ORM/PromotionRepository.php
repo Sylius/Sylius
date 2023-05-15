@@ -23,7 +23,9 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @template T of PromotionInterface
+ *
  * @extends BasePromotionRepository<T>
+ *
  * @implements PromotionRepositoryInterface<T>
  */
 class PromotionRepository extends BasePromotionRepository implements PromotionRepositoryInterface

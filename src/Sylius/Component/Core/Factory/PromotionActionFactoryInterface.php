@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of PromotionActionInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface PromotionActionFactoryInterface extends FactoryInterface

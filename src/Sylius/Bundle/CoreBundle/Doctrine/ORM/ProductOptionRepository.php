@@ -21,6 +21,7 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @template T of ProductOptionInterface
+ *
  * @extends BaseProductOptionRepository<T>
  */
 class ProductOptionRepository extends BaseProductOptionRepository

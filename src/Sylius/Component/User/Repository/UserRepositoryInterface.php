@@ -18,6 +18,7 @@ use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @template T of UserInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface UserRepositoryInterface extends RepositoryInterface

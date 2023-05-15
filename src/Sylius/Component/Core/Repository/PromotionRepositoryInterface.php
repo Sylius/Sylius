@@ -19,6 +19,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface as BasePr
 
 /**
  * @template T of PromotionInterface
+ *
  * @extends BasePromotionRepositoryInterface<T>
  */
 interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface

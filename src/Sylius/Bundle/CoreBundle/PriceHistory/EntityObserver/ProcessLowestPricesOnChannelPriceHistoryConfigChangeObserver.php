@@ -50,8 +50,7 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver impleme
         return
             $entity instanceof ChannelPriceHistoryConfigInterface &&
             null !== $entity->getId() &&
-            !isset($this->configsCurrentlyProcessed[$entity->getId()])
-        ;
+            !isset($this->configsCurrentlyProcessed[$entity->getId()]);
     }
 
     public function observedFields(): array

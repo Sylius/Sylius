@@ -19,6 +19,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
 /**
  * @template T of CustomerInterface
+ *
  * @implements CustomerRepositoryInterface<T>
  */
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface

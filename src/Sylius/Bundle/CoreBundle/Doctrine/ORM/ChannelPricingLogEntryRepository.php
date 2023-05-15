@@ -22,6 +22,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @template T of ChannelPricingLogEntryInterface
+ *
  * @implements ChannelPricingLogEntryRepositoryInterface<T>
  */
 class ChannelPricingLogEntryRepository extends EntityRepository implements ChannelPricingLogEntryRepositoryInterface

@@ -41,8 +41,7 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
         return
             $entity instanceof ChannelInterface &&
             !isset($this->channelsCurrentlyProcessed[$entity->getCode()]) &&
-            $this->hasNewPriceHistoryConfig($entity)
-        ;
+            $this->hasNewPriceHistoryConfig($entity);
     }
 
     public function observedFields(): array
@@ -54,7 +53,6 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
     {
         return
             (null !== $config = $channel->getChannelPriceHistoryConfig()) &&
-            null === $config->getId()
-        ;
+            null === $config->getId();
     }
 }

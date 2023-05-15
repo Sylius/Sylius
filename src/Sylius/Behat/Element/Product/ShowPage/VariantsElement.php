@@ -126,8 +126,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
             $variantContent->find(
                 'css',
                 sprintf('tr.pricing:contains("%s") td:nth-child(%s)', $channel, $lowestPriceColumnIndex),
-            )->getText() === $lowestPriceBeforeDiscount
-        ;
+            )->getText() === $lowestPriceBeforeDiscount;
     }
 
     private function getItemIndexClass(NodeElement $variant): string

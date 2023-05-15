@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @template T of ChannelPricingLogEntryInterface
+ *
  * @implements ChannelPricingLogEntryFactoryInterface<T>
  */
 final class ChannelPricingLogEntryFactory implements ChannelPricingLogEntryFactoryInterface

@@ -30,7 +30,6 @@ final class ProductVariantAppliedPromotionsMapProvider implements ProductVariant
         return
             isset($context['channel']) &&
             $context['channel'] instanceof ChannelInterface &&
-            !$variant->getAppliedPromotionsForChannel($context['channel'])->isEmpty()
-        ;
+            !$variant->getAppliedPromotionsForChannel($context['channel'])->isEmpty();
     }
 }

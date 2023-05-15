@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ZoneInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface ZoneFactoryInterface extends FactoryInterface

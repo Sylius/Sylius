@@ -19,6 +19,7 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface as BaseOrderI
 
 /**
  * @template T of OrderItemInterface
+ *
  * @extends BaseOrderItemRepositoryInterface<T>
  */
 interface OrderItemRepositoryInterface extends BaseOrderItemRepositoryInterface

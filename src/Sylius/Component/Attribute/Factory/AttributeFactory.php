@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AttributeInterface
+ *
  * @implements AttributeFactoryInterface<T>
  */
 final class AttributeFactory implements AttributeFactoryInterface

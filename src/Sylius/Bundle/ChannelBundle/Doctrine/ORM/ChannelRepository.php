@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
  * @template T of ChannelInterface
+ *
  * @implements ChannelRepositoryInterface<T>
  */
 class ChannelRepository extends EntityRepository implements ChannelRepositoryInterface

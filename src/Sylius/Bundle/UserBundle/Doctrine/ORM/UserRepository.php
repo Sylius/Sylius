@@ -19,6 +19,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @template T of UserInterface
+ *
  * @implements UserRepositoryInterface<T>
  */
 class UserRepository extends EntityRepository implements UserRepositoryInterface

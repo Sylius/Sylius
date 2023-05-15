@@ -23,6 +23,7 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepos
 
 /**
  * @template T of OrderInterface
+ *
  * @extends BaseOrderRepositoryInterface<T>
  */
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface

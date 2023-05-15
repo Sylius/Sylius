@@ -20,6 +20,7 @@ use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
 
 /**
  * @template T of OrderItemUnitInterface
+ *
  * @implements OrderItemUnitRepositoryInterface<T>
  */
 class OrderItemUnitRepository extends EntityRepository implements OrderItemUnitRepositoryInterface
