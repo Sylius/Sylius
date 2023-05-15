@@ -686,6 +686,17 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I sort catalog promotions by :order :field
+     */
+    public function iSortCatalogPromotionByOrderField(string $order, string $field): void
+    {
+        $this->indexPage->sortBy(
+            lcfirst(str_replace(' ', '', ucwords($field))),
+            $order === 'descending' ? 'desc' : 'asc',
+        );
+    }
+
+    /**
      * @Then I should be notified that a discount amount should be between 0% and 100%
      */
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
@@ -720,7 +731,15 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->indexPage->open();
 
-        Assert::same($this->indexPage->countItems(), $amount);
+        $this->iShouldSeeCountCatalogPromotionsOnTheList($amount);
+    }
+
+    /**
+     * @Then I should see :count catalog promotions on the list
+     */
+    public function iShouldSeeCountCatalogPromotionsOnTheList(int $count): void
+    {
+        Assert::same($this->indexPage->countItems(), $count);
     }
 
     /**
@@ -1201,6 +1220,14 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name]),
             sprintf('Catalog promotion with name "%s" has been found, but should not.', $name),
         );
+    }
+
+    /**
+     * @Then the first catalog promotion should have code :code
+     */
+    public function theFirstCatalogPromotionShouldHaveCode(string $code): void
+    {
+        Assert::same($this->indexPage->getColumnFields('code')[0], $code);
     }
 
     private function createCatalogPromotion(
