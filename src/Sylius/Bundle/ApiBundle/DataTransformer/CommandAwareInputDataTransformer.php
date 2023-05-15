@@ -42,7 +42,6 @@ final class CommandAwareInputDataTransformer implements DataTransformerInterface
     {
         return
             isset($context['input']['class']) &&
-            is_a($context['input']['class'], CommandAwareDataTransformerInterface::class, true)
-        ;
+            is_a($context['input']['class'], CommandAwareDataTransformerInterface::class, true);
     }
 }

@@ -305,8 +305,7 @@ final class OrderContext implements Context
     {
         $payment = $this
             ->responseChecker
-            ->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'payments')[0]
-        ;
+            ->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'payments')[0];
 
         Assert::same($this->iriConverter->getIriFromItem($paymentMethod), $payment['method']);
     }
@@ -334,8 +333,7 @@ final class OrderContext implements Context
     {
         $paymentMethodIri = $this
             ->responseChecker
-            ->getValue($this->shopClient->getLastResponse(), 'payments')[0]['method']['@id']
-        ;
+            ->getValue($this->shopClient->getLastResponse(), 'payments')[0]['method']['@id'];
 
         Assert::same($this->iriConverter->getItemFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
     }

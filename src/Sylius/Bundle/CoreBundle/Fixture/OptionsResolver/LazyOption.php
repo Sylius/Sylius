@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
@@ -120,8 +119,7 @@ final class LazyOption
                 }
 
                 return $repository->findOneBy(array_merge($criteria, [$field => $previousValue]));
-            }
-        ;
+            };
     }
 
     public static function getOneBy(RepositoryInterface $repository, string $field, array $criteria = []): \Closure
@@ -151,7 +149,6 @@ final class LazyOption
                 }
 
                 return $resource;
-            }
-        ;
+            };
     }
 }
