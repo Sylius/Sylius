@@ -40,7 +40,6 @@ final class DateRange implements CriteriaInterface
     {
         return
             ($catalogPromotion->getStartDate() === null || $catalogPromotion->getStartDate() <= $this->calendar->now()) &&
-            ($catalogPromotion->getEndDate() === null || $catalogPromotion->getEndDate() > $this->calendar->now())
-        ;
+            ($catalogPromotion->getEndDate() === null || $catalogPromotion->getEndDate() > $this->calendar->now());
     }
 }

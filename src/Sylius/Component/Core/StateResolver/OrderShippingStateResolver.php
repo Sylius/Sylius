@@ -80,7 +80,6 @@ final class OrderShippingStateResolver implements StateResolverInterface
         return
             1 <= $shipmentInShippedStateAmount &&
             $shipmentInShippedStateAmount < $shipmentAmount &&
-            OrderShippingStates::STATE_PARTIALLY_SHIPPED !== $order->getShippingState()
-        ;
+            OrderShippingStates::STATE_PARTIALLY_SHIPPED !== $order->getShippingState();
     }
 }

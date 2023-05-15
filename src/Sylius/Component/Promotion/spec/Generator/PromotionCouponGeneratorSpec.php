@@ -100,8 +100,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $promotionCoupon->setCode(Argument::that(function (string $couponCode): bool {
             return
                 str_starts_with($couponCode, 'PREFIX_') &&
-                strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX')
-            ;
+                strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX');
         }))->shouldBeCalled();
         $promotionCoupon->setUsageLimit(null)->shouldBeCalled();
         $promotionCoupon->setExpiresAt(null)->shouldBeCalled();
