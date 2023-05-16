@@ -46,12 +46,12 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
                     continue;
                 }
 
-                $this->addAdjustment($unit, (int) $taxAmount, $taxRate);
+                $this->addAdjustment($unit, $taxAmount, $taxRate);
             }
         }
     }
 
-    private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, TaxRateInterface $taxRate): void
+    private function addAdjustment(OrderItemUnitInterface $unit, float $taxAmount, TaxRateInterface $taxRate): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(
             AdjustmentInterface::TAX_ADJUSTMENT,

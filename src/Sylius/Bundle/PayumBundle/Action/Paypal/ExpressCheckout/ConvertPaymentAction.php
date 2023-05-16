@@ -42,7 +42,7 @@ final class ConvertPaymentAction implements ActionInterface
         $details = [];
         $details['PAYMENTREQUEST_0_INVNUM'] = $this->invoiceNumberGenerator->generate($order, $payment);
         $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrencyCode();
-        $details['PAYMENTREQUEST_0_AMT'] = $this->formatPrice($order->getTotal());
+        $details['PAYMENTREQUEST_0_AMT'] = $this->formatPrice((float) $order->getTotal());
         $details['PAYMENTREQUEST_0_ITEMAMT'] = $this->formatPrice($order->getTotal());
 
         $details = $this->prepareAddressData($order, $details);
@@ -56,7 +56,7 @@ final class ConvertPaymentAction implements ActionInterface
             ++$m;
         }
 
-        if (0 !== $taxTotal = $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)) {
+        if (0.0 !== $taxTotal = $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Tax Total';
             $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($taxTotal);
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
@@ -66,13 +66,13 @@ final class ConvertPaymentAction implements ActionInterface
 
         if (0 !== $promotionTotal = $order->getOrderPromotionTotal()) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Discount';
-            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($promotionTotal);
+            $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice((float) $promotionTotal);
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
 
             ++$m;
         }
 
-        if (0 !== $shippingTotal = $this->getShippingTotalWithoutTaxes($order)) {
+        if (0.0 !== $shippingTotal = $this->getShippingTotalWithoutTaxes($order)) {
             $details['L_PAYMENTREQUEST_0_NAME' . $m] = 'Shipping Total';
             $details['L_PAYMENTREQUEST_0_AMT' . $m] = $this->formatPrice($shippingTotal);
             $details['L_PAYMENTREQUEST_0_QTY' . $m] = 1;
@@ -90,12 +90,12 @@ final class ConvertPaymentAction implements ActionInterface
         ;
     }
 
-    private function getShippingTotalWithoutTaxes(OrderInterface $order): int
+    private function getShippingTotalWithoutTaxes(OrderInterface $order): float
     {
         return $order->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) + $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
     }
 
-    private function formatPrice(int $price): float
+    private function formatPrice(float $price): float
     {
         return round($price / 100, 2);
     }

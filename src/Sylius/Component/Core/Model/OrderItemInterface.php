@@ -34,9 +34,9 @@ interface OrderItemInterface extends BaseOrderItemInterface, VersionedInterface
 
     public function getTaxTotal(): int;
 
-    public function getDiscountedUnitPrice(): int;
+    public function getDiscountedUnitPrice(): float;
 
     public function getSubtotal(): int;
 
-    public function getFullDiscountedUnitPrice(): int;
+    public function getFullDiscountedUnitPrice(): float;
 }

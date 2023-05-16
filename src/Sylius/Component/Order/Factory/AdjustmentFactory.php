@@ -30,7 +30,7 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
     public function createWithData(
         string $type,
         string $label,
-        int $amount,
+        float $amount,
         bool $neutral = false,
         array $details = [],
     ): AdjustmentInterface {

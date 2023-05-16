@@ -57,13 +57,13 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
-            $this->addAdjustment($shipment, (int) $taxAmount, $taxRate, $shippingMethod);
+            $this->addAdjustment($shipment, $taxAmount, $taxRate, $shippingMethod);
         }
     }
 
     private function addAdjustment(
         ShipmentInterface $shipment,
-        int $taxAmount,
+        float $taxAmount,
         TaxRateInterface $taxRate,
         ShippingMethodInterface $shippingMethod,
     ): void {

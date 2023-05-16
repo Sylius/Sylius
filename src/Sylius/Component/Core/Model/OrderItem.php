@@ -18,6 +18,9 @@ use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Webmozart\Assert\Assert;
 
+use function array_reduce;
+use function round;
+
 class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
     /** @var int */
@@ -100,13 +103,13 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             $taxTotal += $unit->getTaxTotal();
         }
 
-        return $taxTotal;
+        return (int) round($taxTotal);
     }
 
     /**
      * Returns single unit price lowered by order unit promotions (each unit must have the same unit promotion discount)
      */
-    public function getDiscountedUnitPrice(): int
+    public function getDiscountedUnitPrice(): float
     {
         if ($this->units->isEmpty()) {
             return $this->unitPrice;
@@ -123,7 +126,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         ;
     }
 
-    public function getFullDiscountedUnitPrice(): int
+    public function getFullDiscountedUnitPrice(): float
     {
         if ($this->units->isEmpty()) {
             return $this->unitPrice;
@@ -143,10 +146,22 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
     public function getSubtotal(): int
     {
-        return array_reduce(
-            $this->getUnits()->toArray(),
-            fn (int $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
-            0,
+        $unitsTotal = (int) round(
+            array_reduce(
+                $this->getUnits()->toArray(),
+                fn (float $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice,
+                0.0,
+            )
         );
+
+        $promotionsTotal = (int) round(
+            array_reduce(
+                $this->getUnits()->toArray(),
+                static fn (float $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
+                0.0,
+            )
+        );
+
+        return $unitsTotal + $promotionsTotal;
     }
 }

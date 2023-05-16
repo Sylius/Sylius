@@ -19,6 +19,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+use function round;
+
 class OrderItemsSubtotalExtension extends AbstractExtension
 {
     /** @var OrderItemsSubtotalCalculatorInterface */
@@ -47,6 +49,6 @@ class OrderItemsSubtotalExtension extends AbstractExtension
 
     public function getSubtotal(OrderInterface $order): int
     {
-        return $this->calculator->getSubtotal($order);
+        return (int) round($this->calculator->getSubtotal($order));
     }
 }

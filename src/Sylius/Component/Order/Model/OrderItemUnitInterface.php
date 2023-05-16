@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
 {
-    public function getTotal(): int;
+    public function getTotal(): float;
 
     public function getOrderItem(): OrderItemInterface;
 }

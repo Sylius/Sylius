@@ -19,6 +19,8 @@ use Sylius\Component\Order\Model\AdjustmentInterface as BaseAdjustmentInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+use function round;
+
 final class OrderUnitTaxesExtension extends AbstractExtension
 {
     public function getFunctions(): array
@@ -43,10 +45,10 @@ final class OrderUnitTaxesExtension extends AbstractExtension
     {
         $total = array_reduce(
             $orderItem->getAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->toArray(),
-            static fn (int $total, BaseAdjustmentInterface $adjustment) => $neutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
-            0,
+            static fn (float $total, BaseAdjustmentInterface $adjustment) => $neutral === $adjustment->isNeutral() ? $total + $adjustment->getAmount() : $total,
+            0.0,
         );
 
-        return $total;
+        return (int) round($total);
     }
 }

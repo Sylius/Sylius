@@ -17,6 +17,8 @@ use Sylius\Component\Core\Model\OrderItem;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+use function round;
+
 final class OrderItemOriginalPriceToDisplayExtension extends AbstractExtension
 {
     public function getFunctions(): array
@@ -32,11 +34,11 @@ final class OrderItemOriginalPriceToDisplayExtension extends AbstractExtension
             $item->getOriginalUnitPrice() !== null &&
             ($item->getOriginalUnitPrice() > $item->getUnitPrice() || $item->getOriginalUnitPrice() > $item->getDiscountedUnitPrice())
         ) {
-            return $item->getOriginalUnitPrice();
+            return (int) round($item->getOriginalUnitPrice());
         }
 
         if ($item->getOriginalUnitPrice() === null && $item->getUnitPrice() > $item->getDiscountedUnitPrice()) {
-            return $item->getUnitPrice();
+            return (int) round($item->getUnitPrice());
         }
 
         return null;

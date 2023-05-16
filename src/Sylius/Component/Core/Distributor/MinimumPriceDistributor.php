@@ -33,7 +33,7 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
             /** @var ProductVariantInterface $variant */
             $variant = $orderItem->getVariant();
 
-            $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice();
+            $minimumPrice = $variant->getChannelPricingForChannel($channel)?->getMinimumPrice() ?? 0;
             $minimumPrice *= $orderItem->getQuantity();
 
             $orderItemsToProcess['order-item-' . $index] = [

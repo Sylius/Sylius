@@ -28,8 +28,8 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     protected $adjustments;
 
-    /** @var int */
-    protected $adjustmentsTotal = 0;
+    /** @var float */
+    protected $adjustmentsTotal = 0.0;
 
     public function __construct(protected OrderItemInterface $orderItem)
     {
@@ -42,12 +42,12 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->id;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
         $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
 
         if ($total < 0) {
-            return 0;
+            return 0.0;
         }
 
         return $total;
@@ -98,13 +98,13 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->adjustments->contains($adjustment);
     }
 
-    public function getAdjustmentsTotal(?string $type = null): int
+    public function getAdjustmentsTotal(?string $type = null): float
     {
         if (null === $type) {
             return $this->adjustmentsTotal;
         }
 
-        $total = 0;
+        $total = 0.0;
         foreach ($this->getAdjustments($type) as $adjustment) {
             if (!$adjustment->isNeutral()) {
                 $total += $adjustment->getAmount();

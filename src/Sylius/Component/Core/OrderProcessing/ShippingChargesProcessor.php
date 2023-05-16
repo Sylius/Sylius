@@ -41,7 +41,7 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
             $shipment->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
             try {
-                $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
+                $shippingCharge = (float) $this->shippingChargesCalculator->calculate($shipment);
                 $shippingMethod = $shipment->getMethod();
 
                 /** @var AdjustmentInterface $adjustment */

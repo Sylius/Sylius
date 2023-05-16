@@ -61,7 +61,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         }
     }
 
-    protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, int $amount, PromotionInterface $promotion): void
+    protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, float $amount, PromotionInterface $promotion): void
     {
         if (!$this->canPromotionBeApplied($unit, $promotion)) {
             return;
@@ -80,7 +80,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
         $channel = $order->getChannel();
 
-        $minimumPrice = $variant->getChannelPricingForChannel($channel)->getMinimumPrice();
+        $minimumPrice = $variant->getChannelPricingForChannel($channel)?->getMinimumPrice() ?? 0;
 
         $adjustment->setAmount($this->calculate($unit->getTotal(), $minimumPrice, -$amount));
 
@@ -100,7 +100,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
         return $adjustment;
     }
 
-    private function calculate(int $unitTotal, ?int $minimumPrice, int $promotionAmount): int
+    private function calculate(float $unitTotal, ?int $minimumPrice, float $promotionAmount): float
     {
         if ($unitTotal + $promotionAmount <= $minimumPrice) {
             return $minimumPrice - $unitTotal;

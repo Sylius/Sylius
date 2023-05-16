@@ -28,7 +28,7 @@ interface AdjustableInterface
 
     public function removeAdjustment(AdjustmentInterface $adjustment): void;
 
-    public function getAdjustmentsTotal(?string $type = null): int;
+    public function getAdjustmentsTotal(?string $type = null): float;
 
     public function removeAdjustments(?string $type = null): void;
 

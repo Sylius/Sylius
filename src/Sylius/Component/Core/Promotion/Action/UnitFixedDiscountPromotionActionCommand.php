@@ -73,7 +73,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit(
                 $unit,
-                min($unit->getTotal(), $amount),
+                min($unit->getTotal(), (float) $amount),
                 $promotion,
             );
         }

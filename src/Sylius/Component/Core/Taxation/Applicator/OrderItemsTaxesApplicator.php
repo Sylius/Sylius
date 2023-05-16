@@ -50,21 +50,18 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             }
 
             $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-            $splitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
+            $splitTaxes = $totalTaxAmount / $quantity;
+            if (0.0 === $splitTaxes) {
+                continue;
+            }
 
-            $i = 0;
             foreach ($item->getUnits() as $unit) {
-                if (0 === $splitTaxes[$i]) {
-                    continue;
-                }
-
-                $this->addAdjustment($unit, $splitTaxes[$i], $taxRate);
-                ++$i;
+                $this->addAdjustment($unit, $splitTaxes, $taxRate);
             }
         }
     }
 
-    private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, TaxRateInterface $taxRate): void
+    private function addAdjustment(OrderItemUnitInterface $unit, float $taxAmount, TaxRateInterface $taxRate): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(
             AdjustmentInterface::TAX_ADJUSTMENT,

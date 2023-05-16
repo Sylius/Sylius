@@ -19,5 +19,5 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, InventoryUnitInterface, ShipmentUnitInterface
 {
-    public function getTaxTotal(): int;
+    public function getTaxTotal(): float;
 }

@@ -58,7 +58,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         return $this->orderItem->getVariant();
     }
 
-    public function getTaxTotal(): int
+    public function getTaxTotal(): float
     {
         $taxTotal = 0;
 

@@ -27,6 +27,8 @@ use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterfac
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 use Webmozart\Assert\Assert;
 
+use function round;
+
 class Order extends BaseOrder implements OrderInterface
 {
     /** @var \Sylius\Component\Core\Model\CustomerInterface|null */
@@ -392,7 +394,7 @@ class Order extends BaseOrder implements OrderInterface
             $taxTotal += $item->getTaxTotal();
         }
 
-        return $taxTotal;
+        return (int) round($taxTotal);
     }
 
     /**
@@ -400,9 +402,10 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getShippingTotal(): int
     {
-        $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT);
-        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
-        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
+        // Adjustment will only be float in OrderItemUnit
+        $shippingTotal = (int) round($this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT));
+        $shippingTotal += (int) round($this->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT));
+        $shippingTotal += (int) round($this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT));
 
         return $shippingTotal;
     }
@@ -412,10 +415,11 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getOrderPromotionTotal(): int
     {
+        // Adjustment will only be float in OrderItemUnit
         return
-            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) +
-            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) +
-            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
+            (int) round($this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)) +
+            (int) round($this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)) +
+            (int) round($this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT))
         ;
     }
 

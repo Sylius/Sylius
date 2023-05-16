@@ -94,7 +94,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
         return $this->adjustments->contains($adjustment);
     }
 
-    public function getAdjustmentsTotal(?string $type = null): int
+    public function getAdjustmentsTotal(?string $type = null): float
     {
         $total = 0;
         foreach ($this->getAdjustments($type) as $adjustment) {

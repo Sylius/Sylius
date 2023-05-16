@@ -54,26 +54,23 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         int $itemPromotionAmount,
         ChannelInterface $channel,
     ): void {
-        $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
+        $splitPromotionAmount = (float) $itemPromotionAmount / $item->getQuantity();
+        if (0.0 === $splitPromotionAmount) {
+            return;
+        }
 
-        $variantMinimumPrice = $item->getVariant()->getChannelPricingForChannel($channel)->getMinimumPrice();
+        $variantMinimumPrice = $item->getVariant()->getChannelPricingForChannel($channel)?->getMinimumPrice() ?? 00;
 
-        $i = 0;
         foreach ($item->getUnits() as $unit) {
-            $promotionAmount = $splitPromotionAmount[$i++];
-            if (0 === $promotionAmount) {
-                continue;
-            }
-
             $this->addAdjustment(
                 $promotion,
                 $unit,
-                $this->calculate($unit->getTotal(), $variantMinimumPrice, $promotionAmount),
+                $this->calculate($unit->getTotal(), $variantMinimumPrice, $splitPromotionAmount),
             );
         }
     }
 
-    private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, int $amount): void
+    private function addAdjustment(PromotionInterface $promotion, OrderItemUnitInterface $unit, float $amount): void
     {
         $adjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, $promotion->getName(), $amount)
@@ -83,7 +80,7 @@ final class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustm
         $unit->addAdjustment($adjustment);
     }
 
-    private function calculate(int $itemTotal, int $minimumPrice, int $promotionAmount): int
+    private function calculate(float $itemTotal, int $minimumPrice, float $promotionAmount): float
     {
         if ($itemTotal + $promotionAmount <= $minimumPrice) {
             return $minimumPrice - $itemTotal;

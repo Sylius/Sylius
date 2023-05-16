@@ -20,13 +20,13 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 {
     public function getQuantity(): int;
 
-    public function getUnitPrice(): int;
+    public function getUnitPrice(): float;
 
-    public function setUnitPrice(int $unitPrice): void;
+    public function setUnitPrice(float $unitPrice): void;
 
-    public function getOriginalUnitPrice(): ?int;
+    public function getOriginalUnitPrice(): ?float;
 
-    public function setOriginalUnitPrice(?int $originalUnitPrice): void;
+    public function setOriginalUnitPrice(?float $originalUnitPrice): void;
 
     public function getTotal(): int;
 
@@ -67,5 +67,5 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function removeAdjustmentsRecursively(?string $type = null): void;
 
-    public function getAdjustmentsTotalRecursively(?string $type = null): int;
+    public function getAdjustmentsTotalRecursively(?string $type = null): float;
 }

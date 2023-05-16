@@ -30,9 +30,9 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 
     public function setLabel(?string $label): void;
 
-    public function getAmount(): int;
+    public function getAmount(): float;
 
-    public function setAmount(int $amount): void;
+    public function setAmount(float $amount): void;
 
     public function isNeutral(): bool;
 

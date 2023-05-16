@@ -57,7 +57,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         }
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
+            $promotionAmount = $item->getUnitPrice() * $configuration[$channelCode]['percentage'];
             $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
 
@@ -66,7 +66,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 
     private function setUnitsAdjustments(
         OrderItemInterface $item,
-        int $promotionAmount,
+        float $promotionAmount,
         PromotionInterface $promotion,
     ): void {
         foreach ($item->getUnits() as $unit) {

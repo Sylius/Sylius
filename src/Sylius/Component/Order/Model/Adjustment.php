@@ -37,8 +37,8 @@ class Adjustment implements AdjustmentInterface
     /** @var string|null */
     protected $label;
 
-    /** @var int */
-    protected $amount = 0;
+    /** @var float */
+    protected $amount = 0.0;
 
     /** @var bool */
     protected $neutral = false;
@@ -116,12 +116,12 @@ class Adjustment implements AdjustmentInterface
         $this->label = $label;
     }
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->amount;
     }
 
-    public function setAmount(int $amount): void
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
         if (!$this->isNeutral()) {

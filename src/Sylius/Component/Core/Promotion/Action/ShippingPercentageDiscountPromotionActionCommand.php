@@ -62,7 +62,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             }
 
             $adjustment = $this->createAdjustment($promotion);
-            $adjustment->setAmount(-$adjustmentAmount);
+            $adjustment->setAmount((float) -$adjustmentAmount);
             $shipment->addAdjustment($adjustment);
             $result = true;
         }
