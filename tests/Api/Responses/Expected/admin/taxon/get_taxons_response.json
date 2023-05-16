@@ -172,7 +172,7 @@
                 }
             },
             "children": [],
-            "enabled": true,
+            "enabled": false,
             "position": "@integer@"
         },
         {

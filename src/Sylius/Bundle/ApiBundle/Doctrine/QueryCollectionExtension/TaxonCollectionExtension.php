@@ -55,7 +55,7 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         $queryBuilder
             ->addSelect('child')
             ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')
-            ->leftJoin(sprintf('%s.children', $rootAlias), 'child')
+            ->leftJoin(sprintf('%s.children', $rootAlias), 'child', 'WITH', 'child.enabled = true')
             ->andWhere(sprintf('%s.enabled = :%s', $rootAlias, $enabledParameterName))
             ->andWhere(sprintf('parent.code = :%s', $parentCodeParameterName))
             ->addOrderBy(sprintf('%s.position', $rootAlias))
