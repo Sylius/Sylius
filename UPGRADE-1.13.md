@@ -102,3 +102,6 @@
 1. Validation translation key `sylius.review.rating.range` has been replaced by `sylius.review.rating.not_in_range` in all places used by Sylius. The `sylius.review.rating.range` has been left for backward compatibility and will be removed in Sylius 2.0.
 
 1. The `payum/payum` package has been replaced by concrete packages like `payum/core`, `payum/offline` or `payum/paypal-express-checkout-nvp`. If you need any other component so far provided by `payum/payum` package, you need to install it explicitly.
+
+1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already created a database schema in some way.
+   All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
