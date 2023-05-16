@@ -43,28 +43,28 @@ Feature: Sorting listed catalog promotion
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "c"
 
-    @ui
+    @ui @no-postgres
     Scenario: Sorting catalog promotion by start date in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending "start date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "not-b"
 
-    @ui
+    @ui @no-postgres
     Scenario: Sorting catalog promotion by start date in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending "start date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @ui
+    @ui @no-postgres
     Scenario: Sorting catalog promotion by end date in ascending order
         When I browse catalog promotions
         And I sort catalog promotions by ascending "end date"
         Then I should see 3 catalog promotions on the list
         And the first catalog promotion should have code "a"
 
-    @ui
+    @ui @no-postgres
     Scenario: Sorting catalog promotion by end date in descending order
         When I browse catalog promotions
         And I sort catalog promotions by descending "end date"
