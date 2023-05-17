@@ -109,7 +109,7 @@ final class ShippingContext implements Context
     /**
      * @Given the store (also )allows shipping with :name
      */
-    public function theStoreAllowsShippingMethodWithName($name): void
+    public function theStoreAllowsShippingMethodWithName(string $name): void
     {
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create(['name' => $name, 'enabled' => true]));
     }
@@ -117,7 +117,7 @@ final class ShippingContext implements Context
     /**
      * @Given the store (also )allows shipping with :name identified by :code
      */
-    public function theStoreAllowsShippingMethodWithNameAndCode($name, $code): void
+    public function theStoreAllowsShippingMethodWithNameAndCode(string $name, string $code): void
     {
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $name,
@@ -130,7 +130,7 @@ final class ShippingContext implements Context
     /**
      * @Given the store (also )allows shipping with :name at position :position
      */
-    public function theStoreAllowsShippingMethodWithNameAndPosition($name, $position): void
+    public function theStoreAllowsShippingMethodWithNameAndPosition(string $name, int $position): void
     {
         $shippingMethod = $this->shippingMethodExampleFactory->create([
             'name' => $name,
@@ -138,7 +138,31 @@ final class ShippingContext implements Context
             'zone' => $this->getShippingZone(),
         ]);
 
-        $shippingMethod->setPosition((int) $position);
+        $shippingMethod->setPosition($position);
+
+        $this->saveShippingMethod($shippingMethod);
+    }
+
+    /**
+     * @Given /^the store(?:| also) allows shipping with "([^"]+)" at position (\d+) with ("[^"]+") fee$/
+     */
+    public function theStoreAllowsShippingMethodWithNameAndPositionAndFee(string $name, int $position, int $fee): void
+    {
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $shippingMethod = $this->shippingMethodExampleFactory->create([
+            'name' => $name,
+            'enabled' => true,
+            'zone' => $this->getShippingZone(),
+            'calculator' => [
+                'type' => DefaultCalculators::FLAT_RATE,
+                'configuration' => $configuration,
+            ],
+            'channels' => [$channel],
+        ]);
+
+        $shippingMethod->setPosition($position);
 
         $this->saveShippingMethod($shippingMethod);
     }
@@ -177,7 +201,7 @@ final class ShippingContext implements Context
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee within the ("[^"]+" zone)$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for the (rest of the world)$/
      */
-    public function storeHasShippingMethodWithFeeAndZone($shippingMethodName, $fee, ZoneInterface $zone): void
+    public function storeHasShippingMethodWithFeeAndZone(string $shippingMethodName, int $fee, ZoneInterface $zone): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
@@ -197,7 +221,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee$/
      */
-    public function storeHasShippingMethodWithFee($shippingMethodName, $fee): void
+    public function storeHasShippingMethodWithFee(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
@@ -218,10 +242,10 @@ final class ShippingContext implements Context
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per shipment for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
      */
     public function storeHasShippingMethodWithFeePerShipmentForChannels(
-        $shippingMethodName,
-        $firstFee,
+        string $shippingMethodName,
+        int $firstFee,
         ChannelInterface $firstChannel,
-        $secondFee,
+        int $secondFee,
         ChannelInterface $secondChannel,
     ): void {
         $configuration = [];
@@ -245,7 +269,7 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFeePerShipmentForChannel(
         string $shippingMethodName,
-        string $fee,
+        int $fee,
         ChannelInterface $channel,
     ): void {
         $configuration = [$channel->getCode() => ['amount' => $fee]];
@@ -267,10 +291,10 @@ final class ShippingContext implements Context
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
      */
     public function storeHasShippingMethodWithFeePerUnitForChannels(
-        $shippingMethodName,
-        $firstFee,
+        string $shippingMethodName,
+        int $firstFee,
         ChannelInterface $firstChannel,
-        $secondFee = null,
+        int $secondFee = null,
         ChannelInterface $secondChannel = null,
     ): void {
         $configuration = [];
@@ -299,7 +323,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has disabled "([^"]+)" shipping method with ("[^"]+") fee$/
      */
-    public function storeHasDisabledShippingMethodWithFee($shippingMethodName, $fee): void
+    public function storeHasDisabledShippingMethodWithFee(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
@@ -319,7 +343,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has an archival "([^"]+)" shipping method with ("[^"]+") fee$/
      */
-    public function theStoreHasArchivalShippingMethodWithFee($shippingMethodName, $fee): void
+    public function theStoreHasArchivalShippingMethodWithFee(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
@@ -340,7 +364,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit$/
      */
-    public function theStoreHasShippingMethodWithFeePerUnit($shippingMethodName, $fee): void
+    public function theStoreHasShippingMethodWithFeePerUnit(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
@@ -360,7 +384,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee not assigned to any channel$/
      */
-    public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel($shippingMethodName, $fee): void
+    public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
         $configuration = $this->getConfigurationByChannels([$channel], $fee);
