@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -29,7 +29,7 @@ final class OrderShopUserItemExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
-        $this->beConstructedWith($userContext);
+        $this->beConstructedWith($userContext, ['shop_select_payment_method', 'shop_account_change_payment_method']);
     }
 
     function it_filters_carts_for_shop_users_to_the_one_owned_by_them_for_methods_other_than_get(
