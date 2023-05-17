@@ -44,7 +44,8 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
         "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/dotenv": "^5.4 || ^6.0"
+        "symfony/dotenv": "^5.4 || ^6.0",
+        "php-http/message-factory": "^1.0"
     },
     "config": {
         "allow-plugins": {
