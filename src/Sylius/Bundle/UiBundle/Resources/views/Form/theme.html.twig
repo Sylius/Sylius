@@ -87,12 +87,14 @@
             {% if prototype is defined and allow_add %}
                 data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
                 data-prototype-name='{{ prototype.vars.name }}'
-                {% set lastIndex = form.children|length > 0 ? form.children|last.vars.name : 0 %}
-                {% if lastIndex matches '/^\\d+$/' %}
+                {% set lastIndex = 0 %}
+                {% for child in form.children %}
+                    {% set name = child.vars.name %}
+                    {% if name matches '/^\\d+$/' %}
+                        {% set lastIndex = max(name, lastIndex) %}
+                    {% endif %}
+                {% endfor %}
                 data-index='{{ lastIndex + 1 }}'
-                {% else %}
-                data-index='0'
-                {% endif %}
             {%- endif -%}
         >
             {{ error(form.vars.errors) }}
