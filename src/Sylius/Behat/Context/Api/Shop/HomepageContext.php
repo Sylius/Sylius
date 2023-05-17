@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -27,6 +28,7 @@ final class HomepageContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private ObjectManager $objectManager,
         private string $apiUrlPrefix,
     ) {
     }
@@ -75,6 +77,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
+        $this->objectManager->clear(); // avoiding doctrine cache
         $this->client->customAction(sprintf('%s/shop/taxons', $this->apiUrlPrefix), HttpRequest::METHOD_GET);
     }
 
