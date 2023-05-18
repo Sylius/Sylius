@@ -526,8 +526,7 @@ final class ManagingProductsContext implements Context
 
         return
             isset($productFromResponse['images'][0]) &&
-            str_contains($productFromResponse['images'][0]['path'], $product->getImages()->first()->getPath())
-        ;
+            str_contains($productFromResponse['images'][0]['path'], $product->getImages()->first()->getPath());
     }
 
     private function hasProductWithFieldValue(Response $response, string $field, string $value): bool
