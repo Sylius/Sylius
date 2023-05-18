@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\CountsChannelBasedErrors;
 use Sylius\Behat\Behaviour\NamesIt;
@@ -149,6 +150,22 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->countChannelErrors($this->getElement('rules'), $channelCode);
     }
 
+    /**
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForTranslation(string $element, string $localeCode): string
+    {
+        $foundElement = $this->getElement($element, ['%localeCode%' => $localeCode])->getParent();
+
+        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $validationMessage->getText();
+    }
+
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -166,6 +183,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
             'exclusive' => '#sylius_promotion_exclusive',
+            'label' => '#sylius_promotion_translations_%localeCode%_label',
             'name' => '#sylius_promotion_name',
             'priority' => '#sylius_promotion_priority',
             'rule_amount' => '[id^="sylius_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',

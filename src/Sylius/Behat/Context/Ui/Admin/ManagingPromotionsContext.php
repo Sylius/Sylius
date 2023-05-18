@@ -116,6 +116,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I replace its label with a string exceeding the limit in :localeCode locale
+     */
+    public function iSpecifyItsLabelWithAStringExceedingTheLimitInLocale(string $localeCode): void
+    {
+        $this->createPage->specifyLabel(str_repeat('a', 256), $localeCode);
+    }
+
+    /**
      * @When the :promotion promotion should have a label :label in :localeCode locale
      */
     public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $localeCode): void
@@ -764,6 +772,20 @@ final class ManagingPromotionsContext implements Context
         $this->notificationChecker->checkNotification(
             sprintf('Some rules of the promotions with codes %s have been updated.', $promotion->getCode()),
             NotificationType::info(),
+        );
+    }
+
+    /**
+     * @Then I should be notified that promotion label in :localeCode locale is too long
+     */
+    public function iShouldBeNotifiedThatPromotionLabelIsTooLong(string $localeCode): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForTranslation('label', $localeCode),
+            'This value is too long. It should have 255 characters or less.',
         );
     }
 

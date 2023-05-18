@@ -16,7 +16,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
 
 final class PromotionTranslationType extends AbstractResourceType
 {
@@ -26,12 +25,6 @@ final class PromotionTranslationType extends AbstractResourceType
             ->add('label', TextType::class, [
                 'label' => 'sylius.form.promotion.label',
                 'required' => false,
-                'constraints' => [
-                    new Length([
-                        'max' => 255,
-                        'groups' => ['sylius'],
-                    ]),
-                ],
             ])
         ;
     }
