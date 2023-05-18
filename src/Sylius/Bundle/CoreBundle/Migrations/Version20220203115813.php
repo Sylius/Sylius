@@ -65,6 +65,7 @@ final class Version20220203115813 extends AbstractMigration
             array_key_exists(self::MAIN_DSN, $_ENV) && str_contains($_ENV[self::MAIN_DSN], 'doctrine') ||
             array_key_exists(self::MAIN_FAILED_DSN, $_ENV) && str_contains($_ENV[self::MAIN_FAILED_DSN], 'doctrine') ||
             array_key_exists(self::CATALOG_PROMOTION_REMOVAL_DSN, $_ENV) && str_contains($_ENV[self::CATALOG_PROMOTION_REMOVAL_DSN], 'doctrine') ||
-            array_key_exists(self::CATALOG_PROMOTION_REMOVAL_FAILED_DSN, $_ENV) && str_contains($_ENV[self::CATALOG_PROMOTION_REMOVAL_FAILED_DSN], 'doctrine');
+            array_key_exists(self::CATALOG_PROMOTION_REMOVAL_FAILED_DSN, $_ENV) && str_contains($_ENV[self::CATALOG_PROMOTION_REMOVAL_FAILED_DSN], 'doctrine')
+        ;
     }
 }

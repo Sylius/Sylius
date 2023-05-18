@@ -41,6 +41,7 @@ final class OrderStateResolver implements StateResolverInterface
         return
             (OrderPaymentStates::STATE_PAID === $order->getPaymentState() ||
             OrderPaymentStates::STATE_PARTIALLY_REFUNDED === $order->getPaymentState()) &&
-            OrderShippingStates::STATE_SHIPPED === $order->getShippingState();
+            OrderShippingStates::STATE_SHIPPED === $order->getShippingState()
+        ;
     }
 }

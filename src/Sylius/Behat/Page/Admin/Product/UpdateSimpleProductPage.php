@@ -117,7 +117,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         return
             $attribute->getParent()->getParent()->find('css', '.attribute-input input')->getValue() === $value &&
-            $attribute->find('css', '.globe.icon') !== null;
+            $attribute->find('css', '.globe.icon') !== null
+        ;
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -330,8 +331,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $priceConfigurationElement = $this->getElement('pricing_configuration');
         $priceElement = $priceConfigurationElement
-            ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent()
-        ;
+            ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
         return $priceElement->find('css', 'input')->getValue();
     }

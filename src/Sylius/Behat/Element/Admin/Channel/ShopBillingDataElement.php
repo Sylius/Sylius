@@ -51,7 +51,8 @@ final class ShopBillingDataElement extends Element implements ShopBillingDataEle
             $street === $this->getElement('street')->getValue() &&
             $postcode === $this->getElement('postcode')->getValue() &&
             $city === $this->getElement('city')->getValue() &&
-            $countryCode === $this->getElement('country_code')->getValue();
+            $countryCode === $this->getElement('country_code')->getValue()
+        ;
     }
 
     protected function getDefinedElements(): array

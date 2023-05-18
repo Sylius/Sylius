@@ -51,7 +51,8 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
                 'Validation message',
                 'css',
                 '[data-test-validation-error]',
-            );
+            )
+            ;
         }
 
         return $errorLabel->getText();

@@ -45,6 +45,7 @@ final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareActio
     {
         return
             $request instanceof Generic &&
-            $request->getModel() instanceof PaymentInterface;
+            $request->getModel() instanceof PaymentInterface
+        ;
     }
 }
