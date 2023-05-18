@@ -742,31 +742,31 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
+     * @Then /^this product should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
+    public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueValue): void
     {
         $item = $this->sharedStorage->get('item');
 
-        $variantData = json_decode($this->shopClient->showByIri(urldecode($item['variant']))->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $optionValues = $this->responseChecker->getValue($this->shopClient->showByIri($item['variant']), 'optionValues');
 
-        foreach ($variantData['optionValues'] as $valueIri) {
-            $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        foreach ($optionValues as $optionValueIri) {
+            $optionValue = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValueIri));
 
-            if ($optionValueData['value'] !== $optionValue) {
+            if ($optionValue['value'] !== $expectedOptionValueValue) {
                 continue;
             }
 
-            $optionData = json_decode($this->shopClient->showByIri($optionValueData['option'])->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+            $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue['option']));
 
-            if ($optionData['name'] !== $optionName) {
-                continue;
+            if ($option['name'] === $expectedOptionName) {
+                return;
             }
-
-            return;
         }
 
-        throw new \DomainException(sprintf('Could not find item with option "%s" set to "%s"', $optionName, $optionValue));
+        throw new \DomainException(
+            sprintf('Could not find item with option "%s" set to "%s"', $expectedOptionName, $expectedOptionValueValue),
+        );
     }
 
     /**

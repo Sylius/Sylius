@@ -680,20 +680,17 @@ final class ProductContext implements Context
     /**
      * @Given /^(this product) is available in "([^"]+)" ([^"]+) priced at ("[^"]+")$/
      */
-    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, int $price)
+    public function thisProductIsAvailableInSize(ProductInterface $product, string $optionValueName, string $optionName, int $price): void
     {
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->productVariantFactory->createNew();
+        $this->createProductVariantWithOption($product, $optionName, $optionValueName, $price);
+    }
 
-        $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
-
-        $variant->addOptionValue($optionValue);
-        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
-        $variant->setCode(sprintf('%s_%s', $product->getCode(), $optionValueName));
-        $variant->setName($product->getName());
-
-        $product->addVariant($variant);
-        $this->objectManager->flush();
+    /**
+     * @Given /^(this product) with "([^"]+)" option "([^"]+)" is priced at ("[^"]+")$/
+     */
+    public function thisProductWithOptionIsPricedAt(ProductInterface $product, string $optionName, string $optionValueName, int $price): void
+    {
+        $this->createProductVariantWithOption($product, $optionName, $optionValueName, $price);
     }
 
     /**
@@ -1427,6 +1424,25 @@ final class ProductContext implements Context
         return $variant;
     }
 
+    private function createProductVariantWithOption(
+        ProductInterface $product,
+        string $optionName,
+        string $optionValueName,
+        int $price,
+    ): void {
+        $variant = $this->productVariantFactory->createNew();
+
+        $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
+
+        $variant->addOptionValue($optionValue);
+        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
+        $variant->setCode(sprintf('%s_%s', $product->getCode(), $optionValueName));
+        $variant->setName($product->getName());
+
+        $product->addVariant($variant);
+        $this->objectManager->flush();
+    }
+
     /**
      * @param string $name
      * @param string $locale
@@ -1479,7 +1495,7 @@ final class ProductContext implements Context
         $option->setName($optionName);
         $option->setCode(StringInflector::nameToUppercaseCode($optionName));
 
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
+        $this->sharedStorage->set(sprintf('%s_option', StringInflector::nameToLowercaseCode($optionName)), $option);
 
         foreach ($values as $value) {
             $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));

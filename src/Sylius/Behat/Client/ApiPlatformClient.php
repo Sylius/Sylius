@@ -32,9 +32,12 @@ final class ApiPlatformClient implements ApiClientInterface
     ) {
     }
 
-    public function index(string $resource): Response
+    public function index(string $resource, array $queryParameters = []): Response
     {
-        $this->request = $this->requestFactory->index($this->section, $resource, $this->authorizationHeader, $this->getToken());
+        $this->request = $this
+            ->requestFactory
+            ->index($this->section, $resource, $this->authorizationHeader, $this->getToken(), $queryParameters)
+        ;
 
         return $this->request($this->request);
     }
