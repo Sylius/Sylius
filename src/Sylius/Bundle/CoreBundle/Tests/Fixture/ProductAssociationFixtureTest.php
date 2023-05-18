@@ -66,7 +66,8 @@ final class ProductAssociationFixtureTest extends TestCase
                 'custom' => [['associated_products' => ['product-1', 'product-2']]],
             ]],
             'custom.*.associated_products',
-        );
+        )
+        ;
     }
 
     protected function getConfiguration(): ProductAssociationFixture

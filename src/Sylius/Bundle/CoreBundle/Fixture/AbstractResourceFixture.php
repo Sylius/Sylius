@@ -42,7 +42,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
                     return array_merge($custom, array_fill(0, $options['random'], $options['prototype']));
                 })
-            ;
+        ;
     }
 
     final public function load(array $options): void

@@ -83,6 +83,7 @@ final class NonChannelLocaleListener
     {
         return
             null !== $firewall &&
-            in_array($firewall->getName(), $this->firewallNames);
+            in_array($firewall->getName(), $this->firewallNames)
+        ;
     }
 }

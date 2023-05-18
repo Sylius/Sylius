@@ -289,7 +289,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             $this->hasAddressPart($displayedAddress, $address->getCity()) &&
             $this->hasAddressPart($displayedAddress, $address->getProvinceCode(), true) &&
             $this->hasAddressPart($displayedAddress, $this->getCountryName($address->getCountryCode())) &&
-            $this->hasAddressPart($displayedAddress, $address->getPostcode());
+            $this->hasAddressPart($displayedAddress, $address->getPostcode())
+        ;
     }
 
     private function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool

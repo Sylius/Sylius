@@ -86,7 +86,8 @@ final class ConvertPaymentAction implements ActionInterface
         return
             $request instanceof Convert &&
             $request->getSource() instanceof PaymentInterface &&
-            $request->getTo() === 'array';
+            $request->getTo() === 'array'
+        ;
     }
 
     private function getShippingTotalWithoutTaxes(OrderInterface $order): int

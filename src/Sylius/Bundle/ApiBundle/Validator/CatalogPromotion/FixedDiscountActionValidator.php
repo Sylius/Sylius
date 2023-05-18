@@ -62,6 +62,7 @@ final class FixedDiscountActionValidator implements ActionValidatorInterface
         return
             !isset($channelConfiguration['amount']) ||
             !is_int($channelConfiguration['amount']) ||
-            $channelConfiguration['amount'] < 0;
+            $channelConfiguration['amount'] < 0
+        ;
     }
 }

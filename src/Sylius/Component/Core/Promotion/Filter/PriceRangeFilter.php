@@ -52,13 +52,15 @@ final class PriceRangeFilter implements FilterInterface
 
         return
             (!isset($priceRange['min']) && $priceRange['max'] >= $price) ||
-            (!isset($priceRange['max']) && $priceRange['min'] <= $price);
+            (!isset($priceRange['max']) && $priceRange['min'] <= $price)
+        ;
     }
 
     private function isConfigured(array $configuration): bool
     {
         return
             isset($configuration['filters']['price_range_filter']['min']) ||
-            isset($configuration['filters']['price_range_filter']['max']);
+            isset($configuration['filters']['price_range_filter']['max'])
+        ;
     }
 }

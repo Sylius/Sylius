@@ -31,6 +31,7 @@ final class ResolveNextRouteAction implements ActionInterface
     {
         return
             $request instanceof ResolveNextRoute &&
-            $request->getFirstModel() instanceof PaymentInterface;
+            $request->getFirstModel() instanceof PaymentInterface
+        ;
     }
 }

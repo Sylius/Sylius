@@ -83,7 +83,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
                 default => throw new InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
-                    $config['filesystem']['adapter'],
+                    $config['filesystem']['adapter']
                 )),
             },
         );
