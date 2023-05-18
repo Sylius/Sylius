@@ -17,8 +17,8 @@ Feature: Viewing different price for different product variants
         When I view product "Wyborowa Vodka"
         Then the product price should be "$40.00"
 
-    @ui @javascript
+    @ui @api @javascript
     Scenario: Viewing a detailed page with product's price for different variant
         When I view product "Wyborowa Vodka"
         And I select "Wyborowa Apple" variant
-        Then the product price should be "$12.55"
+        Then this product variant price should be "$12.55"
