@@ -18,6 +18,7 @@ use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\InformAboutCartRecalculation;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -43,12 +44,12 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_order_completion_without_notes(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -56,6 +57,7 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1500);
 
         $order->setNotes(null)->shouldNotBeCalled();
 
@@ -80,17 +82,18 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_handles_order_completion_with_notes(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         MessageBusInterface $eventBus,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
 
         $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1500);
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -117,16 +120,17 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
 
     function it_delays_an_information_about_cart_recalculate(
         OrderRepositoryInterface $orderRepository,
-        OrderInterface $order,
         MessageBusInterface $commandBus,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        OrderInterface $order,
         CustomerInterface $customer,
         PromotionInterface $promotion,
-        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
     ): void {
         $completeOrder = new CompleteOrder('ThankYou');
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
 
         $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1000);
 
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
@@ -160,13 +164,11 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_order_cannot_be_completed(
+    function it_throws_an_exception_if_order_total_has_changed(
         OrderRepositoryInterface $orderRepository,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        FactoryInterface $stateMachineFactory,
-        CustomerInterface $customer,
         OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        OrderInterface $order,
+        CustomerInterface $customer,
     ): void {
         $completeOrder = new CompleteOrder();
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
@@ -174,6 +176,31 @@ final class CompleteOrderHandlerSpec extends ObjectBehavior
         $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
 
         $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1500, 2000);
+
+        $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
+
+        $this
+            ->shouldThrow(OrderTotalHasChangedException::class)
+            ->during('__invoke', [$completeOrder])
+        ;
+    }
+
+    function it_throws_an_exception_if_order_cannot_be_completed(
+        OrderRepositoryInterface $orderRepository,
+        FactoryInterface $stateMachineFactory,
+        OrderPromotionsIntegrityCheckerInterface $orderPromotionsIntegrityChecker,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        CustomerInterface $customer,
+    ): void {
+        $completeOrder = new CompleteOrder();
+        $completeOrder->setOrderTokenValue('ORDERTOKEN');
+
+        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKEN'])->willReturn($order);
+
+        $order->getCustomer()->willReturn($customer);
+        $order->getTotal()->willReturn(1500);
 
         $orderPromotionsIntegrityChecker->check($order)->willReturn(null);
 

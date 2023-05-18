@@ -57,4 +57,15 @@ final class CheckoutCompleteContext implements Context
         Assert::string($lastResponseContent);
         Assert::contains($lastResponseContent, sprintf('This product %s has been disabled.', $productVariant->getName()));
     }
+
+    /**
+     * @Then my order should not be placed due to changed order total
+     */
+    public function myOrderShouldNotBePlacedDueToChangedOrderTotal(): void
+    {
+        $lastResponseContent = $this->client->getLastResponse()->getContent();
+
+        Assert::string($lastResponseContent);
+        Assert::contains($lastResponseContent, 'Order total has changed during checkout process');
+    }
 }
