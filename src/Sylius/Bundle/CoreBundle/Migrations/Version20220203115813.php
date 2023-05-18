@@ -16,9 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20220203115813 extends AbstractMigration
 {
     private const OLD_TRANSPORT_DSN = 'MESSENGER_TRANSPORT_DSN';
