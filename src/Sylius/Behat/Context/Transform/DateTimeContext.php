@@ -21,6 +21,7 @@ final class DateTimeContext implements Context
      * @Transform :date
      * @Transform :startsDate
      * @Transform :endsDate
+     * @Transform /^on "([^"]+)"$/
      */
     public function getDate($date)
     {

@@ -9,6 +9,8 @@ sylius_grid:
                         method: createQueryBuilderByPromotionId
                         arguments:
                             promotionId: $promotionId
+            sorting:
+                used: desc
             fields:
                 code:
                     type: string
