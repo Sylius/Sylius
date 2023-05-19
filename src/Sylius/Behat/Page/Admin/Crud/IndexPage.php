@@ -39,9 +39,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
             return 1 === count($rows);
-        } catch (\InvalidArgumentException) {
-            return false;
-        } catch (ElementNotFoundException) {
+        } catch (\InvalidArgumentException|ElementNotFoundException) {
             return false;
         }
     }
@@ -51,12 +49,21 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
     }
 
-    public function sortBy(string $fieldName): void
+    public function sortBy(string $fieldName, ?string $order = null): void
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
-        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" does not exist or is not sortable.', $fieldName));
+
+        /** @var NodeElement $sortingHeader */
+        $sortingHeader = $sortableHeaders[$fieldName]->find('css', 'a');
+        preg_match('/\?sorting[^=]+\=([acdes]+)/i', $sortingHeader->getAttribute('href'), $matches);
+        $nextSortingOrder = $matches[1] ?? 'desc';
 
         $sortableHeaders[$fieldName]->find('css', 'a')->click();
+
+        if (null !== $order && ($order !== $nextSortingOrder)) {
+            $sortableHeaders[$fieldName]->find('css', 'a')->click();
+        }
     }
 
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool
@@ -69,9 +76,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             }
 
             return null !== $rows[0]->find('css', $element);
-        } catch (\InvalidArgumentException) {
-            return false;
-        } catch (ElementNotFoundException) {
+        } catch (\InvalidArgumentException|ElementNotFoundException) {
             return false;
         }
     }

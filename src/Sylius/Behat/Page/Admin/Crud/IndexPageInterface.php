@@ -24,7 +24,7 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function getColumnFields(string $columnName): array;
 
-    public function sortBy(string $fieldName): void;
+    public function sortBy(string $fieldName, ?string $order = null): void;
 
     public function deleteResourceOnPage(array $parameters): void;
 
