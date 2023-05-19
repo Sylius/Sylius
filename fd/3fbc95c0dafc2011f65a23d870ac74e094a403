@@ -1,0 +1,13 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-05-12T05:07:06Z
+
+I asked the Core Team, and AFAIR everyone agreed if the bug like this occurs, we should cover it with a Behat scenario.
+
+We don't have to write scenarios for every grid now, but as bug occurred we should test it :/.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-05-19T11:58:47Z
+
+Thanks, Jan! :tada:
