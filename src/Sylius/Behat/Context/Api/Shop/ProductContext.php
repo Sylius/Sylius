@@ -26,6 +26,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -605,13 +606,47 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductAssociationWithProductsAnd(string $productAssociationName, array $products): void
     {
+        Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, $products));
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
+    }
+
+    /**
+     * @Then /^I should(?:| also) not see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldNotSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        Assert::false($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
+    }
+
+    /**
+     * @Then /^I should not see the product (association "([^"]+)")$/
+     */
+    public function iShouldNotSeeTheProductAssociation(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $productAssociationTypeIri = $this->iriConverter->getIriFromItem($productAssociationType);
+
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
         $associations = $this->responseChecker->getValue($response, 'associations');
 
-        Assert::true($this->hasAssociationsWithProducts($associations, $productAssociationName, $products));
+        foreach ($associations as $association) {
+            $associationResponse = $this->client->showByIri($association);
+
+            if ($associationResponse->getStatusCode() === 200) {
+                $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
+
+                Assert::notSame($associationTypeIri, $productAssociationTypeIri);
+            }
+        }
     }
 
     /**
@@ -797,5 +832,16 @@ final class ProductContext implements Context
     private function fetchItemByIri(string $iri): array
     {
         return $this->responseChecker->getResponseContent($this->client->showByIri($iri));
+    }
+
+    private function isProductAssociationWithProductsAvailable(string $productAssociationName, array $associatedProducts): bool
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $associations = $this->responseChecker->getValue($response, 'associations');
+
+        return $this->hasAssociationsWithProducts($associations, $productAssociationName, $associatedProducts);
     }
 }
