@@ -98,11 +98,13 @@
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderShopUserItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument>%sylius.api.doctrine_extension.order_shop_user_item.filter_cart.allowed_non_get_operations%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderVisitorItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument>%sylius.api.doctrine_extension.order_visitor_item.filter_cart.allowed_non_get_operations%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 

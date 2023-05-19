@@ -24,8 +24,10 @@ use Symfony\Component\HttpFoundation\Request;
 /** @experimental */
 final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 {
-    public function __construct(private UserContextInterface $userContext)
-    {
+    public function __construct(
+        private UserContextInterface $userContext,
+        private array $nonFilteredCartAllowedOperations = [],
+    ) {
     }
 
     public function applyToItem(
@@ -62,7 +64,7 @@ final class OrderVisitorItemExtension implements QueryItemExtensionInterface
 
         $httpRequestMethodType = $context[ContextKeys::HTTP_REQUEST_METHOD_TYPE];
 
-        if ($httpRequestMethodType === Request::METHOD_GET || $operationName === 'shop_select_payment_method') {
+        if ($httpRequestMethodType === Request::METHOD_GET || in_array($operationName, $this->nonFilteredCartAllowedOperations, true)) {
             return;
         }
 
