@@ -14,12 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use InvalidArgumentException;
+use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental  */
 final class VerifyCustomerAccountHandler implements MessageHandlerInterface
@@ -27,12 +32,15 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
     public function __construct(
         private RepositoryInterface $shopUserRepository,
         private DateTimeProviderInterface $calendar,
+        private MessageBusInterface $commandBus,
+        private ChannelContextInterface $channelContext,
+        private LocaleContextInterface $localeContext,
     ) {
     }
 
     public function __invoke(VerifyCustomerAccount $command): JsonResponse
     {
-        /** @var UserInterface|null $user */
+        /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
         if (null === $user) {
             throw new InvalidArgumentException(
@@ -43,6 +51,14 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         $user->setVerifiedAt($this->calendar->now());
         $user->setEmailVerificationToken(null);
         $user->enable();
+
+        $channel = $this->channelContext->getChannel();
+        $localeCode = $this->localeContext->getLocaleCode();
+
+        $this->commandBus->dispatch(
+            new SendAccountRegistrationEmail($user->getEmail(), $localeCode, $channel->getCode()),
+            [new DispatchAfterCurrentBusStamp()]
+        );
 
         return new JsonResponse([]);
     }
