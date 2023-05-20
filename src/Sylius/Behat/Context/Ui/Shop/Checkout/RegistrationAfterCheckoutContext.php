@@ -112,7 +112,7 @@ final class RegistrationAfterCheckoutContext implements Context
     /**
      * @Then /^I should be on my account dashboard/
      */
-    public function iShouldBeOnMyAccountDashboard()
+    public function iShouldBeOnMyAccountDashboard(): void
     {
         Assert::true($this->dashboardPage->isOpen());
     }

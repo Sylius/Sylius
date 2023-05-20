@@ -212,7 +212,7 @@ final class ChannelContext implements Context
     /**
      * @Given /^on (this channel) account verification is not required$/
      */
-    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel)
+    public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(false);
 
@@ -222,7 +222,7 @@ final class ChannelContext implements Context
     /**
      * @Given /^on (this channel) account verification is required$/
      */
-    public function onThisChannelAccountVerificationIsRequired(ChannelInterface $channel)
+    public function onThisChannelAccountVerificationIsRequired(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(true);
 

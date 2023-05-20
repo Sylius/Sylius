@@ -254,7 +254,7 @@ final class RegistrationContext implements Context
     /**
      * @Then /^I should be on registration thank you page$/
      */
-    public function iShouldBeOnRegistrationThankYouPage()
+    public function iShouldBeOnRegistrationThankYouPage(): void
     {
         // Intentionally left blank
     }
@@ -262,7 +262,7 @@ final class RegistrationContext implements Context
     /**
      * @Then /^I should be on my account dashboard/
      */
-    public function iShouldBeOnMyAccountDashboard()
+    public function iShouldBeOnMyAccountDashboard(): void
     {
         // Intentionally left blank
     }
