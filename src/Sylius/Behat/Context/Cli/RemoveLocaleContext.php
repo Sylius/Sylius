@@ -40,7 +40,7 @@ final class RemoveLocaleContext implements Context
     }
 
     /**
-     * @When I run a command removing the :localeName locale
+     * @When I remove :localeCode locale
      */
     public function iRunACommandRemovingTheLocale(string $localeName): void
     {

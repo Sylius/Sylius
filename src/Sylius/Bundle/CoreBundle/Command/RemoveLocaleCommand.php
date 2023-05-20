@@ -41,7 +41,7 @@ final class RemoveLocaleCommand extends Command
             ->addArgument(name: 'locale', description: 'Locale code to remove')
             ->setHelp(
                 <<<EOT
-                The <info>%command.name%</info> command removes a locale from Sylius.
+                The <info>%command.name%</info> command can be used to remove an unused locale from Sylius.
                 EOT
             )
         ;
