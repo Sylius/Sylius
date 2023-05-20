@@ -191,7 +191,7 @@ final class EmailContext implements Context
     /**
      * @Then /^only one email should have been sent to "([^"]*)"$/
      */
-    public function onlyOneEmailShouldHaveBeenSentTo(string $recipient)
+    public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
     {
         Assert::eq($this->emailChecker->countMessagesTo($recipient), 1);
     }
