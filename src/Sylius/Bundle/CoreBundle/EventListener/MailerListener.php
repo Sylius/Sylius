@@ -62,6 +62,7 @@ final class MailerListener
     {
         $channel = $this->channelContext->getChannel();
         Assert::isInstanceOf($channel, ChannelInterface::class);
+
         if ($channel->isAccountVerificationRequired()) {
             return;
         }
