@@ -9,36 +9,21 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
-use Webmozart\Assert\Assert;
 
 final class RegistrationThankYouController
 {
-    /** @var ChannelContextInterface */
-    private $channelContext;
-
-    /** @var RouterInterface */
-    private $router;
-
-    /** @var Environment */
-    private $twig;
-
-    /**
-     * RegistrationThankYouController constructor.
-     * @param Environment $twig
-     * @param ChannelContextInterface $channelContext
-     * @param RouterInterface $router
-     */
-    public function __construct(Environment $twig, ChannelContextInterface $channelContext, RouterInterface $router)
-    {
-        $this->twig = $twig;
-        $this->channelContext = $channelContext;
-        $this->router = $router;
+    public function __construct(
+        private Environment $twig,
+        private ChannelContextInterface $channelContext,
+        private RouterInterface $router
+    ) {
     }
 
-    public function thankYouAction()
+    public function thankYouAction(): Response
     {
+        /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
-        Assert::isInstanceOf($channel, ChannelInterface::class);
+
         if ($channel->isAccountVerificationRequired()) {
             return new Response($this->twig->render('@SyliusShop/registerThankYou.html.twig'));
         }

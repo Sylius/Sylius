@@ -47,10 +47,12 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service id="sylius.controller.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
+        <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="router.default" />
+
+            <tag name="controller.service_arguments" />
         </service>
     </services>
 </container>
