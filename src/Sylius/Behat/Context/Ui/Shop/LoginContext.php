@@ -282,16 +282,9 @@ final class LoginContext implements Context
 
     /**
      * @Then I should not be able to change my password with this token
-     */
-    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
-    {
-        $this->iShouldNotBeAbleToChangeMyPassword();
-    }
-
-    /**
      * @Then I should not be able to change my password
      */
-    public function iShouldNotBeAbleToChangeMyPassword(): void
+    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
     {
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }
