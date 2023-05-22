@@ -36,8 +36,7 @@ abstract class AbstractPostgreSQLMigration extends BaseAbstractMigration
     {
         return
             class_exists(PostgreSQLPlatform::class) &&
-            is_a($this->connection->getDatabasePlatform(), PostgreSQLPlatform::class, true)
-        ;
+            is_a($this->connection->getDatabasePlatform(), PostgreSQLPlatform::class, true);
     }
 
     protected function markAsExecuted(string $version): void

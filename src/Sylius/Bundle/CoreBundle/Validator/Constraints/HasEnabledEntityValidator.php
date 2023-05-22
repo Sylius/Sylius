@@ -79,8 +79,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     {
         return
             !\is_countable($result) || 0 === count($result) ||
-            (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)))
-        ;
+            (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)));
     }
 
     private function getProperObjectManager(?string $manager, object $entity): ObjectManager

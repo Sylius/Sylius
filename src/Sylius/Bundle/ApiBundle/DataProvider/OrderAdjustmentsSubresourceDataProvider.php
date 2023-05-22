@@ -34,8 +34,7 @@ final class OrderAdjustmentsSubresourceDataProvider implements RestrictedDataPro
         return
             is_a($resourceClass, AdjustmentInterface::class, true) &&
             isset($subresourceIdentifiers['tokenValue']) &&
-            !isset($subresourceIdentifiers['items'])
-        ;
+            !isset($subresourceIdentifiers['items']);
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)

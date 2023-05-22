@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of PaymentMethodInterface
+ *
  * @implements PaymentMethodFactoryInterface<T>
  */
 final class PaymentMethodFactory implements PaymentMethodFactoryInterface

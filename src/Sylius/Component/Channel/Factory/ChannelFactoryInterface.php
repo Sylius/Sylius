@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ChannelInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface ChannelFactoryInterface extends FactoryInterface

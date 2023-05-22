@@ -20,6 +20,7 @@ use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 
 /**
  * @template T of AvatarImageInterface
+ *
  * @implements AvatarImageRepositoryInterface<T>
  */
 final class AvatarImageRepository extends EntityRepository implements AvatarImageRepositoryInterface

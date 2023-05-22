@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ProductVariantInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ProductVariantRepositoryInterface extends RepositoryInterface

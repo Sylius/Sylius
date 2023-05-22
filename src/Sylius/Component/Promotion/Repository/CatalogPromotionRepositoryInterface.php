@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of CatalogPromotionInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface CatalogPromotionRepositoryInterface extends RepositoryInterface

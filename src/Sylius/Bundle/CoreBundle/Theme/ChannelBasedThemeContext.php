@@ -40,8 +40,7 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
                 $themeName = $channel->getThemeName();
                 $this->theme = null === $themeName
                     ? null
-                    : $this->themeRepository->findOneByName($themeName)
-                ;
+                    : $this->themeRepository->findOneByName($themeName);
             } catch (ChannelNotFoundException|\Exception) {
                 return null;
             }

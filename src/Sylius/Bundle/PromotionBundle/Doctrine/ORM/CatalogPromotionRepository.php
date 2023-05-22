@@ -20,6 +20,7 @@ use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 /**
  * @template T of CatalogPromotionInterface
+ *
  * @implements CatalogPromotionRepositoryInterface<T>
  */
 class CatalogPromotionRepository extends EntityRepository implements CatalogPromotionRepositoryInterface

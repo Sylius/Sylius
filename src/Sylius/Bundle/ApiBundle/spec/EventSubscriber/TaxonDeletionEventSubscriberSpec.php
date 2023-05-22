@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class TaxonDeletionEventSubscriberSpec extends ObjectBehavior
 {
-    function let( ChannelRepositoryInterface $channelRepository): void
+    function let(ChannelRepositoryInterface $channelRepository): void
     {
         $this->beConstructedWith($channelRepository);
     }

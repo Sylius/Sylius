@@ -21,6 +21,7 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 
 /**
  * @template T of ProductInterface
+ *
  * @extends BaseProductRepositoryInterface<T>
  */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface

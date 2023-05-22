@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ChannelInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ChannelRepositoryInterface extends RepositoryInterface

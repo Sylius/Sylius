@@ -20,6 +20,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface as Base
 
 /**
  * @template T of PaymentMethodInterface
+ *
  * @extends BasePaymentMethodRepositoryInterface<T>
  */
 interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryInterface

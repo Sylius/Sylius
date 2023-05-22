@@ -35,7 +35,6 @@ final class ProductVariantPriceMapProvider implements ProductVariantMapProviderI
         return
             isset($context['channel']) &&
             $context['channel'] instanceof ChannelInterface &&
-            null !== $variant->getChannelPricingForChannel($context['channel'])
-        ;
+            null !== $variant->getChannelPricingForChannel($context['channel']);
     }
 }

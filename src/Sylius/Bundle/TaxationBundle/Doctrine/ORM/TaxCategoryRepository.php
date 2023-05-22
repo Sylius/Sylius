@@ -19,6 +19,7 @@ use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @template T of TaxCategoryInterface
+ *
  * @implements TaxCategoryRepositoryInterface<T>
  */
 class TaxCategoryRepository extends EntityRepository implements TaxCategoryRepositoryInterface

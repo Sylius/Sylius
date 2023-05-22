@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AttributeInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface AttributeFactoryInterface extends FactoryInterface

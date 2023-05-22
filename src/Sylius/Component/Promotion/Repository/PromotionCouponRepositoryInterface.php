@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of PromotionCouponInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface

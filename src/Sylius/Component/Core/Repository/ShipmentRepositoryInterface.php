@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ShipmentInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ShipmentRepositoryInterface extends RepositoryInterface

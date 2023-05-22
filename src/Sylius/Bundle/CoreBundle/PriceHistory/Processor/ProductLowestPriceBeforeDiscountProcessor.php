@@ -69,8 +69,7 @@ final class ProductLowestPriceBeforeDiscountProcessor implements ProductLowestPr
     {
         return
             $channelPricing->getOriginalPrice() !== null &&
-            $channelPricing->getPrice() < $channelPricing->getOriginalPrice()
-        ;
+            $channelPricing->getPrice() < $channelPricing->getOriginalPrice();
     }
 
     private function findLowestPriceInPeriod(

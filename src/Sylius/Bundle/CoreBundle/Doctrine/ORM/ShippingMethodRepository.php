@@ -21,7 +21,9 @@ use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 
 /**
  * @template T of ShippingMethodInterface
+ *
  * @extends BaseShippingMethodRepository<T>
+ *
  * @implements ShippingMethodRepositoryInterface<T>
  */
 class ShippingMethodRepository extends BaseShippingMethodRepository implements ShippingMethodRepositoryInterface

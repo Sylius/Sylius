@@ -18,7 +18,7 @@ use Throwable;
 
 class OrderTotalHasChangedException extends Exception
 {
-    public function __construct (
+    public function __construct(
         string $message = 'Order total has changed during checkout process.',
         int $code = 0,
         Throwable $previous = null,

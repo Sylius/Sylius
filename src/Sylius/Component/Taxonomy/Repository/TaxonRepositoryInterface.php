@@ -19,6 +19,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @template T of TaxonInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface TaxonRepositoryInterface extends RepositoryInterface

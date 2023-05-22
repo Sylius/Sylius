@@ -36,15 +36,13 @@ final class ProductVariantOriginalPriceMapProvider implements ProductVariantMapP
             isset($context['channel']) &&
             $context['channel'] instanceof ChannelInterface &&
             null !== $variant->getChannelPricingForChannel($context['channel']) &&
-            $this->isPriceLowerThanOriginalPrice($variant, $context)
-        ;
+            $this->isPriceLowerThanOriginalPrice($variant, $context);
     }
 
     private function isPriceLowerThanOriginalPrice(ProductVariantInterface $variant, array $context): bool
     {
         return
             $this->calculator->calculate($variant, $context) <
-            $this->calculator->calculateOriginal($variant, $context)
-        ;
+            $this->calculator->calculateOriginal($variant, $context);
     }
 }

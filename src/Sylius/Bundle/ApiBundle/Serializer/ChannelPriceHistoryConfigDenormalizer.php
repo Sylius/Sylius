@@ -43,8 +43,7 @@ final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenorma
         return
             !isset($context[self::ALREADY_CALLED]) &&
             is_array($data) &&
-            is_a($type, ChannelPriceHistoryConfigInterface::class, true)
-        ;
+            is_a($type, ChannelPriceHistoryConfigInterface::class, true);
     }
 
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])

@@ -20,6 +20,7 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
 /**
  * @template T of AddressInterface
+ *
  * @implements AddressRepositoryInterface<T>
  */
 class AddressRepository extends EntityRepository implements AddressRepositoryInterface

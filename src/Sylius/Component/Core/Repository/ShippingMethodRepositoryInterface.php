@@ -20,6 +20,7 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as Ba
 
 /**
  * @template T of ShippingMethodInterface
+ *
  * @extends BaseShippingMethodRepositoryInterface<T>
  */
 interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepositoryInterface
