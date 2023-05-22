@@ -57,7 +57,7 @@ final class UserImpersonator implements UserImpersonatorInterface
             $token = new UsernamePasswordToken(
                 $user,
                 $user->getPassword(),
-                $this->firewallContextName,
+                $this->firewallContextName, // @phpstan-ignore-line continue to support Sf < 6
                 array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
             );
         }
