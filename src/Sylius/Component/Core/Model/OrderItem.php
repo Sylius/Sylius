@@ -122,8 +122,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
 
         return
             $this->unitPrice +
-            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
-        ;
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
     }
 
     public function getFullDiscountedUnitPrice(): int
@@ -140,8 +139,7 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         return
             $this->unitPrice +
             $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
-            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-        ;
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
     }
 
     public function getSubtotal(): int

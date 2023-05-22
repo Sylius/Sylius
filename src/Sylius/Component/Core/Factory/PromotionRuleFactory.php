@@ -53,8 +53,7 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(
             TotalOfItemsFromTaxonRuleChecker::TYPE,
             [$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]],
-        )
-        ;
+        );
     }
 
     public function createNthOrder(int $nth): PromotionRuleInterface

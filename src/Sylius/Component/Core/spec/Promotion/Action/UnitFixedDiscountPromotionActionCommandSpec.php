@@ -421,8 +421,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
                 $promotionAdjustment1->getWrappedObject(),
                 $promotionAdjustment2->getWrappedObject(),
             ]),
-        )
-        ;
+        );
 
         $promotion->getCode()->willReturn('PROMOTION');
 

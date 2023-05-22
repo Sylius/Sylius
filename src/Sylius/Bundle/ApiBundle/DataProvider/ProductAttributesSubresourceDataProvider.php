@@ -40,8 +40,7 @@ final class ProductAttributesSubresourceDataProvider implements RestrictedDataPr
 
         return
             is_a($resourceClass, ProductAttributeValueInterface::class, true) &&
-            isset($subresourceIdentifiers['code'])
-        ;
+            isset($subresourceIdentifiers['code']);
     }
 
     public function getSubresource(string $resourceClass, array $identifiers, array $context, string $operationName = null)
