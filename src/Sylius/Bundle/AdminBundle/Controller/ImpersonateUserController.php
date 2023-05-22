@@ -49,9 +49,9 @@ final class ImpersonateUserController
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
-        /** @var UserInterface $user */
         $user = $this->userProvider->loadUserByUsername($username);
         Assert::isInstanceOf($user, SymfonyUserInterface::class);
+        Assert::isInstanceOf($user, UserInterface::class);
 
         $this->impersonator->impersonate($user);
 
