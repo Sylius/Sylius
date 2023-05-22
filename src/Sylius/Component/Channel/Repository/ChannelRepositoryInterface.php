@@ -34,4 +34,6 @@ interface ChannelRepositoryInterface extends RepositoryInterface
     public function findByName(string $name): iterable;
 
     public function findAllWithBasicData(): iterable;
+
+    public function countAll(): int;
 }

@@ -25,13 +25,14 @@ final class SingleChannelContext implements ChannelContextInterface
 
     public function getChannel(): ChannelInterface
     {
-        $channels = $this->channelRepository->findAll();
+        $channelsCount = $this->channelRepository->countAll();
 
-        if (1 !== count($channels)) {
+        if (1 !== $channelsCount) {
             throw new ChannelNotFoundException();
         }
-        $channel = reset($channels);
-        Assert::isInstanceOf($channel, ChannelInterface::class);
+
+        /** @var ChannelInterface $channel */
+        $channel = $this->channelRepository->findOneBy([]);
 
         return $channel;
     }
