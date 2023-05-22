@@ -47,7 +47,9 @@ final class ContactController
         $form = $this->formFactory->create($formType, null, $this->getFormOptions());
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
+            /** @var mixed $data */
             $data = $form->getData();
+            Assert::isArray($data);
 
             $channel = $this->channelContext->getChannel();
 
