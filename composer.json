@@ -29,6 +29,7 @@
         "ext-hash": "*",
         "ext-intl": "*",
         "ext-json": "*",
+        "ext-simplexml": "*",
         "api-platform/core": "^2.7.10",
         "babdev/pagerfanta-bundle": "^3.0",
         "behat/transliterator": "^1.3",
