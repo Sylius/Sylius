@@ -1,5 +1,47 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.8 (2023-05-25)
+
+#### Details
+
+- [#12344](https://github.com/Sylius/Sylius/issues/12344) [Product][Association] Fix attaching association with numeric code ([@hatem20](https://github.com/hatem20))
+- [#13438](https://github.com/Sylius/Sylius/issues/13438) Replace http with https in static URLs ([@vvasiloi](https://github.com/vvasiloi))
+- [#13864](https://github.com/Sylius/Sylius/issues/13864) fix message of the length constraint on email ([@james2001](https://github.com/james2001))
+- [#14918](https://github.com/Sylius/Sylius/issues/14918) [Tasks] Improve Robo task ([@Rafikooo](https://github.com/Rafikooo))
+- [#14920](https://github.com/Sylius/Sylius/issues/14920) [Admin][Shipment] fix english word and add shipment state in admin show shipment ([@BastienGoze](https://github.com/BastienGoze))
+- [#14923](https://github.com/Sylius/Sylius/issues/14923) [CS][DX] Refactor ([@github-actions](https://github.com/github-actions)[[@bot](https://github.com/bot)])
+- [#14925](https://github.com/Sylius/Sylius/issues/14925) [Migrations] Sylius-Standard installation fix ([@Rafikooo](https://github.com/Rafikooo))
+- [#14926](https://github.com/Sylius/Sylius/issues/14926) [API] API Platform's default exception mappings ([@Rafikooo](https://github.com/Rafikooo))
+- [#14929](https://github.com/Sylius/Sylius/issues/14929) Add conflict for doctrine/orm:2.14.2 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14932](https://github.com/Sylius/Sylius/issues/14932) [Admin][Promotion] Remove leftover rules after their assigned product gets deleted ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14935](https://github.com/Sylius/Sylius/issues/14935) [DX] Do not hardcode order state in order processors ([@Zales0123](https://github.com/Zales0123))
+- [#14938](https://github.com/Sylius/Sylius/issues/14938) Revert "Add conflict for doctrine/orm:2.14.2" ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14940](https://github.com/Sylius/Sylius/issues/14940) default shipping methods order by position ([@ehibes](https://github.com/ehibes))
+- [#14941](https://github.com/Sylius/Sylius/issues/14941) Fix build ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14953](https://github.com/Sylius/Sylius/issues/14953) Update BuildTestApp actions within workflows ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14956](https://github.com/Sylius/Sylius/issues/14956) [Shop] Add request matching to LocaleStrippingRouter ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14957](https://github.com/Sylius/Sylius/issues/14957) Ignore push event on upmerge ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14961](https://github.com/Sylius/Sylius/issues/14961) [API] Remove invalid enum value from ProductImage resource ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14962](https://github.com/Sylius/Sylius/issues/14962) [ApiBundle][Maintenance] Remove conflict with `doctrine/dbal:3.*` ([@Rafikooo](https://github.com/Rafikooo))
+- [#14967](https://github.com/Sylius/Sylius/issues/14967) [GRID] Avoid double label translation on date filter ([@Prometee](https://github.com/Prometee))
+- [#14971](https://github.com/Sylius/Sylius/issues/14971) Fix the press enter cause attribute deletion ([@zangra-dev](https://github.com/zangra-dev))
+- [#14973](https://github.com/Sylius/Sylius/issues/14973) [UI][Swagger] Update link to API Introduction section ([@coldic3](https://github.com/coldic3))
+- [#14974](https://github.com/Sylius/Sylius/issues/14974) [CS][DX] Refactor ([@github-actions](https://github.com/github-actions)[[@bot](https://github.com/bot)])
+- [#14977](https://github.com/Sylius/Sylius/issues/14977) [Promotion] Fix price range filter to also consider configuration with only max ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14991](https://github.com/Sylius/Sylius/issues/14991) [Unstable][Maintenance] Fix DisablingApiTest on unstable symfony ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15006](https://github.com/Sylius/Sylius/issues/15006) Fix adding more than one product attribute at once ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15010](https://github.com/Sylius/Sylius/issues/15010) Lower the sylius.context.locale tag priority on RequestHeaderBasedLocalContext ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15018](https://github.com/Sylius/Sylius/issues/15018) Upgrade PHPStan to level 4 ([@lruozzi9](https://github.com/lruozzi9))
+- [#15022](https://github.com/Sylius/Sylius/issues/15022) [Admin] Fix inability of sorting promotion coupons and catalog promotions ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15024](https://github.com/Sylius/Sylius/issues/15024) [Behat][Api] Make sure taxon iri is in right section ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15025](https://github.com/Sylius/Sylius/issues/15025) Added: Implementation of getShippingUnitTotal ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15031](https://github.com/Sylius/Sylius/issues/15031) [Behat] Minor fixes in scenarios and contexts ([@coldic3](https://github.com/coldic3))
+- [#15034](https://github.com/Sylius/Sylius/issues/15034) [CS][DX] Refactor ([@github-actions](https://github.com/github-actions)[[@bot](https://github.com/bot)])
+- [#15038](https://github.com/Sylius/Sylius/issues/15038) [Fix][Migrations] Wrong abstract class extended ([@Rafikooo](https://github.com/Rafikooo))
+- [#15048](https://github.com/Sylius/Sylius/issues/15048) Add php-http/message-factory as a dev dependency to fix tests ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15050](https://github.com/Sylius/Sylius/issues/15050) [Fix][Installer] Install Sylius 1.12 with PostgreSQL ([@Rafikooo](https://github.com/Rafikooo))
+- [#15052](https://github.com/Sylius/Sylius/issues/15052) Revert "[CS][DX] Refactor" ([@jakubtobiasz](https://github.com/jakubtobiasz))
+
 ## v1.12.7 (2023-04-06)
 
 #### Details
