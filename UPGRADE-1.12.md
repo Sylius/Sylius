@@ -1,3 +1,9 @@
+# UPGRADE FROM `v1.12.X` TO `v1.12.8`
+
+1. The priority of the `sylius.context.locale` tag on the `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext` service has been changed from `256` to `32`.
+    It means that this service has no longer the highest priority, and passing `Accept-Language` header on the UI won't override the locale set in the URL. If your app
+    depends on this behavior, you need to change the priority of the `sylius.context.locale` tag on the `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext` directly in your app.
+
 # UPGRADE FROM `v1.12.X` TO `v1.12.5`
 
 1. For routes `sylius_admin_order_shipment_ship` and `sylius_admin_order_resend_confirmation_email` the missing "/orders"
