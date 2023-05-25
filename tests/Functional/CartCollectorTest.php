@@ -15,20 +15,22 @@ namespace Sylius\Tests\Functional;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use Sylius\Bundle\CoreBundle\Collector\CartCollector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Sylius\Bundle\CoreBundle\Collector\CartCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sylius\Component\Core\Storage\CartStorageInterface;
 
 final class CartCollectorTest extends KernelTestCase
 {
     /** @test */
     public function it_has_no_cart_when_no_channel_is_present(): void
     {
+        $this->loadFixtures([]);
+
         $collector = self::getContainer()->get(CartCollector::class);
         $collector->collect(new Request(), new Response());
 
