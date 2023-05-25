@@ -69,10 +69,11 @@ EOT
             return 1;
         }
 
-        $parameters = [
-            'suite' => $suite,
-            '--no-interaction' => true,
-        ];
+        $parameters = ['--no-interaction' => true];
+
+        if (null !== $suite) {
+            $parameters['suite'] = $suite;
+        }
 
         $commands = [
             'sylius:fixtures:load' => $parameters,
