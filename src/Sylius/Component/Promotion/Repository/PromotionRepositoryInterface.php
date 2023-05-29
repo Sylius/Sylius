@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of PromotionInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface PromotionRepositoryInterface extends RepositoryInterface

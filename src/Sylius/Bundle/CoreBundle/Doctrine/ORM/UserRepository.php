@@ -19,7 +19,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
  * @template T of UserInterface
+ *
  * @extends BaseUserRepository<T>
+ *
  * @implements UserRepositoryInterface<T>
  */
 class UserRepository extends BaseUserRepository implements UserRepositoryInterface

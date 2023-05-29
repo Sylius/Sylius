@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of CustomerInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface CustomerRepositoryInterface extends RepositoryInterface

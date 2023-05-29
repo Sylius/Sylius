@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ExchangeRateInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ExchangeRateRepositoryInterface extends RepositoryInterface

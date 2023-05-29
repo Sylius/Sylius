@@ -165,7 +165,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $validationMessage->getText();
     }
 
-
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');

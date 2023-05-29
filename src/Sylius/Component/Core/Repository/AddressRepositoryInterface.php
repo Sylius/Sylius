@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of AddressInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface AddressRepositoryInterface extends RepositoryInterface

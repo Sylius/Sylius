@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ChannelInterface
+ *
  * @implements ChannelFactoryInterface<T>
  */
 final class ChannelFactory implements ChannelFactoryInterface

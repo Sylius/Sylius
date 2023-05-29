@@ -20,6 +20,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
  * @template T of TaxonInterface
+ *
  * @implements TaxonRepositoryInterface<T>
  */
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface

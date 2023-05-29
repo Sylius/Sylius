@@ -20,6 +20,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @template T of ReviewInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface ReviewFactoryInterface extends FactoryInterface

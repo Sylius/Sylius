@@ -49,6 +49,7 @@ class ExchangeRate implements ExchangeRateInterface
     {
         /**
          * It looks like Doctrine is hydrating decimal field as string, force casting to float.
+         *
          * @var float|string|null $ratio
          */
         $ratio = $this->ratio;

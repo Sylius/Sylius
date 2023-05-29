@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of OrderItemInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface OrderItemRepositoryInterface extends RepositoryInterface

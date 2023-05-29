@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of AddressInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface AddressFactoryInterface extends FactoryInterface

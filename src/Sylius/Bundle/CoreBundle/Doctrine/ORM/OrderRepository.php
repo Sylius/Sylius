@@ -30,7 +30,9 @@ use Webmozart\Assert\Assert;
 
 /**
  * @template T of OrderInterface
+ *
  * @extends BaseOrderRepository<T>
+ *
  * @implements OrderRepositoryInterface<T>
  */
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface

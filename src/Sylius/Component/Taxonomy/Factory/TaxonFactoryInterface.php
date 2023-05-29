@@ -18,6 +18,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @template T of TaxonInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface TaxonFactoryInterface extends FactoryInterface

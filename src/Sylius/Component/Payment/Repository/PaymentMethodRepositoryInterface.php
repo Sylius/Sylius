@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of PaymentMethodInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface PaymentMethodRepositoryInterface extends RepositoryInterface

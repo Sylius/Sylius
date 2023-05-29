@@ -18,6 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @template T of ShippingMethodInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ShippingMethodRepositoryInterface extends RepositoryInterface

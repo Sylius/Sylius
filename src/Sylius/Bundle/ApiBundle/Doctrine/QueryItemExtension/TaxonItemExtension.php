@@ -27,12 +27,11 @@ final class TaxonItemExtension implements QueryItemExtensionInterface
 
     public function applyToItem(
         QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface
-        $queryNameGenerator,
+        QueryNameGeneratorInterface $queryNameGenerator,
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ) {
         if (!is_a($resourceClass, TaxonInterface::class, true)) {
             return;

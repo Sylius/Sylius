@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of PaymentInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface PaymentRepositoryInterface extends RepositoryInterface

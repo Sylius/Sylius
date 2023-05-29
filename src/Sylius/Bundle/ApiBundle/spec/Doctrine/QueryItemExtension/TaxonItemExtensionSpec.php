@@ -59,8 +59,8 @@ final class TaxonItemExtensionSpec extends ObjectBehavior
 
         $queryBuilder->addSelect('childAlias')->shouldBeCalled();
         $queryBuilder->leftJoin('rootAlias.children', 'childAlias', 'WITH', 'childAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->andWhere('rootAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);;
-        $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);;
+        $queryBuilder->andWhere('rootAlias.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToItem($queryBuilder, $queryNameGenerator, TaxonInterface::class, [], null, []);
     }

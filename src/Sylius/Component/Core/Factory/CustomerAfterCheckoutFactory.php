@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of CustomerInterface
+ *
  * @implements CustomerAfterCheckoutFactoryInterface<T>
  */
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface

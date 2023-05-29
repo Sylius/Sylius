@@ -22,7 +22,9 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * @template T of ProductVariantInterface
+ *
  * @extends BaseProductVariantRepository<T>
+ *
  * @implements ProductVariantRepositoryInterface<T>
  */
 class ProductVariantRepository extends BaseProductVariantRepository implements ProductVariantRepositoryInterface

@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of CustomerInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface CustomerAfterCheckoutFactoryInterface extends FactoryInterface
