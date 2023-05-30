@@ -80,4 +80,45 @@ final class ProductReviewsTest extends JsonApiTestCase
             Response::HTTP_CREATED,
         );
     }
+
+    /** @test */
+    public function it_prevents_from_creating_a_product_review_with_non_existing_product(): void
+    {
+        $this->loadFixturesFromFiles(['product/product_variant.yaml']);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/product-reviews',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'title' => 'Greatest product!',
+                'rating' => 3,
+                'comment' => 'I\'ve never bought anything better.',
+                'email' => 'test@test.com',
+                'product' => '/api/v2/shop/products/NON-EXISTING-PRODUCT',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_prevents_from_creating_a_product_review_if_no_product_provided(): void
+    {
+        $this->loadFixturesFromFiles(['product/product_variant.yaml']);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/product-reviews',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'title' => 'Greatest product!',
+                'rating' => 3,
+                'comment' => 'I\'ve never bought anything better.',
+                'email' => 'test@test.com',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
