@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
