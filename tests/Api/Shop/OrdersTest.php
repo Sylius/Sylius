@@ -477,4 +477,58 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /** @test */
+    public function it_prevents_from_adding_an_item_to_the_cart_if_product_variant_is_missing(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = self::getContainer()->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/shop/orders/%s/items', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'quantity' => 3,
+            ], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_prevents_from_adding_an_item_to_the_cart_if_quantity_is_missing(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = self::getContainer()->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/shop/orders/%s/items', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'productVariant' => 'MUG_BLUE',
+            ], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
