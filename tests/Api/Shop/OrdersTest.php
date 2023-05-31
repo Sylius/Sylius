@@ -531,4 +531,29 @@ final class OrdersTest extends JsonApiTestCase
 
         $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /** @test */
+    public function it_prevents_from_changing_an_item_quantity_if_quantity_is_missing(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = 'nAWw2jewpA';
+
+        /** @var MessageBusInterface $commandBus */
+        $commandBus = self::getContainer()->get('sylius.command_bus');
+
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode('WEB');
+        $commandBus->dispatch($pickupCartCommand);
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, 1),
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: json_encode([]),
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
