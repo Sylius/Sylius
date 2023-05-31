@@ -28,6 +28,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Webmozart\Assert\Assert;
 
 class OrderFixture extends AbstractFixture
 {
@@ -46,7 +47,7 @@ class OrderFixture extends AbstractFixture
         ObjectManager $orderManager,
         RepositoryInterface $channelRepository,
         RepositoryInterface $customerRepository,
-        ProductRepositoryInterface $productRepository,
+        RepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -56,7 +57,10 @@ class OrderFixture extends AbstractFixture
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderExampleFactory $orderExampleFactory = null,
     ) {
+
         if ($orderExampleFactory === null) {
+            Assert::isInstanceOf($productRepository, ProductRepositoryInterface::class);
+
             $orderExampleFactory = new OrderExampleFactory(
                 $orderFactory,
                 $orderItemFactory,
