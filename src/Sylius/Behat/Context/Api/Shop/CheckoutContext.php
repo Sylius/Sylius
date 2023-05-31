@@ -1052,7 +1052,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
-            sprintf('The product variant with %s does not exist.', $productVariant->getCode()),
+            sprintf('The product variant %s does not exist.', $productVariant->getCode()),
         ));
     }
 
@@ -1063,7 +1063,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
-            sprintf('The product variant with %s does not exist.', $code),
+            sprintf('The product variant %s does not exist.', $code),
         ));
     }
 
