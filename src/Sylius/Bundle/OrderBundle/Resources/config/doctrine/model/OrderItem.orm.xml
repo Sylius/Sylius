@@ -26,7 +26,7 @@
         <field name="originalUnitPrice" column="original_unit_price" type="float" nullable="true"/>
         <field name="unitsTotal" column="units_total" type="float" />
         <field name="adjustmentsTotal" column="adjustments_total" type="float" />
-        <field name="total" column="total" type="integer" />
+        <field name="total" column="total" type="float" />
         <field name="immutable" column="is_immutable" type="boolean" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">

@@ -21,6 +21,8 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
+use function round;
+
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
     public const TYPE = 'order_fixed_discount';
@@ -65,7 +67,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
                 if ($promotion->getAppliesToDiscounted()) {
-                    $itemsTotal[] = $orderItem->getTotal();
+                    $itemsTotal[] = (int) round($orderItem->getTotal());
 
                     continue;
                 }
@@ -77,7 +79,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
                     continue;
                 }
 
-                $itemsTotal[] = $orderItem->getTotal();
+                $itemsTotal[] = (int) round($orderItem->getTotal());
             }
 
             $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);

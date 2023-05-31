@@ -454,7 +454,7 @@ class Order extends BaseOrder implements OrderInterface
             }
         }
 
-        return $total;
+        return (int) round($total);
     }
 
     public function getCreatedByGuest(): bool

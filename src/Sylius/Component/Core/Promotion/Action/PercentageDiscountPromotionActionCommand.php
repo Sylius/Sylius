@@ -23,6 +23,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
 
 use function ceil;
+use function round;
 
 final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
@@ -63,7 +64,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             $itemsTotal = [];
             foreach ($subject->getItems() as $orderItem) {
                 if ($promotion->getAppliesToDiscounted()) {
-                    $itemsTotal[] = $orderItem->getTotal();
+                    $itemsTotal[] = (int) round($orderItem->getTotal());
 
                     continue;
                 }
@@ -75,7 +76,7 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
                     continue;
                 }
 
-                $itemsTotal[] = $orderItem->getTotal();
+                $itemsTotal[] = (int) round($orderItem->getTotal());
             }
 
             $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);

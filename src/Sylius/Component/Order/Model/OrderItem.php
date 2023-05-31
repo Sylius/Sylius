@@ -34,8 +34,8 @@ class OrderItem implements OrderItemInterface
 
     protected ?float $originalUnitPrice = 0.0;
 
-    /** @var int */
-    protected $total = 0;
+    /** @var float */
+    protected $total = 0.0;
 
     /** @var bool */
     protected $immutable = false;
@@ -48,7 +48,7 @@ class OrderItem implements OrderItemInterface
     protected $units;
 
     /** @var float */
-    protected $unitsTotal = 0;
+    protected $unitsTotal = 0.0;
 
     /**
      * @var Collection|AdjustmentInterface[]
@@ -126,7 +126,7 @@ class OrderItem implements OrderItemInterface
         $this->originalUnitPrice = $originalUnitPrice;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
         return $this->total;
     }
@@ -146,10 +146,10 @@ class OrderItem implements OrderItemInterface
 
     public function recalculateUnitsTotal(): void
     {
-        $this->unitsTotal = 0;
+        $this->unitsTotal = (int) round($this->getUnitPrice() * count($this->units));
 
         foreach ($this->units as $unit) {
-            $this->unitsTotal += $unit->getTotal();
+            $this->unitsTotal += $unit->getAdjustmentsTotal();
         }
 
         $this->recalculateTotal();
@@ -304,7 +304,7 @@ class OrderItem implements OrderItemInterface
      */
     protected function recalculateTotal(): void
     {
-        $this->total = (int) round($this->unitsTotal) + (int) round($this->adjustmentsTotal);
+        $this->total = $this->unitsTotal + $this->adjustmentsTotal;
 
         if ($this->total < 0) {
             $this->total = 0;

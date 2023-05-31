@@ -20,6 +20,8 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
+use function round;
+
 final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'total_of_items_from_taxon';
@@ -58,7 +60,7 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($item->getProduct()->hasTaxon($targetTaxon)) {
-                $itemsWithTaxonTotal += $item->getTotal();
+                $itemsWithTaxonTotal += (int) round($item->getTotal());
             }
         }
 

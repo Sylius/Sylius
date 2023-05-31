@@ -28,7 +28,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function setOriginalUnitPrice(?float $originalUnitPrice): void;
 
-    public function getTotal(): int;
+    public function getTotal(): float;
 
     /**
      * Recalculate totals. Should be used after every unit change.

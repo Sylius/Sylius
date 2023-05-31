@@ -18,6 +18,8 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
+use function round;
+
 final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
 {
     public function __construct(private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor)
@@ -71,9 +73,9 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
             $minimumPriceAdjustedByCurrentDiscount = $distribution['minimumPrice'];
             $proposedPromotion = $distribution['promotion'];
 
-            if ($this->exceedsOrderItemMinimumPrice($orderItem->getTotal(), $minimumPriceAdjustedByCurrentDiscount, $proposedPromotion)) {
-                $leftAmount += ($orderItem->getTotal() + $proposedPromotion) - ($minimumPriceAdjustedByCurrentDiscount);
-                $orderItems[$index]['promotion'] = $minimumPriceAdjustedByCurrentDiscount - $orderItem->getTotal();
+            if ($this->exceedsOrderItemMinimumPrice((int) round($orderItem->getTotal()), $minimumPriceAdjustedByCurrentDiscount, $proposedPromotion)) {
+                $leftAmount += ((int) round($orderItem->getTotal()) + $proposedPromotion) - ($minimumPriceAdjustedByCurrentDiscount);
+                $orderItems[$index]['promotion'] = $minimumPriceAdjustedByCurrentDiscount - (int) round($orderItem->getTotal());
 
                 continue;
             }
@@ -112,6 +114,6 @@ final class MinimumPriceDistributor implements MinimumPriceDistributorInterface
             return 0;
         }
 
-        return $orderItem->getTotal();
+        return (int) round($orderItem->getTotal());
     }
 }

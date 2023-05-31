@@ -24,6 +24,8 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 use Webmozart\Assert\Assert;
 
+use function round;
+
 class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     public function __construct(
@@ -49,7 +51,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
-            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
+            $totalTaxAmount = $this->calculator->calculate((int) round($item->getTotal()), $taxRate);
             $splitTaxes = $totalTaxAmount / $quantity;
             if (0.0 === $splitTaxes) {
                 continue;

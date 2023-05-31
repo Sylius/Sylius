@@ -20,9 +20,9 @@ final class DefaultCalculator implements CalculatorInterface
     public function calculate(float $base, TaxRateInterface $rate): float
     {
         if ($rate->isIncludedInPrice()) {
-            return round($base - ($base / (1 + $rate->getAmount())));
+            return $base - ($base / (1 + $rate->getAmount()));
         }
 
-        return round($base * $rate->getAmount());
+        return $base * $rate->getAmount();
     }
 }

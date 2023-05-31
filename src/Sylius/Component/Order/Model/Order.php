@@ -141,7 +141,7 @@ class Order implements OrderInterface
             return;
         }
 
-        $this->itemsTotal += $item->getTotal();
+        $this->itemsTotal += (int) round($item->getTotal());
         $this->items->add($item);
         $item->setOrder($this);
 
@@ -152,7 +152,7 @@ class Order implements OrderInterface
     {
         if ($this->hasItem($item)) {
             $this->items->removeElement($item);
-            $this->itemsTotal -= $item->getTotal();
+            $this->itemsTotal -= (int) round($item->getTotal());
             $this->recalculateTotal();
             $item->setOrder(null);
         }
@@ -170,10 +170,12 @@ class Order implements OrderInterface
 
     public function recalculateItemsTotal(): void
     {
-        $this->itemsTotal = 0;
+        $itemsTotal = 0;
         foreach ($this->items as $item) {
-            $this->itemsTotal += $item->getTotal();
+            $itemsTotal += $item->getTotal();
         }
+
+        $this->itemsTotal = (int) round($itemsTotal);
 
         $this->recalculateTotal();
     }
