@@ -1,6 +1,6 @@
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
-1. The signature of constructor and `createFromData` method of 'Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityCart' command changed:
+1. The signature of constructor of 'Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart' command changed:
 
 ````diff
     public function __construct(
@@ -8,15 +8,6 @@
 +       public ?int $quantity,
     ) {
     } 
-````
-
-````diff
-    public static function createFromData(
-        string $tokenValue, 
-        string $orderItemId, 
--       int $quantity,
-+       ?int $quantity,
-    ): self
 ````
 
 1. The constructor signature of 'Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart' changed:

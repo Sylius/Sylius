@@ -40,6 +40,10 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         /** @var ChangedItemQuantityInCart $constraint */
         Assert::isInstanceOf($constraint, ChangedItemQuantityInCart::class);
 
+        if ($value->quantity === null) {
+            return;
+        }
+
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneBy(['id' => $value->orderItemId]);
         Assert::notNull($orderItem);
