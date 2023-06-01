@@ -19,9 +19,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\ApiBundle\Controller\Locale\DeleteLocaleAction">
-            <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
-            <argument type="service" id="sylius.manager.locale" />
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Remover\LocaleRemoverInterface" />
 
             <tag name="controller.service_arguments" />
         </service>
