@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ChannelPricingLogEntryInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface ChannelPricingLogEntryFactoryInterface extends FactoryInterface

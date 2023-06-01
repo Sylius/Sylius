@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of ProductVariantInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface ProductVariantFactoryInterface extends FactoryInterface

@@ -20,6 +20,7 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
 /**
  * @template T of ExchangeRateInterface
+ *
  * @implements ExchangeRateRepositoryInterface<T>
  */
 class ExchangeRateRepository extends EntityRepository implements ExchangeRateRepositoryInterface

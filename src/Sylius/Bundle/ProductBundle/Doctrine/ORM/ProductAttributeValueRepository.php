@@ -20,6 +20,7 @@ use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface
 
 /**
  * @template T of ProductAttributeValueInterface
+ *
  * @implements ProductAttributeValueRepositoryInterface<T>
  */
 class ProductAttributeValueRepository extends EntityRepository implements ProductAttributeValueRepositoryInterface

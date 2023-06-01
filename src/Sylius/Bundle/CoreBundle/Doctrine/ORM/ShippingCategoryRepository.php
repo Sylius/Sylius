@@ -20,6 +20,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * @template T of ShippingCategoryInterface
+ *
  * @implements ShippingCategoryRepositoryInterface<T>
  */
 class ShippingCategoryRepository extends EntityRepository implements ShippingCategoryRepositoryInterface

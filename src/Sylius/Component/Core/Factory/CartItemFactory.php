@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of OrderItemInterface
+ *
  * @implements CartItemFactoryInterface<T>
  */
 final class CartItemFactory implements CartItemFactoryInterface

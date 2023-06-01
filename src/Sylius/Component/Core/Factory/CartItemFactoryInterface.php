@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of OrderItemInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface CartItemFactoryInterface extends FactoryInterface

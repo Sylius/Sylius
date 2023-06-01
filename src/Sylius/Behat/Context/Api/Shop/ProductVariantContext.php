@@ -344,7 +344,7 @@ final class ProductVariantContext implements Context
 
                 Assert::false(
                     $optionData['name'] === $expectedOptionName &&
-                    $optionValueData['value'] === $expectedOptionValueValue
+                    $optionValueData['value'] === $expectedOptionValueValue,
                 );
             }
         }

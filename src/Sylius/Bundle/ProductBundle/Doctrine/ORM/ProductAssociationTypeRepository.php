@@ -20,6 +20,7 @@ use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterfac
 
 /**
  * @template T of ProductAssociationTypeInterface
+ *
  * @implements ProductAssociationTypeRepositoryInterface<T>
  */
 class ProductAssociationTypeRepository extends EntityRepository implements ProductAssociationTypeRepositoryInterface

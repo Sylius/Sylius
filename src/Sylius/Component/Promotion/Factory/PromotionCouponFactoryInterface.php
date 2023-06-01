@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @template T of PromotionCouponInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface PromotionCouponFactoryInterface extends FactoryInterface

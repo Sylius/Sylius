@@ -19,6 +19,7 @@ use Sylius\Component\Customer\Repository\CustomerGroupRepositoryInterface;
 
 /**
  * @template T of CustomerGroupInterface
+ *
  * @implements CustomerGroupRepositoryInterface<T>
  */
 class CustomerGroupRepository extends EntityRepository implements CustomerGroupRepositoryInterface

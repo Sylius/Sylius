@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ChannelPricingLogEntryInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface ChannelPricingLogEntryRepositoryInterface extends RepositoryInterface

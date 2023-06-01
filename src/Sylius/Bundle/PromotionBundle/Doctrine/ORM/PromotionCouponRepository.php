@@ -20,6 +20,7 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
  * @template T of PromotionCouponInterface
+ *
  * @implements PromotionCouponRepositoryInterface<T>
  */
 class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface

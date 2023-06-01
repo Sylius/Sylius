@@ -19,6 +19,7 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
 /**
  * @template T of ProductInterface
+ *
  * @implements ProductRepositoryInterface<T>
  */
 class ProductRepository extends EntityRepository implements ProductRepositoryInterface

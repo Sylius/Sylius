@@ -22,6 +22,7 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
 /**
  * @template T of ShipmentInterface
+ *
  * @implements ShipmentRepositoryInterface<T>
  */
 class ShipmentRepository extends EntityRepository implements ShipmentRepositoryInterface

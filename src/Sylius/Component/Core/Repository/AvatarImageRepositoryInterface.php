@@ -18,6 +18,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @template T of ImageInterface
+ *
  * @extends RepositoryInterface<T>
  */
 interface AvatarImageRepositoryInterface extends RepositoryInterface

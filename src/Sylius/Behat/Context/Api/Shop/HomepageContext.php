@@ -99,7 +99,7 @@ final class HomepageContext implements Context
 
         Assert::true(
             $this->areAllMenuItemsVisible($menuItems, $expectedMenuItems),
-            sprintf('Menu items %s should be present in the menu', implode(', ', $expectedMenuItems))
+            sprintf('Menu items %s should be present in the menu', implode(', ', $expectedMenuItems)),
         );
     }
 

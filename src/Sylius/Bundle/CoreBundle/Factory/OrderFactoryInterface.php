@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @template T of ResourceInterface
+ *
  * @extends FactoryInterface<T>
  */
 interface OrderFactoryInterface extends FactoryInterface

@@ -21,6 +21,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @template T of OrderInterface
+ *
  * @implements OrderRepositoryInterface<T>
  */
 class OrderRepository extends EntityRepository implements OrderRepositoryInterface
