@@ -34,7 +34,7 @@ final class DeleteLocaleAction
         $session = $request->getSession();
 
         try {
-            $this->localeRemover->removeById($request->attributes->get('id'));
+            $this->localeRemover->removeById((int) $request->attributes->get('id'));
 
             $session->getFlashBag()->add('success', 'sylius.locale.delete.success');
         } catch (LocaleNotFoundException $exception) {

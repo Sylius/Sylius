@@ -69,7 +69,7 @@ final class DeleteLocaleActionSpec extends ObjectBehavior
         $request->headers = $headerBag;
         $request->getSession()->willReturn($session);
 
-        $attributes->get('id')->willReturn(1);
+        $attributes->get('id')->willReturn("1");
 
         $localeRemover->removeById(1)->willThrow(LocaleNotFoundException::class);
 
