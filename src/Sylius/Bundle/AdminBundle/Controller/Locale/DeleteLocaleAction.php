@@ -13,64 +13,35 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Controller\Locale;
 
-use Doctrine\Persistence\ObjectManager;
-use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
+use Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException;
+use Sylius\Bundle\LocaleBundle\Remover\LocaleRemoverInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class DeleteLocaleAction
 {
-    public function __construct (
-        private RepositoryInterface $localeRepository,
-        private LocaleUsageCheckerInterface $localeUsageChecker,
-        private ObjectManager $localeManager,
-    ) {
+    public function __construct (private LocaleRemoverInterface $localeRemover)
+    {
     }
 
     public function __invoke(Request $request): Response
     {
-        /** @var LocaleInterface|null $locale */
-        $locale = $this->localeRepository->find($request->attributes->get('id'));
-
-        if ($locale === null) {
-            throw new LocaleNotFoundException(
-                sprintf('Locale with id %s has not been found.', $request->attributes->get('id'))
-            );
-        }
-
         /** @var Session $session */
         $session = $request->getSession();
 
-        if ($this->localeUsageChecker->isUsed($locale->getCode())) {
-            $session->getFlashBag()->add(
-                'error',
-                new TranslatableMessage(
-                    'sylius.locale.delete.is_used',
-                    ['%locale%' => $locale->getName()],
-                    'flashes',
-                ),
-            );
+        try {
+            $this->localeRemover->removeById($request->attributes->get('id'));
 
-            return new RedirectResponse($request->headers->get('referer'));
+            $session->getFlashBag()->add('success', 'sylius.locale.delete.success');
+        } catch (LocaleNotFoundException $exception) {
+            throw new NotFoundHttpException($exception->getMessage(), $exception);
+        } catch (LocaleIsUsedException) {
+            $session->getFlashBag()->add('error', 'sylius.locale.delete.is_used');
         }
-
-        $this->localeManager->remove($locale);
-        $this->localeManager->flush();
-
-        $session->getFlashBag()->add(
-            'success',
-            new TranslatableMessage(
-                'sylius.locale.delete.success',
-                ['%locale%' => $locale->getName()],
-                'flashes',
-            ),
-        );
 
         return new RedirectResponse($request->headers->get('referer'));
     }
