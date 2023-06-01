@@ -72,8 +72,8 @@ You can get the current channel from the channel context.
 
    The channel is by default determined basing on the hostname, but you can customize that behaviour.
    To do that you have to implement the ``Sylius\Component\Channel\Context\ChannelContextInterface``
-   and register it as a service under the ``sylius.context.channel`` tag. Optionally you can add a ``priority="-64"``
-   since the default ChannelContext has a ``priority="-128"``, and by default a ``priority="0"`` is assigned.
+   and register it as a service under the ``sylius.context.channel`` tag. You should also add a ``priority="64"``
+   since the default ChannelContext has a ``priority="0"`` (and by default a ``priority="0"`` is assigned).
 
 .. note::
 
