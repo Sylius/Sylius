@@ -8,7 +8,7 @@ The example uses a mix of attributes, annotations and yaml for configuration, bu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ``getPaymentMethod`` and ``setPaymentMethod`` are optional and are wrappers for the untyped ``getOwner`` and ``setOwner`` methods.
-The type is set in the constructor to an unspecific value for convenience because it's not relevant in an one-to-one relationship.
+The image ``type`` is set in the constructor to an unspecific value for convenience because it's not relevant in a one-to-one relationship.
 
 .. code-block:: php
 
