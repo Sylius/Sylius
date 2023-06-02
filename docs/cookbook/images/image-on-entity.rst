@@ -331,7 +331,6 @@ For that, copy the ``SyliusAdmin/Form/imagesTheme.html.twig`` file to
         {{- block('image_widget') -}}
     {%- endblock -%}
 
-
 8. Add validation constraints as necessary
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
