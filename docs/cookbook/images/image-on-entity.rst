@@ -290,7 +290,7 @@ Configure the service if it's not done automatically:
 7. Render the image field in the form view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example we eed to customize the form view from ``SyliusAdminBundle/views/PaymentMethod/_form.html.twig``,
+For this example, we need to customize the form view from ``SyliusAdminBundle/views/PaymentMethod/_form.html.twig``,
 so we have to copy it to ``templates/bundles/SyliusAdminBundle/PaymentMethod/_form.html.twig`` file and render the
 ``{{ form_row(form.image) }}`` field.
 
