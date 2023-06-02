@@ -37,6 +37,7 @@ class UserLogin implements UserLoginInterface
     {
         $firewallName = $firewallName ?? 'main';
 
+        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         $this->userChecker->checkPreAuth($user);
         $this->userChecker->checkPostAuth($user);
 
@@ -64,8 +65,8 @@ class UserLogin implements UserLoginInterface
         /** @psalm-suppress NullArgument */
         return new UsernamePasswordToken(
             $user,
-            null,
-            $firewallName,
+            null, // @phpstan-ignore-line continue to support Sf < 6
+            $firewallName, // @phpstan-ignore-line continue to support Sf < 6
             array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
         );
     }

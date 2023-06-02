@@ -16,9 +16,11 @@ namespace Sylius\Component\Core\StateResolver;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Webmozart\Assert\Assert;
 
 final class CheckoutStateResolver implements StateResolverInterface
 {
@@ -29,8 +31,9 @@ final class CheckoutStateResolver implements StateResolverInterface
     ) {
     }
 
-    public function resolve(OrderInterface $order): void
+    public function resolve(BaseOrderInterface $order): void
     {
+        Assert::isInstanceOf($order, OrderInterface::class);
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
         if (
