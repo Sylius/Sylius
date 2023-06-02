@@ -189,6 +189,8 @@ class Order extends BaseOrder implements OrderInterface
         /** @var OrderItem $item */
         foreach ($this->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
+                Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
                 $units->add($unit);
             }
         }
