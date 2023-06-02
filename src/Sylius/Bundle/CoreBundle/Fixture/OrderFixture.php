@@ -57,7 +57,6 @@ class OrderFixture extends AbstractFixture
         OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
         OrderExampleFactory $orderExampleFactory = null,
     ) {
-
         if ($orderExampleFactory === null) {
             Assert::isInstanceOf($productRepository, ProductRepositoryInterface::class);
 
