@@ -367,8 +367,8 @@ For that, copy the ``SyliusAdmin/Form/imagesTheme.html.twig`` file to
         protected ?PaymentMethodImage $image = null;
     }
 
-9. Generate a Doctrine migration and execute it:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+9. Generate a Doctrine migration and execute it
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: shell
 
