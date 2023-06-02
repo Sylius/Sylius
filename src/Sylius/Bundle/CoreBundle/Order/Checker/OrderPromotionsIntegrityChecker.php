@@ -31,6 +31,7 @@ final class OrderPromotionsIntegrityChecker implements OrderPromotionsIntegrityC
 
         $this->orderProcessor->process($order);
 
+        /** @var PromotionInterface $previousPromotion */
         foreach ($previousPromotions as $previousPromotion) {
             if (!$order->getPromotions()->contains($previousPromotion)) {
                 return $previousPromotion;

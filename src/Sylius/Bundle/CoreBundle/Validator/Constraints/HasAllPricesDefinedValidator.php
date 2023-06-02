@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -36,6 +37,7 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
 
         $channels = $product->getChannels();
 
+        /** @var ChannelInterface $channel */
         foreach ($channels as $channel) {
             /** @var ChannelPricingInterface|null $channelPricing */
             $channelPricing = $value->getChannelPricingForChannel($channel);

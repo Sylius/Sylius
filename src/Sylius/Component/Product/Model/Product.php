@@ -183,12 +183,14 @@ class Product implements ProductInterface, \Stringable
         }
 
         $attributes = $this->attributes->filter(
-            function (ProductAttributeValueInterface $attribute) use ($baseLocaleCode) {
+            function (AttributeValueInterface $attribute) use ($baseLocaleCode) {
                 return $attribute->getLocaleCode() === $baseLocaleCode || null === $attribute->getLocaleCode();
             },
         );
 
         $attributesWithFallback = [];
+
+        /** @var ProductAttributeValueInterface $attribute */
         foreach ($attributes as $attribute) {
             $attributesWithFallback[] = $this->getAttributeInDifferentLocale($attribute, $localeCode, $fallbackLocaleCode);
         }
