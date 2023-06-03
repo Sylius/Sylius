@@ -299,5 +299,6 @@
 
     <plugins>
         <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin" />
     </plugins>
 </psalm>

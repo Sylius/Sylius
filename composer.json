@@ -231,7 +231,8 @@
         "symfony/runtime": "^5.4.21 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4.21 || ^6.0",
         "symplify/monorepo-builder": "^11.0",
-        "vimeo/psalm": "5.12.*"
+        "vimeo/psalm": "5.12.*",
+        "weirdan/doctrine-psalm-plugin": "^2.8"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
