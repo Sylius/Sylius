@@ -44,6 +44,9 @@
         "symfony/form": "^5.4 || ^6.0",
         "symfony/validator": "^5.4 || ^6.0"
     },
+    "conflict": {
+        "doctrine/orm": "2.15.2"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true
