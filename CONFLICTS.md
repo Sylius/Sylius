@@ -12,3 +12,8 @@ references related issues.
 
   This version is missing the service alias `validator.expression`
   which causes ValidatorException exception to be thrown when using `Expression` constraint. 
+
+- `doctrine/orm:2.15.2`:
+
+  This version introduced a bug, which causes the `ForeignKeyConstraintViolationException` exception to not be thrown when trying to delete a resource with a foreign key constraint.
+  References: https://github.com/doctrine/orm/issues/10752
