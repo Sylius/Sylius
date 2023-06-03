@@ -34,6 +34,7 @@
         "symfony/validator": "^5.4 || ^6.0"
     },
     "conflict": {
+        "doctrine/orm": "2.15.2",
         "twig/twig": "^1.0"
     },
     "require-dev": {

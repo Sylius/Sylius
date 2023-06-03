@@ -181,6 +181,7 @@
         "api-platform/core": "2.7.0",
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/migrations": "3.5.3",
+        "doctrine/orm": "2.15.2",
         "jms/serializer-bundle": "4.1.0",
         "lexik/jwt-authentication-bundle": "^2.18",
         "symfony/framework-bundle": "5.4.5 || 6.2.8",
