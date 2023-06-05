@@ -6,6 +6,7 @@ sylius:
         catalog_promotion:
             action:
                 percentage_discount: Pourcentage de remise
+                fixed_discount: Remise fixe
             description: Description
             enabled: Activée
             end_date: Date de fin
