@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\CoreBundle\PriceHistory\EventSubscriber;
+namespace spec\Sylius\Bundle\CoreBundle\PriceHistory\EventListener;
 
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDisc
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 
-final class ChannelPricingLogEntryEventSubscriberSpec extends ObjectBehavior
+final class ChannelPricingLogEntryEventListenerSpec extends ObjectBehavior
 {
     function let(ProductLowestPriceBeforeDiscountProcessorInterface $lowestPriceProcessor): void
     {

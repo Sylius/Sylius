@@ -39,5 +39,14 @@
             <argument type="tagged_iterator" tag="sylius.entity_observer" />
             <tag name="doctrine.event_listener" event="onFlush" lazy="true" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface"/>
+            <tag name="doctrine.event_listener"
+                 event="postPersist"
+                 priority="500"
+                 connection="default"
+            />
+        </service>
     </services>
 </container>

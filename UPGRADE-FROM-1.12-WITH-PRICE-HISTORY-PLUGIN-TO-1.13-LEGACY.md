@@ -132,7 +132,7 @@ Legacy upgrade
         Sylius\PriceHistoryPlugin\Infrastructure\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver => Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver\ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver 
         Sylius\PriceHistoryPlugin\Infrastructure\Event\OldChannelPricingLogEntriesEvents => Sylius\Bundle\CoreBundle\PriceHistory\Event\OldChannelPricingLogEntriesEvents 
         Sylius\PriceHistoryPlugin\Infrastructure\EventListener\OnFlushEntityObserverListener => Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverListener 
-        Sylius\PriceHistoryPlugin\Infrastructure\EventSubscriber\ChannelPricingLogEntryEventSubscriber => Sylius\Bundle\CoreBundle\PriceHistory\EventSubscriber\ChannelPricingLogEntryEventSubscriber 
+        Sylius\PriceHistoryPlugin\Infrastructure\EventSubscriber\ChannelPricingLogEntryEventSubscriber => Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener 
         Sylius\PriceHistoryPlugin\Infrastructure\Form\Extension\ChannelTypeExtension => Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension 
         Sylius\PriceHistoryPlugin\Infrastructure\Form\Type\ChannelPriceHistoryConfigType => Sylius\Bundle\CoreBundle\Form\Type\ChannelPriceHistoryConfigType 
         Sylius\PriceHistoryPlugin\Infrastructure\Provider\ProductVariantsPricesProvider => Sylius\Component\Core\Provider\ProductVariantsPricesProvider 
