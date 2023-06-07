@@ -74,6 +74,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I want to edit (this product)$/
+     */
+    public function iWantToEditThisProduct(ProductInterface $product): void
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+    }
+
+    /**
      * @When I specify its code as :code
      * @When I do not specify its code
      */
@@ -1186,6 +1194,36 @@ final class ManagingProductsContext implements Context
     {
         Assert::true($this->indexPage->isEnabledFilterApplied());
         Assert::eq($this->indexPage->getPageNumber(), $page);
+    }
+
+    /**
+     * @Then the show product's page button should be enabled
+     */
+    public function theShowProductsPageButtonShouldBeEnabled(): void
+    {
+        Assert::false($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then the show product's page button should be disabled
+     */
+    public function theShowProductsPageButtonShouldBeDisabled(): void
+    {
+        Assert::true($this->updateSimpleProductPage->isShowInShopButtonDisabled());
+    }
+
+    /**
+     * @Then /^it should be leading to (the product)'s page in the ("[^"]+" locale)$/
+     */
+    public function itShouldBeLeadingToTheProductPageInTheLocale(ProductInterface $product, string $locale): void
+    {
+        $productTranslation = $product->getTranslation($locale);
+        $showProductPageUrl = $this->updateSimpleProductPage->getShowProductInSingleChannelUrl();
+
+        Assert::same(
+            $showProductPageUrl,
+            sprintf('/%s/products/%s', $locale, $productTranslation->getSlug()),
+        );
     }
 
     /**

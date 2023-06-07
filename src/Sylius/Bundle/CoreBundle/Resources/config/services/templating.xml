@@ -59,9 +59,7 @@
         </service>
 
         <service id="sylius.twig.extension.channel_product_url" class="Sylius\Bundle\CoreBundle\Twig\ChannelProductUrlExtension" public="false">
-            <argument type="service" id="sylius.twig.extension.channel_url" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="router" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Routing\Generator\ChannelProductUrlGeneratorInterface" />
             <tag name="twig.extension" />
         </service>
     </services>
