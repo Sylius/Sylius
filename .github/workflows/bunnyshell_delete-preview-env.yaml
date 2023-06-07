@@ -1,0 +1,22 @@
+name: Bunnyshell - Delete Preview Environment
+concurrency: bns-delete-${{ github.event.number || github.event.issue.number }}
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - '*'
+  issue_comment:
+      types: [ created, edited ]
+jobs:
+  start:
+    name: Delete Environment
+    uses: bunnyshell/workflows/.github/workflows/delete-env.yaml@main
+    with:
+      project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
+      env-name: 'Sylius PR #${{ github.event.issue.number }}'
+      allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
+      comment-on-pr: true
+      use-app-token: true
+    secrets:
+      bunnyshell-access-token: ${{ secrets.BUNNYSHELL_ACCESS_TOKEN }}
+      app-private-key: ${{ secrets.BUNNYSHELL_APP_PRIVATE_KEY }}

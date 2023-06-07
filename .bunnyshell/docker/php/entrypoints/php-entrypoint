@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+	set -- php-fpm "$@"
+fi
+
+php bin/console cache:clear
+
+if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
+	mkdir -p var/cache var/log var/sessions public/media
+
+	# @note: certain filesystems might not support setfacl
+	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media || true
+ 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var public/media || true
+
+	if [ "$APP_ENV" != 'prod' ]; then
+		composer install --prefer-dist --no-progress --no-interaction
+		php bin/console assets:install --no-interaction
+		php bin/console sylius:theme:assets:install public --no-interaction
+	fi
+fi
+
+exec docker-php-entrypoint "$@"
