@@ -75,11 +75,11 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @When /^I filter variants by ("[^"]+" option value)$/
+     * @When /^I filter (?:them|variants) by ("[^"]+" option value)$/
      */
     public function iFilterVariantsByOption(ProductOptionValueInterface $optionValue): void
     {
-        $this->client->addFilter('optionValues', $this->iriConverter->getIriFromItem($optionValue));
+        $this->client->addFilter('optionValues[]', $this->iriConverter->getIriFromItem($optionValue));
         $response = $this->client->filter();
 
         $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
@@ -348,6 +348,17 @@ final class ProductVariantContext implements Context
                 );
             }
         }
+    }
+
+    /**
+     * @Then I should not see any variants
+     */
+    public function iShouldNotSeeAnyVariants(): void
+    {
+        Assert::same(
+            count($this->sharedStorage->get('product_variant_collection')),
+            0,
+        );
     }
 
     private function findVariant(?ProductVariantInterface $variant): array
