@@ -47,4 +47,22 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
 
         return $promotions;
     }
+
+    public function findActiveNonCouponBasedByChannel(ChannelInterface $channel): array
+    {
+        $promotions = $this->filterByActive($this->createQueryBuilder('o'))
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.couponBased = false')
+            ->setParameter('channel', $channel)
+            ->addOrderBy('o.priority', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $this->associationHydrator->hydrateAssociations($promotions, [
+            'rules',
+        ]);
+
+        return $promotions;
+    }
 }

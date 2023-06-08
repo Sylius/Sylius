@@ -23,4 +23,9 @@ interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
      * @return array|PromotionInterface[]
      */
     public function findActiveByChannel(ChannelInterface $channel): array;
+
+    /**
+     * @return array|PromotionInterface[]
+     */
+    public function findActiveNonCouponBasedByChannel(ChannelInterface $channel): array;
 }

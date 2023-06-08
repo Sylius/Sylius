@@ -36,6 +36,10 @@ final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsP
             throw new \InvalidArgumentException('Order has no channel, but it should.');
         }
 
+        if (null === $subject->getPromotionCoupon()) {
+            return $this->promotionRepository->findActiveNonCouponBasedByChannel($channel);
+        }
+
         return $this->promotionRepository->findActiveByChannel($channel);
     }
 }
