@@ -26,7 +26,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
@@ -36,8 +35,7 @@ final class ManagingOrdersContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
-        private SharedStorageInterface $sharedStorage,
-        private OrderRepositoryInterface $orderRepository
+        private SharedStorageInterface $sharedStorage
     ) {
     }
 
