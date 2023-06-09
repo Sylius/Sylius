@@ -85,6 +85,11 @@ services:
         arguments: [{id: 'exact', hostname: 'partial'}]
         tags: ['api_platform.filter']
 
+    test.country.id_filter:
+        parent: api_platform.doctrine.orm.search_filter
+        arguments: [{id: 'exact', code: 'partial'}]
+        tags: ['api_platform.filter']
+
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }

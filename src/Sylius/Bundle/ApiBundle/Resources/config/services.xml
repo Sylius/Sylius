@@ -137,6 +137,8 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Merger\LegacyResourceMetadataMerger" />
+
         <service
             id="api_platform.metadata.resource.metadata_factory.yaml"
             class="Sylius\Bundle\ApiBundle\ApiPlatform\Factory\MergingExtractorResourceMetadataFactory"
