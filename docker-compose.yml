@@ -1,7 +1,11 @@
 services:
-    app:
+    backend:
         build:
-            context: .docker/dev
+            context: .
+            dockerfile: Dockerfile
+            target: backend
+            args:
+                COMPOSER_NO_DEV: 0
         environment:
             APP_ENV: "dev"
             DATABASE_URL: "mysql://root:mysql@mysql/sylius_%kernel.environment%?charset=utf8mb4"
@@ -10,42 +14,41 @@ services:
             PHP_XDEBUG_IDEKEY: "PHPSTORM"
             MAILER_URL: "smtp://mailhog:1025"
         volumes:
-            - ./:/app:delegated
-            - ./.docker/dev/php.ini:/etc/php/8.0/fpm/php.ini:delegated
-            - ./.docker/dev/php.ini:/etc/php/8.0/cli/php.ini:delegated
+            - ./:/app/
         ports:
             - ${APP_PORT:-80}:80
         depends_on:
             - mysql
-        networks:
-            - sylius
+            - postgres
+    
+    frontend:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: frontend
+        volumes:
+            - ./:/app/
 
     mysql:
-        image: mysql:5.7
-        platform: linux/amd64
+        image: mysql:8.0
         environment:
             MYSQL_ROOT_PASSWORD: mysql
         ports:
             - ${MYSQL_PORT:-3306}:3306
-        networks:
-            - sylius
     
-#    postgres:
-#        image: postgres:13-alpine
-#        environment:
-#            POSTGRES_USER: root
-#            POSTGRES_PASSWORD: postgres
-#        ports:
-#            - ${POSTGRES_PORT:-5432}:5432
-#        networks:
-#            - sylius
+    postgres:
+        image: postgres:13-alpine
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: postgres
+        ports:
+            - ${POSTGRES_PORT:-5432}:5432
 
     mailhog:
         image: mailhog/mailhog
+        platform: linux/amd64
         ports:
             - ${MAILHOG_PORT:-8025}:8025 # UI
-        networks:
-            - sylius
 
     blackfire:
         image: blackfire/blackfire:2
@@ -58,9 +61,3 @@ services:
             BLACKFIRE_DISABLE_LEGACY_PORT: 1
         ports:
             - ${BLACKFIRE_PORT:-8307}:8307
-        networks:
-            - sylius
-
-networks:
-    sylius:
-        driver: bridge
