@@ -119,6 +119,7 @@ Images
     :hidden:
 
     images/images
+    images/image-on-entity
     images/images-on-entity
     images/images-on-aws-s3
 
