@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Core\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -29,12 +30,29 @@ final class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
         $this->beConstructedWith($promotionRepository);
     }
 
-    function it_implements_an_active_promotions_provider_interface(): void
+    function it_implements_active_promotions_provider_interface(): void
     {
         $this->shouldImplement(PreQualifiedPromotionsProviderInterface::class);
     }
 
-    function it_provides_an_active_promotions_for_given_subject_channel(
+    function it_provides_active_promotions_for_given_subject_channel_when_no_coupon_code_is_set(
+        PromotionRepositoryInterface $promotionRepository,
+        ChannelInterface $channel,
+        PromotionInterface $promotion1,
+        PromotionInterface $promotion2,
+        PromotionCouponInterface $coupon,
+        OrderInterface $subject,
+    ): void {
+        $subject->getChannel()->willReturn($channel);
+        $subject->getPromotionCoupon()->willReturn($coupon);
+
+        $promotionRepository->findActiveNonCouponBasedByChannel($channel)->shouldNotBeCalled();
+        $promotionRepository->findActiveByChannel($channel)->willReturn([$promotion1, $promotion2]);
+
+        $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);
+    }
+
+    function it_provides_active_promotions_for_given_subject_channel_when_a_coupon_code_is_set(
         PromotionRepositoryInterface $promotionRepository,
         ChannelInterface $channel,
         PromotionInterface $promotion1,
@@ -42,7 +60,10 @@ final class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
         OrderInterface $subject,
     ): void {
         $subject->getChannel()->willReturn($channel);
-        $promotionRepository->findActiveByChannel($channel)->willReturn([$promotion1, $promotion2]);
+        $subject->getPromotionCoupon()->willReturn(null);
+
+        $promotionRepository->findActiveByChannel($channel)->shouldNotBeCalled();
+        $promotionRepository->findActiveNonCouponBasedByChannel($channel)->willReturn([$promotion1, $promotion2]);
 
         $this->getPromotions($subject)->shouldReturn([$promotion1, $promotion2]);
     }
