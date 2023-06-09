@@ -1,0 +1,32 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-05-14T06:27:56Z
+
+Does this new cookbook replace the old `How to add images to an entity?`? If so, we should remove the old one.
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2023-05-14T08:17:35Z
+
+> Does this new cookbook replace the old `How to add images to an entity?`? If so, we should remove the old one.
+
+No, they are complementary. This is a one-to-one relationship and the other is one-to-many.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-06-09T10:15:01Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "docs/image-on-entity"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-06-09T12:20:59Z
+
+Thank you, Victor! :1st_place_medal:
