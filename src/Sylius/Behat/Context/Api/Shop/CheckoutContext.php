@@ -554,6 +554,38 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be informed with :paymentMethod payment method instructions
+     */
+    public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod): void
+    {
+        $response = $this->client->getLastResponse();
+        $payments = $this->responseChecker->getValue($response, 'payments');
+
+        Assert::notEmpty($payments, 'No payments found in response.');
+        $paymentMethodIri = $this->iriConverter->getIriFromItem($paymentMethod);
+        foreach ($payments as $payment) {
+            if ($payment['method'] !== $paymentMethodIri) {
+                continue;
+            }
+
+            $customRequest = $this->requestFactory->custom($payment['method'], HTTPRequest::METHOD_GET);
+            $paymentMethodResponse = $this->client->executeCustomRequest($customRequest);
+            Assert::same(
+                $this->responseChecker->getValue(
+                    $paymentMethodResponse,
+                    'instructions',
+                ),
+                $paymentMethod->getInstructions(),
+                sprintf('Payment method instructions should be equal to %s', $paymentMethod->getInstructions()),
+            );
+
+            return;
+        }
+
+        throw new \Exception(sprintf('Payment method %s not found in response.', $paymentMethod->getName()));
+    }
+
+    /**
      * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
      */
     public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(
