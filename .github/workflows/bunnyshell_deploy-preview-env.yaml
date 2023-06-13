@@ -20,7 +20,7 @@ jobs:
       bunnyshell-yaml-path: .bunnyshell/templates/preview/bunnyshell.yaml
       allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
       comment-on-pr: true
-      as-stopped: true
+      deploy-as-stopped: true
       git-ref: refs/pull/${{ github.event.number || github.event.issue.number }}/head
       restricted-files: |
           .bunnyshell/*
