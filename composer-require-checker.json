@@ -54,11 +54,12 @@
     "Payum\\Core\\Security\\TokenInterface",
     "Payum\\Core\\Security\\Util\\Random",
     "Payum\\Core\\Storage\\AbstractStorage",
-    "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
+    "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
-    "Stripe\\Stripe"
+    "Stripe\\Stripe",
+    "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
   ],
   "php-core-extensions" : [
     "Core",

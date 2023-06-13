@@ -11,26 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\PriceHistory\EventSubscriber;
+namespace Sylius\Bundle\CoreBundle\PriceHistory\EventListener;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
-use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDiscountProcessorInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 
-final class ChannelPricingLogEntryEventSubscriber implements EventSubscriberInterface
+final class ChannelPricingLogEntryEventListener
 {
     public function __construct(private ProductLowestPriceBeforeDiscountProcessorInterface $lowestPriceProcessor)
     {
-    }
-
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::postPersist,
-        ];
     }
 
     public function postPersist(LifecycleEventArgs $event): void

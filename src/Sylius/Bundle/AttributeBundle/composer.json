@@ -45,6 +45,9 @@
     "conflict": {
         "doctrine/orm": "2.15.2"
     },
+    "conflict": {
+        "doctrine/orm": "2.15.2"
+    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true

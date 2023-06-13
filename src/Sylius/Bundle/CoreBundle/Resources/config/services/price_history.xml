@@ -19,6 +19,5 @@
         <import resource="price_history/listeners.xml" />
         <import resource="price_history/logger.xml" />
         <import resource="price_history/processors.xml" />
-        <import resource="price_history/subscribers.xml" />
     </imports>
 </container>
