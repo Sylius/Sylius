@@ -105,3 +105,12 @@
 
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
+
+1. Product variants resolving has been refactored for better extendability.
+   The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
+
+   All internal usages of service `sylius.product_variant_resolver.default` have been switched to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
+   `sylius.product_variant_resolver.default` service apply this change accordingly.
+
+   To add a new product variant resolver, you need to create a service implementing `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`
+    and tag it with `sylius.product_variant_resolver` with an appropriate priority.
