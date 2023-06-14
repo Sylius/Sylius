@@ -35,7 +35,7 @@ final class ManagingOrdersContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
-        private SharedStorageInterface $sharedStorage
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
