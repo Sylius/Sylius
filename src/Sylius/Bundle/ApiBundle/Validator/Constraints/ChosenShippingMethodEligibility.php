@@ -22,6 +22,8 @@ final class ChosenShippingMethodEligibility extends Constraint
 
     public string $notFoundMessage = 'sylius.shipping_method.not_found';
 
+    public string $shipmentNotFoundMessage = 'sylius.shipment.not_found';
+
     /** @var string */
     public $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found';
 
