@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_user_request_verification_token:
     path: /verify
