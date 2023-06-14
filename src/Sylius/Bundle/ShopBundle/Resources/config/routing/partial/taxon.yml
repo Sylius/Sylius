@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 sylius_shop_partial_taxon_show_by_slug:
     path: /by-slug/{slug}
