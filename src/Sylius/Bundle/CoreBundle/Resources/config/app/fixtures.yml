@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
+# (c) Sylius Sp. z o.o.
 
 imports:
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/shop_configuration.yaml' }
