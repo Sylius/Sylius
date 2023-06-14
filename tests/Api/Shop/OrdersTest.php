@@ -302,7 +302,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_returns_unprocessable_entity_status_if_tries_to_remove_an_item_that_not_exist_in_the_order(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+        $this->loadFixturesFromFile('channel.yaml');
 
         $tokenValue = $this->pickUpCart();
         $nonExistingOrderItemId = 123;
@@ -310,6 +310,27 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request('DELETE', sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $nonExistingOrderItemId));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
+    public function it_returns_unprocessable_entity_status_if_trying_to_assign_shipping_method_to_non_existing_shipment(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'shipping_method.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/shipments/%s', $tokenValue, '1237'),
+            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            content: json_encode(['shippingMethod' => 'api/v2/shop/shipping-methods/UPS'])
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/assign_shipping_method_to_non_existing_shipment_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
     }
 
     /** @test */
