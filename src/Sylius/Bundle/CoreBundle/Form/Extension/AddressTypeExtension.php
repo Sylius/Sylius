@@ -43,7 +43,7 @@ final class AddressTypeExtension extends AbstractTypeExtension
         $countryCodeField = $builder->create(
             $oldCountryCodeField->getName(),
             $oldCountryCodeField->getType()->getInnerType()::class,
-            array_replace($oldCountryCodeField->getOptions(), ['choices' => $channel->getCountries()->toArray()]),
+            array_replace($oldCountryCodeField->getOptions(), ['choices' => $channel->getEnabledCountries()->toArray()]),
         );
 
         $builder->add($countryCodeField);
