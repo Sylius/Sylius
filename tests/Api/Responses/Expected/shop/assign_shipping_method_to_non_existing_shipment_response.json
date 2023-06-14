@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "The shipment does not exist.",
+    "violations": [
+        {
+            "propertyPath": "",
+            "message": "The shipment does not exist.",
+            "code": null
+        }
+    ]
+}
