@@ -67,6 +67,7 @@ final class TaxonContext implements Context
      * @Transform /^configured with "([^"]+)" and "([^"]+)"$/
      * @Transform /^"([^"]+)" and "([^"]+)" taxons$/
      * @Transform /^belongs to "([^"]+)" and "([^"]+)"/
+     * @Transform /^"([^"]+)" and "([^"]+)" in the vertical menu$/
      */
     public function getTaxonsByNames(string ...$taxonNames): iterable
     {
