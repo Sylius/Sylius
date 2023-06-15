@@ -98,6 +98,42 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_returns_products_collection_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_products_collection_with_associations_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_returns_product_item_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_product_with_default_locale_translation',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);

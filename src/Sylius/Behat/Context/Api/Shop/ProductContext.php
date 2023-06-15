@@ -640,12 +640,9 @@ final class ProductContext implements Context
 
         foreach ($associations as $association) {
             $associationResponse = $this->client->showByIri($association);
+            $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
 
-            if ($associationResponse->getStatusCode() === 200) {
-                $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
-
-                Assert::notSame($associationTypeIri, $productAssociationTypeIri);
-            }
+            Assert::notSame($associationTypeIri, $productAssociationTypeIri);
         }
     }
 

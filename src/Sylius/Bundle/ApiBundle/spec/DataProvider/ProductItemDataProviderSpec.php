@@ -72,7 +72,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
-        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -95,7 +95,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn(null);
 
-        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
