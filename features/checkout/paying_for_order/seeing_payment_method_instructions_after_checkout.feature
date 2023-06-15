@@ -17,4 +17,4 @@ Feature: Seeing payment method instructions after checkout
         And I have product "PHP T-Shirt" in the cart
         When I proceed selecting "Offline" payment method
         And I confirm my order
-        And I should be informed with "Offline" payment method instructions
+        Then I should be informed with "Offline" payment method instructions

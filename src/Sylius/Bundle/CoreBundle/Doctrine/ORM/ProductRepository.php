@@ -251,8 +251,11 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         if (null === $product) {
             $product = $this->findOneByChannelAndCode($channel, $code);
+            if (null === $product) {
+                return null;
+            }
 
-            $product?->getAssociations()->clear();
+            $product->getAssociations()->clear();
         }
 
         $this->associationHydrator->hydrateAssociations($product, [
