@@ -1,5 +1,5 @@
 @paying_for_order
-Feature: Seeing payment method instructions on thank you page
+Feature: Seeing payment method instructions after checkout
     In order to know how to pay for my order
     As a Customer
     I want to be informed about payment instructions for chosen payment method
@@ -11,11 +11,10 @@ Feature: Seeing payment method instructions on thank you page
         And the store has a payment method "Offline" with a code "OFFLINE"
         And it has instructions "Account number: 0000 1111 2222 3333"
 
-    @ui
-    Scenario: Being informed about payment instructions on thank you page
+    @ui @api
+    Scenario: Being informed about payment instructions
         Given I am a logged in customer
         And I have product "PHP T-Shirt" in the cart
         When I proceed selecting "Offline" payment method
         And I confirm my order
-        Then I should see the thank you page
         And I should be informed with "Offline" payment method instructions
