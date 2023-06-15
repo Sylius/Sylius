@@ -82,15 +82,19 @@ final class AvailableProductAssociationsInProductCollectionExtensionSpec extends
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('o')->shouldBeCalled()->willReturn($queryBuilder);
+
         $queryBuilder->addSelect('association')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('o.associations', 'association')->shouldBeCalled()->willReturn($queryBuilder);
+
         $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
         $expr->eq('associatedProduct.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
         $expr->eq('association.owner', 'o')->shouldBeCalled()->willReturn($comparison);
         $queryBuilder->expr()->willReturn($expr->getWrappedObject());
         $queryBuilder->leftJoin('association.associatedProducts', 'associatedProduct', 'WITH', Argument::type(Andx::class))->shouldBeCalled()->willReturn($queryBuilder);
+
         $queryBuilder->andWhere('o.associations IS EMPTY OR associatedProduct.id IS NOT NULL')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($queryBuilder);
+
         $queryBuilder->setParameter('enabled', true)->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', []);
