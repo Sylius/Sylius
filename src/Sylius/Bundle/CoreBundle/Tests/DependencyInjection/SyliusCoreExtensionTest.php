@@ -18,6 +18,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
+use Sylius\Bundle\ProductBundle\DependencyInjection\SyliusProductExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
@@ -91,6 +92,28 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $syliusOrderConfig = $this->container->getExtensionConfig('sylius_order');
         $this->assertEquals($value, $syliusOrderConfig[0]['autoconfigure_with_attributes']);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider provideAutoconfigureWithAttributesData
+     */
+    public function it_prepends_sylius_product_bundle_configuration_with_proper_values(bool $value, bool $productBundleValue): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->container->registerExtension(new SyliusProductExtension());
+        $this->container->loadFromExtension('sylius_core', [
+            'autoconfigure_with_attributes' => $value,
+        ]);
+        $this->container->loadFromExtension('sylius_product', [
+            'autoconfigure_with_attributes' => $productBundleValue,
+        ]);
+
+        $this->load();
+
+        $syliusProductConfig = $this->container->getExtensionConfig('sylius_product');
+        $this->assertEquals($value, $syliusProductConfig[0]['autoconfigure_with_attributes']);
     }
 
     public static function provideAutoconfigureWithAttributesData(): iterable
