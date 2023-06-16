@@ -580,6 +580,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^I should be able to select the "([^"]+)" and "([^"]+)" ([^\s]+) option values$/
+     */
+    public function iShouldBeAbleToSelectTheAndColorOptionValues(
+        string $optionValueValue1,
+        string $optionValueValue2,
+        string $optionName,
+    ): void {
+        Assert::true($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue1));
+        Assert::true($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue2));
+    }
+
+    /**
      * @Then I should be able to select between :count variants
      */
     public function iShouldBeAbleToSelectBetweenVariants(int $count): void
@@ -741,12 +753,10 @@ final class ProductContext implements Context
 
     private function hasProductOptionWithNameAndValue(string $expectedOptionName, string $expectedOptionValueValue): bool
     {
-        $response = $this->client->getLastResponse();
-
         $productVariants = $this->responseChecker->getCollection(
             $this->client->index(
                 Resources::PRODUCT_VARIANTS,
-                ['product' => $this->responseChecker->getValue($response, '@id')],
+                ['product' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('product'))],
             ),
         );
 
