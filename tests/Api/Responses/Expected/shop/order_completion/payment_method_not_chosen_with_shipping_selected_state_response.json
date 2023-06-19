@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Cannot complete as order is in a wrong state. Current: shipping_selected. Possible transitions: address, select_shipping, skip_payment, select_payment.",
+    "violations": [
+        {
+            "propertyPath": "",
+            "message": "Cannot complete as order is in a wrong state. Current: shipping_selected. Possible transitions: address, select_shipping, skip_payment, select_payment.",
+            "code": null
+        }
+    ]
+}
