@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Cannot complete as order is in a wrong state. Current: cart. Possible transitions: address.",
+    "violations": [
+        {
+            "propertyPath": "",
+            "message": "Cannot complete as order is in a wrong state. Current: cart. Possible transitions: address.",
+            "code": null
+        }
+    ]
+}
