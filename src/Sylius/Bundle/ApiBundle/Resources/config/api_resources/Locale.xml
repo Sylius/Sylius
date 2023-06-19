@@ -60,7 +60,6 @@
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">admin/locales/{code}</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\Locale\DeleteLocaleAction</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">
