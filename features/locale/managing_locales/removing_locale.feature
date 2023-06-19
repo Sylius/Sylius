@@ -1,7 +1,7 @@
 @managing_locales
 Feature: Removing locales
     In order to delete accidentally created locales
-    As a Developer
+    As an Administrator
     I want to be able to delete locales
 
     Background:
