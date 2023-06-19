@@ -124,6 +124,82 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         );
     }
 
+    /** @test */
+    public function it_allows_to_complete_checkout_with_shippable_and_non_shippable_items_if_all_checkout_steps_have_been_completed(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+        $this->addItemToCart('MUG_NFT', 1, $tokenValue);
+        $this->updateCartWithAddress($tokenValue);
+        $this->chooseShippingMethod($tokenValue, $this->getFirstShipmentId($tokenValue));
+        $this->choosePaymentMethod($tokenValue, $this->getFirstPaymentId($tokenValue));
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
+            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            content: json_encode([]),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_completion/order_with_shippable_and_non_shippable_items_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_complete_checkout_with_non_shippable_items_without_shipping_method_assigned(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'payment_method.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_NFT', 1, $tokenValue);
+        $this->updateCartWithAddress($tokenValue);
+        $this->choosePaymentMethod($tokenValue, $this->getFirstPaymentId($tokenValue));
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
+            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            content: json_encode([]),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_completion/order_with_non_shippable_items_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_complete_checkout_with_free_non_shippable_items_without_shipping_method_and_payment_method_assigned(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_NFT_FREE', 1, $tokenValue);
+        $this->updateCartWithAddress($tokenValue);
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
+            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            content: json_encode([]),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/order_completion/order_with_free_non_shippable_items_response',
+            Response::HTTP_OK,
+        );
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
