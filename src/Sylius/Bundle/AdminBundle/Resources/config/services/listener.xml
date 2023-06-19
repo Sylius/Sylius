@@ -20,6 +20,12 @@
             <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
         </service>
 
+        <service id="sylius.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+
+            <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
+        </service>
+
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
             <argument type="service" id="request_stack" />
