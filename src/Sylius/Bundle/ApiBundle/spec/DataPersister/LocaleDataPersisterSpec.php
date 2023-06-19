@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -37,7 +37,7 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
 
     public function it_persists_locale(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        Locale $locale
+        Locale $locale,
     ): void {
         $decoratedDataPersister->persist($locale, [])->shouldBeCalled();
 
@@ -47,7 +47,7 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
     public function it_removes_locale(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         LocaleUsageCheckerInterface $localeUsageChecker,
-        Locale $locale
+        Locale $locale,
     ): void {
         $locale->getCode()->willReturn('en_US');
 
@@ -61,7 +61,7 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
     public function it_throws_an_exception_if_locale_is_used(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         LocaleUsageCheckerInterface $localeUsageChecker,
-        Locale $locale
+        Locale $locale,
     ): void {
         $locale->getCode()->willReturn('en_US');
 
