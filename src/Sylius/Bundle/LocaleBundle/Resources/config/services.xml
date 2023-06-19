@@ -76,11 +76,5 @@
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
-
-        <service id="Sylius\Bundle\LocaleBundle\Remover\LocaleRemoverInterface" class="Sylius\Bundle\LocaleBundle\Remover\LocaleRemover">
-            <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
-            <argument type="service" id="sylius.manager.locale" />
-        </service>
     </services>
 </container>
