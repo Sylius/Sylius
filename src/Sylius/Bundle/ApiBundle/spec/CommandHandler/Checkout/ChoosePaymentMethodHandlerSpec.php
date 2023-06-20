@@ -19,6 +19,7 @@ use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
+use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeChangedException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -216,7 +217,7 @@ final class ChoosePaymentMethodHandlerSpec extends ObjectBehavior
         $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(PaymentMethodCannotBeChangedException::class)
             ->during('__invoke', [$choosePaymentMethod])
         ;
     }
