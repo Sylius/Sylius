@@ -34,7 +34,6 @@ Feature: Applying correct taxes for items with tax rate included in price
         Then my cart total should be "$39.40"
         And my included in price taxes should be "$6.56"
 
-
     @ui @api
     Scenario: Applying correct taxes for multiple items with tax rate included in price and decimal calculator
         Given the "VAT" tax rate has decimal calculator configured
