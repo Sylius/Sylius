@@ -311,6 +311,44 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_validates_if_order_is_cancelled_when_trying_to_patch_orders_payment_method(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/customer.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $authentication = $this->logInShopUser('oliver@doe.com');
+        $tokenValue = 'nAWw2jewpA';
+
+        $this->placeOrder($tokenValue, 'oliver@doe.com');
+        $this->cancelOrder($tokenValue);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: array_merge($authentication, self::CONTENT_TYPE_HEADER),
+        );
+        $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/account/orders/nAWw2jewpA/payments/%s', $orderResponse['payments'][0]['id']),
+            server: array_merge($authentication, self::PATCH_CONTENT_TYPE_HEADER),
+            content: json_encode([
+                'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
+            ], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertResponse($response, 'shop/updated_payment_method_on_cancelled_order_response', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
     public function it_creates_empty_cart_with_provided_locale(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
