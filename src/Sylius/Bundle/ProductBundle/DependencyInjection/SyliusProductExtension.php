@@ -26,7 +26,6 @@ use Sylius\Component\Product\Model\ProductAttributeTranslation;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -46,7 +45,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
 
         $loader->load('services.xml');
 
-        $this->registerAutoconfiguration($container, $config['autoconfigure_with_attributes']);
+        $this->registerAutoconfiguration($container);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -56,21 +55,14 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $this->prependAttribute($container, $config);
     }
 
-    private function registerAutoconfiguration(ContainerBuilder $container, bool $autoconfigureWithAttributes): void
+    private function registerAutoconfiguration(ContainerBuilder $container): void
     {
-        if ($autoconfigureWithAttributes) {
-            $container->registerAttributeForAutoconfiguration(
-                AsProductVariantResolver::class,
-                static function (ChildDefinition $definition, AsProductVariantResolver $attribute): void {
-                    $definition->addTag('sylius.product_variant_resolver', ['priority' => $attribute->getPriority()]);
-                },
-            );
-        } else {
-            $container
-                ->registerForAutoconfiguration(ProductVariantResolverInterface::class)
-                ->addTag('sylius.product_variant_resolver')
-            ;
-        }
+        $container->registerAttributeForAutoconfiguration(
+            AsProductVariantResolver::class,
+            static function (ChildDefinition $definition, AsProductVariantResolver $attribute): void {
+                $definition->addTag('sylius.product_variant_resolver', ['priority' => $attribute->getPriority()]);
+            },
+        );
     }
 
     private function prependAttribute(ContainerBuilder $container, array $config): void

@@ -18,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class DefaultProductVariantResolverCompilerPass implements CompilerPassInterface
 {
+    private const DEFAULT_PRIORITY = -999;
+
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('sylius.product_variant_resolver.default')) {
@@ -27,7 +29,7 @@ final class DefaultProductVariantResolverCompilerPass implements CompilerPassInt
         // In case someone overwritten the service, we need to make sure it's tagged
         $defaultResolver = $container->getDefinition('sylius.product_variant_resolver.default');
         if (!$defaultResolver->hasTag('sylius.product_variant_resolver')) {
-            $defaultResolver->addTag('sylius.product_variant_resolver', ['priority' => -999]);
+            $defaultResolver->addTag('sylius.product_variant_resolver', ['priority' => self::DEFAULT_PRIORITY]);
         }
     }
 }

@@ -94,28 +94,6 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->assertEquals($value, $syliusOrderConfig[0]['autoconfigure_with_attributes']);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider provideAutoconfigureWithAttributesData
-     */
-    public function it_prepends_sylius_product_bundle_configuration_with_proper_values(bool $value, bool $productBundleValue): void
-    {
-        $this->container->setParameter('kernel.environment', 'dev');
-        $this->container->registerExtension(new SyliusProductExtension());
-        $this->container->loadFromExtension('sylius_core', [
-            'autoconfigure_with_attributes' => $value,
-        ]);
-        $this->container->loadFromExtension('sylius_product', [
-            'autoconfigure_with_attributes' => $productBundleValue,
-        ]);
-
-        $this->load();
-
-        $syliusProductConfig = $this->container->getExtensionConfig('sylius_product');
-        $this->assertEquals($value, $syliusProductConfig[0]['autoconfigure_with_attributes']);
-    }
-
     public static function provideAutoconfigureWithAttributesData(): iterable
     {
         yield [true, false];

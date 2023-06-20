@@ -16,38 +16,13 @@ namespace Sylius\Bundle\ProductBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ProductBundle\DependencyInjection\SyliusProductExtension;
 use Sylius\Bundle\ProductBundle\Tests\Stub\ProductVariantResolverStub;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusProductExtensionsTest extends AbstractExtensionTestCase
 {
     /** @test */
-    public function it_autoconfigures_product_variant_resolvers(): void
-    {
-        $variantResolver = $this->createMock(ProductVariantResolverInterface::class);
-        $this->container->setDefinition(
-            'acme.product_variant_resolver_autoconfigured',
-            (new Definition())
-                ->setClass(get_class($variantResolver))
-                ->setAutoconfigured(true),
-        );
-
-        $this->load();
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(
-            'acme.product_variant_resolver_autoconfigured',
-            'sylius.product_variant_resolver',
-        );
-    }
-
-    /** @test */
     public function it_autoconfigures_product_variant_resolver_with_attribute(): void
     {
-        $this->container->loadFromExtension('sylius_product', [
-            'autoconfigure_with_attributes' => true,
-        ]);
-
         $this->container->setDefinition(
             'acme.product_variant_resolver_autoconfigured',
             (new Definition())

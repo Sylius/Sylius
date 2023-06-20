@@ -99,10 +99,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
-        $this->prependSyliusAutoconfigurationConfig($container, [
-            'sylius_order',
-            'sylius_product',
-        ], $config['autoconfigure_with_attributes'] ?? false);
+        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -171,20 +168,15 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         ]);
     }
 
-    private function prependSyliusAutoconfigurationConfig(
-        ContainerBuilder $container,
-        array $extensions,
-        bool $autoconfigure,
-    ): void {
-        foreach ($extensions as $extension) {
-            if (!$container->hasExtension($extension)) {
-                continue;
-            }
-
-            $container->prependExtensionConfig($extension, [
-                'autoconfigure_with_attributes' => $autoconfigure,
-            ]);
+    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
+    {
+        if (!$container->hasExtension('sylius_order')) {
+            return;
         }
+
+        $container->prependExtensionConfig('sylius_order', [
+            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
+        ]);
     }
 
     private function switchOrderProcessorsPriorities(
