@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -90,9 +91,17 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that I can no longer change payment method of this order
+     */
+    public function iShouldBeNotifiedThatICanNoLongerChangePaymentMethodOfThisOrder(): void
+    {
+        Assert::true($this->orderIndexPage->hasFlashMessage('You can no longer change payment method of this order'));
     }
 
     /**
@@ -163,6 +172,19 @@ final class AccountContext implements Context
         $this->iSpecifyTheCurrentPasswordAs($oldPassword);
         $this->iSpecifyTheNewPasswordAs($newPassword);
         $this->iSpecifyTheConfirmationPasswordAs($newPassword);
+    }
+
+    /**
+     * @Given I am changing this order's payment method
+     */
+    public function iWantToChangeThisOrdersPaymentMethod(): void
+    {
+        $this->iBrowseMyOrders();
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->changePaymentMethod($order);
     }
 
     /**
@@ -248,6 +270,15 @@ final class AccountContext implements Context
         $order = $this->sharedStorage->get('order');
 
         $this->orderIndexPage->changePaymentMethod($order);
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+        $this->orderShowPage->pay();
+    }
+
+    /**
+     * @Then I try to change my payment method to :paymentMethod
+     */
+    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
         $this->orderShowPage->choosePaymentMethod($paymentMethod);
         $this->orderShowPage->pay();
     }
