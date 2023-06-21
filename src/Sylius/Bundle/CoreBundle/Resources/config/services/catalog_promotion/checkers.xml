@@ -31,6 +31,8 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker">
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.repository.tree.taxon" />
             <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
         </service>
 
