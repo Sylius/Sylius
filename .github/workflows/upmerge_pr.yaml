@@ -24,13 +24,13 @@ jobs:
             -
                 uses: actions/checkout@v3
                 with:
-                    ref: ${{ matrix.base_branch }}
+                    ref: ${{ matrix.target_branch }}
 
-            -
-                name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 8.0
+            -   
+                name: Reset upmerge branch
+                run: |
+                    git fetch origin ${{ matrix.base_branch }}:${{ matrix.base_branch }}
+                    git reset --hard ${{ matrix.base_branch }}
 
             -
                 name: Create Pull Request
@@ -40,7 +40,7 @@ jobs:
                     title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [refactor.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
                         
                         **Remember!** Use **rebase strategy** when merging this PR.
                     branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
