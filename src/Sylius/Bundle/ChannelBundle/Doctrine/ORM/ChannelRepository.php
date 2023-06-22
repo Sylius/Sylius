@@ -55,4 +55,9 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
             ->getResult(AbstractQuery::HYDRATE_ARRAY)
         ;
     }
+
+    public function countAll(): int
+    {
+        return $this->count([]);
+    }
 }
