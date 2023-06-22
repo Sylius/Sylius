@@ -1671,6 +1671,11 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Checker/CatalogPromotionEligibilityChecker.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Checker\\\\ProductVariantForCatalogPromotionEligibility\\:\\:__construct\\(\\) has parameter \\$locator with generic class Symfony\\\\Component\\\\DependencyInjection\\\\ServiceLocator but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Checker/ProductVariantForCatalogPromotionEligibility.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Command\\\\ApplyCatalogPromotionsOnVariants\\:\\:__construct\\(\\) has parameter \\$variantsCodes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Command/ApplyCatalogPromotionsOnVariants.php
@@ -2707,6 +2712,21 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OptionsResolver\\\\LazyOption\\:\\:findOneBy\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OptionsResolver\\\\LazyOption\\:\\:findRandom\\(\\) has parameter \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OptionsResolver\\\\LazyOption\\:\\:findRandom\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\OptionsResolver\\\\LazyOption\\:\\:findRandomOne\\(\\) has parameter \\$criteria with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/OptionsResolver/LazyOption.php
 
@@ -6396,11 +6416,6 @@ parameters:
 			path: src/Sylius/Component/User/Model/CredentialsHolderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\User\\:\\:__serialize\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/User/Model/User.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\User\\:\\:__unserialize\\(\\) has parameter \\$serialized with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/User/Model/User.php
@@ -6419,11 +6434,6 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\UserAwareInterface\\:\\:setUser\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Component/User/Model/UserAwareInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:__serialize\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/User/Model/UserInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Model\\\\UserInterface\\:\\:__unserialize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
