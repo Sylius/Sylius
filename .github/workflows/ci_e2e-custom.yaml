@@ -22,6 +22,12 @@ jobs:
                 php: [ "8.1" ]
                 symfony: [ "^6.3" ]
                 mysql: [ "8.0" ]
+                resource: [ "^1.9" ]
+                include:
+                    -   php: "8.1"
+                        symfony: "^6.3"
+                        mysql: "8.0"
+                        resource: "^1.11@dev"
 
         env:
             APP_ENV: test_cached
@@ -38,7 +44,7 @@ jobs:
                     else
                         echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
                     fi
-                
+
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v3
@@ -54,6 +60,10 @@ jobs:
                     composer config minimum-stability dev
                     composer config prefer-stable true
 
+            -   name: Require SyliusResourceBundle version
+                run: |
+                    composer require sylius/resource-bundle:${{ matrix.resource }} --no-update
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
@@ -65,7 +75,7 @@ jobs:
                     legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    
+
             -   name: Run PHPUnit
                 continue-on-error: true
                 run: vendor/bin/phpunit --colors=always
