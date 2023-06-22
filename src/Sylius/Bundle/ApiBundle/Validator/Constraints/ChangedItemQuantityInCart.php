@@ -25,7 +25,7 @@ final class ChangedItemQuantityInCart extends Constraint
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_changed_item_guantity_in_cart';
+        return 'sylius_api_validator_changed_item_quantity_in_cart';
     }
 
     public function getTargets(): string
