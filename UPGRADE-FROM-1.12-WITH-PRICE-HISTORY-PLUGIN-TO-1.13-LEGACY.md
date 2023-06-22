@@ -95,6 +95,8 @@ Legacy upgrade
 
     ```
 
+1. The class `Sylius\PriceHistoryPlugin\Infrastructure\EventSubscriber\ChannelPricingLogEntryEventSubscriber` has been replaced by `Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener`.
+
 1. Change namespaces from the plugin to correct ones:
 
     ```
