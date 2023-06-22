@@ -25,7 +25,7 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
 {
     public const TYPE = 'for_taxons';
 
-    public function __construct (
+    public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
         private TaxonTreeRepositoryInterface $taxonTreeRepository,
     ) {
