@@ -58,10 +58,13 @@
         <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
         <service id="Sylius\Component\Product\Generator\SlugGeneratorInterface" alias="sylius.generator.slug" />
 
-        <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
-            <tag name="sylius.product_variant_resolver.default" type="default" />
+        <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" class="Sylius\Component\Product\Resolver\CompositeProductVariantResolver">
+            <argument type="tagged_iterator" tag="sylius.product_variant_resolver" />
         </service>
-        <service id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" alias="sylius.product_variant_resolver.default" />
+
+        <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
+            <tag name="sylius.product_variant_resolver" priority="-999" />
+        </service>
 
         <service id="sylius.listener.select_product_attribute_choice_remove" class="Sylius\Bundle\ProductBundle\EventListener\SelectProductAttributeChoiceRemoveListener">
             <argument>%sylius.model.product_attribute_value.class%</argument>

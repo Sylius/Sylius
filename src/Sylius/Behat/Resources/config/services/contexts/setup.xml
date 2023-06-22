@@ -32,7 +32,7 @@
 
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
             <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
@@ -115,7 +115,7 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.repository.shipping_method" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
@@ -137,7 +137,7 @@
         <service id="Sylius\Behat\Context\Setup\PriceHistoryContext">
             <argument type="service" id="Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext" />
             <argument type="service" id="sylius.manager.channel_pricing" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
         </service>
 
         <service id="sylius.behat.context.setup.product" class="Sylius\Behat\Context\Setup\ProductContext">
@@ -154,7 +154,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.generator.slug" />
             <argument type="service" id="behat.mink.parameters" />
@@ -311,7 +311,7 @@
         <service id="Sylius\Behat\Context\Setup\PriceHistoryContext" public="true">
             <argument type="service" id="Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext" />
             <argument type="service" id="sylius.manager.channel_pricing" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
         </service>
     </services>
 </container>
