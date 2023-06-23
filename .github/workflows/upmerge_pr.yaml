@@ -42,7 +42,7 @@ jobs:
                         This PR has been generated automatically.
                         For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
                         
-                        **Remember!** Use **rebase strategy** when merging this PR.
+                        **Remember!** Use **Rebase and merge** when merging this PR if **no conflict** occurred. If any conflict occurs, checkout the branch, push changes and use **Create a merge commit**.
                     branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
                     delete-branch: true
                     branch-suffix: "short-commit-hash"
