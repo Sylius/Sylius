@@ -15,7 +15,6 @@ namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 final class SingleChannelContext implements ChannelContextInterface
 {
