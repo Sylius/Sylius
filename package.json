@@ -66,5 +66,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
-  }
+  },
+  "author": "Sylius Sp. z o.o.",
+  "license": "MIT"
 }

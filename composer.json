@@ -185,7 +185,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "doctrine/orm": "2.15.2",
+        "doctrine/orm": "2.15.2 || 2.15.3",
         "lexik/jwt-authentication-bundle": "^2.18",
         "symfony/framework-bundle": "6.2.8"
     },
@@ -256,7 +256,11 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
+<<<<<<< HEAD
             "require": "5.4.*"
+=======
+            "require": "^6.0"
+>>>>>>> 1.12
         }
     },
     "autoload": {
