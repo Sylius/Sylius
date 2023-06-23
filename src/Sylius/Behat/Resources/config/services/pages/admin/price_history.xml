@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.behat.page.admin.channel_pricing_log_entry.index" class="Sylius\Behat\Page\Admin\ChannelPricingLogEntry\IndexPage" parent="sylius.behat.page.admin.crud.index" public="true">
+            <argument>sylius_admin_channel_pricing_log_entry_index</argument>
+        </service>
+    </services>
+</container>

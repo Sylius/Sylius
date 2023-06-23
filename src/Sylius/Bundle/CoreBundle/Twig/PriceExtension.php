@@ -29,6 +29,8 @@ final class PriceExtension extends AbstractExtension
             new TwigFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
             new TwigFilter('sylius_calculate_original_price', [$this->helper, 'getOriginalPrice']),
             new TwigFilter('sylius_has_discount', [$this->helper, 'hasDiscount']),
+            new TwigFilter('sylius_has_lowest_price', [$this->helper, 'hasLowestPriceBeforeDiscount']),
+            new TwigFilter('sylius_calculate_lowest_price', [$this->helper, 'getLowestPriceBeforeDiscount']),
         ];
     }
 }

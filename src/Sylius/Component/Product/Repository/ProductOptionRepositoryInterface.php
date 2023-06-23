@@ -17,6 +17,11 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of ProductOptionInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface ProductOptionRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder;

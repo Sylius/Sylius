@@ -2,4 +2,5 @@
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('update')), options.link.parameters|default({'id': data.id}))) %}
 
-{{ buttons.edit(path, action.label) }}
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+{{ buttons.edit(path, action.label, null, labeled) }}

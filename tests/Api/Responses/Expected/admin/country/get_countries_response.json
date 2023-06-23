@@ -1,0 +1,38 @@
+{
+    "@context": "\/api\/v2\/contexts\/Country",
+    "@id": "\/api\/v2\/admin\/countries",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/countries\/US",
+            "@type": "Country",
+            "id": "@integer@",
+            "code": "US",
+            "name": "United States",
+            "enabled": true,
+            "provinces": [
+                "\/api\/v2\/admin\/provinces\/US-MI",
+                "\/api\/v2\/admin\/provinces\/US-WY"
+            ]
+        },
+        {
+            "@id": "\/api\/v2\/admin\/countries\/FR",
+            "@type": "Country",
+            "id": "@integer@",
+            "code": "FR",
+            "name": "France",
+            "enabled": true,
+            "provinces": []
+        },
+        {
+            "@id": "\/api\/v2\/admin\/countries\/DE",
+            "@type": "Country",
+            "id": "@integer@",
+            "code": "DE",
+            "name": "Germany",
+            "enabled": true,
+            "provinces": []
+        }
+    ],
+    "hydra:totalItems": 3
+}

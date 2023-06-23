@@ -35,17 +35,18 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sylius/core-bundle": "^1.12",
         "sylius/ui-bundle": "^1.12",
-        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4.21 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.15",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3"
     },
     "require-dev": {
+        "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/dotenv": "^5.4 || ^6.0",
-        "php-http/message-factory": "^1.0"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/dependency-injection": "^5.4.21 || ^6.0",
+        "symfony/dotenv": "^5.4.21 || ^6.0"
     },
     "config": {
         "allow-plugins": {

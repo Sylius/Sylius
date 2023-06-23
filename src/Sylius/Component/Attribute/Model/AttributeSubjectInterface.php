@@ -25,9 +25,7 @@ interface AttributeSubjectInterface
     public function getAttributes(): Collection;
 
     /**
-     * @return Collection|AttributeValueInterface[]
-     *
-     * @psalm-return Collection<array-key, AttributeValueInterface>
+     * @return Collection<array-key, AttributeValueInterface>
      */
     public function getAttributesByLocale(
         string $localeCode,

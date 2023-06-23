@@ -62,6 +62,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
+        $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -98,6 +99,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependJmsSerializerIfAdminApiBundleIsNotPresent($container);
+        $this->prependSyliusOrderBundle($container, $config);
     }
 
     protected function getMigrationsNamespace(): string
@@ -163,6 +165,17 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             'property_naming' => [
                 'id' => 'jms_serializer.identical_property_naming_strategy',
             ],
+        ]);
+    }
+
+    private function prependSyliusOrderBundle(ContainerBuilder $container, array $config): void
+    {
+        if (!$container->hasExtension('sylius_order')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('sylius_order', [
+            'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
         ]);
     }
 

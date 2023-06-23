@@ -34,7 +34,6 @@
         </attribute>
 
         <attribute name="name">
-            <group>admin:shipping_method:read</group>
             <group>shop:shipping_method:read</group>
         </attribute>
 

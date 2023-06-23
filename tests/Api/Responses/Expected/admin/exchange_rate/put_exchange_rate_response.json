@@ -1,0 +1,9 @@
+{
+    "@context": "\/api\/v2\/contexts\/ExchangeRate",
+    "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
+    "@type": "ExchangeRate",
+    "id": @integer@,
+    "ratio": 0.25,
+    "sourceCurrency": "\/api\/v2\/admin\/currencies\/CNY",
+    "targetCurrency": "\/api\/v2\/admin\/currencies\/USD"
+}

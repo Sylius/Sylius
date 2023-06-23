@@ -17,6 +17,11 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Repository\OrderItemRepositoryInterface as BaseOrderItemRepositoryInterface;
 
+/**
+ * @template T of OrderItemInterface
+ *
+ * @extends BaseOrderItemRepositoryInterface<T>
+ */
 interface OrderItemRepositoryInterface extends BaseOrderItemRepositoryInterface
 {
     public function findOneByIdAndCustomer($id, CustomerInterface $customer): ?OrderItemInterface;

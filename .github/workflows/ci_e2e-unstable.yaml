@@ -37,7 +37,7 @@ jobs:
                     composer config prefer-stable false
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"

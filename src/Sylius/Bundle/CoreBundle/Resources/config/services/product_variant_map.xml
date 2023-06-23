@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service
+            id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface"
+            class="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider"
+        >
+            <argument type="tagged_iterator" tag="sylius.product_variant_data_map_provider" />
+        </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOptionsMapProvider">
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantOriginalPriceMapProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantAppliedPromotionsMapProvider">
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
+
+        <service id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantLowestPriceMapProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.product_variant_data_map_provider" />
+        </service>
+    </services>
+</container>

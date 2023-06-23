@@ -26,17 +26,16 @@ final class ProductAssociationsTest extends JsonApiTestCase
 
         /** @var ProductAssociationInterface $association */
         $association = $fixtures['product_association'];
-        $this->client->request('GET',
-            sprintf('/api/v2/shop/product-associations/%s', $association->getId()),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-associations/%s', $association->getId()),
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_product_association_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -45,11 +44,10 @@ final class ProductAssociationsTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
-        $this->client->request('GET',
-            sprintf('/api/v2/shop/product-associations/%s', 'wrong input'),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-associations/%s', 'wrong input'),
+            server: self::CONTENT_TYPE_HEADER,
         );
 
         $response = $this->client->getResponse();

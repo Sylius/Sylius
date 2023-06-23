@@ -166,14 +166,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I filter them by :taxon taxon
      */
     public function iFilterThemByTaxon(TaxonInterface $taxon): void
@@ -257,17 +249,6 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product could not be edited',
-        );
     }
 
     /**
@@ -379,6 +360,28 @@ final class ManagingProductsContext implements Context
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
         Assert::same($mainTaxon, $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
+    }
+
+    /**
+     * @Then the product :product should no longer have a main taxon
+     */
+    public function theProductShouldNoLongerHaveAMainTaxon(ProductInterface $product): void
+    {
+        Assert::null($product->getMainTaxon());
+    }
+
+    /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
+    {
+        $productTaxonId = $this->getProductTaxonId($product);
+
+        $response = $this->client->show(Resources::PRODUCT_TAXONS, (string) $productTaxonId);
+        $productTaxonIri = $this->responseChecker->getValue($response, 'taxon');
+        $productTaxonCodes = explode('/', $productTaxonIri);
+
+        Assert::same(array_pop($productTaxonCodes), $taxon->getCode());
     }
 
     /**
@@ -546,5 +549,13 @@ final class ManagingProductsContext implements Context
     private function getLastResponse(): Response
     {
         return $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
+    }
+
+    private function getProductTaxonId(ProductInterface $product): string
+    {
+        $productResponse = $this->client->show(Resources::PRODUCTS, (string) $product->getCode());
+        $productTaxonUrl = explode('/', $this->responseChecker->getValue($productResponse, 'productTaxons')[0]);
+
+        return array_pop($productTaxonUrl);
     }
 }

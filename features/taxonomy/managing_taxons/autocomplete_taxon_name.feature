@@ -1,4 +1,4 @@
-@managing_taxons
+@managing_taxons_ajax
 Feature: Taxons autocomplete
     In order to get hints when looking for taxons
     As an Administrator

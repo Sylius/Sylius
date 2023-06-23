@@ -33,12 +33,15 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.api.email
+                - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.shop.customer
+                - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.order
                 - sylius.behat.context.api.shop.order_item
-                - sylius.behat.context.api.shop.checkout
-                - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.payment
+                - sylius.behat.context.api.shop.response
+                - sylius.behat.context.api.shop.save
                 - sylius.behat.context.api.shop.shipment
 
             filters:

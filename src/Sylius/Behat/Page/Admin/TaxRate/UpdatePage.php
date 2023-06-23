@@ -26,6 +26,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->selectFieldOption('Zone', 'Select');
     }
 
+    public function isIncludedInPrice(): bool
+    {
+        return (bool) $this->getElement('included_in_price')->getValue();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -40,6 +45,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_tax_rate_code',
             'name' => '#sylius_tax_rate_name',
             'zone' => '#sylius_tax_rate_zone',
+            'included_in_price' => '#sylius_tax_rate_includedInPrice',
         ]);
     }
 }

@@ -36,7 +36,7 @@
         </service>
 
         <service id="sylius.templating.helper.variant_resolver" class="Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper">
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <tag name="templating.helper" alias="sylius_resolve_variant" />
         </service>
 

@@ -255,14 +255,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I sort the shipping methods :sortType by code
      * @When I switch the way shipping methods are sorted :sortType by code
      */
@@ -444,17 +436,6 @@ final class ManagingShippingMethodsContext implements Context
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping method could not be edited',
         );
     }
 

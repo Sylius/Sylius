@@ -34,7 +34,13 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_an_order(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -61,7 +67,7 @@ final class OrdersTest extends JsonApiTestCase
         $updateCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($updateCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_response', Response::HTTP_OK);
@@ -110,7 +116,13 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_order_items(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -125,8 +137,11 @@ final class OrdersTest extends JsonApiTestCase
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA/items',
+            server: self::CONTENT_TYPE_HEADER,
+        );
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_items_response', Response::HTTP_OK);
@@ -135,7 +150,13 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_order_adjustments(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -150,7 +171,11 @@ final class OrdersTest extends JsonApiTestCase
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/adjustments', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA/adjustments',
+            server: self::CONTENT_TYPE_HEADER,
+        );
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_adjustments_response', Response::HTTP_OK);
@@ -159,7 +184,13 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_gets_order_item_adjustments(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -189,7 +220,11 @@ final class OrdersTest extends JsonApiTestCase
         $orderItem->addAdjustment($adjustment);
         $this->get('sylius.manager.order')->flush();
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA/items/'.$order->getItems()->first()->getId().'/adjustments', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA/items/' . $order->getItems()->first()->getId() . '/adjustments',
+            server: self::CONTENT_TYPE_HEADER,
+        );
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/get_order_item_adjustments_response', Response::HTTP_OK);
@@ -198,7 +233,13 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_allows_to_add_items_to_order(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -209,10 +250,15 @@ final class OrdersTest extends JsonApiTestCase
         $pickupCartCommand->setChannelCode('WEB');
         $commandBus->dispatch($pickupCartCommand);
 
-        $this->client->request('POST', '/api/v2/shop/orders/nAWw2jewpA/items', [], [], self::CONTENT_TYPE_HEADER, json_encode([
-            'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
-            'quantity' => 3,
-        ]));
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/orders/nAWw2jewpA/items',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
+                'quantity' => 3,
+            ], JSON_THROW_ON_ERROR),
+        );
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/add_item_response', Response::HTTP_CREATED);
@@ -221,7 +267,7 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_orders_collection_for_guest(): void
     {
-        $this->client->request('GET', '/api/v2/shop/orders', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
 
         $this->assertResponse($response, 'shop/error/jwt_token_not_found', Response::HTTP_UNAUTHORIZED);
@@ -230,32 +276,34 @@ final class OrdersTest extends JsonApiTestCase
     /** @test */
     public function it_allows_to_patch_orders_payment_method(): void
     {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/customer.yaml',
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
-        $loginData = $this->logInShopUser('oliver@doe.com');
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $header['HTTP_' . $authorizationHeader] = 'Bearer ' . $loginData;
-        $header = array_merge($header, self::CONTENT_TYPE_HEADER);
-
+        $authentication = $this->logInShopUser('oliver@doe.com');
         $tokenValue = 'nAWw2jewpA';
 
         $this->placeOrder($tokenValue, 'oliver@doe.com');
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], $header);
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/orders/nAWw2jewpA',
+            server: array_merge($authentication, self::CONTENT_TYPE_HEADER),
+        );
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
-            'PATCH',
-            sprintf('/api/v2/shop/account/orders/nAWw2jewpA/payments/%s',$orderResponse['payments'][0]['id']),
-            [],
-            [],
-            [
-                'CONTENT_TYPE' => 'application/merge-patch+json',
-                'HTTP_Authorization' => sprintf('Bearer %s', $loginData)
-            ],
-                json_encode([
-                    'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
-            ])
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/account/orders/nAWw2jewpA/payments/%s', $orderResponse['payments'][0]['id']),
+            server: array_merge($authentication, self::PATCH_CONTENT_TYPE_HEADER),
+            content: json_encode([
+                'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
+            ], JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -268,12 +316,10 @@ final class OrdersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/orders',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'pl_PL'],
-            json_encode([])
+            method: 'POST',
+            uri: '/api/v2/shop/orders',
+            server: array_merge(['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'], self::CONTENT_TYPE_HEADER),
+            content: '{}',
         );
         $response = $this->client->getResponse();
 
@@ -286,12 +332,10 @@ final class OrdersTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
 
         $this->client->request(
-            'POST',
-            '/api/v2/shop/orders',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'],
-            json_encode([])
+            method: 'POST',
+            uri: '/api/v2/shop/orders',
+            server: self::CONTENT_TYPE_HEADER,
+            content: '{}',
         );
         $response = $this->client->getResponse();
 
@@ -299,9 +343,15 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_to_patch_orders_address(): void
+    public function it_allows_to_replace_orders_address(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
 
         $tokenValue = 'nAWw2jewpA';
 
@@ -324,22 +374,20 @@ final class OrdersTest extends JsonApiTestCase
             'phoneNumber'=> '666111333',
             'company'=> 'Potato Corp.',
             'countryCode'=> $country->getCode(),
+            'provinceCode' => 'US-MI',
             'street'=> 'Top secret',
             'city'=> 'Nebraska',
-            'postcode'=> '12343'
+            'postcode'=> '12343',
         ];
 
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/shop/orders/nAWw2jewpA',
-            server: [
-                'CONTENT_TYPE' => 'application/ld+json',
-                'HTTP_ACCEPT' => 'application/ld+json',
-            ],
+            server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'oliver@doe.com',
                 'billingAddress' => $billingAddress,
-            ])
+            ], JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 

@@ -35,7 +35,7 @@ final class UnitFixedDiscountConfigurationType extends AbstractType
                 'currency' => $options['currency'],
             ])
             ->add('filters', PromotionFilterCollectionType::class, [
-                'label' => false,
+                'label' => 'sylius.form.promotion_action.filters',
                 'required' => false,
                 'currency' => $options['currency'],
             ])

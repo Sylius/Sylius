@@ -86,6 +86,9 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         return $productAssociations;
     }
 
+    /**
+     * @param Collection<array-key, ProductInterface> $products
+     */
     private function getCodesAsStringFromProducts(Collection $products): ?string
     {
         if ($products->isEmpty()) {

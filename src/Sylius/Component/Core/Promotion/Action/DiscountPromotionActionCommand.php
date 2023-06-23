@@ -38,6 +38,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
         }
 
         foreach ($subject->getItems() as $item) {
+            /** @var OrderItemUnitInterface $unit */
             foreach ($item->getUnits() as $unit) {
                 $this->removeUnitOrderPromotionAdjustmentsByOrigin($unit, $promotion);
             }

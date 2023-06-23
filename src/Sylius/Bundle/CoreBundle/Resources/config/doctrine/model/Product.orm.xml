@@ -51,7 +51,7 @@
         </many-to-many>
 
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
+            <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImageInterface" mapped-by="owner" orphan-removal="true">

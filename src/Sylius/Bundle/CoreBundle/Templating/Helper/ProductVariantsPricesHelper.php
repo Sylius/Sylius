@@ -15,13 +15,24 @@ namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
+/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProvider} instead. */
 class ProductVariantsPricesHelper extends Helper
 {
     public function __construct(private ProductVariantsPricesProviderInterface $productVariantsPricesProvider)
     {
+        trigger_deprecation(
+            'sylius/core-bundle',
+            '1.13',
+            sprintf(
+                'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0. Use "%s" instead.',
+                self::class,
+                ProductVariantsMapProvider::class,
+            ),
+        );
     }
 
     public function getPrices(ProductInterface $product, ChannelInterface $channel): array

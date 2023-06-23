@@ -124,14 +124,6 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should see :count product options in the list
      */
     public function iShouldSeeProductOptionsInTheList(int $count): void
@@ -272,17 +264,6 @@ final class ManagingProductOptionsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Product option could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product option could not be edited',
         );
     }
 }

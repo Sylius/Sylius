@@ -13,6 +13,6 @@ Feature: Province unique code validation
     Scenario: Trying to add a new province with taken code
         When I want to edit this country
         And I add the "Scotland" province with "GB-NIR" code
-        And I try to save changes
+        And I try to save my changes
         Then I should be notified that province code must be unique
         And province with name "Scotland" should not be added in this country

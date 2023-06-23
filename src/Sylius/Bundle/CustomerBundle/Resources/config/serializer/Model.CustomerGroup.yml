@@ -1,0 +1,16 @@
+Sylius\Component\Customer\Model\CustomerGroup:
+    exclusion_policy: ALL
+    xml_root_name: customer-group
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        code:
+            expose: true
+            type: string
+            groups: [Default, Detailed, Autocomplete]
+        name:
+            expose: true
+            type: string
+            groups: [Default, Detailed, Autocomplete]

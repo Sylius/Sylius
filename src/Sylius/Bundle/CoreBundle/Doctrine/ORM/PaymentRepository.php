@@ -19,6 +19,11 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
+/**
+ * @template T of PaymentInterface
+ *
+ * @implements PaymentRepositoryInterface<T>
+ */
 class PaymentRepository extends EntityRepository implements PaymentRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder

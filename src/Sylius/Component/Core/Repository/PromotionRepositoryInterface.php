@@ -17,6 +17,11 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface as BasePromotionRepositoryInterface;
 
+/**
+ * @template T of PromotionInterface
+ *
+ * @extends BasePromotionRepositoryInterface<T>
+ */
 interface PromotionRepositoryInterface extends BasePromotionRepositoryInterface
 {
     /**

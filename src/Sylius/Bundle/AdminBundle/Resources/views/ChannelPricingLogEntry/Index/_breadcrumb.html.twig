@@ -1,0 +1,13 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{% set product_variant = configuration.vars.product_variant %}
+{% set product = configuration.vars.product_variant.product %}
+
+{{ breadcrumb.crumble([
+    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+    { label: 'sylius.ui.products'|trans, url: path('sylius_admin_product_index') },
+    { label: product.name|default(product.code), url: path('sylius_admin_product_show', {'id': product.id }) },
+    { label: 'sylius.ui.variants'|trans, url: path('sylius_admin_product_variant_index', {'productId': product.id }) },
+    { label: product_variant.name|default(product_variant.code), url: path('sylius_admin_product_variant_update', {'id': product_variant.id, 'productId': product.id }) },
+    { label: 'sylius.ui.price_history'|trans },
+]) }}

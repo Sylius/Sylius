@@ -55,8 +55,7 @@
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor"
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
-            <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.event_bus" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface" />
         </service>
     </services>
 </container>

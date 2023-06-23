@@ -16,4 +16,6 @@ namespace Sylius\Component\Order;
 interface SyliusCartEvents
 {
     public const CART_CHANGE = 'sylius.cart_change';
+
+    public const CART_SUMMARY = 'sylius.cart_summary';
 }

@@ -99,6 +99,10 @@
         </service>
 
         <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Checker\EmailChecker">
+            <argument type="service" id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" />
+        </service>
+
+        <service id="Sylius\Behat\Service\Provider\EmailMessagesProviderInterface" class="Sylius\Behat\Service\Provider\EmailMessagesProvider">
             <argument type="service" id="test.mailer_pool" />
         </service>
 

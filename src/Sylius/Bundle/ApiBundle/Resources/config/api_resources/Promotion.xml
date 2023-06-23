@@ -26,6 +26,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:promotion:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_get">
@@ -63,5 +66,16 @@
         <property name="rules" readable="true" />
         <property name="actions" readable="true" />
         <property name="channels" readable="true" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="label">string</attribute>
+                        <attribute name="locale">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

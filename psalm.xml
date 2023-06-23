@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <psalm
     errorLevel="2"
+    findUnusedBaselineEntry="false"
+    findUnusedCode="false"
     reportMixedIssues="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
@@ -25,14 +27,24 @@
     </projectFiles>
 
     <issueHandlers>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <referencedClass name="UnitEnum" />
+            </errorLevel>
+        </UndefinedDocblockClass>
+
         <!-- level 3 issues - slightly lazy code writing, but probably low false-negatives -->
 
         <DeprecatedClass>
             <errorLevel type="info">
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
+                <referencedClass name="ApiPlatform\Core\Metadata\Extractor\XmlExtractor" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Http\Message\MessageFactory" /> <!-- deprecated in HttpMessage 1.1 -->
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
+                <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
+                <referencedClass name="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper" />
+                <referencedClass name="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" />
                 <referencedClass name="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder"/>
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
@@ -47,20 +59,26 @@
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1, probably a bug in psalm, as this is referenced as DeprecatedClass, not an interface -->
             </errorLevel>
         </DeprecatedClass>
+
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
-                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface" /> <!-- deprecated in Symfony 5.1 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface" /> <!-- deprecated in Symfony 6.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" /> <!-- deprecated in Symfony 5.3 -->
+                <referencedClass name="Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface" /> <!-- deprecated in Symfony 5.3 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
+                <referencedClass name="Http\Message\MessageFactory" /> <!-- Deprecated in Http\Message 1.1 -->
+                <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" /> <!-- deprecated in Payum 1.3.7 -->
             </errorLevel>
         </DeprecatedInterface>
+
         <DeprecatedMethod>
             <errorLevel type="info">
                 <referencedMethod name="Faker\Generator::__get"/>
@@ -93,11 +111,35 @@
             </errorLevel>
         </InternalClass>
 
+        <InvalidCast>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/ApiBundle/Converter/IriToIdentifierConverter.php" />
+            </errorLevel>
+        </InvalidCast>
+
         <InvalidDocblock>
             <errorLevel type="info">
                 <file name="vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php" />
             </errorLevel>
         </InvalidDocblock>
+
+        <InvalidOperand>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/AdminBundle/MessageHandler/CreateAdminUserHandler.php" />
+            </errorLevel>
+        </InvalidOperand>
+
+        <InvalidPropertyAssignmentValue>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php" />
+            </errorLevel>
+        </InvalidPropertyAssignmentValue>
+
+        <RedundantCast>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/ApiBundle/Converter/IriToIdentifierConverter.php" />
+            </errorLevel>
+        </RedundantCast>
 
         <UndefinedMethod>
             <errorLevel type="suppress">
@@ -110,6 +152,12 @@
 
         <UndefinedInterfaceMethod>
             <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::booleanNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::integerNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::variableNode" />
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getPassword" />
                 <referencedMethod name="Symfony\Component\Security\Core\User\UserInterface::getUsername" />
                 <referencedMethod name="Sylius\Component\User\Model\UserInterface::getUsername" />
@@ -119,6 +167,19 @@
 
         <MissingReturnType errorLevel="info" />
 
+        <MissingTemplateParam>
+            <errorLevel type="suppress">
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductTaxonToTaxonTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductVariantsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/ProductsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/CoreBundle/Form/DataTransformer/TaxonsToCodesTransformer.php" />
+                <file name="src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductVariantToProductOptionsTransformer.php" />
+                <file name="src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductsToProductAssociationsTransformer.php" />
+                <file name="src/Sylius/Bundle/PromotionBundle/Form/Type/PromotionCouponToCodeType.php" />
+                <file name="src/Sylius/Bundle/UserBundle/Form/UserVerifiedAtToBooleanTransformer.php" />
+            </errorLevel>
+        </MissingTemplateParam>
+
         <PropertyNotSetInConstructor errorLevel="info" />
         <MissingConstructor>
             <errorLevel type="info">
@@ -126,6 +187,12 @@
             </errorLevel>
         </MissingConstructor>
         <MissingParamType errorLevel="info" />
+
+        <DuplicateClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Component/User/Model/CredentialsHolderInterface.php" />
+            </errorLevel>
+        </DuplicateClass>
 
         <RedundantConditionGivenDocblockType errorLevel="info" />
 
@@ -221,6 +288,12 @@
         <!-- level 8 issues - some fatal errors in PHP -->
 
         <MethodSignatureMismatch errorLevel="info" />
+
+        <InvalidStringClass>
+            <errorLevel type="info">
+                <file name="src/Sylius/Component/Core/Factory/ChannelPricingLogEntryFactory.php" />
+            </errorLevel>
+        </InvalidStringClass>
     </issueHandlers>
 
     <stubs>
@@ -229,5 +302,6 @@
 
     <plugins>
         <pluginClass class="Psalm\MockeryPlugin\Plugin" />
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin" />
     </plugins>
 </psalm>

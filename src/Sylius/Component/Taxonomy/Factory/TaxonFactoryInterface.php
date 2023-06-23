@@ -16,6 +16,11 @@ namespace Sylius\Component\Taxonomy\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+/**
+ * @template T of TaxonInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface TaxonFactoryInterface extends FactoryInterface
 {
     public function createForParent(TaxonInterface $parent): TaxonInterface;

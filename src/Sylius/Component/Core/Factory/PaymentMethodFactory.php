@@ -17,12 +17,22 @@ use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of PaymentMethodInterface
+ *
+ * @implements PaymentMethodFactoryInterface<T>
+ */
 final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 {
+    /**
+     * @param FactoryInterface<T> $decoratedFactory
+     * @param FactoryInterface<GatewayConfigInterface> $gatewayConfigFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory, private FactoryInterface $gatewayConfigFactory)
     {
     }
 
+    /** @inheritdoc */
     public function createNew(): PaymentMethodInterface
     {
         return $this->decoratedFactory->createNew();

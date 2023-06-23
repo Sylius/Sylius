@@ -40,6 +40,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
+            /** @var OrderItemUnitInterface $unit */
             foreach ($item->getUnits() as $unit) {
                 $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
                 if (0.00 === $taxAmount) {

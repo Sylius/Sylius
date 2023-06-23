@@ -22,9 +22,8 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.admin.managing_taxons
-                - sylius.behat.context.ui.admin.removing_taxons
                 - sylius.behat.context.ui.admin.notification
-                - sylius.behat.context.ui.shop.product
+                - sylius.behat.context.ui.admin.removing_taxons
 
             filters:
                 tags: "@managing_taxons&&@ui"

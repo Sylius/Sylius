@@ -18,6 +18,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
+/**
+ * @template T of TaxonInterface
+ *
+ * @implements TaxonRepositoryInterface<T>
+ */
 class TaxonRepository extends EntityRepository implements TaxonRepositoryInterface
 {
     public function findChildren(string $parentCode, ?string $locale = null): array

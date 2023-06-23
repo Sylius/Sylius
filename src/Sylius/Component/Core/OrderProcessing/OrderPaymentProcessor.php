@@ -20,6 +20,7 @@ use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
@@ -40,7 +41,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         if (0 === $order->getTotal()) {
-            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
+            $removablePayments = $order->getPayments()->filter(function (BasePaymentInterface $payment): bool {
                 return $payment->getState() === OrderPaymentStates::STATE_CART;
             });
 

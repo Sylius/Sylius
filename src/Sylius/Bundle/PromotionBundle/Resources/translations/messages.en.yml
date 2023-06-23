@@ -24,6 +24,7 @@ sylius:
             description: Description
             ends_at: Ends at
             exclusive: Exclusive
+            label: Label
             name: Name
             priority: Priority
             rules: Rules
@@ -35,6 +36,7 @@ sylius:
             order_fixed_discount: Order fixed discount
             order_percentage_discount: Order percentage discount
             shipping_percentage_discount: Shipping percentage discount
+            filters: Filters
             fixed_discount_configuration:
                 amount: Amount
             percentage_discount_configuration:

@@ -183,12 +183,14 @@ class Order extends BaseOrder implements OrderInterface
 
     public function getItemUnits(): Collection
     {
-        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
+        /** @var ArrayCollection<array-key, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */
         foreach ($this->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
+                Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
                 $units->add($unit);
             }
         }
@@ -333,6 +335,20 @@ class Order extends BaseOrder implements OrderInterface
     public function getPromotionSubjectCount(): int
     {
         return $this->getTotalQuantity();
+    }
+
+    public function getItemsSubtotal(): int
+    {
+        /** @var array<OrderItemInterface> $items */
+        $items = $this->getItems()->toArray();
+
+        return array_reduce(
+            $items,
+            static function (int $subtotal, OrderItemInterface $item): int {
+                return $subtotal + $item->getSubtotal();
+            },
+            0,
+        );
     }
 
     public function getCurrencyCode(): ?string

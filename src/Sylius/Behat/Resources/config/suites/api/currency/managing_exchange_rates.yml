@@ -17,6 +17,8 @@ default:
                 - sylius.behat.context.setup.exchange_rate
 
                 - sylius.behat.context.api.admin.managing_exchange_rates
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
 
             filters:
                 tags: "@managing_exchange_rates&&@api"

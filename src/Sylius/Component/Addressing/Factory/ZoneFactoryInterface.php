@@ -16,6 +16,11 @@ namespace Sylius\Component\Addressing\Factory;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of ZoneInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface ZoneFactoryInterface extends FactoryInterface
 {
     public function createTyped(string $type): ZoneInterface;

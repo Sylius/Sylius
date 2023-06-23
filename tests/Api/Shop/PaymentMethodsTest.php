@@ -16,7 +16,6 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class PaymentMethodsTest extends JsonApiTestCase
@@ -31,23 +30,22 @@ final class PaymentMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
+        $pickupCartCommand->setLocaleCode('en_US');
         $commandBus->dispatch($pickupCartCommand);
 
         $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/payment-methods?paymentId=%s&tokenValue=%s', $orderResponse['payments'][0]['id'], $tokenValue),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-methods?paymentId=%s&tokenValue=%s', $orderResponse['payments'][0]['id'], $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 
@@ -64,23 +62,22 @@ final class PaymentMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
+        $pickupCartCommand->setLocaleCode('en_US');
         $commandBus->dispatch($pickupCartCommand);
 
         $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
         $addItemToCartCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($addItemToCartCommand);
 
-        $this->client->request('GET', '/api/v2/shop/orders/nAWw2jewpA', [], [], self::CONTENT_TYPE_HEADER);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/orders/nAWw2jewpA', server: self::CONTENT_TYPE_HEADER);
         $orderResponse = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/payment-methods?paymentId=%s', $orderResponse['payments'][0]['id']),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-methods?paymentId=%s', $orderResponse['payments'][0]['id']),
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 
@@ -97,8 +94,9 @@ final class PaymentMethodsTest extends JsonApiTestCase
         /** @var MessageBusInterface $commandBus */
         $commandBus = self::getContainer()->get('sylius.command_bus');
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
+        $pickupCartCommand = new PickupCart($tokenValue);
         $pickupCartCommand->setChannelCode('WEB');
+        $pickupCartCommand->setLocaleCode('en_US');
         $commandBus->dispatch($pickupCartCommand);
 
         $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
@@ -106,11 +104,9 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $commandBus->dispatch($addItemToCartCommand);
 
         $this->client->request(
-            'GET',
-            sprintf('/api/v2/shop/payment-methods?tokenValue=%s', $tokenValue),
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-methods?tokenValue=%s', $tokenValue),
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 
@@ -123,11 +119,9 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->loadFixturesFromFiles(['channel.yaml', 'payment_method.yaml']);
 
         $this->client->request(
-            'GET',
-            '/api/v2/shop/payment-methods',
-            [],
-            [],
-            self::CONTENT_TYPE_HEADER
+            method: 'GET',
+            uri: '/api/v2/shop/payment-methods',
+            server: self::CONTENT_TYPE_HEADER,
         );
         $response = $this->client->getResponse();
 

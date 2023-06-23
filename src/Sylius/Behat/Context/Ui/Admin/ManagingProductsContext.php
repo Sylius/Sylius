@@ -649,7 +649,18 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
         $currentPage->open(['id' => $product->getId()]);
 
-        Assert::true($currentPage->isMainTaxonChosen($taxonName));
+        Assert::true($currentPage->hasMainTaxonWithName($taxonName));
+    }
+
+    /**
+     * @Then the product :product should have the :taxon taxon
+     */
+    public function thisProductTaxonShouldBe(ProductInterface $product, string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+        $currentPage->open(['id' => $product->getId()]);
+
+        Assert::true($currentPage->isTaxonChosen($taxonName));
     }
 
     /**
@@ -906,7 +917,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->createSimpleProductPage->getChannelPricingValidationMessage(),
-            'You must define price for every channel.',
+            'You must define price for every enabled channel.',
         );
     }
 

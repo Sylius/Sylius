@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Security;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetterInterface;
+use Sylius\Bundle\UserBundle\Exception\UserNotFoundException;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -62,7 +63,7 @@ final class UserPasswordResetterSpec extends ObjectBehavior
         $passwordUpdater->updatePassword(Argument::any())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(UserNotFoundException::class)
             ->during('reset', ['TOKEN', 'newPassword'])
         ;
     }

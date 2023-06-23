@@ -132,6 +132,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'currencies' => '#sylius_channel_currencies',
             'default_locale' => '#sylius_channel_defaultLocale',
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
+            'discounted_products_checking_period' => '#sylius_channel_channelPriceHistoryConfig_lowestPriceForDiscountedProductsCheckingPeriod',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'menu_taxon' => '#sylius_channel_menuTaxon ~ .text',

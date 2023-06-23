@@ -11,6 +11,15 @@ Sylius\Component\Core\Model\Channel:
         menuTaxon: '@category_taxon'
         enabled: true
         taxCalculationStrategy: "order_items_based"
+        channelPriceHistoryConfig: '@web_price_history_config'
+
+Sylius\Component\Core\Model\ChannelPriceHistoryConfig:
+    web_price_history_config:
+        lowestPriceForDiscountedProductsCheckingPeriod: 25
+        lowestPriceForDiscountedProductsVisible: false
+        __calls:
+            - addTaxonExcludedFromShowingLowestPrice: ["@mug_taxon"]
+            - addTaxonExcludedFromShowingLowestPrice: ["@hat_taxon"]
 
 Sylius\Component\Currency\Model\Currency:
     dolar:
@@ -58,6 +67,7 @@ Sylius\Component\Core\Model\Taxon:
         currentLocale: "en_US"
         translations: ["@en_us_women_t_shirt_translation", "@de_de_women_t_shirt_translation"]
         parent: "@t_shirt_taxon"
+        enabled: false
     brand_taxon:
         code: "BRAND"
         currentLocale: "en_US"

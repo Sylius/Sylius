@@ -200,14 +200,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then the zone named :zone with the :country country member should appear in the registry
      */
     public function theZoneNamedWithTheCountryMemberShouldAppearInTheRegistry(
@@ -379,17 +371,6 @@ final class ManagingZonesContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Zone could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Zone could not be edited',
         );
     }
 

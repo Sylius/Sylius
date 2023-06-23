@@ -52,16 +52,12 @@ interface OrderInterface extends
     public function setPaymentState(?string $paymentState): void;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnits(): Collection;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getItemUnitsByVariant(ProductVariantInterface $variant): Collection;
 
@@ -109,6 +105,8 @@ interface OrderInterface extends
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;
+
+    public function getItemsSubtotal(): int;
 
     public function getTokenValue(): ?string;
 

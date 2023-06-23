@@ -85,15 +85,6 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     * @When I try to save changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I name the province :provinceName
      */
     public function iNameTheProvince(string $provinceName): void
@@ -242,17 +233,6 @@ final class ManagingCountriesContext implements Context
             'Country has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Country ISO code must be unique.');
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Country could not be edited',
-        );
     }
 
     /**

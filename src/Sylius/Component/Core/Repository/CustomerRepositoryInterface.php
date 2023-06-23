@@ -16,6 +16,11 @@ namespace Sylius\Component\Core\Repository;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of CustomerInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface CustomerRepositoryInterface extends RepositoryInterface
 {
     public function countCustomers(): int;

@@ -42,6 +42,10 @@ sylius:
             invalid: This email is invalid.
             max: Email must not be longer than {{ limit }} characters.
             min: Email must be at least {{ limit }} characters long.
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Value must be greater than {{ compared_value }}'
+            less_than: 'Value must be less than {{ compared_value }}'
     channel_pricing:
         price:
             min: Price cannot be lower than 0.
@@ -65,6 +69,7 @@ sylius:
             not_valid: The currency code you entered is invalid.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
+        insufficient_stock: 'Insufficient stock'
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
@@ -83,6 +88,12 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    product_taxon:
+        unique: Product taxons cannot be duplicated.
+        product:
+            not_blank: Please select a product.
+        taxon:
+            not_blank: Please select a taxon.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
@@ -103,7 +114,8 @@ sylius:
             min: Depth cannot be negative.
             invalid: Depth must be a number.
         channel_pricing:
-            all_defined: 'You must define price for every channel.'
+            all_defined: 'You must define price for every enabled channel.'
+            existing_code: Channel with code {{ channelCode }} does not exist.
     promotion_coupon:
         per_customer_usage_limit:
             min: Coupon usage limit per customer must be at least {{ limit }}.
@@ -115,10 +127,14 @@ sylius:
             not_blank: Please enter your email.
         rating:
             range: Review rating must be an integer in the range 1-5.
+            not_in_range: Review rating must be between {{ min }} and {{ max }}.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+    translation:
+        locale_code:
+            invalid: 'Please choose one of the available locales: %locales%'
     user:
         email:
             unique: This email is already used.

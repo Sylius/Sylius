@@ -21,6 +21,11 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
+/**
+ * @template T of OrderInterface
+ *
+ * @extends BaseOrderRepositoryInterface<T>
+ */
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
@@ -77,7 +82,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @return array|OrderInterface[]
      */
-    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate): array;
+    public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
 
     public function findCartForSummary($id): ?OrderInterface;
 

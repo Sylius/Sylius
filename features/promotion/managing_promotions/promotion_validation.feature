@@ -6,6 +6,7 @@ Feature: Promotion validation
 
     Background:
         Given the store operates on a single channel in "United States"
+        And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And I am logged in as an administrator
 
     @ui
@@ -51,6 +52,14 @@ Feature: Promotion validation
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to save my changes
         Then I should be notified that promotion cannot end before it start
+
+    @ui @javascript
+    Scenario: Adding a promotion with label exceeding 255 characters
+        Given there is a promotion "Christmas sale"
+        When I want to modify this promotion
+        And I replace its label with a string exceeding the limit in "Polish (Poland)" locale
+        And I try to save my changes
+        Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
     @ui @javascript
     Scenario: Trying to add a new promotion without specifying a order percentage discount
