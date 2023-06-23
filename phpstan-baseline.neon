@@ -1351,6 +1351,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php
 
 		-
+			message: "#^Parameter \\#1 \\$func of method Doctrine\\\\Common\\\\Collections\\\\ReadableCollection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\>\\:\\:map\\(\\) expects Closure\\(Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\)\\: string, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\)\\: string given\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Serializer/ProductNormalizer.php
+
+		-
 			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Serializer/ProductVariantNormalizer.php
@@ -1661,6 +1666,11 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Applicator/ActionBasedDiscountApplicator.php
 
 		-
+			message: "#^Parameter \\#1 \\$channel of method Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\:\\:getChannelPricingForChannel\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\ChannelInterface, Sylius\\\\Component\\\\Channel\\\\Model\\\\ChannelInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Applicator/CatalogPromotionApplicator.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Calculator\\\\CatalogPromotionPriceCalculator\\:\\:__construct\\(\\) has parameter \\$priceCalculators with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Calculator/CatalogPromotionPriceCalculator.php
@@ -1719,6 +1729,11 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Listener\\\\CatalogPromotionUpdatedListener\\:\\:__construct\\(\\) has parameter \\$catalogPromotionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Listener/CatalogPromotionUpdatedListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(Sylius\\\\Component\\\\Product\\\\Model\\\\ProductVariantInterface\\)\\: mixed\\)\\|null, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\ProductVariantInterface\\)\\: string given\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Processor/ProductCatalogPromotionsProcessor.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Validator\\\\CatalogPromotionAction\\\\FixedDiscountActionValidator\\:\\:isChannelConfigured\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
@@ -3231,6 +3246,11 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/OAuth/UserProvider.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Order\\\\Checker\\\\OrderPromotionsIntegrityChecker\\:\\:check\\(\\) should return Sylius\\\\Component\\\\Core\\\\Model\\\\PromotionInterface\\|null but returns Sylius\\\\Component\\\\Promotion\\\\Model\\\\PromotionInterface\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Order/Checker/OrderPromotionsIntegrityChecker.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Order\\\\NumberGenerator\\\\SequentialOrderNumberGenerator\\:\\:__construct\\(\\) has parameter \\$sequenceFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Order/NumberGenerator/SequentialOrderNumberGenerator.php
@@ -3691,6 +3711,11 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Form/EventSubscriber/BuildAttributesFormSubscriber.php
 
 		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Attribute\\\\Model\\\\AttributeValueInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Attribute\\\\Model\\\\AttributeValueInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Product\\\\Model\\\\ProductAttributeValueInterface\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ProductBundle/Form/EventSubscriber/BuildAttributesFormSubscriber.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ProductBundle\\\\Form\\\\Type\\\\ProductAssociationTypeChoiceType\\:\\:__construct\\(\\) has parameter \\$productAssociationTypeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductAssociationTypeChoiceType.php
@@ -4089,6 +4114,11 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ShopBundle\\\\SyliusShopBundle\\:\\:build\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ShopBundle/SyliusShopBundle.php
+
+		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\PaymentInterface\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ShopBundle/Twig/OrderPaymentsExtension.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\TaxationBundle\\\\Form\\\\Type\\\\TaxCalculatorChoiceType\\:\\:__construct\\(\\) has parameter \\$calculators with no value type specified in iterable type array\\.$#"
@@ -5001,6 +5031,11 @@ parameters:
 			path: src/Sylius/Component/Core/Model/Image.php
 
 		-
+			message: "#^Parameter \\#1 \\$element of method Doctrine\\\\Common\\\\Collections\\\\ArrayCollection\\<int,Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface\\>\\:\\:add\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Model/Order.php
+
+		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Model\\\\Product\\:\\:getVariantSelectionMethodLabels\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Model/Product.php
@@ -5026,6 +5061,11 @@ parameters:
 			path: src/Sylius/Component/Core/Model/ProductVariantInterface.php
 
 		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Order\\\\Model\\\\AdjustmentInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Order\\\\Model\\\\AdjustmentInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\AdjustmentInterface\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Model/Shipment.php
+
+		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Model\\\\ShopBillingData\\:\\:getId\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Model/ShopBillingData.php
@@ -5039,6 +5079,11 @@ parameters:
 			message: "#^Property Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderAdjustmentsClearer\\:\\:\\$adjustmentsToRemove type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/OrderProcessing/OrderAdjustmentsClearer.php
+
+		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\PaymentInterface\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/OrderProcessing/OrderPaymentProcessor.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderShipmentProcessor\\:\\:__construct\\(\\) has parameter \\$shipmentFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
@@ -5057,6 +5102,11 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\DiscountPromotionActionCommand\\:\\:revert\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Promotion/Action/DiscountPromotionActionCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\DiscountPromotionActionCommand\\:\\:removeUnitOrderPromotionAdjustmentsByOrigin\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Action/DiscountPromotionActionCommand.php
 
@@ -5106,6 +5156,11 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Action/UnitDiscountPromotionActionCommand.php
 
 		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitDiscountPromotionActionCommand\\:\\:removeUnitOrderItemAdjustments\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Promotion/Action/UnitDiscountPromotionActionCommand.php
+
+		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitFixedDiscountPromotionActionCommand\\:\\:__construct\\(\\) has parameter \\$adjustmentFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Action/UnitFixedDiscountPromotionActionCommand.php
@@ -5116,12 +5171,22 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Action/UnitFixedDiscountPromotionActionCommand.php
 
 		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitDiscountPromotionActionCommand\\:\\:addAdjustmentToUnit\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Promotion/Action/UnitFixedDiscountPromotionActionCommand.php
+
+		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitPercentageDiscountPromotionActionCommand\\:\\:__construct\\(\\) has parameter \\$adjustmentFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Action/UnitPercentageDiscountPromotionActionCommand.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitPercentageDiscountPromotionActionCommand\\:\\:execute\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Promotion/Action/UnitPercentageDiscountPromotionActionCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Action\\\\UnitDiscountPromotionActionCommand\\:\\:addAdjustmentToUnit\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Action/UnitPercentageDiscountPromotionActionCommand.php
 
@@ -5469,6 +5534,21 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Shipping\\\\Checker\\\\Rule\\\\OrderTotalRuleChecker\\:\\:isEligible\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Shipping/Checker/Rule/OrderTotalRuleChecker.php
+
+		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Payment\\\\Model\\\\PaymentInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Core\\\\Model\\\\PaymentInterface\\)\\: bool given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/StateResolver/OrderPaymentStateResolver.php
+
+		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Taxation\\\\Applicator\\\\OrderItemUnitsTaxesApplicator\\:\\:addAdjustment\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Taxation/Applicator/OrderItemUnitsTaxesApplicator.php
+
+		-
+			message: "#^Parameter \\#1 \\$unit of method Sylius\\\\Component\\\\Core\\\\Taxation\\\\Applicator\\\\OrderItemsTaxesApplicator\\:\\:addAdjustment\\(\\) expects Sylius\\\\Component\\\\Core\\\\Model\\\\OrderItemUnitInterface, Sylius\\\\Component\\\\Order\\\\Model\\\\OrderItemUnitInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Taxation/Applicator/OrderItemsTaxesApplicator.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Test\\\\Factory\\\\TestPromotionFactory\\:\\:__construct\\(\\) has parameter \\$promotionFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
@@ -5902,6 +5982,16 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Product\\\\Model\\\\Product\\:\\:getId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Component/Product/Model/Product.php
+
+		-
+			message: "#^Parameter \\#1 \\$attributeValue of method Sylius\\\\Component\\\\Product\\\\Model\\\\Product\\:\\:getAttributeInDifferentLocale\\(\\) expects Sylius\\\\Component\\\\Product\\\\Model\\\\ProductAttributeValueInterface, Sylius\\\\Component\\\\Attribute\\\\Model\\\\AttributeValueInterface given\\.$#"
+			count: 1
+			path: src/Sylius/Component/Product/Model/Product.php
+
+		-
+			message: "#^Parameter \\#1 \\$p of method Doctrine\\\\Common\\\\Collections\\\\Collection\\<\\(int\\|string\\),Sylius\\\\Component\\\\Attribute\\\\Model\\\\AttributeValueInterface\\>\\:\\:filter\\(\\) expects Closure\\(Sylius\\\\Component\\\\Attribute\\\\Model\\\\AttributeValueInterface\\)\\: bool, Closure\\(Sylius\\\\Component\\\\Product\\\\Model\\\\ProductAttributeValueInterface\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Sylius/Component/Product/Model/Product.php
 
