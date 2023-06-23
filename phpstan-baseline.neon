@@ -2221,6 +2221,11 @@ parameters:
 			path: src/Sylius/Bundle/AttributeBundle/Doctrine/ORM/Subscriber/LoadMetadataSubscriber.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Checker\\\\InForTaxonsScopeVariantChecker\\:\\:__construct\\(\\) has parameter \\$taxonRepository with generic interface Sylius\\\\Component\\\\Taxonomy\\\\Repository\\\\TaxonRepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Checker/InForTaxonsScopeVariantChecker.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\AttributeBundle\\\\Form\\\\Type\\\\AttributeChoiceType\\:\\:__construct\\(\\) has parameter \\$attributeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AttributeBundle/Form/Type/AttributeChoiceType.php
