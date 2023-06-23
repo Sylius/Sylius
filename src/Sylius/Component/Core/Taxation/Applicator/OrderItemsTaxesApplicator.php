@@ -69,14 +69,20 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $itemSplitTaxes = $this->proportionalIntegerDistributor->distribute($itemTaxWholeAmounts, $itemTotalTaxWholeAmount);
 
         foreach ($order->getItems() as $index => $item) {
+            $itemSplitTaxesIndex = $index;
+
+            if (!array_key_exists($itemSplitTaxesIndex, $itemSplitTaxes)) {
+                $itemSplitTaxesIndex = count($itemSplitTaxes) - 1;
+            }
+
             $quantity = $item->getQuantity();
             Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
 
-            if (0 === $itemSplitTaxes[$index]) {
+            if (0 === $itemSplitTaxes[$itemSplitTaxesIndex]) {
                 continue;
             }
 
-            $this->distributeTaxesToUnits($itemSplitTaxes[$index], $quantity, $item, $itemTaxRates[$index]);
+            $this->distributeTaxesToUnits($itemSplitTaxes[$itemSplitTaxesIndex], $quantity, $item, $itemTaxRates[$index]);
         }
     }
 
@@ -122,6 +128,11 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
     ): void {
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
         foreach ($item->getUnits() as $index => $unit) {
+
+            if (!array_key_exists($index, $unitSplitTaxes)) {
+                $index = count($unitSplitTaxes) - 1;
+            }
+
             if (0 === $unitSplitTaxes[$index]) {
                 continue;
             }
