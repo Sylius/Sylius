@@ -45,7 +45,7 @@ final class PercentAttributeType implements AttributeTypeInterface
 
         foreach ($this->getValidationErrors($context, $value) as $error) {
             $context
-                ->buildViolation($error->getMessage())
+                ->buildViolation((string) $error->getMessage())
                 ->atPath('value')
                 ->addViolation()
             ;

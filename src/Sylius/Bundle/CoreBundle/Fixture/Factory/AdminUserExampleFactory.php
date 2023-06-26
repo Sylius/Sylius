@@ -23,6 +23,7 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -116,6 +117,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         }
 
         $imagePath = $this->fileLocator->locate($options['avatar']);
+        Assert::string($imagePath);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
         if ($this->avatarImageFactory === null) {

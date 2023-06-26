@@ -7,9 +7,10 @@ includes:
     - vendor/phpstan/phpstan-symfony/rules.neon
 
 parameters:
-    level: 6
+    level: 7
 
     reportUnmatchedIgnoredErrors: false
+    treatPhpDocTypesAsCertain: false
 
     paths:
         - 'src/'
@@ -45,3 +46,9 @@ parameters:
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method [a-zA-z\\]+Filter\:\:filterProperty\(\) has parameter \$value with no type specified./'
         - '/Method [a-zA-z\\]+Persister\:\:(persist|remove|supports)\(\) has parameter \$data with no type specified./'
+
+    symfony:
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+
+    scanDirectories:
+        - var/cache/dev/Symfony/Config

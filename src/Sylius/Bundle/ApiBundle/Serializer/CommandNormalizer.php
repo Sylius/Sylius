@@ -17,6 +17,7 @@ use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 final class CommandNormalizer implements ContextAwareNormalizerInterface
 {
@@ -43,6 +44,7 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
     {
         $context[self::ALREADY_CALLED] = true;
         $data = $this->objectNormalizer->normalize($object, $format, $context);
+        Assert::isArray($data);
 
         return [
             'code' => 400,

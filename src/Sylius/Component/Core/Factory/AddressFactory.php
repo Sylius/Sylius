@@ -24,6 +24,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class AddressFactory implements AddressFactoryInterface
 {
+    /**
+     * @param FactoryInterface<AddressInterface> $decoratedFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory)
     {
     }
@@ -35,8 +38,7 @@ class AddressFactory implements AddressFactoryInterface
 
     public function createForCustomer(CustomerInterface $customer): AddressInterface
     {
-        /** @var AddressInterface $address */
-        $address = $this->decoratedFactory->createNew();
+        $address = $this->createNew();
         $address->setCustomer($customer);
 
         return $address;

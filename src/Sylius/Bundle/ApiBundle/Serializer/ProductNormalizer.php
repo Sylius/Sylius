@@ -42,6 +42,7 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
         $context[self::ALREADY_CALLED] = true;
 
         $data = $this->normalizer->normalize($object, $format, $context);
+        Assert::isArray($data);
 
         $data['variants'] = $object
             ->getEnabledVariants()

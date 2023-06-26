@@ -32,7 +32,7 @@ final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandD
         $customer = $this->getCustomer();
 
         /** @var CustomerEmailAwareInterface|mixed $object */
-        Assert::object($object, CustomerEmailAwareInterface::class);
+        Assert::isInstanceOf($object, CustomerEmailAwareInterface::class);
 
         if ($customer !== null) {
             $object->setEmail($customer->getEmail());

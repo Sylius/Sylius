@@ -21,6 +21,9 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 final class TaxonFactory implements TaxonFactoryInterface
 {
+    /**
+     * @param FactoryInterface<TaxonInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory)
     {
     }

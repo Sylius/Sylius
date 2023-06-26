@@ -13,24 +13,31 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Controller;
 
+use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductAttribute;
+use Sylius\Component\Registry\ServiceRegistry;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Webmozart\Assert\Assert;
 
 class ProductAttributeController extends ResourceController
 {
     public function getAttributeTypesAction(Request $request, string $template): Response
     {
+        $attributeTypeRegistry = $this->get('sylius.registry.attribute_type');
+        Assert::isInstanceOf($attributeTypeRegistry, ServiceRegistry::class);
         return $this->render(
             $template,
             [
-                'types' => $this->get('sylius.registry.attribute_type')->all(),
+                'types' => $attributeTypeRegistry->all(),
                 'metadata' => $this->metadata,
             ],
         );
@@ -40,7 +47,9 @@ class ProductAttributeController extends ResourceController
     {
         $template = $request->attributes->get('template', '@SyliusAttribute/attributeChoice.html.twig');
 
-        $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
+        $formFactory = $this->get('form.factory');
+        Assert::isInstanceOf($formFactory, FormFactoryInterface::class);
+        $form = $formFactory->create(ProductAttributeChoiceType::class, null, [
             'multiple' => true,
         ]);
 
@@ -60,7 +69,9 @@ class ProductAttributeController extends ResourceController
             throw new BadRequestHttpException();
         }
 
-        $localeCodes = $this->get('sylius.translation_locale_provider')->getDefinedLocalesCodes();
+        $translationLocaleProvider = $this->get('sylius.translation_locale_provider');
+        Assert::isInstanceOf($translationLocaleProvider, TranslationLocaleProviderInterface::class);
+        $localeCodes = $translationLocaleProvider->getDefinedLocalesCodes();
 
         $forms = [];
         foreach ($attributes as $attribute) {
@@ -81,12 +92,16 @@ class ProductAttributeController extends ResourceController
      */
     protected function getAttributeFormsInAllLocales(AttributeInterface $attribute, array $localeCodes): array
     {
-        $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
+        $attributeTypeFormRegistry = $this->get('sylius.form_registry.attribute_type');
+        Assert::isInstanceOf($attributeTypeFormRegistry, FormTypeRegistry::class);
+        $attributeForm = $attributeTypeFormRegistry->get($attribute->getType(), 'default');
 
         $forms = [];
 
         if (!$attribute->isTranslatable()) {
-            $adminLocaleCode = $this->get(LocaleContextInterface::class)->getLocaleCode();
+            $localeContext = $this->get(LocaleContextInterface::class);
+            Assert::isInstanceOf($localeContext, LocaleContextInterface::class);
+            $adminLocaleCode = $localeContext->getLocaleCode();
 
             return [null => $this->createFormAndView($attributeForm, $attribute, $adminLocaleCode)];
         }
@@ -103,8 +118,10 @@ class ProductAttributeController extends ResourceController
         AttributeInterface $attribute,
         string $localeCode,
     ): FormView {
-        return $this
-            ->get('form.factory')
+        $formFactory = $this->get('form.factory');
+        Assert::isInstanceOf($formFactory, FormFactoryInterface::class);
+
+        return $formFactory
             ->createNamed(
                 'value',
                 $attributeForm,

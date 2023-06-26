@@ -23,6 +23,9 @@ use Webmozart\Assert\Assert;
  */
 final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PromotionCouponInterface> $factory
+     */
     public function __construct(private FactoryInterface $factory)
     {
     }

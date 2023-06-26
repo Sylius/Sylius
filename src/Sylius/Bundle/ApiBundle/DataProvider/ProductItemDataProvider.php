@@ -34,6 +34,7 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
     public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
     {
         $user = $this->userContext->getUser();
+        Assert::string($id);
 
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return $this->productRepository->findOneByCode($id);

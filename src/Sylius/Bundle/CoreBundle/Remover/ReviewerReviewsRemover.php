@@ -34,6 +34,9 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
         $reviewSubjectsToRecalculate = [];
 
         foreach ($this->reviewRepository->findBy(['author' => $author]) as $review) {
+            if (!$review instanceof ReviewInterface) {
+                continue;
+            }
             $reviewSubjectsToRecalculate = $this->removeReviewsAndExtractSubject($review, $reviewSubjectsToRecalculate);
         }
         $this->reviewManager->flush();

@@ -16,6 +16,7 @@ namespace Sylius\Component\Promotion\Action;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Webmozart\Assert\Assert;
 
 final class PromotionApplicator implements PromotionApplicatorInterface
 {
@@ -47,6 +48,9 @@ final class PromotionApplicator implements PromotionApplicatorInterface
 
     private function getActionCommandByType(string $type): PromotionActionCommandInterface
     {
-        return $this->registry->get($type);
+        $actionCommand = $this->registry->get($type);
+        Assert::isInstanceOf($actionCommand, PromotionActionCommandInterface::class);
+
+        return $actionCommand;
     }
 }

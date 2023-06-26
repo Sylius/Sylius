@@ -69,7 +69,7 @@ final class Version20201208105207 extends AbstractMigration
             }
         }
 
-        return json_encode($parsedDetails);
+        return json_encode($parsedDetails, JSON_THROW_ON_ERROR);
     }
 
     private function setDefaultAdjustmentData(): void

@@ -28,6 +28,9 @@ use Webmozart\Assert\Assert;
  */
 final class CartItemFactory implements CartItemFactoryInterface
 {
+    /**
+     * @param FactoryInterface<OrderItemInterface> $decoratedFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory, private ProductVariantResolverInterface $variantResolver)
     {
     }

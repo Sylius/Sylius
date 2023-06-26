@@ -40,7 +40,6 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 
     public function createWithGateway(string $gatewayFactory): PaymentMethodInterface
     {
-        /** @var GatewayConfigInterface $gatewayConfig */
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);
 

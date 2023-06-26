@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductAssociationRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of ProductAssociationInterface
@@ -40,6 +41,7 @@ class ProductAssociationRepository extends EntityRepository implements ProductAs
 
         if (null === $productAssociation) {
             $productAssociation = $this->find($associationId);
+            Assert::isInstanceOf($productAssociation, ProductAssociationInterface::class);
             $productAssociation->clearAssociatedProducts();
         }
 

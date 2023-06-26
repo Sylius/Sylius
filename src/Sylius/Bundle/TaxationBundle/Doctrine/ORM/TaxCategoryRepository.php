@@ -16,6 +16,7 @@ namespace Sylius\Bundle\TaxationBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of TaxCategoryInterface
@@ -26,6 +27,9 @@ class TaxCategoryRepository extends EntityRepository implements TaxCategoryRepos
 {
     public function findByName(string $name): array
     {
-        return $this->findBy(['name' => $name]);
+        $taxCategory = $this->findBy(['name' => $name]);
+        Assert::allIsInstanceOf($taxCategory, TaxCategoryInterface::class);
+
+        return $taxCategory;
     }
 }
