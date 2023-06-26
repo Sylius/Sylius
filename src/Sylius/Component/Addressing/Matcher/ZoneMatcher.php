@@ -30,6 +30,9 @@ final class ZoneMatcher implements ZoneMatcherInterface
         ZoneInterface::TYPE_ZONE,
     ];
 
+    /**
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     */
     public function __construct(private RepositoryInterface $zoneRepository)
     {
     }

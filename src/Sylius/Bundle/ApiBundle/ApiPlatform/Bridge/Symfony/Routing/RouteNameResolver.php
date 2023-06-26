@@ -58,7 +58,7 @@ final class RouteNameResolver implements RouteNameResolverInterface
             }
         }
 
-        return $this->returnMatchingRouteName($matchingRoutes, $operationType, $resourceClass);
+        return $this->returnMatchingRouteName($matchingRoutes, (string) $operationType, $resourceClass);
     }
 
     private function isSameSubresource(array $context, array $currentContext): bool

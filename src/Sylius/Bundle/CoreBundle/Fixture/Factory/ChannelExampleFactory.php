@@ -40,6 +40,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private ?TaxonRepositoryInterface $taxonRepository;
 
+    /** @var FactoryInterface<ShopBillingData>|null */
     private ?FactoryInterface $shopBillingDataFactory;
 
     public function __construct(

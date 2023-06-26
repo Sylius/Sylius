@@ -13,15 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher;
 
+use InvalidArgumentException;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher implements ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface
 {
+    /** @var positive-int */
+    private int $size;
+
     public function __construct(
         private MessageBusInterface $messageBus,
-        private int $size,
+        int $size,
     ) {
+        if ($size < 1) {
+            throw new InvalidArgumentException('Size must be greater than 0');
+        }
+        $this->size = $size;
     }
 
     public function updateVariants(array $variantsCodes): void

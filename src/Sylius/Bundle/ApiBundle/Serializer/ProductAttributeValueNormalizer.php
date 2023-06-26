@@ -46,6 +46,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
 
         $context[self::ALREADY_CALLED] = true;
         $data = $this->normalizer->normalize($object, $format, $context);
+        Assert::isArray($data);
 
         switch ($object->getType()) {
             case SelectAttributeType::TYPE:

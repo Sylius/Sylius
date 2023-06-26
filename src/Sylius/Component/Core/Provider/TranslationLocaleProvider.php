@@ -19,6 +19,9 @@ use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInte
 
 final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(private RepositoryInterface $localeRepository, private string $defaultLocaleCode)
     {
     }
@@ -28,7 +31,7 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
         $locales = $this->localeRepository->findAll();
 
         return array_map(
-            function (LocaleInterface $locale) {
+            static function (LocaleInterface $locale) {
                 return (string) $locale->getCode();
             },
             $locales,

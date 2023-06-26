@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Swagger;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class AdminAuthenticationTokenDocumentationNormalizer implements NormalizerInterface
@@ -33,6 +34,7 @@ final class AdminAuthenticationTokenDocumentationNormalizer implements Normalize
     public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
+        Assert::isArray($docs);
 
         $docs['components']['schemas']['AdminUserToken'] = [
             'type' => 'object',

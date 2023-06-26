@@ -28,9 +28,11 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Webmozart\Assert\Assert;
@@ -46,6 +48,7 @@ class UserController extends ResourceController
         }
 
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
+        Assert::isInstanceOf($user, UserInterface::class);
 
         $changePassword = new ChangePassword();
         $formType = $this->getSyliusAttribute($request, 'form', UserChangePasswordType::class);
@@ -91,6 +94,8 @@ class UserController extends ResourceController
         }
 
         $resetting = $this->metadata->getParameter('resetting');
+        Assert::isArray($resetting);
+        Assert::keyExists($resetting, 'token');
         $lifetime = new \DateInterval($resetting['token']['ttl']);
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             return $this->handleExpiredToken($request, $configuration, $user);
@@ -258,10 +263,14 @@ class UserController extends ResourceController
     protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
-        $this->container->get('request_stack')->getSession()->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
+        $session = $this->container->get('request_stack')->getSession();
+        if ($session instanceof FlashBagAwareSessionInterface) {
+            $session->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
+        }
     }
 
     /**
+     * @param class-string<FormTypeInterface> $type
      * @param object $object
      */
     protected function createResourceForm(

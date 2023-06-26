@@ -20,6 +20,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterface
 {
+    /**
+     * @param RepositoryInterface<OrderSequenceInterface> $sequenceRepository
+     * @param FactoryInterface<OrderSequenceInterface> $sequenceFactory
+     */
     public function __construct(
         private RepositoryInterface $sequenceRepository,
         private FactoryInterface $sequenceFactory,
@@ -47,7 +51,6 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
 
     private function getSequence(): OrderSequenceInterface
     {
-        /** @var OrderSequenceInterface|null $sequence */
         $sequence = $this->sequenceRepository->findOneBy([]);
 
         if (null === $sequence) {

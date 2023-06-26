@@ -30,6 +30,6 @@ class CurrencyNameConverter implements CurrencyNameConverterInterface
             ));
         }
 
-        return $currencyCode;
+        return (string) $currencyCode;
     }
 }

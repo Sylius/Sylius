@@ -14,17 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\DataCollector;
 
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
+use Webmozart\Assert\Assert;
 
 /** @internal */
 final class TemplateBlockRenderingHistory
 {
-    /** @var array<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
-    private $renderedEvents = [];
+    /** @var list<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
+    private array $renderedEvents = [];
 
-    /** @var array<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
+    /** @var list<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
     private array $currentlyRenderedEvents = [];
 
-    /** @var array<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
+    /** @var list<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
     private array $currentlyRenderedBlocks = [];
 
     public function startRenderingEvent(array $eventNames, array $context): void
@@ -39,18 +40,23 @@ final class TemplateBlockRenderingHistory
 
     public function stopRenderingBlock(TemplateBlock $templateBlock, array $context): void
     {
+        /** @var array{definition: TemplateBlock, start: float, stop?: float, time?: float} $currentlyRenderedBlock */
         $currentlyRenderedBlock = array_pop($this->currentlyRenderedBlocks);
         $currentlyRenderedBlock['stop'] = microtime(true);
         $currentlyRenderedBlock['time'] = $currentlyRenderedBlock['stop'] - $currentlyRenderedBlock['start'];
 
+        /** @var array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}|null $currentlyRenderedEvent */
         $currentlyRenderedEvent = array_pop($this->currentlyRenderedEvents);
+        Assert::notNull($currentlyRenderedEvent);
         $currentlyRenderedEvent['blocks'][] = $currentlyRenderedBlock;
         $this->currentlyRenderedEvents[] = $currentlyRenderedEvent;
     }
 
     public function stopRenderingEvent(array $eventNames, array $context): void
     {
+        /** @var array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}|null $currentlyRenderedEvent */
         $currentlyRenderedEvent = array_pop($this->currentlyRenderedEvents);
+        Assert::notNull($currentlyRenderedEvent);
         $currentlyRenderedEvent['stop'] = microtime(true);
         $currentlyRenderedEvent['time'] = $currentlyRenderedEvent['stop'] - $currentlyRenderedEvent['start'];
         $this->renderedEvents[] = $currentlyRenderedEvent;

@@ -19,6 +19,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PaymentMethodInterface> $decoratedFactory
+     * @param FactoryInterface<GatewayConfigInterface> $gatewayConfigFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory, private FactoryInterface $gatewayConfigFactory)
     {
     }
@@ -30,7 +34,6 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
 
     public function createWithGateway(string $gatewayFactory): PaymentMethodInterface
     {
-        /** @var GatewayConfigInterface $gatewayConfig */
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);
 

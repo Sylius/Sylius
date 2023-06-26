@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -43,9 +47,17 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $currency = $this->getContainer()->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $locale = $this->getContainer()->get('sylius.setup.locale')->setup($input, $output, $this->getHelper('question'));
-        $this->getContainer()->get('sylius.setup.channel')->setup($locale, $currency);
+        $currencySetup = $this->getContainer()->get('sylius.setup.currency');
+        Assert::isInstanceOf($currencySetup, CurrencySetupInterface::class);
+        $questionHelper = $this->getHelper('question');
+        Assert::isInstanceOf($questionHelper, QuestionHelper::class);
+        $currency = $currencySetup->setup($input, $output, $questionHelper);
+        $localeSetup = $this->getContainer()->get('sylius.setup.locale');
+        Assert::isInstanceOf($localeSetup, LocaleSetupInterface::class);
+        $locale = $localeSetup->setup($input, $output, $questionHelper);
+        $channelSetup = $this->getContainer()->get('sylius.setup.channel');
+        Assert::isInstanceOf($channelSetup, ChannelSetupInterface::class);
+        $channelSetup->setup($locale, $currency);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
         return 0;
@@ -60,7 +72,9 @@ EOT
         $userFactory = $this->getContainer()->get('sylius.factory.admin_user');
 
         try {
-            $user = $this->configureNewUser($userFactory->createNew(), $input, $output);
+            $adminUser = $userFactory->createNew();
+            Assert::isInstanceOf($adminUser, AdminUserInterface::class);
+            $user = $this->configureNewUser($adminUser, $input, $output);
         } catch (\InvalidArgumentException) {
             return;
         }

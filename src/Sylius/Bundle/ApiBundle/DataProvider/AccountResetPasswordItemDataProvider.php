@@ -16,12 +16,15 @@ namespace Sylius\Bundle\ApiBundle\DataProvider;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class AccountResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
+        Assert::string($id);
+
         return new ResetPassword($id);
     }
 

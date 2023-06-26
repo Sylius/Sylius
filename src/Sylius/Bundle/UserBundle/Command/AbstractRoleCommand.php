@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UserBundle\Command;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -116,7 +117,10 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $class = $this->getUserModelClass($userType);
 
-        return $this->getContainer()->get('doctrine')->getManagerForClass($class);
+        $doctrineService = $this->getContainer()->get('doctrine');
+        Assert::isInstanceOf($doctrineService, Registry::class);
+
+        return $doctrineService->getManagerForClass($class);
     }
 
     protected function getUserRepository(string $userType): UserRepositoryInterface
@@ -132,24 +136,31 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     protected function getAvailableUserTypes(): array
     {
         $config = $this->getContainer()->getParameter('sylius.user.users');
+        Assert::isArray($config);
 
         // Keep only users types which implement \Sylius\Component\User\Model\UserInterface
-        $userTypes = array_filter($config, fn (array $userTypeConfig): bool => isset($userTypeConfig['user']['classes']['model']) && is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true));
+        $userTypes = array_filter(
+            $config,
+            static fn (array $userTypeConfig): bool => is_a($userTypeConfig['user']['classes']['model'], UserInterface::class, true),
+        );
 
         return array_keys($userTypes);
     }
 
     /**
+     * @return class-string
      * @throws \InvalidArgumentException
      */
     protected function getUserModelClass(string $userType): string
     {
         $config = (array) $this->getContainer()->getParameter('sylius.user.users');
-        if (empty($config[$userType]['user']['classes']['model'])) {
+        $model = $config[$userType]['user']['classes']['model'];
+        if (empty($model)) {
             throw new \InvalidArgumentException(sprintf('User type %s misconfigured.', $userType));
         }
+        Assert::classExists($model);
 
-        return $config[$userType]['user']['classes']['model'];
+        return $model;
     }
 
     abstract protected function executeRoleCommand(InputInterface $input, OutputInterface $output, UserInterface $user, array $securityRoles): void;

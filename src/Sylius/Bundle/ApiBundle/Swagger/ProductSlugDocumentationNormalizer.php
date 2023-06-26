@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Swagger;
 
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class ProductSlugDocumentationNormalizer implements NormalizerInterface
@@ -32,6 +33,7 @@ final class ProductSlugDocumentationNormalizer implements NormalizerInterface
     public function normalize($object, $format = null, array $context = [])
     {
         $docs = $this->decoratedNormalizer->normalize($object, $format, $context);
+        Assert::isArray($docs);
 
         $shopProductBySlugPath = $this->apiRoute . '/shop/products-by-slug/{slug}';
         $params = $docs['paths'][$shopProductBySlugPath]['get']['parameters'];

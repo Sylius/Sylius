@@ -53,6 +53,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
         $context[self::ALREADY_CALLED] = true;
         $data = $this->normalizer->normalize($object, $format, $context);
+        Assert::isArray($data);
 
         $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
 
