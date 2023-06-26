@@ -18,7 +18,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
-use Sylius\Bundle\ProductBundle\DependencyInjection\SyliusProductExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;

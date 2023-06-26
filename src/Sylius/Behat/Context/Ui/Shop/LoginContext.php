@@ -200,14 +200,6 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Then I should be notified about disabled account
-     */
-    public function iShouldBeNotifiedAboutDisabledAccount(): void
-    {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
-    }
-
-    /**
      * @Then I should be notified that email with reset instruction has been sent
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
