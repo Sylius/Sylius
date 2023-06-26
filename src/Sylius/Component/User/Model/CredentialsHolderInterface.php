@@ -53,7 +53,7 @@ if (\method_exists(SymfonyUserInterface::class, 'getPassword')) {
          */
         public function eraseCredentials();
     }
-// Symfony 6
+    // Symfony 6
 } else {
     interface CredentialsHolderInterface extends LegacyPasswordAuthenticatedUserInterface
     {
