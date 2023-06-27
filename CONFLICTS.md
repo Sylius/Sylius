@@ -59,3 +59,8 @@ references related issues.
 - `doctrine/orm:2.15.3`
 
   This version introduced a bug, causing the bulk editing not to work properly. When deleting two items at once, the second one is deleted and re-added to the database.
+
+- `symfony/validator:5.4.25 || 6.2.12 || 6.3.1`
+
+  This version introduced a bug, causing validation constraints to not work.
+  References: https://github.com/symfony/symfony/issues/50780
