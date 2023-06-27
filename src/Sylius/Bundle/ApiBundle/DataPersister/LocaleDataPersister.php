@@ -26,22 +26,29 @@ final class LocaleDataPersister implements ContextAwareDataPersisterInterface
     ) {
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supports($data, array $context = []): bool
     {
         return $data instanceof LocaleInterface;
     }
 
-    public function persist($data, array $context = [])
+    /**
+     * @param array<array-key, mixed> $context
+     */
+    public function persist($data, array $context = []): object
     {
         return $this->decoratedDataPersister->persist($data, $context);
     }
 
     /**
      * @param LocaleInterface $data
+     * @param array<array-key, mixed> $context
      *
      * @throws LocaleIsUsedException
      */
-    public function remove($data, array $context = [])
+    public function remove($data, array $context = []): mixed
     {
         if ($this->localeUsageChecker->isUsed($data->getCode())) {
             throw new LocaleIsUsedException($data->getCode());

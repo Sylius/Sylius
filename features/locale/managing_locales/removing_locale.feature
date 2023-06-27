@@ -11,7 +11,7 @@ Feature: Removing locales
         And I am logged in as an administrator
 
     @ui @api
-    Scenario: The developer tries to delete a not used locale
+    Scenario: Deleting unused locale
         Given the store has a product "T-Shirt banana"
         And this product is named "Banana T-Shirt with Minions" in the "English (United States)" locale
         And this product has no translation in the "Polish (Poland)" locale
@@ -20,7 +20,7 @@ Feature: Removing locales
         And only the "English (United States)" locale should be present in the system
 
     @ui @api
-    Scenario: The developer tries to deleted a locale in usage
+    Scenario: Deleting a locale in use
         Given the store has a product "T-Shirt banana"
         And this product is named "Banana T-Shirt with Minions" in the "English (United States)" locale
         And this product is named "Koszulka Banan z Minionami" in the "Polish (Poland)" locale

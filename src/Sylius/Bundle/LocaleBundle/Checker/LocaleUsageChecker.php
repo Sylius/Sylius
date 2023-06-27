@@ -14,12 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\LocaleBundle\Checker;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class LocaleUsageChecker implements LocaleUsageCheckerInterface
 {
+    /**
+     * @param RepositoryInterface<LocaleInterface> $localeRepository
+     */
     public function __construct(
         private RepositoryInterface $localeRepository,
         private RegistryInterface $resourceRegistry,
@@ -67,8 +73,12 @@ final class LocaleUsageChecker implements LocaleUsageCheckerInterface
         return $translationEntityInterfaces;
     }
 
+    /**
+     * @param class-string<TranslationInterface> $translationEntityInterface
+     */
     private function isLocaleUsedByTranslation(string $translationEntityInterface, string $localeCode): bool
     {
+        /** @var EntityRepository<TranslationInterface> $repository */
         $repository = $this->entityManager->getRepository($translationEntityInterface);
 
         return $repository->count(['locale' => $localeCode]) > 0;

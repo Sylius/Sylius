@@ -39,7 +39,7 @@ final class LocaleDataPersisterSpec extends ObjectBehavior
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         Locale $locale,
     ): void {
-        $decoratedDataPersister->persist($locale, [])->shouldBeCalled();
+        $decoratedDataPersister->persist($locale, [])->shouldBeCalled()->willReturn(new stdClass());
 
         $this->persist($locale);
     }
