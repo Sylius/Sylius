@@ -15,7 +15,7 @@ Feature: Receiving a welcoming email after registration
         Then only one email should have been sent to "ghastly@bespoke.com"
         And a welcoming email should have been sent to "ghastly@bespoke.com"
 
-    @ui @email
+    @ui @email @api
     Scenario: Receiving an account verification email after registration when channel has enabled registration verification
         Given on this channel account verification is required
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
@@ -29,7 +29,7 @@ Feature: Receiving a welcoming email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife" in the "Polish (Poland)" locale
         Then a welcoming email should have been sent to "ghastly@bespoke.com" in "Polish (Poland)" locale
 
-    @ui @email
+    @ui @email @api
     Scenario: Receiving a welcoming email after account verification when channel has enabled registration verification
         Given on this channel account verification is required
         And I register with email "ghastly@bespoke.com" and password "suitsarelife"
