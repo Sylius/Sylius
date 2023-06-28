@@ -15,4 +15,3 @@ jobs:
       use-app-token: true
     secrets:
       bunnyshell-access-token: ${{ secrets.BUNNYSHELL_ACCESS_TOKEN }}
-      app-private-key: ${{ secrets.BUNNYSHELL_APP_PRIVATE_KEY }}
