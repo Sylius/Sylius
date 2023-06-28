@@ -21,7 +21,7 @@ Feature: Receiving a welcoming email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then only one email should have been sent to "ghastly@bespoke.com"
         And a verification email should have been sent to "ghastly@bespoke.com"
-        And a welcoming email should not have been sent to "ghastly@bespoke.com"
+        But a welcoming email should not have been sent to "ghastly@bespoke.com"
 
     @ui @email @api
     Scenario: Receiving a welcoming email after registration in different locale than the default one

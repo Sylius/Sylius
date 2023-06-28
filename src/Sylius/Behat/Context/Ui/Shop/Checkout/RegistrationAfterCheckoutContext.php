@@ -101,7 +101,7 @@ final class RegistrationAfterCheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should be on registration thank you page$/
+     * @Then I should be on registration thank you page
      */
     public function iShouldBeOnRegistrationThankYouPage(): void
     {

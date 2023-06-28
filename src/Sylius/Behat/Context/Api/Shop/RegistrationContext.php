@@ -252,19 +252,11 @@ final class RegistrationContext implements Context
     }
 
     /**
-     * @Then /^I should be on registration thank you page$/
+     * @Then I should be on my account dashboard
+     * @Then I should be on registration thank you page
      */
-    public function iShouldBeOnRegistrationThankYouPage(): void
+    public function intentionallyLeftBlank(): void
     {
-        // Intentionally left blank
-    }
-
-    /**
-     * @Then /^I should be on my account dashboard/
-     */
-    public function iShouldBeOnMyAccountDashboard(): void
-    {
-        // Intentionally left blank
     }
 
     private function assertFieldValidationMessage(string $path, string $message): void

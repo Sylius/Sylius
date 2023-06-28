@@ -192,7 +192,7 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then /^only one email should have been sent to "([^"]*)"$/
+     * @Then only one email should have been sent to :recipientEmail
      */
     public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
     {

@@ -6,5 +6,4 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 
 interface RegisterThankYouPageInterface extends SymfonyPageInterface
 {
-
 }
