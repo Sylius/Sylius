@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,7 +35,8 @@ final class SingleChannelContextSpec extends ObjectBehavior
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
     ): void {
-        $channelRepository->findAll()->willReturn([$channel]);
+        $channelRepository->countAll()->willReturn(1);
+        $channelRepository->findOneBy([])->willReturn($channel);
 
         $this->getChannel()->shouldReturn($channel);
     }
@@ -43,17 +44,17 @@ final class SingleChannelContextSpec extends ObjectBehavior
     function it_throws_a_channel_not_found_exception_if_there_are_no_channels_defined(
         ChannelRepositoryInterface $channelRepository,
     ): void {
-        $channelRepository->findAll()->willReturn([]);
+        $channelRepository->countAll()->willReturn(0);
+        $channelRepository->findOneBy([])->shouldNotBeCalled();
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }
 
     function it_throws_a_channel_not_found_exception_if_there_are_many_channels_defined(
         ChannelRepositoryInterface $channelRepository,
-        ChannelInterface $firstChannel,
-        ChannelInterface $secondChannel,
     ): void {
-        $channelRepository->findAll()->willReturn([$firstChannel, $secondChannel]);
+        $channelRepository->countAll()->willReturn(2);
+        $channelRepository->findOneBy([])->shouldNotBeCalled();
 
         $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
     }

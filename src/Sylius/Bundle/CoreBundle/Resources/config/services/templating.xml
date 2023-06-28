@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -36,7 +36,7 @@
         </service>
 
         <service id="sylius.templating.helper.variant_resolver" class="Sylius\Bundle\CoreBundle\Templating\Helper\VariantResolverHelper">
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <tag name="templating.helper" alias="sylius_resolve_variant" />
         </service>
 

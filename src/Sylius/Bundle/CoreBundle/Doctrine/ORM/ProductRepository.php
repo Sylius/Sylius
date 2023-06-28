@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -231,5 +231,43 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findOneByChannelAndCodeWithAvailableAssociations(ChannelInterface $channel, string $code): ?ProductInterface
+    {
+        $product = $this->createQueryBuilder('o')
+            ->addSelect('association')
+            ->leftJoin('o.associations', 'association')
+            ->innerJoin('association.associatedProducts', 'associatedProduct', 'WITH', 'associatedProduct.enabled = :enabled')
+            ->where('o.code = :code')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = :enabled')
+            ->setParameter('channel', $channel)
+            ->setParameter('code', $code)
+            ->setParameter('enabled', true)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        if (null === $product) {
+            $product = $this->findOneByChannelAndCode($channel, $code);
+            if (null === $product) {
+                return null;
+            }
+
+            $product->getAssociations()->clear();
+        }
+
+        $this->associationHydrator->hydrateAssociations($product, [
+            'images',
+            'options',
+            'options.translations',
+            'variants',
+            'variants.channelPricings',
+            'variants.optionValues',
+            'variants.optionValues.translations',
+        ]);
+
+        return $product;
     }
 }

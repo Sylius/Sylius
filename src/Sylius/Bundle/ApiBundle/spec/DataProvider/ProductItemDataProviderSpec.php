@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -72,7 +72,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
 
-        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(
@@ -95,7 +95,7 @@ final class ProductItemDataProviderSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn(null);
 
-        $productRepository->findOneByChannelAndCode($channel, 'FORD_FOCUS')->willReturn($product);
+        $productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, 'FORD_FOCUS')->willReturn($product);
 
         $this
             ->getItem(

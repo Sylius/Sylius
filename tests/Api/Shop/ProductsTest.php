@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -93,6 +93,42 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product/get_products_collection_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_returns_products_collection_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_products_collection_with_associations_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_returns_product_item_with_only_available_associations(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_product_with_default_locale_translation',
             Response::HTTP_OK,
         );
     }

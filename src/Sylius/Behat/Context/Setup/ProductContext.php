@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -216,6 +216,16 @@ final class ProductContext implements Context
     public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
     {
         $this->addProductTranslation($product, $name, $locale);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) has no translation in the "([^"]+)" locale$/
+     */
+    public function thisProductHasNoTranslationIn(ProductInterface $product, $locale): void
+    {
+        $product->removeTranslation($product->getTranslation($locale));
 
         $this->objectManager->flush();
     }
@@ -1466,6 +1476,14 @@ final class ProductContext implements Context
         $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
+    }
+
+    private function removeProductTranslation(ProductInterface $product, $locale): void
+    {
+        /** @var ProductTranslationInterface $translation */
+        $translation = $product->getTranslation($locale);
+
+        $product->removeTranslation($translation);
     }
 
     /**

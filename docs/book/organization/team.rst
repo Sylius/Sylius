@@ -34,7 +34,7 @@ Vision
 
 This role is currently held by:
 
-* **Paweł Jędrzejewski** (`pjedrzejewski`_)
+* **Nicolas Kroll** (`bitbager`_)
 
 Core Release Manager
 ~~~~~~~~~~~~~~~~~~~~
@@ -106,10 +106,10 @@ This role is currently held by:
 .. _`CoderMaggie`: https://github.com/CoderMaggie/
 .. _`GSadee`: https://github.com/GSadee/
 .. _`lchrusciel`: https://github.com/lchrusciel/
-.. _`loic425`: https://github.com/loic425
-.. _`pjedrzejewski`: https://github.com/pjedrzejewski/
-.. _`Roshyo`: https://github.com/Roshyo
-.. _`Sylius`: https://github.com/Sylius/Sylius
-.. _`SyliusLabs`: https://github.com/SyliusLabs
-.. _`vvasiloi`: https://github.com/vvasiloi
+.. _`loic425`: https://github.com/loic425/
+.. _`bitbager`: https://github.com/bitbager/
+.. _`Roshyo`: https://github.com/Roshyo/
+.. _`Sylius`: https://github.com/Sylius/Sylius/
+.. _`SyliusLabs`: https://github.com/SyliusLabs/
+.. _`vvasiloi`: https://github.com/vvasiloi/
 .. _`Zales0123`: https://github.com/Zales0123/

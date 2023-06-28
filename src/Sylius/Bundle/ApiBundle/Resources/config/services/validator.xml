@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -64,7 +64,7 @@
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.availability_checker" />
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_guantity_in_cart" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_quantity_in_cart" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator">

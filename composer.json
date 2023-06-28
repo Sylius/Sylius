@@ -185,9 +185,10 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "doctrine/orm": "2.15.2",
+        "doctrine/orm": "2.15.2 || 2.15.3",
         "lexik/jwt-authentication-bundle": "^2.18",
-        "symfony/framework-bundle": "6.2.8"
+        "symfony/framework-bundle": "6.2.8",
+        "symfony/validator": "5.4.25 || 6.2.12 || 6.3.1"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",
@@ -232,7 +233,7 @@
         "symfony/runtime": "^5.4.21 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4.21 || ^6.0",
         "symplify/monorepo-builder": "^11.0",
-        "vimeo/psalm": "5.12.*",
+        "vimeo/psalm": "5.13.*",
         "weirdan/doctrine-psalm-plugin": "^2.8"
     },
     "suggest": {

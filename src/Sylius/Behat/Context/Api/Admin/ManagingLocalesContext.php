@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingLocalesContext implements Context
@@ -51,6 +52,14 @@ final class ManagingLocalesContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When I remove :localeCode locale
+     */
+    public function iRemoveLocale(string $localeCode): void
+    {
+        $this->client->delete(Resources::LOCALES, $localeCode);
     }
 
     /**
@@ -114,5 +123,47 @@ final class ManagingLocalesContext implements Context
             'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: This value is not a valid locale code.');
+    }
+
+    /**
+     * @Then I should be informed that locale :localeCode has been deleted
+     */
+    public function iShouldBeInformedThatLocaleHasBeenDeleted(string $localeCode): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @Then only the :localeCode locale should be present in the system
+     */
+    public function onlyTheLocaleShouldBePresentInTheSystem(string $localeCode): void
+    {
+        $response = $this->client->index(Resources::LOCALES);
+        Assert::true($this->responseChecker->countCollectionItems($response) === 1);
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
+            sprintf('There is no locale with code "%s"', $localeCode),
+        );
+    }
+
+    /**
+     * @Then I should be informed that locale :localeCode is in use and cannot be deleted
+     */
+    public function iShouldBeInformedThatLocaleIsInUseAndCannotBeDeleted(string $localeCode): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_UNPROCESSABLE_ENTITY);
+        Assert::same($this->responseChecker->getError($this->client->getLastResponse()), sprintf('Locale "%s" is used.', $localeCode));
+    }
+
+    /**
+     * @Then the :localeCode locale should be still present in the system
+     */
+    public function theLocaleShouldBeStillPresentInTheSystem(string $localeCode): void
+    {
+        $response = $this->client->index(Resources::LOCALES);
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
+            sprintf('There is no locale with code "%s"', $localeCode),
+        );
     }
 }

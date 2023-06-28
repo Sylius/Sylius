@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -54,5 +54,10 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
             ->getQuery()
             ->getResult(AbstractQuery::HYDRATE_ARRAY)
         ;
+    }
+
+    public function countAll(): int
+    {
+        return $this->count([]);
     }
 }

@@ -2,6 +2,7 @@
   "name": "@sylius-ui/frontend",
   "version": "1.0.1",
   "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "chart.js": "^3.7.1",
@@ -66,5 +67,6 @@
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
-  "author": "Paweł Jędrzejewski"
+  "author": "Sylius Sp. z o.o.",
+  "license": "MIT"
 }

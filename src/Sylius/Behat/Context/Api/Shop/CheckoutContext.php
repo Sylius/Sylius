@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -551,6 +551,38 @@ final class CheckoutContext implements Context
             $this->getCheckoutState(),
             [OrderCheckoutStates::STATE_PAYMENT_SKIPPED, OrderCheckoutStates::STATE_PAYMENT_SELECTED],
         );
+    }
+
+    /**
+     * @Then I should be informed with :paymentMethod payment method instructions
+     */
+    public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod): void
+    {
+        $response = $this->client->getLastResponse();
+        $payments = $this->responseChecker->getValue($response, 'payments');
+
+        Assert::notEmpty($payments, 'No payments found in response.');
+        $paymentMethodIri = $this->iriConverter->getIriFromItem($paymentMethod);
+        foreach ($payments as $payment) {
+            if ($payment['method'] !== $paymentMethodIri) {
+                continue;
+            }
+
+            $customRequest = $this->requestFactory->custom($payment['method'], HTTPRequest::METHOD_GET);
+            $paymentMethodResponse = $this->client->executeCustomRequest($customRequest);
+            Assert::same(
+                $this->responseChecker->getValue(
+                    $paymentMethodResponse,
+                    'instructions',
+                ),
+                $paymentMethod->getInstructions(),
+                sprintf('Payment method instructions should be equal to %s', $paymentMethod->getInstructions()),
+            );
+
+            return;
+        }
+
+        throw new \Exception(sprintf('Payment method %s not found in response.', $paymentMethod->getName()));
     }
 
     /**

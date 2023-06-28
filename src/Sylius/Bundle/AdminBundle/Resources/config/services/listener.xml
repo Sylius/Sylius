@@ -4,7 +4,7 @@
 
  This file is part of the Sylius package.
 
- (c) Paweł Jędrzejewski
+ (c) Sylius Sp. z o.o.
 
  For the full copyright and license information, please view the LICENSE
  file that was distributed with this source code.
@@ -18,6 +18,12 @@
         <service id="sylius.listener.shipment_ship" class="Sylius\Bundle\AdminBundle\EventListener\ShipmentShipListener">
             <argument type="service" id="sylius.email_manager.shipment" />
             <tag name="kernel.event_listener" event="sylius.shipment.post_ship" method="sendConfirmationEmail" />
+        </service>
+
+        <service id="sylius.listener.locale" class="Sylius\Bundle\AdminBundle\EventListener\LocaleListener">
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+
+            <tag name="kernel.event_listener" event="sylius.locale.pre_delete" method="preDelete" />
         </service>
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteSubscriber">

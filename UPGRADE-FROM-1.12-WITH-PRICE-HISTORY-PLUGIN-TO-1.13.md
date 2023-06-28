@@ -76,6 +76,8 @@ Upgrade with Rector
 
     ```
 
+1. The class `Sylius\PriceHistoryPlugin\Infrastructure\EventSubscriber\ChannelPricingLogEntryEventSubscriber` has been replaced by `Sylius\Bundle\CoreBundle\PriceHistory\EventListener\ChannelPricingLogEntryEventListener`.
+
 1. The `Sylius\PriceHistoryPlugin\Application\Calculator\ProductVariantLowestPriceCalculator` class along with its interface has been removed.
    If you have used it in your project, you should also remove it from your code.
 

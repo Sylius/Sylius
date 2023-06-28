@@ -16,14 +16,18 @@
 1. Not passing `Doctrine\Persistence\ObjectManager` to `Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater`
    as a fifth argument is deprecated.
 
-1. To allow to autoconfigure order processors and cart context and define a priority for them in `1.13` we have introduced
-   `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` and `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` attributes. By default, Sylius still configures them using interfaces, but this way you cannot define a priority.
+1. To ease customization we've introduces attributes for some services in `1.13`:
+   - `Sylius\Bundle\OrderBundle\Attribute\AsCartContext` for cart contexts
+   - `Sylius\Bundle\OrderBundle\Attribute\AsOrderProcessor` for order processors
+   - `Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver` for product variant resolvers
+
+   By default, Sylius still configures them using interfaces, but this way you cannot define a priority.
    If you want to define a priority, you need to set the following configuration in your `_sylius.yaml` file:
    ```yaml
    sylius_core:
        autoconfigure_with_attributes: true
    ```
-   and use one of the new attributes accordingly to a type of your class, e.g.:
+   and use one of the new attributes accordingly to the type of your class, e.g.:
    ```php
     <?php
 
@@ -35,8 +39,7 @@
     use Sylius\Component\Order\Model\OrderInterface;
     use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
-    #[AsOrderProcessor(priority: 10)] //priority is optional
-    //#[AsOrderProcessor] can be used as well
+    #[AsOrderProcessor(/*priority: 10*/)] //priority is optional
     final class OrderProcessorWithAttributeStub implements OrderProcessorInterface
     {
         public function process(OrderInterface $order): void
@@ -72,7 +75,7 @@
    depending on your Guzzle version.
    Subsequently, you need to register the adapter as a `Psr\Http\Client\ClientInterface` service as the following:
     ```yaml
-        services:    
+        services:
             Psr\Http\Client\ClientInterface:
                 class: Http\Adapter\Guzzle7\Client # for Guzzle 6 use Http\Adapter\Guzzle6\Client instead
     ```
@@ -105,3 +108,9 @@
 
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
+
+1. Product variants resolving has been refactored for better extendability.
+   The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
+
+   All internal usages of service `sylius.product_variant_resolver.default` have been switched to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
+   `sylius.product_variant_resolver.default` service apply this change accordingly.

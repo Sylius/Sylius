@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -114,6 +114,13 @@ final class Request implements RequestInterface
     private function mergeArraysUniquely(array $firstArray, array $secondArray): array
     {
         foreach ($secondArray as $key => $value) {
+            if (is_string($key) && str_ends_with($key, '[]')) {
+                $key = substr($key, 0, -2);
+                $firstArray[$key][] = $value;
+
+                continue;
+            }
+
             if (is_array($value) && is_array(@$firstArray[$key])) {
                 $value = $this->mergeArraysUniquely($firstArray[$key], $value);
             }
