@@ -65,7 +65,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createCriteriaAwareSearchListQueryBuilder(?array $criteria = null): QueryBuilder
+    public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder
     {
         if ($criteria === null) {
             return $this->createListQueryBuilder();
@@ -95,6 +95,16 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
         return $this->createListQueryBuilder()
+            ->andWhere('o.customer = :customerId')
+            ->setParameter('customerId', $customerId)
+        ;
+    }
+
+    public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder
+    {
+        $queryBuilder = $this->createCriteriaAwareSearchListQueryBuilder($criteria);
+
+        return $queryBuilder
             ->andWhere('o.customer = :customerId')
             ->setParameter('customerId', $customerId)
         ;

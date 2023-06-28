@@ -38,9 +38,17 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param array{product: string, variant: string}|null $criteria
      */
-    public function createCriteriaAwareSearchListQueryBuilder(?array $criteria = null): QueryBuilder;
+    public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
+    /**
+     * @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see createByCustomerIdCriteriaAwareQueryBuilder()} instead.
+     */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
+
+    /**
+     * @param array{product: string, variant: string}|null $criteria
+     */
+    public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder;
 
     public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder;
 
