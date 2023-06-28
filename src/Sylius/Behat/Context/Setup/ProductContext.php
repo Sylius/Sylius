@@ -221,6 +221,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has no translation in the "([^"]+)" locale$/
+     */
+    public function thisProductHasNoTranslationIn(ProductInterface $product, $locale): void
+    {
+        $product->removeTranslation($product->getTranslation($locale));
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the store has a product named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
      */
     public function theStoreHasProductNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
@@ -1466,6 +1476,14 @@ final class ProductContext implements Context
         $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
+    }
+
+    private function removeProductTranslation(ProductInterface $product, $locale): void
+    {
+        /** @var ProductTranslationInterface $translation */
+        $translation = $product->getTranslation($locale);
+
+        $product->removeTranslation($translation);
     }
 
     /**

@@ -78,6 +78,7 @@ final class LocalesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
     /** @test */
     public function it_gets_locales(): void
     {
@@ -109,5 +110,28 @@ final class LocalesTest extends JsonApiTestCase
             'admin/locale/post_locale_response',
             Response::HTTP_CREATED,
         );
+    }
+
+    /** @test */
+    public function it_deletes_an_unused_locale(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/locales/en_US',
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/locales/en_US',
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 }
