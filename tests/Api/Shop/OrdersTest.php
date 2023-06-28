@@ -334,6 +334,23 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_returns_unprocessable_entity_status_if_trying_to_change_item_quantity_if_invalid_item_id_passed(): void
+    {
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
+
+        $tokenValue = $this->pickUpCart();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, 'invalid-item-id'),
+            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            content: json_encode(['quantity' => 5])
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /** @test */
     public function it_does_not_return_payment_configuration_if_invalid_payment_id_passed(): void
     {
         $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml']);
