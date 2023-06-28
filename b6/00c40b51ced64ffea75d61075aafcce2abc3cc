@@ -1,0 +1,40 @@
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2023-05-26T08:09:39Z
+
+I don't really see a point in limiting it only to CLI, UX-wise.
+Since we can only delete not used locales, then I'd assume it'll be mostly used for accidental locales, if it'd be in UI, no problem, just click a thing on the list.
+With it being in CLI, after I create a locale by mistake I need to either go on the server directly or inform someone that manages it to run the command.
+It's much more hassle for the same effect. The only upside I can see is settings a cron to periodically remove unused locales, but that way can have so many potential issues that I doubt anyone would use it.
+
+The situation would be completely different if we actually allowed deleting locales that are used, which we don't.
+
+I'd be for changing this to [solution 2](https://github.com/Sylius/Sylius/issues/10183#issuecomment-1543724190), but without the conditional showing of the button, and just keeping it in line with other resources that sometimes cannot be deleted (show an error flash and leave the resource be)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-05-26T10:18:12Z
+
+I have not commented before, but after thinking about it and the comment from @NoResponseMate, I would also favour the second option. To add the ability to delete only unused locales in the admin panel, I don't really see any real benefit from adding this functionality to the CLI only 🤔
+
+I am also interested in other opinions
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-06-01T13:28:16Z
+
+Refactored 👯‍♂️. I see behats are failing, but you can still review 🕺🏻.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-06-19T13:22:10Z
+
+@lchrusciel all changed applied.
+Admin custom action -> `sylius.locale.pre_delete` event listener
+API custom action -> decorated data persister
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-06-28T09:34:11Z
+
+Thank you, Jacob! :tada:
