@@ -11,7 +11,7 @@ environmentVariables:
 components:
     -   kind: Application
         name: cron
-        gitRepo: 'https://github.com/bunnyshell/OSS-Sylius.git'
+        gitRepo: 'https://github.com/Sylius/Sylius.git'
         gitBranch: bunnyshell-preview-environments
         gitApplicationPath: /
         dockerCompose:
@@ -35,7 +35,7 @@ components:
     -
         kind: Application
         name: php
-        gitRepo: 'https://github.com/bunnyshell/OSS-Sylius.git'
+        gitRepo: 'https://github.com/Sylius/Sylius.git'
         gitBranch: bunnyshell-preview-environments
         gitApplicationPath: /
         dockerCompose:
@@ -97,7 +97,7 @@ components:
     -
         kind: SidecarContainer
         name: nginx
-        gitRepo: 'https://github.com/bunnyshell/OSS-Sylius.git'
+        gitRepo: 'https://github.com/Sylius/Sylius.git'
         gitBranch: bunnyshell-preview-environments
         gitApplicationPath: /
         dockerCompose:
@@ -117,7 +117,7 @@ components:
     -
         kind: InitContainer
         name: init-migrations
-        gitRepo: 'https://github.com/bunnyshell/OSS-Sylius.git'
+        gitRepo: 'https://github.com/Sylius/Sylius.git'
         gitBranch: bunnyshell-preview-environments
         gitApplicationPath: /
         dockerCompose:
