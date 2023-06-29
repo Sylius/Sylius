@@ -48,10 +48,11 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
+        $items = $order->getItems()->getValues();
         $itemTaxFloatAmounts = [];
         $itemTaxRates = [];
 
-        foreach ($order->getItems() as $index => $item) {
+        foreach ($items as $index => $item) {
             /** @var TaxRateInterface|null $taxRate */
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
             if (null === $taxRate) {
@@ -68,21 +69,15 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $itemTotalTaxWholeAmount = (int) round(array_sum($itemTaxFloatAmounts));
         $itemSplitTaxes = $this->proportionalIntegerDistributor->distribute($itemTaxWholeAmounts, $itemTotalTaxWholeAmount);
 
-        foreach ($order->getItems() as $index => $item) {
-            $itemSplitTaxesIndex = $index;
-
-            if (!array_key_exists($itemSplitTaxesIndex, $itemSplitTaxes)) {
-                $itemSplitTaxesIndex = count($itemSplitTaxes) - 1;
-            }
-
+        foreach ($items as $index => $item) {
             $quantity = $item->getQuantity();
             Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
 
-            if (0 === $itemSplitTaxes[$itemSplitTaxesIndex]) {
+            if (0 === $itemSplitTaxes[$index]) {
                 continue;
             }
 
-            $this->distributeTaxesToUnits($itemSplitTaxes[$itemSplitTaxesIndex], $quantity, $item, $itemTaxRates[$index]);
+            $this->distributeTaxesToUnits($itemSplitTaxes[$index], $quantity, $item, $itemTaxRates[$index]);
         }
     }
 
@@ -127,8 +122,9 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         TaxRateInterface $taxRate
     ): void {
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
-        foreach ($item->getUnits() as $index => $unit) {
 
+        $units = $item->getUnits()->getValues();
+        foreach ($units as $index => $unit) {
             if (!array_key_exists($index, $unitSplitTaxes)) {
                 $index = count($unitSplitTaxes) - 1;
             }
