@@ -49,6 +49,26 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^I am changing (this order)'s payment method$/
+     */
+    public function iWantToChangeThisOrdersPaymentMethod(OrderInterface $order): void
+    {
+        $request = $this->requestFactory->custom(
+            sprintf(
+                '%s/shop/account/orders/%s/payments/%s',
+                $this->apiUrlPrefix,
+                $order->getTokenValue(),
+                (string) $order->getPayments()->first()->getId(),
+            ),
+            HttpRequest::METHOD_PATCH,
+            [],
+            $this->shopClient->getToken(),
+        );
+
+        $this->sharedStorage->set('payment_method_patch_request', $request);
+    }
+
+    /**
      * @When I change my payment method to :paymentMethod
      */
     public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
@@ -67,6 +87,18 @@ final class OrderContext implements Context
             [],
             $this->shopClient->getToken(),
         );
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
+
+        $this->shopClient->executeCustomRequest($request);
+    }
+
+    /**
+     * @When I try to change my payment method to :paymentMethod
+     */
+    public function iTryToChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
+    {
+        $request = $this->sharedStorage->get('payment_method_patch_request');
+
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
 
         $this->shopClient->executeCustomRequest($request);
