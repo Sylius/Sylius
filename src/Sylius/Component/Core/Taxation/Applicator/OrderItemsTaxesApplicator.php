@@ -42,6 +42,8 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
+        $this->checkItemsQuantities($order);
+
         if ($this->proportionalIntegerDistributor === null) {
             $this->applyWithoutDistributionToItems($order, $zone);
 
@@ -70,23 +72,17 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $itemSplitTaxes = $this->proportionalIntegerDistributor->distribute($itemTaxWholeAmounts, $itemTotalTaxWholeAmount);
 
         foreach ($items as $index => $item) {
-            $quantity = $item->getQuantity();
-            Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
-
             if (0 === $itemSplitTaxes[$index]) {
                 continue;
             }
 
-            $this->distributeTaxesToUnits($itemSplitTaxes[$index], $quantity, $item, $itemTaxRates[$index]);
+            $this->distributeTaxesToUnits($itemSplitTaxes[$index], $item->getQuantity(), $item, $itemTaxRates[$index]);
         }
     }
 
     private function applyWithoutDistributionToItems(OrderInterface $order, ZoneInterface $zone): void
     {
         foreach ($order->getItems() as $item) {
-            $quantity = $item->getQuantity();
-            Assert::notSame($quantity, 0, 'Cannot apply tax to order item with 0 quantity.');
-
             /** @var TaxRateInterface|null $taxRate */
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
             if (null === $taxRate) {
@@ -95,7 +91,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 
             $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
 
-            $this->distributeTaxesToUnits($totalTaxAmount, $quantity, $item, $taxRate);
+            $this->distributeTaxesToUnits($totalTaxAmount, $item->getQuantity(), $item, $taxRate);
         }
     }
 
@@ -115,7 +111,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $unit->addAdjustment($unitTaxAdjustment);
     }
 
-    public function distributeTaxesToUnits(
+    private function distributeTaxesToUnits(
         float $totalTaxAmount,
         int $quantity,
         OrderItemInterface $item,
@@ -134,6 +130,13 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             }
 
             $this->addAdjustment($unit, $unitSplitTaxes[$index], $taxRate);
+        }
+    }
+
+    private function checkItemsQuantities(OrderInterface $order): void
+    {
+        foreach ($order->getItems() as $item) {
+            Assert::notSame($item->getQuantity(), 0, 'Cannot apply tax to order item with 0 quantity.');
         }
     }
 }

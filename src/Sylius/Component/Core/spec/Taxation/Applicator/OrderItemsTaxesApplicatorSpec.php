@@ -101,6 +101,74 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
+    function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ZoneInterface $zone,
+    ): void {
+        $items = new ArrayCollection([$orderItem->getWrappedObject()]);
+        $order->getItems()->willReturn($items);
+
+        $orderItem->getQuantity()->willReturn(0);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [$order, $zone]);
+    }
+
+    function it_does_nothing_if_tax_rate_cannot_be_resolved(
+        TaxRateResolverInterface $taxRateResolver,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant,
+        ZoneInterface $zone,
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+        $orderItem->getQuantity()->willReturn(5);
+        $orderItem->getVariant()->willReturn($productVariant);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
+
+        $orderItem->getUnits()->shouldNotBeCalled();
+
+        $this->apply($order, $zone);
+    }
+
+    function it_does_not_apply_taxes_with_amount_0(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        IntegerDistributorInterface $distributor,
+        TaxRateResolverInterface $taxRateResolver,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        ProductVariantInterface $productVariant,
+        TaxRateInterface $taxRate,
+        ZoneInterface $zone,
+    ): void {
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+
+        $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getVariant()->willReturn($productVariant);
+
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+
+        $orderItem->getTotal()->willReturn(1000);
+        $calculator->calculate(1000, $taxRate)->willReturn(0);
+
+        $taxRate->getLabel()->willReturn('Simple tax (0%)');
+        $taxRate->isIncludedInPrice()->willReturn(false);
+
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $distributor->distribute(0, 2)->willReturn([0, 0]);
+
+        $adjustmentsFactory
+            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)
+            ->shouldNotBeCalled()
+        ;
+
+        $this->apply($order, $zone);
+    }
+
     function it_applies_taxes_on_units_based_on_item_total_and_rate_with_distribution_on_items(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
@@ -203,71 +271,23 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity(
+    function it_throws_an_invalid_argument_exception_if_order_item_has_0_quantity_during_distribution_on_items(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        IntegerDistributorInterface $distributor,
+        TaxRateResolverInterface $taxRateResolver,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ZoneInterface $zone,
     ): void {
+        $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver, $proportionalIntegerDistributor);
+
         $items = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($items);
 
         $orderItem->getQuantity()->willReturn(0);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [$order, $zone]);
-    }
-
-    function it_does_nothing_if_tax_rate_cannot_be_resolved(
-        TaxRateResolverInterface $taxRateResolver,
-        OrderInterface $order,
-        OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant,
-        ZoneInterface $zone,
-    ): void {
-        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
-        $orderItem->getQuantity()->willReturn(5);
-        $orderItem->getVariant()->willReturn($productVariant);
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
-
-        $orderItem->getUnits()->shouldNotBeCalled();
-
-        $this->apply($order, $zone);
-    }
-
-    function it_does_not_apply_taxes_with_amount_0(
-        CalculatorInterface $calculator,
-        AdjustmentFactoryInterface $adjustmentsFactory,
-        IntegerDistributorInterface $distributor,
-        TaxRateResolverInterface $taxRateResolver,
-        OrderInterface $order,
-        OrderItemInterface $orderItem,
-        OrderItemUnitInterface $unit1,
-        OrderItemUnitInterface $unit2,
-        ProductVariantInterface $productVariant,
-        TaxRateInterface $taxRate,
-        ZoneInterface $zone,
-    ): void {
-        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
-
-        $orderItem->getQuantity()->willReturn(2);
-        $orderItem->getVariant()->willReturn($productVariant);
-
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
-
-        $orderItem->getTotal()->willReturn(1000);
-        $calculator->calculate(1000, $taxRate)->willReturn(0);
-
-        $taxRate->getLabel()->willReturn('Simple tax (0%)');
-        $taxRate->isIncludedInPrice()->willReturn(false);
-
-        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
-
-        $distributor->distribute(0, 2)->willReturn([0, 0]);
-
-        $adjustmentsFactory
-            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (0%)', 0, false)
-            ->shouldNotBeCalled()
-        ;
-
-        $this->apply($order, $zone);
     }
 }
