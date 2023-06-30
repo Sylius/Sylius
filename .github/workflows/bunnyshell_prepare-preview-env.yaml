@@ -1,0 +1,20 @@
+name: Bunnyshell - Prepare Preview Environment Configuration
+on:
+    pull_request:
+        types: [ opened, reopened, synchronize ]
+        branches:
+            - '*'
+        paths-ignore:
+            - "*.md"
+    issue_comment:
+        types: [ created, edited ]
+jobs:
+    deploy:
+        name: Deploy Environment
+        uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v1
+        with:
+            bunnyshell-yaml-path: .bunnyshell/templates/preview/bunnyshell.yaml
+            allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
+            git-ref: refs/pull/${{ github.event.number || github.event.issue.number }}/head
+            restricted-files: |
+                .bunnyshell/*
