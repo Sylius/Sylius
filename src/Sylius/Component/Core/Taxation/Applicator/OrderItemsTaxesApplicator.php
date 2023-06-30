@@ -37,9 +37,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
     ) {
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         $this->checkItemsQuantities($order);
@@ -72,7 +70,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $itemSplitTaxes = $this->proportionalIntegerDistributor->distribute($itemTaxWholeAmounts, $itemTotalTaxWholeAmount);
 
         foreach ($items as $index => $item) {
-            if (0 === $itemSplitTaxes[$index]) {
+            if (0 === $itemSplitTaxes[$index] || !isset($itemTaxRates[$index])) {
                 continue;
             }
 

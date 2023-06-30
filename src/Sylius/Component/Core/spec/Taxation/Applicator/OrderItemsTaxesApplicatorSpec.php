@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
@@ -267,6 +268,38 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $unit1->addAdjustment($taxAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($taxAdjustment2)->shouldBeCalled();
         $unit3->addAdjustment($taxAdjustment3)->shouldBeCalled();
+
+        $this->apply($order, $zone);
+    }
+
+    function it_does_not_apply_taxes_with_distribution_on_items_if_the_given_item_has_no_tax_rate(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        IntegerDistributorInterface $distributor,
+        TaxRateResolverInterface $taxRateResolver,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit,
+        ProductVariantInterface $productVariant,
+        ZoneInterface $zone,
+    ): void {
+        $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver, $proportionalIntegerDistributor);
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+
+        $orderItem->getQuantity()->willReturn(1);
+        $orderItem->getTotal()->willReturn(1000);
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
+        $orderItem->getVariant()->willReturn($productVariant);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
+
+        $calculator->calculate(1000, Argument::any())->shouldNotBeCalled();
+
+        $proportionalIntegerDistributor->distribute([0], 0)->willReturn([0, 0]);
+
+        $distributor->distribute(Argument::any())->shouldNotBeCalled();
+        $adjustmentsFactory->createWithData(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
