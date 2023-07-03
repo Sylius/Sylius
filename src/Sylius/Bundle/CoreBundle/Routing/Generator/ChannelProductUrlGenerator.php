@@ -26,6 +26,7 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
     public function __construct (
         private LocaleContextInterface $localeContext,
         private UrlGeneratorInterface $urlGenerator,
+        private bool $unsecuredUrls,
     ) {
     }
 
@@ -38,7 +39,7 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
         $productTranslation = $this->findTranslationWithSlugForLocales($productTranslations, [$administratorLocaleCode]);
 
         if (false !== $productTranslation) {
-            return $this->generateProductUrl($productTranslation);
+            return $this->generateProductUrl($productTranslation, $channel);
         }
 
         /** @var string $channelDefaultLocaleCode */
@@ -46,14 +47,14 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
         $productTranslation = $this->findTranslationWithSlugForLocales($productTranslations, [$channelDefaultLocaleCode]);
 
         if (false !== $productTranslation) {
-            return $this->generateProductUrl($productTranslation);
+            return $this->generateProductUrl($productTranslation, $channel);
         }
 
         $localesEnabledInChannel = $this->getLocalesCodesEnabledInChannel($channel);
         $productTranslation = $this->findTranslationWithSlugForLocales($productTranslations, $localesEnabledInChannel);
 
         if (false !== $productTranslation) {
-            return $this->generateProductUrl($productTranslation);
+            return $this->generateProductUrl($productTranslation, $channel);
         }
 
         return null;
@@ -73,12 +74,23 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
         })->first();
     }
 
-    private function generateProductUrl(ProductTranslationInterface $productTranslation): string
+    private function generateProductUrl(ProductTranslationInterface $productTranslation, ChannelInterface $channel): string
     {
-        return $this->urlGenerator->generate('sylius_shop_product_show', [
+        $productPath = $this->urlGenerator->generate('sylius_shop_product_show', [
             'slug' => $productTranslation->getSlug(),
             '_locale' => $productTranslation->getLocale(),
         ]);
+
+        if ($channel->getHostname() === null) {
+            return $productPath;
+        }
+
+        return sprintf(
+            '%s://%s%s',
+            $this->unsecuredUrls ? 'http' : 'https',
+            $channel->getHostname(),
+            $productPath,
+        );
     }
 
     /**

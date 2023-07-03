@@ -160,7 +160,7 @@ final class ChannelProductUrlGeneratorTest extends TestCase
 
     private function createGenerator(): ChannelProductUrlGeneratorInterface
     {
-        return new ChannelProductUrlGenerator($this->localeContext, $this->urlGenerator);
+        return new ChannelProductUrlGenerator($this->localeContext, $this->urlGenerator, unsecuredUrls: false);
     }
 
     private function createProductTranslation(ProductInterface $product, string $localeCode, string $slug = ''): ProductTranslationInterface

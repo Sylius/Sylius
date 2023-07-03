@@ -16,6 +16,7 @@
         <service id="Sylius\Bundle\CoreBundle\Routing\Generator\ChannelProductUrlGeneratorInterface" class="Sylius\Bundle\CoreBundle\Routing\Generator\ChannelProductUrlGenerator">
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="Symfony\Component\Routing\Generator\UrlGeneratorInterface" />
+            <argument>%sylius.unsecured_urls%</argument>
         </service>
     </services>
 </container>
