@@ -91,7 +91,7 @@ final class ChannelContext implements Context
      */
     public function storeOperatesOnASingleChannelInLocale(string $localeCode): void
     {
-        $defaultData = $this->defaultChannelFactory->create($localeCode);
+        $defaultData = $this->defaultChannelFactory->create(localeCode: $localeCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
