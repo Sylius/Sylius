@@ -22,7 +22,6 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
