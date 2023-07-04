@@ -118,6 +118,8 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
         $units = $item->getUnits()->getValues();
+
+        /** @var OrderItemUnitInterface $unit */
         foreach ($units as $index => $unit) {
             if (!array_key_exists($index, $unitSplitTaxes)) {
                 $index = count($unitSplitTaxes) - 1;
