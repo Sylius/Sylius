@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2023-06-27T16:09:45Z
+
+WDYT about adding a new  `createCriteriaSearchListQueryBuilder` method and deprecating the current one instead of changing the signature?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-06-27T17:31:04Z
+
+@vvasiloi Seems like a safer way 👍🏼. I'll change it tomorrow.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-07-04T05:21:27Z
+
+Thanks, Jacob! :tada:
