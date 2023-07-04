@@ -1,0 +1,79 @@
+---------------------------------------------------------------------------
+
+by ikamikaz3 at 2022-04-05T08:47:34Z
+
+Original author of the slack submission here.
+
+Just tested this version of `OrderItemsTaxesApplicator`, works like a charm in my use case !
+
+---------------------------------------------------------------------------
+
+by ikamikaz3 at 2022-04-06T11:56:42Z
+
+> Hey folks!
+>
+> thanks for bringing it up and the test that directly resolves the requested case.
+>
+> However, I'm wondering what is the proper way of solving it from the taxation point of view. If I understood the current implementation the part that we are missing in each iteration is added to every 3rd element, which results in a slightly different tax percentage on these particular elements. On the other hand, we are having proper grand totals. I was thinking that moving the precision point could help us as well, but this solution seems to be more precise.
+>
+> In the end, I don't have enough knowledge to make a call here. @CoderMaggie could you take a look into it from the PO perspective? Another option for me would be to dig into the tax calculation domain sweat_smile
+
+In my case the issue was pretty simple, The `DefaultCalculator` removes the decimal part of the taxation amount resulting in the amount being off in the adjustement - missing `0,3333` in my example - which in the end makes the grand total being off aswell since it just fetch the adjustements recursively.
+
+What I don't understand is how nobody had this issue before ? we saw with @vvasiloi that my use case is particular because :
+1. I have multiple order items based on the same variant with have a single quantity and a single unit.
+2. I can also have "default" order items which use the default behaviour of X quantity = X units. for those the base applicator does the job as expected.
+3. Both those order items "types" can be found in the same order.
+
+Point number 1 seems to be the core issue here, and it's pretty easy to see why :
+Imagine my order item's unit price is `19,70` or `1970` and I try to apply a `20%` VAT to it. Using the default calculator and applicator, the result is `3,28` or `328` and it's then applied to my single unit as adjustement.
+Now let's say we add the same order item again but not as another unit but rather a whole new order item.
+Now I have `19,70 x 2 = 39,4` or `3940` and I try to apply the `20%` VAT. Using the default calculator and applicator, both order items have their taxes calculated separately so again `328` is apply to each unit.
+Then when I tried to get the `taxTotal` I would simply get `328x2 = 656` but if I calculate it manually : `3940−(3940 ÷ (1 +0,20)) = 656,666666667` which is rounded to `657` or `6,57` instead of `656`.
+The more items I had this way, the more decimal parts I lose and in the end the grand total of tax becomes way off.
+
+Maybe it's explained better this way. :)
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2022-04-06T12:17:12Z
+
+> If I understood the current implementation the part that we are missing in each iteration is added to every 3rd element, which results in a slightly different tax percentage on these particular elements.
+
+@lchrusciel not really, I just used `Sylius\Component\Core\Distributor\ProportionalIntegerDistributor`, which distributes the missing amount resulting from rounding to all items, cent by cent. Here's how the item-unit tax adjustment amounts look like in the test case:
+![image](https://user-images.githubusercontent.com/7114562/161971224-199bdf0b-cf66-463c-8d87-4d2cafc279a5.png)
+
+---------------------------------------------------------------------------
+
+by ikamikaz3 at 2022-04-06T12:32:43Z
+
+@vvasiloi @lchrusciel
+
+To add to the previous reply if I take my example again with the new implementation, I would have one tax adjustement amount at `328` and one at `329` giving me the correct `657`.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-06-16T13:19:41Z
+
+Hi!
+I've looked into this problem and I don't know if I'm missing something, but I'm unable to reproduce it. It may have been fixed in the meantime, although I can't find a specific PR.
+
+In any case, reproducing even a specific scenario, with the suggested product price, tax rate amount and items quantity, the adjustment amounts are correct, I mean, they distribute according to the quantity so that the tax total is correct. Below are screenshots of my configuration:
+
+<img width="1395" alt="Zrzut ekranu 2023-06-16 o 15 08 42" src="https://github.com/Sylius/Sylius/assets/6140884/e5fc92e1-db49-4ed3-b70d-97bab800b8c7">
+
+<img width="308" alt="Zrzut ekranu 2023-06-16 o 15 11 15" src="https://github.com/Sylius/Sylius/assets/6140884/901a4719-af3d-400d-9795-08a02879e07a">
+
+<img width="291" alt="Zrzut ekranu 2023-06-16 o 15 10 16" src="https://github.com/Sylius/Sylius/assets/6140884/9fb960cc-8a07-448c-9f27-b44cbe4ca37b">
+
+---------------------------------------------------------------------------
+
+by vvasiloi at 2023-06-16T20:07:20Z
+
+@GSadee Yes, you've missed the fact that the scenario to reproduce it is to have 20 order items, not 1 order item with 20 qty. See the test case.
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-07-04T09:00:45Z
+
+Thanks, Victor! :1st_place_medal:
