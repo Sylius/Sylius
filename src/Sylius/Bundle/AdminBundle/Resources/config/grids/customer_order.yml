@@ -5,7 +5,7 @@ sylius_grid:
             driver:
                 options:
                     repository:
-                        method: createByCustomerIdQueryBuilder
+                        method: createByCustomerIdCriteriaAwareQueryBuilder
                         arguments:
                             customerId: $id
             fields:

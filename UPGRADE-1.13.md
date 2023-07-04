@@ -114,3 +114,7 @@
 
    All internal usages of service `sylius.product_variant_resolver.default` have been switched to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
    `sylius.product_variant_resolver.default` service apply this change accordingly.
+
+1. Due to optimizations of the Order's grid the `Sylius\Component\Core\Repository\OrderRepositoryInterface::createSearchListQueryBuilder` method bas been deprecated and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createCriteriaAwareSearchListQueryBuilder`.
+   Also `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdQueryBuilder` has been deprecated and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdCriteriaAwareQueryBuilder` for the same reason. Both changes affect
+   `sylius_admin_order` and `sylius_admin_customer_order` grids configuration.
