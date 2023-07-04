@@ -89,6 +89,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
      * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
      */
     public function iAddMultipleProductsToTheCart(array $products): void
