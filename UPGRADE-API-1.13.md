@@ -1,5 +1,41 @@
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
+1. The signature of constructor of 'Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart' command changed:
+
+````diff
+    public function __construct(
+-       public int $quantity,
++       public ?int $quantity,
+    ) {
+    } 
+````
+
+1. The constructor signature of 'Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart' changed:
+
+````diff
+    public function __construct(
+-       public string $productCode,
++       public ?string $productCode,
+-       public int $quantity,
++       public ?int $quantity,
+    ) {
+    }
+````
+
+1. The constructor signature of `Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview` changed:
+
+````diff
+    public function __construct(
+        public ?string $title,
+        public ?int $rating,
+        public ?string $comment,
+-       public string $productCode,
++       public ?string $productCode,
+        public ?string $email = null,
+    ) {
+    }
+````
+
 1. The item operation paths for ProductVariantTranslation resource changed:
 
 - `GET /admin/product-variant-translation/{id}` -> `GET /admin/product-variant-translations/{id}`

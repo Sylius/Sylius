@@ -52,6 +52,14 @@
                 </option>
             </constraint>
         </property>
+        <property name="productCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.review.product.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
         <property name="email">
             <constraint name="NotBlank">
                 <option name="message">sylius.review.author.not_blank</option>

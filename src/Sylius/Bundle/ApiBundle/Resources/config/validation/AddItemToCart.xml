@@ -18,7 +18,17 @@
                 <value>sylius</value>
             </option>
         </constraint>
+        <property name="productVariantCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.order_item.product_variant.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="quantity">
+            <constraint name="NotBlank">
+                <option name="message">sylius.order_item.quantity.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.order_item.quantity.min</option>

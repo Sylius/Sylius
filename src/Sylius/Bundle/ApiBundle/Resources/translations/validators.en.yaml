@@ -19,7 +19,7 @@ sylius:
     product:
         not_exist: 'The product %productName% does not exist.'
     product_variant:
-        not_exist: 'The product variant with %productVariantCode% does not exist.'
+        not_exist: 'The product variant %productVariantCode% does not exist.'
         not_longer_available: 'The product variant with name %productVariantName% does not exist.'
         not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
         product_variant_with_name_not_sufficient: 'The product variant with %productVariantName% name does not have sufficient stock.'
