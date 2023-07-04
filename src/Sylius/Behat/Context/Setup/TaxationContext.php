@@ -157,6 +157,16 @@ final class TaxationContext implements Context
     }
 
     /**
+     * @Given the :taxRate tax rate has :calculator calculator configured
+     */
+    public function theTaxRateHasCalculatorConfigured(TaxRateInterface $taxRate, string $calculator): void
+    {
+        $taxRate->setCalculator($calculator);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $taxCategoryName
      *
      * @return TaxCategoryInterface

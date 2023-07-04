@@ -35,6 +35,7 @@
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
             <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.proportional_integer_distributor" />
             <tag name="sylius.taxation.items.applicator" />
         </service>
         <service id="sylius.taxation.order_item_units_taxes_applicator" class="Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator">
