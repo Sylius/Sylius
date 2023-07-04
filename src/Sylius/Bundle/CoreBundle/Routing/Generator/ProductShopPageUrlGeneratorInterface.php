@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Routing\Generator;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
-interface ChannelProductUrlGeneratorInterface
+interface ProductShopPageUrlGeneratorInterface
 {
     public function generate(ProductInterface $product, ChannelInterface $channel): ?string;
 }

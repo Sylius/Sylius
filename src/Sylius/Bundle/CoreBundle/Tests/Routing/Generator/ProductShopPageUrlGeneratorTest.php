@@ -15,8 +15,8 @@ namespace Routing\Generator;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\CoreBundle\Routing\Generator\ChannelProductUrlGenerator;
-use Sylius\Bundle\CoreBundle\Routing\Generator\ChannelProductUrlGeneratorInterface;
+use Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGenerator;
+use Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGeneratorInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -26,7 +26,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Model\Locale;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class ChannelProductUrlGeneratorTest extends TestCase
+final class ProductShopPageUrlGeneratorTest extends TestCase
 {
     private LocaleContextInterface|MockObject $localeContext;
 
@@ -158,9 +158,9 @@ final class ChannelProductUrlGeneratorTest extends TestCase
         $this->assertNull($generatedUrl);
     }
 
-    private function createGenerator(): ChannelProductUrlGeneratorInterface
+    private function createGenerator(): ProductShopPageUrlGeneratorInterface
     {
-        return new ChannelProductUrlGenerator($this->localeContext, $this->urlGenerator, unsecuredUrls: false);
+        return new ProductShopPageUrlGenerator($this->localeContext, $this->urlGenerator, unsecuredUrls: false);
     }
 
     private function createProductTranslation(ProductInterface $product, string $localeCode, string $slug = ''): ProductTranslationInterface

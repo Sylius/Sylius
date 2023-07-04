@@ -15,7 +15,7 @@
             <div class="menu">
                 <div class="scrolling menu">
                     {% for channel in enabledChannels %}
-                        {% set url = sylius_channel_product_url(product, channel) %}
+                        {% set url = sylius_product_shop_page_url(product, channel) %}
 
                         <a
                             href="{{ (url is null) ? '#' : url|raw }}"
@@ -32,7 +32,7 @@
         </div>
     {% else %}
         {% for channel in enabledChannels %}
-            {% set url = sylius_channel_product_url(product, channel) %}
+            {% set url = sylius_product_shop_page_url(product, channel) %}
 
             <a
                 class="ui labeled icon button {% if url is null %}disabled{% endif %}"

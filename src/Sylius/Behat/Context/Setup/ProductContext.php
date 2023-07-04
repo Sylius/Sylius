@@ -1109,11 +1109,10 @@ final class ProductContext implements Context
         $this->saveProduct($product);
     }
 
-
     /**
      * @Given /^(this product) has no slug in the ("[^"]+" locale)$/
      */
-    public function thisProductHasNoSlugInTheLocale(ProductInterface $product, $localeCode): void
+    public function thisProductHasNoSlugInTheLocale(ProductInterface $product, string $localeCode): void
     {
         $productTranslation = $product->getTranslation($localeCode);
         $productTranslation->setSlug('');

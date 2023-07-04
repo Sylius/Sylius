@@ -74,14 +74,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I want to edit (this product)$/
-     */
-    public function iWantToEditThisProduct(ProductInterface $product): void
-    {
-        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
-    }
-
-    /**
      * @When I specify its code as :code
      * @When I do not specify its code
      */
@@ -378,6 +370,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I want to modify the :product product
      * @When /^I want to modify (this product)$/
+     * @When /^I want to edit (this product)$/
      * @When I modify the :product product
      */
     public function iWantToModifyAProduct(ProductInterface $product): void
@@ -1215,14 +1208,14 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^it should be leading to (the product)'s page in the ("[^"]+" locale)$/
      */
-    public function itShouldBeLeadingToTheProductPageInTheLocale(ProductInterface $product, string $locale): void
+    public function itShouldBeLeadingToTheProductPageInTheLocale(ProductInterface $product, string $localeCode): void
     {
-        $productTranslation = $product->getTranslation($locale);
+        $productTranslation = $product->getTranslation($localeCode);
         $showProductPageUrl = $this->updateSimpleProductPage->getShowProductInSingleChannelUrl();
 
         Assert::same(
             $showProductPageUrl,
-            sprintf('/%s/products/%s', $locale, $productTranslation->getSlug()),
+            sprintf('/%s/products/%s', $localeCode, $productTranslation->getSlug()),
         );
     }
 

@@ -21,9 +21,9 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInterface
+final class ProductShopPageUrlGenerator implements ProductShopPageUrlGeneratorInterface
 {
-    public function __construct (
+    public function __construct(
         private LocaleContextInterface $localeContext,
         private UrlGeneratorInterface $urlGenerator,
         private bool $unsecuredUrls,
@@ -66,12 +66,16 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
      */
     private function findTranslationWithSlugForLocales(Collection $productTranslations, array $localeCodes): ProductTranslationInterface|false
     {
-        return $productTranslations->filter(function (ProductTranslationInterface $productTranslation) use ($localeCodes): bool {
-            return in_array($productTranslation->getLocale(), $localeCodes) &&
-                '' !== $productTranslation->getSlug() &&
-                null !== $productTranslation->getSlug()
-            ;
-        })->first();
+        foreach ($productTranslations as $productTranslation) {
+            $isLocaleCodeMatching = in_array($productTranslation->getLocale(), $localeCodes);
+            $isSlugPresent = '' !== $productTranslation->getSlug() && null !== $productTranslation->getSlug();
+
+            if ($isLocaleCodeMatching && $isSlugPresent) {
+                return $productTranslation;
+            }
+        }
+
+        return false;
     }
 
     private function generateProductUrl(ProductTranslationInterface $productTranslation, ChannelInterface $channel): string
@@ -93,9 +97,7 @@ final class ChannelProductUrlGenerator implements ChannelProductUrlGeneratorInte
         );
     }
 
-    /**
-     * @return array<array-key, string>
-     */
+    /** @return array<array-key, string> */
     private function getLocalesCodesEnabledInChannel(ChannelInterface $channel): array
     {
         return $channel->getLocales()->map(function (LocaleInterface $locale): string {
