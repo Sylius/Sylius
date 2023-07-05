@@ -53,6 +53,19 @@ final class ProportionalIntegerDistributorSpec extends ObjectBehavior
         $this->distribute([0], -299)->shouldReturn([0]);
     }
 
+    function it_keeps_original_keys_after_computation(): void
+    {
+        $this->distribute([
+            1 => 4000,
+            3 => 2000,
+            6 => 2000,
+        ], 300)->shouldReturn([
+            1 => 150,
+            3 => 75,
+            6 => 75,
+        ]);
+    }
+
     function it_throws_an_exception_if_any_of_integers_array_element_is_not_integer(): void
     {
         $this
