@@ -36,7 +36,7 @@ final class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
-        TaxRateResolverInterface $taxRateResolver
+        TaxRateResolverInterface $taxRateResolver,
     ): void {
         $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver);
     }
