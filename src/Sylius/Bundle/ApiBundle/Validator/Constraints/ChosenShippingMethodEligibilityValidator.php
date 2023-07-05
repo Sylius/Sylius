@@ -51,7 +51,12 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
 
         /** @var ShipmentInterface|null $shipment */
         $shipment = $this->shipmentRepository->find($value->shipmentId);
-        Assert::notNull($shipment);
+
+        if (null === $shipment) {
+            $this->context->addViolation($constraint->shipmentNotFoundMessage);
+
+            return;
+        }
 
         $order = $shipment->getOrder();
 
