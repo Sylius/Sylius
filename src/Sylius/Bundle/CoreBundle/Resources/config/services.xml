@@ -33,6 +33,7 @@
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
         <import resource="services/promotion.xml" />
+        <import resource="services/providers.xml" />
         <import resource="services/shipping.xml" />
         <import resource="services/state_resolvers.xml" />
         <import resource="services/taxation.xml" />
@@ -48,13 +49,6 @@
 
     <services>
         <defaults public="true" />
-
-        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
-
-        <service id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\CustomerProvider" >
-            <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.canonicalizer" />
-        </service>
 
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="Sylius\Component\Core\Distributor\IntegerDistributorInterface" alias="sylius.integer_distributor" />
@@ -165,11 +159,6 @@
         </service>
         <service id="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactoryInterface" alias="sylius.factory.customer_after_checkout" />
 
-        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-        </service>
-        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
-
         <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
             <tag name="twig.extension" />
@@ -205,11 +194,6 @@
 
         <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
         <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
-
-        <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
-            <argument type="service" id="sylius.repository.locale" />
-            <argument type="string">%locale%</argument>
-        </service>
 
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />

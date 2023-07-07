@@ -1109,6 +1109,30 @@ final class ProductContext implements Context
         $this->saveProduct($product);
     }
 
+    /**
+     * @Given /^(this product) has no slug in the ("[^"]+" locale)$/
+     */
+    public function thisProductHasNoSlugInTheLocale(ProductInterface $product, string $localeCode): void
+    {
+        $productTranslation = $product->getTranslation($localeCode);
+        $productTranslation->setSlug('');
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product) has no translations with a defined slug$/
+     */
+    public function thisProductHasNoTranslationsWithADefinedSlug(ProductInterface $product): void
+    {
+        /** @var ProductTranslationInterface $productTranslation */
+        foreach ($product->getTranslations() as $productTranslation) {
+            $productTranslation->setSlug('');
+        }
+
+        $this->saveProduct($product);
+    }
+
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);

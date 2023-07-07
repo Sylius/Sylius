@@ -39,10 +39,10 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     ) {
     }
 
-    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null, ?string $localeCode = null): array
     {
         $currency = $this->provideCurrency($currencyCode);
-        $locale = $this->provideLocale();
+        $locale = $this->provideLocale($localeCode);
 
         /** @var ChannelInterface $channel */
         $channel = $this->channelFactory->createNamed($name ?: self::DEFAULT_CHANNEL_NAME);
@@ -82,7 +82,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         return $currency;
     }
 
-    private function provideLocale(): LocaleInterface
+    private function provideLocale(?string $localeCode = null): LocaleInterface
     {
         /** @var LocaleInterface|null $locale */
         $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);
@@ -90,7 +90,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         if (null === $locale) {
             /** @var LocaleInterface $locale */
             $locale = $this->localeFactory->createNew();
-            $locale->setCode($this->defaultLocaleCode);
+            $locale->setCode($localeCode ?? $this->defaultLocaleCode);
 
             $this->localeRepository->add($locale);
         }
