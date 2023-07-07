@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Routing\Generator;
+namespace Sylius\Bundle\CoreBundle\Tests\Provider;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGenerator;
-use Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGeneratorInterface;
+use Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider;
+use Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -24,22 +24,18 @@ use Sylius\Component\Core\Model\ProductTranslation;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Model\Locale;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class ProductShopPageUrlGeneratorTest extends TestCase
+final class ChannelBasedProductTranslationProviderTest extends TestCase
 {
     private LocaleContextInterface|MockObject $localeContext;
-
-    private UrlGeneratorInterface|MockObject $urlGenerator;
 
     protected function setUp(): void
     {
         $this->localeContext = $this->createMock(LocaleContextInterface::class);
-        $this->urlGenerator = $this->createMock(UrlGeneratorInterface::class);
     }
 
     /** @test */
-    public function it_generates_url_using_administrator_locale_translations(): void
+    public function it_provides_product_translation_using_administrator_locale(): void
     {
         $product = new Product();
         $product->addTranslation($this->createProductTranslation($product, 'pl_PL', 'polish-product-slug'));
@@ -52,20 +48,12 @@ final class ProductShopPageUrlGeneratorTest extends TestCase
         $channel->setDefaultLocale($channelLocale);
 
         $this->localeContext->expects($this->once())->method('getLocaleCode')->willReturn('pl_PL');
-        $this->urlGenerator
-            ->expects($this->once())
-            ->method('generate')
-            ->with('sylius_shop_product_show', [
-                'slug' => 'polish-product-slug',
-                '_locale' => 'pl_PL',
-            ])
-            ->willReturn('/pl_PL/products/polish-product-slug')
-        ;
 
-        $generator = $this->createGenerator();
-        $generatedUrl = $generator->generate($product, $channel);
+        $provider = $this->createProvider();
+        $productTranslation = $provider->provide($product, $channel);
 
-        $this->assertSame('/pl_PL/products/polish-product-slug', $generatedUrl);
+        $this->assertSame('polish-product-slug', $productTranslation->getSlug());
+        $this->assertSame('pl_PL', $productTranslation->getLocale());
     }
 
     /** @test */
@@ -82,20 +70,12 @@ final class ProductShopPageUrlGeneratorTest extends TestCase
         $channel->setDefaultLocale($channelLocale);
 
         $this->localeContext->expects($this->once())->method('getLocaleCode')->willReturn('de_DE');
-        $this->urlGenerator
-            ->expects($this->once())
-            ->method('generate')
-            ->with('sylius_shop_product_show', [
-                'slug' => 'english-product-slug',
-                '_locale' => 'en_US',
-            ])
-            ->willReturn('/en_US/products/english-product-slug')
-        ;
 
-        $generator = $this->createGenerator();
-        $generatedUrl = $generator->generate($product, $channel);
+        $provider = $this->createProvider();
+        $productTranslation = $provider->provide($product, $channel);
 
-        $this->assertSame('/en_US/products/english-product-slug', $generatedUrl);
+        $this->assertSame('english-product-slug', $productTranslation->getSlug());
+        $this->assertSame('en_US', $productTranslation->getLocale());
     }
 
     /** @test */
@@ -119,20 +99,12 @@ final class ProductShopPageUrlGeneratorTest extends TestCase
         $channel->addLocale($deDeLocale);
 
         $this->localeContext->expects($this->once())->method('getLocaleCode')->willReturn('es_ES');
-        $this->urlGenerator
-            ->expects($this->once())
-            ->method('generate')
-            ->with('sylius_shop_product_show', [
-                'slug' => 'german-product-slug',
-                '_locale' => 'de_DE',
-            ])
-            ->willReturn('/de_DE/products/german-product-slug')
-        ;
 
-        $generator = $this->createGenerator();
-        $generatedUrl = $generator->generate($product, $channel);
+        $provider = $this->createProvider();
+        $productTranslation = $provider->provide($product, $channel);
 
-        $this->assertSame('/de_DE/products/german-product-slug', $generatedUrl);
+        $this->assertSame('german-product-slug', $productTranslation->getSlug());
+        $this->assertSame('de_DE', $productTranslation->getLocale());
     }
 
     /** @test */
@@ -147,20 +119,16 @@ final class ProductShopPageUrlGeneratorTest extends TestCase
         $channel->setDefaultLocale($channelLocale);
 
         $this->localeContext->expects($this->once())->method('getLocaleCode')->willReturn('fr_FR');
-        $this->urlGenerator
-            ->expects($this->never())
-            ->method('generate')
-        ;
 
-        $generator = $this->createGenerator();
-        $generatedUrl = $generator->generate($product, $channel);
+        $provider = $this->createProvider();
+        $productTranslation = $provider->provide($product, $channel);
 
-        $this->assertNull($generatedUrl);
+        $this->assertNull($productTranslation);
     }
 
-    private function createGenerator(): ProductShopPageUrlGeneratorInterface
+    private function createProvider(): ChannelBasedProductTranslationProviderInterface
     {
-        return new ProductShopPageUrlGenerator($this->localeContext, $this->urlGenerator, unsecuredUrls: false);
+        return new ChannelBasedProductTranslationProvider($this->localeContext);
     }
 
     private function createProductTranslation(ProductInterface $product, string $localeCode, string $slug = ''): ProductTranslationInterface

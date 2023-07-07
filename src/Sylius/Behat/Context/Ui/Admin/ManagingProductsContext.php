@@ -1213,7 +1213,7 @@ final class ManagingProductsContext implements Context
         $productTranslation = $product->getTranslation($localeCode);
         $showProductPageUrl = $this->updateSimpleProductPage->getShowProductInSingleChannelUrl();
 
-        Assert::same(
+        Assert::contains(
             $showProductPageUrl,
             sprintf('/%s/products/%s', $localeCode, $productTranslation->getSlug()),
         );

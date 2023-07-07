@@ -15,11 +15,14 @@
             <div class="menu">
                 <div class="scrolling menu">
                     {% for channel in enabledChannels %}
-                        {% set url = sylius_product_shop_page_url(product, channel) %}
+                        {% set product_translation = sylius_product_translation(product, channel) %}
+                        {% if product_translation is not null %}
+                            {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+                        {% endif %}
 
                         <a
-                            href="{{ (url is null) ? '#' : url|raw }}"
-                            class="item {% if url is null %}disabled{% endif %}"
+                            href="{{ (url is not defined) ? '#' : url|raw }}"
+                            class="item {% if url is not defined %}disabled{% endif %}"
                             target="_blank"
                         >
                             <i class="angle right icon"></i>
@@ -32,11 +35,14 @@
         </div>
     {% else %}
         {% for channel in enabledChannels %}
-            {% set url = sylius_product_shop_page_url(product, channel) %}
+            {% set product_translation = sylius_product_translation(product, channel) %}
+            {% if product_translation is not null %}
+                {% set url = sylius_channel_url(path('sylius_shop_product_show', {'slug': product_translation.slug, '_locale': product_translation.locale}), channel) %}
+            {% endif %}
 
             <a
-                class="ui labeled icon button {% if url is null %}disabled{% endif %}"
-                href="{{ (url is null) ? '#' : url|raw }}"
+                class="ui labeled icon button {% if url is not defined %}disabled{% endif %}"
+                href="{{ (url is not defined) ? '#' : url|raw }}"
                 target="_blank"
                 {{ sylius_test_html_attribute('show-product-in-shop-page') }}
             >

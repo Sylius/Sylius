@@ -11,12 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Routing\Generator;
+namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface;
 
-interface ProductShopPageUrlGeneratorInterface
+interface ChannelBasedProductTranslationProviderInterface
 {
-    public function generate(ProductInterface $product, ChannelInterface $channel): ?string;
+    public function provide(ProductInterface $product, ChannelInterface $channel): ?ProductTranslationInterface;
 }

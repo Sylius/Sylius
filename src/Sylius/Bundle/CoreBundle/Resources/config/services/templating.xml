@@ -58,8 +58,8 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.twig.extension.product_shop_page_url" class="Sylius\Bundle\CoreBundle\Twig\ProductShopPageUrlExtension" public="false">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGeneratorInterface" />
+        <service id="sylius.twig.extension.product_translation" class="Sylius\Bundle\CoreBundle\Twig\ProductTranslationExtension" public="false">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface" />
             <tag name="twig.extension" />
         </service>
     </services>

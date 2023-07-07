@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Routing\Generator\ProductShopPageUrlGeneratorInterface;
+use Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-final class ProductShopPageUrlExtension extends AbstractExtension
+final class ProductTranslationExtension extends AbstractExtension
 {
     public function __construct(
-        private ProductShopPageUrlGeneratorInterface $productShopPageUrlGenerator,
+        private ChannelBasedProductTranslationProviderInterface $channelBasedProductTranslationProvider,
     ) {
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_product_shop_page_url', [$this->productShopPageUrlGenerator, 'generate']),
+            new TwigFunction('sylius_product_translation', [$this->channelBasedProductTranslationProvider, 'provide']),
         ];
     }
 }
