@@ -1,0 +1,29 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-07-07T05:28:19Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment stopped
+
+Available commands:
+  - `/bns:start` to start the environment
+  - `/bns:deploy` to redeploy the environment
+  - `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-07-07T05:30:12Z
+
+/bns:start
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-07-07T07:21:12Z
+
+/bns:stop
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-07-07T08:46:49Z
+
+Thanks, Jacob! :tada:
