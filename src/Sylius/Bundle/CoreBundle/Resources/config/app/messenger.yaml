@@ -12,12 +12,12 @@ parameters:
 framework:
     messenger:
         transports:
-            main: 
+            main:
                 dsn: '%sylius_messenger_transport_main_dsn%'
                 failure_transport: 'main_failed'
-            main_failed: 
+            main_failed:
                 dsn: '%sylius_messenger_transport_main_failed_dsn%'
-            catalog_promotion_removal: 
+            catalog_promotion_removal:
                 dsn: '%sylius_messenger_transport_catalog_promotion_removal_dsn%'
                 failure_transport: 'catalog_promotion_removal_failed'
             catalog_promotion_removal_failed:
@@ -42,4 +42,4 @@ framework:
                 default_middleware: allow_no_handlers
             sylius_default.bus: *command_bus
             sylius_event.bus: *event_bus
-        
+

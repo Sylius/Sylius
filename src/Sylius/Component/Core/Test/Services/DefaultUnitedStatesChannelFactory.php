@@ -52,7 +52,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     ) {
     }
 
-    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null): array
+    public function create(?string $code = null, ?string $name = null, ?string $currencyCode = null, ?string $localeCode = null): array
     {
         $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
