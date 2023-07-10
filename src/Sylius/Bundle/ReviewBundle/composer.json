@@ -47,6 +47,7 @@
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {
+        "stof/doctrine-extensions-bundle": "1.8.0",
         "twig/twig": "^3.0"
     },
     "require-dev": {
