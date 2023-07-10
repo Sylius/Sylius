@@ -113,7 +113,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         float $totalTaxAmount,
         int $quantity,
         OrderItemInterface $item,
-        TaxRateInterface $taxRate
+        TaxRateInterface $taxRate,
     ): void {
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
