@@ -123,7 +123,9 @@ class OrderController extends ResourceController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->resetChangesOnCart($resource);
-            $this->addFlash('error', 'sylius.cart.not_recalculated');
+            if ($this->container->has('session')) {
+                $this->addFlash('error', 'sylius.cart.not_recalculated');
+            }
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -152,6 +154,10 @@ class OrderController extends ResourceController
 
     private function resetChangesOnCart(OrderInterface $cart): void
     {
+        if (!$cart->getId()) {
+            return;
+        }
+
         $this->manager->refresh($cart);
         foreach ($cart->getItems() as $item) {
             $this->manager->refresh($item);
