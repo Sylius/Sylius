@@ -133,9 +133,11 @@ class OrderController extends ResourceController
 
     private function resetChangesOnCart(OrderInterface $cart): void
     {
-        $this->manager->refresh($cart);
-        foreach ($cart->getItems() as $item) {
-            $this->manager->refresh($item);
+        if ($this->manager->contains($cart)) {
+            $this->manager->refresh($cart);
+            foreach($cart->getItems() as $item) {
+                $this->manager->refresh($item);
+            }
         }
     }
 
