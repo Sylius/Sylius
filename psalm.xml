@@ -12,7 +12,6 @@
         <directory name="src" />
         <ignoreFiles>
             <file name="src/Sylius/Bundle/CoreBundle/Application/Kernel.php" />
-            <file name="src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php" />
 
             <directory name="src/Sylius/Behat" />
 

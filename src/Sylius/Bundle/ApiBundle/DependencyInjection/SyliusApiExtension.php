@@ -37,7 +37,10 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
 
         $loader->load('services.xml');
 
-        if ($container->hasParameter('api_platform.enable_swagger_ui') && $container->getParameter('api_platform.enable_swagger_ui')) {
+        // If parameter is not set, it means that Swagger is not enabled (api_platform.enable_swagger set to false)
+        $swaggerEnabled = $container->hasParameter('api_platform.swagger.api_keys');
+
+        if ($swaggerEnabled) {
             $loader->load('integrations/swagger.xml');
         }
     }
