@@ -11,7 +11,7 @@ Feature: Accessing a store's product page
         And I am using "Polish (Poland)" locale for my panel
 
     @ui @no-api
-    Scenario: Opening a product's page from the admin panel when the product has a translation with a defined slug in the administrator's chosen language
+    Scenario: Accessing the product shop page from the admin panel when the product has a translation with a defined slug in the administrator's chosen language
         Given the locale "Polish (Poland)" is enabled
         And this product is named "Bulldog francuski T-Shirt" in the "Polish (Poland)" locale
         When I want to edit this product
@@ -19,7 +19,7 @@ Feature: Accessing a store's product page
         And it should be leading to the product's page in the "Polish (Poland)" locale
 
     @ui @no-api
-    Scenario: Opening a product's page from the admin panel when the product has a translation with a defined slug in the default channel's language
+    Scenario: Accessing the product shop page from the admin panel when the product has a translation with a defined slug in the default channel's language
         Given the locale "French (France)" is enabled
         And this product is named "Tee-shirt bouledogue français" in the "French (France)" locale
         When I want to edit this product
@@ -27,16 +27,17 @@ Feature: Accessing a store's product page
         And it should be leading to the product's page in the "German (Germany)" locale
 
     @ui @no-api
-    Scenario: Opening a product's page from the admin panel with using first available locale with slug and enabled in the channel
+    Scenario: Accessing the product shop page from the admin panel with using first available locale with slug and enabled in the channel
         Given the locale "French (France)" is enabled
         And the store also operates in "French (France)" locale
         And this product has no slug in the "German (Germany)" locale
         And this product is named "T-shirt bouledogue français" in the "French (France)" locale
         When I want to edit this product
-        Then it should be leading to the product's page in the "French (France)" locale
+        Then the show product's page button should be enabled
+        And it should be leading to the product's page in the "French (France)" locale
 
     @ui @no-api
-    Scenario: Not being able to open a product's page from the admin panel when the product has no translations meeting the criteria
+    Scenario: Not being able to access the product shop page from the admin panel when the product has no translations meeting the criteria
         Given this product has no translations with a defined slug
         When I want to edit this product
         Then the show product's page button should be disabled
