@@ -21,7 +21,6 @@ use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -82,7 +81,6 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel,
         Expr $expr,
         Expr\Comparison $comparison,
         Andx $andx,
@@ -98,12 +96,12 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')->shouldBeCalled()->willReturn($queryBuilder);
         $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
-        $expr->eq('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
+        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
         $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
         $queryBuilder->expr()->willReturn($expr->getWrappedObject());
         $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Andx::class))->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->setParameter('taxonCode', 't_shirts')->shouldBeCalled()->willReturn($queryBuilder);
+        $queryBuilder->setParameter('taxonCode', ['t_shirts'])->shouldBeCalled()->willReturn($queryBuilder);
 
         $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'get', ['filters' => ['productTaxons.taxon.code' => 't_shirts']]);
     }

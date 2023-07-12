@@ -51,8 +51,13 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
         $this->addSortingToQuery($queryBuilder, $taxonCode, $queryNameGenerator);
     }
 
-    private function addSortingToQuery(QueryBuilder $queryBuilder, string $taxonCode, QueryNameGeneratorInterface $queryNameGenerator): void
+    /**
+     * @param array<string>|string $taxonCode
+     */
+    private function addSortingToQuery(QueryBuilder $queryBuilder, array|string $taxonCode, QueryNameGeneratorInterface $queryNameGenerator): void
     {
+        $taxonCode = is_array($taxonCode) ? $taxonCode : [$taxonCode];
+
         $rootAlias = $queryBuilder->getRootAliases()[0];
         $taxonCodeParameterName = $queryNameGenerator->generateParameterName('taxonCode');
         $productTaxonAliasName = $queryNameGenerator->generateJoinAlias('productTaxons');
@@ -71,7 +76,7 @@ final class ProductsByTaxonExtension implements ContextAwareQueryCollectionExten
                 $taxonAliasName,
                 'WITH',
                 $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq(sprintf('%s.code', $taxonAliasName), sprintf(':%s', $taxonCodeParameterName)),
+                    $queryBuilder->expr()->in(sprintf('%s.code', $taxonAliasName), sprintf(':%s', $taxonCodeParameterName)),
                     $queryBuilder->expr()->eq(sprintf('%s.enabled', $taxonAliasName), 'true'),
                 ),
             )
