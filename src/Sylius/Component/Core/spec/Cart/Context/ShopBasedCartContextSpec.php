@@ -26,6 +26,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Context\ResettingCartContextInterface;
 
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
@@ -37,6 +38,11 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     function it_implements_a_cart_context_interface(): void
     {
         $this->shouldImplement(CartContextInterface::class);
+    }
+
+    function it_is_a_resetting_cart_context(): void
+    {
+        $this->shouldImplement(ResettingCartContextInterface::class);
     }
 
     function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration(
