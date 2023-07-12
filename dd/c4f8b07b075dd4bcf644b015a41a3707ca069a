@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-07-12T07:53:55Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment created
+
+Available commands:
+- `/bns:start` to start the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-07-12T13:00:35Z
+
+Thank you, Tamas! :1st_place_medal:
