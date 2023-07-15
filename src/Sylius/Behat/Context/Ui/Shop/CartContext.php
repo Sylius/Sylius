@@ -55,6 +55,7 @@ final class CartContext implements Context
 
     /**
      * @When I update my cart
+     * @When I try to update my cart
      */
     public function iUpdateMyCart()
     {
@@ -587,6 +588,14 @@ final class CartContext implements Context
     public function theQuantityOfShouldBe(string $productName, int $quantity): void
     {
         Assert::same($this->checkoutSubtotalElement->getProductQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then I should see an empty cart
+     */
+    public function iShouldSeeAnEmptyCart(): void
+    {
+        Assert::true($this->summaryPage->isEmpty());
     }
 
     private function getPriceFromString(string $price): int
