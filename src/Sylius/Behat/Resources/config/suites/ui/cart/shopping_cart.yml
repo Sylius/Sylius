@@ -32,6 +32,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
+                - sylius.behat.context.ui.browser
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.currency

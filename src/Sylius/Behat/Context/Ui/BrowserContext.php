@@ -29,4 +29,12 @@ final class BrowserContext implements Context
     {
         $this->browserElement->goBack();
     }
+
+    /**
+     * @When my session expired
+     */
+    public function mySessionExpires(): void
+    {
+        $this->browserElement->resetSession();
+    }
 }
