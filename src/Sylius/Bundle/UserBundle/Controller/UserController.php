@@ -263,10 +263,15 @@ class UserController extends ResourceController
     protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
-        $session = $this->container->get('request_stack')->getSession();
-        if ($session instanceof FlashBagAwareSessionInterface) {
-            $session->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
+        if ($this->container->has('session')) {
+            $session = $this->container->get('session');
+        } else {
+            $session = $this->container->get('request_stack')->getSession();
+            if (!$session instanceof FlashBagAwareSessionInterface) {
+                return;
+            }
         }
+        $session->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
     /**
