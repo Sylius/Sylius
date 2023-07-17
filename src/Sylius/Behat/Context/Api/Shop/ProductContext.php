@@ -136,7 +136,7 @@ final class ProductContext implements Context
         $this->client->index(Resources::PRODUCTS);
 
         foreach ($taxons as $index => $taxon) {
-            $this->client->addFilter('productTaxons.taxon.code['.$index.']', $taxon->getCode());
+            $this->client->addFilter('productTaxons.taxon.code[' . $index . ']', $taxon->getCode());
         }
 
         $this->client->filter();
