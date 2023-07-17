@@ -270,7 +270,7 @@ class UserController extends ResourceController
             $session = $this->container->get('session');
         } else {
             $session = $this->container->get('request_stack')->getSession();
-            if (!$session instanceof FlashBagAwareSessionInterface) {
+            if (!$session instanceof FlashBagAwareSessionInterface) { // @phpstan-ignore-line
                 return;
             }
         }
