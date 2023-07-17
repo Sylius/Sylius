@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\BrowserElementInterface;
 use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
 use Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface;
 use Sylius\Behat\NotificationType;
@@ -40,6 +41,7 @@ final class CartContext implements Context
         private CartWidgetElementInterface $cartWidgetElement,
         private NotificationCheckerInterface $notificationChecker,
         private SessionManagerInterface $sessionManager,
+        private BrowserElementInterface $browserElement,
     ) {
     }
 
@@ -51,6 +53,14 @@ final class CartContext implements Context
     public function iOpenCartSummaryPage(): void
     {
         $this->summaryPage->open();
+    }
+
+    /**
+     * @Given I've been gone for a long time
+     */
+    public function iveBeenGoneForLongTime(): void
+    {
+        $this->browserElement->resetSession();
     }
 
     /**
