@@ -370,16 +370,14 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
+     * @Then I should not be able to confirm order because the :shippingMethod shipping method is not available
      */
     public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(ShippingMethodInterface $shippingMethod): void
     {
-        $this->completePage->confirmOrder();
-
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'The %s shipping method is not available, please choose another one.',
+                'The "%s" shipping method is not available, please choose another one.',
                 $shippingMethod->getName(),
             ),
         );

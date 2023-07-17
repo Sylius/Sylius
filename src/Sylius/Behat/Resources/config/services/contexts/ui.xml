@@ -364,6 +364,7 @@
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.addressing" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.shipping" />
             <argument type="service" id="sylius.behat.context.ui.shop.checkout.payment" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.ui.shop.checkout.thank_you" class="Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutThankYouContext">

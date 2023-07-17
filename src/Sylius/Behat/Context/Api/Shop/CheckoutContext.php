@@ -502,6 +502,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded through checkout process with :shippingMethod shipping method
+     */
+    public function iProceedThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->addressOrder($this->getArrayWithDefaultAddress());
+
+        $this->selectShippingMethod($shippingMethod);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        $this->iChoosePaymentMethod($paymentMethod);
+
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
+    }
+
+    /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
      * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
      */
@@ -1165,14 +1181,14 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
+     * @Then I should not be able to confirm order because the :shippingMethod shipping method is not available
      */
     public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(ShippingMethodInterface $shippingMethod): void
     {
-        Assert::contains(
-            $this->client->getLastResponse()->getContent(),
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf(
-                'The %s shipping method is not available, please choose another one.',
+                'The "%s" shipping method is not available, please choose another one.',
                 $shippingMethod->getName(),
             ),
         );
