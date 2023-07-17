@@ -45,20 +45,22 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
 
         $context[self::ALREADY_CALLED] = true;
         $data = $this->normalizer->normalize($object, $format, $context);
-        Assert::isArray($data);
 
         switch ($object->getType()) {
             case SelectAttributeType::TYPE:
+                Assert::isArray($data);
                 $data['value'] = $this->normalizeSelectValue($object);
 
                 break;
             case DateAttributeType::TYPE:
                 Assert::isInstanceOf($object->getValue(), \DateTimeInterface::class);
+                Assert::isArray($data);
                 $data['value'] = $object->getValue()->format('Y-m-d');
 
                 break;
             case DateTimeAttributeType::TYPE:
                 Assert::isInstanceOf($object->getValue(), \DateTimeInterface::class);
+                Assert::isArray($data);
                 $data['value'] = $object->getValue()->format('Y-m-d H:i:s');
 
                 break;
