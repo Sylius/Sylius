@@ -27,7 +27,7 @@ final class OrderShippingMethodAvailableValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var OrderShippingMethodAvailable $constraint */
         Assert::isInstanceOf($constraint, OrderShippingMethodAvailable::class);
