@@ -1165,6 +1165,20 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::contains(
+            $this->client->getLastResponse()->getContent(),
+            sprintf(
+                'The %s shipping method is not available, please choose another one.',
+                $shippingMethod->getName(),
+            ),
+        );
+    }
+
+    /**
      * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
      */
     public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
