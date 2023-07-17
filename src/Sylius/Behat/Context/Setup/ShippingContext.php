@@ -546,6 +546,15 @@ final class ShippingContext implements Context
         $this->addRuleToShippingMethod($rule, $shippingMethod);
     }
 
+    /**
+     * @Given (this shipping method) has been disabled
+     */
+    public function thisShippingMethodHasBeenDisabled(ShippingMethodInterface $shippingMethod): void
+    {
+        $shippingMethod->disable();
+        $this->shippingMethodManager->flush();
+    }
+
     private function getConfigurationByChannels(array $channels, int $amount = 0): array
     {
         $configuration = [];
