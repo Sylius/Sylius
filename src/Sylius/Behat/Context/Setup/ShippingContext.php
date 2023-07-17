@@ -547,10 +547,13 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given (this shipping method) has been disabled
+     * @Given /^(this shipping method) has been disabled$/
      */
     public function thisShippingMethodHasBeenDisabled(ShippingMethodInterface $shippingMethod): void
     {
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $shippingMethod->getCode()]);
+
         $shippingMethod->disable();
         $this->shippingMethodManager->flush();
     }
