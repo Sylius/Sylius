@@ -104,7 +104,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded through checkout process with :shippingMethod shipping method
      */
-    public function iProceedThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->addressingContext->iProceedSelectingBillingCountry();
         $this->shippingContext->iHaveProceededSelectingShippingMethod($shippingMethod->getName());

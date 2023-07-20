@@ -504,7 +504,7 @@ final class CheckoutContext implements Context
     /**
      * @Given I have proceeded through checkout process with :shippingMethod shipping method
      */
-    public function iProceedThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->addressOrder($this->getArrayWithDefaultAddress());
 
@@ -1181,15 +1181,15 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to confirm order because the :shippingMethod shipping method is not available
+     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
      */
-    public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(ShippingMethodInterface $shippingMethod): void
+    public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf(
-                'The "%s" shipping method is not available, please choose another one.',
-                $shippingMethod->getName(),
+                'The "%s" shipping method is not available. Please reselect your shipping method.',
+                $shippingMethodName,
             ),
         );
     }

@@ -548,13 +548,19 @@ final class ShippingContext implements Context
 
     /**
      * @Given /^(this shipping method) has been disabled$/
+     * @Given /^(this shipping method) has been disabled for ("[^"]+" channel)$/
      */
-    public function thisShippingMethodHasBeenDisabled(ShippingMethodInterface $shippingMethod): void
+    public function thisShippingMethodHasBeenDisabled(ShippingMethodInterface $shippingMethod, ?ChannelInterface $channel = null): void
     {
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $shippingMethod->getCode()]);
 
-        $shippingMethod->disable();
+        if (null === $channel) {
+            $shippingMethod->disable();
+        } else {
+            $shippingMethod->removeChannel($channel);
+        }
+
         $this->shippingMethodManager->flush();
     }
 

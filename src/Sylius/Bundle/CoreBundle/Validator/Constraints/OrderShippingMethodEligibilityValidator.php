@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -28,7 +29,7 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
     /**
      * @throws \InvalidArgumentException
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var OrderInterface $value */
         Assert::isInstanceOf($value, OrderInterface::class);
@@ -42,9 +43,21 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
         }
 
         foreach ($shipments as $shipment) {
-            if (!$this->methodEligibilityChecker->isEligible($shipment, $shipment->getMethod())) {
+            /** @var ShippingMethodInterface $shippingMethod */
+            $shippingMethod = $shipment->getMethod();
+
+            if (!$shippingMethod->isEnabled() || !$shippingMethod->getChannels()->contains($value->getChannel())) {
                 $this->context->addViolation(
-                    $constraint->message,
+                    $constraint->getMethodNotAvailableMessage(),
+                    ['%shippingMethodName%' => $shippingMethod->getName()],
+                );
+
+                continue;
+            }
+
+            if (!$this->methodEligibilityChecker->isEligible($shipment, $shippingMethod)) {
+                $this->context->addViolation(
+                    $constraint->getMessage(),
                     ['%shippingMethodName%' => $shipment->getMethod()->getName()],
                 );
             }

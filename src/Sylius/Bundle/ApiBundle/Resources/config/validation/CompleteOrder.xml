@@ -41,11 +41,6 @@
                 <value>sylius_checkout_complete</value>
             </option>
         </constraint>
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodAvailable">
-            <option name="groups">
-                <value>sylius_checkout_complete</value>
-            </option>
-        </constraint>
         <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibility">
             <option name="groups">
                 <value>sylius_checkout_complete</value>

@@ -11,19 +11,16 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibility;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibility;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
@@ -31,11 +28,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 {
-    function let(
-        OrderRepositoryInterface $orderRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-    ): void {
-        $this->beConstructedWith($orderRepository, $eligibilityChecker);
+    function let(ShippingMethodEligibilityCheckerInterface $eligibilityChecker): void
+    {
+        $this->beConstructedWith($eligibilityChecker);
     }
 
     function it_is_a_constraint_validator(): void
@@ -52,49 +47,18 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_constraint_does_not_type_of_order_shipping_method_eligibility(): void
+    function it_throws_an_exception_if_constraint_is_not_type_of_order_shipping_method_eligibility(Constraint $constraint): void
     {
-        $constraint = new class() extends Constraint implements OrderTokenValueAwareInterface {
-            private ?string $orderTokenValue = null;
-
-            public function getOrderTokenValue(): ?string
-            {
-                return 'xxx';
-            }
-
-            public function setOrderTokenValue(?string $orderTokenValue): void
-            {
-                $this->orderTokenValue = $orderTokenValue;
-            }
-        };
-
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('validate', ['', $constraint])
         ;
     }
 
-    function it_throws_an_exception_if_order_is_null(OrderRepositoryInterface $orderRepository): void
-    {
-        $constraint = new OrderShippingMethodEligibility();
-
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
-
-        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn(null);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [$value, $constraint])
-        ;
-    }
-
     function it_adds_a_violation_for_every_not_available_shipping_method_attached_to_the_order(
-        OrderRepositoryInterface $orderRepository,
         ExecutionContextInterface $context,
-        OrderTokenValueAwareInterface $value,
         ChannelInterface $channel,
-        OrderInterface $order,
+        OrderInterface $value,
         ShipmentInterface $shipmentOne,
         ShipmentInterface $shipmentTwo,
         ShippingMethodInterface $shippingMethodOne,
@@ -104,11 +68,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($context);
 
-        $value->getOrderTokenValue()->willReturn('ORDERTOKENVALUE');
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKENVALUE'])->willReturn($order);
-
-        $order->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
-        $order->getChannel()->willReturn($channel);
+        $value->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
+        $value->getChannel()->willReturn($channel);
 
         $shipmentOne->getMethod()->willReturn($shippingMethodOne);
         $shipmentTwo->getMethod()->willReturn($shippingMethodTwo);
@@ -132,12 +93,10 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_violation_if_all_shipping_methods_are_available(
-        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         ExecutionContextInterface $context,
-        OrderTokenValueAwareInterface $value,
         ChannelInterface $channel,
-        OrderInterface $order,
+        OrderInterface $value,
         ShipmentInterface $shipmentOne,
         ShipmentInterface $shipmentTwo,
         ShippingMethodInterface $shippingMethodOne,
@@ -147,11 +106,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($context);
 
-        $value->getOrderTokenValue()->willReturn('ORDERTOKENVALUE');
-        $orderRepository->findOneBy(['tokenValue' => 'ORDERTOKENVALUE'])->willReturn($order);
-
-        $order->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
-        $order->getChannel()->willReturn($channel);
+        $value->getShipments()->willReturn(new ArrayCollection([$shipmentOne->getWrappedObject(), $shipmentTwo->getWrappedObject()]));
+        $value->getChannel()->willReturn($channel);
 
         $shipmentOne->getMethod()->willReturn($shippingMethodOne);
         $shipmentTwo->getMethod()->willReturn($shippingMethodTwo);
@@ -178,9 +134,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_shipment_does_not_match_with_shipping_method(
-        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        OrderInterface $order,
+        OrderInterface $value,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         Collection $channelsCollection,
@@ -191,13 +146,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
-
-        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
-
-        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
-        $order->getChannel()->willReturn($channel);
+        $value->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $value->getChannel()->willReturn($channel);
 
         $shipment->getMethod()->willReturn($shippingMethod);
 
@@ -221,9 +171,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
     }
 
     function it_does_not_add_a_violation_if_shipment_matches_with_shipping_method(
-        OrderRepositoryInterface $orderRepository,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        OrderInterface $order,
+        OrderInterface $value,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         Collection $channelsCollection,
@@ -234,13 +183,8 @@ final class OrderShippingMethodEligibilityValidatorSpec extends ObjectBehavior
 
         $constraint = new OrderShippingMethodEligibility();
 
-        $value = new CompleteOrder();
-        $value->setOrderTokenValue('token');
-
-        $orderRepository->findOneBy(['tokenValue' => 'token'])->willReturn($order);
-
-        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
-        $order->getChannel()->willReturn($channel);
+        $value->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
+        $value->getChannel()->willReturn($channel);
 
         $shipment->getMethod()->willReturn($shippingMethod);
 
