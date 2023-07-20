@@ -502,6 +502,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded through checkout process with :shippingMethod shipping method
+     */
+    public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->addressOrder($this->getArrayWithDefaultAddress());
+
+        $this->selectShippingMethod($shippingMethod);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $this->paymentMethodRepository->findOneBy([]);
+        $this->iChoosePaymentMethod($paymentMethod);
+
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
+    }
+
+    /**
      * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
      * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
      */
@@ -1161,6 +1177,20 @@ final class CheckoutContext implements Context
         Assert::contains(
             $this->client->getLastResponse()->getContent(),
             sprintf('Order is no longer eligible for this %s promotion. Your cart was recalculated.', $promotion->getName()),
+        );
+    }
+
+    /**
+     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
+     */
+    public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf(
+                'The "%s" shipping method is not available. Please reselect your shipping method.',
+                $shippingMethodName,
+            ),
         );
     }
 
