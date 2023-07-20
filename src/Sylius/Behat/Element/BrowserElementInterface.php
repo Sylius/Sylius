@@ -16,4 +16,6 @@ namespace Sylius\Behat\Element;
 interface BrowserElementInterface
 {
     public function goBack(): void;
+
+    public function resetSession(): void;
 }
