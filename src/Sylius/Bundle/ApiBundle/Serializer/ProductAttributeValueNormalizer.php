@@ -84,7 +84,7 @@ final class ProductAttributeValueNormalizer implements ContextAwareNormalizerInt
         $values = [];
 
         foreach ($configuration['choices'] ?? [] as $uuid => $choice) {
-            if (in_array($uuid, $object->getValue())) {
+            if (is_array($object->getValue()) && in_array($uuid, $object->getValue())) {
                 $values[] = $choice[$object->getLocaleCode()]
                     ?? $choice[$this->localeProvider->getDefaultLocaleCode()]
                     ?? $choice[$this->defaultLocaleCode]
