@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\BrowserElementInterface;
 use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
 use Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface;
 use Sylius\Behat\NotificationType;
@@ -40,6 +41,7 @@ final class CartContext implements Context
         private CartWidgetElementInterface $cartWidgetElement,
         private NotificationCheckerInterface $notificationChecker,
         private SessionManagerInterface $sessionManager,
+        private BrowserElementInterface $browserElement,
     ) {
     }
 
@@ -54,7 +56,16 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I've been gone for a long time
+     */
+    public function iveBeenGoneForLongTime(): void
+    {
+        $this->browserElement->resetSession();
+    }
+
+    /**
      * @When I update my cart
+     * @When I try to update my cart
      */
     public function iUpdateMyCart()
     {
@@ -588,6 +599,14 @@ final class CartContext implements Context
     public function theQuantityOfShouldBe(string $productName, int $quantity): void
     {
         Assert::same($this->checkoutSubtotalElement->getProductQuantity($productName), $quantity);
+    }
+
+    /**
+     * @Then I should see an empty cart
+     */
+    public function iShouldSeeAnEmptyCart(): void
+    {
+        Assert::true($this->summaryPage->isEmpty());
     }
 
     private function getPriceFromString(string $price): int

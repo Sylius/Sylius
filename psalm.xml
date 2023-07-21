@@ -252,6 +252,7 @@
                 <referencedFunction name="Symfony\Component\HttpKernel\Config\FileLocator::__construct" />
                 <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" /> <!-- removed parameter in Symfony 5.4 -->
+                <referencedFunction name="Symfony\Component\Serializer\NameConverter\NameConverterInterface::normalize" />
             </errorLevel>
             <errorLevel type="suppress">
                 <referencedFunction name="Doctrine\ORM\Query\Expr::andX" />

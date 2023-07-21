@@ -32,7 +32,7 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint)
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 
@@ -49,9 +49,18 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
             /** @var ShippingMethodInterface $shippingMethod */
             $shippingMethod = $shipment->getMethod();
 
+            if (!$shippingMethod->isEnabled() || !$shippingMethod->getChannels()->contains($order->getChannel())) {
+                $this->context->addViolation(
+                    $constraint->getMethodNotAvailableMessage(),
+                    ['%shippingMethodName%' => $shippingMethod->getName()],
+                );
+
+                continue;
+            }
+
             if (!$this->eligibilityChecker->isEligible($shipment, $shippingMethod)) {
                 $this->context->addViolation(
-                    $constraint->message,
+                    $constraint->getMessage(),
                     ['%shippingMethodName%' => $shippingMethod->getName()],
                 );
             }

@@ -21,4 +21,9 @@ final class BrowserElement extends Element implements BrowserElementInterface
     {
         $this->getDriver()->back();
     }
+
+    public function resetSession(): void
+    {
+        $this->getSession()->setCookie('MOCKSESSID');
+    }
 }
