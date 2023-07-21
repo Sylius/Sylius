@@ -27,9 +27,9 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -40,6 +40,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
     ): void {
 
         $this->beConstructedWith(
@@ -47,7 +48,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
             $priceRangeFilter,
             $taxonFilter,
             $productFilter,
-            [],
+            $additionalFiltersApplicator,
         );
     }
 
@@ -61,7 +62,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
-        FilterInterface $additionalFilter,
+        AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
         ChannelInterface $channel,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
@@ -83,7 +84,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
             $priceRangeFilter,
             $taxonFilter,
             $productFilter,
-            [$additionalFilter],
+            $additionalFiltersApplicator,
         );
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -111,7 +112,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
         $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
-        $additionalFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1])->shouldBeCalled();
+        $additionalFiltersApplicator->apply([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1])->shouldBeCalled();
 
         $orderItem1->getQuantity()->willReturn(2);
         $orderItem1->getUnits()->willReturn($units);
@@ -148,6 +149,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
         ChannelInterface $channel,
         AdjustmentInterface $promotionAdjustment,
         OrderInterface $order,
@@ -170,6 +172,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $priceRangeFilter->filter([$orderItem1, $orderItem2], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1, $orderItem2]);
         $taxonFilter->filter([$orderItem1, $orderItem2], ['percentage' => 0.2])->willReturn([$orderItem1, $orderItem2]);
         $productFilter->filter([$orderItem1, $orderItem2], ['percentage' => 0.2])->willReturn([$orderItem1, $orderItem2]);
+        $additionalFiltersApplicator->apply([$orderItem1, $orderItem2], ['percentage' => 0.2])->willReturn([$orderItem1, $orderItem2]);
 
         $orderItem1->getQuantity()->willReturn(1);
         $orderItem1->getUnitPrice()->willReturn(500);
@@ -216,6 +219,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -230,6 +234,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $priceRangeFilter->filter([$orderItem], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([]);
+        $additionalFiltersApplicator->apply([], ['percentage' => 0.2])->willReturn([]);
 
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
     }
@@ -239,7 +244,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
-        FilterInterface $additionalFilter,
+        AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -250,7 +255,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
             $priceRangeFilter,
             $taxonFilter,
             $productFilter,
-            [$additionalFilter],
+            $additionalFiltersApplicator,
         );
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -260,7 +265,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $priceRangeFilter->filter([$orderItem], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
-        $additionalFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([]);
+        $additionalFiltersApplicator->apply([$orderItem], ['percentage' => 0.2])->willReturn([]);
 
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
     }
@@ -343,21 +348,5 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('revert', [$subject, ['percentage' => 0.2], $promotion])
         ;
-    }
-
-    function it_throws_an_exception_if_additional_filter_are_not_of_the_correct_type(
-        FactoryInterface $adjustmentFactory,
-        FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        \stdClass $additionalFilter,
-    ): void {
-        $this->beConstructedWith(
-            $adjustmentFactory,
-            $priceRangeFilter,
-            $taxonFilter,
-            $productFilter,
-            [$additionalFilter],
-        );
     }
 }

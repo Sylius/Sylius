@@ -16,30 +16,25 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Webmozart\Assert\Assert;
 
 final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     public const TYPE = 'unit_percentage_discount';
-
-    /** @var iterable|FilterInterface[] */
-    private iterable $additionalItemFilters;
 
     public function __construct(
         FactoryInterface $adjustmentFactory,
         private FilterInterface $priceRangeFilter,
         private FilterInterface $taxonFilter,
         private FilterInterface $productFilter,
-        iterable $additionalItemFilters,
+        private AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
     ) {
         parent::__construct($adjustmentFactory);
-        Assert::allIsInstanceOf($additionalItemFilters, FilterInterface::class);
-        $this->additionalItemFilters = $additionalItemFilters;
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -59,7 +54,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         );
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
-        $filteredItems = $this->applyAdditionalItemFilters($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->additionalFiltersApplicator->apply($filteredItems, $configuration[$channelCode]);
 
         if (empty($filteredItems)) {
             return false;
@@ -82,14 +77,5 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         foreach ($item->getUnits() as $unit) {
             $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
         }
-    }
-
-    private function applyAdditionalItemFilters(array $filteredItems, array $configuration): array
-    {
-        foreach($this->additionalItemFilters as $additionalItemFilter) {
-            $filteredItems = $additionalItemFilter->filter($filteredItems, $configuration);
-        }
-
-        return $filteredItems;
     }
 }
