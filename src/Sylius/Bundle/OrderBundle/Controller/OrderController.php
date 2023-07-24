@@ -157,7 +157,7 @@ class OrderController extends ResourceController
         }
 
         $this->manager->refresh($cart);
-        foreach($cart->getItems() as $item) {
+        foreach ($cart->getItems() as $item) {
             $this->manager->refresh($item);
         }
     }
