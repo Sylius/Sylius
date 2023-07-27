@@ -190,7 +190,15 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When /^I (?:|upload|update) the "([^"]+)" image as (my) avatar$/
+     * @When I upload the :avatar image as the avatar
+     */
+    public function iUploadTheImageAsTheAvatar(string $avatar): void
+    {
+        $this->createPage->attachAvatar($avatar);
+    }
+
+    /**
+     * @When /^I (?:upload|update) the "([^"]+)" image as (my) avatar$/
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
@@ -330,6 +338,14 @@ final class ManagingAdministratorsContext implements Context
 
         Assert::false($this->topBarElement->hasAvatarInMainBar($avatarPath));
         Assert::true($this->topBarElement->hasDefaultAvatarInMainBar());
+    }
+
+    /**
+     * @Then I should not see any image as the avatar
+     */
+    public function iShouldNotSeeAnyImageAsTheAvatar(): void
+    {
+        Assert::false($this->createPage->isAvatarAttached());
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface
