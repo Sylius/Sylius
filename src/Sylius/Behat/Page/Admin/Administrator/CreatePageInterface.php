@@ -17,6 +17,10 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 interface CreatePageInterface extends BaseCreatePageInterface
 {
+    public function isAvatarAttached(): bool;
+
+    public function attachAvatar(string $path): void;
+
     public function enable(): void;
 
     public function specifyUsername(string $username): void;
