@@ -597,6 +597,37 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I want to choose main taxon for product :product
+     */
+    public function iWantToChooseMainTaxonForProduct(ProductInterface $product): void
+    {
+        $this->iWantToModifyAProduct($product);
+
+        $currentPage = $this->resolveCurrentPage();
+        $currentPage->open(['id' => $product->getId()]);
+    }
+
+    /**
+     * @Then I should be able to choose taxon :taxonName from the list
+     */
+    public function iShouldBeAbleToChooseTaxonForThisProduct(string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::true($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
+    }
+
+    /**
+     * @Then I should not be able to choose taxon :taxonName from the list
+     */
+    public function iShouldNotBeAbleToChooseTaxonForThisProduct(string $taxonName): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        Assert::false($currentPage->isTaxonVisibleInMainTaxonList($taxonName));
+    }
+
+    /**
      * @Then /^this product should have (?:a|an) "([^"]+)" option$/
      */
     public function thisProductShouldHaveOption($productOption)

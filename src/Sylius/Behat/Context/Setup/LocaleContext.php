@@ -47,6 +47,24 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @Given the store has many locales
+     */
+    public function theStoreHasManyLocales(): void
+    {
+        $this->theStoreHasLocale('en_US');
+        $this->theStoreHasLocale('fr_FR');
+        $this->theStoreHasLocale('de_DE');
+        $this->theStoreHasLocale('es_ES');
+        $this->theStoreHasLocale('pl_PL');
+        $this->theStoreHasLocale('pt_PT');
+        $this->theStoreHasLocale('uk_UA');
+        $this->theStoreHasLocale('ja_JP');
+        $this->theStoreHasLocale('zh_CN');
+        $this->theStoreHasLocale('bg_BG');
+        $this->theStoreHasLocale('da_DK');
+    }
+
+    /**
      * @Given the locale :localeCode does not exist in the store
      */
     public function theStoreDoesNotHaveLocale($localeCode)
