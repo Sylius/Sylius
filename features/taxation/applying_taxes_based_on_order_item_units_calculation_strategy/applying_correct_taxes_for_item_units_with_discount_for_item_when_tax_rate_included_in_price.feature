@@ -2,7 +2,7 @@
 Feature: Applying correct taxes for item units with a discount when tax rates are included in price
     In order to pay proper amount when buying goods
     As a Visitor
-    I want to have correct taxes applied to my order when it has a discount and tax rates are included in products prices
+    I want to have correct taxes applied when the order is discounted and tax rates are included in products prices
 
     Background:
         Given the store operates on a single channel in "United States"
