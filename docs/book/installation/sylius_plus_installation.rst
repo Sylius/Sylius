@@ -352,13 +352,7 @@ your application's ``.env`` file:
 
         bin/console sylius:install -s plus -n
 
-**11.** Copy templates that are overridden by Sylius Plus into ``templates/bundles``:
-
-.. code-block:: bash
-
-    cp -fr vendor/sylius/plus/src/Resources/templates/bundles/* templates/bundles
-
-**12.** Install JS libraries using Yarn:
+**11.** Install JS libraries using Yarn:
 
 .. code-block:: bash
 
@@ -366,14 +360,14 @@ your application's ``.env`` file:
     yarn build
     bin/console assets:install --ansi
 
-**13.** Rebuild cache for proper display of all translations:
+**12.** Rebuild cache for proper display of all translations:
 
 .. code-block:: bash
 
     bin/console cache:clear
     bin/console cache:warmup
 
-**14.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
+**13.** For more details check the installation guides for all plugins installed as dependencies with Sylius Plus.
 
 * `Sylius/InvoicingPlugin <https://github.com/Sylius/InvoicingPlugin/blob/master/README.md#installation>`_
 * `Sylius/RefundPlugin <https://github.com/Sylius/RefundPlugin/blob/master/README.md#installation>`_
