@@ -290,9 +290,9 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given the store has :taxCalculationStrategy tax calculation strategy configured
+     * @Given the store uses the :taxCalculationStrategy tax calculation strategy
      */
-    public function theStoreHasTaxCalculationStrategyConfigured(string $taxCalculationStrategy): void
+    public function theStoreUsesTheTaxCalculationStrategy(string $taxCalculationStrategy): void
     {
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');

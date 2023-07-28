@@ -7,7 +7,7 @@ Feature: Applying correct taxes for item units with tax rate included in price
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has "Order item units based" tax calculation strategy configured
+        And the store uses the "Order item units based" tax calculation strategy
         And the store has included in price "VAT" tax rate of 20% for "Clothes" within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$19.70"
         And it belongs to "Clothes" tax category
