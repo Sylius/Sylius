@@ -55,6 +55,8 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
+    public function isTaxonVisibleInMainTaxonList(string $taxonName): bool;
+
     public function selectProductTaxon(TaxonInterface $taxon): void;
 
     public function unselectProductTaxon(TaxonInterface $taxon): void;

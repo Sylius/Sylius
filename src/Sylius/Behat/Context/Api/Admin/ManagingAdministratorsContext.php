@@ -136,7 +136,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When /^I (?:|upload|update) the "([^"]+)" image as (my) avatar$/
+     * @When /^I (?:upload|update) the "([^"]+)" image as (my) avatar$/
      */
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {

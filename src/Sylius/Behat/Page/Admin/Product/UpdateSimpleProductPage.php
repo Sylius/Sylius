@@ -130,6 +130,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
+    public function isTaxonVisibleInMainTaxonList(string $taxonName): bool
+    {
+        $this->openTaxonBookmarks();
+
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
+
+        return AutocompleteHelper::isValueVisible($this->getSession(), $mainTaxonElement, $taxonName);
+    }
+
     public function selectProductTaxon(TaxonInterface $taxon): void
     {
         $productTaxonsCodes = [];

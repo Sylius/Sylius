@@ -59,6 +59,17 @@ abstract class AutocompleteHelper
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
     }
 
+    public static function isValueVisible(Session $session, NodeElement $element, $value): bool
+    {
+        static::activateAutocompleteDropdown($session, $element);
+
+        $result = $element->find('css', sprintf('div.item:contains("%s")', $value));
+
+        static::waitForElementToBeVisible($session, $element);
+
+        return null !== $result;
+    }
+
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
         JQueryHelper::waitForAsynchronousActionsToFinish($session);
