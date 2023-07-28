@@ -61,11 +61,13 @@
         <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
             <argument>cart</argument>
+            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
             <tag name="sylius.order_processor" priority="0"/>
         </service>
         <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.order_payment_provider" />
             <argument>new</argument>
+            <argument type="service" id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" />
         </service>
     </services>
 </container>

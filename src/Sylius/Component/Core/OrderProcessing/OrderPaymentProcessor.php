@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
@@ -27,7 +27,11 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
         private string $targetState = PaymentInterface::STATE_CART,
+        private ?OrderPaymentsRemoverInterface $orderPaymentsRemover = null,
     ) {
+        if ($this->orderPaymentsRemover === null) {
+            @trigger_error(sprintf('Not passing an $orderPaymentsRemover to %s constructor is deprecated since Sylius 1.12 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -39,15 +43,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             return;
         }
 
-        if (0 === $order->getTotal()) {
-            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
-                return $payment->getState() === OrderPaymentStates::STATE_CART;
-            });
-
-            foreach ($removablePayments as $payment) {
-                $order->removePayment($payment);
-            }
-
+        if ($this->removePayments($order)) {
             return;
         }
 
@@ -65,5 +61,32 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         } catch (NotProvidedOrderPaymentException) {
             return;
         }
+    }
+
+    private function removePayments(OrderInterface $order): bool
+    {
+        if (null !== $this->orderPaymentsRemover) {
+            if ($this->orderPaymentsRemover->canRemovePayments($order)) {
+                $this->orderPaymentsRemover->removePayments($order);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        if (0 === $order->getTotal()) {
+            $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
+                return $payment->getState() === PaymentInterface::STATE_CART;
+            });
+
+            foreach ($removablePayments as $payment) {
+                $order->removePayment($payment);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }
