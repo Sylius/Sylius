@@ -53,6 +53,14 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
+    function it_does_nothing_if_the_order_is_fulfilled(OrderInterface $order): void
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
+        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+
+        $this->process($order);
+    }
+
     function it_removes_cart_payments_from_order_if_its_total_is_zero(
         OrderInterface $order,
         PaymentInterface $cartPayment,

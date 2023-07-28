@@ -39,7 +39,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        if (OrderInterface::STATE_CANCELLED === $order->getState()) {
+        if ($this->cannotBeProcessed($order)) {
             return;
         }
 
@@ -88,5 +88,13 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         return false;
+    }
+
+    private function cannotBeProcessed(OrderInterface $order): bool
+    {
+        return
+            $order->getState() === OrderInterface::STATE_CANCELLED ||
+            $order->getState() === OrderInterface::STATE_FULFILLED
+        ;
     }
 }
