@@ -53,7 +53,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
     private function assertConstructorArgumentsPresence(
         \ReflectionMethod $constructor,
         string $class,
-        mixed $data
+        mixed $data,
     ): void {
         $parameters = $constructor->getParameters();
 
