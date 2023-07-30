@@ -281,81 +281,6 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/ApiResourceConfigurationMergerInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$formats with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthAuthorizationUrl with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthClientId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthClientSecret with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthEnabled with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthFlow with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthScopes with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthTokenUrl with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__construct\\(\\) has parameter \\$oauthType with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:__invoke\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:getContext\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:getPathAndMethod\\(\\) has parameter \\$swaggerData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:getPathAndMethod\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Property Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:\\$formats type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
-			message: "#^Property Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Bundle\\\\Action\\\\SwaggerUiAction\\:\\:\\$formatsProvider has no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Bundle/Action/SwaggerUiAction.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\ApiPlatform\\\\Bridge\\\\Symfony\\\\Routing\\\\RouteNameResolver\\:\\:isSameSubresource\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/ApiPlatform/Bridge/Symfony/Routing/RouteNameResolver.php
@@ -1919,16 +1844,6 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\SerializerContextBuilder\\\\LocaleContextBuilder\\:\\:createFromRequest\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/SerializerContextBuilder/LocaleContextBuilder.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Swagger\\\\AcceptLanguageHeaderDocumentationNormalizer\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Swagger/AcceptLanguageHeaderDocumentationNormalizer.php
-
-		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Swagger\\\\PathHiderDocumentationNormalizer\\:\\:__construct\\(\\) has parameter \\$apiRoutes with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Swagger/PathHiderDocumentationNormalizer.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\CatalogPromotion\\\\FixedDiscountActionValidator\\:\\:isChannelAmountValid\\(\\) has parameter \\$channelConfiguration with no value type specified in iterable type array\\.$#"

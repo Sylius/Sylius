@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction;
 use Sylius\Bundle\ApiBundle\DependencyInjection\SyliusApiExtension;
 
 final class SyliusApiExtensionTest extends AbstractExtensionTestCase
@@ -24,10 +23,10 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
 
-        $this->setParameter('api_platform.enable_swagger_ui', true);
+        $this->setParameter('api_platform.swagger.api_keys', []);
         $this->load();
 
-        $this->assertContainerBuilderHasService('api_platform.swagger.action.ui', SwaggerUiAction::class);
+        $this->assertContainerBuilderHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
     }
 
     /** @test */
@@ -35,20 +34,9 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
 
-        $this->setParameter('api_platform.enable_swagger_ui', false);
         $this->load();
 
-        $this->assertContainerBuilderNotHasService('api_platform.swagger.action.ui');
-    }
-
-    /** @test */
-    public function it_does_not_load_swagger_integration_if_it_does_not_exists(): void
-    {
-        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
-
-        $this->load();
-
-        $this->assertContainerBuilderNotHasService('api_platform.swagger.action.ui');
+        $this->assertContainerBuilderNotHasService('Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier');
     }
 
     /** @test */
