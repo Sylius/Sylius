@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
-use ApiPlatform\OpenApi\Model\PathItem;
-use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\OpenApi;
 
 /** @experimental */
@@ -43,7 +41,7 @@ final class ProductVariantDocumentationModifier implements DocumentationModifier
         ];
 
         return $docs->withComponents(
-            $components->withSchemas($schemas)
+            $components->withSchemas($schemas),
         );
     }
 }

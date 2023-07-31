@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\OpenApi;
-use Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface;
 
 /** @experimental */
 final class ProductSlugDocumentationModifier implements DocumentationModifierInterface
