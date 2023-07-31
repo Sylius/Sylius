@@ -79,6 +79,7 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->addToAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
         $adjustment->setAdjustable($this);
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function removeAdjustment(AdjustmentInterface $adjustment): void
@@ -91,6 +92,7 @@ class OrderItemUnit implements OrderItemUnitInterface
         $this->subtractFromAdjustmentsTotal($adjustment);
         $this->orderItem->recalculateUnitsTotal();
         $adjustment->setAdjustable(null);
+        $this->recalculateAdjustmentsTotal();
     }
 
     public function hasAdjustment(AdjustmentInterface $adjustment): bool
