@@ -418,6 +418,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I edit (this promotion) percentage action to have "([^"]+)%"$/
+     */
+    public function iEditCatalogPromotionToHaveDiscount(PromotionInterface $promotion, string $amount): void
+    {
+        $this->updatePage->open(['id' => $promotion->getId()]);
+        $this->updatePage->specifyPercentageDiscountActionValue($amount);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then the code field should be disabled
      */
     public function theCodeFieldShouldBeDisabled()
@@ -713,6 +723,14 @@ final class ManagingPromotionsContext implements Context
     public function iShouldSeeTheRuleConfigurationForm()
     {
         Assert::true($this->createPage->checkIfRuleConfigurationFormIsVisible(), 'Cart promotion rule configuration form is not visible.');
+    }
+
+    /**
+     * @Then /^it should have "([^"]+)%" discount$/
+     */
+    public function itShouldHaveDiscount(string $amount): void
+    {
+        Assert::same($this->updatePage->getPercentageDiscountActionValue(), $amount);
     }
 
     /**
