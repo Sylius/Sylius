@@ -39,6 +39,7 @@
             <argument type="service" id="sylius.tax_calculator" />
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.tax_rate_resolver" />
+            <argument type="service" id="sylius.proportional_integer_distributor" />
         </service>
 
         <service id="sylius.taxation.order_items_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
