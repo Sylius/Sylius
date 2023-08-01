@@ -12,11 +12,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
-use Sylius\Component\Order\Context\ResettingCartContextInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class TagCartContextsPass implements CompilerPassInterface
+final class TagResettableCartContextsPass implements CompilerPassInterface
 {
 
     public function process(ContainerBuilder $container) : void
@@ -26,7 +26,11 @@ final class TagCartContextsPass implements CompilerPassInterface
         foreach ($taggedServices as $id => $tags) {
             $definition = $container->getDefinition($id);
 
-            if(is_subclass_of($definition->getClass(), ResettingCartContextInterface::class)) {
+            if ($definition->hasTag('kernel.reset')) {
+                continue;
+            }
+
+            if(is_subclass_of($definition->getClass(), ResetInterface::class)) {
                 $definition->addTag('kernel.reset', ['method' => 'reset']);
             }
         }

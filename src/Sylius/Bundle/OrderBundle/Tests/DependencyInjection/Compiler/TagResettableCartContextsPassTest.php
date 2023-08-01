@@ -16,13 +16,13 @@ namespace DependencyInjection\Compiler;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
-use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\TagCartContextsPass;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\TagResettableCartContextsPass;
 use Sylius\Component\Order\Context\CartContextInterface;
-use Sylius\Component\Order\Context\ResettingCartContextInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class TagCartContextsPassTest extends AbstractCompilerPassTestCase
+final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCase
 {
 
     /** @test */
@@ -31,7 +31,7 @@ final class TagCartContextsPassTest extends AbstractCompilerPassTestCase
         $this->container->setDefinition(
             'acme.cart_context_resetting',
             (new Definition())
-                ->setClass($this->getMockClass(ResettingCartContextInterface::class))
+                ->setClass($this->getMockClass(ResetInterface::class))
                 ->setAutoconfigured(true)
                 ->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG),
         );
@@ -70,7 +70,7 @@ final class TagCartContextsPassTest extends AbstractCompilerPassTestCase
         $this->container->setDefinition(
             'acme.cart_context_resetting',
             (new Definition())
-                ->setClass($this->getMockClass(ResettingCartContextInterface::class))
+                ->setClass($this->getMockClass(ResetInterface::class))
                 ->setAutoconfigured(true),
         );
 
@@ -81,8 +81,25 @@ final class TagCartContextsPassTest extends AbstractCompilerPassTestCase
         self::assertThat($definition, self::logicalNot(new DefinitionHasTagConstraint('kernel.reset', ['method' => 'reset'])));
     }
 
+    /** @test */
+    public function it_prevents_from_tagging_cart_context_when_already_tagged_as_kernel_reset(): void
+    {
+        $this->container->setDefinition(
+            'acme.cart_context_resetting',
+            (new Definition())
+                ->setClass($this->getMockClass(ResetInterface::class))
+                ->setAutoconfigured(true)
+                ->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG),
+        );
+        $this->container->registerForAutoconfiguration(ResetInterface::class)->addTag('kernel.reset', ['method' => 'reset']);
+
+        $this->compile();
+
+        $this->assertCount(1, $this->container->getDefinition('acme.cart_context_resetting')->getTag('kernel.reset'));
+    }
+
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new TagCartContextsPass());
+        $container->addCompilerPass(new TagResettableCartContextsPass());
     }
 }
