@@ -34,7 +34,7 @@ Feature: Creating a catalog promotion
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And it should have "50%" discount
+        And it should have "50.00%" discount
         And it should be active
         And "PHP T-Shirt" variant and "Kotlin T-Shirt" variant should be discounted
 
@@ -52,7 +52,7 @@ Feature: Creating a catalog promotion
         Then there should be 1 new catalog promotion on the list
         And it should have "winter_sale" code and "Winter sale" name
         And "Winter sale" catalog promotion should apply to "PHP T-Shirt" variant and "Kotlin T-Shirt" variant
-        And it should have "50%" discount
+        And it should have "50.00%" discount
         And it should be inactive
         And "PHP T-Shirt" variant and "Kotlin T-Shirt" variant should not be discounted
 
