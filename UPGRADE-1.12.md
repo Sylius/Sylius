@@ -1,15 +1,27 @@
-# UPGRADE FROM `v1.12.X` TO `v1.12.8`
+# UPGRADE FROM `v1.12.8` TO `v1.12.9`
+
+1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
+    ```diff
+    public function __construct(
+        private OrderPaymentProviderInterface $orderPaymentProvider,
+        private string $targetState = PaymentInterface::STATE_CART,
+    +   private ?OrderPaymentsRemoverInterface $orderPaymentsRemover = null,
+    +   private array $unprocessableOrderStates = [],
+    )
+    ```
+
+# UPGRADE FROM `v1.12.5` TO `v1.12.8`
 
 1. The priority of the `sylius.context.locale` tag on the `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext` service has been changed from `256` to `32`.
     It means that this service has no longer the highest priority, and passing `Accept-Language` header on the UI won't override the locale set in the URL. If your app
     depends on this behavior, you need to change the priority of the `sylius.context.locale` tag on the `Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext` directly in your app.
 
-# UPGRADE FROM `v1.12.X` TO `v1.12.5`
+# UPGRADE FROM `v1.12.4` TO `v1.12.5`
 
 1. For routes `sylius_admin_order_shipment_ship` and `sylius_admin_order_resend_confirmation_email` the missing "/orders"
     prefix has been added. If you have been using these routes' paths directly, you need to update them.
 
-# UPGRADE FROM `v1.12.X` TO `v1.12.4`
+# UPGRADE FROM `v1.12.2` TO `v1.12.4`
 
 1. The default configuration of Symfony Messenger has changed,
    it is now separated for each transport and can be set via environmental variables:
@@ -22,7 +34,7 @@
         + SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN=doctrine://default?queue_name=catalog_promotion_removal_failed
     ```
 
-# UPGRADE FROM `v1.12.X` TO `v1.12.2`
+# UPGRADE FROM `v1.12.0` TO `v1.12.2`
 
 1. All entities and their relationships have a default order by identifier if no order is specified. You can disable
    this behavior by setting the `sylius_core.order_by_identifier` parameter to `false`:
@@ -54,7 +66,7 @@ and should be used only this way.
 
 4. To allow administrator reset their password, add in `config/packages/security.yaml` file the following entry
    ```yaml
-           - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
+   - { path: "%sylius.security.admin_regex%/forgotten-password", role: IS_AUTHENTICATED_ANONYMOUSLY }
    ```
    above
    ```yaml
