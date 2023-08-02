@@ -45,18 +45,27 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_the_order_is_cancelled(OrderInterface $order): void
-    {
+    function it_does_nothing_if_the_order_is_cancelled_when_no_unsupported_states_were_passed(
+        OrderInterface $order
+    ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
         $order->getLastPayment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
     }
 
-    function it_does_nothing_if_the_order_is_fulfilled(OrderInterface $order): void
-    {
+    function it_does_nothing_if_the_order_state_is_in_unsupported_states(
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        OrderInterface $order,
+    ): void {
+        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, null, [
+            OrderInterface::STATE_FULFILLED,
+        ]);
+
         $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
         $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+
+        $orderPaymentProvider->provideOrderPayment($order)->shouldNotBeCalled();
 
         $this->process($order);
     }
