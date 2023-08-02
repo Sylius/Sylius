@@ -59,7 +59,6 @@
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface" /> <!-- deprecated in Symfony 6.3 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
                 <referencedClass name="Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface" /> <!-- deprecated in Symfony 6.1 -->
-                <referencedClass name="Sylius\Component\Order\Context\ResettingCartContextInterface" /> <!-- deprecated in Sylius 2.0 -->
             </errorLevel>
         </DeprecatedInterface>
         <DeprecatedMethod>
