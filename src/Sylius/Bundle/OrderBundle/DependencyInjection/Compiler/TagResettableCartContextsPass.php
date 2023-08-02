@@ -18,7 +18,6 @@ use Symfony\Contracts\Service\ResetInterface;
 
 final class TagResettableCartContextsPass implements CompilerPassInterface
 {
-
     public function process(ContainerBuilder $container) : void
     {
         $taggedServices = $container->findTaggedServiceIds(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG);
