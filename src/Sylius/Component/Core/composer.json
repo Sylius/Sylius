@@ -50,6 +50,7 @@
         "sylius/taxation": "^1.12",
         "sylius/taxonomy": "^1.12",
         "sylius/user": "^1.12",
+        "symfony/service-contracts": "^2.5",
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/mime": "^5.4 || ^6.0",
         "symfony/string": "^5.4 || ^6.0",
