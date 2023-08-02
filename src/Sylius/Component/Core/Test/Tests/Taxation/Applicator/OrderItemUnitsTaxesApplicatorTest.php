@@ -15,56 +15,74 @@ namespace Sylius\Component\Core\Test\Tests\Taxation\Applicator;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\Zone;
-use Sylius\Component\Core\Distributor\IntegerDistributor;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributor;
 use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\Order;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItem;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\TaxRate;
 use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator;
+use Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator;
 use Sylius\Component\Order\Factory\AdjustmentFactory;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxation\Calculator\DecimalCalculator;
+use Sylius\Component\Taxation\Calculator\DefaultCalculator;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
-final class OrderItemsTaxesApplicatorTest extends TestCase
+final class OrderItemUnitsTaxesApplicatorTest extends TestCase
 {
-    public function test_it_calculates_tax_with_decimal_precision(): void
+    public function test_it_calculates_tax_with_rounding(): void
     {
-        $applicator = new OrderItemsTaxesApplicator(
-            new DecimalCalculator(),
+        $applicator = new OrderItemUnitsTaxesApplicator(
+            new DefaultCalculator(),
             new AdjustmentFactory(new Factory(Adjustment::class)),
-            new IntegerDistributor(),
             $this->createConfiguredMock(TaxRateResolverInterface::class, [
                 'resolve' => $this->createTaxRate(),
             ]),
             new ProportionalIntegerDistributor(),
         );
 
-        $order = new Order();
-        for ($i = 0; $i < 20; ++$i) {
-            $order->addItem($this->createOrderItem());
-        }
+        $order = $this->createOrder();
 
         $applicator->apply($order, new Zone());
 
-        $this->assertEquals(39400, $order->getTotal());
-        $this->assertEquals(6567, $order->getTaxTotal());
-        $this->assertEquals(32833, $order->getTotal() - $order->getTaxTotal());
+        $this->assertEquals(3940, $order->getTotal());
+        $this->assertEquals(656, $order->getTaxTotal());
     }
 
-    private function createOrderItem(): OrderItemInterface
+    public function test_it_calculates_tax_with_decimal_precision(): void
+    {
+        $applicator = new OrderItemUnitsTaxesApplicator(
+            new DecimalCalculator(),
+            new AdjustmentFactory(new Factory(Adjustment::class)),
+            $this->createConfiguredMock(TaxRateResolverInterface::class, [
+                'resolve' => $this->createTaxRate(),
+            ]),
+            new ProportionalIntegerDistributor(),
+        );
+
+        $order = $this->createOrder();
+
+        $applicator->apply($order, new Zone());
+
+        $this->assertEquals(3940, $order->getTotal());
+        $this->assertEquals(657, $order->getTaxTotal());
+    }
+
+    private function createOrder(): OrderInterface
     {
         $item = new OrderItem();
         $item->setVariant(new ProductVariant());
         $item->setUnitPrice(1970);
         $item->addUnit(new OrderItemUnit($item));
+        $item->addUnit(new OrderItemUnit($item));
 
-        return $item;
+        $order = new Order();
+        $order->addItem($item);
+
+        return $order;
     }
 
     private function createTaxRate(): TaxRateInterface
