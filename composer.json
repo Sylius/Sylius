@@ -181,7 +181,7 @@
         "api-platform/core": "2.7.0",
         "doctrine/doctrine-bundle": "2.3.0",
         "doctrine/migrations": "3.5.3",
-        "doctrine/orm": "2.15.2 || 2.15.3 || 2.15.4",
+        "doctrine/orm": ">= 2.15.2",
         "jms/serializer-bundle": "4.1.0",
         "lexik/jwt-authentication-bundle": "^2.18",
         "stof/doctrine-extensions-bundle": "1.8.0",
