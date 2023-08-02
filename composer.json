@@ -185,7 +185,7 @@
         "sylius/user-bundle": "self.version"
     },
     "conflict": {
-        "doctrine/orm": "2.15.2 || 2.15.3 || 2.15.4",
+        "doctrine/orm": ">= 2.15.2",
         "lexik/jwt-authentication-bundle": "^2.18",
         "stof/doctrine-extensions-bundle": "1.8.0",
         "symfony/framework-bundle": "6.2.8",

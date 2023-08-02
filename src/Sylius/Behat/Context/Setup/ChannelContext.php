@@ -347,6 +347,18 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the store uses the :taxCalculationStrategy tax calculation strategy
+     */
+    public function theStoreUsesTheTaxCalculationStrategy(string $taxCalculationStrategy): void
+    {
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setTaxCalculationStrategy(StringInflector::nameToLowercaseCode($taxCalculationStrategy));
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param bool $state
      */
     private function changeChannelState(ChannelInterface $channel, $state)

@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -50,8 +50,6 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         TaxRateResolverInterface $taxRateResolver,
         AdjustmentInterface $taxAdjustment1,
         AdjustmentInterface $taxAdjustment2,
-        Collection $items,
-        Collection $units,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
@@ -60,10 +58,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         TaxRateInterface $taxRate,
         ZoneInterface $zone,
     ): void {
-        $order->getItems()->willReturn($items);
-
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $orderItem->getVariant()->willReturn($productVariant);
         $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
@@ -74,8 +69,7 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $taxRate->getAmount()->willReturn(0.1);
         $taxRate->isIncludedInPrice()->willReturn(false);
 
-        $orderItem->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $unit1->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(100);
@@ -144,16 +138,12 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
         CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
-        Collection $items,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant,
         ZoneInterface $zone,
     ): void {
-        $order->getItems()->willReturn($items);
-
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $orderItem->getQuantity()->willReturn(1);
 
@@ -170,8 +160,6 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
-        Collection $items,
-        Collection $units,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
@@ -180,18 +168,14 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         TaxRateInterface $taxRate,
         ZoneInterface $zone,
     ): void {
-        $order->getItems()->willReturn($items);
-
-        $items->count()->willReturn(2);
-        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
         $orderItem->getQuantity()->willReturn(2);
 
         $orderItem->getVariant()->willReturn($productVariant);
         $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
 
-        $orderItem->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $unit1->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(0.00);
@@ -202,6 +186,79 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, Argument::cetera())->shouldNotBeCalled();
         $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();
         $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
+
+        $this->apply($order, $zone);
+    }
+
+    function it_applies_taxes_on_units_based_on_item_total_and_rate_with_distribution_on_units(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        AdjustmentInterface $taxAdjustment1,
+        AdjustmentInterface $taxAdjustment2,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        ProductVariantInterface $productVariant,
+        TaxRateInterface $taxRate,
+        ZoneInterface $zone,
+    ): void {
+        $this->beConstructedWith($calculator, $adjustmentsFactory, $taxRateResolver, $proportionalIntegerDistributor);
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
+
+        $orderItem->getVariant()->willReturn($productVariant);
+        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+
+        $taxRate->getLabel()->willReturn('Simple tax (10%)');
+        $taxRate->getCode()->willReturn('simple_tax');
+        $taxRate->getName()->willReturn('Simple tax');
+        $taxRate->getAmount()->willReturn(0.1004);
+        $taxRate->isIncludedInPrice()->willReturn(false);
+
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $unit1->getTotal()->willReturn(1000);
+        $calculator->calculate(1000, $taxRate)->willReturn(100.40);
+
+        $unit2->getTotal()->willReturn(900);
+        $calculator->calculate(900, $taxRate)->willReturn(90.36);
+
+        $proportionalIntegerDistributor->distribute([100, 90], 191)->willReturn([101, 90]);
+
+        $adjustmentsFactory
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                101,
+                false,
+                [
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1004,
+                ],
+            )
+            ->willReturn($taxAdjustment1)
+        ;
+        $adjustmentsFactory
+            ->createWithData(
+                AdjustmentInterface::TAX_ADJUSTMENT,
+                'Simple tax (10%)',
+                90,
+                false,
+                [
+                    'taxRateCode' => 'simple_tax',
+                    'taxRateName' => 'Simple tax',
+                    'taxRateAmount' => 0.1004,
+                ],
+            )
+            ->willReturn($taxAdjustment2)
+        ;
+
+        $unit1->addAdjustment($taxAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment($taxAdjustment2)->shouldBeCalled();
 
         $this->apply($order, $zone);
     }
