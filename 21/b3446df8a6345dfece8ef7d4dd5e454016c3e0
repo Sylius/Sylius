@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-07-12T10:49:16Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-lhkwu6.bunnyenv.com/|
+|php|https://store-lhkwu6.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by palttamas at 2023-07-27T07:54:57Z
+
+@jakubtobiasz I think I made all the requested changes
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-08-01T14:21:52Z
+
+I let myself implement @NoResponseMate suggestions as we'd like to merge this PR this week :).
+
+---------------------------------------------------------------------------
+
+by TheMilek at 2023-08-02T11:59:49Z
+
+Thank you, Tamas! :tada:
