@@ -726,7 +726,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then /^it should have "([^"]+)%" discount$/
+     * @Then it should have :amount discount
      */
     public function itShouldHaveDiscount(string $amount): void
     {
