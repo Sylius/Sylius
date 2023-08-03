@@ -32,6 +32,7 @@ class ProvinceController extends ResourceController
      */
     public function choiceOrTextFieldFormAction(Request $request): Response
     {
+        // some change only to force gha
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
