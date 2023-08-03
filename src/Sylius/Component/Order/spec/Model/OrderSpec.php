@@ -160,6 +160,19 @@ final class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(true);
     }
 
+    function it_adds_adjustments_and_recalculates_them_properly(AdjustmentInterface $adjustment): void
+    {
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+        $adjustment->isNeutral()->willReturn(false);
+
+        $adjustment->getAmount()->willReturn(100);
+
+        $this->hasAdjustment($adjustment)->shouldReturn(false);
+        $this->addAdjustment($adjustment);
+        $this->hasAdjustment($adjustment)->shouldReturn(true);
+        $this->getAdjustmentsTotal()->shouldReturn(100);
+    }
+
     function it_removes_adjustments_properly(AdjustmentInterface $adjustment): void
     {
         $this->hasAdjustment($adjustment)->shouldReturn(false);

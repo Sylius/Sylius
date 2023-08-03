@@ -234,6 +234,7 @@ class OrderItem implements OrderItemInterface
             $this->adjustments->add($adjustment);
             $this->addToAdjustmentsTotal($adjustment);
             $adjustment->setAdjustable($this);
+            $this->recalculateAdjustmentsTotal();
         }
     }
 
@@ -243,6 +244,7 @@ class OrderItem implements OrderItemInterface
             $this->adjustments->removeElement($adjustment);
             $this->subtractFromAdjustmentsTotal($adjustment);
             $adjustment->setAdjustable(null);
+            $this->recalculateAdjustmentsTotal();
         }
     }
 

@@ -357,8 +357,6 @@ final class OrderItemSpec extends ObjectBehavior
         $this->addAdjustment($adjustment1);
         $this->addAdjustment($adjustment2);
 
-        $this->getTotal()->shouldReturn(600);
-        $this->recalculateAdjustmentsTotal();
         $this->getTotal()->shouldReturn(400);
     }
 
