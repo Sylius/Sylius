@@ -37,13 +37,13 @@
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^8.5",
+        "sylius-labs/doctrine-extensions-extra-bundle": "dev-main",
         "symfony/browser-kit": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.15.2",
-        "stof/doctrine-extensions-bundle": "1.8.0"
+        "doctrine/orm": ">= 2.15.2"
     },
     "config": {
         "allow-plugins": {

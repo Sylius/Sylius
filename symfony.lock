@@ -583,6 +583,9 @@
     "sylius-labs/coding-standard": {
         "version": "v2.0.0"
     },
+    "sylius-labs/doctrine-extensions-extra-bundle": {
+        "version": "dev-main"
+    },
     "sylius-labs/doctrine-migrations-extra-bundle": {
         "version": "v0.1.3"
     },

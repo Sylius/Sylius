@@ -30,12 +30,12 @@
         "stof/doctrine-extensions-bundle": "^1.4",
         "sylius/addressing": "^1.12",
         "sylius/resource-bundle": "^1.9",
+        "sylius-labs/doctrine-extensions-extra-bundle": "dev-main",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/intl": "^5.4 || ^6.0"
     },
     "conflict": {
         "doctrine/orm": ">= 2.15.2",
-        "stof/doctrine-extensions-bundle": "1.8.0",
         "twig/twig": "^1.0 || ^3.0"
     },
     "require-dev": {

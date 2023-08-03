@@ -44,10 +44,10 @@
         "sylius/resource-bundle": "^1.9",
         "sylius/review": "^1.12",
         "sylius/user-bundle": "^1.12",
+        "sylius-labs/doctrine-extensions-extra-bundle": "dev-main",
         "symfony/framework-bundle": "^5.4 || ^6.0"
     },
     "conflict": {
-        "stof/doctrine-extensions-bundle": "1.8.0",
         "twig/twig": "^3.0"
     },
     "require-dev": {
