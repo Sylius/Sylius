@@ -246,6 +246,8 @@
         </service>
         <service id="Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface" alias="sylius.order_payment_provider" />
 
+        <service id="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface" class="Sylius\Component\Core\Payment\Remover\OrderPaymentsRemover" />
+
         <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.channel" />

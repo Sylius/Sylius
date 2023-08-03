@@ -103,6 +103,10 @@ everything recalculated.
 
     $this->container->get('sylius.order_processing.order_processor')->process($order);
 
+.. warning::
+    By default all the **OrderProcessors** only work on orders with state **cart** as the processing has been tailored to work in checkout.
+    If you'd like to use that logic for orders with different states you will need to change the **Order**'s *canBeProcessed* method and probably apply other customizations fitting your case.
+
 .. note::
 
     This **CompositeOrderProcessor** is one of the most powerful concepts. It handles whole order calculation logic and allows
