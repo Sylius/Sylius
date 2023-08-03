@@ -1,0 +1,45 @@
+---------------------------------------------------------------------------
+
+by SirDomin at 2021-07-29T09:20:42Z
+
+The base of this pull-request was changed, you need fetch and reset your local branch
+if you want to add new commits to this pull request. **Reset before you pull, else commits
+may become messed-up.**
+
+Unless you added new commits (to this branch) locally that you did not push yet,
+execute `git fetch origin && git reset "patch-6"` to update your local branch.
+
+Feel free to ask for assistance when you get stuck :+1:
+
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-07-30T08:26:22Z
+
+OR 😄 in fact I'm not 100% sure should we merge it without adding the same feature on `OrderItem`, `OrderItemUnit` and `Shipment` level - currently no adjustment is added to `Order` directly, so we *cannot* be sure it does not break anything, as these change would not be covered by any Behat scenario 💃
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-07-31T12:38:51Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-ec4vn7.bunnyenv.com/|
+|php|https://store-ec4vn7.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-08-03T13:06:33Z
+
+Thanks, @kayue! :1st_place_medal:
