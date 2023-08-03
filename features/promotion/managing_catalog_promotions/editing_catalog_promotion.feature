@@ -74,7 +74,7 @@ Feature: Editing catalog promotion
     Scenario: Editing catalog promotion action
         When I edit "Christmas sale" catalog promotion to have "40%" discount
         Then I should be notified that it has been successfully edited
-        And this catalog promotion should have "40%" percentage discount
+        And this catalog promotion should have "40.00%" percentage discount
 
     @api @ui @javascript
     Scenario: Editing catalog promotion action to be a fixed discount

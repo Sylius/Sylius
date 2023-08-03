@@ -34,6 +34,7 @@
         "sylius/order": "^1.12",
         "sylius/resource-bundle": "^1.9",
         "symfony/framework-bundle": "^5.4.21 || ^6.0",
+        "symfony/service-contracts": "^2.5",
         "symfony/templating": "^5.4.21 || ^6.0"
     },
     "conflict": {

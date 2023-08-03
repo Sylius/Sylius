@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle;
 
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\TagResettableCartContextsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,6 +35,7 @@ final class SyliusOrderBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterProcessorsPass());
         $container->addCompilerPass(new RegisterCartContextsPass());
+        $container->addCompilerPass(new TagResettableCartContextsPass());
     }
 
     /**

@@ -55,6 +55,7 @@
         "symfony/http-client": "^5.4.21 || ^6.0",
         "symfony/http-foundation": "^5.4.21 || ^6.0",
         "symfony/mime": "^5.4.21 || ^6.0",
+        "symfony/service-contracts": "^2.5",
         "symfony/string": "^5.4.21 || ^6.0",
         "webmozart/assert": "^1.9",
         "laminas/laminas-stdlib": "^3.3.1"

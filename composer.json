@@ -126,6 +126,7 @@
         "symfony/security-csrf": "^5.4.21 || ^6.0",
         "symfony/security-http": "^5.4.21 || ^6.0",
         "symfony/serializer": "^5.4.21 || ^6.0",
+        "symfony/service-contracts": "^2.5",
         "symfony/string": "^5.4.21 || ^6.0",
         "symfony/templating": "^5.4.21 || ^6.0",
         "symfony/translation": "^5.4.21 || ^6.0",
