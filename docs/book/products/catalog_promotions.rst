@@ -241,7 +241,7 @@ We can also make it programmatically:
 
     /** @var MessageBusInterface $eventBus */
     $eventBus = $this->container->get('sylius.event_bus');
-    $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
+    $eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
 
 And now you should be able to see created Catalog Promotion. You can check if it exists like in the last example (with GET endpoint).
 If you look into ``product-variant`` endpoint in shop you should see now that chosen variants have lowered price and added field ``appliedPromotions``:
