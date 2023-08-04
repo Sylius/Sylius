@@ -31,6 +31,9 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         private TaxRateResolverInterface $taxRateResolver,
         private ?ProportionalIntegerDistributorInterface $proportionalIntegerDistributor = null,
     ) {
+        if ($this->proportionalIntegerDistributor === null) {
+            @trigger_error(sprintf('Not passing an $proportionalIntegerDistributor to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+        }
     }
 
     public function apply(OrderInterface $order, ZoneInterface $zone): void
