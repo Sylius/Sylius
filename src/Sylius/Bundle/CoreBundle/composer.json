@@ -36,7 +36,7 @@
         "league/flysystem-bundle": "^2.4",
         "liip/imagine-bundle": "^2.10",
         "nyholm/psr7": "^1.6",
-        "sonata-project/block-bundle": "^4.2",
+        "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
