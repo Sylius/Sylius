@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sylius package.
  *
@@ -18,7 +19,7 @@ use Symfony\Contracts\Service\ResetInterface;
 
 final class TagResettableCartContextsPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container) : void
+    public function process(ContainerBuilder $container): void
     {
         $taggedServices = $container->findTaggedServiceIds(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG);
 
@@ -29,7 +30,7 @@ final class TagResettableCartContextsPass implements CompilerPassInterface
                 continue;
             }
 
-            if(is_subclass_of($definition->getClass(), ResetInterface::class)) {
+            if (is_subclass_of($definition->getClass(), ResetInterface::class)) {
                 $definition->addTag('kernel.reset', ['method' => 'reset']);
             }
         }

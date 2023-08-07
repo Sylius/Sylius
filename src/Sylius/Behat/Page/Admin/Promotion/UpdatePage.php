@@ -143,7 +143,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $action = $this->getElement('percentage_action_field');
 
-        return $action->find('css', 'input')->getValue().'%';
+        return $action->find('css', 'input')->getValue() . '%';
     }
 
     public function removeRuleAmount(string $channelCode): void
