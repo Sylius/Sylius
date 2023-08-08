@@ -144,7 +144,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $action = $this->getElement('percentage_action_field');
 
-        return $action->find('css', 'input')->getValue();
+        return $action->find('css', 'input')->getValue() . '%';
     }
 
     public function removeRuleAmount(string $channelCode): void
@@ -186,7 +186,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return [
             'action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_%channelCode%_%field%"]',
-            'percentage_action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_percentage"]',
             'actions' => '#actions',
             'applies_to_discounted' => '#sylius_promotion_appliesToDiscounted',
             'code' => '#sylius_promotion_code',
@@ -197,6 +196,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'exclusive' => '#sylius_promotion_exclusive',
             'label' => '#sylius_promotion_translations_%localeCode%_label',
             'name' => '#sylius_promotion_name',
+            'percentage_action_field' => '[id^="sylius_promotion_actions_"][id$="_configuration_percentage"]',
             'priority' => '#sylius_promotion_priority',
             'rule_amount' => '[id^="sylius_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',
             'rules' => '#rules',

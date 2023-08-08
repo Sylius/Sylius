@@ -24,7 +24,6 @@ use Symfony\Contracts\Service\ResetInterface;
 
 final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCase
 {
-
     /** @test */
     public function it_tags_resetting_cart_contexts_with_kernel_reset(): void
     {
@@ -48,7 +47,6 @@ final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCa
     /** @test */
     public function it_tags_only_if_service_implements_resetting_cart_context(): void
     {
-
         $this->container->setDefinition(
             'acme.cart_context',
             (new Definition())

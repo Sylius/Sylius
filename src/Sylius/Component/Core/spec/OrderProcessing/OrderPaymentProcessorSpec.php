@@ -46,7 +46,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_the_order_is_cancelled_when_no_unsupported_states_were_passed(
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
         $order->getLastPayment(Argument::any())->shouldNotBeCalled();
