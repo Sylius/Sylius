@@ -56,6 +56,10 @@
    to `Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator`
    as the second argument is deprecated.
 
+1. Not passing an instance of `Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface`
+   and a collection of unprocessable order states to `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
+   as the third and fourth arguments respectively is deprecated.
+
 1. Class `\Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal calculation
    is now available on the Order model `\Sylius\Component\Core\Model\Order::getItemsSubtotal`.
 
