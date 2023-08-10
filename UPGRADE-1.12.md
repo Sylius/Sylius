@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.12.9` TO `v1.12.10`
+
+1. The `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` constructor has been removed as it is not used anymore.
+
 # UPGRADE FROM `v1.12.8` TO `v1.12.9`
 
 1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
