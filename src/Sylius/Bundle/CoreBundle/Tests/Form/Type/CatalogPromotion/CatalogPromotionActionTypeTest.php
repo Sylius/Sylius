@@ -219,7 +219,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
 
         $this->assertInstanceOf(CatalogPromotionActionInterface::class, $catalogPromotionAction);
         $this->assertSame('fixed_discount', $catalogPromotionAction->getType());
-        $this->assertSame(['WEB_US' => ['amount' => null]], $catalogPromotionAction->getConfiguration());
+        $this->assertSame(['WEB_US' => ['amount' => 10]], $catalogPromotionAction->getConfiguration());
     }
 
     /** @test */
