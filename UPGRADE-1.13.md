@@ -60,6 +60,10 @@
    and a collection of unprocessable order states to `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor`
    as the third and fourth arguments respectively is deprecated.
 
+1. Not passing an instance of `Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface`
+   to `Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator` and to `Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator`
+   as the last argument is deprecated.
+
 1. Class `\Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator` has been deprecated. Order items subtotal calculation
    is now available on the Order model `\Sylius\Component\Core\Model\Order::getItemsSubtotal`.
 
