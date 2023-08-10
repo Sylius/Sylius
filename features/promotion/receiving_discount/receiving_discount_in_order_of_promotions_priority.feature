@@ -9,7 +9,7 @@ Feature: Receiving discount in the order defined by promotions' priorities
         And the store has a product "The Pug Mug" priced at "$100.00"
 
     @ui @api
-    Scenario: Receiving fixed discount first when priority is greater
+    Scenario: Receiving percentage discount first when priority is higher
         Given there is a promotion "Cebula Deal" with priority 1
         And it gives "$10.00" discount to every order
         And there is a promotion "Santa's Gift" with priority 4
@@ -18,7 +18,7 @@ Feature: Receiving discount in the order defined by promotions' priorities
         Then my cart total should be "$70.00"
 
     @ui @api
-    Scenario: Receiving percentage discount first when priority is greater
+    Scenario: Receiving fixed discount first when priority is higher
         Given there is a promotion "Cebula Deal" with priority 5
         And it gives "$10.00" discount to every order
         And there is a promotion "Santa's Gift" with priority 2
