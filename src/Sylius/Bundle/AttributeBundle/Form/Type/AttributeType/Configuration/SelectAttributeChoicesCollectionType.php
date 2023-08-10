@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Ramsey\Uuid\Uuid;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,13 +22,6 @@ use Symfony\Component\Form\FormEvents;
 
 class SelectAttributeChoicesCollectionType extends AbstractType
 {
-    private string $defaultLocaleCode;
-
-    public function __construct(TranslationLocaleProviderInterface $localeProvider)
-    {
-        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
-    }
-
     /**
      * @psalm-suppress InvalidScalarArgument Some weird magic going on here, not sure about refactor
      */
@@ -45,10 +37,6 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                     if (!is_int($key)) {
                         $fixedData[$key] = $this->resolveValues($values);
 
-                        continue;
-                    }
-
-                    if (!array_key_exists($this->defaultLocaleCode, $values)) {
                         continue;
                     }
 
