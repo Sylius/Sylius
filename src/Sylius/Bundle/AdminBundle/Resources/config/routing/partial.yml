@@ -18,6 +18,10 @@ sylius_admin_partial_order:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/order.yml"
     prefix: /orders
 
+sylius_admin_partial_payment_method:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/payment_method.yml"
+    prefix: /payment-methods
+
 sylius_admin_partial_product:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/product.yml"
     prefix: /products
