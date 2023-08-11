@@ -42,7 +42,7 @@
         "twig/twig": "^2.12 || ^3.3"
     },
     "conflict": {
-        "doctrine/orm": ">= 2.15.2"
+        "doctrine/orm": ">= 2.16.0"
     },
     "config": {
         "allow-plugins": {
