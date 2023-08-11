@@ -13,14 +13,10 @@ references related issues.
   This version is missing the service alias `validator.expression`
   which causes ValidatorException exception to be thrown when using `Expression` constraint. 
 
-- `doctrine/orm:2.15.2`:
+- `doctrine/orm:>= 2.16.0`
 
-  This version introduced a bug, which causes the `ForeignKeyConstraintViolationException` exception to not be thrown when trying to delete a resource with a foreign key constraint.
-  References: https://github.com/doctrine/orm/issues/10752
-
-- `doctrine/orm:>=2.15.3`
-
-  This version introduced a bug, causing the bulk editing not to work properly. When deleting two items at once, the second one is deleted and re-added to the database.
+  This version makes Sylius Fixtures loading fail on the product review fixtures.
+  References: https://github.com/doctrine/orm/issues/10869
 
 - `symfony/validator:5.4.25 || 6.2.12 || 6.3.1`
 

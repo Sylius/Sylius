@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ReviewBundle\EventListener;
 
+use Doctrine\ORM\Event\PostRemoveEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -46,6 +47,12 @@ final class ReviewChangeListener
             return;
         }
 
-        $this->averageRatingUpdater->update($subject->getReviewSubject());
+        $reviewSubject = $subject->getReviewSubject();
+
+        if ($args instanceof PostRemoveEventArgs) {
+            $reviewSubject->removeReview($subject);
+        }
+
+        $this->averageRatingUpdater->update($reviewSubject);
     }
 }
