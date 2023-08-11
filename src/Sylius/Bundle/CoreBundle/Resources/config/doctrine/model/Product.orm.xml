@@ -35,6 +35,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="reviewSubject">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <order-by>
                 <order-by-field name="id" />
