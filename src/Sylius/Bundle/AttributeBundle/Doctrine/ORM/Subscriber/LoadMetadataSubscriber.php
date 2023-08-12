@@ -50,6 +50,10 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory,
     ): void {
+        if ($metadata->hasAssociation('subject')) {
+            return;
+        }
+
         /** @var ClassMetadataInfo $targetEntityMetadata */
         $targetEntityMetadata = $metadataFactory->getMetadataFor($subjectClass);
         $subjectMapping = [
@@ -64,7 +68,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
             ]],
         ];
 
-        $this->mapManyToOne($metadata, $subjectMapping);
+        $metadata->mapManyToOne($subjectMapping);
     }
 
     private function mapAttributeOnAttributeValue(
@@ -72,6 +76,10 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ClassMetadataInfo $metadata,
         ClassMetadataFactory $metadataFactory,
     ): void {
+        if ($metadata->hasAssociation('attribute')) {
+            return;
+        }
+
         /** @var ClassMetadataInfo $attributeMetadata */
         $attributeMetadata = $metadataFactory->getMetadataFor($attributeClass);
         $attributeMapping = [
@@ -84,11 +92,6 @@ final class LoadMetadataSubscriber implements EventSubscriber
             ]],
         ];
 
-        $this->mapManyToOne($metadata, $attributeMapping);
-    }
-
-    private function mapManyToOne(ClassMetadataInfo $metadata, array $subjectMapping): void
-    {
-        $metadata->mapManyToOne($subjectMapping);
+        $metadata->mapManyToOne($attributeMapping);
     }
 }
