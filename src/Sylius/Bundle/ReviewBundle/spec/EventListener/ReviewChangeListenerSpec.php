@@ -60,7 +60,7 @@ final class ReviewChangeListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_event_subject_is_not_review_object(
         ReviewableRatingUpdaterInterface $averageRatingUpdater,
-        LifecycleEventArgs $event
+        LifecycleEventArgs $event,
     ): void {
         $event->getObject()->willReturn('badObject');
 
