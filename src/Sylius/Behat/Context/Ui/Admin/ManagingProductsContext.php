@@ -259,6 +259,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I am browsing the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     * @When /^I go to the (\d+)(?:st|nd|rd|th) page of products from ("([^"]+)" taxon)$/
+     */
+    public function iAmBrowsingProductsFromTaxonPage(int $page, TaxonInterface $taxon): void
+    {
+        $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId(), 'page' => $page]);
+    }
+
+    /**
      * @When I filter them by :taxonName taxon
      */
     public function iFilterThemByTaxon($taxonName)
@@ -309,6 +318,39 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then /^the (\d+)(?:st|nd|rd|th) product on this page should be named "([^"]+)"$/
+     */
+    public function theNthProductOnThisPageShouldBeNamed(int $position, string $value): void
+    {
+        $values = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same($values[$position - 1], $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
+     * @Then /^this product should be at position (\d+)$/
+     */
+    public function theNthProductOnThisPageShouldBeAtPosition(int $position): void
+    {
+        $productName = $this->sharedStorage->get('product_taxon_name');
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+    }
+
+    /**
+     * @Then the one before last product on the list should have :field :value
+     */
+    public function theOneBeforeLastProductOnTheListShouldHave(string $field, string $value): void
+    {
+        $values = $this->indexPerTaxonPage->getColumnFields($field);
+
+        Assert::same($values[count($values) - 2], $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
      * @Then the last product on the list should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
@@ -316,6 +358,8 @@ final class ManagingProductsContext implements Context
         $values = $this->indexPerTaxonPage->getColumnFields($field);
 
         Assert::same(end($values), $value);
+
+        $this->sharedStorage->set('product_taxon_name', $value);
     }
 
     /**

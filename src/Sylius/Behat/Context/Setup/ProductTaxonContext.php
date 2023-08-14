@@ -31,7 +31,7 @@ final class ProductTaxonContext implements Context
     /**
      * @Given /^I assigned (this product) to ("[^"]+" taxon)$/
      * @Given /^(it|this product) (belongs to "[^"]+")$/
-     * @Given /^(this product) is in ("[^"]+" taxon) at (\d)(?:st|nd|rd|th) position$/
+     * @Given /^(this product) is in ("[^"]+" taxon) at (\d+)(?:st|nd|rd|th) position$/
      * @Given the product :product belongs to taxon :taxon
      */
     public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon, $position = null)
