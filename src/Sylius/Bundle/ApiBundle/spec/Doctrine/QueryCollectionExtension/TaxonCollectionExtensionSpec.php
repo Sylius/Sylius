@@ -130,11 +130,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_conditions_if_logged_in_user_is_admin(
-        TaxonRepositoryInterface $taxonRepository,
         UserContextInterface $userContext,
-        TaxonInterface $menuTaxon,
-        TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon,
         ChannelInterface $channel,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -142,11 +138,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn($admin);
 
-        $channel->getMenuTaxon()->willReturn($menuTaxon);
-
         $admin->getRoles()->shouldBeCalled()->willReturn(['ROLE_API_ACCESS']);
-
-        $menuTaxon->getCode()->willReturn('code');
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('child')->shouldNotBeCalled();
@@ -157,8 +149,6 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         $queryBuilder->addOrderBy('o.position')->shouldNotBeCalled();
         $queryBuilder->setParameter('parentCode', 'code')->shouldNotBeCalled();
         $queryBuilder->setParameter('enabled', true)->shouldNotBeCalled();
-
-        $taxonRepository->findChildrenByChannelMenuTaxon($menuTaxon)->willReturn([$firstTaxon, $secondTaxon]);
 
         $this->applyToCollection(
             $queryBuilder->getWrappedObject(),
