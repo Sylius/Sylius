@@ -43,5 +43,10 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonSlugEventSubscriber">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
