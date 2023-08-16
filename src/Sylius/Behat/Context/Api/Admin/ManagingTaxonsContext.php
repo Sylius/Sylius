@@ -91,7 +91,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given /^I set its (parent taxon to "[^"]+")$/
+     * @When /^I set its (parent taxon to "[^"]+")$/
      */
     public function iSetItsParentTaxonTo(TaxonInterface $taxon): void
     {
@@ -143,6 +143,18 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Taxon could not be created',
+        );
+    }
+
+    /**
+     * @Then I should see the taxon named :name in the list
+     */
+    public function iShouldSeeTheTaxonNamedInTheList(string $name): void
+    {
+        $code = StringInflector::nameToLowercaseCode($name);
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAXONS), 'code', $code),
         );
     }
 
@@ -207,6 +219,14 @@ final class ManagingTaxonsContext implements Context
                 'parent' => $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'),
             ],
         ));
+    }
+
+    /**
+     * @Then I should see :count taxons on the list
+     */
+    public function iShouldSeeTaxonsInTheList(int $count): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     private function updateTranslations(string $localeCode, string $field, string $value): void
