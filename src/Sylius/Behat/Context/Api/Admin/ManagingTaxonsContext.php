@@ -13,22 +13,97 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
 final class ManagingTaxonsContext implements Context
 {
     public function __construct(
-        private RequestStack $requestStack,
+        private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private ApiClientInterface $apiClient,
+        private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
     ) {
+    }
+
+    /**
+     * @When I want to see all taxons in store
+     */
+    public function iWantToSeeAllTaxonsInStore(): void
+    {
+        $this->client->index(Resources::TAXONS);
+    }
+
+    /**
+     * @When I want to create a new taxon
+     */
+    public function iWantToCreateNewTaxon(): void
+    {
+        $this->client->buildCreateRequest(Resources::TAXONS);
+    }
+
+    /**
+     * @When I want to create a new taxon for :parentTaxon
+     */
+    public function iWantToCreateANewTaxonForParent(TaxonInterface $parentTaxon): void
+    {
+        $this->iWantToCreateNewTaxon();
+        $this->iSetItsParentTaxonTo($parentTaxon);
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I name it :name in :localeCode
+     */
+    public function iNameItIn(string $name, string $localeCode): void
+    {
+        $this->updateTranslations($localeCode, 'name', $name);
+    }
+
+    /**
+     * @When I set its slug to :slug in :localeCode
+     */
+    public function iSetItsSlugTo(string $slug, string $localeCode): void
+    {
+        $this->updateTranslations($localeCode, 'slug', $slug);
+    }
+
+    /**
+     * @When I describe it as :description in :localeCode
+     */
+    public function iDescribeItAsIn(string $description, string $localeCode): void
+    {
+        $this->updateTranslations($localeCode, 'description', $description);
+    }
+
+    /**
+     * @Given /^I set its (parent taxon to "[^"]+")$/
+     */
+    public function iSetItsParentTaxonTo(TaxonInterface $taxon): void
+    {
+        $this->client->addRequestData('parent', $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
+    }
+
+    /**
+     * @When I (try to) add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
     }
 
     /**
@@ -40,7 +115,35 @@ final class ManagingTaxonsContext implements Context
     {
         $code = StringInflector::nameToLowercaseCode($name);
 
-        $this->apiClient->delete(Resources::TAXONS, $code);
+        $this->client->delete(Resources::TAXONS, $code);
+    }
+
+    /**
+     * @When I move down :taxonName taxon
+     */
+    public function iMoveDownTaxon(string $taxonName): void
+    {
+        $lastResponse = $this->client->getLastResponse();
+        $code = StringInflector::nameToLowercaseCode($taxonName);
+
+        $taxon = $this->responseChecker->getCollectionItemsWithValue($lastResponse, 'code', $code);
+        $position = $taxon[0]['position'];
+
+        $this->client->buildUpdateRequest(Resources::TAXONS, $code);
+        $this->client->addRequestData('position', $position + 1);
+
+        $this->client->update();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Taxon could not be created',
+        );
     }
 
     /**
@@ -52,7 +155,7 @@ final class ManagingTaxonsContext implements Context
         $code = StringInflector::nameToLowercaseCode($name);
 
         Assert::false(
-            $this->responseChecker->hasItemWithValue($this->apiClient->index(Resources::TAXONS), 'code', $code),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAXONS), 'code', $code),
         );
     }
 
@@ -62,8 +165,10 @@ final class ManagingTaxonsContext implements Context
     public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon): void
     {
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->apiClient->index(Resources::TAXONS), 'code', $taxon->getCode()),
+            $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAXONS), 'code', $taxon->getCode()),
         );
+
+        $this->sharedStorage->set('taxon', $taxon);
     }
 
     /**
@@ -71,33 +176,48 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatICannotDeleteAMenuTaxonOfAnyChannel(): void
     {
-        $lastResponse = $this->apiClient->getLastResponse();
+        $lastResponse = $this->client->getLastResponse();
 
         Assert::false($this->responseChecker->isDeletionSuccessful($lastResponse));
     }
 
     /**
-     * @When I want to see all taxons in store
+     * @Then /^(it) should not belong to any other taxon$/
      */
-    public function iWantToSeeAllTaxonsInStore(): void
+    public function itShouldNotBelongToAnyOtherTaxon(TaxonInterface $taxon): void
     {
-        $this->apiClient->index(Resources::TAXONS);
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            [
+                'code' => $taxon->getCode(),
+                'parent' => null,
+            ],
+        ));
     }
 
     /**
-     * @When I move down :taxonName taxon
+     * @Then /^(this taxon) should (belongs to "[^"]+")$/
      */
-    public function iMoveDownTaxon(string $taxonName): void
+    public function thisTaxonShouldBelongsTo(TaxonInterface $taxon, TaxonInterface $parentTaxon): void
     {
-        $lastResponse = $this->apiClient->getLastResponse();
-        $code = StringInflector::nameToLowercaseCode($taxonName);
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            [
+                'code' => $taxon->getCode(),
+                'parent' => $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'),
+            ],
+        ));
+    }
 
-        $taxon = $this->responseChecker->getCollectionItemsWithValue($lastResponse, 'code', $code);
-        $position = $taxon[0]['position'];
-
-        $this->apiClient->buildUpdateRequest(Resources::TAXONS, $code);
-        $this->apiClient->addRequestData('position', $position + 1);
-
-        $this->apiClient->update();
+    private function updateTranslations(string $localeCode, string $field, string $value): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'locale' => $localeCode,
+                    $field => $value,
+                ],
+            ],
+        ]);
     }
 }
