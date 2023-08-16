@@ -33,7 +33,7 @@
         "sylius/money-bundle": "^1.12",
         "sylius/order": "^1.12",
         "sylius/resource-bundle": "^1.9",
-        "symfony/service-contracts": "^2.5",
+        "symfony/service-contracts": "^2.5 || ^3.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/templating": "^5.4 || ^6.0"
     },
