@@ -295,6 +295,7 @@ final class ManagingTaxonsContext implements Context
             'The code field with value NEW_CODE exist',
         );
     }
+
     /**
      * @Then /^(it) should be (enabled|disabled)$/
      */
