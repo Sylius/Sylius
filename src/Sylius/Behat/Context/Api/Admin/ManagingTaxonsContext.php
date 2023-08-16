@@ -121,6 +121,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I (enable|disable) it$/
+     */
+    public function iEnableIt(string $toggleAction): void
+    {
+        $this->client->addRequestData('enabled', $toggleAction === 'enable');
+    }
+
+    /**
      * @When I (try to) add it
      */
     public function iAddIt(): void
@@ -281,6 +289,17 @@ final class ManagingTaxonsContext implements Context
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The code field with value NEW_CODE exist',
         );
+    }
+    /**
+     * @Then /^(it) should be (enabled|disabled)$/
+     */
+    public function itShouldBeDisabled(TaxonInterface $taxon, string $enabled): void
+    {
+        Assert::true($this->responseChecker->hasValue(
+            $this->client->show(Resources::TAXONS, $taxon->getCode()),
+            'enabled',
+            $enabled === 'enabled',
+        ));
     }
 
     private function updateTranslations(string $localeCode, string $field, string $value): void
