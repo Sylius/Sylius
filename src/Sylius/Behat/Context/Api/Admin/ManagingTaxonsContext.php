@@ -59,6 +59,16 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I want to modify the :taxon taxon
+     */
+    public function iWantToModifyATaxon(TaxonInterface $taxon): void
+    {
+        $this->sharedStorage->set('taxon', $taxon);
+
+        $this->client->buildUpdateRequest(Resources::TAXONS, $taxon->getCode());
+    }
+
+    /**
      * @When I specify its code as :code
      */
     public function iSpecifyItsCodeAs(string $code): void
@@ -68,6 +78,7 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I name it :name in :localeCode
+     * @When I rename it to :name in :localeCode
      */
     public function iNameItIn(string $name, string $localeCode): void
     {
@@ -83,7 +94,17 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I enable slug modification
+     * @When I enable slug modification in :localeCode
+     */
+    public function iEnableSlugModification(string $localeCode = 'en_US'): void
+    {
+        $this->updateTranslations($localeCode, 'slug', '');
+    }
+
+    /**
      * @When I describe it as :description in :localeCode
+     * @When I change its description to :description in :localeCode
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
@@ -91,11 +112,12 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When /^I set its (parent taxon to "[^"]+")$/
+     * @When I set its parent taxon to :parentTaxon
+     * @When I change its parent taxon to :parentTaxon
      */
-    public function iSetItsParentTaxonTo(TaxonInterface $taxon): void
+    public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
-        $this->client->addRequestData('parent', $this->iriConverter->getIriFromItemInSection($taxon, 'admin'));
+        $this->client->addRequestData('parent', $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'));
     }
 
     /**
@@ -212,6 +234,8 @@ final class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon, TaxonInterface $parentTaxon): void
     {
+        $this->iWantToSeeAllTaxonsInStore();
+
         Assert::true($this->responseChecker->hasItemWithValues(
             $this->client->getLastResponse(),
             [
@@ -227,6 +251,36 @@ final class ManagingTaxonsContext implements Context
     public function iShouldSeeTaxonsInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then this taxon :field should be :value
+     * @Then this taxon should have :field :value in :localeCode
+     */
+    public function thisTaxonFieldShouldBe(string $field, string $value, string $localeCode = 'en_US'): void
+    {
+        Assert::true($this->responseChecker->hasTranslation($this->client->getLastResponse(), $localeCode, $field, $value));
+    }
+
+    /**
+     * @Then the :field of the :taxonName taxon should( still) be :value
+     */
+    public function theFieldOfTheTaxonShouldStillBe(string $field, string $taxonName, string $value): void
+    {
+        $this->thisTaxonFieldShouldBe($field, $value);
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist',
+        );
     }
 
     private function updateTranslations(string $localeCode, string $field, string $value): void

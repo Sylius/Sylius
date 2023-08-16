@@ -21,6 +21,8 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.api.admin.managing_taxons
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
             filters:
                 tags: "@managing_taxons&&@api"
             javascript: false

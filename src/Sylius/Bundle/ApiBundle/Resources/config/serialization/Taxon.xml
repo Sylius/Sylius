@@ -37,10 +37,12 @@
         <attribute name="translations">
             <group>admin:taxon:read</group>
             <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
         </attribute>
         <attribute name="parent">
             <group>admin:taxon:read</group>
             <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
         </attribute>
         <attribute name="children">
             <group>admin:taxon:read</group>
