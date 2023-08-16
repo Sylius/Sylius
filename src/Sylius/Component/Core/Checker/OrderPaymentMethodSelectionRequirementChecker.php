@@ -28,7 +28,7 @@ final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymen
             return false;
         }
 
-        if (!$order->getChannel()->isSkippingPaymentStepAllowed()) {
+        if (!$order->getChannel()->isSkippingPaymentStepAllowed() || $order->getPayments()->isEmpty()) {
             return true;
         }
 

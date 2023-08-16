@@ -48,6 +48,21 @@ final class PaymentContext implements Context
     }
 
     /**
+     * @Given the store has disabled all payment methods
+     */
+    public function theStoreHasDisabledAllPaymentMethods(): void
+    {
+        $paymentMethods = $this->paymentMethodRepository->findAll();
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        foreach ($paymentMethods as $paymentMethod) {
+            $paymentMethod->setEnabled(false);
+        }
+
+        $this->paymentMethodManager->flush();
+    }
+
+    /**
      * @Given /^the store allows paying (\w+) for (all channels)$/
      */
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
