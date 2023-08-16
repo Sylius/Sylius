@@ -62,7 +62,7 @@ final class TaxonsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_taxon(): void
     {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -71,6 +71,7 @@ final class TaxonsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'WATCHES',
+                'parent' => '/api/v2/admin/taxons/CATEGORY',
                 'translations' => [
                     'en_US' => [
                         'name' => 'Watches',

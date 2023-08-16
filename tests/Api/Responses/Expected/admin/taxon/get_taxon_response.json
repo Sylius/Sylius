@@ -5,6 +5,12 @@
     "id": "@integer@",
     "code": "CATEGORY",
     "position": "@integer@",
+    "parent": null,
+    "children": [
+        "\/api\/v2\/admin\/taxons\/MUG",
+        "\/api\/v2\/admin\/taxons\/HAT",
+        "\/api\/v2\/admin\/taxons\/T_SHIRTS"
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -16,10 +22,5 @@
             "locale": "en_US"
         }
     },
-    "children": [
-        "\/api\/v2\/admin\/taxons\/MUG",
-        "\/api\/v2\/admin\/taxons\/HAT",
-        "\/api\/v2\/admin\/taxons\/T_SHIRTS"
-    ],
     "enabled": true
 }

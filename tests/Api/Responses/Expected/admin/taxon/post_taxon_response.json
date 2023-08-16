@@ -4,6 +4,7 @@
     "@type": "Taxon",
     "id": @integer@,
     "code": "WATCHES",
+    "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
     "children": [],
     "position": @integer@,
     "translations": {

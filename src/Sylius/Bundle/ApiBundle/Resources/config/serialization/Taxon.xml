@@ -38,6 +38,10 @@
             <group>admin:taxon:read</group>
             <group>admin:taxon:create</group>
         </attribute>
+        <attribute name="parent">
+            <group>admin:taxon:read</group>
+            <group>admin:taxon:create</group>
+        </attribute>
         <attribute name="children">
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
