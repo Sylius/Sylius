@@ -53,6 +53,8 @@ sylius:
     ui:
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
+        channel:
+            account_verification_required_details: By disabling this option, it will be possible to create accounts and access them without email verification and thus potentially access order data placed as a guest.
         channel_pricings: Channel pricings
         product:
             product_not_active_in_channel: The product is not yet activated in this channel.
