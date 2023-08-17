@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-08-11T12:15:13Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment started
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-4zmjub.bunnyenv.com/|
+|php|https://store-4zmjub.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-08-12T07:13:11Z
+
+/bns:start
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-08-17T07:00:38Z
+
+Thanks, Jan! :1st_place_medal:
