@@ -365,9 +365,9 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then /^it should see value "([^"]*)"/
+     * @Then I should see the value :value
      */
-    public function theSelectAttributeShouldHaveValueInLocale(string $value): void
+    public function iShouldSeeTheValue(string $value): void
     {
         Assert::true($this->updatePage->hasAttributeValue($value));
     }

@@ -1,6 +1,8 @@
 # UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
-1. The `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` constructor has been removed as it is not used anymore.
+1. The `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` only
+    constructor argument has been made optional and is `null` by default, subsequently the first argument of
+    `sylius.form.type.attribute_type.select.choices_collection` has been removed.
 
 # UPGRADE FROM `v1.12.8` TO `v1.12.9`
 

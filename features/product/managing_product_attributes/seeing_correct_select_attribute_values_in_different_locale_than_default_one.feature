@@ -1,7 +1,7 @@
 @managing_product_attributes
 Feature: Seeing correct select attribute values in different locale than default one
     In order to see correct attribute values in different locale than default one
-    As and Administrator
+    As an Administrator
     I should be able to create attribute with values in different locale than default one
 
     Background:
@@ -16,4 +16,4 @@ Feature: Seeing correct select attribute values in different locale than default
         And I add value "Banana Skin" in "French (France)"
         And I add it
         Then I should be notified that it has been successfully created
-        And it should see value "Banana Skin"
+        And I should see the value "Banana Skin"
