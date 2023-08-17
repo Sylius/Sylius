@@ -32,6 +32,7 @@
         <import resource="services/message_handlers.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
+        <import resource="services/positioner.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/shipping.xml" />

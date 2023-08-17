@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Positioner\PositionerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -58,56 +59,70 @@ class ProductTaxonController extends ResourceController
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $this->validateCsrfProtection($request, $configuration);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        /** @var Session $session */
-        $session = $request->getSession();
+        $productTaxonsPositions = $request->request->all('productTaxons');
+
+        if (!$this->shouldProductsPositionsBeUpdated($request, $productTaxonsPositions)) {
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
 
         try {
-            $productTaxonsPositionsMap = $this->getModifiedProductTaxonPositionMapFromRequest($request);
+            $productTaxonsPositionsMap = $this->mapFromArrayToProductTaxonPositionMap($productTaxonsPositions);
         } catch (\InvalidArgumentException $exception) {
+            /** @var Session $session */
+            $session = $request->getSession();
             $session->getFlashBag()->add('error', $exception->getMessage());
 
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        $this->validateCsrfProtection($request, $configuration);
+        /** @var PositionerInterface $positioner */
+        $positioner = $this->get(PositionerInterface::class);
 
-        if ($this->shouldProductsPositionsBeUpdated($request, $productTaxonsPositionsMap)) {
-            foreach ($productTaxonsPositionsMap as $id => $position) {
-                $this->updatePositions($position, $id);
-            }
+        foreach ($productTaxonsPositionsMap as $productTaxonPositionMap) {
+            $positioner->updatePosition(
+                $productTaxonPositionMap['productTaxon'],
+                $productTaxonPositionMap['newPosition'],
+                $this->getMaxPosition(),
+            );
+            $this->manager->flush();
         }
 
         return $this->redirectHandler->redirectToReferer($configuration);
     }
 
-    /** @return array<int, int> */
-    private function getModifiedProductTaxonPositionMapFromRequest(Request $request): array
+    /**
+     * @param array<int, string> $productTaxonPositions
+     *
+     * @return array<array{productTaxon: ProductTaxonInterface, newPosition: int}>
+     */
+    private function mapFromArrayToProductTaxonPositionMap(array $productTaxonPositions): array
     {
-        /** @var array<int, string> $positions */
-        $positions = $request->request->all('productTaxons');
-        /** @var array<int, int> $modifiedPositions */
-        $modifiedPositions = [];
-        $maxPosition = $this->getMaxPosition();
+        /** @var PositionerInterface $positioner */
+        $positioner = $this->get(PositionerInterface::class);
+        $map = [];
 
-        foreach ($positions as $productTaxonId => $productTaxonPosition) {
+        foreach ($productTaxonPositions as $productTaxonId => $productTaxonPosition) {
             if (!is_numeric($productTaxonPosition)) {
                 throw new \InvalidArgumentException(sprintf('The position "%s" is invalid.', $productTaxonPosition));
             }
 
-            $productTaxonPosition = (int) $productTaxonPosition;
             /** @var ProductTaxonInterface $productTaxon */
             $productTaxon = $this->repository->find($productTaxonId);
+            $productTaxonPosition = (int) $productTaxonPosition;
 
-            if ($productTaxon->getPosition() !== $productTaxonPosition) {
-                if ($productTaxonPosition >= $maxPosition) {
-                    $productTaxonPosition = -1;
-                }
-                $modifiedPositions[$productTaxonId] = $productTaxonPosition;
+            if (!$positioner->hasPositionChanged($productTaxon, $productTaxonPosition)) {
+                continue;
             }
+
+            $map[] = [
+                'productTaxon' => $productTaxon,
+                'newPosition' => $productTaxonPosition,
+            ];
         }
 
-        return $modifiedPositions;
+        return $map;
     }
 
     private function getMaxPosition(): int
