@@ -37,9 +37,11 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     function it_says_that_payment_method_has_to_be_selected_if_order_total_is_bigger_than_0(
         OrderInterface $order,
         ChannelInterface $channel,
+        PaymentInterface $payment,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
         $channel->isSkippingPaymentStepAllowed()->willReturn(false);
 
         $this->isPaymentMethodSelectionRequired($order)->shouldReturn(true);
@@ -55,9 +57,11 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
     function it_says_that_payment_method_has_to_be_selected_if_skipping_payment_step_is_disabled(
         OrderInterface $order,
         ChannelInterface $channel,
+        PaymentInterface $payment,
     ): void {
         $order->getTotal()->willReturn(1000);
         $order->getChannel()->willReturn($channel);
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
 
         $channel->isSkippingPaymentStepAllowed()->willReturn(false);
 
@@ -94,6 +98,22 @@ final class OrderPaymentMethodSelectionRequirementCheckerSpec extends ObjectBeha
         $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
 
         $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([$paymentMethod1, $paymentMethod2]);
+        $channel->isSkippingPaymentStepAllowed()->willReturn(true);
+
+        $this->isPaymentMethodSelectionRequired($order)->shouldReturn(true);
+    }
+
+    public function it_says_that_payment_method_has_to_be_selected_if_skipping_payment_step_is_enabled_but_there_are_no_payment_methods_available(
+        OrderInterface $order,
+        ChannelInterface $channel,
+        PaymentInterface $payment,
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
+    ): void {
+        $order->getTotal()->willReturn(1000);
+        $order->getChannel()->willReturn($channel);
+        $order->getPayments()->willReturn(new ArrayCollection([$payment->getWrappedObject()]));
+
+        $paymentMethodsResolver->getSupportedMethods($payment)->willReturn([]);
         $channel->isSkippingPaymentStepAllowed()->willReturn(true);
 
         $this->isPaymentMethodSelectionRequired($order)->shouldReturn(true);
