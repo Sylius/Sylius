@@ -70,7 +70,6 @@
         </service>
 
         <service id="sylius.form.type.attribute_type.select.choices_collection" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType">
-            <argument id="sylius.translation_locale_provider" type="service"/>
             <tag name="form.type" />
         </service>
 

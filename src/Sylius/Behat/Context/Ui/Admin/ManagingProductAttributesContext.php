@@ -365,6 +365,14 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @Then I should see the value :value
+     */
+    public function iShouldSeeTheValue(string $value): void
+    {
+        Assert::true($this->updatePage->hasAttributeValue($value));
+    }
+
+    /**
      * @Then /^(this product attribute) should have value "([^"]*)"/
      */
     public function theSelectAttributeShouldHaveValue(ProductAttributeInterface $productAttribute, string $value): void

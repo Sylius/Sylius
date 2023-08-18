@@ -62,6 +62,7 @@ abstract class AttributeValueType extends AbstractResourceType
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $attributeValue = $event->getData();
+                $localeCode = $attributeValue['localeCode'];
 
                 if (!isset($attributeValue['attribute'])) {
                     return;
@@ -72,7 +73,7 @@ abstract class AttributeValueType extends AbstractResourceType
                     return;
                 }
 
-                $this->addValueField($event->getForm(), $attribute);
+                $this->addValueField($event->getForm(), $attribute, $localeCode);
             })
         ;
 
