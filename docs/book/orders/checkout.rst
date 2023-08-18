@@ -72,7 +72,7 @@ How to perform the Addressing Step programmatically?
 
 Firstly if the **Customer** is not yet set on the Order it will be assigned depending on the case:
 
-* An already logged in **User** - the Customer is set for the Order using the `CartBlamerListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EventListener/CartBlamerListener.php>`_, that determines the user basing on the event.
+* An already logged in **User** - the Customer is set for the Order using the `ShopCartBlamerListener <https://github.com/Sylius/Sylius/blob/1.12/src/Sylius/Bundle/ShopBundle/EventListener/ShopCartBlamerListener.php>`_, that determines the user basing on the event.
 * A **Customer** or **User** that was present in the system before (we've got their e-mail) - the Customer instance is updated via cascade, the order is assigned to it.
 * A new **Customer** with unknown e-mail - a new Customer instance is created and assigned to the order.
 
