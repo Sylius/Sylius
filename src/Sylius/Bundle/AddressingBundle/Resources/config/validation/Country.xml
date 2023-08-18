@@ -36,6 +36,9 @@
             </constraint>
         </property>
         <property name="provinces">
+            <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\UniqueProvinceCollectionCodes">
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="Valid" />
         </property>
     </class>
