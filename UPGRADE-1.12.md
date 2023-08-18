@@ -1,4 +1,4 @@
-# UPGRADE FROM `v1.12.9` TO `v1.12.10`
+# UPGRADE FROM `v1.12.10` TO `v1.12.11`
 
 1. The `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` only
     constructor argument has been made optional and is `null` by default, subsequently the first argument of
