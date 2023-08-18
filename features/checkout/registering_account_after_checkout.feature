@@ -11,9 +11,9 @@ Feature: Registering a new account after checkout
         And the store allows paying Offline
 
     @ui @no-api
-    Scenario: Registering a new account after checkout when channel has enabled registration verification
+    Scenario: Displaying thank you page after registration
         Given on this channel account verification is required
-        Given I have product "PHP T-Shirt" in the cart
+        And I have product "PHP T-Shirt" in the cart
         And I have completed addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I have confirmed order
@@ -22,13 +22,25 @@ Feature: Registering a new account after checkout
         And I confirm this password
         And I register this account
         Then I should be on registration thank you page
-        When I verify my account using link sent to "john@example.com"
+
+    @ui @no-api
+    Scenario: Registering a new account after checkout when channel has enabled registration verification
+        Given on this channel account verification is required
+        And I have product "PHP T-Shirt" in the cart
+        And I have completed addressing step with email "john@example.com" and "United States" based billing address
+        And I have proceeded order with "Free" shipping method and "Offline" payment
+        And I have confirmed order
+        When I proceed to the registration
+        And I specify a password as "sylius"
+        And I confirm this password
+        And I register this account
+        And I verify my account using link sent to "john@example.com"
         Then I should be able to log in as "john@example.com" with "sylius" password
 
     @ui @no-api
     Scenario: Registering a new account after checkout when channel has disabled registration verification
         Given on this channel account verification is not required
-        Given I have product "PHP T-Shirt" in the cart
+        And I have product "PHP T-Shirt" in the cart
         And I have completed addressing step with email "john@example.com" and "United States" based billing address
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I have confirmed order

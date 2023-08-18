@@ -36,6 +36,18 @@
     }
 ````
 
+1. The constructor signature of `Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount` changed:
+
+````diff
+    public function __construct(
+-       public $token,
++       public string $token,
++       public ?string $channelCode = null,
++       public ?string $localeCode = null,
+    ) {
+    }
+````
+
 1. The item operation paths for ProductVariantTranslation resource changed:
 
 - `GET /admin/product-variant-translation/{id}` -> `GET /admin/product-variant-translations/{id}`

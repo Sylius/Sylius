@@ -18,9 +18,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Messenger\Envelope;
@@ -34,10 +31,8 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
         RepositoryInterface $shopUserRepository,
         DateTimeProviderInterface $dateTimeProvider,
         MessageBusInterface $commandBus,
-        ChannelContextInterface $channelContext,
-        LocaleContextInterface $localeContext,
     ): void {
-        $this->beConstructedWith($shopUserRepository, $dateTimeProvider, $commandBus, $channelContext, $localeContext);
+        $this->beConstructedWith($shopUserRepository, $dateTimeProvider, $commandBus);
     }
 
     function it_is_a_message_handler(): void
@@ -50,9 +45,6 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
         DateTimeProviderInterface $dateTimeProvider,
         UserInterface $user,
         MessageBusInterface $commandBus,
-        ChannelContextInterface $channelContext,
-        LocaleContextInterface $localeContext,
-        ChannelInterface $channel,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn($user);
         $dateTimeProvider->now()->willReturn(new \DateTime());
@@ -62,17 +54,12 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
         $user->setEmailVerificationToken(null)->shouldBeCalled();
         $user->enable()->shouldBeCalled();
 
-        $channel->getCode()->willReturn('WEB');
-
-        $channelContext->getChannel()->willReturn($channel);
-        $localeContext->getLocaleCode()->willReturn('en_US');
-
         $commandBus->dispatch(
             new SendAccountRegistrationEmail('shop@example.com', 'en_US', 'WEB'),
             [new DispatchAfterCurrentBusStamp()]
         )->willReturn(new Envelope(new \stdClass()));
 
-        $this(new VerifyCustomerAccount('ToKeN'));
+        $this(new VerifyCustomerAccount('ToKeN', 'en_US', 'WEB'));
     }
 
     function it_throws_error_if_user_does_not_exist(

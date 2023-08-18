@@ -214,8 +214,6 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
             <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.context.locale" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

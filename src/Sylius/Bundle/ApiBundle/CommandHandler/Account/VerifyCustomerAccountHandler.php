@@ -17,9 +17,7 @@ use InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -33,8 +31,6 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         private RepositoryInterface $shopUserRepository,
         private DateTimeProviderInterface $calendar,
         private MessageBusInterface $commandBus,
-        private ChannelContextInterface $channelContext,
-        private LocaleContextInterface $localeContext,
     ) {
     }
 
@@ -52,11 +48,8 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
         $user->setEmailVerificationToken(null);
         $user->enable();
 
-        $channel = $this->channelContext->getChannel();
-        $localeCode = $this->localeContext->getLocaleCode();
-
         $this->commandBus->dispatch(
-            new SendAccountRegistrationEmail($user->getEmail(), $localeCode, $channel->getCode()),
+            new SendAccountRegistrationEmail($user->getEmail(), $command->getLocaleCode(), $command->getChannelCode()),
             [new DispatchAfterCurrentBusStamp()]
         );
 
