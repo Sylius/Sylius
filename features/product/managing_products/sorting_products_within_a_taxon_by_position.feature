@@ -6,46 +6,26 @@ Feature: Sorting listed products from a taxon by position
 
     Background:
         Given the store classifies its products as "Soft Toys"
-        And the store has a product "Old pug"
-        And this product is in "Soft Toys" taxon at 1st position
-        And the store has a product "Young pug"
-        And this product is in "Soft Toys" taxon at 2nd position
-        And the store has a product "Small pug"
-        And this product is in "Soft Toys" taxon at 3rd position
-        And the store has a product "Tiny pug"
-        And this product is in "Soft Toys" taxon at 4th position
-        And the store has a product "Large pug"
-        And this product is in "Soft Toys" taxon at 5th position
-        And the store has a product "Medium pug"
-        And this product is in "Soft Toys" taxon at 6th position
-        And the store has a product "Giant pug"
-        And this product is in "Soft Toys" taxon at 7th position
-        And the store has a product "Mini pug"
-        And this product is in "Soft Toys" taxon at 8th position
-        And the store has a product "Nano pug"
-        And this product is in "Soft Toys" taxon at 9th position
-        And the store has a product "Micro pug"
-        And this product is in "Soft Toys" taxon at 10th position
-        And the store has a product "Puglet"
-        And this product is in "Soft Toys" taxon at 11th position
-        And the store has a product "Pug XL"
-        And this product is in "Soft Toys" taxon at 12th position
-        And the store has a product "Pug XS"
-        And this product is in "Soft Toys" taxon at 13th position
-        And the store has a product "Puggle"
-        And this product is in "Soft Toys" taxon at 14th position
-        And the store has a product "Pug Junior"
-        And this product is in "Soft Toys" taxon at 15th position
-        And the store has a product "Pug Senior"
-        And this product is in "Soft Toys" taxon at 16th position
-        And the store has a product "Pug Master"
-        And this product is in "Soft Toys" taxon at 17th position
-        And the store has a product "Pug Pro"
-        And this product is in "Soft Toys" taxon at 18th position
-        And the store has a product "Pug Expert"
-        And this product is in "Soft Toys" taxon at 19th position
-        And the store has a product "Ultimate Pug"
-        And this product is in "Soft Toys" taxon at 20th position
+        And the store has a product "Old pug" in the "Soft Toys" taxon at 0th position
+        And the store has a product "Young pug" in the "Soft Toys" taxon at 1st position
+        And the store has a product "Small pug" in the "Soft Toys" taxon at 2nd position
+        And the store has a product "Tiny pug" in the "Soft Toys" taxon at 3rd position
+        And the store has a product "Large pug" in the "Soft Toys" taxon at 4th position
+        And the store has a product "Medium pug" in the "Soft Toys" taxon at 5th position
+        And the store has a product "Giant pug" in the "Soft Toys" taxon at 6th position
+        And the store has a product "Mini pug" in the "Soft Toys" taxon at 7th position
+        And the store has a product "Nano pug" in the "Soft Toys" taxon at 8th position
+        And the store has a product "Micro pug" in the "Soft Toys" taxon at 9th position
+        And the store has a product "Puglet" in the "Soft Toys" taxon at 10th position
+        And the store has a product "Pug XL" in the "Soft Toys" taxon at 11th position
+        And the store has a product "Pug XS" in the "Soft Toys" taxon at 12th position
+        And the store has a product "Puggle" in the "Soft Toys" taxon at 13th position
+        And the store has a product "Pug Junior" in the "Soft Toys" taxon at 14th position
+        And the store has a product "Pug Senior" in the "Soft Toys" taxon at 15th position
+        And the store has a product "Pug Master" in the "Soft Toys" taxon at 16th position
+        And the store has a product "Pug Pro" in the "Soft Toys" taxon at 17th position
+        And the store has a product "Pug Expert" in the "Soft Toys" taxon at 18th position
+        And the store has a product "Ultimate Pug" in the "Soft Toys" taxon at 19th position
         And I am logged in as an administrator
 
     @ui
@@ -148,15 +128,12 @@ Feature: Sorting listed products from a taxon by position
         And I save my new configuration
         Then I should be notified that the position "test" is invalid
 
-#    @ui
-#    Scenario: Sort products in descending order
-#        When I am browsing products from "Soft Toys" taxon
-#        And I start sorting products by position
-#        Then I should see 3 products in the list
-#        And they should have order like "Small pug", "Young pug" and "Old pug"
-
-#    @ui
-#    Scenario: Products are sorted by position in ascending order by default
-#        When I am browsing products from "Soft Toys" taxon
-#        Then I should see 3 products in the list
-#        And they should have order like "Old pug", "Young pug" and "Small pug"
+    @ui
+    Scenario: Sort products in descending order
+        When I am browsing products from "Soft Toys" taxon
+        And I start sorting products by position
+        Then the first product on the list should have name "Ultimate Pug"
+    @ui
+    Scenario: Products are sorted by position in ascending order by default
+        When I am browsing products from "Soft Toys" taxon
+        Then the first product on the list should have name "Old pug"

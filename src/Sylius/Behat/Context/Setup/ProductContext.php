@@ -23,8 +23,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
@@ -54,6 +56,7 @@ final class ProductContext implements Context
         private FactoryInterface $productOptionFactory,
         private FactoryInterface $productOptionValueFactory,
         private FactoryInterface $productImageFactory,
+        private FactoryInterface $productTaxonFactory,
         private ObjectManager $objectManager,
         private ProductVariantGeneratorInterface $productVariantGenerator,
         private ProductVariantResolverInterface $defaultVariantResolver,
@@ -73,6 +76,22 @@ final class ProductContext implements Context
     public function storeHasAProductPricedAt($productName, int $price = 100, ChannelInterface $channel = null)
     {
         $product = $this->createProduct($productName, $price, $channel);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" in the ("[^"]+" taxon) at (\d+)(?:st|nd|rd|th) position$/
+     */
+    public function theStoreHasAProductInTheTaxonAtPosition(
+        string $productName,
+        TaxonInterface $taxon,
+        int $position,
+    ): void {
+        $product = $this->createProduct($productName);
+
+        $productTaxon = $this->createProductTaxon($taxon, $product, $position);
+        $product->addProductTaxon($productTaxon);
 
         $this->saveProduct($product);
     }
@@ -1353,5 +1372,19 @@ final class ProductContext implements Context
 
         $this->objectManager->persist($product);
         $this->objectManager->flush();
+    }
+
+    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, ?int $position = null): ProductTaxonInterface
+    {
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $this->productTaxonFactory->createNew();
+        $productTaxon->setProduct($product);
+        $productTaxon->setTaxon($taxon);
+
+        if (null !== $position) {
+            $productTaxon->setPosition($position);
+        }
+
+        return $productTaxon;
     }
 }

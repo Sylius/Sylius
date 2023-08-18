@@ -46,10 +46,17 @@ class ProductTaxonController extends ResourceController
             /** @psalm-var array{position: string|int, id: int} $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 try {
-                    $this->updatePositions($productTaxon['position'], $productTaxon['id']);
+                    $id = $productTaxon['id'];
+                    $position = $productTaxon['position'];
+
+                    /** @var ProductTaxonInterface $productTaxonFromBase */
+                    $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
+                    $productTaxonFromBase->setPosition((int) $position);
                 } catch (\InvalidArgumentException $exception) {
                     throw new HttpException(Response::HTTP_BAD_REQUEST, $exception->getMessage());
                 }
+
+                $this->manager->flush();
             }
         }
 
@@ -67,8 +74,10 @@ class ProductTaxonController extends ResourceController
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
+        $maxPosition = $this->getMaxPosition($configuration);
+
         try {
-            $productTaxonsPositionsMap = $this->mapFromArrayToProductTaxonPositionMap($productTaxonsPositions);
+            $this->updatePositions($productTaxonsPositions, $maxPosition);
         } catch (\InvalidArgumentException $exception) {
             /** @var Session $session */
             $session = $request->getSession();
@@ -77,60 +86,52 @@ class ProductTaxonController extends ResourceController
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-        /** @var PositionerInterface $positioner */
-        $positioner = $this->get(PositionerInterface::class);
-
-        foreach ($productTaxonsPositionsMap as $productTaxonPositionMap) {
-            $positioner->updatePosition(
-                $productTaxonPositionMap['productTaxon'],
-                $productTaxonPositionMap['newPosition'],
-                $this->getMaxPosition(),
-            );
-            $this->manager->flush();
-        }
 
         return $this->redirectHandler->redirectToReferer($configuration);
     }
 
-    /**
-     * @param array<int, string> $productTaxonPositions
-     *
-     * @return array<array{productTaxon: ProductTaxonInterface, newPosition: int}>
-     */
-    private function mapFromArrayToProductTaxonPositionMap(array $productTaxonPositions): array
+    /** @param array<int, string> $productTaxonPositions */
+    private function updatePositions(array $productTaxonPositions, int $maxPosition): void
     {
-        /** @var PositionerInterface $positioner */
-        $positioner = $this->get(PositionerInterface::class);
-        $map = [];
+        $positioner = $this->getPositioner();
+        $modifiedProductTaxons = [];
 
-        foreach ($productTaxonPositions as $productTaxonId => $productTaxonPosition) {
-            if (!is_numeric($productTaxonPosition)) {
-                throw new \InvalidArgumentException(sprintf('The position "%s" is invalid.', $productTaxonPosition));
+        /** @var array<ProductTaxonInterface> $productTaxons */
+        $productTaxons = $this->repository->findBy(['id' => array_keys($productTaxonPositions)]);
+
+        foreach ($productTaxons as $productTaxon) {
+            $newProductTaxonPosition = $productTaxonPositions[$productTaxon->getId()];
+            if (!is_numeric($newProductTaxonPosition)) {
+                throw new \InvalidArgumentException(sprintf('The position "%s" is invalid.', $newProductTaxonPosition));
             }
 
-            /** @var ProductTaxonInterface $productTaxon */
-            $productTaxon = $this->repository->find($productTaxonId);
-            $productTaxonPosition = (int) $productTaxonPosition;
+            $newProductTaxonPosition = (int) $newProductTaxonPosition;
 
-            if (!$positioner->hasPositionChanged($productTaxon, $productTaxonPosition)) {
+            if (!$positioner->hasPositionChanged($productTaxon, $newProductTaxonPosition)) {
                 continue;
             }
 
-            $map[] = [
+            $modifiedProductTaxons[] = [
                 'productTaxon' => $productTaxon,
-                'newPosition' => $productTaxonPosition,
+                'newPosition' => $newProductTaxonPosition,
             ];
         }
 
-        return $map;
+        foreach ($modifiedProductTaxons as $modifiedProductTaxon) {
+            $positioner->updatePosition($modifiedProductTaxon['productTaxon'], $modifiedProductTaxon['newPosition'], $maxPosition);
+            $this->manager->flush();
+        }
     }
 
-    private function getMaxPosition(): int
+    private function getMaxPosition(RequestConfiguration $configuration): int
     {
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $this->findOr404($configuration);
+
         /** @var EntityRepository&RepositoryInterface $repository */
         $repository = $this->repository;
 
-        return $repository->count([]) - 1;
+        return $repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
     }
 
     private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
@@ -140,18 +141,13 @@ class ProductTaxonController extends ResourceController
         }
     }
 
+    /** @param array<string, int>|null $productTaxons */
     private function shouldProductsPositionsBeUpdated(Request $request, ?array $productTaxons): bool
     {
-        return in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons;
-    }
-
-    private function updatePositions(int $position, int $id): void
-    {
-        /** @var ProductTaxonInterface $productTaxonFromBase */
-        $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
-        $productTaxonFromBase->setPosition($position);
-
-        $this->manager->flush();
+        return in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) &&
+            null !== $productTaxons &&
+            [] !== $productTaxons
+        ;
     }
 
     /**
@@ -175,5 +171,13 @@ class ProductTaxonController extends ResourceController
         }
 
         return null;
+    }
+
+    private function getPositioner(): PositionerInterface
+    {
+        /** @var PositionerInterface $positioner */
+        $positioner = $this->get(PositionerInterface::class);
+
+        return $positioner;
     }
 }

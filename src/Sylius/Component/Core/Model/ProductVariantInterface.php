@@ -28,8 +28,7 @@ interface ProductVariantInterface extends
     StockableInterface,
     TaxableInterface,
     VersionedInterface,
-    ProductImagesAwareInterface,
-    PositionAwareInterface
+    ProductImagesAwareInterface
 {
     public function getWeight(): ?float;
 

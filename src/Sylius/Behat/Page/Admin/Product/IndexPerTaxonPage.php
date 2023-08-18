@@ -21,10 +21,6 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
 {
     public function getProductPosition(string $productName): int
     {
-        if (!$this->hasElement('product_taxon_position', ['%name%' => $productName])) {
-            return -1;
-        }
-
         return (int) $this->getElement('product_taxon_position', ['%name%' => $productName])->getValue();
     }
 

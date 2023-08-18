@@ -53,6 +53,14 @@ final class PositionerSpec extends ObjectBehavior
         $positionAwareObject->getPosition()->willReturn(0);
         $positionAwareObject->setPosition(-1)->shouldBeCalled();
 
+        $this->updatePosition($positionAwareObject, 3, 2);
+    }
+
+    public function it_sets_new_position_to_minus_1_when_it_is_equal_to_max_position(PositionAwareInterface $positionAwareObject): void
+    {
+        $positionAwareObject->getPosition()->willReturn(0);
+        $positionAwareObject->setPosition(-1)->shouldBeCalled();
+
         $this->updatePosition($positionAwareObject, 2, 2);
     }
 }
