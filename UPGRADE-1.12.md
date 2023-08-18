@@ -4,7 +4,7 @@
     constructor argument has been made optional and is `null` by default, subsequently the first argument of
     `sylius.form.type.attribute_type.select.choices_collection` has been removed.
 
-# UPGRADE FROM `v1.12.8` TO `v1.12.9`
+# UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
 1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
     ```diff
