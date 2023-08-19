@@ -10,8 +10,7 @@ The process of specifying address, payment and a way of shipping transforms the 
 Checkout State Machine
 ----------------------
 
-The Order Checkout state machine has 5 states available: ``cart``, ``addressed``, ``shipping_selected``, ``payment_selected``, ``completed``
-and a set of defined transitions between them.
+The Order Checkout state machine has 7 states available: ``cart``, ``addressed``, ``shipping_selected``,  ``shipping_skipped``, ``payment_selected``, ``payment_skipped``, ``completed`` and a set of defined transitions between them.
 These states are saved as the **checkoutState** of the **Order**.
 
 Besides the steps of checkout, each of them can be done more than once. For instance if the Customer changes their mind
