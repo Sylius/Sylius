@@ -160,8 +160,7 @@ Built-in Calculators
 
 The already defined calculators in Sylius:
 
-* **DefaultCalculator** - calculates the ``amount`` with rounding.
-* **DecimalCalculator** - calculates the ``amount`` without rounding, which results in a distribution of decimal values among the items.
+* **DefaultCalculator** - calculate tax based on a given base amount and tax rate. The calculation varies depending on whether the tax rate is already included in the base price or not.
 
 Learn more
 ----------
