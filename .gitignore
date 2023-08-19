@@ -16,6 +16,8 @@
 /etc/build/*
 !/etc/build/.gitignore
 
+docker-compose.override.yml
+
 /behat.yml
 /phpspec.yml
 
