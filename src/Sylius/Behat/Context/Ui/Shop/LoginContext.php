@@ -277,7 +277,7 @@ final class LoginContext implements Context
     {
         $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
 
-        $this->iShouldNotBeAbleToChangeMyPassword();
+        $this->iShouldNotBeAbleToChangeMyPasswordWithThisToken();
     }
 
     /**
