@@ -37,8 +37,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [null, new class() extends Constraint {
-            }])
+            ->during('validate', [null, new ShopUserResetPasswordTokenExists])
         ;
     }
 
@@ -58,15 +57,13 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = 'token';
-
         $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
 
         $executionContext
             ->addViolation('sylius.reset_password.invalid_token', ['%token%' => 'token'])
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ShopUserResetPasswordTokenExists());
+        $this->validate('token', new ShopUserResetPasswordTokenExists());
     }
 
     function it_adds_violation_if_reset_password_token_does_not_exist(
@@ -75,14 +72,12 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
     ): void {
         $this->initialize($executionContext);
 
-        $value = 'token';
-
         $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn(null);
 
         $executionContext
             ->addViolation('sylius.reset_password.invalid_token', ['%token%' => 'token'])
             ->shouldBeCalled();
 
-        $this->validate($value, new ShopUserResetPasswordTokenExists());
+        $this->validate('token', new ShopUserResetPasswordTokenExists());
     }
 }

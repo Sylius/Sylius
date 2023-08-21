@@ -38,8 +38,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [null, new class() extends Constraint {
-            }])
+            ->during('validate', [null, new ShopUserResetPasswordTokenNotExpired])
         ;
     }
 
@@ -58,15 +57,13 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
     ): void {
         $this->initialize($executionContext);
 
-        $value = 'token';
-
         $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn(null);
 
         $executionContext
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
+        $this->validate('token', new ShopUserResetPasswordTokenNotExpired());
     }
 
     function it_does_not_add_violation_if_reset_password_token_is_not_expired(
@@ -75,8 +72,6 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
         UserInterface $user
     ): void {
         $this->initialize($executionContext);
-
-        $value = 'token';
 
         $user->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '1';
@@ -89,7 +84,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldNotBeCalled();
 
-        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
+        $this->validate('token', new ShopUserResetPasswordTokenNotExpired());
     }
 
     function it_adds_violation_if_reset_password_token_is_expired(
@@ -98,8 +93,6 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
         UserInterface $user
     ): void {
         $this->initialize($executionContext);
-
-        $value = 'token';
 
         $user->isPasswordRequestNonExpired(Argument::that(function (\DateInterval $dateInterval) {
             return $dateInterval->format('%d') === '1';
@@ -112,6 +105,6 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
             ->addViolation('sylius.reset_password.token_expired')
             ->shouldBeCalled();
 
-        $this->validate($value, new ShopUserResetPasswordTokenNotExpired());
+        $this->validate('token', new ShopUserResetPasswordTokenNotExpired());
     }
 }
