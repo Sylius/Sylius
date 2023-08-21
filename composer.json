@@ -226,7 +226,7 @@
         "psalm/plugin-mockery": "1.1.0",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^0.17.0",
-        "stripe/stripe-php": "^10.4",
+        "stripe/stripe-php": "^12.0",
         "sylius-labs/coding-standard": "^4.2",
         "symfony/browser-kit": "^5.4.21 || ^6.0",
         "symfony/debug-bundle": "^5.4.21 || ^6.0",
