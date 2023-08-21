@@ -163,7 +163,14 @@ final class UserContext implements Context
     {
         /** @var \DateTime $passwordRequestedAt */
         $passwordRequestedAt = $user->getPasswordRequestedAt();
-        $passwordRequestedAt->sub(new \DateInterval($this->passwordResetTokenTtl));
+
+        // Subtracting the ttl twice because date operations tend to be wobbly
+        // and might result in random fails due to skip years, daylight saving
+        // time date changes, etc
+        $interval = new \DateInterval($this->passwordResetTokenTtl);
+        $passwordRequestedAt->sub($interval);
+        $passwordRequestedAt->sub($interval);
+
         $user->setPasswordRequestedAt($passwordRequestedAt);
 
         $this->userManager->flush();
