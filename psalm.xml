@@ -64,6 +64,7 @@
         <DeprecatedMethod>
             <errorLevel type="info">
                 <referencedMethod name="Faker\Generator::__get"/>
+                <referencedMethod name="HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface::getUsername" />
                 <referencedMethod name="Payum\Core\Model\GatewayConfigInterface::setFactoryName" />
                 <referencedMethod name="Sylius\Component\Mailer\Sender\SenderInterface::send"/>
                 <referencedMethod name="Symfony\Component\HttpFoundation\JsonResponse::create" /> <!-- deprecated in Symfony 5.1 -->
