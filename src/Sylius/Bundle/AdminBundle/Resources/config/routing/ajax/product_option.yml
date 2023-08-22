@@ -5,10 +5,10 @@ sylius_admin_ajax_product_options_by_phrase:
         _controller: sylius.controller.product_option::indexAction
         _format: json
         _sylius:
-            serialization_groups: [Default]
+            serialization_groups: [Autocomplete]
             permission: true
             repository:
-                method: findByPhraseAndProductCode
+                method: findByPhrase
                 arguments:
                     phrase: $phrase
                     locale: expr:service('sylius.context.locale').getLocaleCode()
@@ -21,9 +21,9 @@ sylius_admin_ajax_find_product_options:
         _controller: sylius.controller.product_option::indexAction
         _format: json
         _sylius:
-            serialization_groups: [Default]
+            serialization_groups: [Autocomplete]
             permission: true
             repository:
-                method: findByOptions
+                method: findByCodes
                 arguments:
-                    code: $code
+                    codes: $code

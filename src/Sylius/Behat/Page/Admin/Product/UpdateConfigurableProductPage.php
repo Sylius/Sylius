@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -35,7 +36,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function isProductOptionChosen(string $option): bool
     {
-        return $this->getElement('options')->find('named', ['option', $option])->hasAttribute('selected');
+        $optionElement = $this->getElement('options')->getParent();
+
+        return AutocompleteHelper::isValueVisible($this->getSession(), $optionElement, $option);
     }
 
     public function isProductOptionsDisabled(): bool

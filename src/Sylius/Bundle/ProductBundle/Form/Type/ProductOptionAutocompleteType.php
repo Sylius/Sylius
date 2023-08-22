@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductOptionAutocompleteType extends AbstractType
 {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'choice_value' => 'code',
+            'choice_name' => 'name',
+            'resource' => 'sylius.product_option',
+        ]);
+    }
+
     /**
      * @psalm-suppress MissingPropertyType
      */
@@ -28,18 +37,6 @@ final class ProductOptionAutocompleteType extends AbstractType
     {
         $view->vars['remote_criteria_type'] = 'contains';
         $view->vars['remote_criteria_name'] = 'phrase';
-        $view->vars['remote_url'] = '/admin/ajax/product-options/search-phrase';
-        $view->vars['load_edit_url'] = '/admin/ajax/product-options/options';
-    }
-
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'choice_value' => 'code',
-            'choice_name' => 'code',
-            'resource' => 'sylius.product_option',
-            'choice_translation_domain' => false,
-        ]);
     }
 
     public function getParent(): string
