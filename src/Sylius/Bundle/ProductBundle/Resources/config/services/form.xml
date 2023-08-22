@@ -168,7 +168,8 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.product_option_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType">
+        <service id="sylius.form.type.product_option_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType">
+            <argument type="service" id="sylius.repository.product_option" />
             <tag name="form.type" />
         </service>
 
