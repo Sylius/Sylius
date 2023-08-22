@@ -68,3 +68,41 @@ winzou_state_machine:
                     do: ["@sylius.state_resolver.order_shipping", "resolve"]
                     args: ["object"]
                     priority: -100
+
+framework:
+    workflows:
+        sylius_order_checkout:
+            type: 'state_machine'
+            marking_store:
+                type: 'method'
+                property: 'checkoutState'
+            supports: 
+                - "Sylius\\Component\\Core\\Model\\Order"
+            initial_marking: cart
+            places:
+                - cart
+                - addressed
+                - shipping_selected
+                - shipping_skipped
+                - payment_skipped
+                - payment_selected
+                - completed
+            transitions:
+                address:
+                    from: [cart, addressed, shipping_selected, shipping_skipped, payment_selected, payment_skipped]
+                    to: addressed
+                skip_shipping:
+                    from: [addressed]
+                    to: shipping_skipped
+                select_shipping:
+                    from: [addressed, shipping_selected, payment_selected, payment_skipped]
+                    to: shipping_selected
+                skip_payment:
+                    from: [shipping_selected, shipping_skipped]
+                    to: payment_skipped
+                select_payment:
+                    from: [payment_selected, shipping_skipped, shipping_selected]
+                    to: payment_selected
+                complete:
+                    from: [payment_selected, payment_skipped]
+                    to: completed
