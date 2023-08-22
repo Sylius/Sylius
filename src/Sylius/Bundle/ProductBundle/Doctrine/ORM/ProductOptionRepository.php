@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 
 class ProductOptionRepository extends EntityRepository implements ProductOptionRepositoryInterface
@@ -41,30 +42,40 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
         ;
     }
 
-    public function findByPhraseAndProductCode(string $phrase, string $locale, int $limit = 15): array
+    public function findByPhrase(string $phrase, string $locale, int $limit = 10): array
     {
-        $expr = $this->getEntityManager()->getExpressionBuilder();
+        $subqueryBuilder = $this->createQueryBuilder('sq')
+            ->innerJoin('sq.translations', 'translation', 'WITH', 'translation.name LIKE :name')
+            ->groupBy('sq.id')
+            ->addGroupBy('translation.translatable')
+            ->orderBy('translation.translatable', 'DESC')
+        ;
 
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->andWhere($expr->orX(
-                'translation.name LIKE :phrase',
-                'o.code LIKE :phrase',
-            ))
-            ->setParameter('phrase', '%' . $phrase . '%')
-            ->setParameter('locale', $locale)
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        /** @var ProductOptionInterface[] $results */
+        $results = $queryBuilder
+            ->andWhere($queryBuilder->expr()->in('o', $subqueryBuilder->getDQL()))
+            ->setParameter('name', '%' . $phrase . '%')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
+
+        foreach ($results as $result) {
+            $result->setFallbackLocale(array_key_first($result->getTranslations()->toArray()));
+        }
+
+        return $results;
     }
 
-    public function findByOptions(?array $code = []): array
+    public function findByCodes(array $codes = []): array
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();
 
         return $this->createQueryBuilder('o')
-            ->andWhere($expr->in('o.code', ':code'))
-            ->setParameter('code', $code)
+            ->andWhere($expr->in('o.code', ':codes'))
+            ->setParameter('codes', $codes)
             ->getQuery()
             ->getResult()
         ;
