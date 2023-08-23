@@ -43,9 +43,9 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
-        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void

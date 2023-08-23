@@ -170,8 +170,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function disableTracking(): void

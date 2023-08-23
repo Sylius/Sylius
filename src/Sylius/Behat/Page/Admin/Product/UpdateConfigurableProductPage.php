@@ -49,9 +49,9 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function isMainTaxonChosen(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
-        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -187,6 +187,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             'channels' => '#sylius_product_channels',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
+            'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
             'options' => '#sylius_product_options',
             'price' => '#sylius_product_variant_price',
