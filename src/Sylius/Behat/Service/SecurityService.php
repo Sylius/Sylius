@@ -19,11 +19,12 @@ use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionFactoryInterface;
+use Symfony\Component\Security\Core\Authentication\Token\RememberMeToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-final class SecurityService implements SecurityServiceInterface
+final class SecurityService implements RememberMeAwareSecurityServiceInterface
 {
     private string $sessionTokenVariable;
 
@@ -44,6 +45,13 @@ final class SecurityService implements SecurityServiceInterface
         } else {
             $token = new UsernamePasswordToken($user, $user->getPassword(), $this->firewallContextName, $user->getRoles());
         }
+
+        $this->setToken($token);
+    }
+
+    public function logInWithRememberMe(UserInterface $user): void
+    {
+        $token = new RememberMeToken($user, $this->firewallContextName, 'secret');
 
         $this->setToken($token);
     }

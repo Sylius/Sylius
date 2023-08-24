@@ -67,4 +67,17 @@ final class ShopSecurityContext implements Context
 
         $this->sharedStorage->set('user', $user);
     }
+
+    /**
+     * @Given I am a logged in customer by using remember me option
+     */
+    public function iAmLoggedInCustomerByUsingRememberMeOption(): void
+    {
+        $userData = ['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true];
+
+        $user = $this->userFactory->create($userData);
+        $this->userRepository->add($user);
+
+        $this->securityService->logInWithRememberMe($user);
+    }
 }
