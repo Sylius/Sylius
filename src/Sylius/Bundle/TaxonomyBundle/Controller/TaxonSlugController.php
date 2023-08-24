@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +34,12 @@ final class TaxonSlugController
     public function generateAction(Request $request): Response
     {
         $name = (string) $request->query->get('name');
+        if ('' === trim($name)) {
+            throw new BadRequestException('Cannot generate slug without a name');
+        }
+
         $locale = (string) $request->query->get('locale');
-        $parentId = $request->query->get('parentId');
+        $parentCode = $request->query->get('parentCode');
 
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
@@ -42,8 +47,8 @@ final class TaxonSlugController
         $taxon->setFallbackLocale($locale);
         $taxon->setName($name);
 
-        if (null !== $parentId) {
-            $taxon->setParent($this->taxonRepository->find($parentId));
+        if (null !== $parentCode) {
+            $taxon->setParent($this->taxonRepository->findOneBy(['code' => $parentCode]));
         }
 
         return new JsonResponse([
