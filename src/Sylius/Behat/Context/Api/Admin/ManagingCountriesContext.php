@@ -52,6 +52,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -316,9 +317,20 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
     {
-        Assert::same(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'provinces[1].code: Province code must be unique.',
+            '/provinces\[[\d+]\]\.code: Province code must be unique\./',
+        );
+    }
+
+    /**
+     * @Then I should be notified that all province codes within this country need to be unique
+     */
+    public function iShouldBeNotifiedThatAllProvinceCodesWithinThisCountryNeedToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'provinces: All provinces within this country need to have unique codes.',
         );
     }
 
