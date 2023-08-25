@@ -106,8 +106,6 @@ Feature: Editing taxon's slug
         And I save my changes
         Then the slug of the "Renaissance weapons" taxon should be "renaissance"
 
-
-
     @ui @javascript
     Scenario: Automatically changing a child taxon's slug when changing the parent
         Given the store has "Renaissance weapons" taxonomy
