@@ -17,7 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -42,8 +42,11 @@ final class MailerListenerSpec extends ObjectBehavior
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
         GenericEvent $event,
         \stdClass $customer,
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserRegistrationEmail', [$event]);
     }
@@ -52,9 +55,12 @@ final class MailerListenerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer,
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn(null);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
 
         $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
@@ -66,10 +72,13 @@ final class MailerListenerSpec extends ObjectBehavior
         GenericEvent $event,
         CustomerInterface $customer,
         ShopUserInterface $user,
+        ChannelInterface $channel,
     ): void {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn(null);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
 
         $emailSender->send(Argument::cetera())->shouldNotBeCalled();
 
@@ -89,11 +98,24 @@ final class MailerListenerSpec extends ObjectBehavior
 
         $user->getEmail()->willReturn('fulanito@sylius.com');
 
+        $channel->isAccountVerificationRequired()->willReturn(false);
+
         $emailSender->send(Emails::USER_REGISTRATION, ['fulanito@sylius.com'], [
             'user' => $user,
             'channel' => $channel,
             'localeCode' => 'en_US',
         ])->shouldBeCalled();
+
+        $this->sendUserRegistrationEmail($event);
+    }
+
+    function it_does_nothing_when_account_verification_is_required(
+        ChannelInterface $channel,
+        GenericEvent $event,
+    ): void {
+        $channel->isAccountVerificationRequired()->willReturn(true);
+
+        $event->getSubject()->shouldNotBeCalled();
 
         $this->sendUserRegistrationEmail($event);
     }
@@ -134,5 +156,35 @@ final class MailerListenerSpec extends ObjectBehavior
         ])->shouldBeCalled();
 
         $this->sendResetPasswordPinEmail($event);
+    }
+
+    function it_sends_verification_success_email(
+        SenderInterface $emailSender,
+        GenericEvent $event,
+        ShopUserInterface $shopUser,
+        ChannelInterface $channel,
+    ): void {
+        $event->getSubject()->willReturn($shopUser);
+        $shopUser->getEmail()->willReturn('shop@example.com');
+
+        $emailSender->send(
+            Emails::USER_REGISTRATION,
+            ['shop@example.com'],
+            [
+                'user' => $shopUser,
+                'channel' => $channel,
+                'localeCode' => 'en_US',
+            ],
+        )->shouldBeCalled();
+
+        $this->sendVerificationSuccessEmail($event);
+    }
+
+    function it_throws_exception_while_sending_verification_success_email_when_event_subject_is_not_a_shop_user(
+        GenericEvent $event,
+    ): void {
+        $event->getSubject()->willReturn(new \stdClass());
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('sendVerificationSuccessEmail', [$event]);
     }
 }

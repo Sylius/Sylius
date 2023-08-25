@@ -49,6 +49,9 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         /** @var UserInterface|ObjectProphecy $user */
         $user = $this->prophesize(UserInterface::class);
 
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $channel->getHostname()->willReturn('example.com');
+
         $user->getUsername()->willReturn('username');
         $user->getEmailVerificationToken()->willReturn('token');
 
@@ -98,6 +101,9 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $channel = $this->prophesize(ChannelInterface::class);
         /** @var UserInterface|ObjectProphecy $user */
         $user = $this->prophesize(UserInterface::class);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $channel->getHostname()->willReturn(null);
 
         $user->getUsername()->willReturn('username');
         $user->getEmailVerificationToken()->willReturn('token');

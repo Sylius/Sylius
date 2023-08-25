@@ -420,7 +420,10 @@
             <argument type="service" id="sylius.behat.page.shop.order.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.account.verify" />
+            <argument type="service" id="sylius.behat.page.shop.account.register.thank_you" />
+            <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.element.shop.account.register" />
+            <argument type="service" id="sylius.repository.customer" />
         </service>
 
         <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext">
@@ -548,11 +551,12 @@
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.page.shop.account.register.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.account.verify" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.element.shop.account.register" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.repository.customer" />
         </service>
 
         <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
