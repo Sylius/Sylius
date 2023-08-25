@@ -41,13 +41,16 @@
 
     <div class="attribute" data-id="{{ form.vars.data.attribute.code }}">
         <div class="attribute-row">
-            <div class="attribute-label">
-                {% if form.localeCode.vars.value %}
-                    {{ flags.fromLocaleCode(form.localeCode.vars.value) }}
-                {% else %}
-                    <i class="globe icon"></i>
-                {% endif %}
-                {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
+            <div class="attribute-label{% if not form.localeCode.vars.value or form.localeCode.vars.value == sylius_base_locale %} required field{% endif %}">
+                <label>
+                    {% if form.localeCode.vars.value %}
+                        <span class="language">{{ flags.fromLocaleCode(form.localeCode.vars.value) }} {{ form.localeCode.vars.value|sylius_locale_name }}</span>
+                        <br>
+                    {% else %}
+                        <i class="globe icon"></i>
+                    {% endif %}
+                    {{ form.vars.value.attribute.translation(form.vars.value.localeCode).name }}
+                </label>
             </div>
             <div class="attribute-input" data-test-product-attribute-value-in-locale="{{ "%s %s"|format(form.vars.data.attribute.name, form.localeCode.vars.value) }}">
                 <div {{ 'checkbox' in form.children.value.vars.block_prefixes ? 'class="ui toggle checkbox"' : '' }}>
