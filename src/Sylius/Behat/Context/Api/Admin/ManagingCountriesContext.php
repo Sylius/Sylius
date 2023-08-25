@@ -313,24 +313,24 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then I should be notified that province code must be unique
+     * @Then /^I should be notified that province (code|name) must be unique$/
      */
-    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(): void
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(string $field): void
     {
         Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            '/provinces\[[\d+]\]\.code: Province code must be unique\./',
+            sprintf('/provinces\[[\d+]\]\.%1$s: Province %1$s must be unique\./', $field),
         );
     }
 
     /**
-     * @Then I should be notified that all province codes within this country need to be unique
+     * @Then I should be notified that all province codes and names within this country need to be unique
      */
-    public function iShouldBeNotifiedThatAllProvinceCodesWithinThisCountryNeedToBeUnique(): void
+    public function iShouldBeNotifiedThatAllProvinceCodesAndNamesWithinThisCountryNeedToBeUnique(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'provinces: All provinces within this country need to have unique codes.',
+            'provinces: All provinces within this country need to have unique codes and names.',
         );
     }
 
