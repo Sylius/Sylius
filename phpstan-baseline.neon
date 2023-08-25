@@ -71,9 +71,9 @@ parameters:
 			path: src/Sylius/Bundle/AddressingBundle/Validator/Constraints/ProvinceAddressConstraintValidator.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\AddressingBundle\\\\Validator\\\\Constraints\\\\UniqueProvinceCollectionCodesValidator\\:\\:validate\\(\\) has parameter \\$value with no type specified\\.$#"
+			message: "#^Method Sylius\\\\Bundle\\\\AddressingBundle\\\\Validator\\\\Constraints\\\\UniqueProvinceCollectionValidator\\:\\:validate\\(\\) has parameter \\$value with no type specified\\.$#"
 			count: 1
-			path: src/Sylius/Bundle/AddressingBundle/Validator/Constraints/UniqueProvinceCollectionCodesValidator.php
+			path: src/Sylius/Bundle/AddressingBundle/Validator/Constraints/UniqueProvinceCollectionValidator.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\AddressingBundle\\\\Validator\\\\Constraints\\\\ZoneCannotContainItselfValidator\\:\\:validate\\(\\) has parameter \\$value with no type specified\\.$#"

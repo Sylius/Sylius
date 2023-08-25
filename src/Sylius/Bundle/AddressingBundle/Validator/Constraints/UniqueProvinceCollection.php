@@ -6,12 +6,12 @@ namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class UniqueProvinceCollectionCodes extends Constraint
+final class UniqueProvinceCollection extends Constraint
 {
-    public string $message = 'sylius.country.unique_provinces_codes';
+    public string $message = 'sylius.country.unique_provinces';
 
     public function validatedBy(): string
     {
-        return 'sylius_unique_province_collection_codes_validator';
+        return 'sylius_unique_province_collection_validator';
     }
 }
