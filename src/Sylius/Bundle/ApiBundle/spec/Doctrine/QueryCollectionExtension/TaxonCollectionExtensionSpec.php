@@ -36,6 +36,8 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
+        $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, TaxonInterface::class, 'get_from_menu_taxon', []])
@@ -129,7 +131,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_does_not_apply_conditions_if_logged_in_user_is_admin(
+    function it_orders_taxons_if_logged_in_user_is_admin(
         UserContextInterface $userContext,
         ChannelInterface $channel,
         QueryBuilder $queryBuilder,
@@ -140,13 +142,15 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
 
         $admin->getRoles()->shouldBeCalled()->willReturn(['ROLE_API_ACCESS']);
 
-        $queryBuilder->getRootAliases()->shouldNotBeCalled();
+        $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
+        $queryBuilder->addOrderBy('o.parent')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());;
+        $queryBuilder->addOrderBy('o.position')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());;
+
         $queryBuilder->addSelect('child')->shouldNotBeCalled();
         $queryBuilder->innerJoin('o.parent', 'parent')->shouldNotBeCalled();
         $queryBuilder->leftJoin('o.children', 'child', 'WITH', 'child.enabled = true')->shouldNotBeCalled();
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldNotBeCalled();
         $queryBuilder->andWhere('parent.code = :parentCode')->shouldNotBeCalled();
-        $queryBuilder->addOrderBy('o.position')->shouldNotBeCalled();
         $queryBuilder->setParameter('parentCode', 'code')->shouldNotBeCalled();
         $queryBuilder->setParameter('enabled', true)->shouldNotBeCalled();
 

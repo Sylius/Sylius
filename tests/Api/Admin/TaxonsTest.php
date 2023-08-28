@@ -52,6 +52,7 @@ final class TaxonsTest extends JsonApiTestCase
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/taxons', server: $header);
 
+        $res = $this->client->getResponse();
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/taxon/get_taxons_response',

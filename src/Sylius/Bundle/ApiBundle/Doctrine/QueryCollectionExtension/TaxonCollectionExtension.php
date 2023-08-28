@@ -40,8 +40,15 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
             return;
         }
 
+        $rootAlias = $queryBuilder->getRootAliases()[0];
+
         $user = $this->userContext->getUser();
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+            $queryBuilder
+                ->addOrderBy(sprintf('%s.parent', $rootAlias))
+                ->addOrderBy(sprintf('%s.position', $rootAlias))
+            ;
+
             return;
         }
 
@@ -51,7 +58,6 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
         $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
         $parentCodeParameterName = $queryNameGenerator->generateParameterName('parentCode');
 
-        $rootAlias = $queryBuilder->getRootAliases()[0];
         $queryBuilder
             ->addSelect('child')
             ->innerJoin(sprintf('%s.parent', $rootAlias), 'parent')

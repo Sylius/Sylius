@@ -6,15 +6,15 @@
         {
             "@id": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "@type": "Taxon",
-            "id": "@integer@",
+            "id": @integer@,
             "code": "CATEGORY",
-            "position": "@integer@",
             "parent": null,
             "children": [
                 "\/api\/v2\/admin\/taxons\/MUG",
                 "\/api\/v2\/admin\/taxons\/HAT",
                 "\/api\/v2\/admin\/taxons\/T_SHIRTS"
             ],
+            "position": 0,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -29,165 +29,13 @@
             "enabled": true
         },
         {
-            "@id": "\/api\/v2\/admin\/taxons\/MUG",
-            "@type": "Taxon",
-            "id": "@integer@",
-            "code": "MUG",
-            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
-            "children": [],
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Mugs",
-                    "slug": "categories/mugs",
-                    "description": "Some description Lorem ipsum dolor sit amet.",
-                    "locale": "en_US"
-                },
-                "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Tassen",
-                    "slug": "tassen",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
-                    "locale": "de_DE"
-                }
-            },
-            "enabled": true,
-            "position": "@integer@"
-        },
-        {
-            "@id": "\/api\/v2\/admin\/taxons\/HAT",
-            "@type": "Taxon",
-            "id": "@integer@",
-            "code": "HAT",
-            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
-            "children": [],
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Hats",
-                    "slug": "categories/hats",
-                    "description": "Some description Lorem ipsum dolor sit amet.",
-                    "locale": "en_US"
-                },
-                "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Hüte",
-                    "slug": "hute",
-                    "description": null,
-                    "locale": "de_DE"
-                }
-            },
-            "enabled": true,
-            "position": "@integer@"
-        },
-        {
-            "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
-            "@type": "Taxon",
-            "id": "@integer@",
-            "code": "T_SHIRTS",
-            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
-            "children": [
-                "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
-                "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
-            ],
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "T-Shirts",
-                    "slug": "categories/t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet.",
-                    "locale": "en_US"
-                },
-                "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "T-Shirts",
-                    "slug": "t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
-                    "locale": "de_DE"
-                }
-            },
-            "enabled": true,
-            "position": "@integer@"
-        },
-        {
-            "@id": "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
-            "@type": "Taxon",
-            "id": "@integer@",
-            "code": "MEN_T_SHIRTS",
-            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
-            "children": [],
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Men T-Shirts",
-                    "slug": "categories/t-shirts/men-t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet.",
-                    "locale": "en_US"
-                },
-                "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Männer T-Shirts",
-                    "slug": "männer-t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
-                    "locale": "de_DE"
-                }
-            },
-            "enabled": true,
-            "position": "@integer@"
-        },
-        {
-            "@id": "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS",
-            "@type": "Taxon",
-            "id": "@integer@",
-            "code": "WOMEN_T_SHIRTS",
-            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
-            "children": [],
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Women T-Shirts",
-                    "slug": "categories/t-shirts/women-t-shirts",
-                    "description": "Some description Lorem ipsum dolor sit amet.",
-                    "locale": "en_US"
-                },
-                "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
-                    "@type": "TaxonTranslation",
-                    "id": @integer@,
-                    "name": "Frauen T-Shirts",
-                    "slug": "frauen-t-shirts",
-                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
-                    "locale": "de_DE"
-                }
-            },
-            "enabled": false,
-            "position": "@integer@"
-        },
-        {
             "@id": "\/api\/v2\/admin\/taxons\/BRAND",
             "@type": "Taxon",
-            "id": "@integer@",
+            "id": @integer@,
             "code": "BRAND",
             "parent": null,
             "children": [],
+            "position": 1,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -208,16 +56,16 @@
                     "locale": "de_DE"
                 }
             },
-            "enabled": true,
-            "position": "@integer@"
+            "enabled": true
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/de%3Flol=xd%23boom",
             "@type": "Taxon",
-            "id": "@integer@",
+            "id": @integer@,
             "code": "de?lol=xd#boom",
             "parent": null,
             "children": [],
+            "position": 2,
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -229,8 +77,160 @@
                     "locale": "en_US"
                 }
             },
-            "enabled": true,
-            "position": "@integer@"
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/taxons\/MUG",
+            "@type": "Taxon",
+            "id": @integer@,
+            "code": "MUG",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [],
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Mugs",
+                    "slug": "categories\/mugs",
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
+                },
+                "de_DE": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Tassen",
+                    "slug": "tassen",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
+                }
+            },
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/taxons\/HAT",
+            "@type": "Taxon",
+            "id": @integer@,
+            "code": "HAT",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [],
+            "position": 1,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Hats",
+                    "slug": "categories\/hats",
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
+                },
+                "de_DE": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Hüte",
+                    "slug": "hute",
+                    "description": null,
+                    "locale": "de_DE"
+                }
+            },
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
+            "@type": "Taxon",
+            "id": @integer@,
+            "code": "T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [
+                "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
+                "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
+            ],
+            "position": 2,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "T-Shirts",
+                    "slug": "categories\/t-shirts",
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
+                },
+                "de_DE": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "T-Shirts",
+                    "slug": "t-shirts",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
+                }
+            },
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
+            "@type": "Taxon",
+            "id": @integer@,
+            "code": "MEN_T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
+            "children": [],
+            "position": 0,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Men T-Shirts",
+                    "slug": "categories\/t-shirts\/men-t-shirts",
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
+                },
+                "de_DE": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Männer T-Shirts",
+                    "slug": "männer-t-shirts",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
+                }
+            },
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS",
+            "@type": "Taxon",
+            "id": @integer@,
+            "code": "WOMEN_T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
+            "children": [],
+            "position": 1,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Women T-Shirts",
+                    "slug": "categories\/t-shirts\/women-t-shirts",
+                    "description": "Some description Lorem ipsum dolor sit amet.",
+                    "locale": "en_US"
+                },
+                "de_DE": {
+                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@type": "TaxonTranslation",
+                    "id": @integer@,
+                    "name": "Frauen T-Shirts",
+                    "slug": "frauen-t-shirts",
+                    "description": "Einige Beschreibung Lorem ipsum dolor sit amet.",
+                    "locale": "de_DE"
+                }
+            },
+            "enabled": false
         }
     ],
     "hydra:totalItems": 8

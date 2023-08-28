@@ -36,6 +36,7 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I want to see all taxons in store
+     * @When I browse taxons
      */
     public function iWantToSeeAllTaxonsInStore(): void
     {
@@ -154,18 +155,23 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I move down :taxonName taxon
+     * @When I move up :taxon taxon
      */
-    public function iMoveDownTaxon(string $taxonName): void
+    public function iMoveUpTaxon(TaxonInterface $taxon): void
     {
-        $lastResponse = $this->client->getLastResponse();
-        $code = StringInflector::nameToLowercaseCode($taxonName);
+        $this->client->buildUpdateRequest(Resources::TAXONS, $taxon->getCode());
+        $this->client->addRequestData('position', $taxon->getPosition() - 1);
 
-        $taxon = $this->responseChecker->getCollectionItemsWithValue($lastResponse, 'code', $code);
-        $position = $taxon[0]['position'];
+        $this->client->update();
+    }
 
-        $this->client->buildUpdateRequest(Resources::TAXONS, $code);
-        $this->client->addRequestData('position', $position + 1);
+    /**
+     * @When I move down :taxon taxon
+     */
+    public function iMoveDownTaxon(TaxonInterface $taxon): void
+    {
+        $this->client->buildUpdateRequest(Resources::TAXONS, $taxon->getCode());
+        $this->client->addRequestData('position', $taxon->getPosition() + 1);
 
         $this->client->update();
     }
@@ -194,7 +200,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^taxon named "([^"]+)" should not be added$/
+     * @Then taxon named :name should not be added
      * @Then the taxon named :name should no longer exist in the registry
      */
     public function taxonNamedShouldNotBeAdded(string $name): void
@@ -306,6 +312,20 @@ final class ManagingTaxonsContext implements Context
             'enabled',
             $enabled === 'enabled',
         ));
+    }
+
+    /**
+     * @Then the first taxon on the list should be :taxonName
+     */
+    public function theFirstTaxonOnTheListShouldBe(string $taxonName): void
+    {
+        $res = $this->client->getLastResponse();
+        Assert::true($this->responseChecker->hasItemOnPositionWithValue(
+            $this->client->getLastResponse(),
+            0,
+            'code',
+            StringInflector::nameToLowercaseCode($taxonName)),
+        );
     }
 
     /**
