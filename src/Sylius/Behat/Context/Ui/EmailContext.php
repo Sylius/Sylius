@@ -93,7 +93,7 @@ final class EmailContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             $this->translator->trans('sylius.email.verification_token.to_verify_your_email_address'),
-            $recipient
+            $recipient,
         );
     }
 
@@ -104,7 +104,7 @@ final class EmailContext implements Context
     {
         $this->assertEmailDoesNotContainMessageTo(
             $this->translator->trans('sylius.email.user_registration.welcome_to_our_store'),
-            $recipient
+            $recipient,
         );
     }
 
