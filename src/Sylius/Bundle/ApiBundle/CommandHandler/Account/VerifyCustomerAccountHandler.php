@@ -50,7 +50,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 
         $this->commandBus->dispatch(
             new SendAccountRegistrationEmail($user->getEmail(), $command->getLocaleCode(), $command->getChannelCode()),
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         );
 
         return new JsonResponse([]);

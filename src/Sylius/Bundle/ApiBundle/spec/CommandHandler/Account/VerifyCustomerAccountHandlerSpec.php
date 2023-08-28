@@ -56,7 +56,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 
         $commandBus->dispatch(
             new SendAccountRegistrationEmail('shop@example.com', 'en_US', 'WEB'),
-            [new DispatchAfterCurrentBusStamp()]
+            [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope(new \stdClass()));
 
         $this(new VerifyCustomerAccount('ToKeN', 'en_US', 'WEB'));

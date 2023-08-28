@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -50,7 +50,7 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
             [
                 'user' => $shopUser,
                 'localeCode' => 'en_US',
-                'channel' => $channel
+                'channel' => $channel,
             ],
         )->shouldBeCalled();
 
@@ -76,7 +76,7 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
             [
                 'user' => $shopUser,
                 'localeCode' => 'en_US',
-                'channel' => $channel
+                'channel' => $channel,
             ],
         )->shouldBeCalled();
 
@@ -89,8 +89,7 @@ final class SendAccountRegistrationEmailHandlerSpec extends ObjectBehavior
         SenderInterface $emailSender,
         ShopUserInterface $shopUser,
         ChannelInterface $channel,
-    ): void
-    {
+    ): void {
         $shopUserRepository->findOneByEmail('shop@example.com')->willReturn($shopUser);
         $channelRepository->findOneByCode('WEB')->willReturn($channel);
 
