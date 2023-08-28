@@ -70,17 +70,21 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code): void
+    public function iSpecifyItsCodeAs(?string $code = null): void
     {
-        $this->client->addRequestData('code', $code);
+        if ($code !== null) {
+            $this->client->addRequestData('code', $code);
+        }
     }
 
     /**
      * @When I name it :name in :localeCode
      * @When I rename it to :name in :localeCode
+     * @When I do not specify its name
      */
-    public function iNameItIn(string $name, string $localeCode): void
+    public function iNameItIn(?string $name = null, string $localeCode = 'en_US'): void
     {
         $this->updateTranslations($localeCode, 'name', $name);
     }
@@ -302,15 +306,59 @@ final class ManagingTaxonsContext implements Context
         ));
     }
 
-    private function updateTranslations(string $localeCode, string $field, string $value): void
+    /**
+     * @Then I should be notified that :field is required
+     */
+    public function iShouldBeNotifiedThatFieldIsRequired(string $field): void
     {
-        $this->client->updateRequestData([
-            'translations' => [
-                $localeCode => [
-                    'locale' => $localeCode,
-                    $field => $value,
-                ],
-            ],
-        ]);
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter taxon %s.', $field),
+        );
+    }
+
+    /**
+     * @Then I should be notified that taxon slug must be unique
+     */
+    public function iShouldBeNotifiedThatTaxonSlugMustBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'slug: Taxon slug must be unique.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that taxon with this code already exists
+     */
+    public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'code: Taxon with given code already exists.',
+        );
+    }
+
+    /**
+     * @Then there should still be only one taxon with code :code
+     */
+    public function thereShouldStillBeOnlyOneTaxonWithCode(string $code): void
+    {
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::TAXONS), 'code', $code),
+            1,
+            sprintf('There should be only one taxon with code "%s"', $code),
+        );
+    }
+
+    private function updateTranslations(string $localeCode, string $field, ?string $value = null): void
+    {
+        $data['translations'][$localeCode]['locale'] = $localeCode;
+
+        if ($value !== null) {
+            $data['translations'][$localeCode][$field] = $value;
+        }
+
+        $this->client->updateRequestData($data);
     }
 }
