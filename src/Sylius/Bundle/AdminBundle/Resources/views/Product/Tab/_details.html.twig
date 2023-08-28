@@ -14,7 +14,7 @@
                     {% if product.simple %}
                         {{ form_row(form.variant.shippingRequired) }}
                     {% else %}
-                        {{ form_row(form.options) }}
+                        {{ form_row(form.options, {'remote_url': path('sylius_admin_ajax_product_options_by_phrase'), 'load_edit_url': path('sylius_admin_ajax_find_product_options')}) }}
                         {{ form_row(form.variantSelectionMethod) }}
                     {% endif %}
 
