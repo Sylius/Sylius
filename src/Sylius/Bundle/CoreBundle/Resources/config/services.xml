@@ -32,7 +32,6 @@
         <import resource="services/message_handlers.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
-        <import resource="services/positioner.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/shipping.xml" />
@@ -290,5 +289,7 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
         </service>
+
+        <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
     </services>
 </container>
