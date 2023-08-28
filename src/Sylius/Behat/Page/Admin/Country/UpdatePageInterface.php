@@ -38,4 +38,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function removeProvinceName(string $provinceName): void;
 
     public function specifyProvinceCode(string $provinceCode): void;
+
+    /** @return array<array-key, string> */
+    public function getFormValidationErrors(): array;
 }
