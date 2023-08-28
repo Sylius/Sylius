@@ -363,14 +363,6 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the product :product should no longer have a main taxon
-     */
-    public function theProductShouldNoLongerHaveAMainTaxon(ProductInterface $product): void
-    {
-        Assert::null($product->getMainTaxon());
-    }
-
-    /**
      * @Then the product :product should have the :taxon taxon
      */
     public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void

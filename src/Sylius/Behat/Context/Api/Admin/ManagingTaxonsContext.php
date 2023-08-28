@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -349,6 +350,14 @@ final class ManagingTaxonsContext implements Context
             1,
             sprintf('There should be only one taxon with code "%s"', $code),
         );
+    }
+
+    /**
+     * @Then the product :product should no longer have a main taxon
+     */
+    public function theProductShouldNoLongerHaveAMainTaxon(ProductInterface $product): void
+    {
+        Assert::null($product->getMainTaxon());
     }
 
     private function updateTranslations(string $localeCode, string $field, ?string $value = null): void
