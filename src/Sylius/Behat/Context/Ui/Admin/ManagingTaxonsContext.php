@@ -204,7 +204,7 @@ final class ManagingTaxonsContext implements Context
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
 
-        Assert::true($this->updatePage->hasResourceValues(['slug' => $slug]));
+        Assert::same($this->updatePage->getSlug(), $slug);
     }
 
     /**
