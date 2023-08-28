@@ -90,6 +90,95 @@ final class TaxonsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_taxon_without_required_data(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/taxons',
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                    ]
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/post_taxon_without_required_data_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_taxon_with_taken_code(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/taxons',
+            server: $header,
+            content: json_encode([
+                'code' => 'MUG',
+                'parent' => '/api/v2/admin/taxons/CATEGORY',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Watches',
+                        'slug' => 'watches',
+                        'locale' => 'en_US'
+                    ]
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/post_taxon_with_taken_code_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_updates_the_existing_taxon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['mug_taxon'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            server: $header,
+            content: json_encode([
+                'parent' => '/api/v2/admin/taxons/BRAND',
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/taxon-translations/%s', $taxon->getTranslation('en_US')->getId()),
+                        'name' => 'Watches',
+                        'slug' => 'watches',
+                    ],
+                ],
+                'enabled' => false,
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/put_taxon_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_deletes_a_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
