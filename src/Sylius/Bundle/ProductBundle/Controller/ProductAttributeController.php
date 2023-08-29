@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Controller;
 
-use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Product\Model\ProductAttribute;
