@@ -43,9 +43,9 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
-        Assert::notNull($this->getDocument()->find('css', '.search > .text'));
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function selectMainTaxon(TaxonInterface $taxon): void
@@ -59,7 +59,9 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
 
     public function selectOption(string $optionName): void
     {
-        $this->getDocument()->selectFieldOption('Options', $optionName);
+        $option = $this->getElement('options_choice')->getParent();
+
+        AutocompleteHelper::chooseValue($this->getSession(), $option, $optionName);
     }
 
     public function attachImage(string $path, ?string $type = null): void
@@ -85,6 +87,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
             'images' => '#sylius_product_images',
             'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
+            'options_choice' => '#sylius_product_options',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
             'slug' => '#sylius_product_translations_en_US_slug',

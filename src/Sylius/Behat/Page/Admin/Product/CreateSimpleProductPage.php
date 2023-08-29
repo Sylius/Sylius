@@ -133,8 +133,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
+        $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
-        return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
+        return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
     }
 
     public function checkProductTaxon(TaxonInterface $taxon): void

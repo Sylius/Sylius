@@ -120,7 +120,7 @@ final class TaxonomyContext implements Context
     public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames): void
     {
         foreach ($taxonsNames as $taxonName) {
-            $taxon->addChild($this->createTaxon($taxonName));
+            $taxon->addChild($this->createChildTaxon($taxonName, $taxon));
         }
 
         $this->objectManager->persist($taxon);
@@ -156,6 +156,15 @@ final class TaxonomyContext implements Context
         $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
 
         return $taxon;
+    }
+
+    private function createChildTaxon(string $name, TaxonInterface $parent): TaxonInterface
+    {
+        $child = $this->createTaxon($name);
+        $child->setParent($parent);
+        $child->setSlug($this->taxonSlugGenerator->generate($child));
+
+        return $child;
     }
 
     /**
