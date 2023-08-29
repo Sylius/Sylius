@@ -22,6 +22,10 @@ sylius_admin_ajax_customer_group:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/customer_group.yml"
     prefix: /customer-groups
 
+sylius_admin_ajax_product_option:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_option.yml"
+    prefix: /product-options
+
 sylius_admin_ajax_render_province_form:
     path: /render-province-form
     defaults:

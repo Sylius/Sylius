@@ -27,7 +27,19 @@ interface ProductOptionRepositoryInterface extends RepositoryInterface
     public function createListQueryBuilder(string $locale): QueryBuilder;
 
     /**
-     * @return array|ProductOptionInterface[]
+     * @return ProductOptionInterface[]
      */
     public function findByName(string $name, string $locale): array;
+
+    /**
+     * @return ProductOptionInterface[]
+     */
+    public function findByPhrase(string $phrase, string $locale, int $limit = 10): array;
+
+    /**
+     * @param string[] $codes
+     *
+     * @return ProductOptionInterface[]
+     */
+    public function findByCodes(array $codes = []): array;
 }

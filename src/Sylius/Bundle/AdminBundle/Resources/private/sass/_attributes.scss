@@ -39,7 +39,7 @@
 
 .attribute-row {
     flex-wrap: wrap;
-    margin: 10px 0;
+    margin: 10px 0 0;
 
     @media (min-width: 1152px) {
         display: flex;
@@ -50,11 +50,20 @@
     align-self: center;
     width: 200px;
     margin-right: 20px;
-    padding-top: 5px;
-    padding-bottom: 5px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    &.field.required {
+        margin: 0 20px 0 0;
+
+        > label {
+            margin: 0 !important;
+            font-size: 1rem;
+        }
+    }
+    span.language {
+        font-size: 11px;
+    }
 
     i {
         width: 20px;
@@ -83,6 +92,10 @@
 .attribute-input textarea {
     height: 6em !important;
     min-height: 6em !important;
+}
+
+.attribute-action {
+    margin: auto;
 }
 
 .attribute-action > * {
