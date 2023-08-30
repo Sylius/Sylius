@@ -63,7 +63,7 @@ The types of rules that are configured in **Sylius** by default are:
 * **Nth Order** - checks if this is for example the second order made by the customer,
 * **Shipping Country** - checks if the order's shipping address is in a given country.
 * **Customer Group** - checks if the current customer is in a given customer group.
-* **Contain Product** - checks if the order contain a certain product.
+* **Contains Product** - checks if the order contains a certain product.
 
 How to create a new PromotionRule programmatically?
 '''''''''''''''''''''''''''''''''''''''''''''''''''
