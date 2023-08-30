@@ -26,6 +26,9 @@ final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidato
     {
     }
 
+    /**
+     * @param mixed $value
+     */
     public function validate($value, Constraint $constraint): void
     {
         Assert::string($value);
