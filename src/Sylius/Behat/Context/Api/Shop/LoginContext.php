@@ -282,7 +282,7 @@ final class LoginContext implements Context
     {
         $response = $this->client->executeCustomRequest($this->request);
         Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: No user found with reset token: itotallyforgotmypassword.');
+        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token itotallyforgotmypassword is invalid.');
 
     }
 
