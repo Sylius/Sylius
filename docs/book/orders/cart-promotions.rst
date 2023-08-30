@@ -118,7 +118,7 @@ There are a few kinds of actions in **Sylius**:
 * percentage discount on the order (for example: -10% on the whole order)
 * fixed unit discount (for example: -1$ off the order total but *distributed and applied on each order item unit*)
 * percentage unit discount (for example: -10% off the order total but *distributed and applied on each order item unit*)
-* shipping discount (for example: -6$ on the costs of shipping)
+* shipping precentage discount (for example: -10% off the costs of shipping)
 
 .. tip::
 
