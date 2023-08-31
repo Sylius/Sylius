@@ -146,6 +146,7 @@
             <argument type="service" id="sylius.factory.product_option" />
             <argument type="service" id="sylius.factory.product_option_value" />
             <argument type="service" id="sylius.factory.product_image" />
+            <argument type="service" id="sylius.factory.product_taxon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.product_variant_resolver.default" />

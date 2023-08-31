@@ -15,14 +15,16 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Positioner\PositionerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Webmozart\Assert\Assert;
 
 class ProductTaxonController extends ResourceController
 {
@@ -44,7 +46,12 @@ class ProductTaxonController extends ResourceController
             /** @psalm-var array{position: string|int, id: int} $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 try {
-                    $this->updatePositions($productTaxon['position'], $productTaxon['id']);
+                    $id = $productTaxon['id'];
+                    $position = $productTaxon['position'];
+
+                    /** @var ProductTaxonInterface $productTaxonFromBase */
+                    $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
+                    $productTaxonFromBase->setPosition((int) $position);
                 } catch (\InvalidArgumentException $exception) {
                     throw new HttpException(Response::HTTP_BAD_REQUEST, $exception->getMessage());
                 }
@@ -56,35 +63,75 @@ class ProductTaxonController extends ResourceController
         return new JsonResponse();
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-        $productTaxons = $this->getParameterFromRequest($request, 'productTaxons');
-
         $this->validateCsrfProtection($request, $configuration);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+        $productTaxonsPositions = $request->request->all('productTaxons');
 
-        if ($this->shouldProductsPositionsBeUpdated($request, $productTaxons)) {
-            /** @var Session $session */
-            $session = $request->getSession();
-
-            foreach ($productTaxons as $id => $position) {
-                try {
-                    $this->updatePositions($position, $id);
-                } catch (\InvalidArgumentException $exception) {
-                    $session->getFlashBag()->add('error', $exception->getMessage());
-
-                    return $this->redirectHandler->redirectToReferer($configuration);
-                }
-            }
-
-            $this->manager->flush();
+        if (!$this->shouldProductsPositionsBeUpdated($request, $productTaxonsPositions)) {
+            return $this->redirectHandler->redirectToReferer($configuration);
         }
 
+        $maxPosition = $this->getMaxPosition($configuration);
+
+        try {
+            $this->updatePositions($productTaxonsPositions, $maxPosition);
+        } catch (\InvalidArgumentException $exception) {
+            /** @var Session $session */
+            $session = $request->getSession();
+            $session->getFlashBag()->add('error', $exception->getMessage());
+
+            return $this->redirectHandler->redirectToReferer($configuration);
+        }
+
+
         return $this->redirectHandler->redirectToReferer($configuration);
+    }
+
+    /** @param array<int, string> $productTaxonPositions */
+    private function updatePositions(array $productTaxonPositions, int $maxPosition): void
+    {
+        $positioner = $this->getPositioner();
+        $modifiedProductTaxons = [];
+
+        /** @var array<ProductTaxonInterface> $productTaxons */
+        $productTaxons = $this->repository->findBy(['id' => array_keys($productTaxonPositions)]);
+
+        foreach ($productTaxons as $productTaxon) {
+            $newProductTaxonPosition = $productTaxonPositions[$productTaxon->getId()];
+            if (!is_numeric($newProductTaxonPosition)) {
+                throw new \InvalidArgumentException(sprintf('The position "%s" is invalid.', $newProductTaxonPosition));
+            }
+
+            $newProductTaxonPosition = (int) $newProductTaxonPosition;
+
+            if (!$positioner->hasPositionChanged($productTaxon, $newProductTaxonPosition)) {
+                continue;
+            }
+
+            $modifiedProductTaxons[] = [
+                'productTaxon' => $productTaxon,
+                'newPosition' => $newProductTaxonPosition,
+            ];
+        }
+
+        foreach ($modifiedProductTaxons as $modifiedProductTaxon) {
+            $positioner->updatePosition($modifiedProductTaxon['productTaxon'], $modifiedProductTaxon['newPosition'], $maxPosition);
+            $this->manager->flush();
+        }
+    }
+
+    private function getMaxPosition(RequestConfiguration $configuration): int
+    {
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $this->findOr404($configuration);
+
+        /** @var EntityRepository&RepositoryInterface $repository */
+        $repository = $this->repository;
+
+        return $repository->count(['taxon' => $productTaxon->getTaxon()]) - 1;
     }
 
     private function validateCsrfProtection(Request $request, RequestConfiguration $configuration): void
@@ -94,18 +141,13 @@ class ProductTaxonController extends ResourceController
         }
     }
 
+    /** @param array<string, int>|null $productTaxons */
     private function shouldProductsPositionsBeUpdated(Request $request, ?array $productTaxons): bool
     {
-        return in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons;
-    }
-
-    private function updatePositions(string $position, int $id): void
-    {
-        Assert::numeric($position, sprintf('The position "%s" is invalid.', $position));
-
-        /** @var ProductTaxonInterface $productTaxonFromBase */
-        $productTaxonFromBase = $this->repository->findOneBy(['id' => $id]);
-        $productTaxonFromBase->setPosition((int) $position);
+        return in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) &&
+            null !== $productTaxons &&
+            [] !== $productTaxons
+        ;
     }
 
     /**
@@ -129,5 +171,13 @@ class ProductTaxonController extends ResourceController
         }
 
         return null;
+    }
+
+    private function getPositioner(): PositionerInterface
+    {
+        /** @var PositionerInterface $positioner */
+        $positioner = $this->get(PositionerInterface::class);
+
+        return $positioner;
     }
 }
