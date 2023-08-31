@@ -330,7 +330,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^this product should be at position (\d+)$/
+     * @Then this product should be at position :position
      */
     public function theNthProductOnThisPageShouldBeAtPosition(int $position): void
     {
@@ -351,6 +351,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the one before last product on the list should have name :productName with position :position
+     */
+    public function theOneBeforeLastProductOnTheListShouldHaveNameWithPosition(string $productName, int $position): void
+    {
+        $productNames = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same($productNames[count($productNames) - 2], $productName);
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+
+        $this->sharedStorage->set('product_taxon_name', $productName);
+    }
+
+    /**
      * @Then the last product on the list should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
@@ -360,6 +373,19 @@ final class ManagingProductsContext implements Context
         Assert::same(end($values), $value);
 
         $this->sharedStorage->set('product_taxon_name', $value);
+    }
+
+    /**
+     * @Then the last product on the list should have name :productName with position :position
+     */
+    public function theLastProductOnTheListShouldHaveNameWithPosition(string $productName, int $position): void
+    {
+        $productNames = $this->indexPerTaxonPage->getColumnFields('name');
+
+        Assert::same(end($productNames), $productName);
+        Assert::same($this->indexPerTaxonPage->getProductPosition($productName), $position);
+
+        $this->sharedStorage->set('product_taxon_name', $productName);
     }
 
     /**

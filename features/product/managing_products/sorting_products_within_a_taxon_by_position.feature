@@ -35,21 +35,17 @@ Feature: Sorting listed products from a taxon by position
         And I set the position of "Young pug" to "-1"
         And I save my new configuration
         And I go to the 2nd page of products from "Soft Toys" taxon
-        Then the one before last product on the list should have name "Old pug"
-        And this product should be at position 18
-        And the last product on the list should have name "Young pug"
-        And this product should be at position 19
+        Then the one before last product on the list should have name "Old pug" with position 18
+        And the last product on the list should have name "Young pug" with position 19
 
     @ui
     Scenario: Setting two products to position -1 on the last page
         When I am browsing the 2nd page of products from "Soft Toys" taxon
-        When I set the position of "Pug XL" to "-1"
+        And I set the position of "Pug XL" to "-1"
         And I set the position of "Pug XS" to "-1"
         And I save my new configuration
-        Then the one before last product on the list should have name "Pug XL"
-        And this product should be at position 18
-        And the last product on the list should have name "Pug XS"
-        And this product should be at position 19
+        Then the one before last product on the list should have name "Pug XL" with position 18
+        And the last product on the list should have name "Pug XS" with position 19
 
     @ui
     Scenario: Setting two products to the already occupied position on the other page
@@ -90,10 +86,8 @@ Feature: Sorting listed products from a taxon by position
         And I set the position of "Young pug" to "26"
         And I save my new configuration
         And I go to the 2nd page of products from "Soft Toys" taxon
-        Then the one before last product on the list should have name "Old pug"
-        And this product should be at position 18
-        And the last product on the list should have name "Young pug"
-        And this product should be at position 19
+        Then the one before last product on the list should have name "Old pug" with position 18
+        And the last product on the list should have name "Young pug" with position 19
 
     @ui
     Scenario: Setting two products to the positions overflowing the max available position on the last page
@@ -102,10 +96,8 @@ Feature: Sorting listed products from a taxon by position
         And I set the position of "Pug XL" to "26"
         And I save my new configuration
         And I go to the 2nd page of products from "Soft Toys" taxon
-        Then the one before last product on the list should have name "Puglet"
-        And this product should be at position 18
-        And the last product on the list should have name "Pug XL"
-        And this product should be at position 19
+        Then the one before last product on the list should have name "Puglet" with position 18
+        And the last product on the list should have name "Pug XL" with position 19
 
     @ui
     Scenario: New product is added as last one
