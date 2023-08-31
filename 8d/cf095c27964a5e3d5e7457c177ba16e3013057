@@ -1,0 +1,70 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-08-15T07:05:53Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-3gzytg.bunnyenv.com/|
+|php|https://store-3gzytg.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by SzymonFilipek at 2023-08-25T14:40:22Z
+
+/bns:deploy
+
+---------------------------------------------------------------------------
+
+by SzymonFilipek at 2023-08-28T09:21:22Z
+
+/bns:start
+
+---------------------------------------------------------------------------
+
+by SzymonFilipek at 2023-08-28T09:43:05Z
+
+Found few differences between scenarios and the state of the environment.
+Scenario:
+![image](https://github.com/Sylius/Sylius/assets/138723846/cc88a544-6c08-4de3-91a0-cfed20c1b8b6)
+In this test "Puglet" is replaced with "Last" and "Pug XL" with "rgrg".
+![image](https://github.com/Sylius/Sylius/assets/138723846/a33c0b8c-24ed-4ee6-b7f1-b65fd23b9987)
+Changing the position of "Last" to 20 and "rgrg" to 21 results in this.
+![image](https://github.com/Sylius/Sylius/assets/138723846/43b587bb-c130-4df2-ab87-49aed6faf14e)
+According to the scenario "Last" should be on the 16th postion and "rgrg" on the last 17th.
+
+Scenario:
+![image](https://github.com/Sylius/Sylius/assets/138723846/156f1b32-3b25-42df-b410-c6d0a08607ce)
+In this test "Old Pug" is replaced with "Sport_basic_white_T_Shirt" (postition 0) and "Young Pug" with "Raglan_grey_&_black_Tee" (postition 1). Second page looks like this.
+![image](https://github.com/Sylius/Sylius/assets/138723846/e589dd33-b29b-4197-955d-085579b7d812)
+According to the the scenario if we change postions of "Sport_basic_white_T_Shirt" and "Raglan_grey_&_black_Tee" to 15 then "Sport_basic_white_T_Shirt" should be placed 14th, "Raglan_grey_&_black_Tee" 15th and "Testing2" 13th. However, the result is that:
+![image](https://github.com/Sylius/Sylius/assets/138723846/1f4a9b8f-67f1-429d-8548-90fe5cd7f43c)
+
+Scenario:
+![image](https://github.com/Sylius/Sylius/assets/138723846/7ec5a254-0c39-4a62-bd60-314b8c91ae56)
+![image](https://github.com/Sylius/Sylius/assets/138723846/07f3f80a-5b06-4824-83d3-24dda73405c8)
+User changes the position of Testing1 to 15 and Testing2 to 15. The rest of positions aren't changed by the user. The result should be that Testing1 is 14th and Testing2 15th. The actual result:
+![image](https://github.com/Sylius/Sylius/assets/138723846/6e9d0dc3-f1d1-498d-80d3-5d31ed59b693)
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-08-29T07:55:00Z
+
+/bns:deploy
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-08-31T06:44:31Z
+
+Thank you, Jacob! :1st_place_medal:
