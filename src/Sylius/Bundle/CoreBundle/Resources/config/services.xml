@@ -312,5 +312,7 @@
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface" />
         </service>
+
+        <service id="Sylius\Component\Core\Positioner\PositionerInterface" class="Sylius\Component\Core\Positioner\Positioner" />
     </services>
 </container>

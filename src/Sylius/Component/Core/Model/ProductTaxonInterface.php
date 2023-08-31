@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-interface ProductTaxonInterface extends ResourceInterface
+interface ProductTaxonInterface extends ResourceInterface, PositionAwareInterface
 {
     public function getProduct(): ?ProductInterface;
 
@@ -24,8 +24,4 @@ interface ProductTaxonInterface extends ResourceInterface
     public function getTaxon(): ?TaxonInterface;
 
     public function setTaxon(?TaxonInterface $taxon): void;
-
-    public function getPosition(): ?int;
-
-    public function setPosition(?int $position): void;
 }

@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -58,6 +59,7 @@ final class ProductContext implements Context
         private FactoryInterface $productOptionFactory,
         private FactoryInterface $productOptionValueFactory,
         private FactoryInterface $productImageFactory,
+        private FactoryInterface $productTaxonFactory,
         private ObjectManager $objectManager,
         private ProductVariantGeneratorInterface $productVariantGenerator,
         private ProductVariantRepositoryInterface $productVariantRepository,
@@ -105,9 +107,26 @@ final class ProductContext implements Context
     public function storeHasAProductBelongingToTheTaxon(
         string $productName,
         TaxonInterface $taxon,
-    ): void {
+    ): void
+    {
         $product = $this->createProduct($productName);
         $this->productTaxonContext->itBelongsTo($product, $taxon);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" in the ("[^"]+" taxon) at (\d+)(?:st|nd|rd|th) position$/
+     */
+    public function theStoreHasAProductInTheTaxonAtPosition(
+        string $productName,
+        TaxonInterface $taxon,
+        int $position,
+    ): void {
+        $product = $this->createProduct($productName);
+
+        $productTaxon = $this->createProductTaxon($taxon, $product, $position);
+        $product->addProductTaxon($productTaxon);
 
         $this->saveProduct($product);
     }
@@ -1579,5 +1598,19 @@ final class ProductContext implements Context
 
         $this->objectManager->persist($product);
         $this->objectManager->flush();
+    }
+
+    private function createProductTaxon(TaxonInterface $taxon, ProductInterface $product, ?int $position = null): ProductTaxonInterface
+    {
+        /** @var ProductTaxonInterface $productTaxon */
+        $productTaxon = $this->productTaxonFactory->createNew();
+        $productTaxon->setProduct($product);
+        $productTaxon->setTaxon($taxon);
+
+        if (null !== $position) {
+            $productTaxon->setPosition($position);
+        }
+
+        return $productTaxon;
     }
 }
