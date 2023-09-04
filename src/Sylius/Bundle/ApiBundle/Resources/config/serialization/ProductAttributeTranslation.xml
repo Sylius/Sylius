@@ -23,10 +23,12 @@
         <attribute name="locale">
             <group>shop:product_attribute:read</group>
             <group>admin:product_attribute:read</group>
+            <group>admin:product_attribute:create</group>
         </attribute>
         <attribute name="name">
             <group>shop:product_attribute:read</group>
             <group>admin:product_attribute:read</group>
+            <group>admin:product_attribute:create</group>
         </attribute>
     </class>
 </serializer>
