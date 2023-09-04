@@ -107,8 +107,7 @@ final class ProductContext implements Context
     public function storeHasAProductBelongingToTheTaxon(
         string $productName,
         TaxonInterface $taxon,
-    ): void
-    {
+    ): void {
         $product = $this->createProduct($productName);
         $this->productTaxonContext->itBelongsTo($product, $taxon);
 
