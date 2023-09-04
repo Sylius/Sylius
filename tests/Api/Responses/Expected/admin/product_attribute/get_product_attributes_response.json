@@ -173,7 +173,26 @@
                 }
             },
             "type": "text"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-attributes/text_delete",
+            "@type": "ProductAttribute",
+            "code": "text_delete",
+            "configuration": [],
+            "position": 8,
+            "storageType": "text",
+            "translatable": false,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+                    "@type": "ProductAttributeTranslation",
+                    "id": "@integer@",
+                    "name": "text delete",
+                    "locale": "en_US"
+                }
+            },
+            "type": "text"
         }
     ],
-    "hydra:totalItems": 8
+    "hydra:totalItems": 9
 }

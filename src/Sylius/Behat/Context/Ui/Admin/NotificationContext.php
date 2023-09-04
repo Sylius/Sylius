@@ -76,8 +76,8 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @Then I should be notified that the archival operation has started successfully
-     */
+    * @Then I should be notified that the archival operation has started successfully
+    */
     public function iShouldBeNotifiedThatTheArchivalOperationHasStartedSuccessfully(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
@@ -100,14 +100,14 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been failed deleted :name
+     * @Then I should be notified that it is in use
      */
-    public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
+    public function iShouldBeNotifiedThatItIsInUse(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::failure(),
-            'Cannot delete, the ' . ucfirst($name) . ' is in use.',
+            'Cannot delete',
         );
     }
 }

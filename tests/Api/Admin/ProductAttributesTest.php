@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,5 +35,25 @@ final class ProductAttributesTest extends JsonApiTestCase
             'admin/product_attribute/get_product_attributes_response',
             Response::HTTP_OK,
         );
+    }
+
+    /** @test */
+    public function it_deletes_a_product_attribute(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/product_attribute.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $fixtures['product_attribute_text_delete'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/product-attributes/%s', $productAttribute->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 }
