@@ -29,6 +29,8 @@ final class UnitPercentageDiscountConfigurationType extends AbstractType
         $builder
             ->add('percentage', PercentType::class, [
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
+                'html5' => true,
+                'scale' => 2,
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),

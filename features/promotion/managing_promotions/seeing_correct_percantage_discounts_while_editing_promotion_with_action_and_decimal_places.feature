@@ -16,7 +16,7 @@ Feature: Seeing correct percentage discounts while editing promotion with action
         And I edit this promotion percentage action to have "2.50%"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should have "2.50%" discount
+        And it should have "2.50%" of order percentage discount
 
     @ui @javascript
     Scenario: Seeing the accurate percentage amount after editing the promotion including the value up to two decimal places
@@ -24,4 +24,4 @@ Feature: Seeing correct percentage discounts while editing promotion with action
         And I edit this promotion percentage action to have "2.56%"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should have "2.56%" discount
+        And it should have "2.56%" of order percentage discount
