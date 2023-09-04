@@ -86,7 +86,6 @@ class ProductTaxonController extends ResourceController
             return $this->redirectHandler->redirectToReferer($configuration);
         }
 
-
         return $this->redirectHandler->redirectToReferer($configuration);
     }
 
