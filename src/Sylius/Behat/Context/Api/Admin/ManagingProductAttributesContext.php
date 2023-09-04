@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Ramsey\Uuid\Uuid;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -33,6 +34,65 @@ final class ManagingProductAttributesContext implements Context
     public function iDeleteThisProductAttribute(ProductAttributeInterface $attribute): void
     {
         $this->client->delete(Resources::PRODUCT_ATTRIBUTES, $attribute->getCode());
+    }
+
+    /**
+     * @When I want to create a new :type product attribute
+     */
+    public function iWantToCreateANewTypedProductAttribute(string $type): void
+    {
+        $this->client->buildCreateRequest(Resources::PRODUCT_ATTRIBUTES);
+        $this->client->addRequestData('type', $type);
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I name it :name in :language
+     */
+    public function iNameItIn(string $name, string $language): void
+    {
+        $this->client->addRequestData('translations', [$language => ['name' => $name, 'locale' => $language]]);
+    }
+
+    /**
+     * @When I (also) add value :value in :language
+     */
+    public function iAddValueIn(string $value, string $language): void
+    {
+        $uuid = Uuid::uuid4()->toString();
+
+        $this->client->addRequestData('configuration', ['choices' => [$uuid => [$language => $value]]]);
+    }
+
+    /**
+     * @When I disable its translatability
+     */
+    public function iDisableItsTranslatability(): void
+    {
+        $this->client->addRequestData('translatable', false);
+    }
+
+    /**
+     * @When I check multiple option
+     */
+    public function iCheckMultipleOption(): void
+    {
+        $this->client->addRequestData('configuration', ['multiple' => true]);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
     }
 
     /**
@@ -86,5 +146,58 @@ final class ManagingProductAttributesContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Cannot delete, the product attribute is in use.',
         );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Product attribute could not be created',
+        );
+    }
+
+    /**
+     * @Then the :type attribute :name should appear in the store
+     */
+    public function theAttributeShouldAppearInTheStore(string $type, string $name): void
+    {
+        $response = $this->client->index(Resources::PRODUCT_ATTRIBUTES);
+
+        /** @var array<string, mixed> $item */
+        foreach ($this->responseChecker->getCollection($response) as $item) {
+            if ($item['type'] === $type && $item['translations']['en_US']['name'] === $name) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'Product attribute of type "%s" with name "%s" has not been found',
+            $type,
+            $name,
+        ));
+    }
+
+    /**
+     * @Then I should see the value :value
+     */
+    public function iShouldSeeTheValue(string $value): void
+    {
+        $content = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $choices = $content['configuration']['choices'];
+
+        foreach ($choices as $values) {
+            if (in_array($value, $values)) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'Product attribute value "%s" has not been found in choices: %s',
+            $value,
+            json_encode($choices),
+        ));
     }
 }

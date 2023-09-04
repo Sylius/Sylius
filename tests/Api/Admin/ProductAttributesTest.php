@@ -56,4 +56,48 @@ final class ProductAttributesTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
+
+    /** @test */
+    public function it_creates_a_product_attribute(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-attributes',
+            server: $header,
+            content: json_encode([
+                'code' => 'material',
+                'configuration' => [
+                    'choices' => [
+                        '0afb212e-cd08-11ec-871e-0242ac120005' => [
+                            'en_US' => 'Cotton',
+                            'pl_PL' => 'Bawelna',
+                        ],
+                        '0afb4e88-cd08-11ec-bcd4-0242ac120005' => [
+                            'en_US' => 'Wool',
+                        ],
+                    ],
+                    'multiple' => true,
+                    'min' => 1,
+                    'max' => 3,
+                ],
+                'type' => 'select',
+                'translatable' => true,
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                        'name' => 'Material',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/post_product_attribute_response',
+            Response::HTTP_CREATED,
+        );
+    }
 }

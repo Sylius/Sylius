@@ -26,6 +26,17 @@
                     <attribute name="groups">admin:product_attribute:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-attributes</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_attribute:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
