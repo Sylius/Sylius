@@ -55,6 +55,8 @@ final class Resources
 
     public const PRODUCT_ASSOCIATION_TYPES = 'product-association-types';
 
+    public const PRODUCT_ATTRIBUTES = 'product-attributes';
+
     public const PRODUCT_OPTIONS = 'product-options';
 
     public const PRODUCT_REVIEWS = 'product-reviews';

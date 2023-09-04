@@ -10,7 +10,7 @@ Feature: Browsing product attributes
         And the store has a integer product attribute "Book pages" with code "book_pages"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Browsing all product attributes in store
         When I want to see all product attributes in store
         Then I should see 3 product attributes in the list

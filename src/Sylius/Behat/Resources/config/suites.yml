@@ -31,6 +31,7 @@ imports:
     - suites/api/payment/managing_payments.yml
     - suites/api/product/adding_product_review.yml
     - suites/api/product/managing_product_association_types.yml
+    - suites/api/product/managing_product_attributes.yml
     - suites/api/product/managing_product_options.yml
     - suites/api/product/managing_product_reviews.yml
     - suites/api/product/managing_product_variants.yml
