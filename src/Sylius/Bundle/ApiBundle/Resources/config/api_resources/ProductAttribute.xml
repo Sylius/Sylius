@@ -16,20 +16,33 @@
    xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_attribute.class%" shortName="ProductAttribute">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shop:product_attribute:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-attributes</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-attributes/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attributes/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -39,6 +52,18 @@
         <property name="type" />
         <property name="configuration" />
         <property name="storageType" />
+        <property name="translatable" />
         <property name="position" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="locale">string</attribute>
+                        <attribute name="name">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>
