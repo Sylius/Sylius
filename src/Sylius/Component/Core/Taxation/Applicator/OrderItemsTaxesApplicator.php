@@ -51,7 +51,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
                 continue;
             }
 
-            $totalTaxAmount = $this->calculator->calculate((int) round($item->getTotal()), $taxRate);
+            $totalTaxAmount = round($this->calculator->calculate($item->getTotal(), $taxRate));
             $splitTaxes = $totalTaxAmount / $quantity;
             if (0.0 === $splitTaxes) {
                 continue;
