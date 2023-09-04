@@ -60,7 +60,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $container->registerAttributeForAutoconfiguration(
             AsProductVariantResolver::class,
             static function (ChildDefinition $definition, AsProductVariantResolver $attribute): void {
-                $definition->addTag('sylius.product_variant_resolver', ['priority' => $attribute->getPriority()]);
+                $definition->addTag(AsProductVariantResolver::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
             },
         );
     }
