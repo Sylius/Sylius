@@ -67,7 +67,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\TaxationBundle\\spec\\": "spec/"
+            "Sylius\\Bundle\\TaxationBundle\\spec\\": "spec/",
+            "Sylius\\Bundle\\TaxationBundle\\Tests\\": "Tests/"
         },
         "classmap": [
             "test/app/AppKernel.php"
