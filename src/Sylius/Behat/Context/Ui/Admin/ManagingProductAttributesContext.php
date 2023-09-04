@@ -328,7 +328,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^I delete (this product attribute)$/
+     * @When /^I(?:| try to) delete (this product attribute)$/
      */
     public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute)
     {
