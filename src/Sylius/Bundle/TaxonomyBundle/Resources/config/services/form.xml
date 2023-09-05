@@ -19,6 +19,9 @@
         <parameter key="sylius.form.type.taxon_translation.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.taxon_position.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -36,5 +39,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType">
+            <argument>%sylius.model.taxon.class%</argument>
+            <argument>%sylius.form.type.taxon_position.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
