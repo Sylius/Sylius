@@ -181,7 +181,7 @@ final class ProductContext implements Context
     {
         $product = $this->createProduct($productName, $price);
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant = $product->getEnabledVariants()->first();
 
         foreach ($channels as $channel) {
             $product->addChannel($channel);

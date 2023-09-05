@@ -17,10 +17,16 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
+    function let(ProductVariantRepositoryInterface $productVariantRepository): void
+    {
+        $this->beConstructedWith($productVariantRepository);
+    }
+
     function it_implements_variant_resolver_interface(): void
     {
         $this->shouldImplement(ProductVariantResolverInterface::class);
@@ -30,18 +36,28 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants,
+        ProductVariantRepositoryInterface $productVariantRepository,
     ): void {
-        $product->getEnabledVariants()->willReturn($variants);
-        $variants->isEmpty()->willReturn(false);
-        $variants->first()->willReturn($variant);
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findOneBy([
+            'product' => 1,
+            'enabled' => true,
+        ])->willReturn($variant);
 
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
+    function it_returns_null_if_first_variant_is_not_defined(
+        Collection $variants,
+        ProductInterface $product,
+        ProductVariantRepositoryInterface $productVariantRepository,
+    ): void
     {
-        $product->getEnabledVariants()->willReturn($variants);
-        $variants->isEmpty()->willReturn(true);
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findOneBy([
+            'product' => 1,
+            'enabled' => true,
+        ])->willReturn(null);
 
         $this->getVariant($product)->shouldReturn(null);
     }
