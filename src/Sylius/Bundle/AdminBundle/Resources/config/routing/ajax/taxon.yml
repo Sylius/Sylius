@@ -74,8 +74,7 @@ sylius_admin_ajax_taxon_move_up:
     path: /{id}/move/up
     methods: [PUT]
     defaults:
-        limit: 1
-        _controller: sylius.controller.taxon_move:upAction
+        _controller: sylius.controller.taxon_position::moveUpAction
         _format: json
         _sylius:
             permission: true
@@ -84,26 +83,7 @@ sylius_admin_ajax_taxon_move_down:
     path: /{id}/move/down
     methods: [PUT]
     defaults:
-        limit: 1
-        _controller: sylius.controller.taxon_move:downAction
-        _format: json
-        _sylius:
-            permission: true
-
-sylius_admin_ajax_taxon_move_top:
-    path: /{id}/move/top
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.taxon_move:upAction
-        _format: json
-        _sylius:
-            permission: true
-
-sylius_admin_ajax_taxon_move_end:
-    path: /{id}/move/end
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.taxon_move:downAction
+        _controller: sylius.controller.taxon_position::moveDownAction
         _format: json
         _sylius:
             permission: true

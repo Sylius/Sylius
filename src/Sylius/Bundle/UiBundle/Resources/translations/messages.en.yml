@@ -515,8 +515,6 @@ sylius:
         most_expensive_first: 'Most expensive first'
         move_down: 'Move down'
         move_up: 'Move up'
-        move_top: 'Move to top'
-        move_end: 'Move to end'
         my_account: 'My account'
         n_a: 'N/A'
         name: 'Name'

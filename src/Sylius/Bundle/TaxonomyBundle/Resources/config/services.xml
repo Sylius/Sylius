@@ -26,8 +26,10 @@
             <argument type="service" id="sylius.factory.taxon" />
         </service>
 
-        <service id="sylius.controller.taxon_move" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonMoveController">
+        <service id="sylius.controller.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonPositionController">
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="Sylius\Component\Taxonomy\Positioner\TaxonPositionerInterface" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
@@ -37,5 +39,9 @@
 
         <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator" />
         <service id="Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface" alias="sylius.generator.taxon_slug" />
+
+        <service id="Sylius\Component\Taxonomy\Positioner\TaxonPositionerInterface" class="Sylius\Component\Taxonomy\Positioner\TaxonPositioner">
+            <argument type="service" id="sylius.repository.taxon" />
+        </service>
     </services>
 </container>
