@@ -14,73 +14,55 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class ProductDeletionListenerSpec extends ObjectBehavior
 {
-    function let(
-        RequestStack $requestStack,
-        ProductAwareRuleUpdaterInterface $firstUpdater,
-        ProductAwareRuleUpdaterInterface $secondUpdater,
-    ): void {
-        $this->beConstructedWith($requestStack, $firstUpdater, $secondUpdater);
+    function let(ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker): void
+    {
+        $this->beConstructedWith($productInPromotionRuleChecker);
     }
 
-    function it_throws_an_exception_when_subject_is_not_a_product(GenericEvent $event): void
+    function it_throws_an_exception_when_subject_is_not_a_product(ResourceControllerEvent $event): void
     {
         $event->getSubject()->willReturn('subject');
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('removeProductFromPromotionRules', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
     }
 
-    function it_does_nothing_when_rule_updaters_do_not_return_any_codes(
-        RequestStack $requestStack,
-        ProductAwareRuleUpdaterInterface $firstUpdater,
-        ProductAwareRuleUpdaterInterface $secondUpdater,
+    function it_does_nothing_when_product_is_not_assigned_to_rule(
+        ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker,
         SessionInterface $session,
-        GenericEvent $event,
+        ResourceControllerEvent $event,
         ProductInterface $product,
     ): void {
         $event->getSubject()->willReturn($product);
 
-        $firstUpdater->updateAfterProductDeletion($product)->willReturn([]);
-        $secondUpdater->updateAfterProductDeletion($product)->willReturn([]);
+        $productInPromotionRuleChecker->isInUse($product)->willReturn(false);
 
-        $requestStack->getSession()->willReturn($session);
-        $session->getBag('flashes')->shouldNotBeCalled();
+        $event->setMessageType('error')->shouldNotBeCalled();
+        $event->setMessage('sylius.product.in_use_by_promotion_rule')->shouldNotBeCalled();
+        $event->stopPropagation()->shouldNotBeCalled();
 
-        $this->removeProductFromPromotionRules($event);
+        $this->protectFromRemovingProductInUseByPromotionRule($event);
     }
 
-    function it_returns_a_list_of_unique_updated_rules_codes(
-        RequestStack $requestStack,
-        ProductAwareRuleUpdaterInterface $firstUpdater,
-        ProductAwareRuleUpdaterInterface $secondUpdater,
-        SessionInterface $session,
-        FlashBagInterface $flashes,
-        GenericEvent $event,
+    function it_prevents_to_remove_product_if_it_is_assigned_to_rule(
+        ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker,
+        ResourceControllerEvent $event,
         ProductInterface $product,
     ): void {
         $event->getSubject()->willReturn($product);
 
-        $firstUpdater->updateAfterProductDeletion($product)->willReturn(['first_rule', 'second_rule']);
-        $secondUpdater->updateAfterProductDeletion($product)->willReturn(['second_rule', 'third_rule']);
+        $productInPromotionRuleChecker->isInUse($product)->willReturn(true);
 
-        $requestStack->getSession()->willReturn($session);
-        $session->getBag('flashes')->willReturn($flashes);
-        $flashes
-            ->add('info', [
-                'message' => 'sylius.promotion.update_rules',
-                'parameters' => ['%codes%' => 'first_rule, second_rule, third_rule'],
-            ])
-            ->shouldBeCalled()
-        ;
+        $event->setMessageType('error')->shouldBeCalled();
+        $event->setMessage('sylius.product.in_use_by_promotion_rule')->shouldBeCalled();
+        $event->stopPropagation()->shouldBeCalled();
 
-        $this->removeProductFromPromotionRules($event);
+        $this->protectFromRemovingProductInUseByPromotionRule($event);
     }
 }
