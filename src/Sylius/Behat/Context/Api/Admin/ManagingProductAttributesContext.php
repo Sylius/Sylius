@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -17,6 +18,7 @@ final class ManagingProductAttributesContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -88,11 +90,74 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When /^I want to edit (this product attribute)$/
+     */
+    public function iWantToEditThisProductAttribute(ProductAttributeInterface $productAttribute): void
+    {
+        $this->sharedStorage->set('product_attribute', $productAttribute);
+
+        $this->client->buildUpdateRequest(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
+    }
+
+    /**
      * @When I add it
      */
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When I change its name to :name in :language
+     */
+    public function iChangeItsNameTo(string $name, string $language): void
+    {
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+    }
+
+    /**
+     * @When /^I change (its) value "([^"]+)" to "([^"]+)"$/
+     */
+    public function iChangeItsValueTo(
+        ProductAttributeInterface $productAttribute,
+        string $oldValue,
+        string $newValue,
+    ): void {
+        $response = $this->client->show(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
+        $configuration = $this->responseChecker->getValue($response, 'configuration');
+
+        $choices = $configuration['choices'];
+        foreach ($choices as $key => $choice) {
+            if ($choice['en_US'] === $oldValue) {
+                $choices[$key]['en_US'] = $newValue;
+
+                break;
+            }
+        }
+
+        $this->client->updateRequestData(['configuration' => ['choices' => $choices]]);
+    }
+
+    /**
+     * @When I delete value :value
+     */
+    public function iDeleteValue(string $value): void
+    {
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $this->sharedStorage->get('product_attribute');
+        $response = $this->client->show(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
+        $configuration = $this->responseChecker->getValue($response, 'configuration');
+
+        $choices = $configuration['choices'];
+        foreach ($choices as $key => $choice) {
+            if ($choice['en_US'] === $value) {
+                unset($choices[$key]);
+
+                break;
+            }
+        }
+
+        $this->client->setRequestData(['configuration' => ['choices' => $choices]]);
     }
 
     /**
@@ -199,5 +264,38 @@ final class ManagingProductAttributesContext implements Context
             $value,
             json_encode($choices),
         ));
+    }
+
+    /**
+     * @Then /^(this product attribute) should have value "([^"]+)"$/
+     */
+    public function thisProductAttributeShouldHaveValue(
+        ProductAttributeInterface $productAttribute,
+        string $value,
+    ): void {
+        $this->client->show(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
+
+        $this->iShouldSeeTheValue($value);
+    }
+
+    /**
+     * @Then /^(this product attribute) should not have value "([^"]+)"$/
+     */
+    public function thisProductAttributeShouldNotHaveValue(
+        ProductAttributeInterface $productAttribute,
+        string $value,
+    ): void {
+        $response = $this->client->show(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
+        $content = $this->responseChecker->getResponseContent($response);
+        $choices = $content['configuration']['choices'];
+
+        foreach ($choices as $values) {
+            if (in_array($value, $values)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Product attribute value "%s" has been found but should not',
+                    $value,
+                ));
+            }
+        }
     }
 }

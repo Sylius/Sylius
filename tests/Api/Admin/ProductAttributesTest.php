@@ -100,4 +100,65 @@ final class ProductAttributesTest extends JsonApiTestCase
             Response::HTTP_CREATED,
         );
     }
+
+    /** @test */
+    public function it_updates_a_product_attribute(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/product_attribute.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $fixtures['product_attribute_select'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/admin/product-attributes/' . $productAttribute->getCode(),
+            server: $header,
+            content: json_encode([
+                'configuration' => [
+                    'choices' => [
+                        '0afb212e-cd08-11ec-871e-0242ac120005' => [
+                            'en_US' => 'handmade',
+                            'fr_FR' => 'fait la main',
+                        ],
+                        '0afb4e88-cd08-11ec-bcd4-0242ac120005' => [
+                            'fr_FR' =>  'coffret cadeau',
+                            'en_US' => 'gift wrapping',
+                            'pl_PL' => 'pakowanie na prezent',
+                        ],
+                        '0afb4e44-cd08-11ec-ad3f-0242ac120005' => [
+                            'en_US' => 'eco approved',
+                        ],
+                    ],
+                    'min' => 1,
+                    'max' => 3,
+                    'multiple' => true,
+                ],
+                'translatable' => true,
+                'position' => 0,
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf(
+                            '/api/v2/admin/product-attribute-translations/%s',
+                            $productAttribute->getTranslation('en_US')->getId(),
+                        ),
+                        'locale' => 'en_US',
+                        'name' => 'Additional information',
+                    ],
+                    'pl_PL' => [
+                        'locale' => 'pl_PL',
+                        'name' => 'Dodatkowe informacje',
+                    ],
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/put_product_attribute_response',
+            Response::HTTP_OK,
+        );
+    }
 }
