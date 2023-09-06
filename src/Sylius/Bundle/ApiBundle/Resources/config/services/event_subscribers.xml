@@ -35,7 +35,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\ProductDeletionEventSubscriber">
-            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductPromotionRuleCheckerInterface" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" />
             <tag name="kernel.event_subscriber" />
         </service>
 
