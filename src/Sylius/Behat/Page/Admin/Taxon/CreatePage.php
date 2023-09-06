@@ -144,6 +144,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $this->getLeaves()[0]->getText();
     }
 
+    public function getLastTaxonOnTheList(): string
+    {
+        $leaves = $this->getLeaves();
+        return $leaves[count($leaves) - 1]->getText();
+    }
+
     protected function getElement(string $name, array $parameters = []): NodeElement
     {
         if (!isset($parameters['%language%'])) {

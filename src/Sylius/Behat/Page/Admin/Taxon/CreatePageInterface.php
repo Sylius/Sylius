@@ -52,4 +52,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function moveDownTaxon(string $name): void;
 
     public function getFirstTaxonOnTheList(): string;
+
+    public function getLastTaxonOnTheList(): string;
 }
