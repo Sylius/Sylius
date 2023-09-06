@@ -22,6 +22,11 @@ final class ContainsProductRuleUpdater implements ProductAwareRuleUpdaterInterfa
 {
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
+        @trigger_deprecation(
+            'sylius/core',
+            '1.13', 'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0.',
+            self::class
+        );
     }
 
     public function updateAfterProductDeletion(ProductInterface $product): array
