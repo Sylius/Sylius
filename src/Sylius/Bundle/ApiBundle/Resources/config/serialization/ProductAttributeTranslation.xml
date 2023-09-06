@@ -24,11 +24,13 @@
             <group>shop:product_attribute:read</group>
             <group>admin:product_attribute:read</group>
             <group>admin:product_attribute:create</group>
+            <group>admin:product_attribute:update</group>
         </attribute>
         <attribute name="name">
             <group>shop:product_attribute:read</group>
             <group>admin:product_attribute:read</group>
             <group>admin:product_attribute:create</group>
+            <group>admin:product_attribute:update</group>
         </attribute>
     </class>
 </serializer>
