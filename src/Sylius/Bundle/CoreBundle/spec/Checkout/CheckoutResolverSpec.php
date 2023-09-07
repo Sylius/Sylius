@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\Checkout;
 
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
-use PhpSpec\ObjectBehavior;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -31,31 +31,31 @@ final class CheckoutResolverSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         CheckoutStateUrlGeneratorInterface $urlGenerator,
         RequestMatcherInterface $requestMatcher,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $this->beConstructedWith(
             $cartContext,
             $urlGenerator,
             $requestMatcher,
-            $stateMachineFactory
+            $stateMachineFactory,
         );
     }
 
     function it_only_applies_to_the_main_request(RequestEvent $event): void
     {
-        $event->isMasterRequest()->willReturn(false);
+        $event->isMainRequest()->willReturn(false);
         $event->getRequest()->shouldNotBeCalled();
 
         $this->onKernelRequest($event);
     }
 
-    function it_only_applies_to_a_mathched_request(
+    function it_only_applies_to_a_matched_request(
         RequestEvent $event,
         Request $request,
         RequestMatcherInterface $requestMatcher,
-        CartContextInterface $cartContext
+        CartContextInterface $cartContext,
     ): void {
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(false);
         $cartContext->getCart()->shouldNotBeCalled();
@@ -69,9 +69,9 @@ final class CheckoutResolverSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         CartContextInterface $cartContext,
         OrderInterface $order,
-        CheckoutStateUrlGeneratorInterface $urlGenerator
+        CheckoutStateUrlGeneratorInterface $urlGenerator,
     ): void {
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -87,10 +87,10 @@ final class CheckoutResolverSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         CartContextInterface $cartContext,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $request = new Request();
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -105,10 +105,10 @@ final class CheckoutResolverSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         CartContextInterface $cartContext,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $request = new Request([], [], ['_sylius' => []]);
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -123,10 +123,10 @@ final class CheckoutResolverSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         CartContextInterface $cartContext,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $request = new Request([], [], ['_sylius' => ['state_machine' => ['transition' => 'test_transition']]]);
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -141,10 +141,10 @@ final class CheckoutResolverSpec extends ObjectBehavior
         RequestMatcherInterface $requestMatcher,
         CartContextInterface $cartContext,
         OrderInterface $order,
-        FactoryInterface $stateMachineFactory
+        FactoryInterface $stateMachineFactory,
     ): void {
         $request = new Request([], [], ['_sylius' => ['state_machine' => ['graph' => 'test_graph']]]);
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -160,11 +160,12 @@ final class CheckoutResolverSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine
+        StateMachineInterface $stateMachine,
     ): void {
-        $request = new Request([], [],
-            ['_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']]]);
-        $event->isMasterRequest()->willReturn(true);
+        $request = new Request([], [], [
+            '_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']],
+        ]);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);
@@ -183,11 +184,12 @@ final class CheckoutResolverSpec extends ObjectBehavior
         OrderInterface $order,
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
-        CheckoutStateUrlGeneratorInterface $urlGenerator
+        CheckoutStateUrlGeneratorInterface $urlGenerator,
     ): void {
-        $request = new Request([], [],
-            ['_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']]]);
-        $event->isMasterRequest()->willReturn(true);
+        $request = new Request([], [], [
+            '_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']],
+        ]);
+        $event->isMainRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
         $requestMatcher->matches($request)->willReturn(true);
         $cartContext->getCart()->willReturn($order);

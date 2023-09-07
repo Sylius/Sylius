@@ -4,6 +4,9 @@
     constructor argument has been made optional and is `null` by default, subsequently the first argument of
     `sylius.form.type.attribute_type.select.choices_collection` has been removed.
 
+1. The default checkout resolving route pattern has been changed from `/checkout/.+` to
+   `%sylius.security.shop_regex%/checkout/.+` to reduce the probability of conflicts with other routes.
+
 # UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
 1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
