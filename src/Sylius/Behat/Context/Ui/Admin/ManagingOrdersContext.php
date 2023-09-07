@@ -532,6 +532,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should be notified that the order's payment could not be finalized due to insufficient stock
+     */
+    public function iShouldBeNotifiedThatTheOrderSPaymentCouldNotBeFinalizedDueToInsufficientStock()
+    {
+        $this->notificationChecker->checkNotification(
+            'The payment cannot be completed due to insufficient stock of the',
+            NotificationType::failure(),
+        );
+    }
+
+    /**
      * @Then I should be notified that the order's payment has been successfully refunded
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded()
