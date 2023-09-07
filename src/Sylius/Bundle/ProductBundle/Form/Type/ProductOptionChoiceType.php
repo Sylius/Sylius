@@ -25,6 +25,12 @@ final class ProductOptionChoiceType extends AbstractType
 {
     public function __construct(private RepositoryInterface $productOptionRepository)
     {
+        @trigger_deprecation(
+            'sylius/product-bundle',
+            '1.13',
+            'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0.',
+            self::class
+        );
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -1,5 +1,8 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
+   Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
+
 1. Starting with Sylius 1.13, the `SyliusPriceHistoryPlugin` is included.
    If you are currently using the plugin in your project, we recommend following the upgrade guide located [here](UPGRADE-FROM-1.12-WITH-PRICE-HISTORY-PLUGIN-TO-1.13.md).
 
