@@ -1,0 +1,40 @@
+---------------------------------------------------------------------------
+
+by vvasiloi at 2021-08-14T18:34:42Z
+
+Any ideas on how to test the checkout resolver pattern behavior?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-07-09T08:36:00Z
+
+Maybe we should add some logging 🤔. Usually when something goes wrong we throw an exception, but in this case when we want to be silent, let's let know the developer (or administrator) something happened 🤔?
+
+WDYT @vvasiloi? Do you want to finish this PR (I promise to review it quicker this time 🤣), or should we take it over?
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-08T11:05:27Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-xpcdko.bunnyenv.com/|
+|php|https://store-xpcdko.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-08T12:48:31Z
+
+Thanks, Victor! :1st_place_medal:
