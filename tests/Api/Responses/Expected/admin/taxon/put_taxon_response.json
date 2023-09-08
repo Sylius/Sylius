@@ -1,10 +1,10 @@
 {
     "@context": "\/api\/v2\/contexts\/Taxon",
-    "@id": "\/api\/v2\/admin\/taxons\/WATCHES",
+    "@id": "\/api\/v2\/admin\/taxons\/MUG",
     "@type": "Taxon",
     "id": @integer@,
-    "code": "WATCHES",
-    "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+    "code": "MUG",
+    "parent": "\/api\/v2\/admin\/taxons\/BRAND",
     "children": [],
     "position": @integer@,
     "translations": {
@@ -14,9 +14,9 @@
             "id": @integer@,
             "name": "Watches",
             "slug": "watches",
-            "description": null,
+            "description": "Some description Lorem ipsum dolor sit amet.",
             "locale": "en_US"
         }
     },
-    "enabled": true
+    "enabled": false
 }

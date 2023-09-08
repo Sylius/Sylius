@@ -37,6 +37,7 @@ final class TaxonContext implements Context
      * @Transform /^taxon with "([^"]+)" name/
      * @Transform /^taxon "([^"]+)"$/
      * @Transform :taxon
+     * @Transform :parentTaxon
      */
     public function getTaxonByName(string $name): TaxonInterface
     {

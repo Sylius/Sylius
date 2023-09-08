@@ -75,6 +75,7 @@
         <property name="name" required="true" />
         <property name="slug" required="true" />
         <property name="description" required="true" />
+        <property name="parent" readableLink="false" writableLink="false" />
         <property name="children" readableLink="false" />
         <property name="position" writable="true" />
         <property name="translations" readable="true" writable="true">

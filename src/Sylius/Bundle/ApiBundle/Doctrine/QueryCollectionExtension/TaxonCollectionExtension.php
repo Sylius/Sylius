@@ -40,13 +40,13 @@ final class TaxonCollectionExtension implements ContextAwareQueryCollectionExten
             return;
         }
 
-        Assert::keyExists($context, ContextKeys::CHANNEL);
-        $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
-
         $user = $this->userContext->getUser();
         if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
             return;
         }
+
+        Assert::keyExists($context, ContextKeys::CHANNEL);
+        $channelMenuTaxon = $context[ContextKeys::CHANNEL]->getMenuTaxon();
 
         $enabledParameterName = $queryNameGenerator->generateParameterName('enabled');
         $parentCodeParameterName = $queryNameGenerator->generateParameterName('parentCode');

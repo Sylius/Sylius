@@ -8,6 +8,13 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "CATEGORY",
+            "position": "@integer@",
+            "parent": null,
+            "children": [
+                "\/api\/v2\/admin\/taxons\/MUG",
+                "\/api\/v2\/admin\/taxons\/HAT",
+                "\/api\/v2\/admin\/taxons\/T_SHIRTS"
+            ],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -19,12 +26,6 @@
                     "locale": "en_US"
                 }
             },
-            "position": "@integer@",
-            "children": [
-                "\/api\/v2\/admin\/taxons\/MUG",
-                "\/api\/v2\/admin\/taxons\/HAT",
-                "\/api\/v2\/admin\/taxons\/T_SHIRTS"
-            ],
             "enabled": true
         },
         {
@@ -32,6 +33,8 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "MUG",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -52,7 +55,6 @@
                     "locale": "de_DE"
                 }
             },
-            "children": [],
             "enabled": true,
             "position": "@integer@"
         },
@@ -61,6 +63,8 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "HAT",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -81,7 +85,6 @@
                     "locale": "de_DE"
                 }
             },
-            "children": [],
             "enabled": true,
             "position": "@integer@"
         },
@@ -90,6 +93,11 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
+            "children": [
+                "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
+                "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
+            ],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -110,18 +118,16 @@
                     "locale": "de_DE"
                 }
             },
-            "position": "@integer@",
-            "children": [
-                "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
-                "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
-            ],
-            "enabled": true
+            "enabled": true,
+            "position": "@integer@"
         },
         {
             "@id": "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
             "@type": "Taxon",
             "id": "@integer@",
             "code": "MEN_T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -142,7 +148,6 @@
                     "locale": "de_DE"
                 }
             },
-            "children": [],
             "enabled": true,
             "position": "@integer@"
         },
@@ -151,6 +156,8 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "WOMEN_T_SHIRTS",
+            "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -171,7 +178,6 @@
                     "locale": "de_DE"
                 }
             },
-            "children": [],
             "enabled": false,
             "position": "@integer@"
         },
@@ -180,6 +186,8 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "BRAND",
+            "parent": null,
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -200,7 +208,6 @@
                     "locale": "de_DE"
                 }
             },
-            "children": [],
             "enabled": true,
             "position": "@integer@"
         },
@@ -209,6 +216,8 @@
             "@type": "Taxon",
             "id": "@integer@",
             "code": "de?lol=xd#boom",
+            "parent": null,
+            "children": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -220,7 +229,6 @@
                     "locale": "en_US"
                 }
             },
-            "children": [],
             "enabled": true,
             "position": "@integer@"
         }
