@@ -104,6 +104,11 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="handleRemovingRootTaxonAtPositionZero" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
+            <argument type="service" id="Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface" />
+            <tag name="kernel.event_listener" event="sylius.payment.pre_complete" method="checkStockAvailability" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
             <argument type="service" id="request_stack" />
             <argument type="service" id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater" />
