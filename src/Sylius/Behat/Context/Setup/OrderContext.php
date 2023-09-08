@@ -753,6 +753,19 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the :product product's inventory has become tracked with :numberOfItems items
+     */
+    public function theProductSInventoryHasBecameTrackedWithItems(ProductInterface $product, int $numberOfItems): void
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $product->getVariants()->first();
+        $productVariant->setTracked(true);
+        $productVariant->setOnHand($numberOfItems);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $transition
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
