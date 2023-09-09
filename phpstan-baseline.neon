@@ -96,6 +96,10 @@ parameters:
 			path: src/Sylius/Bundle/AdminBundle/Command/CreateAdminUserCommand.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Command\\\\ChangeAdminUserPasswordCommand\\:\\:__construct\\(\\) has parameter \\$adminUserRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/AdminBundle/Command/ChangeAdminUserPasswordCommand.php
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Controller\\\\CustomerStatisticsController\\:\\:__construct\\(\\) has parameter \\$customerRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Controller/CustomerStatisticsController.php
