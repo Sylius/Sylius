@@ -30,7 +30,6 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     private UserRepositoryInterface $userRepository;
     private PasswordUpdaterInterface $passwordUpdater;
 
-
     protected function setUp(): void
     {
         parent::setUp();
