@@ -46,13 +46,17 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     /** @test */
     public function it_does_not_reset_password_when_admin_user_is_not_found(): void
     {
-        $this->userRepository->expects($this->once())
+        $this
+            ->userRepository
+            ->expects($this->once())
             ->method('findOneByEmail')
             ->willReturn(null);
 
-        $this->command->setInputs([
-            'email' => self::EMAIL
-        ]);
+        $this
+            ->command
+            ->setInputs([
+                'email' => self::EMAIL
+            ]);
 
         $this->command->execute([]);
 
@@ -64,21 +68,29 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     {
         $adminUser = new AdminUser();
 
-        $this->userRepository->expects($this->once())
+        $this
+            ->userRepository
+            ->expects($this->once())
             ->method('findOneByEmail')
             ->willReturn($adminUser);
-        $this->userRepository->expects($this->once())
+        $this
+            ->userRepository
+            ->expects($this->once())
             ->method('add')
             ->with($adminUser);
 
-        $this->passwordUpdater->expects($this->once())
+        $this
+            ->passwordUpdater
+            ->expects($this->once())
             ->method('updatePassword')
             ->with($adminUser);
 
-        $this->command->setInputs([
-            'email' => self::EMAIL,
-            'password' => self::PASSWORD
-        ]);
+        $this
+            ->command
+            ->setInputs([
+                'email' => self::EMAIL,
+                'password' => self::PASSWORD
+            ]);
 
         $this->command->execute([]);
 
