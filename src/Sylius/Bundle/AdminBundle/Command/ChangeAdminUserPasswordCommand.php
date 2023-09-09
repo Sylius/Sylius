@@ -29,8 +29,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class ChangeAdminUserPasswordCommand extends Command
 {
-    private SymfonyStyle $io;
-
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
         private PasswordUpdaterInterface $passwordUpdater
@@ -38,38 +36,34 @@ final class ChangeAdminUserPasswordCommand extends Command
         parent::__construct();
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $io = new SymfonyStyle($input, $output);
         if (!$input->isInteractive()) {
-            $this->io->error('This command must be run interactively.');
+            $io->error('This command must be run interactively.');
 
             return Command::FAILURE;
         }
 
-        $this->io->title('Change admin user password');
+        $io->title('Change admin user password');
 
-        $email = $this->io->askQuestion($this->createEmailQuestion());
+        $email = $io->askQuestion($this->createEmailQuestion());
 
         /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->adminUserRepository->findOneByEmail($email);
         if ($adminUser === null) {
-            $this->io->error(sprintf('Admin user with email address %s not found!', $email));
+            $io->error(sprintf('Admin user with email address %s not found!', $email));
 
             return Command::INVALID;
         }
 
-        $password = $this->io->askHidden('Password');
+        $password = $io->askHidden('Password');
         $adminUser->setPlainPassword($password);
 
         $this->passwordUpdater->updatePassword($adminUser);
         $this->adminUserRepository->add($adminUser);
 
-        $this->io->success('Admin user password has been successfully reset.');
+        $io->success('Admin user password has been successfully reset.');
 
         return Command::SUCCESS;
     }
