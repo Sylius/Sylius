@@ -115,6 +115,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @Then the :type attribute :name should appear in the store
+     * @Then the :type attribute :name should still be in the store
      */
     public function theAttributeShouldAppearInTheStore($type, $name)
     {

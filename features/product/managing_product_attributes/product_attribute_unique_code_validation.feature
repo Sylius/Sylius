@@ -8,7 +8,7 @@ Feature: Product attribute unique code validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new product attribute with taken code
         Given the store has a text product attribute "T-Shirt cotton material" with code "t_shirt_material"
         When I want to create a new text product attribute
