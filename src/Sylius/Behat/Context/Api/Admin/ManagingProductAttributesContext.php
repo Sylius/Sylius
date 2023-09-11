@@ -183,6 +183,27 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @Then the first product attribute on the list should have name :name
+     */
+    public function theFirstProductAttributeOnTheListShouldHaveName(string $name): void
+    {
+        $first = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        Assert::same($first['translations']['en_US']['name'], $name);
+    }
+
+    /**
+     * @Then the last product attribute on the list should have name :name
+     */
+    public function theLastProductAttributeOnTheListShouldHaveName(string $name): void
+    {
+        $collection = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $last = end($collection);
+
+        Assert::same($last['translations']['en_US']['name'], $name);
+    }
+
+    /**
      * @Then I should see the product attribute :attributeName in the list
      */
     public function iShouldSeeTheProductAttributeInTheList(string $attributeName): void

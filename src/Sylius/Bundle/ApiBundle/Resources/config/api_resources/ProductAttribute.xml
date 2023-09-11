@@ -18,6 +18,10 @@
     <resource class="%sylius.model.product_attribute.class%" shortName="ProductAttribute">
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
