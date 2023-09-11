@@ -19,7 +19,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 
 final class PaymentPreCompleteListener
 {
-    public function __construct (
+    public function __construct(
         private AvailabilityCheckerInterface $availabilityChecker,
     ) {
     }
