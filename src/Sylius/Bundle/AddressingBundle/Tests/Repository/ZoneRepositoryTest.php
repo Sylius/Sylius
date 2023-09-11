@@ -17,6 +17,7 @@ use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Bundle\AddressingBundle\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Addressing\Model\Address;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ZoneRepositoryTest extends KernelTestCase
@@ -84,6 +85,40 @@ final class ZoneRepositoryTest extends KernelTestCase
         $this->assertArrayHasKey('EU', $zones);
         $this->assertArrayNotHasKey('VISEGRAD_GROUP', $zones);
         $this->assertArrayNotHasKey('POLISH_PROVINCES', $zones);
+    }
+
+    /** @test */
+    public function it_finds_all_zones_by_passing_a_child_zone(): void
+    {
+        $repository = $this->getRepository();
+        $zones = [];
+
+        $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
+        foreach ($repository->findAllByZones([$visegradGroupZone]) as $zone) {
+            $zones[$zone->getCode()] = $zone;
+        }
+
+        $this->assertCount(2, $zones);
+        $this->assertArrayHasKey('EU_MIDDLE', $zones);
+        $this->assertArrayHasKey('NATO', $zones);
+    }
+
+    /** @test */
+    public function it_finds_all_zones_by_passing_a_child_zone_with_reistricting_by_scope_if_provided(): void
+    {
+        $repository = $this->getRepository();
+        $zones = [];
+
+        /** @var ZoneInterface $visegradGroupZone */
+        $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
+
+        foreach ($repository->findAllByZones([$visegradGroupZone], 'only_eu') as $zone) {
+            $zones[$zone->getCode()] = $zone;
+        }
+
+        $this->assertCount(1, $zones);
+        $this->assertArrayHasKey('EU_MIDDLE', $zones);
+        $this->assertArrayNotHasKey('NATO', $zones);
     }
 
     private function getRepository(): ZoneRepositoryInterface

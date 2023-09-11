@@ -26,4 +26,10 @@ interface ZoneRepositoryInterface extends RepositoryInterface
 {
     /** @return ZoneInterface[] */
     public function findAllByAddress(AddressInterface $address, ?string $scope = null): array;
+
+    /**
+     * @param array<ZoneInterface> $zones
+     * @return array<ZoneInterface>
+     */
+    public function findAllByZones(array $zones, ?string $scope = null): array;
 }

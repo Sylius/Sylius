@@ -45,7 +45,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
                 $query->expr()->eq('m.code', ':countryCode'),
             );
 
-            $query->setParameter('country', 'country');
+            $query->setParameter('country', ZoneInterface::TYPE_COUNTRY);
             $query->setParameter('countryCode', $address->getCountryCode());
         }
 
@@ -55,11 +55,44 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
                 $query->expr()->eq('m.code', ':provinceCode'),
             );
 
-            $query->setParameter('province', 'province');
+            $query->setParameter('province', ZoneInterface::TYPE_PROVINCE);
             $query->setParameter('provinceCode', $address->getProvinceCode());
         }
 
         $query->andWhere($query->expr()->orX(...$orConditions));
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param array<ZoneInterface> $zones
+     * @return array<ZoneInterface>
+     */
+    public function findAllByZones(array $zones, ?string $scope = null): array
+    {
+        $zones = array_map(
+            fn (ZoneInterface $zone): string => $zone->getCode(),
+            $zones
+        );
+
+        $query = $this->createQueryBuilder('z')
+            ->select('z')
+            ->leftJoin('z.members', 'm')
+        ;
+
+        if (null !== $scope) {
+            $query
+                ->andWhere('z.scope = :scope')
+                ->setParameter('scope', $scope)
+            ;
+        }
+
+        $query
+            ->andWhere('z.type = :type')
+            ->andWhere($query->expr()->in('m.code', ':zones'))
+            ->setParameter('type', ZoneInterface::TYPE_ZONE)
+            ->setParameter('zones', $zones)
+        ;
 
         return $query->getQuery()->getResult();
     }
