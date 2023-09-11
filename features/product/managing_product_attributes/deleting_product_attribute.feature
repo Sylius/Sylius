@@ -9,13 +9,13 @@ Feature: Deleting a product attribute
         And the store has a product "44 Magnum"
 
     @ui @api
-    Scenario: Try deleting a attribute from the registry when product use him
+    Scenario: Try deleting a attribute from the registry when a product uses it
         Given this product has a text attribute "Gun caliber" with value "11 mm"
         When I delete this product attribute
         Then I should be notified that it is in use
 
     @ui @api
-    Scenario: Deleting a text product attribute when not by used
+    Scenario: Deleting a text product attribute when it's not used
         Given the store has a text product attribute "Gun caliber"
         When I delete this product attribute
         Then I should be notified that it has been successfully deleted

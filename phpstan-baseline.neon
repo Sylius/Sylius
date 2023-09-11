@@ -771,6 +771,26 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:remove\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductTaxonDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductTaxonDataPersister.php
@@ -2249,6 +2269,11 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Checker\\\\CatalogPromotionEligibilityChecker\\:\\:__construct\\(\\) has parameter \\$defaultCriteria with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Checker/CatalogPromotionEligibilityChecker.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Checker\\\\InForTaxonsScopeVariantChecker\\:\\:__construct\\(\\) has parameter \\$taxonRepository with generic interface Sylius\\\\Component\\\\Taxonomy\\\\Repository\\\\TaxonRepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/Checker/InForTaxonsScopeVariantChecker.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\Checker\\\\ProductVariantForCatalogPromotionEligibility\\:\\:__construct\\(\\) has parameter \\$locator with generic class Symfony\\\\Component\\\\DependencyInjection\\\\ServiceLocator but does not specify its types\\: T$#"
