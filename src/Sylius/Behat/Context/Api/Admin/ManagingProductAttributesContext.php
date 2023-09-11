@@ -57,10 +57,13 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @When I name it :name in :language
+     * @When I change its name to :name in :language
+     * @When I do not name it
+     * @When I remove its name from :language translation
      */
-    public function iNameItIn(string $name, string $language): void
+    public function iNameItIn(string $name = '', string $language = 'en_US'): void
     {
-        $this->client->addRequestData('translations', [$language => ['name' => $name, 'locale' => $language]]);
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
     }
 
     /**
@@ -90,6 +93,24 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @When I do not check multiple option
+     * @When I do not specify its code
+     */
+    public function intentionallyBlank(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
+     * @When I specify its :limitType entries value as :count
+     * @When I specify its :limitType length as :count
+     */
+    public function iSpecifyItsLimitTypeEntriesAs(string $limitType, int $count): void
+    {
+        $this->client->addRequestData('configuration', [$limitType => $count]);
+    }
+
+    /**
      * @When /^I want to edit (this product attribute)$/
      */
     public function iWantToEditThisProductAttribute(ProductAttributeInterface $productAttribute): void
@@ -101,18 +122,11 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
         $this->client->create();
-    }
-
-    /**
-     * @When I change its name to :name in :language
-     */
-    public function iChangeItsNameTo(string $name, string $language): void
-    {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
     }
 
     /**
@@ -226,6 +240,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @Then the :type attribute :name should appear in the store
+     * @Then the :type attribute :name should still be in the store
      */
     public function theAttributeShouldAppearInTheStore(string $type, string $name): void
     {
@@ -243,6 +258,19 @@ final class ManagingProductAttributesContext implements Context
             $type,
             $name,
         ));
+    }
+
+    /**
+     * @Then the attribute with :field :value should not appear in the store
+     */
+    public function theAttributeWithCodeShouldNotAppearInTheStore(string $field, string $value): void
+    {
+        $response = $this->client->index(Resources::PRODUCT_ATTRIBUTES);
+
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($response, $field, $value),
+            sprintf('Product attribute with %s %s exists, but should not', $field, $value),
+        );
     }
 
     /**
@@ -297,5 +325,85 @@ final class ManagingProductAttributesContext implements Context
                 ));
             }
         }
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatFieldIsRequired(string $field): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Please enter attribute %s.', $field),
+        );
+    }
+
+    /**
+     * @Then I should be notified that product attribute with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists()
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'This code is already in use.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that max length must be greater or equal to the min length
+     */
+    public function iShouldBeNotifiedThatMaxLengthMustBeGreaterOrEqualToTheMinLength(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Configuration max length must be greater or equal to the min length.',
+        );
+    }
+
+    /**
+     * @Then there should still be only one product attribute with code :code
+     */
+    public function thereShouldStillBeOnlyOneProductAttributeWithCode($code)
+    {
+        $items = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->index(Resources::PRODUCT_ATTRIBUTES),
+            'code',
+            $code,
+        );
+
+        Assert::count($items, 1, sprintf('More than one attribute with code %s found', $code));
+    }
+
+    /**
+     * @Then I should be notified that max entries value must be greater or equal to the min entries value
+     */
+    public function iShouldBeNotifiedThatMaxEntriesValueMustBeGreaterOrEqualToTheMinEntriesValue(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Configuration max entries value must be greater or equal to the min entries value.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that min entries value must be lower or equal to the number of added choices
+     */
+    public function iShouldBeNotifiedThatMinEntriesValueMustBeLowerOrEqualToTheNumberOfAddedChoices(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Configuration min entries value must be lower or equal to the number of added choices.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that multiple must be true if min or max entries values are specified
+     */
+    public function iShouldBeNotifiedThatMultipleMustBeTrueIfMinOrMaxEntriesValuesAreSpecified(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Configuration multiple must be true if min or max entries values are specified.',
+        );
     }
 }

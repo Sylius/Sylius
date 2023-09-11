@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -83,7 +84,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                     'min' => 1,
                     'max' => 3,
                 ],
-                'type' => 'select',
+                'type' => SelectAttributeType::TYPE,
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
@@ -98,6 +99,55 @@ final class ProductAttributesTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/product_attribute/post_product_attribute_response',
             Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_does_no_create_a_product_attribute_without_required_data(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-attributes',
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/post_product_attribute_without_required_data_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_no_create_a_product_attribute_with_unregistered_type(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-attributes',
+            server: $header,
+            content: json_encode([
+                'code' => 'test',
+                'type' => 'foobar',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/post_product_attribute_with_unregistered_type_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
