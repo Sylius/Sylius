@@ -1,0 +1,30 @@
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_eu_country_{NL, BE, PL, DE, CZ, SK, HU}:
+        code: <current()>
+    member_visegrad_country_{CZ, SK, HU, PL}:
+        code: <current()>
+    member_province_{AL, CA, FL, NY, MA, LD}:
+        code: <current()>
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu:
+        code: EU
+        name: European Union
+        type: country
+        members: ["@member_eu_country_NL", "@member_eu_country_BE", "@member_eu_country_PL", "@member_eu_country_DE", "@member_eu_country_CZ", "@member_eu_country_SK", "@member_eu_country_HU"]
+        scope: 'only_eu'
+    zone_visegrad:
+        code: VISEGRAD_GROUP
+        name: Visegrad Group
+        type: country
+        members: ["@member_visegrad_country_CZ", "@member_visegrad_country_SK", "@member_visegrad_country_HU", "@member_visegrad_country_PL"]
+    zone_usa_provinces:
+        code: USA_PROVINCES
+        name: USA Provinces
+        type: province
+        members: ["@member_province_AL", "@member_province_CA", "@member_province_FL", "@member_province_NY"]
+    zone_polish_provinces:
+        code: POLISH_PROVINCES
+        name: Polish Provinces
+        type: province
+        members: ["@member_province_MA", "@member_province_LD"]
