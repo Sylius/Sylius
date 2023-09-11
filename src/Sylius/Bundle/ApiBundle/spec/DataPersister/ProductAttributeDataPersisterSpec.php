@@ -17,17 +17,13 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved;
-use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
-use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 
 final class ProductAttributeDataPersisterSpec extends ObjectBehavior
 {
-    function let(ContextAwareDataPersisterInterface $persister, ServiceRegistryInterface $typesRegistry): void
+    function let(ContextAwareDataPersisterInterface $persister): void
     {
-        $this->beConstructedWith($persister, $typesRegistry);
+        $this->beConstructedWith($persister);
     }
 
     function it_is_a_context_aware_persister(): void
@@ -41,32 +37,10 @@ final class ProductAttributeDataPersisterSpec extends ObjectBehavior
         $this->supports($productAttribute)->shouldReturn(true);
     }
 
-    function it_uses_inner_persister_to_persist_product_attribute_when_storage_type_is_set(
+    function it_uses_inner_persister_to_persist_product_attribute(
         ContextAwareDataPersisterInterface $persister,
         ProductAttributeInterface $productAttribute,
     ): void {
-        $productAttribute->getType()->willReturn(TextAttributeType::TYPE);
-        $productAttribute->getStorageType()->willReturn(AttributeValueInterface::STORAGE_TEXT);
-
-        $persister->persist($productAttribute, [])->shouldBeCalled();
-
-        $this->persist($productAttribute, []);
-    }
-
-    function it_sets_storage_type_when_none_is_set_but_type_is(
-        ContextAwareDataPersisterInterface $persister,
-        ServiceRegistryInterface $typesRegistry,
-        AttributeTypeInterface $attributeType,
-        ProductAttributeInterface $productAttribute,
-    ): void {
-        $productAttribute->getType()->willReturn(TextAttributeType::TYPE);
-        $productAttribute->getStorageType()->willReturn(null);
-
-        $attributeType->getStorageType()->willReturn(AttributeValueInterface::STORAGE_TEXT);
-        $typesRegistry->get(TextAttributeType::TYPE)->willReturn($attributeType);
-
-        $productAttribute->setStorageType(AttributeValueInterface::STORAGE_TEXT)->shouldBeCalled();
-
         $persister->persist($productAttribute, [])->shouldBeCalled();
 
         $this->persist($productAttribute, []);
