@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
         ];
     }
 
