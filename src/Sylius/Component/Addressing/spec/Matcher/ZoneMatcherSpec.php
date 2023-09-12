@@ -62,7 +62,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     ): void {
         $zoneOne->getScope()->willReturn('nato');
         $zoneTwo->getScope()->willReturn('all');
-        $zoneThree->getScope()->willReturn('all');
+        $zoneThree->getScope()->willReturn('custom');
 
         $zoneRepository->findAllByAddress($address)->willReturn([$zoneOne]);
         $zoneRepository->findAllByZones([$zoneOne])->willReturn([$zoneTwo]);
@@ -71,7 +71,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
         $matchedZones = $this->matchAll($address, 'nato');
 
-        $matchedZones->shouldHaveCount(1);
-        $matchedZones->shouldBe([$zoneOne]);
+        $matchedZones->shouldHaveCount(2);
+        $matchedZones->shouldBe([$zoneOne, $zoneTwo]);
     }
 }
