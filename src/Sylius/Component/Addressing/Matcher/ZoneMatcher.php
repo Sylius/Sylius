@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Matcher;
 
+use Sylius\Bundle\AddressingBundle\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ZoneMatcher implements ZoneMatcherInterface
 {
@@ -30,7 +28,10 @@ final class ZoneMatcher implements ZoneMatcherInterface
         ZoneInterface::TYPE_ZONE,
     ];
 
-    public function __construct(private RepositoryInterface $zoneRepository)
+    /**
+     * @param ZoneRepositoryInterface<ZoneInterface> $zoneRepository
+     */
+    public function __construct(private ZoneRepositoryInterface $zoneRepository)
     {
     }
 
@@ -38,76 +39,36 @@ final class ZoneMatcher implements ZoneMatcherInterface
     {
         $zones = [];
 
-        /** @var ZoneInterface $zone */
-        foreach ($this->getZones($scope) as $zone) {
-            if ($this->addressBelongsToZone($address, $zone)) {
-                $zones[$zone->getType()] = $zone;
-            }
-        }
-
-        foreach (self::PRIORITIES as $priority) {
-            if (isset($zones[$priority])) {
-                return $zones[$priority];
-            }
-        }
-
         return null;
     }
 
     public function matchAll(AddressInterface $address, ?string $scope = null): array
     {
-        $zones = [];
+        $zones = $this->zoneRepository->findAllByAddress($address);
+        $zonesWithParents = $this->getZonesWithParentZones($zones);
 
-        foreach ($this->getZones($scope) as $zone) {
-            if ($this->addressBelongsToZone($address, $zone)) {
-                $zones[] = $zone;
-            }
+        if (null === $scope) {
+            return $zonesWithParents;
         }
 
-        return $zones;
-    }
-
-    private function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone): bool
-    {
-        foreach ($zone->getMembers() as $member) {
-            if ($this->addressBelongsToZoneMember($address, $member)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_filter(
+            $zonesWithParents,
+            fn (ZoneInterface $zone) => $zone->getScope() === $scope
+        );
     }
 
     /**
-     * @throws \InvalidArgumentException
+     * @param array<ZoneInterface> $zones
+     * @return array<ZoneInterface>
      */
-    private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member): bool
+    private function getZonesWithParentZones(array $zones): array
     {
-        switch ($type = $member->getBelongsTo()->getType()) {
-            case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
-            case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
-            case ZoneInterface::TYPE_ZONE:
-                $zone = $this->getZoneByCode($member->getCode());
+        $parentZones = $this->zoneRepository->findAllByZones($zones);
 
-                return null !== $zone && $this->addressBelongsToZone($address, $zone);
-            default:
-                throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
-        }
-    }
-
-    private function getZones(?string $scope = null): array
-    {
-        if (null === $scope) {
-            return $this->zoneRepository->findAll();
+        if ([] === $parentZones) {
+            return $zones;
         }
 
-        return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
-    }
-
-    private function getZoneByCode(string $code): ?ZoneInterface
-    {
-        return $this->zoneRepository->findOneBy(['code' => $code]);
+        return array_merge($zones, $this->getZonesWithParentZones($parentZones));
     }
 }

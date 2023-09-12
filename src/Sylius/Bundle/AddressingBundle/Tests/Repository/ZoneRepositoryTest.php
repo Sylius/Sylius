@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Repository;
+namespace Sylius\Bundle\AddressingBundle\Tests\Repository;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
