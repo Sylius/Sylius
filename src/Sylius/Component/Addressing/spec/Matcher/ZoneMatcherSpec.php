@@ -25,6 +25,16 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->beConstructedWith($zoneRepository);
     }
 
+    public function it_returns_a_matching_zone(
+        ZoneRepositoryInterface $zoneRepository,
+        AddressInterface $address,
+        ZoneInterface $zone,
+    ): void {
+        $zoneRepository->findOneByAddress($address, null)->willReturn($zone);
+
+        $this->match($address)->shouldReturn($zone);
+    }
+
     public function it_returns_all_matching_zones(
         ZoneRepositoryInterface $zoneRepository,
         AddressInterface $address,

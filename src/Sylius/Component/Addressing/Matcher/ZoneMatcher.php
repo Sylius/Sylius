@@ -20,15 +20,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 final class ZoneMatcher implements ZoneMatcherInterface
 {
     /**
-     * @var array
-     */
-    private const PRIORITIES = [
-        ZoneInterface::TYPE_PROVINCE,
-        ZoneInterface::TYPE_COUNTRY,
-        ZoneInterface::TYPE_ZONE,
-    ];
-
-    /**
      * @param ZoneRepositoryInterface<ZoneInterface> $zoneRepository
      */
     public function __construct(private ZoneRepositoryInterface $zoneRepository)
@@ -37,9 +28,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
-        $zones = [];
-
-        return null;
+        return $this->zoneRepository->findOneByAddress($address, $scope);
     }
 
     public function matchAll(AddressInterface $address, ?string $scope = null): array
