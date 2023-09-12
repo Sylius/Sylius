@@ -158,6 +158,15 @@ You have most likely changed the PayPal credentials during the checkout process.
 Payment complete events
 -----------------------
 
+.. warning::
+
+    The following events are not a universal way to listen for a completed payment, as they are only dispatched by `ResourceController` at specific places, like completing the payment for a given order in the Admin Panel.
+    It means that `pre_complete` and `post_complete` events won't be triggered when a customer completes the payment by using, e.g., a payment gateway.
+
+.. tip::
+
+    If you are looking for a way to listen for completing the payment, consider :doc:`adding a new callback </customization/state_machine>` for a `sylius_order_payment` state machine on the `pay` transition.
+
 There are two events that are triggered on the payment complete action:
 
 +-------------------------------------+
