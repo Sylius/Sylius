@@ -24,6 +24,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 interface ZoneRepositoryInterface extends RepositoryInterface
 {
+    public function findOneByAddress(AddressInterface $address, ?string $scope = null): ?ZoneInterface;
+
     /** @return ZoneInterface[] */
     public function findAllByAddress(AddressInterface $address, ?string $scope = null): array;
 

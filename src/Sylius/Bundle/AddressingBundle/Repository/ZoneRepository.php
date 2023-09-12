@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -22,8 +23,31 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
  */
 class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
+    public function findOneByAddress(AddressInterface $address, ?string $scope = null): ?ZoneInterface
+    {
+        $query = $this->getFindByAddressQueryBuilder($address, $scope);
+
+        $query
+            ->addSelect('(CASE
+                    WHEN z.type = \'province\' THEN 1
+                    WHEN z.type = \'country\' THEN 2
+                    WHEN z.type = \'zone\' THEN 3
+                    ELSE 4
+                END) AS HIDDEN sort_order')
+            ->orderBy('sort_order', 'ASC')
+            ->setMaxResults(1)
+        ;
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
     /** @return ZoneInterface[] */
     public function findAllByAddress(AddressInterface $address, ?string $scope = null): array
+    {
+        return $this->getFindByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
+    }
+
+    private function getFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
     {
         $query = $this->createQueryBuilder('z')
             ->select('z')
@@ -61,7 +85,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         $query->andWhere($query->expr()->orX(...$orConditions));
 
-        return $query->getQuery()->getResult();
+        return $query;
     }
 
     /**

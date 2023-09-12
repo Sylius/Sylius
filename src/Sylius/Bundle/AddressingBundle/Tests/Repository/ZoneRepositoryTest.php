@@ -30,6 +30,34 @@ final class ZoneRepositoryTest extends KernelTestCase
     }
 
     /** @test */
+    public function it_finds_a_single_zone_by_address_prioritising_province_type(): void
+    {
+        $address = new Address();
+        $address->setCountryCode('PL');
+        $address->setProvinceCode('MA');
+
+        $repository = $this->getRepository();
+        $zone = $repository->findOneByAddress($address);
+
+        $this->assertNotNull($zone);
+        $this->assertSame('POLISH_PROVINCES', $zone->getCode());
+    }
+
+    /** @test */
+    public function it_finds_a_single_zone_by_address_prioritising_country_type_when_no_province_is_found(): void
+    {
+        $address = new Address();
+        $address->setCountryCode('PL');
+        $address->setProvinceCode('ZZ');
+
+        $repository = $this->getRepository();
+        $zone = $repository->findOneByAddress($address);
+
+        $this->assertNotNull($zone);
+        $this->assertSame('EU', $zone->getCode());
+    }
+
+    /** @test */
     public function it_finds_all_zones_for_a_given_address_with_both_province_and_country(): void
     {
         $address = new Address();
