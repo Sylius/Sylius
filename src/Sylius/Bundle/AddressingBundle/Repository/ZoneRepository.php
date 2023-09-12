@@ -17,6 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 /**
  * @implements ZoneRepositoryInterface<ZoneInterface>

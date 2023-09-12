@@ -15,9 +15,9 @@ namespace Sylius\Bundle\AddressingBundle\Tests\Repository;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Sylius\Bundle\AddressingBundle\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ZoneRepositoryTest extends KernelTestCase

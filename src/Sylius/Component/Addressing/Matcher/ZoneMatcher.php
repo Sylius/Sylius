@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Matcher;
 
-use Sylius\Bundle\AddressingBundle\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 final class ZoneMatcher implements ZoneMatcherInterface
 {
