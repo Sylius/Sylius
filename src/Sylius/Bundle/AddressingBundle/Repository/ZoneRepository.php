@@ -90,13 +90,14 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
     /**
      * @param array<ZoneInterface> $zones
+     *
      * @return array<ZoneInterface>
      */
     public function findAllByZones(array $zones, ?string $scope = null): array
     {
         $zones = array_map(
             fn (ZoneInterface $zone): string => $zone->getCode(),
-            $zones
+            $zones,
         );
 
         $query = $this->createQueryBuilder('z')
