@@ -71,7 +71,7 @@ sylius_admin_ajax_taxon_move:
             form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType
 
 sylius_admin_ajax_taxon_move_up:
-    path: /{id}/move/up
+    path: /{id}/move-up
     methods: [PUT]
     defaults:
         _controller: sylius.controller.taxon_position::moveUpAction
@@ -80,7 +80,7 @@ sylius_admin_ajax_taxon_move_up:
             permission: true
 
 sylius_admin_ajax_taxon_move_down:
-    path: /{id}/move/down
+    path: /{id}/move-down
     methods: [PUT]
     defaults:
         _controller: sylius.controller.taxon_position::moveDownAction

@@ -147,6 +147,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function getLastTaxonOnTheList(): string
     {
         $leaves = $this->getLeaves();
+
         return $leaves[count($leaves) - 1]->getText();
     }
 

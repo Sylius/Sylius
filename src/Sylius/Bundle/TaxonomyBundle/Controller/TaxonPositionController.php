@@ -15,7 +15,6 @@ namespace Sylius\Bundle\TaxonomyBundle\Controller;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Taxonomy\Positioner\TaxonPositionerInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +24,6 @@ final class TaxonPositionController
 {
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
-        private TaxonPositionerInterface $taxonPositioner,
         private ObjectManager $taxonManager,
     ) {
     }
@@ -36,7 +34,9 @@ final class TaxonPositionController
         $taxonToBeMoved = $this->taxonRepository->find($id);
         Assert::notNull($taxonToBeMoved);
 
-        $this->taxonPositioner->moveUp($taxonToBeMoved);
+        if ($taxonToBeMoved->getPosition() > 0) {
+            $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() - 1);
+        }
         $this->taxonManager->flush();
 
         return new JsonResponse();
@@ -48,7 +48,7 @@ final class TaxonPositionController
         $taxonToBeMoved = $this->taxonRepository->find($id);
         Assert::notNull($taxonToBeMoved);
 
-        $this->taxonPositioner->moveDown($taxonToBeMoved);
+        $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() + 1);
         $this->taxonManager->flush();
 
         return new JsonResponse();
