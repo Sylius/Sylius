@@ -42,12 +42,13 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
         return array_filter(
             $zonesWithParents,
-            fn (ZoneInterface $zone) => $zone->getScope() === $scope
+            fn (ZoneInterface $zone) => $zone->getScope() === $scope,
         );
     }
 
     /**
      * @param array<ZoneInterface> $zones
+     *
      * @return array<ZoneInterface>
      */
     private function getZonesWithParentZones(array $zones): array
