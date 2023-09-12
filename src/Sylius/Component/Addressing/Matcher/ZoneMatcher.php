@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Addressing\Matcher;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
@@ -42,7 +43,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
         return array_filter(
             $zonesWithParents,
-            fn (ZoneInterface $zone) => $zone->getScope() === $scope,
+            fn (ZoneInterface $zone) => $zone->getScope() === $scope || $zone->getScope() === Scope::ALL,
         );
     }
 

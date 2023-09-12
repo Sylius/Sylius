@@ -16,6 +16,7 @@ namespace Sylius\Bundle\AddressingBundle\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
@@ -57,8 +58,8 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         if (null !== $scope) {
             $query
-                ->andWhere('z.scope = :scope')
-                ->setParameter('scope', $scope)
+                ->andWhere($query->expr()->in('z.scope', ':scopes'))
+                ->setParameter('scopes', [$scope, Scope::ALL])
             ;
         }
 
