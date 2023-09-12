@@ -383,6 +383,11 @@ class User implements UserInterface, \Stringable
         $this->encoderName = $encoderName;
     }
 
+    public function getPasswordHasherName(): ?string
+    {
+        return $this->getEncoderName();
+    }
+
     /**
      * The serialized data have to contain the fields used by the equals method and the username.
      */
