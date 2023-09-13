@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
+use Sylius\Bundle\ApiBundle\Attribute\AsCommandDataTransformer;
+use Sylius\Bundle\ApiBundle\Attribute\AsDocumentationModifier;
+use Sylius\Bundle\ApiBundle\Attribute\AsPaymentConfigurationProvider;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -43,6 +47,8 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         if ($swaggerEnabled) {
             $loader->load('integrations/swagger.xml');
         }
+
+        $this->registerAutoconfiguration($container);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -58,5 +64,29 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $path = $metadata['SyliusApiBundle']['path'] . '/Resources/config/api_resources';
 
         $container->prependExtensionConfig('api_platform', ['mapping' => ['paths' => [$path]]]);
+    }
+
+    private function registerAutoconfiguration(ContainerBuilder $container): void
+    {
+        $container->registerAttributeForAutoconfiguration(
+            AsCommandDataTransformer::class,
+            static function (ChildDefinition $definition, AsCommandDataTransformer $attribute): void {
+                $definition->addTag(AsCommandDataTransformer::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsDocumentationModifier::class,
+            static function (ChildDefinition $definition, AsDocumentationModifier $attribute): void {
+                $definition->addTag(AsDocumentationModifier::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
+
+        $container->registerAttributeForAutoconfiguration(
+            AsPaymentConfigurationProvider::class,
+            static function (ChildDefinition $definition, AsPaymentConfigurationProvider $attribute): void {
+                $definition->addTag(AsPaymentConfigurationProvider::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
     }
 }
