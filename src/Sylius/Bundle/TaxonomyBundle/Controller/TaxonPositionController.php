@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,6 +18,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
 final class TaxonPositionController
@@ -30,27 +31,37 @@ final class TaxonPositionController
 
     public function moveUpAction(int $id): Response
     {
-        /** @var TaxonInterface|null $taxonToBeMoved */
-        $taxonToBeMoved = $this->taxonRepository->find($id);
-        Assert::notNull($taxonToBeMoved);
+        $taxonToBeMoved = $this->findTaxonOr404($id);
 
         if ($taxonToBeMoved->getPosition() > 0) {
             $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() - 1);
+            $this->taxonManager->flush();
         }
-        $this->taxonManager->flush();
 
-        return new JsonResponse();
+        return new JsonResponse('', Response::HTTP_NO_CONTENT);
     }
 
     public function moveDownAction(int $id): Response
     {
-        /** @var TaxonInterface|null $taxonToBeMoved */
-        $taxonToBeMoved = $this->taxonRepository->find($id);
-        Assert::notNull($taxonToBeMoved);
+        $taxonToBeMoved = $this->findTaxonOr404($id);
 
         $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() + 1);
         $this->taxonManager->flush();
 
-        return new JsonResponse();
+        return new JsonResponse('', Response::HTTP_NO_CONTENT);
+    }
+
+    private function findTaxonOr404(int $id): TaxonInterface
+    {
+        /** @var TaxonInterface|null $taxon */
+        $taxon = $this->taxonRepository->find($id);
+
+        if (null === $taxon) {
+            throw new NotFoundHttpException(sprintf('Taxon with id %d does not exist.', $id));
+        }
+
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        return $taxon;
     }
 }

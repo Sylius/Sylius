@@ -28,7 +28,7 @@
 
         <service id="sylius.controller.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonPositionController">
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.manager.taxon" />
         </service>
 
         <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" decoration-priority="256" public="false">
