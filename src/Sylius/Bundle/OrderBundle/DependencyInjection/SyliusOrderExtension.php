@@ -50,13 +50,13 @@ final class SyliusOrderExtension extends AbstractResourceExtension
             $container->registerAttributeForAutoconfiguration(
                 AsCartContext::class,
                 static function (ChildDefinition $definition, AsCartContext $attribute): void {
-                    $definition->addTag(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+                    $definition->addTag(AsCartContext::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
                 },
             );
             $container->registerAttributeForAutoconfiguration(
                 AsOrderProcessor::class,
                 static function (ChildDefinition $definition, AsOrderProcessor $attribute): void {
-                    $definition->addTag(RegisterProcessorsPass::PROCESSOR_SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+                    $definition->addTag(AsOrderProcessor::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
                 },
             );
         } else {

@@ -16,6 +16,8 @@ namespace Sylius\Bundle\OrderBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsCartContext
 {
+    public const SERVICE_TAG = 'sylius.context.cart';
+
     public function __construct(
         private int $priority = 0,
     ) {

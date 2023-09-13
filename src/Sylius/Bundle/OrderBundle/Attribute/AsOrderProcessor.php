@@ -16,6 +16,8 @@ namespace Sylius\Bundle\OrderBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsOrderProcessor
 {
+    public const SERVICE_TAG = 'sylius.order_processor';
+
     public function __construct(
         private int $priority = 0,
     ) {
