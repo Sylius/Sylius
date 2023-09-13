@@ -22,6 +22,10 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
 
     public function nameItIn(string $name, string $localeCode): void;
 
+    public function setMetaKeywords(string $keywords, string $localeCode): void;
+
+    public function setMetaDescription(string $description, string $localeCode): void;
+
     public function isProductOptionChosen(string $option): bool;
 
     public function isProductOptionsDisabled(): bool;
