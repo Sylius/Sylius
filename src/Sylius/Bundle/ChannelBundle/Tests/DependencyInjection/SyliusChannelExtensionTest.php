@@ -15,10 +15,10 @@ namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContext;
-use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContextRequestResolver;
+use Sylius\Bundle\ChannelBundle\Attribute\AsRequestBasedChannelResolver;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\SyliusChannelExtension;
-use Sylius\Bundle\ChannelBundle\Tests\Stub\ChannelContextRequestResolverStub;
 use Sylius\Bundle\ChannelBundle\Tests\Stub\ChannelContextStub;
+use Sylius\Bundle\ChannelBundle\Tests\Stub\RequestBestChannelResolverStub;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
@@ -79,12 +79,12 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         );
     }
     /** @test */
-    public function it_autoconfigures_channel_context_request_resolver_with_attribute(): void
+    public function it_autoconfigures_request_based_channel_resolver_with_attribute(): void
     {
         $this->container->setDefinition(
             'acme.channel_context_request_resolver_with_attribute',
             (new Definition())
-                ->setClass(ChannelContextRequestResolverStub::class)
+                ->setClass(RequestBestChannelResolverStub::class)
                 ->setAutoconfigured(true),
         );
 
@@ -93,7 +93,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag(
             'acme.channel_context_request_resolver_with_attribute',
-            AsChannelContextRequestResolver::SERVICE_TAG,
+            AsRequestBasedChannelResolver::SERVICE_TAG,
             ['priority' => 20],
         );
     }

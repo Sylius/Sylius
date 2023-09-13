@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ChannelBundle\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class AsChannelContextRequestResolver
+final class AsRequestBasedChannelResolver
 {
     public const SERVICE_TAG = 'sylius.context.channel.request_based.resolver';
 

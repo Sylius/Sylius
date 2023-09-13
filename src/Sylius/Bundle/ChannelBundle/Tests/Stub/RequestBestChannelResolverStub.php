@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ChannelBundle\Tests\Stub;
 
-use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContextRequestResolver;
+use Sylius\Bundle\ChannelBundle\Attribute\AsRequestBasedChannelResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-#[AsChannelContextRequestResolver(priority: 20)]
-final class ChannelContextRequestResolverStub implements RequestResolverInterface
+#[AsRequestBasedChannelResolver(priority: 20)]
+final class RequestBestChannelResolverStub implements RequestResolverInterface
 {
     public function findChannel(Request $request): ?ChannelInterface
     {
