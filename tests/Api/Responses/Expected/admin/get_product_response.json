@@ -23,7 +23,9 @@
             "@type": "ProductTranslation",
             "id": @integer@,
             "name": "Mug",
-            "slug": "mug"
+            "slug": "mug",
+            "metaKeywords": null,
+            "metaDescription": null
         }
     }
 }
