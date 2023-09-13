@@ -16,6 +16,8 @@ namespace Sylius\Bundle\ProductBundle\Attribute;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsProductVariantResolver
 {
+    public const SERVICE_TAG = 'sylius.product_variant_resolver';
+
     public function __construct(private int $priority = 0)
     {
     }
