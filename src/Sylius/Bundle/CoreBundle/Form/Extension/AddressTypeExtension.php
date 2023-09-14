@@ -34,7 +34,7 @@ final class AddressTypeExtension extends AbstractTypeExtension
         /** @var ChannelInterface|null $channel */
         $channel = $options['channel'];
 
-        if ($channel === null || $channel->getCountries()->count() === 0) {
+        if ($channel === null || $channel->getEnabledCountries()->count() === 0) {
             return;
         }
 
