@@ -1,0 +1,46 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-12T13:17:13Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-elxvvv.bunnyenv.com/|
+|php|https://store-elxvvv.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-09-12T17:01:59Z
+
+1.  `are only dispatched by the ResourceController`  phrase suggest there is implication, but new documentation reader wouldn't know which one.
+2. `sylius.payment.pre/post_complete` correlates to sylius_payment SM with `completed` state, while people most likely intrested in  sylius_order_payment SM `paid` state.
+
+I couldn't phrase it better, but my take on the message is to split it into two alerts:
+**Warning**
+> These events are not universal way to listen for a completed payment (Dispatched by `ResourceController` at specific places like payment complete for admin ui, but not at the time of payment by a customer for a shop ui), consider adding :doc:`callback </customization/state_machine>` for a "sylius_payment" state machine with `completed` state.
+
+**Tip**
+> If you looking for order payment paid event, consider adding :doc:`callback </customization/state_machine>` for a "sylius_order_payment" state machine with `paid` state.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-13T02:51:02Z
+
+Thanks for your perspective @diimpp! Now it should sound better (I guess :D).
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-14T12:51:31Z
+
+Thank you, Jacob! :tada:
