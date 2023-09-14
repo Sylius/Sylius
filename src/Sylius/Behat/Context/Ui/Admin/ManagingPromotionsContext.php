@@ -445,10 +445,10 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I edit (this promotion) percentage action to have "([^"]+)%"$/
      */
-    public function iEditCatalogPromotionToHaveDiscount(PromotionInterface $promotion, string $amount): void
+    public function iEditPromotionToHaveDiscount(PromotionInterface $promotion, string $amount): void
     {
         $this->updatePage->open(['id' => $promotion->getId()]);
-        $this->updatePage->specifyPercentageDiscountActionValue($amount);
+        $this->updatePage->specifyOrderPercentageDiscountActionValue($amount);
         $this->updatePage->saveChanges();
     }
 
@@ -751,11 +751,19 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then it should have :amount discount
+     * @Then it should have :amount of order percentage discount
      */
-    public function itShouldHaveDiscount(string $amount): void
+    public function itShouldHaveOfOrderPercentageDiscount(string $amount): void
     {
-        Assert::same($this->updatePage->getPercentageDiscountActionValue(), $amount);
+        Assert::same($this->updatePage->getOrderPercentageDiscountActionValue(), $amount);
+    }
+
+    /**
+     * @Then it should have :amount of item percentage discount configured for :channel channel
+     */
+    public function itShouldHaveOfItemPercentageDiscount(string $amount, ChannelInterface $channel): void
+    {
+        Assert::same($this->updatePage->getItemPercentageDiscountActionValue($channel->getCode()), $amount);
     }
 
     /**

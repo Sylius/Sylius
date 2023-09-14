@@ -10,18 +10,26 @@ Feature: Seeing correct percentage discounts while editing promotion with action
         And this promotion gives "12.00%" discount to every order
         And I am logged in as an administrator
 
-    @ui @javascript
-    Scenario: Seeing the accurate percentage amount after editing the promotion including the value up to one decimal place
+    @ui
+    Scenario: Seeing an accurate percentage amount after editing the promotion including the value up to one decimal place
         When I want to modify a "Cheap Stuff" promotion
-        And I edit this promotion percentage action to have "2.50%"
+        And I edit this promotion percentage action to have "2.5%"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should have "2.50%" discount
+        And it should have "2.50%" of order percentage discount
 
-    @ui @javascript
-    Scenario: Seeing the accurate percentage amount after editing the promotion including the value up to two decimal places
+    @ui
+    Scenario: Seeing an accurate percentage amount after editing the promotion including the value up to two decimal places
         When I want to modify a "Cheap Stuff" promotion
         And I edit this promotion percentage action to have "2.56%"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And it should have "2.56%" discount
+        And it should have "2.56%" of order percentage discount
+
+    @ui
+    Scenario: Seeing an accurate percentage amount after using a comma as a decimal separator
+        When I want to modify a "Cheap Stuff" promotion
+        And I edit this promotion percentage action to have "2,56%"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And it should have "2.56%" of order percentage discount
