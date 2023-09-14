@@ -1,0 +1,73 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-05T13:48:22Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-7d4em3.bunnyenv.com/|
+|php|https://store-7d4em3.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2023-09-07T08:14:26Z
+
+Thanks for the fixes, @jakubtobiasz :)
+
+---------------------------------------------------------------------------
+
+by ehibes at 2023-09-07T08:58:07Z
+
+Hi guys,
+Why not use nested set behavior for taxons position ? It’s already implemented on database...  otherwise I don't see what use it would be.
+#7585 this issue is about it too.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-07T14:40:57Z
+
+Hi @ehibes 👋🏼,
+thanks for sharing your thoughts. This PR aims to fix the existing behavior, the issue you share might be considered in a longer term (e.g. Sylius `2.0` or `3.0` as it might require analysis + refactoring and changes in the behavior).
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-07T14:42:02Z
+
+Thanks for leaving the review @igormukhingmailcom 😅
+
+---------------------------------------------------------------------------
+
+by igormukhingmailcom at 2023-09-13T12:32:49Z
+
+Is this works?
+
+```
+$taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() - 1);
+```
+
+It just doing the same `-1` as we had before (when things did not work), but on backend side rather than on front-end side - that is all the difference. Did someone tested this by hands?
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-13T12:42:07Z
+
+@igormukhingmailcom
+![CleanShot 2023-09-13 at 14 41 10](https://github.com/Sylius/Sylius/assets/80641364/9a9a9333-dc90-488d-8d0a-a7ec5ff34a84)
+There's an if statement preventing moving the taxon to `-1` positions. Behat tests are passing that way, and we tested it yesterday.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-14T07:19:12Z
+
+Thank you, Jacob! :1st_place_medal:
