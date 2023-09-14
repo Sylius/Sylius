@@ -34,10 +34,10 @@
 
                                     <div class="divider"></div>
 
-                                    <div class="item sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                                    <div class="item sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move_up', { id: taxon.id }) }}">
                                         <i class="arrow up icon grey"></i>{{ 'sylius.ui.move_up'|trans }}
                                     </div>
-                                    <div class="item sylius-taxon-move-down" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                                    <div class="item sylius-taxon-move-down" data-url="{{ path('sylius_admin_ajax_taxon_move_down', { id: taxon.id }) }}">
                                         <i class="arrow down icon grey"></i>{{ 'sylius.ui.move_down'|trans }}
                                     </div>
 

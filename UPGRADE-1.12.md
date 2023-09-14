@@ -7,6 +7,10 @@
 1. The default checkout resolving route pattern has been changed from `/checkout/.+` to
    `%sylius.security.shop_regex%/checkout/.+` to reduce the probability of conflicts with other routes.
 
+1. The `src/Sylius/Bundle/AdminBundle/Resources/views/Taxon/_treeWithButtons.html.twig` template has been updated to
+    implement new changing taxon's position logic. If you have overridden this template, you need to update it.
+    If you want to check what has changed, you might use [this PR](https://github.com/Sylius/Sylius/pull/15272) as a reference.
+
 # UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
 1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
