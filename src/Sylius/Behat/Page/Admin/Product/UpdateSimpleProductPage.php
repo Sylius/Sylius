@@ -481,6 +481,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'price' => '#sylius_product_variant_channelPricings input[id*="%channelCode%"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
+            'meta_description' => '#sylius_product_translations_%locale%_metaDescription',
+            'meta_keywords' => '#sylius_product_translations_%locale%_metaKeywords',
             'non_translatable_attribute' => '#attributesContainer [data-test-product-attribute-value-in-locale="%attributeName% "] input',
             'product_taxon' => '#sylius-product-taxonomy-tree .item .header:contains("%taxonName%") input',
             'product_taxons' => '#sylius_product_productTaxons',

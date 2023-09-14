@@ -34,6 +34,22 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         );
     }
 
+    public function setMetaKeywords(string $keywords, string $localeCode): void
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_product_translations_%s_metaKeywords', $localeCode),
+            $keywords,
+        );
+    }
+
+    public function setMetaDescription(string $description, string $localeCode): void
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_product_translations_%s_metaDescription', $localeCode),
+            $description,
+        );
+    }
+
     public function isProductOptionChosen(string $option): bool
     {
         $optionElement = $this->getElement('options')->getParent();
