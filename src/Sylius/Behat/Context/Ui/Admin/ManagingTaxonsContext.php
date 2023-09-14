@@ -417,6 +417,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Then the last taxon on the list should be :taxonName
+     */
+    public function theLastTaxonOnTheListShouldBe(string $taxonName): void
+    {
+        Assert::same($this->createPage->getLastTaxonOnTheList(), $taxonName);
+    }
+
+    /**
      * @When I enable it
      */
     public function iEnableIt(): void
