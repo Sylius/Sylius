@@ -63,8 +63,10 @@ final class ZoneMatcherTest extends KernelTestCase
             $matchedZones[$zone->getCode()] = $zone;
         }
 
-        $this->assertCount(1, $matchedZones);
+        $this->assertCount(3, $matchedZones);
         $this->assertArrayHasKey('NATO', $matchedZones);
+        $this->assertArrayHasKey('PL', $matchedZones);
+        $this->assertArrayHasKey('VISEGRAD_GROUP', $matchedZones);
     }
 
     private function loadFixtures(): void

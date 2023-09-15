@@ -109,8 +109,8 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         if (null !== $scope) {
             $query
-                ->andWhere('z.scope = :scope')
-                ->setParameter('scope', $scope)
+                ->andWhere($query->expr()->in('z.scope', ':scopes'))
+                ->setParameter('scopes', [$scope, Scope::ALL])
             ;
         }
 
