@@ -1,3 +1,14 @@
+Sylius\Component\Addressing\Model\Country:
+    country_PL:
+        code: PL
+
+Sylius\Component\Addressing\Model\Province:
+    province_{MA, LD, MZ, DS}:
+        code: <current()>
+        name: <current()>
+        abbreviation: <current()>
+        country: "@country_PL"
+
 Sylius\Component\Addressing\Model\ZoneMember:
     member_province_{MA, LD, MZ, DS}:
         code: <current()>
@@ -22,6 +33,7 @@ Sylius\Component\Addressing\Model\Zone:
         name: European Union
         type: zone
         members: ["@member_visegrad_group"]
+        scope: 'only_eu'
     zone_nato:
         code: NATO
         name: NATO

@@ -1,3 +1,14 @@
+Sylius\Component\Addressing\Model\Country:
+    country_PL:
+        code: PL
+
+Sylius\Component\Addressing\Model\Province:
+    province_{AL, CA, FL, NY, MA, LD}:
+        code: <current()>
+        name: <current()>
+        abbreviation: <current()>
+        country: "@country_PL"
+
 Sylius\Component\Addressing\Model\ZoneMember:
     member_eu_country_{NL, BE, PL, DE, CZ, SK, HU}:
         code: <current()>
@@ -28,6 +39,7 @@ Sylius\Component\Addressing\Model\Zone:
         name: NATO
         type: zone
         members: ["@member_zone_visegrad_2"]
+        scope: 'only_nato'
     zone_visegrad:
         code: VISEGRAD_GROUP
         name: Visegrad Group

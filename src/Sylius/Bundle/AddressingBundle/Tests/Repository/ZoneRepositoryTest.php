@@ -111,10 +111,10 @@ final class ZoneRepositoryTest extends KernelTestCase
             $zones[$zone->getCode()] = $zone;
         }
 
-        $this->assertCount(1, $zones);
+        $this->assertCount(3, $zones);
         $this->assertArrayHasKey('EU', $zones);
-        $this->assertArrayNotHasKey('VISEGRAD_GROUP', $zones);
-        $this->assertArrayNotHasKey('POLISH_PROVINCES', $zones);
+        $this->assertArrayHasKey('VISEGRAD_GROUP', $zones);
+        $this->assertArrayHasKey('POLISH_PROVINCES', $zones);
     }
 
     /** @test */
