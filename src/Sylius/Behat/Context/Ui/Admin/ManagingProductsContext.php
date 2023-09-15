@@ -500,6 +500,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that meta keywords are too long
+     */
+    public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
+    {
+        $this->assertValidationMessage('meta_keywords', 'Product meta keywords must not be longer than 255 characters.');
+    }
+
+    /**
+     * @Then I should be notified that meta description is too long
+     */
+    public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
+    {
+        $this->assertValidationMessage('meta_description', 'Product meta description must not be longer than 255 characters.');
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -664,6 +680,22 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->nameItIn('', $language);
+    }
+
+    /**
+     * @When I set its meta keywords to too long string in :language
+     */
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $language): void
+    {
+        $this->updateConfigurableProductPage->setMetaKeywords(str_repeat('a', 256), $language);
+    }
+
+    /**
+     * @When I set its meta description to too long string in :language
+     */
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $language): void
+    {
+        $this->updateConfigurableProductPage->setMetaDescription(str_repeat('a', 256), $language);
     }
 
     /**

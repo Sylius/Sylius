@@ -106,6 +106,22 @@ Feature: Products validation
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui @api
+    Scenario: Trying to set too long meta keywords for a product
+        Given the store has a "Dice Brewing" product
+        When I want to modify this product
+        And I set its meta keywords to too long string in "English (United States)"
+        And I try to save my changes
+        Then I should be notified that meta keywords are too long
+
+    @ui @api
+    Scenario: Trying to set too long meta keywords for a product
+        Given the store has a "Dice Brewing" product
+        When I want to modify this product
+        And I set its meta description to too long string in "English (United States)"
+        And I try to save my changes
+        Then I should be notified that meta description is too long
+
+    @ui @api
     Scenario: Trying to remove name from existing product
         Given the store has a "Dice Brewing" product
         When I want to modify this product

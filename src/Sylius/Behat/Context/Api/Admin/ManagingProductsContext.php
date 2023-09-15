@@ -244,6 +244,36 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its meta keywords to too long string in :localeCode
+     */
+    public function iSetItsMetaKeywordsToTooLongStringIn(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'metaKeywords' => str_repeat('a', 256),
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @When I set its meta description to too long string in :localeCode
+     */
+    public function iSetItsMetaDescriptionToTooLongStringIn(string $localeCode): void
+    {
+        $this->client->updateRequestData([
+            'translations' => [
+                $localeCode => [
+                    'metaDescription' => str_repeat('a', 256),
+                    'locale' => $localeCode,
+                ],
+            ],
+        ]);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -281,6 +311,28 @@ final class ManagingProductsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('Please enter product %s.', $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that meta keywords are too long
+     */
+    public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product meta keywords must not be longer than 255 characters.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that meta description is too long
+     */
+    public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product meta description must not be longer than 255 characters.',
         );
     }
 
