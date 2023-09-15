@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-07T10:15:13Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment started
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-363xtb.bunnyenv.com/|
+|php|https://store-363xtb.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2023-09-07T10:23:54Z
+
+> ### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+> **It will be automatically stopped in 4 hours.**
+>
+> Use the command `/bns:start` to start it if it's stopped.
+>
+> Component	Endpoints
+> mailhog	https://mailhog-363xtb.bunnyenv.com/
+> php	https://store-363xtb.bunnyenv.com/
+> Available commands:
+>
+> * `/bns:stop` to stop the environment
+> * `/bns:deploy` to redeploy the environment
+> * `/bns:delete` to remove the environment
+
+LGTM there.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-13T17:21:45Z
+
+Hello @stefandoorn 👋🏼,
+I let myself to apply @Zales0123's suggestion :).
+
+---------------------------------------------------------------------------
+
+by stefandoorn at 2023-09-13T18:02:21Z
+
+Ah sorry - didn't see there was a suggestion! Thanks for applying it :)
+
+---------------------------------------------------------------------------
+
+by SzymonFilipek at 2023-09-14T13:21:57Z
+
+/bns:start
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-15T08:54:31Z
+
+Thanks, Stefan! :tada:
