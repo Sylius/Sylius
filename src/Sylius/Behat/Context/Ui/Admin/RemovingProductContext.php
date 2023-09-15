@@ -14,15 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 final class RemovingProductContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private IndexPageInterface $indexPage,
+        private NotificationCheckerInterface $notificationChecker,
     ) {
     }
 
@@ -46,5 +50,26 @@ final class RemovingProductContext implements Context
         $this->sharedStorage->set('product', $product);
 
         $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
+    }
+
+    /**
+     * @Then /^(this product) should still exist$/
+     */
+    public function theProductShouldStillExist(ProductInterface $product): void
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $product->getName()]));
+    }
+
+    /**
+     * @Then I should be notified that this product could not be deleted as it is in use by a promotion rule
+     */
+    public function iShouldBeNotifiedThatThisProductCouldNotBeDeleted(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Cannot delete a product that is in use by a promotion rule.',
+            NotificationType::failure(),
+        );
     }
 }

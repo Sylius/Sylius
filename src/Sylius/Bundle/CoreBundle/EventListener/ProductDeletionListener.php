@@ -13,43 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductDeletionListener
 {
-    /** @var ProductAwareRuleUpdaterInterface[] */
-    private iterable $ruleUpdaters;
-
-    public function __construct(
-        private RequestStack $requestStack,
-        ProductAwareRuleUpdaterInterface ...$ruleUpdaters,
-    ) {
-        $this->ruleUpdaters = $ruleUpdaters;
+    public function __construct(private ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker)
+    {
     }
 
-    public function removeProductFromPromotionRules(GenericEvent $event): void
+    public function protectFromRemovingProductInUseByPromotionRule(ResourceControllerEvent $event): void
     {
         $product = $event->getSubject();
         Assert::isInstanceOf($product, ProductInterface::class);
 
-        $updatedPromotionCodes = [];
-        foreach ($this->ruleUpdaters as $ruleUpdater) {
-            $updatedPromotionCodes[] = $ruleUpdater->updateAfterProductDeletion($product);
-        }
-
-        $updatedPromotionCodes = array_merge(...$updatedPromotionCodes);
-
-        if ([] !== $updatedPromotionCodes) {
-            $flashes = FlashBagProvider::getFlashBag($this->requestStack);
-            $flashes->add('info', [
-                'message' => 'sylius.promotion.update_rules',
-                'parameters' => ['%codes%' => implode(', ', array_unique($updatedPromotionCodes))],
-            ]);
+        if ($this->productInPromotionRuleChecker->isInUse($product)) {
+            $event->setMessageType('error');
+            $event->setMessage('sylius.product.in_use_by_promotion_rule');
+            $event->stopPropagation();
         }
     }
 }
