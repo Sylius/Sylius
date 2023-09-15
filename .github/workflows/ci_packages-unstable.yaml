@@ -40,7 +40,7 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
-            COMPOSER_ROOT_VERSION: "dev-master"
+            COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
             UNSTABLE: "yes"
 
