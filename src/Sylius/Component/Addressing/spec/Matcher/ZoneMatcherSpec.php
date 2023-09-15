@@ -20,12 +20,12 @@ use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
 final class ZoneMatcherSpec extends ObjectBehavior
 {
-    public function let(ZoneRepositoryInterface $zoneRepository): void
+    function let(ZoneRepositoryInterface $zoneRepository): void
     {
         $this->beConstructedWith($zoneRepository);
     }
 
-    public function it_returns_a_matching_zone(
+    function it_returns_a_matching_zone(
         ZoneRepositoryInterface $zoneRepository,
         AddressInterface $address,
         ZoneInterface $zone,
@@ -35,7 +35,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->match($address)->shouldReturn($zone);
     }
 
-    public function it_returns_all_matching_zones(
+    function it_returns_all_matching_zones(
         ZoneRepositoryInterface $zoneRepository,
         AddressInterface $address,
         ZoneInterface $zoneOne,
@@ -53,7 +53,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $matchedZones->shouldBe([$zoneOne, $zoneTwo, $zoneThree]);
     }
 
-    public function it_returns_all_matching_zones_withing_a_matching_scope(
+    function it_returns_all_matching_zones_withing_a_matching_scope(
         ZoneRepositoryInterface $zoneRepository,
         AddressInterface $address,
         ZoneInterface $zoneOne,
