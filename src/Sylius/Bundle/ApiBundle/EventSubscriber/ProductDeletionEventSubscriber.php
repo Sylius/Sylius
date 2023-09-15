@@ -43,7 +43,7 @@ final class ProductDeletionEventSubscriber implements EventSubscriberInterface
         }
 
         if ($this->productInPromotionRuleChecker->isInUse($product)) {
-            throw new ProductCannotBeRemoved();
+            throw new ProductCannotBeRemoved('Cannot delete a product that is in use by a promotion rule.');
         }
     }
 }

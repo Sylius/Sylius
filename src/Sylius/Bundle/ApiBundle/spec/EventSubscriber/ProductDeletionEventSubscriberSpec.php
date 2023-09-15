@@ -65,6 +65,6 @@ final class ProductDeletionEventSubscriberSpec extends ObjectBehavior
 
         $productInPromotionRuleChecker->isInUse($product)->willReturn(true);
 
-        $this->shouldThrow(new ProductCannotBeRemoved())->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
+        $this->shouldThrow(ProductCannotBeRemoved::class)->during('protectFromRemovingProductInUseByPromotionRule', [$event]);
     }
 }
