@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Tests\Matcher;
 
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Component\Addressing\Model\Address;
@@ -68,6 +71,11 @@ final class ZoneMatcherTest extends KernelTestCase
     {
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = self::getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
+
+        /** @var EntityManagerInterface $manager */
+        $manager = self::getContainer()->get('doctrine.orm.default_entity_manager');
+
+        (new ORMPurger($manager))->purge();
 
         $fixtureLoader->load([
             __DIR__ . '/ZoneMatcherTest/fixtures.yaml',
