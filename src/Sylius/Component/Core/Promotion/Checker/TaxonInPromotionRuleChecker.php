@@ -20,6 +20,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class TaxonInPromotionRuleChecker implements TaxonInPromotionRuleCheckerInterface
 {
+    /**
+     * @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository
+     */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
     }

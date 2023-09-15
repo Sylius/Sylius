@@ -20,6 +20,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductInPromotionRuleChecker implements ProductInPromotionRuleCheckerInterface
 {
+    /**
+     * @param RepositoryInterface<PromotionRuleInterface> $promotionRuleRepository
+     */
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
     }
