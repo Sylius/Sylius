@@ -1,5 +1,9 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is no more used.
+
+1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more used.
+
 1. Class `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType` has been deprecated.
    Use `Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType` instead.
 
