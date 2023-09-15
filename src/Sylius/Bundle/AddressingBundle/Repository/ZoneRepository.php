@@ -52,7 +52,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     private function getFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
     {
         $query = $this->createQueryBuilder('z')
-            ->select('z')
+            ->select('z', 'm')
             ->leftJoin('z.members', 'm')
         ;
 
@@ -103,7 +103,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
         );
 
         $query = $this->createQueryBuilder('z')
-            ->select('z')
+            ->select('z', 'm')
             ->leftJoin('z.members', 'm')
         ;
 
