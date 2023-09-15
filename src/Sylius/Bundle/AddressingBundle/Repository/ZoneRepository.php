@@ -97,7 +97,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
      */
     public function findAllByZones(array $zones, ?string $scope = null): array
     {
-        $zones = array_map(
+        $zonesCodes = array_map(
             fn (ZoneInterface $zone): string => $zone->getCode(),
             $zones,
         );
@@ -118,7 +118,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             ->andWhere('z.type = :type')
             ->andWhere($query->expr()->in('m.code', ':zones'))
             ->setParameter('type', ZoneInterface::TYPE_ZONE)
-            ->setParameter('zones', $zones)
+            ->setParameter('zones', $zonesCodes)
         ;
 
         return $query->getQuery()->getResult();
