@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -28,6 +29,8 @@ interface ZoneRepositoryInterface extends RepositoryInterface
 
     /** @return ZoneInterface[] */
     public function findAllByAddress(AddressInterface $address, ?string $scope = null): array;
+
+    public function createFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder;
 
     /**
      * @param array<ZoneInterface> $zones
