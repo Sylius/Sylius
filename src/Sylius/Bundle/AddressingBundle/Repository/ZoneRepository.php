@@ -27,7 +27,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     public function findOneByAddress(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
-        $query = $this->getFindByAddressQueryBuilder($address, $scope);
+        $query = $this->createFindByAddressQueryBuilder($address, $scope);
 
         $query
             ->addSelect('(CASE
@@ -46,10 +46,10 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     /** @return ZoneInterface[] */
     public function findAllByAddress(AddressInterface $address, ?string $scope = null): array
     {
-        return $this->getFindByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
+        return $this->createFindByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
     }
 
-    private function getFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
+    public function createFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
     {
         $query = $this->createQueryBuilder('z')
             ->select('z', 'm')
