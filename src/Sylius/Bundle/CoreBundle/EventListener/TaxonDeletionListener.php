@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -31,6 +33,7 @@ final class TaxonDeletionListener
     public function __construct(
         private SessionInterface|RequestStack $requestStackOrSession,
         private ChannelRepositoryInterface $channelRepository,
+        private TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters,
     ) {
         $this->ruleUpdaters = $ruleUpdaters;
@@ -51,6 +54,18 @@ final class TaxonDeletionListener
             $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
             $flashes->add('error', 'sylius.taxon.menu_taxon_delete');
 
+            $event->stopPropagation();
+        }
+    }
+
+    public function protectFromRemovingTaxonInUseByPromotionRule(ResourceControllerEvent $event): void
+    {
+        $taxon = $event->getSubject();
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
+
+        if ($this->taxonInPromotionRuleChecker->isInUse($taxon)) {
+            $event->setMessageType('error');
+            $event->setMessage('sylius.taxon.in_use_by_promotion_rule');
             $event->stopPropagation();
         }
     }

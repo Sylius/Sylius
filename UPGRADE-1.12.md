@@ -1,5 +1,31 @@
 # UPGRADE FROM `v1.12.10` TO `v1.12.11`
 
+1. Due to a bug that was causing the removal of promotion configurations for promotions [REF](https://github.com/Sylius/Sylius/issues/15201),
+   The constructor of `Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener` has been modified as follows:
+
+   ```diff
+    public function __construct(
+        private RequestStack $requestStack,
+    +   private ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker,
+    -   ProductAwareRuleUpdaterInterface ...$ruleUpdaters,
+    )
+    ```
+
+   The method name has also changed from `removeProductFromPromotionRules` to `protectFromRemovingProductInUseByPromotionRule`.
+
+   Please refrain from using ProductAwareRuleUpdaterInterface, as it will be removed in the next major release.
+
+   * Due to the same bug, the constructor of `Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener` has also changed:
+    
+      ```diff
+       public function __construct(
+           private SessionInterface|RequestStack $requestStackOrSession,
+           private ChannelRepositoryInterface $channelRepository,
+       +   private TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
+           TaxonAwareRuleUpdaterInterface ...$ruleUpdaters,
+       )
+      ```
+
 1. The `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\SelectAttributeChoicesCollectionType` only
     constructor argument has been made optional and is `null` by default, subsequently the first argument of
     `sylius.form.type.attribute_type.select.choices_collection` has been removed.

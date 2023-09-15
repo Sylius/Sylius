@@ -97,11 +97,13 @@
         <service id="sylius.listener.taxon_deletion" class="Sylius\Bundle\CoreBundle\EventListener\TaxonDeletionListener">
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
             <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
             <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="handleRemovingRootTaxonAtPositionZero" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingTaxonInUseByPromotionRule" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener">
@@ -110,9 +112,8 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener">
-            <argument type="service" id="request_stack" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater" />
-            <tag name="kernel.event_listener" event="sylius.product.post_delete" method="removeProductFromPromotionRules" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_delete" method="protectFromRemovingProductInUseByPromotionRule" />
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener">
