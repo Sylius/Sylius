@@ -114,17 +114,6 @@ jobs:
                     
             -   name: Install dependencies
                 run: composer update --no-interaction --no-scripts
-                
-            -   name: Prepare manifest.json files
-                run: |
-                    mkdir -p public/build/admin
-                    mkdir -p public/build/shop
-                    mkdir -p public/build/app/admin
-                    mkdir -p public/build/app/shop
-                    echo "{}" > public/build/admin/manifest.json
-                    echo "{}" > public/build/shop/manifest.json
-                    echo "{}" > public/build/app/admin/manifest.json
-                    echo "{}" > public/build/app/shop/manifest.json
 
             -   name: "Run pipeline"
                 run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 vendor/bin/robo ci:packages
@@ -185,17 +174,6 @@ jobs:
 
             -   name: Install dependencies
                 run: composer update --no-interaction --no-scripts
-
-            -   name: Prepare manifest.json files
-                run: |
-                    mkdir -p public/build/admin
-                    mkdir -p public/build/shop
-                    mkdir -p public/build/app/admin
-                    mkdir -p public/build/app/shop
-                    echo "{}" > public/build/admin/manifest.json
-                    echo "{}" > public/build/shop/manifest.json
-                    echo "{}" > public/build/app/admin/manifest.json
-                    echo "{}" > public/build/app/shop/manifest.json
 
             -   name: "Run pipeline"
                 run: vendor/bin/robo ci:packages '${{ env.PACKAGES }}'
