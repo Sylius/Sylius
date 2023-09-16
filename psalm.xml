@@ -147,6 +147,7 @@
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\RequestEvent::isMasterRequest" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\ExceptionEvent::isMasterRequest" />
                 <referencedMethod name="Symfony\Component\HttpKernel\Event\ResponseEvent::isMasterRequest" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::children" />
             </errorLevel>
         </UndefinedMethod>
 
