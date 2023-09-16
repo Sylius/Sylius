@@ -1,4 +1,4 @@
-# UPGRADE FROM `v1.X.X` TO `v2.0.0`
+# UPGRADE FROM `1.13` TO `2.0`
 
 ## Codebase
 
