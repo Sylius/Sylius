@@ -37,7 +37,7 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function can(object $subject, string $graphName, string $transition): bool
     {
-        $lastException = null;
+        $lastException = new \Exception();
 
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
@@ -55,7 +55,7 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void
     {
-        $lastException = null;
+        $lastException = new \Exception();
 
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
@@ -75,7 +75,7 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function getEnabledTransition(object $subject, string $graphName): array
     {
-        $lastException = null;
+        $lastException = new \Exception();
 
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
