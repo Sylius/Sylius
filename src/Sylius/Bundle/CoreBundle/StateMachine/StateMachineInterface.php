@@ -13,13 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+
 interface StateMachineInterface
 {
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function can(object $subject, string $graphName, string $transition): bool;
 
+    /**
+     * @throws StateMachineExecutionException
+     */
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void;
 
     /**
+     * @throws StateMachineExecutionException
      * @return array<TransitionInterface>
      */
     public function getEnabledTransition(object $subject, string $graphName): array;

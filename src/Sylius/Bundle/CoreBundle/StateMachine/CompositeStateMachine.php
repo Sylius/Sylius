@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Traversable;
 use Webmozart\Assert\Assert;
 
@@ -42,7 +43,7 @@ class CompositeStateMachine implements StateMachineInterface
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
                 return $stateMachineAdapter->can($subject, $graphName, $transition);
-            } catch (\Exception $exception) {
+            } catch (StateMachineExecutionException $exception) {
                 $lastException = $exception;
             }
         }
@@ -62,7 +63,7 @@ class CompositeStateMachine implements StateMachineInterface
                 $stateMachineAdapter->apply($subject, $graphName, $transition, $context);
 
                 return;
-            } catch (\Exception $exception) {
+            } catch (StateMachineExecutionException $exception) {
                 $lastException = $exception;
             }
         }
@@ -80,7 +81,7 @@ class CompositeStateMachine implements StateMachineInterface
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
                 return $stateMachineAdapter->getEnabledTransition($subject, $graphName);
-            } catch (\Exception $exception) {
+            } catch (StateMachineExecutionException $exception) {
                 $lastException = $exception;
             }
         }
