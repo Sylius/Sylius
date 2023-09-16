@@ -134,6 +134,7 @@
         "symfony/twig-bundle": "^5.4.21 || ^6.0",
         "symfony/validator": "^5.4.21 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.15",
+        "symfony/workflow": "^5.4.21 || ^6.0",
         "symfony/yaml": "^5.4.21 || ^6.0",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3",
