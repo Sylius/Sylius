@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+use Symfony\Component\Workflow\Exception\InvalidArgumentException;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;
 
@@ -24,17 +26,29 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
 
     public function can(object $subject, string $graphName, string $transition): bool
     {
-        return $this->symfonyWorkflowRegistry->get($subject, $graphName)->can($subject, $transition);
+        try {
+            return $this->symfonyWorkflowRegistry->get($subject, $graphName)->can($subject, $transition);
+        } catch (InvalidArgumentException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
     }
 
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void
     {
-        $this->symfonyWorkflowRegistry->get($subject, $graphName)->apply($subject, $transition, $context);
+        try {
+            $this->symfonyWorkflowRegistry->get($subject, $graphName)->apply($subject, $transition, $context);
+        } catch (InvalidArgumentException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
     }
 
     public function getEnabledTransition(object $subject, string $graphName): array
     {
-        $enabledTransitions = $this->symfonyWorkflowRegistry->get($subject, $graphName)->getEnabledTransitions($subject);
+        try {
+            $enabledTransitions = $this->symfonyWorkflowRegistry->get($subject, $graphName)->getEnabledTransitions($subject);
+        } catch (InvalidArgumentException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
 
         return array_map(
             function (SymfonyWorkflowTransition $transition): TransitionInterface {
