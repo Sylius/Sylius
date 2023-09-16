@@ -71,14 +71,6 @@
           "symfony": "^6.0"
         }
       ]
-    },
-    "packages-swiftmailer": {
-      "include": [
-        {
-          "php": "8.2",
-          "symfony": "^5.4"
-        }
-      ]
     }
   },
   "full": {
@@ -107,10 +99,6 @@
     "packages": {
       "php": [ "8.2" ],
       "symfony": [ "^5.4", "^6.0" ]
-    },
-    "packages-swiftmailer": {
-      "php": [ "8.2" ],
-      "symfony": [ "^5.4" ]
     }
   }
 }
