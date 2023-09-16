@@ -39,6 +39,7 @@ framework:
             paths: ['%kernel.project_dir%/config/serialization']
     mailer:
         dsn: 'null://null'
+    workflows: ~
 
 doctrine_migrations:
     storage:
