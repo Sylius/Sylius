@@ -83,7 +83,7 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
             new SymfonyWorkflowTransition('transition2', ['from'], ['to']),
         ]);
 
-        $this->getEnabledTransition($subject, 'some_workflow')->shouldBeLike([
+        $this->getEnabledTransitions($subject, 'some_workflow')->shouldBeLike([
             new Transition('transition', ['from'], ['to']),
             new Transition('transition2', ['from'], ['to']),
         ]);
@@ -97,6 +97,6 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
         $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
         $someWorkflow->getEnabledTransitions($subject)->willThrow(new InvalidArgumentException('Invalid argument'));
 
-        $this->shouldThrow(StateMachineExecutionException::class)->during('getEnabledTransition', [$subject, 'some_workflow']);
+        $this->shouldThrow(StateMachineExecutionException::class)->during('getEnabledTransitions', [$subject, 'some_workflow']);
     }
 }

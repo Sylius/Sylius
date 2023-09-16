@@ -79,7 +79,7 @@ final class WinzouStateMachineAdapterSpec extends ObjectBehavior
         $winzouStateMachineFactory->get($subject, 'some_graph')->willReturn($stateMachine);
         $stateMachine->getPossibleTransitions()->shouldBeCalled()->willReturn(['transition', 'transition2']);
 
-        $this->getEnabledTransition($subject, 'some_graph')->shouldBeLike([
+        $this->getEnabledTransitions($subject, 'some_graph')->shouldBeLike([
             new Transition('transition', null, null),
             new Transition('transition2', null, null),
         ]);
@@ -93,6 +93,6 @@ final class WinzouStateMachineAdapterSpec extends ObjectBehavior
         $winzouStateMachineFactory->get($subject, 'some_graph')->willReturn($stateMachine);
         $stateMachine->getPossibleTransitions()->willThrow(new SMException('Invalid argument'));
 
-        $this->shouldThrow(StateMachineExecutionException::class)->during('getEnabledTransition', [$subject, 'some_graph']);
+        $this->shouldThrow(StateMachineExecutionException::class)->during('getEnabledTransitions', [$subject, 'some_graph']);
     }
 }

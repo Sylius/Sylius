@@ -109,11 +109,11 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow(new StateMachineExecutionException());
-        $stateMachineTwo->getEnabledTransition($subject, 'graph')->willReturn([]);
+        $stateMachineOne->getEnabledTransitions($subject, 'graph')->willThrow(new StateMachineExecutionException());
+        $stateMachineTwo->getEnabledTransitions($subject, 'graph')->willReturn([]);
 
         $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->getEnabledTransition($subject, 'graph')->shouldReturn([]);
+        $this->getEnabledTransitions($subject, 'graph')->shouldReturn([]);
     }
 
     function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_a_get_enabled_transition_call(
@@ -124,10 +124,10 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         $firstException = new StateMachineExecutionException();
         $secondException = new StateMachineExecutionException();
 
-        $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow($firstException);
-        $stateMachineTwo->getEnabledTransition($subject, 'graph')->willThrow($secondException);
+        $stateMachineOne->getEnabledTransitions($subject, 'graph')->willThrow($firstException);
+        $stateMachineTwo->getEnabledTransitions($subject, 'graph')->willThrow($secondException);
 
         $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->shouldThrow($secondException)->during('getEnabledTransition', [$subject, 'graph']);
+        $this->shouldThrow($secondException)->during('getEnabledTransitions', [$subject, 'graph']);
     }
 }
