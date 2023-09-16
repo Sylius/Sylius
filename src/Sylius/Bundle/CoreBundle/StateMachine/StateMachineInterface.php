@@ -23,6 +23,8 @@ interface StateMachineInterface
     public function can(object $subject, string $graphName, string $transition): bool;
 
     /**
+     * @param array<string, mixed> $context
+     *
      * @throws StateMachineExecutionException
      */
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void;
