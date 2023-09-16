@@ -1,12 +1,23 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
 use SM\Factory\FactoryInterface;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
-    public function __construct (private FactoryInterface $winzouStateMachineFactory)
+    public function __construct(private FactoryInterface $winzouStateMachineFactory)
     {
     }
 
@@ -26,7 +37,7 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
 
         return array_map(
             fn (string $transition) => new Transition($transition, null, null),
-            $transitions
+            $transitions,
         );
     }
 

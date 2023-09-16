@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use Exception;
@@ -15,7 +26,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         $this->beConstructedWith([]);
         $this
             ->shouldThrow(
-                new InvalidArgumentException('At least one state machine adapter should be provided.')
+                new InvalidArgumentException('At least one state machine adapter should be provided.'),
             )->duringInstantiation()
         ;
     }
@@ -26,7 +37,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         $this
             ->shouldThrow(
                 new InvalidArgumentException(
-                    sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class)
+                    sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class),
                 ),
             )->duringInstantiation()
         ;
@@ -43,7 +54,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_invokes_the_can_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $stateMachineOne->can($subject, 'graph', 'transition')->willThrow(new Exception());
         $stateMachineTwo->can($subject, 'graph', 'transition')->willReturn(false);
@@ -55,7 +66,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_a_can_call(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $firstException = new Exception();
         $secondException = new Exception();
@@ -70,7 +81,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_invokes_the_apply_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow(new Exception());
         $stateMachineTwo->apply($subject, 'graph', 'transition', [])->shouldBeCalled();
@@ -82,7 +93,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_an_apply_call(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $firstException = new Exception();
         $secondException = new Exception();
@@ -97,7 +108,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_invokes_the_get_enabled_transition_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow(new Exception());
         $stateMachineTwo->getEnabledTransition($subject, 'graph')->willReturn([]);
@@ -109,7 +120,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
     function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_a_get_enabled_transition_call(
         StateMachineInterface $stateMachineOne,
         StateMachineInterface $stateMachineTwo,
-        stdClass $subject
+        stdClass $subject,
     ): void {
         $firstException = new Exception();
         $secondException = new Exception();
