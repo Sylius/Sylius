@@ -74,13 +74,13 @@ class CompositeStateMachine implements StateMachineInterface
     /**
      * @throws \Exception
      */
-    public function getEnabledTransition(object $subject, string $graphName): array
+    public function getEnabledTransitions(object $subject, string $graphName): array
     {
         $lastException = new \Exception();
 
         foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
             try {
-                return $stateMachineAdapter->getEnabledTransition($subject, $graphName);
+                return $stateMachineAdapter->getEnabledTransitions($subject, $graphName);
             } catch (StateMachineExecutionException $exception) {
                 $lastException = $exception;
             }

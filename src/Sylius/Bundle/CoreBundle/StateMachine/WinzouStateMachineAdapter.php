@@ -41,7 +41,7 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
         }
     }
 
-    public function getEnabledTransition(object $subject, string $graphName): array
+    public function getEnabledTransitions(object $subject, string $graphName): array
     {
         try {
             $transitions = $this->getStateMachine($subject, $graphName)->getPossibleTransitions();

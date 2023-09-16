@@ -42,7 +42,7 @@ final class SymfonyWorkflowAdapter implements StateMachineInterface
         }
     }
 
-    public function getEnabledTransition(object $subject, string $graphName): array
+    public function getEnabledTransitions(object $subject, string $graphName): array
     {
         try {
             $enabledTransitions = $this->symfonyWorkflowRegistry->get($subject, $graphName)->getEnabledTransitions($subject);

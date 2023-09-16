@@ -31,5 +31,5 @@ interface StateMachineInterface
      * @throws StateMachineExecutionException
      * @return array<TransitionInterface>
      */
-    public function getEnabledTransition(object $subject, string $graphName): array;
+    public function getEnabledTransitions(object $subject, string $graphName): array;
 }
