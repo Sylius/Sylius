@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
-use SM\SMException;
 use Sylius\Bundle\CoreBundle\Application\Model\BlogPost;
 use Sylius\Bundle\CoreBundle\Application\Model\Comment;
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -49,7 +49,7 @@ final class StateMachineCompositeTest extends KernelTestCase
 
         $comment = new Comment();
 
-        $this->expectException(SMException::class);
+        $this->expectException(StateMachineExecutionException::class);
         $this->expectExceptionMessage('Cannot create a state machine because the configuration for object "Sylius\Bundle\CoreBundle\Application\Model\Comment" with graph "app_blog_comment" does not exist');
 
         $stateMachine->apply($comment, 'app_blog_comment', 'publish');
