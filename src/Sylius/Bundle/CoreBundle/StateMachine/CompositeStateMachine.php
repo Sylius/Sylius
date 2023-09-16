@@ -13,7 +13,12 @@ class CompositeStateMachine implements StateMachineInterface
 
     public function __construct (iterable $stateMachineAdapters)
     {
-        Assert::allIsInstanceOf($stateMachineAdapters, StateMachineInterface::class);
+        Assert::notEmpty($stateMachineAdapters, 'At least one state machine adapter should be provided.');
+        Assert::allIsInstanceOf(
+            $stateMachineAdapters,
+            StateMachineInterface::class,
+            sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class)
+        );
         $this->stateMachineAdapters = $stateMachineAdapters instanceof Traversable ? iterator_to_array($stateMachineAdapters) : $stateMachineAdapters;
     }
 

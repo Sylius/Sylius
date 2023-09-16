@@ -10,10 +10,26 @@ use Webmozart\Assert\InvalidArgumentException;
 
 final class CompositeStateMachineSpec extends ObjectBehavior
 {
+    function it_throws_an_exception_when_no_state_machine_is_passed(): void
+    {
+        $this->beConstructedWith([]);
+        $this
+            ->shouldThrow(
+                new InvalidArgumentException('At least one state machine adapter should be provided.')
+            )->duringInstantiation()
+        ;
+    }
+
     function it_throws_an_exception_when_any_of_passed_objects_is_not_a_state_machine(): void
     {
         $this->beConstructedWith([new stdClass()]);
-        $this->shouldThrow(InvalidArgumentException::class)->duringInstantiation();
+        $this
+            ->shouldThrow(
+                new InvalidArgumentException(
+                    sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class)
+                ),
+            )->duringInstantiation()
+        ;
     }
 
     function it_does_not_throw_an_exception_when_all_passed_objects_are_state_machines(
