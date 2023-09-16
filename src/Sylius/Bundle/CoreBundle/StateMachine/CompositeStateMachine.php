@@ -1,0 +1,74 @@
+<?php
+
+namespace Sylius\Bundle\CoreBundle\StateMachine;
+
+use Exception;
+use Traversable;
+use Webmozart\Assert\Assert;
+
+class CompositeStateMachine implements StateMachineInterface
+{
+    /** @var array<StateMachineInterface> */
+    private array $stateMachineAdapters;
+
+    public function __construct (iterable $stateMachineAdapters)
+    {
+        Assert::allIsInstanceOf($stateMachineAdapters, StateMachineInterface::class);
+        $this->stateMachineAdapters = $stateMachineAdapters instanceof Traversable ? iterator_to_array($stateMachineAdapters) : $stateMachineAdapters;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function can(object $subject, string $graphName, string $transition): bool
+    {
+        $lastException = null;
+
+        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
+            try {
+                return $stateMachineAdapter->can($subject, $graphName, $transition);
+            } catch (Exception $exception) {
+                $lastException = $exception;
+            }
+        }
+
+        throw $lastException;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function apply(object $subject, string $graphName, string $transition, array $context = []): void
+    {
+        $lastException = null;
+
+        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
+            try {
+                $stateMachineAdapter->apply($subject, $graphName, $transition, $context);
+                return;
+            } catch (Exception $exception) {
+                $lastException = $exception;
+            }
+        }
+
+        throw $lastException;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getEnabledTransition(object $subject, string $graphName): array
+    {
+        $lastException = null;
+
+        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
+            try {
+                return $stateMachineAdapter->getEnabledTransition($subject, $graphName);
+            } catch (Exception $exception) {
+                $lastException = $exception;
+            }
+        }
+
+        throw $lastException;
+    }
+}
