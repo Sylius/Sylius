@@ -14,6 +14,8 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <defaults public="true" />
+
         <service id="sylius.state_machine.composite" class="Sylius\Bundle\CoreBundle\StateMachine\CompositeStateMachine">
             <argument type="tagged_iterator" tag="sylius.state_machine" />
         </service>
@@ -24,11 +26,15 @@
 
         <service id="sylius.state_machine.adapter.symfony_workflow" class="Sylius\Bundle\CoreBundle\StateMachine\SymfonyWorkflowAdapter">
             <argument type="service" id="workflow.registry" />
+
+            <tag name="sylius.state_machine" priority="128" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $symfonyWorkflow" alias="sylius.state_machine.adapter.symfony_workflow" />
 
         <service id="sylius.state_machine.adapter.winzou_state_machine" class="Sylius\Bundle\CoreBundle\StateMachine\WinzouStateMachineAdapter">
             <argument type="service" id="sm.factory" />
+
+            <tag name="sylius.state_machine" priority="64" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius.state_machine.adapter.winzou_state_machine" />
     </services>
