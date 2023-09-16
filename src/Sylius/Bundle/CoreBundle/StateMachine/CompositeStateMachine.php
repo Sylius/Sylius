@@ -22,6 +22,9 @@ class CompositeStateMachine implements StateMachineInterface
     /** @var array<StateMachineInterface> */
     private array $stateMachineAdapters;
 
+    /**
+     * @param iterable<StateMachineInterface> $stateMachineAdapters
+     */
     public function __construct(iterable $stateMachineAdapters)
     {
         Assert::notEmpty($stateMachineAdapters, 'At least one state machine adapter should be provided.');
