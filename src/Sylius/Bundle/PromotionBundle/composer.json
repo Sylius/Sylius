@@ -29,11 +29,11 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
-        "sylius/money-bundle": "^1.12",
-        "sylius/promotion": "^1.12",
-        "sylius/registry": "^1.5",
-        "sylius/resource-bundle": "^1.9",
+        "sylius/calendar": "^0.5",
+        "sylius/money-bundle": "^2.0",
+        "sylius/promotion": "^2.0",
+        "sylius/registry": "^1.6",
+        "sylius/resource-bundle": "^1.10",
         "symfony/framework-bundle": "^5.4.21 || ^6.0"
     },
     "conflict": {

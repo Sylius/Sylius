@@ -29,10 +29,10 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
-        "sylius/registry": "^1.5",
-        "sylius/resource-bundle": "^1.9",
-        "sylius/taxation": "^1.12",
+        "sylius/calendar": "^0.5",
+        "sylius/registry": "^1.6",
+        "sylius/resource-bundle": "^1.10",
+        "sylius/taxation": "^2.0",
         "symfony/framework-bundle": "^5.4.21 || ^6.0"
     },
     "conflict": {

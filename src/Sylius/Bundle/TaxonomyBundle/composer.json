@@ -30,8 +30,8 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/resource-bundle": "^1.9",
-        "sylius/taxonomy": "^1.12",
+        "sylius/resource-bundle": "^1.10",
+        "sylius/taxonomy": "^2.0",
         "symfony/framework-bundle": "^5.4.21 || ^6.0"
     },
     "conflict": {
