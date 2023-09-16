@@ -26,5 +26,10 @@
             <argument type="service" id="workflow.registry" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $symfonyWorkflow" alias="sylius.state_machine.adapter.symfony_workflow" />
+
+        <service id="sylius.state_machine.adapter.winzou_state_machine" class="Sylius\Bundle\CoreBundle\StateMachine\WinzouStateMachineAdapter">
+            <argument type="service" id="sm.factory" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius.state_machine.adapter.winzou_state_machine" />
     </services>
 </container>
