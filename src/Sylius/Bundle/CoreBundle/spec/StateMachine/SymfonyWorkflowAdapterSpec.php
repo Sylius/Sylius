@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\Transition;
+use Symfony\Component\Workflow\Exception\InvalidArgumentException;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;
 use Symfony\Component\Workflow\Workflow;
@@ -37,6 +39,17 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
         $this->can($subject, 'some_workflow', 'transition')->shouldReturn(true);
     }
 
+    function it_translates_invalid_argument_exception_to_state_machine_execution_exception_on_the_can_method_call(
+        Registry $symfonyWorkflowRegistry,
+        Workflow $someWorkflow,
+        \stdClass $subject,
+    ): void {
+        $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
+        $someWorkflow->can($subject, 'transition')->willThrow(new InvalidArgumentException('Invalid argument'));
+
+        $this->shouldThrow(StateMachineExecutionException::class)->during('can', [$subject, 'some_workflow', 'transition']);
+    }
+
     function it_applies_a_transition(
         Registry $symfonyWorkflowRegistry,
         Workflow $someWorkflow,
@@ -46,6 +59,17 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
         $someWorkflow->apply($subject, 'transition', [])->shouldBeCalled();
 
         $this->apply($subject, 'some_workflow', 'transition');
+    }
+
+    function it_translates_invalid_argument_exception_to_state_machine_execution_exception_on_the_apply_method_call(
+        Registry $symfonyWorkflowRegistry,
+        Workflow $someWorkflow,
+        \stdClass $subject,
+    ): void {
+        $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
+        $someWorkflow->apply($subject, 'transition', [])->willThrow(new InvalidArgumentException('Invalid argument'));
+
+        $this->shouldThrow(StateMachineExecutionException::class)->during('apply', [$subject, 'some_workflow', 'transition']);
     }
 
     function it_returns_enabled_transitions(
@@ -63,5 +87,16 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
             new Transition('transition', ['from'], ['to']),
             new Transition('transition2', ['from'], ['to']),
         ]);
+    }
+
+    function it_translates_invalid_argument_exception_to_state_machine_execution_exception_on_the_get_enabled_transition_method_call(
+        Registry $symfonyWorkflowRegistry,
+        Workflow $someWorkflow,
+        \stdClass $subject,
+    ): void {
+        $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
+        $someWorkflow->getEnabledTransitions($subject)->willThrow(new InvalidArgumentException('Invalid argument'));
+
+        $this->shouldThrow(StateMachineExecutionException::class)->during('getEnabledTransition', [$subject, 'some_workflow']);
     }
 }
