@@ -21,5 +21,10 @@
 
         <service id="sylius.state_machine" alias="sylius.state_machine.composite" />
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface" alias="sylius.state_machine" />
+
+        <service id="sylius.state_machine.adapter.symfony_workflow" class="Sylius\Bundle\CoreBundle\StateMachine\SymfonyWorkflowAdapter">
+            <argument type="service" id="workflow.registry" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $symfonyWorkflow" alias="sylius.state_machine.adapter.symfony_workflow" />
     </services>
 </container>
