@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.9",
         "symfony/options-resolver": "^5.4.21 || ^6.0"
