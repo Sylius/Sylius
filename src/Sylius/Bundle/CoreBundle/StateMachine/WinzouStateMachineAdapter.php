@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
 use SM\Factory\FactoryInterface;
+use SM\SMException;
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
@@ -23,17 +25,29 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
 
     public function can(object $subject, string $graphName, string $transition): bool
     {
-        return $this->getStateMachine($subject, $graphName)->can($transition);
+        try {
+            return $this->getStateMachine($subject, $graphName)->can($transition);
+        } catch (SMException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
     }
 
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void
     {
-        $this->getStateMachine($subject, $graphName)->apply($transition);
+        try {
+            $this->getStateMachine($subject, $graphName)->apply($transition);
+        } catch (SMException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
     }
 
     public function getEnabledTransition(object $subject, string $graphName): array
     {
-        $transitions = $this->getStateMachine($subject, $graphName)->getPossibleTransitions();
+        try {
+            $transitions = $this->getStateMachine($subject, $graphName)->getPossibleTransitions();
+        } catch (SMException $exception) {
+            throw new StateMachineExecutionException($exception->getMessage(), $exception->getCode(), $exception);
+        }
 
         return array_map(
             fn (string $transition) => new Transition($transition, null, null),
