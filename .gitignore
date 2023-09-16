@@ -59,4 +59,5 @@ docker-compose.override.yml
 npm-debug.log
 yarn-error.log
 yarn.lock
+package-lock.json
 ###< symfony/webpack-encore-bundle ###
