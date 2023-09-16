@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
 use Webmozart\Assert\InvalidArgumentException;
 
@@ -54,7 +55,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $stateMachineOne->can($subject, 'graph', 'transition')->willThrow(new \Exception());
+        $stateMachineOne->can($subject, 'graph', 'transition')->willThrow(new StateMachineExecutionException());
         $stateMachineTwo->can($subject, 'graph', 'transition')->willReturn(false);
 
         $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
@@ -66,8 +67,8 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $firstException = new \Exception();
-        $secondException = new \Exception();
+        $firstException = new StateMachineExecutionException();
+        $secondException = new StateMachineExecutionException();
 
         $stateMachineOne->can($subject, 'graph', 'transition')->willThrow($firstException);
         $stateMachineTwo->can($subject, 'graph', 'transition')->willThrow($secondException);
@@ -81,7 +82,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow(new \Exception());
+        $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow(new StateMachineExecutionException());
         $stateMachineTwo->apply($subject, 'graph', 'transition', [])->shouldBeCalled();
 
         $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
@@ -93,8 +94,8 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $firstException = new \Exception();
-        $secondException = new \Exception();
+        $firstException = new StateMachineExecutionException();
+        $secondException = new StateMachineExecutionException();
 
         $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow($firstException);
         $stateMachineTwo->apply($subject, 'graph', 'transition', [])->willThrow($secondException);
@@ -108,7 +109,7 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow(new \Exception());
+        $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow(new StateMachineExecutionException());
         $stateMachineTwo->getEnabledTransition($subject, 'graph')->willReturn([]);
 
         $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
@@ -120,8 +121,8 @@ final class CompositeStateMachineSpec extends ObjectBehavior
         StateMachineInterface $stateMachineTwo,
         \stdClass $subject,
     ): void {
-        $firstException = new \Exception();
-        $secondException = new \Exception();
+        $firstException = new StateMachineExecutionException();
+        $secondException = new StateMachineExecutionException();
 
         $stateMachineOne->getEnabledTransition($subject, 'graph')->willThrow($firstException);
         $stateMachineTwo->getEnabledTransition($subject, 'graph')->willThrow($secondException);
