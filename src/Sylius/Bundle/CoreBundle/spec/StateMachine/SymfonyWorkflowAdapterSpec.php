@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
-use stdClass;
 use Sylius\Bundle\CoreBundle\StateMachine\Transition;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;
@@ -30,7 +29,7 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
     function it_returns_whether_a_transition_can_be_applied(
         Registry $symfonyWorkflowRegistry,
         Workflow $someWorkflow,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
         $someWorkflow->can($subject, 'transition')->shouldBeCalled()->willReturn(true);
@@ -41,7 +40,7 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
     function it_applies_a_transition(
         Registry $symfonyWorkflowRegistry,
         Workflow $someWorkflow,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
         $someWorkflow->apply($subject, 'transition', [])->shouldBeCalled();
@@ -52,7 +51,7 @@ final class SymfonyWorkflowAdapterSpec extends ObjectBehavior
     function it_returns_enabled_transitions(
         Registry $symfonyWorkflowRegistry,
         Workflow $someWorkflow,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $symfonyWorkflowRegistry->get($subject, 'some_workflow')->willReturn($someWorkflow);
         $someWorkflow->getEnabledTransitions($subject)->shouldBeCalled()->willReturn([

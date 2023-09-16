@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use stdClass;
 use Sylius\Bundle\CoreBundle\StateMachine\Transition;
 
 final class WinzouStateMachineAdapterSpec extends ObjectBehavior
@@ -29,7 +28,7 @@ final class WinzouStateMachineAdapterSpec extends ObjectBehavior
     function it_returns_whether_a_transition_can_be_applied(
         FactoryInterface $winzouStateMachineFactory,
         StateMachineInterface $stateMachine,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $winzouStateMachineFactory->get($subject, 'some_graph')->willReturn($stateMachine);
         $stateMachine->can('transition')->shouldBeCalled()->willReturn(true);
@@ -40,7 +39,7 @@ final class WinzouStateMachineAdapterSpec extends ObjectBehavior
     function it_applies_a_transition(
         FactoryInterface $winzouStateMachineFactory,
         StateMachineInterface $stateMachine,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $winzouStateMachineFactory->get($subject, 'some_graph')->willReturn($stateMachine);
         $stateMachine->apply('transition')->shouldBeCalled()->willReturn(true);
@@ -51,7 +50,7 @@ final class WinzouStateMachineAdapterSpec extends ObjectBehavior
     function it_returns_enabled_transitions(
         FactoryInterface $winzouStateMachineFactory,
         StateMachineInterface $stateMachine,
-        stdClass $subject,
+        \stdClass $subject,
     ): void {
         $winzouStateMachineFactory->get($subject, 'some_graph')->willReturn($stateMachine);
         $stateMachine->getPossibleTransitions()->shouldBeCalled()->willReturn(['transition', 'transition2']);
