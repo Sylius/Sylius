@@ -9,10 +9,10 @@ winzou_state_machine:
             published: ~
             unpublished: ~
         transitions:
-            publish:
+            post:
                 from: [new, unpublished]
                 to: published
-            unpublish:
+            unpost:
                 from: [published]
                 to: unpublished
     app_comment:
