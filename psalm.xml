@@ -98,6 +98,7 @@
             <errorLevel type="info">
                 <referencedMethod name="PHPUnit\Framework\TestCase::__construct" />
                 <referencedMethod name="Symfony\Bundle\SecurityBundle\Security\_FirewallMap::getFirewallConfig" />
+                <referencedMethod name="Symfony\Component\Workflow\Registry::get" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::getQueryString" />
                 <referencedMethod name="ApiPlatform\Util\RequestParser::getQueryString" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
