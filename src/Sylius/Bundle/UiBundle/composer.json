@@ -40,6 +40,7 @@
         "symfony/security-core": "^5.4.21 || ^6.0",
         "symfony/security-bundle": "^5.4.21 || ^6.0",
         "symfony/templating": "^5.4.21 || ^6.0",
+        "symfony/ux-twig-component": "^2.11.2",
         "symfony/webpack-encore-bundle": "^1.15",
         "laminas/laminas-stdlib": "^3.3.1"
     },
