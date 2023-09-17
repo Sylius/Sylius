@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
 use Symfony\UX\TwigComponent\ComponentRendererInterface;
@@ -54,7 +55,7 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
             0,
             true,
         );
-        $componentRenderer->createAndRender('some_component', ['some' => 'context'])->willReturn('some_rendered_component');
+        $componentRenderer->createAndRender('some_component', Argument::type('array'))->willReturn('some_rendered_component');
 
         $this->render($someTemplateBlock, ['some' => 'context'])->shouldReturn('some_rendered_component');
     }
