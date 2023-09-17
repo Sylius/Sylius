@@ -144,3 +144,18 @@
 
 1. The `sylius_admin_ajax_taxon_move` route has been deprecated. If you're relaying on it, consider migrating to new
     `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
+
+1. The constructor of `Sylius\Bundle\UiBundle\Registry\TemplateBlock` has been changed:
+
+    ```diff
+        public function __construct(
+            private string $name,
+            private string $eventName,
+            private ?string $template,
+    +       private ?string $component,
+            private ?array $context,
+            private ?int $priority,
+            private ?bool $enabled,
+        ) {
+        }
+    ```
