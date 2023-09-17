@@ -166,3 +166,18 @@
     and should be used only this way.
 
 1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` has been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead. Note: this class is available since Symfony 6.2.
+
+1. The constructor of `Sylius\Bundle\UiBundle\Registry\TemplateBlock` has been changed:
+
+    ```diff
+        public function __construct(
+            private string $name,
+            private string $eventName,
+            private ?string $template,
+    +       private ?string $component,
+            private ?array $context,
+            private ?int $priority,
+            private ?bool $enabled,
+        ) {
+        }
+    ```
