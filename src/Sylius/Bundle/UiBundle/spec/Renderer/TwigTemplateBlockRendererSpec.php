@@ -43,7 +43,7 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
         ContextProviderInterface $firstContextProvider,
         ContextProviderInterface $secondContextProvider,
     ): void {
-        $templateBlock = new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true);
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['sample' => 'Hi', 'switch' => true], 0, true, null);
 
         $twig->render('block.txt.twig', ['sample' => 'Hello', 'switch' => true])->willReturn('Block content');
 

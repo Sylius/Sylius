@@ -23,30 +23,55 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
 
     public function render(TemplateBlock $templateBlock, array $context = []): string
     {
-        $shouldRenderHtmlDebug = strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
+        $isTemplateBlockComponent = null !== $templateBlock->getComponent();
+        $shouldRenderHtmlDebug = $isTemplateBlockComponent || strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
+
+        if (!$shouldRenderHtmlDebug) {
+            return $this->templateBlockRenderer->render($templateBlock, $context);
+        }
 
         $renderedParts = [];
 
-        if ($shouldRenderHtmlDebug) {
-            $renderedParts[] = sprintf(
-                '<!-- BEGIN BLOCK | event name: "%s", block name: "%s", template: "%s", priority: %d -->',
-                $templateBlock->getEventName(),
-                $templateBlock->getName(),
-                $templateBlock->getTemplate(),
-                $templateBlock->getPriority(),
-            );
+        if ($isTemplateBlockComponent) {
+            $renderedParts[] = $this->getBeginBlockForComponent($templateBlock);
+        } else {
+            $renderedParts[] = $this->getBeginBlockForTemplate($templateBlock);
         }
 
         $renderedParts[] = $this->templateBlockRenderer->render($templateBlock, $context);
-
-        if ($shouldRenderHtmlDebug) {
-            $renderedParts[] = sprintf(
-                '<!-- END BLOCK | event name: "%s", block name: "%s" -->',
-                $templateBlock->getEventName(),
-                $templateBlock->getName(),
-            );
-        }
+        $renderedParts[] = $this->getEndBlock($templateBlock);
 
         return implode("\n", $renderedParts);
+    }
+
+    private function getBeginBlockForTemplate(TemplateBlock $templateBlock): string
+    {
+        return sprintf(
+            '<!-- BEGIN BLOCK | event name: "%s", block name: "%s", template: "%s", priority: %d -->',
+            $templateBlock->getEventName(),
+            $templateBlock->getName(),
+            $templateBlock->getTemplate(),
+            $templateBlock->getPriority(),
+        );
+    }
+
+    private function getBeginBlockForComponent(TemplateBlock $templateBlock): string
+    {
+        return sprintf(
+            '<!-- BEGIN BLOCK | event name: "%s", block name: "%s", component: "%s", priority: %d -->',
+            $templateBlock->getEventName(),
+            $templateBlock->getName(),
+            $templateBlock->getComponent(),
+            $templateBlock->getPriority(),
+        );
+    }
+
+    private function getEndBlock(TemplateBlock $templateBlock): string
+    {
+        return sprintf(
+            '<!-- END BLOCK | event name: "%s", block name: "%s" -->',
+            $templateBlock->getEventName(),
+            $templateBlock->getName(),
+        );
     }
 }

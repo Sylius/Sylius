@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
@@ -31,51 +30,65 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         $this->shouldImplement(TemplateEventRendererInterface::class);
     }
 
-    function it_renders_html_debug_comment_if_at_least_one_template_is_a_html_one(
+    function it_does_not_render_html_debug_comments_when_there_are_no_template_blocks_with_a_defined_component_nor_template(
         TemplateEventRendererInterface $templateEventRenderer,
-        TemplateBlockRegistryInterface $templateBlockRegistry,
+        TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.html.twig', [], 0, true);
+        $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
+            new TemplateBlock('some_block_one', 'some_event', 'some content', null, null, true, null),
+        ]);
 
-        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
+        $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
 
-        $templateEventRenderer->render(['best_event_ever'], ['foo' => 'bar'])->willReturn("First block\nSecond block");
+        $this->render(['event_name'])->shouldReturn('rendered_content');
+    }
 
-        $this->render(['best_event_ever'], ['foo' => 'bar'])->shouldReturn(
-            '<!-- BEGIN EVENT | event name: "best_event_ever" -->' . "\n" .
-            'First block' . "\n" .
-            'Second block' . "\n" .
-            '<!-- END EVENT | event name: "best_event_ever" -->',
+    function it_renders_html_debug_comment_when_no_template_block_passed(
+        TemplateEventRendererInterface $templateEventRenderer,
+        TemplateBlockRegistryInterface $templateBlockRegistry
+    ): void {
+        $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([]);
+
+        $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
+
+        $this->render(['event_name'])->shouldReturn(
+            '<!-- BEGIN EVENT | event name: "event_name" -->' . "\n" .
+            'rendered_content' . "\n" .
+            '<!-- END EVENT | event name: "event_name" -->'
         );
     }
 
-    function it_does_not_render_html_debug_comment_if_no_html_templates_are_found(
+    function it_renders_html_debug_comment_when_at_least_one_block_has_a_configured_component(
         TemplateEventRendererInterface $templateEventRenderer,
-        TemplateBlockRegistryInterface $templateBlockRegistry,
+        TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event_block', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event_block', 'secondBlock.txt.twig', [], 0, true);
+        $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
+            new TemplateBlock('some_block_one', 'some_event', 'some content',  null, null, true, 'SomeComponent'),
+        ]);
 
-        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
+        $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
 
-        $templateEventRenderer->render(['best_event_ever'], ['foo' => 'bar'])->willReturn("First block\nSecond block");
-
-        $this->render(['best_event_ever'], ['foo' => 'bar'])->shouldReturn("First block\nSecond block");
+        $this->render(['event_name'])->shouldReturn(
+            '<!-- BEGIN EVENT | event name: "event_name" -->' . "\n" .
+            'rendered_content' . "\n" .
+            '<!-- END EVENT | event name: "event_name" -->'
+        );
     }
 
-    function it_returns_html_debug_comment_if_no_blocks_are_found_for_an_event(
+    function it_renders_html_debug_comment_when_at_least_one_block_has_a_configured_twig_template(
         TemplateEventRendererInterface $templateEventRenderer,
-        TemplateBlockRegistryInterface $templateBlockRegistry,
+        TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
-        $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([]);
+        $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
+            new TemplateBlock('some_block_one', 'some_event', 'some_template.html.twig', null, null, true, null),
+        ]);
 
-        $templateEventRenderer->render(Argument::cetera())->willReturn('');
+        $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
 
-        $this->render(['best_event_ever'])->shouldReturn(
-            '<!-- BEGIN EVENT | event name: "best_event_ever" -->' . "\n" .
-            "\n" .
-            '<!-- END EVENT | event name: "best_event_ever" -->',
+        $this->render(['event_name'])->shouldReturn(
+            '<!-- BEGIN EVENT | event name: "event_name" -->' . "\n" .
+            'rendered_content' . "\n" .
+            '<!-- END EVENT | event name: "event_name" -->'
         );
     }
 }
