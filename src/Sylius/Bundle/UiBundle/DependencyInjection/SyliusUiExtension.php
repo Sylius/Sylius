@@ -63,6 +63,7 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                     $details['name'],
                     $details['eventName'],
                     $details['template'],
+                    $details['component'],
                     $details['context'],
                     $details['priority'],
                     $details['enabled'],
