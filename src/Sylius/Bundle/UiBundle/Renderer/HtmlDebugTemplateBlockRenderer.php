@@ -26,19 +26,20 @@ final class HtmlDebugTemplateBlockRenderer implements TemplateBlockRendererInter
         $isTemplateBlockComponent = null !== $templateBlock->getComponent();
         $shouldRenderHtmlDebug = $isTemplateBlockComponent || strrpos($templateBlock->getTemplate(), '.html.twig') !== false;
 
+        if (!$shouldRenderHtmlDebug) {
+            return $this->templateBlockRenderer->render($templateBlock, $context);
+        }
+
         $renderedParts = [];
 
-        if ($shouldRenderHtmlDebug && $isTemplateBlockComponent) {
+        if ($isTemplateBlockComponent) {
             $renderedParts[] = $this->getBeginBlockForComponent($templateBlock);
-        } elseif ($shouldRenderHtmlDebug) {
+        } else {
             $renderedParts[] = $this->getBeginBlockForTemplate($templateBlock);
         }
 
         $renderedParts[] = $this->templateBlockRenderer->render($templateBlock, $context);
-
-        if ($shouldRenderHtmlDebug) {
-            $renderedParts[] = $this->getEndBlock($templateBlock);
-        }
+        $renderedParts[] = $this->getEndBlock($templateBlock);
 
         return implode("\n", $renderedParts);
     }
