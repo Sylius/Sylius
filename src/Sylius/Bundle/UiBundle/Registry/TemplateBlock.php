@@ -49,16 +49,8 @@ final class TemplateBlock
         return $this->template;
     }
 
-    public function getComponent(): string
+    public function getComponent(): ?string
     {
-        if ($this->component === null) {
-            throw new \DomainException(sprintf(
-                'There is no component defined for block "%s" in event "%s".',
-                $this->name,
-                $this->eventName,
-            ));
-        }
-
         return $this->component;
     }
 
