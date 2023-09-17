@@ -14,120 +14,139 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
-use Webmozart\Assert\InvalidArgumentException;
 
 final class CompositeStateMachineSpec extends ObjectBehavior
 {
-    function it_throws_an_exception_when_no_state_machine_is_passed(): void
-    {
-        $this->beConstructedWith([]);
-        $this
-            ->shouldThrow(
-                new InvalidArgumentException('At least one state machine adapter should be provided.'),
-            )->duringInstantiation()
-        ;
-    }
-
-    function it_throws_an_exception_when_any_of_passed_objects_is_not_a_state_machine(): void
-    {
-        $this->beConstructedWith([new \stdClass()]);
-        $this
-            ->shouldThrow(
-                new InvalidArgumentException(
-                    sprintf('All state machine adapters should implement the "%s" interface.', StateMachineInterface::class),
-                ),
-            )->duringInstantiation()
-        ;
-    }
-
-    function it_does_not_throw_an_exception_when_all_passed_objects_are_state_machines(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
+    function it_invokes_the_can_method_on_a_default_state_machine_adapter_when_no_state_machine_is_mapped_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->shouldNotThrow(InvalidArgumentException::class)->duringInstantiation();
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [],
+        );
+
+        $subject = new \stdClass();
+
+        $winzouStateMachineAdapter->can($subject, 'my_graph', 'my_transition')->willReturn(true);
+        $symfonyWorkflowAdapter->can($subject, 'my_graph', 'my_transition')->shouldNotBeCalled();
+
+        $this->can($subject, 'my_graph', 'my_transition')->shouldReturn(true);
     }
 
-    function it_invokes_the_can_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
+    function it_invokes_the_can_method_on_a_state_machine_assigned_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $stateMachineOne->can($subject, 'graph', 'transition')->willThrow(new StateMachineExecutionException());
-        $stateMachineTwo->can($subject, 'graph', 'transition')->willReturn(false);
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [
+                'my_graph' => 'symfony_workflow',
+            ],
+        );
 
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->can($subject, 'graph', 'transition')->shouldReturn(false);
+        $subject = new \stdClass();
+
+        $winzouStateMachineAdapter->can($subject, 'my_graph', 'my_transition')->shouldNotBeCalled();
+        $symfonyWorkflowAdapter->can($subject, 'my_graph', 'my_transition')->willReturn(true);
+
+        $this->can($subject, 'my_graph', 'my_transition')->shouldReturn(true);
     }
 
-    function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_a_can_call(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
+    function it_invokes_the_apply_method_on_a_default_state_machine_adapter_when_no_state_machine_is_mapped_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $firstException = new StateMachineExecutionException();
-        $secondException = new StateMachineExecutionException();
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [],
+        );
 
-        $stateMachineOne->can($subject, 'graph', 'transition')->willThrow($firstException);
-        $stateMachineTwo->can($subject, 'graph', 'transition')->willThrow($secondException);
+        $subject = new \stdClass();
 
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->shouldThrow($secondException)->during('can', [$subject, 'graph', 'transition']);
+        $winzouStateMachineAdapter->apply($subject, 'my_graph', 'my_transition', [])->shouldBeCalled();
+        $symfonyWorkflowAdapter->apply($subject, 'my_graph', 'my_transition', [])->shouldNotBeCalled();
+
+        $this->apply($subject, 'my_graph', 'my_transition');
     }
 
-    function it_invokes_the_apply_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
+    function it_invokes_the_apply_method_on_a_state_machine_assigned_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow(new StateMachineExecutionException());
-        $stateMachineTwo->apply($subject, 'graph', 'transition', [])->shouldBeCalled();
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [
+                'my_graph' => 'symfony_workflow',
+            ],
+        );
 
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->apply($subject, 'graph', 'transition');
+        $subject = new \stdClass();
+
+        $winzouStateMachineAdapter->apply($subject, 'my_graph', 'my_transition', [])->shouldNotBeCalled();
+        $symfonyWorkflowAdapter->apply($subject, 'my_graph', 'my_transition', [])->shouldBeCalled();
+
+        $this->apply($subject, 'my_graph', 'my_transition');
     }
 
-    function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_an_apply_call(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
+    function it_invokes_the_get_enabled_transitions_method_on_a_default_state_machine_adapter_when_no_state_machine_is_mapped_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $firstException = new StateMachineExecutionException();
-        $secondException = new StateMachineExecutionException();
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [],
+        );
 
-        $stateMachineOne->apply($subject, 'graph', 'transition', [])->willThrow($firstException);
-        $stateMachineTwo->apply($subject, 'graph', 'transition', [])->willThrow($secondException);
+        $subject = new \stdClass();
 
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->shouldThrow($secondException)->during('apply', [$subject, 'graph', 'transition']);
+        $winzouStateMachineAdapter->getEnabledTransitions($subject, 'my_graph')->shouldBeCalled()->willReturn([]);
+        $symfonyWorkflowAdapter->getEnabledTransitions($subject, 'my_graph')->shouldNotBeCalled();
+
+        $this->getEnabledTransitions($subject, 'my_graph')->shouldReturn([]);
     }
 
-    function it_invokes_the_get_enabled_transition_method_on_a_first_state_machine_with_a_configured_graph_for_a_given_subject(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
+    function it_invokes_the_get_enabled_transitions_method_on_a_state_machine_assigned_to_a_given_graph(
+        StateMachineInterface $winzouStateMachineAdapter,
+        StateMachineInterface $symfonyWorkflowAdapter,
     ): void {
-        $stateMachineOne->getEnabledTransitions($subject, 'graph')->willThrow(new StateMachineExecutionException());
-        $stateMachineTwo->getEnabledTransitions($subject, 'graph')->willReturn([]);
+        $this->beConstructedWith(
+            [
+                'winzou_state_machine' => $winzouStateMachineAdapter,
+                'symfony_workflow' => $symfonyWorkflowAdapter,
+            ],
+            'winzou_state_machine',
+            [
+                'my_graph' => 'symfony_workflow',
+            ],
+        );
 
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->getEnabledTransitions($subject, 'graph')->shouldReturn([]);
-    }
+        $subject = new \stdClass();
 
-    function it_throws_the_last_caught_exception_when_no_state_machine_is_configured_for_a_given_subject_on_a_get_enabled_transition_call(
-        StateMachineInterface $stateMachineOne,
-        StateMachineInterface $stateMachineTwo,
-        \stdClass $subject,
-    ): void {
-        $firstException = new StateMachineExecutionException();
-        $secondException = new StateMachineExecutionException();
+        $winzouStateMachineAdapter->getEnabledTransitions($subject, 'my_graph')->shouldNotBeCalled();
+        $symfonyWorkflowAdapter->getEnabledTransitions($subject, 'my_graph')->shouldBeCalled()->willReturn([]);
 
-        $stateMachineOne->getEnabledTransitions($subject, 'graph')->willThrow($firstException);
-        $stateMachineTwo->getEnabledTransitions($subject, 'graph')->willThrow($secondException);
-
-        $this->beConstructedWith([$stateMachineOne, $stateMachineTwo]);
-        $this->shouldThrow($secondException)->during('getEnabledTransitions', [$subject, 'graph']);
+        $this->getEnabledTransitions($subject, 'my_graph')->shouldReturn([]);
     }
 }

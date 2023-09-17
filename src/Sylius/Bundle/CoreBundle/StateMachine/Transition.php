@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\StateMachine;
 final class Transition implements TransitionInterface
 {
     /**
-     * @param string $name
      * @param array<string>|null $froms
      * @param array<string>|null $tos
      */

@@ -86,7 +86,7 @@ final class ConfigurationTest extends TestCase
             [
                 'state_machine' => [
                     'default_adapter' => 'symfony_workflow',
-                    'adapters_mapping' => [],
+                    'graphs_to_adapters_mapping' => [],
                 ],
             ],
             'state_machine',
@@ -100,15 +100,9 @@ final class ConfigurationTest extends TestCase
             [
                 [
                     'state_machine' => [
-                        'adapters_mapping' => [
-                            [
-                                'graph_name' => 'order',
-                                'adapter' => 'symfony_workflow',
-                            ],
-                            [
-                                'graph_name' => 'payment',
-                                'adapter' => 'winzou_state_machine',
-                            ],
+                        'graphs_to_adapters_mapping' => [
+                            'order' => 'symfony_workflow',
+                            'payment' => 'winzou_state_machine',
                         ],
                     ],
                 ],
@@ -116,15 +110,9 @@ final class ConfigurationTest extends TestCase
             [
                 'state_machine' => [
                     'default_adapter' => 'winzou_state_machine',
-                    'adapters_mapping' => [
-                        [
-                            'graph_name' => 'order',
-                            'adapter' => 'symfony_workflow',
-                        ],
-                        [
-                            'graph_name' => 'payment',
-                            'adapter' => 'winzou_state_machine',
-                        ],
+                    'graphs_to_adapters_mapping' => [
+                        'order' => 'symfony_workflow',
+                        'payment' => 'winzou_state_machine',
                     ],
                 ],
             ],
