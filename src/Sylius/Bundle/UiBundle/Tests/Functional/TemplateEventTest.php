@@ -100,4 +100,27 @@ final class TemplateEventTest extends KernelTestCase
 
         Assert::assertSame($expectedLines, $renderedLines);
     }
+
+    /** @test */
+    public function it_renders_component(): void
+    {
+        $expectedLines = [
+            '<!-- BEGIN EVENT | event name: "template_event" -->',
+            '<!-- BEGIN BLOCK | event name: "template_event", block name: "block", component: "SomeTwigComponent", priority: 0 -->',
+            'Hello from the Twig Component :)',
+            'Context: no context',
+            '<!-- END BLOCK | event name: "template_event", block name: "block" -->',
+            '<!-- END EVENT | event name: "template_event" -->',
+            '<!-- BEGIN EVENT | event name: "template_event_with_context" -->',
+            '<!-- BEGIN BLOCK | event name: "template_event_with_context", block name: "block", component: "SomeTwigComponent", priority: 0 -->',
+            'Hello from the Twig Component :)',
+            'Context: foo=bar',
+            '<!-- END BLOCK | event name: "template_event_with_context", block name: "block" -->',
+            '<!-- END EVENT | event name: "template_event_with_context" -->',
+        ];
+
+        $renderedLines = array_values(array_filter(explode("\n", $this->twig->render('templateEventsButComponent.txt.twig'))));
+
+        Assert::assertSame($expectedLines, $renderedLines);
+    }
 }
