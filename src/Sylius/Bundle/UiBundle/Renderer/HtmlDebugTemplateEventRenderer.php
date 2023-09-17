@@ -57,6 +57,9 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
         return count($templateBlocks) === 0 || $this->hasAnyBlockWithComponentOrTemplate($templateBlocks);
     }
 
+    /**
+     * @param array<TemplateBlock> $templateBlocks
+     */
     private function hasAnyBlockWithComponentOrTemplate(array $templateBlocks): bool
     {
         foreach ($templateBlocks as $templateBlock) {
