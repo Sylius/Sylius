@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Traversable;
 use Webmozart\Assert\Assert;
 
@@ -24,9 +23,13 @@ class CompositeStateMachine implements StateMachineInterface
 
     /**
      * @param iterable<StateMachineInterface> $stateMachineAdapters
+     * @param array<string, string> $graphsToAdaptersMapping
      */
-    public function __construct(iterable $stateMachineAdapters)
-    {
+    public function __construct(
+        iterable $stateMachineAdapters,
+        private string $defaultAdapter,
+        private array $graphsToAdaptersMapping,
+    ) {
         Assert::notEmpty($stateMachineAdapters, 'At least one state machine adapter should be provided.');
         Assert::allIsInstanceOf(
             $stateMachineAdapters,
@@ -41,17 +44,7 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function can(object $subject, string $graphName, string $transition): bool
     {
-        $lastException = new \Exception();
-
-        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
-            try {
-                return $stateMachineAdapter->can($subject, $graphName, $transition);
-            } catch (StateMachineExecutionException $exception) {
-                $lastException = $exception;
-            }
-        }
-
-        throw $lastException;
+        return $this->getStateMachineAdapter($graphName)->can($subject, $graphName, $transition);
     }
 
     /**
@@ -59,19 +52,7 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function apply(object $subject, string $graphName, string $transition, array $context = []): void
     {
-        $lastException = new \Exception();
-
-        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
-            try {
-                $stateMachineAdapter->apply($subject, $graphName, $transition, $context);
-
-                return;
-            } catch (StateMachineExecutionException $exception) {
-                $lastException = $exception;
-            }
-        }
-
-        throw $lastException;
+        $this->getStateMachineAdapter($graphName)->apply($subject, $graphName, $transition, $context);
     }
 
     /**
@@ -79,16 +60,15 @@ class CompositeStateMachine implements StateMachineInterface
      */
     public function getEnabledTransitions(object $subject, string $graphName): array
     {
-        $lastException = new \Exception();
+        return $this->getStateMachineAdapter($graphName)->getEnabledTransitions($subject, $graphName);
+    }
 
-        foreach ($this->stateMachineAdapters as $stateMachineAdapter) {
-            try {
-                return $stateMachineAdapter->getEnabledTransitions($subject, $graphName);
-            } catch (StateMachineExecutionException $exception) {
-                $lastException = $exception;
-            }
+    private function getStateMachineAdapter(string $graphName): StateMachineInterface
+    {
+        if (isset($this->graphsToAdaptersMapping[$graphName])) {
+            return $this->stateMachineAdapters[$this->graphsToAdaptersMapping[$graphName]];
         }
 
-        throw $lastException;
+        return $this->stateMachineAdapters[$this->defaultAdapter];
     }
 }

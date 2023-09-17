@@ -17,7 +17,9 @@
         <defaults public="true" />
 
         <service id="sylius.state_machine.composite" class="Sylius\Bundle\CoreBundle\StateMachine\CompositeStateMachine">
-            <argument type="tagged_iterator" tag="sylius.state_machine" />
+            <argument type="tagged_iterator" tag="sylius.state_machine" index-by="key" />
+            <argument>%sylius_core.state_machine.default_adapter%</argument>
+            <argument>%sylius_core.state_machine.graphs_to_adapters_mapping%</argument>
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $compositeStateMachine" alias="sylius.state_machine.composite" />
 
@@ -27,14 +29,14 @@
         <service id="sylius.state_machine.adapter.symfony_workflow" class="Sylius\Bundle\CoreBundle\StateMachine\SymfonyWorkflowAdapter">
             <argument type="service" id="workflow.registry" />
 
-            <tag name="sylius.state_machine" priority="128" />
+            <tag name="sylius.state_machine" key="symfony_workflow" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $symfonyWorkflow" alias="sylius.state_machine.adapter.symfony_workflow" />
 
         <service id="sylius.state_machine.adapter.winzou_state_machine" class="Sylius\Bundle\CoreBundle\StateMachine\WinzouStateMachineAdapter">
             <argument type="service" id="sm.factory" />
 
-            <tag name="sylius.state_machine" priority="64" />
+            <tag name="sylius.state_machine" key="winzou_state_machine" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface $winzouStateMachine" alias="sylius.state_machine.adapter.winzou_state_machine" />
     </services>
