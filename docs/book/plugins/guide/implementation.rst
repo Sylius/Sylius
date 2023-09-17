@@ -24,11 +24,11 @@ the same entity, it's recommended to provide a trait with new properties and met
 
     <?php
 
-    // src/Model/ProductVariantTrait.php
+    // src/Entity/ProductVariantTrait.php
 
     declare(strict_types=1);
 
-    namespace IronMan\SyliusProductOnDemandPlugin\Model;
+    namespace IronMan\SyliusProductOnDemandPlugin\Entity;
 
     trait ProductVariantTrait
     {
@@ -54,7 +54,7 @@ the same entity, it's recommended to provide a trait with new properties and met
 
     <?php
 
-    // src/Model/ProductVariantInterface.php
+    // src/Entity/ProductVariantInterface.php
 
     declare(strict_types=1);
 
