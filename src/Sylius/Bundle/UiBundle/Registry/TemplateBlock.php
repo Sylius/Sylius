@@ -19,6 +19,7 @@ final class TemplateBlock
         private string $name,
         private string $eventName,
         private ?string $template,
+        private ?string $component,
         private ?array $context,
         private ?int $priority,
         private ?bool $enabled,
@@ -46,6 +47,19 @@ final class TemplateBlock
         }
 
         return $this->template;
+    }
+
+    public function getComponent(): string
+    {
+        if ($this->component === null) {
+            throw new \DomainException(sprintf(
+                'There is no component defined for block "%s" in event "%s".',
+                $this->name,
+                $this->eventName,
+            ));
+        }
+
+        return $this->component;
     }
 
     public function getContext(): array
@@ -77,6 +91,7 @@ final class TemplateBlock
             $this->name,
             $block->eventName,
             $block->template ?? $this->template,
+            $block->component ?? $this->component,
             $block->context ?? $this->context,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,
