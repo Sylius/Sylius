@@ -73,6 +73,66 @@ final class ConfigurationTest extends TestCase
     }
 
     /** @test */
+    public function it_allows_to_configure_a_default_state_machine_adapter(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'state_machine' => [
+                        'default_adapter' => 'symfony_workflow',
+                    ],
+                ],
+            ],
+            [
+                'state_machine' => [
+                    'default_adapter' => 'symfony_workflow',
+                    'adapters_mapping' => [],
+                ],
+            ],
+            'state_machine',
+        );
+    }
+
+    /** @test */
+    public function it_allows_to_configure_the_state_machines_adapters_mapping(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                [
+                    'state_machine' => [
+                        'adapters_mapping' => [
+                            [
+                                'graph_name' => 'order',
+                                'adapter' => 'symfony_workflow',
+                            ],
+                            [
+                                'graph_name' => 'payment',
+                                'adapter' => 'winzou_state_machine',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'state_machine' => [
+                    'default_adapter' => 'winzou_state_machine',
+                    'adapters_mapping' => [
+                        [
+                            'graph_name' => 'order',
+                            'adapter' => 'symfony_workflow',
+                        ],
+                        [
+                            'graph_name' => 'payment',
+                            'adapter' => 'winzou_state_machine',
+                        ],
+                    ],
+                ],
+            ],
+            'state_machine',
+        );
+    }
+
+    /** @test */
     public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 'rep']]]);
