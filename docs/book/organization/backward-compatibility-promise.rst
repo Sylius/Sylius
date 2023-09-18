@@ -97,7 +97,7 @@ the migration:
 
 .. code-block:: php
 
-    @trigger_error(
+    trigger_deprecation(
         'XXX() is deprecated since version 2.X and will be removed in 2.Y. Use XXX instead.',
         \E_USER_DEPRECATED
     );
