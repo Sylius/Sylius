@@ -43,9 +43,9 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $zoneThree,
     ): void {
         $zoneRepository->findAllByAddress($address)->willReturn([$zoneOne]);
-        $zoneRepository->findAllByZones([$zoneOne])->willReturn([$zoneTwo]);
-        $zoneRepository->findAllByZones([$zoneTwo])->willReturn([$zoneThree]);
-        $zoneRepository->findAllByZones([$zoneThree])->willReturn([]);
+        $zoneRepository->findZonesByMembers([$zoneOne])->willReturn([$zoneTwo]);
+        $zoneRepository->findZonesByMembers([$zoneTwo])->willReturn([$zoneThree]);
+        $zoneRepository->findZonesByMembers([$zoneThree])->willReturn([]);
 
         $matchedZones = $this->matchAll($address);
 
@@ -65,9 +65,9 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $zoneThree->getScope()->willReturn('custom');
 
         $zoneRepository->findAllByAddress($address)->willReturn([$zoneOne]);
-        $zoneRepository->findAllByZones([$zoneOne])->willReturn([$zoneTwo]);
-        $zoneRepository->findAllByZones([$zoneTwo])->willReturn([$zoneThree]);
-        $zoneRepository->findAllByZones([$zoneThree])->willReturn([]);
+        $zoneRepository->findZonesByMembers([$zoneOne])->willReturn([$zoneTwo]);
+        $zoneRepository->findZonesByMembers([$zoneTwo])->willReturn([$zoneThree]);
+        $zoneRepository->findZonesByMembers([$zoneThree])->willReturn([]);
 
         $matchedZones = $this->matchAll($address, 'nato');
 
