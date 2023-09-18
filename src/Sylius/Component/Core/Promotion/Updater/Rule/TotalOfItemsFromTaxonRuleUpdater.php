@@ -24,8 +24,9 @@ final class TotalOfItemsFromTaxonRuleUpdater implements TaxonAwareRuleUpdaterInt
     {
         @trigger_deprecation(
             'sylius/core',
-            '1.13', 'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0.',
-            self::class
+            '1.13',
+            'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0.',
+            self::class,
         );
     }
 

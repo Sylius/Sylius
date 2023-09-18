@@ -78,6 +78,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
             ['priority' => 15],
         );
     }
+
     /** @test */
     public function it_autoconfigures_request_based_channel_resolver_with_attribute(): void
     {
