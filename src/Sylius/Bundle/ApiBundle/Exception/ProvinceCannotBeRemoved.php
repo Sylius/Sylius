@@ -16,8 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 /** @experimental */
 final class ProvinceCannotBeRemoved extends \RuntimeException
 {
-    public function __construct()
-    {
-        parent::__construct('Cannot delete, the province is in use.');
+    public function __construct(
+        string $message = 'Cannot delete, the province is in use.',
+        $code = 0,
+        $previous = null
+    ) {
+        parent::__construct($message, $code, $previous);
     }
 }

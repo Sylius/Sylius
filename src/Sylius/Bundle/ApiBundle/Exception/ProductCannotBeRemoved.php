@@ -16,8 +16,11 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 /** @experimental */
 final class ProductCannotBeRemoved extends \RuntimeException
 {
-    public function __construct(string $message = 'Cannot delete, the product is in use.')
-    {
-        parent::__construct($message);
+    public function __construct(
+        string $message = 'Cannot delete, the product is in use.',
+        $code = 0,
+        $previous = null
+    ) {
+        parent::__construct($message, $code, $previous);
     }
 }
