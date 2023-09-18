@@ -16,14 +16,12 @@ namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
 {
@@ -110,24 +108,6 @@ final class CatalogPromotionRemovalProcessorSpec extends ObjectBehavior
         $this
             ->shouldThrow(\DomainException::class)
             ->during('removeCatalogPromotion', ['CATALOG_PROMOTION_CODE'])
-        ;
-    }
-
-    public function it_deprecates_passing_message_busses(
-        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        MessageBusInterface $eventBus,
-        MessageBusInterface $commandBus,
-    ): void {
-        $this->beConstructedWith($catalogPromotionRepository, $eventBus, $commandBus);
-
-        $this
-            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing an instance of %s as second constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, CatalogPromotionRemovalProcessor::class, CatalogPromotionRemovalAnnouncerInterface::class))
-            ->duringInstantiation()
-        ;
-
-        $this
-            ->shouldTrigger(\E_USER_DEPRECATED, sprintf('Passing third constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0.', CatalogPromotionRemovalProcessor::class))
-            ->duringInstantiation()
         ;
     }
 }
