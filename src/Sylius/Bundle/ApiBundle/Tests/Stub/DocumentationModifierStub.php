@@ -24,6 +24,6 @@ final class DocumentationModifierStub implements DocumentationModifierInterface
 {
     public function modify(OpenApi $docs): OpenApi
     {
-        return new OpenApi(new Info('title', '1.0.0'), [],  new Paths());
+        return new OpenApi(new Info('title', '1.0.0'), [], new Paths());
     }
 }
