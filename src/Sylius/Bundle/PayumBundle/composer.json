@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+        "symfony/dependency-injection": "^6.3.4"
     },
     "config": {
         "allow-plugins": {

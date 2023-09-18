@@ -29,8 +29,8 @@
     "require": {
         "php": "^8.2",
         "sylius/resource": "^1.10",
-        "symfony/form": "^5.4.21 || ^6.0",
-        "symfony/http-foundation": "^5.4.21 || ^6.0",
+        "symfony/form": "^6.3.2",
+        "symfony/http-foundation": "^6.3.4",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {

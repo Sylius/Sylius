@@ -65,12 +65,12 @@
         "sylius/theme-bundle": "^2.3",
         "sylius/ui-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0",
-        "symfony/intl": "^5.4.21 || ^6.0",
-        "symfony/mailer": "^5.4.21 || ^6.0",
-        "symfony/messenger": "^5.4.21 || ^6.0",
-        "symfony/templating": "^5.4.21 || ^6.0",
-        "symfony/webpack-encore-bundle": "^1.15",
+        "symfony/framework-bundle": "^6.3.4",
+        "symfony/intl": "^6.3.2",
+        "symfony/mailer": "^6.3.0",
+        "symfony/messenger": "^6.3.4",
+        "symfony/templating": "^6.3.0",
+        "symfony/webpack-encore-bundle": "^1.17.1",
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
@@ -81,11 +81,8 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/dotenv": "^5.4.21 || ^6.0"
-    },
-    "conflict": {
-        "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
+        "symfony/dependency-injection": "^6.3.4",
+        "symfony/dotenv": "^6.3.4"
     },
     "config": {
         "allow-plugins": {
@@ -98,7 +95,7 @@
             "dev-main": "2.0-dev"
         },
         "symfony": {
-            "require": "^5.4.21"
+            "require": "6.3.*"
         }
     },
     "autoload": {
