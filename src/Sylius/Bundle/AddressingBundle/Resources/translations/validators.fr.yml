@@ -6,7 +6,7 @@ sylius:
         city:
             max_length: Le nom de la ville ne doit pas dépasser {{ limit }} caractères|Le nom de la ville ne doit pas dépasser {{ limit }} caractères.
             min_length: Le nom de la ville doit comporter au moins {{ limit }} caractères|Le nom de la ville doit comporter au moins {{ limit }} caractères.
-            not_blank: Veuillez entrer une ville.
+            not_blank: Veuillez entrer une ville
         country:
             not_blank: Veuillez choisir un pays.
             disabled: Le pays choisi est désactivé. Veuillez en choisir un autre.
