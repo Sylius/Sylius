@@ -1,5 +1,37 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.11 (2023-09-18)
+
+#### Details
+
+- [#12519](https://github.com/Sylius/Sylius/issues/12519) [ProductBundle] Add validation for product meta keywords & description ([@DieterHolvoet](https://github.com/DieterHolvoet), [@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#12894](https://github.com/Sylius/Sylius/issues/12894) Make CheckoutResolver fail safe ([@vvasiloi](https://github.com/vvasiloi), [@NoResponseMate](https://github.com/NoResponseMate))
+- [#13334](https://github.com/Sylius/Sylius/issues/13334) [Admin] Display flag properly based on locale code on product and catalog promotion details ([@adpeyre](https://github.com/adpeyre))
+- [#13954](https://github.com/Sylius/Sylius/issues/13954) [Docker] Add custom docker composer file to gitignore ([@lchrusciel](https://github.com/lchrusciel))
+- [#14806](https://github.com/Sylius/Sylius/issues/14806) [Admin][ProductOptions] Changed form ProductOptionChoiceType to Produ… ([@ulinskas](https://github.com/ulinskas))
+- [#15218](https://github.com/Sylius/Sylius/issues/15218) Fix attributes creation while the default locale is not available in our store ([@TheMilek](https://github.com/TheMilek), [@NoResponseMate](https://github.com/NoResponseMate))
+- [#15219](https://github.com/Sylius/Sylius/issues/15219) [Admin] Fix inconsistent routing ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15225](https://github.com/Sylius/Sylius/issues/15225) Fix updating product taxons positions ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15226](https://github.com/Sylius/Sylius/issues/15226) Update checkout.rst ([@zairigimad](https://github.com/zairigimad))
+- [#15227](https://github.com/Sylius/Sylius/issues/15227) CartBlamerListener not found , replace with ShopCartBlamerListener ([@zairigimad](https://github.com/zairigimad))
+- [#15228](https://github.com/Sylius/Sylius/issues/15228) [Docs] Update UPGRADE-1.12.md ([@UlrichHP](https://github.com/UlrichHP))
+- [#15229](https://github.com/Sylius/Sylius/issues/15229) Update symfony/service-contracts in composer.json to update Sylius to 1.12.10 ([@UlrichHP](https://github.com/UlrichHP))
+- [#15231](https://github.com/Sylius/Sylius/issues/15231) Prevent skipping choosing payment step once skipping payment step allowed, but no payment method is available ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15232](https://github.com/Sylius/Sylius/issues/15232) [Documentation][Admin] Add notes about accessing guest orders ([@GSadee](https://github.com/GSadee))
+- [#15234](https://github.com/Sylius/Sylius/issues/15234) Fix Sylius versions in UPGRADE file ([@GSadee](https://github.com/GSadee))
+- [#15245](https://github.com/Sylius/Sylius/issues/15245) Fix CI 2023-08-21 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15250](https://github.com/Sylius/Sylius/issues/15250) [Admin][Country] Add violation for adding provinces with duplicated codes or names ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15251](https://github.com/Sylius/Sylius/issues/15251) Fix error with being unable to add product review while being logged in using remember me ([@TheMilek](https://github.com/TheMilek))
+- [#15252](https://github.com/Sylius/Sylius/issues/15252) [Admin][Taxon] Fix slug generation to work based on the parent field ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15255](https://github.com/Sylius/Sylius/issues/15255) [Admin][Product] Add language names to attribute values ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15263](https://github.com/Sylius/Sylius/issues/15263) Update default Rules of cart promotion ([@zairigimad](https://github.com/zairigimad))
+- [#15268](https://github.com/Sylius/Sylius/issues/15268) Fix configuring amount for cart promotions item percentage discount actions ([@TheMilek](https://github.com/TheMilek), [@NoResponseMate](https://github.com/NoResponseMate))
+- [#15272](https://github.com/Sylius/Sylius/issues/15272) Fix "jumping" taxons while moving up or down ([@igormukhingmailcom](https://github.com/igormukhingmailcom), [@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15277](https://github.com/Sylius/Sylius/issues/15277) Prevent removing product/taxon if it is already used in promotion rule ([@TheMilek](https://github.com/TheMilek), [@NoResponseMate](https://github.com/NoResponseMate))
+- [#15280](https://github.com/Sylius/Sylius/issues/15280) Prevent throwing 500 while finalizing an order when at least one item has become tracked ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15290](https://github.com/Sylius/Sylius/issues/15290) Add a note about payment-related events ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15311](https://github.com/Sylius/Sylius/issues/15311) [API] fix prefix url on locale api path ([@oallain](https://github.com/oallain))
+
 ## v1.12.10 (2023-08-11)
 
 #### Details
