@@ -31,7 +31,7 @@ final class AttributeTypeStub implements AttributeTypeInterface
         return '';
     }
 
-    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration,): void
+    public function validate(AttributeValueInterface $attributeValue, ExecutionContextInterface $context, array $configuration): void
     {
     }
 }

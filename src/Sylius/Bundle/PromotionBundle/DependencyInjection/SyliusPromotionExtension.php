@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
-use Sylius\Bundle\PromotionBundle\Attribute\AsCatalogPromotionPriceCalculator;
-use Sylius\Bundle\PromotionBundle\Attribute\AsCatalogPromotionVariantChecker;
 use Sylius\Bundle\PromotionBundle\Attribute\AsPromotionAction;
 use Sylius\Bundle\PromotionBundle\Attribute\AsPromotionCouponEligibilityChecker;
 use Sylius\Bundle\PromotionBundle\Attribute\AsPromotionEligibilityChecker;
