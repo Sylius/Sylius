@@ -111,6 +111,10 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
+        <service id="clock" class="Sylius\Behat\Clock\FakeClock">
+            <argument>%kernel.project_dir%</argument>
+        </service>
+
         <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter" public="false">
             <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
             <argument type="service" id="api_platform.metadata.property.metadata_factory" />
