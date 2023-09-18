@@ -91,6 +91,7 @@
         "sylius/resource-bundle": "^1.10",
         "sylius/theme-bundle": "^2.3",
         "symfony/asset": "^6.3.0",
+        "symfony/clock": "^6.3.4",
         "symfony/config": "^6.3.2",
         "symfony/console": "^6.3.4",
         "symfony/dependency-injection": "^6.3.4",
