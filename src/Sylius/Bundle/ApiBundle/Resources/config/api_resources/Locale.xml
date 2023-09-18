@@ -22,7 +22,7 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/locales</attribute>
+                <attribute name="path">/admin/locales</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:locale:read</attribute>
                 </attribute>
@@ -30,7 +30,7 @@
 
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
-                <attribute name="path">admin/locales</attribute>
+                <attribute name="path">/admin/locales</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:locale:create</attribute>
                 </attribute>
@@ -41,7 +41,7 @@
 
             <collectionOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/locales</attribute>
+                <attribute name="path">/shop/locales</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:locale:read</attribute>
                 </attribute>
@@ -51,7 +51,7 @@
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">admin/locales/{code}</attribute>
+                <attribute name="path">/admin/locales/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:locale:read</attribute>
                 </attribute>
@@ -64,7 +64,7 @@
 
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">shop/locales/{code}</attribute>
+                <attribute name="path">/shop/locales/{code}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:locale:read</attribute>
                 </attribute>
