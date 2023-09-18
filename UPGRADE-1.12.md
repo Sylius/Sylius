@@ -37,6 +37,9 @@
     implement new changing taxon's position logic. If you have overridden this template, you need to update it.
     If you want to check what has changed, you might use [this PR](https://github.com/Sylius/Sylius/pull/15272) as a reference.
 
+1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
+    interface to fix the compatibilty with Symfony 6.
+
 # UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
 1. The `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor` constructor has been changed:
