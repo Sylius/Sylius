@@ -547,9 +547,6 @@
     "sonata-project/cache": {
         "version": "2.0.1"
     },
-    "sonata-project/doctrine-extensions": {
-        "version": "1.9.1"
-    },
     "sonata-project/form-extensions": {
         "version": "1.0",
         "recipe": {
