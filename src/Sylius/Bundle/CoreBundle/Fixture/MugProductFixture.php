@@ -16,7 +16,11 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Faker\Factory;
 use Faker\Generator;
 
-@trigger_error('The "MugProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.5',
+    'The "MugProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
+);
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;

@@ -40,12 +40,13 @@ final class AddressType extends AbstractResourceType
         parent::__construct($dataClass, $validationGroups);
 
         if (null === $addressComparator) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.8',
                 sprintf(
                     'Not passing an $addressComparator to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
                     __CLASS__,
                 ),
-                \E_USER_DEPRECATED,
             );
         }
 

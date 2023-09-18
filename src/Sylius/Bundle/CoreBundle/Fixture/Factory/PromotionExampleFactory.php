@@ -46,7 +46,11 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $this->configureOptions($this->optionsResolver);
 
         if ($this->couponFactory === null) {
-            @trigger_error(sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.8',
+                sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class),
+            );
         }
     }
 

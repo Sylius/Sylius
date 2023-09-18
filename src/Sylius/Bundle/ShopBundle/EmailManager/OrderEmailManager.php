@@ -26,13 +26,14 @@ final class OrderEmailManager implements OrderEmailManagerInterface
         private ?DecoratedOrderEmailManagerInterface $decoratedEmailManager,
     ) {
         if ($decoratedEmailManager === null) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.8',
                 sprintf(
                     'Not passing an instance of %s to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.',
                     DecoratedOrderEmailManagerInterface::class,
                     self::class,
                 ),
-                \E_USER_DEPRECATED,
             );
         }
     }
