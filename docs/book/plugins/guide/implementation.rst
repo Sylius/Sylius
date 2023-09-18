@@ -30,6 +30,8 @@ the same entity, it's recommended to provide a trait with new properties and met
 
     namespace IronMan\SyliusProductOnDemandPlugin\Entity;
 
+    use Doctrine\ORM\Mapping as ORM;
+
     trait ProductVariantTrait
     {
         /**
