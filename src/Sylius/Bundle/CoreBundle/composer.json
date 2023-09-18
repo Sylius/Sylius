@@ -65,6 +65,7 @@
         "sylius/theme-bundle": "^2.3",
         "sylius/ui-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
+        "symfony/clock": "^6.3.4",
         "symfony/framework-bundle": "^6.3.4",
         "symfony/intl": "^6.3.2",
         "symfony/mailer": "^6.3.0",

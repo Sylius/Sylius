@@ -15,8 +15,8 @@ namespace Sylius\Bundle\CoreBundle\PriceHistory\Remover;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\PriceHistory\Event\OldChannelPricingLogEntriesEvents;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -26,7 +26,7 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
     public function __construct(
         private ChannelPricingLogEntryRepositoryInterface $channelPricingLogEntriesRepository,
         private ObjectManager $channelPricingLogEntriesManager,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
         private EventDispatcherInterface $eventDispatcher,
         private int $batchSize = 100,
     ) {
@@ -59,7 +59,7 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
 
     private function getFromDate(int $fromDays): \DateTimeInterface
     {
-        $now = $this->dateTimeProvider->now();
+        $now = $this->clock->now();
         Assert::methodExists($now, 'modify');
 
         /** @psalm-suppress UndefinedInterfaceMethod */

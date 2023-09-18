@@ -225,7 +225,7 @@
         <service id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" class="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover">
             <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <argument type="service" id="event_dispatcher" />
             <argument>%sylius.channel_pricing_log_entry.old_logs_removal_batch_size%</argument>
         </service>
