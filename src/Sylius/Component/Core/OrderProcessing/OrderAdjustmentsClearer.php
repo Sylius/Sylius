@@ -24,9 +24,10 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
     public function __construct(array $adjustmentsToRemove = [])
     {
         if (0 === func_num_args()) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/core',
+                '1.2',
                 'Not passing adjustments types explicitly is deprecated since 1.2 and will be prohibited in 2.0',
-                \E_USER_DEPRECATED,
             );
 
             $adjustmentsToRemove = [

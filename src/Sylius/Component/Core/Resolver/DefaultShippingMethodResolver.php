@@ -22,7 +22,11 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
-@trigger_error(sprintf('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class), \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/core',
+    '1.2',
+    sprintf('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class),
+);
 
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {

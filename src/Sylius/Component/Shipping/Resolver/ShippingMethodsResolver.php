@@ -26,11 +26,15 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
         private ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
     ) {
         if (!$this->shippingMethodRepository instanceof ShippingMethodRepositoryInterface) {
-            @trigger_error(sprintf(
-                'Not implementing "%s" in "%s" is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
-                ShippingMethodRepositoryInterface::class,
-                get_debug_type($this->shippingMethodRepository),
-            ), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/shipping',
+                '1.13',
+                sprintf(
+                    'Not implementing "%s" in "%s" is deprecated since Sylius 1.13 and will be required in Sylius 2.0.',
+                    ShippingMethodRepositoryInterface::class,
+                    get_debug_type($this->shippingMethodRepository),
+                ),
+            );
         }
     }
 

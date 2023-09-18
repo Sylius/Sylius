@@ -37,7 +37,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         private ?TaxationAddressResolverInterface $taxationAddressResolver = null,
     ) {
         if ($this->taxationAddressResolver === null) {
-            @trigger_error(sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core',
+                '1.11',
+                sprintf('Not passing a $taxationAddressResolver to %s constructor is deprecated since Sylius 1.11 and will be removed in Sylius 2.0.', self::class),
+            );
         }
     }
 

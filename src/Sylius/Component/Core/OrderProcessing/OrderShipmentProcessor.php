@@ -31,9 +31,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null,
     ) {
         if (2 === func_num_args() || null === $shippingMethodsResolver) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/core',
+                '1.2',
                 'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
-                \E_USER_DEPRECATED,
             );
         }
     }

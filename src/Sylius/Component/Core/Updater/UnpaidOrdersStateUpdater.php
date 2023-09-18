@@ -34,16 +34,18 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         private int $batchSize = 100,
     ) {
         if (null === $logger) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/core',
+                '1.7',
                 'Not passing a logger is deprecated since 1.7',
-                \E_USER_DEPRECATED,
             );
         }
 
         if (null === $orderManager) {
-            @trigger_error(
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
                 'Not passing an $orderManager is deprecated since 1.13 as it makes $batchSize useless.',
-                \E_USER_DEPRECATED,
             );
         }
 
