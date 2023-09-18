@@ -4,7 +4,7 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Le nom de la catégorie ne peut pas dépasser les {{ limit }} caractères.'
+            max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
             min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
             not_blank: 'Veuillez entrer le nom de la catégorie de livraison.'
         code:
