@@ -80,7 +80,6 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
         "sylius-labs/polyfill-symfony-security": "^1.1",
-        "sylius/calendar": "^0.5",
         "sylius/fixtures-bundle": "^1.8",
         "sylius/grid": "^1.12",
         "sylius/grid-bundle": "^1.12",
