@@ -17,10 +17,10 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,9 +32,9 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         MessageBusInterface $messageBus,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
     ): void {
-        $this->beConstructedWith($userRepository, $messageBus, $generator, $dateTimeProvider);
+        $this->beConstructedWith($userRepository, $messageBus, $generator, $clock);
     }
 
     function it_is_a_message_handler(): void
@@ -46,15 +46,15 @@ final class RequestResetPasswordTokenHandlerSpec extends ObjectBehavior
         UserRepositoryInterface $userRepository,
         ShopUserInterface $shopUser,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         MessageBusInterface $messageBus,
     ): void {
         $userRepository->findOneByEmail('test@email.com')->willReturn($shopUser);
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setPasswordResetToken('TOKEN')->shouldBeCalled();
-        $shopUser->setPasswordRequestedAt(Argument::type(\DateTime::class));
+        $shopUser->setPasswordRequestedAt(Argument::type(\DateTimeImmutable::class));
 
         $sendResetPasswordEmail = new SendResetPasswordEmail('test@email.com', 'WEB', 'en_US');
 
