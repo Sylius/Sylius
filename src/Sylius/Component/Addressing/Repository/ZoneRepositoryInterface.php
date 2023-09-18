@@ -33,9 +33,9 @@ interface ZoneRepositoryInterface extends RepositoryInterface
     public function createFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder;
 
     /**
-     * @param array<ZoneInterface> $zones
+     * @param array<ZoneInterface> $members
      *
      * @return array<ZoneInterface>
      */
-    public function findAllByZones(array $zones, ?string $scope = null): array;
+    public function findZonesByMembers(array $members, ?string $scope = null): array;
 }

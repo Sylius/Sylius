@@ -118,13 +118,13 @@ final class ZoneRepositoryTest extends KernelTestCase
     }
 
     /** @test */
-    public function it_finds_all_zones_by_passing_a_child_zone(): void
+    public function it_finds_all_zones_by_passing_a_zone_member(): void
     {
         $repository = $this->getRepository();
         $zones = [];
 
         $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
-        foreach ($repository->findAllByZones([$visegradGroupZone]) as $zone) {
+        foreach ($repository->findZonesByMembers([$visegradGroupZone]) as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
@@ -134,7 +134,7 @@ final class ZoneRepositoryTest extends KernelTestCase
     }
 
     /** @test */
-    public function it_finds_all_zones_by_passing_a_child_zone_with_reistricting_by_scope_if_provided(): void
+    public function it_finds_all_zones_by_passing_a_zone_member_with_restricting_by_scope_if_provided(): void
     {
         $repository = $this->getRepository();
         $zones = [];
@@ -142,7 +142,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         /** @var ZoneInterface $visegradGroupZone */
         $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
 
-        foreach ($repository->findAllByZones([$visegradGroupZone], 'only_eu') as $zone) {
+        foreach ($repository->findZonesByMembers([$visegradGroupZone], 'only_eu') as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
