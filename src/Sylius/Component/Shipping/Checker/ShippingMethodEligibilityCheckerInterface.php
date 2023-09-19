@@ -20,7 +20,9 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 trigger_deprecation(
     'sylius/shipping',
     '1.8',
-    sprintf('The "%s" interface is deprecated since Sylius 1.8, use "%s" instead.', ShippingMethodEligibilityCheckerInterface::class, NewShippingMethodEligibilityCheckerInterface::class),
+    'The "%s" interface is deprecated, use "%s" instead.',
+    ShippingMethodEligibilityCheckerInterface::class,
+    NewShippingMethodEligibilityCheckerInterface::class,
 );
 
 /**

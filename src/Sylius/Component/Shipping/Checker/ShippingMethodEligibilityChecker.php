@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 trigger_deprecation(
     'sylius/shipping',
     '1.8',
-    sprintf('The "%s" class is deprecated since Sylius 1.8, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'),
+    sprintf('The "%s" class is deprecated, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'),
 );
 
 /**

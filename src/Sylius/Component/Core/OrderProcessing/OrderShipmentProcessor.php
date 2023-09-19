@@ -34,7 +34,7 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.2',
-                'Not passing ShippingMethodsResolverInterface explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                'Not passing a $shippingMethodsResolver explicitly is deprecated and will be prohibited in Sylius 2.0',
             );
         }
     }

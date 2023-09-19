@@ -29,11 +29,9 @@ final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
             trigger_deprecation(
                 'sylius/shipping',
                 '1.13',
-                sprintf(
-                    'Not implementing "%s" in "%s" is deprecated and will be required in Sylius 2.0.',
-                    ShippingMethodRepositoryInterface::class,
-                    get_debug_type($this->shippingMethodRepository),
-                ),
+                'Not implementing "%s" in "%s" is deprecated and will be required in Sylius 2.0.',
+                ShippingMethodRepositoryInterface::class,
+                get_debug_type($this->shippingMethodRepository),
             );
         }
     }

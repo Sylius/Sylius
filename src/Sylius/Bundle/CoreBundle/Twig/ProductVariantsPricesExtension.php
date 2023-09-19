@@ -17,7 +17,7 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapExtension} instead. */
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapExtension} instead. */
 final class ProductVariantsPricesExtension extends AbstractExtension
 {
     public function __construct(private ProductVariantsPricesHelper $productVariantsPricesHelper)

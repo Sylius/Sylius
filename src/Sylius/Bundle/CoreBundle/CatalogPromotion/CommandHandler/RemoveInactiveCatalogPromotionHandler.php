@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
-/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see RemoveCatalogPromotionHandler} instead. */
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see RemoveCatalogPromotionHandler} instead. */
 final class RemoveInactiveCatalogPromotionHandler
 {
     public function __construct(

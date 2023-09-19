@@ -28,7 +28,7 @@ class TaxRateResolver implements TaxRateResolverInterface
             trigger_deprecation(
                 'sylius/taxation',
                 '1.12',
-                'Not passing TaxRateDateEligibilityCheckerInterface through constructor is deprecated in Sylius 1.12 and it will be prohibited in Sylius 2.0',
+                'Not passing a $taxRateDateChecker through constructor is deprecated and it will be prohibited in Sylius 2.0',
             );
         }
     }

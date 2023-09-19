@@ -19,7 +19,7 @@ use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderI
 
 trigger_deprecation('sylius/core', '1.13', 'The "%s" class is deprecated, use "%s" instead.', ProductVariantsPricesProviderInterface::class, ProductVariantsMapProviderInterface::class);
 
-/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProviderInterface} instead. */
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProviderInterface} instead. */
 interface ProductVariantsPricesProviderInterface
 {
     public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel): array;

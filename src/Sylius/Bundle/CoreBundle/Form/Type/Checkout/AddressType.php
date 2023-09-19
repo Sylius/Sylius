@@ -44,7 +44,7 @@ final class AddressType extends AbstractResourceType
                 'sylius/core-bundle',
                 '1.8',
                 sprintf(
-                    'Not passing an $addressComparator to "%s" constructor is deprecated since Sylius 1.8 and will be impossible in Sylius 2.0.',
+                    'Not passing an $addressComparator to "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
                     __CLASS__,
                 ),
             );

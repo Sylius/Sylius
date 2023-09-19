@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 trigger_deprecation(
     'sylius/core-bundle',
     '1.5',
-    'The "StickerProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
+    'The "StickerProductFixture" class is deprecated. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
 );
 
 use Faker\Factory;
@@ -27,6 +27,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated since Sylius 1.5 and will be removed in Sylius 2.0. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.
+ */
 class StickerProductFixture extends AbstractFixture
 {
     private Generator $faker;

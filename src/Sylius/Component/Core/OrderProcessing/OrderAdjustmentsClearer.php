@@ -27,7 +27,7 @@ final class OrderAdjustmentsClearer implements OrderProcessorInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.2',
-                'Not passing adjustments types explicitly is deprecated since 1.2 and will be prohibited in 2.0',
+                'Not passing $adjustmentsToRemove explicitly is deprecated and will be prohibited in Sylius 2.0',
             );
 
             $adjustmentsToRemove = [

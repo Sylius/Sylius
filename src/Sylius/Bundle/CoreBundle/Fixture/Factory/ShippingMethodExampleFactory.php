@@ -48,7 +48,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.4',
-                sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.4 and will be removed in Sylius 2.0.', self::class),
+                sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
             );
         }
 

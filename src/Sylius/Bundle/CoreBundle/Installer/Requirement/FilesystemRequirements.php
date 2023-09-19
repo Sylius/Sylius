@@ -29,8 +29,7 @@ final class FilesystemRequirements extends RequirementCollection
                 'sylius/core-bundle',
                 '1.2',
                 sprintf(
-                    'Passing root directory to "%s" constructor as the second argument is deprecated since 1.2 ' .
-                        'and this argument will be removed in 2.0.',
+                    'Passing root directory to "%s" constructor as the second argument is deprecated and this argument will be removed in Sylius 2.0.',
                     self::class,
                 ),
             );

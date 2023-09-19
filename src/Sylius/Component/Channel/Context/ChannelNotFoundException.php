@@ -23,7 +23,7 @@ class ChannelNotFoundException extends \RuntimeException
             trigger_deprecation(
                 'sylius/channel',
                 '1.2',
-                'Passing previous exception as the first argument is deprecated since 1.2 and will be prohibited since 2.0.',
+                'Passing previous exception as the first argument is deprecated and will be prohibited since Sylius 2.0.',
             );
             $previousException = $messageOrPreviousException;
         }

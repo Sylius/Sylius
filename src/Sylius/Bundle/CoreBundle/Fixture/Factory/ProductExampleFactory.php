@@ -244,7 +244,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 trigger_deprecation(
                     'sylius/core-bundle',
                     '1.3',
-                    'It is deprecated since Sylius 1.3 to pass indexed array as an image definition. ' .
+                    'It is deprecated to pass indexed array as an image definition. ' .
                     'Please use associative array with "path" and "type" keys instead.',
                 );
 

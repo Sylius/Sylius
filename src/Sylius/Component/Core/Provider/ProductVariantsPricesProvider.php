@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
-/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProvider} instead. */
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see ProductVariantsMapProvider} instead. */
 final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
     public function __construct(private ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)

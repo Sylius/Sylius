@@ -19,7 +19,7 @@ use Faker\Generator;
 trigger_deprecation(
     'sylius/core-bundle',
     '1.5',
-    'The "MugProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
+    'The "MugProductFixture" class is deprecated and will be removed in Sylius 2.0. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
 );
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
@@ -27,6 +27,9 @@ use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated since Sylius 1.5 and will be removed in Sylius 2.0. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.
+ */
 class MugProductFixture extends AbstractFixture
 {
     private Generator $faker;

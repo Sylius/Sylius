@@ -25,9 +25,12 @@ use Webmozart\Assert\Assert;
 trigger_deprecation(
     'sylius/core',
     '1.2',
-    sprintf('This class is deprecated since Sylius 1.2 and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class),
+    sprintf('This class is deprecated and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class),
 );
 
+/**
+ * @deprecated since Sylius 1.2, will be removed in Sylius 2.0. Use {@link EligibleDefaultShippingMethodResolver} instead.
+ */
 class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInterface
 {
     public function __construct(private ShippingMethodRepositoryInterface $shippingMethodRepository)

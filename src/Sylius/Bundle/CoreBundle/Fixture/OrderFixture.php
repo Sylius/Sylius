@@ -80,7 +80,7 @@ class OrderFixture extends AbstractFixture
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.6',
-                'Use orderExampleFactory. OrderFixture is deprecated since 1.6 and will be prohibited since 2.0.',
+                'Use OrderExampleFactory. OrderFixture is deprecated and will be prohibited since Sylius 2.0.',
             );
         }
 

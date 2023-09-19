@@ -49,7 +49,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.8',
-                sprintf('Not passing a $couponFactory to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.', self::class),
+                sprintf('Not passing a $couponFactory to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
             );
         }
     }

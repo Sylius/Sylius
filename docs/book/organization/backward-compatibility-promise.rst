@@ -93,14 +93,14 @@ The deprecation message should indicate the version in which the class/method wa
 deprecated and how the feature was replaced (whenever possible).
 
 A PHP deprecation must also be triggered to help people with
-the migration:
+the migration, for instance:
 
 .. code-block:: php
 
     trigger_deprecation(
         'sylius/some-package', // package name
-        '1.X', // package version
-        'XXX is deprecated since version 1.X and will be removed in 2.Y. Use YYY instead.', // message
+        '1.x', // package version
+        'A is deprecated and will be removed in Sylius 2.0. Use B instead.', // message
     );
 
 You should not use the @trigger_error() function.

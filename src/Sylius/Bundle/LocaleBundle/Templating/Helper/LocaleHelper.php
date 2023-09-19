@@ -28,7 +28,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
             trigger_deprecation(
                 'sylius/locale-bundle',
                 '1.4',
-                'Not passing LocaleContextInterface explicitly as the second argument is deprecated since 1.4 and will be prohibited in 2.0',
+                'Not passing a $localeContext explicitly as the second argument is deprecated and will be prohibited in Sylius 2.0',
             );
         }
     }

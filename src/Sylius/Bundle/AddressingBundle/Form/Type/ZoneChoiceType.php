@@ -28,7 +28,7 @@ final class ZoneChoiceType extends AbstractType
             trigger_deprecation(
                 'sylius/addressing-bundle',
                 '1.5',
-                'Not passing $scopeTypes through constructor is deprecated in Sylius 1.5 and it will be removed in Sylius 2.0',
+                'Not passing $scopeTypes through constructor is deprecated and it prohibited in Sylius 2.0.',
             );
         }
     }

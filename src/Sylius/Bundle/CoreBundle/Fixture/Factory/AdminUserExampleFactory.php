@@ -46,7 +46,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.6',
-                sprintf('Not passing a $fileLocator or/and $imageUploader to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
+                sprintf('Not passing a $fileLocator or/and an $imageUploader to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
             );
         }
 
@@ -54,7 +54,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.10',
-                sprintf('Not passing a $avatarImageFactory to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
+                sprintf('Not passing an $avatarImageFactory to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
             );
         }
     }

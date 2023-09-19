@@ -50,7 +50,7 @@ final class ShopBasedCartContext implements CartContextInterface, ResetInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.10.9',
-                'Not passing createdByGuestFlagResolver through constructor is deprecated in Sylius 1.10.9 and it will be prohibited in Sylius 2.0',
+                'Not passing a $createdByGuestFlagResolver through constructor is deprecated and will be prohibited in Sylius 2.0',
             );
         }
     }

@@ -30,7 +30,7 @@ final class OrderEmailManager implements OrderEmailManagerInterface
                 'sylius/shop-bundle',
                 '1.8',
                 sprintf(
-                    'Not passing an instance of %s to %s constructor is deprecated since Sylius 1.8 and will be removed in Sylius 2.0.',
+                    'Not passing an instance of %s to %s constructor is deprecated and will be removed in Sylius 2.0.',
                     DecoratedOrderEmailManagerInterface::class,
                     self::class,
                 ),

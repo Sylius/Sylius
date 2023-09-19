@@ -32,7 +32,7 @@ class OrderItemsSubtotalExtension extends AbstractExtension
             trigger_deprecation(
                 'sylius/shop-bundle',
                 '1.6',
-                'Not passing a calculator is deprecated since 1.6. Argument will no longer be optional from 2.0.',
+                'Not passing a $calculator is deprecated. Argument will no longer be optional from Sylius 2.0.',
             );
         }
 
