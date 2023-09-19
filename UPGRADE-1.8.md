@@ -1,8 +1,3 @@
-# UPGRADE FROM `v1.8.11` TO `v1.8.12`
-
-1. Names of the default `LiipImagineBundle` resolver and loader were changed from **default** to **sylius_image** (check out [this PR](https://github.com/Sylius/Sylius/pull/12543)).
-To change the default resolver and/or loader for `LiipImagineBundle`, configure `cache` and/or `data_loader` parameters under the `liip_imagine` key.
-
 # UPGRADE FROM `v1.8.4` TO `v1.8.6`
 
 1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
