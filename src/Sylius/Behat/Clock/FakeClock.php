@@ -13,16 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Clock;
 
-use DateTimeImmutable;
 use Symfony\Component\Clock\ClockInterface;
 
 final class FakeClock implements ClockInterface
 {
-    private string $temporaryDatePath;
-
-    public function __construct(string $projectDirectory)
+    public function __construct(private string $temporaryDatePath)
     {
-        $this->temporaryDatePath = $projectDirectory . '/var/temporaryDate.txt';
     }
 
     public function sleep(float|int $seconds): void
@@ -30,7 +26,7 @@ final class FakeClock implements ClockInterface
         // Intentionally left blank.
     }
 
-    public function now(): DateTimeImmutable
+    public function now(): \DateTimeImmutable
     {
         if (file_exists($this->temporaryDatePath)) {
             $dateTime = file_get_contents($this->temporaryDatePath);
