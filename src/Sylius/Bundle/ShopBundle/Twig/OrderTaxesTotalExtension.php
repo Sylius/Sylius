@@ -22,7 +22,7 @@ use Twig\TwigFunction;
 trigger_deprecation(
     'sylius/shop-bundle',
     '1.12',
-    'The "Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from "Sylius\Component\Core\Model\Order" instead.',
+    'The "Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" class is deprecated and will be removed in 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from "Sylius\Component\Core\Model\Order" instead.',
 );
 
 class OrderTaxesTotalExtension extends AbstractExtension

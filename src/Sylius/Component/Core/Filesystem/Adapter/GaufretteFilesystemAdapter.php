@@ -27,7 +27,7 @@ final class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
             'sylius/core',
             '1.12',
             sprintf(
-                'The "%s" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use "%s" instead.',
+                'The "%s" class is deprecated and will be removed in 2.0. Use "%s" instead.',
                 self::class,
                 FlysystemFilesystemAdapter::class,
             ),

@@ -28,7 +28,7 @@ final class ProductOptionChoiceType extends AbstractType
         @trigger_deprecation(
             'sylius/product-bundle',
             '1.13',
-            'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0.',
+            'The "%s" class is deprecated and will be removed in 2.0.',
             self::class,
         );
     }

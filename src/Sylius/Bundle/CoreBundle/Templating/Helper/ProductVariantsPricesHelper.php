@@ -28,7 +28,7 @@ class ProductVariantsPricesHelper extends Helper
             'sylius/core-bundle',
             '1.13',
             sprintf(
-                'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0. Use "%s" instead.',
+                'The "%s" class is deprecated and will be removed in 2.0. Use "%s" instead.',
                 self::class,
                 ProductVariantsMapProvider::class,
             ),

@@ -32,7 +32,7 @@ class SelectAttributeChoicesCollectionType extends AbstractType
                 'sylius/attribute-bundle',
                 '1.13',
                 sprintf(
-                    'Passing an instance of %s as a constructor argument for %s is deprecated as of Sylius 1.13 and will not be possible in 2.0.',
+                    'Passing an instance of %s as a constructor argument for %s is deprecated and will not be possible in 2.0.',
                     TranslationLocaleProviderInterface::class,
                     self::class,
                 ),

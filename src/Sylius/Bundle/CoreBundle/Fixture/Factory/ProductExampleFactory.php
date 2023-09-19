@@ -69,7 +69,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.6',
-                sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated since Sylius 1.6 and will be removed in Sylius 2.0.', self::class),
+                sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
             );
         }
 

@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
             trigger_deprecation(
                 'sylius/user-bundle',
                 '1.11',
-                sprintf('Not passing a $authenticationUtils to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class),
+                sprintf('Not passing a $authenticationUtils to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
             );
         }
 
@@ -39,7 +39,7 @@ class SecurityController extends AbstractController
             trigger_deprecation(
                 'sylius/user-bundle',
                 '1.11',
-                sprintf('Not passing a $formFactory to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class),
+                sprintf('Not passing a $formFactory to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
             );
         }
     }

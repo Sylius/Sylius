@@ -35,14 +35,14 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.13',
-                sprintf('Not passing an $orderPaymentsRemover to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class),
+                sprintf('Not passing an $orderPaymentsRemover to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
             );
         }
         if ([] === $this->unprocessableOrderStates) {
             trigger_deprecation(
                 'sylius/core',
                 '1.13',
-                sprintf('Not passing an $unprocessableOrderStates to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class),
+                sprintf('Not passing an $unprocessableOrderStates to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
             );
         }
     }

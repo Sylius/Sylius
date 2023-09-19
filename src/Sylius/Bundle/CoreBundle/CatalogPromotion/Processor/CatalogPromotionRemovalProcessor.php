@@ -31,13 +31,13 @@ final class CatalogPromotionRemovalProcessor implements CatalogPromotionRemovalP
         private ?MessageBusInterface $eventBus = null, /** @phpstan-ignore-line */
     ) {
         if ($catalogPromotionRemovalAnnouncer instanceof MessageBusInterface) {
-            trigger_deprecation('sylius/core-bundle', '1.13', sprintf('Passing an instance of %s as second constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, self::class, CatalogPromotionRemovalAnnouncerInterface::class));
+            trigger_deprecation('sylius/core-bundle', '1.13', sprintf('Passing an instance of %s as second constructor argument for %s is deprecated and will be removed in 2.0. Pass an instance of %s instead.', MessageBusInterface::class, self::class, CatalogPromotionRemovalAnnouncerInterface::class));
 
             $this->catalogPromotionRemovalAnnouncer = new CatalogPromotionRemovalAnnouncer($catalogPromotionRemovalAnnouncer);
         }
 
         if (null !== $eventBus) {
-            trigger_deprecation('sylius/core-bundle', '1.13', sprintf('Passing third constructor argument for %s is deprecated as of Sylius 1.13 and will be removed in 2.0.', self::class));
+            trigger_deprecation('sylius/core-bundle', '1.13', sprintf('Passing third constructor argument for %s is deprecated and will be removed in 2.0.', self::class));
         }
     }
 

@@ -18,5 +18,5 @@ declare(strict_types=1);
 trigger_deprecation(
     'sylius/sylius',
     '1.3',
-    'Importing files from Sylius/Sylius\'s "app/config" directory is deprecated since Sylius 1.3.',
+    'Importing files from Sylius/Sylius\'s "app/config" directory is deprecated.',
 );
