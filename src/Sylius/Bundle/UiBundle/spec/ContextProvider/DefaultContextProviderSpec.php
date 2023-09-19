@@ -26,7 +26,7 @@ final class DefaultContextProviderSpec extends ObjectBehavior
 
     function it_replaces_block_context_with_a_template_context(): void
     {
-        $templateBlock = new TemplateBlock('block_name', 'event_name', 'block.txt.twig', null, ['foo' => 'quux', 'quuz' => 'corge'], 0, true);
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['foo' => 'quux', 'quuz' => 'corge'], 0, true, null);
 
         $this
             ->provide(['foo' => 'bar', 'baz' => 'qux'], $templateBlock)
@@ -46,7 +46,7 @@ final class DefaultContextProviderSpec extends ObjectBehavior
         ;
 
         $this
-            ->supports(new TemplateBlock('block_name', 'event_name', 'block.txt.twig', null, ['foo' => 'quux', 'quuz' => 'corge'], 0, true))
+            ->supports(new TemplateBlock('block_name', 'event_name', 'block.txt.twig', ['foo' => 'quux', 'quuz' => 'corge'], 0, true, null))
             ->shouldReturn(true)
         ;
     }

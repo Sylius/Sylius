@@ -33,10 +33,10 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
             'some_name',
             'some_event_name',
             'some_template',
-            null,
             ['some' => 'context'],
             0,
             true,
+            null,
         );
         $decoratedRenderer->render($someTemplateBlock, ['some' => 'context'])->shouldBeCalled();
 
@@ -50,10 +50,10 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
             'some_name',
             'some_event_name',
             'some_template',
-            'some_component',
             ['some' => 'context'],
             0,
             true,
+            'some_component',
         );
         $componentRenderer->createAndRender('some_component', Argument::type('array'))->willReturn('some_rendered_component');
 

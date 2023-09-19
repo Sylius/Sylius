@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Symfony\UX\TwigComponent\ComponentRendererInterface;
 
+/** @internal */
 final class TwigComponentBlockRenderer implements TemplateBlockRendererInterface
 {
     public function __construct(

@@ -19,10 +19,10 @@ final class TemplateBlock
         private string $name,
         private string $eventName,
         private ?string $template,
-        private ?string $component,
         private ?array $context,
         private ?int $priority,
         private ?bool $enabled,
+        private ?string $component = null,
     ) {
     }
 
@@ -83,10 +83,10 @@ final class TemplateBlock
             $this->name,
             $block->eventName,
             $block->template ?? $this->template,
-            $block->component ?? $this->component,
             $block->context ?? $this->context,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,
+            $block->component ?? $this->component,
         );
     }
 }

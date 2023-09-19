@@ -152,10 +152,10 @@
             private string $name,
             private string $eventName,
             private ?string $template,
-    +       private ?string $component,
             private ?array $context,
             private ?int $priority,
             private ?bool $enabled,
+    +       private ?string $component,
         ) {
         }
     ```

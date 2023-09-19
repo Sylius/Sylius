@@ -32,7 +32,7 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
     function it_does_not_render_a_debug_html_comment_if_the_template_block_is_not_a_component_nor_a_twig_template(
         TemplateBlockRendererInterface $templateBlockRenderer,
     ): void {
-        $templateBlock = new TemplateBlock('block_name', 'event_name', 'some_content', null, null, null, true);
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'some_content', null, null, true, null);
 
         $templateBlockRenderer->render($templateBlock, [])->willReturn('Rendered template');
 
@@ -42,7 +42,7 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
     function it_renders_a_debug_html_comment_if_the_template_block_has_a_configured_component(
         TemplateBlockRendererInterface $templateBlockRenderer,
     ): void {
-        $templateBlock = new TemplateBlock('block_name', 'event_name', 'some_content', 'component_name', null, null, true);
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'some_content', null, null, true, 'component_name');
 
         $templateBlockRenderer->render($templateBlock, [])->willReturn('Rendered template');
 
@@ -56,7 +56,7 @@ final class HtmlDebugTemplateBlockRendererSpec extends ObjectBehavior
     function it_renders_a_debug_html_comment_if_the_template_block_has_a_configured_twig_template(
         TemplateBlockRendererInterface $templateBlockRenderer,
     ): void {
-        $templateBlock = new TemplateBlock('block_name', 'event_name', 'template.html.twig', null, [], null, true);
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'template.html.twig', [], null, true, null);
 
         $templateBlockRenderer->render($templateBlock, [])->willReturn('Rendered template');
 
