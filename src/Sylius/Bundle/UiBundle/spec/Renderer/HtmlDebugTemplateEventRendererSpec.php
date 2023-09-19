@@ -35,7 +35,7 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
         $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
-            new TemplateBlock('some_block_one', 'some_event', 'some content', null, null, null, true),
+            new TemplateBlock('some_block_one', 'some_event', 'some content', null, null, true, null),
         ]);
 
         $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
@@ -63,7 +63,7 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
         $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
-            new TemplateBlock('some_block_one', 'some_event', 'some content', 'SomeComponent', null, null, true),
+            new TemplateBlock('some_block_one', 'some_event', 'some content',  null, null, true, 'SomeComponent'),
         ]);
 
         $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
@@ -80,7 +80,7 @@ final class HtmlDebugTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry
     ): void {
         $templateBlockRegistry->findEnabledForEvents(['event_name'])->willReturn([
-            new TemplateBlock('some_block_one', 'some_event', 'some_template.html.twig', null, null, null, true),
+            new TemplateBlock('some_block_one', 'some_event', 'some_template.html.twig', null, null, true, null),
         ]);
 
         $templateEventRenderer->render(['event_name'], [])->willReturn('rendered_content');
