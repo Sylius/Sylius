@@ -29,7 +29,7 @@
         "php": "^8.2",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.10",
-        "symfony/intl": "^5.4.21 || ^6.0"
+        "symfony/intl": "^6.3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"

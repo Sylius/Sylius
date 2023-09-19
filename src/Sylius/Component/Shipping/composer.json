@@ -31,7 +31,7 @@
         "php": "^8.2",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.10",
-        "symfony/options-resolver": "^5.4.21 || ^6.0"
+        "symfony/options-resolver": "^6.3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
