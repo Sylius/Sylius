@@ -1,6 +1,0 @@
-liip_imagine:
-    resolvers:
-        sylius_image:
-            web_path:
-                web_root: "%kernel.project_dir%/public"
-                cache_prefix: "media/cache"
