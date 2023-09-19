@@ -40,7 +40,7 @@
 
         * `sylius.mailer.templates`
 
-* Added the `Sylius\Component\Order\Context\ResattableCartContextInterface`, extending `Sylius\Component\Order\Context\CartContextInterface` with `Symfony\Contracts\Service\ResetInterface`.
+* Added the `Sylius\Component\Order\Context\ResettableCartContextInterface` that extends `Sylius\Component\Order\Context\CartContextInterface` and `Symfony\Contracts\Service\ResetInterface`.
 
 ## Frontend
 
