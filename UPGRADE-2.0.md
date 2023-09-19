@@ -40,6 +40,8 @@
 
         * `sylius.mailer.templates`
 
+* Added the `Sylius\Component\Order\Context\ResattableCartContextInterface`, extending `Sylius\Component\Order\Context\CartContextInterface` with `Symfony\Contracts\Service\ResetInterface`.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
