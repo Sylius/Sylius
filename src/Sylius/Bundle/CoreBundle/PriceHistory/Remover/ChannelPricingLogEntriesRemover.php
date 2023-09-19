@@ -19,7 +19,6 @@ use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Webmozart\Assert\Assert;
 
 final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesRemoverInterface
 {
@@ -60,9 +59,7 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
     private function getFromDate(int $fromDays): \DateTimeInterface
     {
         $now = $this->clock->now();
-        Assert::methodExists($now, 'modify');
 
-        /** @psalm-suppress UndefinedInterfaceMethod */
         return $now->modify(sprintf('-%d days', $fromDays));
     }
 }
