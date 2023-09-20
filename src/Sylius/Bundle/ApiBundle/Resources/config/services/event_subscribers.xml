@@ -46,6 +46,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
             <tag name="kernel.event_subscriber" />
         </service>
 

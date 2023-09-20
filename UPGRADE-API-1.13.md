@@ -1,5 +1,15 @@
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
+1. The constructor of 'Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber' has changed:
+
+````diff
+    public function __construct(
+        private ChannelRepositoryInterface $channelRepository,
++       private TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
+    ) {
+    }
+````
+
 1. The signature of constructor of 'Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart' command changed:
 
 ````diff
