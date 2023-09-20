@@ -115,7 +115,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="sylius.behat.clock" class="Sylius\Behat\Clock\FakeClock">
+        <service id="sylius.behat.clock" class="Sylius\Behat\Service\Clock">
             <argument>%sylius.behat.clock.fake.temporary_file%</argument>
         </service>
         <service id="clock" alias="sylius.behat.clock" />

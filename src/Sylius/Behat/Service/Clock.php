@@ -11,11 +11,11 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Clock;
+namespace Sylius\Behat\Service;
 
 use Symfony\Component\Clock\ClockInterface;
 
-final class FakeClock implements ClockInterface
+final class Clock implements ClockInterface
 {
     public function __construct(private string $temporaryDatePath)
     {
