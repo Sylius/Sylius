@@ -51,11 +51,19 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         ?FactoryInterface $shopBillingDataFactory = null,
     ) {
         if (null === $taxonRepository) {
-            @trigger_error('Passing RouterInterface as the fifth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.8',
+                'Passing a $taxonRepository as the fifth argument is deprecated and will be prohibited in Sylius 2.0',
+            );
         }
 
         if (null === $shopBillingDataFactory) {
-            @trigger_error('Passing RouterInterface as the sixth argument is deprecated since 1.8 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.8',
+                'Passing a $shopBillingDataFactory as the sixth argument is deprecated and will be prohibited in Sylius 2.0',
+            );
         }
         $this->taxonRepository = $taxonRepository;
         $this->shopBillingDataFactory = $shopBillingDataFactory;

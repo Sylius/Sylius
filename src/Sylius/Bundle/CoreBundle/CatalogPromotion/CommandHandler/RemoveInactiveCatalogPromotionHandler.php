@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
-/** @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see RemoveCatalogPromotionHandler} instead. */
+/** @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see RemoveCatalogPromotionHandler} instead. */
 final class RemoveInactiveCatalogPromotionHandler
 {
     public function __construct(
@@ -30,11 +30,9 @@ final class RemoveInactiveCatalogPromotionHandler
         trigger_deprecation(
             'sylius/core-bundle',
             '1.13',
-            sprintf(
-                'The "%s" class is deprecated since Sylius 1.13 and will be removed in 2.0. Use "%s" instead.',
-                self::class,
-                RemoveCatalogPromotionHandler::class,
-            ),
+            'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+            self::class,
+            RemoveCatalogPromotionHandler::class,
         );
     }
 

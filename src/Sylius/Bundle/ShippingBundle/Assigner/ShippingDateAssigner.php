@@ -22,9 +22,13 @@ final class ShippingDateAssigner implements ShippingDateAssignerInterface
     public function __construct(private DateTimeProvider|DateTimeProviderInterface $calendar)
     {
         if ($calendar instanceof DateTimeProvider) {
-            @trigger_error(
-                sprintf('Passing a "Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.', self::class),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shipping-bundle',
+                '1.11',
+                'Passing a "%s" to "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Use "%s" instead.',
+                DateTimeProvider::class,
+                self::class,
+                DateTimeProviderInterface::class,
             );
         }
     }

@@ -23,27 +23,27 @@ use Sylius\Component\Order\OrderTransitions;
 
 final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterface
 {
-    private ?LoggerInterface $logger;
-
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private Factory $stateMachineFactory,
         private string $expirationPeriod,
-        LoggerInterface $logger = null,
+        private ?LoggerInterface $logger = null,
         private ?ObjectManager $orderManager = null,
         private int $batchSize = 100,
     ) {
         if (null === $logger) {
-            @trigger_error(
-                'Not passing a logger is deprecated since 1.7',
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/core',
+                '1.7',
+                'Not passing a $logger is deprecated and will be prohibited in Sylius 2.0.',
             );
         }
 
         if (null === $orderManager) {
-            @trigger_error(
-                'Not passing an $orderManager is deprecated since 1.13 as it makes $batchSize useless.',
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                'Not passing the $orderManager is deprecated as it makes $batchSize useless.',
             );
         }
 

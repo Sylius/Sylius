@@ -13,11 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Provider;
 
-@trigger_error(
-    'The "Sylius\Bundle\ShippingBundle\Provider\Calendar" class is deprecated since Sylius 1.11 and will be removed in 2.0. Use "Sylius\Calendar\Provider\Calendar" instead.',
-    \E_USER_DEPRECATED,
+trigger_deprecation(
+    'sylius/shipping-bundle',
+    '1.11',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    Calendar::class,
+    \Sylius\Calendar\Provider\Calendar::class,
 );
 
+/**
+ * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0. Use {@see \Sylius\Calendar\Provider\Calendar} instead.
+ */
 final class Calendar implements DateTimeProvider
 {
     public function today(): \DateTimeInterface

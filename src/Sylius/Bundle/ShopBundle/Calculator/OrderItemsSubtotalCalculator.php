@@ -19,23 +19,14 @@ use Sylius\Component\Core\Model\OrderInterface;
 trigger_deprecation(
     'sylius/sylius',
     '1.13',
-    sprintf(
-        'Class "%s" is deprecated and will be removed in Sylius 2.0. Items subtotal calculations is now available by using %s::getSubtotalItems method.',
-        OrderItemsSubtotalCalculator::class,
-        Order::class,
-    ),
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Items subtotal calculations is now available by using %s::getSubtotalItems method.',
+    OrderItemsSubtotalCalculator::class,
+    Order::class,
 );
 
-trigger_deprecation(
-    'sylius/sylius',
-    '1.13',
-    sprintf(
-        'Class "%s" is deprecated and will be removed in Sylius 2.0. Items subtotal calculations is now available by using %s::getSubtotalItems method.',
-        OrderItemsSubtotalCalculator::class,
-        Order::class,
-    ),
-);
-
+/**
+ * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Items subtotal calculations is now available by using {@see Order::getSubtotalItems} method.
+ */
 final class OrderItemsSubtotalCalculator implements OrderItemsSubtotalCalculatorInterface
 {
     public function getSubtotal(OrderInterface $order): int

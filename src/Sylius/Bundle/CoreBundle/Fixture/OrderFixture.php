@@ -77,7 +77,11 @@ class OrderFixture extends AbstractFixture
                 $orderPaymentMethodSelectionRequirementChecker,
             );
 
-            @trigger_error('Use orderExampleFactory. OrderFixture is deprecated since 1.6 and will be prohibited since 2.0.', \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.6',
+                'Use OrderExampleFactory. OrderFixture is deprecated and will be prohibited since Sylius 2.0.',
+            );
         }
 
         $this->orderManager = $orderManager;

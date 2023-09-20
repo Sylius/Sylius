@@ -92,15 +92,18 @@ relevant classes, methods, properties:
 The deprecation message should indicate the version in which the class/method was
 deprecated and how the feature was replaced (whenever possible).
 
-A PHP ``\E_USER_DEPRECATED`` error must also be triggered to help people with
-the migration:
+A PHP deprecation must also be triggered to help people with
+the migration, for instance:
 
 .. code-block:: php
 
-    @trigger_error(
-        'XXX() is deprecated since version 2.X and will be removed in 2.Y. Use XXX instead.',
-        \E_USER_DEPRECATED
+    trigger_deprecation(
+        'sylius/some-package', // package name
+        '1.x', // package version
+        'A is deprecated and will be removed in Sylius 2.0. Use B instead.', // message
     );
+
+You should not use the @trigger_error() function.
 
 .. _Semantic Versioning: https://semver.org/
 .. _Symfony's Backward Compatibility Promise: https://symfony.com/doc/current/contributing/code/bc.html

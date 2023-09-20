@@ -38,7 +38,11 @@ final class ImpersonateUserController
         private string $authorizationRole,
     ) {
         if (null !== $router) {
-            @trigger_error('Passing RouterInterface as the fourth argument is deprecated since 1.4 and will be prohibited in 2.0', \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '1.4',
+                'Passing a $router as the fourth argument is deprecated and will be prohibited in Sylius 2.0',
+            );
         }
         $this->router = $router;
     }

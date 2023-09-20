@@ -32,7 +32,12 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         private ?ProportionalIntegerDistributorInterface $proportionalIntegerDistributor = null,
     ) {
         if ($this->proportionalIntegerDistributor === null) {
-            @trigger_error(sprintf('Not passing an $proportionalIntegerDistributor to %s constructor is deprecated since Sylius 1.13 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                'Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
         }
     }
 

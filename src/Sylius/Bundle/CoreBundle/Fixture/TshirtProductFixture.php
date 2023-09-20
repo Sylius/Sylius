@@ -16,13 +16,20 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Faker\Factory;
 use Faker\Generator;
 
-@trigger_error('The "TshirtProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.5',
+    'The "TshirtProductFixture" class is deprecated. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.',
+);
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated since Sylius 1.5 and will be removed in Sylius 2.0. Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.
+ */
 class TshirtProductFixture extends AbstractFixture
 {
     private Generator $faker;

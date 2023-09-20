@@ -23,11 +23,13 @@ final class GaufretteFilesystemAdapter implements FilesystemAdapterInterface
 {
     public function __construct(private FilesystemInterface $filesystem)
     {
-        @trigger_error(sprintf(
-            'The "%s" class is deprecated since Sylius 1.12 and will be removed in 2.0. Use "%s" instead.',
+        trigger_deprecation(
+            'sylius/core',
+            '1.12',
+            'The "%s" class is deprecated and will be removed in 2.0. Use "%s" instead.',
             self::class,
             FlysystemFilesystemAdapter::class,
-        ), \E_USER_DEPRECATED);
+        );
     }
 
     public function has(string $location): bool
