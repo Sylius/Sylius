@@ -69,7 +69,16 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.6',
-                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
+        }
+
+        if ($this->fileLocator === null) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Not passing a $fileLocator to %s constructor is deprecated and will be removed in Sylius 2.0.',
                 self::class,
             );
         }
