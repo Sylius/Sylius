@@ -25,7 +25,10 @@ final class ShippingDateAssigner implements ShippingDateAssignerInterface
             trigger_deprecation(
                 'sylius/shipping-bundle',
                 '1.11',
-                sprintf('Passing a "Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider" to "%s" constructor is deprecated and will be prohibited in 2.0. Use "Sylius\Calendar\Provider\DateTimeProviderInterface" instead.', self::class),
+                'Passing a "%s" to "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Use "%s" instead.',
+                DateTimeProvider::class,
+                self::class,
+                DateTimeProviderInterface::class,
             );
         }
     }

@@ -39,7 +39,8 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.13',
-                sprintf('Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
+                'Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
             );
         }
     }

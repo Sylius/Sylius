@@ -31,11 +31,9 @@ final class CancelOrderStateMachineCallbackPass implements CompilerPassInterface
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.11',
-                sprintf(
-                    'Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
-                    'winzou_state_machine.sylius_order.callbacks.after.sylis_cancel_order',
-                    'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order',
-                ),
+                'Callback "%s" was renamed to "%s". The old name will be removed in Sylius 2.0, use the new name to override it.',
+                'winzou_state_machine.sylius_order.callbacks.after.sylis_cancel_order',
+                'winzou_state_machine.sylius_order.callbacks.after.sylius_cancel_order',
             );
 
             $smConfigs['sylius_order']['callbacks']['after']['sylius_cancel_order'] = $smConfigs['sylius_order']['callbacks']['after']['sylis_cancel_order'];

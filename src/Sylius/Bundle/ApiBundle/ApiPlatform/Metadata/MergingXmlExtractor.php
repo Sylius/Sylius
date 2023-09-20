@@ -146,7 +146,8 @@ final class MergingXmlExtractor extends AbstractResourceExtractor implements Pro
             trigger_deprecation(
                 'api-platform/core',
                 '2.1',
-                sprintf('Configuring "%1$s" tags without using a parent "%1$ss" tag is deprecated since API Platform 2.1 and will not be possible anymore in API Platform 3', $operationType),
+                'Configuring "%1$s" tags without using a parent "%1$ss" tag is deprecated since API Platform 2.1 and will not be possible anymore in API Platform 3',
+                $operationType,
             );
 
             return $legacyOperations;

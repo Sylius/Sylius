@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterfac
 trigger_deprecation('sylius/user-bundle', '1.12', 'The "%s" class is deprecated, use "%s" instead.', UserPasswordEncoder::class, UserPasswordHasher::class);
 
 /**
- * @deprecated, use {@link UserPasswordHasher} instead
+ * @deprecated, use {@link UserPasswordHasher} instead.
  */
 class UserPasswordEncoder implements UserPasswordEncoderInterface
 {

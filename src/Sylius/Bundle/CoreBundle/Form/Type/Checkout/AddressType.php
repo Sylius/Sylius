@@ -43,10 +43,8 @@ final class AddressType extends AbstractResourceType
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.8',
-                sprintf(
-                    'Not passing an $addressComparator to "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
-                    __CLASS__,
-                ),
+                'Not passing an $addressComparator to "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
             );
         }
 

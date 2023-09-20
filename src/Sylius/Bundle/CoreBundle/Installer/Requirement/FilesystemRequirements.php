@@ -28,10 +28,8 @@ final class FilesystemRequirements extends RequirementCollection
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.2',
-                sprintf(
-                    'Passing root directory to "%s" constructor as the second argument is deprecated and this argument will be removed in Sylius 2.0.',
-                    self::class,
-                ),
+                'Passing root directory to "%s" constructor as the second argument is deprecated and this argument will be removed in Sylius 2.0.',
+                self::class,
             );
 
             [$rootDir, $cacheDir, $logsDir] = [$cacheDir, $logsDir, $rootDir];

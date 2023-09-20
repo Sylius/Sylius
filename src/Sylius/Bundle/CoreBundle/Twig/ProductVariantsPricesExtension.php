@@ -25,11 +25,9 @@ final class ProductVariantsPricesExtension extends AbstractExtension
         trigger_deprecation(
             'sylius/core-bundle',
             '1.13',
-            sprintf(
-                'The "%s" class is deprecated and will be removed in 2.0. Use "%s" instead.',
-                self::class,
-                ProductVariantsMapExtension::class,
-            ),
+            'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+            self::class,
+            ProductVariantsMapExtension::class,
         );
     }
 

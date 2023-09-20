@@ -25,7 +25,8 @@ use Webmozart\Assert\Assert;
 trigger_deprecation(
     'sylius/core',
     '1.2',
-    sprintf('This class is deprecated and will be removed in 2.0. "%s" should be used instead.', EligibleDefaultShippingMethodResolver::class),
+    'This class is deprecated and will be removed in 2.0. "%s" should be used instead.',
+    EligibleDefaultShippingMethodResolver::class,
 );
 
 /**

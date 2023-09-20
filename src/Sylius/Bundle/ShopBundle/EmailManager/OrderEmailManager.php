@@ -29,11 +29,9 @@ final class OrderEmailManager implements OrderEmailManagerInterface
             trigger_deprecation(
                 'sylius/shop-bundle',
                 '1.8',
-                sprintf(
-                    'Not passing an instance of %s to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                    DecoratedOrderEmailManagerInterface::class,
-                    self::class,
-                ),
+                'Not passing an instance of %s to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                DecoratedOrderEmailManagerInterface::class,
+                self::class,
             );
         }
     }

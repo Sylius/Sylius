@@ -69,7 +69,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.6',
-                sprintf('Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.', self::class),
+                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
             );
         }
 
@@ -244,8 +245,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 trigger_deprecation(
                     'sylius/core-bundle',
                     '1.3',
-                    'It is deprecated to pass indexed array as an image definition. ' .
-                    'Please use associative array with "path" and "type" keys instead.',
+                    'It is deprecated to pass indexed array as an image definition. Please use associative array with "path" and "type" keys instead.',
                 );
 
                 $imagePath = array_shift($image);

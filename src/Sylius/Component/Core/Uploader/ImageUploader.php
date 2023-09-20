@@ -42,10 +42,8 @@ class ImageUploader implements ImageUploaderInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.12',
-                sprintf(
-                    'Passing Gaufrette\FilesystemInterface as a first argument in %s constructor is deprecated and will be not possible in Sylius 2.0.',
-                    self::class,
-                ),
+                'Passing Gaufrette\FilesystemInterface as a first argument in %s constructor is deprecated and will be not possible in Sylius 2.0.',
+                self::class,
             );
 
             /** @psalm-suppress DeprecatedClass */
@@ -56,10 +54,8 @@ class ImageUploader implements ImageUploaderInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.6',
-                sprintf(
-                    'Not passing an $imagePathGenerator to %s constructor is deprecated and will be not possible in Sylius 2.0.',
-                    self::class,
-                ),
+                'Not passing an $imagePathGenerator to %s constructor is deprecated and will be not possible in Sylius 2.0.',
+                self::class,
             );
         }
 

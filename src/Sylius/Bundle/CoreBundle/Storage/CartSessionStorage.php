@@ -33,7 +33,7 @@ final class CartSessionStorage implements CartStorageInterface
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.12',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in 2.0. Pass an instance of %s instead.',
+                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
                 SessionInterface::class,
                 self::class,
                 RequestStack::class,

@@ -29,7 +29,8 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
             trigger_deprecation(
                 'sylius/core',
                 '1.13',
-                sprintf('Not passing a $productVariantLowestPriceDisplayChecker to %s constructor is deprecated and will be prohibited in Sylius 2.0.', self::class),
+                'Not passing a $productVariantLowestPriceDisplayChecker to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
             );
         }
     }

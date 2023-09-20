@@ -38,7 +38,7 @@ final class NotificationController
             trigger_deprecation(
                 'sylius/admin-bundle',
                 '1.13',
-                'Using a service that does not implement "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in 2.0.',
+                'Using a service that does not implement "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
                 ClientInterface::class,
                 self::class,
             );
@@ -48,7 +48,7 @@ final class NotificationController
             trigger_deprecation(
                 'sylius/admin-bundle',
                 '1.13',
-                'Using a service that does not implement "%s" as a 2nd argument of "%s" constructor is deprecated and will be prohibited in 2.0.',
+                'Using a service that does not implement "%s" as a 2nd argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
                 RequestFactoryInterface::class,
                 self::class,
             );
@@ -58,7 +58,7 @@ final class NotificationController
             trigger_deprecation(
                 'sylius/admin-bundle',
                 '1.13',
-                'Not passing a service that implements "%s" as a 5th argument of "%s" constructor is deprecated and will be prohibited in 2.0.',
+                'Not passing a service that implements "%s" as a 5th argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
                 StreamFactoryInterface::class,
                 self::class,
             );

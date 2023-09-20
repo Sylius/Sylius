@@ -28,7 +28,10 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
             trigger_deprecation(
                 'sylius/core',
                 '1.11',
-                sprintf('Passing a "Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" to "%s" constructor is deprecated and will be prohibited in 2.0. Use "Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" instead.', self::class),
+                'Passing a "%s" to "%s" constructor is deprecated and will be prohibited in 2.0. Use "%s" instead.',
+                ProductVariantPriceCalculatorInterface::class,
+                self::class,
+                ProductVariantPricesCalculatorInterface::class,
             );
         }
     }

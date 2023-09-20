@@ -51,7 +51,8 @@ class Kernel extends HttpKernel
         trigger_deprecation(
             'sylius/core-bundle',
             '1.3',
-            sprintf('Using "%s" as Symfony kernel is deprecated. Please migrate to Symfony 4 directory structure. Upgrade guide: https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md#directory-structure-change', self::class),
+            'Using "%s" as Symfony kernel is deprecated. Please migrate to Symfony 4 directory structure. Upgrade guide: https://github.com/Sylius/Sylius/blob/1.3/UPGRADE-1.3.md#directory-structure-change',
+            self::class,
         );
 
         parent::__construct($environment, $debug);

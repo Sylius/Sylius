@@ -17,7 +17,7 @@ use Sonata\BlockBundle\Event\BlockEvent;
 use Sonata\BlockBundle\Model\Block;
 
 /**
- * @deprecated
+ * @deprecated since Sylius 1.7 and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.
  */
 final class BlockEventListener
 {
@@ -26,7 +26,8 @@ final class BlockEventListener
         trigger_deprecation(
             'sylius/ui-bundle',
             '1.7',
-            sprintf('Using "%s" to add blocks to the templates is deprecated and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.', self::class),
+            'Using "%s" to add blocks to the templates is deprecated and will be removed in Sylius 2.0. Use "sylius_ui" configuration instead.',
+            self::class,
         );
     }
 
