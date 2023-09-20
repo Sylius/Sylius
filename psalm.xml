@@ -42,7 +42,6 @@
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
                 <referencedClass name="Payum\Core\Security\GenericTokenFactoryInterface" />
                 <referencedClass name="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper" />
-                <referencedClass name="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" />
                 <referencedClass name="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator"/>
                 <referencedClass name="Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension"/>
