@@ -2506,11 +2506,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Controller/ProductTaxonController.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$smConfigs has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/BackwardsCompatibility/CancelOrderStateMachineCallbackPass.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\DependencyInjection\\\\SyliusCoreExtension\\:\\:getNamespacesOfMigrationsExecutedBefore\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/DependencyInjection/SyliusCoreExtension.php
