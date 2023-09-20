@@ -28,9 +28,10 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         private ?CLIContextCheckerInterface $commandBasedChecker = null,
     ) {
         if ($this->commandBasedChecker === null) {
-            @trigger_error(
-                'Not passing CommandBasedContextCheckedInterface explicitly as the third argument is deprecated since 1.11 and will be prohibited in 2.0.',
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/core',
+                '1.11',
+                'Not passing a $commandBasedChecker explicitly as the third argument is deprecated and will be prohibited in Sylius 2.0.',
             );
         }
     }

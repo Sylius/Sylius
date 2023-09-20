@@ -24,7 +24,12 @@ class ProductSlugController extends AbstractController
     public function __construct(private ?SlugGeneratorInterface $slugGenerator = null)
     {
         if ($this->slugGenerator === null) {
-            @trigger_error(sprintf('Not passing a $slugGenerator to %s constructor is deprecated since Sylius 1.11 and will be prohibited in Sylius 2.0.', self::class), \E_USER_DEPRECATED);
+            trigger_deprecation(
+                'sylius/product-bundle',
+                '1.11',
+                'Not passing a $slugGenerator to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
+                self::class,
+            );
         }
     }
 

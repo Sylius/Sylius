@@ -31,7 +31,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     /**
-     * @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see createCriteriaAwareSearchListQueryBuilder()} instead.
+     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createCriteriaAwareSearchListQueryBuilder()} instead.
      */
     public function createSearchListQueryBuilder(): QueryBuilder;
 
@@ -41,7 +41,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
     /**
-     * @deprecated since 1.13 and will be removed in Sylius 2.0. Use {@see createByCustomerIdCriteriaAwareQueryBuilder()} instead.
+     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createByCustomerIdCriteriaAwareQueryBuilder()} instead.
      */
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
 

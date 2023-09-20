@@ -39,20 +39,24 @@ class ImageUploader implements ImageUploaderInterface
         protected ?ImagePathGeneratorInterface $imagePathGenerator = null,
     ) {
         if ($this->filesystem instanceof FilesystemInterface) {
-            @trigger_error(sprintf(
-                'Passing Gaufrette\FilesystemInterface as a first argument in %s constructor is deprecated since Sylius 1.12 and will be not possible in Sylius 2.0.',
+            trigger_deprecation(
+                'sylius/core',
+                '1.12',
+                'Passing Gaufrette\FilesystemInterface as a first argument in %s constructor is deprecated and will be not possible in Sylius 2.0.',
                 self::class,
-            ), \E_USER_DEPRECATED);
+            );
 
             /** @psalm-suppress DeprecatedClass */
             $this->filesystem = new GaufretteFilesystemAdapter($this->filesystem);
         }
 
         if ($imagePathGenerator === null) {
-            @trigger_error(sprintf(
-                'Not passing an $imagePathGenerator to %s constructor is deprecated since Sylius 1.6 and will be not possible in Sylius 2.0.',
+            trigger_deprecation(
+                'sylius/core',
+                '1.6',
+                'Not passing an $imagePathGenerator to %s constructor is deprecated and will be not possible in Sylius 2.0.',
                 self::class,
-            ), \E_USER_DEPRECATED);
+            );
         }
 
         $this->imagePathGenerator = $imagePathGenerator ?? new UploadedImagePathGenerator();

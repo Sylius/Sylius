@@ -29,9 +29,10 @@ class OrderItemsSubtotalExtension extends AbstractExtension
         if (null === $calculator) {
             $calculator = new OrderItemsSubtotalCalculator();
 
-            @trigger_error(
-                'Not passing a calculator is deprecated since 1.6. Argument will no longer be optional from 2.0.',
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.6',
+                'Not passing a $calculator is deprecated. Argument will no longer be optional from Sylius 2.0.',
             );
         }
 
