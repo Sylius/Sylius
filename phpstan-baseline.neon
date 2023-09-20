@@ -2286,11 +2286,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/RemoveCatalogPromotionHandler.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\CommandHandler\\\\RemoveInactiveCatalogPromotionHandler\\:\\:__construct\\(\\) has parameter \\$catalogPromotionRepository with generic interface Sylius\\\\Component\\\\Promotion\\\\Repository\\\\CatalogPromotionRepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/RemoveInactiveCatalogPromotionHandler.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\CatalogPromotion\\\\CommandHandler\\\\UpdateCatalogPromotionStateHandler\\:\\:__construct\\(\\) has parameter \\$catalogPromotionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandHandler/UpdateCatalogPromotionStateHandler.php
