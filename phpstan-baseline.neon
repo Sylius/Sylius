@@ -4231,11 +4231,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/PriceHelper.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Templating\\\\Helper\\\\ProductVariantsPricesHelper\\:\\:getPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Templating/Helper/ProductVariantsPricesHelper.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\BundleLoadedCheckerExtension\\:\\:__construct\\(\\) has parameter \\$listOfBundles with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Twig/BundleLoadedCheckerExtension.php
