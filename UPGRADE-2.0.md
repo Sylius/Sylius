@@ -45,6 +45,9 @@
 *  The name of the default `LiipImagineBundle`'s resolver and loader were changed from **default** to **sylius_image** ([reference](https://github.com/Sylius/Sylius/pull/12543)). 
    To change the default resolver and/or loader for `LiipImagineBundle`, configure `cache` and/or `data_loader` parameters under the `liip_imagine` key.
 
+* The `sylius/calendar` package has been replaced with `symfony/clock` package. All usages of the `Sylius\Calendar\Provider\DateTimeProviderInterface` class
+    have been replaced with `Symfony\Component\Clock\ClockInterface` class.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
