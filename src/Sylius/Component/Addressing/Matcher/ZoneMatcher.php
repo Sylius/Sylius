@@ -29,7 +29,22 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
     public function match(AddressInterface $address, ?string $scope = null): ?ZoneInterface
     {
-        return $this->zoneRepository->findOneByAddress($address, $scope);
+        $zoneByProvince = $this->zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, $scope);
+        if (null !== $zoneByProvince) {
+            return $zoneByProvince;
+        }
+
+        $zoneByCountry = $this->zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_COUNTRY, $scope);
+        if (null !== $zoneByCountry) {
+            return $zoneByCountry;
+        }
+
+        $zoneByMember = $this->zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_ZONE, $scope);
+        if (null !== $zoneByMember) {
+            return $zoneByMember;
+        }
+
+        return null;
     }
 
     public function matchAll(AddressInterface $address, ?string $scope = null): array
