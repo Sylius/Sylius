@@ -34,7 +34,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
 
     public function matchAll(AddressInterface $address, ?string $scope = null): array
     {
-        $zones = $this->zoneRepository->findAllByAddress($address);
+        $zones = $this->zoneRepository->findByAddress($address);
         $zonesWithParents = $this->getZonesWithParentZones($zones);
 
         if (null === $scope) {

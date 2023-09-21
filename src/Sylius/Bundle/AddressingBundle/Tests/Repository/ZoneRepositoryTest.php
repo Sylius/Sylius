@@ -69,7 +69,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         $repository = $this->getRepository();
         $zones = [];
 
-        foreach ($repository->findAllByAddress($address) as $zone) {
+        foreach ($repository->findByAddress($address) as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
@@ -88,7 +88,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         $repository = $this->getRepository();
         $zones = [];
 
-        foreach ($repository->findAllByAddress($address) as $zone) {
+        foreach ($repository->findByAddress($address) as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
@@ -107,7 +107,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         $repository = $this->getRepository();
         $zones = [];
 
-        foreach ($repository->findAllByAddress($address, 'only_eu') as $zone) {
+        foreach ($repository->findByAddress($address, 'only_eu') as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
