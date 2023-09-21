@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
+    "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
     "chart.js": "^3.7.1",
     "jquery": "^3.5.0",
     "jquery.dirtyforms": "^2.0.0",
