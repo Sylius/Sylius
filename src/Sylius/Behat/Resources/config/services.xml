@@ -120,6 +120,8 @@
         </service>
         <service id="clock" alias="sylius.behat.clock" />
         <service id="Symfony\Component\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
 
         <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter" public="false">
             <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
