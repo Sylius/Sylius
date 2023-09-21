@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;

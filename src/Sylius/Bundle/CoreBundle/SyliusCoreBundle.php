@@ -30,7 +30,6 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SyliusPriceHistoryLegacyAliasesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -92,7 +91,6 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new Symfony5AuthenticationManagerPass());
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
-        $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
     }
 
     /**

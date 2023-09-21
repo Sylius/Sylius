@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection;
 
-use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Configuration;
-use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
 final class SyliusCoreConfigurationTest extends TestCase
 {
