@@ -48,6 +48,19 @@
 * The `sylius/calendar` package has been replaced with `symfony/clock` package. All usages of the `Sylius\Calendar\Provider\DateTimeProviderInterface` class
     have been replaced with `Symfony\Component\Clock\ClockInterface` class.
 
+  * The following classes were changed:
+
+    * `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer`
+    * `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\RequestResetPasswordEmailHandler`
+    * `Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLogger`
+    * `Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover`
+    * `Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner`
+    * `Sylius\Bundle\PromotionBundle\Criteria\DateRange`
+    * `Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicator`
+    * `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler`
+    * `Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler`
+    * `Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker`
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
