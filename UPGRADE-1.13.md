@@ -149,3 +149,7 @@
 
 1. Interface `Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface` and class `Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension` responsible for the `sylius_order_items_subtotal` twig function have been deprecated and will be removed in Sylius 2.0.
    Use the `::getItemsSubtotal()` method from the `Order` class instead.
+
+1. The `Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture` has been deprecated. Use `Sylius\Bundle\CoreBundle\Fixture\PaymentFixture` instead.
+
+1. Not passing a `$router` to `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController` as the fourth argument is deprecated and will be prohibited in Sylius 2.0.
