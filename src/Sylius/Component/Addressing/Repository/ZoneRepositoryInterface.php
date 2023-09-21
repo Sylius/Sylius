@@ -37,5 +37,5 @@ interface ZoneRepositoryInterface extends RepositoryInterface
      *
      * @return array<ZoneInterface>
      */
-    public function findZonesByMembers(array $members, ?string $scope = null): array;
+    public function findByMembers(array $members, ?string $scope = null): array;
 }

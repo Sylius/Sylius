@@ -124,7 +124,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         $zones = [];
 
         $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
-        foreach ($repository->findZonesByMembers([$visegradGroupZone]) as $zone) {
+        foreach ($repository->findByMembers([$visegradGroupZone]) as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 
@@ -142,7 +142,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         /** @var ZoneInterface $visegradGroupZone */
         $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
 
-        foreach ($repository->findZonesByMembers([$visegradGroupZone], 'only_eu') as $zone) {
+        foreach ($repository->findByMembers([$visegradGroupZone], 'only_eu') as $zone) {
             $zones[$zone->getCode()] = $zone;
         }
 

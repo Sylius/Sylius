@@ -95,7 +95,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
      *
      * @return array<ZoneInterface>
      */
-    public function findZonesByMembers(array $members, ?string $scope = null): array
+    public function findByMembers(array $members, ?string $scope = null): array
     {
         $zonesCodes = array_map(
             fn (ZoneInterface $zone): string => $zone->getCode(),
