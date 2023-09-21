@@ -11,8 +11,6 @@
     <projectFiles>
         <directory name="src" />
         <ignoreFiles>
-            <file name="src/Sylius/Bundle/CoreBundle/Application/Kernel.php" />
-
             <directory name="src/Sylius/Behat" />
 
             <directory name="src/Sylius/Bundle/*/spec" />
