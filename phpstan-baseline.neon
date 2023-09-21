@@ -4761,11 +4761,6 @@ parameters:
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductCodeChoiceType.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ProductBundle\\\\Form\\\\Type\\\\ProductOptionChoiceType\\:\\:__construct\\(\\) has parameter \\$productOptionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductOptionChoiceType.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\ProductBundle\\\\Form\\\\Type\\\\ProductOptionValueCollectionType\\:\\:assertOptionsAreValid\\(\\) has parameter \\$options with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ProductBundle/Form/Type/ProductOptionValueCollectionType.php
