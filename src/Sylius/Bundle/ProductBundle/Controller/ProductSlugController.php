@@ -26,9 +26,6 @@ class ProductSlugController extends AbstractController
     {
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');
