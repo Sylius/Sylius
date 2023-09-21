@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------
+
+by Zales0123 at 2021-04-20T07:44:53Z
+
+`UPGRADE` file updated 👍
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-19T10:05:44Z
+
+I rebased the PR against the `2.0` branch :).
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-19T10:05:55Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployment failed
+
+Check https://github.com/Sylius/Sylius/actions/runs/6257746053 for details.
+
+Available commands:
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-21T06:27:30Z
+
+Thanks, Mateusz! :1st_place_medal:
