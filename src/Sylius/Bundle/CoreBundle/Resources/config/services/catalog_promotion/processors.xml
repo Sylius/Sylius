@@ -51,6 +51,14 @@
         </service>
 
         <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessor"
+        >
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionArchivalAnnouncerInterface" />
+        </service>
+
+        <service
             id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor"
         >

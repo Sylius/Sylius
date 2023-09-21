@@ -51,5 +51,7 @@
                 <order-by-field name="id" />
             </order-by>
         </one-to-many>
+
+        <field name="archivedAt" column="archived_at" type="datetime" nullable="true" />
     </mapped-superclass>
 </doctrine-mapping>

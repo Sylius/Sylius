@@ -15,6 +15,9 @@
     <services>
         <defaults public="true" />
 
+        <service id="sylius.catalog_promotion.criteria.unarchived" class="Sylius\Bundle\PromotionBundle\Criteria\Unarchived">
+            <tag name="sylius.catalog_promotion.criteria" />
+        </service>
         <service id="sylius.catalog_promotion.criteria.enabled" class="Sylius\Bundle\PromotionBundle\Criteria\Enabled">
             <tag name="sylius.catalog_promotion.criteria" />
         </service>

@@ -23,6 +23,17 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\ArchiveCatalogPromotionHandler">
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\RestoreCatalogPromotionHandler">
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\DisableCatalogPromotionHandler">
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface"/>
