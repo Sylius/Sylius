@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Addressing\Matcher;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 
@@ -60,8 +61,8 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $zoneTwo,
         ZoneInterface $zoneThree,
     ): void {
-        $zoneOne->getScope()->willReturn('nato');
-        $zoneTwo->getScope()->willReturn('all');
+        $zoneOne->getScope()->willReturn('shipping');
+        $zoneTwo->getScope()->willReturn(Scope::ALL);
         $zoneThree->getScope()->willReturn('custom');
 
         $zoneRepository->findByAddress($address)->willReturn([$zoneOne]);
@@ -69,7 +70,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $zoneRepository->findByMembers([$zoneTwo])->willReturn([$zoneThree]);
         $zoneRepository->findByMembers([$zoneThree])->willReturn([]);
 
-        $matchedZones = $this->matchAll($address, 'nato');
+        $matchedZones = $this->matchAll($address, 'shipping');
 
         $matchedZones->shouldHaveCount(2);
         $matchedZones->shouldBe([$zoneOne, $zoneTwo]);

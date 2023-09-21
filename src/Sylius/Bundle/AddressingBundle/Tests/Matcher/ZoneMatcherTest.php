@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AddressingBundle\Tests\Matcher;
 
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Component\Addressing\Model\Address;
@@ -59,7 +58,7 @@ final class ZoneMatcherTest extends KernelTestCase
         $zoneMatcher = self::getContainer()->get('sylius.zone_matcher');
         $matchedZones = [];
 
-        foreach ($zoneMatcher->matchAll($address, 'nato') as $zone) {
+        foreach ($zoneMatcher->matchAll($address, 'shipping') as $zone) {
             $matchedZones[$zone->getCode()] = $zone;
         }
 
