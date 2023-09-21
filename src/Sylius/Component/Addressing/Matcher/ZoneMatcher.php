@@ -54,7 +54,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
      */
     private function getZonesWithParentZones(array $zones): array
     {
-        $parentZones = $this->zoneRepository->findZonesByMembers($zones);
+        $parentZones = $this->zoneRepository->findByMembers($zones);
 
         if ([] === $parentZones) {
             return $zones;
