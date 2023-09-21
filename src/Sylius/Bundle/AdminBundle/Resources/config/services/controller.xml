@@ -95,6 +95,10 @@
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Controller\ArchiveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>

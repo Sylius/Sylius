@@ -60,6 +60,7 @@
             </order-by>
         </one-to-many>
 
+        <field name="archivedAt" column="archived_at" type="datetime" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
