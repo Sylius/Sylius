@@ -134,7 +134,7 @@ final class Kernel extends HttpKernel
                     'block' => [
                         'component' => 'SomeTwigComponent',
                         'context' => [
-                            'foo' => 'bar',
+                            'baz' => 'qux',
                         ],
                     ],
                 ],

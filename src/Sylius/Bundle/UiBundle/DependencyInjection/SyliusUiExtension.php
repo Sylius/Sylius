@@ -57,8 +57,8 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
                 $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
+            /** @psalm-var array{name: string, eventName: string, template: string, component: string|null, context: array, priority: int, enabled: bool} $details */
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @psalm-var array{name: string, eventName: string, template: string, component: string|null, context: array, priority: int, enabled: bool} $details */
                 $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
                     $details['name'],
                     $details['eventName'],

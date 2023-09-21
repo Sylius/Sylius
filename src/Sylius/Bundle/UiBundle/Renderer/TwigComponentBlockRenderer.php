@@ -34,6 +34,6 @@ final class TwigComponentBlockRenderer implements TemplateBlockRendererInterface
             return $this->decoratedRenderer->render($templateBlock, $context);
         }
 
-        return $this->componentRenderer->createAndRender($templateBlock->getComponent(), ['context' => $templateBlock->getContext()]);
+        return $this->componentRenderer->createAndRender($templateBlock->getComponent(), ['context' => $templateBlock->getContext() + $context]);
     }
 }
