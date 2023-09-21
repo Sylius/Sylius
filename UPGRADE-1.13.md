@@ -153,3 +153,5 @@
 1. The `Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture` has been deprecated. Use `Sylius\Bundle\CoreBundle\Fixture\PaymentFixture` instead.
 
 1. Not passing a `$router` to `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController` as the fourth argument is deprecated and will be prohibited in Sylius 2.0.
+
+1. The `Sylius\Bundle\CoreBundle\Provider\SessionProvider` has been deprecated and will be removed in Sylius 2.0.
