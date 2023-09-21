@@ -33,10 +33,10 @@ Sylius\Component\Addressing\Model\Zone:
         name: European Union
         type: zone
         members: ["@member_visegrad_group"]
-        scope: 'only_eu'
+        scope: 'tax'
     zone_nato:
         code: NATO
         name: NATO
         type: zone
         members: ["@member_poland_nato"]
-        scope: 'nato'
+        scope: 'shipping'

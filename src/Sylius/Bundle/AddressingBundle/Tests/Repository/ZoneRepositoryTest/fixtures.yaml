@@ -27,19 +27,19 @@ Sylius\Component\Addressing\Model\Zone:
         name: European Union
         type: country
         members: ["@member_eu_country_NL", "@member_eu_country_BE", "@member_eu_country_PL", "@member_eu_country_DE", "@member_eu_country_CZ", "@member_eu_country_SK", "@member_eu_country_HU"]
-        scope: 'only_eu'
+        scope: 'tax'
     zone_eu_middle:
         code: EU_MIDDLE
         name: European Union Middle
         type: zone
         members: ["@member_zone_visegrad"]
-        scope: 'only_eu'
+        scope: 'tax'
     nato:
         code: NATO
         name: NATO
         type: zone
         members: ["@member_zone_visegrad_2"]
-        scope: 'only_nato'
+        scope: 'shipping'
     zone_visegrad:
         code: VISEGRAD_GROUP
         name: Visegrad Group
