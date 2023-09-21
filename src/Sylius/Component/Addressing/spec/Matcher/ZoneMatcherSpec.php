@@ -42,7 +42,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         ZoneInterface $zoneTwo,
         ZoneInterface $zoneThree,
     ): void {
-        $zoneRepository->findAllByAddress($address)->willReturn([$zoneOne]);
+        $zoneRepository->findByAddress($address)->willReturn([$zoneOne]);
         $zoneRepository->findByMembers([$zoneOne])->willReturn([$zoneTwo]);
         $zoneRepository->findByMembers([$zoneTwo])->willReturn([$zoneThree]);
         $zoneRepository->findByMembers([$zoneThree])->willReturn([]);
@@ -64,7 +64,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $zoneTwo->getScope()->willReturn('all');
         $zoneThree->getScope()->willReturn('custom');
 
-        $zoneRepository->findAllByAddress($address)->willReturn([$zoneOne]);
+        $zoneRepository->findByAddress($address)->willReturn([$zoneOne]);
         $zoneRepository->findByMembers([$zoneOne])->willReturn([$zoneTwo]);
         $zoneRepository->findByMembers([$zoneTwo])->willReturn([$zoneThree]);
         $zoneRepository->findByMembers([$zoneThree])->willReturn([]);

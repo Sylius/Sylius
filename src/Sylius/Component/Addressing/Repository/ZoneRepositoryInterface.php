@@ -28,7 +28,7 @@ interface ZoneRepositoryInterface extends RepositoryInterface
     public function findOneByAddress(AddressInterface $address, ?string $scope = null): ?ZoneInterface;
 
     /** @return ZoneInterface[] */
-    public function findAllByAddress(AddressInterface $address, ?string $scope = null): array;
+    public function findByAddress(AddressInterface $address, ?string $scope = null): array;
 
     public function createFindByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder;
 

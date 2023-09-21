@@ -44,7 +44,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     }
 
     /** @return ZoneInterface[] */
-    public function findAllByAddress(AddressInterface $address, ?string $scope = null): array
+    public function findByAddress(AddressInterface $address, ?string $scope = null): array
     {
         return $this->createFindByAddressQueryBuilder($address, $scope)->getQuery()->getResult();
     }
