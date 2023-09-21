@@ -25,18 +25,13 @@ use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
  */
 class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
-    public function findOneByAddress(AddressInterface $address, ?string $scope = null): ?ZoneInterface
+    public function findOneByAddressAndType(AddressInterface $address, string $type, ?string $scope = null): ?ZoneInterface
     {
         $query = $this->createByAddressQueryBuilder($address, $scope);
 
         $query
-            ->addSelect('(CASE
-                    WHEN o.type = \'province\' THEN 1
-                    WHEN o.type = \'country\' THEN 2
-                    WHEN o.type = \'zone\' THEN 3
-                    ELSE 4
-                END) AS HIDDEN sort_order')
-            ->orderBy('sort_order', 'ASC')
+            ->andWhere($query->expr()->eq('o.type', ':type'))
+            ->setParameter('type', $type)
             ->setMaxResults(1)
         ;
 

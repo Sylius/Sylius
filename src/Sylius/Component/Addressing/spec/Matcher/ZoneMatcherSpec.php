@@ -26,14 +26,48 @@ final class ZoneMatcherSpec extends ObjectBehavior
         $this->beConstructedWith($zoneRepository);
     }
 
-    function it_returns_a_matching_zone(
+    function it_returns_a_matching_zone_by_province(
         ZoneRepositoryInterface $zoneRepository,
         AddressInterface $address,
         ZoneInterface $zone,
     ): void {
-        $zoneRepository->findOneByAddress($address, null)->willReturn($zone);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, null)->willReturn($zone);
 
         $this->match($address)->shouldReturn($zone);
+    }
+
+    function it_returns_a_matching_zone_by_country(
+        ZoneRepositoryInterface $zoneRepository,
+        AddressInterface $address,
+        ZoneInterface $zone,
+    ): void {
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, null)->willReturn(null);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_COUNTRY, null)->willReturn($zone);
+
+        $this->match($address)->shouldReturn($zone);
+    }
+
+    function it_returns_a_matching_zone_by_member(
+        ZoneRepositoryInterface $zoneRepository,
+        AddressInterface $address,
+        ZoneInterface $zone,
+    ): void {
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, null)->willReturn(null);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_COUNTRY, null)->willReturn(null);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_ZONE, null)->willReturn($zone);
+
+        $this->match($address)->shouldReturn($zone);
+    }
+
+    function it_returns_null_if_no_matching_zone_found(
+        ZoneRepositoryInterface $zoneRepository,
+        AddressInterface $address,
+    ): void {
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_PROVINCE, null)->willReturn(null);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_COUNTRY, null)->willReturn(null);
+        $zoneRepository->findOneByAddressAndType($address, ZoneInterface::TYPE_ZONE, null)->willReturn(null);
+
+        $this->match($address)->shouldReturn(null);
     }
 
     function it_returns_all_matching_zones(
