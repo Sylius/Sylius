@@ -42,6 +42,9 @@
 
 * Added the `Sylius\Component\Order\Context\ResettableCartContextInterface` that extends `Sylius\Component\Order\Context\CartContextInterface` and `Symfony\Contracts\Service\ResetInterface`.
 
+*  The name of the default `LiipImagineBundle`'s resolver and loader were changed from **default** to **sylius_image** ([reference](https://github.com/Sylius/Sylius/pull/12543)). 
+   To change the default resolver and/or loader for `LiipImagineBundle`, configure `cache` and/or `data_loader` parameters under the `liip_imagine` key.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
