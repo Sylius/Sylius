@@ -61,6 +61,16 @@
     * `Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler`
     * `Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker`
 
+* The parameter order of `Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType::__construct` has been changed:
+```php
+    public function __construct(
+    +   private readonly AddressComparatorInterface $addressComparator,
+        string $dataClass,
+        array $validationGroups = []
+    -   private readonly AddressComparatorInterface $addressComparator = null,
+    )
+```
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
