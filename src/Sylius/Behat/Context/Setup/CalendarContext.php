@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 
 final class CalendarContext implements Context
 {
-    public function __construct(private string $temporaryDatePath)
+    public function __construct(private string $dateFilePath)
     {
     }
 
@@ -26,6 +26,6 @@ final class CalendarContext implements Context
      */
     public function itIsNow(string $dateTime): void
     {
-        file_put_contents($this->temporaryDatePath, $dateTime);
+        file_put_contents($this->dateFilePath, $dateTime);
     }
 }

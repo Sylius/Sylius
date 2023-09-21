@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.calendar" class="Sylius\Behat\Context\Setup\CalendarContext">
-            <argument>%sylius.behat.clock.fake.temporary_file%</argument>
+            <argument>%sylius.behat.clock.date_file%</argument>
         </service>
 
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">

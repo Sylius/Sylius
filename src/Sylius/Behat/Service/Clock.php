@@ -17,7 +17,7 @@ use Symfony\Component\Clock\ClockInterface;
 
 final class Clock implements ClockInterface
 {
-    public function __construct(private string $temporaryDatePath)
+    public function __construct(private string $dateFilePath)
     {
     }
 
@@ -28,8 +28,8 @@ final class Clock implements ClockInterface
 
     public function now(): \DateTimeImmutable
     {
-        if (file_exists($this->temporaryDatePath)) {
-            $dateTime = file_get_contents($this->temporaryDatePath);
+        if (file_exists($this->dateFilePath)) {
+            $dateTime = file_get_contents($this->dateFilePath);
 
             return new \DateTimeImmutable($dateTime);
         }

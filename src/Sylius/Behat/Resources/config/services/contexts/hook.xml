@@ -16,7 +16,7 @@
         <defaults public="true" />
 
         <service id="sylius.behat.context.hook.calendar" class="Sylius\Behat\Context\Hook\CalendarContext">
-            <argument>%sylius.behat.clock.fake.temporary_file%</argument>
+            <argument>%sylius.behat.clock.date_file%</argument>
         </service>
 
         <service id="sylius.behat.context.hook.doctrine_orm" class="Sylius\Behat\Context\Hook\DoctrineORMContext">

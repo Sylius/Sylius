@@ -17,15 +17,15 @@ use Behat\Behat\Context\Context;
 
 final class CalendarContext implements Context
 {
-    public function __construct(private $temporaryDatePath)
+    public function __construct(private $dateFilePath)
     {
     }
 
     /** @AfterScenario */
     public function deleteTemporaryDate(): void
     {
-        if (file_exists($this->temporaryDatePath)) {
-            unlink($this->temporaryDatePath);
+        if (file_exists($this->dateFilePath)) {
+            unlink($this->dateFilePath);
         }
     }
 }
