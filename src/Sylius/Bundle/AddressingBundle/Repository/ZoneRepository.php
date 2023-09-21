@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Sylius Sp. z o.o.
+ * (c) Sylius Sp. o o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -31,9 +31,9 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         $query
             ->addSelect('(CASE
-                    WHEN z.type = \'province\' THEN 1
-                    WHEN z.type = \'country\' THEN 2
-                    WHEN z.type = \'zone\' THEN 3
+                    WHEN o.type = \'province\' THEN 1
+                    WHEN o.type = \'country\' THEN 2
+                    WHEN o.type = \'zone\' THEN 3
                     ELSE 4
                 END) AS HIDDEN sort_order')
             ->orderBy('sort_order', 'ASC')
@@ -51,14 +51,14 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
     public function createByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
     {
-        $query = $this->createQueryBuilder('z')
-            ->select('z', 'm')
-            ->leftJoin('z.members', 'm')
+        $query = $this->createQueryBuilder('o')
+            ->select('o', 'members')
+            ->leftJoin('o.members', 'members')
         ;
 
         if (null !== $scope) {
             $query
-                ->andWhere($query->expr()->in('z.scope', ':scopes'))
+                ->andWhere($query->expr()->in('o.scope', ':scopes'))
                 ->setParameter('scopes', [$scope, Scope::ALL])
             ;
         }
@@ -67,8 +67,8 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         if ($address->getCountryCode() !== null) {
             $orConditions[] = $query->expr()->andX(
-                $query->expr()->eq('z.type', ':country'),
-                $query->expr()->eq('m.code', ':countryCode'),
+                $query->expr()->eq('o.type', ':country'),
+                $query->expr()->eq('members.code', ':countryCode'),
             );
 
             $query->setParameter('country', ZoneInterface::TYPE_COUNTRY);
@@ -77,8 +77,8 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
         if ($address->getProvinceCode() !== null) {
             $orConditions[] = $query->expr()->andX(
-                $query->expr()->eq('z.type', ':province'),
-                $query->expr()->eq('m.code', ':provinceCode'),
+                $query->expr()->eq('o.type', ':province'),
+                $query->expr()->eq('members.code', ':provinceCode'),
             );
 
             $query->setParameter('province', ZoneInterface::TYPE_PROVINCE);
@@ -102,21 +102,21 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             $members,
         );
 
-        $query = $this->createQueryBuilder('z')
-            ->select('z', 'm')
-            ->leftJoin('z.members', 'm')
+        $query = $this->createQueryBuilder('o')
+            ->select('o', 'members')
+            ->leftJoin('o.members', 'members')
         ;
 
         if (null !== $scope) {
             $query
-                ->andWhere($query->expr()->in('z.scope', ':scopes'))
-                ->setParameter('scopes', [$scope, Scope::ALL])
+                ->andWhere($query->expr()->in('o.scope', ':scopes'))
+                ->setParameter('scopes', array_unique([$scope, Scope::ALL]))
             ;
         }
 
         $query
-            ->andWhere('z.type = :type')
-            ->andWhere($query->expr()->in('m.code', ':zones'))
+            ->andWhere('o.type = :type')
+            ->andWhere($query->expr()->in('members.code', ':zones'))
             ->setParameter('type', ZoneInterface::TYPE_ZONE)
             ->setParameter('zones', $zonesCodes)
         ;
