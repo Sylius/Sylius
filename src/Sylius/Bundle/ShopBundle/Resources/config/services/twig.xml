@@ -15,15 +15,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.twig.extension.taxes" class="Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension" public="false">
-            <tag name="twig.extension" />
-        </service>
-
-        <service id="sylius.twig.extension.subtotal" class="Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension" public="false">
-            <argument type="service" id="sylius.calculator.order_items_subtotal" />
-            <tag name="twig.extension" />
-        </service>
-
         <service id="sylius.twig.extension.original_price_to_display" class="Sylius\Bundle\ShopBundle\Twig\OrderItemOriginalPriceToDisplayExtension" public="false">
             <tag name="twig.extension" />
         </service>

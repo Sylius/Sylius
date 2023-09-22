@@ -17,37 +17,19 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
-final class ContactEmailManager implements ContactEmailManagerInterface
+final readonly class ContactEmailManager implements ContactEmailManagerInterface
 {
     public function __construct(private SenderInterface $emailSender)
     {
     }
 
+    /** @inheritdoc */
     public function sendContactRequest(
         array $data,
         array $recipients,
-        ?ChannelInterface $channel = null,
-        ?string $localeCode = null,
+        ChannelInterface $channel,
+        string $localeCode,
     ): void {
-        if ($channel === null) {
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.7',
-                'Not passing a $channel into %s::%s is deprecated.',
-                __CLASS__,
-                __METHOD__,
-            );
-        }
-        if ($localeCode === null) {
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.7',
-                'Not passing a $localeCode into %s::%s is deprecated.',
-                __CLASS__,
-                __METHOD__,
-            );
-        }
-
         $this->emailSender->send(
             Emails::CONTACT_REQUEST,
             $recipients,
