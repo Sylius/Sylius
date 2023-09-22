@@ -23,6 +23,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShopBillingData;
+use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -40,7 +41,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     private ?TaxonRepositoryInterface $taxonRepository;
 
-    /** @var FactoryInterface<ShopBillingData>|null */
+    /** @var FactoryInterface<ShopBillingDataInterface>|null */
     private ?FactoryInterface $shopBillingDataFactory;
 
     public function __construct(

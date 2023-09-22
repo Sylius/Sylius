@@ -101,7 +101,7 @@ jobs:
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
-            -   name: "Warmup cache for env dev for PHPStan and Psalm Symfony integrations"
+            -   name: "Warmup dev env cache for PHPStan and Psalm Symfony integrations"
                 run: bin/console cache:warmup --env=dev
 
             -   name: "Validate composer.json"

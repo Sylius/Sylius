@@ -19,6 +19,7 @@ use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Webmozart\Assert\Assert;
 
 final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
 {
@@ -34,9 +35,7 @@ final class ReviewerReviewsRemover implements ReviewerReviewsRemoverInterface
         $reviewSubjectsToRecalculate = [];
 
         foreach ($this->reviewRepository->findBy(['author' => $author]) as $review) {
-            if (!$review instanceof ReviewInterface) {
-                continue;
-            }
+            Assert::isInstanceOf($review, ReviewInterface::class);
             $reviewSubjectsToRecalculate = $this->removeReviewsAndExtractSubject($review, $reviewSubjectsToRecalculate);
         }
         $this->reviewManager->flush();
