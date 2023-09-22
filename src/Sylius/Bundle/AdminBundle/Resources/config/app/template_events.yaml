@@ -23,3 +23,7 @@ sylius_ui:
                     component: 'SyliusAdminNavbarNotifications'
                 user_dropdown:
                     component: 'SyliusAdminUserDropdown'
+        sylius.admin.index.body.navbar.menu:
+            blocks:
+                search:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Menu/_search.html.twig'
