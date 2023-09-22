@@ -22,7 +22,7 @@ sylius_ui:
                 notifications:
                     component: 'SyliusAdminNavbarNotifications'
                 user_dropdown:
-                    component: 'SyliusAdminUserDropdown'
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Items/_userDropdown.html.twig'
         sylius.admin.common.navbar.menu:
             blocks:
                 search:
@@ -31,7 +31,7 @@ sylius_ui:
             blocks:
                 logo:
                     template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_logo.html.twig'
-                mobile_user_dropdown:
-                    template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_mobileUserDropdown.html.twig'
+                user_dropdown:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_userDropdown.html.twig'
                 menu:
                     template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_menu.html.twig'

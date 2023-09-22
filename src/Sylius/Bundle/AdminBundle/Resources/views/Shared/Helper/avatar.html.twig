@@ -1,5 +1,5 @@
 {% macro default(img, content, class) %}
-    <span class="avatar {{ class }}" {% if img %} style="background-image: url({{ img }})" {% endif %}>
+    <span class="sylius avatar {{ class }}" {% if img %} style="background-image: url({{ img }})" {% endif %}>
         {{ content ? content }}
     </span>
 {% endmacro %}

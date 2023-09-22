@@ -1,17 +1,15 @@
 {% import '@SyliusAdmin/Shared/Helper/avatar.html.twig' as avatar %}
 {% import '@SyliusAdmin/Shared/Helper/dropdown.html.twig' as dropdown %}
 
-<div class="nav-item">
-    {% set dropdown_trigger %}
-            <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
-                {% set avatarPath = user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
-                {{ avatar.small(avatarPath) }}
-                <div class="d-none d-xl-block ps-2">
-                    <div class="mb-1 small text-muted">Hello</div>
-                    <div>{{ user.firstName }}</div>
-                </div>
-            </div>
-    {% endset %}
+{% set dropdown_trigger %}
+    <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
+        {% set avatarPath = user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
+        {{ avatar.small(avatarPath) }}
+        <div class="d-none d-xl-block ps-2">
+            <div class="mb-1 small text-muted">Hello</div>
+            <div>{{ user.firstName }}</div>
+        </div>
+    </div>
+{% endset %}
 
-    {{ dropdown.list({ customTrigger: dropdown_trigger, direction: 'down-end' }, menuItems) }}
-</div>
+{{ dropdown.list({ customTrigger: dropdown_trigger, direction: 'down-end' }, menuItems) }}
