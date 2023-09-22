@@ -46,6 +46,7 @@
                 <referencedClass name="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator"/>
                 <referencedClass name="Sylius\Bundle\ShopBundle\Twig\OrderTaxesTotalExtension"/>
+                <referencedClass name="Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension" />
                 <referencedClass name="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder"/>
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
@@ -66,6 +67,7 @@
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
+                <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />

@@ -13,41 +13,44 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig;
 
-use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator;
 use Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+trigger_deprecation(
+    'sylius/shop-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use method "getItemsSubtotal" from "%s" instead.',
+    OrderItemsSubtotalExtension::class,
+    Order::class,
+);
+
+/**
+ * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Items subtotal calculations is now available by using {@see Order::getSubtotalItems} method.
+ *
+ * @psalm-suppress DeprecatedClass
+ */
 class OrderItemsSubtotalExtension extends AbstractExtension
 {
-    /** @var OrderItemsSubtotalCalculatorInterface */
-    private $calculator;
-
-    public function __construct(?OrderItemsSubtotalCalculatorInterface $calculator = null)
+    public function __construct(private ?OrderItemsSubtotalCalculatorInterface $calculator = null)
     {
-        if (null === $calculator) {
-            $calculator = new OrderItemsSubtotalCalculator();
-
-            trigger_deprecation(
-                'sylius/shop-bundle',
-                '1.6',
-                'Not passing a $calculator is deprecated. Argument will no longer be optional from Sylius 2.0.',
-            );
-        }
-
-        $this->calculator = $calculator;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('sylius_order_items_subtotal', [$this, 'getSubtotal']),
+            new TwigFunction('sylius_order_items_subtotal', [$this, 'getSubtotal'], ['deprecated' => true]),
         ];
     }
 
     public function getSubtotal(OrderInterface $order): int
     {
+        if (null === $this->calculator) {
+            return $order->getItemsSubtotal();
+        }
+
         return $this->calculator->getSubtotal($order);
     }
 }
