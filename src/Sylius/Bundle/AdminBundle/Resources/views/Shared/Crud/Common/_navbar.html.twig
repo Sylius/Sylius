@@ -1,8 +1,7 @@
-{% set event_name = _context.event_prefix ~ '.navbar' %}
-{% set resource_event_name = _context.resource_event_prefix ~ '.navbar' %}
+{% set event_name = 'sylius.admin.common.navbar' %}
 
 <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
     <div class="container-xl">
-        {{ sylius_template_event(event_name, { event_prefix: event_name, resource_event_prefix: resource_event_name }) }}
+        {{ sylius_template_event(event_name, { event_prefix: event_name }) }}
     </div>
 </header>

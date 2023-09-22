@@ -11,19 +11,19 @@ sylius_ui:
                     template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
                 content:
                     template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
-        sylius.admin.index.body.navbar:
+        sylius.admin.common.navbar:
             blocks:
                 items:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_items.html.twig'
                 menu:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_menu.html.twig'
-        sylius.admin.index.body.navbar.items:
+        sylius.admin.common.navbar.items:
             blocks:
                 notifications:
                     component: 'SyliusAdminNavbarNotifications'
                 user_dropdown:
                     component: 'SyliusAdminUserDropdown'
-        sylius.admin.index.body.navbar.menu:
+        sylius.admin.common.navbar.menu:
             blocks:
                 search:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Menu/_search.html.twig'

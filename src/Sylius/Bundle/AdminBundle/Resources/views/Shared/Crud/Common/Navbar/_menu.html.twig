@@ -1,6 +1,5 @@
 {% set event_name = _context.event_prefix ~ '.menu' %}
-{% set resource_event_name = _context.resource_event_prefix ~ '.menu' %}
 
 <div class="collapse navbar-collapse" id="navbar-menu">
-    {{ sylius_template_event(event_name, { event_prefix: event_name, resource_event_prefix: resource_event_name }) }}
+    {{ sylius_template_event(event_name, { event_prefix: event_name }) }}
 </div>
