@@ -17,7 +17,7 @@ interface TaxonTreeRepositoryInterface
 {
     /**
      * @param string|string[]|null $sortByField
-     * @param string|string[] $direction
+     * @param 'asc'|'desc'|'ASC'|'DESC'|array<int, 'asc'|'desc'|'ASC'|'DESC'> $direction
      *
      * @return array<object>|null
      */
