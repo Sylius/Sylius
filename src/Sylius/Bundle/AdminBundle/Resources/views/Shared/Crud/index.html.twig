@@ -2,13 +2,13 @@
 
 {% set definition = resources.definition %}
 {% set data = resources.data %}
-{% set event_prefix = metadata.applicationName ~ '.admin.' ~ 'index' %}
-{% set resource_event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}
+{% set event_name = metadata.applicationName ~ '.admin.' ~ 'index.body' %}
+{% set resource_event_name = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index.body' %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
 {% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ sylius_template_event('sylius.admin.index.body', { event_prefix: event_prefix, resource_event_prefix: resource_event_prefix }) }}
+    {{ sylius_template_event(event_name, { event_prefix: event_name, resource_event_prefix: resource_event_name }) }}
 {% endblock %}

@@ -11,13 +11,13 @@ sylius_ui:
                     template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
                 content:
                     template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
-        sylius.admin.index.navbar:
+        sylius.admin.index.body.navbar:
             blocks:
                 items:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_items.html.twig'
                 menu:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_menu.html.twig'
-        sylius.admin.index.navbar.items:
+        sylius.admin.index.body.navbar.items:
             blocks:
                 notifications:
                     component: 'SyliusAdminNavbarNotifications'
