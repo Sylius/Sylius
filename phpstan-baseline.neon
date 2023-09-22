@@ -7311,7 +7311,7 @@ parameters:
 			path: src/Sylius/Component/Shipping/Resolver/DefaultShippingMethodResolver.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Shipping\\\\Resolver\\\\ShippingMethodsResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Doctrine\\\\Persistence\\\\ObjectRepository but does not specify its types\\: TEntityClass$#"
+			message: "#^Method Sylius\\\\Component\\\\Shipping\\\\Resolver\\\\ShippingMethodsResolver\\:\\:__construct\\(\\) has parameter \\$shippingMethodRepository with generic interface Sylius\\\\Component\\\\Shipping\\\\Repository\\\\ShippingMethodRepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Shipping/Resolver/ShippingMethodsResolver.php
 
