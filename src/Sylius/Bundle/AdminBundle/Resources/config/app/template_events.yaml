@@ -21,3 +21,5 @@ sylius_ui:
             blocks:
                 notifications:
                     component: 'SyliusAdminNavbarNotifications'
+                user_dropdown:
+                    component: 'SyliusAdminUserDropdown'

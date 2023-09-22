@@ -718,6 +718,7 @@ sylius:
         remember_me: 'Remember me'
         remove_attribute: 'Remove attribute'
         repeat_new_password: 'Repeat new password'
+        report_an_issue: 'Report an issue'
         report_details: 'Report details'
         report_it: 'Report it'
         reports: 'Reports'

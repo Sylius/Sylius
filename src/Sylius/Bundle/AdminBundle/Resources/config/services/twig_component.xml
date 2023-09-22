@@ -14,5 +14,13 @@
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent">
             <tag name="twig.component" key="SyliusAdminNavbarNotifications" template="@SyliusAdmin/Shared/Components/Navbar/notifications.html.twig" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\UserDropdown">
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="security.helper" />
+
+            <tag name="twig.component" key="SyliusAdminUserDropdown" template="@SyliusAdmin/Shared/Components/Navbar/user.html.twig" />
+        </service>
     </services>
 </container>
