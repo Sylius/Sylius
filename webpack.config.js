@@ -25,6 +25,6 @@ shopConfig.name = 'shop';
 
 Encore.reset();
 
-const adminConfig = SyliusAdmin.getWebpackConfig();
+const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
 
 module.exports = [shopConfig, adminConfig];

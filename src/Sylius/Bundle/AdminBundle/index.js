@@ -11,7 +11,7 @@ const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 
 class SyliusAdmin {
-  static getWebpackConfig() {
+  static getWebpackConfig(rootDir) {
     const uiBundleScripts = path.resolve(__dirname, '../UiBundle/Resources/private/js/');
     const uiBundleResources = path.resolve(__dirname, '../UiBundle/Resources/private/');
 
@@ -25,7 +25,7 @@ class SyliusAdmin {
       .enableVersioning(Encore.isProduction())
       .enableSassLoader((options) => {
         // eslint-disable-next-line no-param-reassign
-        options.additionalData = `$assetsPath: ${path.resolve(__dirname, 'Resources/assets')};`;
+        options.additionalData = `$rootDir: ${rootDir};`;
       });
 
     const adminConfig = Encore.getWebpackConfig();
