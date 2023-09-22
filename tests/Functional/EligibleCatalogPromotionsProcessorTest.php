@@ -15,13 +15,8 @@ namespace Sylius\Tests\Functional;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Sylius\Bundle\PromotionBundle\Criteria\DateRange;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider;
-use Sylius\Component\Core\Dashboard\Interval;
-use Sylius\Component\Core\Dashboard\SalesSummary;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class EligibleCatalogPromotionsProcessorTest extends WebTestCase
@@ -45,8 +40,9 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
         $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $dateFilePath = self::$kernel->getContainer()->getParameter('sylius.behat.clock.date_file');
 
-        file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 00:00:02');
+        file_put_contents($dateFilePath, '2021-10-12 00:00:02');
 
         $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
@@ -65,7 +61,7 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
             $this->assertTrue(in_array($actualDateTime, $expectedDateTimes));
         }
 
-        unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
+        unlink($dateFilePath);
     }
 
     /** @test */
@@ -73,8 +69,9 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
         $eligibleCatalogPromotionsProvider = self::$kernel->getContainer()->get('Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInterface');
+        $dateFilePath = self::$kernel->getContainer()->getParameter('sylius.behat.clock.date_file');
 
-        file_put_contents(self::$kernel->getProjectDir() . '/var/temporaryDate.txt', '2021-10-12 23:59:58');
+        file_put_contents($dateFilePath, '2021-10-12 23:59:58');
 
         $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
@@ -92,6 +89,6 @@ class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         $this->assertTrue(($expectedDateTimes == $actualDateTimes));
 
-        unlink(self::$kernel->getProjectDir() . '/var/temporaryDate.txt');
+        unlink($dateFilePath);
     }
 }

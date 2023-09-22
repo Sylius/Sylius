@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
-use DateTime;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,10 +31,10 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
     public function let(
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $calendar,
+        ClockInterface $clock,
         MessageBusInterface $messageBus,
     ): void {
-        $this->beConstructedWith($userRepository, $generator, $calendar, $messageBus);
+        $this->beConstructedWith($userRepository, $generator, $clock, $messageBus);
     }
 
     public function it_is_a_message_handler(): void
@@ -46,7 +45,7 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
     public function it_handles_request_for_password_reset_token(
         UserRepositoryInterface $userRepository,
         GeneratorInterface $generator,
-        DateTimeProviderInterface $calendar,
+        ClockInterface $clock,
         MessageBusInterface $messageBus,
         AdminUserInterface $adminUser,
     ): void {
@@ -54,8 +53,8 @@ final class RequestResetPasswordEmailHandlerSpec extends ObjectBehavior
 
         $generator->generate()->willReturn('sometoken');
 
-        $now = new DateTime();
-        $calendar->now()->willReturn($now);
+        $now = new \DateTimeImmutable();
+        $clock->now()->willReturn($now);
 
         $adminUser->getEmail()->willReturn('admin@example.com');
         $adminUser->getLocaleCode()->willReturn('en_US');

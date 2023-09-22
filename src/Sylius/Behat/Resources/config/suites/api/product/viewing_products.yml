@@ -31,7 +31,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
+                - sylius.behat.context.setup.calendar
 
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product

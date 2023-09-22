@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sylius\Calendar\SyliusCalendarBundle(),
             new Sylius\Bundle\ShippingBundle\SyliusShippingBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
