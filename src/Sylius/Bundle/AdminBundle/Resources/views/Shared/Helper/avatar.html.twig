@@ -1,0 +1,10 @@
+{% macro default(img, content, class) %}
+    <span class="avatar {{ class }}" {% if img %} style="background-image: url({{ img }})" {% endif %}>
+        {{ content ? content }}
+    </span>
+{% endmacro %}
+
+{% macro small(img, content, class) %}
+    {% import _self as _ %}
+    {{ _.default(img, content, 'avatar-sm ' ~ class) }}
+{% endmacro %}
