@@ -4,7 +4,7 @@
       "include": [
         {
           "php": "8.2",
-          "symfony": "6.3.*",
+          "symfony": "~6.3.0",
           "api-platform": "^2.7.10"
         }
       ]
@@ -13,7 +13,7 @@
       "include": [
         {
           "php": "8.2",
-          "symfony": "6.3.*",
+          "symfony": "~6.3.0",
           "mariadb": "10.4.10"
         }
       ]
@@ -22,7 +22,7 @@
       "include": [
         {
           "php": "8.2",
-          "symfony": "6.3.*",
+          "symfony": "~6.3.0",
           "api-platform": "^2.7.10",
           "mysql": "8.0",
           "twig": "^3.3"
@@ -33,7 +33,7 @@
       "include": [
         {
           "php": "8.2",
-          "symfony": "6.3.*",
+          "symfony": "~6.3.0",
           "postgres": "14.6"
         }
       ]
@@ -42,7 +42,7 @@
       "include": [
         {
           "php": "8.2",
-          "symfony": "6.3.*"
+          "symfony": "~6.3.0"
         }
       ]
     }
@@ -50,29 +50,29 @@
   "full": {
     "static-checks": {
       "php": [ "8.2" ],
-      "symfony": [ "6.3.*" ],
+      "symfony": [ "~6.3.0" ],
       "api-platform": [ "^2.7.10" ]
     },
     "e2e-mariadb": {
       "php": [ "8.2" ],
-      "symfony": [ "6.3.*" ],
+      "symfony": [ "~6.3.0" ],
       "mariadb": [ "10.4.10" ]
     },
     "e2e-mysql": {
       "php": [ "8.2" ],
-      "symfony": [ "6.3.*" ],
+      "symfony": [ "~6.3.0" ],
       "api-platform": [ "^2.7.10" ],
       "mysql": [ "5.7", "8.0" ],
       "twig": [ "^3.3" ]
     },
     "e2e-pgsql": {
       "php": [ "8.2" ],
-      "symfony": [ "6.3.*" ],
+      "symfony": [ "~6.3.0" ],
       "postgres": [ "13.9", "14.6" ]
     },
     "packages": {
       "php": [ "8.2" ],
-      "symfony": [ "6.3.*" ]
+      "symfony": [ "~6.3.0" ]
     }
   }
 }
