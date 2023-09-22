@@ -1,25 +1,27 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
+{% extends '@SyliusAdmin/Shared/Crud/index.html.twig' %}
 
-{% set definition = resources.definition %}
-{% set data = resources.data %}
-{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}
+{#{% extends '@SyliusAdmin/layout.html.twig' %}#}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{#{% set definition = resources.definition %}#}
+{#{% set data = resources.data %}#}
+{#{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}#}
 
-{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+{#{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}#}
 
-{% block content %}
-    {{ sylius_template_event([event_prefix, 'sylius.admin.index'], _context) }}
-{% endblock %}
+{#{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}#}
 
-{% block stylesheets %}
-    {{ parent() }}
+{#{% block content %}#}
+{#    {{ sylius_template_event([event_prefix, 'sylius.admin.index'], _context) }}#}
+{#{% endblock %}#}
 
-    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.index.stylesheets'], { 'metadata': metadata }) }}
-{% endblock %}
+{#{% block stylesheets %}#}
+{#    {{ parent() }}#}
 
-{% block javascripts %}
-    {{ parent() }}
+{#    {{ sylius_template_event([event_prefix ~ '.stylesheets', 'sylius.admin.index.stylesheets'], { 'metadata': metadata }) }}#}
+{#{% endblock %}#}
 
-    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.index.javascripts'], { 'metadata': metadata }) }}
-{% endblock %}
+{#{% block javascripts %}#}
+{#    {{ parent() }}#}
+
+{#    {{ sylius_template_event([event_prefix ~ '.javascripts', 'sylius.admin.index.javascripts'], { 'metadata': metadata }) }}#}
+{#{% endblock %}#}

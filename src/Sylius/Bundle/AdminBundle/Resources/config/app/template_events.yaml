@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_ui:
+    events:
+        sylius.admin.index.body:
+            blocks:
+                sidebar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                navbar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                content:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'

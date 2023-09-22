@@ -1,0 +1,5 @@
+<header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
+    <div class="container-xl">
+        {{ sylius_template_event(_context.event_prefix ~ '.navbar', { event_prefix: _context.event_prefix, resource_event_prefix: _context.resource_event_prefix }) }}
+    </div>
+</header>
