@@ -15,3 +15,4 @@ import './scripts/choices';
 import 'bootstrap';
 
 import './images/sylius-logo.svg';
+import './images/sylius-logo-dark-text.png';

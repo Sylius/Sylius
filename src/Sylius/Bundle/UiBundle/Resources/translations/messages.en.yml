@@ -447,6 +447,7 @@ sylius:
         login: 'Login'
         login_button: 'Login'
         login_sylius_store: 'Login <small>Sylius store</small>'
+        login_to_your_account: 'Login to your account'
         logout: 'Logout'
         look_and_feel: 'Look & feel'
         lowest_price_before_discount: 'Lowest price before discount'
