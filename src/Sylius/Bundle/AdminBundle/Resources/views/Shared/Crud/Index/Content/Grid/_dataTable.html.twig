@@ -1,0 +1,21 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon %}
+{% import '@SyliusAdmin/Shared/Helper/table.html.twig' as _table %}
+
+{% if resources.data|length > 0 %}
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap datatable" {{ sylius_test_html_attribute('grid-table') }}>
+                <thead>
+                <tr>
+                    {{ _table.headers(resources, resources.definition, app.request.attributes) }}
+                </tr>
+                </thead>
+                <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
+                {% for row in resources.data %}
+                    {{ _table.row(resources, resources.definition, row) }}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endif %}

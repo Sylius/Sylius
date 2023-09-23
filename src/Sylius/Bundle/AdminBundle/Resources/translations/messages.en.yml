@@ -54,6 +54,7 @@ sylius:
                     header: Sales
                     orders: Orders
     ui:
+        add_new_entry: Add a new entry
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
         channel:
@@ -67,6 +68,8 @@ sylius:
                 <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         lowest_price_before_discount: 'Lowest price before discount'
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
+        no_results: No results found
+        no_results_adjust_your_search: 'Adjust your search and try again.'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         price_history: Price history

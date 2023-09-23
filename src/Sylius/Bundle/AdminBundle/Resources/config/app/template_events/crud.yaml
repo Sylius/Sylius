@@ -30,3 +30,17 @@ sylius_ui:
             blocks:
                 filters:
                     template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/_filters.html.twig'
+                data_table:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/_dataTable.html.twig'
+                no_data_block:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/_noResults.html.twig'
+        sylius.admin.index.body.content.grid.no_results:
+            blocks:
+                image:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/NoResults/_image.html.twig'
+                title:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/NoResults/_title.html.twig'
+                subtitle:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/NoResults/_subtitle.html.twig'
+                action:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/NoResults/_action.html.twig'
