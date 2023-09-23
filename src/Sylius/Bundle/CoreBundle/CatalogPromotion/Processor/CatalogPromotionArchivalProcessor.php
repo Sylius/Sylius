@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionArchival
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionArchivalAnnouncerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Exception\CatalogPromotionAlreadyArchivedException;
+use Sylius\Component\Promotion\Exception\CatalogPromotionAlreadyRestoredException;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
@@ -70,6 +71,15 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
     {
         /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
+
+        if (null === $catalogPromotion->getArchivedAt()) {
+            throw new CatalogPromotionAlreadyRestoredException(
+                sprintf(
+                    'Catalog promotion with code "%s" is already restored.',
+                    $catalogPromotionCode,
+                ),
+            );
+        }
 
         if ($catalogPromotion->getState() === CatalogPromotionStates::STATE_PROCESSING) {
             throw new InvalidCatalogPromotionStateException(
