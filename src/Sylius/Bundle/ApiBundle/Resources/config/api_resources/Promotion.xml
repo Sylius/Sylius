@@ -49,6 +49,30 @@
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/promotions/{code}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Archives Promotion</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/promotions/{code}/restore</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Restores Archived Promotion</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
@@ -61,6 +85,7 @@
         <property name="usageLimit" readable="true" />
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
+        <property name="archivedAt" writable="false" />
         <property name="couponBased" readable="true" />
         <property name="coupons" readable="true" />
         <property name="rules" readable="true" />
