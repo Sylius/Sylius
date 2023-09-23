@@ -98,6 +98,14 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\ArchiveCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\RestoreCatalogPromotionAction" public="true">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
             <argument type="service" id="sylius.context.channel" />

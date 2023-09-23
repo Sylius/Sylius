@@ -147,6 +147,44 @@ Example configuration for `percentage_discount` action type:
                     </attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/catalog-promotions/{code}/archive</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\ArchiveCatalogPromotionAction</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="responses">
+                        <attribute name="202">
+                            <attribute name="description">CatalogPromotion resource archival request accepted</attribute>
+                        </attribute>
+                        <attribute name="400">
+                            <attribute name="description">Invalid CatalogPromotion state</attribute>
+                        </attribute>
+                        <attribute name="404">
+                            <attribute name="description">Resource not found</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_patch">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/admin/catalog-promotions/{code}/restore</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RestoreCatalogPromotionAction</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="responses">
+                        <attribute name="202">
+                            <attribute name="description">CatalogPromotion resource restoral request accepted</attribute>
+                        </attribute>
+                        <attribute name="400">
+                            <attribute name="description">Invalid CatalogPromotion state</attribute>
+                        </attribute>
+                        <attribute name="404">
+                            <attribute name="description">Resource not found</attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
@@ -154,6 +192,7 @@ Example configuration for `percentage_discount` action type:
         <property name="name" writable="true" />
         <property name="startDate" writable="true" />
         <property name="endDate" writable="true" />
+        <property name="archivedAt" writable="false" />
         <property name="priority" writable="true" />
         <property name="state" writable="true" />
         <property name="channels" writable="true" />

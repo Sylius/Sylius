@@ -67,6 +67,10 @@
             <group>admin:promotion:read</group>
         </attribute>
 
+        <attribute name="archivedAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
         <attribute name="couponBased">
             <group>admin:promotion:read</group>
         </attribute>
