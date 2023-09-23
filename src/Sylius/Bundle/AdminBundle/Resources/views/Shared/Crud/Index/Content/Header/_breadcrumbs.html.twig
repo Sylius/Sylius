@@ -1,0 +1,6 @@
+{% import '@SyliusAdmin/Shared/Helper/breadcrumbs.html.twig' as _breadcrumbs %}
+
+{{ _breadcrumbs.default([
+    { 'name': 'Dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
+    { 'name': metadata.applicationName~'.ui.'~metadata.pluralName, 'active': true },
+]) }}

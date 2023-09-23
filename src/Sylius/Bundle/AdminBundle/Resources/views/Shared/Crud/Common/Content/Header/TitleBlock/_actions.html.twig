@@ -1,0 +1,12 @@
+{% import '@SyliusAdmin/Shared/Helper/dropdown.html.twig' as _dropdown %}
+
+<div class="col-12 col-md-auto ms-auto d-print-none">
+    {% if resources.definition.actionGroups.main is defined %}
+        {% set actions %}
+            {% for action in resources.definition.getEnabledActions('main') %}
+                {{ sylius_grid_render_action(resources, action, null) }}
+            {% endfor %}
+        {% endset %}
+        {{ _dropdown.default({ content: actions, button: { text: 'Actions' } }) }}
+    {% endif %}
+</div>
