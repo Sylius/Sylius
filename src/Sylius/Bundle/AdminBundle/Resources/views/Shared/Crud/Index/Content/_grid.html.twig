@@ -1,0 +1,49 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon %}
+{% import '@SyliusAdmin/Shared/Helper/table.html.twig' as _table %}
+
+{% set event_name = event_prefix ~ '.grid' %}
+{% set resource_event_name = resource_event_prefix ~ '.grid' %}
+
+<div class="page-body">
+    <div class="container-xl">
+        {{ sylius_template_event([resource_event_name, event_name], _context|merge({ event_prefix: event_name, resource_event_prefix: resource_event_name })) }}
+{#        {{ sylius_grid_render(resources, '@SyliusAdmin/Shared/Crud/Index/Content/Grid/_content.html.twig') }}#}
+{#        {{ sylius_template_event('sylius.grid.filters', _context) }}#}
+
+{#        <div class="card">#}
+{#            {% block dataTable %}#}
+{#                {% if data|length > 0 %}#}
+{#                    <div class="table-responsive">#}
+{#                        <table class="table card-table table-vcenter text-nowrap datatable" {{ sylius_test_html_attribute('grid-table') }}>#}
+{#                            <thead>#}
+{#                            <tr>#}
+{#                                {{ _table.headers(grid, definition, app.request.attributes) }}#}
+{#                            </tr>#}
+{#                            </thead>#}
+{#                            <tbody {{ sylius_test_html_attribute('grid-table-body') }}>#}
+{#                            {% for row in data %}#}
+{#                                {{ _table.row(grid, definition, row) }}#}
+{#                            {% endfor %}#}
+{#                            </tbody>#}
+{#                        </table>#}
+{#                    </div>#}
+{#                {% else %}#}
+{#                    <div class="empty">#}
+{#                        <div class="empty-img"><img src="{{ asset('build/admin/images/no_data.svg', 'admin') }}" height="128" alt="">#}
+{#                        </div>#}
+{#                        <p class="empty-title">{{ 'sylius.grid.no_results'|trans }}</p>#}
+{#                        <p class="empty-subtitle text-secondary">#}
+{#                            {{ 'sylius.grid.no_results_adjust_your_search'|trans }}#}
+{#                        </p>#}
+{#                        <div class="empty-action">#}
+{#                            <a href="" class="btn btn-primary">#}
+{#                                {{ icon({ icon: 'plus' }) }}#}
+{#                                {{ configuration.vars.no_result.create|default('sylius.grid.add_your_first.resource')|trans }}#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endblock %}#}
+{#        </div>#}
+    </div>
+</div>

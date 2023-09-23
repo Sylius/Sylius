@@ -1,6 +1,5 @@
 {% macro default(breadcrumbs) %}
     <ol class="breadcrumb" aria-label="breadcrumbs">
-        {% dump(breadcrumbs) %}
         {% for breadcrumb in breadcrumbs %}
             <li class="breadcrumb-item {{ breadcrumb.active ? "active" }}">
                 {% if breadcrumb.url is defined %}

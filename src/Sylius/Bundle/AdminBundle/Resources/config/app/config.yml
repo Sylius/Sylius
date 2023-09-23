@@ -56,8 +56,15 @@ sylius_grid:
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
         filter:
-            entities: '@SyliusUi/Grid/Filter/entities.html.twig'
-            resource_autocomplete: '@SyliusUi/Grid/Filter/resourceAutocomplete.html.twig'
+            boolean: '@SyliusAdmin/Shared/Grid/Filter/_boolean.html.twig'
+            date: '@SyliusAdmin/Shared/Grid/Filter/_date.html.twig'
+            entities: '@SyliusAdmin/Shared/Grid/Filter/_entities.html.twig'
+            entity: '@SyliusAdmin/Shared/Grid/Filter/_entity.html.twig'
+            exists: '@SyliusAdmin/Shared/Grid/Filter/_exists.html.twig'
+            money: '@SyliusAdmin/Shared/Grid/Filter/_money.html.twig'
+            resource_autocomplete: '@SyliusAdmin/Shared/Grid/Filter/_resourceAutocomplete.html.twig'
+            select: '@SyliusAdmin/Shared/Grid/Filter/_select.html.twig'
+            string: '@SyliusAdmin/Shared/Grid/Filter/_string.html.twig'
 
 liip_imagine:
     filter_sets:

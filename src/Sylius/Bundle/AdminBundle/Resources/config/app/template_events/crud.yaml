@@ -12,6 +12,8 @@ sylius_ui:
             blocks:
                 header:
                     template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+                grid:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/_grid.html.twig'
         sylius.admin.index.body.content.header:
             blocks:
                 breadcrumbs:
@@ -24,3 +26,7 @@ sylius_ui:
                     template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_title.html.twig'
                 actions:
                     template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/_actions.html.twig'
+        sylius.admin.index.body.content.grid:
+            blocks:
+                filters:
+                    template: '@SyliusAdmin/Shared/Crud/Index/Content/Grid/_filters.html.twig'
