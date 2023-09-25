@@ -29,26 +29,12 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         private CalculatorInterface $calculator,
         private AdjustmentFactoryInterface $adjustmentFactory,
         private TaxRateResolverInterface $taxRateResolver,
-        private ?ProportionalIntegerDistributorInterface $proportionalIntegerDistributor = null,
+        private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
     ) {
-        if ($this->proportionalIntegerDistributor === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
-        if ($this->proportionalIntegerDistributor === null) {
-            $this->applyWithoutDistributionToUnits($order, $zone);
-
-            return;
-        }
-
         foreach ($order->getItems() as $item) {
             /** @var TaxRateInterface|null $taxRate */
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
