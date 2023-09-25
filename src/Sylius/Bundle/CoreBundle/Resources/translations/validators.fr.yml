@@ -6,8 +6,16 @@ sylius:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: La configuration pour l'un des canaux requis n'est pas fournie.
+            invalid_channel: La configuration fournie contient des erreurs. Au moins un des codes de canal fournis n'existe pas.
+            not_valid: La configuration fournie contient des erreurs. Veuillez ajouter le montant de remise fixe qui est un nombre supérieur à 0.
     catalog_promotion_scope:
         invalid_type: Le type de champ d'application pour la promotion catalogue est invalide. Veuillez choisir un type valide.
+        for_products:
+            invalid_products: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des produits existants.
+            not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 produit.
         for_variants:
             invalid_variants: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes existantes.
             not_empty: Veuillez ajouter au moins une variante.
@@ -31,6 +39,8 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
+        email:
+            not_changeable: L'e-mail ne peut pas être modifié pour le client connecté.
     contact:
         email:
             invalid: Cet e-mail n'est pas valide.

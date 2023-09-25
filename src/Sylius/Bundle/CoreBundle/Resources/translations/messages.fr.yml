@@ -43,6 +43,7 @@ sylius:
         catalog_promotion:
             channels: Canaux
             scope:
+                for_products: Pour les produits
                 for_taxons: Pour les taxonomies
                 for_variants: Pour les variantes
         checkout:
@@ -212,8 +213,8 @@ sylius:
             intl: Intl
             json_encode: JSON
             mbstring: Chaîne de caractères multi-octets
-            off: false
-            on: true
+            off: off
+            on: on
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
@@ -243,8 +244,8 @@ sylius:
             detect_unicode_help: Définir 'detect_unicode = Off' dans votre fichier php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
-            off: false
-            on: true
+            off: off
+            on: on
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
