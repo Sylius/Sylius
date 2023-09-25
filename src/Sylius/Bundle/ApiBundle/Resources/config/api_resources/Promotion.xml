@@ -36,6 +36,9 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.archived_promotions_filter</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -49,9 +52,9 @@
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
-            <itemOperation name="admin_patch">
+            <itemOperation name="admin_archive">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/promotions/{code}/archive</attribute>
+                <attribute name="path">/promotions/{code}/archive</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
                 <attribute name="openapi_context">
@@ -61,9 +64,9 @@
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </itemOperation>
-            <itemOperation name="admin_patch">
+            <itemOperation name="admin_restore">
                 <attribute name="method">PATCH</attribute>
-                <attribute name="path">/admin/promotions/{code}/restore</attribute>
+                <attribute name="path">/promotions/{code}/restore</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
                 <attribute name="openapi_context">
