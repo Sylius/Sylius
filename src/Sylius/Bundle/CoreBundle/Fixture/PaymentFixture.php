@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
+namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -24,20 +24,34 @@ use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+class_alias(PaymentFixture::class, '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture');
+
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
+    '\Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture',
+    PaymentFixture::class,
+);
+
 class PaymentFixture extends AbstractFixture
 {
     private Generator $faker;
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param PaymentRepositoryInterface<PaymentInterface> $paymentRepository
+     */
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
         private StateMachineFactoryInterface $stateMachineFactory,
         private ObjectManager $paymentManager,
     ) {
+        $this->faker = Factory::create();
+
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
-        $this->faker = Factory::create();
     }
 
     public function getName(): string
@@ -45,6 +59,9 @@ class PaymentFixture extends AbstractFixture
         return 'payments';
     }
 
+    /**
+     * @param string[] $options
+     */
     public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
