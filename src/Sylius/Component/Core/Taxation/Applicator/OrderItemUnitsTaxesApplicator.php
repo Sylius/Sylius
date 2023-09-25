@@ -66,27 +66,6 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
         }
     }
 
-    private function applyWithoutDistributionToUnits(OrderInterface $order, ZoneInterface $zone): void
-    {
-        foreach ($order->getItems() as $item) {
-            /** @var TaxRateInterface|null $taxRate */
-            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
-            if (null === $taxRate) {
-                continue;
-            }
-
-            /** @var OrderItemUnitInterface $unit */
-            foreach ($item->getUnits() as $unit) {
-                $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
-                if (0.00 === $taxAmount) {
-                    continue;
-                }
-
-                $this->addAdjustment($unit, (int) $taxAmount, $taxRate);
-            }
-        }
-    }
-
     private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, TaxRateInterface $taxRate): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(
