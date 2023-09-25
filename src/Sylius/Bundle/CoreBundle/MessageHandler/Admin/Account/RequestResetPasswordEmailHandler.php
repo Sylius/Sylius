@@ -15,10 +15,10 @@ namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\RequestResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
@@ -28,7 +28,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private GeneratorInterface $generator,
-        private DateTimeProviderInterface $calendar,
+        private ClockInterface $clock,
         private MessageBusInterface $commandBus,
     ) {
     }
@@ -42,7 +42,7 @@ final class RequestResetPasswordEmailHandler implements MessageHandlerInterface
         }
 
         $adminUser->setPasswordResetToken($this->generator->generate());
-        $adminUser->setPasswordRequestedAt($this->calendar->now());
+        $adminUser->setPasswordRequestedAt($this->clock->now());
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail($adminUser->getEmail(), $adminUser->getLocaleCode()),

@@ -7,11 +7,7 @@
         {% if product.images|length >= 1 %}
             <div class="ui small images">
                 {% for image in product.images %}
-                    {% if use_webpack %}
-                        {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
-                    {% else %}
-                        {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('assets/admin/img/200x200.png') %}
-                    {% endif %}
+                    {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_small_thumbnail') : asset('build/admin/images/200x200.png', 'admin') %}
                     <div class="ui image">
                         {% if product.isConfigurable() and product.variants|length > 0 %}
                             {% include '@SyliusAdmin/Product/Show/_imageVariants.html.twig' %}

@@ -24,7 +24,6 @@ sylius_api:
     enabled: '%env(bool:SYLIUS_API_ENABLED)%'
 
 framework:
-    assets: ~
     secret: "ch4mb3r0f5ecr3ts"
     default_locale: "%locale%"
     session:
@@ -39,6 +38,16 @@ framework:
             paths: ['%kernel.project_dir%/config/serialization']
     mailer:
         dsn: 'null://null'
+    assets:
+        packages:
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            app.admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+            app.shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     workflows: ~
 
 doctrine_migrations:
@@ -94,3 +103,11 @@ services:
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build/default'
+    builds:
+        admin: '%kernel.project_dir%/public/build/admin'
+        shop: '%kernel.project_dir%/public/build/shop'
+        app.admin: '%kernel.project_dir%/public/build/app/admin'
+        app.shop: '%kernel.project_dir%/public/build/app/shop'

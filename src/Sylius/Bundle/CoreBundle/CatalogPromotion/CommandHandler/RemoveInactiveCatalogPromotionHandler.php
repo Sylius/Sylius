@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
@@ -25,7 +25,7 @@ final class RemoveInactiveCatalogPromotionHandler
 {
     public function __construct(
         private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        private EntityManager $entityManager,
+        private EntityManagerInterface $entityManager,
     ) {
         trigger_deprecation(
             'sylius/core-bundle',

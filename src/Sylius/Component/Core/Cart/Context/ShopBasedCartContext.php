@@ -23,11 +23,11 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Context\ResettableCartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
-use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ShopBasedCartContext implements CartContextInterface, ResetInterface
+final class ShopBasedCartContext implements ResettableCartContextInterface
 {
     private CartContextInterface $cartContext;
 

@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-/**
- * @internal
- */
-
 declare(strict_types=1);
 
-trigger_deprecation(
-    'sylius/sylius',
-    '1.3',
-    'Importing files from Sylius/Sylius\'s "app/config" directory is deprecated.',
-);
+namespace Sylius\Component\Order\Context;
+
+use Symfony\Contracts\Service\ResetInterface;
+
+interface ResettableCartContextInterface extends CartContextInterface, ResetInterface
+{
+}

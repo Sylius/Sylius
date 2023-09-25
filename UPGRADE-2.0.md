@@ -1,4 +1,4 @@
-# UPGRADE FROM `v1.X.X` TO `v2.0.0`
+# UPGRADE FROM `1.13` TO `2.0`
 
 ## Codebase
 
@@ -39,3 +39,29 @@
     * The following configuration options were removed:
 
         * `sylius.mailer.templates`
+
+* Added the `Sylius\Component\Order\Context\ResettableCartContextInterface` that extends `Sylius\Component\Order\Context\CartContextInterface` and `Symfony\Contracts\Service\ResetInterface`.
+
+*  The name of the default `LiipImagineBundle`'s resolver and loader were changed from **default** to **sylius_image** ([reference](https://github.com/Sylius/Sylius/pull/12543)). 
+   To change the default resolver and/or loader for `LiipImagineBundle`, configure `cache` and/or `data_loader` parameters under the `liip_imagine` key.
+
+* The `sylius/calendar` package has been replaced with `symfony/clock` package. All usages of the `Sylius\Calendar\Provider\DateTimeProviderInterface` class
+    have been replaced with `Symfony\Component\Clock\ClockInterface` class.
+
+  * The following classes were changed:
+
+    * `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer`
+    * `Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\RequestResetPasswordEmailHandler`
+    * `Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLogger`
+    * `Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover`
+    * `Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner`
+    * `Sylius\Bundle\PromotionBundle\Criteria\DateRange`
+    * `Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicator`
+    * `Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler`
+    * `Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler`
+    * `Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker`
+
+## Frontend
+
+* `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
+* `use_webpack` twig global variable was removed. Webpack is always used now, and there is no need to check for it.

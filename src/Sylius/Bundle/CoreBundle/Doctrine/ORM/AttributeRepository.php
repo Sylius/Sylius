@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -26,7 +26,7 @@ class AttributeRepository extends EntityRepository
 {
     protected AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, ClassMetadata $class)
+    public function __construct(EntityManagerInterface $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 

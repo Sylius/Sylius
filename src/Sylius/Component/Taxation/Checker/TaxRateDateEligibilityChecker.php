@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxation\Checker;
 
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
+use Symfony\Component\Clock\ClockInterface;
 
 final class TaxRateDateEligibilityChecker implements TaxRateDateEligibilityCheckerInterface
 {
     public function __construct(
-        protected DateTimeProviderInterface $calendar,
+        protected ClockInterface $clock,
     ) {
     }
 
     public function isEligible(TaxRateInterface $taxRate): bool
     {
-        $date = $this->calendar->now();
+        $date = $this->clock->now();
         $startDate = $taxRate->getStartDate();
         $endDate = $taxRate->getEndDate();
 
