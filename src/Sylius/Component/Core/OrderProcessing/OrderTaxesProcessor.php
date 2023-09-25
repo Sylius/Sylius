@@ -34,16 +34,8 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         private ZoneProviderInterface $defaultTaxZoneProvider,
         private ZoneMatcherInterface $zoneMatcher,
         private PrioritizedServiceRegistryInterface $strategyRegistry,
-        private ?TaxationAddressResolverInterface $taxationAddressResolver = null,
+        private TaxationAddressResolverInterface $taxationAddressResolver,
     ) {
-        if ($this->taxationAddressResolver === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.11',
-                'Not passing a $taxationAddressResolver to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -80,12 +72,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     private function getTaxZone(OrderInterface $order): ?ZoneInterface
     {
-        $taxationAddress = $order->getBillingAddress();
-
-        if ($this->taxationAddressResolver) {
-            $taxationAddress = $this->taxationAddressResolver->getTaxationAddressFromOrder($order);
-        }
-
+        $taxationAddress = $this->taxationAddressResolver->getTaxationAddressFromOrder($order);
         $zone = null;
 
         if (null !== $taxationAddress) {
