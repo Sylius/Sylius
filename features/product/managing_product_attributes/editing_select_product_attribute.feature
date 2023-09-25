@@ -41,12 +41,12 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should not have value "Banana skin"
 
-    @ui @no-api
-    Scenario: Seeing disabled code field while editing a product attribute
+    @ui @api
+    Scenario: Being unable to change code of an existing product attribute
         When I want to edit this product attribute
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui @no-api
-    Scenario: Seeing disabled type field while editing a product attribute
+    @ui @api
+    Scenario: Being unable to change type of an existing product attribute
         When I want to edit this product attribute
-        Then the type field should be disabled
+        Then I should not be able to edit its type

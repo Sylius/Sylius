@@ -427,4 +427,30 @@ final class ManagingProductAttributesContext implements Context
             'Configuration multiple must be true if min or max entries values are specified.',
         );
     }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
+            'The code field with value NEW_CODE exist',
+        );
+    }
+
+    /**
+     * @Then I should not be able to edit its type
+     */
+    public function iShouldNotBeAbleToEditItsType(): void
+    {
+        $this->client->updateRequestData(['type' => 'percent']);
+
+        Assert::false(
+            $this->responseChecker->hasValue($this->client->update(), 'type', 'percent'),
+            'The product attribute has new type select set.',
+        );
+    }
 }
