@@ -5886,11 +5886,6 @@ parameters:
 			path: src/Sylius/Component/Core/OrderProcessing/OrderAdjustmentsClearer.php
 
 		-
-			message: "#^Property Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderAdjustmentsClearer\\:\\:\\$adjustmentsToRemove type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/OrderProcessing/OrderAdjustmentsClearer.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\OrderProcessing\\\\OrderShipmentProcessor\\:\\:__construct\\(\\) has parameter \\$shipmentFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/OrderProcessing/OrderShipmentProcessor.php
