@@ -38,7 +38,7 @@ sylius:
         newsletter_description: 'Abonnez-vous à notre newsletter pour recevoir les nouvelles offres qui n''attendent que vous ! (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.newsletter_description" dans votre fichier de traduction</i>)'
         subscribe: 'S''abonner'
     lightbox:
-        image_album_label: 'Page %1 sur %2'
+        image_album_label: 'Page %1 de %2'
     menu:
         shop:
             account:
