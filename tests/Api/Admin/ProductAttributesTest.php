@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
+use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -103,7 +104,7 @@ final class ProductAttributesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_no_create_a_product_attribute_without_required_data(): void
+    public function it_does_not_create_a_product_attribute_without_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -129,7 +130,7 @@ final class ProductAttributesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_no_create_a_product_attribute_with_unregistered_type(): void
+    public function it_does_not_create_a_product_attribute_with_unregistered_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -208,6 +209,34 @@ final class ProductAttributesTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product_attribute/put_product_attribute_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_the_code_and_type_of_existing_product_attribute(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'product/product_attribute.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $fixtures['product_attribute_text'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/admin/product-attributes/' . $productAttribute->getCode(),
+            server: $header,
+            content: json_encode([
+                'code' => 'NEW_CODE',
+                'type' => TextAreaAttributeType::TYPE,
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/put_product_attribute_with_code_and_type_response',
             Response::HTTP_OK,
         );
     }

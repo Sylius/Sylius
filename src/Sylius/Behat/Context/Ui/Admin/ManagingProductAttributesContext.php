@@ -153,17 +153,18 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
      * @Then the type field should be disabled
+     * @Then I should not be able to edit its type
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function theTypeFieldShouldBeDisabled(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
