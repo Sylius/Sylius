@@ -27,26 +27,10 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
         private string $targetState = PaymentInterface::STATE_CART,
-        private ?OrderPaymentsRemoverInterface $orderPaymentsRemover = null,
+        private OrderPaymentsRemoverInterface $orderPaymentsRemover,
         /** @var array<string> $unprocessableOrderStates */
-        private array $unprocessableOrderStates = [],
+        private array $unprocessableOrderStates,
     ) {
-        if ($this->orderPaymentsRemover === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing an $orderPaymentsRemover to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
-        if ([] === $this->unprocessableOrderStates) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing an $unprocessableOrderStates to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -82,36 +66,16 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 
     private function canPaymentsBeRemoved(OrderInterface $order): bool
     {
-        if (null !== $this->orderPaymentsRemover) {
-            return $this->orderPaymentsRemover->canRemovePayments($order);
-        }
-
-        return 0 === $order->getTotal();
+        return $this->orderPaymentsRemover->canRemovePayments($order);
     }
 
     private function removePayments(OrderInterface $order): void
     {
-        if (null !== $this->orderPaymentsRemover) {
-            $this->orderPaymentsRemover->removePayments($order);
-
-            return;
-        }
-
-        $removablePayments = $order->getPayments()->filter(function (PaymentInterface $payment): bool {
-            return $payment->getState() === PaymentInterface::STATE_CART;
-        });
-
-        foreach ($removablePayments as $payment) {
-            $order->removePayment($payment);
-        }
+        $this->orderPaymentsRemover->removePayments($order);
     }
 
     private function cannotBeProcessed(OrderInterface $order): bool
     {
-        if ([] === $this->unprocessableOrderStates) {
-            return OrderInterface::STATE_CANCELLED === $order->getState();
-        }
-
         return in_array($order->getState(), $this->unprocessableOrderStates, true);
     }
 }

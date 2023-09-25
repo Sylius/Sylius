@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
@@ -27,9 +25,18 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
-    function let(OrderPaymentProviderInterface $orderPaymentProvider): void
-    {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART);
+    function let(
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        OrderPaymentsRemoverInterface $orderPaymentsRemover,
+    ): void {
+        $this->beConstructedWith(
+            $orderPaymentProvider,
+            PaymentInterface::STATE_CART,
+            $orderPaymentsRemover,
+            [
+                OrderInterface::STATE_FULFILLED,
+            ],
+        );
     }
 
     function it_is_an_order_processor(): void
@@ -45,96 +52,14 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_the_order_is_cancelled_when_no_unsupported_states_were_passed(
-        OrderInterface $order,
-    ): void {
-        $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
-        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
     function it_does_nothing_if_the_order_state_is_in_unsupported_states(
         OrderPaymentProviderInterface $orderPaymentProvider,
         OrderInterface $order,
     ): void {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, null, [
-            OrderInterface::STATE_FULFILLED,
-        ]);
-
         $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
         $order->getLastPayment(Argument::any())->shouldNotBeCalled();
 
         $orderPaymentProvider->provideOrderPayment($order)->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_removes_cart_payments_from_order_if_its_total_is_zero(
-        OrderInterface $order,
-        PaymentInterface $cartPayment,
-        PaymentInterface $cancelledPayment,
-        Collection $payments,
-    ): void {
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
-        $order->getTotal()->willReturn(0);
-
-        $cartPayment->getState()->willReturn(OrderPaymentStates::STATE_CART);
-        $cancelledPayment->getState()->willReturn(OrderPaymentStates::STATE_CANCELLED);
-
-        $payments->filter(Argument::type(\Closure::class))->willReturn([$cartPayment]);
-
-        $order->getPayments()->willReturn($payments);
-        $order->removePayment($cartPayment)->shouldBeCalledTimes(1);
-        $order->removePayment($cancelledPayment)->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
-        OrderInterface $order,
-        PaymentInterface $payment,
-    ): void {
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
-        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn($payment);
-
-        $order->getCurrencyCode()->willReturn('PLN');
-        $order->getTotal()->willReturn(1000);
-
-        $payment->setCurrencyCode('PLN')->shouldBeCalled();
-        $payment->setAmount(1000)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_sets_provided_order_payment_if_it_is_not_null(
-        OrderInterface $order,
-        OrderPaymentProviderInterface $orderPaymentProvider,
-        PaymentInterface $payment,
-    ): void {
-        $order->getTotal()->willReturn(10);
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
-        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
-
-        $orderPaymentProvider->provideOrderPayment($order, PaymentInterface::STATE_CART)->willReturn($payment);
-        $order->addPayment($payment)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_does_not_set_order_payment_if_it_cannot_be_provided(
-        OrderInterface $order,
-        OrderPaymentProviderInterface $orderPaymentProvider,
-    ): void {
-        $order->getTotal()->willReturn(10);
-        $order->getState()->willReturn(OrderInterface::STATE_CART);
-        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
-
-        $orderPaymentProvider
-            ->provideOrderPayment($order, PaymentInterface::STATE_CART)
-            ->willThrow(NotProvidedOrderPaymentException::class)
-        ;
-        $order->addPayment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
     }
@@ -144,25 +69,23 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderPaymentsRemoverInterface $orderPaymentsRemover,
         OrderInterface $order,
     ): void {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, $orderPaymentsRemover);
-
         $order->getState()->willReturn(OrderInterface::STATE_CART);
-        $order->getTotal()->shouldNotBeCalled();
 
         $orderPaymentsRemover->canRemovePayments($order)->willReturn(true);
         $orderPaymentsRemover->removePayments($order)->shouldBeCalled();
 
+        $order->addPayment(Argument::any())->shouldNotBeCalled();
+        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
+
         $this->process($order);
     }
 
-    function it_sets_last_order_currency_with_target_state_currency_code_and_amount_when_using_payments_remover(
+    function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
         OrderPaymentProviderInterface $orderPaymentProvider,
         OrderPaymentsRemoverInterface $orderPaymentsRemover,
         OrderInterface $order,
         PaymentInterface $payment,
     ): void {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, $orderPaymentsRemover);
-
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn($payment);
 
@@ -174,18 +97,17 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $payment->setCurrencyCode('PLN')->shouldBeCalled();
         $payment->setAmount(1000)->shouldBeCalled();
 
+        $orderPaymentProvider->provideOrderPayment($order, PaymentInterface::STATE_CART)->shouldNotBeCalled();
+
         $this->process($order);
     }
 
-    function it_sets_provided_order_payment_if_it_is_not_null_when_using_payments_remover(
+    function it_sets_provided_order_payment_if_it_is_not_null(
         OrderPaymentProviderInterface $orderPaymentProvider,
         OrderPaymentsRemoverInterface $orderPaymentsRemover,
         OrderInterface $order,
         PaymentInterface $payment,
     ): void {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, $orderPaymentsRemover);
-
-        $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
 
@@ -197,14 +119,11 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_set_order_payment_if_it_cannot_be_provided_when_using_payments_remover(
+    function it_does_not_set_order_payment_if_it_cannot_be_provided(
         OrderPaymentProviderInterface $orderPaymentProvider,
         OrderPaymentsRemoverInterface $orderPaymentsRemover,
         OrderInterface $order,
     ): void {
-        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART, $orderPaymentsRemover);
-
-        $order->getTotal()->willReturn(10);
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
 
