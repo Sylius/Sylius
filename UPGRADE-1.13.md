@@ -146,3 +146,6 @@
     `sylius_admin_ajax_taxon_move_up` and `sylius_admin_ajax_taxon_move_down` routes.
 
 1. Not passing a `$fileLocator` to `Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory` constructor is deprecated and will be prohibited in Sylius 2.0.
+
+1. Interface `Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface` and class `Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension` responsible for the `sylius_order_items_subtotal` twig function have been deprecated and will be removed in Sylius 2.0.
+   Use the `::getItemsSubtotal()` method from the `Order` class instead.
