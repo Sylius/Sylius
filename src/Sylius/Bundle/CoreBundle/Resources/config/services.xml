@@ -42,6 +42,7 @@
         <import resource="services/taxation.xml" />
         <import resource="services/templating.xml" />
         <import resource="services/validators.xml" />
+        <import resource="services/workflow.xml" />
     </imports>
 
     <parameters>
