@@ -6,7 +6,7 @@ Feature: Editing a text product attribute
 
     Background:
         Given the store is available in "English (United States)"
-        Given the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
+        And the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
         And I am logged in as an administrator
 
     @ui @api
