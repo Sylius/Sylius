@@ -6071,16 +6071,6 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Filter/TaxonFilter.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ContainsProductRuleUpdater\\:\\:__construct\\(\\) has parameter \\$promotionRuleRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ContainsProductRuleUpdater.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ContainsProductRuleUpdater\\:\\:updateAfterProductDeletion\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ContainsProductRuleUpdater.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\HasTaxonRuleUpdater\\:\\:__construct\\(\\) has parameter \\$promotionRuleRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/HasTaxonRuleUpdater.php
