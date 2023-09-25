@@ -56,24 +56,24 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
-     * @When I change its name to :name in :language
+     * @When I name it :name in :localeCode
+     * @When I change its name to :name in :localeCode
      * @When I do not name it
-     * @When I remove its name from :language translation
+     * @When I remove its name from :localeCode translation
      */
-    public function iNameItIn(string $name = '', string $language = 'en_US'): void
+    public function iNameItIn(string $name = '', string $localeCode = 'en_US'): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name, 'locale' => $localeCode]]]);
     }
 
     /**
-     * @When I (also) add value :value in :language
+     * @When I (also) add value :value in :localeCode
      */
-    public function iAddValueIn(string $value, string $language): void
+    public function iAddValueIn(string $value, string $localeCode): void
     {
         $uuid = Uuid::uuid4()->toString();
 
-        $this->client->addRequestData('configuration', ['choices' => [$uuid => [$language => $value]]]);
+        $this->client->addRequestData('configuration', ['choices' => [$uuid => [$localeCode => $value]]]);
     }
 
     /**
@@ -362,7 +362,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then I should be notified that product attribute with this code already exists
      */
-    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists()
+    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -384,7 +384,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then there should still be only one product attribute with code :code
      */
-    public function thereShouldStillBeOnlyOneProductAttributeWithCode($code)
+    public function thereShouldStillBeOnlyOneProductAttributeWithCode(string $code): void
     {
         $items = $this->responseChecker->getCollectionItemsWithValue(
             $this->client->index(Resources::PRODUCT_ATTRIBUTES),
