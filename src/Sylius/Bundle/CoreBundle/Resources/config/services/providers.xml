@@ -26,11 +26,6 @@
             <argument type="service" id="sylius.canonicalizer" />
         </service>
 
-        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-        </service>
-        <service id="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" alias="sylius.provider.product_variants_prices" />
-
         <service id="sylius.translation_locale_provider.admin" class="Sylius\Component\Core\Provider\TranslationLocaleProvider">
             <argument type="service" id="sylius.repository.locale" />
             <argument type="string">%locale%</argument>

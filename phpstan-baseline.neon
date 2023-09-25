@@ -6236,26 +6236,6 @@ parameters:
 			path: src/Sylius/Component/Core/Provider/ProductVariantMap/ProductVariantsMapProviderInterface.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:constructOptionsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProvider\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$appliedPromotions contains generic class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection but does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProvider.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\ProductVariantsPricesProviderInterface\\:\\:provideVariantsPrices\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Provider/ProductVariantsPricesProviderInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Provider\\\\TranslationLocaleProvider\\:\\:__construct\\(\\) has parameter \\$localeRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/Core/Provider/TranslationLocaleProvider.php

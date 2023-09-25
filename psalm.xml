@@ -45,7 +45,6 @@
                 <referencedClass name="Sylius\Bundle\ShopBundle\Twig\OrderItemsSubtotalExtension" />
                 <referencedClass name="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder"/>
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
-                <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker"/>
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\HttpFoundation\RequestMatcher" /> <!-- deprecated in Symfony 6.2 -->
@@ -66,7 +65,6 @@
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface" />
-                <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
