@@ -35,7 +35,6 @@ use Sylius\Bundle\CoreBundle\Tests\Stub\UriBasedSectionResolverStub;
 use Sylius\Bundle\OrderBundle\DependencyInjection\SyliusOrderExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
-use Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -165,16 +164,6 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->load(['filesystem' => ['adapter' => 'flysystem']]);
 
         $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, FlysystemFilesystemAdapter::class);
-    }
-
-    /** @test */
-    public function it_aliases_gaufrette_filesystem_adapter_properly(): void
-    {
-        $this->container->setParameter('kernel.environment', 'dev');
-
-        $this->load(['filesystem' => ['adapter' => 'gaufrette']]);
-
-        $this->assertContainerBuilderHasAlias(FilesystemAdapterInterface::class, GaufretteFilesystemAdapter::class);
     }
 
     /** @test */
