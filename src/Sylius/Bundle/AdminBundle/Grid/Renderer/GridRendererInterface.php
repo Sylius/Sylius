@@ -19,5 +19,5 @@ use Sylius\Component\Grid\View\GridViewInterface;
 
 interface GridRendererInterface extends BaseGridRendererInterface
 {
-    public function renderItemAction(GridViewInterface $gridView, Action $action, mixed $data = null);
+    public function renderItemAction(GridViewInterface $gridView, Action $action, mixed $data = null): string;
 }

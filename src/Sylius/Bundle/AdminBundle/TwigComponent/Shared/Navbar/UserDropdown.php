@@ -41,11 +41,17 @@ final class UserDropdown
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, array<string, array{title?: string, url?: string, icon?: string, type?: string, class?: string}>>
+     *
+     * @psalm-suppress InvalidReturnType
      */
     #[ExposeInTemplate]
     public function getMenuItems(): array
     {
+        /**
+         * @phpstan-ignore-next-line PHPStan complains the declared return type does not match the returned value
+         * @psalm-suppress InvalidReturnStatement
+         */
         return [
             [
                 'title' => $this->translator->trans('sylius.ui.my_account'),
