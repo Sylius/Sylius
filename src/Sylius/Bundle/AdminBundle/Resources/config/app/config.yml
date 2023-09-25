@@ -46,9 +46,29 @@ webpack_encore:
     builds:
         admin: '%kernel.project_dir%/public/build/admin'
 
+sylius_admin:
+    templates:
+        item_action:
+            apply_transition: '@SyliusAdmin/Shared/Grid/ItemAction/_applyTransition.html.twig'
+            archive: '@SyliusAdmin/Shared/Grid/ItemAction/_archive.html.twig'
+            create: '@SyliusAdmin/Shared/Grid/ItemAction/_create.html.twig'
+            default: '@SyliusAdmin/Shared/Grid/ItemAction/_default.html.twig'
+            delete: '@SyliusAdmin/Shared/Grid/ItemAction/_delete.html.twig'
+            links: '@SyliusAdmin/Shared/Grid/ItemAction/_links.html.twig'
+            show: '@SyliusAdmin/Shared/Grid/ItemAction/_show.html.twig'
+            update: '@SyliusAdmin/Shared/Grid/ItemAction/_update.html.twig'
+
 sylius_grid:
     templates:
         action:
+            apply_transition: '@SyliusAdmin/Shared/Grid/Action/_applyTransition.html.twig'
+            archive: '@SyliusAdmin/Shared/Grid/Action/_archive.html.twig'
+            create: '@SyliusAdmin/Shared/Grid/Action/_create.html.twig'
+            default: '@SyliusAdmin/Shared/Grid/Action/_default.html.twig'
+            delete: '@SyliusAdmin/Shared/Grid/Action/_delete.html.twig'
+            links: '@SyliusAdmin/Shared/Grid/Action/_links.html.twig'
+            show: '@SyliusAdmin/Shared/Grid/Action/_show.html.twig'
+            update: '@SyliusAdmin/Shared/Grid/Action/_update.html.twig'
             create_payment_method: "@SyliusAdmin/PaymentMethod/Grid/Action/create.html.twig"
             create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
             generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"

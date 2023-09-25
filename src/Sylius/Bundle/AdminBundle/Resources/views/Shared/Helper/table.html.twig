@@ -35,7 +35,7 @@
             <td {{ sylius_test_html_attribute('actions') }}>
                 {% set actions %}
                     {% for action in definition.getEnabledActions('item')|sort_by('position') %}
-                        {{ sylius_grid_render_action(grid, action, row) }}
+                        {{ sylius_grid_render_item_action(grid, action, row) }}
                     {% endfor %}
                 {% endset %}
                 {{ dropdown.default({ content: actions, button: { text: 'Actions' } }) }}
