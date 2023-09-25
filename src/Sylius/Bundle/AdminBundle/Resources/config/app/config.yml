@@ -75,6 +75,8 @@ sylius_grid:
             ship_with_tracking_code: "@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig"
             update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
             update_product_variant_positions: "@SyliusAdmin/ProductVariant/Grid/Action/updatePositions.html.twig"
+        bulk_action:
+            delete: '@SyliusAdmin/Shared/Grid/BulkAction/_delete.html.twig'
         filter:
             boolean: '@SyliusAdmin/Shared/Grid/Filter/_boolean.html.twig'
             date: '@SyliusAdmin/Shared/Grid/Filter/_date.html.twig'
