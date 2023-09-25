@@ -80,10 +80,6 @@ class RoboFile extends Tasks
             $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
         }
 
-        if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {
-            $task->exec('rm spec/Security/UserPasswordEncoderSpec.php');
-        }
-
         $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');
 
         if (file_exists(sprintf('%s/phpunit.xml', $packagePath)) || file_exists(sprintf('%s/phpunit.xml.dist', $packagePath))) {
