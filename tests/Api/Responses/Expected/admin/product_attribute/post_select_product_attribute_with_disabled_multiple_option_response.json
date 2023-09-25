@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Configuration multiple must be true if min or max entries values are specified.",
+    "violations":[
+        {
+            "propertyPath": "",
+            "message": "Configuration multiple must be true if min or max entries values are specified.",
+            "code": null
+        }
+    ]
+}
