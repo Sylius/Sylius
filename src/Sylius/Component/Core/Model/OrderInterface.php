@@ -120,10 +120,6 @@ interface OrderInterface extends
 
     public function isCreatedByGuest(): bool;
 
-    public function getCreatedByGuest(): bool;
-
-    public function setCreatedByGuest(bool $createdByGuest): void;
-
     /**
      * @return Collection|OrderItemInterface[]
      *
