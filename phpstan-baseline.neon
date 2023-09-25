@@ -2486,11 +2486,6 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\OrderRepository\\:\\:createByCustomerIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
-
-		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\OrderRepository\\:\\:findCartByChannel\\(\\) has parameter \\$id with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepository.php
@@ -6247,11 +6242,6 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface\\:\\:createByCustomerAndChannelIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
-
-		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Repository\\\\OrderRepositoryInterface\\:\\:createByCustomerIdQueryBuilder\\(\\) has parameter \\$customerId with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Repository/OrderRepositoryInterface.php
 
