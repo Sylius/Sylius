@@ -13,6 +13,7 @@
         size: null,
         type: "button",
         url: null,
+        form: null,
     }|merge(params) %}
 
     {% set buttonClass = 'btn' ~
@@ -36,6 +37,7 @@
     {% else %}
         <button type="{{ p.type }}"
                 {% if p.id %}id="{{ p.id }}"{% endif %}
+                {% if p.form %}form="{{ p.form }}"{% endif %}
                 class="{{ buttonClass }}"
             {% if p.disabled %}disabled{% endif %}
             {% if p.dropdown %}data-bs-toggle="dropdown"{% endif %}

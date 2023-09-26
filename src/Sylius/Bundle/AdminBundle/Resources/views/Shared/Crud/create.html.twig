@@ -1,0 +1,12 @@
+{% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
+
+{% set event_name = metadata.applicationName ~ '.admin.' ~ 'create.body' %}
+{% set resource_event_name = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.create.body' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ sylius_template_event([resource_event_name, event_name], { event_prefix: event_name, resource_event_prefix: resource_event_name, resource: resource, metadata: metadata, configuration: configuration, form: form }) }}
+{% endblock %}

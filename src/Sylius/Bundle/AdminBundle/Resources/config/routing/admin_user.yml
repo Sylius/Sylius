@@ -3,7 +3,7 @@ sylius_admin_admin_user:
         alias: sylius.admin_user
         section: admin
         path: users
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\Shared\\Crud"
         except: ['show']
         redirect: index
         grid: sylius_admin_admin_user

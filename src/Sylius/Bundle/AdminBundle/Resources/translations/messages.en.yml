@@ -61,6 +61,8 @@ sylius:
             account_verification_required_details: By disabling this option, it will be possible to create accounts and access them without email verification and thus potentially access order data placed as a guest.
         channel_pricing_history: 'Channel pricing history'
         channel_pricings: Channel pricings
+        create_new:
+            customer_group: 'Create a new customer group'
         gateway:
             no_sca_support_notice: The chosen payment gateway does not support SCA.
             pay_pal_express_checkout_deprecation_notice: >

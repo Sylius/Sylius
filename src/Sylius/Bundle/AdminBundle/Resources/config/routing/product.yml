@@ -2,7 +2,7 @@ sylius_admin_product:
     resource: |
         alias: sylius.product
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\Shared\\Crud"
         except: ['index', 'update']
         redirect: update
         grid: sylius_admin_product
