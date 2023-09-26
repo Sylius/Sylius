@@ -28,23 +28,13 @@ use Webmozart\Assert\Assert;
 
 final class ImpersonateUserController
 {
-    private ?RouterInterface $router;
-
     public function __construct(
         private UserImpersonatorInterface $impersonator,
         private AuthorizationCheckerInterface $authorizationChecker,
         private UserProviderInterface $userProvider,
-        ?RouterInterface $router,
+        private RouterInterface $router,
         private string $authorizationRole,
     ) {
-        if (null === $router) {
-            trigger_deprecation(
-                'sylius/admin-bundle',
-                '1.13',
-                'Not passing a $router as the fourth argument is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
-        $this->router = $router;
     }
 
     public function impersonateAction(Request $request, string $username): Response
