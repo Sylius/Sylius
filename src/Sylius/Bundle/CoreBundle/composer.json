@@ -50,6 +50,7 @@
         "sylius/grid-bundle": "^1.12",
         "sylius/inventory-bundle": "^2.0",
         "sylius/locale-bundle": "^2.0",
+        "sylius/mailer-bundle": "^2.0",
         "sylius/money-bundle": "^2.0",
         "sylius/order-bundle": "^2.0",
         "sylius/payment-bundle": "^2.0",
@@ -61,7 +62,6 @@
         "sylius/shipping-bundle": "^2.0",
         "sylius/taxation-bundle": "^2.0",
         "sylius/taxonomy-bundle": "^2.0",
-        "sylius/mailer-bundle": "^2.0",
         "sylius/theme-bundle": "^2.3",
         "sylius/ui-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
@@ -72,6 +72,7 @@
         "symfony/messenger": "^6.3.4",
         "symfony/templating": "^6.3.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/workflow": "^6.3.4",
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {

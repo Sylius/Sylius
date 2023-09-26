@@ -98,6 +98,16 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('state_machine')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
+                        ->arrayNode('graphs_to_adapters_mapping')
+                            ->useAttributeAsKey('graph_name')
+                            ->scalarPrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

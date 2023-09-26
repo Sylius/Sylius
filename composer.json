@@ -133,6 +133,7 @@
         "symfony/twig-bundle": "^6.3.0",
         "symfony/validator": "^6.3.4",
         "symfony/webpack-encore-bundle": "^1.17.1",
+        "symfony/workflow": "^6.3.4",
         "symfony/yaml": "^6.3.3",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3",
