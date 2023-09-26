@@ -18,9 +18,9 @@ use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePageInterface;
+use Sylius\Behat\Page\Admin\CatalogPromotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\ShowPageInterface;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -47,6 +47,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I browse catalog promotions
+     * @When I browse catalog promotions once again
      */
     public function iBrowseCatalogPromotions(): void
     {
@@ -686,6 +687,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I request the archival of :catalogPromotion catalog promotion
+     */
+    public function iRequestTheArchivalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->indexPage->open();
+        $actions = $this->indexPage->getActionsForResource(['name' => $catalogPromotion->getName()]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
      * @When I sort catalog promotions by :order :field
      */
     public function iSortCatalogPromotionByOrderField(string $order, string $field): void
@@ -1228,6 +1239,66 @@ final class ManagingCatalogPromotionsContext implements Context
     public function theFirstCatalogPromotionShouldHaveCode(string $code): void
     {
         Assert::same($this->indexPage->getColumnFields('code')[0], $code);
+    }
+
+    /**
+     * @When I archive the :name promotion
+     */
+    public function iArchiveThePromotion(string $name): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
+     * @When I restore the :name catalog promotion
+     */
+    public function iRestoreTheCatalogPromotion(string $name): void
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Restore');
+    }
+
+    /**
+     * @Then I should be viewing non archival catalog promotions
+     */
+    public function iShouldBeViewingNonArchivalCatalogPromotions(): void
+    {
+        Assert::false($this->indexPage->isArchivalFilterEnabled());
+    }
+
+    /**
+     * @When I filter archival catalog promotions
+     */
+    public function iFilterArchivalCatalogPromotions(): void
+    {
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @Then I should see a single catalog promotion in the list
+     * @Then there should be :amount catalog promotions
+     */
+    public function thereShouldBeAmountCatalogPromotion(int $amount = 1): void
+    {
+        Assert::same($this->indexPage->countItems(), $amount);
+    }
+
+    /**
+     * @Then the :promotionName catalog promotion shouldn't be listed on the current page
+     */
+    public function theCatalogPromotionShouldntBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then the :promotionName catalog promotion should be listed on the current page
+     */
+    public function theCatalogPromotionShouldBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
     }
 
     private function createCatalogPromotion(

@@ -76,6 +76,30 @@ final class NotificationContext implements Context
     }
 
     /**
+     * @Then I should be notified that the archival operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheArchivalOperationHasStartedSuccessfully(): void
+    {
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'has been requested. This process can take a while depending on the number of affected products.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the catalog promotion has been successfully restored
+     */
+    public function iShouldBeNotifiedThatTheCatalogPromotionHasBeenSuccessfullyRestored(): void
+    {
+        $this->testHelper->waitUntilNotificationPopups(
+            $this->notificationChecker,
+            NotificationType::success(),
+            'Promotion has been successfully restored.',
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been failed deleted :name
      */
     public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
