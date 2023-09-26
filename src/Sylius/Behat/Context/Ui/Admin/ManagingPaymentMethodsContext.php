@@ -100,14 +100,6 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
-    }
-
-    /**
      * @Then this payment method :element should be :value
      */
     public function thisPaymentMethodElementShouldBe($element, $value)

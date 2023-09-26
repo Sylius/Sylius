@@ -89,13 +89,22 @@ Sylius\Component\Product\Model\ProductAttribute:
         storage_type: 'text'
         configuration: []
         translatable: true
-        
+    product_attribute_text_delete:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: 'text_delete'
+        name: 'text delete'
+        type: 'text'
+        storage_type: 'text'
+        configuration: []
+        translatable: false
+
 Sylius\Component\Product\Model\ProductAttributeTranslation:
     product_attribute_translation_checkbox:
         locale: pl_PL
         name: 'mozna myc w zmywarce'
         translatable: '@product_attribute_checkbox'
-        
+
 Sylius\Component\Product\Model\ProductAttributeValue:
     product_attribute_value_checkbox:
         localeCode: pl_PL

@@ -449,14 +449,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Shipping method is in use.', NotificationType::failure());
-    }
-
-    /**
      * @Then I should be notified that amount for :channel channel should not be blank
      */
     public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
