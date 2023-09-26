@@ -69,6 +69,7 @@
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
+                <referencedClass name="Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface" />
                 <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
