@@ -88,7 +88,7 @@ final class Configuration implements ConfigurationInterface
                         ->scalarNode('adapter')
                             ->defaultValue('default')
                             ->validate()
-                                ->ifNotInArray(['default', 'flysystem', 'gaufrette'])
+                                ->ifNotInArray(['default', 'flysystem'])
                                 ->thenInvalid('Expected adapter "default", "flysystem" or "gaufrette", but %s passed.')
                             ->end()
                         ->end()
