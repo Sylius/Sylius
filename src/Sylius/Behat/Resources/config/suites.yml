@@ -73,6 +73,7 @@ imports:
     - suites/domain/product/managing_price_history.yml
     - suites/domain/product/managing_product_variants.yml
     - suites/domain/product/managing_products.yml
+    - suites/domain/promotion/managing_catalog_promotions.yml
     - suites/domain/promotion/managing_promotion_coupons.yml
     - suites/domain/promotion/managing_promotions.yml
     - suites/domain/shipping/managing_shipping_methods.yml

@@ -46,6 +46,11 @@
             <argument type="service" id="sylius.repository.product_review" />
         </service>
 
+        <service id="sylius.behat.context.domain.managing_catalog_promotions" class="Sylius\Behat\Context\Domain\ManagingCatalogPromotionsContext">
+            <argument type="service" id="sylius.repository.catalog_promotion" />
+            <argument type="service" id="sylius.manager.catalog_promotion" />
+        </service>
+
         <service id="sylius.behat.context.domain.managing_promotions" class="Sylius\Behat\Context\Domain\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.promotion" />
