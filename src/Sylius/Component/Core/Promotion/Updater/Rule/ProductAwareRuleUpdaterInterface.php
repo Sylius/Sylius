@@ -15,6 +15,9 @@ namespace Sylius\Component\Core\Promotion\Updater\Rule;
 
 use Sylius\Component\Core\Model\ProductInterface;
 
+/**
+ * @deprecated since Sylius 1.13 ane will be removed in Sylius 2.0
+ */
 interface ProductAwareRuleUpdaterInterface
 {
     public function updateAfterProductDeletion(ProductInterface $product): array;
