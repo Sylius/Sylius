@@ -119,7 +119,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findByCustomer(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdCriteriaAwareQueryBuilder([], $customer->getId())
+        return $this->createByCustomerIdCriteriaAwareQueryBuilder(null, $customer->getId())
             ->getQuery()
             ->getResult()
         ;
