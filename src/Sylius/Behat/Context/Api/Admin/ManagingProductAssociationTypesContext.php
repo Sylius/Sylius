@@ -131,7 +131,7 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (?:it has|they have) been successfully deleted$/
+     * @Then /^I should be notified that it has been successfully deleted$/
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
@@ -192,29 +192,6 @@ final class ManagingProductAssociationTypesContext implements Context
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
             'The shipping category code should not be changed to "NEW_CODE", but it is',
         );
-    }
-
-    /**
-     * @When I check (also) the :productAssociationType product association type
-     */
-    public function iCheckTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
-    {
-        $productAssociationTypeToDelete = [];
-        if ($this->sharedStorage->has('product_association_type_to_delete')) {
-            $productAssociationTypeToDelete = $this->sharedStorage->get('product_association_type_to_delete');
-        }
-        $productAssociationTypeToDelete[] = $productAssociationType->getCode();
-        $this->sharedStorage->set('product_association_type_to_delete', $productAssociationTypeToDelete);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        foreach ($this->sharedStorage->get('product_association_type_to_delete') as $code) {
-            $this->client->delete(Resources::PRODUCT_ASSOCIATION_TYPES, $code);
-        }
     }
 
     /**
