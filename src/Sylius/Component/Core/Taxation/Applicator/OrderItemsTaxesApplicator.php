@@ -72,21 +72,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         }
     }
 
-//    private function applyWithoutDistributionToItems(OrderInterface $order, ZoneInterface $zone): void
-//    {
-//        foreach ($order->getItems() as $item) {
-//            /** @var TaxRateInterface|null $taxRate */
-//            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
-//            if (null === $taxRate) {
-//                continue;
-//            }
-//
-//            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-//
-//            $this->distributeTaxesToUnits($totalTaxAmount, $item->getQuantity(), $item, $taxRate);
-//        }
-//    }
-
     private function addAdjustment(OrderItemUnitInterface $unit, int $taxAmount, TaxRateInterface $taxRate): void
     {
         $unitTaxAdjustment = $this->adjustmentFactory->createWithData(
