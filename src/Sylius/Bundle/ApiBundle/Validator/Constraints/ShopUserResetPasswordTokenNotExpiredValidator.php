@@ -31,6 +31,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidator extends ConstraintVali
     ) {
     }
 
+    /** @param string $value */
     public function validate($value, Constraint $constraint): void
     {
         Assert::string($value);
