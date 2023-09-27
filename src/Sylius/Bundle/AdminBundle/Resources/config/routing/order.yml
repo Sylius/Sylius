@@ -25,7 +25,7 @@ sylius_admin_order_show:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/show.html.twig"
+            template: "@SyliusAdmin/Shared/Crud/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
