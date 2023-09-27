@@ -6081,11 +6081,6 @@ parameters:
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/HasTaxonRuleUpdater.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\ProductAwareRuleUpdaterInterface\\:\\:updateAfterProductDeletion\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Sylius/Component/Core/Promotion/Updater/Rule/ProductAwareRuleUpdaterInterface.php
-
-		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Promotion\\\\Updater\\\\Rule\\\\TaxonAwareRuleUpdaterInterface\\:\\:updateAfterDeletingTaxon\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Promotion/Updater/Rule/TaxonAwareRuleUpdaterInterface.php
