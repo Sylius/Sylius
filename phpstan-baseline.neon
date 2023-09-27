@@ -771,6 +771,26 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/MessengerDataPersister.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:remove\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductAttributeDataPersister\\:\\:supports\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductTaxonDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductTaxonDataPersister.php
