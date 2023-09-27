@@ -37,7 +37,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [null, new ShopUserResetPasswordTokenExists])
+            ->during('validate', [null, new ShopUserResetPasswordTokenExists()])
         ;
     }
 
@@ -53,7 +53,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_user_exist(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->initialize($executionContext);
 
@@ -68,7 +68,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_if_reset_password_token_does_not_exist(
         UserRepositoryInterface $userRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 

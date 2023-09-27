@@ -38,7 +38,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('validate', [null, new ShopUserResetPasswordTokenNotExpired])
+            ->during('validate', [null, new ShopUserResetPasswordTokenNotExpired()])
         ;
     }
 
@@ -53,7 +53,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
 
     function it_does_not_add_violation_if_reset_password_token_does_not_exist(
         UserRepositoryInterface $userRepository,
-        ExecutionContextInterface $executionContext
+        ExecutionContextInterface $executionContext,
     ): void {
         $this->initialize($executionContext);
 
@@ -69,7 +69,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
     function it_does_not_add_violation_if_reset_password_token_is_not_expired(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->initialize($executionContext);
 
@@ -78,7 +78,6 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
         }))->willReturn(true);
 
         $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
-
 
         $executionContext
             ->addViolation('sylius.reset_password.token_expired')
@@ -90,7 +89,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
     function it_adds_violation_if_reset_password_token_is_expired(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
-        UserInterface $user
+        UserInterface $user,
     ): void {
         $this->initialize($executionContext);
 
@@ -99,7 +98,6 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
         }))->willReturn(false);
 
         $userRepository->findOneBy(['passwordResetToken' => 'token'])->willReturn($user);
-
 
         $executionContext
             ->addViolation('sylius.reset_password.token_expired')
