@@ -5611,12 +5611,17 @@ parameters:
 			path: src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculator.php
 
 		-
-			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPriceCalculatorInterface\\:\\:calculate\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculate\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Sylius/Component/Core/Calculator/ProductVariantPriceCalculatorInterface.php
+			path: src/Sylius/Component/Core/Calculator/ProductVariantPricesCalculatorInterface.php
 
 		-
 			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculateOriginal\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Calculator/ProductVariantPricesCalculatorInterface.php
+
+		-
+			message: "#^Method Sylius\\\\Component\\\\Core\\\\Calculator\\\\ProductVariantPricesCalculatorInterface\\:\\:calculateLowestPriceBeforeDiscount\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Component/Core/Calculator/ProductVariantPricesCalculatorInterface.php
 
