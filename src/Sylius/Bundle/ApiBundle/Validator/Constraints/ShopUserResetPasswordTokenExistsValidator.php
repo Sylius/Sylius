@@ -22,13 +22,13 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidator
 {
+    /**
+     * @param UserRepositoryInterface<UserInterface> $userRepository
+     */
     public function __construct(private UserRepositoryInterface $userRepository)
     {
     }
 
-    /**
-     * @param mixed $value
-     */
     public function validate($value, Constraint $constraint): void
     {
         Assert::string($value);
