@@ -1,0 +1,42 @@
+Sylius\Component\Addressing\Model\Country:
+    country_PL:
+        code: PL
+
+Sylius\Component\Addressing\Model\Province:
+    province_{MA, LD, MZ, DS}:
+        code: <current()>
+        name: <current()>
+        abbreviation: <current()>
+        country: "@country_PL"
+
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_province_{MA, LD, MZ, DS}:
+        code: <current()>
+    member_{poland_visegrad_group, poland_nato}:
+        code: PL
+    member_visegrad_group:
+        code: "VISEGRAD_GROUP"
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_poland:
+        code: PL
+        name: Poland
+        type: province
+        members: ["@member_province_MA", "@member_province_LD", "@member_province_MZ", "@member_province_DS"]
+    zone_visegrad_group:
+        code: VISEGRAD_GROUP
+        name: Visegrad Group
+        type: zone
+        members: ["@member_poland_visegrad_group"]
+    zone_eu:
+        code: EU
+        name: European Union
+        type: zone
+        members: ["@member_visegrad_group"]
+        scope: 'tax'
+    zone_nato:
+        code: NATO
+        name: NATO
+        type: zone
+        members: ["@member_poland_nato"]
+        scope: 'shipping'

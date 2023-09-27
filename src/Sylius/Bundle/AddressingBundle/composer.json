@@ -39,6 +39,7 @@
         "twig/twig": "^1.0 || ^3.0"
     },
     "require-dev": {
+        "doctrine/data-fixtures": "^1.4",
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
@@ -47,7 +48,8 @@
         "symfony/browser-kit": "^5.4.21 || ^6.0",
         "symfony/dependency-injection": "^5.4.21 || ^6.0",
         "symfony/form": "^5.4.21 || ^6.0",
-        "symfony/validator": "^5.4.21 || ^6.0"
+        "symfony/validator": "^5.4.21 || ^6.0",
+        "theofidry/alice-data-fixtures": "^1.4"
     },
     "config": {
         "allow-plugins": {
