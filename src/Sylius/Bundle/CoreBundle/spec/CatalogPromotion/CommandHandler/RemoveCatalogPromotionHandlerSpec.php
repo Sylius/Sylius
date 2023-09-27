@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveCatalogPromotion;
@@ -26,14 +26,14 @@ final class RemoveCatalogPromotionHandlerSpec extends ObjectBehavior
 {
     public function let(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
     ): void {
         $this->beConstructedWith($catalogPromotionRepository, $entityManager);
     }
 
     public function it_removes_catalog_promotion_being_processed(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
@@ -47,7 +47,7 @@ final class RemoveCatalogPromotionHandlerSpec extends ObjectBehavior
 
     public function it_throws_an_exception_if_catalog_promotion_is_not_in_a_processing_state(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         CatalogPromotionInterface $catalogPromotion,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn($catalogPromotion);
@@ -65,7 +65,7 @@ final class RemoveCatalogPromotionHandlerSpec extends ObjectBehavior
 
     public function it_returns_if_there_is_no_catalog_promotion_with_given_code(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
     ): void {
         $catalogPromotionRepository->findOneBy(['code' => 'CATALOG_PROMOTION_CODE'])->willReturn(null);
 

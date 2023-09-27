@@ -48,7 +48,6 @@ class RoboFile extends Tasks
     private function processPackagePipeline(string $package): ?Result
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
-        $useSwiftmailer = getenv('USE_SWIFTMAILER');
         $unstable = getenv('UNSTABLE');
         $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
 
@@ -61,13 +60,6 @@ class RoboFile extends Tasks
             ->stopOnFail()
             ->exec(sprintf('composer config extra.symfony.require "%s"', $symfonyVersion))
         ;
-
-        if (self::YES === $useSwiftmailer) {
-            $task
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "sylius/mailer-bundle:^1.8"')
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"')
-            ;
-        }
 
         if (self::YES === $unstable) {
             $task->exec('composer config minimum-stability dev');
@@ -86,10 +78,6 @@ class RoboFile extends Tasks
 
         if ('Bundle/ApiBundle' === $package) {
             $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
-        }
-
-        if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {
-            $task->exec('rm spec/Security/UserPasswordEncoderSpec.php');
         }
 
         $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');

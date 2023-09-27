@@ -28,11 +28,11 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/resource-bundle": "^1.9",
-        "sylius/taxonomy": "^1.12",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0"
+        "sylius/resource-bundle": "^1.10",
+        "sylius/taxonomy": "^2.0",
+        "symfony/framework-bundle": "^6.3.4"
     },
     "conflict": {
         "doctrine/orm": "2.15.2",
@@ -43,7 +43,7 @@
         "doctrine/orm": "^2.13",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+        "symfony/dependency-injection": "^6.3.4"
     },
     "config": {
         "allow-plugins": {
@@ -52,7 +52,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

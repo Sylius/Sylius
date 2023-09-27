@@ -17,10 +17,14 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 interface ContactEmailManagerInterface
 {
+    /**
+     * @param array<string, mixed> $data
+     * @param array<array-key, string> $recipients
+     */
     public function sendContactRequest(
         array $data,
         array $recipients,
-        ?ChannelInterface $channel = null,
-        ?string $localeCode = null,
+        ChannelInterface $channel,
+        string $localeCode,
     ): void;
 }

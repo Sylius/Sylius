@@ -42,17 +42,8 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         private RepositoryInterface $shippingCategoryRepository,
         private RepositoryInterface $localeRepository,
         private ChannelRepositoryInterface $channelRepository,
-        private ?RepositoryInterface $taxCategoryRepository = null,
+        private RepositoryInterface $taxCategoryRepository,
     ) {
-        if ($this->taxCategoryRepository === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.4',
-                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -135,9 +126,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;
 
-        if ($this->taxCategoryRepository !== null) {
-            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
-        }
+        $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
     private function getLocales(): iterable

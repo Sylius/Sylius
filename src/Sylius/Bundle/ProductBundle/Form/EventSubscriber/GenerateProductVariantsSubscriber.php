@@ -21,25 +21,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
-final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
+final readonly class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private ProductVariantGeneratorInterface $generator,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack $requestStack,
     ) {
-        if ($requestStackOrSession instanceof SessionInterface) {
-            trigger_deprecation(
-                'sylius/product-bundle',
-                '1.12',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
-                SessionInterface::class,
-                self::class,
-                RequestStack::class,
-            );
-        }
     }
 
     public static function getSubscribedEvents(): array
@@ -65,14 +54,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 
     private function getFlashBag(): FlashBagInterface
     {
-        if ($this->requestStackOrSession instanceof RequestStack) {
-            $flashBag = $this->requestStackOrSession->getSession()->getBag('flashes');
-            Assert::isInstanceOf($flashBag, FlashBagInterface::class);
-
-            return $flashBag;
-        }
-
-        $flashBag = $this->requestStackOrSession->getBag('flashes');
+        $flashBag = $this->requestStack->getSession()->getBag('flashes');
         Assert::isInstanceOf($flashBag, FlashBagInterface::class);
 
         return $flashBag;

@@ -1,5 +1,4 @@
 imports:
-    - { resource: "../vendor/sylius/calendar/tests/Behat/Resources/services.yaml" }
     - { resource: "../src/Sylius/Behat/Resources/config/services.xml" }
 
 # workaround needed for strange "test.client.history" problem

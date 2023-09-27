@@ -17,9 +17,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -29,10 +29,10 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shopUserRepository,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         MessageBusInterface $commandBus,
     ): void {
-        $this->beConstructedWith($shopUserRepository, $dateTimeProvider, $commandBus);
+        $this->beConstructedWith($shopUserRepository, $clock, $commandBus);
     }
 
     function it_is_a_message_handler(): void
@@ -42,15 +42,15 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 
     function it_verifies_shop_user(
         RepositoryInterface $shopUserRepository,
-        DateTimeProviderInterface $dateTimeProvider,
+        ClockInterface $clock,
         UserInterface $user,
         MessageBusInterface $commandBus,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn($user);
-        $dateTimeProvider->now()->willReturn(new \DateTime());
+        $clock->now()->willReturn(new \DateTimeImmutable());
 
         $user->getEmail()->willReturn('shop@example.com');
-        $user->setVerifiedAt(Argument::type(\DateTime::class))->shouldBeCalled();
+        $user->setVerifiedAt(Argument::type(\DateTimeImmutable::class))->shouldBeCalled();
         $user->setEmailVerificationToken(null)->shouldBeCalled();
         $user->enable()->shouldBeCalled();
 
