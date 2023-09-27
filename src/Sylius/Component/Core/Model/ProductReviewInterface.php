@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Review\Model\Review;
+use Sylius\Component\Review\Model\ReviewInterface;
 
-class ProductReview extends Review implements ProductReviewInterface
+interface ProductReviewInterface extends ReviewInterface
 {
 }
