@@ -135,29 +135,6 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @When I check (also) the :zone zone
-     */
-    public function iCheckTheZone(ZoneInterface $zone): void
-    {
-        $ZoneToDelete = [];
-        if ($this->sharedStorage->has('zone_to_delete')) {
-            $ZoneToDelete = $this->sharedStorage->get('zone_to_delete');
-        }
-        $ZoneToDelete[] = $zone->getCode();
-        $this->sharedStorage->set('zone_to_delete', $ZoneToDelete);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        foreach ($this->sharedStorage->get('zone_to_delete') as $code) {
-            $this->client->delete(Resources::ZONES, $code);
-        }
-    }
-
-    /**
      * @When I want to modify the zone named :zone
      */
     public function iWantToModifyTheZoneNamed(ZoneInterface $zone): void
@@ -376,7 +353,6 @@ final class ManagingZonesContext implements Context
 
     /**
      * @Then I should be notified that it has been successfully deleted
-     * @Then I should be notified that they have been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
