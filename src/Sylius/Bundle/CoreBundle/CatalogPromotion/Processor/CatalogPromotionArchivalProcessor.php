@@ -27,7 +27,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchivalProcessorInterface
 {
     public function __construct(
-        private CatalogPromotionRepositoryInterface                            $catalogPromotionRepository,
+        /** @var CatalogPromotionRepositoryInterface<CatalogPromotionInterface> */
+        private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         /** @var CatalogPromotionArchivalAnnouncerInterface $catalogPromotionArchivalAnnouncer */
         private CatalogPromotionArchivalAnnouncerInterface|MessageBusInterface $catalogPromotionArchivalAnnouncer,
     ) {

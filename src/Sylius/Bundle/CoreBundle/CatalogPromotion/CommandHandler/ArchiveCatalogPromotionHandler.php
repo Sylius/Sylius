@@ -24,6 +24,7 @@ use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 final class ArchiveCatalogPromotionHandler
 {
     public function __construct(
+        /** @var CatalogPromotionRepositoryInterface<CatalogPromotionInterface> */
         private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         private CatalogPromotionStateProcessorInterface $catalogPromotionStateProcessor,
     ) {

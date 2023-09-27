@@ -24,6 +24,7 @@ final class HideArchivedCatalogPromotionExtension implements ContextAwareQueryCo
     {
     }
 
+    /** @param array<string, mixed> $context */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
