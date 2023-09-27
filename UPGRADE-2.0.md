@@ -71,6 +71,8 @@
     )
 ```
 
+* The `\Serializable` interface has been removed from the `Sylius\Component\User\Model\UserInterface`.
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.
