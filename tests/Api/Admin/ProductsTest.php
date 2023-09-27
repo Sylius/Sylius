@@ -23,29 +23,9 @@ final class ProductsTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     /** @test */
-    public function it_returns_products_collection(): void
+    public function it_gets_a_product(): void
     {
-        $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml', 'authentication/api_administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/products',
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/get_products_collection_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_returns_product_item(): void
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-        $fixtures = $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductInterface $product */
@@ -58,7 +38,26 @@ final class ProductsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/get_product_response',
+            'admin/product/get_product_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_gets_products(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/products',
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/get_products_response',
             Response::HTTP_OK,
         );
     }
