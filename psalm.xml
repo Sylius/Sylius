@@ -62,7 +62,6 @@
             <errorLevel type="info">
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
-                <referencedClass name="Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderAwareInterface" /> <!-- deprecated in Symfony 5.3 -->
