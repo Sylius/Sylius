@@ -30,6 +30,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -323,6 +324,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
     /**
      * @When I browse catalog promotions
+     * @When I browse catalog promotions once again
      */
     public function iBrowseCatalogPromotions(): void
     {
@@ -830,6 +832,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->addFilter($field, $phrase);
         $this->client->filter();
+        $this->client->index(Resources::CATALOG_PROMOTIONS);
     }
 
     /**
@@ -896,6 +899,14 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I request the archival of :catalogPromotion catalog promotion
+     */
+    public function iRequestTheArchivalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+    }
+
+    /**
      * @Then I should be notified that the removal operation has started successfully
      */
     public function iShouldBeNotifiedThatTheRemovalOperationHasStartedSuccessfully(): void
@@ -907,8 +918,97 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @Then I should be notified that the archival operation has started successfully
+     */
+    public function iShouldBeNotifiedThatTheArchivalOperationHasStartedSuccessfully(): void
+    {
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Promotion doesn\'t exist, but it should',
+        );
+    }
+
+    /**
+     * @When I filter archival catalog promotions
+     */
+    public function iFilterArchivalCatalogPromotions(): void
+    {
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
+    }
+
+    /**
+     * @Then I should see a single catalog promotion in the list
+     * @Then there should be :amount catalog promotions
+     */
+    public function thereShouldBeAmountCatalogPromotion(int $amount = 1): void
+    {
+        Assert::same(
+            count($this->responseChecker->getCollection($this->client->getLastResponse())),
+            $amount,
+        );
+    }
+
+    /**
+     * @Then the :promotionName catalog promotion shouldn't be listed on the current page
+     */
+    public function theCatalogPromotionShouldntBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotionName,
+        ));
+
+        Assert::false($returnedPromotion, sprintf('There is catalog promotion %s in registry', $promotionName));
+    }
+
+    /**
+     * @Then the :promotionName catalog promotion should be listed on the current page
+     */
+    public function theCatalogPromotionShouldBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotionName,
+        ));
+
+        Assert::isArray($returnedPromotion, sprintf('There is no catalog promotion %s in registry', $promotionName));
+    }
+
+    /**
+     * @When /^I restore the ("([^"]+)" catalog promotion)$/
+     */
+    public function iRestoreTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), HttpRequest::METHOD_PATCH, 'restore');
+    }
+
+    /**
+     * @Then I should be notified that the catalog promotion has been successfully restored
+     */
+    public function iShouldBeNotifiedThatTheCatalogPromotionHasBeenSuccessfullyRestored(): void
+    {
+        Assert::true(
+            $this->responseChecker->isAccepted($this->client->getLastResponse()),
+            'Promotion doesn\'t exist, but it should',
+        );
+    }
+
+    /**
+     * @Then I should be viewing non archival catalog promotions
+     */
+    public function iShouldBeViewingNonArchivalCatalogPromotions(): void
+    {
+        // Intentionally left blank
+    }
+
+
+    /**
      * @Then there should be :amount new catalog promotion on the list
      * @Then there should be :amount catalog promotions on the list
+     * @Then I should see :amount catalog promotions on the list
      * @Then there should be an empty list of catalog promotions
      */
     public function thereShouldBeNewCatalogPromotionOnTheList(int $amount = 0): void
