@@ -65,14 +65,6 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then no email should be sent
-     */
-    public function noEmailShouldBeSent(): void
-    {
-        Assert::false($this->filesystem->exists($this->emailChecker->getSpoolDirectory()));
-    }
-
-    /**
      * @Then :count email(s) should be sent to :recipient
      */
     public function numberOfEmailsShouldBeSentTo(int $count, string $recipient): void
