@@ -179,30 +179,6 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @When I check the :taxRate tax rate
-     * @When I check also the :taxRate tax rate
-     */
-    public function iCheckTheTaxRate(TaxRateInterface $taxRate): void
-    {
-        $taxRatesToDelete = [];
-        if ($this->sharedStorage->has('tax_rates_to_delete')) {
-            $taxRatesToDelete = $this->sharedStorage->get('tax_rates_to_delete');
-        }
-        $taxRatesToDelete[] = $taxRate->getCode();
-        $this->sharedStorage->set('tax_rates_to_delete', $taxRatesToDelete);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        foreach ($this->sharedStorage->get('tax_rates_to_delete') as $id) {
-            $this->client->delete(Resources::TAX_RATES, (string) $id)->getContent();
-        }
-    }
-
-    /**
      * @When I remove its name
      */
     public function iRemoveItsName(): void
@@ -331,17 +307,6 @@ class ManagingTaxRatesContext implements Context
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->index(Resources::TAX_RATES), 'name', $name),
             sprintf('Tax rate with name %s exists', $name),
-        );
-    }
-
-    /**
-     * @Then I should be notified that they have been successfully deleted
-     */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted(): void
-    {
-        Assert::true(
-            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be deleted',
         );
     }
 
