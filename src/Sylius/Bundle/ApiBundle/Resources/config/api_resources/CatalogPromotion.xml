@@ -29,6 +29,7 @@
                     <attribute>sylius.api.catalog_promotion_start_date_filter</attribute>
                     <attribute>sylius.api.catalog_promotion_end_date_filter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter</attribute>
+                    <attribute>sylius.api.archived_catalog_promotions_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -148,10 +149,13 @@ Example configuration for `percentage_discount` action type:
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_patch">
+            <itemOperation name="admin_archive">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/catalog-promotions/{code}/archive</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\ArchiveCatalogPromotionAction</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="responses">
                         <attribute name="202">
@@ -167,10 +171,13 @@ Example configuration for `percentage_discount` action type:
                 </attribute>
             </itemOperation>
 
-            <itemOperation name="admin_patch">
+            <itemOperation name="admin_restore">
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/catalog-promotions/{code}/restore</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RestoreCatalogPromotionAction</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
+                </attribute>
                 <attribute name="openapi_context">
                     <attribute name="responses">
                         <attribute name="202">

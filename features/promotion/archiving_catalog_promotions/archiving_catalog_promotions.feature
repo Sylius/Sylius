@@ -18,8 +18,7 @@ Feature: Archiving a catalog promotions
         And there is a catalog promotion "Spring Sale" that reduces price by "10%" and applies on "Cups" taxon
         And I am logged in as an administrator
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Archiving an expired catalog promotion
         Given it is "2022-08-22" now
         And the catalog promotion "Winter Sale" operates between "2021-12-20" and "2021-12-30"
@@ -28,16 +27,14 @@ Feature: Archiving a catalog promotions
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Archiving an active catalog promotion without any time limits
         When I request the archival of "Winter Sale" catalog promotion
         Then I should be notified that the archival operation has started successfully
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Archiving an active catalog promotion in the time range
         Given it is "2022-12-15" now
         And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2022-12-30"
@@ -46,8 +43,7 @@ Feature: Archiving a catalog promotions
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Archiving a scheduled catalog promotion
         Given it is "2022-08-22" now
         And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2023-02-28"
@@ -61,8 +57,7 @@ Feature: Archiving a catalog promotions
         When I archive the "Winter Sale" catalog promotion
         Then the catalog promotion should still exist in the registry
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Seeing only archived catalog promotions
         Given the "Winter Sale" catalog promotion is archival
         When I browse catalog promotions
@@ -71,8 +66,7 @@ Feature: Archiving a catalog promotions
         And the "Winter Sale" catalog promotion should be listed on the current page
         And the "Spring Sale" catalog promotion shouldn't be listed on the current page
 
-#    @api
-    @ui
+    @api @ui
     Scenario: Restoring an archival catalog promotion
         Given the "Winter Sale" catalog promotion is archival
         When I browse catalog promotions
