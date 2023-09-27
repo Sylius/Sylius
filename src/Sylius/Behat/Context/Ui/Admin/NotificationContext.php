@@ -110,5 +110,4 @@ final class NotificationContext implements Context
             'Promotion has been successfully restored.',
         );
     }
-
 }
