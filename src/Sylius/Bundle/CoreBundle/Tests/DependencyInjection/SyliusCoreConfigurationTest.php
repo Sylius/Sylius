@@ -45,12 +45,6 @@ final class SyliusCoreConfigurationTest extends TestCase
             ['filesystem' => ['adapter' => 'flysystem']],
             'filesystem',
         );
-
-        $this->assertProcessedConfigurationEquals(
-            [['filesystem' => ['adapter' => 'gaufrette']]],
-            ['filesystem' => ['adapter' => 'gaufrette']],
-            'filesystem',
-        );
     }
 
     /** @test */
@@ -58,7 +52,7 @@ final class SyliusCoreConfigurationTest extends TestCase
     {
         $this->assertConfigurationIsInvalid(
             [['filesystem' => ['adapter' => 'yolo']]],
-            'Expected adapter "default", "flysystem" or "gaufrette", but "yolo" passed.',
+            'Expected adapter "default" or "flysystem", but "yolo" passed.',
         );
     }
 

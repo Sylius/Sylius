@@ -89,7 +89,7 @@ final class Configuration implements ConfigurationInterface
                             ->defaultValue('default')
                             ->validate()
                                 ->ifNotInArray(['default', 'flysystem'])
-                                ->thenInvalid('Expected adapter "default", "flysystem" or "gaufrette", but %s passed.')
+                                ->thenInvalid('Expected adapter "default" or "flysystem", but %s passed.')
                             ->end()
                         ->end()
                     ->end()
