@@ -1,0 +1,21 @@
+framework:
+    workflows:
+        sylius_product_review:
+            type: state_machine
+            marking_store:
+                type: method
+                property: status
+            supports:
+                - Sylius\Component\Core\Model\ProductReviewInterface
+            initial_marking: !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_NEW
+            places:
+                - !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_NEW
+                - !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_ACCEPTED
+                - !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_REJECTED
+            transitions:
+                !php/const Sylius\Component\Core\ProductReviewTransitions::TRANSITION_ACCEPT:
+                    from: !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_NEW
+                    to: !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_ACCEPTED
+                !php/const Sylius\Component\Core\ProductReviewTransitions::TRANSITION_REJECT:
+                    from: !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_NEW
+                    to: !php/const Sylius\Component\Review\Model\ReviewInterface::STATUS_REJECTED
