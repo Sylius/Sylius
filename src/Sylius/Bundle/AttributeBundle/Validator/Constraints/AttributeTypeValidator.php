@@ -25,7 +25,7 @@ final class AttributeTypeValidator extends ConstraintValidator
     {
     }
 
-    public function validate(mixed $value, Constraint $constraint):void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var mixed|AttributeInterface $value */
         Assert::isInstanceOf($value, AttributeInterface::class);
