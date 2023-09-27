@@ -27,15 +27,15 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 {
     public function findOneByAddressAndType(AddressInterface $address, string $type, ?string $scope = null): ?ZoneInterface
     {
-        $query = $this->createByAddressQueryBuilder($address, $scope);
+        $queryBuilder = $this->createByAddressQueryBuilder($address, $scope);
 
-        $query
-            ->andWhere($query->expr()->eq('o.type', ':type'))
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.type', ':type'))
             ->setParameter('type', $type)
             ->setMaxResults(1)
         ;
 
-        return $query->getQuery()->getOneOrNullResult();
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /** @return ZoneInterface[] */
@@ -46,43 +46,43 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
 
     public function createByAddressQueryBuilder(AddressInterface $address, ?string $scope = null): QueryBuilder
     {
-        $query = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
             ->leftJoin('o.members', 'members')
         ;
 
         if (null !== $scope) {
-            $query
-                ->andWhere($query->expr()->in('o.scope', ':scopes'))
-                ->setParameter('scopes', [$scope, Scope::ALL])
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->in('o.scope', ':scopes'))
+                ->setParameter('scopes', array_unique([$scope, Scope::ALL]))
             ;
         }
 
         $orConditions = [];
 
         if ($address->getCountryCode() !== null) {
-            $orConditions[] = $query->expr()->andX(
-                $query->expr()->eq('o.type', ':country'),
-                $query->expr()->eq('members.code', ':countryCode'),
+            $orConditions[] = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('o.type', ':country'),
+                $queryBuilder->expr()->eq('members.code', ':countryCode'),
             );
 
-            $query->setParameter('country', ZoneInterface::TYPE_COUNTRY);
-            $query->setParameter('countryCode', $address->getCountryCode());
+            $queryBuilder->setParameter('country', ZoneInterface::TYPE_COUNTRY);
+            $queryBuilder->setParameter('countryCode', $address->getCountryCode());
         }
 
         if ($address->getProvinceCode() !== null) {
-            $orConditions[] = $query->expr()->andX(
-                $query->expr()->eq('o.type', ':province'),
-                $query->expr()->eq('members.code', ':provinceCode'),
+            $orConditions[] = $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq('o.type', ':province'),
+                $queryBuilder->expr()->eq('members.code', ':provinceCode'),
             );
 
-            $query->setParameter('province', ZoneInterface::TYPE_PROVINCE);
-            $query->setParameter('provinceCode', $address->getProvinceCode());
+            $queryBuilder->setParameter('province', ZoneInterface::TYPE_PROVINCE);
+            $queryBuilder->setParameter('provinceCode', $address->getProvinceCode());
         }
 
-        $query->andWhere($query->expr()->orX(...$orConditions));
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(...$orConditions));
 
-        return $query;
+        return $queryBuilder;
     }
 
     /**
@@ -97,25 +97,25 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             $members,
         );
 
-        $query = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->select('o', 'members')
             ->leftJoin('o.members', 'members')
         ;
 
         if (null !== $scope) {
-            $query
-                ->andWhere($query->expr()->in('o.scope', ':scopes'))
+            $queryBuilder
+                ->andWhere($queryBuilder->expr()->in('o.scope', ':scopes'))
                 ->setParameter('scopes', array_unique([$scope, Scope::ALL]))
             ;
         }
 
-        $query
+        $queryBuilder
             ->andWhere('o.type = :type')
-            ->andWhere($query->expr()->in('members.code', ':zones'))
+            ->andWhere($queryBuilder->expr()->in('members.code', ':zones'))
             ->setParameter('type', ZoneInterface::TYPE_ZONE)
             ->setParameter('zones', $zonesCodes)
         ;
 
-        return $query->getQuery()->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 }
