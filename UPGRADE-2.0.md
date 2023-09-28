@@ -73,6 +73,17 @@
 
 * The `\Serializable` interface has been removed from the `Sylius\Component\User\Model\UserInterface`.
 
+* The parameter order of the `Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor::__construct` has been changed:
+```php
+    public function __construct(
+        private OrderPaymentProviderInterface $orderPaymentProvider,
+    -   private string $targetState = PaymentInterface::STATE_CART,
+        private OrderPaymentsRemoverInterface $orderPaymentsRemover,
+        private array $unprocessableOrderStates,
+    +   private string $targetState = PaymentInterface::STATE_CART,
+    )
+```
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module bundler provided by Sylius.

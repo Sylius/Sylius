@@ -24,12 +24,14 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
+    /**
+     * @param array<string> $unprocessableOrderStates
+     */
     public function __construct(
         private OrderPaymentProviderInterface $orderPaymentProvider,
-        private string $targetState = PaymentInterface::STATE_CART,
         private OrderPaymentsRemoverInterface $orderPaymentsRemover,
-        /** @var array<string> $unprocessableOrderStates */
         private array $unprocessableOrderStates,
+        private string $targetState = PaymentInterface::STATE_CART,
     ) {
     }
 
