@@ -65,7 +65,7 @@ final class TaxonSlugController
             trigger_deprecation(
                 'sylius/taxonomy-bundle',
                 '1.13',
-                'Using "parentId" for slug generation is deprecated and will not be possible in 2.0. Use "parentCode" instead.'
+                'Using "parentId" for slug generation is deprecated and will not be possible in 2.0. Use "parentCode" instead.',
             );
 
             return $this->taxonRepository->find($parentId);
