@@ -31,11 +31,11 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith(
             $orderPaymentProvider,
-            PaymentInterface::STATE_CART,
             $orderPaymentsRemover,
             [
                 OrderInterface::STATE_FULFILLED,
             ],
+            PaymentInterface::STATE_CART,
         );
     }
 
