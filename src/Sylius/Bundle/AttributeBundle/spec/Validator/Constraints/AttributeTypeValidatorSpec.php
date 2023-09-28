@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeType;
-use Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeTypeValidator;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Validator\Constraint;
