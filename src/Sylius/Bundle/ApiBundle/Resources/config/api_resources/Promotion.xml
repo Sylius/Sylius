@@ -28,6 +28,10 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -35,6 +39,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.archived_promotions_filter</attribute>
@@ -47,6 +55,10 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="admin_delete">

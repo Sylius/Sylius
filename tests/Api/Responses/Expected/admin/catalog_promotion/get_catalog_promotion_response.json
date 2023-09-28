@@ -15,6 +15,7 @@
     "scopes": [],
     "actions": [],
     "enabled": @boolean@,
+    "archivedAt": null,
     "exclusive": false,
     "translations": {
         "en_US": {

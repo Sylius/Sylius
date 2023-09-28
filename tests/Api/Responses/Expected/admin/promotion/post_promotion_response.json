@@ -18,6 +18,7 @@
     "rules": [],
     "actions": [],
     "appliesToDiscounted": false,
+    "archivedAt": null,
     "createdAt": @string@,
     "updatedAt": @string@,
     "translations": {

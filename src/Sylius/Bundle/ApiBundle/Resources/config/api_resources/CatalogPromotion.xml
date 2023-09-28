@@ -33,6 +33,10 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -44,6 +48,10 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -81,6 +89,10 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </itemOperation>
 
@@ -89,6 +101,10 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:catalog_promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </itemOperation>
 
@@ -100,6 +116,10 @@ Example configuration for `percentage_discount` action type:
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -153,6 +173,7 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/catalog-promotions/{code}/archive</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\ArchiveCatalogPromotionAction</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
@@ -175,6 +196,7 @@ Example configuration for `percentage_discount` action type:
                 <attribute name="method">PATCH</attribute>
                 <attribute name="path">/admin/catalog-promotions/{code}/restore</attribute>
                 <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\RestoreCatalogPromotionAction</attribute>
+                <attribute name="input">false</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
