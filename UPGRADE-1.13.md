@@ -130,8 +130,8 @@
    All internal usages of service `sylius.product_variant_resolver.default` have been switched to `Sylius\Component\Product\Resolver\ProductVariantResolverInterface`, if you have been using the
    `sylius.product_variant_resolver.default` service apply this change accordingly.
 
-1. Due to optimizations of the Order's grid the `Sylius\Component\Core\Repository\OrderRepositoryInterface::createSearchListQueryBuilder` method bas been deprecated and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createCriteriaAwareSearchListQueryBuilder`.
-   Also `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdQueryBuilder` has been deprecated and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdCriteriaAwareQueryBuilder` for the same reason. Both changes affect
+1. Due to optimizations of the Order's grid the `Sylius\Component\Core\Repository\OrderRepositoryInterface::createSearchListQueryBuilder` method bas been deprecated in both the interface and the class, and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createCriteriaAwareSearchListQueryBuilder`.
+   Also `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdQueryBuilder` has been deprecated in both the interface and the class, and replaced by `Sylius\Component\Core\Repository\OrderRepositoryInterface::createByCustomerIdCriteriaAwareQueryBuilder` for the same reason. Both changes affect
    `sylius_admin_order` and `sylius_admin_customer_order` grids configuration.
 
 1. We have explicitly added relationships between product and reviews and between product and attributes in XML mappings.
@@ -157,3 +157,7 @@
 1. The `Sylius\Bundle\CoreBundle\Provider\SessionProvider` has been deprecated and will be removed in Sylius 2.0.
 
 1. Interface `Sylius\Component\Core\Promotion\Updater\Rule\ProductAwareRuleUpdaterInterface` has been deprecated and will be removed in Sylius 2.0.
+
+1. Both `getCreatedByGuest` and `setCreatedByGuest` methods were deprecated on `\Sylius\Component\Core\Model\OrderInterface`.
+    Please use `isCreatedByGuest` instead of the first one. The latter is a part of the `setCustomerWithAuthorization` logic
+    and should be used only this way.

@@ -58,6 +58,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function createSearchListQueryBuilder(): QueryBuilder
     {
+        trigger_deprecation(
+            'sylius/core',
+            '1.13',
+            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createCriteriaAwareSearchListQueryBuilder` instead.',
+        );
+
         return $this->createListQueryBuilder()
             ->leftJoin('o.items', 'item')
             ->leftJoin('item.variant', 'variant')
@@ -94,6 +100,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
     {
+        trigger_deprecation(
+            'sylius/core',
+            '1.13',
+            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createByCustomerIdCriteriaAwareQueryBuilder` instead.',
+        );
+
         return $this->createListQueryBuilder()
             ->andWhere('o.customer = :customerId')
             ->setParameter('customerId', $customerId)
