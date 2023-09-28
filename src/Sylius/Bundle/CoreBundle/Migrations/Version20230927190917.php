@@ -14,7 +14,7 @@ final class Version20230927190917 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Add archived_at field on promotion tables';
     }
 
     public function up(Schema $schema): void
