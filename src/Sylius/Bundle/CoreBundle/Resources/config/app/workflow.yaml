@@ -2,4 +2,4 @@
 # (c) Sylius Sp. z o.o.
 
 imports:
-    - { resource: "@SyliusCoreBundle/Resources/config/app/workflow/sylius_product_review.yaml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/workflow/**" }
