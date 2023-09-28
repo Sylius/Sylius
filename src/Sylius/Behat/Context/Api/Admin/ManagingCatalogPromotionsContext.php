@@ -832,7 +832,6 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->addFilter($field, $phrase);
         $this->client->filter();
-        $this->client->index(Resources::CATALOG_PROMOTIONS);
     }
 
     /**
