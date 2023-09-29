@@ -52,7 +52,7 @@ Feature: Resetting a password
     @ui @email @api
     Scenario: Trying to change my account password with an expired token I received
         Given I have already received a resetting password email
-        But I waited too long, and the link expired
+        But I waited too long, and the token expired
         When I follow link on my email to reset my password
         And I specify my new password as "newp@ssw0rd"
         And I confirm my new password as "newp@ssw0rd"

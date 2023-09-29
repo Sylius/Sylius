@@ -157,9 +157,9 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given /^(I) waited too long, and the link expired$/
+     * @Given /^(I) waited too long, and the token expired$/
      */
-    public function iWaitedTooMuchTimeToResetMyPassword(UserInterface $user): void
+    public function iWaitedTooLongAndTheTokenExpired(UserInterface $user): void
     {
         /** @var \DateTime $passwordRequestedAt */
         $passwordRequestedAt = $user->getPasswordRequestedAt();
