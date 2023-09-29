@@ -28,10 +28,13 @@ final class AfterOrderShippedListenerSpec extends ObjectBehavior
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('onOrderShippingCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('onOrderShippingCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())])
+        ;
     }
 
-    function it_resolves_orders_after_order_being_shipped(
+    function it_resolves_order_state_after_order_being_shipped(
         StateResolverInterface $stateResolver,
     ): void {
         $order = new Order();

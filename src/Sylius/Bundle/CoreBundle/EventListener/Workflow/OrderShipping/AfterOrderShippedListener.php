@@ -26,10 +26,8 @@ final class AfterOrderShippedListener
 
     public function onOrderShippingCompleted(CompletedEvent $event): void
     {
-        Assert::isInstanceOf($event->getSubject(), OrderInterface::class);
-
-        /** @var OrderInterface $order */
         $order = $event->getSubject();
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $this->orderStateResolver->resolve($order);
     }
