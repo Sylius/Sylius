@@ -18,11 +18,11 @@ trigger_deprecation(
     '1.11',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
     Calendar::class,
-    \Sylius\Calendar\Provider\Calendar::class,
+    'Symfony\Component\Clock\Clock',
 );
 
 /**
- * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0. Use {@see \Sylius\Calendar\Provider\Calendar} instead.
+ * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see 'Symfony\Component\Clock\Clock'} instead.
  */
 final class Calendar implements DateTimeProvider
 {

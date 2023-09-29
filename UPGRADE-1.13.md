@@ -164,3 +164,5 @@
 1. Both `getCreatedByGuest` and `setCreatedByGuest` methods were deprecated on `\Sylius\Component\Core\Model\OrderInterface`.
     Please use `isCreatedByGuest` instead of the first one. The latter is a part of the `setCustomerWithAuthorization` logic
     and should be used only this way.
+
+1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` has been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead. Note: this class is available since Symfony 6.2.
