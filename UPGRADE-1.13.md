@@ -167,7 +167,7 @@
     Please use `isCreatedByGuest` instead of the first one. The latter is a part of the `setCustomerWithAuthorization` logic
     and should be used only this way.
 
-1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` has been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead. Note: this class is available since Symfony 6.2.
+1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` and `Sylius\Bundle\ShippingBundle\Provider\DateTimeProvider` have been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead. Note: this class is available since Symfony 6.2.
 
 1. In the `sylius_payment` state machine of `PaymentBundle`, there has been a change in the state name:
     - State name change:
