@@ -1,7 +1,7 @@
-{% set event_name = 'sylius.admin.common.sidebar' %}
+{% set main_event = 'sylius.admin.common.sidebar' %}
 
 <aside class="navbar navbar-vertical navbar-expand-lg d-print-none" data-bs-theme="dark">
     <div class="container-fluid">
-        {{ sylius_template_event(event_name, { event_prefix: event_name }) }}
+        {{ sylius_template_event(main_event, { main_event: main_event }) }}
     </div>
 </aside>

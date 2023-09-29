@@ -1,8 +1,10 @@
-{% if app.session is not null and app.session.started %}
+{% set session = _context.session|default(null) %}
+
+{% if session is not null and session.started %}
     {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
     <div class="container-xl mt-3">
         {% for type in ['success', 'error', 'info', 'warning'] %}
-            {% for flash in app.session.flashbag.get(type) %}
+            {% for flash in session.flashbag.get(type) %}
                 <div class="sylius alert alert-{{ type == 'error' ? 'danger' : type }}" role="alert">
                     <div class="d-flex">
                         <div>
