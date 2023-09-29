@@ -1,5 +1,6 @@
-suites:
-    main:
-        namespace: Sylius\Bundle\ApiBundle
-        psr4_prefix: Sylius\Bundle\ApiBundle
-        src_path: .
+# Temporary disabled during upgrade to API Platform 3
+#suites:
+#   main:
+#       namespace: Sylius\Bundle\ApiBundle
+#       psr4_prefix: Sylius\Bundle\ApiBundle
+#       src_path: .

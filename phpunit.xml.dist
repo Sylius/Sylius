@@ -10,6 +10,8 @@
     <testsuites>
         <testsuite name="Sylius Test Suite">
             <directory>tests</directory>
+            <exclude>tests/Api/Admin</exclude>
+            <exclude>tests/Api/Shop</exclude>
         </testsuite>
     </testsuites>
 

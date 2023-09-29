@@ -5,7 +5,7 @@
         {
           "php": "8.2",
           "symfony": "~6.3.0",
-          "api-platform": "^2.7.10"
+          "api-platform": "^3.1"
         }
       ]
     },
@@ -23,7 +23,7 @@
         {
           "php": "8.2",
           "symfony": "~6.3.0",
-          "api-platform": "^2.7.10",
+          "api-platform": "^3.1",
           "mysql": "8.0",
           "twig": "^3.3"
         }
@@ -51,7 +51,7 @@
     "static-checks": {
       "php": [ "8.2" ],
       "symfony": [ "~6.3.0" ],
-      "api-platform": [ "^2.7.10" ]
+      "api-platform": [ "^3.1" ]
     },
     "e2e-mariadb": {
       "php": [ "8.2" ],
@@ -61,7 +61,7 @@
     "e2e-mysql": {
       "php": [ "8.2" ],
       "symfony": [ "~6.3.0" ],
-      "api-platform": [ "^2.7.10" ],
+      "api-platform": [ "^3.1" ],
       "mysql": [ "5.7", "8.0" ],
       "twig": [ "^3.3" ]
     },
