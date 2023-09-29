@@ -13,17 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Resolver;
 
-use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 
 final class DefaultProductVariantResolver implements ProductVariantResolverInterface
 {
     public function __construct(private ?ProductVariantRepositoryInterface $productVariantRepository = null)
     {
-        if (null === $this->productVariantRepository) {
-            trigger_deprecation('sylius/product', '1.13', 'Not passing a service that implements "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in 2.0.', ProductVariantRepositoryInterface::class, self::class);
-        }
     }
 
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
