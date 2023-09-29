@@ -154,18 +154,18 @@
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>-->
+        <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">-->
 <!--            <argument type="service" id="sylius.promotion_eligibility_checker" />-->
 <!--            <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">-->
-<!--            <argument type="service" id="sm.factory" />-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />-->
-<!--            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">-->
 <!--            <argument type="service" id="sylius.repository.promotion_coupon" />-->
