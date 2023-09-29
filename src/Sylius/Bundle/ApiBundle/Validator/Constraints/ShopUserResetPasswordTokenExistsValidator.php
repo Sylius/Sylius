@@ -23,9 +23,9 @@ use Webmozart\Assert\Assert;
 final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidator
 {
     /**
-     * @param UserRepositoryInterface<UserInterface> $userRepository
+     * @param UserRepositoryInterface<UserInterface> $shopUserRepository
      */
-    public function __construct(private UserRepositoryInterface $userRepository)
+    public function __construct(private UserRepositoryInterface $shopUserRepository)
     {
     }
 
@@ -38,7 +38,7 @@ final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidato
         Assert::isInstanceOf($constraint, ShopUserResetPasswordTokenExists::class);
 
         /** @var UserInterface|null $user */
-        $user = $this->userRepository->findOneBy(['passwordResetToken' => $value]);
+        $user = $this->shopUserRepository->findOneBy(['passwordResetToken' => $value]);
 
         if (null !== $user) {
             return;
