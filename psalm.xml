@@ -262,6 +262,7 @@
         </TooManyArguments>
         <UndefinedClass>
             <errorLevel type="info">
+                <referencedClass name="Symfony\Component\Clock\Clock" /> <!-- introduced in Symfony 6.2 -->
                 <referencedClass name="Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface" />
             </errorLevel>
         </UndefinedClass>

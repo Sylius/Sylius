@@ -24,7 +24,7 @@ trigger_deprecation(
 );
 
 /**
- * @deprecated since Sylius 1.11 and will be removed in Sylius 2.0. Use {@see \Sylius\Calendar\Provider\Calendar} instead.
+ * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see 'Symfony\Component\Clock\Clock'} instead.
  */
 final class Calendar implements DateTimeProvider
 {
