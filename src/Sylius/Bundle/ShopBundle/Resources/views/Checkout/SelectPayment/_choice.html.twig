@@ -11,5 +11,6 @@
                 <p>{{ method.description }}</p>
             </div>
         {% endif %}
+        {{ sylius_template_event('sylius.shop.checkout.select_payment.choice_item_content', {'method': method}) }}
     </div>
 </div>
