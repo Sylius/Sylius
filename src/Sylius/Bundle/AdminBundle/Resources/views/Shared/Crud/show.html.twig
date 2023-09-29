@@ -8,7 +8,7 @@
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ sylius_template_event(
+    {{ twig_event(
         [main_event, fallback_event],
         {
             main_event: main_event,
@@ -22,10 +22,10 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ sylius_template_event([main_event ~ '.stylesheets', fallback_event ~ '.stylesheets']) }}
+    {{ twig_event([main_event ~ '.stylesheets', fallback_event ~ '.stylesheets']) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ sylius_template_event([main_event ~ '.javascripts', fallback_event ~ '.javascripts']) }}
+    {{ twig_event([main_event ~ '.javascripts', fallback_event ~ '.javascripts']) }}
 {% endblock %}

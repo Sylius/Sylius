@@ -1,5 +1,5 @@
 {% set main_event = _context.main_event ~ '.items' %}
 
 <div class="sylius navbar-nav order-md-last">
-    {{ sylius_template_event(main_event, { main_event: main_event }) }}
+    {{ twig_event(main_event, { main_event: main_event }) }}
 </div>

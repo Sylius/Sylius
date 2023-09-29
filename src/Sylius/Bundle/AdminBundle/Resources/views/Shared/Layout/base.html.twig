@@ -10,7 +10,7 @@
     {% block metatags %}{% endblock %}
     {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
     {% block stylesheets %}
-        {{ sylius_template_event('sylius.admin.common.stylesheets') }}
+        {{ twig_event('sylius.admin.common.stylesheets') }}
     {% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -20,7 +20,7 @@
 
 {{ encore_entry_script_tags('admin-entry', null, 'admin') }}
 {% block javascripts %}
-    {{ sylius_template_event('sylius.admin.common.javascripts') }}
+    {{ twig_event('sylius.admin.common.javascripts') }}
 {% endblock %}
 </body>
 </html>
