@@ -43,6 +43,12 @@ final class Configuration implements ConfigurationInterface
                                         ->ifString()
                                         ->then(static fn (?string $template): array => ['template' => $template])
                                     ->end()
+                                    ->validate()
+                                        ->ifTrue(static function ($block): bool {
+                                            return null !== $block['template'] && [] !== $block['component'];
+                                        })
+                                        ->thenInvalid('You cannot use both "template" and "component" for a block.')
+                                    ->end()
                                     ->children()
                                         ->booleanNode('enabled')->defaultNull()->end()
                                         ->arrayNode('context')->addDefaultsIfNotSet()->ignoreExtraKeys(false)->end()
