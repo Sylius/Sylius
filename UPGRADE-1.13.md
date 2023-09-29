@@ -206,3 +206,5 @@
 
 1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country` constraint.
    Due to that, it's translation message `sylius.country.code.regex` was also removed.
+
+1. The `redirectToCartSummary` protected method of `Sylius\Bundle\OrderBundle\Controller\OrderController` has been deprecated as it was never used and will be removed in Sylius 2.0.
