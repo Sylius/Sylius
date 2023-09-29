@@ -19,6 +19,9 @@
 
             <directory name="src/Sylius/Component/*/spec" />
 
+            <!-- Temporary exclusion during upgrade to API Platform 3 -->
+            <directory name="src/Sylius/Bundle/ApiBundle" />
+
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
