@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class OrderCheckoutWorkflowTest extends KernelTestCase
@@ -42,12 +43,19 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
             ->willReturn([])
         ;
 
+        $sequenceRepository = $this->createMock(RepositoryInterface::class);
+        $sequenceRepository
+            ->method('findOneBy')
+            ->willReturn(null)
+        ;
+
         $this->orderShippingMethodSelectionRequirementChecker = $this->createMock(OrderShippingMethodSelectionRequirementCheckerInterface::class);
         $this->orderPaymentMethodSelectionRequirementChecker = $this->createMock(OrderPaymentMethodSelectionRequirementCheckerInterface::class);
 
         self::getContainer()->set('sylius.checker.order_shipping_method_selection_requirement', $this->orderShippingMethodSelectionRequirementChecker);
         self::getContainer()->set('sylius.checker.order_payment_method_selection_requirement', $this->orderPaymentMethodSelectionRequirementChecker);
         self::getContainer()->set('sylius.repository.promotion', $promotionRepository);
+        self::getContainer()->set('sylius.repository.order_sequence', $sequenceRepository);
     }
 
     /**
