@@ -34,6 +34,7 @@
         </service>
 
         <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\CreateOrderListener">
+            <argument type="service" id="sylius.state_machine" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" method="onCompleted" priority="-400"/>
         </service>
 
