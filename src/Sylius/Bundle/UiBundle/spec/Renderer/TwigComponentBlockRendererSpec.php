@@ -14,51 +14,91 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\UX\TwigComponent\ComponentRendererInterface;
 
 final class TwigComponentBlockRendererSpec extends ObjectBehavior
 {
-    function let(TemplateBlockRendererInterface $decoratedRenderer, ComponentRendererInterface $componentRenderer): void
-    {
-        $this->beConstructedWith($decoratedRenderer, $componentRenderer);
-    }
-
-    function it_invokes_decorated_renderer_when_no_component_is_set(
-        TemplateBlockRendererInterface $decoratedRenderer,
-    ): void {
-        $someTemplateBlock = new TemplateBlock(
-            'some_name',
-            'some_event_name',
-            'some_template',
-            ['some' => 'context'],
-            0,
-            true,
-            null,
-        );
-        $decoratedRenderer->render($someTemplateBlock, ['some' => 'context'])->shouldBeCalled();
-
-        $this->render($someTemplateBlock, ['some' => 'context']);
-    }
-
-    function it_renders_a_component_when_component_is_set(
+    function let(
         ComponentRendererInterface $componentRenderer,
+        ContextProviderInterface $contextProvider,
+        ExpressionLanguage $expressionLanguage,
     ): void {
-        $someTemplateBlock = new TemplateBlock(
-            'some_name',
-            'some_event_name',
-            'some_template',
-            ['another' => 'value'],
+        $this->beConstructedWith(
+            $componentRenderer,
+            $contextProvider,
+            $expressionLanguage,
+        );
+    }
+
+    function it_returns_true_if_block_is_supported(): void
+    {
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'template.html.twig', [], 0, true);
+        $componentBlock = new ComponentBlock('block_name', 'event_name', 'Component', [], [], 0, true);
+
+        $this->supports($templateBlock)->shouldReturn(false);
+        $this->supports($componentBlock)->shouldReturn(true);
+    }
+
+    function it_throws_an_exception_when_trying_to_render_unsupported_block(): void
+    {
+        $templateBlock = new TemplateBlock('block_name', 'event_name', 'template.html.twig', [], 0, true);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('render', [$templateBlock])
+        ;
+    }
+
+    function it_renders_component_block(
+        ComponentRendererInterface $componentRenderer,
+        ContextProviderInterface $contextProvider,
+        ExpressionLanguage $expressionLanguage,
+    ): void {
+        $componentBlock = new ComponentBlock(
+            'block_name',
+            'event_name',
+            'Component',
+            [
+                'foo' => 'bar',
+                'bar' => 'expr:foo',
+                'nested' => [
+                    'foo' => 'expr:bar',
+                    'bar' => 'expr:baz',
+                ],
+            ],
+            [],
             0,
             true,
-            'some_component',
         );
+
+        $context = [
+            'foo' => 'bar',
+            'bar' => 'baz',
+            'baz' => 'qux',
+        ];
+
+        $contextProvider->provide([], $componentBlock)->willReturn($context);
+
+        $expressionLanguage->evaluate('foo', $context)->willReturn('bar');
+        $expressionLanguage->evaluate('bar', $context)->willReturn('baz');
+        $expressionLanguage->evaluate('baz', $context)->willReturn('qux');
+
         $componentRenderer
-            ->createAndRender('some_component', ['context' => ['another' => 'value', 'some' => 'value']])
-            ->willReturn('some_rendered_component')
+            ->createAndRender('Component', [
+                'foo' => 'bar',
+                'bar' => 'bar',
+                'nested' => [
+                    'foo' => 'baz',
+                    'bar' => 'qux',
+                ],
+            ])
+            ->willReturn('rendered_component')
         ;
 
-        $this->render($someTemplateBlock, ['some' => 'value'])->shouldReturn('some_rendered_component');
+        $this->render($componentBlock)->shouldReturn('rendered_component');
     }
 }

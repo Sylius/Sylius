@@ -44,7 +44,11 @@ final class Configuration implements ConfigurationInterface
                                         ->then(static fn (?string $template): array => ['template' => $template])
                                     ->end()
                                     ->validate()
-                                        ->ifTrue(static function ($block): bool {
+                                        ->ifTrue(static function (array $block): bool {
+                                            if (!array_key_exists('template', $block) || !array_key_exists('component', $block)) {
+                                                return false;
+                                            }
+
                                             return null !== $block['template'] && [] !== $block['component'];
                                         })
                                         ->thenInvalid('You cannot use both "template" and "component" for a block.')

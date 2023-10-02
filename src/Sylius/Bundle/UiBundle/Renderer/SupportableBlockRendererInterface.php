@@ -13,12 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
-interface TemplateEventRendererInterface
+use Sylius\Bundle\UiBundle\Registry\Block;
+
+interface SupportableBlockRendererInterface extends BlockRendererInterface
 {
-    /**
-     * @param string[] $eventNames
-     *
-     * @psalm-param non-empty-list<string> $eventNames
-     */
-    public function render(array $eventNames, array $context = []): string;
+    public function supports(Block $block): bool;
 }

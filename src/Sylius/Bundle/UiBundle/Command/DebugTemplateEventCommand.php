@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Command;
 
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +25,7 @@ final class DebugTemplateEventCommand extends Command
 {
     protected static $defaultName = 'sylius:debug:template-event';
 
-    public function __construct(private TemplateBlockRegistryInterface $templateBlockRegistry)
+    public function __construct(private BlockRegistryInterface $templateBlockRegistry)
     {
         parent::__construct();
     }
@@ -53,6 +53,9 @@ final class DebugTemplateEventCommand extends Command
 
         $io->title(sprintf('Blocks registered for the template event "%s"', $eventName));
 
+        /** @var array<TemplateBlock> $templateBlocksForEvent */
+        $templateBlocksForEvent = $this->templateBlockRegistry->all()[$eventName] ?? [];
+
         $io->table(
             ['Block name', 'Template', 'Priority', 'Enabled'],
             array_map(
@@ -62,7 +65,7 @@ final class DebugTemplateEventCommand extends Command
                     $templateBlock->getPriority(),
                     $templateBlock->isEnabled() ? 'TRUE' : 'FALSE',
                 ],
-                $this->templateBlockRegistry->all()[$eventName] ?? [],
+                $templateBlocksForEvent,
             ),
         );
 

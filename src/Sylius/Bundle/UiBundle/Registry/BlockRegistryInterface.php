@@ -13,23 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
-interface TemplateBlockRegistryInterface
+interface BlockRegistryInterface
 {
     /**
-     * @return TemplateBlock[][]
-     *
-     * @psalm-return array<string, array<string, TemplateBlock>>
+     * @return array<string, array<string, Block>>
      */
     public function all(): array;
 
     /**
      * @param string[] $eventNames
      *
-     * @psalm-param non-empty-list<string> $eventNames
-     *
-     * @return TemplateBlock[]
-     *
-     * @psalm-return list<TemplateBlock>
+     * @return Block[]
      */
     public function findEnabledForEvents(array $eventNames): array;
 }
+
+class_alias(BlockRegistryInterface::class, '\Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface');
