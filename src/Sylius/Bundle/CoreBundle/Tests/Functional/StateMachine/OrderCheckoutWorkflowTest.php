@@ -17,10 +17,22 @@ use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class OrderCheckoutWorkflowTest extends KernelTestCase
 {
+    public function setup(): void
+    {
+        parent::setUp();
+        $promotionRepository = $this->createMock(PromotionRepositoryInterface::class);
+        $promotionRepository
+            ->method('findActiveNonCouponBasedByChannel')
+            ->willReturn([])
+        ;
+        self::getContainer()->set('sylius.repository.promotion', $promotionRepository);
+    }
+
     /** @test */
     public function it_applies_address_transitions_for_order_checkout_cart_status(): void
     {
