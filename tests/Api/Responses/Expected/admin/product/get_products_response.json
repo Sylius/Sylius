@@ -68,7 +68,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
                     "@type": "ProductAttributeValue",
                     "id": @integer@,
-                    "attribute": "\/api\/v2\/admin\/product-attributes\/MUG_MATERIAL",
+                    "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
                     "value": "Ceramic",
                     "localeCode": "en_US"
                 },
@@ -76,7 +76,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
                     "@type": "ProductAttributeValue",
                     "id": @integer@,
-                    "attribute": "\/api\/v2\/admin\/product-attributes\/MUG_MATERIAL",
+                    "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
                     "value": "Ceramika",
                     "localeCode": "pl_PL"
                 }

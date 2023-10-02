@@ -23,16 +23,19 @@
         <attribute name="attribute">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
             <group>shop:product_attribute_value:read</group>
         </attribute>
         <attribute name="value">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
             <group>shop:product_attribute_value:read</group>
         </attribute>
         <attribute name="localeCode">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
             <group>shop:product_attribute_value:read</group>
         </attribute>
         <attribute name="name">

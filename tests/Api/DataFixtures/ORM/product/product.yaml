@@ -1,13 +1,17 @@
 Sylius\Component\Core\Model\Product:
     product_mug:
         code: 'MUG'
-        channels: ['@channel_web']
+        enabled: true
+        options: ['@product_option_color']
         mainTaxon: '@taxon_mugs'
+        channels: ['@channel_web']
         currentLocale: 'en_US'
         translations:
             en_US: '@product_translation_mug_en_US'
             pl_PL: '@product_translation_mug_pl_PL'
-        options: ['@product_option_color']
+        attributes: 
+            - '@product_attribute_value_material_en_US'
+            - '@product_attribute_value_material_pl_PL'
     product_cap:
         code: 'CAP'
         channels: ['@channel_web']
@@ -63,6 +67,7 @@ Sylius\Component\Core\Model\ProductVariant:
         optionValues: ['@product_option_value_color_blue']
         channelPricings:
             WEB: '@channel_pricing_mug_blue_web'
+            MOBILE: '@channel_pricing_mug_blue_mobile'
     product_variant_mug_red:
         code: 'MUG_RED'
         product: '@product_mug'
@@ -72,6 +77,7 @@ Sylius\Component\Core\Model\ProductVariant:
         optionValues: ['@product_option_value_color_red']
         channelPricings:
             WEB: '@channel_pricing_mug_red_web'
+            MOBILE: '@channel_pricing_mug_red_mobile'
 
 Sylius\Component\Product\Model\ProductVariantTranslation:
     product_variant_translation_mug_blue:
@@ -91,6 +97,13 @@ Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_mug_red_web:
         channelCode: 'WEB'
         price: 2000
+    channel_pricing_mug_blue_mobile:
+        channelCode: 'MOBILE'
+        price: 2500
+        originalPrice: 3500
+    channel_pricing_mug_red_mobile:
+        channelCode: 'MOBILE'
+        price: 2500
     
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
@@ -125,6 +138,8 @@ Sylius\Component\Product\Model\ProductOptionValueTranslation:
 Sylius\Component\Core\Model\Taxon:
     taxon_mugs:
         code: 'MUGS'
+    taxon_caps:
+        code: 'CAPS'
 
 Sylius\Component\Core\Model\ProductTaxon:
     product_taxon:
@@ -156,33 +171,33 @@ Sylius\Component\Core\Model\Customer:
         emailCanonical: 'john.doe@example.com'
 
 Sylius\Component\Product\Model\ProductAttribute:
-    product_attribute_mug_material:
+    product_attribute_material:
         translatable: true
         fallbackLocale: 'en_US'
         currentLocale: 'en_US'
-        code: 'MUG_MATERIAL'
+        code: 'MATERIAL'
         type: 'text'
         storageType: 'text'
         translations:
-            - '@product_attribute_translation_mug_material_en_US'
+            - '@product_attribute_translation_material_en_US'
 
 Sylius\Component\Product\Model\ProductAttributeValue:
-    product_attribute_value_mug_material_en_US:
+    product_attribute_value_material_en_US:
         localeCode: 'en_US'
         product: '@product_mug'
-        attribute: '@product_attribute_mug_material'
+        attribute: '@product_attribute_material'
         value: 'Ceramic'
-    product_attribute_value_mug_material_pl_PL:
+    product_attribute_value_material_pl_PL:
         localeCode: 'pl_PL'
         product: '@product_mug'
-        attribute: '@product_attribute_mug_material'
+        attribute: '@product_attribute_material'
         value: 'Ceramika'
 
 Sylius\Component\Product\Model\ProductAttributeTranslation:
-    product_attribute_translation_mug_material_en_US:
+    product_attribute_translation_material_en_US:
         locale: 'en_US'
         name: 'Mug material'
-        translatable: '@product_attribute_mug_material'
+        translatable: '@product_attribute_material'
 
 Sylius\Component\Core\Model\ProductImage:
     product_mug_thumbnail:

@@ -92,10 +92,12 @@
         <attribute name="attributes">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
         </attribute>
         <attribute name="channels">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
         </attribute>
         <attribute name="createdAt">
             <group>admin:product:read</group>

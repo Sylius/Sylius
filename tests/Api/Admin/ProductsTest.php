@@ -25,11 +25,16 @@ final class ProductsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_product(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product.yaml',
+        ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
+
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/products/%s', $product->getCode()),
@@ -119,6 +124,86 @@ final class ProductsTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/product/post_product_response',
             Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_updates_the_existing_product(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product.yaml',
+            'product/product_attribute.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/products/%s', $product->getCode()),
+            server: $header,
+            content: json_encode([
+                'enabled' => false,
+                'mainTaxon' => '/api/v2/admin/taxons/CAPS',
+                'channels' => [
+                    '/api/v2/admin/channels/MOBILE',
+                ],
+                'attributes' => [
+                    [
+                        '@id' => sprintf(
+                            '/api/v2/admin/product-attribute-values/%s',
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'en_US')->getId()
+                        ),
+                        'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
+                        'value' => 'Cotton',
+                        'localeCode' => 'en_US',
+                    ],
+                    [
+                        '@id' => sprintf(
+                            '/api/v2/admin/product-attribute-values/%s',
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'pl_PL')->getId()
+                        ),
+                        'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
+                        'value' => 'Bawełna',
+                        'localeCode' => 'pl_PL',
+                    ],
+                    [
+                        'attribute' => '/api/v2/admin/product-attributes/dishwasher_safe',
+                        'value' => true,
+                    ]
+                ],
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
+                        'locale' => 'en_US',
+                        'slug' => 'caps/cap',
+                        'name' => 'Cap',
+                        'description' => 'This is a cap',
+                        'shortDescription' => 'Short cap description',
+                        'metaKeywords' => 'cap',
+                        'metaDescription' => 'Cap description',
+                    ],
+                    'pl_PL' => [
+                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('pl_PL')->getId()),
+                        'locale' => 'pl_PL',
+                        'slug' => 'czapki/czapka',
+                        'name' => 'Czapka',
+                        'description' => 'To jest czapka',
+                        'shortDescription' => 'Krótki opis czapki',
+                        'metaKeywords' => 'czapka',
+                        'metaDescription' => 'Opis czapki',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/put_product_response',
+            Response::HTTP_OK,
         );
     }
 }

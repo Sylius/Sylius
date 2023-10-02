@@ -115,7 +115,10 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/products/{code}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product:update</attribute>
+                    <attribute name="groups">admin:product:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product:read</attribute>
                 </attribute>
             </itemOperation>
 

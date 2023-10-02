@@ -5,7 +5,7 @@
     "id": @integer@,
     "code": "MUG",
     "variantSelectionMethod": "choice",
-    "enabled": true,
+    "enabled": false,
     "options": [
         "\/api\/v2\/admin\/product-options\/COLOR"
     ],
@@ -13,12 +13,12 @@
         "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
         "\/api\/v2\/admin\/product-variants\/MUG_RED"
     ],
-    "mainTaxon": "\/api\/v2\/admin\/taxons\/MUGS",
+    "mainTaxon": "\/api\/v2\/admin\/taxons\/CAPS",
     "productTaxons": [
         "\/api\/v2\/admin\/product-taxons\/@integer@"
     ],
     "channels": [
-        "\/api\/v2\/admin\/channels\/WEB"
+        "\/api\/v2\/admin\/channels\/MOBILE"
     ],
     "reviews": [
         "\/api\/v2\/admin\/product-reviews\/@integer@",
@@ -30,7 +30,7 @@
             "@type": "ProductAttributeValue",
             "id": @integer@,
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
-            "value": "Ceramic",
+            "value": "Cotton",
             "localeCode": "en_US"
         },
         {
@@ -38,8 +38,16 @@
             "@type": "ProductAttributeValue",
             "id": @integer@,
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
-            "value": "Ceramika",
+            "value": "Bawełna",
             "localeCode": "pl_PL"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
+            "value": true,
+            "localeCode": null
         }
     ],
     "images": [
@@ -56,23 +64,23 @@
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
             "id": @integer@,
-            "name": "Mug",
-            "slug": "mug",
-            "description": "This is a mug",
-            "shortDescription": "Short mug description",
-            "metaKeywords": "mug",
-            "metaDescription": "Mug description"
+            "name": "Cap",
+            "slug": "caps/cap",
+            "description": "This is a cap",
+            "shortDescription": "Short cap description",
+            "metaKeywords": "cap",
+            "metaDescription": "Cap description"
         },
         "pl_PL": {
             "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
             "@type": "ProductTranslation",
             "id": @integer@,
-            "name": "Kubek",
-            "slug": "kubek",
-            "description": "To jest kubek",
-            "shortDescription": "Krótki opis kubka",
-            "metaKeywords": "kubek",
-            "metaDescription": "Opis kubka"
+            "name": "Czapka",
+            "slug": "czapki/czapka",
+            "description": "To jest czapka",
+            "shortDescription": "Krótki opis czapki",
+            "metaKeywords": "czapka",
+            "metaDescription": "Opis czapki"
         }
     },
     "createdAt": @date@,
