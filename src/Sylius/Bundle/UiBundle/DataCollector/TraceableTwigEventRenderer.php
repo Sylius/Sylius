@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\DataCollector;
 
-use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
+use Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface;
 
 /** @internal */
-final class TraceableTemplateEventRenderer implements TemplateEventRendererInterface
+final class TraceableTwigEventRenderer implements TwigEventRendererInterface
 {
     public function __construct(
-        private TemplateEventRendererInterface $templateEventRenderer,
-        private TemplateBlockRenderingHistory $templateBlockRenderingHistory,
+        private TwigEventRendererInterface $templateEventRenderer,
+        private BlockRenderingHistory $templateBlockRenderingHistory,
     ) {
     }
 

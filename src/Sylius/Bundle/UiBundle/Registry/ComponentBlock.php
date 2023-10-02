@@ -13,12 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
-final class TemplateBlock extends Block
+final class ComponentBlock extends Block
 {
+    /**
+     * @param array<string, mixed> $componentInputs
+     * @param array<string, mixed>|null $context
+     */
     public function __construct(
         string $name,
         string $eventName,
-        private ?string $template,
+        private string $componentName,
+        private array $componentInputs,
         ?array $context,
         ?int $priority,
         ?bool $enabled,
@@ -26,24 +31,22 @@ final class TemplateBlock extends Block
         parent::__construct($name, $eventName, $context, $priority, $enabled);
     }
 
-    public function getTemplate(): string
+    public function getComponentName(): string
     {
-        if ($this->template === null) {
-            throw new \DomainException(sprintf(
-                'There is no template defined for block "%s" in event "%s".',
-                $this->name,
-                $this->eventName,
-            ));
-        }
+        return $this->componentName;
+    }
 
-        return $this->template;
+    /** @return array<string> */
+    public function getComponentInputs(): array
+    {
+        return $this->componentInputs;
     }
 
     public function overwriteWith(Block $block): self
     {
-        if (!$block instanceof self) {
+        if (!$block instanceof ComponentBlock) {
             throw new \DomainException(sprintf(
-                'Trying to overwrite template block "%s" with block of different type "%s".',
+                'Trying to overwrite component block "%s" with block of different type "%s".',
                 $this->name,
                 get_class($block),
             ));
@@ -60,7 +63,8 @@ final class TemplateBlock extends Block
         return new self(
             $this->name,
             $block->eventName,
-            $block->template ?? $this->template,
+            $block->getComponentName(),
+            $block->getComponentInputs(),
             $block->context ?? $this->context,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,

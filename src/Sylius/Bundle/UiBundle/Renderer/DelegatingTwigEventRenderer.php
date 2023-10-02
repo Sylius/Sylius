@@ -13,14 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Renderer;
 
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
 
-final class DelegatingTemplateEventRenderer implements TemplateEventRendererInterface
+final class DelegatingTwigEventRenderer implements TwigEventRendererInterface
 {
-    public function __construct(private TemplateBlockRegistryInterface $templateBlockRegistry, private TemplateBlockRendererInterface $templateBlockRenderer)
+    public function __construct(private BlockRegistryInterface $templateBlockRegistry, private BlockRendererInterface $templateBlockRenderer)
     {
     }
 
+    /**
+     * @param array<string> $eventNames
+     * @param array<string, mixed> $context
+     */
     public function render(array $eventNames, array $context = []): string
     {
         $templateBlocks = $this->templateBlockRegistry->findEnabledForEvents($eventNames);

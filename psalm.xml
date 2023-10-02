@@ -66,6 +66,7 @@
         <DeprecatedInterface>
             <errorLevel type="info">
                 <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
+                <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" />
                 <referencedClass name="Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
@@ -135,7 +136,7 @@
 
         <InvalidPropertyAssignmentValue>
             <errorLevel type="info">
-                <file name="src/Sylius/Bundle/UiBundle/DataCollector/TemplateBlockRenderingHistory.php" />
+                <file name="src/Sylius/Bundle/UiBundle/DataCollector/BlockRenderingHistory.php" />
             </errorLevel>
         </InvalidPropertyAssignmentValue>
 

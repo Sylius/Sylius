@@ -11,11 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\UiBundle\Renderer;
+namespace Sylius\Bundle\UiBundle\Renderer\Exception;
 
-use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-
-interface TemplateBlockRendererInterface
+class NoSupportedBlockRenderer extends \RuntimeException
 {
-    public function render(TemplateBlock $templateBlock, array $context = []): string;
 }
