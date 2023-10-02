@@ -206,4 +206,52 @@ final class ProductsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_deletes_the_product(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_socks'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/products/%s', $product->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_does_not_delete_the_product_in_use(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_cap'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/products/%s', $product->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/delete_product_in_use_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
 }
