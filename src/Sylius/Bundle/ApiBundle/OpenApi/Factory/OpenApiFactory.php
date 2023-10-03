@@ -19,7 +19,7 @@ use Sylius\Bundle\ApiBundle\OpenApi\Documentation\DocumentationModifierInterface
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OpenApiFactory implements OpenApiFactoryInterface
+final readonly class OpenApiFactory implements OpenApiFactoryInterface
 {
     public function __construct(
         private OpenApiFactoryInterface $decorated,
