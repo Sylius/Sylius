@@ -23,6 +23,11 @@
             <tag name="console.command" />
         </service>
 
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Cli\Command\ClearPriceHistoryCommand">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" />
+            <tag name="console.command"/>
+        </service>
+
         <service id="Sylius\Bundle\CoreBundle\Command\InstallAssetsCommand">
             <tag name="console.command" />
         </service>

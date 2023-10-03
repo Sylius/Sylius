@@ -38,16 +38,22 @@ final class LoadMetadataSubscriber implements EventSubscriber
 
         foreach ($this->subjects as $subject => $class) {
             if ($class['review']['classes']['model'] === $metadata->getName()) {
-                $reviewableEntity = $class['subject'];
-                $reviewerEntity = $class['reviewer']['classes']['model'];
-                $reviewableEntityMetadata = $metadataFactory->getMetadataFor($reviewableEntity);
-                $reviewerEntityMetadata = $metadataFactory->getMetadataFor($reviewerEntity);
+                if (!$metadata->hasAssociation('reviewSubject')) {
+                    $reviewableEntity = $class['subject'];
+                    $reviewableEntityMetadata = $metadataFactory->getMetadataFor($reviewableEntity);
 
-                $metadata->mapManyToOne($this->createSubjectMapping($reviewableEntity, $subject, $reviewableEntityMetadata));
-                $metadata->mapManyToOne($this->createReviewerMapping($reviewerEntity, $reviewerEntityMetadata));
+                    $metadata->mapManyToOne($this->createSubjectMapping($reviewableEntity, $subject, $reviewableEntityMetadata));
+                }
+
+                if (!$metadata->hasAssociation('author')) {
+                    $reviewerEntity = $class['reviewer']['classes']['model'];
+                    $reviewerEntityMetadata = $metadataFactory->getMetadataFor($reviewerEntity);
+
+                    $metadata->mapManyToOne($this->createReviewerMapping($reviewerEntity, $reviewerEntityMetadata));
+                }
             }
 
-            if ($class['subject'] === $metadata->getName()) {
+            if ($class['subject'] === $metadata->getName() && !$metadata->hasAssociation('reviews')) {
                 $reviewEntity = $class['review']['classes']['model'];
 
                 $metadata->mapOneToMany($this->createReviewsMapping($reviewEntity));

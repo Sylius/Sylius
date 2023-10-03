@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture\OptionsResolver;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\ResourceNotFoundException;
@@ -24,6 +25,8 @@ use Symfony\Component\OptionsResolver\Options;
 
 final class LazyOptionTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

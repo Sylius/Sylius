@@ -16,7 +16,6 @@ Sylius\Component\Currency\Model\ExchangeRate:
         targetCurrency: '@currency_btn'
         ratio: 2.37
 
-
 Sylius\Component\Currency\Model\Currency:
     currency_pln:
         code: 'PLN'

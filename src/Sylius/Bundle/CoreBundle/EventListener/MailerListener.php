@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreBundleEmails;
 use Sylius\Bundle\UserBundle\Mailer\Emails as UserBundleEmails;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
@@ -48,8 +49,24 @@ final class MailerListener
         $this->sendEmail($event->getSubject(), UserBundleEmails::EMAIL_VERIFICATION_TOKEN);
     }
 
+    public function sendVerificationSuccessEmail(GenericEvent $event): void
+    {
+        $user = $event->getSubject();
+
+        Assert::isInstanceOf($user, ShopUserInterface::class);
+
+        $this->sendEmail($user, CoreBundleEmails::USER_REGISTRATION);
+    }
+
     public function sendUserRegistrationEmail(GenericEvent $event): void
     {
+        $channel = $this->channelContext->getChannel();
+        Assert::isInstanceOf($channel, ChannelInterface::class);
+
+        if ($channel->isAccountVerificationRequired()) {
+            return;
+        }
+
         $customer = $event->getSubject();
 
         Assert::isInstanceOf($customer, CustomerInterface::class);

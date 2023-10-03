@@ -30,12 +30,13 @@
         "doctrine/doctrine-migrations-bundle": "^3.0.1",
         "egulias/email-validator": "^3.1",
         "fakerphp/faker": "^1.10",
-        "jms/serializer-bundle": "^4.0",
+        "jms/serializer-bundle": "^4.2",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.7 || ^0.8",
         "league/flysystem-bundle": "^2.4",
-        "liip/imagine-bundle": "^2.3",
-        "sonata-project/block-bundle": "^4.2",
+        "liip/imagine-bundle": "^2.10",
+        "nyholm/psr7": "^1.6",
+        "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/association-hydrator": "^1.1 || ^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.1.4 || ^0.2",
         "sylius-labs/polyfill-symfony-framework-bundle": "^1.0 || ^1.1",
@@ -64,23 +65,25 @@
         "sylius/theme-bundle": "^2.1.1 || ^2.3",
         "sylius/ui-bundle": "^1.12",
         "sylius/user-bundle": "^1.12",
-        "symfony/framework-bundle": "^5.4 || ^6.0",
-        "symfony/intl": "^5.4 || ^6.0",
-        "symfony/mailer": "^5.4 || ^6.0",
-        "symfony/messenger": "^5.4 || ^6.0",
-        "symfony/templating": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4.21 || ^6.0",
+        "symfony/intl": "^5.4.21 || ^6.0",
+        "symfony/mailer": "^5.4.21 || ^6.0",
+        "symfony/messenger": "^5.4.21 || ^6.0",
+        "symfony/templating": "^5.4.21 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.15",
+        "symfony/workflow": "^5.4.21 || ^6.0",
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^1.12 || ^2.0",
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
         "hwi/oauth-bundle": "^1.1 || ^2.0@beta",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/dotenv": "^5.4 || ^6.0"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/dependency-injection": "^5.4.21 || ^6.0",
+        "symfony/dotenv": "^5.4.21 || ^6.0"
     },
     "conflict": {
         "symfony/doctrine-bridge": "4.4.20 || 5.2.4 || 5.2.5"
@@ -96,7 +99,7 @@
             "dev-master": "1.12-dev"
         },
         "symfony": {
-            "require": "^5.4"
+            "require": "^5.4.21"
         }
     },
     "autoload": {

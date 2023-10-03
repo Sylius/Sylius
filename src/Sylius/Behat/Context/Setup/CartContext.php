@@ -48,7 +48,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I have(?:| added) (\d+) (products "[^"]+") (?:to|in) the (cart)$/
+     * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
      */
     public function iHaveAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {

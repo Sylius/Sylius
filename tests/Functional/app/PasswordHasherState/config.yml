@@ -1,0 +1,8 @@
+sylius_user:
+    encoder: argon2i
+    
+security:
+    password_hashers:
+        argon2i: argon2i
+        sodium: sodium
+        Sylius\Component\User\Model\UserInterface: argon2i

@@ -16,16 +16,19 @@ namespace Sylius\Tests\Api\Shop;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
+use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 final class AddressesGetTest extends JsonApiTestCase
 {
+    use ShopUserLoginTrait;
+
     /** @test */
     public function it_denies_access_to_get_address_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles(['authentication/customer.yaml']);
 
-        $this->client->request('GET', '/api/v2/shop/addresses', [], [], [self::CONTENT_TYPE_HEADER]);
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses', server: self::CONTENT_TYPE_HEADER);
 
         $response = $this->client->getResponse();
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
@@ -38,17 +41,11 @@ final class AddressesGetTest extends JsonApiTestCase
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/shop/addresses',
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses', server: $header);
 
-        $this->assertResponse($this->client->getResponse(), 'shop/get_addresses_response');
+        $this->assertResponse($this->client->getResponse(), 'shop/address/get_addresses_response');
     }
 
     /** @test */
@@ -60,16 +57,10 @@ final class AddressesGetTest extends JsonApiTestCase
         /** @var AddressInterface $address */
         $address = $fixtures['address'];
 
-        $authorizationHeader = $this->getAuthorizationHeaderAsCustomer($customer->getEmailCanonical(), 'sylius');
+        $header = array_merge($this->logInShopUser($customer->getEmailCanonical()), self::CONTENT_TYPE_HEADER);
 
-        $this->client->request(
-            'GET',
-            '/api/v2/shop/addresses/' . $address->getId(),
-            [],
-            [],
-            array_merge($authorizationHeader, self::CONTENT_TYPE_HEADER)
-        );
+        $this->client->request(method: 'GET', uri: '/api/v2/shop/addresses/' . $address->getId(), server: $header);
 
-        $this->assertResponse($this->client->getResponse(), 'shop/get_an_address_response');
+        $this->assertResponse($this->client->getResponse(), 'shop/address/get_an_address_response');
     }
 }

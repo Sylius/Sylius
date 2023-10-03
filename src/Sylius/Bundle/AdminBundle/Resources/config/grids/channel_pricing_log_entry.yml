@@ -1,0 +1,30 @@
+sylius_grid:
+    grids:
+        sylius_admin_channel_pricing_log_entry:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%sylius.model.channel_pricing_log_entry.class%'
+                    repository:
+                        method: createByChannelPricingIdListQueryBuilder
+                        arguments: [$channelPricingId]
+            fields:
+                price:
+                    type: twig
+                    label: sylius.ui.price
+                    path: .
+                    options:
+                        template: '@SyliusAdmin/ChannelPricingLogEntry/Grid/Field/price.html.twig'
+                originalPrice:
+                    type: twig
+                    label: sylius.ui.original_price
+                    path: .
+                    options:
+                        template: '@SyliusAdmin/ChannelPricingLogEntry/Grid/Field/originalPrice.html.twig'
+                loggedAt:
+                    type: datetime
+                    label: sylius.ui.logged_at
+            filters:
+                loggedAt:
+                    type: date
+                    label: sylius.ui.logged_at

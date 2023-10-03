@@ -14,10 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
+use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
+    use AdminUserLoginTrait;
+
     public const CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json'];
+
+    public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
@@ -27,7 +32,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         $this->expectedResponsesPath = __DIR__ . '/Responses/Expected';
     }
 
-    protected function get($id)
+    protected function get($id): ?object
     {
         if (property_exists(static::class, 'container')) {
             return self::$kernel->getContainer()->get($id);
@@ -36,24 +41,13 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return parent::get($id);
     }
 
-    protected function getAuthorizationHeaderAsCustomer(string $email, string $password): array
+    protected function getUnloggedHeader(): array
     {
-        $this->client->request(
-            'POST',
-            '/api/v2/shop/authentication-token',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => $password])
-        );
-        $this->assertResponseStatusCodeSame(200);
+        return self::CONTENT_TYPE_HEADER;
+    }
 
-        $token = json_decode($this->client->getResponse()->getContent(), true)['token'];
-        $this->assertIsString($token);
-
-        $authorizationHeader = self::$kernel->getContainer()->getParameter('sylius.api.authorization_header');
-        $this->assertIsString($authorizationHeader);
-
-        return ['HTTP_' . $authorizationHeader => 'Bearer ' . $token];
+    protected function getLoggedHeader(): array
+    {
+        return array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
     }
 }

@@ -24,6 +24,10 @@
                 <option name="minMessage">sylius.order_item.quantity.min</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="NotBlank">
+                <option name="message">sylius.order_item.quantity.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

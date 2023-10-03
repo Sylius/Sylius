@@ -147,12 +147,7 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @param string $name
-     *
-     * @return TaxonInterface
-     */
-    private function createTaxon($name)
+    private function createTaxon(string $name): TaxonInterface
     {
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();

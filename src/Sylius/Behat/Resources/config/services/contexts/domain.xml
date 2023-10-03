@@ -25,12 +25,18 @@
             <argument type="service" id="sylius.repository.address"/>
             <argument type="service" id="sylius.repository.adjustment"/>
             <argument type="service" id="sylius.manager.order"/>
-            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface"/>
             <argument type="service" id="sylius.unpaid_orders_state_updater" />
         </service>
 
         <service id="sylius.behat.context.domain.managing_payments" class="Sylius\Behat\Context\Domain\ManagingPaymentsContext">
             <argument type="service" id="sylius.repository.payment"/>
+        </service>
+
+        <service id="Sylius\Behat\Context\Domain\ManagingPriceHistoryContext">
+            <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" />
         </service>
 
         <service id="sylius.behat.context.domain.managing_products" class="Sylius\Behat\Context\Domain\ManagingProductsContext">

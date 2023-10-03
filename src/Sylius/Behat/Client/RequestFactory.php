@@ -32,9 +32,10 @@ final class RequestFactory implements RequestFactoryInterface
         string $resource,
         string $authorizationHeader,
         ?string $token = null,
+        array $queryParameters = [],
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s', $this->apiUrlPrefix, $section, $resource),
+            sprintf('%s/%s/%s%s', $this->apiUrlPrefix, $section, $resource, $this->getQueryString($queryParameters)),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
@@ -194,5 +195,10 @@ final class RequestFactory implements RequestFactoryInterface
         }
 
         return $builder->build();
+    }
+
+    private function getQueryString(array $queryParameters): string
+    {
+        return count($queryParameters) > 0 ? '?' . http_build_query($queryParameters) : '';
     }
 }

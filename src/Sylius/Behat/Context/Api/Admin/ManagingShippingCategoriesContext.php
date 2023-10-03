@@ -108,14 +108,6 @@ final class ManagingShippingCategoriesContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @Then I should be notified that shipping category with this code already exists
      */
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
@@ -225,17 +217,6 @@ final class ManagingShippingCategoriesContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Shipping category could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping category could not be edited',
         );
     }
 

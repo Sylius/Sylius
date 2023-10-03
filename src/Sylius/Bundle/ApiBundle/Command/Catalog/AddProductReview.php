@@ -19,53 +19,13 @@ use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 /** @experimental */
 class AddProductReview implements IriToIdentifierConversionAwareInterface, CustomerEmailAwareInterface
 {
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $title;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var int|null
-     */
-    public $rating;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $comment;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    public $productCode;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $email;
-
     public function __construct(
-        ?string $title,
-        ?int $rating,
-        ?string $comment,
-        string $productCode,
-        ?string $email = null,
+        public ?string $title,
+        public ?int $rating,
+        public ?string $comment,
+        public ?string $productCode,
+        public ?string $email = null,
     ) {
-        $this->title = $title;
-        $this->rating = $rating;
-        $this->comment = $comment;
-        $this->productCode = $productCode;
-        $this->email = $email;
     }
 
     public function getEmail(): ?string

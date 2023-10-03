@@ -20,12 +20,14 @@ use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 class RegistrationContext implements Context
@@ -36,10 +38,12 @@ class RegistrationContext implements Context
         private HomePageInterface $homePage,
         private LoginPageInterface $loginPage,
         private RegisterPageInterface $registerPage,
+        private RegisterThankYouPageInterface $registerThankYouPage,
         private VerificationPageInterface $verificationPage,
         private ProfileUpdatePageInterface $profileUpdatePage,
         private RegisterElementInterface $registerElement,
         private NotificationCheckerInterface $notificationChecker,
+        private CustomerRepositoryInterface $customerRepository,
     ) {
     }
 
@@ -346,6 +350,23 @@ class RegistrationContext implements Context
         $this->profileUpdatePage->open();
 
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
+    }
+
+    /**
+     * @Then I should be on registration thank you page
+     */
+    public function iShouldBeOnRegistrationThankYouPage(): void
+    {
+        $registeredCustomer = $this->customerRepository->findLatest(1)[0];
+        Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
+    }
+
+    /**
+     * @Then I should be on my account dashboard
+     */
+    public function iShouldBeOnMyAccountDashboard(): void
+    {
+        Assert::true($this->dashboardPage->isOpen());
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void

@@ -109,6 +109,9 @@ class Taxon implements TaxonInterface, \Stringable
         }
     }
 
+    /**
+     * @return Collection<int, TaxonInterface>
+     */
     public function getAncestors(): Collection
     {
         $ancestors = [];
@@ -117,7 +120,10 @@ class Taxon implements TaxonInterface, \Stringable
             $ancestors[] = $ancestor;
         }
 
-        return new ArrayCollection($ancestors);
+        /** @var Collection<int, TaxonInterface> $collection */
+        $collection = new ArrayCollection($ancestors);
+
+        return $collection;
     }
 
     public function getChildren(): Collection

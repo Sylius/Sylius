@@ -46,6 +46,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I want to modify a channel :channel
+     */
+    public function iWantToModifyChannel(ChannelInterface $channel): void
+    {
+        $this->client->buildUpdateRequest(Resources::CHANNELS, $channel->getCode());
+    }
+
+    /**
      * @When I specify its :field as :value
      * @When I :field it :value
      * @When I set its :field as :value
@@ -62,6 +70,14 @@ final class ManagingChannelsContext implements Context
     public function iChooseAsTheBaseCurrency(CurrencyInterface $currency): void
     {
         $this->client->addRequestData('baseCurrency', $this->iriConverter->getIriFromItemInSection($currency, 'admin'));
+    }
+
+    /**
+     * @When I make it available in :locale
+     */
+    public function iMakeItAvailableInLocale(LocaleInterface $locale): void
+    {
+        $this->client->addRequestData('locales', [$this->iriConverter->getIriFromItem($locale)]);
     }
 
     /**
@@ -172,6 +188,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt(): void
     {
@@ -205,11 +222,25 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I save my changes
+     * @When /^I (enable|disable) showing the lowest price of discounted products$/
      */
-    public function iSaveMyChanges(): void
+    public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
     {
-        $this->client->update();
+        $this->client->addRequestData(
+            'channelPriceHistoryConfig',
+            ['lowestPriceForDiscountedProductsVisible' => $visible === 'enable'],
+        );
+    }
+
+    /**
+     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
+     */
+    public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
+    {
+        $this->client->addRequestData(
+            'channelPriceHistoryConfig',
+            ['lowestPriceForDiscountedProductsCheckingPeriod' => $days],
+        );
     }
 
     /**
@@ -218,8 +249,8 @@ final class ManagingChannelsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Channel could not be created',
+            $this->responseChecker->isCreationSuccessful($response = $this->client->getLastResponse()),
+            'Channel could not be created: ' . $response->getContent(),
         );
     }
 
@@ -265,16 +296,5 @@ final class ManagingChannelsContext implements Context
             'shippingAddressInCheckoutRequired',
             $type === 'shipping',
         ));
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Channel could not be edited',
-        );
     }
 }

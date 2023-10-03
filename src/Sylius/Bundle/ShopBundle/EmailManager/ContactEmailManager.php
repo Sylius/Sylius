@@ -30,15 +30,21 @@ final class ContactEmailManager implements ContactEmailManagerInterface
         ?string $localeCode = null,
     ): void {
         if ($channel === null) {
-            @trigger_error(
-                sprintf('Not passing channel into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.7',
+                'Not passing a $channel into %s::%s is deprecated.',
+                __CLASS__,
+                __METHOD__,
             );
         }
         if ($localeCode === null) {
-            @trigger_error(
-                sprintf('Not passing locale code into %s::%s is deprecated since Sylius 1.7', __CLASS__, __METHOD__),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '1.7',
+                'Not passing a $localeCode into %s::%s is deprecated.',
+                __CLASS__,
+                __METHOD__,
             );
         }
 

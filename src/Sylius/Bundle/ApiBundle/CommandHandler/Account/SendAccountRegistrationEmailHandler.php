@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -36,7 +37,12 @@ final class SendAccountRegistrationEmailHandler implements MessageHandlerInterfa
         /** @var ShopUserInterface $shopUser */
         $shopUser = $this->shopUserRepository->findOneByEmail($command->shopUserEmail);
 
+        /** @var ChannelInterface $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
+
+        if ($channel->isAccountVerificationRequired() && !$shopUser->isEnabled()) {
+            return;
+        }
 
         $this->emailSender->send(
             Emails::USER_REGISTRATION,

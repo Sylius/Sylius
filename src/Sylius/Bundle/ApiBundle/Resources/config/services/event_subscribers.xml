@@ -43,5 +43,21 @@
             <argument type="service" id="sylius.generator.slug" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\TaxonSlugEventSubscriber">
+            <argument type="service" id="sylius.generator.taxon_slug" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\EventSubscriber\AttributeEventSubscriber">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>

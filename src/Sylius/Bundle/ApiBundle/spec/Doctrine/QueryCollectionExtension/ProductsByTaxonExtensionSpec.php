@@ -15,10 +15,12 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -79,7 +81,9 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         UserInterface $user,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
-        ChannelInterface $channel,
+        Expr $expr,
+        Expr\Comparison $comparison,
+        Andx $andx,
     ): void {
         $userContext->getUser()->willReturn($user);
         $user->getRoles()->willReturn([]);
@@ -91,7 +95,11 @@ final class ProductsByTaxonExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->addSelect('productTaxons')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->leftJoin('o.productTaxons', 'productTaxons', 'WITH', 'productTaxons.product = o.id')->shouldBeCalled()->willReturn($queryBuilder);
-        $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', 'taxon.code IN (:taxonCode)')->shouldBeCalled()->willReturn($queryBuilder);
+        $expr->andX(Argument::type(Expr\Comparison::class), Argument::type(Expr\Comparison::class))->willReturn($andx);
+        $expr->in('taxon.code', ':taxonCode')->shouldBeCalled()->willReturn($comparison);
+        $expr->eq('taxon.enabled', 'true')->shouldBeCalled()->willReturn($comparison);
+        $queryBuilder->expr()->willReturn($expr->getWrappedObject());
+        $queryBuilder->leftJoin('productTaxons.taxon', 'taxon', 'WITH', Argument::type(Andx::class))->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->orderBy('productTaxons.position', 'ASC')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->setParameter('taxonCode', ['t_shirts'])->shouldBeCalled()->willReturn($queryBuilder);
 

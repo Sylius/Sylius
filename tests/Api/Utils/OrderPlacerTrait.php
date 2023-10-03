@@ -22,6 +22,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
@@ -71,5 +72,24 @@ trait OrderPlacerTrait
         $completeOrderCommand = new CompleteOrder();
         $completeOrderCommand->setOrderTokenValue($tokenValue);
         $commandBus->dispatch($completeOrderCommand);
+    }
+
+    protected function cancelOrder(string $tokenValue): void
+    {
+        $objectManager = $this->get('doctrine.orm.entity_manager');
+
+        /** @var OrderRepositoryInterface $orderRepository */
+        $orderRepository = $this->get('sylius.repository.order');
+        /** @var OrderInterface|null $order */
+        $order = $orderRepository->findOneByTokenValue($tokenValue);
+        Assert::notNull($order);
+
+        $stateMachineFactory = $this->get('sm.factory');
+
+        $stateMachine = $stateMachineFactory->get($order, OrderTransitions::GRAPH);
+        $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);
+
+        $objectManager->flush();
+        $objectManager->clear();
     }
 }

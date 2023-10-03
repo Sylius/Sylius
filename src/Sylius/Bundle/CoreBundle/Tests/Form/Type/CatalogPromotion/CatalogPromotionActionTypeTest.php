@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Form\Type\CatalogPromotion;
 
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionAction\ChannelBasedFixedDiscountActionConfigurationType;
@@ -32,6 +33,8 @@ use Symfony\Component\Validator\Validation;
 
 final class CatalogPromotionActionTypeTest extends TypeTestCase
 {
+    use ProphecyTrait;
+
     private ProphecyInterface|ChannelInterface $channel;
 
     private ObjectProphecy $channelRepository;

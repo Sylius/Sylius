@@ -1,3 +1,5 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
+
 <div class="ui two column stackable grid">
     <div class="column">
         {{ form_errors(form) }}
@@ -33,6 +35,9 @@
             {{ form_row(form.endsAt) }}
         </div>
     </div>
+</div>
+<div class="column">
+    {{ translationForm(form.translations) }}
 </div>
 <div class="ui segment">
     <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>

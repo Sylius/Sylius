@@ -20,12 +20,15 @@ use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
+use Symfony\Component\BrowserKit\Exception\BadMethodCallException;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
@@ -204,7 +207,17 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeLoggedIn(): void
     {
-        Assert::false($this->apiSecurityClient->isLoggedIn(), 'Shop user should not be logged in, but they are.');
+        try {
+            $isLoggedIn = $this->apiSecurityClient->isLoggedIn();
+        } catch (BadMethodCallException) {
+            /** @var ShopUserInterface $shopUser */
+            $shopUser = $this->sharedStorage->get('user');
+            $this->client->show(Resources::CUSTOMERS, (string) $shopUser->getCustomer()->getId());
+
+            $isLoggedIn = $this->client->getLastResponse()->getStatusCode() !== Response::HTTP_UNAUTHORIZED;
+        }
+
+        Assert::false($isLoggedIn, 'Shop user should not be logged in, but they are.');
     }
 
     /**
@@ -270,9 +283,9 @@ final class LoginContext implements Context
         $this->client->executeCustomRequest($this->request);
 
         // token is removed when used
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'Internal Server Error');
+        Assert::startsWith($message, 'No user found with reset token:');
     }
 
     private function addLocale(string $locale): void

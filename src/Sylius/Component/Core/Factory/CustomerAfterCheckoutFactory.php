@@ -17,18 +17,21 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of CustomerInterface
+ *
+ * @implements CustomerAfterCheckoutFactoryInterface<T>
+ */
 final class CustomerAfterCheckoutFactory implements CustomerAfterCheckoutFactoryInterface
 {
     public function __construct(private FactoryInterface $baseCustomerFactory)
     {
     }
 
+    /** @inheritdoc */
     public function createNew(): CustomerInterface
     {
-        /** @var CustomerInterface $customer */
-        $customer = $this->baseCustomerFactory->createNew();
-
-        return $customer;
+        return $this->baseCustomerFactory->createNew();
     }
 
     public function createAfterCheckout(OrderInterface $order): CustomerInterface

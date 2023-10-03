@@ -16,12 +16,17 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
+/**
+ * @template T of ProductOptionInterface
+ *
+ * @extends BaseProductOptionRepository<T>
+ */
 class ProductOptionRepository extends BaseProductOptionRepository
 {
-    /** @var AssociationHydrator */
-    protected $associationHydrator;
+    protected AssociationHydrator $associationHydrator;
 
     public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {

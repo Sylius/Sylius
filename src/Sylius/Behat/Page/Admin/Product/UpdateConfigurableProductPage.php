@@ -62,7 +62,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();

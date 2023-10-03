@@ -21,6 +21,7 @@ default:
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.tax_category
                 - sylius.behat.context.transform.tax_rate
+                - sylius.behat.context.transform.user
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.channel
@@ -37,6 +38,7 @@ default:
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.paypal
+                - sylius.behat.context.ui.shop.account
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing

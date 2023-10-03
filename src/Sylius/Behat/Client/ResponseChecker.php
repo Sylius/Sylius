@@ -54,13 +54,17 @@ final class ResponseChecker implements ResponseCheckerInterface
         return $translations[$localeCode][$key];
     }
 
-    public function getError(Response $response): string
+    public function getError(Response $response): ?string
     {
         if ($this->hasKey($response, 'message')) {
             return $this->getValue($response, 'message');
         }
 
-        return $this->getResponseContentValue($response, 'hydra:description');
+        if ($this->hasKey($response, 'hydra:description')) {
+            return $this->getResponseContentValue($response, 'hydra:description');
+        }
+
+        return $response->getContent();
     }
 
     public function isAccepted(Response $response): bool

@@ -16,7 +16,10 @@
         <span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
     <td class="center aligned">
-        <span class="sylius-quantity ui form">{{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)|sylius_merge_recursive({'attr': {'form': main_form}})) }}</span>
+        <span class="sylius-quantity ui form">
+            {{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)|sylius_merge_recursive({'attr': {'form': main_form}})) }}
+            {{ form_errors(form.quantity) }}
+        </span>
     </td>
     <td class="center aligned">
         <form action="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" method="post">

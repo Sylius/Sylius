@@ -115,6 +115,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @Then the :type attribute :name should appear in the store
+     * @Then the :type attribute :name should still be in the store
      */
     public function theAttributeShouldAppearInTheStore($type, $name)
     {
@@ -152,17 +153,18 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
      * @Then the type field should be disabled
+     * @Then I should not be able to edit its type
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function theTypeFieldShouldBeDisabled(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -328,7 +330,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^I delete (this product attribute)$/
+     * @When /^I(?:| try to) delete (this product attribute)$/
      */
     public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute)
     {

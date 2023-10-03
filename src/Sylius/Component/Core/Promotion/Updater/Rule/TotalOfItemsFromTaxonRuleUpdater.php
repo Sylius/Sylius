@@ -18,10 +18,19 @@ use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecke
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0.
+ */
 final class TotalOfItemsFromTaxonRuleUpdater implements TaxonAwareRuleUpdaterInterface
 {
     public function __construct(private RepositoryInterface $promotionRuleRepository)
     {
+        trigger_deprecation(
+            'sylius/core',
+            '1.13',
+            'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+            self::class,
+        );
     }
 
     public function updateAfterDeletingTaxon(TaxonInterface $taxon): array

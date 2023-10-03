@@ -17,6 +17,11 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of PromotionCouponInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;

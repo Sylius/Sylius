@@ -18,6 +18,11 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
 
+/**
+ * @template T of OrderItemUnitInterface
+ *
+ * @implements OrderItemUnitRepositoryInterface<T>
+ */
 class OrderItemUnitRepository extends EntityRepository implements OrderItemUnitRepositoryInterface
 {
     public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface

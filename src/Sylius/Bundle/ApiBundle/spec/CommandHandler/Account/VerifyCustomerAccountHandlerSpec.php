@@ -15,19 +15,24 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
 use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shopUserRepository,
         DateTimeProviderInterface $dateTimeProvider,
+        MessageBusInterface $commandBus,
     ): void {
-        $this->beConstructedWith($shopUserRepository, $dateTimeProvider);
+        $this->beConstructedWith($shopUserRepository, $dateTimeProvider, $commandBus);
     }
 
     function it_is_a_message_handler(): void
@@ -39,15 +44,22 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
         RepositoryInterface $shopUserRepository,
         DateTimeProviderInterface $dateTimeProvider,
         UserInterface $user,
+        MessageBusInterface $commandBus,
     ): void {
         $shopUserRepository->findOneBy(['emailVerificationToken' => 'ToKeN'])->willReturn($user);
         $dateTimeProvider->now()->willReturn(new \DateTime());
 
+        $user->getEmail()->willReturn('shop@example.com');
         $user->setVerifiedAt(Argument::type(\DateTime::class))->shouldBeCalled();
         $user->setEmailVerificationToken(null)->shouldBeCalled();
         $user->enable()->shouldBeCalled();
 
-        $this(new VerifyCustomerAccount('ToKeN'));
+        $commandBus->dispatch(
+            new SendAccountRegistrationEmail('shop@example.com', 'en_US', 'WEB'),
+            [new DispatchAfterCurrentBusStamp()],
+        )->willReturn(new Envelope(new \stdClass()));
+
+        $this(new VerifyCustomerAccount('ToKeN', 'en_US', 'WEB'));
     }
 
     function it_throws_error_if_user_does_not_exist(

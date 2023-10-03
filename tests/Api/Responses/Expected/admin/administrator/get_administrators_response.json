@@ -1,0 +1,72 @@
+{
+    "@context": "\/api\/v2\/contexts\/Administrator",
+    "@id": "\/api\/v2\/admin\/administrators",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/administrators\/@integer@",
+            "@type": "Administrator",
+            "firstName": null,
+            "lastName": null,
+            "localeCode": "en",
+            "avatar": null,
+            "id": @integer@,
+            "username": "rich",
+            "lastLogin": null,
+            "verifiedAt": null,
+            "email": "api_rich@admin.com",
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/administrators\/@integer@",
+            "@type": "Administrator",
+            "firstName": null,
+            "lastName": null,
+            "localeCode": "en",
+            "avatar": null,
+            "id": @integer@,
+            "username": "susie",
+            "lastLogin": null,
+            "verifiedAt": null,
+            "email": "api_susie@admin.com",
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/administrators\/@integer@",
+            "@type": "Administrator",
+            "firstName": null,
+            "lastName": null,
+            "localeCode": "en",
+            "avatar": null,
+            "id": @integer@,
+            "username": "wilhelm",
+            "lastLogin": null,
+            "verifiedAt": null,
+            "email": "api_wilhelm@admin.com",
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "enabled": true
+        },
+        {
+            "@id": "\/api\/v2\/admin\/administrators\/@integer@",
+            "@type": "Administrator",
+            "firstName": null,
+            "lastName": null,
+            "localeCode": "en",
+            "avatar": null,
+            "id": @integer@,
+            "username": "sylius",
+            "lastLogin": null,
+            "verifiedAt": null,
+            "email": "api@example.com",
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "enabled": true
+        }
+    ],
+    "hydra:totalItems": 4
+}

@@ -18,6 +18,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 
+/**
+ * @template T of ProductOptionInterface
+ *
+ * @implements ProductOptionRepositoryInterface<T>
+ */
 class ProductOptionRepository extends EntityRepository implements ProductOptionRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder

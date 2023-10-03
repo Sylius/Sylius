@@ -17,6 +17,9 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements ProductVariantFactoryInterface<ProductVariantInterface>
+ */
 class ProductVariantFactory implements ProductVariantFactoryInterface
 {
     public function __construct(private FactoryInterface $factory)

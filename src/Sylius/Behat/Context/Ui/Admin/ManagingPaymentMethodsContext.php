@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
@@ -97,14 +96,6 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
-    }
-
-    /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
     }
 
     /**

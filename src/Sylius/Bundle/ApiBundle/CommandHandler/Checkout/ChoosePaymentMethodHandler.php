@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
+use Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeChangedException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -78,6 +79,6 @@ final class ChoosePaymentMethodHandler implements MessageHandlerInterface
             return $cart;
         }
 
-        throw new \InvalidArgumentException('Payment method can not be set');
+        throw new PaymentMethodCannotBeChangedException();
     }
 }

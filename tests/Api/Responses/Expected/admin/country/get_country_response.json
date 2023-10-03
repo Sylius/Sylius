@@ -1,0 +1,10 @@
+{
+    "@context": "\/api\/v2\/contexts\/Country",
+    "@id": "\/api\/v2\/admin\/countries\/DE",
+    "@type": "Country",
+    "id": "@integer@",
+    "code": "DE",
+    "enabled": true,
+    "name": "Germany",
+    "provinces": []
+}

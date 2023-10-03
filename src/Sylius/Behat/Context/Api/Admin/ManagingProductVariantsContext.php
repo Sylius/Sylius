@@ -26,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
+    private const FIRST_COLLECTION_ITEM = 0;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -51,6 +53,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I name it :name in :localeCode
+     */
+    public function iNameItIn(string $name, string $localeCode): void
+    {
+        $this->client->addRequestData('translations', [
+            $localeCode => [
+                'locale' => $localeCode,
+                'name' => $name,
+            ],
+        ]);
+    }
+
+    /**
      * @When /^I set its price to ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel): void
@@ -58,6 +73,19 @@ final class ManagingProductVariantsContext implements Context
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
                 'price' => $price,
+                'channelCode' => $channel->getCode(),
+            ],
+        ]);
+    }
+
+    /**
+     * @When /^I set its original price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iSetItsOriginalPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'originalPrice' => $originalPrice,
                 'channelCode' => $channel->getCode(),
             ],
         ]);
@@ -127,13 +155,37 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I want to modify the :variant product variant
+     */
+    public function iWantToModifyProductVariant(ProductVariantInterface $variant): void
+    {
+        $this->client->buildUpdateRequest(Resources::PRODUCT_VARIANTS, $variant->getCode());
+    }
+
+    /**
+     * @When /^I change its price to ("[^"]+") for ("[^"]+" channel)$/
+     */
+    public function iChangeItsPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channelPricings', [
+            $channel->getCode() => [
+                'price' => $originalPrice,
+                'channelCode' => $channel->getCode(),
+            ],
+        ]);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Product Variant could not be created',
+            sprintf(
+                'Product Variant could not be created: %s',
+                $this->responseChecker->getError($this->client->getLastResponse()),
+            ),
         );
     }
 
@@ -148,13 +200,34 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^the (?:variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
+     */
+    public function theVariantWithCodeShouldBeNamedIn(string $name, string $localeCode): void
+    {
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
+
+        $expectedTranslation = [
+            'locale' => $localeCode,
+            'name' => $name,
+        ];
+
+        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM]['translations'][$localeCode];
+
+        Assert::allInArray(
+            $expectedTranslation,
+            $translationInLocale,
+            sprintf('Expected translation %s, got %s', $expectedTranslation['name'], $translationInLocale['name']),
+        );
+    }
+
+    /**
      * @Then /^the (variant with code "[^"]+") should be priced at ("[^"]+") for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[0]['channelPricings'][$channel->getCode()]['price'], $price);
+        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
     }
 
     /**
@@ -164,7 +237,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[0]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
+        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
     }
 
     private function updateChannelPricingField(

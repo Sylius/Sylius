@@ -15,8 +15,14 @@ namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
+/**
+ * @template T of PromotionInterface
+ *
+ * @implements PromotionRepositoryInterface<T>
+ */
 class PromotionRepository extends EntityRepository implements PromotionRepositoryInterface
 {
     public function findActive(): array

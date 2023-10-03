@@ -23,9 +23,7 @@
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="max">5</option>
-                <option name="minMessage">sylius.review.rating.range</option>
-                <option name="maxMessage">sylius.review.rating.range</option>
-                <option name="notInRangeMessage">sylius.review.rating.range</option>
+                <option name="notInRangeMessage">sylius.review.rating.not_in_range</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
@@ -49,6 +47,14 @@
         <property name="comment">
             <constraint name="NotBlank">
                 <option name="message">sylius.review.comment.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="productCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.review.product.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>

@@ -18,6 +18,11 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of OrderItemInterface
+ *
+ * @extends FactoryInterface<T>
+ */
 interface CartItemFactoryInterface extends FactoryInterface
 {
     public function createForProduct(ProductInterface $product): OrderItemInterface;

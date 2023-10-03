@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Bundles\ApiBundle\CommandHandler;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler;
@@ -25,6 +26,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

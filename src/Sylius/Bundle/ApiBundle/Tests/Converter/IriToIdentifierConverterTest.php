@@ -17,6 +17,7 @@ use ApiPlatform\Core\Exception\InvalidArgumentException;
 use ApiPlatform\Core\Identifier\IdentifierConverterInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
@@ -26,6 +27,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class IriToIdentifierConverterTest extends TestCase
 {
+    use ProphecyTrait;
+
     private RouterInterface|ObjectProphecy $router;
 
     private IdentifierConverterInterface|ObjectProphecy $identifierConverter;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Bundles\ApiBundle\CommandHandler;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountVerificationEmailHandler;
@@ -25,6 +26,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

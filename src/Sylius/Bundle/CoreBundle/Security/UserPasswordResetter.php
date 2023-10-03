@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Security;
 
+use Sylius\Bundle\UserBundle\Exception\UserNotFoundException;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
-use Webmozart\Assert\Assert;
 
 final class UserPasswordResetter implements UserPasswordResetterInterface
 {
@@ -27,12 +27,17 @@ final class UserPasswordResetter implements UserPasswordResetterInterface
     ) {
     }
 
+    /**
+     * @throws UserNotFoundException
+     */
     public function reset(string $token, string $password): void
     {
         /** @var UserInterface|null $user */
         $user = $this->userRepository->findOneBy(['passwordResetToken' => $token]);
 
-        Assert::notNull($user, 'No user found with reset token: ' . $token);
+        if (null === $user) {
+            throw new UserNotFoundException(message: sprintf('No user found with reset token: %s', $token));
+        }
 
         $lifetime = new \DateInterval($this->tokenTtl);
 

@@ -13,18 +13,14 @@ sylius_fixtures:
                     options:
                         amount: 3
 
-                fulfilled_order:
-                    name: order
+                order:
                     options:
-                        amount: 12
+                        amount: 20
                         channel: 'FASHION_WEB'
-                        fulfilled: true
-
-                new_order:
-                    name: order
+                        
+                payments:
                     options:
-                        amount: 8
-                        channel: 'FASHION_WEB'
+                        percentage_completed: 75
 
                 address:
                     options:

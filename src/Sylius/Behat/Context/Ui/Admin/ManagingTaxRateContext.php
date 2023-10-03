@@ -143,6 +143,19 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @Then the tax rate :taxRate should be included in price
+     */
+    public function theTaxRateShouldIncludePrice(TaxRateInterface $taxRate): void
+    {
+        $this->updatePage->open(['id' => $taxRate->getId()]);
+
+        Assert::true(
+            $taxRate->isIncludedInPrice(),
+            sprintf('Tax rate is not included in price'),
+        );
+    }
+
+    /**
      * @Then I should not see a tax rate with name :name
      */
     public function iShouldNotSeeATaxRateWithName(string $taxRateName): void

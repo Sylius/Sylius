@@ -35,6 +35,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="reviews" target-entity="Sylius\Component\Review\Model\ReviewInterface" mapped-by="reviewSubject">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <order-by>
                 <order-by-field name="id" />
@@ -51,7 +57,7 @@
         </many-to-many>
 
         <many-to-one field="mainTaxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
+            <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImageInterface" mapped-by="owner" orphan-removal="true">

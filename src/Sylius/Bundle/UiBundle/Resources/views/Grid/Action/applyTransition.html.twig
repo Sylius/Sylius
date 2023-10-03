@@ -1,9 +1,12 @@
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+
 {% if sm_can(data, options.transition, options.graph) %}
     <form action="{{ path(options.link.route, options.link.parameters) }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
         <input type="hidden" name="_method" value="PUT">
-        <button class="ui loadable {{ options.class|default }} labeled icon button" type="submit" data-js-disable=".sylius-grid-table-wrapper button, .sylius-grid-table-wrapper a">
-            <i class="{{ action.icon }} icon"></i> {{ action.label|trans }}
+        <button class="ui loadable {{ options.class|default }} {% if labeled %}labeled{% endif %} icon button" type="submit" data-js-disable=".sylius-grid-table-wrapper button, .sylius-grid-table-wrapper a">
+            <i class="{{ action.icon }} icon"></i>
+            {% if labeled %}{{ action.label|trans }}{% endif %}
         </button>
     </form>
 {% endif %}
