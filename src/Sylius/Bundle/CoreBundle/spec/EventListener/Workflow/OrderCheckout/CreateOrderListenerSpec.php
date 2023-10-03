@@ -37,7 +37,7 @@ final class CreateOrderListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('onCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
     function it_creates_order(
@@ -46,7 +46,7 @@ final class CreateOrderListenerSpec extends ObjectBehavior
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
 
-        $this->onCompleted($event);
+        $this($event);
 
         $compositeStateMachine
             ->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CREATE)

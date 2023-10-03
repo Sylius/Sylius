@@ -44,9 +44,9 @@ framework:
                     to: !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_PAYMENT_SKIPPED
                 !php/const Sylius\Component\Core\OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT:
                     from:
-                        - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_SHIPPING_SELECTED
-                        - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_SHIPPING_SKIPPED
                         - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_PAYMENT_SELECTED
+                        - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_SHIPPING_SKIPPED
+                        - !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_SHIPPING_SELECTED
                     to: !php/const Sylius\Component\Core\OrderCheckoutStates::STATE_PAYMENT_SELECTED
                 !php/const Sylius\Component\Core\OrderCheckoutTransitions::TRANSITION_COMPLETE:
                     from:

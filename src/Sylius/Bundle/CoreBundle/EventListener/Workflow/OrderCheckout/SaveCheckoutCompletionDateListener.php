@@ -17,9 +17,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Webmozart\Assert\Assert;
 
-final class CompleteCheckoutListener
+final class SaveCheckoutCompletionDateListener
 {
-    public function onCompleted(CompletedEvent $event): void
+    public function __invoke(CompletedEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

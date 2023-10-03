@@ -24,7 +24,7 @@ final class ProcessCartListener
     {
     }
 
-    public function onCompleted(CompletedEvent $event): void
+    public function __invoke(CompletedEvent $event): void
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();

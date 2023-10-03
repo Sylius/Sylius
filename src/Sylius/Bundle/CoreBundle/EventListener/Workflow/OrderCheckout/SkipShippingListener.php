@@ -13,6 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
-final class SkipShippingListener extends AbstractStateCompletedStateResolverListener
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\StateResolver\StateResolverInterface;
+use Symfony\Component\Workflow\Event\CompletedEvent;
+use Webmozart\Assert\Assert;
+
+final class SkipShippingListener
 {
+    public function __construct(protected StateResolverInterface $orderCheckoutStateResolver)
+    {
+    }
+
+    public function __invoke(CompletedEvent $event): void
+    {
+        /** @var OrderInterface $order */
+        $order = $event->getSubject();
+        Assert::isInstanceOf($order, OrderInterface::class);
+
+        $this->orderCheckoutStateResolver->resolve($order);
+    }
 }

@@ -22,9 +22,9 @@ use Symfony\Component\Workflow\Marking;
 
 final class SkipShippingListenerSpec extends ObjectBehavior
 {
-    function let(StateResolverInterface $stateResolver): void
+    function let(StateResolverInterface $orderCheckoutStateResolver): void
     {
-        $this->beConstructedWith($stateResolver);
+        $this->beConstructedWith($orderCheckoutStateResolver);
     }
 
     function it_is_initializable(): void
@@ -36,17 +36,17 @@ final class SkipShippingListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('onCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
     function it_resolves_order_checkout_state_after_address(
-        StateResolverInterface $stateResolver,
+        StateResolverInterface $orderCheckoutStateResolver,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
 
-        $this->onCompleted($event);
+        $this($event);
 
-        $stateResolver->resolve($order)->shouldHaveBeenCalledOnce();
+        $orderCheckoutStateResolver->resolve($order)->shouldHaveBeenCalledOnce();
     }
 }

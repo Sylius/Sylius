@@ -36,7 +36,7 @@ final class ProcessCartListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('onCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
     function it_processes_order(
@@ -45,7 +45,7 @@ final class ProcessCartListenerSpec extends ObjectBehavior
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
 
-        $this->onCompleted($event);
+        $this($event);
 
         $orderProcessor->process($order)->shouldHaveBeenCalledOnce();
     }

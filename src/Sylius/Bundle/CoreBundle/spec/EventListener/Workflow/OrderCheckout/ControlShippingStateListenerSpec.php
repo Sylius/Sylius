@@ -22,9 +22,9 @@ use Symfony\Component\Workflow\Marking;
 
 final class ControlShippingStateListenerSpec extends ObjectBehavior
 {
-    function let(StateResolverInterface $stateResolver): void
+    function let(StateResolverInterface $orderShippingStateResolver): void
     {
-        $this->beConstructedWith($stateResolver);
+        $this->beConstructedWith($orderShippingStateResolver);
     }
 
     function it_is_initializable(): void
@@ -36,17 +36,17 @@ final class ControlShippingStateListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('onCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
     function it_resolves_order_shipping_state_after_compete(
-        StateResolverInterface $stateResolver,
+        StateResolverInterface $orderShippingStateResolver,
         OrderInterface $order,
     ): void {
         $event = new CompletedEvent($order->getWrappedObject(), new Marking());
 
-        $this->onCompleted($event);
+        $this($event);
 
-        $stateResolver->resolve($order)->shouldHaveBeenCalledOnce();
+        $orderShippingStateResolver->resolve($order)->shouldHaveBeenCalledOnce();
     }
 }
