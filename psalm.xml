@@ -109,6 +109,7 @@
                 <referencedMethod name="ApiPlatform\Util\RequestParser::getQueryString" />
                 <referencedMethod name="ApiPlatform\Core\Util\RequestParser::parseRequestParams" />
                 <referencedMethod name="ApiPlatform\Util\RequestParser::parseRequestParams" />
+                <referencedMethod name="Symfony\Component\Workflow\Registry::get" />
             </errorLevel>
         </InternalMethod>
 

@@ -17,6 +17,7 @@ use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -42,7 +43,18 @@ final class MessengerDataPersisterSpec extends ObjectBehavior
         $completeOrder->setOrderTokenValue('ORDERTOKEN');
         $envelope = new Envelope($completeOrder);
 
-        $decoratedDataPersister->persist($envelope, [])->willThrow(new DelayedMessageHandlingException([new \RuntimeException('Delayed message exception')]));
+        if (Kernel::VERSION_ID >= 60305) {
+            $decoratedDataPersister
+                ->persist($envelope, [])
+                ->willThrow(
+                    new DelayedMessageHandlingException(
+                        [new \RuntimeException('Delayed message exception')],
+                        $envelope,
+                    ),
+                );
+        } else {
+            $decoratedDataPersister->persist($envelope, [])->willThrow(new DelayedMessageHandlingException([new \RuntimeException('Delayed message exception')]));
+        }
 
         $this->shouldThrow(new \RuntimeException('Delayed message exception'))->during('persist', [$envelope, []]);
     }
