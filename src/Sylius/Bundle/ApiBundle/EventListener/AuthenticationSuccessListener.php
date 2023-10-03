@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-final class AuthenticationSuccessListener
+final readonly class AuthenticationSuccessListener
 {
     public function __construct(private IriConverterInterface $iriConverter)
     {
@@ -36,7 +36,7 @@ final class AuthenticationSuccessListener
         /** @var CustomerInterface $customer */
         $customer = $user->getCustomer();
 
-        $data['customer'] = $this->iriConverter->getIriFromItem($customer);
+        $data['customer'] = $this->iriConverter->getIriFromResource($customer);
 
         $event->setData($data);
     }
