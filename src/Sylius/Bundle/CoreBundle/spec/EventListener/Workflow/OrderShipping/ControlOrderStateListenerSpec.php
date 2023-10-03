@@ -19,7 +19,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class AfterOrderShippedListenerSpec extends ObjectBehavior
+final class ControlOrderStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $stateResolver): void
     {
@@ -30,7 +30,7 @@ final class AfterOrderShippedListenerSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('onOrderShippingCompleted', [new CompletedEvent($callback->getWrappedObject(), new Marking())])
+            ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())])
         ;
     }
 
@@ -42,6 +42,6 @@ final class AfterOrderShippedListenerSpec extends ObjectBehavior
 
         $stateResolver->resolve($order)->shouldBeCalled();
 
-        $this->onOrderShippingCompleted($event);
+        $this($event);
     }
 }

@@ -18,14 +18,15 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Webmozart\Assert\Assert;
 
-final class AfterOrderShippedListener
+final class ControlOrderStateListener
 {
     public function __construct(private StateResolverInterface $orderStateResolver)
     {
     }
 
-    public function onOrderShippingCompleted(CompletedEvent $event): void
+    public function __invoke(CompletedEvent $event): void
     {
+        /** @var OrderInterface $order */
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
