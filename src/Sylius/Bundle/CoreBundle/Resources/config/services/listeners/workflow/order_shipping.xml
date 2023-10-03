@@ -19,44 +19,5 @@
             <argument type="service" id="sylius.state_resolver.order" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_shipping.completed.ship" priority="-100"/>
         </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ProcessCartListener">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.address" priority="-200"/>
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_shipping"  priority="-200"/>
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.skip_shipping" priority="-200"/>
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_payment" priority="-200"/>
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.skip_payment" priority="-200"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\CreateOrderListener">
-            <argument type="service" id="sylius.state_machine" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-400"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SaveCheckoutCompletionDateListener">
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-300"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SkipShippingListener">
-            <argument type="service" id="sylius.state_resolver.order_checkout" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.address" priority="-100"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SkipPaymentListener">
-            <argument type="service" id="sylius.state_resolver.order_checkout" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_shipping" priority="-100"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ControlPaymentStateListener">
-            <argument type="service" id="sylius.state_resolver.order_payment" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-100"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ControlShippingStateListener">
-            <argument type="service" id="sylius.state_resolver.order_shipping" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-100"/>
-        </service>
-
     </services>
 </container>
