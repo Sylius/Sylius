@@ -35,6 +35,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     /** @var bool */
     protected $tracked = false;
 
+    /** @var bool */
+    protected $wholesale = false;
+
     /** @var float|null */
     protected $weight;
 
@@ -137,6 +140,16 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     public function setTracked(bool $tracked): void
     {
         $this->tracked = $tracked;
+    }
+
+    public function isWholesale(): bool
+    {
+        return $this->wholesale;
+    }
+
+    public function setWholesale(bool $wholesale): void
+    {
+        $this->wholesale = $wholesale;
     }
 
     public function getInventoryName(): ?string

@@ -182,7 +182,12 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasUnit($itemUnit)) {
             $this->units->add($itemUnit);
 
-            ++$this->quantity;
+            if ($this->isWholesale()) {
+                $this->quantity = $itemUnit->getQuantity();
+            } else {
+                ++$this->quantity;
+            }
+
             $this->unitsTotal += $itemUnit->getTotal();
             $this->recalculateTotal();
         }

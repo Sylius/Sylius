@@ -24,6 +24,12 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
+        if ($orderItem->isWholesale()) {
+            $this->modifyWholesale($orderItem, $targetQuantity);
+
+            return;
+        }
+
         $currentQuantity = $orderItem->getQuantity();
         if (0 >= $targetQuantity || $currentQuantity === $targetQuantity) {
             return;
@@ -34,6 +40,12 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
         } elseif ($targetQuantity > $currentQuantity) {
             $this->increaseUnitsNumber($orderItem, $targetQuantity - $currentQuantity);
         }
+    }
+
+    private function modifyWholesale(OrderItemInterface $orderItem, int $targetQuantity): void
+    {
+        $this->decreaseUnitsNumber($orderItem, $targetQuantity);
+        $this->orderItemUnitFactory->createWholesaleForItem($orderItem, $targetQuantity);
     }
 
     private function increaseUnitsNumber(OrderItemInterface $orderItem, int $increaseBy): void

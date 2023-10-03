@@ -30,6 +30,10 @@ interface ProductVariantInterface extends
     VersionedInterface,
     ProductImagesAwareInterface
 {
+    public function isWholesale(): bool;
+
+    public function setWholesale(bool $wholesale): void;
+
     public function getWeight(): ?float;
 
     public function setWeight(?float $weight): void;

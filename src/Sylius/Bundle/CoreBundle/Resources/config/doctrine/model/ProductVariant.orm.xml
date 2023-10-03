@@ -18,6 +18,7 @@
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="tracked" type="boolean" />
+        <field name="wholesale" type="boolean" />
         <field name="width" column="width" type="float" nullable="true" />
         <field name="height" column="height" type="float" nullable="true" />
         <field name="depth" column="depth" type="float" nullable="true" />

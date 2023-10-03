@@ -8,6 +8,12 @@
         <div class="ui pointing above ignored label">
             {{ form_help(form.variant.tracked) }}
         </div>
+        <br /><br />
+
+        {{ form_row(form.variant.wholesale) }}
+        <div class="ui pointing above ignored label">
+            {{ form_help(form.variant.wholesale) }}
+        </div>
 
         {{ form_row(form.variant.version) }}
     {% endif %}

@@ -21,6 +21,9 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var mixed */
     protected $id;
 
+    /** @var int */
+    protected $quantity = 1;
+
     /**
      * @var Collection|AdjustmentInterface[]
      *
@@ -31,15 +34,23 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var int */
     protected $adjustmentsTotal = 0;
 
-    public function __construct(protected OrderItemInterface $orderItem)
-    {
-        $this->adjustments = new ArrayCollection();
+    public function __construct(
+        protected OrderItemInterface $orderItem,
+        int $quantity = 1,
+    ) {
+        $this->quantity = $quantity;
         $this->orderItem->addUnit($this);
+        $this->adjustments = new ArrayCollection();
     }
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
     }
 
     public function getTotal(): int
