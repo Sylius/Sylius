@@ -19,7 +19,7 @@
 <!--        <import resource="services/**/*.xml" />-->
         <import resource="services/api_payment_methods.xml" />
         <import resource="services/applicators.xml" />
-        <import resource="services/context_builders.xml" />
+        <import resource="services/command_handlers.xml" />
         <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/event_handlers.xml" />
@@ -72,23 +72,8 @@
 <!--            <tag name="sylius.api.command_data_transformer" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer">-->
-<!--            <argument type="service" id="sylius.context.channel" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer">-->
-<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
 <!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailAwareCommandDataTransformer">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />-->
-<!--            <tag name="sylius.api.command_data_transformer" />-->
-<!--        </service>-->
-
-<!--        <service id="Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer">-->
-<!--            <argument type="service" id="sylius.context.locale.composite" />-->
 <!--            <tag name="sylius.api.command_data_transformer" />-->
 <!--        </service>-->
 
@@ -177,5 +162,11 @@
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">-->
 <!--            <argument type="service" id="validator" />-->
 <!--        </service>-->
+
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\StateProcessor\MessengerProcessor" decorates="ApiPlatform\Symfony\Messenger\Processor" public="false">
+            <argument type="service" id=".inner" />
+            <argument type="tagged_iterator" tag="sylius_api.input_data_processor" />
+            <tag name="api_platform.state_processor" priority="-900" />
+        </service>
     </services>
 </container>

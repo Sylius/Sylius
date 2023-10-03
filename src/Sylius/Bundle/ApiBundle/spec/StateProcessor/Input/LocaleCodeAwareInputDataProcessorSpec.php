@@ -11,48 +11,40 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\DataTransformer;
+namespace spec\Sylius\Bundle\ApiBundle\StateProcessor\Input;
 
+use ApiPlatform\Metadata\Operation;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-final class LocaleCodeAwareInputCommandDataTransformerSpec extends ObjectBehavior
+final class LocaleCodeAwareInputDataProcessorSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext): void
     {
         $this->beConstructedWith($localeContext);
     }
 
-    function it_supports_only_locale_code_aware_interface(
-        LocaleCodeAwareInterface $localeCodeAware,
-        ResourceInterface $resource,
-    ): void {
-        $this->supportsTransformation($localeCodeAware)->shouldReturn(true);
-        $this->supportsTransformation($resource)->shouldReturn(false);
-    }
-
     function it_adds_locale_code_to_object(
         LocaleContextInterface $localeContext,
         LocaleCodeAwareInterface $command,
+        Operation $operation,
     ): void {
-        $command->getLocaleCode()->willReturn(null);
-
         $localeContext->getLocaleCode()->willReturn('en_US');
 
         $command->setLocaleCode('en_US');
 
-        $this->transform($command, '', [])->shouldReturn($command);
+        $this->process($command, $operation)->shouldReturn([$command, $operation, [], []]);
     }
 
-    function it_does_nothing_if_object_has_locale_code(
+    function it_can_process_only_locale_code_aware_interface(
         LocaleCodeAwareInterface $command,
+        ChannelCodeAwareInterface $wrongCommand,
+        Operation $operation,
     ): void {
-        $command->getLocaleCode()->willReturn('en_US');
-
-        $command->setLocaleCode('en_US')->shouldNotBeCalled();
-
-        $this->transform($command, '', [])->shouldReturn($command);
+        $this->supports($command, $operation)->shouldReturn(true);
+        $this->supports($wrongCommand, $operation)->shouldReturn(false);
     }
 }
