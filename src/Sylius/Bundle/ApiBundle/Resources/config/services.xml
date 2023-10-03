@@ -121,10 +121,10 @@
 <!--            <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">-->
-<!--            <argument type="service" id="api_platform.iri_converter" />-->
-<!--            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />-->
-<!--        </service>-->
+        <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
+            <argument type="service" id="api_platform.iri_converter" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        </service>
 
 <!--        <service id="sylius.listener.api_postgresql_driver_exception_listener" class="Sylius\Bundle\ApiBundle\EventListener\PostgreSQLDriverExceptionListener">-->
 <!--            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />-->
