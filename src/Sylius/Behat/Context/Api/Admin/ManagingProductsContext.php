@@ -284,17 +284,18 @@ final class ManagingProductsContext implements Context
     /**
      * @When I set its :attribute attribute to :value
      * @When I set its :attribute attribute to :value in :localeCode
+     * @When I do not set its :attribute attribute in :localeCode
      */
     public function iSetItsFloatAttributeTo(
         ProductAttributeInterface $attribute,
-        string $value,
+        ?string $value = null,
         string $localeCode = 'en_US'
     ): void {
         $this->client->addSubResourceData(
             'attributes',
             [
                 'attribute' => $this->iriConverter->getIriFromItem($attribute),
-                'value' => $this->getAttributeValueInProperType($attribute, $value),
+                'value' => $value !== null ? $this->getAttributeValueInProperType($attribute, $value) : null,
                 'localeCode' => $localeCode,
             ],
         );
@@ -711,6 +712,31 @@ final class ManagingProductsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Product slug must be unique.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode
+     */
+    public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attributeName, string $localeCode): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'This value should not be blank.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the :attributeName attribute in :localeCode should be longer than :number
+     */
+    public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(
+        string $attributeName,
+        string $localeCode,
+        int $number
+    ): void {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
 
