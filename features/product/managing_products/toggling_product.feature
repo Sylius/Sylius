@@ -1,5 +1,5 @@
 @managing_products
-Feature: Toggle the product
+Feature: Toggling the simple product
     In order to stop or resume the sale of a product
     As an Administrator
     I want to toggle the product
