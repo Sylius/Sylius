@@ -692,6 +692,28 @@ final class ManagingProductsContext implements Context
         );
     }
 
+    /**
+     * @Then I should be notified that I have to define product variants' prices for newly assigned channels first
+     */
+    public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'You have to define product variants\' prices for newly assigned channels first.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that slug has to be unique
+     */
+    public function iShouldBeNotifiedThatSlugHasToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product slug must be unique.',
+        );
+    }
+
     private function getAdminLocaleCode(): string
     {
         /** @var AdminUserInterface $adminUser */
