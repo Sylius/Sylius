@@ -54,7 +54,7 @@ final class TwigComponentBlockRenderer implements SupportableBlockRendererInterf
                 return $value;
             }
 
-            return $this->expressionLanguage->evaluate(substr($value, 5), $context);
+            return $this->expressionLanguage->evaluate(substr($value, 5), ['context' => $context]);
         }, $templateBlock->getComponentInputs());
 
         return $this->componentRenderer->createAndRender($templateBlock->getComponentName(), $inputs);

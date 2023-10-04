@@ -29,6 +29,7 @@ final class TemplateEventExtension extends AbstractExtension
         return [
             new TwigFunction('sylius_template_event', [$this, 'render'], ['is_safe' => ['html']]),
             new TwigFunction('twig_event', [$this, 'render'], ['is_safe' => ['html']]),
+            new TwigFunction('twig_event_name', [$this, 'createEventName']),
         ];
     }
 
@@ -42,6 +43,17 @@ final class TemplateEventExtension extends AbstractExtension
         }
         Assert::notEmpty($eventName);
 
+        $eventName = array_filter($eventName, fn (?string $eventName) => $eventName !== null);
+
         return $this->templateEventRenderer->render($eventName, $context);
+    }
+
+    public function createEventName(?string $eventName, string ...$suffixes): ?string
+    {
+        if ($eventName === null) {
+            return null;
+        }
+
+        return implode('.', array_merge([$eventName], $suffixes));
     }
 }
