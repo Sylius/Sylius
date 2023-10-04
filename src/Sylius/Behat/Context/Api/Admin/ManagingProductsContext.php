@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
-use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -146,16 +145,9 @@ final class ManagingProductsContext implements Context
     /**
      * @When I add the :productOption option to it
      */
-    public function iAddTheOptionToIt(ProductOption $productOption): void
+    public function iAddTheOptionToIt(ProductOptionInterface $productOption): void
     {
-        /** @var ProductInterface $product */
-        $product = $this->sharedStorage->get('product');
-
-        $productOptions = $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, $product->getCode()), 'options');
-
-        $productOptions[] = $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin');
-
-        $this->client->updateRequestData(['options' => $productOptions]);
+        $this->client->updateRequestData(['options' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
     }
 
     /**
