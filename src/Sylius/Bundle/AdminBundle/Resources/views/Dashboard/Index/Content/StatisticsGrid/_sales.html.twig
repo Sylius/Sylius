@@ -1,0 +1,19 @@
+{% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+<div class="col-sm-6 col-lg-3 mb-3">
+    <div class="card card-sm">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <span class="bg-gray text-black-50 avatar">
+                        {{ _icon({ icon: 'coins' }) }}
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="subheader">{{ 'sylius.ui.sales'|trans }}</div>
+                    <div class="h2 mb-0 me-2">{{ _context.statistics.total_sales }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

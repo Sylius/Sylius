@@ -11,11 +11,26 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\StatisticsComponent">
+            <argument type="service" id="Sylius\Bundle\AdminBundle\Provider\StatisticsDataProviderInterface" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.Statistics" template="@SyliusAdmin/Dashboard/Index/Component/statistics.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewCustomersComponent">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewCustomers" template="@SyliusAdmin/Dashboard/Index/Component/newCustomers.html.twig" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Dashboard\NewOrdersComponent">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="twig.component" key="SyliusAdmin.Dashboard.NewOrders" template="@SyliusAdmin/Dashboard/Index/Component/newOrders.html.twig" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\NotificationsComponent">
             <tag name="twig.component" key="SyliusAdminNavbarNotifications" template="@SyliusAdmin/Shared/Components/Navbar/notifications.html.twig" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\UserDropdown">
+        <service id="Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar\UserDropdownComponent">
             <argument type="service" id="router" />
             <argument type="service" id="translator" />
             <argument type="service" id="security.helper" />

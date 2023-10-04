@@ -10,10 +10,17 @@
 import ApexCharts from 'apexcharts';
 
 (function () {
+  // eslint-disable-next-line no-undef
+  const statisticsChart = document.querySelector('#statistics-chart');
+
+  if (!statisticsChart) {
+    return;
+  }
+
   const options = {
     series: [{
-      name: 'Inflation',
-      data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+      name: 'Sales',
+      data: JSON.parse(statisticsChart.dataset.sales),
     }],
     chart: {
       height: 350,
@@ -30,7 +37,7 @@ import ApexCharts from 'apexcharts';
     dataLabels: {
       enabled: true,
       formatter(val) {
-        return `${val}%`;
+        return `${val}`;
       },
       offsetY: -20,
       style: {
@@ -40,7 +47,7 @@ import ApexCharts from 'apexcharts';
     },
 
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      categories: JSON.parse(statisticsChart.dataset.intervals),
       position: 'top',
       axisBorder: {
         show: false,
@@ -89,11 +96,6 @@ import ApexCharts from 'apexcharts';
     },
   };
 
-  // eslint-disable-next-line no-undef
-  const ch = document.querySelector('#chart-demo');
-  if (ch) {
-    // eslint-disable-next-line no-undef
-    const chart = new ApexCharts(document.querySelector('#chart-demo'), options);
-    chart.render();
-  }
+  const chart = new ApexCharts(statisticsChart, options);
+  chart.render();
 }());

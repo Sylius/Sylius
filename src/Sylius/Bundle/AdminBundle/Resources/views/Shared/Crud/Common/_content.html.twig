@@ -1,5 +1,5 @@
-{% set main_event = _context.main_event ~ '.content' %}
-{% set fallback_event = _context.fallback_event ~ '.content' %}
+{% set main_event = twig_event_name(_context.main_event, 'content') %}
+{% set fallback_event = twig_event_name(_context.fallback_event|default(null), 'content') %}
 
 <div class="page-wrapper">
     {{ twig_event(

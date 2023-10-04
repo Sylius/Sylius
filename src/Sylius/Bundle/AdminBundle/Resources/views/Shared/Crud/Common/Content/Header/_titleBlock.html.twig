@@ -1,5 +1,5 @@
-{% set main_event = _context.main_event ~ '.title_block' %}
-{% set fallback_event = _context.fallback_event ~ '.title_block' %}
+{% set main_event = twig_event_name(_context.main_event, 'title_block') %}
+{% set fallback_event = twig_event_name(_context.fallback_event|default(null), 'title_block') %}
 
 <div class="row g-2 mt-2">
     {{ twig_event(
