@@ -629,22 +629,9 @@ final class ManagingProductsContext implements Context
         ProductInterface $product,
         string $value
     ): void {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
 
-        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
-
-        $attributes = $this->responseChecker->getValue($response, 'attributes');
-        foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === null) {
-                Assert::same((string) $attributeValue['value'], $value);
-
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(
-            sprintf('Product %s does not have attribute %s', $product->getName(), $attribute->getName())
-        );
+        $this->hasAttributeWithValueInLastResponse($attribute, $value);
     }
 
     /**
@@ -652,23 +639,13 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(ProductAttributeInterface $attribute, int $value): void
     {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
-
-        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
-        foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === null) {
-                Assert::same($attributeValue['value'], $value / 100);
-
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(sprintf('Product does not have attribute %s', $attribute->getName()));
+        $this->hasAttributeWithValueInLastResponse($attribute, (string) ($value / 100));
     }
 
     /**
      * @Then attribute :attribute of product :product should be :value
      * @Then attribute :attribute of product :product should be :value in :localeCode
+     * @Then select attribute :attribute of product :product should be :value in :localeCode
      */
     public function attributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
@@ -676,22 +653,9 @@ final class ManagingProductsContext implements Context
         string $value,
         string $localeCode = 'en_US'
     ) {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
 
-        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
-
-        $attributes = $this->responseChecker->getValue($response, 'attributes');
-        foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === $localeCode) {
-                Assert::same((string) $attributeValue['value'], $value);
-
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(
-            sprintf('Product %s does not have attribute %s', $product->getName(), $attribute->getName())
-        );
+        $this->hasAttributeWithValueInLastResponse($attribute, $value, $localeCode);
     }
 
     /**
@@ -707,33 +671,6 @@ final class ManagingProductsContext implements Context
                 );
             }
         }
-    }
-
-    /**
-     * @Then select attribute :attribute of product :product should be :value in :localeCode
-     */
-    public function selectAttributeOfProductShouldBe(
-        ProductAttributeInterface $attribute,
-        ProductInterface $product,
-        string $value,
-        string $localeCode = 'en_US'
-    ) {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
-
-        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
-
-        $attributes = $this->responseChecker->getValue($response, 'attributes');
-        foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === $localeCode) {
-                Assert::allInArray($attributeValue['value'], [$value]);
-
-                return;
-            }
-        }
-
-        throw new \InvalidArgumentException(
-            sprintf('Product %s does not have attribute %s', $product->getName(), $attribute->getName())
-        );
     }
 
     private function getAdminLocaleCode(): string
@@ -823,5 +760,40 @@ final class ManagingProductsContext implements Context
         throw new \InvalidArgumentException(
             sprintf('Value "%s" not found in attribute %s', $value, $attribute->getName())
         );
+    }
+
+    private function hasAttributeWithValueInLastResponse(
+        ProductAttributeInterface $attribute,
+        string $value,
+        ?string $localeCode = null,
+    ): void {
+        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
+
+        $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        foreach ($attributes as $attributeValue) {
+            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === $localeCode) {
+                $this->assertAttributeValue($attribute, $value, $attributeValue['value']);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(
+            sprintf('The given product does not have attribute %s', $attribute->getName())
+        );
+    }
+
+    private function assertAttributeValue(
+        ProductAttributeInterface $attribute,
+        string $expectedValue,
+        $value,
+    ): void {
+        if ($attribute->getStorageType() === 'json') {
+            Assert::allInArray($value, [$expectedValue]);
+
+            return;
+        }
+
+        Assert::same((string) $value, $expectedValue);
     }
 }
