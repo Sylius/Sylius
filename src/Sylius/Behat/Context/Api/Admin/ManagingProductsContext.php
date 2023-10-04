@@ -20,6 +20,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -343,6 +344,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I assign it to channel :channel
+     */
+    public function iAssignItToChannel(ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -553,6 +562,7 @@ final class ManagingProductsContext implements Context
     /**
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
+     * @Then /^(this product) should(?:| still) have slug "([^"]+)" in ("[^"]+" locale)$/
      */
     public function productSlugShouldBe(ProductInterface $product, string $slug, $localeCode = 'en_US'): void
     {
@@ -663,6 +673,23 @@ final class ManagingProductsContext implements Context
                 );
             }
         }
+    }
+
+    /**
+     * @Then I should not be able to edit its options
+     */
+    public function iShouldNotBeAbleToEditItsOptions(): void
+    {
+        $productOption = $this->sharedStorage->get('product_option');
+        $productOptionIri = $this->iriConverter->getIriFromItemInSection($productOption, 'admin');
+        $this->client->updateRequestData(['options' => [$productOptionIri]]);
+
+        $res = $this->client->update();
+
+        Assert::false(
+            $this->responseChecker->hasValueInCollection($res, 'options', $productOptionIri),
+            'The product options should not be changed, but they were',
+        );
     }
 
     private function getAdminLocaleCode(): string

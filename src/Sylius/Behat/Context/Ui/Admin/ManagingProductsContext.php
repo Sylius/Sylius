@@ -737,9 +737,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the option field should be disabled
+     * @Then I should not be able to edit its options
      */
-    public function theOptionFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsOptions(): void
     {
         Assert::true($this->updateConfigurableProductPage->isProductOptionsDisabled());
     }
@@ -1087,7 +1087,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( still) have slug :value in :language
+     * @Then this product should( still) have slug :value in :language (locale)
      */
     public function thisProductElementShouldHaveSlugIn($slug, $language)
     {

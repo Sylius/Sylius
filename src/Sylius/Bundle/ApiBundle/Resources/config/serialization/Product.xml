@@ -66,7 +66,6 @@
         <attribute name="options">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
-            <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="variants">
