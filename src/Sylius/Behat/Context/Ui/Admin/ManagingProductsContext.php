@@ -561,14 +561,13 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its :attribute attribute to :value
-     * @When I set its :attribute attribute to :value in :language
-     * @When I do not set its :attribute attribute in :language
+     * @When I set its :attribute attribute to :value in :localeCode
+     * @When I do not set its :attribute attribute in :localeCode
      * @When I add the :attribute attribute
      */
-    public function iSetItsAttributeTo($attribute, $value = null, $language = 'en_US')
+    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', $language);
+        $this->createSimpleProductPage->addAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**
@@ -580,11 +579,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its non-translatable :attribute attribute to :value
+     * @When I set its non-translatable :attributeName attribute to :value
      */
-    public function iSetItsNonTranslatableAttributeTo(string $attribute, string $value): void
+    public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
     {
-        $this->createSimpleProductPage->addNonTranslatableAttribute($attribute, $value);
+        $this->createSimpleProductPage->addNonTranslatableAttribute($attributeName, $value);
     }
 
     /**
@@ -756,7 +755,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should see non-translatable attribute :attribute with value :value
+     * @Then I should see non-translatable attribute :attribute with value :value%
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {

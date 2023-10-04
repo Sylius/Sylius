@@ -73,7 +73,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent) product attribute "([^"]+)"$/
+     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent|float) product attribute "([^"]+)"$/
      */
     public function theStoreHasANonTranslatableProductAttribute(string $type, string $name): void
     {
