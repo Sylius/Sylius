@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
@@ -98,7 +98,7 @@ final class LoginContext implements Context
     {
         $this->iWantToResetPassword();
         $this->iSpecifyTheEmail($email);
-        $this->addLocale($this->iriConverter->getIriFromItem($locale));
+        $this->addLocale($this->iriConverter->getIriFromResource($locale));
         $this->iResetIt();
     }
 
@@ -271,7 +271,7 @@ final class LoginContext implements Context
                 $this->shopAuthenticationTokenClient->getResponse(),
                 'customer',
             ),
-            $this->iriConverter->getIriFromItem($customer),
+            $this->iriConverter->getIriFromResource($customer),
         );
     }
 

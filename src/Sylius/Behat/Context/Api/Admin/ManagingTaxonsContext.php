@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -122,7 +122,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
-        $this->client->addRequestData('parent', $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'));
+        $this->client->addRequestData('parent', $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
     }
 
     /**
@@ -253,7 +253,7 @@ final class ManagingTaxonsContext implements Context
             $this->client->getLastResponse(),
             [
                 'code' => $taxon->getCode(),
-                'parent' => $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'),
+                'parent' => $this->iriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
             ],
         ));
     }

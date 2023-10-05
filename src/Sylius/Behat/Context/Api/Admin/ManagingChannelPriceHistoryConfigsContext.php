@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -80,7 +80,7 @@ final class ManagingChannelPriceHistoryConfigsContext implements Context
     {
         $taxonsIris = [];
         foreach ($taxons as $taxon) {
-            $taxonsIris[] = $this->iriConverter->getIriFromItem($taxon);
+            $taxonsIris[] = $this->iriConverter->getIriFromResource($taxon);
         }
 
         $this->client->addRequestData('taxonsExcludedFromShowingLowestPrice', $taxonsIris);
@@ -205,7 +205,7 @@ final class ManagingChannelPriceHistoryConfigsContext implements Context
 
     private function isResourceAdminIriInArray(ResourceInterface $resource, array $iris): bool
     {
-        $iri = $this->iriConverter->getIriFromItemInSection($resource, 'admin');
+        $iri = $this->iriConverter->getIriFromResourceInSection($resource, 'admin');
 
         return in_array($iri, $iris, true);
     }

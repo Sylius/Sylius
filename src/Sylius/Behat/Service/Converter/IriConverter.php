@@ -15,10 +15,9 @@ namespace Sylius\Behat\Service\Converter;
 
 use ApiPlatform\Core\Api\IdentifiersExtractor;
 use ApiPlatform\Core\Api\IdentifiersExtractorInterface;
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Core\Api\OperationType;
 use ApiPlatform\Core\Api\ResourceClassResolverInterface;
-use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolverInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\OperationDataProviderTrait;
@@ -34,9 +33,11 @@ use ApiPlatform\Core\Metadata\Property\Factory\PropertyNameCollectionFactoryInte
 use ApiPlatform\Core\Metadata\Resource\Factory\ResourceMetadataFactoryInterface;
 use ApiPlatform\Core\Util\AttributesExtractor;
 use ApiPlatform\Core\Util\ResourceClassInfoTrait;
+use ApiPlatform\Metadata\Operation;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Routing\Exception\ExceptionInterface as RoutingExceptionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -76,10 +77,8 @@ final class IriConverter implements IriConverterInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return object
      */
-    public function getItemFromIri(string $iri, array $context = [])
+    public function getResourceFromIri(string $iri, array $context = [], ?Operation $operation = null)
     {
         try {
             $parameters = $this->router->match($iri);
@@ -125,8 +124,12 @@ final class IriConverter implements IriConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function getIriFromItem($item, int $referenceType = null): string
-    {
+    public function getIriFromResource(
+        $item,
+        int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH,
+        ?Operation $operation = null,
+        array $context = []
+    ): ?string {
         $resourceClass = $this->getResourceClass($item, true);
 
         try {
@@ -145,7 +148,7 @@ final class IriConverter implements IriConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function getIriFromItemInSection($item, string $section, int $referenceType = null): string
+    public function getIriFromResourceInSection($item, string $section, int $referenceType = null): string
     {
         $resourceClass = $this->getResourceClass($item, true);
 
@@ -213,6 +216,6 @@ final class IriConverter implements IriConverterInterface
             $referenceType = $metadata->getAttribute('url_generation_strategy');
         }
 
-        return $referenceType ?? UrlGeneratorInterface::ABS_PATH;
+        return $referenceType ?? UrlGeneratorInterface::ABSOLUTE_PATH;
     }
 }

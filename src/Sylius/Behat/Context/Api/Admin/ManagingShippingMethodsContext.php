@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -115,7 +115,7 @@ final class ManagingShippingMethodsContext implements Context
             'code' => 'FED_EX_CARRIER',
             'position' => 0,
             'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
-            'zone' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')),
+            'zone' => $this->iriConverter->getIriFromResource($this->sharedStorage->get('zone')),
             'calculator' => 'Flat rate per shipment',
             'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]],
         ]);
@@ -183,7 +183,7 @@ final class ManagingShippingMethodsContext implements Context
     public function iDefineItForTheZone(ZoneInterface $zone = null): void
     {
         if (null !== $zone) {
-            $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+            $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));
         }
     }
 
@@ -208,7 +208,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
     /**
@@ -373,7 +373,7 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Shipping method is not assigned to %s channel', $channel->getName()),
         );
