@@ -269,6 +269,7 @@
             "src/Sylius/*/*/Tests/",
             "src/Sylius/Component/Core/Test/Tests/",
             "src/Sylius/*/*/spec/",
+            "src/Sylius/*/*/disabledSpec/",
             "src/Sylius/*/*/test/",
             "src/Sylius/*/*/phparkitect.php"
         ]
