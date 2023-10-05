@@ -21,7 +21,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="quantity" column="quantity" type="integer" />
+        <field name="quantity" column="quantity" type="integer" nullable="false" default="1" />
         <field name="unitPrice" column="unit_price" type="integer" />
         <field name="originalUnitPrice" column="original_unit_price" type="integer" nullable="true"/>
         <field name="unitsTotal" column="units_total" type="integer" />

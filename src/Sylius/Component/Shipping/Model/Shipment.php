@@ -141,7 +141,7 @@ class Shipment implements ShipmentInterface, \Stringable
         $weight = 0;
 
         foreach ($this->units as $unit) {
-            $weight += $unit->getShippable()->getShippingWeight();
+            $weight += $unit->getShippable()->getShippingWeight() * $unit->getQuantity();
         }
 
         return $weight;
@@ -152,7 +152,7 @@ class Shipment implements ShipmentInterface, \Stringable
         $volume = 0;
 
         foreach ($this->units as $unit) {
-            $volume += $unit->getShippable()->getShippingVolume();
+            $volume += $unit->getShippable()->getShippingVolume() * $unit->getQuantity();
         }
 
         return $volume;

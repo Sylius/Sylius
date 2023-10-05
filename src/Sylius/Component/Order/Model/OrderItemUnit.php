@@ -55,7 +55,7 @@ class OrderItemUnit implements OrderItemUnitInterface
 
     public function getTotal(): int
     {
-        $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
+        $total = $this->orderItem->getUnitPrice() * $this->quantity + $this->adjustmentsTotal;
 
         if ($total < 0) {
             return 0;
