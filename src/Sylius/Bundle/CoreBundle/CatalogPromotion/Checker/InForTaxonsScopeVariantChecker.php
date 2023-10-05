@@ -60,7 +60,9 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
 
         foreach ($this->taxonTreeRepository->children($taxon) as $taxonChild) {
             Assert::isInstanceOf($taxonChild, TaxonInterface::class);
-            $childrenCodes[] = (string) $taxonChild->getCode();
+            $taxonCode = $taxonChild->getCode();
+            Assert::notNull($taxonCode);
+            $childrenCodes[] = $taxonCode;
         }
 
         return $childrenCodes;
