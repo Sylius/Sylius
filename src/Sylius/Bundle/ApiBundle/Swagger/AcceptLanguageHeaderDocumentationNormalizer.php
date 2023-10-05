@@ -56,7 +56,8 @@ final class AcceptLanguageHeaderDocumentationNormalizer implements NormalizerInt
 
         foreach ($docs['paths'] as $path => $methods) {
             foreach ($methods as $methodName => $methodBody) {
-                if (is_object($methodBody) && method_exists($methodBody, 'getArrayCopy')) {
+                if (is_object($methodBody)) {
+                    Assert::methodExists($methodBody, 'getArrayCopy');
                     $methodBody = $methodBody->getArrayCopy();
                     $methodBody['parameters'][] = $acceptLanguageHeader;
 
