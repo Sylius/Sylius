@@ -1,3 +1,0 @@
-{% if sm_can(shipment, 'ship', 'sylius_shipment') %}
-    {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': order.id, 'id': shipment.id})) }}
-{% endif %}
