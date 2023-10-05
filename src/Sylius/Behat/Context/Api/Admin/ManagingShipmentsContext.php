@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -36,6 +37,7 @@ final class ManagingShipmentsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -162,7 +164,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValues($this->client->index(Resources::SHIPMENTS), [
-                'order' => $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
+                'order' => $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
                 'state' => strtolower($shippingState),
             ]),
             sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState),
@@ -293,7 +295,7 @@ final class ManagingShipmentsContext implements Context
         return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromResourceInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         );
     }
 }

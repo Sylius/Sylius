@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -34,7 +34,7 @@ final class ManagingProductsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
     ) {
@@ -152,7 +152,7 @@ final class ManagingProductsContext implements Context
 
         $productOptions = $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, $product->getCode()), 'options');
 
-        $productOptions[] = $this->iriConverter->getIriFromResourceInSection($productOption, 'admin');
+        $productOptions[] = $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin');
 
         $this->client->updateRequestData(['options' => $productOptions]);
     }
@@ -162,7 +162,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
-        $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin')]);
+        $this->client->updateRequestData(['mainTaxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin')]);
     }
 
     /**
@@ -411,7 +411,7 @@ final class ManagingProductsContext implements Context
 
         $mainTaxon = $this->responseChecker->getValue($response, 'mainTaxon');
 
-        Assert::same($mainTaxon, $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
+        Assert::same($mainTaxon, $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
     /**
@@ -464,7 +464,7 @@ final class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
+            in_array($this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }
@@ -506,7 +506,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getCollectionItemsWithValue(
                 $response,
                 'reviewSubject',
-                $this->iriConverter->getIriFromResourceInSection($product, 'admin'),
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
             ),
             'Should be no reviews, but some exist',
         );

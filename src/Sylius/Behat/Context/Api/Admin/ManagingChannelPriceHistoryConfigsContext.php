@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -31,6 +32,7 @@ final class ManagingChannelPriceHistoryConfigsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -205,7 +207,7 @@ final class ManagingChannelPriceHistoryConfigsContext implements Context
 
     private function isResourceAdminIriInArray(ResourceInterface $resource, array $iris): bool
     {
-        $iri = $this->iriConverter->getIriFromResourceInSection($resource, 'admin');
+        $iri = $this->sectionAwareIriConverter->getIriFromResourceInSection($resource, 'admin');
 
         return in_array($iri, $iris, true);
     }
