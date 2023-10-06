@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class UploadAvatarImageAction
+final readonly class UploadAvatarImageAction
 {
     public function __construct(
         private FactoryInterface $avatarImageFactory,

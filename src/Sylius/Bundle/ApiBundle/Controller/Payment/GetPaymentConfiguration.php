@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
-final class GetPaymentConfiguration
+final readonly class GetPaymentConfiguration
 {
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
