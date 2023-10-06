@@ -19,7 +19,7 @@ use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Webmozart\Assert\Assert;
 
-final class CreateOrderListener
+final class ApplyCreateTransitionOnOrderListener
 {
     public function __construct(private StateMachineInterface $compositeStateMachine)
     {
