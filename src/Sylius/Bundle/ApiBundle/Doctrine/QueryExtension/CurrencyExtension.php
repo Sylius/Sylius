@@ -21,19 +21,17 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Currency\Model\ExchangeRateInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final readonly class ExchangeRateExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final readonly class CurrencyExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(private SectionProviderInterface $sectionProvider)
     {
     }
 
-    /**
-     * @param array<array-key, mixed> $context
-     */
     public function applyToCollection(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -41,7 +39,7 @@ final readonly class ExchangeRateExtension implements QueryCollectionExtensionIn
         Operation $operation = null,
         array $context = [],
     ): void {
-        if (!is_a($resourceClass, ExchangeRateInterface::class, true)) {
+        if (!is_a($resourceClass, CurrencyInterface::class, true)) {
             return;
         }
 
@@ -50,26 +48,23 @@ final readonly class ExchangeRateExtension implements QueryCollectionExtensionIn
         }
 
         Assert::keyExists($context, ContextKeys::CHANNEL);
+        /** @var ChannelInterface $channel */
         $channel = $context[ContextKeys::CHANNEL];
 
-        $currencyParameterName = $queryNameGenerator->generateParameterName(':currency');
+        $currenciesParameterName = $queryNameGenerator->generateParameterName(':currencies');
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
+        $currencies = array_merge(
+            $channel->getCurrencies()->toArray(),
+            [$channel->getBaseCurrency()],
+        );
+
         $queryBuilder
-            ->andWhere(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq(sprintf('%s.sourceCurrency', $rootAlias), $currencyParameterName),
-                    $queryBuilder->expr()->eq(sprintf('%s.targetCurrency', $rootAlias), $currencyParameterName),
-                ),
-            )
-            ->setParameter($currencyParameterName, $channel->getBaseCurrency())
+            ->andWhere($queryBuilder->expr()->in(sprintf('%s.id', $rootAlias), $currenciesParameterName))
+            ->setParameter($currenciesParameterName, $currencies)
         ;
     }
 
-    /**
-     * @param array<array-key, mixed> $identifiers
-     * @param array<array-key, mixed> $context
-     */
     public function applyToItem(
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,

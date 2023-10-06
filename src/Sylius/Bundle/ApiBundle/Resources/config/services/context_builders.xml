@@ -23,7 +23,7 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder.inner" />
+            <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
 
@@ -32,7 +32,7 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder.inner" />
+            <argument type="service" id=".inner" />
             <argument type="service" id="sylius.context.locale" />
         </service>
 
@@ -41,7 +41,7 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder.inner" />
+            <argument type="service" id=".inner" />
         </service>
     </services>
 </container>

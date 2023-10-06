@@ -103,10 +103,6 @@
             <tag name="api_platform.subresource_data_provider" priority="10" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
-            <argument type="service" id="security.token_storage" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataProvider\VerifyCustomerAccountItemDataProvider">
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>

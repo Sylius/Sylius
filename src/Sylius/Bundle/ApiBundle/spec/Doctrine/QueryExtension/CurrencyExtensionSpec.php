@@ -16,6 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
@@ -26,10 +27,8 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Currency\Model\ExchangeRate;
-use Sylius\Component\Currency\Model\ExchangeRateInterface;
 
-final class ExchangeRateExtensionSpec extends ObjectBehavior
+final class CurrencyExtensionSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
@@ -70,7 +69,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ExchangeRateInterface::class);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, CurrencyInterface::class);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
@@ -84,7 +83,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
     ): void {
         $sectionProvider->getSection()->willReturn($adminApiSection);
 
-        $this->applyToItem($queryBuilder, $queryNameGenerator, ExchangeRateInterface::class, []);
+        $this->applyToItem($queryBuilder, $queryNameGenerator, CurrencyInterface::class, []);
 
         $queryBuilder->getRootAliases()->shouldNotHaveBeenCalled();
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
@@ -100,7 +99,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ExchangeRate::class])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, CurrencyInterface::class])
         ;
     }
 
@@ -114,7 +113,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToItem', [$queryBuilder, $queryNameGenerator, ExchangeRate::class, []])
+            ->during('applyToItem', [$queryBuilder, $queryNameGenerator, CurrencyInterface::class, []])
         ;
     }
 
@@ -124,34 +123,34 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
+        CurrencyInterface $baseCurrency,
         CurrencyInterface $currency,
         Expr $expr,
-        Expr\Orx $exprOrx,
         Expr\Comparison $exprComparison,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
-        $channel->getBaseCurrency()->willReturn($currency);
-        $queryNameGenerator->generateParameterName(':currency')->willReturn(':currency');
+        $currenciesCollection = new ArrayCollection([$currency]);
+        $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
+        $channel->getBaseCurrency()->willReturn($baseCurrency);
+        $queryNameGenerator->generateParameterName(':currencies')->willReturn(':currencies');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.sourceCurrency', ':currency')->willReturn($exprComparison);
-        $expr->eq('o.targetCurrency', ':currency')->willReturn($exprComparison);
-        $expr->orX($exprComparison, $exprComparison)->willReturn($exprOrx);
+        $expr->in('o.id', ':currencies')->willReturn($exprComparison);
 
-        $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            ExchangeRateInterface::class,
+            CurrencyInterface::class,
             null,
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
             ],
         );
 
-        $queryBuilder->setParameter(':currency', $currency)->shouldHaveBeenCalledOnce();
+        $queryBuilder->setParameter(':currencies', [$currency, $baseCurrency])->shouldHaveBeenCalledOnce();
     }
 
     function it_applies_conditions_to_item_for_non_admin_api_section(
@@ -160,27 +159,27 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
+        CurrencyInterface $baseCurrency,
         CurrencyInterface $currency,
         Expr $expr,
-        Expr\Orx $exprOrx,
         Expr\Comparison $exprComparison,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
-        $channel->getBaseCurrency()->willReturn($currency);
-        $queryNameGenerator->generateParameterName(':currency')->willReturn(':currency');
+        $currenciesCollection = new ArrayCollection([$currency]);
+        $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
+        $channel->getBaseCurrency()->willReturn($baseCurrency);
+        $queryNameGenerator->generateParameterName(':currencies')->willReturn(':currencies');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
         $queryBuilder->expr()->willReturn($expr);
-        $expr->eq('o.sourceCurrency', ':currency')->willReturn($exprComparison);
-        $expr->eq('o.targetCurrency', ':currency')->willReturn($exprComparison);
-        $expr->orX($exprComparison, $exprComparison)->willReturn($exprOrx);
+        $expr->in('o.id', ':currencies')->willReturn($exprComparison);
 
-        $queryBuilder->andWhere($exprOrx)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere($exprComparison)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToItem(
             $queryBuilder,
             $queryNameGenerator,
-            ExchangeRateInterface::class,
+            CurrencyInterface::class,
             [],
             null,
             [
@@ -188,6 +187,6 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             ],
         );
 
-        $queryBuilder->setParameter(':currency', $currency)->shouldHaveBeenCalledOnce();
+        $queryBuilder->setParameter(':currencies', [$currency, $baseCurrency])->shouldHaveBeenCalledOnce();
     }
 }
