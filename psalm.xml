@@ -37,7 +37,6 @@
 
         <DeprecatedClass>
             <errorLevel type="info">
-                <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="ApiPlatform\Core\Metadata\Extractor\XmlExtractor" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Http\Message\MessageFactory" /> <!-- deprecated in HttpMessage 1.1 -->
                 <referencedClass name="Payum\Core\Action\GatewayAwareAction" />
@@ -63,7 +62,6 @@
 
         <DeprecatedInterface>
             <errorLevel type="info">
-                <referencedClass name="ApiPlatform\Core\Api\IriConverterInterface" /> <!-- deprecated in ApiPlatform 2.7 -->
                 <referencedClass name="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" />
                 <referencedClass name="Sylius\Component\User\Security\UserPasswordEncoderInterface" />
                 <referencedClass name="Symfony\Component\Messenger\Handler\MessageHandlerInterface" /> <!-- deprecated in Symfony 6.2 -->

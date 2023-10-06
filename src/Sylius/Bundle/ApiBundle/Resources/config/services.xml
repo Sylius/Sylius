@@ -122,7 +122,7 @@
 <!--        </service>-->
 
         <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
@@ -173,7 +173,7 @@
 <!--        </service>-->
 
         <service id="sylius.listener.admin_api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
