@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Order;
@@ -23,7 +24,7 @@ use Sylius\Component\Core\Model\ProductReview;
 
 final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
 {
-    function let(ContextAwareQueryCollectionExtensionInterface $decoratedExtension): void
+    function let(QueryCollectionExtensionInterface $decoratedExtension): void
     {
         $this->beConstructedWith(
             $decoratedExtension,
@@ -35,44 +36,44 @@ final class RestrictingFilterEagerLoadingExtensionSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_current_resource_and_operation_is_restricted(
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $args = [$queryBuilder, $queryNameGenerator, Product::class, 'shop_get', []];
+        $args = [$queryBuilder, $queryNameGenerator, Product::class, new Get(name: 'shop_get')];
 
         $decoratedExtension->applyToCollection(...$args)->shouldNotBeCalled();
         $this->applyToCollection(...$args);
     }
 
     public function it_calls_filter_eager_loading_extension_if_current_resource_is_not_restricted(
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $args = [$queryBuilder, $queryNameGenerator, Order::class, 'shop_get', []];
+        $args = [$queryBuilder, $queryNameGenerator, Order::class, new Get(name: 'shop_get'), []];
 
         $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
         $this->applyToCollection(...$args);
     }
 
     public function it_calls_filter_eager_loading_extension_if_current_operation_is_not_restricted(
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $args = [$queryBuilder, $queryNameGenerator, Product::class, 'admin_get', []];
+        $args = [$queryBuilder, $queryNameGenerator, Product::class, new Get(name: 'admin_get'), []];
 
         $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
         $this->applyToCollection(...$args);
     }
 
     public function it_calls_filter_eager_loading_extension_if_current_resource_is_restricted_but_operation_is_not(
-        ContextAwareQueryCollectionExtensionInterface $decoratedExtension,
+        QueryCollectionExtensionInterface $decoratedExtension,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $args = [$queryBuilder, $queryNameGenerator, ProductReview::class, 'admin_get', []];
+        $args = [$queryBuilder, $queryNameGenerator, ProductReview::class, new Get(name: 'admin_get'), []];
 
         $decoratedExtension->applyToCollection(...$args)->shouldBeCalled();
         $this->applyToCollection(...$args);

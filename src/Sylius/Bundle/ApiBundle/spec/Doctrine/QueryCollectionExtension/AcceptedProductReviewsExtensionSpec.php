@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductInterface;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -33,10 +34,10 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $queryBuilder->andWhere('o.status = :status')->willReturn($queryBuilder);
-        $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldNotBeCalled();
+        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
+        $queryBuilder->setParameter(Argument::cetera())->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'shop_get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, \stdClass::class, new Get(name: 'shop_get'));
     }
 
     function it_does_nothing_if_operation_name_is_not_shop_get(
@@ -45,10 +46,10 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
     ): void {
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
-        $queryBuilder->andWhere('o.status = :status')->willReturn($queryBuilder);
-        $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldNotBeCalled();
+        $queryBuilder->andWhere(Argument::any())->shouldNotBeCalled();
+        $queryBuilder->setParameter(Argument::cetera())->shouldNotBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductInterface::class, 'admin_get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductReview::class, new Get(name: 'admin_get'));
     }
 
     function it_filters_accepted_product_reviews(
@@ -61,6 +62,6 @@ final class AcceptedProductReviewsExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere('o.status = :status')->willReturn($queryBuilder);
         $queryBuilder->setParameter('status', ReviewInterface::STATUS_ACCEPTED)->shouldBeCalled();
 
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductReview::class, 'shop_get', []);
+        $this->applyToCollection($queryBuilder, $queryNameGenerator, ProductReview::class, new Get(name: 'shop_get'));
     }
 }
