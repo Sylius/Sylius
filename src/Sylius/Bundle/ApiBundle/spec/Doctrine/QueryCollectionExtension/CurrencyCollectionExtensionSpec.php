@@ -13,18 +13,20 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final class LocaleCollectionExtensionSpec extends ObjectBehavior
+final class CurrencyCollectionExtensionSpec extends ObjectBehavior
 {
     function let(UserContextInterface $userContext): void
     {
@@ -37,7 +39,7 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, LocaleInterface::class, 'get', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, CurrencyInterface::class, new Get()])
         ;
     }
 
@@ -53,14 +55,14 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn($admin);
         $admin->getRoles()->willReturn(['ROLE_API_ACCESS']);
 
-        $queryBuilder->andWhere('o..id in :locales')->shouldNotBeCalled();
-        $queryBuilder->setParameter('locales', $channel->getLocales())->shouldNotBeCalled();
+        $queryBuilder->andWhere('o..id in :currencies')->shouldNotBeCalled();
+        $queryBuilder->setParameter('currencies', Argument::any())->shouldNotBeCalled();
 
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            LocaleInterface::class,
-            Request::METHOD_GET,
+            CurrencyInterface::class,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -73,26 +75,27 @@ final class LocaleCollectionExtensionSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        LocaleInterface $locale,
+        CurrencyInterface $currency,
     ): void {
-        $queryNameGenerator->generateParameterName('locales')->shouldBeCalled()->willReturn('locales');
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
         $userContext->getUser()->willReturn(null);
 
-        $queryBuilder->andWhere('o.id in (:locales)')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->andWhere('o.id in (:currencies)')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
-        $localesCollection = new ArrayCollection([$locale]);
+        $currenciesCollection = new ArrayCollection([$currency]);
 
-        $channel->getLocales()->shouldBeCalled()->willReturn($localesCollection);
+        $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
 
-        $queryBuilder->setParameter('locales', $localesCollection)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
+        $queryNameGenerator->generateParameterName('currencies')->shouldBeCalled()->willReturn('currencies');
+
+        $queryBuilder->setParameter('currencies', $currenciesCollection)->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
 
         $this->applyToCollection(
             $queryBuilder,
             $queryNameGenerator,
-            LocaleInterface::class,
-            Request::METHOD_GET,
+            CurrencyInterface::class,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
