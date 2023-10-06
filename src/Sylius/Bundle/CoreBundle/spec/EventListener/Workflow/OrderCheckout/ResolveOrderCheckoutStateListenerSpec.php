@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SkipShippingListener;
+use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderCheckoutStateListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class SkipShippingListenerSpec extends ObjectBehavior
+final class ResolveOrderCheckoutStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $orderCheckoutStateResolver): void
     {
@@ -29,7 +29,7 @@ final class SkipShippingListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(SkipShippingListener::class);
+        $this->shouldHaveType(ResolveOrderCheckoutStateListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void
@@ -39,7 +39,7 @@ final class SkipShippingListenerSpec extends ObjectBehavior
             ->during('__invoke', [new CompletedEvent($callback->getWrappedObject(), new Marking())]);
     }
 
-    function it_resolves_order_checkout_state_after_address(
+    function it_resolves_order_checkout_state_after_select_shipping(
         StateResolverInterface $orderCheckoutStateResolver,
         OrderInterface $order,
     ): void {

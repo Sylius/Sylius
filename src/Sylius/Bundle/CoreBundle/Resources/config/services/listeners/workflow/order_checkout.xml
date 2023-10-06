@@ -33,13 +33,9 @@
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.complete" priority="-300"/>
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SkipShippingListener">
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderCheckoutStateListener">
             <argument type="service" id="sylius.state_resolver.order_checkout" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.address" priority="-100"/>
-        </service>
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SkipPaymentListener">
-            <argument type="service" id="sylius.state_resolver.order_checkout" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_checkout.completed.select_shipping" priority="-100"/>
         </service>
 
