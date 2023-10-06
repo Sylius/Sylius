@@ -4,7 +4,7 @@ framework:
             type: state_machine
             marking_store:
                 type: method
-                property: ShippingState
+                property: shippingState
             supports:
                 - Sylius\Component\Core\Model\OrderInterface
             initial_marking: !php/const Sylius\Component\Core\OrderShippingStates::STATE_CART
