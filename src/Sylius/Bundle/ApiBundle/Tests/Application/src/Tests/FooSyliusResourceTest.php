@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
-use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Sylius\Bundle\ApiBundle\Application\Entity\FooSyliusResource;
 
 final class FooSyliusResourceTest extends ApiTestCase
