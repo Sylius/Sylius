@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ControlPaymentStateListener;
+use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolverOrderPaymentStateListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class ControlPaymentStateListenerSpec extends ObjectBehavior
+final class ResolverOrderPaymentStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $orderPaymentStateResolver): void
     {
@@ -29,7 +29,7 @@ final class ControlPaymentStateListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(ControlPaymentStateListener::class);
+        $this->shouldHaveType(ResolverOrderPaymentStateListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void
