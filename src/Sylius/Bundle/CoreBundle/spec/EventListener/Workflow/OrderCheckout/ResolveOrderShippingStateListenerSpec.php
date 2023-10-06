@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ControlShippingStateListener;
+use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderShippingStateListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class ControlShippingStateListenerSpec extends ObjectBehavior
+final class ResolveOrderShippingStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $orderShippingStateResolver): void
     {
@@ -29,7 +29,7 @@ final class ControlShippingStateListenerSpec extends ObjectBehavior
 
     function it_is_initializable(): void
     {
-        $this->shouldHaveType(ControlShippingStateListener::class);
+        $this->shouldHaveType(ResolveOrderShippingStateListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void
