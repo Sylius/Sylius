@@ -169,10 +169,10 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">-->
-<!--            <argument type="service" id="sylius.repository.promotion_coupon" />-->
-<!--            <argument type="service" id="sylius.order_processing.order_processor" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <argument type="service" id="sylius.order_processing.order_processor" />
+        </service>
 
         <service id="sylius.listener.admin_api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
             <argument type="service" id="api_platform.symfony.iri_converter" />

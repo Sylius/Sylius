@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInterface
+final readonly class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInterface
 {
     public function __construct(
         private PromotionCouponRepositoryInterface $promotionCouponRepository,
