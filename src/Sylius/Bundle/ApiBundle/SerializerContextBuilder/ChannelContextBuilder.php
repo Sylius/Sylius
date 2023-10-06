@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\SerializerContextBuilder;
 
-use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
+use ApiPlatform\Serializer\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
-final class ChannelContextBuilder implements SerializerContextBuilderInterface
+final readonly class ChannelContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(
         private SerializerContextBuilderInterface $decoratedContextBuilder,

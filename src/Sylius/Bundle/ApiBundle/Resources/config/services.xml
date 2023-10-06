@@ -18,6 +18,7 @@
     <imports>
 <!--        <import resource="services/**/*.xml" />-->
         <import resource="services/applicators.xml" />
+        <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/event_handlers.xml" />
         <import resource="services/event_subscribers.xml" />
