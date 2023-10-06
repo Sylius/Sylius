@@ -158,10 +158,10 @@
 
         <service id="Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface" class="Sylius\Bundle\ApiBundle\Mapper\AddressMapper" public="true"/>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">-->
-<!--            <argument type="service" id="sylius.promotion_eligibility_checker" />-->
-<!--            <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" class="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker">
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifierInterface" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sm.factory" />
