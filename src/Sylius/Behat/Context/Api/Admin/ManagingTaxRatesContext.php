@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -72,7 +72,7 @@ class ManagingTaxRatesContext implements Context
             return;
         }
 
-        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+        $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));
     }
 
     /**
@@ -86,7 +86,7 @@ class ManagingTaxRatesContext implements Context
             return;
         }
 
-        $this->client->addRequestData('category', $this->iriConverter->getIriFromItem($taxCategory));
+        $this->client->addRequestData('category', $this->iriConverter->getIriFromResource($taxCategory));
     }
 
     /**
@@ -448,7 +448,7 @@ class ManagingTaxRatesContext implements Context
     public function thisTaxRateShouldBeApplicableForTheTaxCategory(TaxRateInterface $taxRate, TaxCategoryInterface $taxCategory): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'category', $this->iriConverter->getIriFromItem($taxCategory)),
+            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'category', $this->iriConverter->getIriFromResource($taxCategory)),
             sprintf('Tax rate is not applicable for %s tax category', $taxCategory),
         );
     }
@@ -459,7 +459,7 @@ class ManagingTaxRatesContext implements Context
     public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, ZoneInterface $zone): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'zone', $this->iriConverter->getIriFromItem($zone)),
+            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'zone', $this->iriConverter->getIriFromResource($zone)),
             sprintf('Tax rate is not applicable for %s zone', $zone),
         );
     }

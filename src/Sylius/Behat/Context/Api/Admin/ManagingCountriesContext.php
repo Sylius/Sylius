@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -365,7 +365,7 @@ final class ManagingCountriesContext implements Context
         $countryFromResponse = $this->responseChecker->getResponseContent($response);
 
         foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {
-            yield $this->iriConverter->getItemFromIri($provinceFromResponse);
+            yield $this->iriConverter->getResourceFromIri($provinceFromResponse);
         }
     }
 }

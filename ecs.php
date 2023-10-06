@@ -28,7 +28,6 @@ return static function (ECSConfig $config): void {
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',
         VisibilityRequiredFixer::class => ['*Spec.php'],
         '**/var/*',
-        'src/Sylius/Behat/Service/Converter/IriConverter.php',
     ]);
     $config->ruleWithConfiguration(PhpdocSeparationFixer::class, ['groups' => [['Given', 'When', 'Then']]]);
     $config->ruleWithConfiguration(
