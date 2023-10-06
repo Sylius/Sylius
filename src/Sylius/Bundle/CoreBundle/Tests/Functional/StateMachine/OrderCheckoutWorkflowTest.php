@@ -61,13 +61,13 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForCartStatus
+     * @dataProvider availableTransitionsForCartState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_cart_status(
+    public function it_applies_all_available_transitions_for_order_checkout_cart_state(
         string $transition,
         bool $isShippingMethodSelectionRequired,
         bool $isPaymentMethodSelectionRequired,
-        string $expectedStatus,
+        string $expectedState,
     ): void {
         $this->setShippingMethodSelectionRequired($isShippingMethodSelectionRequired);
         $this->setPaymentMethodSelectionRequired($isPaymentMethodSelectionRequired);
@@ -76,15 +76,15 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForAddressedStatus
+     * @dataProvider availableTransitionsForAddressedState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_addressed_state(string $transition, string $expectedStatus): void
+    public function it_applies_all_available_transitions_for_order_checkout_addressed_state(string $transition, string $expectedState): void
     {
         $this->setShippingMethodSelectionRequired(true);
         $this->setPaymentMethodSelectionRequired(true);
@@ -93,15 +93,15 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForShippingSelectedStatus
+     * @dataProvider availableTransitionsForShippingSelectedState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_shipping_selected_state(string $transition, string $expectedStatus): void
+    public function it_applies_all_available_transitions_for_order_checkout_shipping_selected_state(string $transition, string $expectedState): void
     {
         $this->setShippingMethodSelectionRequired(true);
         $this->setPaymentMethodSelectionRequired(true);
@@ -110,15 +110,15 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForShippingSkippedStatus
+     * @dataProvider availableTransitionsForShippingSkippedState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_shipping_skipped_state(string $transition, string $expectedStatus): void
+    public function it_applies_all_available_transitions_for_order_checkout_shipping_skipped_state(string $transition, string $expectedState): void
     {
         $this->setShippingMethodSelectionRequired(true);
         $this->setPaymentMethodSelectionRequired(true);
@@ -127,15 +127,15 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForPaymentSkippedStatus
+     * @dataProvider availableTransitionsForPaymentSkippedState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_payment_skipped_state(string $transition, string $expectedStatus): void
+    public function it_applies_all_available_transitions_for_order_checkout_payment_skipped_state(string $transition, string $expectedState): void
     {
         $this->setShippingMethodSelectionRequired(true);
         $this->setPaymentMethodSelectionRequired(true);
@@ -144,15 +144,15 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
 
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
     /**
      * @test
      *
-     * @dataProvider availableTransitionsForPaymentSelectedStatus
+     * @dataProvider availableTransitionsForPaymentSelectedState
      */
-    public function it_applies_all_available_transitions_for_order_checkout_payment_selected_status(string $transition, string $expectedStatus): void
+    public function it_applies_all_available_transitions_for_order_checkout_payment_selected_state(string $transition, string $expectedState): void
     {
         $this->setShippingMethodSelectionRequired(true);
         $this->setPaymentMethodSelectionRequired(true);
@@ -160,10 +160,10 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
         $order = $this->createOrderWithCheckoutState('payment_selected');
         $stateMachine->apply($order, 'sylius_order_checkout', $transition);
 
-        $this->assertSame($expectedStatus, $order->getCheckoutState());
+        $this->assertSame($expectedState, $order->getCheckoutState());
     }
 
-    public function availableTransitionsForCartStatus(): iterable
+    public function availableTransitionsForCartState(): iterable
     {
         yield ['address', false, false, 'payment_skipped'];
         yield ['address', false, true, 'shipping_skipped'];
@@ -171,14 +171,14 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
         yield ['address', true, true, 'addressed'];
     }
 
-    public function availableTransitionsForAddressedStatus(): iterable
+    public function availableTransitionsForAddressedState(): iterable
     {
         yield ['address', 'addressed'];
         yield ['skip_shipping', 'shipping_skipped'];
         yield ['select_shipping', 'shipping_selected'];
     }
 
-    public function availableTransitionsForShippingSelectedStatus(): iterable
+    public function availableTransitionsForShippingSelectedState(): iterable
     {
         yield ['address', 'addressed'];
         yield ['select_shipping', 'shipping_selected'];
@@ -186,21 +186,21 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
         yield ['select_payment', 'payment_selected'];
     }
 
-    public function availableTransitionsForShippingSkippedStatus(): iterable
+    public function availableTransitionsForShippingSkippedState(): iterable
     {
         yield ['address', 'addressed'];
         yield ['skip_payment', 'payment_skipped'];
         yield ['select_payment', 'payment_selected'];
     }
 
-    public function availableTransitionsForPaymentSkippedStatus(): iterable
+    public function availableTransitionsForPaymentSkippedState(): iterable
     {
         yield ['address', 'addressed'];
         yield ['select_shipping', 'shipping_selected'];
         yield ['complete', 'completed'];
     }
 
-    public function availableTransitionsForPaymentSelectedStatus(): iterable
+    public function availableTransitionsForPaymentSelectedState(): iterable
     {
         yield ['address', 'addressed'];
         yield ['select_shipping', 'shipping_selected'];
