@@ -17,7 +17,9 @@
 >
     <imports>
 <!--        <import resource="services/**/*.xml" />-->
+        <import resource="services/api_payment_methods.xml" />
         <import resource="services/applicators.xml" />
+        <import resource="services/context_builders.xml" />
         <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
         <import resource="services/event_handlers.xml" />
@@ -25,6 +27,7 @@
         <import resource="services/extensions.xml" />
         <import resource="services/filters.xml" />
         <import resource="services/payments.xml" />
+        <import resource="services/providers.xml" />
         <import resource="services/state_processors.xml" />
     </imports>
 
