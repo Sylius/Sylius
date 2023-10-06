@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -111,7 +111,7 @@ final class ManagingOrdersContext implements Context
             $this->responseChecker->hasItemWithValue(
                 $this->client->getLastResponse(),
                 'customer',
-                $this->iriConverter->getIriFromItem($customer),
+                $this->iriConverter->getIriFromResource($customer),
             ),
             sprintf('There is no order for customer %s', $customer->getEmail()),
         );

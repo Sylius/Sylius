@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -30,7 +30,7 @@ final class ManagingPaymentsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private string $apiUrlPrefix,
     ) {
     }
@@ -169,7 +169,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 
@@ -181,7 +181,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItemInSection($order, 'admin'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
         ));
     }
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -60,7 +60,7 @@ final class ChannelPriceHistoryConfigDenormalizer implements ContextAwareDenorma
 
         foreach ($data['taxonsExcludedFromShowingLowestPrice'] ?? [] as $excludedTaxonIri) {
             /** @var TaxonInterface $taxon */
-            $taxon = $this->iriConverter->getItemFromIri($excludedTaxonIri);
+            $taxon = $this->iriConverter->getResourceFromIri($excludedTaxonIri);
 
             $channelPriceHistoryConfig->addTaxonExcludedFromShowingLowestPrice($taxon);
         }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -34,7 +34,7 @@ final class ManagingProductTaxonsContext implements Context
     public function iChangeThatTheProductBelongsToTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCT_TAXONS, (string) $product->getProductTaxons()->current()->getId());
-        $this->client->updateRequestData(['taxon' => $this->iriConverter->getIriFromItem($taxon)]);
+        $this->client->updateRequestData(['taxon' => $this->iriConverter->getIriFromResource($taxon)]);
         $this->client->update();
     }
 
@@ -45,8 +45,8 @@ final class ManagingProductTaxonsContext implements Context
     public function iAddTaxonToTheProduct(TaxonInterface $taxon, ProductInterface $product): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
-        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromItem($taxon));
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromResource($taxon));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
         $this->client->create();
     }
 
@@ -56,7 +56,7 @@ final class ManagingProductTaxonsContext implements Context
     public function iTryToAssignAnEmptyTaxonToTheProduct(ProductInterface $product): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
         $this->client->create();
     }
 
@@ -66,7 +66,7 @@ final class ManagingProductTaxonsContext implements Context
     public function iTryToAssignAnEmptyProductToTheTaxon(TaxonInterface $taxon): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
-        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromItem($taxon));
+        $this->client->addRequestData('taxon', $this->iriConverter->getIriFromResource($taxon));
         $this->client->create();
     }
 
@@ -83,7 +83,7 @@ final class ManagingProductTaxonsContext implements Context
         )->first();
 
         $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
-        $this->client->addRequestData('productTaxons', [$this->iriConverter->getIriFromItem($productTaxon)]);
+        $this->client->addRequestData('productTaxons', [$this->iriConverter->getIriFromResource($productTaxon)]);
         $this->client->update();
     }
 

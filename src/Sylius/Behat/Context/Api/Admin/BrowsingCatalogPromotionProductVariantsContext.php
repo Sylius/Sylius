@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -36,7 +36,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
-        $this->client->addFilter('catalogPromotion', $this->iriConverter->getIriFromItem($catalogPromotion));
+        $this->client->addFilter('catalogPromotion', $this->iriConverter->getIriFromResource($catalogPromotion));
         $this->client->filter();
     }
 
