@@ -17,6 +17,7 @@
 >
     <imports>
 <!--        <import resource="services/**/*.xml" />-->
+        <import resource="services/applicators.xml" />
         <import resource="services/state_processors.xml" />
     </imports>
 
