@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /** @experimental */
-final class OrderStateMachineTransitionApplicator implements OrderStateMachineTransitionApplicatorInterface
+final readonly class OrderStateMachineTransitionApplicator implements OrderStateMachineTransitionApplicatorInterface
 {
     public function __construct(private StateMachineFactoryInterface $stateMachineFactory)
     {
