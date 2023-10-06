@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Provider;
 
 /** @experimental */
-class LiipProductImageFilterProvider implements ProductImageFilterProviderInterface
+readonly class LiipProductImageFilterProvider implements ProductImageFilterProviderInterface
 {
     private array $filters;
 

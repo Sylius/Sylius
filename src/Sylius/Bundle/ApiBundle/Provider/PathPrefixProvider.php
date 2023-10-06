@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
-final class PathPrefixProvider implements PathPrefixProviderInterface
+final readonly class PathPrefixProvider implements PathPrefixProviderInterface
 {
     public function __construct(
         private UserContextInterface $userContext,
