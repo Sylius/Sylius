@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ApplyCreateTransitionOnOrderListener;
 use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -26,11 +25,6 @@ final class ApplyCreateTransitionOnOrderListenerSpec extends ObjectBehavior
     function let(StateMachineInterface $compositeStateMachine): void
     {
         $this->beConstructedWith($compositeStateMachine);
-    }
-
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(ApplyCreateTransitionOnOrderListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void

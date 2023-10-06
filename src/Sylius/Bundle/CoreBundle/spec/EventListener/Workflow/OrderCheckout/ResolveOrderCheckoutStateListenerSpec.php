@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderCheckoutStateListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -25,11 +24,6 @@ final class ResolveOrderCheckoutStateListenerSpec extends ObjectBehavior
     function let(StateResolverInterface $orderCheckoutStateResolver): void
     {
         $this->beConstructedWith($orderCheckoutStateResolver);
-    }
-
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(ResolveOrderCheckoutStateListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void

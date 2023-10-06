@@ -14,18 +14,12 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\SaveCheckoutCompletionDateListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
 final class SaveCheckoutCompletionDateListenerSpec extends ObjectBehavior
 {
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(SaveCheckoutCompletionDateListener::class);
-    }
-
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void
     {
         $this

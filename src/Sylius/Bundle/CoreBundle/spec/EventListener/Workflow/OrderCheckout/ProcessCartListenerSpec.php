@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ProcessCartListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
@@ -25,11 +24,6 @@ final class ProcessCartListenerSpec extends ObjectBehavior
     function let(OrderProcessorInterface $orderProcessor): void
     {
         $this->beConstructedWith($orderProcessor);
-    }
-
-    function it_is_initializable(): void
-    {
-        $this->shouldHaveType(ProcessCartListener::class);
     }
 
     function it_throws_an_exception_on_non_supported_subject(\stdClass $callback): void

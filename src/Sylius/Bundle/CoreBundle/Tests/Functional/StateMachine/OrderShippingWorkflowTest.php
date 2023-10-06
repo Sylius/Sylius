@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\StateMachine;
+namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
