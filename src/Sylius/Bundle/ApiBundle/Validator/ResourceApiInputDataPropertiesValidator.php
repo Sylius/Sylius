@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @experimental */
-final class ResourceApiInputDataPropertiesValidator implements ResourceInputDataPropertiesValidatorInterface
+final readonly class ResourceApiInputDataPropertiesValidator implements ResourceInputDataPropertiesValidatorInterface
 {
     public function __construct(private ValidatorInterface $validator)
     {
