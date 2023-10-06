@@ -15,7 +15,7 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ControlOrderStateListener">
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderStateListener">
             <argument type="service" id="sylius.state_resolver.order" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_shipping.completed.ship" priority="-100"/>
         </service>

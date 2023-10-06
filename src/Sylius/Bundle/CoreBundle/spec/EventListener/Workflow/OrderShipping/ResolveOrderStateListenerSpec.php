@@ -19,7 +19,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class ControlOrderStateListenerSpec extends ObjectBehavior
+final class ResolveOrderStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $stateResolver): void
     {
