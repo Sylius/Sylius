@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class DeleteOrderItemAction
+final readonly class DeleteOrderItemAction
 {
     public function __construct(
         private MessageBusInterface $commandBus,

@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @experimental */
-final class RemoveCatalogPromotionAction
+final readonly class RemoveCatalogPromotionAction
 {
     public function __construct(
         private CatalogPromotionRemovalProcessorInterface $catalogPromotionRemovalProcessor,
