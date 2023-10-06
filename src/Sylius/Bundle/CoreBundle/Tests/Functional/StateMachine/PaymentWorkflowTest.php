@@ -44,7 +44,7 @@ final class PaymentWorkflowTest extends KernelTestCase
      *
      * @dataProvider availableTransitions
      */
-    public function it_applies_all_available_transitions_for_create_state(
+    public function it_applies_all_available_transitions(
         string $fromState,
         string $transition,
         string $toState,
@@ -52,7 +52,7 @@ final class PaymentWorkflowTest extends KernelTestCase
         $this->payment->setState($fromState);
 
         $stateMachine = $this->getStateMachine();
-        $stateMachine->apply($this->payment, 'sylius_payment', $transition);
+        $stateMachine->apply($this->payment, PaymentTransitions::GRAPH, $transition);
 
         $this->assertSame($toState, $this->payment->getState());
     }
