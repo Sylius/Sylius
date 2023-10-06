@@ -29,7 +29,6 @@ return static function (ECSConfig $config): void {
         VisibilityRequiredFixer::class => ['*Spec.php'],
         ErrorSuppressionFixer::class => 'src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/BackwardsCompatibility/CancelOrderStateMachineCallbackPass.php',
         '**/var/*',
-        'src/Sylius/Behat/Service/Converter/IriConverter.php',
     ]);
     $config->ruleWithConfiguration(PhpdocSeparationFixer::class, ['groups' => [['Given', 'When', 'Then']]]);
     $config->ruleWithConfiguration(
