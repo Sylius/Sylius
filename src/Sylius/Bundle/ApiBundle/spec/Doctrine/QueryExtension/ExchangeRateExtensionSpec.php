@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
@@ -38,7 +39,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ExchangeRate::class, 'get', []])
+            ->during('applyToCollection', [$queryBuilder, $queryNameGenerator, ExchangeRate::class, new Get(), []])
         ;
     }
 
@@ -58,7 +59,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             ExchangeRate::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -83,7 +84,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             ExchangeRate::class,
             [],
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -119,7 +120,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             $queryBuilder,
             $queryNameGenerator,
             ExchangeRate::class,
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
@@ -156,7 +157,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
             $queryNameGenerator,
             ExchangeRate::class,
             [],
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,

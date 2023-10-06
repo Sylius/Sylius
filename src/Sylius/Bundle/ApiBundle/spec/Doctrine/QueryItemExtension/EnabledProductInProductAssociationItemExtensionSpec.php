@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension;
 
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -45,7 +46,7 @@ final class EnabledProductInProductAssociationItemExtensionSpec extends ObjectBe
             $queryNameGenerator,
             ProductVariantInterface::class,
             [],
-            Request::METHOD_GET,
+            new Get(),
         );
     }
 
@@ -65,7 +66,7 @@ final class EnabledProductInProductAssociationItemExtensionSpec extends ObjectBe
             $queryNameGenerator,
             ProductAssociationInterface::class,
             [],
-            Request::METHOD_GET,
+            new Get(),
         );
     }
 
@@ -94,7 +95,7 @@ final class EnabledProductInProductAssociationItemExtensionSpec extends ObjectBe
             $queryNameGenerator,
             ProductAssociationInterface::class,
             [],
-            Request::METHOD_GET,
+            new Get(),
             [
                 ContextKeys::CHANNEL => $channel->getWrappedObject(),
                 ContextKeys::HTTP_REQUEST_METHOD_TYPE => Request::METHOD_GET,
