@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Sylius Sp. z o.o.
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,15 +16,34 @@ namespace Sylius\Bundle\ShopBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\Field;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
-use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Webmozart\Assert\Assert;
 
-final class ProductGrid extends AbstractGrid
+final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterface
 {
+    private ?Request $resquest;
+
+    /**
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     */
     public function __construct(
         private string $resourceClass,
+        private ChannelContextInterface $channelContext,
+        private TaxonRepositoryInterface $taxonRepository,
+        private LocaleContextInterface $localeContext,
+        RequestStack $requestStatck,
+        private bool  $includeAllDescendants,
     ) {
+        $this->resquest = $requestStatck->getMainRequest();
     }
 
     public static function getName(): string
@@ -34,15 +53,20 @@ final class ProductGrid extends AbstractGrid
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
+        Assert::notNull($this->resquest);
+        $localeCode = $this->localeContext->getLocaleCode();
+
         $gridBuilder
             ->setRepositoryMethod('createShopListQueryBuilder', [
-               'channel' => "expr:service('sylius.context.channel').getChannel()",
-               'taxon' => "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug(\$slug, service('sylius.context.locale').getLocaleCode()))",
-               'locale' => "expr:service('sylius.context.locale').getLocaleCode()",
-               'sorting' => "expr:service('request_stack').getCurrentRequest().get('sorting', [])",
-               'includeAllDescendants' => "expr:parameter('sylius_shop.product_grid.include_all_descendants')",
+                $this->channelContext->getChannel(),
+                $this->taxonRepository->findOneBySlug(
+                    $this->resquest->attributes->get('slug'),
+                    $localeCode,
+                ),
+                $localeCode,
+                $this->resquest->query->get('sorting') ?? [],
+                $this->includeAllDescendants,
             ])
-            ->setDriverOption('class', $this->resourceClass)
             ->orderBy('position', 'asc')
             ->setLimits([
                 9,
@@ -66,10 +90,14 @@ final class ProductGrid extends AbstractGrid
                     ->setSortable(true, 'channelPricing.price'),
             )
             ->addFilter(
-                Filter::create('search', 'shop_string')
+                StringFilter::create('search', ['translation.name'])
                     ->setLabel(false)
-                    ->addOption('fields', ['translation.name'])
-                    ->addFormOption('type', 'contains'),
+                    ->addFormOption('type', 'contains')
             );
+    }
+
+    public function getResourceClass(): string
+    {
+        return $this->resourceClass;
     }
 }
