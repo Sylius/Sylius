@@ -59,6 +59,13 @@
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="handleUserVerification" />
         </service>
 
+        <service id="sylius.listener.already_logged_in_user_registration" class="Sylius\Bundle\ShopBundle\EventListener\AlreadyLoggedInUserRegistrationListener">
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="router" />
+            <tag name="kernel.event_listener" event="sylius.customer.initialize_register" method="handleAlreadyConnectedUser" />
+        </service>
+
         <service id="sylius.listener.order_integrity_checker" class="Sylius\Bundle\ShopBundle\EventListener\OrderIntegrityChecker">
             <argument type="service" id="router" />
             <argument type="service" id="sylius.manager.order" />

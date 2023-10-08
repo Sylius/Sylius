@@ -32,6 +32,7 @@ sylius_shop_register:
             redirect:
                 route: sylius_shop_register_thank_you
             flash: sylius.customer.register
+            logged_in_route: sylius_shop_account_dashboard
 
 sylius_shop_register_after_checkout:
     path: /register-after-checkout/{tokenValue}
