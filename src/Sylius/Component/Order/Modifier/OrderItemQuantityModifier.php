@@ -24,7 +24,7 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
 
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
-        if ($orderItem->isWholesale()) {
+        if ($orderItem->isWholesaleVariant()) {
             $this->modifyWholesale($orderItem, $targetQuantity);
 
             return;

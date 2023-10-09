@@ -69,5 +69,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function getAdjustmentsTotalRecursively(?string $type = null): int;
 
+    public function isWholesaleVariant(): bool;
+
     public function isWholesale(): bool;
 }

@@ -34,11 +34,16 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var int */
     protected $adjustmentsTotal = 0;
 
+    /** @var bool */
+    protected $wholesale = false;
+
     public function __construct(
         protected OrderItemInterface $orderItem,
         int $quantity = 1,
+        bool $wholesale = false
     ) {
         $this->quantity = $quantity;
+        $this->wholesale = $wholesale;
         $this->orderItem->addUnit($this);
         $this->adjustments = new ArrayCollection();
     }
@@ -159,5 +164,10 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();
         }
+    }
+
+    public function isWholesale(): bool
+    {
+        return $this->wholesale;
     }
 }
