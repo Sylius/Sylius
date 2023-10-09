@@ -26,17 +26,19 @@ final class ProductDataPersister implements ContextAwareDataPersisterInterface
     ) {
     }
 
+    /** @param array<mixed> $context */
     public function supports($data, array $context = []): bool
     {
         return $data instanceof ProductInterface;
     }
 
-    /** @param ProductInterface $data */
+    /** @param array<mixed> $context */
     public function persist($data, array $context = [])
     {
         return $this->decoratedDataPersister->persist($data, $context);
     }
 
+    /** @param array<mixed> $context */
     public function remove($data, array $context = [])
     {
         try {
