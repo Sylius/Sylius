@@ -16,7 +16,7 @@ sylius_grid:
                     label: sylius.ui.image
                     path: .
                     options:
-                        template: "@SyliusAdmin/Product/Grid/Field/image.html.twig"
+                        template: "@SyliusAdmin/Product/Grid/Field/productImage.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -36,7 +36,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
             filters:
                 search:
                     type: string

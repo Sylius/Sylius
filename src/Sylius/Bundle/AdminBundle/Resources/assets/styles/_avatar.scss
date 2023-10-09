@@ -11,6 +11,11 @@
     &.avatar {
         background-color: $gray-100;
     }
+
+    &.avatar-l {
+        --tblr-avatar-size: 3rem;
+    }
+
     &.alert {
         background-color: #fff;
     }

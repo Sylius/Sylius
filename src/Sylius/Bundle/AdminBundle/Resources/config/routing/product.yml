@@ -3,7 +3,7 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: "@SyliusAdmin\\Shared\\Crud"
-        except: ['index', 'update']
+        except: ['update']
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -15,20 +15,6 @@ sylius_admin_product:
             index:
                 icon: cube
     type: sylius.resource
-
-sylius_admin_product_index:
-    path: /products/
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product::indexAction
-        _sylius:
-            section: admin
-            permission: true
-            grid: sylius_admin_product
-            template: "@SyliusAdmin/Product/index.html.twig"
-            vars:
-                subheader: sylius.ui.manage_your_product_catalog
-                icon: cube
 
 sylius_admin_product_update:
     path: /products/{id}/edit

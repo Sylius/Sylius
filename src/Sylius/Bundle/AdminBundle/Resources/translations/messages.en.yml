@@ -70,6 +70,7 @@ sylius:
                 <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         lowest_price_before_discount: 'Lowest price before discount'
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
+        no_main_taxon: 'no main taxon'
         no_results: No results found
         no_results_adjust_your_search: 'Adjust your search and try again.'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
