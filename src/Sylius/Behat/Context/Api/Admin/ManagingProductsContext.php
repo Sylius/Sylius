@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -35,6 +36,7 @@ final class ManagingProductsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
@@ -275,7 +277,7 @@ final class ManagingProductsContext implements Context
         $this->client->addSubResourceData(
         'attributes',
             [
-                'attribute' => $this->iriConverter->getIriFromItem($attribute),
+                'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => $this->getAttributeValueInProperType($attribute, $value),
             ],
         );
@@ -294,7 +296,7 @@ final class ManagingProductsContext implements Context
         $this->client->addSubResourceData(
             'attributes',
             [
-                'attribute' => $this->iriConverter->getIriFromItem($attribute),
+                'attribute' => $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin'),
                 'value' => $value !== null ? $this->getAttributeValueInProperType($attribute, $value) : null,
                 'localeCode' => $localeCode,
             ],
@@ -306,7 +308,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsAttribute(ProductAttributeInterface $attribute): void
     {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
+        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $content = $this->client->getContent();
         foreach ($content['attributes'] as $key => $attributeValue) {
@@ -337,7 +339,7 @@ final class ManagingProductsContext implements Context
         $this->client->addSubResourceData(
             'attributes',
             [
-                'attribute' => $this->iriConverter->getIriFromItem($attribute),
+                'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => [$this->getSelectAttributeValueUuidByChoiceValue($attribute, $value)],
                 'localeCode' => $localeCode,
             ],
@@ -349,7 +351,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAssignItToChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
     /**
@@ -668,7 +670,7 @@ final class ManagingProductsContext implements Context
     {
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $this->iriConverter->getIriFromItemInSection($attribute, 'admin')) {
+            if ($attributeValue['attribute'] === $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin')) {
                 throw new \InvalidArgumentException(
                     sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName())
                 );
@@ -682,7 +684,7 @@ final class ManagingProductsContext implements Context
     public function iShouldNotBeAbleToEditItsOptions(): void
     {
         $productOption = $this->sharedStorage->get('product_option');
-        $productOptionIri = $this->iriConverter->getIriFromItemInSection($productOption, 'admin');
+        $productOptionIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin');
         $this->client->updateRequestData(['options' => [$productOptionIri]]);
 
         $res = $this->client->update();
@@ -834,7 +836,7 @@ final class ManagingProductsContext implements Context
         string $value,
         ?string $localeCode = null,
     ): void {
-        $attributeIri = $this->iriConverter->getIriFromItemInSection($attribute, 'admin');
+        $attributeIri = $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {
