@@ -19,7 +19,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class ResolverOrderPaymentStateListenerSpec extends ObjectBehavior
+final class ResolveOrderPaymentStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $orderPaymentStateResolver): void
     {

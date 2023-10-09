@@ -18,7 +18,7 @@ use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Webmozart\Assert\Assert;
 
-final class ResolverOrderPaymentStateListener
+final class ResolveOrderPaymentStateListener
 {
     public function __construct(protected StateResolverInterface $orderPaymentStateResolver)
     {
