@@ -39,7 +39,7 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 
     public function createWholesaleForItem(OrderItemInterface $orderItem, int $quantity): OrderItemUnitInterface
     {
-        return new $this->className($orderItem, true, $quantity);
+        return new $this->className($orderItem, $quantity);
     }
 
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface

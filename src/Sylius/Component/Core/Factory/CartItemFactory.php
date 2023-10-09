@@ -41,7 +41,11 @@ final class CartItemFactory implements CartItemFactoryInterface
     {
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->createNew();
+
+        /** @var ProductVariantInterface $variant */
         $variant = $this->variantResolver->getVariant($product);
+        $cartItem->setWholesale($variant->isWholesale());
+
         Assert::nullOrIsInstanceOf($variant, ProductVariantInterface::class);
         $cartItem->setVariant($variant);
 

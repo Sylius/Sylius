@@ -152,9 +152,4 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
             0,
         );
     }
-
-    public function isWholesaleVariant(): bool
-    {
-        return $this->variant->isWholesale();
-    }
 }

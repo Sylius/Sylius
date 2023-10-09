@@ -45,6 +45,10 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function setImmutable(bool $immutable): void;
 
+    public function isWholesale(): bool;
+
+    public function setWholesale(bool $wholesale): void;
+
     /**
      * @return Collection|OrderItemUnitInterface[]
      *
@@ -68,6 +72,4 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function removeAdjustmentsRecursively(?string $type = null): void;
 
     public function getAdjustmentsTotalRecursively(?string $type = null): int;
-
-    public function isWholesale(): bool;
 }

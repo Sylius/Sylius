@@ -38,6 +38,9 @@ class OrderItem implements OrderItemInterface
     /** @var bool */
     protected $immutable = false;
 
+    /** @var bool */
+    protected $wholesale = false;
+
     /**
      * @var Collection|OrderItemUnitInterface[]
      *
@@ -168,6 +171,16 @@ class OrderItem implements OrderItemInterface
         $this->immutable = $immutable;
     }
 
+    public function isWholesale(): bool
+    {
+        return $this->wholesale;
+    }
+
+    public function setWholesale(bool $wholesale): void
+    {
+        $this->wholesale = $wholesale;
+    }
+
     public function getUnits(): Collection
     {
         return $this->units;
@@ -179,14 +192,16 @@ class OrderItem implements OrderItemInterface
             throw new \LogicException('This order item unit is assigned to a different order item.');
         }
 
-        if (!$this->hasUnit($itemUnit)) {
+        if ($this->isWholesale()) {
+            $this->units->clear();
             $this->units->add($itemUnit);
+            $this->quantity = $itemUnit->getQuantity();
 
-            if ($itemUnit->isWholesale()) {
-                $this->quantity = $itemUnit->getQuantity();
-            } else {
-                ++$this->quantity;
-            }
+            $this->unitsTotal += $itemUnit->getTotal();
+            $this->recalculateTotal();
+        } else if (!$this->hasUnit($itemUnit)) {
+            $this->units->add($itemUnit);
+            ++$this->quantity;
 
             $this->unitsTotal += $itemUnit->getTotal();
             $this->recalculateTotal();
@@ -334,10 +349,5 @@ class OrderItem implements OrderItemInterface
             $this->adjustmentsTotal -= $adjustment->getAmount();
             $this->recalculateTotal();
         }
-    }
-
-    public function isWholesale(): bool
-    {
-        return $this->units->count() === 1 && $this->units->first()->isWholesale();
     }
 }
