@@ -132,9 +132,6 @@
             <subresourceOperation name="attributes_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products/{code}/attributes</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">shop:product:read</attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 

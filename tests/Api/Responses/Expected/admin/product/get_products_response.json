@@ -13,7 +13,9 @@
             "options": [
                 "\/api\/v2\/admin\/product-options\/COLOR"
             ],
-            "variants": [],
+            "variants": [
+                "\/api\/v2\/admin\/product-variants\/CAP_RED"
+            ],
             "mainTaxon": null,
             "productTaxons": [],
             "channels": [

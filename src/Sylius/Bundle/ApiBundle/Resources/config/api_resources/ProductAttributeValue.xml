@@ -42,6 +42,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_products_attributes_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute_value:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="attribute" />
         <property name="name" writable="false" />
