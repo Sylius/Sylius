@@ -55,8 +55,27 @@ final class CartItemFactorySpec extends ObjectBehavior
     ): void {
         $decoratedFactory->createNew()->willReturn($cartItem);
         $variantResolver->getVariant($product)->willReturn($productVariant);
+        $productVariant->isWholesale()->willReturn(false);
 
         $cartItem->setVariant($productVariant)->shouldBeCalled();
+        $cartItem->setWholesale(false)->shouldBeCalledOnce();
+
+        $this->createForProduct($product)->shouldReturn($cartItem);
+    }
+
+    function it_creates_a_cart_item_and_assigns_a_wholesale_product_variant(
+        FactoryInterface $decoratedFactory,
+        ProductVariantResolverInterface $variantResolver,
+        OrderItemInterface $cartItem,
+        ProductInterface $product,
+        ProductVariantInterface $productVariant,
+    ): void {
+        $decoratedFactory->createNew()->willReturn($cartItem);
+        $variantResolver->getVariant($product)->willReturn($productVariant);
+        $productVariant->isWholesale()->willReturn(true);
+
+        $cartItem->setVariant($productVariant)->shouldBeCalled();
+        $cartItem->setWholesale(true)->shouldBeCalledOnce();
 
         $this->createForProduct($product)->shouldReturn($cartItem);
     }

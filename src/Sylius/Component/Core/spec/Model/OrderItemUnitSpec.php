@@ -30,6 +30,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
+        $orderItem->isWholesale()->willReturn(false);
         $this->beConstructedWith($orderItem);
     }
 
@@ -63,7 +64,8 @@ final class OrderItemUnitSpec extends ObjectBehavior
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
-        $this->beConstructedWith($orderItem, true, 150);
+        $orderItem->isWholesale()->willReturn(true);
+        $this->beConstructedWith($orderItem, 150);
 
         $this->isWholesale()->shouldReturn(true);
         $this->getQuantity()->shouldReturn(150);

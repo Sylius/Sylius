@@ -496,11 +496,11 @@ final class OrderItemSpec extends ObjectBehavior
     function it_adds_wholesale_unit(
         OrderItemUnitInterface $orderItemUnit,
     ): void {
-        $orderItemUnit->isWholesale()->willReturn(true);
         $orderItemUnit->getQuantity()->willReturn(3);
         $orderItemUnit->getTotal()->willReturn(500);
         $orderItemUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
+        $this->setWholesale(true);
         $this->addUnit($orderItemUnit);
 
         $this->getQuantity()->shouldReturn(3);
