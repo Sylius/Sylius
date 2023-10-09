@@ -20,6 +20,7 @@ use ApiPlatform\Metadata\Operation;
 
 /**
  * Wrapper between the legacy iri converter and the new one
+ *
  * @experimental
  */
 final class IriConverter implements LegacyIriConverterInterface, IriConverterInterface
