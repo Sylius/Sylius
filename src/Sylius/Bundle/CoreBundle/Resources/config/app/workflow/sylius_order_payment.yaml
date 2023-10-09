@@ -13,8 +13,8 @@ framework:
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AUTHORIZED
-                - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_PAID
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_CANCELLED
+                - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_PAID
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PAID
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_REFUNDED
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_REFUNDED
@@ -32,18 +32,18 @@ framework:
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
                     to: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AUTHORIZED
+                !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_CANCEL:
+                    from:
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AUTHORIZED
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
+                    to: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_CANCELLED
                 !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY:
                     from: 
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_PAID
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
                     to: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_PAID
-                !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_CANCEL:
-                    from: 
-                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
-                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AUTHORIZED
-                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
-                    to: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_CANCELLED
                 !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_PAY:
                     from: 
                         - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
