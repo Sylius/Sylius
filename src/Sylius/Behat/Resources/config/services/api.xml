@@ -13,24 +13,24 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-<!--        <service id="sylius.behat.api_platform_client" class="Sylius\Behat\Client\ApiPlatformClient" abstract="true">-->
-<!--            <argument type="service" id="test.client" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--            <argument type="service" id="sylius.behat.request_factory" />-->
-<!--            <argument>%sylius.api.authorization_header%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.api_platform_client" class="Sylius\Behat\Client\ApiPlatformClient" abstract="true">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.request_factory" />
+            <argument>%sylius.api.authorization_header%</argument>
+        </service>
 
 <!--        <service id="sylius.behat.api_platform_client.shop" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">-->
 <!--            <argument>shop</argument>-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.api_platform_client.admin" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">-->
-<!--            <argument>admin</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.api_platform_client.admin" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>admin</argument>
+        </service>
 
-<!--        <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">-->
-<!--            <argument type="service" id="test.client" />-->
-<!--        </service>-->
+        <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">
+            <argument type="service" id="test.client" />
+        </service>
 
 <!--        <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">-->
 <!--            <argument type="service" id="test.client" />-->
@@ -46,11 +46,11 @@
 <!--            <argument>shop</argument>-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.content_type_guide" class="Sylius\Behat\Client\ContentTypeGuide" />-->
+        <service id="sylius.behat.content_type_guide" class="Sylius\Behat\Client\ContentTypeGuide" />
 
-<!--        <service id="sylius.behat.request_factory" class="Sylius\Behat\Client\RequestFactory">-->
-<!--            <argument type="service" id="sylius.behat.content_type_guide"/>-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.request_factory" class="Sylius\Behat\Client\RequestFactory">
+            <argument type="service" id="sylius.behat.content_type_guide"/>
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
     </services>
 </container>
