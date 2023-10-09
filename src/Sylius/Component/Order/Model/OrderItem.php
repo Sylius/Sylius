@@ -182,7 +182,7 @@ class OrderItem implements OrderItemInterface
         if (!$this->hasUnit($itemUnit)) {
             $this->units->add($itemUnit);
 
-            if ($this->isWholesale()) {
+            if ($itemUnit->isWholesale()) {
                 $this->quantity = $itemUnit->getQuantity();
             } else {
                 ++$this->quantity;
@@ -334,11 +334,6 @@ class OrderItem implements OrderItemInterface
             $this->adjustmentsTotal -= $adjustment->getAmount();
             $this->recalculateTotal();
         }
-    }
-
-    public function isWholesaleVariant(): bool
-    {
-        return $this->variant->isWholesale();
     }
 
     public function isWholesale(): bool

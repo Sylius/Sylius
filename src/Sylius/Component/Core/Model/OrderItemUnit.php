@@ -29,10 +29,10 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 
     public function __construct(
         OrderItemInterface $orderItem,
+        bool $wholesale = false,
         int $quantity = 1,
-        bool $wholesale = false
     ) {
-        parent::__construct($orderItem, $quantity, $wholesale);
+        parent::__construct($orderItem, $wholesale, $quantity);
 
         $this->createdAt = new \DateTime();
     }

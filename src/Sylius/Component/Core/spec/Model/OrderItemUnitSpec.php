@@ -53,6 +53,22 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
+    function it_is_not_wholesale_by_default(): void
+    {
+        $this->isWholesale()->shouldReturn(false);
+        $this->getQuantity()->shouldReturn(1);
+    }
+
+    function it_is_wholesale(OrderItemInterface $orderItem): void
+    {
+        $orderItem->getUnitPrice()->willReturn(1000);
+        $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
+        $this->beConstructedWith($orderItem, true, 150);
+
+        $this->isWholesale()->shouldReturn(true);
+        $this->getQuantity()->shouldReturn(150);
+    }
+
     function its_shipment_is_mutable(ShipmentInterface $shipment): void
     {
         $this->setShipment($shipment);

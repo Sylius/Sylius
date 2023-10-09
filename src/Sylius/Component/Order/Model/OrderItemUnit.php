@@ -39,8 +39,8 @@ class OrderItemUnit implements OrderItemUnitInterface
 
     public function __construct(
         protected OrderItemInterface $orderItem,
+        bool $wholesale = false,
         int $quantity = 1,
-        bool $wholesale = false
     ) {
         $this->quantity = $quantity;
         $this->wholesale = $wholesale;

@@ -133,6 +133,17 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getShippingHeight()->shouldReturn(110.00);
     }
 
+    function it_is_not_wholesale_by_default(): void
+    {
+        $this->isWholesale()->shouldReturn(false);
+    }
+
+    function it_is_wholesale_when_configured(): void
+    {
+        $this->setWholesale(true);
+        $this->isWholesale()->shouldReturn(true);
+    }
+
     function it_has_no_code_by_default(): void
     {
         $this->getCode()->shouldReturn(null);

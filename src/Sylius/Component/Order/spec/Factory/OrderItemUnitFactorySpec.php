@@ -37,6 +37,15 @@ final class OrderItemUnitFactorySpec extends ObjectBehavior
         $this->shouldThrow(UnsupportedMethodException::class)->during('createNew');
     }
 
+    function it_creates_a_new_wholesale_order_item_unit_with_given_order_item(
+        OrderItemInterface $orderItem,
+        OrderItemUnitInterface $orderItemUnit,
+    ): void {
+        $orderItemUnit->getOrderItem()->willReturn($orderItem);
+
+        $this->createWholesaleForItem($orderItem, 10)->shouldBeSameAs($orderItemUnit);
+    }
+
     function it_creates_a_new_order_item_unit_with_given_order_item(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $orderItemUnit,

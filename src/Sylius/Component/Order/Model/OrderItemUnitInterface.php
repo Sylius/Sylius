@@ -22,4 +22,6 @@ interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
     public function getOrderItem(): OrderItemInterface;
 
     public function isWholesale(): bool;
+
+    public function getQuantity(): int;
 }

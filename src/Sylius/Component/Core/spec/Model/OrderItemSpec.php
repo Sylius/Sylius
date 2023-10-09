@@ -35,9 +35,11 @@ final class OrderItemSpec extends ObjectBehavior
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
         $orderItemUnit1->getOrderItem()->willReturn($this);
+        $orderItemUnit1->isWholesale()->willReturn(false);
         $orderItemUnit2->getTotal()->willReturn(1120);
         $orderItemUnit2->getTaxTotal()->willReturn(120);
         $orderItemUnit2->getOrderItem()->willReturn($this);
+        $orderItemUnit2->isWholesale()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -54,9 +56,11 @@ final class OrderItemSpec extends ObjectBehavior
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
         $orderItemUnit1->getOrderItem()->willReturn($this);
+        $orderItemUnit1->isWholesale()->willReturn(false);
         $orderItemUnit2->getTotal()->willReturn(1120);
         $orderItemUnit2->getTaxTotal()->willReturn(120);
         $orderItemUnit2->getOrderItem()->willReturn($this);
+        $orderItemUnit2->isWholesale()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -83,6 +87,7 @@ final class OrderItemSpec extends ObjectBehavior
 
         $unit->getOrderItem()->willReturn($this);
         $unit->getTotal()->willReturn(9000);
+        $unit->isWholesale()->willReturn(false);
         $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
 
         $this->addUnit($unit);
@@ -105,17 +110,46 @@ final class OrderItemSpec extends ObjectBehavior
 
         $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-1667);
         $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->isWholesale()->willReturn(false);
+        $firstUnit->getQuantity()->willReturn(1);
         $firstUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
         $secondUnit->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(400);
         $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-3333);
         $secondUnit->getTotal()->willReturn(10000);
+        $secondUnit->isWholesale()->willReturn(false);
+        $secondUnit->getQuantity()->willReturn(1);
         $secondUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
         $this->addUnit($firstUnit->getWrappedObject());
         $this->addUnit($secondUnit->getWrappedObject());
 
         $this->getSubtotal()->shouldReturn(15000);
+    }
+
+    function its_subtotal_consists_of_sum_of_units_multiplied_by_units_quantities(
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
+    ): void {
+        $this->setUnitPrice(10000);
+
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-1667);
+        $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->isWholesale()->willReturn(true);
+        $firstUnit->getQuantity()->willReturn(2);
+        $firstUnit->getOrderItem()->willReturn($this->getWrappedObject());
+
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(400);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-3333);
+        $secondUnit->getTotal()->willReturn(10000);
+        $secondUnit->isWholesale()->willReturn(true);
+        $secondUnit->getQuantity()->willReturn(3);
+        $secondUnit->getOrderItem()->willReturn($this->getWrappedObject());
+
+        $this->addUnit($firstUnit->getWrappedObject());
+        $this->addUnit($secondUnit->getWrappedObject());
+
+        $this->getSubtotal()->shouldReturn(45000);
     }
 
     function it_has_no_variant_by_default(): void

@@ -81,7 +81,9 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $unit2->getOrderItem()->willReturn($orderItem2);
 
         $unit1->getTotal()->willReturn(500);
+        $unit1->getQuantity()->willReturn(1);
         $unit2->getTotal()->willReturn(500);
+        $unit2->getQuantity()->willReturn(1);
 
         $orderItem1->getVariant()->willReturn($productVariant1);
         $orderItem2->getVariant()->willReturn($productVariant2);
@@ -131,6 +133,86 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
     }
 
+    function it_applies_percentage_discount_on_wholesale_unit(
+        FactoryInterface $adjustmentFactory,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        ChannelInterface $channel,
+        AdjustmentInterface $promotionAdjustment1,
+        AdjustmentInterface $promotionAdjustment2,
+        Collection $originalItems,
+        Collection $units,
+        OrderInterface $order,
+        OrderItemInterface $orderItem1,
+        OrderItemUnitInterface $unit1,
+        OrderItemUnitInterface $unit2,
+        PromotionInterface $promotion,
+        OrderItemInterface $orderItem2,
+        ProductVariantInterface $productVariant1,
+        ProductVariantInterface $productVariant2,
+        ChannelPricingInterface $channelPricing1,
+        ChannelPricingInterface $channelPricing2,
+    ): void {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $unit2->getOrderItem()->willReturn($orderItem2);
+
+        $unit1->getTotal()->willReturn(500);
+        $unit1->getQuantity()->willReturn(2);
+        $unit2->getTotal()->willReturn(500);
+        $unit2->getQuantity()->willReturn(3);
+
+        $orderItem1->getVariant()->willReturn($productVariant1);
+        $orderItem2->getVariant()->willReturn($productVariant2);
+        $orderItem1->getOrder()->willReturn($order);
+        $orderItem2->getOrder()->willReturn($order);
+
+        $productVariant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
+        $productVariant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
+
+        $channelPricing1->getMinimumPrice()->willReturn(0);
+        $channelPricing2->getMinimumPrice()->willReturn(0);
+
+        $order->getItems()->willReturn($originalItems);
+        $originalItems->toArray()->willReturn([$orderItem1]);
+
+        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
+        $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+        $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+
+        $orderItem1->getQuantity()->willReturn(2);
+        $orderItem1->getUnits()->willReturn($units);
+        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+
+        $orderItem1->getUnitPrice()->willReturn(500);
+
+        $promotion->getName()->willReturn('Test promotion');
+        $promotion->getCode()->willReturn('TEST_PROMOTION');
+        $promotion->getAppliesToDiscounted()->willReturn(true);
+
+        $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
+
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-200)->shouldBeCalled();
+
+        $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
+
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-300)->shouldBeCalled();
+
+        $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
+
+        $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
+        $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
+
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
+    }
+
     function it_applies_discount_only_to_non_discounted_units_if_promotion_does_not_apply_to_discounted_ones(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -167,6 +249,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $variant1->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection());
         $unit1->getOrderItem()->willReturn($orderItem1);
         $unit1->getTotal()->willReturn(500);
+        $unit1->getQuantity()->willReturn(1);
 
         $orderItem2->getQuantity()->willReturn(1);
         $orderItem2->getUnitPrice()->willReturn(500);
@@ -176,6 +259,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $variant2->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion]));
         $unit2->getOrderItem()->willReturn($orderItem2);
         $unit2->getTotal()->willReturn(500);
+        $unit2->getQuantity()->willReturn(1);
 
         $variant1->getChannelPricingForChannel($channel)->willReturn($channelPricing1);
         $variant2->getChannelPricingForChannel($channel)->willReturn($channelPricing2);
