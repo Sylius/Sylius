@@ -65,6 +65,8 @@ api_platform:
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
         Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException: 409
     defaults:
+        normalization_context:
+            skip_null_values: false
         pagination_client_items_per_page: true
 
 lexik_jwt_authentication:
