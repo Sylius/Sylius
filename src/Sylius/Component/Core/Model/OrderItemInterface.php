@@ -39,6 +39,4 @@ interface OrderItemInterface extends BaseOrderItemInterface, VersionedInterface
     public function getSubtotal(): int;
 
     public function getFullDiscountedUnitPrice(): int;
-
-    public function isWholesale(): bool;
 }

@@ -335,4 +335,9 @@ class OrderItem implements OrderItemInterface
             $this->recalculateTotal();
         }
     }
+
+    public function isWholesale(): bool
+    {
+        return $this->units->count() === 1 && $this->units->isWholesale();
+    }
 }
