@@ -18,14 +18,14 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final readonly class ExchangeRateExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
+final readonly class ShopExchangeRateExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
     public function __construct(private SectionProviderInterface $sectionProvider)
     {
@@ -41,11 +41,31 @@ final readonly class ExchangeRateExtension implements QueryCollectionExtensionIn
         Operation $operation = null,
         array $context = [],
     ): void {
+        $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);
+    }
+
+    public function applyToItem(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $identifiers,
+        Operation $operation = null,
+        array $context = [],
+    ): void {
+        $this->applyCondition($queryBuilder, $queryNameGenerator, $resourceClass, $context);
+    }
+
+    private function applyCondition(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $context,
+    ): void {
         if (!is_a($resourceClass, ExchangeRateInterface::class, true)) {
             return;
         }
 
-        if ($this->sectionProvider->getSection() instanceof AdminApiSection) {
+        if (!$this->sectionProvider->getSection() instanceof ShopApiSection) {
             return;
         }
 
@@ -64,20 +84,5 @@ final readonly class ExchangeRateExtension implements QueryCollectionExtensionIn
             )
             ->setParameter($currencyParameterName, $channel->getBaseCurrency())
         ;
-    }
-
-    /**
-     * @param array<array-key, mixed> $identifiers
-     * @param array<array-key, mixed> $context
-     */
-    public function applyToItem(
-        QueryBuilder $queryBuilder,
-        QueryNameGeneratorInterface $queryNameGenerator,
-        string $resourceClass,
-        array $identifiers,
-        Operation $operation = null,
-        array $context = [],
-    ): void {
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operation, $context);
     }
 }

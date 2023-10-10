@@ -29,7 +29,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRate;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 
-final class ExchangeRateExtensionSpec extends ObjectBehavior
+final class ShopExchangeRateExtensionSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
@@ -118,7 +118,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_applies_conditions_to_collection_for_non_admin_api_section(
+    function it_applies_conditions_to_collection_for_shop_api_section(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
@@ -154,7 +154,7 @@ final class ExchangeRateExtensionSpec extends ObjectBehavior
         $queryBuilder->setParameter(':currency', $currency)->shouldHaveBeenCalledOnce();
     }
 
-    function it_applies_conditions_to_item_for_non_admin_api_section(
+    function it_applies_conditions_to_item_for_shop_api_section(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,

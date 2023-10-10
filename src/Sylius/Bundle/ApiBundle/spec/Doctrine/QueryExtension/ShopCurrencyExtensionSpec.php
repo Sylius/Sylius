@@ -26,9 +26,10 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
-final class CurrencyExtensionSpec extends ObjectBehavior
+final class ShopCurrencyExtensionSpec extends ObjectBehavior
 {
     function let(SectionProviderInterface $sectionProvider): void
     {
@@ -117,21 +118,23 @@ final class CurrencyExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_applies_conditions_to_collection_for_non_admin_api_section(
+    function it_applies_conditions_to_collection_for_shop_api_section(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        CurrencyInterface $baseCurrency,
-        CurrencyInterface $currency,
+        Currency $baseCurrency,
+        Currency $currency,
         Expr $expr,
         Expr\Comparison $exprComparison,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
-        $currenciesCollection = new ArrayCollection([$currency]);
+        $baseCurrency->__toString()->willReturn('baseCode');
+        $currency->__toString()->willReturn('code');
+        $currenciesCollection = new ArrayCollection([$currency->getWrappedObject()]);
         $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
-        $channel->getBaseCurrency()->willReturn($baseCurrency);
+        $channel->getBaseCurrency()->willReturn($baseCurrency->getWrappedObject());
         $queryNameGenerator->generateParameterName(':currencies')->willReturn(':currencies');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
@@ -153,21 +156,23 @@ final class CurrencyExtensionSpec extends ObjectBehavior
         $queryBuilder->setParameter(':currencies', [$currency, $baseCurrency])->shouldHaveBeenCalledOnce();
     }
 
-    function it_applies_conditions_to_item_for_non_admin_api_section(
+    function it_applies_conditions_to_item_for_shop_api_section(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
         ChannelInterface $channel,
-        CurrencyInterface $baseCurrency,
-        CurrencyInterface $currency,
+        Currency $baseCurrency,
+        Currency $currency,
         Expr $expr,
         Expr\Comparison $exprComparison,
     ): void {
         $sectionProvider->getSection()->willReturn($shopApiSection);
-        $currenciesCollection = new ArrayCollection([$currency]);
+        $baseCurrency->__toString()->willReturn('baseCode');
+        $currency->__toString()->willReturn('code');
+        $currenciesCollection = new ArrayCollection([$currency->getWrappedObject()]);
         $channel->getCurrencies()->shouldBeCalled()->willReturn($currenciesCollection);
-        $channel->getBaseCurrency()->willReturn($baseCurrency);
+        $channel->getBaseCurrency()->willReturn($baseCurrency->getWrappedObject());
         $queryNameGenerator->generateParameterName(':currencies')->willReturn(':currencies');
 
         $queryBuilder->getRootAliases()->willReturn(['o']);

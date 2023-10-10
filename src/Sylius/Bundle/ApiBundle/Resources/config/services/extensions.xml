@@ -78,7 +78,7 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.collection" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\CurrencyExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ShopCurrencyExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
@@ -124,7 +124,7 @@
 <!--            <tag name="api_platform.doctrine.orm.query_extension.item" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ExchangeRateExtension">
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ShopExchangeRateExtension">
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
