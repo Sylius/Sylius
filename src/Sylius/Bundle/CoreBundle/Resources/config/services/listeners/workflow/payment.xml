@@ -23,7 +23,7 @@
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.authorize" priority="-100" />
         </service>
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderPaymentListener">
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\Payment\ProcessOrderListener">
             <argument type="service" id="sylius.order_processing.order_payment_processor.after_checkout" />
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.fail" priority="-100" />
             <tag name="kernel.event_listener" event="workflow.sylius_payment.completed.cancel" priority="-100" />

@@ -20,7 +20,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
 
-final class ProcessOrderPaymentListenerSpec extends ObjectBehavior
+final class ProcessOrderListenerSpec extends ObjectBehavior
 {
     function let(OrderProcessorInterface $orderProcessor): void
     {
