@@ -579,6 +579,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I select :value value for the :attribute attribute
+     */
+    public function iSelectValueForTheAttribute(string $value, string $attribute): void
+    {
+        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, '');
+    }
+
+    /**
      * @When I set its non-translatable :attributeName attribute to :value
      */
     public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
@@ -625,11 +633,21 @@ final class ManagingProductsContext implements Context
     /**
      * @Then select attribute :attributeName of product :product should be :value in :language
      */
-    public function itsSelectAttributeShouldBe($attributeName, ProductInterface $product, $value, $language = 'en_US')
+    public function itsSelectAttributeShouldBeIn($attributeName, ProductInterface $product, $value, $language = 'en_US')
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
         Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $language), $value);
+    }
+
+    /**
+     * @Then select attribute :attributeName of product :product should be :value
+     */
+    public function itsSelectAttributeShouldBe(string $attributeName, ProductInterface $product, string $value): void
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, ''), $value);
     }
 
     /**

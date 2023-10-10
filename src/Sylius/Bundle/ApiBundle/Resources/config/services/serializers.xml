@@ -50,6 +50,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueNormalizer">
             <argument type="service" id="sylius.locale_provider.channel_based" />
             <argument>%locale%</argument>

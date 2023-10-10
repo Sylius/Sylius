@@ -19,3 +19,13 @@ Feature: Adding a new product with a float attribute
         Then I should be notified that it has been successfully created
         And the product "Smartphone" should appear in the store
         And non-translatable attribute "Display Size" of product "Smartphone" should be 12.5
+
+    @api @no-ui
+    Scenario: Trying to add an invalid float attribute to product
+        When I want to create a new configurable product
+        And I specify its code as "44_MAGNUM"
+        And I name it "44 Magnum" in "English (United States)"
+        And I set the invalid string value of the non-translatable "Display Size" attribute to "twelve"
+        And I try to add it
+        Then I should be notified that the value of the "Display Size" attribute has invalid type
+        And product with code "44_MAGNUM" should not be added

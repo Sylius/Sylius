@@ -31,3 +31,13 @@ Feature: Adding a new product with an integer attribute
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Weight" of product "44 Magnum" should be 10
+
+    @api @no-ui
+    Scenario: Trying to add an invalid integer attribute to product
+        When I want to create a new configurable product
+        And I specify its code as "44_MAGNUM"
+        And I name it "44 Magnum" in "English (United States)"
+        And I set the invalid string value of the non-translatable "Weight" attribute to "ten"
+        And I try to add it
+        Then I should be notified that the value of the "Weight" attribute has invalid type
+        And product with code "44_MAGNUM" should not be added

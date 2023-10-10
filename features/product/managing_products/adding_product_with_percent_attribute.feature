@@ -10,8 +10,7 @@ Feature: Adding a new product with a percent attribute
         And the store has a non-translatable percent product attribute "Accuracy"
         And I am logged in as an administrator
 
-    @ui @javascript
-#    @api
+    @ui @javascript @api
     Scenario: Adding a percent attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
@@ -22,8 +21,7 @@ Feature: Adding a new product with a percent attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Awesomeness rating" of product "44 Magnum" should be 80
 
-    @ui @javascript
-#    @api
+    @ui @javascript @api
     Scenario: Adding a non-translatable percent attribute to product
         When I want to create a new configurable product
         And I specify its code as "44_MAGNUM"
@@ -33,3 +31,13 @@ Feature: Adding a new product with a percent attribute
         Then I should be notified that it has been successfully created
         And the product "44 Magnum" should appear in the store
         And non-translatable attribute "Accuracy" of product "44 Magnum" should be 95
+
+    @api @no-ui
+    Scenario: Trying to add an invalid percent attribute to product
+        When I want to create a new configurable product
+        And I specify its code as "44_MAGNUM"
+        And I name it "44 Magnum" in "English (United States)"
+        And I set the invalid string value of the non-translatable "Accuracy" attribute to "ninety"
+        And I try to add it
+        Then I should be notified that the value of the "Accuracy" attribute has invalid type
+        And product with code "44_MAGNUM" should not be added

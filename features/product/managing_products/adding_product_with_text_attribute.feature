@@ -46,3 +46,13 @@ Feature: Adding a new product with text attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Overall length" of product "44 Magnum" should be "30.5 cm"
         And product "44 Magnum" should not have a "Gun caliber" attribute
+
+    @api @no-ui
+    Scenario: Trying to add an invalid text attribute to product
+        When I want to create a new configurable product
+        And I specify its code as "44_MAGNUM"
+        And I name it "44 Magnum" in "English (United States)"
+        And I set the invalid integer value of the non-translatable "Author" attribute to 5
+        And I try to add it
+        Then I should be notified that the value of the "Author" attribute has invalid type
+        And product with code "44_MAGNUM" should not be added

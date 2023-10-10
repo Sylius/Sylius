@@ -284,6 +284,34 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set the invalid integer value of the non-translatable :attribute attribute to :value
+     */
+    public function iSetTheInvalidIntegerValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, int $value): void
+    {
+        $this->client->addSubResourceData(
+        'attributes',
+            [
+                'attribute' => $this->iriConverter->getIriFromResource($attribute),
+                'value' => $value,
+            ],
+        );
+    }
+
+    /**
+     * @When I set the invalid string value of the non-translatable :attribute attribute to :value
+     */
+    public function iSetTheInvalidStringValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, string $value): void
+    {
+        $this->client->addSubResourceData(
+        'attributes',
+            [
+                'attribute' => $this->iriConverter->getIriFromResource($attribute),
+                'value' => $value,
+            ],
+        );
+    }
+
+    /**
      * @When I set its :attribute attribute to :value
      * @When I set its :attribute attribute to :value in :localeCode
      * @When I do not set its :attribute attribute in :localeCode
@@ -331,7 +359,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I select :value value in :localeCode for the :attribute attribute
      */
-    public function iSelectValueForTheAttribute(
+    public function iSelectValueInForTheAttribute(
         string $value,
         string $localeCode,
         ProductAttributeInterface $attribute
@@ -342,6 +370,22 @@ final class ManagingProductsContext implements Context
                 'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => [$this->getSelectAttributeValueUuidByChoiceValue($attribute, $value)],
                 'localeCode' => $localeCode,
+            ],
+        );
+    }
+
+    /**
+     * @When I select :value value for the :attribute attribute
+     */
+    public function iSelectValueForTheAttribute(
+        string $value,
+        ProductAttributeInterface $attribute
+    ): void {
+        $this->client->addSubResourceData(
+            'attributes',
+            [
+                'attribute' => $this->iriConverter->getIriFromResource($attribute),
+                'value' => [$this->getSelectAttributeValueUuidByChoiceValue($attribute, $value)],
             ],
         );
     }
@@ -628,6 +672,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then non-translatable attribute :attribute of product :product should be :value
+     * @Then select attribute :attribute of product :product should be :value
      */
     public function nonTranslatableAttributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
@@ -739,6 +784,18 @@ final class ManagingProductsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('This value is too short. It should have %s characters or more.', $number),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the value of the :attributeName attribute has invalid type
+     */
+    public function iShouldBeNotifiedThatTheValueOfTheAttributeHasInvalidType(
+        string $attributeName,
+    ): void {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('The value of attribute "%s" has the invalid type', $attributeName),
         );
     }
 
