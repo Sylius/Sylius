@@ -176,3 +176,9 @@
     - Transition `authorize`:
         - From states: [`new`, `processing`]
         - To state: `authorized`
+    - Transition `complete`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `completed`
+    - Transition `cancel`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `cancelled`

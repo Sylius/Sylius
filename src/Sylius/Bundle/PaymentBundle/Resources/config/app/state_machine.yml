@@ -28,13 +28,13 @@ winzou_state_machine:
                 from: [new, processing]
                 to: authorized
             complete:
-                from: [new, processing]
+                from: [new, processing, authorized]
                 to: completed
             fail:
                 from: [new, processing]
                 to: failed
             cancel:
-                from: [new, processing]
+                from: [new, processing, authorized]
                 to: cancelled
             refund:
                 from: [completed]
