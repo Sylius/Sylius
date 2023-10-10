@@ -11,6 +11,7 @@ winzou_state_machine:
             cart: ~
             new: ~
             processing: ~
+            authorized: ~
             completed: ~
             failed: ~
             cancelled: ~
@@ -23,6 +24,9 @@ winzou_state_machine:
             process:
                 from: [new]
                 to: processing
+            authorize:
+                from: [new, processing]
+                to: authorized
             complete:
                 from: [new, processing]
                 to: completed
