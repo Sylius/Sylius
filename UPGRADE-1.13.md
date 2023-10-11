@@ -179,6 +179,12 @@
     - Transition `complete`:
         - From states: [`new`, `processing`, `authorized`]
         - To state: `completed`
+    - Transition `fail`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `failed`
     - Transition `cancel`:
         - From states: [`new`, `processing`, `authorized`]
         - To state: `cancelled`
+    - Transition `void`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `unknown`

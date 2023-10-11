@@ -31,7 +31,7 @@ winzou_state_machine:
                 from: [new, processing, authorized]
                 to: completed
             fail:
-                from: [new, processing]
+                from: [new, processing, authorized]
                 to: failed
             cancel:
                 from: [new, processing, authorized]
@@ -40,5 +40,5 @@ winzou_state_machine:
                 from: [completed]
                 to: refunded
             void:
-                from: [new, processing]
+                from: [new, processing, authorized]
                 to: unknown
