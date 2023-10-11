@@ -296,7 +296,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_channel_pricing_and_translation_of_a_product_variant(): void
+    public function it_updates_the_existing_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -317,23 +317,36 @@ final class ProductVariantsTest extends JsonApiTestCase
             uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
             server: $header,
             content: json_encode([
+                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
                 'channelPricings' => ['WEB' => [
                     '@id' => sprintf('/api/v2/admin/channel-pricings/%s', $productVariant->getChannelPricingForChannel($channel)->getId()),
                     'price' => 3000,
                     'originalPrice' => 4000,
-                    'minimumPrice' => 210,
+                    'minimumPrice' => 500,
                 ]],
                 'translations' => [
                     'pl_PL' => [
                         '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('pl_PL')->getId()),
                         'locale' => 'pl_PL',
-                        'name' => 'Pomarańczowy kubek',
+                        'name' => 'Czerwony kubek',
                     ],
                     'de_DE' => [
                         'locale' => 'de_DE',
-                        'name' => 'Orange Tasse',
+                        'name' => 'Rote Tasse',
                     ],
-                ]
+                ],
+                'enabled' => false,
+                'position' => 2,
+                'tracked' => false,
+                'onHold' => 0,
+                'onHand' => 0,
+                'weight' => 50.5,
+                'width' => 50.5,
+                'height' => 50.5,
+                'depth' => 50.5,
+                'taxCategory' => '/api/v2/admin/tax-categories/special',
+                'shippingCategory' => '/api/v2/admin/shipping-categories/special',
+                'shippingRequired' => false,
             ], JSON_THROW_ON_ERROR),
         );
 

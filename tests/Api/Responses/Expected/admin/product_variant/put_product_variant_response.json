@@ -5,7 +5,7 @@
     "code": "MUG",
     "product": "\/api\/v2\/admin\/products\/MUG_SW",
     "optionValues":[
-        "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE"
+        "\/api\/v2\/admin\/product-option-values\/COLOR_RED"
     ],
     "channelPricings": {
         "WEB": {
@@ -15,7 +15,7 @@
             "price": 3000,
             "originalPrice": 4000,
             "lowestPriceBeforeDiscount": 2000,
-            "minimumPrice": 210
+            "minimumPrice": 500
         }
     },
     "translations": {
@@ -23,29 +23,29 @@
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
-            "name": "Orange Tasse",
+            "name": "Rote Tasse",
             "locale": "de_DE"
         },
         "pl_PL": {
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
-            "name": "Pomarańczowy kubek",
+            "name": "Czerwony kubek",
             "locale": "pl_PL"
         }
     },
-    "enabled": true,
-    "position": 1,
-    "tracked": true,
+    "enabled": false,
+    "position": 2,
+    "tracked": false,
     "onHold": 0,
-    "onHand": 10,
-    "weight": 100.5,
-    "width": 100.5,
-    "height": 100.5,
-    "depth": 100.5,
-    "taxCategory": "\/api\/v2\/admin\/tax-categories\/default",
-    "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/default",
-    "shippingRequired": true,
+    "onHand": 0,
+    "weight": 50.5,
+    "width": 50.5,
+    "height": 50.5,
+    "depth": 50.5,
+    "taxCategory": "\/api\/v2\/admin\/tax-categories\/special",
+    "shippingCategory": "\/api\/v2\/admin\/shipping-categories\/special",
+    "shippingRequired": false,
     "createdAt": @date@,
     "updatedAt": @date@
 }
