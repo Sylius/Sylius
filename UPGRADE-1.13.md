@@ -173,3 +173,20 @@
     - State name change:
         - From: `void`
         - To: `unknown`
+
+1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, with the following transition:
+    - Transition `authorize`:
+        - From states: [`new`, `processing`]
+        - To state: `authorized`
+    - Transition `complete`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `completed`
+    - Transition `fail`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `failed`
+    - Transition `cancel`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `cancelled`
+    - Transition `void`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `unknown`
