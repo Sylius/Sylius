@@ -87,7 +87,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_product_variant_enabled_by_default(): void
+    public function it_creates_a_product_variant_with_all_optional_data(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -103,9 +103,9 @@ final class ProductVariantsTest extends JsonApiTestCase
             uri: '/api/v2/admin/product-variants',
             server: $header,
             content: json_encode([
-                'code' => 'MUG_3',
-                'position' => 1,
+                'code' => 'MUG_RED',
                 'product' => '/api/v2/admin/products/MUG_SW',
+                'optionValues' => ['/api/v2/admin/product-option-values/COLOR_RED'],
                 'channelPricings' => ['WEB' => [
                     'channelCode' => 'WEB',
                     'price' => 4000,
@@ -115,9 +115,21 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         'locale' => 'en_US',
-                        'name' => 'Yellow mug',
+                        'name' => 'Red mug',
                     ],
                 ],
+                'enabled' => false,
+                'position' => 1,
+                'tracked' => true,
+                'onHold' => 5,
+                'onHand' => 10,
+                'weight' => 100.5,
+                'width' => 100.5,
+                'height' => 100.5,
+                'depth' => 100.5,
+                'taxCategory' => '/api/v2/admin/tax-categories/default',
+                'shippingCategory' => '/api/v2/admin/shipping-categories/default',
+                'shippingRequired' => true,
             ], JSON_THROW_ON_ERROR),
         );
 
@@ -129,7 +141,7 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_disabled_product_variant(): void
+    public function it_creates_a_product_variant_enabled_by_default(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
@@ -146,21 +158,17 @@ final class ProductVariantsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'MUG_3',
-                'position' => 1,
                 'product' => '/api/v2/admin/products/MUG_SW',
                 'channelPricings' => ['WEB' => [
                     'channelCode' => 'WEB',
                     'price' => 4000,
-                    'originalPrice' => 5000,
-                    'minimumPrice' => 2000,
                 ]],
-                'enabled' => false,
             ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_variant/post_product_variant_disabled_response',
+            'admin/product_variant/post_product_variant_enabled_by_default_response',
             Response::HTTP_CREATED,
         );
     }

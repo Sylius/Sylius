@@ -11,13 +11,13 @@
             "@type": "ChannelPricing",
             "channelCode": "WEB",
             "price": 4000,
-            "originalPrice": 5000,
-            "minimumPrice": 2000,
+            "originalPrice": null,
+            "minimumPrice": 0,
             "lowestPriceBeforeDiscount": null
         }
     },
     "translations": [],
-    "enabled": false,
+    "enabled": true,
     "position": 3,
     "tracked": false,
     "onHold": 0,
