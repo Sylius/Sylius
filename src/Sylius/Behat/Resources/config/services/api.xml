@@ -20,9 +20,9 @@
             <argument>%sylius.api.authorization_header%</argument>
         </service>
 
-<!--        <service id="sylius.behat.api_platform_client.shop" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">-->
-<!--            <argument>shop</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.api_platform_client.shop" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
+            <argument>shop</argument>
+        </service>
 
         <service id="sylius.behat.api_platform_client.admin" class="Sylius\Behat\Client\ApiPlatformClient" parent="sylius.behat.api_platform_client">
             <argument>admin</argument>
