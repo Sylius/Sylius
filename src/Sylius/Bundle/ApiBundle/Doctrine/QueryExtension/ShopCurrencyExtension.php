@@ -81,6 +81,7 @@ final readonly class ShopCurrencyExtension implements QueryCollectionExtensionIn
 
         $queryBuilder
             ->andWhere($queryBuilder->expr()->in(sprintf('%s.id', $rootAlias), $currenciesParameterName))
-            ->setParameter($currenciesParameterName, $currencies);
+            ->setParameter($currenciesParameterName, $currencies)
+        ;
     }
 }

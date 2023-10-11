@@ -90,7 +90,7 @@ final class ShopCurrencyExtensionSpec extends ObjectBehavior
         $queryBuilder->andWhere()->shouldNotHaveBeenCalled();
     }
 
-    function it_throws_an_exception_during_apply_collection_if_context_has_not_channel(
+    function it_throws_an_exception_during_apply_collection_if_context_has_no_channel(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
@@ -104,7 +104,7 @@ final class ShopCurrencyExtensionSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_during_apply_item_if_context_has_not_channel(
+    function it_throws_an_exception_during_apply_item_if_context_has_no_channel(
         SectionProviderInterface $sectionProvider,
         ShopApiSection $shopApiSection,
         QueryBuilder $queryBuilder,
