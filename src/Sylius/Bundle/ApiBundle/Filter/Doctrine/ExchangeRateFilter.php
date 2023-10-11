@@ -30,15 +30,15 @@ final class ExchangeRateFilter extends AbstractFilter
         Operation $operation = null,
         array $context = [],
     ): void {
-        if ($property === 'currencyCode') {
+        if ('currencyCode' === $property) {
             $rootAlias = $queryBuilder->getRootAliases()[0];
-            $codeParameterName = $queryNameGenerator->generateParameterName('code');
+            $codeParameterName = $queryNameGenerator->generateParameterName(':code');
             $queryBuilder
                 ->innerJoin(sprintf('%s.sourceCurrency', $rootAlias), 'sourceCurrency')
                 ->innerJoin(sprintf('%s.targetCurrency', $rootAlias), 'targetCurrency')
-                ->where('sourceCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
-                ->orWhere('targetCurrency.code LIKE CONCAT(\'%\', :' . $codeParameterName . ', \'%\')')
-                ->setParameter($codeParameterName, $value)
+                ->where($queryBuilder->expr()->like('sourceCurrency.code', $codeParameterName))
+                ->orWhere($queryBuilder->expr()->like('targetCurrency.code', $codeParameterName))
+                ->setParameter($codeParameterName, sprintf('%%%s%%', $value))
             ;
         }
     }

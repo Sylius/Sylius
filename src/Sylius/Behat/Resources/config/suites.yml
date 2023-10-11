@@ -19,8 +19,8 @@ imports:
 #    - suites/api/checkout/paying_for_order.yml
 #    - suites/api/contact/requesting_contact.yml
 #    - suites/api/currency/currencies.yml
-#    - suites/api/currency/managing_currencies.yml
-#    - suites/api/currency/managing_exchange_rates.yml
+    - suites/api/currency/managing_currencies.yml
+    - suites/api/currency/managing_exchange_rates.yml
 #    - suites/api/currency/viewing_exchange_rates.yml
 #    - suites/api/homepage/viewing_products.yml
 #    - suites/api/inventory/cart_inventory.yml
