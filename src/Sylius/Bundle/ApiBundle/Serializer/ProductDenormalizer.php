@@ -19,9 +19,11 @@ use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
+use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class ProductDenormalizer implements ContextAwareDenormalizerInterface, DenormalizerAwareInterface
@@ -49,10 +51,39 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
 
+        $data = $this->denormalizeOptions($data, $context);
+
         $this->validateAttributes($data);
         $data = $this->denormalizeAttributes($data);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
+    }
+
+    /**
+     * @param array<array-key, mixed> $data
+     * @param array<array-key, mixed> $context
+     *
+     * @return array<array-key, mixed>
+     */
+    private function denormalizeOptions(array $data, array $context): array
+    {
+        if (!isset($context[AbstractNormalizer::OBJECT_TO_POPULATE])) {
+            return $data;
+        }
+
+        if (!isset($data['options'])) {
+            return $data;
+        }
+
+        /** @var ProductInterface $product */
+        $product = $context[AbstractNormalizer::OBJECT_TO_POPULATE];
+        Assert::isInstanceOf($product, ProductInterface::class);
+
+        if (!$product->getVariants()->isEmpty()) {
+            unset($data['options']);
+        }
+
+        return $data;
     }
 
     /**
@@ -89,7 +120,11 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         foreach ($data['attributes'] as $attributeData) {
             /** @var ProductAttributeInterface $attribute */
             $attribute = $this->iriConverter->getResourceFromIri($attributeData['attribute']);
+
             $value = $attributeData['value'];
+            if ($value === null) {
+                continue;
+            }
 
             switch ($attribute->getStorageType()) {
                 case 'boolean':
