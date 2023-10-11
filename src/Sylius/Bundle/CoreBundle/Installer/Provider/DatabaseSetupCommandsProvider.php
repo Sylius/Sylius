@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,6 +28,9 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     {
     }
 
+    /**
+     * @return array<string, array>
+     */
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $outputStyle = new SymfonyStyle($input, $output);
@@ -66,7 +68,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isEmptyDatabasePresent(): bool
     {
         try {
-            return 0 === count($this->getSchemaManager()->listTableNames());
+            return 0 === count($this->getEntityManager()->getConnection()->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -75,7 +77,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isSchemaHasAnyTable(): bool
     {
         try {
-            return 0 !== count($this->getSchemaManager()->listTableNames());
+            return 0 !== count($this->getEntityManager()->getConnection()->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -84,22 +86,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function getDatabaseName(): string
     {
         return $this->getEntityManager()->getConnection()->getDatabase();
-    }
-
-    private function getSchemaManager(): AbstractSchemaManager
-    {
-        $connection = $this->getEntityManager()->getConnection();
-
-        if (method_exists($connection, 'createSchemaManager')) {
-            return $connection->createSchemaManager();
-        }
-
-        if (method_exists($connection, 'getSchemaManager')) {
-            /** @psalm-suppress DeprecatedMethod */
-            return $connection->getSchemaManager();
-        }
-
-        throw new \RuntimeException('Unable to get schema manager.');
     }
 
     private function getEntityManager(): EntityManagerInterface
