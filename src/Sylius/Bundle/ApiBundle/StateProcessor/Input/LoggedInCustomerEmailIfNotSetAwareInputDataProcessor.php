@@ -11,8 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\DataTransformer;
+namespace Sylius\Bundle\ApiBundle\StateProcessor\Input;
 
+use ApiPlatform\Metadata\Operation;
 use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LoggedInCustomerEmailIfNotSetAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -22,34 +23,34 @@ use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer implements CommandDataTransformerInterface
+final readonly class LoggedInCustomerEmailIfNotSetAwareInputDataProcessor implements InputDataProcessorInterface
 {
     public function __construct(private UserContextInterface $userContext)
     {
     }
 
-    public function transform($object, string $to, array $context = [])
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
         /** @var CustomerInterface|null $customer */
         $customer = $this->getCustomer();
 
-        /** @var CustomerEmailAwareInterface|mixed $object */
-        Assert::isInstanceOf($object, LoggedInCustomerEmailIfNotSetAwareInterface::class);
+        /** @var CustomerEmailAwareInterface|mixed $data */
+        Assert::isInstanceOf($data, LoggedInCustomerEmailIfNotSetAwareInterface::class);
 
         if ($customer === null) {
-            return $object;
+            return [$data, $operation, $uriVariables, $context];
         }
 
-        if ($object->getEmail() === null) {
-            $object->setEmail($customer->getEmail());
+        if ($data->getEmail() === null) {
+            $data->setEmail($customer->getEmail());
         }
 
-        return $object;
+        return [$data, $operation, $uriVariables, $context];
     }
 
-    public function supportsTransformation($object): bool
+    public function supports(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): bool
     {
-        return $object instanceof LoggedInCustomerEmailIfNotSetAwareInterface;
+        return $data instanceof LoggedInCustomerEmailIfNotSetAwareInterface;
     }
 
     private function getCustomer(): ?CustomerInterface

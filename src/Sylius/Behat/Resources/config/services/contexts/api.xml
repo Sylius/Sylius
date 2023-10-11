@@ -19,5 +19,7 @@
 <!--        <import resource="api/**/*.xml" />-->
         <import resource="api/admin.xml" />
         <import resource="api/common.xml" />
+        <import resource="api/email.xml" />
+        <import resource="api/shop.xml" />
     </imports>
 </container>

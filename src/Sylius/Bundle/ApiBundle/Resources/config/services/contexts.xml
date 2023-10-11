@@ -28,9 +28,5 @@
             <argument>%sylius.security.new_api_route%</argument>
             <tag name="sylius.context.cart" priority="-333" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" class="Sylius\Bundle\ApiBundle\Context\TokenBasedUserContext">
-            <argument type="service" id="security.token_storage" />
-        </service>
     </services>
 </container>
