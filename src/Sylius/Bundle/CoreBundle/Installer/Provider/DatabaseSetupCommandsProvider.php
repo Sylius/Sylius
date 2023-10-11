@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Provider;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,6 +28,9 @@ use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
+    /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
+    private ?AbstractSchemaManager $schemaManager = null;
+
     public function __construct(
         private Registry $doctrineRegistry,
         private ?EntityManagerInterface $entityManager = null,
@@ -79,7 +86,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isEmptyDatabasePresent(): bool
     {
         try {
-            return 0 === count($this->entityManager->getConnection()->createSchemaManager()->listTableNames());
+            return 0 === count($this->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -88,7 +95,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isSchemaHasAnyTable(): bool
     {
         try {
-            return 0 !== count($this->entityManager->getConnection()->createSchemaManager()->listTableNames());
+            return 0 !== count($this->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -97,6 +104,20 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function getDatabaseName(): string
     {
         return $this->entityManager->getConnection()->getDatabase();
+    }
+
+    /**
+     * @return AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>
+     *
+     * @throws Exception
+     */
+    private function createSchemaManager(): AbstractSchemaManager
+    {
+        if (null === $this->schemaManager) {
+            $this->schemaManager = $this->entityManager->getConnection()->createSchemaManager();
+        }
+
+        return $this->schemaManager;
     }
 
     private function getEntityManager(): EntityManagerInterface
