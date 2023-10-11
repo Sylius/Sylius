@@ -1,9 +1,10 @@
 {
-    "@context":"\/api\/v2\/contexts\/ProductVariant",
-    "@id":"\/api\/v2\/admin\/product-variants\/MUG_2",
-    "@type":"ProductVariant",
-    "code":"MUG_2",
-    "product":"\/api\/v2\/admin\/products\/MUG_SW",
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/admin\/product-variants\/MUG_3",
+    "@type": "ProductVariant",
+    "code": "MUG_3",
+    "product": "\/api\/v2\/admin\/products\/MUG_SW",
+    "optionValues": [],
     "channelPricings": {
         "WEB": {
             "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
@@ -15,14 +16,27 @@
             "lowestPriceBeforeDiscount": null
         }
     },
-    "enabled": true,
-    "optionValues": [],
     "translations": {
         "en_US": {
-            "@id":"\/api\/v2\/admin\/product-variant-translations\/@integer@",
-            "@type":"ProductVariantTranslation",
-            "name":"Yellow mug",
-            "locale":"en_US"
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id":@integer@,
+            "name": "Yellow mug",
+            "locale": "en_US"
         }
-    }
+    },
+    "enabled": true,
+    "position": 3,
+    "tracked": false,
+    "onHold": 0,
+    "onHand": 0,
+    "weight": null,
+    "width": null,
+    "height": null,
+    "depth": null,
+    "taxCategory": null,
+    "shippingCategory": null,
+    "shippingRequired": true,
+    "createdAt": @date@,
+    "updatedAt": @date@
 }
