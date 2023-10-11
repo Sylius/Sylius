@@ -14,7 +14,7 @@ winzou_state_machine:
             completed: ~
             failed: ~
             cancelled: ~
-            void: ~
+            unknown: ~
             refunded: ~
         transitions:
             create:
@@ -37,4 +37,4 @@ winzou_state_machine:
                 to: refunded
             void:
                 from: [new, processing]
-                to: void
+                to: unknown
