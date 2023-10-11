@@ -24,8 +24,19 @@ use Webmozart\Assert\Assert;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
-    public function __construct(private Registry $doctrineRegistry)
-    {
+    public function __construct(
+        private Registry $doctrineRegistry,
+        private ?EntityManagerInterface $entityManager = null,
+    ) {
+        if (null === $this->entityManager) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                'Not passing an $entityManager to "%s" is deprecated and will be prohibited in Sylius 2.0.',
+            );
+
+            $this->entityManager = $this->getEntityManager();
+        }
     }
 
     /**
@@ -60,7 +71,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
 
         return [
-            'doctrine:database:create',
+            'doctrine:database:create' => [],
             'doctrine:migrations:migrate' => ['--no-interaction' => true],
         ];
     }
@@ -68,7 +79,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isEmptyDatabasePresent(): bool
     {
         try {
-            return 0 === count($this->getEntityManager()->getConnection()->createSchemaManager()->listTableNames());
+            return 0 === count($this->entityManager->getConnection()->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -77,7 +88,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     private function isSchemaHasAnyTable(): bool
     {
         try {
-            return 0 !== count($this->getEntityManager()->getConnection()->createSchemaManager()->listTableNames());
+            return 0 !== count($this->entityManager->getConnection()->createSchemaManager()->listTableNames());
         } catch (\Exception) {
             return false;
         }
@@ -85,7 +96,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function getDatabaseName(): string
     {
-        return $this->getEntityManager()->getConnection()->getDatabase();
+        return $this->entityManager->getConnection()->getDatabase();
     }
 
     private function getEntityManager(): EntityManagerInterface

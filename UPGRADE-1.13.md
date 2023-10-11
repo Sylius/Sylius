@@ -127,6 +127,8 @@
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
 
+1. Not passing an `$entityManager` and passing a `$doctrineRegistry` to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated and will be prohibited in Sylius 2.0.
+
 1. Product variants resolving has been refactored for better extendability.
    The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
 
