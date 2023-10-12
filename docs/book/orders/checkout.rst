@@ -150,7 +150,7 @@ How to perform the Selecting shipping Step programmatically?
 Before approaching this step be sure that your Order is in the ``addressed`` state. In this state your order
 will already have a default ShippingMethod assigned, but in this step you can change it and have everything recalculated automatically.
 
-Firstly either create new (see how in the `Shipments concept </book/orders/shipments>`_) or retrieve a **ShippingMethod**
+Firstly either create new (see how in the :doc:`Shipments concept </book/orders/shipments>`) or retrieve a **ShippingMethod**
 from the repository to assign it to your order's shipment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -210,7 +210,7 @@ How to perform the Selecting payment step programmatically?
 Before this step your Order should be in the ``shipping_selected`` state. It will have a default Payment selected after the addressing step,
 but in this step you can change it.
 
-Firstly either create new (see how in the `Payments concept </book/orders/payments>`_) or retrieve a **PaymentMethod**
+Firstly either create new (see how in the :doc:`Payments concept </book/orders/payments>`) or retrieve a **PaymentMethod**
 from the repository to assign it to your order's payment created defaultly in the addressing step.
 
 .. code-block:: php
