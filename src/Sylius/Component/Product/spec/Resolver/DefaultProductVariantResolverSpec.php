@@ -17,6 +17,7 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
@@ -26,7 +27,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantResolverInterface::class);
     }
 
-    function it_returns_first_variant(
+    function it_returns_first_variant_if_product_variant_repository_is_not_initialized(
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants,
@@ -38,10 +39,42 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
+    function it_returns_null_if_first_variant_is_not_defined_and_product_variant_repository_is_not_initialized(Collection $variants, ProductInterface $product): void
     {
         $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);
+
+        $this->getVariant($product)->shouldReturn(null);
+    }
+
+    function it_returns_first_variant_if_product_variant_repository_is_initialized(
+        ProductInterface $product,
+        ProductVariantInterface $variant,
+        ProductVariantRepositoryInterface $productVariantRepository,
+    ): void {
+        $this->beConstructedWith($productVariantRepository);
+
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findOneBy([
+            'product' => 1,
+            'enabled' => true,
+        ])->willReturn($variant);
+
+        $this->getVariant($product)->shouldReturn($variant);
+    }
+
+    function it_returns_null_if_first_variant_is_not_defined_and_product_variant_repository_is_initialized(
+        ProductInterface $product,
+        ProductVariantRepositoryInterface $productVariantRepository,
+    ): void
+    {
+        $this->beConstructedWith($productVariantRepository);
+
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findOneBy([
+            'product' => 1,
+            'enabled' => true,
+        ])->willReturn(null);
 
         $this->getVariant($product)->shouldReturn(null);
     }
