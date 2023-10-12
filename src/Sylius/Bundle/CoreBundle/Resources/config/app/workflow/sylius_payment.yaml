@@ -39,6 +39,7 @@ framework:
                     from:
                         - !php/const Sylius\Component\Payment\Model\PaymentInterface::STATE_NEW
                         - !php/const Sylius\Component\Payment\Model\PaymentInterface::STATE_PROCESSING
+                        - !php/const Sylius\Component\Payment\Model\PaymentInterface::STATE_AUTHORIZED
                     to: !php/const Sylius\Component\Payment\Model\PaymentInterface::STATE_FAILED
                 !php/const Sylius\Component\Payment\PaymentTransitions::TRANSITION_CANCEL:
                     from:
