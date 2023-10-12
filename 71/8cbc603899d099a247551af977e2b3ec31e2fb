@@ -1,0 +1,145 @@
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-05T14:04:35Z
+
+Hello @ulinskas 👋🏼,
+do you have any statistics comparing the performance before and after your changes?🙏🏼
+
+---------------------------------------------------------------------------
+
+by ulinskas at 2023-09-05T14:08:48Z
+
+> Hello @ulinskas 👋🏼, do you have any statistics comparing the performance before and after your changes?🙏🏼
+
+It depends on variant count.
+With few variants you will not notice any difference.
+With thousands of variants you will reach memory limit.
+I can give you some numbers if you wish.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-05T14:10:11Z
+
+We're aware it'll be noticeable in case of bigger amount of data. It'd be great if you share some numbers 👊🏼.
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-05T14:14:30Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-bvh3q4.bunnyenv.com/|
+|php|https://store-bvh3q4.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by ulinskas at 2023-09-06T07:23:23Z
+
+@jakubtobiasz
+Here are some simple numbers of variants and performance changes.
+I used symfony profiler for simple performance benchmarks.
+
+This is before and after my implementation.
+Product with 12 variants:
+   controller execution 365.1 ms / 20 MiB -> **controller execution 397 ms / 18 MiB**
+Product with 1229 variants:
+   controller execution 450.9 ms / 30 MiB -> **controller execution 338.3 ms / 24 MiB**
+Product with 38775 variants:
+    controller execution 2006.2 ms / 222 MiB -> **controller execution 372.7 ms / 14 MiB**
+Product with 97225 variants:
+   Memory limit reached -> **controller execution 358.6 ms / 16 MiB**
+
+As you can see, most noticeable performance gains are for products with 10k+ variants.
+For products with few variants, there aren't any noticeable changes, for each request execution time fluctuates by +-40ms.
+Keep in mind, I'm using local docker environment for mac, so this is not from production.
+
+Also attaching screenshots, for total page load performance. Screenshots are from product with 38775 variants.
+Before:
+<img width="1054" alt="38775-before" src="https://github.com/Sylius/Sylius/assets/17234071/507f8105-d2fb-438b-a441-dded6d22492e">
+After:
+<img width="1022" alt="38775-after" src="https://github.com/Sylius/Sylius/assets/17234071/9de8ec18-4b75-4f25-9b66-43226b704db0">
+
+Hope this helps.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-06T07:31:22Z
+
+Thanks for sharing the results. Seems legit to me, can you only take a look at specs, as they're broken now?
+
+---------------------------------------------------------------------------
+
+by ulinskas at 2023-09-06T12:24:36Z
+
+@jakubtobiasz done with specs.
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-09-13T18:35:23Z
+
+Basically every other relation with collection will go out of memory on 1000+ records, by adding optimization at `Component` level we're making assumptions about `Bundle` mappings and `Core`/`Admin` pages/usage.
+
+For example `Order->getLastPayment(?string $state = null): ?PaymentInterface` or `Product->getImagesByType(string $type): Collection` will go out of memory on 1000-9000 records as well.
+
+I would say we should move this change into `Sylius\Bundle\CoreBundle\Product\Resolver\ProductVariantResolver`as decorating service. (Or `Component\Core`, not sure about the difference atm) to keep optimization to "ecommerce-application" level instead of "ecommerce-framework" level, where it's actually needed based on usage.
+
+**tldr**: Optimization should be based on usage and mass-variant usage is allowed at core/admin/api.
+
+---------------------------------------------------------------------------
+
+by ulinskas at 2023-09-27T10:26:37Z
+
+@jakubtobiasz do I miss something else?
+Maybe we can merge this PR?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-09-29T11:10:12Z
+
+@GSadee shouldn't this go into 1.13 instead of 1.12 as this is not a regular bugfix? Then deprecation notice can be added immediately.
+
+Similar performance fix for zone matcher went into 1.13 https://github.com/Sylius/Sylius/pull/15275
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-09-29T11:22:16Z
+
+> @GSadee shouldn't this go into 1.13 instead of 1.12 as this is not a regular bugfix? Then deprecation notice can be added immediately.
+>
+> Similar performance fix for zone matcher went into 1.13 #15275
+
+I have been thinking about this and decided that we could treat it as a bug because of reaching the memory limit with a large number of variants, fix it in this version and add the appropriate deprecation on 1.13. Are you having doubts that we should not consider this a bug?
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-09-29T12:04:43Z
+
+> Are you having doubts that we should not consider this a bug?
+
+No, personally I don't consider this a bug, every collection relation is susceptible to this issue, try adding 1000 items to a order, 2000 payment attempts for a order, it doesn't make order system broken because of that.
+
+So in my opinion it's not a bugfix for a degraded performance, but rather a feature/improvement to support "bigger" data sets.
+
+---------------------------------------------------------------------------
+
+by ulinskas at 2023-10-12T10:15:26Z
+
+@jakubtobiasz Friendly reminder that this PR is idle for 2 weeks.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-10-12T11:46:58Z
+
+Thanks, Andrius! :tada:
