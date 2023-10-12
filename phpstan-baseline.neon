@@ -2571,6 +2571,11 @@ parameters:
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ProductVariantRepository.php
 
 		-
+			message: "#^Method Sylius\\\\Component\\\\Product\\\\Resolver\\\\DefaultProductVariantResolver\\:\\:__construct\\(\\) has parameter \\$productVariantRepository with generic interface Sylius\\\\Component\\\\Product\\\\Repository\\\\ProductVariantRepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Component/Product/Resolver/DefaultProductVariantResolver.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Doctrine\\\\ORM\\\\ShipmentRepository\\:\\:findOneByCustomer\\(\\) has parameter \\$id with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/ShipmentRepository.php
