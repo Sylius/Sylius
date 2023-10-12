@@ -15,9 +15,14 @@
     <services>
         <defaults public="false" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderStateListener">
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\SellOrderInventoryListener">
+            <argument type="service" id="sylius.inventory.order_inventory_operator" />
+            <tag name="kernel.event_listener" event="workflow.sylius_order_payment.completed.pay" priority="-200"/>
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\ResolveOrderStateListener">
             <argument type="service" id="sylius.state_resolver.order" />
-            <tag name="kernel.event_listener" event="workflow.sylius_order_shipping.completed.ship" priority="-100"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order_payment.completed.pay" priority="-100"/>
         </service>
     </services>
 </container>
