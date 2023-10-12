@@ -1,0 +1,91 @@
+---------------------------------------------------------------------------
+
+by rimas-kudelis at 2022-05-04T10:13:19Z
+
+I have an alternative solution for this (not a PR though) in #13871.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2022-05-04T11:29:44Z
+
+> I have an alternative solution for this (not a PR though) in #13871.
+
+@rimas-kudelis you are right, I found it better to create constraint instead of using Exception inside command handlers
+
+---------------------------------------------------------------------------
+
+by Prometee at 2022-05-04T14:49:03Z
+
+@lchrusciel @Zales0123 the proposal from @rimas-kudelis is smarter than changing the exception, so I restart this PR from scratch and add two new validators aiming to validate the `RequestPassword` before the handler is executed.
+
+Now the reset password endpoint will return 422 violations when the reset password token is not founded or is expired.
+
+Finally I added a new scenario testing the expiration of a token.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-05-01T09:41:49Z
+
+Hi @Prometee 👋🏼!
+I added a few comments, and there are a few conflicting files. If you would like to take care of this PR, it'd be great. I can promise quicker review and reactions this time 🙏🏻.
+
+Otherwise, please let us know you don't want to continue this PR, and we'll take over it.
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-05-19T11:22:09Z
+
+I rebased the PR to fix CI :).
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-05-21T13:50:23Z
+
+> I rebased the PR to fix CI :).
+
+@jakubtobiasz, I commit the required cleaning suggestion 😉, thank you for your review.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-08-21T10:15:30Z
+
+@NoResponseMate or @jakubtobiasz ready for review again (I rebased on 1.13 branch by mistake so I go back and rebased it onto the 1.12 branch)
+
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-08-30T14:20:21Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-x4i2ln.bunnyenv.com/|
+|php|https://store-x4i2ln.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by Wojdylak at 2023-09-27T13:20:34Z
+
+ Rebased the PR against the 1.13 branch
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-09-28T08:44:30Z
+
+Thx @Wojdylak 😉
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-10-12T12:33:39Z
+
+Thank you, Francis! :1st_place_medal:
