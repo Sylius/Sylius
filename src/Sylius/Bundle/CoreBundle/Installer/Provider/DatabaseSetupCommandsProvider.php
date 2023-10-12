@@ -31,18 +31,21 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
     private ?AbstractSchemaManager $schemaManager = null;
 
-    public function __construct(
-        private Registry $doctrineRegistry,
-        private ?EntityManagerInterface $entityManager = null,
-    ) {
-        if (null === $this->entityManager) {
+    public function __construct(private Registry|EntityManagerInterface $entityManager)
+    {
+        if ($this->entityManager instanceof Registry) {
             trigger_deprecation(
                 'sylius/sylius',
                 '1.13',
-                'Not passing an $entityManager to "%s" is deprecated and will be prohibited in Sylius 2.0.',
+                'Passing a $registry to the "%s" constructor is deprecated and will be prohibited in Sylius 2.0. Pass an instance of "%s" instead.',
+                self::class,
+                EntityManagerInterface::class,
             );
 
-            $this->entityManager = $this->getEntityManager();
+            $objectManager = $this->entityManager->getManager();
+            Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
+
+            $this->entityManager = $objectManager;
         }
     }
 
@@ -118,13 +121,5 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
 
         return $this->schemaManager;
-    }
-
-    private function getEntityManager(): EntityManagerInterface
-    {
-        $objectManager = $this->doctrineRegistry->getManager();
-        Assert::isInstanceOf($objectManager, EntityManagerInterface::class);
-
-        return $objectManager;
     }
 }

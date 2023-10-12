@@ -280,12 +280,19 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
     {
-        $this->client->executeCustomRequest($this->request);
+        $response = $this->client->executeCustomRequest($this->request);
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token itotallyforgotmypassword is invalid.');
+    }
 
-        // token is removed when used
-        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
-        $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'No user found with reset token:');
+    /**
+     * @Then I should not be able to change my password with this token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token has expired.');
     }
 
     private function addLocale(string $locale): void

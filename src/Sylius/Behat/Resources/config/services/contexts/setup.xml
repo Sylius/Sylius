@@ -293,6 +293,7 @@
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.command_bus" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="Sylius\Behat\Context\Setup\ZoneContext">
