@@ -66,8 +66,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
     function it_returns_null_if_first_variant_is_not_defined_and_product_variant_repository_is_initialized(
         ProductInterface $product,
         ProductVariantRepositoryInterface $productVariantRepository,
-    ): void
-    {
+    ): void {
         $this->beConstructedWith($productVariantRepository);
 
         $product->getId()->willReturn(1);

@@ -68,6 +68,7 @@ final class PaymentWorkflowTest extends KernelTestCase
         yield [PaymentInterface::STATE_AUTHORIZED, PaymentTransitions::TRANSITION_COMPLETE, PaymentInterface::STATE_COMPLETED];
         yield [PaymentInterface::STATE_NEW, PaymentTransitions::TRANSITION_FAIL, PaymentInterface::STATE_FAILED];
         yield [PaymentInterface::STATE_PROCESSING, PaymentTransitions::TRANSITION_FAIL, PaymentInterface::STATE_FAILED];
+        yield [PaymentInterface::STATE_AUTHORIZED, PaymentTransitions::TRANSITION_FAIL, PaymentInterface::STATE_FAILED];
         yield [PaymentInterface::STATE_NEW, PaymentTransitions::TRANSITION_CANCEL, PaymentInterface::STATE_CANCELLED];
         yield [PaymentInterface::STATE_PROCESSING, PaymentTransitions::TRANSITION_CANCEL, PaymentInterface::STATE_CANCELLED];
         yield [PaymentInterface::STATE_AUTHORIZED, PaymentTransitions::TRANSITION_CANCEL, PaymentInterface::STATE_CANCELLED];
