@@ -135,6 +135,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I check the wholesale option
+     */
+    public function iCheckWholesaleOption(): void
+    {
+        $this->createSimpleProductPage->checkWholesaleOption(true);
+    }
+
+    /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsOriginalPriceTo(int $originalPrice, ChannelInterface $channel)
@@ -238,6 +246,14 @@ final class ManagingProductsContext implements Context
         $this->iWantToBrowseProducts();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productName]));
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should be wholesale$/
+     */
+    public function theProductShouldBeWholesale(ProductInterface $product): void
+    {
+        Assert::true($product->getVariants()->first()->isWholesale(), 'Product has to be wholesale');
     }
 
     /**

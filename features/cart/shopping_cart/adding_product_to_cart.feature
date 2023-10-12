@@ -7,21 +7,30 @@ Feature: Adding a simple product to the cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana" priced at "$12.54"
+        And the store has a wholesale product "T-Shirt grape" priced at "$25.12"
         And the store ships everywhere for free
 
     @ui @api
     Scenario: Adding a simple product to the cart
-        When I add this product to the cart
+        When I add "T-Shirt banana" product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
         And this item should have name "T-Shirt banana"
 
     @ui @api
+    Scenario: Adding a wholesale product to the cart
+        When I add "T-Shirt grape" product to the cart
+        Then I should be on my cart summary page
+        And I should be notified that the product has been successfully added
+        And there should be one item in my cart
+        And this item should have name "T-Shirt grape"
+
+    @ui @api
     Scenario: Adding a product to the cart as a logged in customer
         Given I am a logged in customer
         And the store has a product "Oathkeeper" priced at "$99.99"
-        When I add this product to the cart
+        When I add "Oathkeeper" product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
@@ -37,7 +46,7 @@ Feature: Adding a simple product to the cart
     Scenario: Adding a simple product to the cart after picked up more than one cart
         When I pick up my cart
         And I pick up my cart again
-        And I add this product to the cart
+        And I add "T-Shirt banana" product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
@@ -46,5 +55,12 @@ Feature: Adding a simple product to the cart
     @ui @api
     Scenario: Increasing quantity of an item in cart by adding the product again
         Given I have product "T-Shirt banana" in the cart
-        When I add this product to the cart
+        When I add "T-Shirt banana" product to the cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart
+
+    @ui @api
+    Scenario: Increasing quantity of a wholesale item in cart by adding the product again
+        Given I have product "T-Shirt grape" in the cart
+        When I add "T-Shirt grape" product to the cart
+        Then there should be one item in my cart
+        And I should see "T-Shirt grape" with quantity 2 in my cart

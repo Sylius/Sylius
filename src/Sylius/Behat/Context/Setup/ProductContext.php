@@ -87,6 +87,19 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the store has a wholesale product "([^"]+)"$/
+     * @Given /^the store has a wholesale product "([^"]+)" priced at ("[^"]+")$/
+     */
+    public function storeHasAWholesaleProductPricedAt(
+        string $productName,
+        int $price = 100
+    ): void {
+        $product = $this->createWholesaleProduct($productName, $price, null);
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") belonging to the ("[^"]+" taxon)$/
      */
     public function storeHasAProductPricedAtBelongingToTheTaxon(
@@ -1359,6 +1372,16 @@ final class ProductContext implements Context
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
+    }
+
+    private function createWholesaleProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
+    {
+        $product = $this->createProduct($productName, $price, $channel);
+        foreach ($product->getVariants() as $variant) {
+            $variant->setWholesale(true);
+        }
+
+        return $product;
     }
 
     private function createProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface

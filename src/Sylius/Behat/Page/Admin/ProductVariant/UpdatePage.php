@@ -65,6 +65,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('tracked')->isChecked();
     }
 
+    public function checkWholesaleOption(bool $value): void
+    {
+        if ($value) {
+            $this->getElement('wholesale')->check();
+        } else {
+            $this->getElement('wholesale')->uncheck();
+        }
+    }
+
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency): string
     {
         $priceElement = $this->getElement('pricing_configuration')->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
@@ -127,6 +136,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('shipping_required')->isChecked();
     }
 
+    public function isWholesale(): bool
+    {
+        return $this->getElement('wholesale')->isChecked();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
@@ -134,6 +148,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
+            'wholesale' => '#sylius_product_variant_wholesale',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',
             'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',

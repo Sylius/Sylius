@@ -91,3 +91,16 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should not have shipping required
         And the product "Dice Brewing" should appear in the store
+
+    @ui @no-api
+    Scenario: Adding a new simple wholesale product
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing" in "English (United States)"
+        And I set its price to "$10.00" for "United States" channel
+        And I check the wholesale option
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should be wholesale
+        And the product "Dice Brewing" should appear in the store

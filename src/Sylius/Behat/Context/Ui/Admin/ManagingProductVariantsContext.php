@@ -99,6 +99,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I check its wholesale option
+     */
+    public function iCheckItsWholesaleOption(): void
+    {
+        $this->updatePage->checkWholesaleOption(true);
+    }
+
+    /**
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      * @When I do not set its price
      */
@@ -359,6 +367,16 @@ final class ManagingProductVariantsContext implements Context
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->updatePage->getPriceForChannel($channel), $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should be wholesale$/
+     */
+    public function theVariantWithCodeShouldBeWholesale(ProductVariantInterface $productVariant): void
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::true($this->updatePage->isWholesale());
     }
 
     /**

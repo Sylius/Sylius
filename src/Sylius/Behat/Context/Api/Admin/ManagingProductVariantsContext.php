@@ -66,6 +66,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I check its wholesale option
+     */
+    public function iCheckItsWholesaleOption(): void
+    {
+        $this->client->addRequestData('wholesale', true);
+    }
+
+    /**
      * @When /^I set its price to ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel): void
@@ -228,6 +236,16 @@ final class ManagingProductVariantsContext implements Context
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should be wholesale$/
+     */
+    public function theVariantWithCodeShouldBeWholesale(ProductVariantInterface $productVariant): void
+    {
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
+
+        Assert::true($response[self::FIRST_COLLECTION_ITEM]['wholesale']);
     }
 
     /**

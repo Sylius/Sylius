@@ -22,3 +22,11 @@ Feature: Editing a product variant
         Then I should be notified that it has been successfully edited
         And the variant with code "GO" should be named "Java" in "English (United States)" locale
         And the variant with code "GO" should be named "Kawa" in "Polish (Poland)" locale
+
+    @api @ui
+    Scenario: Changing the wholesale option
+        Given I want to modify the "Go" product variant
+        When I check its wholesale option
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And the variant with code "GO" should be wholesale

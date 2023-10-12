@@ -22,6 +22,8 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
     public function specifyPrice(ChannelInterface $channel, string $price): void;
 
+    public function checkWholesaleOption(bool $value): void;
+
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void;
 
     public function choosePricingCalculator(string $name): void;

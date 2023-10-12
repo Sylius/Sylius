@@ -59,6 +59,15 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
+    public function checkWholesaleOption(bool $value): void
+    {
+        if ($value) {
+            $this->getElement('wholesale')->check();
+        } else {
+            $this->getElement('wholesale')->uncheck();
+        }
+    }
+
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
     {
         $this->getElement('original_price', ['%channelCode%' => $channel->getCode()])->setValue($originalPrice);
@@ -285,6 +294,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
+            'wholesale' => '#sylius_product_variant_wholesale',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'slug' => '#sylius_product_translations_%locale%_slug',
