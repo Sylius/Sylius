@@ -25,5 +25,7 @@ framework:
                     from: !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
                     to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED
                 !php/const Sylius\Component\Core\OrderShippingTransitions::TRANSITION_SHIP:
-                    from: [!php/const Sylius\Component\Core\OrderShippingStates::STATE_READY, !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED]
+                    from: 
+                        - !php/const Sylius\Component\Core\OrderShippingStates::STATE_READY
+                        - !php/const Sylius\Component\Core\OrderShippingStates::STATE_PARTIALLY_SHIPPED
                     to: !php/const Sylius\Component\Core\OrderShippingStates::STATE_SHIPPED
