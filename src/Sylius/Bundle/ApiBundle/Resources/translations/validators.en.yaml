@@ -23,6 +23,9 @@ sylius:
         not_longer_available: 'The product variant with name %productVariantName% does not exist.'
         not_sufficient: 'The product variant with %productVariantCode% code does not have sufficient stock.'
         product_variant_with_name_not_sufficient: 'The product variant with %productVariantName% name does not have sufficient stock.'
+    reset_password:
+        invalid_token: 'Password reset token %token% is invalid.'
+        token_expired: 'Password reset token has expired.'
     shipment:
         not_found: 'The shipment does not exist.'
         shipped: 'You cannot ship a shipment that was shipped before.'
