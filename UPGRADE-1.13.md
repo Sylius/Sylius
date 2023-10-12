@@ -174,10 +174,12 @@
         - From: `void`
         - To: `unknown`
 
-1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, with the following transition:
+1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, along with a new transition:
     - Transition `authorize`:
         - From states: [`new`, `processing`]
         - To state: `authorized`
+
+   Due to that the following transitions have been updated:
     - Transition `complete`:
         - From states: [`new`, `processing`, `authorized`]
         - To state: `completed`
@@ -190,3 +192,11 @@
     - Transition `void`:
         - From states: [`new`, `processing`, `authorized`]
         - To state: `unknown`
+
+1. The `sylius_payment` state machine of `CoreBundle` has been updated to allow failing an authorized payment:
+    ```diff
+        fail:
+    -       from: [new, processing]
+    +       from: [new, processing, authorized]
+            to: failed
+    ```
