@@ -1,0 +1,91 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-10-02T16:31:49Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-rt4hbb.bunnyenv.com/|
+|php|https://store-rt4hbb.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-10-02T19:18:18Z
+
+(I'm not fully following what's going on with this listener, so I'm only approving changes code-wise)
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-10-03T08:48:19Z
+
+@diimpp I fixed the description, maybe it's more clear now.
+
+Without any related Behat scenario, I can't be 100% sure why this listener exists.
+I think it's to avoid browsing a not supported locale for a channel and that's why I propose to only run it when we are under the `shop` firewall and we have a `_locale` request attribute present.
+
+@oallain & @NoResponseMate apparently you worked on this file apparently, can we apply what I propose here ?
+
+---------------------------------------------------------------------------
+
+by lruozzi9 at 2023-10-05T15:08:12Z
+
+We just had a problem due to this event listener! We have a website available on more domains; one is only for the Spanish market, and a URL without a locale falls in redirected due to my browser locale not being available in that Spanish channel!
+
+I'm not even sure that this listener should remain! I mean, IMHO the redirect due to the locale should be done ONLY on the homepage without the locale (http://domain.xyz). If you ask for a page with a non-existing locale it should return 404.
+
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2023-10-05T15:28:51Z
+
+@Prometee IIRC it was covering a case when someone changes the locale in the URI by hand or the locale itself stops being available in the channel, then using an outside link w/ the now not available locale and similar. I found the [ancient PR](https://github.com/Sylius/Sylius/pull/7595) introducing it, though I have no idea what happened afterwards.
+The scenario covering it apparently [here](https://github.com/Sylius/Sylius/blob/1.13/features/locale/browsing_shop_in_different_than_default_locale.feature#L27).
+I don't see why we shouldn't merge it if it passes.
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-10-05T15:35:22Z
+
+@lruozzi9 I totally agree with you and yes this listener can be removed since it's not really required.
+
+@NoResponseMate yes it will cover this scenario because it will redirect only when a `_locale` is present in the URL. Reading the code it seems it will be the case.
+What about removing this listener and change the scenario to check for a 404 ?
+
+---------------------------------------------------------------------------
+
+by NoResponseMate at 2023-10-05T16:22:53Z
+
+That's perfectly fine by me, frankly, I'd expect a 404 in those cases instead of some weird server-side rerouting magic. Not sure about BC in this case, although listeners are excluded, it's a behaviour change.
+@GSadee, any opinion regarding this?
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-10-06T09:14:03Z
+
+> That's perfectly fine by me, frankly, I'd expect a 404 in those cases instead of some weird server-side rerouting magic. Not sure about BC in this case, although listeners are excluded, it's a behaviour change. @GSadee, any opinion regarding this?
+
+I'm also ok with this change, it is indeed a change of behaviour, but to fix it, and listeners are excluded from BC, it might just be worth adding some mention to the UPGRADE file.
+
+And @Prometee could you rebase with the current 1.12, this should fix the not working build here?
+
+---------------------------------------------------------------------------
+
+by Prometee at 2023-10-06T10:24:43Z
+
+@GSadee it's done.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-10-12T11:58:51Z
+
+Thank you, Francis! :tada:
