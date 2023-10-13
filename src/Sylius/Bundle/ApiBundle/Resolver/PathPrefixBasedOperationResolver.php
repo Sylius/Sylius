@@ -27,7 +27,7 @@ final readonly class PathPrefixBasedOperationResolver implements OperationResolv
     ) {
     }
 
-    public function resolve(string $resourceClass, string $requestUri, ?Operation $operation): Operation
+    public function resolve(string $resourceClass, string $requestUri, ?Operation $operation): ?Operation
     {
         if ($operation !== null && $operation->getName() !== '') {
             return $operation;
