@@ -28,6 +28,7 @@
         <import resource="services/filters.xml" />
         <import resource="services/payments.xml" />
         <import resource="services/providers.xml" />
+        <import resource="services/resolvers.xml" />
         <import resource="services/section_resolver.xml" />
         <import resource="services/serializers.xml" />
         <import resource="services/state_processors.xml" />
@@ -164,6 +165,11 @@
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">-->
 <!--            <argument type="service" id="validator" />-->
 <!--        </service>-->
+
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter" decorates="api_platform.symfony.iri_converter" public="false">
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
+        </service>
 
         <service id="Sylius\Bundle\ApiBundle\ApiPlatform\StateProcessor\MessengerProcessor" decorates="ApiPlatform\Symfony\Messenger\Processor" public="false">
             <argument type="service" id=".inner" />
