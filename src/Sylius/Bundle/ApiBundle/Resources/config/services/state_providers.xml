@@ -19,5 +19,9 @@
         <service id="Sylius\Bundle\ApiBundle\StateProvider\ShopUserResetPasswordProvider">
             <tag name="api_platform.state_provider" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\StateProvider\Input\VerifyCustomerAccountStateProvider">
+            <tag name="api_platform.state_provider" priority="10" />
+        </service>
     </services>
 </container>

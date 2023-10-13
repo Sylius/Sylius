@@ -164,6 +164,7 @@ final class CustomerContext implements Context
      */
     public function iTryToVerifyUsing(string $token): void
     {
+        $this->verificationToken = $token;
         $this->verifyAccount($token);
     }
 

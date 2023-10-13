@@ -6,6 +6,7 @@ imports:
 #    - suites/api/account/customer.yml
 #    - suites/api/account/customer_registration.yml
 #    - suites/api/account/email_verification.yml
+    - suites/api/account/email_verification.yml
     - suites/api/account/login.yaml
     - suites/api/addressing/managing_countries.yaml
 #    - suites/api/addressing/managing_zones.yml
