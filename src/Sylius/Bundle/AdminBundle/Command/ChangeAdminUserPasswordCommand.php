@@ -60,7 +60,7 @@ final class ChangeAdminUserPasswordCommand extends AbstractAdminUserCommand
         $this->passwordUpdater->updatePassword($adminUser);
         $this->adminUserRepository->add($adminUser);
 
-        $this->io->success('Admin user password has been successfully reset.');
+        $this->io->success('Admin user password has been changed successfully.');
 
         return Command::SUCCESS;
     }
