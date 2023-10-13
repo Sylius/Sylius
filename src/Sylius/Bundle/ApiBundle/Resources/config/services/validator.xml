@@ -129,7 +129,7 @@
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">-->
 <!--            <argument type="service" id="sylius.repository.shop_user" />-->
 <!--            <tag name="validator.constraint_validator" alias="sylius_api_shop_user_not_verified" />-->
-        </service>
+<!--        </service>-->
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibilityValidator">-->
 <!--            <argument type="service" id="sylius.repository.shop_user" />-->
