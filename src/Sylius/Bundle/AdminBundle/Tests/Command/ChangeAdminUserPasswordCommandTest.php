@@ -44,6 +44,14 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_execute_in_non_interactive_mode(): void
+    {
+        $this->command->execute([], ['interactive' => false]);
+
+        self::assertSame(Command::FAILURE, $this->command->getStatusCode());
+    }
+
+    /** @test */
     public function it_does_not_reset_password_when_admin_user_is_not_found(): void
     {
         $this
