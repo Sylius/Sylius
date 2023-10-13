@@ -79,7 +79,7 @@
    * `Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer`
    * `Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer`
    * `Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer`
-   
+
    Responsibility of these services has been moved to the corresponding services tagged with `sylius.open_api.modifier`:
    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdminAuthenticationTokenDocumentationModifier`
    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShopAuthenticationTokenDocumentationModifier`
@@ -90,3 +90,20 @@
    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier`
    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier`
    * `Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier`
+
+1. All usages of `ApiPlatform\Core\Api\IriConverterInterface` have been switched to its non-deprecated counterpart `ApiPlatform\Api\IriConverterInterface`.
+   Due to that, the constructor and usage in the following classes have been changed accordingly: 
+   * `Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction`
+   * `Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction`
+   * `Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener`
+   * `Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantCatalogPromotionFilter`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductVariantOptionValueFilter`
+   * `Sylius\Bundle\ApiBundle\Filter\Doctrine\TaxonFilter`
+   * `Sylius\Bundle\ApiBundle\Serializer\ChannelPriceHistoryConfigDenormalizer`
+   * `Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer`
+   * `Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer`
+   * `Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer`

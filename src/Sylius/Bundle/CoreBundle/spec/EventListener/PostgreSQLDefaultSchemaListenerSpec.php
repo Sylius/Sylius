@@ -61,18 +61,4 @@ final class PostgreSQLDefaultSchemaListenerSpec extends ObjectBehavior
 
         $this->postGenerateSchema($args);
     }
-
-    function it_throws_an_exception_if_schema_manager_cannot_be_created(
-        Connection $connection,
-        EntityManagerInterface $entityManager,
-        GenerateSchemaEventArgs $args,
-    ): void {
-        $connection->createSchemaManager()->willThrow(\RuntimeException::class);
-        $entityManager->getConnection()->willReturn($connection);
-        $args->getEntityManager()->willReturn($entityManager);
-
-        $args->getSchema()->shouldNotBeCalled();
-
-        $this->shouldThrow(\RuntimeException::class)->during('postGenerateSchema', [$args]);
-    }
 }

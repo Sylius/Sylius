@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -492,7 +492,7 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id']),
         );
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($paymentMethod)]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -578,7 +578,7 @@ final class CheckoutContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
 
         Assert::notEmpty($payments, 'No payments found in response.');
-        $paymentMethodIri = $this->iriConverter->getIriFromItem($paymentMethod);
+        $paymentMethodIri = $this->iriConverter->getIriFromResource($paymentMethod);
         foreach ($payments as $payment) {
             if ($payment['method'] !== $paymentMethodIri) {
                 continue;
@@ -1502,7 +1502,7 @@ final class CheckoutContext implements Context
             'items',
         );
         $request->setContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
+            'productVariant' => $this->iriConverter->getIriFromResource($productVariant),
             'quantity' => $quantity,
         ]);
 
@@ -1585,7 +1585,7 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
-        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromItem($shippingMethod)]);
+        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)]);
 
         return $this->client->executeCustomRequest($request);
     }
