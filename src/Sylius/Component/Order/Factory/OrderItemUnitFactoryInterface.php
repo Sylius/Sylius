@@ -24,7 +24,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 interface OrderItemUnitFactoryInterface extends FactoryInterface
 {
-    public function createWholesaleForItem(OrderItemInterface $orderItemm, int $quantity): OrderItemUnitInterface;
+    public function createWholesaleForItem(OrderItemInterface $orderItem, int $quantity): OrderItemUnitInterface;
 
     public function createForItem(OrderItemInterface $orderItem): OrderItemUnitInterface;
 }
