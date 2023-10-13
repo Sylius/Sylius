@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<properties xmlns="https://api-platform.com/schema/metadata/properties-3.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
+>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="id" identifier="false" writable="false"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="code" identifier="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="name" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="startDate" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="endDate" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="priority" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="state" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="channels" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="translations" readable="true" writable="true">
+        <openapiContext>
+            <values>
+                <value name="type">object</value>
+                <value name="example">
+                    <values>
+                        <value name="en_US">
+                            <values>
+                                <value name="label">string</value>
+                                <value name="description">string</value>
+                                <value name="locale">string</value>
+                            </values>
+                        </value>
+                    </values>
+                </value>
+            </values>
+        </openapiContext>
+    </property>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="channels" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="actions" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="enabled" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="exclusive" writable="true"/>
+    <property resource="Sylius\Component\Core\Model\CatalogPromotion" name="label" writable="true"/>
+</properties>
