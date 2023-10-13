@@ -13,16 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command;
 
+use Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware;
+
 /** experimental */
+#[ChannelCodeAware()]
 class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public ?string $localeCode = null;
 
-    public ?string $channelCode = null;
-
     public function __construct(
         private ?string $email = null,
         private ?string $message = null,
+        private string $channelCode,
     ) {
     }
 

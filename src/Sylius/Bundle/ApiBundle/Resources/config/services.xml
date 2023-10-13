@@ -26,6 +26,7 @@
         <import resource="services/event_subscribers.xml" />
         <import resource="services/extensions.xml" />
         <import resource="services/filters.xml" />
+        <import resource="services/serializers.xml" />
         <import resource="services/payments.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/state_processors.xml" />
