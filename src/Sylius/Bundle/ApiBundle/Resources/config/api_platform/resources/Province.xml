@@ -16,7 +16,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Addressing\Model\Province" routePrefix="/admin">
+    <resource class="Sylius\Component\Addressing\Model\Province">
         <validationContext>
             <values>
                 <value name="groups">
@@ -28,7 +28,7 @@
         </validationContext>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get">
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/provinces/{code}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -40,7 +40,7 @@
                 </normalizationContext>
             </operation>
 
-            <operation class="ApiPlatform\Metadata\Put">
+            <operation class="ApiPlatform\Metadata\Put" uriTemplate="/admin/provinces/{code}">
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -55,6 +55,18 @@
                         <value name="groups">
                             <values>
                                 <value>admin:province:read</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/shop/provinces/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>shop:province:read</value>
                             </values>
                         </value>
                     </values>

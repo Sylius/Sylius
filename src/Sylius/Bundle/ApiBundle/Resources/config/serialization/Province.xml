@@ -17,23 +17,26 @@
 >
     <class name="Sylius\Component\Addressing\Model\Province">
        <attribute name="code">
+           <group>admin:province:read</group>
            <group>admin:country:create</group>
            <group>admin:country:update</group>
+           <group>shop:province:read</group>
            <group>shop:country:read</group>
-           <group>admin:province:read</group>
        </attribute>
        <attribute name="name">
-           <group>admin:country:create</group>
-           <group>admin:country:update</group>
-           <group>shop:country:read</group>
            <group>admin:province:read</group>
            <group>admin:province:update</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
+           <group>shop:province:read</group>
+           <group>shop:country:read</group>
        </attribute>
        <attribute name="abbreviation">
-           <group>admin:country:create</group>
-           <group>admin:country:update</group>
            <group>admin:province:read</group>
            <group>admin:province:update</group>
+           <group>admin:country:create</group>
+           <group>admin:country:update</group>
+           <group>shop:province:read</group>
        </attribute>
     </class>
 </serializer>
