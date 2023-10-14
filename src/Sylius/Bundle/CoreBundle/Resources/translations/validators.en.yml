@@ -47,6 +47,8 @@ sylius:
             min: Price cannot be lower than 0.
             not_blank: Please enter the price.
     checkout:
+        addressing:
+            csrf_error: Please resubmit complete form.
         shipping_method:
             not_blank: Please select shipping method.
         email:

@@ -144,6 +144,17 @@ final class AddressType extends AbstractResourceType
 
                 $event->setData($orderData);
             })
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
+                $orderData = $event->getData();
+
+                if ($options['customer'] instanceof CustomerInterface && array_key_exists('customer', $orderData)) {
+                    // Logged-in user try to submit customer while reloading page after login
+                    unset($orderData['customer']);
+                    $event->getForm()->remove('customer');
+                }
+
+                $event->setData($orderData);
+            })
         ;
     }
 
@@ -154,6 +165,7 @@ final class AddressType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'customer' => null,
+                'csrf_message' => 'sylius.checkout.addressing.csrf_error',
             ])
         ;
     }
