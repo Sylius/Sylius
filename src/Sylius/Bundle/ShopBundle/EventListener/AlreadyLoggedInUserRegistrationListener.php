@@ -47,7 +47,7 @@ final class AlreadyLoggedInUserRegistrationListener implements EventSubscriberIn
 
     public function handleAlreadyConnectedUser(ResourceControllerEvent $event): void
     {
-        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             // Not authenticated, nothing to do here
             return;
         }
