@@ -52,7 +52,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_reset_password_when_admin_user_is_not_found(): void
+    public function it_does_not_change_password_when_admin_user_is_not_found(): void
     {
         $this
             ->userRepository
@@ -72,7 +72,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_resets_password_for_existing_admin_user(): void
+    public function it_changes_password_for_existing_admin_user(): void
     {
         $adminUser = new AdminUser();
 
