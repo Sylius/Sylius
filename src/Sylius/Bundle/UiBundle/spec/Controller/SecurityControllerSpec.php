@@ -83,7 +83,7 @@ final class SecurityControllerSpec extends ObjectBehavior
     ): void {
         $request->attributes = $requestAttributes;
         $requestAttributes->get('_sylius', [])->willReturn(['logged_in_route' => 'foo_bar']);
-        $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(true);
+        $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $router->generate('foo_bar')->willReturn('/login');
 
         $this->loginAction($request)->shouldHaveType(RedirectResponse::class);

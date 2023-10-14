@@ -38,7 +38,7 @@ final class SecurityController
     {
         $alreadyLoggedInRedirectRoute = $request->attributes->get('_sylius', [])['logged_in_route'] ?? null;
 
-        if ($alreadyLoggedInRedirectRoute && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($alreadyLoggedInRedirectRoute && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return new RedirectResponse($this->router->generate($alreadyLoggedInRedirectRoute));
         }
 
