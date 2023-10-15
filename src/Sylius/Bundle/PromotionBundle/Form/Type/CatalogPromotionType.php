@@ -46,10 +46,6 @@ final class CatalogPromotionType extends AbstractResourceType
                 'entry_type' => $this->catalogPromotionTranslationType,
                 'label' => 'sylius.form.catalog_promotion.translations',
             ])
-            ->add('enabled', CheckboxType::class, [
-                'label' => 'sylius.form.catalog_promotion.enabled',
-                'required' => false,
-            ])
             ->add('priority', NumberType::class, [
                 'label' => 'sylius.form.catalog_promotion.priority',
                 'required' => false,
@@ -89,6 +85,18 @@ final class CatalogPromotionType extends AbstractResourceType
                 'required' => false,
             ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+            /** @var CatalogPromotion $data */
+            $data = $event->getData();
+
+            $form = $event->getForm();
+            $form->add('enabled', CheckboxType::class, [
+                'label' => 'sylius.form.catalog_promotion.enabled',
+                'required' => false,
+                'disabled' => $data->getArchivedAt() !== null,
+            ]);
+        });
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
             $data = $event->getData();
