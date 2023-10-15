@@ -178,6 +178,7 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
+                    <attribute name="summary">Archives CatalogPromotion</attribute>
                     <attribute name="responses">
                         <attribute name="202">
                             <attribute name="description">CatalogPromotion resource archival request accepted</attribute>
@@ -201,6 +202,7 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
+                    <attribute name="summary">Restores Archived CatalogPromotion</attribute>
                     <attribute name="responses">
                         <attribute name="202">
                             <attribute name="description">CatalogPromotion resource restoral request accepted</attribute>
