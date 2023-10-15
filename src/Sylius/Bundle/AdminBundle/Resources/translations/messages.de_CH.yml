@@ -47,6 +47,11 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Bestellungen
+                support:
+                    header: Unterstützung
+                    professional_services: Professionelle Dienstleistungen
+                    find_a_partner: Einen Partner finden
+                    browse_plugins: Plugins durchsuchen
     ui:
         catalog_promotion:
             dates_details: Dieser Vorgang ist zeitintensiv! Bitte berücksichtigen Sie eine Verzögerung von 2-10 Minuten ab Start des angegebenen Datums. Die Verzögerung hängt von der Größe des Katalogs ab.

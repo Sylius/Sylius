@@ -41,3 +41,8 @@ sylius:
                 sales:
                     header: Predaj
                     orders: Objednávky
+                support:
+                    header: Podpora
+                    professional_services: Profesionálne služby
+                    find_a_partner: Nájdite partnera
+                    browse_plugins: Prehliadať pluginy

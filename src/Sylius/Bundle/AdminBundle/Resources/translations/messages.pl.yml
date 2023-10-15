@@ -43,6 +43,11 @@ sylius:
                 sales:
                     header: Sprzedaż
                     orders: Zamówienia
+                support:
+                    header: Wsparcie
+                    professional_services: Profesjonalne usługi
+                    find_a_partner: Znajdź partnera
+                    browse_plugins: Przeglądaj wtyczki
     ui:
         gateway:
             no_sca_support_notice: Wybrana bramka płatności nie obsługuje SCA.

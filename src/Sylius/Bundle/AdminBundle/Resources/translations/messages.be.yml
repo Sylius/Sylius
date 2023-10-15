@@ -38,3 +38,8 @@ sylius:
                 sales:
                     header: Продажы
                     orders: Замовы
+                support:
+                    header: Unterstützung
+                    professional_services: Professionelle Dienstleistungen
+                    find_a_partner: Einen Partner finden
+                    browse_plugins: Plugins durchsuchen

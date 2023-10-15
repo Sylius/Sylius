@@ -45,6 +45,11 @@ sylius:
                 sales:
                     header: Verkoop
                     orders: Bestellingen
+                support:
+                    header: Ondersteuning
+                    professional_services: Professionele diensten
+                    find_a_partner: Vind een partner
+                    browse_plugins: Blader door plugins
     ui:
         product:
             product_not_active_in_channel: Het product is nog niet geactiveerd in dit kanaal.
