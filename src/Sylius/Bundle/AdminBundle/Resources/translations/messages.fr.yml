@@ -47,6 +47,11 @@ sylius:
                 sales:
                     header: Ventes
                     orders: Commandes
+                support:
+                    header: Soutien
+                    professional_services: Services professionnels
+                    find_a_partner: Trouver un partenaire
+                    browse_plugins: Parcourir les plugins
     ui:
         product:
             product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.

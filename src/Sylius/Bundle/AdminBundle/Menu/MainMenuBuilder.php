@@ -35,6 +35,7 @@ final class MainMenuBuilder
         $this->addCustomersSubMenu($menu);
         $this->addMarketingSubMenu($menu);
         $this->addConfigurationSubMenu($menu);
+        $this->addSupportSubMenu($menu);
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
 
@@ -317,6 +318,35 @@ final class MainMenuBuilder
             ]]])
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
             ->setLabelAttribute('icon', 'lock')
+        ;
+    }
+
+    private function addSupportSubMenu(ItemInterface $menu): void
+    {
+        $configuration = $menu
+            ->addChild('support')
+            ->setLabel('sylius.menu.admin.main.support.header')
+        ;
+
+        $configuration
+            ->addChild('professional_services')
+            ->setUri('https://sylius.com/services/')
+            ->setLabel('sylius.menu.admin.main.support.professional_services')
+            ->setLabelAttribute('icon', 'cog')
+        ;
+
+        $configuration
+            ->addChild('find_a_partner')
+            ->setUri('https://sylius.com/find-a-partner/')
+            ->setLabel('sylius.menu.admin.main.support.find_a_partner')
+            ->setLabelAttribute('icon', 'handshake')
+        ;
+
+        $configuration
+            ->addChild('browse_plugins')
+            ->setUri('https://store.sylius.com/')
+            ->setLabel('sylius.menu.admin.main.support.browse_plugins')
+            ->setLabelAttribute('icon', 'plug')
         ;
     }
 }
