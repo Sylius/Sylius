@@ -45,6 +45,11 @@
                     <attribute name="groups">shop:product_variant:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-variants/{code}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <collectionOperations>

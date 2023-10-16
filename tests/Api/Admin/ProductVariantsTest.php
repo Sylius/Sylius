@@ -395,4 +395,56 @@ final class ProductVariantsTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    /** @test */
+    public function it_deletes_the_product_variant(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant_2'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    /** @test */
+    public function it_does_not_delete_the_product_variant_in_use(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_variant/delete_product_variant_in_use_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
 }

@@ -95,3 +95,24 @@ Sylius\Component\Product\Model\ProductOptionValueTranslation:
         locale: 'en_US'
         value: 'Red'
         translatable: '@product_option_value_color_red'
+
+Sylius\Component\Core\Model\Customer:
+    customer:
+        firstName: 'John'
+        lastName: 'Doe'
+        email: 'john.doe@example.com'
+        emailCanonical: 'john.doe@example.com'
+
+Sylius\Component\Core\Model\Order:
+    cart:
+        channel: '@channel_web'
+        items: ['@order_item']
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+        customer: '@customer'
+        state: 'cart'
+
+Sylius\Component\Core\Model\OrderItem:
+    order_item:
+        variant: '@product_variant'
+        order: '@cart'
