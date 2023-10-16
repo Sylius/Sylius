@@ -26,6 +26,10 @@ final readonly class LocaleCodeAwareInputDataProcessor implements InputDataProce
 
     public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): mixed
     {
+        if ($data->getLocaleCode() !== null) {
+            return [$data, $operation, $uriVariables, $context];
+        }
+
         $localeCode = $this->localeContext->getLocaleCode();
 
         $data->setLocaleCode($localeCode);
