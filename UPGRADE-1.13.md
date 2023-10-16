@@ -127,6 +127,8 @@
 1. PostgreSQL migration support has been introduced. If you are using PostgreSQL, we assume that you have already created a database schema in some way.
    All you need to do is run migrations, which will mark all migrations created before Sylius 1.13 as executed.
 
+1. Not passing an `$entityManager` and passing a `$doctrineRegistry` to `Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider` constructor is deprecated and will be prohibited in Sylius 2.0.
+
 1. Product variants resolving has been refactored for better extendability.
    The tag `sylius.product_variant_resolver.default` has been removed as it was never used.
 
@@ -166,3 +168,35 @@
     and should be used only this way.
 
 1. The `Sylius\Bundle\ShippingBundle\Provider\Calendar` has been deprecated and will be removed in Sylius 2.0. Use `Symfony\Component\Clock\Clock` instead. Note: this class is available since Symfony 6.2.
+
+1. In the `sylius_payment` state machine of `PaymentBundle`, there has been a change in the state name:
+    - State name change:
+        - From: `void`
+        - To: `unknown`
+
+1. In the `sylius_payment` state machine of `PaymentBundle`, a new state `authorized` has been introduced, along with a new transition:
+    - Transition `authorize`:
+        - From states: [`new`, `processing`]
+        - To state: `authorized`
+
+   Due to that the following transitions have been updated:
+    - Transition `complete`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `completed`
+    - Transition `fail`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `failed`
+    - Transition `cancel`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `cancelled`
+    - Transition `void`:
+        - From states: [`new`, `processing`, `authorized`]
+        - To state: `unknown`
+
+1. The `sylius_payment` state machine of `CoreBundle` has been updated to allow failing an authorized payment:
+    ```diff
+        fail:
+    -       from: [new, processing]
+    +       from: [new, processing, authorized]
+            to: failed
+    ```

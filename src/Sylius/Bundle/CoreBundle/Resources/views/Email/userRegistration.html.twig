@@ -1,7 +1,7 @@
 {% extends '@SyliusCore/Email/layout.html.twig' %}
 
 {% block subject %}
-    {{ 'sylius.email.user_registration.subject'|trans({}, null, localeCode) }}
+    {{ 'sylius.email.user_registration.subject'|trans({}, null, localeCode)|raw }}
 {% endblock %}
 
 {% block content %}
