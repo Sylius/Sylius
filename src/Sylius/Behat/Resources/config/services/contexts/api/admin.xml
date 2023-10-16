@@ -214,12 +214,12 @@
 <!--            <argument type="service" id="sylius.behat.shared_storage" />-->
 <!--        </service>-->
 
-<!--        <service id="sylius.behat.context.api.admin.resetting_password" class="Sylius\Behat\Context\Api\Admin\ResettingPasswordContext">-->
-<!--            <argument type="service" id="sylius.behat.api_platform_client.shop" />-->
-<!--            <argument type="service" id="sylius.behat.request_factory" />-->
-<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.context.api.admin.resetting_password" class="Sylius\Behat\Context\Api\Admin\ResettingPasswordContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+            <argument type="service" id="sylius.behat.request_factory" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument>%sylius.security.new_api_route%</argument>
+        </service>
 
 <!--        <service id="Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext">-->
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
