@@ -33,6 +33,9 @@ final class Version20231003081106 extends AbstractPostgreSQLMigration
 
         $this->addSql('ALTER TABLE sylius_payment ALTER COLUMN details TYPE TEXT');
         $this->addSql('COMMENT ON COLUMN sylius_payment.details IS \'(DC2Type:json)\'');
+
+        $this->addSql('ALTER TABLE sylius_gateway_config ALTER COLUMN config TYPE TEXT');
+        $this->addSql('COMMENT ON COLUMN sylius_gateway_config.config IS \'(DC2Type:json)\'');
     }
 
     public function down(Schema $schema): void
@@ -45,5 +48,8 @@ final class Version20231003081106 extends AbstractPostgreSQLMigration
 
         $this->addSql('ALTER TABLE sylius_payment ALTER COLUMN details TYPE JSON USING json(details)');
         $this->addSql('COMMENT ON COLUMN sylius_payment.details IS NULL');
+
+        $this->addSql('ALTER TABLE sylius_gateway_config ALTER COLUMN config TYPE JSON USING json(config)');
+        $this->addSql('COMMENT ON COLUMN sylius_gateway_config.config IS NULL');
     }
 }
