@@ -26,10 +26,24 @@ final class Version20231003081106 extends AbstractPostgreSQLMigration
     public function up(Schema $schema): void
     {
         $this->addSql('ALTER TABLE sylius_product_attribute_value ALTER COLUMN json_value TYPE TEXT');
+        $this->addSql('COMMENT ON COLUMN sylius_product_attribute_value.json_value IS \'(DC2Type:json)\'');
+
+        $this->addSql('ALTER TABLE sylius_adjustment ALTER COLUMN details TYPE TEXT');
+        $this->addSql('COMMENT ON COLUMN sylius_adjustment.details IS \'(DC2Type:json)\'');
+
+        $this->addSql('ALTER TABLE sylius_payment ALTER COLUMN details TYPE TEXT');
+        $this->addSql('COMMENT ON COLUMN sylius_payment.details IS \'(DC2Type:json)\'');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE sylius_product_attribute_value ALTER COLUMN json_value TYPE JSON');
+        $this->addSql('ALTER TABLE sylius_product_attribute_value ALTER COLUMN json_value TYPE JSON USING json(json_value)');
+        $this->addSql('COMMENT ON COLUMN sylius_product_attribute_value.json_value IS NULL');
+
+        $this->addSql('ALTER TABLE sylius_adjustment ALTER COLUMN details TYPE JSON USING json(details)');
+        $this->addSql('COMMENT ON COLUMN sylius_adjustment.details IS NULL');
+
+        $this->addSql('ALTER TABLE sylius_payment ALTER COLUMN details TYPE JSON USING json(details)');
+        $this->addSql('COMMENT ON COLUMN sylius_payment.details IS NULL');
     }
 }
