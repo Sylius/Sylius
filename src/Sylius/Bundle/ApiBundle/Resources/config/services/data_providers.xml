@@ -18,10 +18,6 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\DataProvider\AccountResetPasswordItemDataProvider">
-            <tag name="api_platform.item_data_provider" priority="10" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\DataProvider\AdminResetPasswordItemDataProvider">
             <tag name="api_platform.item_data_provider" priority="10" />
         </service>
