@@ -18,8 +18,15 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved;
 use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Webmozart\Assert\Assert;
 
-final class CountryProcessor implements ProcessorInterface
+/**
+ * @experimental
+ *
+ * @implements ProcessorInterface<CountryInterface>
+ */
+final readonly class CountryProcessor implements ProcessorInterface
 {
     public function __construct(
         private ProcessorInterface $persistProcessor,
@@ -28,8 +35,13 @@ final class CountryProcessor implements ProcessorInterface
     ) {
     }
 
+    /**
+     * @param CountryInterface $data
+     */
     public function process($data, Operation $operation, array $uriVariables = [], array $context = [])
     {
+        Assert::isInstanceOf($data, CountryInterface::class);
+
         if ($operation instanceof DeleteOperationInterface) {
             return $this->removeProcessor->process($data, $operation, $uriVariables, $context);
         }
