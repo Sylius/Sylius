@@ -26,6 +26,7 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
 
 final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterface
@@ -56,15 +57,21 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
         Assert::notNull($this->resquest);
         $localeCode = $this->localeContext->getLocaleCode();
 
+        // @see Sylius\Bundle\ResourceBundle\ExpressionLanguage\NotNullExpressionFunctionProvider
+        $taxon = $this->taxonRepository->findOneBySlug(
+                    $this->resquest->attributes->get('slug'),
+                    $localeCode,
+        );
+        if ($taxon === null)  {
+            throw new NotFoundHttpException('Requested page is invalid');
+        }
+
         $gridBuilder
             ->setRepositoryMethod('createShopListQueryBuilder', [
                 $this->channelContext->getChannel(),
-                $this->taxonRepository->findOneBySlug(
-                    $this->resquest->attributes->get('slug'),
-                    $localeCode,
-                ),
+                $taxon,
                 $localeCode,
-                $this->resquest->query->get('sorting') ?? [],
+                $this->resquest->query->all('sorting'),
                 $this->includeAllDescendants,
             ])
             ->orderBy('position', 'asc')
