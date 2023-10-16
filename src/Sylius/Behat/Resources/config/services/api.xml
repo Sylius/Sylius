@@ -32,12 +32,12 @@
             <argument type="service" id="test.client" />
         </service>
 
-<!--        <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">-->
-<!--            <argument type="service" id="test.client" />-->
-<!--            <argument type="service" id="sylius.behat.shared_storage" />-->
-<!--            <argument>%sylius.security.new_api_route%</argument>-->
-<!--            <argument>admin</argument>-->
-<!--        </service>-->
+        <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
+            <argument type="service" id="test.client" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>admin</argument>
+        </service>
 
 <!--        <service id="sylius.behat.client.shop_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">-->
 <!--            <argument type="service" id="test.client" />-->
