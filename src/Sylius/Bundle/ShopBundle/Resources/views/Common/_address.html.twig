@@ -1,4 +1,4 @@
-{% import "@SyliusUi/Macro/flags.html.twig" as flags %}
+{% import "@SyliusShop/Macro/flags.html.twig" as flags %}
 
 <address {{ sylius_test_html_attribute('address-context', "%s %s"|format(address.firstName, address.lastName)) }}>
     {% if address.company is not null %}
