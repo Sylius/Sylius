@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Api\Admin;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,12 +28,12 @@ final class AvatarImageTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             server: $header,
         );
 
@@ -53,7 +52,7 @@ final class AvatarImageTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', 'wrong input'),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', 'wrong input'),
             server: $header,
         );
 
@@ -73,10 +72,7 @@ final class AvatarImageTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/avatar-images',
-            parameters: [
-                'owner' => sprintf('/api/v2/admin/administrators/%s', $adminUser->getId()),
-            ],
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             files: ['file' => $this->getUploadedFile('fixtures/ford.jpg', 'ford.jpg')],
             server: $header,
         );
@@ -95,12 +91,12 @@ final class AvatarImageTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'DELETE',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             server: $header,
         );
 

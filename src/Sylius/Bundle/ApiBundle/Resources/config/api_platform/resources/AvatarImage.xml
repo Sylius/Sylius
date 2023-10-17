@@ -16,7 +16,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
 >
-    <resource class="Sylius\Component\Core\Model\AvatarImage" shortName="AvatarImage">
+    <resource class="Sylius\Component\Core\Model\AvatarImage" uriTemplate="/admin/administrators/{id}/avatar-image.{_format}">
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="Sylius\Component\Core\Model\AdminUser" fromProperty="avatar"/>
+        </uriVariables>
+
         <validationContext>
             <values>
                 <value name="groups">
@@ -28,7 +32,7 @@
         </validationContext>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/avatar-images/{id}.{_format}">
+            <operation class="ApiPlatform\Metadata\Get">
                 <normalizationContext>
                     <values>
                         <value name="groups">
@@ -42,7 +46,6 @@
 
             <operation
                 class="ApiPlatform\Metadata\Post"
-                uriTemplate="/admin/avatar-images.{_format}"
                 controller="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction"
                 deserialize="false"
             >
@@ -72,12 +75,6 @@
                                                                 <value name="format">binary</value>
                                                             </values>
                                                         </value>
-                                                        <value name="owner">
-                                                            <values>
-                                                                <value name="type">string</value>
-                                                                <value name="format">iri-reference</value>
-                                                            </values>
-                                                        </value>
                                                     </values>
                                                 </value>
                                             </values>
@@ -90,10 +87,7 @@
                 </openapi>
             </operation>
 
-            <operation
-                class="ApiPlatform\Metadata\Delete"
-                uriTemplate="/admin/avatar-images/{id}"
-            />
+            <operation class="ApiPlatform\Metadata\Delete"/>
         </operations>
     </resource>
 </resources>
