@@ -44,6 +44,12 @@ sylius:
                 sales:
                     header: فروش‌ها
                     orders: سفارش‌ها
+                extras:
+                    header: افزونه‌ها
+                    browse_plugins: مرور افزونه‌ها
+                    sylius_plus: Sylius Plus
+                    professional_services: خدمات حرفه‌ای
+                    find_a_partner: پیدا کردن همکار
     ui:
         gateway:
             no_sca_support_notice: درگاه پرداخت انتخابی SCA را پشتیبانی نمی کند.

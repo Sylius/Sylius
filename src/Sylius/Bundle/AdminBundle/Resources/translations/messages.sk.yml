@@ -42,7 +42,8 @@ sylius:
                     header: Predaj
                     orders: Objednávky
                 support:
-                    header: Podpora
+                    header: Doplnky
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Prehliadať pluginy
                     professional_services: Profesionálne služby
                     find_a_partner: Nájdite partnera
-                    browse_plugins: Prehliadať pluginy

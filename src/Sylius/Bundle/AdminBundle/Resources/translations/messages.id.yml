@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Penjualan
                     orders: Pemesanan
+                extras:
+                    header: Ekstra
+                    browse_plugins: Telusuri plugin
+                    sylius_plus: Sylius Plus
+                    professional_services: Layanan profesional
+                    find_a_partner: Temukan mitra

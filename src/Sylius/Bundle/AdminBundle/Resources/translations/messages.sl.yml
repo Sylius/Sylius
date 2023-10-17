@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Prodaja
                     orders: Naročila
+                extras:
+                    header: Dodatki
+                    browse_plugins: Prebrskaj vtičnike
+                    sylius_plus: Sylius Plus
+                    professional_services: Strokovne storitve
+                    find_a_partner: Poišči partnerja

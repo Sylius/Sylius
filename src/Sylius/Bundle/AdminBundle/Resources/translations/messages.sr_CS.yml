@@ -37,3 +37,9 @@ sylius:
                 sales:
                     header: Akcije
                     orders: Narudžbine
+                extras:
+                    header: Dodaci
+                    browse_plugins: Pregledaj dodatke
+                    sylius_plus: Sylius Plus
+                    professional_services: Profesionalne usluge
+                    find_a_partner: Pronađi partnera

@@ -45,6 +45,12 @@ sylius:
                 sales:
                     header: Prodeje
                     orders: Objednávky
+                extras:
+                    header: Doplňky
+                    browse_plugins: Procházet pluginy
+                    sylius_plus: Sylius Plus
+                    professional_services: Profesionální služby
+                    find_a_partner: Najít partnera
     ui:
         product:
             product_not_active_in_channel: Produkt ještě není v tomto kanálu aktivován.

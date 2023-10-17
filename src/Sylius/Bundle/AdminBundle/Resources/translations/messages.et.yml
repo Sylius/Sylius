@@ -9,3 +9,9 @@ sylius:
                     channels: Kanalid
                     currencies: Valuutad
                     locales: Keeled
+            extras:
+                header: Lisad
+                browse_plugins: Sirvi pluginaid
+                sylius_plus: Sylius Plus
+                professional_services: Professionaalsed teenused
+                find_a_partner: Leia partner

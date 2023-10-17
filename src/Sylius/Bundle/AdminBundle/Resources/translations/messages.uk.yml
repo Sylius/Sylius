@@ -45,10 +45,11 @@ sylius:
                     header: Збут
                     orders: Замовлення
                 support:
-                    header: Підтримка
+                    header: Додатки
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Перегляд плагінів
                     professional_services: Професійні послуги
                     find_a_partner: Знайти партнера
-                    browse_plugins: Перегляд плагінів
     ui:
         gateway:
             no_sca_support_notice: Обраний платіжний шлюз не підтримує SCA.
