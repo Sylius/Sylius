@@ -55,15 +55,15 @@ final class CartItemFactorySpec extends ObjectBehavior
     ): void {
         $decoratedFactory->createNew()->willReturn($cartItem);
         $variantResolver->getVariant($product)->willReturn($productVariant);
-        $productVariant->isWholesale()->willReturn(false);
+        $productVariant->getOrderItemUnitGenerationMode()->willReturn(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE);
 
         $cartItem->setVariant($productVariant)->shouldBeCalled();
-        $cartItem->setWholesale(false)->shouldBeCalledOnce();
+        $cartItem->setSingleUnit(false)->shouldBeCalledOnce();
 
         $this->createForProduct($product)->shouldReturn($cartItem);
     }
 
-    function it_creates_a_cart_item_and_assigns_a_wholesale_product_variant(
+    function it_creates_a_cart_item_and_assigns_a_single_unit_product_variant(
         FactoryInterface $decoratedFactory,
         ProductVariantResolverInterface $variantResolver,
         OrderItemInterface $cartItem,
@@ -72,10 +72,10 @@ final class CartItemFactorySpec extends ObjectBehavior
     ): void {
         $decoratedFactory->createNew()->willReturn($cartItem);
         $variantResolver->getVariant($product)->willReturn($productVariant);
-        $productVariant->isWholesale()->willReturn(true);
+        $productVariant->getOrderItemUnitGenerationMode()->willReturn(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
 
         $cartItem->setVariant($productVariant)->shouldBeCalled();
-        $cartItem->setWholesale(true)->shouldBeCalledOnce();
+        $cartItem->setSingleUnit(true)->shouldBeCalledOnce();
 
         $this->createForProduct($product)->shouldReturn($cartItem);
     }

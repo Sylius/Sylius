@@ -35,9 +35,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     /** @var bool */
     protected $tracked = false;
 
-    /** @var bool */
-    protected $wholesale = false;
-
     /** @var float|null */
     protected $weight;
 
@@ -61,6 +58,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
 
     /** @var bool */
     protected $shippingRequired = true;
+
+    /** @var int */
+    protected $orderItemUnitGenerationMode = ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE;
 
     /**
      * @var Collection|ProductImageInterface[]
@@ -142,14 +142,14 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
         $this->tracked = $tracked;
     }
 
-    public function isWholesale(): bool
+    public function getOrderItemUnitGenerationMode(): int
     {
-        return $this->wholesale;
+        return $this->orderItemUnitGenerationMode;
     }
 
-    public function setWholesale(bool $wholesale): void
+    public function setOrderItemUnitGenerationMode(int $orderItemUnitGenerationMode): void
     {
-        $this->wholesale = $wholesale;
+        $this->orderItemUnitGenerationMode = $orderItemUnitGenerationMode;
     }
 
     public function getInventoryName(): ?string

@@ -135,11 +135,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I check the wholesale option
+     * @When I check its single order item unit option
      */
-    public function iCheckWholesaleOption(): void
+    public function iCheckItsSingleOrderItemUnitOption(): void
     {
-        $this->createSimpleProductPage->checkWholesaleOption(true);
+        $this->createSimpleProductPage->chooseSingleOrderItemUnitOption(true);
     }
 
     /**
@@ -249,11 +249,15 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^the (product "[^"]+") should be wholesale$/
+     * @Then /^the (product "[^"]+") should have single order item unit mode set$/
      */
-    public function theProductShouldBeWholesale(ProductInterface $product): void
+    public function theProductShouldHaveSingleOrderItemUnitModeSet(ProductInterface $product): void
     {
-        Assert::true($product->getVariants()->first()->isWholesale(), 'Product has to be wholesale');
+        Assert::true(
+            $product->getVariants()->first()->getOrderItemUnitGenerationMode(),
+            ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
+            'Product has to be single unit',
+        );
     }
 
     /**

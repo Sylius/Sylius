@@ -133,7 +133,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
     }
 
-    function it_applies_percentage_discount_on_wholesale_unit(
+    function it_applies_percentage_discount_on_single_unit_order_item_unit(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,

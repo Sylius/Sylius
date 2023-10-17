@@ -7,7 +7,7 @@
             "@id": "\/api\/v2\/admin\/product-variants/MUG",
             "@type": "ProductVariant",
             "code": "MUG",
-            "wholesale": false,
+            "orderItemUnitGenerationMode": 0,
             "product": "\/api\/v2\/admin\/products\/MUG_SW",
             "channelPricings": {
                 "WEB": {

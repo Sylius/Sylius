@@ -37,7 +37,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem,
     ): void {
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $orderItem->getQuantity()->willReturn(1);
 
         $orderItemUnitFactory->createForItem($orderItem)->shouldBeCalledTimes(2);
@@ -52,7 +52,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitInterface $unit3,
         OrderItemUnitInterface $unit4,
     ): void {
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $orderItem->getQuantity()->willReturn(4);
         $orderItem->getUnits()->willReturn(new ArrayCollection([
             $unit1->getWrappedObject(),
@@ -69,7 +69,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem,
     ): void {
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
@@ -83,7 +83,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem,
     ): void {
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
@@ -97,7 +97,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem,
     ): void {
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $orderItem->getQuantity()->willReturn(3);
 
         $orderItemUnitFactory->createForItem(Argument::any())->shouldNotBeCalled();
@@ -107,13 +107,13 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, -10);
     }
 
-    function it_adds_order_item_unit_for_wholesale_order_item(
+    function it_adds_order_item_unit_for_single_unit_order_item(
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unitToRemove1,
         OrderItemUnitInterface $unitToRemove2,
     ): void {
-        $orderItem->isWholesale()->willReturn(true);
+        $orderItem->isSingleUnit()->willReturn(true);
         $orderItem->getUnits()->willReturn(new ArrayCollection([
             $unitToRemove1->getWrappedObject(),
             $unitToRemove2->getWrappedObject(),
@@ -122,7 +122,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $orderItem->removeUnit($unitToRemove1)->shouldBeCalledOnce();
         $orderItem->removeUnit($unitToRemove2)->shouldBeCalledOnce();
 
-        $orderItemUnitFactory->createWholesaleForItem($orderItem, 5)->shouldBeCalledOnce();
+        $orderItemUnitFactory->createSingleUnitForItem($orderItem, 5)->shouldBeCalledOnce();
 
         $this->modify($orderItem, 5);
     }

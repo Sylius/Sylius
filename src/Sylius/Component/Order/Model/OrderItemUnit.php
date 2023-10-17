@@ -161,8 +161,8 @@ class OrderItemUnit implements OrderItemUnitInterface
         }
     }
 
-    public function isWholesale(): bool
+    public function isSingleUnit(): bool
     {
-        return $this->orderItem->isWholesale();
+        return $this->orderItem->isSingleUnit();
     }
 }

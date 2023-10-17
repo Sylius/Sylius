@@ -6,7 +6,7 @@ Feature: Adding a simple product of given quantity to the cart
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a wholesale product "T-Shirt grape" priced at "$56.12"
+        And the store has a product "T-Shirt grape" configured as single order item unit priced at "$56.12"
         And the store has a product "T-Shirt banana" priced at "$12.54"
 
     @ui @api
@@ -26,7 +26,7 @@ Feature: Adding a simple product of given quantity to the cart
         And I should see "T-Shirt banana" with quantity 9999 in my cart
 
     @ui @api
-    Scenario: Adding a wholesale product to the cart
+    Scenario: Adding a product configured as single order item unit to the cart
         Given there are 10 units of product "T-Shirt grape" available in the inventory
         When I add 10 products "T-Shirt grape" to the cart
         Then I should be on my cart summary page

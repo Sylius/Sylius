@@ -133,15 +133,15 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getShippingHeight()->shouldReturn(110.00);
     }
 
-    function it_is_not_wholesale_by_default(): void
+    function it_is_not_single_unit_by_default(): void
     {
-        $this->isWholesale()->shouldReturn(false);
+        $this->getOrderItemUnitGenerationMode()->shouldReturn(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE);
     }
 
-    function it_is_wholesale_when_configured(): void
+    function it_is_single_unit_when_configured(): void
     {
-        $this->setWholesale(true);
-        $this->isWholesale()->shouldReturn(true);
+        $this->setOrderItemUnitGenerationMode(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
+        $this->getOrderItemUnitGenerationMode()->shouldReturn(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
     }
 
     function it_has_no_code_by_default(): void

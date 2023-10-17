@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
@@ -65,12 +66,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('tracked')->isChecked();
     }
 
-    public function checkWholesaleOption(bool $value): void
+    public function chooseSingleOrderItemUnitOption(bool $value): void
     {
         if ($value) {
-            $this->getElement('wholesale')->check();
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
         } else {
-            $this->getElement('wholesale')->uncheck();
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE);
         }
     }
 
@@ -136,9 +139,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('shipping_required')->isChecked();
     }
 
-    public function isWholesale(): bool
+    public function isSingleUnit(): bool
     {
-        return $this->getElement('wholesale')->isChecked();
+        return $this->getElement('order_item_unit_generation_mode')->getValue() === ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE;
     }
 
     protected function getDefinedElements(): array
@@ -148,7 +151,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'minimum_price' => '#sylius_product_variant_channelPricings_%channelCode%_minimumPrice',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
-            'wholesale' => '#sylius_product_variant_wholesale',
+            'order_item_unit_generation_mode' => '#sylius_product_variant_orderItemUnitGenerationMode',
             'option_values' => '#sylius_product_variant_optionValues_%optionName%',
             'original_price' => '#sylius_product_variant_channelPricings_%channelCode%_originalPrice',
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',

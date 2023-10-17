@@ -14,7 +14,7 @@
         }
     },
     "code": "MUG",
-    "wholesale": false,
+    "orderItemUnitGenerationMode": 0,
     "product": "\/api\/v2\/admin\/products\/MUG_SW",
     "optionValues": [],
     "enabled": true,

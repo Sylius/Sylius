@@ -127,12 +127,12 @@ final class OrderItemSpec extends ObjectBehavior
         $unit1->getOrderItem()->willReturn($this);
         $unit1->getTotal()->willReturn(100);
         $unit1->getAdjustments(null)->willReturn(new ArrayCollection([$unitAdjustment1->getWrappedObject()]));
-        $unit1->isWholesale()->willReturn(false);
+        $unit1->isSingleUnit()->willReturn(false);
 
         $unit2->getOrderItem()->willReturn($this);
         $unit2->getTotal()->willReturn(100);
         $unit2->getAdjustments(null)->willReturn(new ArrayCollection([$unitAdjustment2->getWrappedObject()]));
-        $unit2->isWholesale()->willReturn(false);
+        $unit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($unit1);
         $this->addUnit($unit2);
@@ -149,10 +149,10 @@ final class OrderItemSpec extends ObjectBehavior
     {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(0);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(0);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
         $this->getUnits()->shouldHaveType(Collection::class);
 
         $this->addUnit($orderItemUnit1);
@@ -180,10 +180,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(0, 100);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(0, 100);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -223,10 +223,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(1499);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(1499);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -239,10 +239,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(2000);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(1000);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -259,10 +259,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(1499);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(1499);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-1000);
@@ -312,7 +312,7 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(1499);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
 
         $adjustment->isNeutral()->willReturn(false);
         $adjustment->getAmount()->willReturn(-2000);
@@ -329,10 +329,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(0, 100);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(0, 100);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -347,10 +347,10 @@ final class OrderItemSpec extends ObjectBehavior
     ): void {
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(0);
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(0, 100);
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addUnit($orderItemUnit1);
         $this->addUnit($orderItemUnit2);
@@ -441,11 +441,11 @@ final class OrderItemSpec extends ObjectBehavior
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(500);
         $orderItemUnit1->getAdjustments(null)->willReturn(new ArrayCollection([$taxAdjustment1->getWrappedObject()]));
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(300);
         $orderItemUnit2->getAdjustments(null)->willReturn(new ArrayCollection([$taxAdjustment2->getWrappedObject()]));
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addAdjustment($adjustment1);
         $this->addUnit($orderItemUnit1);
@@ -478,12 +478,12 @@ final class OrderItemSpec extends ObjectBehavior
         $orderItemUnit1->getTotal()->willReturn(500);
         $orderItemUnit1->getAdjustments('tax')->willReturn(new ArrayCollection([$taxAdjustment1->getWrappedObject()]));
         $orderItemUnit1->getAdjustments('promotion')->willReturn(new ArrayCollection([$promotionAdjustment->getWrappedObject()]));
-        $orderItemUnit1->isWholesale()->willReturn(false);
+        $orderItemUnit1->isSingleUnit()->willReturn(false);
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(300);
         $orderItemUnit2->getAdjustments('tax')->willReturn(new ArrayCollection([$taxAdjustment2->getWrappedObject()]));
         $orderItemUnit2->getAdjustments('promotion')->willReturn(new ArrayCollection());
-        $orderItemUnit2->isWholesale()->willReturn(false);
+        $orderItemUnit2->isSingleUnit()->willReturn(false);
 
         $this->addAdjustment($adjustment1);
         $this->addUnit($orderItemUnit1);
@@ -493,14 +493,14 @@ final class OrderItemSpec extends ObjectBehavior
         $this->getAdjustmentsTotalRecursively('promotion')->shouldReturn(30);
     }
 
-    function it_adds_wholesale_unit(
+    function it_adds_single_unit_order_item_unit(
         OrderItemUnitInterface $orderItemUnit,
     ): void {
         $orderItemUnit->getQuantity()->willReturn(3);
         $orderItemUnit->getTotal()->willReturn(500);
         $orderItemUnit->getOrderItem()->willReturn($this->getWrappedObject());
 
-        $this->setWholesale(true);
+        $this->setSingleUnit(true);
         $this->addUnit($orderItemUnit);
 
         $this->getQuantity()->shouldReturn(3);

@@ -12,7 +12,7 @@ Feature: Apply correct taxes on visitor cart
         And default tax zone is "US"
         And the store has "RoW VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has "US VAT" tax rate of 23% for "Clothes" within the "US" zone
-        And the store has a wholesale product "Symfony T-Shirt" priced at "$120.00"
+        And the store has a product "Symfony T-Shirt" configured as single order item unit priced at "$120.00"
         And it belongs to "Clothes" tax category
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category

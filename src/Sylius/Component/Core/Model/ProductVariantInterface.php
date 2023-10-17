@@ -30,9 +30,13 @@ interface ProductVariantInterface extends
     VersionedInterface,
     ProductImagesAwareInterface
 {
-    public function isWholesale(): bool;
+    public const ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE = 0;
 
-    public function setWholesale(bool $wholesale): void;
+    public const ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE = 1;
+
+    public function getOrderItemUnitGenerationMode(): int;
+
+    public function setOrderItemUnitGenerationMode(int $orderItemUnitGenerationMode): void;
 
     public function getWeight(): ?float;
 

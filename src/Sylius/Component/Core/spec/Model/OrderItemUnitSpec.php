@@ -30,7 +30,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
-        $orderItem->isWholesale()->willReturn(false);
+        $orderItem->isSingleUnit()->willReturn(false);
         $this->beConstructedWith($orderItem);
     }
 
@@ -54,20 +54,20 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
-    function it_is_not_wholesale_by_default(): void
+    function it_is_not_single_unit_by_default(): void
     {
-        $this->isWholesale()->shouldReturn(false);
+        $this->isSingleUnit()->shouldReturn(false);
         $this->getQuantity()->shouldReturn(1);
     }
 
-    function it_is_wholesale(OrderItemInterface $orderItem): void
+    function it_is_single_unit(OrderItemInterface $orderItem): void
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
-        $orderItem->isWholesale()->willReturn(true);
+        $orderItem->isSingleUnit()->willReturn(true);
         $this->beConstructedWith($orderItem, 150);
 
-        $this->isWholesale()->shouldReturn(true);
+        $this->isSingleUnit()->shouldReturn(true);
         $this->getQuantity()->shouldReturn(150);
     }
 

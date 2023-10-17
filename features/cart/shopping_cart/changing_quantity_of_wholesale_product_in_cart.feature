@@ -1,12 +1,12 @@
 @shopping_cart
-Feature: Changing quantity of a wholesale product in cart
-    In order to buy chosen quantity of a specific wholesale product
+Feature: Changing quantity of a product configured as single order item unit in cart
+    In order to buy chosen quantity of a specific product which is configured to be single order item unit
     As a Visitor
     I want to be able to change quantity of an item in my cart
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a wholesale product "T-Shirt grape" priced at "$25.12"
+        And the store has a product "T-Shirt grape" configured as single order item unit priced at "$25.12"
         And I add this product to the cart
 
     @ui @api

@@ -126,7 +126,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(true);
     }
 
-    function it_applies_a_fixed_discount_on_wholesale_unit(
+    function it_applies_a_fixed_discount_on_single_unit_order_item_unit(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,

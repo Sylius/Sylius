@@ -66,11 +66,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I check its wholesale option
+     * @When I check its single order item unit option
      */
-    public function iCheckItsWholesaleOption(): void
+    public function iCheckItsSingleOrderItemUnitOption(): void
     {
-        $this->client->addRequestData('wholesale', true);
+        $this->client->addRequestData('orderItemUnitGenerationMode', ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
     }
 
     /**
@@ -239,13 +239,16 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^the (variant with code "[^"]+") should be wholesale$/
+     * @Then /^the (variant with code "[^"]+") should have single order item unit mode set$/
      */
-    public function theVariantWithCodeShouldBeWholesale(ProductVariantInterface $productVariant): void
+    public function theVariantWithCodeShouldHaveSingleOrderItemUnitModeSet(ProductVariantInterface $productVariant): void
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::true($response[self::FIRST_COLLECTION_ITEM]['wholesale']);
+        Assert::eq(
+            $response[self::FIRST_COLLECTION_ITEM]['orderItemUnitGenerationMode'],
+            ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
+        );
     }
 
     /**

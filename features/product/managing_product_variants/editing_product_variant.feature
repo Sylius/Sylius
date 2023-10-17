@@ -24,9 +24,9 @@ Feature: Editing a product variant
         And the variant with code "GO" should be named "Kawa" in "Polish (Poland)" locale
 
     @api @ui
-    Scenario: Changing the wholesale option
+    Scenario: Changing the order item unit generation option
         Given I want to modify the "Go" product variant
-        When I check its wholesale option
+        When I check its single order item unit option
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the variant with code "GO" should be wholesale
+        And the variant with code "GO" should have single order item unit mode set

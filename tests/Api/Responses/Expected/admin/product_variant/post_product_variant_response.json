@@ -3,7 +3,7 @@
     "@id":"\/api\/v2\/admin\/product-variants\/MUG_2",
     "@type":"ProductVariant",
     "code":"MUG_2",
-    "wholesale": false,
+    "orderItemUnitGenerationMode": 0,
     "product":"\/api\/v2\/admin\/products\/MUG_SW",
     "channelPricings": {
         "WEB": {

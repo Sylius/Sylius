@@ -23,7 +23,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function enableTracking(): void;
 
-    public function checkWholesaleOption(bool $value): void;
+    public function chooseSingleOrderItemUnitOption(bool $value): void;
 
     public function isCodeDisabled(): bool;
 
@@ -31,7 +31,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isShippingRequired(): bool;
 
-    public function isWholesale(): bool;
+    public function isSingleUnit(): bool;
 
     public function isTracked(): bool;
 

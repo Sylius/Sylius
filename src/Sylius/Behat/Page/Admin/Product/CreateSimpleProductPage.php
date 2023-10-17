@@ -20,6 +20,7 @@ use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -59,12 +60,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
     }
 
-    public function checkWholesaleOption(bool $value): void
+    public function chooseSingleOrderItemUnitOption(bool $value): void
     {
         if ($value) {
-            $this->getElement('wholesale')->check();
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
         } else {
-            $this->getElement('wholesale')->uncheck();
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE);
         }
     }
 
@@ -294,7 +297,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
-            'wholesale' => '#sylius_product_variant_wholesale',
+            'order_item_unit_generation_mode' => '#sylius_product_variant_orderItemUnitGenerationMode',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'slug' => '#sylius_product_translations_%locale%_slug',

@@ -7,7 +7,7 @@ Feature: Adding a simple product to the cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-Shirt banana" priced at "$12.54"
-        And the store has a wholesale product "T-Shirt grape" priced at "$25.12"
+        And the store has a product "T-Shirt grape" configured as single order item unit priced at "$25.12"
         And the store ships everywhere for free
 
     @ui @api
@@ -19,7 +19,7 @@ Feature: Adding a simple product to the cart
         And this item should have name "T-Shirt banana"
 
     @ui @api
-    Scenario: Adding a wholesale product to the cart
+    Scenario: Adding a product configured as single order item unit to the cart
         When I add "T-Shirt grape" product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
@@ -59,7 +59,7 @@ Feature: Adding a simple product to the cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart
 
     @ui @api
-    Scenario: Increasing quantity of a wholesale item in cart by adding the product again
+    Scenario: Increasing quantity of a single unit item in cart by adding the product again
         Given I have product "T-Shirt grape" in the cart
         When I add "T-Shirt grape" product to the cart
         Then there should be one item in my cart

@@ -87,14 +87,14 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the store has a wholesale product "([^"]+)"$/
-     * @Given /^the store has a wholesale product "([^"]+)" priced at ("[^"]+")$/
+     * @Given /^the store has a product "([^"]+)" configured as single order item unit$/
+     * @Given /^the store has a product "([^"]+)" configured as single order item unit priced at ("[^"]+")$/
      */
-    public function storeHasAWholesaleProductPricedAt(
+    public function storeHasAProductConfiguredAsSingleOrderItemUnitPricedAt(
         string $productName,
         int $price = 100
     ): void {
-        $product = $this->createWholesaleProduct($productName, $price, null);
+        $product = $this->createSingleOrderItemUnitProduct($productName, $price, null);
 
         $this->saveProduct($product);
     }
@@ -1374,11 +1374,11 @@ final class ProductContext implements Context
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    private function createWholesaleProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
+    private function createSingleOrderItemUnitProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
     {
         $product = $this->createProduct($productName, $price, $channel);
         foreach ($product->getVariants() as $variant) {
-            $variant->setWholesale(true);
+            $variant->setOrderItemUnitGenerationMode(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
         }
 
         return $product;

@@ -133,7 +133,7 @@ final class ShipmentSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($date);
     }
 
-    function it_returns_weight_for_wholesale_units(
+    function it_returns_weight_for_units_being_single_unit(
         ShipmentUnitInterface $unit1,
         ShipmentUnitInterface $unit2,
         ShippableInterface $shippable1,
@@ -155,7 +155,7 @@ final class ShipmentSpec extends ObjectBehavior
         $this->getShippingWeight()->shouldReturn(65.0);
     }
 
-    function it_returns_volume_for_wholesale_units(
+    function it_returns_volume_for_units_being_single_unit(
         ShipmentUnitInterface $unit1,
         ShipmentUnitInterface $unit2,
         ShippableInterface $shippable1,
