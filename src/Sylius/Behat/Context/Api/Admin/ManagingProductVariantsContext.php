@@ -212,6 +212,15 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
+     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
+     */
+    public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant): void
+    {
+        $this->client->delete(Resources::PRODUCT_VARIANTS, $productVariant->getCode());
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -340,6 +349,54 @@ final class ManagingProductVariantsContext implements Context
             $this->client->getLastResponse(),
             ['code' => $productVariant->getCode(), 'enabled' => true],
         ));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Product variant could not be deleted',
+        );
+    }
+
+    /**
+     * @Then /^(this variant) should not exist in the product catalog$/
+     */
+    public function thisProductVariantShouldNotExistInTheProductCatalog(ProductVariantInterface $productVariant): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->index(Resources::PRODUCT_VARIANTS), 'code', $productVariant->getCode(),
+            ),
+            'The product variant still exists, but it should not',
+        );
+    }
+
+    /**
+     * @Then /^(this variant) should still exist in the product catalog$/
+     */
+    public function thisProductVariantShouldStillExistInTheProductCatalog(ProductVariantInterface $productVariant): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->index(Resources::PRODUCT_VARIANTS), 'code', $productVariant->getCode(),
+            ),
+            'The product variant does not exist, but it should',
+        );
+    }
+
+    /**
+     * @Then I should be notified that this variant is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisVariantIsInUseAndCannotBeDeleted(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the product variant is in use.',
+        );
     }
 
     private function updateChannelPricingField(
