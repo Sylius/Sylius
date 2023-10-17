@@ -22,14 +22,14 @@ Feature: Verifying account's email address
         When I try to verify using "twinklelittlestar" token
         Then I should be notified that the verification token is invalid
 
-    @ui @email #api / temporarily disabled as validation triggers before processors
+    @ui @email #api TODO: temporarily disabled as validation triggers before processors
     Scenario: Resending the verification email as a logged in user
         Given I am logged in as "valkyrie@cain.com"
         When I resend the verification email
         Then I should be notified that the verification email has been sent
         And it should be sent to "valkyrie@cain.com"
 
-    @ui #api / temporarily disabled as validation triggers before processors
+    @ui #api TODO: temporarily disabled as validation triggers before processors
     Scenario: Being unable to verify using old verification links
         Given I am logged in as "valkyrie@cain.com"
         And I have already received a verification email
@@ -39,7 +39,7 @@ Feature: Verifying account's email address
         Then I should be notified that the verification token is invalid
         And my account should not be verified
 
-    @ui #api / temporarily disabled as validation triggers before processors
+    @ui #api TODO: temporarily disabled as validation triggers before processors
     Scenario: Being unable to resend verification token when verified
         Given I am logged in as "valkyrie@cain.com"
         And I have already verified my account

@@ -16,7 +16,6 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Input;
 use ApiPlatform\Metadata\Operation;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class VerifyCustomerAccountStateProviderSpec extends ObjectBehavior
 {
@@ -27,13 +26,21 @@ final class VerifyCustomerAccountStateProviderSpec extends ObjectBehavior
         $this->provide($operation)->shouldReturn(null);
     }
 
-    function it_throw_http_exception_when_no_token_is_provided(Operation $operation): void
+    function it_throws_invalid_argument_exception_when_no_token_is_provided(Operation $operation): void
     {
         $operation->getClass()->willReturn(VerifyCustomerAccount::class);
 
         $this
-            ->shouldThrow(HttpException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('provide', [$operation])
+        ;
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('provide', [$operation, ['token' => null]])
+        ;
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('provide', [$operation, ['token' => '']])
         ;
     }
 

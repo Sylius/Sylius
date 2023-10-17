@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\StateProvider\Input;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Webmozart\Assert\Assert;
 
 /**
  * @experimental
@@ -31,9 +31,7 @@ final class VerifyCustomerAccountStateProvider implements ProviderInterface
             return null;
         }
 
-        if (!isset($uriVariables['token'])) {
-            throw new HttpException(422, 'Token is required.');
-        }
+        Assert::stringNotEmpty($uriVariables['token'] ?? null, 'Token is required.');
 
         return new VerifyCustomerAccount($uriVariables['token']);
     }

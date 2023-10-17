@@ -23,6 +23,16 @@
         output="false"
         status="202"
     >
+        <validationContext>
+            <values>
+                <value name="groups">
+                    <values>
+                        <value>sylius</value>
+                    </values>
+                </value>
+            </values>
+        </validationContext>
+
         <operations>
             <operation
                 name="shop_resend_verification_email"
@@ -31,15 +41,6 @@
                 input="Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail"
                 security="is_granted('ROLE_USER')"
             >
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
@@ -63,15 +64,6 @@
                 input="Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount"
                 provider="Sylius\Bundle\ApiBundle\StateProvider\Input\VerifyCustomerAccountStateProvider"
             >
-                <validationContext>
-                    <values>
-                        <value name="groups">
-                            <values>
-                                <value>sylius</value>
-                            </values>
-                        </value>
-                    </values>
-                </validationContext>
                 <denormalizationContext>
                     <values>
                         <value name="groups">
