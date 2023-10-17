@@ -22,6 +22,8 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
@@ -176,6 +178,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I set its :optionName option to :optionValue
+     */
+    public function iSetItsOptionAs(string $optionName, ProductOptionValueInterface $optionValue): void
+    {
+        $this->client->addRequestData('optionValues', [$this->iriConverter->getIriFromResource($optionValue)]);
+    }
+
+    /**
+     * @When I set its shipping category as :shippingCategory
+     */
+    public function iSetItsShippingCategoryAs(ShippingCategoryInterface $shippingCategory): void
+    {
+        $this->client->addRequestData('shippingCategory', $this->iriConverter->getIriFromResource($shippingCategory));
+    }
+
+    /**
+     * @When I do not want to have shipping required for this product variant
+     */
+    public function iDoNotWantToHaveShippingRequiredForThisProductVariant(): void
+    {
+        $this->client->addRequestData('shippingRequired', false);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -221,13 +247,30 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^the (variant with code "[^"]+") should be priced at ("[^"]+") for (channel "([^"]+)")$/
+     * @Then /^the variant with code "([^"]+)" should be priced at ("[^"]+") for (channel "[^"]+")$/
      */
-    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel): void
-    {
+    public function theVariantWithCodeShouldBePricedAtForChannel(
+        string $variantCode,
+        int $price,
+        ChannelInterface $channel,
+    ): void {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
+    }
+
+    /**
+     * @Then /^the variant with code "([^"]+)" should have an original price of ("[^"]+") for (channel "[^"]+")$/
+     * @Then /^the variant with code "([^"]+)" should be originally priced at ("[^"]+") for (channel "[^"]+")$/
+     */
+    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(
+        string $variantCode,
+        int $originalPrice,
+        ChannelInterface $channel,
+    ): void {
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
+
+        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['originalPrice'], $originalPrice);
     }
 
     /**
@@ -238,6 +281,14 @@ final class ManagingProductVariantsContext implements Context
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should not have shipping required$/
+     */
+    public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant): void
+    {
+        Assert::false($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingRequired'));
     }
 
     private function updateChannelPricingField(

@@ -180,9 +180,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I do not want to have shipping required for this product
+     * @When I do not want to have shipping required for this product( variant)
      */
-    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    public function iDoNotWantToHaveShippingRequiredForThisProduct(): void
     {
         $this->createPage->setShippingRequired(false);
     }
@@ -374,6 +374,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should be originally priced at (?:€|£|\$)([^"]+) for (channel "[^"]+")$/
+     * @Then /^the (variant with code "[^"]+") should be originally priced at "(?:€|£|\$)([^"]+)" for (channel "[^"]+")$/
      */
     public function theVariantWithCodeShouldBeOriginalPricedAtForChannel(
         ProductVariantInterface $productVariant,
@@ -397,6 +398,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should have an original price of "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, ChannelInterface $channel)
     {
