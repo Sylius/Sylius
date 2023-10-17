@@ -141,7 +141,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     public function isSingleUnit(): bool
     {
-        return $this->getElement('order_item_unit_generation_mode')->getValue() === ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE;
+        return (int)$this->getElement('order_item_unit_generation_mode')->getValue() === ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE;
     }
 
     protected function getDefinedElements(): array
