@@ -1,5 +1,5 @@
 @managing_product_variants
-Feature: Toggle the product variant
+Feature: Toggling the product variant
     In order to stop or resume the sale of some product variants
     As an Administrator
     I want to toggle the product variant
@@ -10,8 +10,8 @@ Feature: Toggle the product variant
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Disabling a product variant
+    @api @ui
+    Scenario: Disabling the product variant
         Given the "Wyborowa Vodka Exquisite" product variant is enabled
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I disable it
@@ -19,8 +19,8 @@ Feature: Toggle the product variant
         Then I should be notified that it has been successfully edited
         And this variant should be disabled
 
-    @ui
-    Scenario: Enabling a product variant
+    @api @ui
+    Scenario: Enabling the product variant
         Given the "Wyborowa Vodka Exquisite" product variant is disabled
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I enable it

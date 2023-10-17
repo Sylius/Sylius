@@ -15,7 +15,7 @@ Feature: Editing a product variant
 
     @api @ui
     Scenario: Changing product variant name
-        Given I want to modify the "Go" product variant
+        When I want to modify the "Go" product variant
         And I name it "Java" in "English (United States)"
         And I name it "Kawa" in "Polish (Poland)"
         And I save my changes

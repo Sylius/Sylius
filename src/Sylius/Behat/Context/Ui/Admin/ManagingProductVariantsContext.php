@@ -108,6 +108,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I set its price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativePriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyPrice('-' . $price , $channel);
+    }
+
+    /**
      * @When /^I set its minimum price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsMinimumPriceTo(string $price, ChannelInterface $channel): void
@@ -116,7 +124,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I remove its price for :channel channel
+     * @When I remove its price from :channel channel
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {

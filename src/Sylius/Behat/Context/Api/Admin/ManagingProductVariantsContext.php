@@ -81,6 +81,34 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I remove its price from :channel channel
+     */
+    public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
+    {
+        $content = $this->client->getContent();
+        $content['channelPricings'][$channel->getCode()]['price'] = null;
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
+     * @When I do not set its price
+     * @When I do not specify its code
+     */
+    public function iDoNotSetValue(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
+     * @When I do not specify its current stock
+     */
+    public function iDoNotSpecifyItsCurrentStock(): void
+    {
+        $this->client->addRequestData('onHand', null);
+    }
+
+    /**
      * @When /^I set its original price to ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iSetItsOriginalPriceToForChannel(int $originalPrice, ChannelInterface $channel): void
@@ -105,7 +133,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I( try to) add it
      */
     public function iAddIt(): void
     {
@@ -221,6 +249,51 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I disable it
+     */
+    public function iDisableIt(): void
+    {
+        $this->client->updateRequestData(['enabled' => false]);
+    }
+
+    /**
+     * @When I enable it
+     */
+    public function iEnableIt(): void
+    {
+        $this->client->updateRequestData(['enabled' => true]);
+    }
+
+    /**
+     * @When I disable its inventory tracking
+     */
+    public function iDisableItsTracking(): void
+    {
+        $this->client->updateRequestData(['tracked' => false]);
+    }
+
+    /**
+     * @When I enable its inventory tracking
+     */
+    public function iEnableItsTracking(): void
+    {
+        $this->client->updateRequestData(['tracked' => true]);
+    }
+
+    /**
+     * @When I set its height, width, depth and weight to :value
+     */
+    public function iSetItsDimensionsTo(float $value): void
+    {
+        $this->client->updateRequestData([
+            'height' => $value,
+            'width' => $value,
+            'depth' => $value,
+            'weight' => $value,
+        ]);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -235,13 +308,23 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then the :productVariantCode variant of the :product product should appear in the store
+     * @Then the :productVariantCode variant of the :productName product should appear in the store
      */
-    public function theProductVariantShouldAppearInTheShop(string $productVariantCode, ProductInterface $product): void
+    public function theProductVariantShouldAppearInTheShop(string $productVariantCode, string $productName): void
     {
         $response = $this->client->index(Resources::PRODUCT_VARIANTS);
 
         Assert::true($this->responseChecker->hasItemWithValue($response, 'code', $productVariantCode));
+    }
+
+    /**
+     * @Then the :productVariantCode variant of the :productName product should not appear in the store
+     */
+    public function theProductVariantShouldNotAppearInTheShop(string $productVariantCode, string $productName): void
+    {
+        $response = $this->client->index(Resources::PRODUCT_VARIANTS);
+
+        Assert::false($this->responseChecker->hasItemWithValue($response, 'code', $productVariantCode));
     }
 
     /**
@@ -267,11 +350,12 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the variant with code "([^"]+)" should be priced at ("[^"]+") for (channel "[^"]+")$/
+     * @Then I should not have configured price for :channel channel
      */
     public function theVariantWithCodeShouldBePricedAtForChannel(
-        string $variantCode,
-        int $price,
-        ChannelInterface $channel,
+        ?string $variantCode = null,
+        ?int $price = null,
+        ?ChannelInterface $channel = null,
     ): void {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
@@ -283,13 +367,23 @@ final class ManagingProductVariantsContext implements Context
      * @Then /^the variant with code "([^"]+)" should be originally priced at ("[^"]+") for (channel "[^"]+")$/
      */
     public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(
-        string $variantCode,
+        ?string $variantCode,
         int $originalPrice,
         ChannelInterface $channel,
     ): void {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['originalPrice'], $originalPrice);
+    }
+
+    /**
+     * @Then /^I should have original price equal to ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function iShouldHaveOriginalPriceEqualToInChannel(
+        int $originalPrice,
+        ChannelInterface $channel,
+    ): void {
+        $this->theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(null, $originalPrice, $channel);
     }
 
     /**
@@ -352,6 +446,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then this variant should be disabled
+     */
+    public function thisVariantShouldBeDisabled(): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'enabled', false));
+    }
+
+    /**
+     * @Then this variant should be enabled
+     */
+    public function thisVariantShouldBeEnabled(): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'enabled', true));
+    }
+
+    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
@@ -397,6 +507,119 @@ final class ManagingProductVariantsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Cannot delete, the product variant is in use.',
         );
+    }
+
+    /**
+     * @Then inventory of this variant should not be tracked
+     */
+    public function inventoryOfThisVariantShouldNotBeTracked(): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'tracked', false));
+    }
+
+    /**
+     * @Then inventory of this variant should be tracked
+     */
+    public function inventoryOfThisVariantShouldBeTracked(): void
+    {
+        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'tracked', true));
+    }
+
+    /**
+     * @Then I should be notified that prices in all channels must be defined
+     */
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'You must define price for every enabled channel.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that price cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatPriceCannotBeLowerThanZero(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Price cannot be lower than 0.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that code is required
+     */
+    public function iShouldBeNotifiedThatCodeIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Please enter the code.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that current stock is required
+     */
+    public function iShouldBeNotifiedThatCurrentStockIsRequired(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The type of the "onHand" attribute must be "int", "NULL" given.',
+        );
+    }
+
+    /**
+     * @Then the :product product should have no variants
+     */
+    public function theProductShouldHaveNoVariants(ProductInterface $product): void
+    {
+        $this->iWantToViewAllVariantsOfThisProduct($product);
+        $this->iShouldSeeNumberOfProductVariantsInTheList(0);
+    }
+
+    /**
+     * @Then the :product product should have only one variant
+     */
+    public function theProductShouldHaveOnlyOneVariant(ProductInterface $product): void
+    {
+        $this->iWantToViewAllVariantsOfThisProduct($product);
+        $this->iShouldSeeNumberOfProductVariantsInTheList(1);
+    }
+
+    /**
+     * @Then I should be notified that code has to be unique
+     */
+    public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Product variant code must be unique.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that this variant already exists
+     */
+    public function iShouldBeNotifiedThatThisVariantAlreadyExists(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Variant with this option set already exists.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that height, width, depth and weight cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatIsHeightWidthDepthAndWeightCannotBeLowerThanZero(): void
+    {
+        $errors = $this->responseChecker->getError($this->client->getLastResponse());
+
+        Assert::contains($errors, 'Height cannot be negative.');
+        Assert::contains($errors, 'Width cannot be negative.');
+        Assert::contains($errors, 'Depth cannot be negative.');
+        Assert::contains($errors, 'Weight cannot be negative.');
     }
 
     private function updateChannelPricingField(
