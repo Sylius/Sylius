@@ -87,6 +87,7 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
                         ],
                     ]),
                     Action::create('pay', 'shop_pay')
+                        ->setLabel('sylius.ui.pay')
                         ->setOptions([
                             'link' => [
                                 'route' => 'sylius_shop_order_show',
