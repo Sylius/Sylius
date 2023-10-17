@@ -18,11 +18,11 @@
     <services>
 <!--        <defaults public="true" />-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">-->
-<!--            <argument type="service" id="sylius.canonicalizer" />-->
-<!--            <argument type="service" id="sylius.repository.shop_user" />-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_validator_unique_shop_user_email" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">
+            <argument type="service" id="sylius.canonicalizer" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius_validator_unique_shop_user_email" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator">-->
 <!--            <argument type="service" id="sylius.repository.order" />-->

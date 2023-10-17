@@ -19,38 +19,12 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations>
-            <collectionOperation name="shop_post">
-                <attribute name="method">POST</attribute>
-                <attribute name="path">/shop/customers</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="summary">Registers a new customer</attribute>
-                </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">shop:customer:create</attribute>
-                </attribute>
-                <attribute name="messenger">input</attribute>
-                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser</attribute>
-                <attribute name="output">false</attribute>
-            </collectionOperation>
-        </collectionOperations>
-
         <itemOperations>
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:customer:read</attribute>
-                </attribute>
-            </itemOperation>
-
-            <itemOperation name="shop_get">
-                <attribute name="method">GET</attribute>
-                <attribute name="path">/shop/customers/{id}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">
-                        <attribute>shop:customer:read</attribute>
-                    </attribute>
                 </attribute>
             </itemOperation>
 
