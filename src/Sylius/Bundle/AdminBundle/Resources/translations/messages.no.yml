@@ -38,3 +38,9 @@ sylius:
                 sales:
                     header: Salg
                     orders: Bestillinger
+                extras:
+                    header: Ekstra
+                    browse_plugins: Bla gjennom plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Profesjonelle tjenester
+                    find_a_partner: Finn en partner

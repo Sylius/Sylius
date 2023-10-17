@@ -50,11 +50,12 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
-                support:
-                    header: Support
+                extras:
+                    header: Extras
+                    browse_plugins: Browse plugins
+                    sylius_plus: Sylius Plus
                     professional_services: Professional services
                     find_a_partner: Find a partner
-                    browse_plugins: Browse plugins
     ui:
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.

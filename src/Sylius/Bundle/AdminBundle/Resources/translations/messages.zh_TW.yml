@@ -38,3 +38,9 @@ sylius:
                 sales:
                     header: 銷售
                     orders: 訂單
+                extras:
+                    header: 額外
+                    browse_plugins: 瀏覽插件
+                    sylius_plus: Sylius Plus
+                    professional_services: 專業服務
+                    find_a_partner: 找一個合作夥伴

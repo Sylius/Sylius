@@ -29,3 +29,9 @@ sylius:
                     header: Khách hàng
                 sales:
                     orders: Đơn đặt hàng
+                extras:
+                    header: Phụ kiện
+                    browse_plugins: Duyệt plugin
+                    sylius_plus: Sylius Plus
+                    professional_services: Dịch vụ chuyên nghiệp
+                    find_a_partner: Tìm đối tác

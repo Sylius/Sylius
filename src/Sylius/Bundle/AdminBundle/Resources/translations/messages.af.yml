@@ -26,3 +26,9 @@ sylius:
                 sales:
                     header: Verkope
                     orders: Bestellings
+                extras:
+                    header: Ekstras
+                    browse_plugins: Deurblaai invoegings
+                    sylius_plus: Sylius Plus
+                    professional_services: Professionele dienste
+                    find_a_partner: Vind 'n vennoot

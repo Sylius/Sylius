@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Sala
                     orders: Pantanir
+                extras:
+                    header: Aukahlutir
+                    browse_plugins: Skoða viðbæti
+                    sylius_plus: Sylius Plus
+                    professional_services: Fagleg þjónusta
+                    find_a_partner: Finndu samstarfsaðila
