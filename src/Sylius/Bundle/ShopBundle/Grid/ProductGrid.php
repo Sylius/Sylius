@@ -31,8 +31,6 @@ use Webmozart\Assert\Assert;
 
 final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterface
 {
-    private ?Request $resquest;
-
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
@@ -41,10 +39,9 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
         private ChannelContextInterface $channelContext,
         private TaxonRepositoryInterface $taxonRepository,
         private LocaleContextInterface $localeContext,
-        RequestStack $requestStatck,
+        private RequestStack $requestStack,
         private bool  $includeAllDescendants,
     ) {
-        $this->resquest = $requestStatck->getMainRequest();
     }
 
     public static function getName(): string
@@ -54,14 +51,13 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
-        Assert::notNull($this->resquest);
+        $request = $this->requestStack->getMainRequest();
+        Assert::notNull($request, 'The '.self::class. ' does not work in CLI mode');
+
         $localeCode = $this->localeContext->getLocaleCode();
 
         // @see Sylius\Bundle\ResourceBundle\ExpressionLanguage\NotNullExpressionFunctionProvider
-        $taxon = $this->taxonRepository->findOneBySlug(
-                    $this->resquest->attributes->get('slug'),
-                    $localeCode,
-        );
+        $taxon = $this->taxonRepository->findOneBySlug($request->attributes->get('slug'), $localeCode);
         if ($taxon === null)  {
             throw new NotFoundHttpException('Requested page is invalid');
         }
@@ -71,7 +67,7 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
                 $this->channelContext->getChannel(),
                 $taxon,
                 $localeCode,
-                $this->resquest->query->all('sorting'),
+                $request->query->all('sorting'),
                 $this->includeAllDescendants,
             ])
             ->orderBy('position', 'asc')
