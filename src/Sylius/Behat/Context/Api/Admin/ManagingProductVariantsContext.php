@@ -202,6 +202,16 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I want to view all variants of (this product)$/
+     */
+    public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product): void
+    {
+        $this->client->index(Resources::PRODUCT_VARIANTS);
+        $this->client->addFilter('product', $this->iriConverter->getIriFromResource($product));
+        $this->client->filter();
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -289,6 +299,47 @@ final class ManagingProductVariantsContext implements Context
     public function theVariantWithCodeShouldNotHaveShippingRequired(ProductVariantInterface $productVariant): void
     {
         Assert::false($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingRequired'));
+    }
+
+    /**
+     * @Then I should see :amount variant(s) in the list
+     */
+    public function iShouldSeeNumberOfProductVariantsInTheList(int $amount): void
+    {
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $amount);
+    }
+
+    /**
+     * @Then I should see that the :productVariant variant is not tracked
+     */
+    public function iShouldSeeThatVariantIsNotTracked(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            ['code' => $productVariant->getCode(), 'tracked' => false],
+        ));
+    }
+
+    /**
+     * @Then I should see that the :productVariant variant has zero on hand quantity
+     */
+    public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            ['code' => $productVariant->getCode(), 'onHand' => 0],
+        ));
+    }
+
+    /**
+     * @Then I should see that the :productVariant variant is enabled
+     */
+    public function iShouldSeeThatTheVariantIsEnabled(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValues(
+            $this->client->getLastResponse(),
+            ['code' => $productVariant->getCode(), 'enabled' => true],
+        ));
     }
 
     private function updateChannelPricingField(
