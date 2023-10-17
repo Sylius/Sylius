@@ -33,6 +33,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -253,8 +254,8 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldHaveSingleOrderItemUnitModeSet(ProductInterface $product): void
     {
-        Assert::true(
-            $product->getVariants()->first()->getOrderItemUnitGenerationMode(),
+        Assert::eq(
+            (int)$product->getVariants()->first()->getOrderItemUnitGenerationMode(),
             ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
             'Product has to be single unit',
         );
