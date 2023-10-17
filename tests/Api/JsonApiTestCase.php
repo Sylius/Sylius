@@ -156,4 +156,16 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->assertContains($expectedViolation['message'], $violationMap[$propertyPath], $responseContent);
         }
     }
+
+    protected function getUploadedFile(
+        string $path,
+        string $name,
+        string $type = 'image/jpg',
+    ): UploadedFile {
+        return new UploadedFile(
+            __DIR__ . '/../Resources/' . $path,
+            $name,
+            $type,
+        );
+    }
 }
