@@ -1,7 +1,7 @@
 {% set main_event = _context.main_event ~ '.header' %}
 {% set fallback_event = _context.fallback_event ~ '.header' %}
 
-<div class="page-header">
+<div class="page-header" {% if _context.sticky_header|default(true) %}data-sticky-header{% endif %}>
     <div class="container-xl">
         {{ twig_event(
             [main_event, fallback_event],

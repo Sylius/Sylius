@@ -1,0 +1,16 @@
+{% set main_event = twig_event_name(main_event, 'taxonomy') %}
+{% set fallback_event = twig_event_name(fallback_event, 'taxonomy') %}
+{% set product = _context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.taxonomy'|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="divide-y">
+            {{ twig_event([main_event, fallback_event], _context|merge({ main_event: main_event, fallback_event: fallback_event })) }}
+        </div>
+    </div>
+</div>

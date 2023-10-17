@@ -1,12 +1,12 @@
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
 {% set main_event = _context.main_event ~ '.form' %}
 {% set fallback_event = _context.fallback_event ~ '.form' %}
 
-{% set route = _context.configuration.vars.route %}
-{% set indexRoute = _context.configuration.vars.index.route %}
+{% set route = _context.configuration.vars.route|default(null) %}
+{% set indexRoute = _context.configuration.vars.index.route|default(null) %}
 {% set index_url = path(
     indexRoute.name|default(_context.configuration.getRouteName('index')),
     indexRoute.parameters|default(route.parameters|default({}))
