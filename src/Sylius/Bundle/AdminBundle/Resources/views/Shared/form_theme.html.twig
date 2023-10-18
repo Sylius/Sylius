@@ -10,7 +10,7 @@
             data-choice-value-field="{{ choice_value }}"
             data-input-id="{{ form.vars.id }}"
             data-init-url="{{ init_load_url|default(null) }}"
-            data-search-url="{{ search_url }}"
+            {% if search_url is defined %}data-search-url="{{ search_url }}"{% endif %}
             data-no-choices-text="{{ no_choices_translation|default('sylius.ui.start_typing_to_search')|trans }}"
             {% if form.vars.disabled %}disabled{% endif %}
             {% if multiple %}multiple{% endif %}

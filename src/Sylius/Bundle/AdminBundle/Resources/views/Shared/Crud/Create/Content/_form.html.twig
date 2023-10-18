@@ -14,21 +14,24 @@
 
 <div class="page-body">
     <div class="container-xl">
-        {% if _context.render_rest %}
-            <div class="card">
+        {% block content %}
+            {% if _context.render_rest %}
+                <div class="card">
                 <div class="card-body">
-        {% endif %}
-                    {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-                        {{ twig_event(
-                            [main_event, fallback_event],
-                            _context|merge({
-                                main_event: main_event,
-                                fallback_event: fallback_event,
-                                form: form,
-                            })
-                        ) }}
-                    {{ form_end(form, {'render_rest': _context.render_rest}) }}
-        {% if _context.render_rest %}
+            {% endif %}
+            {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+                {% block form_content %}
+                    {{ twig_event(
+                        [main_event, fallback_event],
+                        _context|merge({
+                            main_event: main_event,
+                            fallback_event: fallback_event,
+                            form: form,
+                        })
+                    ) }}
+                {% endblock %}
+            {{ form_end(form, {'render_rest': _context.render_rest}) }}
+            {% if _context.render_rest %}
                 </div>
                 <div class="card-footer">
                     <div class="row align-items-center">
@@ -39,7 +42,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
     </div>
 </div>

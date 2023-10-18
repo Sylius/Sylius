@@ -46,18 +46,11 @@ sylius_ui:
                 form:
                     context:
                         render_rest: false
-        sylius.admin.product.update.content.header.title_block:
-            blocks:
-                actions:
-                    template: '@SyliusAdmin/Product/Update/Header/TitleBlock/_actions.html.twig'
         sylius.admin.product.update.content.header.title_block.actions:
             blocks:
                 more:
                     template: '@SyliusAdmin/Product/Update/Header/TitleBlock/Actions/_more.html.twig'
-                cancel:
-                    template: '@SyliusAdmin/Product/Update/Header/TitleBlock/Actions/_cancel.html.twig'
-                create:
-                    template: '@SyliusAdmin/Product/Update/Header/TitleBlock/Actions/_update.html.twig'
+                    priority: 128
         sylius.admin.product.update.content.header.title_block.actions.more:
             blocks:
                 view_in_store:
@@ -112,16 +105,6 @@ sylius_ui:
                 form:
                     context:
                         render_rest: false
-        sylius.admin.product.create.content.header.title_block:
-            blocks:
-                actions:
-                    template: '@SyliusAdmin/Product/Create/Header/TitleBlock/_actions.html.twig'
-        sylius.admin.product.create.content.header.title_block.actions:
-            blocks:
-                cancel:
-                    template: '@SyliusAdmin/Product/Create/Header/TitleBlock/Actions/_cancel.html.twig'
-                create:
-                    template: '@SyliusAdmin/Product/Create/Header/TitleBlock/Actions/_create.html.twig'
         sylius.admin.product.create.content.form:
             blocks:
                 form_body:

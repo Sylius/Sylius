@@ -3,6 +3,7 @@
 
 imports:
     - { resource: 'template_events/*.yaml' }
+    - { resource: 'template_events/**/*.yaml' }
 
 sylius_ui:
     events:
