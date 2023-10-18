@@ -78,7 +78,9 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
             )
             ->addActionGroup(
                 ItemActionGroup::create(
-                    ShowAction::create([
+                Action::create('show', 'shop_show')
+                    ->setLabel('sylius.ui.show')
+                    ->setOptions([
                         'link' => [
                             'route' => 'sylius_shop_account_order_show',
                             'parameters' => [

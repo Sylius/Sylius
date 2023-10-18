@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ShopBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\Field;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
-use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
@@ -24,7 +24,6 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
@@ -37,8 +36,8 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
     public function __construct(
         private string $resourceClass,
         private ChannelContextInterface $channelContext,
-        private TaxonRepositoryInterface $taxonRepository,
         private LocaleContextInterface $localeContext,
+        private TaxonRepositoryInterface $taxonRepository,
         private RequestStack $requestStack,
         private bool $includeAllDescendants,
     ) {
@@ -93,8 +92,9 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
                     ->setSortable(true, 'channelPricing.price'),
             )
             ->addFilter(
-                StringFilter::create('search', ['translation.name'])
+            Filter::create('search', 'shop_string')
                     ->setLabel(false)
+                    ->addOption('fields', ['translation.name'])
                     ->addFormOption('type', 'contains')
             );
     }
