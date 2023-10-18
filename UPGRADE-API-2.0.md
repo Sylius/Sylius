@@ -11,3 +11,15 @@
     +   private ImageUploaderInterface $imageUploader,
     )
 ```
+
+* Updated API routes related to avatar management:
+
+  Previous Routes:
+    * `'GET' - /api/v2/admin/avatar-images/{id}`
+    * `'POST' - /api/v2/admin/avatar-images`
+    * `'DELETE' - /api/v2/admin/avatar-images/{id}`
+
+  New Routes:
+    * `'GET' - /api/v2/admin/administrators/{id}/avatar-image`
+    * `'POST' - /api/v2/admin/administrators/{id}/avatar-image`
+    * `'DELETE' - /api/v2/admin/administrators/{id}/avatar-image`

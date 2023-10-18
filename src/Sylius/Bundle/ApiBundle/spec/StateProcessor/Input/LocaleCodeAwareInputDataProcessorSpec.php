@@ -18,7 +18,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class LocaleCodeAwareInputDataProcessorSpec extends ObjectBehavior
 {
