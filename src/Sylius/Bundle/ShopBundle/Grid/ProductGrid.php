@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sylius package.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Sylius Sp. z o.o.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -40,7 +40,7 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
         private TaxonRepositoryInterface $taxonRepository,
         private LocaleContextInterface $localeContext,
         private RequestStack $requestStack,
-        private bool  $includeAllDescendants,
+        private bool $includeAllDescendants,
     ) {
     }
 
@@ -52,7 +52,7 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $request = $this->requestStack->getMainRequest();
-        Assert::notNull($request, 'The '.self::class. ' does not work in CLI mode');
+        Assert::notNull($request, 'No main request available.');
 
         $localeCode = $this->localeContext->getLocaleCode();
 
