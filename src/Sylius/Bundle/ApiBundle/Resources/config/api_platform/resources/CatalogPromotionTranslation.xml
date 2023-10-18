@@ -28,7 +28,7 @@
         </validationContext>
 
         <operations>
-            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/catalog-promotion-translations/{id}.{_format}">
+            <operation class="ApiPlatform\Metadata\Get" uriTemplate="/admin/catalog-promotion-translations/{id}">
                 <normalizationContext>
                     <values>
                         <value name="groups">
