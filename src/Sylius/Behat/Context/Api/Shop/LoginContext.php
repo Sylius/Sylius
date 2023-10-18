@@ -95,7 +95,7 @@ final class LoginContext implements Context
     {
         $this->iWantToResetPassword();
         $this->iSpecifyTheEmail($email);
-        $this->addLocale($this->iriConverter->getIriFromItem($locale));
+        $this->sharedStorage->set('current_locale_code', $locale->getCode());
         $this->iResetIt();
     }
 
@@ -273,10 +273,5 @@ final class LoginContext implements Context
         Assert::same($this->client->getLastResponse()->getStatusCode(), 500);
         $message = $this->responseChecker->getError($this->client->getLastResponse());
         Assert::startsWith($message, 'Internal Server Error');
-    }
-
-    private function addLocale(string $locale): void
-    {
-        $this->request->updateContent(['locale' => $locale]);
     }
 }
