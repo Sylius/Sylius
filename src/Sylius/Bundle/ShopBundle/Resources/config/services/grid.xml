@@ -23,8 +23,8 @@
         <service id="sylius.shop.grid.product" class="Sylius\Bundle\ShopBundle\Grid\ProductGrid">
             <argument>%sylius.model.product.class%</argument>
             <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="request_stack" />
             <argument>%sylius_shop.product_grid.include_all_descendants%</argument>
             <tag name="sylius.grid" />
