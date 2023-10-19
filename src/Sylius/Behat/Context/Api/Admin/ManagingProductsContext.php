@@ -276,7 +276,7 @@ final class ManagingProductsContext implements Context
     public function iSetItsNonTranslatableAttributeTo(ProductAttributeInterface $attribute, string $value): void
     {
         $this->client->addSubResourceData(
-        'attributes',
+            'attributes',
             [
                 'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => $this->getAttributeValueInProperType($attribute, $value),
@@ -290,7 +290,7 @@ final class ManagingProductsContext implements Context
     public function iSetTheInvalidIntegerValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, int $value): void
     {
         $this->client->addSubResourceData(
-        'attributes',
+            'attributes',
             [
                 'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => $value,
@@ -304,7 +304,7 @@ final class ManagingProductsContext implements Context
     public function iSetTheInvalidStringValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, string $value): void
     {
         $this->client->addSubResourceData(
-        'attributes',
+            'attributes',
             [
                 'attribute' => $this->iriConverter->getIriFromResource($attribute),
                 'value' => $value,
@@ -320,7 +320,7 @@ final class ManagingProductsContext implements Context
     public function iSetItsAttributeTo(
         ProductAttributeInterface $attribute,
         ?string $value = null,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->client->addSubResourceData(
             'attributes',
@@ -363,7 +363,7 @@ final class ManagingProductsContext implements Context
     public function iSelectValueInForTheAttribute(
         string $value,
         string $localeCode,
-        ProductAttributeInterface $attribute
+        ProductAttributeInterface $attribute,
     ): void {
         $this->client->addSubResourceData(
             'attributes',
@@ -380,7 +380,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSelectValueForTheAttribute(
         string $value,
-        ProductAttributeInterface $attribute
+        ProductAttributeInterface $attribute,
     ): void {
         $this->client->addSubResourceData(
             'attributes',
@@ -678,7 +678,7 @@ final class ManagingProductsContext implements Context
     public function nonTranslatableAttributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
         ProductInterface $product,
-        string $value
+        string $value,
     ): void {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
 
@@ -702,7 +702,7 @@ final class ManagingProductsContext implements Context
         ProductAttributeInterface $attribute,
         ProductInterface $product,
         string $value,
-        string $localeCode = 'en_US'
+        string $localeCode = 'en_US',
     ): void {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
 
@@ -718,7 +718,7 @@ final class ManagingProductsContext implements Context
         foreach ($attributes as $attributeValue) {
             if ($attributeValue['attribute'] === $this->sectionAwareIriConverter->getIriFromResourceInSection($attribute, 'admin')) {
                 throw new \InvalidArgumentException(
-                    sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName())
+                    sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName()),
                 );
             }
         }
@@ -780,7 +780,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(
         string $attributeName,
         string $localeCode,
-        int $number
+        int $number,
     ): void {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -861,7 +861,7 @@ final class ManagingProductsContext implements Context
 
     private function getAttributeValueInProperType(
         ProductAttributeInterface $productAttribute,
-        string $value
+        string $value,
     ): string|bool|float|int {
         switch ($productAttribute->getStorageType()) {
             case AttributeValueInterface::STORAGE_BOOLEAN:
@@ -887,7 +887,7 @@ final class ManagingProductsContext implements Context
         }
 
         throw new \InvalidArgumentException(
-            sprintf('Value "%s" not found in attribute "%s"', $value, $attribute->getName())
+            sprintf('Value "%s" not found in attribute "%s"', $value, $attribute->getName()),
         );
     }
 
@@ -908,7 +908,7 @@ final class ManagingProductsContext implements Context
         }
 
         throw new \InvalidArgumentException(
-            sprintf('The given product does not have attribute %s', $attribute->getName())
+            sprintf('The given product does not have attribute %s', $attribute->getName()),
         );
     }
 
