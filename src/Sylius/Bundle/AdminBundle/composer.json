@@ -36,6 +36,8 @@
         "sylius/core-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
         "symfony/framework-bundle": "^6.3.4",
+        "symfony/stimulus-bundle": "^2.12",
+        "symfony/ux-live-component": "^2.12",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3"

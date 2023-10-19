@@ -3,7 +3,7 @@ sylius_ui:
         sylius.admin.taxon.update.content:
             blocks:
                 form:
-                    template: '@SyliusAdmin/Taxon/_form.html.twig'
+                    template: '@SyliusAdmin/Taxon/Update/_form.html.twig'
                     context:
                         render_rest: false
         sylius.admin.taxon.update.content.form:

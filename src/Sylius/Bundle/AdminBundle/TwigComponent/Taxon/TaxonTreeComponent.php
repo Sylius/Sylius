@@ -13,17 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Taxon;
 
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveAction;
+use Symfony\UX\LiveComponent\Attribute\LiveArg;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
+#[AsLiveComponent]
 final readonly class TaxonTreeComponent
 {
+    use DefaultActionTrait;
+
     /**
      * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
      */
-    public function __construct (private TaxonRepositoryInterface $taxonRepository)
-    {
+    public function __construct (
+        private TaxonRepositoryInterface $taxonRepository,
+        private ObjectManager $taxonManager,
+    ) {
     }
 
     /**
@@ -33,5 +43,32 @@ final readonly class TaxonTreeComponent
     public function getRootNodes(): array
     {
         return $this->taxonRepository->findHydratedRootNodes();
+    }
+
+    #[LiveAction]
+    public function moveUp(#[LiveArg] int $taxonId): void
+    {
+        $taxonToBeMoved = $this->taxonRepository->find($taxonId);
+
+        if ($taxonToBeMoved->getPosition() > 0) {
+            $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() - 1);
+            $this->taxonManager->flush();
+        }
+    }
+
+    #[LiveAction]
+    public function moveDown(#[LiveArg] int $taxonId): void
+    {
+        $taxonToBeMoved = $this->taxonRepository->find($taxonId);
+
+        $taxonToBeMoved->setPosition($taxonToBeMoved->getPosition() + 1);
+        $this->taxonManager->flush();
+    }
+
+    #[LiveAction]
+    public function delete(#[LiveArg] int $taxonId): void
+    {
+        $taxon = $this->taxonRepository->find($taxonId);
+        $this->taxonRepository->remove($taxon);
     }
 }

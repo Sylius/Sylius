@@ -1,13 +1,15 @@
 {% import '@SyliusAdmin/Taxon/Helper/taxonTree.html.twig' as taxonTree %}
 
-<div class="col-12 col-md-4">
+<div class="col-12 col-md-4" {{ attributes }}>
     <div class="card mb-5" data-js-tree="container">
-        <div class="card-body">
+        <div class="card-body relative">
             <div class="mb-3">
                 <button data-js-tree="toggle-all" type="button" class="btn btn-sm">Toggle All</button>
             </div>
 
-            {{ taxonTree.render(rootNodes) }}
+            <div>
+                {{ taxonTree.render(rootNodes) }}
+            </div>
         </div>
     </div>
 </div>
