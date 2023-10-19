@@ -80,6 +80,11 @@
                 </attribute>
                 <attribute name="validation_groups">sylius</attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/channels/{code}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>

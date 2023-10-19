@@ -45,6 +45,37 @@ final class ChannelsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_deletes_a_channel(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/channels/MOBILE',
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/channels/MOBILE',
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/channels/MOBILE',
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
     public function it_gets_channels(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
@@ -119,7 +150,15 @@ final class ChannelsTest extends JsonApiTestCase
             uri: '/api/v2/admin/channels/' . $channel->getCode(),
             server: $header,
             content: json_encode([
+                'defaultLocale' => '/api/v2/admin/locales/en_US',
+                'locales' => ['/api/v2/admin/locales/en_US'],
                 'shippingAddressInCheckoutRequired' => true,
+                'taxCalculationStrategy' => 'order_items_based',
+                'accountVerificationRequired' => false,
+                'name' => 'Web Store',
+                'description' => 'different description',
+                'hostname' => 'updated-hostname.com',
+                'color' => 'blue',
             ], JSON_THROW_ON_ERROR),
         );
 
