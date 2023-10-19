@@ -183,7 +183,6 @@ Example configuration for `percentage_discount` action type:
                     </values>
                 </normalizationContext>
             </operation>
-
         </operations>
     </resource>
 </resources>

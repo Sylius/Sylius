@@ -137,7 +137,7 @@ final class ManagingAdministratorsContext implements Context
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         $builder = RequestBuilder::create(
-            sprintf('/api/v2/admin/administrators/%s/%s', $administrator->getId(), Resources::AVATAR_IMAGE),
+            sprintf('/api/v2/admin/%s/%s/%s', Resources::ADMINISTRATORS, $administrator->getId(), Resources::AVATAR_IMAGE),
             Request::METHOD_POST,
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
