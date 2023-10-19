@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Grid\Account;
 
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
-use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -23,6 +22,7 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
 {
@@ -40,31 +40,36 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
+        $customer = $this->customerContext->getCustomer();
+        if ($customer === null) {
+            throw new BadRequestException('Could not find logged in customer');
+        }
+
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
-                $this->customerContext->getCustomer()?->getId(),
+                $customer?->getId(),
                 $this->channelContext->getChannel()->getId(),
             ])
             ->orderBy('checkoutCompletedAt', 'desc')
             ->addField(
                 TwigField::create('number', '@SyliusShop/Account/Order/Grid/Field/number.html.twig')
                     ->setLabel('sylius.ui.number')
-                    ->setSortable(true)
+                    ->setSortable(true),
             )
             ->addField(
-                DateTimeField::create('checkoutCompletedAt', 'm/d/Y')
+                DateTimeField::create('checkoutCompletedAt')
                     ->setLabel('sylius.ui.date')
-                    ->setSortable(true)
+                    ->setSortable(true),
             )
             ->addField(
                 TwigField::create('shippingAddress', '@SyliusShop/Account/Order/Grid/Field/address.html.twig')
-                    ->setLabel('sylius.ui.ship_to')
+                    ->setLabel('sylius.ui.ship_to'),
             )
             ->addField(
                 TwigField::create('total', '@SyliusShop/Account/Order/Grid/Field/total.html.twig')
                     ->setLabel('sylius.ui.total')
                     ->setPath('.')
-                    ->setSortable(true, 'total')
+                    ->setSortable(true, 'total'),
             )
             ->addField(
                 TwigField::create('state', '@SyliusUi/Grid/Field/label.html.twig')
@@ -74,20 +79,20 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
                         'vars' => [
                             'labels' => '@SyliusShop/Account/Order/Label/State',
                         ],
-                    ])
+                    ]),
             )
             ->addActionGroup(
                 ItemActionGroup::create(
-                Action::create('show', 'shop_show')
-                    ->setLabel('sylius.ui.show')
-                    ->setOptions([
-                        'link' => [
-                            'route' => 'sylius_shop_account_order_show',
-                            'parameters' => [
-                                'number' => 'resource.number',
+                    Action::create('show', 'shop_show')
+                        ->setLabel('sylius.ui.show')
+                        ->setOptions([
+                            'link' => [
+                                'route' => 'sylius_shop_account_order_show',
+                                'parameters' => [
+                                    'number' => 'resource.number',
+                                ],
                             ],
-                        ],
-                    ]),
+                        ]),
                     Action::create('pay', 'shop_pay')
                         ->setLabel('sylius.ui.pay')
                         ->setOptions([
