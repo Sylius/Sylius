@@ -4,3 +4,4 @@
 * :doc:`/cookbook/promotions/custom-catalog-promotion-action`
 * :doc:`/cookbook/promotions/catalog-promotion-labels`
 * :doc:`/cookbook/promotions/catalog-promotion-performance`
+* :doc:`/cookbook/promotions/catalog-promotion-additional-item-filters`

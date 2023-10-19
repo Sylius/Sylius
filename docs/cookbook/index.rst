@@ -99,6 +99,7 @@ Promotions
     promotions/custom-catalog-promotion-action
     promotions/catalog-promotion-labels
     promotions/catalog-promotion-performance
+    promotions/catalog-promotion-additional-item-filters
 
 .. include:: /cookbook/promotions/map.rst.inc
 
