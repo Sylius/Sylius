@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Provider;
 /** @experimental */
 final readonly class PathPrefixProvider implements PathPrefixProviderInterface
 {
-    public function __construct(private string $apiRoute)
+    public function __construct(private string $apiRoute, private array $pathPrefixes)
     {
     }
 
@@ -29,12 +29,8 @@ final readonly class PathPrefixProvider implements PathPrefixProviderInterface
         /** @var array<int, string> $pathElements */
         $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
 
-        if ($pathElements[0] === PathPrefixes::SHOP_PREFIX) {
-            return PathPrefixes::SHOP_PREFIX;
-        }
-
-        if ($pathElements[0] === PathPrefixes::ADMIN_PREFIX) {
-            return PathPrefixes::ADMIN_PREFIX;
+        if (in_array($pathElements[0], $this->pathPrefixes, true)) {
+            return $pathElements[0];
         }
 
         return null;
