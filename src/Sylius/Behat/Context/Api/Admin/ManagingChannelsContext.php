@@ -151,9 +151,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iMakeItAvailableOnlyInLocale(LocaleInterface $locale): void
     {
-        $this->client->addRequestData('locales', [
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin'),
-        ]);
+        $this->client->replaceRequestData('locales', [$this->sectionAwareIriConverter->getIriFromResourceInSection($locale, 'admin')]);
     }
 
     /**
