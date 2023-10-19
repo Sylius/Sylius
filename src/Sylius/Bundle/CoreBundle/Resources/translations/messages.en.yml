@@ -173,6 +173,13 @@ sylius:
             weight: Weight
             width: Width
             tracked_help: If this option is enabled Sylius will keep track of the stock and will stop selling the product once stock reaches 0.
+            order_item_unit_generation_mode:
+                label: Order item unit generation mode
+                multiple: Multiple
+                single: Single
+                help_first_line: Selecting the 'Multiple' option will result generating order item units for every product piece in order. If you plan to sell small quantities of product in single order, please use this option.
+                help_second_line: Selecting 'Single' option will result generating only one order item unit for all pieces of particular product. If you plan to sell big quantities of product in single order, consider this option. 
+                help_third_line: Although it doesn't affect the basic buying flow, please note that 'Single' option may not be supported by plugins and integrations you use.  
         attribute:
             product_attribute_value:
                 attribute: Attribute

@@ -41,8 +41,8 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
                 'help' => 'sylius.form.variant.tracked_help',
             ])
             ->add('orderItemUnitGenerationMode', ChoiceType::class, [
-                'label' => 'sylius.form.variant.order_item_unit_generation_mode',
-                'help' => 'sylius.form.variant.order_item_unit_generation_mode_help',
+                'label' => 'sylius.form.variant.order_item_unit_generation_mode.label',
+                'help' => 'sylius.form.variant.order_item_unit_generation_mode.help',
                 'choices' => [
                     'sylius.form.variant.order_item_unit_generation_mode.multiple' => ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE,
                     'sylius.form.variant.order_item_unit_generation_mode.single' => ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
