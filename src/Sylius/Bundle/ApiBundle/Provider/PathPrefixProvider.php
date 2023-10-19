@@ -13,18 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Provider;
 
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-
 /** @experimental */
 final readonly class PathPrefixProvider implements PathPrefixProviderInterface
 {
-    public function __construct(
-        private UserContextInterface $userContext,
-        private string $apiRoute,
-    ) {
+    public function __construct(private string $apiRoute)
+    {
     }
 
     public function getPathPrefix(string $path): ?string
@@ -41,22 +34,6 @@ final readonly class PathPrefixProvider implements PathPrefixProviderInterface
         }
 
         if ($pathElements[0] === PathPrefixes::ADMIN_PREFIX) {
-            return PathPrefixes::ADMIN_PREFIX;
-        }
-
-        return null;
-    }
-
-    public function getCurrentPrefix(): ?string
-    {
-        /** @var UserInterface|null $user */
-        $user = $this->userContext->getUser();
-
-        if ($user === null || $user instanceof ShopUserInterface) {
-            return PathPrefixes::SHOP_PREFIX;
-        }
-
-        if ($user instanceof AdminUserInterface) {
             return PathPrefixes::ADMIN_PREFIX;
         }
 

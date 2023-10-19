@@ -17,6 +17,4 @@ namespace Sylius\Bundle\ApiBundle\Provider;
 interface PathPrefixProviderInterface
 {
     public function getPathPrefix(string $path): ?string;
-
-    public function getCurrentPrefix(): ?string;
 }
