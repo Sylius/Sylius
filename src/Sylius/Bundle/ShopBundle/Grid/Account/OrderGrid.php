@@ -40,14 +40,9 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
-        $customer = $this->customerContext->getCustomer();
-        if ($customer === null) {
-            throw new BadRequestException('Could not find logged in customer');
-        }
-
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
-                $customer?->getId(),
+                $this->customerContext->getCustomer()?->getId(),
                 $this->channelContext->getChannel()->getId(),
             ])
             ->orderBy('checkoutCompletedAt', 'desc')
