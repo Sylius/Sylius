@@ -92,8 +92,7 @@ final class LoggedInCustomerEmailIfNotSetAwareInputDataProcessorSpec extends Obj
         LoggedInCustomerEmailIfNotSetAwareInterface $command,
         LocaleCodeAwareInterface $localeCommand,
         Operation $operation,
-    ): void
-    {
+    ): void {
         $this->supports($command, $operation)->shouldReturn(true);
         $this->supports($localeCommand, $operation)->shouldReturn(false);
     }

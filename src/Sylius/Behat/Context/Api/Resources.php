@@ -19,7 +19,7 @@ final class Resources
 
     public const ADMINISTRATORS = 'administrators';
 
-    public const AVATAR_IMAGES = 'avatar-images';
+    public const AVATAR_IMAGE = 'avatar-image';
 
     public const CATALOG_PROMOTIONS = 'catalog-promotions';
 
