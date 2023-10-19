@@ -9,7 +9,7 @@ sylius_ui:
         sylius.admin.taxon.update.content.form:
             blocks:
                 tree:
-                    template: '@SyliusAdmin/Taxon/Form/_tree.html.twig'
+                    component: 'SyliusAdmin.Taxon.TaxonTree'
                 sections:
                     template: '@SyliusAdmin/Taxon/Form/_sections.html.twig'
         sylius.admin.taxon.update.content.form.sections:
