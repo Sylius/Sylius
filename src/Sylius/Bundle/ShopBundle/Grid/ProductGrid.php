@@ -55,12 +55,7 @@ final class ProductGrid extends AbstractGrid implements ResourceAwareGridInterfa
 
         $localeCode = $this->localeContext->getLocaleCode();
 
-        $slug = $request->attributes->get('slug', '');
-        if (!is_string($slug)) {
-            throw new NotFoundHttpException('The request attribute "slug" must be a string.');
-        }
-
-        // @see Sylius\Bundle\ResourceBundle\ExpressionLanguage\NotNullExpressionFunctionProvider
+        $slug = $request->attributes->getString('slug');
         $taxon = $this->taxonRepository->findOneBySlug($slug, $localeCode);
         if ($taxon === null) {
             throw new NotFoundHttpException('Requested page is invalid');

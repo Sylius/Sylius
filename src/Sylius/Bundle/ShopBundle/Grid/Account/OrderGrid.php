@@ -22,7 +22,7 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Webmozart\Assert\Assert;
 
 final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
 {
@@ -40,9 +40,12 @@ final class OrderGrid extends AbstractGrid implements ResourceAwareGridInterface
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
+        $customer = $this->customerContext->getCustomer();
+        Assert::notNull($customer, 'Customer can not be null in the order grid.');
+
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
-                $this->customerContext->getCustomer()?->getId(),
+                $customer->getId(),
                 $this->channelContext->getChannel()->getId(),
             ])
             ->orderBy('checkoutCompletedAt', 'desc')
