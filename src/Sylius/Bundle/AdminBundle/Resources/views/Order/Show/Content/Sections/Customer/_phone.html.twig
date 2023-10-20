@@ -1,0 +1,12 @@
+<div>
+    <strong>{{ 'sylius.ui.phone_number'|trans }}:</strong>
+</div>
+<div class="mb-3">
+    <span class="g-col-12 text-muted">
+        {% if _context.customer.phoneNumber is not null or _context.customer.phoneNumber is not empty %}
+            {{ _context.customer.phoneNumber }}
+        {% else %}
+            -
+        {% endif %}
+    </span>
+</div>

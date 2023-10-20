@@ -1,0 +1,18 @@
+{% set main_event = twig_event_name(_context.main_event, 'customer') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'customer') %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ (_context.title|default('sylius.ui.customer'))|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        <div>
+            {{ twig_event(
+                [main_event, fallback_event],
+                _context|merge({ main_event, fallback_event, customer: _context.order.customer })
+            ) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/Shared/Helper/address.html.twig' as _address %}
+
+<div>
+    <strong>{{ 'sylius.ui.shipping_address'|trans }}:</strong>
+</div>
+<div class="mb-3">
+    {{ _address.default(_context.order.billingAddress) }}
+</div>

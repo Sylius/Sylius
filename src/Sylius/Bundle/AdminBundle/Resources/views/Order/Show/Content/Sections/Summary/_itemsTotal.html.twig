@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
+
+{% set order = _context.resource %}
+
+<tr>
+    <td><strong>{{ 'sylius.ui.items_total'|trans }}:</strong></td>
+    <td class="text-end">{{ _money.format(order.itemsTotal, order.currencyCode) }}</td>
+</tr>
