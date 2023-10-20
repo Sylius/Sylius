@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException;
 use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -117,35 +118,34 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
             return;
         }
 
-        foreach ($data['attributes'] as $attributeData) {
-            /** @var ProductAttributeInterface $attribute */
-            $attribute = $this->iriConverter->getResourceFromIri($attributeData['attribute']);
-
-            $value = $attributeData['value'];
+        foreach ($data['attributes'] as ['attribute' => $attributeIri, 'value' => $value]) {
             if ($value === null) {
                 continue;
             }
 
+            /** @var ProductAttributeInterface $attribute */
+            $attribute = $this->iriConverter->getResourceFromIri($attributeIri);
+
             switch ($attribute->getStorageType()) {
-                case 'boolean':
+                case AttributeValueInterface::STORAGE_BOOLEAN:
                     if (!is_bool($value)) {
                         $this->throwException($attribute->getName(), $attribute->getStorageType());
                     }
 
                     return;
-                case 'integer':
+                case AttributeValueInterface::STORAGE_INTEGER:
                     if (!is_int($value)) {
                         $this->throwException($attribute->getName(), $attribute->getStorageType());
                     }
 
                     return;
-                case 'float':
-                    if (!is_numeric($value)) {
+                case AttributeValueInterface::STORAGE_FLOAT:
+                    if (!is_int($value) && !is_float($value)) {
                         $this->throwException($attribute->getName(), $attribute->getStorageType());
                     }
 
                     return;
-                case 'json':
+                case AttributeValueInterface::STORAGE_JSON:
                     if (!is_array($value)) {
                         $this->throwException($attribute->getName(), 'array');
                     }
@@ -162,7 +162,7 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
     private function throwException(string $attributeName, string $type): void
     {
         throw new InvalidProductAttributeValueTypeException(sprintf(
-            'The value of attribute "%s" has the invalid type, it must be of type %s.',
+            'The value of attribute "%s" has an invalid type, it must be of type %s.',
             $attributeName,
             $type,
         ));

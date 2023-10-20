@@ -15,12 +15,13 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductAttributeContext implements Context
 {
-    public function __construct(private RepositoryInterface $productAttributeRepository)
+    public function __construct(private RepositoryInterface $productAttributeTranslationRepository)
     {
     }
 
@@ -30,17 +31,17 @@ final class ProductAttributeContext implements Context
      */
     public function getProductAttributeByName(string $name): ProductAttributeInterface
     {
-        /** @var ProductAttributeInterface[] $productAttribute */
-        $productAttributes = $this->productAttributeRepository->findAll();
-        $productAttributes = array_filter($productAttributes, function (ProductAttributeInterface $productAttribute) use ($name) {
-            return $productAttribute->getName() === $name;
-        });
+        /** @var ProductAttributeTranslationInterface[] $productAttributeTranslations */
+        $productAttributeTranslations = $this->productAttributeTranslationRepository->findBy(['name' => $name]);
 
         Assert::notEmpty(
-            $productAttributes,
-            sprintf('Product attribute with name "%s" does not exist', $name),
+            $productAttributeTranslations,
+            sprintf('Product attribute with with name "%s" does not exist', $name),
         );
 
-        return reset($productAttributes);
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $productAttributeTranslations[0]->getTranslatable();
+
+        return $productAttribute;
     }
 }

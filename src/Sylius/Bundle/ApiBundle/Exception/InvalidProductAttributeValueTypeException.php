@@ -17,7 +17,7 @@ namespace Sylius\Bundle\ApiBundle\Exception;
 final class InvalidProductAttributeValueTypeException extends \RuntimeException
 {
     public function __construct(
-        string $message = 'The value of attribute has the invalid type.',
+        string $message = 'The value of attribute has an invalid type.',
         int $code = 0,
         \Throwable $previous = null,
     ) {

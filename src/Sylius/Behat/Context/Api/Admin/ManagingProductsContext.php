@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -316,7 +317,7 @@ final class ManagingProductsContext implements Context
      * @When I set its :attribute attribute to :value in :localeCode
      * @When I do not set its :attribute attribute in :localeCode
      */
-    public function iSetItsFloatAttributeTo(
+    public function iSetItsAttributeTo(
         ProductAttributeInterface $attribute,
         ?string $value = null,
         string $localeCode = 'en_US'
@@ -702,7 +703,7 @@ final class ManagingProductsContext implements Context
         ProductInterface $product,
         string $value,
         string $localeCode = 'en_US'
-    ) {
+    ): void {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         $this->hasAttributeWithValueInLastResponse($attribute, $value, $localeCode);
@@ -767,9 +768,9 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatIHaveToDefineTheAttributeIn(string $attributeName, string $localeCode): void
     {
-        Assert::contains(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'This value should not be blank.',
+            '/attributes\[[\d+]\]\.value: This value should not be blank\./',
         );
     }
 
@@ -795,7 +796,7 @@ final class ManagingProductsContext implements Context
     ): void {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('The value of attribute "%s" has the invalid type', $attributeName),
+            sprintf('The value of attribute "%s" has an invalid type', $attributeName),
         );
     }
 
@@ -858,14 +859,16 @@ final class ManagingProductsContext implements Context
         return array_pop($productTaxonUrl);
     }
 
-    private function getAttributeValueInProperType(ProductAttributeInterface $productAttribute, string $value): mixed
-    {
+    private function getAttributeValueInProperType(
+        ProductAttributeInterface $productAttribute,
+        string $value
+    ): string|bool|float|int {
         switch ($productAttribute->getStorageType()) {
-            case 'boolean':
+            case AttributeValueInterface::STORAGE_BOOLEAN:
                 return (bool) $value;
-            case 'float':
+            case AttributeValueInterface::STORAGE_FLOAT:
                 return (float) $value;
-            case 'integer':
+            case AttributeValueInterface::STORAGE_INTEGER:
                 return (int) $value;
         }
 
@@ -884,7 +887,7 @@ final class ManagingProductsContext implements Context
         }
 
         throw new \InvalidArgumentException(
-            sprintf('Value "%s" not found in attribute %s', $value, $attribute->getName())
+            sprintf('Value "%s" not found in attribute "%s"', $value, $attribute->getName())
         );
     }
 
@@ -898,7 +901,7 @@ final class ManagingProductsContext implements Context
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
         foreach ($attributes as $attributeValue) {
             if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === $localeCode) {
-                $this->assertAttributeValue($attribute, $value, $attributeValue['value']);
+                $this->assertAttributeValue($value, $attributeValue['value']);
 
                 return;
             }
@@ -909,12 +912,9 @@ final class ManagingProductsContext implements Context
         );
     }
 
-    private function assertAttributeValue(
-        ProductAttributeInterface $attribute,
-        string $expectedValue,
-        $value,
-    ): void {
-        if ($attribute->getStorageType() === 'json') {
+    private function assertAttributeValue(string $expectedValue, $value): void
+    {
+        if (is_array($value)) {
             Assert::allInArray($value, [$expectedValue]);
 
             return;
