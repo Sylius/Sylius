@@ -115,5 +115,10 @@
             <argument type="service" id="sylius.factory.channel_price_history_config" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CustomerDenormalizer">
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
     </services>
 </container>
