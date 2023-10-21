@@ -1,0 +1,68 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_grid:
+    grids:
+        sylius_shop_account_order:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.order.class%"
+                    repository:
+                        method: createByCustomerAndChannelIdQueryBuilder
+                        arguments:
+                            - "expr:service('sylius.context.customer').getCustomer().getId()"
+                            - "expr:service('sylius.context.channel').getChannel().getId()"
+            sorting:
+                checkoutCompletedAt: desc
+            fields:
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    sortable: ~
+                    options:
+                        template: "@SyliusShop/Account/Order/Grid/Field/number.html.twig"
+                checkoutCompletedAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    sortable: ~
+                    options:
+                        format: m/d/Y
+                shippingAddress:
+                    type: twig
+                    label: sylius.ui.ship_to
+                    options:
+                        template: "@SyliusShop/Account/Order/Grid/Field/address.html.twig"
+                total:
+                    type: twig
+                    label: sylius.ui.total
+                    path: .
+                    sortable: total
+                    options:
+                        template: "@SyliusShop/Account/Order/Grid/Field/total.html.twig"
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        vars:
+                            labels: "@SyliusShop/Account/Order/Label/State"
+            actions:
+                item:
+                    show:
+                        type: shop_show
+                        label: sylius.ui.show
+                        options:
+                            link:
+                                route: sylius_shop_account_order_show
+                                parameters:
+                                    number: resource.number
+                    pay:
+                        type: shop_pay
+                        label: sylius.ui.pay
+                        options:
+                            link:
+                                route: sylius_shop_order_show
+                                parameters:
+                                    tokenValue: resource.tokenValue
