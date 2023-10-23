@@ -13,13 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Api\IriConverterInterface;
-use Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException;
-use Sylius\Component\Attribute\AttributeType\DateAttributeType;
-use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
@@ -32,11 +26,6 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
     use DenormalizerAwareTrait;
 
     private const ALREADY_CALLED = 'sylius_product_denormalizer_already_called';
-
-    public function __construct(
-        private IriConverterInterface $iriConverter,
-    ) {
-    }
 
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
@@ -53,9 +42,6 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         $data = (array) $data;
 
         $data = $this->denormalizeOptions($data, $context);
-
-        $this->validateAttributes($data);
-        $data = $this->denormalizeAttributes($data);
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
@@ -85,86 +71,5 @@ final class ProductDenormalizer implements ContextAwareDenormalizerInterface, De
         }
 
         return $data;
-    }
-
-    /**
-     * @param array<array-key, mixed> $data
-     *
-     * @return array<array-key, mixed>
-     */
-    private function denormalizeAttributes(array $data): array
-    {
-        if (!isset($data['attributes'])) {
-            return $data;
-        }
-
-        foreach ($data['attributes'] as $key => $attributeData) {
-            /** @var ProductAttributeInterface $attribute */
-            $attribute = $this->iriConverter->getResourceFromIri($attributeData['attribute']);
-
-            if (in_array($attribute->getType(), [DateAttributeType::TYPE, DateTimeAttributeType::TYPE], true)) {
-                $attributeData['value'] = new \DateTime($attributeData['value']);
-                $data['attributes'][$key] = $attributeData;
-            }
-        }
-
-        return $data;
-    }
-
-    /** @param array<array-key, mixed> $data */
-    private function validateAttributes(array $data): void
-    {
-        if (!isset($data['attributes'])) {
-            return;
-        }
-
-        foreach ($data['attributes'] as ['attribute' => $attributeIri, 'value' => $value]) {
-            if ($value === null) {
-                continue;
-            }
-
-            /** @var ProductAttributeInterface $attribute */
-            $attribute = $this->iriConverter->getResourceFromIri($attributeIri);
-
-            switch ($attribute->getStorageType()) {
-                case AttributeValueInterface::STORAGE_BOOLEAN:
-                    if (!is_bool($value)) {
-                        $this->throwException($attribute->getName(), $attribute->getStorageType());
-                    }
-
-                    return;
-                case AttributeValueInterface::STORAGE_INTEGER:
-                    if (!is_int($value)) {
-                        $this->throwException($attribute->getName(), $attribute->getStorageType());
-                    }
-
-                    return;
-                case AttributeValueInterface::STORAGE_FLOAT:
-                    if (!is_int($value) && !is_float($value)) {
-                        $this->throwException($attribute->getName(), $attribute->getStorageType());
-                    }
-
-                    return;
-                case AttributeValueInterface::STORAGE_JSON:
-                    if (!is_array($value)) {
-                        $this->throwException($attribute->getName(), 'array');
-                    }
-
-                    return;
-                default:
-                    if (!is_string($value)) {
-                        $this->throwException($attribute->getName(), 'string');
-                    }
-            }
-        }
-    }
-
-    private function throwException(string $attributeName, string $type): void
-    {
-        throw new InvalidProductAttributeValueTypeException(sprintf(
-            'The value of attribute "%s" has an invalid type, it must be of type %s.',
-            $attributeName,
-            $type,
-        ));
     }
 }
