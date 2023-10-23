@@ -200,12 +200,8 @@ final class ItemNormalizer extends AbstractItemNormalizer
             return $normalizedRelatedObject;
         }
 
-        $iri = $this->iriConverter->getIriFromResource(
-            $relatedObject,
-            UrlGeneratorInterface::ABS_PATH,
-            $context['operation'] ?? null,
-            $context
-        );
+        // The line below has been modified to pass the context to the IriConverter
+        $iri = $this->iriConverter->getIriFromResource($relatedObject, UrlGeneratorInterface::ABS_PATH, null, $context);
 
         if (isset($context['resources'])) {
             $context['resources'][$iri] = $iri;
