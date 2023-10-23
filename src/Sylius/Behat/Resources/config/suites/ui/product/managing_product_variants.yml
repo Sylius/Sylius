@@ -13,6 +13,7 @@ default:
                 - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_option_value
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.channel

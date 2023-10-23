@@ -18,10 +18,12 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
@@ -34,6 +36,7 @@ final class ManagingProductVariantsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -210,7 +213,44 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsOptionAs(string $optionName, ProductOptionValueInterface $optionValue): void
     {
-        $this->client->addRequestData('optionValues', [$this->iriConverter->getIriFromResource($optionValue)]);
+        $content = $this->client->getContent();
+        $content['optionValues'][] = $this->sectionAwareIriConverter->getIriFromResourceInSection($optionValue, 'admin');
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
+     * @When I change its :productOption option to :productOptionValue
+     */
+    public function iChangeItsOptionTo(
+        ProductOptionInterface $productOption,
+        ProductOptionValueInterface $productOptionValue,
+    ): void {
+        $content = $this->client->getContent();
+        foreach ($content['optionValues'] as $key => $optionValueIri) {
+            /** @var ProductOptionValueInterface $currentOptionValue */
+            $currentOptionValue = $this->iriConverter->getResourceFromIri($optionValueIri);
+            if ($currentOptionValue->getOptionCode() === $productOption->getCode()) {
+                unset($content['optionValues'][$key]);
+            }
+        }
+
+        $content['optionValues'][] = $this->iriConverter->getIriFromResource($productOptionValue);
+
+        $this->client->setRequestData($content);
+    }
+
+    /**
+     * @When I add additionally :productOptionValue value as :productOptionName option
+     */
+    public function iAddAdditionallyValueAsOption(
+        ProductOptionValueInterface $productOptionValue,
+        string $productOptionName,
+    ): void {
+        $content = $this->client->getContent();
+        $content['optionValues'][] = $this->iriConverter->getIriFromResource($productOptionValue);
+
+        $this->client->setRequestData($content);
     }
 
     /**
@@ -620,6 +660,32 @@ final class ManagingProductVariantsContext implements Context
         Assert::contains($errors, 'Width cannot be negative.');
         Assert::contains($errors, 'Depth cannot be negative.');
         Assert::contains($errors, 'Weight cannot be negative.');
+    }
+
+    /**
+     * @Then the variant :productVariantName should have :optionName option as :optionValue
+     */
+    public function theVariantShouldHaveOptionAs(
+        string $productVariantName,
+        string $optionName,
+        ProductOptionValueInterface $optionValue
+    ): void {
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'optionValues',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($optionValue, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should be notified that the variant can have only one value configured for a single option
+     */
+    public function iShouldBeNotifiedThatTheVariantCanHaveOnlyOneValueConfiguredForASingleOption(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The product variant can have only one value configured for a single option.',
+        );
     }
 
     private function updateChannelPricingField(

@@ -58,6 +58,18 @@ Feature: Product variant validation
         Then I should be notified that this variant already exists
         And the "Wyborowa Vodka" product should have only one variant
 
+    @api @no-ui
+    Scenario: Adding a new product variant with two values of the same option
+        Given this product has option "Taste" with values "Orange" and "Melon"
+        When I want to create a new variant of this product
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I set its "Taste" option to "Orange"
+        And I set its "Taste" option to "Melon"
+        And I set its price to "$100.00" for "United States" channel
+        And I try to add it
+        Then I should be notified that the variant can have only one value configured for a single option
+        And the "Wyborowa Vodka" product should have no variants
+
     @api @ui
     Scenario: Adding a new product variant with negative properties
         When I want to create a new variant of this product

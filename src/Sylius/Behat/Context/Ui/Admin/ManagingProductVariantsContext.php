@@ -682,6 +682,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then the variant :productVariant should have :optionName option as :optionValue
+     */
+    public function theVariantShouldHaveOptionAs(
+        ProductVariantInterface $productVariant,
+        string $optionName,
+        string $optionValue
+    ): void {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName, $optionValue));
+    }
+
+    /**
      * @param string $element
      * @param string $message
      */
