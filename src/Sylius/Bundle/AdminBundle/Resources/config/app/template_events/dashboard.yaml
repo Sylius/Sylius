@@ -16,8 +16,7 @@ sylius_ui:
                     component:
                         name: 'SyliusAdmin.Dashboard.Statistics'
                         inputs:
-                            context: 'expr:context'
-                            channel: 'expr:context["channel"]'
+                            channelCode: 'expr:context["channel"].getCode()'
                 latest_statistics: '@SyliusAdmin/Dashboard/Index/Content/_latestStatistics.html.twig'
         sylius.admin.dashboard.content.header:
             blocks:
@@ -29,13 +28,13 @@ sylius_ui:
                     template: '@SyliusAdmin/Dashboard/Index/Content/Header/TitleBlock/_title.html.twig'
                     context:
                         header: sylius.ui.dashboard
-        sylius.admin.dashboard.content.statistics:
+        sylius.admin.dashboard.statistics:
             blocks:
                 statistics_grid:
                     template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsGrid.html.twig'
                 statistics_chart:
                     template: '@SyliusAdmin/Dashboard/Index/Content/_statisticsChart.html.twig'
-        sylius.admin.dashboard.content.statistics.grid:
+        sylius.admin.dashboard.statistics.grid:
             blocks:
                 sales: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_sales.html.twig'
                 paid_orders: '@SyliusAdmin/Dashboard/Index/Content/StatisticsGrid/_paidOrders.html.twig'

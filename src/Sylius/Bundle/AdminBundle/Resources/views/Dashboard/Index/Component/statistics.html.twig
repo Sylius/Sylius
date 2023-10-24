@@ -1,5 +1,3 @@
-{% set main_event = twig_event_name(context.main_event, 'statistics') %}
-
-<div class="container-xl">
-    {{ twig_event(main_event, context|merge({ main_event: main_event })) }}
+<div class="container-xl" {{ attributes }}>
+    {{ twig_event(eventName, { main_event: eventName, statisticsData: statistics, rangeName }) }}
 </div>

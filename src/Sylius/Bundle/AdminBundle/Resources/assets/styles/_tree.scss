@@ -39,14 +39,3 @@ ul.tree .tree-icon {
 ul.tree .tree-icon svg {
     stroke-width: 1px;
 }
-
-.tree-loader {
-    display: flex;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
