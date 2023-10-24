@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -165,6 +166,50 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/channel/put_channel_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_updates_a_shop_billing_data(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ChannelInterface $channel */
+        $channel = $fixtures['channel_web'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/channels/%s', $channel->getCode()),
+            server: $header,
+            content: json_encode([
+                'shopBillingData' => [
+                    '@id' => sprintf('/api/v2/admin/shop-billing-datas/%s', $channel->getShopBillingData()->getId()),
+                    'company' => 'DifferentCompany',
+                    'taxId' => '123',
+                    'countryCode' => 'DE',
+                    'street' => 'Different Street',
+                    'city' => 'different City',
+                    'postcode' => '12-124'
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode(
+            $this->client->getResponse(),
+            Response::HTTP_OK,
+        );
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/channels/%s/shop-billing-data', $channel->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/put_shop_billing_data_response',
             Response::HTTP_OK,
         );
     }
