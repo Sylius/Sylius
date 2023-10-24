@@ -238,6 +238,30 @@ final class CustomerTest extends JsonApiTestCase
         );
     }
 
+    /** @test */
+    public function it_does_not_allow_updating_a_customer_with_invalid_gender(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/admin/customers/' . $customer->getId(),
+            server: $header,
+            content: json_encode([
+                'gender' => 'a',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/customer/update_customer_with_invalid_gender_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
+    }
 
     /** @test */
     public function it_gets_customer_orders(): void
