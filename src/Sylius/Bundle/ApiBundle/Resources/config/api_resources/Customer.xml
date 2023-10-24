@@ -26,6 +26,9 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:customer:read</attribute>
                 </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.customer_group_filter</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_post">

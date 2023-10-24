@@ -194,6 +194,18 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I filter by group :groupName
+     * @When I filter by groups :firstGroup and :secondGroup
+     */
+    public function iFilterByGroup(string ...$groupsNames): void
+    {
+        foreach ($groupsNames as $groupName) {
+            $this->client->addFilter('group.name[]', $groupName);
+        }
+        $this->client->filter();
+    }
+
+    /**
      * @When I do not specify any information
      */
     public function iDoNotSpecifyAnyInformation(): void
@@ -294,7 +306,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldSeeZonesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::CUSTOMERS)), $count);
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**

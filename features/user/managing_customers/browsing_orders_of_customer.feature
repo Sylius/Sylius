@@ -24,7 +24,7 @@ Feature: Browsing orders of a customer
         And I should see the order with number "#00000007" in the list
         And I should not see the order with number "#00000008" in the list
 
-    @ui @api
+    @ui
     Scenario: Browsing orders of a specific customer in the list
         When I browse orders of a customer "logan@wolverine.com"
         And I sort them by channel
