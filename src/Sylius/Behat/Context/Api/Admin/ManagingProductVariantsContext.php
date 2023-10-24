@@ -19,7 +19,6 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -141,50 +140,6 @@ final class ManagingProductVariantsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
-    }
-
-    /**
-     * @When /^I change the price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
-     */
-    public function iChangeThePriceOfTheProductVariantInChannel(
-        ProductVariantInterface $variant,
-        int $price,
-        ChannelInterface $channel,
-    ): void {
-        $this->updateChannelPricingField($variant, $channel, $price, 'price');
-    }
-
-    /**
-     * @When /^I change the original price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
-     */
-    public function iChangeTheOriginalPriceOfTheProductVariantInChannel(
-        ProductVariantInterface $variant,
-        int $originalPrice,
-        ChannelInterface $channel,
-    ): void {
-        $this->updateChannelPricingField($variant, $channel, $originalPrice, 'originalPrice');
-    }
-
-    /**
-     * @When /^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/
-     */
-    public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
-        ProductVariantInterface $variant,
-        ChannelInterface $channel,
-    ): void {
-        $this->updateChannelPricingField($variant, $channel, null, 'originalPrice');
-    }
-
-    /**
-     * @When /^I create a new "([^"]+)" variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
-     */
-    public function iCreateANewVariantPricedAtForProductInTheChannel(
-        string $name,
-        int $price,
-        ProductInterface $product,
-        ChannelInterface $channel,
-    ): void {
-        $this->createNewVariantWithPrice($name, $price, $product, $channel);
     }
 
     /**
@@ -690,40 +645,5 @@ final class ManagingProductVariantsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The product variant can have only one value configured for a single option.',
         );
-    }
-
-    private function updateChannelPricingField(
-        ProductVariantInterface $variant,
-        ChannelInterface $channel,
-        ?int $price,
-        string $field,
-    ): void {
-        $this->client->buildUpdateRequest(Resources::PRODUCT_VARIANTS, $variant->getCode());
-
-        $content = $this->client->getContent();
-        $content['channelPricings'][$channel->getCode()][$field] = $price;
-        $this->client->updateRequestData($content);
-
-        $this->client->update();
-    }
-
-    private function createNewVariantWithPrice(
-        string $name,
-        int $price,
-        ProductInterface $product,
-        ChannelInterface $channel,
-    ): void {
-        $this->client->buildCreateRequest(Resources::PRODUCT_VARIANTS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
-        $this->client->addRequestData('code', StringInflector::nameToCode($name));
-
-        $this->client->addRequestData('channelPricings', [
-            $channel->getCode() => [
-                'price' => $price,
-                'channelCode' => $channel->getCode(),
-            ],
-        ]);
-
-        $this->client->create();
     }
 }
