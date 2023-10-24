@@ -391,6 +391,12 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items/{items}/adjustments</attribute>
             </subresourceOperation>
+
+            <subresourceOperation name="api_customers_orders_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />

@@ -95,5 +95,9 @@
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>
+
+        <attribute name="createdAt">
+            <group>admin:customer:read</group>
+        </attribute>
     </class>
 </serializer>

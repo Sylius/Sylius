@@ -115,6 +115,13 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="orders_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers/{id}/orders</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="true" writable="false" />
         <property name="email" writable="true" />
         <property name="firstName" writable="true" />
@@ -122,6 +129,9 @@
         <property name="fullName" writable="false" />
         <property name="defaultAddress" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
-        <property name="user" readable="true" iri="true" />
+        <property name="user" readable="true" writable="true" />
+        <property name="orders" readable="true" writable="false">
+            <subresource resourceClass="%sylius.model.order.class%" collection="true" />
+        </property>
     </resource>
 </resources>
