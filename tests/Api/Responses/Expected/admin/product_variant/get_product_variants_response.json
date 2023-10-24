@@ -91,9 +91,21 @@
     "hydra:totalItems": 2,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-variants{?catalogPromotion}",
+        "hydra:template": "\/api\/v2\/admin\/product-variants{?product,product[],catalogPromotion}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product",
+                "property": "product",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product[]",
+                "property": "product",
+                "required": false
+            },
             {
                 "@type": "IriTemplateMapping",
                 "variable": "catalogPromotion",
