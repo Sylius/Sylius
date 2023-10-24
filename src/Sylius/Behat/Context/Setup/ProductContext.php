@@ -1563,7 +1563,7 @@ final class ProductContext implements Context
         $this->sharedStorage->set(sprintf('%s_option', StringInflector::nameToLowercaseCode($optionName)), $option);
 
         foreach ($values as $value) {
-            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
+            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToCode($value));
             $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
         }
 
