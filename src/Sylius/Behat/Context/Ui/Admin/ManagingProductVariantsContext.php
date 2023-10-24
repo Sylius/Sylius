@@ -112,7 +112,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsNegativePriceTo(string $price, ChannelInterface $channel): void
     {
-        $this->createPage->specifyPrice('-' . $price , $channel);
+        $this->createPage->specifyPrice('-' . $price, $channel);
     }
 
     /**
@@ -687,7 +687,7 @@ final class ManagingProductVariantsContext implements Context
     public function theVariantShouldHaveOptionAs(
         ProductVariantInterface $productVariant,
         string $optionName,
-        string $optionValue
+        string $optionValue,
     ): void {
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 

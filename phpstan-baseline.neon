@@ -811,6 +811,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductTaxonDataPersister.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductVariantDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductVariantDataPersister.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
@@ -2089,6 +2094,11 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\Constraints\\\\ShopUserNotVerifiedValidator\\:\\:validate\\(\\) has parameter \\$value with no type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Validator/Constraints/ShopUserNotVerifiedValidator.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\Constraints\\\\SingleValueForProductVariantOptionValidator\\:\\:validate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Validator/Constraints/SingleValueForProductVariantOptionValidator.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Validator\\\\Constraints\\\\UniqueReviewerEmailValidator\\:\\:__construct\\(\\) has parameter \\$shopUserRepository with generic interface Sylius\\\\Component\\\\User\\\\Repository\\\\UserRepositoryInterface but does not specify its types\\: T$#"

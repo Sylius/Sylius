@@ -519,7 +519,9 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::false(
             $this->responseChecker->hasItemWithValue(
-                $this->client->index(Resources::PRODUCT_VARIANTS), 'code', $productVariant->getCode(),
+                $this->client->index(Resources::PRODUCT_VARIANTS),
+                'code',
+                $productVariant->getCode(),
             ),
             'The product variant still exists, but it should not',
         );
@@ -532,7 +534,9 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-                $this->client->index(Resources::PRODUCT_VARIANTS), 'code', $productVariant->getCode(),
+                $this->client->index(Resources::PRODUCT_VARIANTS),
+                'code',
+                $productVariant->getCode(),
             ),
             'The product variant does not exist, but it should',
         );
@@ -668,7 +672,7 @@ final class ManagingProductVariantsContext implements Context
     public function theVariantShouldHaveOptionAs(
         string $productVariantName,
         string $optionName,
-        ProductOptionValueInterface $optionValue
+        ProductOptionValueInterface $optionValue,
     ): void {
         Assert::true($this->responseChecker->hasValueInCollection(
             $this->client->getLastResponse(),
