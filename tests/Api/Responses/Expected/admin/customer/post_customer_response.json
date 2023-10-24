@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/Customer",
+    "@id": "\/api\/v2\/admin\/customers\/@string@",
+    "@type": "Customer",
+    "defaultAddress": null,
+    "user": null,
+    "id": @integer@,
+    "email": "api@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "birthday": "2023-10-24 11:00:00",
+    "gender": "m",
+    "group": null,
+    "phoneNumber": "+48123456789",
+    "subscribedToNewsletter": true,
+    "createdAt": @date@,
+    "fullName": "John Doe"
+}
