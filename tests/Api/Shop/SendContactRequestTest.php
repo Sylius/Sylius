@@ -47,7 +47,7 @@ final class SendContactRequestTest extends JsonApiTestCase
     /** @test */
     public function it_sends_contact_request_as_logged_in_user(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'authentication/customer.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'authentication/shop_user.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_oliver'];
 
