@@ -12,6 +12,7 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: 'order_items_based'
         channelPriceHistoryConfig: '@web_price_history_config'
+        shopBillingData: '@another_billing_data'
     channel_mobile:
         code: 'MOBILE'
         name: 'Mobile Channel'
@@ -45,6 +46,12 @@ Sylius\Component\Core\Model\ShopBillingData:
         street: 'Wall Street 1'
         city: 'New York'
         postcode: '00-000'
+    another_billing_data:
+        company: 'Another company'
+        taxId: 'PL123423190'
+        street: 'Wall Street 2'
+        city: 'New York'
+        postcode: '01-000'
 
 Sylius\Component\Locale\Model\Locale:
     locale_en:
