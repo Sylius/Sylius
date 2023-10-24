@@ -11,10 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Provider;
+namespace Sylius\Bundle\ApiBundle\Resolver;
+
+use ApiPlatform\Metadata\Operation;
 
 /** @experimental */
-interface PathPrefixProviderInterface
+interface OperationResolverInterface
 {
-    public function getPathPrefix(string $path): ?string;
+    public function resolve(string $resourceClass, string $requestUri, ?Operation $operation): ?Operation;
 }
