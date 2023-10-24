@@ -25,7 +25,6 @@
             <group>admin:customer:create</group>
             <group>admin:customer:read</group>
             <group>admin:customer:update</group>
-            <group>shop:customer:read</group>
         </attribute>
 
         <attribute name="verified">
