@@ -26,7 +26,7 @@ final class AdminResetPasswordTest extends JsonApiTestCase
 
         $this->client->request(
             method: Request::METHOD_POST,
-            uri: '/api/v2/admin/reset-password-requests',
+            uri: '/api/v2/admin/reset-password',
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
