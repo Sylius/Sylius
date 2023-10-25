@@ -17,7 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -96,7 +96,7 @@ final class RegisterShopUserHandlerSpec extends ObjectBehavior
             ->willReturn(new Envelope($sendRegistrationEmailCommand))
         ;
 
-        $sendVerificationEmailCommand = new SendAccountVerificationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
+        $sendVerificationEmailCommand = new SendShopUserVerificationEmail('WILL.SMITH@example.com', 'en_US', 'CHANNEL_CODE');
         $commandBus
             ->dispatch($sendVerificationEmailCommand, [new DispatchAfterCurrentBusStamp()])
             ->shouldBeCalled()

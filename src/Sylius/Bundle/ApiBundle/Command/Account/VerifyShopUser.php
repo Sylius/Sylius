@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
  *
  * @psalm-immutable
  */
-class VerifyCustomerAccount implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class VerifyShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(
         public string $token,

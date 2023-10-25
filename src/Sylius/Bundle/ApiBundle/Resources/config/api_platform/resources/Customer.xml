@@ -29,8 +29,31 @@
 
         <operations>
             <operation
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/customers"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser"
+                output="false"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>shop:customer:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <openapiContext>
+                    <values>
+                        <value name="summary">Registers a new shop user</value>
+                    </values>
+                </openapiContext>
+            </operation>
+
+            <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="shop/customers/{id}.{_format}"
+                uriTemplate="/shop/customers/{id}"
             >
                 <normalizationContext>
                     <values>

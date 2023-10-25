@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
-use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification;
+use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Webmozart\Assert\Assert;
 
 /** @experimental  */
-final class ResendVerificationEmailHandler implements MessageHandlerInterface
+final class RequestShopUserVerificationHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
@@ -34,7 +34,7 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(ResendVerificationEmail $command): void
+    public function __invoke(RequestShopUserVerification $command): void
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->find($command->getShopUserId());
@@ -45,7 +45,7 @@ final class ResendVerificationEmailHandler implements MessageHandlerInterface
         /** @var CustomerInterface $customer */
         $customer = $user->getCustomer();
 
-        $this->commandBus->dispatch(new SendAccountVerificationEmail(
+        $this->commandBus->dispatch(new SendShopUserVerificationEmail(
             $customer->getEmail(),
             $command->getLocaleCode(),
             $command->getChannelCode(),

@@ -35,10 +35,14 @@
   Previous Routes:
     * `'POST' - /api/v2/shop/reset-password-requests`
     * `'PATCH' - /api/v2/shop/reset-password-requests/{resetPasswordToken}`
+    * `'POST' - /api/v2/shop/account-verification-requests`
+    * `'PATCH - /api/v2/shop/account-verification-requests/{token}`
 
   New Routes:
     * `'POST' - /api/v2/shop/reset-password`
     * `'PATCH' - /api/v2/shop/reset-password/{resetPasswordToken}`
+    * `'POST' - /api/v2/shop/verify-shop-user`
+    * `'PATCH' - /api/v2/shop/verify-shop-user/{token}`
 
 * The `getCurrentPrefix` method has been removed from the `Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface`.
 

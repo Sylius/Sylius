@@ -164,6 +164,7 @@ final class CustomerContext implements Context
      */
     public function iTryToVerifyUsing(string $token): void
     {
+        $this->verificationToken = $token;
         $this->verifyAccount($token);
     }
 
@@ -295,6 +296,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
     {
+        $response = $this->client->getLastResponse();
         $this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('There is no shop user with %s email verification token.', $this->verificationToken),
@@ -457,7 +459,7 @@ final class CustomerContext implements Context
     private function verifyAccount(string $token): void
     {
         $request = $this->requestFactory->custom(
-            \sprintf('%s/shop/account-verification-requests/%s', $this->apiUrlPrefix, $token),
+            \sprintf('%s/shop/verify-shop-user/%s', $this->apiUrlPrefix, $token),
             HttpRequest::METHOD_PATCH,
         );
 
@@ -480,7 +482,7 @@ final class CustomerContext implements Context
 
     private function resendVerificationEmail(string $email): void
     {
-        $request = $this->requestFactory->create('shop', 'account-verification-requests', 'Bearer');
+        $request = $this->requestFactory->create('shop', 'verify-shop-user', 'Bearer');
 
         $request->setContent(['email' => $email]);
 

@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraint;
@@ -21,19 +22,20 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class AccountVerificationTokenEligibilityValidator extends ConstraintValidator
+final class ShopUserVerificationTokenEligibilityValidator extends ConstraintValidator
 {
+    /** @param RepositoryInterface<ShopUserInterface> */
     public function __construct(private RepositoryInterface $shopUserRepository)
     {
     }
 
-    /** @param VerifyCustomerAccount|mixed $value */
+    /** @param VerifyShopUser|mixed $value */
     public function validate($value, Constraint $constraint)
     {
-        Assert::isInstanceOf($value, VerifyCustomerAccount::class);
+        Assert::isInstanceOf($value, VerifyShopUser::class);
 
-        /** @var AccountVerificationTokenEligibility $constraint */
-        Assert::isInstanceOf($constraint, AccountVerificationTokenEligibility::class);
+        /** @var ShopUserVerificationTokenEligibility $constraint */
+        Assert::isInstanceOf($constraint, ShopUserVerificationTokenEligibility::class);
 
         /** @var UserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $value->token]);
