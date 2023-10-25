@@ -139,22 +139,12 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I enable their account
+     * @When /^I (enable|disable) their account$/
      */
-    public function iEnableIt(): void
+    public function iEnableIt(string $toggleAction): void
     {
         $this->client->addRequestData('user', [
-            'enabled' => true,
-        ]);
-    }
-
-    /**
-     * @When I disable their account
-     */
-    public function iDisableIt(): void
-    {
-        $this->client->addRequestData('user', [
-            'enabled' => false,
+            'enabled' => 'enable' === $toggleAction,
         ]);
     }
 
@@ -448,27 +438,15 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(this customer) should be enabled$/
+     * @Then /^(this customer) should be (enabled|disabled)$/
      */
-    public function thisCustomerShouldBeEnabled(CustomerInterface $customer): void
+    public function thisCustomerShouldBeEnabled(CustomerInterface $customer, string $toggleAction): void
     {
         $user = $this->responseChecker->getValue(
             $this->client->show(Resources::CUSTOMERS, (string) $customer->getId()),
             'user',
         );
-        Assert::true($user['enabled']);
-    }
-
-    /**
-     * @Then /^(this customer) should be disabled$/
-     */
-    public function thisCustomerShouldBeDisabled(CustomerInterface $customer): void
-    {
-        $user = $this->responseChecker->getValue(
-            $this->client->show(Resources::CUSTOMERS, (string) $customer->getId()),
-            'user',
-        );
-        Assert::false($user['enabled']);
+        Assert::same($user['enabled'], 'enabled' === $toggleAction);
     }
 
     /**
