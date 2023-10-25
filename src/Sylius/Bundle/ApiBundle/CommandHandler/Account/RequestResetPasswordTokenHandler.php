@@ -23,7 +23,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental */
-final class RequestResetPasswordTokenHandler implements MessageHandlerInterface
+final readonly class RequestResetPasswordTokenHandler implements MessageHandlerInterface
 {
     public function __construct(
         private UserRepositoryInterface $userRepository,
