@@ -23,6 +23,10 @@ body {
     font-feature-settings: "cv03", "cv04", "cv11";
 }
 
+.w-fit-content {
+    width: fit-content;
+}
+
 @import "alert";
 @import "avatar";
 @import "collapse";
