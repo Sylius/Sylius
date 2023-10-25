@@ -1,5 +1,5 @@
 @managing_products
-Feature: Toggle the inventory tracking
+Feature: Toggling the inventory tracking
     In order to have the inventory tracked in my shop
     As an Administrator
     I want to toggle the inventory tracking
