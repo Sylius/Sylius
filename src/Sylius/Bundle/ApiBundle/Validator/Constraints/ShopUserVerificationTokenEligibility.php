@@ -16,13 +16,13 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental */
-final class AccountVerificationTokenEligibility extends Constraint
+final class ShopUserVerificationTokenEligibility extends Constraint
 {
     public string $message = 'sylius.account.invalid_verification_token';
 
     public function validatedBy(): string
     {
-        return 'sylius_api_validator_account_verification_token_eligibility';
+        return 'sylius_api_validator_shop_user_verification_token_eligibility';
     }
 
     public function getTargets(): string

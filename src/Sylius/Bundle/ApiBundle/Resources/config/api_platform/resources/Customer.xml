@@ -30,7 +30,7 @@
         <operations>
             <operation
                 class="ApiPlatform\Metadata\Post"
-                uriTemplate="shop/customers"
+                uriTemplate="/shop/customers"
                 messenger="input"
                 input="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser"
                 output="false"
@@ -46,14 +46,14 @@
                 </denormalizationContext>
                 <openapiContext>
                     <values>
-                        <value name="summary">Registers a new customer</value>
+                        <value name="summary">Registers a new shop user</value>
                     </values>
                 </openapiContext>
             </operation>
 
             <operation
                 class="ApiPlatform\Metadata\Get"
-                uriTemplate="shop/customers/{id}.{_format}"
+                uriTemplate="/shop/customers/{id}"
             >
                 <normalizationContext>
                     <values>

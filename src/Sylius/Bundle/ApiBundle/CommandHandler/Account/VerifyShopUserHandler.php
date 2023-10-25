@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Clock\ClockInterface;
@@ -25,8 +25,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
 /** @experimental  */
-final class VerifyCustomerAccountHandler implements MessageHandlerInterface
+final class VerifyShopUserHandler implements MessageHandlerInterface
 {
+    /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
     public function __construct(
         private RepositoryInterface $shopUserRepository,
         private ClockInterface $clock,
@@ -34,7 +35,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
     ) {
     }
 
-    public function __invoke(VerifyCustomerAccount $command): JsonResponse
+    public function __invoke(VerifyShopUser $command): JsonResponse
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);

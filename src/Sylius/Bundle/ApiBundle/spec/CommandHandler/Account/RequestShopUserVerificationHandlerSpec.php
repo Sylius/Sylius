@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\SendAccountVerificationEmail;
+use Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification;
+use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
+final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,
@@ -44,7 +44,7 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
     {
         $userRepository->find(42)->willReturn(null);
 
-        $resendVerificationEmail = new ResendVerificationEmail();
+        $resendVerificationEmail = new RequestShopUserVerification();
         $resendVerificationEmail->setChannelCode('WEB');
         $resendVerificationEmail->setLocaleCode('en_US');
         $resendVerificationEmail->setShopUserId(42);
@@ -69,14 +69,14 @@ final class ResendVerificationEmailHandlerSpec extends ObjectBehavior
         $generator->generate()->willReturn('TOKEN');
         $shopUser->setEmailVerificationToken('TOKEN')->shouldBeCalled();
 
-        $sendAccountVerificationEmail = new SendAccountVerificationEmail('test@email.com', 'en_US', 'WEB');
+        $sendAccountVerificationEmail = new SendShopUserVerificationEmail('test@email.com', 'en_US', 'WEB');
 
         $messageBus->dispatch(
             $sendAccountVerificationEmail,
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendAccountVerificationEmail))->shouldBeCalled();
 
-        $resendVerificationEmail = new ResendVerificationEmail();
+        $resendVerificationEmail = new RequestShopUserVerification();
         $resendVerificationEmail->setChannelCode('WEB');
         $resendVerificationEmail->setLocaleCode('en_US');
         $resendVerificationEmail->setShopUserId(42);

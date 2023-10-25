@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Clock\ClockInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 
-final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
+final class VerifyShopUserHandlerSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $shopUserRepository,
@@ -59,7 +59,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope(new \stdClass()));
 
-        $this(new VerifyCustomerAccount('ToKeN', 'en_US', 'WEB'));
+        $this(new VerifyShopUser('ToKeN', 'en_US', 'WEB'));
     }
 
     function it_throws_error_if_user_does_not_exist(
@@ -69,7 +69,7 @@ final class VerifyCustomerAccountHandlerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__invoke', [new VerifyCustomerAccount('ToKeN')])
+            ->during('__invoke', [new VerifyShopUser('ToKeN')])
         ;
     }
 }

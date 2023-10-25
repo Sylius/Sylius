@@ -12,8 +12,8 @@
 -->
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail">
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerified">
+    <class name="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser">
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationTokenEligibility">
             <option name="groups">
                 <value>sylius</value>
             </option>

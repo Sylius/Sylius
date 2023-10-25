@@ -16,7 +16,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Component\Core\Model\Customer;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
@@ -123,8 +123,8 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 Customer::class,
                 null,
                 [
-                    'input' => ['class' => VerifyCustomerAccount::class],
-                    'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
+                    'input' => ['class' => VerifyShopUser::class],
+                    'object_to_populate' => new VerifyShopUser('TOKEN'),
                 ],
             )
             ->willReturn(['key' => 'value'])
@@ -136,8 +136,8 @@ final class CommandDenormalizerSpec extends ObjectBehavior
                 Customer::class,
                 null,
                 [
-                    'input' => ['class' => VerifyCustomerAccount::class],
-                    'object_to_populate' => new VerifyCustomerAccount('TOKEN'),
+                    'input' => ['class' => VerifyShopUser::class],
+                    'object_to_populate' => new VerifyShopUser('TOKEN'),
                 ],
             )
             ->shouldReturn(['key' => 'value'])

@@ -18,7 +18,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
  *
  * @psalm-immutable
  */
-class SendAccountVerificationEmail
+class SendShopUserVerificationEmail
 {
     /** @var string */
     public $shopUserEmail;

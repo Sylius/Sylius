@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibility;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationTokenEligibility;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehavior
+final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $shopUserRepository): void
     {
@@ -34,9 +34,9 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         $this->shouldImplement(ConstraintValidatorInterface::class);
     }
 
-    function it_throws_an_exception_if_value_is_not_type_of_verify_customer_account(): void
+    function it_throws_an_exception_if_value_is_not_type_of_verify_shop_user(): void
     {
-        $constraint = new AccountVerificationTokenEligibility();
+        $constraint = new ShopUserVerificationTokenEligibility();
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -44,9 +44,9 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         ;
     }
 
-    function it_throws_an_exception_if_constraint_is_not_type_of_account_verification_eligibility(): void
+    function it_throws_an_exception_if_constraint_is_not_type_of_shop_user_verification_eligibility(): void
     {
-        $value = new VerifyCustomerAccount('TOKEN');
+        $value = new VerifyShopUser('TOKEN');
         $constraint = new OrderPaymentMethodEligibility();
 
         $this
@@ -55,12 +55,12 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         ;
     }
 
-    function it_adds_violation_if_account_is_null(
+    function it_adds_violation_if_shop_user_is_null(
         RepositoryInterface $shopUserRepository,
         ExecutionContextInterface $executionContext,
     ): void {
-        $constraint = new AccountVerificationTokenEligibility();
-        $value = new VerifyCustomerAccount('TOKEN');
+        $constraint = new ShopUserVerificationTokenEligibility();
+        $value = new VerifyShopUser('TOKEN');
 
         $this->initialize($executionContext);
 
@@ -77,13 +77,13 @@ final class AccountVerificationTokenEligibilityValidatorSpec extends ObjectBehav
         $this->validate($value, $constraint);
     }
 
-    function it_does_nothing_if_account_has_been_found(
+    function it_does_nothing_if_shop_user_has_been_found(
         RepositoryInterface $shopUserRepository,
         ExecutionContextInterface $executionContext,
         ShopUserInterface $user,
     ): void {
-        $constraint = new AccountVerificationTokenEligibility();
-        $value = new VerifyCustomerAccount('TOKEN');
+        $constraint = new ShopUserVerificationTokenEligibility();
+        $value = new VerifyShopUser('TOKEN');
 
         $this->initialize($executionContext);
 

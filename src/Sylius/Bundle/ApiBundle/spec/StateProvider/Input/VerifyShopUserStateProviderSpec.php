@@ -15,9 +15,9 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Input;
 
 use ApiPlatform\Metadata\Operation;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 
-final class VerifyCustomerAccountStateProviderSpec extends ObjectBehavior
+final class VerifyShopUserStateProviderSpec extends ObjectBehavior
 {
     function it_returns_null_when_operation_is_not_on_verify_customer_account(Operation $operation): void
     {
@@ -28,7 +28,7 @@ final class VerifyCustomerAccountStateProviderSpec extends ObjectBehavior
 
     function it_throws_invalid_argument_exception_when_no_token_is_provided(Operation $operation): void
     {
-        $operation->getClass()->willReturn(VerifyCustomerAccount::class);
+        $operation->getClass()->willReturn(VerifyShopUser::class);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -46,11 +46,11 @@ final class VerifyCustomerAccountStateProviderSpec extends ObjectBehavior
 
     function it_returns_verify_customer_account_command_when_token_is_provided(Operation $operation): void
     {
-        $operation->getClass()->willReturn(VerifyCustomerAccount::class);
+        $operation->getClass()->willReturn(VerifyShopUser::class);
 
         $this
             ->provide($operation, ['token' => 'TOKEN'])
-            ->shouldBeLike(new VerifyCustomerAccount('TOKEN'))
+            ->shouldBeLike(new VerifyShopUser('TOKEN'))
         ;
     }
 }

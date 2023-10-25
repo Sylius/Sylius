@@ -17,19 +17,19 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-final class VerifyCustomerAccountsTest extends JsonApiTestCase
+final class VerifyShopUsersTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
     /** #test / temporarily disabled as validation triggers before processors */
     public function it_resends_account_verification_token(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
         $header = array_merge($this->logInShopUser('oliver@doe.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/account-verification-requests',
+            uri: '/api/v2/shop/verify-shop-user',
             server: $header,
             content: '{}',
         );
@@ -44,11 +44,11 @@ final class VerifyCustomerAccountsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_allow_to_resend_token_for_not_logged_in_users(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/customer.yaml']);
+        $this->loadFixturesFromFiles(['channel.yaml', 'cart.yaml', 'authentication/shop_user.yaml']);
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/shop/account-verification-requests',
+            uri: '/api/v2/shop/verify-shop-user',
             server: self::CONTENT_TYPE_HEADER,
         );
 

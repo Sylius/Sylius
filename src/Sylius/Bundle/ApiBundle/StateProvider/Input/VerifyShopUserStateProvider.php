@@ -15,24 +15,24 @@ namespace Sylius\Bundle\ApiBundle\StateProvider\Input;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Webmozart\Assert\Assert;
 
 /**
  * @experimental
  *
- * @implements ProviderInterface<VerifyCustomerAccount>
+ * @implements ProviderInterface<VerifyShopUser>
  */
-final class VerifyCustomerAccountStateProvider implements ProviderInterface
+final class VerifyShopUserStateProvider implements ProviderInterface
 {
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
-        if (!is_a($operation->getClass(), VerifyCustomerAccount::class, true)) {
+        if (!is_a($operation->getClass(), VerifyShopUser::class, true)) {
             return null;
         }
 
         Assert::stringNotEmpty($uriVariables['token'] ?? null, 'Token is required.');
 
-        return new VerifyCustomerAccount($uriVariables['token']);
+        return new VerifyShopUser($uriVariables['token']);
     }
 }

@@ -46,9 +46,9 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_allows_customer_to_log_in(): void
+    public function it_allows_shop_user_to_log_in(): void
     {
-        $this->loadFixturesFromFiles(['authentication/customer.yaml']);
+        $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
 
         $this->client->request(
             method: 'POST',
