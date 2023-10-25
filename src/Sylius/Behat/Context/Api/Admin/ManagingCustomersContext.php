@@ -423,6 +423,17 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that the password must be at least (\d+) characters long$/
+     */
+    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong(string $amountOfCharacters): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('Password must be at least %d characters long.', $amountOfCharacters),
+        );
+    }
+
+    /**
      * @Then I should not see the order with number :orderNumber in the list
      */
     public function iShouldNotSeeASingleOrderFromCustomer(string $orderNumber): void
