@@ -68,13 +68,13 @@
 <!--            <tag name="serializer.normalizer" priority="64" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">-->
-<!--            <argument type="service" id="sylius.calculator.product_variant_price" />-->
-<!--            <argument type="service" id="sylius.availability_checker" />-->
-<!--            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />-->
-<!--            <argument type="service" id="api_platform.symfony.iri_converter" />-->
-<!--            <tag name="serializer.normalizer" priority="64" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer" decorates="fos_rest.serializer.flatten_exception_normalizer">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\FlattenExceptionNormalizer.inner" />-->
