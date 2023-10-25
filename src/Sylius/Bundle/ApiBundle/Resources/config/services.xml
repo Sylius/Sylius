@@ -166,8 +166,14 @@
 <!--            <argument type="service" id="validator" />-->
 <!--        </service>-->
 
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter" decorates="api_platform.symfony.iri_converter" public="false">
+        <service
+            id="Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter"
+            decorates="api_platform.symfony.iri_converter"
+            decoration-priority="64"
+            public="false"
+        >
             <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
 

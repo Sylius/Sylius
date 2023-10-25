@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Api\UrlGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Util\ClassInfoTrait;
+use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 
 final readonly class IriConverter implements IriConverterInterface
@@ -25,6 +26,7 @@ final readonly class IriConverter implements IriConverterInterface
 
     public function __construct(
         private IriConverterInterface $decoratedIriConverter,
+        private PathPrefixProviderInterface $pathPrefixProvider,
         private OperationResolverInterface $operationResolver,
     ) {
     }
@@ -41,7 +43,8 @@ final readonly class IriConverter implements IriConverterInterface
         array $context = [],
     ): ?string {
         $resourceClass = $context['force_resource_class'] ?? (\is_string($resource) ? $resource : $this->getObjectClass($resource));
-        $operation = $this->operationResolver->resolve($resourceClass, $context['request_uri'] ?? '', $operation);
+        $pathPrefix = $this->pathPrefixProvider->getPathPrefix($context['request_uri'] ?? '');
+        $operation = $this->operationResolver->resolve($resourceClass, $pathPrefix, $operation);
 
         return $this->decoratedIriConverter->getIriFromResource($resource, $referenceType, $operation, $context);
     }

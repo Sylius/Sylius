@@ -18,5 +18,5 @@ use ApiPlatform\Metadata\Operation;
 /** @experimental */
 interface OperationResolverInterface
 {
-    public function resolve(string $resourceClass, string $requestUri, ?Operation $operation): ?Operation;
+    public function resolve(string $resourceClass, ?string $pathPrefix, ?Operation $operation): ?Operation;
 }

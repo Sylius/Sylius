@@ -16,24 +16,19 @@ namespace Sylius\Bundle\ApiBundle\Resolver;
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
-use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 
 /** @experimental */
 final readonly class PathPrefixBasedOperationResolver implements OperationResolverInterface
 {
-    public function __construct(
-        private ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
-        private PathPrefixProviderInterface $pathPrefixProvider,
-    ) {
+    public function __construct(private ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory)
+    {
     }
 
-    public function resolve(string $resourceClass, string $requestUri, ?Operation $operation): ?Operation
+    public function resolve(string $resourceClass, ?string $pathPrefix, ?Operation $operation): ?Operation
     {
         if ($operation !== null && $operation->getName() !== '') {
             return $operation;
         }
-
-        $pathPrefix = $this->pathPrefixProvider->getPathPrefix($requestUri);
 
         $resourceMetadataCollection = $this->resourceMetadataCollectionFactory->create($resourceClass);
         foreach ($resourceMetadataCollection as $resourceMetadata) {
