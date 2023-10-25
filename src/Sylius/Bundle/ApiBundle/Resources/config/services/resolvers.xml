@@ -18,7 +18,6 @@
     <services>
         <service id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" class="Sylius\Bundle\ApiBundle\Resolver\PathPrefixBasedOperationResolver">
             <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
         </service>
     </services>
 </container>
