@@ -19,6 +19,10 @@
             <option name="groups">sylius</option>
         </constraint>
         <property name="code">
+            <constraint name="Country">
+                <option name="message">sylius.country.code.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.country.code.not_blank</option>
                 <option name="groups">sylius</option>
