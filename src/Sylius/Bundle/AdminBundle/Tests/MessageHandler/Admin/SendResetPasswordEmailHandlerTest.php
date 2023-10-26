@@ -19,7 +19,6 @@ use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase

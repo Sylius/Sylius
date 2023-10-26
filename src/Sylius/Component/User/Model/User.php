@@ -297,7 +297,7 @@ class User implements UserInterface, \Stringable
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getRoles(): array
     {
@@ -404,7 +404,7 @@ class User implements UserInterface, \Stringable
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function __unserialize(array $data): void
     {
