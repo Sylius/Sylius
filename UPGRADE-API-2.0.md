@@ -44,6 +44,16 @@
     * `'POST' - /api/v2/shop/verify-shop-user`
     * `'PATCH' - /api/v2/shop/verify-shop-user/{token}`
 
+* Updated API routes related to admin user management:
+
+  Previous Routes:
+    * `'POST' - /api/v2/admin/reset-password-requests`
+    * `'PATCH' - /api/v2/admin/reset-password-requests/{resetPasswordToken}`
+
+  New Routes:
+    * `'POST' - /api/v2/admin/reset-password`
+    * `'PATCH' - /api/v2/admin/reset-password/{resetPasswordToken}`
+
 * The `getCurrentPrefix` method has been removed from the `Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface`.
 
 * The `Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider` constructor has been changed due to refactor. 

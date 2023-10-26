@@ -44,24 +44,6 @@ final class AdminUsersTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_sends_administrator_password_reset_email(): void
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-
-        $this->client->request(
-            method: Request::METHOD_POST,
-            uri: '/api/v2/admin/reset-password-requests',
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'email' => 'api@example.com',
-            ], JSON_THROW_ON_ERROR),
-        );
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-    }
-
-    /** @test */
     public function it_gets_administrators(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
