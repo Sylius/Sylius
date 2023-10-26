@@ -57,6 +57,7 @@ sylius_admin:
             links: '@SyliusAdmin/Shared/Grid/ItemAction/_links.html.twig'
             show: '@SyliusAdmin/Shared/Grid/ItemAction/_show.html.twig'
             update: '@SyliusAdmin/Shared/Grid/ItemAction/_update.html.twig'
+            ship_with_tracking_code: '@SyliusAdmin/Shipment/Grid/Action/shipWithTrackingCode.html.twig'
 
 sylius_grid:
     templates:
