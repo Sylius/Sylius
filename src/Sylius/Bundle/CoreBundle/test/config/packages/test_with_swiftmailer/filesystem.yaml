@@ -1,4 +1,0 @@
-services:
-    test.filesystem.public:
-        alias: filesystem
-        public: true
