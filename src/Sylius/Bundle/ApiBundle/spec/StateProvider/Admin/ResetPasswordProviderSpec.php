@@ -43,8 +43,6 @@ final class ResetPasswordProviderSpec extends ObjectBehavior
     {
         $operation = new Patch(class: 'NotResetPassword');
 
-        $this->shouldThrow(\InvalidArgumentException::class)
-            ->during('provide', [$operation])
-        ;
+        $this->shouldThrow(\InvalidArgumentException::class)->during('provide', [$operation]);
     }
 }
