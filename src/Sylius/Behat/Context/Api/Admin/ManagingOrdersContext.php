@@ -20,9 +20,14 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -345,4 +350,140 @@ final class ManagingOrdersContext implements Context
 
         Assert::same($firstItem['number'], str_replace('#', '', $number));
     }
+
+
+    /**
+     * @When I specify filter date from as :dateTime
+     */
+    public function iSpecifyFilterDateFromAs(string $dateTime): void
+    {
+        $this->client->addFilter('checkoutCompletedAt[after]', $dateTime);
+    }
+
+    /**
+     * @When I specify filter date to as :dateTime
+     */
+    public function iSpecifyFilterDateToAs(string $dateTime): void
+    {
+        $this->client->addFilter('checkoutCompletedAt[before]', $dateTime);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
+    }
+
+    /**
+     * @Then I should see :count orders in the list
+     */
+    public function itShouldHaveAmountOfItemsInTheList(int $count): void
+    {
+        $numberOfItems = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:totalItems');
+        Assert::eq($numberOfItems, $count);
+    }
+
+    /**
+     * @Then I should not see an order with :number number
+     */
+    public function iShouldNotSeeAnOrderWithNumber(string $number): void
+    {
+        Assert::false($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'number', $number));
+    }
+
+    /**
+     * @When I choose :channel as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
+    {
+        $this->client->addFilter('channel.code', $channel->getCode());
+    }
+
+    /**
+     * @When /^I filter by (product "([^"]+)")$/
+     */
+    public function iFilterByProduct(ProductInterface $product): void
+    {
+        $this->client->addFilter('items.variant.product[]', $product->getId());
+
+        $this->iFilter();
+    }
+
+    /**
+     * @When /^I filter by (products "([^"]+)" and "([^"]+)")$/
+     * @param ProductInterface[] $products
+     */
+    public function iFilterByProducts(array $products): void
+    {
+        foreach ($products as $productName) {
+            $this->client->addFilter('items.variant.product[]', $productName->getId());
+        }
+
+        $this->iFilter();
+    }
+
+    /**
+     * @When I choose :shippingMethod as a shipping method filter
+     */
+    public function iChooseMethodAsAShippingMethodFilter(ShippingMethodInterface $shippingMethod): void
+    {
+        $this->client->addFilter('shipments.method.code', $shippingMethod->getCode());
+    }
+
+
+    /**
+     * @When I choose :currency as the filter currency
+     */
+    public function iChooseAsTheFilterCurrency(CurrencyInterface $currency): void
+    {
+        $this->client->addFilter('currencyCode', $currency->getCode());
+    }
+
+    /**
+     * @Then I should not see any orders with currency :currency
+     */
+    public function iShouldNotSeeAnyOrdersWithCurrency(CurrencyInterface $currency): void
+    {
+        Assert::false($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'currencyCode', $currency->getCode()));
+    }
+
+    /**
+     * @When I specify filter total being greater than :total
+     */
+    public function iSpecifyFilterTotalBeingGreaterThan(float $total): void
+    {
+        $this->client->addFilter('total[gt]', (int) ($total * 100));
+    }
+
+    /**
+     * @When I specify filter total being less than :total
+     */
+    public function iSpecifyFilterTotalBeingLessThan(float $total): void
+    {
+        $this->client->addFilter('total[lt]', (int) ($total * 100));
+    }
+
+    /**
+     * @When /^I filter by (variant "([^"]+)")$/
+     */
+    public function iFilterByVariant(ProductVariantInterface $variant): void
+    {
+        $this->client->addFilter("items.variant[]", $variant->getId());
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I filter by (variants "([^"]+)" and "([^"]+)")$/
+     * @param ProductVariantInterface[] $variants
+     */
+    public function iFilterByVariants(array $variants): void
+    {
+        foreach ($variants as $variant) {
+            $this->client->addFilter("items.variant[]", $variant->getId());
+        }
+        $this->client->filter();
+    }
+
 }
