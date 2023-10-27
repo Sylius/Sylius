@@ -39,7 +39,7 @@ final class ToggleArchivationForCatalogPromotionAction
     public function __invoke(Request $request): Response
     {
         $code = $request->attributes->get('code');
-        $csrfToken = $request->request->get('sylius_archivable');
+        $csrfToken = (array)$request->request->get('sylius_archivable');
         Assert::isArray($csrfToken);
 
         $csrfValue = 'sylius_archivable';
