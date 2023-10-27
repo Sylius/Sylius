@@ -141,7 +141,6 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         CatalogPromotionInterface $catalogPromotion,
         IriConverterInterface $iriConverter,
     ): void {
-        $context = [ContextKeys::CHANNEL => $channel];
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($variant, null, [
@@ -157,12 +156,12 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
         $iriConverter
-            ->getIriFromResource($catalogPromotion, UrlGeneratorInterface::ABS_PATH, null, array_merge($context, [self::ALREADY_CALLED => true]))
+            ->getIriFromResource($catalogPromotion, UrlGeneratorInterface::ABS_PATH, null, [ContextKeys::CHANNEL => $channel, self::ALREADY_CALLED => true])
             ->willReturn('/api/v2/shop/catalog-promotions/winter_sale')
         ;
 
         $this
-            ->normalize($variant, null, $context)
+            ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])
             ->shouldBeLike([
                 'price' => 500,
                 'originalPrice' => 1000,
