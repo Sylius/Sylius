@@ -61,5 +61,14 @@
         >
             <argument type="service" id=".inner" />
         </service>
+
+        <service
+            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInShopUserIdAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+        </service>
     </services>
 </container>

@@ -11,10 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Attribute;
 
-/** @experimental */
-interface ShopUserIdAwareInterface extends CommandAwareDataTransformerInterface
+#[\Attribute(\Attribute::TARGET_CLASS)]
+final class ShopUserIdAware
 {
-    public function getShopUserId();
+    public function __construct (public string $constructorArgumentName = 'shopUserId')
+    {
+    }
 }

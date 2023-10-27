@@ -27,10 +27,5 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="sylius_api.input_data_processor" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\StateProcessor\Input\LoggedInShopUserIdAwareInputDataProcessor">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
-            <tag name="sylius_api.input_data_processor" />
-        </service>
     </services>
 </container>
