@@ -791,6 +791,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductAttributeDataPersister.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductDataPersister.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ProductTaxonDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductTaxonDataPersister.php
