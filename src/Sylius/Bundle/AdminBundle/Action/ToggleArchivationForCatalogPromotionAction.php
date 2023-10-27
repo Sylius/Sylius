@@ -26,6 +26,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Webmozart\Assert\Assert;
 
 final class ToggleArchivationForCatalogPromotionAction
 {
@@ -38,10 +39,11 @@ final class ToggleArchivationForCatalogPromotionAction
     public function __invoke(Request $request): Response
     {
         $code = $request->attributes->get('code');
-        $csrfToken = $request->request->get('sylius_archivable')['_token'];
-        $csrfValue = 'sylius_archivable';
+        $csrfToken = $request->request->get('sylius_archivable');
+        Assert::isArray($csrfToken);
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($csrfValue, (string) $csrfToken))) {
+        $csrfValue = 'sylius_archivable';
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($csrfValue, (string) $csrfToken['_token']))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
