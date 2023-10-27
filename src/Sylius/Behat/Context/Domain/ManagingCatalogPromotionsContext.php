@@ -29,9 +29,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When /^I archive the ("[^"]+" catalog promotion)$/
+     * @When /^I set the ("[^"]+" catalog promotion) as archived$/
      */
-    public function iArchiveTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iSetTheCatalogPromotionAsArchived(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setArchivedAt(new \DateTime());
         $catalogPromotion->setState(CatalogPromotionStates::STATE_INACTIVE);

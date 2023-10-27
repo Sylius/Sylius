@@ -38,7 +38,10 @@ final class ToggleArchivationForCatalogPromotionAction
     public function __invoke(Request $request): Response
     {
         $code = $request->attributes->get('code');
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($code, (string) $request->query->get('_csrf_token')))) {
+        $csrfToken = $request->request->get('sylius_archivable')['_token'];
+        $csrfValue = 'sylius_archivable';
+
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($csrfValue, (string) $csrfToken))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

@@ -43,7 +43,7 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
     {
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
 
-        return null !== $catalogPromotion->getArchivedAt();
+        return null === $catalogPromotion->getArchivedAt();
     }
 
     public function archive(string $catalogPromotionCode): void

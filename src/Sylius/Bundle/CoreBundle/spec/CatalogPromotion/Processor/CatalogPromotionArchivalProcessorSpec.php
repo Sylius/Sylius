@@ -39,6 +39,26 @@ final class CatalogPromotionArchivalProcessorSpec extends ObjectBehavior
         $this->shouldImplement(CatalogPromotionArchivalProcessorInterface::class);
     }
 
+    function it_can_be_archived(
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        CatalogPromotionInterface $catalogPromotion,
+    ): void {
+        $catalogPromotionRepository->findOneBy(["code" => "promotion-code"])->willReturn($catalogPromotion);
+        $catalogPromotion->getArchivedAt()->willReturn(null);
+
+        $this->canBeArchived("promotion-code")->shouldReturn(true);
+    }
+
+    function it_cannot_be_archived(
+        CatalogPromotionRepositoryInterface $catalogPromotionRepository,
+        CatalogPromotionInterface $catalogPromotion,
+    ): void {
+        $catalogPromotionRepository->findOneBy(["code" => "promotion-code"])->willReturn($catalogPromotion);
+        $catalogPromotion->getArchivedAt()->willReturn(new DateTime());
+
+        $this->canBeArchived("promotion-code")->shouldReturn(false);
+    }
+
     function it_archives_given_catalog_promotion(
         CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         CatalogPromotionArchivalAnnouncerInterface $catalogPromotionArchivalAnnouncer,

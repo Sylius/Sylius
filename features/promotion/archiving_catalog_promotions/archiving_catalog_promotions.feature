@@ -54,7 +54,7 @@ Feature: Archiving catalog promotions
 
     @domain
     Scenario: Archiving a catalog promotion does not remove it from the database
-        When I archive the "Winter Sale" catalog promotion
+        When I set the "Winter Sale" catalog promotion as archived
         Then the catalog promotion should still exist in the registry
 
     @api @ui
