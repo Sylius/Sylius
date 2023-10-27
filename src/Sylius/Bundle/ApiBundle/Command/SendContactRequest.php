@@ -18,9 +18,8 @@ class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareIn
 {
     public ?string $localeCode = null;
 
-    public ?string $channelCode = null;
-
     public function __construct(
+        private ?string $channelCode,
         private ?string $email = null,
         private ?string $message = null,
     ) {
@@ -29,11 +28,6 @@ class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareIn
     public function getChannelCode(): ?string
     {
         return $this->channelCode;
-    }
-
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
     }
 
     public function getLocaleCode(): ?string

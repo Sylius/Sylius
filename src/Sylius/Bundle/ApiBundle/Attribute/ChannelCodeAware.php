@@ -11,10 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command;
+namespace Sylius\Bundle\ApiBundle\Attribute;
 
-/** @experimental */
-interface ChannelCodeAwareInterface
+#[\Attribute(\Attribute::TARGET_CLASS)]
+final class ChannelCodeAware
 {
-    public function getChannelCode(): ?string;
+    public function __construct (public string $constructorArgumentName = 'channelCode')
+    {
+    }
 }

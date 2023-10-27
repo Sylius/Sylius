@@ -23,11 +23,6 @@
             <tag name="api_platform.state_processor" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\StateProcessor\Input\ChannelCodeAwareInputDataProcessor">
-            <argument type="service" id="sylius.context.channel" />
-            <tag name="sylius_api.input_data_processor" />
-        </service>
-
         <service id="Sylius\Bundle\ApiBundle\StateProcessor\Input\LocaleCodeAwareInputDataProcessor">
             <argument type="service" id="sylius.context.locale.composite" />
             <tag name="sylius_api.input_data_processor" />
