@@ -16,7 +16,15 @@
             "lowestPriceBeforeDiscount": null
         }
     },
-    "translations": [],
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
+            "@type": "ProductVariantTranslation",
+            "id": @integer@,
+            "name": null,
+            "locale": "en_US"
+        }
+    },
     "enabled": true,
     "position": 3,
     "tracked": false,

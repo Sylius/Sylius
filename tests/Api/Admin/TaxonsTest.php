@@ -99,13 +99,7 @@ final class TaxonsTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/admin/taxons',
             server: $header,
-            content: json_encode([
-                'translations' => [
-                    'en_US' => [
-                        'locale' => 'en_US',
-                    ]
-                ]
-            ], JSON_THROW_ON_ERROR),
+            content: '{}',
         );
 
         $this->assertResponse(
