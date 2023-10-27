@@ -1,5 +1,5 @@
 @managing_catalog_promotions
-Feature: Archiving a catalog promotions
+Feature: Archiving catalog promotions
     In order to be in control of possible catalog promotions that exist on the system
     As an Administrator
     I want to have an option to archive such a promotion
@@ -22,23 +22,23 @@ Feature: Archiving a catalog promotions
     Scenario: Archiving an expired catalog promotion
         Given it is "2022-08-22" now
         And the catalog promotion "Winter Sale" operates between "2021-12-20" and "2021-12-30"
-        When I request the archival of "Winter Sale" catalog promotion
+        When I request the archivation of the "Winter Sale" catalog promotion
         Then I should be notified that the archival operation has started successfully
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
 
     @api @ui
     Scenario: Archiving an active catalog promotion without any time limits
-        When I request the archival of "Winter Sale" catalog promotion
+        When I request the archivation of the "Winter Sale" catalog promotion
         Then I should be notified that the archival operation has started successfully
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
 
     @api @ui
-    Scenario: Archiving an active catalog promotion in the time range
+    Scenario: Archiving an active catalog promotion in the time period
         Given it is "2022-12-15" now
         And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2022-12-30"
-        When I request the archival of "Winter Sale" catalog promotion
+        When I request the archivation of the "Winter Sale" catalog promotion
         Then I should be notified that the archival operation has started successfully
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted
@@ -47,7 +47,7 @@ Feature: Archiving a catalog promotions
     Scenario: Archiving a scheduled catalog promotion
         Given it is "2022-08-22" now
         And the catalog promotion "Winter Sale" operates between "2022-12-01" and "2023-02-28"
-        When I request the archival of "Winter Sale" catalog promotion
+        When I request the archivation of the "Winter Sale" catalog promotion
         Then I should be notified that the archival operation has started successfully
         And there should be 1 catalog promotions on the list
         And "PHP T-Shirt" variant should not be discounted

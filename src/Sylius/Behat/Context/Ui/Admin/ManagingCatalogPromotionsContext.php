@@ -687,9 +687,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I request the archival of :catalogPromotion catalog promotion
+     * @When I request the archivation of the :catalogPromotion catalog promotion
      */
-    public function iRequestTheArchivalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iRequestTheArchivationOfTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->indexPage->open();
         $actions = $this->indexPage->getActionsForResource(['name' => $catalogPromotion->getName()]);
@@ -1242,9 +1242,9 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I archive the :name promotion
+     * @When I archive the :name catalog promotion
      */
-    public function iArchiveThePromotion(string $name): void
+    public function iArchiveTheCatalogPromotion(string $name): void
     {
         $actions = $this->indexPage->getActionsForResource(['name' => $name]);
         $actions->pressButton('Archive');
@@ -1272,7 +1272,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iFilterArchivalCatalogPromotions(): void
     {
-        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->chooseArchivalFilter('Yes');
         $this->indexPage->filter();
     }
 

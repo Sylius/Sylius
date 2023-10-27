@@ -1,5 +1,5 @@
 @managing_promotions
-Feature: Archiving obsolete promotions
+Feature: Archiving promotions
     In order to hide no longer available promotions from the list and customers' use
     As an Administrator
     I want to archive promotions

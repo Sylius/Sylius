@@ -18,7 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -227,7 +227,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iArchiveThePromotion(PromotionInterface $promotion): void
     {
-        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'archive');
         $this->client->index(Resources::PROMOTIONS);
     }
 
@@ -236,7 +236,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iRestoreThePromotion(PromotionInterface $promotion): void
     {
-        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), HttpRequest::METHOD_PATCH, 'restore');
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'restore');
     }
 
     /**

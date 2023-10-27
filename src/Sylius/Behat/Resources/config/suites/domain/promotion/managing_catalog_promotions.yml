@@ -32,6 +32,5 @@ default:
                 - Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 
-
             filters:
                 tags: "@managing_catalog_promotions&&@domain"

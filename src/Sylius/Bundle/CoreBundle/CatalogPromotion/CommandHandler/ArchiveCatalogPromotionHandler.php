@@ -33,7 +33,7 @@ final class ArchiveCatalogPromotionHandler
     public function __invoke(ArchiveCatalogPromotion $command): void
     {
         /** @var CatalogPromotionInterface|null $catalogPromotion */
-        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $command->code]);
+        $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $command->getCode()]);
 
         if (null === $catalogPromotion) {
             return;

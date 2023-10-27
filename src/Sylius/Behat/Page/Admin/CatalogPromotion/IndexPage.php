@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 final class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
-    public function chooseArchival(string $isArchival): void
+    public function chooseArchivalFilter(string $isArchival): void
     {
         $this->getElement('filter_archival')->selectOption($isArchival);
     }

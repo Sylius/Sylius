@@ -30,7 +30,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -898,11 +898,11 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I request the archival of :catalogPromotion catalog promotion
+     * @When I request the archivation of the :catalogPromotion catalog promotion
      */
-    public function iRequestTheArchivalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iRequestTheArchivationOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), HttpRequest::METHOD_PATCH, 'archive');
+        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), Request::METHOD_PATCH, 'archive');
     }
 
     /**
@@ -981,7 +981,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iRestoreTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
-        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), HttpRequest::METHOD_PATCH, 'restore');
+        $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), Request::METHOD_PATCH, 'restore');
     }
 
     /**

@@ -7,9 +7,6 @@ namespace Sylius\Bundle\CoreBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20230927190918 extends AbstractPostgreSQLMigration
 {
     public function getDescription(): string

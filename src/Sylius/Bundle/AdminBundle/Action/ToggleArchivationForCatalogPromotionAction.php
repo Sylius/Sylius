@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Controller;
+namespace Sylius\Bundle\AdminBundle\Action;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface;
 use Sylius\Component\Promotion\Exception\CatalogPromotionAlreadyArchivedException;
@@ -22,29 +22,41 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class ArchiveCatalogPromotionAction
+final class ToggleArchivationForCatalogPromotionAction
 {
-    public function __construct(private CatalogPromotionArchivalProcessorInterface $catalogPromotionArchivalProcessor)
-    {
+    public function __construct(
+        private CatalogPromotionArchivalProcessorInterface $catalogPromotionArchivalProcessor,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+    ) {
     }
 
     public function __invoke(Request $request): Response
     {
+        $code = $request->attributes->get('code');
+        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($code, (string) $request->query->get('_csrf_token')))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
         /** @var Session $session */
         $session = $request->getSession();
 
         try {
-            $this->catalogPromotionArchivalProcessor->archiveCatalogPromotion($request->attributes->get('code'));
-            $session->getFlashBag()->add('success', 'sylius.catalog_promotion.archive');
+            if ($this->catalogPromotionArchivalProcessor->canBeArchived($code)) {
+                $this->catalogPromotionArchivalProcessor->archive($code);
+                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.archive');
 
-            return new RedirectResponse($request->headers->get('referer'));
-        } catch (CatalogPromotionAlreadyArchivedException $e) {
-            $this->catalogPromotionArchivalProcessor->restoreCatalogPromotion($request->attributes->get('code'));
-            $session->getFlashBag()->add('success', 'sylius.catalog_promotion.restore');
+                return new RedirectResponse($request->headers->get('referer'));
+            } else {
+                $this->catalogPromotionArchivalProcessor->restore($code);
+                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.restore');
 
-            return new RedirectResponse($request->headers->get('referer'));
+                return new RedirectResponse($request->headers->get('referer'));
+            }
         } catch (CatalogPromotionNotFoundException) {
             throw new NotFoundHttpException('The catalog promotion has not been found');
         } catch (InvalidCatalogPromotionStateException $exception) {

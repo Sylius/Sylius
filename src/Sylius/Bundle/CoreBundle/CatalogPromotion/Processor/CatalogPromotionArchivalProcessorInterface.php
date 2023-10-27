@@ -15,7 +15,9 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
 interface CatalogPromotionArchivalProcessorInterface
 {
-    public function archiveCatalogPromotion(string $catalogPromotionCode): void;
+    public function canBeArchived(string $catalogPromotionCode): bool;
 
-    public function restoreCatalogPromotion(string $catalogPromotionCode): void;
+    public function archive(string $catalogPromotionCode): void;
+
+    public function restore(string $catalogPromotionCode): void;
 }

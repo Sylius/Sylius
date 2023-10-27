@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
 
 interface IndexPageInterface extends BaseIndexPageInterface
 {
-    public function chooseArchival(string $isArchival): void;
+    public function chooseArchivalFilter(string $isArchival): void;
 
     public function isArchivalFilterEnabled(): bool;
 }

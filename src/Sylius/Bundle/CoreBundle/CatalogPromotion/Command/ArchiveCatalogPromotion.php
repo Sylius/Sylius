@@ -15,7 +15,12 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Command;
 
 final class ArchiveCatalogPromotion
 {
-    public function __construct(public string $code)
+    public function __construct(private string $code)
     {
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
     }
 }

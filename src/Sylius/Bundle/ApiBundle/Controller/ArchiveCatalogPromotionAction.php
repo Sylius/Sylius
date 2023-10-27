@@ -31,7 +31,7 @@ final class ArchiveCatalogPromotionAction
     public function __invoke(Request $request): Response
     {
         try {
-            $this->catalogPromotionArchivalProcessor->archiveCatalogPromotion($request->attributes->get('code'));
+            $this->catalogPromotionArchivalProcessor->archive($request->attributes->get('code'));
 
             return new Response(status: Response::HTTP_ACCEPTED);
         } catch (CatalogPromotionNotFoundException) {

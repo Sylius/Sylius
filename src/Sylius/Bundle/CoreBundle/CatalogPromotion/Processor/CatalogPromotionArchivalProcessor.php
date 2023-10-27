@@ -39,9 +39,15 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
         }
     }
 
-    public function archiveCatalogPromotion(string $catalogPromotionCode): void
+    public function canBeArchived(string $catalogPromotionCode): bool
     {
-        /** @var CatalogPromotionInterface|null $catalogPromotion */
+        $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
+
+        return null !== $catalogPromotion->getArchivedAt();
+    }
+
+    public function archive(string $catalogPromotionCode): void
+    {
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
         if (null !== $catalogPromotion->getArchivedAt()) {
             throw new CatalogPromotionAlreadyArchivedException(
@@ -62,15 +68,14 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
         }
 
         if (!in_array($catalogPromotion->getState(), [CatalogPromotionStates::STATE_ACTIVE, CatalogPromotionStates::STATE_INACTIVE], true)) {
-            throw new \DomainException('Invalid catalog promotion state.');
+            throw new InvalidCatalogPromotionStateException('Invalid catalog promotion state.');
         }
 
         $this->catalogPromotionArchivalAnnouncer->dispatchCatalogPromotionArchival($catalogPromotion);
     }
 
-    public function restoreCatalogPromotion(string $catalogPromotionCode): void
+    public function restore(string $catalogPromotionCode): void
     {
-        /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
 
         if (null === $catalogPromotion->getArchivedAt()) {
@@ -92,7 +97,7 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
         }
 
         if (CatalogPromotionStates::STATE_INACTIVE !== $catalogPromotion->getState()) {
-            throw new \DomainException('Invalid catalog promotion state.');
+            throw new InvalidCatalogPromotionStateException('Invalid catalog promotion state.');
         }
 
         $this->catalogPromotionArchivalAnnouncer->dispatchCatalogPromotionRestoral($catalogPromotion);
@@ -100,11 +105,12 @@ final class CatalogPromotionArchivalProcessor implements CatalogPromotionArchiva
 
     private function getCatalogPromotion(string $catalogPromotionCode): CatalogPromotionInterface
     {
-        /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['code' => $catalogPromotionCode]);
 
         if (null === $catalogPromotion) {
-            throw new CatalogPromotionNotFoundException('Catalog promotion with given code does not exist.');
+            throw new CatalogPromotionNotFoundException(
+                sprintf('Catalog promotion with given code %s does not exist.', $catalogPromotionCode)
+            );
         }
 
         return $catalogPromotion;

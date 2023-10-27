@@ -95,8 +95,9 @@
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Controller\ArchiveCatalogPromotionAction" public="true">
+        <service id="Sylius\Bundle\AdminBundle\Action\ToggleArchivationForCatalogPromotionAction" public="true">
             <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface" />
+            <argument type="service" id="security.csrf.token_manager" />
         </service>
 
         <service id="Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction" public="true">
