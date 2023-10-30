@@ -404,7 +404,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) name should be "[^"]+"$/
+     * @Then /^(?:their|his) name should be "([^"]+)"$/
      */
     public function hisNameShouldBe(string $name): void
     {
@@ -420,7 +420,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) email should be "[^"]+"$/
+     * @Then /^(?:their|his) email should be "([^"]+)"$/
      */
     public function hisEmailShouldBe(string $email): void
     {
@@ -428,7 +428,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) phone number should be "[^"]+"$/
+     * @Then /^(?:their|his) phone number should be "([^"]+)"$/
      */
     public function hisPhoneNumberShouldBe(string $phoneNumber): void
     {
@@ -436,7 +436,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(?:their|his) default address should be "[^"]+"$/
+     * @Then /^(?:their|his) default address should be "([^"]+)"$/
      */
     public function hisShippingAddressShouldBe(string $defaultAddress): void
     {
