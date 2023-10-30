@@ -35,8 +35,6 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
             'example' => false,
         ];
 
-        return $docs->withComponents(
-            $components->withSchemas($schemas),
-        );
+        return $docs->withComponents($components->withSchemas($schemas));
     }
 }

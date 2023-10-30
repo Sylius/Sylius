@@ -19,7 +19,7 @@ use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CustomerTest extends JsonApiTestCase
+final class CustomersTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
@@ -260,33 +260,6 @@ final class CustomerTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/customer/update_customer_with_invalid_gender_response',
             Response::HTTP_UNPROCESSABLE_ENTITY
-        );
-    }
-
-    /** @test */
-    public function it_gets_customer_orders(): void
-    {
-        $fixtures = $this->loadFixturesFromFiles([
-            'authentication/api_administrator.yaml',
-            'channel.yaml',
-            'customer.yaml',
-            'customer_order.yaml',
-        ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        /** @var CustomerInterface $customer */
-        $customer = $fixtures['customer_tony'];
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/customers/' . $customer->getId() . '/orders',
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/customer/get_customer_orders_response',
-            Response::HTTP_OK,
         );
     }
 }

@@ -24,6 +24,8 @@
                 <attribute name="path">/admin/orders</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_customer_filter</attribute>
+                    <attribute>sylius.api.order_channel_order_filter</attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="number">DESC</attribute>
@@ -390,12 +392,6 @@
             <subresourceOperation name="items_adjustments_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}/items/{items}/adjustments</attribute>
-            </subresourceOperation>
-
-            <subresourceOperation name="api_customers_orders_get_subresource">
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:customer:read</attribute>
-                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 

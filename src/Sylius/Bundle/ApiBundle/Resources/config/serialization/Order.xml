@@ -18,7 +18,6 @@
     <class name="Sylius\Component\Core\Model\Order">
         <attribute name="id">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order:read</group>
@@ -26,7 +25,6 @@
 
         <attribute name="number">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
             <group>shop:order:read</group>
@@ -34,13 +32,11 @@
 
         <attribute name="currencyCode">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="channel">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:order:read</group>
         </attribute>
 
@@ -68,25 +64,21 @@
 
         <attribute name="state">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:order:read</group>
         </attribute>
 
         <attribute name="paymentState">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="shippingState">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
         </attribute>
 
         <attribute name="total">
             <group>admin:order:read</group>
-            <group>admin:customer:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
         </attribute>

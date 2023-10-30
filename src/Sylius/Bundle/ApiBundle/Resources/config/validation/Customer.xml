@@ -25,6 +25,7 @@
                 </option>
                 <option name="groups">
                     <value>sylius_api_user_create</value>
+                    <value>sylius_api_user_update</value>
                 </option>
             </constraint>
         </property>
