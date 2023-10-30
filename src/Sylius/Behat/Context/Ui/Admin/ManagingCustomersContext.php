@@ -375,11 +375,11 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I sort them by :sortBy
+     * @When I sort the orders :sortType by :field
      */
-    public function iSortThemByChannel(string $sortBy): void
+    public function iSortTheOrderByField(string $field): void
     {
-        $this->ordersIndexPage->sort(ucfirst($sortBy));
+        $this->ordersIndexPage->sort(ucfirst($field));
     }
 
     /**
@@ -404,9 +404,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his name should be :name
+     * @Then (his|their) name should be :name
      */
-    public function hisNameShouldBe($name)
+    public function hisNameShouldBe(string $name): void
     {
         Assert::same($this->showPage->getCustomerName(), $name);
     }
@@ -420,27 +420,44 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his email should be :email
+     * @Then (his|their) email should be :email
      */
-    public function hisEmailShouldBe($email)
+    public function hisEmailShouldBe(string $email): void
     {
         Assert::same($this->showPage->getCustomerEmail(), $email);
     }
 
     /**
-     * @Then his phone number should be :phoneNumber
+     * @Then (his|their) phone number should be :phoneNumber
      */
-    public function hisPhoneNumberShouldBe($phoneNumber)
+    public function hisPhoneNumberShouldBe(string $phoneNumber): void
     {
         Assert::same($this->showPage->getCustomerPhoneNumber(), $phoneNumber);
     }
 
     /**
-     * @Then his default address should be :defaultAddress
+     * @Then (his|their) default address should be :defaultAddress
      */
-    public function hisShippingAddressShouldBe($defaultAddress)
+    public function hisShippingAddressShouldBe(string $defaultAddress): void
     {
         Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
+    }
+
+    /**
+     * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
+     */
+    public function theirSDefaultAddressShouldBe(
+        string $firstName,
+        string $lastName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $country,
+    ): void {
+        Assert::same(
+            $this->showPage->getDefaultAddress(),
+            sprintf('%s %s %s %s %s %s', $firstName, $lastName, $street, $city, strtoupper($country), $postcode),
+        );
     }
 
     /**

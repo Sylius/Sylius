@@ -18,12 +18,15 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingCustomersContext implements Context
 {
+    public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -56,7 +59,9 @@ final class ManagingCustomersContext implements Context
      */
     public function iBrowseOrdersOfACustomer(CustomerInterface $customer): void
     {
-        $this->client->subResourceIndex(Resources::CUSTOMERS, 'orders', (string) $customer->getId());
+        $this->client->index(Resources::ORDERS);
+        $this->client->addFilter('customer.id', $customer->getId());
+        $this->client->filter();
     }
 
     /**
@@ -169,7 +174,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @When I want to see all customers in store
      */
-    public function iWantToSeeAllZonesInStore(): void
+    public function iWantToSeeAllCustomersInStore(): void
     {
         $this->client->index(Resources::CUSTOMERS);
     }
@@ -196,19 +201,21 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I do not specify any information
+     * @When I sort the orders :sortType by channel
      */
-    public function iDoNotSpecifyAnyInformation(): void
+    public function iSortThemBy(string $sortType = 'ascending'): void
     {
-        // Intentionally left empty
+        $this->client->sort([
+            'channel.code' => self::SORT_TYPES[$sortType],
+        ]);
     }
 
     /**
+     * @When I do not specify any information
      * @When I do not choose create account option
      */
-    public function iDoNotChooseCreateAccountOption()
+    public function intentionallyLeftEmpty(): void
     {
-        // Intentionally left blank.
     }
 
     /**
@@ -223,7 +230,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that ([^"]+) is required$/
+     * @Then I should be notified that :element is required
      */
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
@@ -247,7 +254,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^I should be notified that ([^"]+) should be ([^"]+)$/
      */
-    public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage): void
+    public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -319,9 +326,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his name should be :name
+     * @Then their name should be :name
      */
-    public function hisNameShouldBe(string $name): void
+    public function theirNameShouldBe(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'fullName', $name));
     }
@@ -335,31 +342,31 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his email should be :email
+     * @Then their email should be :email
      */
-    public function hisEmailShouldBe(string $email): void
+    public function theirEmailShouldBe(string $email): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'email', $email));
     }
 
     /**
-     * @Then his phone number should be :phoneNumber
+     * @Then their phone number should be :phoneNumber
      */
-    public function hisPhoneNumberShouldBe(string $phoneNumber): void
+    public function theirPhoneNumberShouldBe(string $phoneNumber): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'phoneNumber', $phoneNumber));
     }
 
     /**
-     * @Then his default address should be :firstName :lastName, :street, :postcode :city, :countryCode
+     * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
      */
-    public function hisSDefaultAddressShouldBe(
+    public function theirSDefaultAddressShouldBe(
         string $firstName,
         string $lastName,
         string $street,
         string $postcode,
         string $city,
-        string $countryCode,
+        CountryInterface $country,
     ): void {
         $this->client->showByIri($this->responseChecker->getValue($this->client->getLastResponse(), 'defaultAddress'));
 
@@ -368,7 +375,7 @@ final class ManagingCustomersContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'street'), $street);
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'postcode'), $postcode);
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'city'), $city);
-        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'countryCode'), $countryCode);
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'countryCode'), $country->getCode());
     }
 
     /**
@@ -401,7 +408,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then I should see the order with number :orderNumber in the list
      */
-    public function iShouldSeeASingleOrderFromCustomer(string $orderNumber): void
+    public function iShouldSeeTheOrderWithNumberInTheList(string $orderNumber): void
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
@@ -413,9 +420,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the password must be at least (\d+) characters long$/
+     * @Then I should be notified that the password must be at least :amountOfCharacters characters long
      */
-    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong(string $amountOfCharacters): void
+    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong(int $amountOfCharacters): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -518,7 +525,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Then /^(this customer) with name "([^"]*)" should appear in the store$/
      */
-    public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, string $name): void
+    public function theCustomerWithNameShouldAppearInTheStore(CustomerInterface $customer, string $name): void
     {
         Assert::true(
             $this->responseChecker->hasValue(
@@ -556,35 +563,13 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then I should not see create account option
-     */
-    public function iShouldNotSeeCreateAccountOption(): void
-    {
-        // Intentionally left empty
-    }
-
-    /**
      * @Then I should still be on the customer creation page
-     */
-    public function iShouldStillBeOnTheCustomerCreationPage(): void
-    {
-        // Intentionally left empty
-    }
-
-    /**
      * @Then I should be able to specify their password
      * @Then I should not be able to specify their password
-     */
-    public function iShouldBeAbleToSpecifyTheirPassword(): void
-    {
-        // Intentionally left empty
-    }
-
-    /**
      * @Then I should be able to select create account option
      * @Then I should not be able to select create account option
      */
-    public function iShouldBeAbleToSelectCreateAccountOption(): void
+    public function intentionallyLeftBlank(): void
     {
-        // Intentionally left empty
     }
 }
