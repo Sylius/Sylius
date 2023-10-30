@@ -17,6 +17,9 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * TODO: Remove this controller
+ */
 class PaymentMethodController extends ResourceController
 {
     public function getPaymentGatewaysAction(Request $request, string $template): Response

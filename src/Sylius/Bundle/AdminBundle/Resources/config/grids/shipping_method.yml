@@ -12,11 +12,9 @@ sylius_grid:
                 position: asc
             fields:
                 position:
-                    type: twig
+                    type: string
                     label: sylius.ui.position
                     sortable: ~
-                    options:
-                        template: "@SyliusUi/Grid/Field/position.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
@@ -33,7 +31,7 @@ sylius_grid:
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/boolean.html.twig"
             filters:
                 search:
                     type: string
