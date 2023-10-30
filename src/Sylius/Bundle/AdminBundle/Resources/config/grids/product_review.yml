@@ -20,23 +20,25 @@ sylius_grid:
                     label: sylius.ui.title
                     sortable: ~
                 rating:
-                    type: string
+                    type: twig
                     label: sylius.ui.rating
                     sortable: ~
+                    options:
+                        template: "@SyliusAdmin/ProductReview/Grid/Field/rating.html.twig"
                 status:
                     type: twig
                     label: sylius.ui.status
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/ProductReview/Label/Status"
+                        template: "@SyliusAdmin/ProductReview/Grid/Field/state.html.twig"
                 reviewSubject:
                     type: string
                     label: sylius.ui.product
                 author:
-                    type: string
+                    type: twig
                     label: sylius.ui.customer
+                    options:
+                        template: '@SyliusAdmin/Shared/Grid/Field/customer.html.twig'
             filters:
                 title:
                     type: string
