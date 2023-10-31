@@ -15,7 +15,7 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -26,7 +26,7 @@ final class ManagingPromotionsContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PromotionRepositoryInterface $promotionRepository,
-        private EntityManager $promotionManager,
+        private EntityManagerInterface $promotionManager,
     ) {
     }
 

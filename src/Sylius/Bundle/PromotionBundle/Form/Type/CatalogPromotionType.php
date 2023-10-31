@@ -16,7 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
-use Sylius\Component\Promotion\Model\CatalogPromotion;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -88,7 +88,7 @@ final class CatalogPromotionType extends AbstractResourceType
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
-            /** @var CatalogPromotion $data */
+            /** @var CatalogPromotionInterface $data */
             $data = $event->getData();
 
             $form = $event->getForm();

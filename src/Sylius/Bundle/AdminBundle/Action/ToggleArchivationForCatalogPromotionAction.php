@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Action;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionArchivalProcessorInterface;
-use Sylius\Component\Promotion\Exception\CatalogPromotionAlreadyArchivedException;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
@@ -52,15 +51,13 @@ final class ToggleArchivationForCatalogPromotionAction
         try {
             if ($this->catalogPromotionArchivalProcessor->canBeArchived($code)) {
                 $this->catalogPromotionArchivalProcessor->archive($code);
-                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.archive');
-
-                return new RedirectResponse($request->headers->get('referer'));
+                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.archival_in_progress');
             } else {
                 $this->catalogPromotionArchivalProcessor->restore($code);
-                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.restore');
-
-                return new RedirectResponse($request->headers->get('referer'));
+                $session->getFlashBag()->add('success', 'sylius.catalog_promotion.successfully_restored');
             }
+
+            return new RedirectResponse($request->headers->get('referer'));
         } catch (CatalogPromotionNotFoundException) {
             throw new NotFoundHttpException('The catalog promotion has not been found');
         } catch (InvalidCatalogPromotionStateException $exception) {

@@ -21,11 +21,11 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 interface PromotionInterface extends
+    ArchivableInterface,
     CodeAwareInterface,
     TimestampableInterface,
     TranslatableInterface,
-    ResourceInterface,
-    ArchivableInterface
+    ResourceInterface
 {
     public function getName(): ?string;
 

@@ -20,7 +20,7 @@ use Doctrine\ORM\QueryBuilder;
 /** @experimental */
 final class HideArchivedCatalogPromotionExtension implements ContextAwareQueryCollectionExtensionInterface
 {
-    public function __construct(private string $promotionClass)
+    public function __construct(private string $catalogPromotionClass)
     {
     }
 
@@ -32,7 +32,7 @@ final class HideArchivedCatalogPromotionExtension implements ContextAwareQueryCo
         string $operationName = null,
         array $context = [],
     ): void {
-        if ($this->promotionClass !== $resourceClass) {
+        if ($this->catalogPromotionClass !== $resourceClass) {
             return;
         }
 

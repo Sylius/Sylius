@@ -902,7 +902,7 @@ final class ManagingCatalogPromotionsContext implements Context
     /**
      * @When I request the archivation of the :catalogPromotion catalog promotion
      */
-    public function iRequestTheArchivationOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
+    public function iRequestTheArchivationOfTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->client->customItemAction(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode(), Request::METHOD_PATCH, 'archive');
     }

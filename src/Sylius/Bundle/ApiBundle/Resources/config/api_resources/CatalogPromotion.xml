@@ -29,7 +29,7 @@
                     <attribute>sylius.api.catalog_promotion_start_date_filter</attribute>
                     <attribute>sylius.api.catalog_promotion_end_date_filter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter</attribute>
-                    <attribute>sylius.api.archived_catalog_promotions_filter</attribute>
+                    <attribute>sylius.api.promotion_archived_filter</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -178,16 +178,10 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Archives CatalogPromotion</attribute>
+                    <attribute name="summary">Archives catalog promotion</attribute>
                     <attribute name="responses">
                         <attribute name="202">
                             <attribute name="description">CatalogPromotion resource archival request accepted</attribute>
-                        </attribute>
-                        <attribute name="400">
-                            <attribute name="description">Invalid CatalogPromotion state</attribute>
-                        </attribute>
-                        <attribute name="404">
-                            <attribute name="description">Resource not found</attribute>
                         </attribute>
                     </attribute>
                 </attribute>
@@ -202,16 +196,10 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Restores Archived CatalogPromotion</attribute>
+                    <attribute name="summary">Restores archived catalog promotion</attribute>
                     <attribute name="responses">
                         <attribute name="202">
                             <attribute name="description">CatalogPromotion resource restoral request accepted</attribute>
-                        </attribute>
-                        <attribute name="400">
-                            <attribute name="description">Invalid CatalogPromotion state</attribute>
-                        </attribute>
-                        <attribute name="404">
-                            <attribute name="description">Resource not found</attribute>
                         </attribute>
                     </attribute>
                 </attribute>
