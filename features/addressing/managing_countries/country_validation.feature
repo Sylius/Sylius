@@ -21,6 +21,13 @@ Feature: Country validation
         Then I should be notified that the country code is invalid
 
     @api @no-ui
+    Scenario: Trying to add a new country with alpha-3 code
+        When I want to add a new country
+        And I specify the country code as "USA"
+        And I try to save my changes
+        Then I should be notified that the country code is invalid
+
+    @api @no-ui
     Scenario: Trying to add a new country with no code
         When I want to add a new country
         And I do not specify the country code
