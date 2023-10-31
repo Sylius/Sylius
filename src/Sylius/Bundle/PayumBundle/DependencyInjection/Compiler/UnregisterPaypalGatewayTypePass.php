@@ -21,7 +21,7 @@ final class UnregisterPaypalGatewayTypePass implements CompilerPassInterface
 {
     private const PAYPAL_GATEWAY_TYPE_SERVICE_ID = 'sylius.form.type.gateway_configuration.paypal';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
             return;

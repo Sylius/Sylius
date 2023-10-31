@@ -21,7 +21,7 @@ final class UnregisterStripeGatewayTypePass implements CompilerPassInterface
 {
     private const STRIPE_GATEWAY_TYPE_SERVICE_ID = 'sylius.form.type.gateway_configuration.stripe';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (class_exists(StripeCheckoutGatewayFactory::class)) {
             return;
