@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -41,7 +41,7 @@ final class ManagingProductVariantsContext implements Context
     public function iWantToCreateANewProductVariant(ProductInterface $product): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_VARIANTS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
     }
 
     /**
@@ -262,7 +262,7 @@ final class ManagingProductVariantsContext implements Context
         ChannelInterface $channel,
     ): void {
         $this->client->buildCreateRequest(Resources::PRODUCT_VARIANTS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
         $this->client->addRequestData('code', StringInflector::nameToCode($name));
 
         $this->client->addRequestData('channelPricings', [
