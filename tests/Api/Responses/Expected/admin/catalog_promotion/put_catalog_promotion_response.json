@@ -28,7 +28,7 @@
     "actions": [
         {
             "@type": "CatalogPromotionAction",
-            "@id": "\/api\/v2\/catalog-promotion-actions\/@integer@",
+            "@id": "\/api\/v2\/admin\/catalog-promotion-actions\/@integer@",
             "id": @integer@,
             "type": "percentage_discount",
             "configuration": {
