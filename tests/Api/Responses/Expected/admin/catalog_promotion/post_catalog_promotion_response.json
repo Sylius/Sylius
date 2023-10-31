@@ -15,7 +15,7 @@
     "scopes": [
         {
             "@type": "CatalogPromotionScope",
-            "@id": "\/api\/v2\/catalog-promotion-scopes\/@integer@",
+            "@id": "\/api\/v2\/admin\/catalog-promotion-scopes\/@integer@",
             "id": @integer@,
             "type": "for_variants",
             "configuration": {
