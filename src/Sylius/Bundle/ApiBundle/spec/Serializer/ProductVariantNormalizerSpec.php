@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Api\UrlGeneratorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -32,6 +33,8 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantNormalizerSpec extends ObjectBehavior
 {
+    private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
+
     function let(
         ProductVariantPricesCalculatorInterface $pricesCalculator,
         AvailabilityCheckerInterface $availabilityChecker,
@@ -152,7 +155,10 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
-        $iriConverter->getIriFromResource($catalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
+        $iriConverter
+            ->getIriFromResource($catalogPromotion, UrlGeneratorInterface::ABS_PATH, null, [ContextKeys::CHANNEL => $channel, self::ALREADY_CALLED => true])
+            ->willReturn('/api/v2/shop/catalog-promotions/winter_sale')
+        ;
 
         $this
             ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])

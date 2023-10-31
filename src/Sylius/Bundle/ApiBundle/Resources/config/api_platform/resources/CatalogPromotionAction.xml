@@ -23,6 +23,7 @@
                 controller="ApiPlatform\Action\NotFoundAction"
                 read="false"
                 output="false"
+                routePrefix="admin"
             />
         </operations>
     </resource>
