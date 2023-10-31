@@ -68,7 +68,13 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_catalog_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_variant.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -190,7 +196,13 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_invalid_scopes(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_variant.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -278,7 +290,13 @@ final class CatalogPromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_catalog_promotion_with_invalid_actions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_variant.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -421,7 +439,14 @@ final class CatalogPromotionsTest extends JsonApiTestCase
 
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'product/product_variant.yaml', 'catalog_promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+            'catalog_promotion.yaml',
+        ]);
 
         /** @var CatalogPromotionInterface $catalogPromotion */
         $catalogPromotion = $fixtures['catalog_promotion'];

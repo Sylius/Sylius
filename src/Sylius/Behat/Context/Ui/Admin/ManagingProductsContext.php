@@ -1092,7 +1092,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I remove its price for ("[^"]+" channel)$/
+     * @When /^I remove its price from ("[^"]+" channel)$/
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
