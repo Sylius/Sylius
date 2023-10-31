@@ -130,6 +130,5 @@
         <property name="defaultAddress" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
         <property name="user" readable="true" writable="true" />
-        <property name="orders" readable="true" writable="false" />
     </resource>
 </resources>
