@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 final class UnregisterPaypalGatewayTypePass implements CompilerPassInterface
 {
     private const PAYPAL_GATEWAY_TYPE_SERVICE_ID = 'sylius.form.type.gateway_configuration.paypal';
+
     private const PAYPAL_CONVERT_ACTION_SERVICE_ID = 'sylius.payum_action.paypal_express_checkout.convert_payment';
 
     public function process(ContainerBuilder $container): void
