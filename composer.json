@@ -62,7 +62,6 @@
         "liip/imagine-bundle": "^2.10",
         "nyholm/psr7": "^1.6",
         "pagerfanta/pagerfanta": "^3.0",
-        "payum/core": "^1.7.3",
         "payum/offline": "^1.7.3",
         "payum/payum-bundle": "^2.5",
         "php-http/httplug": "^2.4",
