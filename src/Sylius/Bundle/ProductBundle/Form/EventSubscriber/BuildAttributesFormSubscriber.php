@@ -56,9 +56,11 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
             fn (ProductAttributeValueInterface $attribute) => $attribute->getLocaleCode() === $defaultLocaleCode,
         );
 
+        $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
+
         /** @var ProductAttributeValueInterface $attribute */
         foreach ($attributes as $attribute) {
-            $this->resolveLocalizedAttributes($product, $attribute);
+            $this->resolveLocalizedAttributes($product, $attribute, $localeCodes);
         }
     }
 
@@ -80,10 +82,14 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
         }
     }
 
-    private function resolveLocalizedAttributes(ProductInterface $product, ProductAttributeValueInterface $productAttributeValue): void
-    {
-        $localeCodes = $this->localeProvider->getDefinedLocalesCodes();
-
+    /**
+     * @var string[] $localeCode
+     */
+    private function resolveLocalizedAttributes(
+        ProductInterface $product,
+        ProductAttributeValueInterface $productAttributeValue,
+        array $localeCodes,
+    ): void {
         foreach ($localeCodes as $localeCode) {
             if (!$product->hasAttributeByCodeAndLocale($productAttributeValue->getCode(), $localeCode)) {
                 $attribute = $productAttributeValue->getAttribute();

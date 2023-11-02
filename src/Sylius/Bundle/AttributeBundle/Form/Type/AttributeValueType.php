@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\CoreBundle\Form\DataTransformer\ResourceToIdentifierCacheableTransformer;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
@@ -78,7 +79,7 @@ abstract class AttributeValueType extends AbstractResourceType
         ;
 
         $builder->get('localeCode')->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code')),
+            new ReversedTransformer(new ResourceToIdentifierCacheableTransformer($this->localeRepository, 'code')),
         );
     }
 
