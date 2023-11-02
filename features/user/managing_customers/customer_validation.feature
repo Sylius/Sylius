@@ -7,7 +7,7 @@ Feature: Customer validation
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Trying to add a new customer without an email
         When I want to create a new customer
         And I specify their first name as "Luke"
@@ -15,7 +15,7 @@ Feature: Customer validation
         And I try to add them
         Then I should be notified that email is required
 
-    @ui
+    @api @ui
     Scenario: Trying to specify too short first name for an existing customer
         Given the store has customer "l.skywalker@gmail.com"
         When I want to edit this customer
@@ -24,7 +24,7 @@ Feature: Customer validation
         Then I should be notified that first name should be at least 2 characters long
         And the customer "l.skywalker@gmail.com" should still have an empty first name
 
-    @ui
+    @api @ui
     Scenario: Trying to specify too short last name for an existing customer
         Given the store has customer "l.skywalker@gmail.com" with first name "Luke"
         When I want to edit this customer
@@ -33,7 +33,7 @@ Feature: Customer validation
         Then I should be notified that last name should be at least 2 characters long
         And the customer "l.skywalker@gmail.com" should still have an empty last name
 
-    @ui
+    @api @ui
     Scenario: Trying to remove email from an existing customer
         Given the store has customer "l.skywalker@gmail.com"
         When I want to edit this customer
@@ -42,7 +42,7 @@ Feature: Customer validation
         Then I should be notified that email is required
         And the customer "l.skywalker@gmail.com" should still have this email
 
-    @ui
+    @api @ui
     Scenario: Trying to create customer with wrong email format
         When I want to create a new customer
         And I specify their email as "wrongemail"
@@ -50,7 +50,7 @@ Feature: Customer validation
         Then I should be notified that email is not valid
         And the customer with email "wrongemail" should not appear in the store
 
-    @ui
+    @api @ui
     Scenario: Trying to create customer with wrong email format in strict mode
         When I want to create a new customer
         And I specify their email as "wrongemail@example..com"

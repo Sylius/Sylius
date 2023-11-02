@@ -8,7 +8,7 @@ Feature: Adding a new customer
         Given the store has a customer group "Retail"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Adding a new customer
         When I want to create a new customer
         And I specify their email as "l.skywalker@gmail.com"
@@ -16,7 +16,7 @@ Feature: Adding a new customer
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
 
-    @ui
+    @api @ui
     Scenario: Adding a new customer with full details
         When I want to create a new customer
         And I specify their first name as "Luke"

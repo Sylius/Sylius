@@ -7,7 +7,7 @@ Feature: Create account option availability
     Background:
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Being able to create an account for created customer
         When I want to create a new customer
         And I do not choose create account option
@@ -17,7 +17,7 @@ Feature: Create account option availability
         And I should not be able to specify their password
         And I should be able to select create account option
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Not seeing create account option after adding customer with account
         When I want to create a new customer account
         And I choose create account option

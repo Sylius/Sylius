@@ -40,6 +40,11 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
+        <service id="Sylius\Behat\Context\Api\Admin\CreatingProductVariantContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_administrators" class="Sylius\Behat\Context\Api\Admin\ManagingAdministratorsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
@@ -114,6 +119,11 @@
 <!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
 <!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
 <!--            <argument type="service" id="api_platform.iri_converter" />-->
+<!--            <argument type="service" id="sylius.behat.section_iri_converter" />-->
+<!--        </service>-->
+
+<!--        <service id="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsPricesContext">-->
+<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
 <!--        </service>-->
 
 <!--        <service id="sylius.behat.context.api.admin.managing_tax_categories" class="Sylius\Behat\Context\Api\Admin\ManagingTaxCategoriesContext">-->
@@ -233,6 +243,12 @@
 <!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
 <!--            <argument type="service" id="api_platform.iri_converter" />-->
 <!--            <argument type="service" id="sylius.behat.section_iri_converter" />-->
+<!--        </service>-->
+
+<!--        <service id="sylius.behat.context.api.admin.managing_customers" class="Sylius\Behat\Context\Api\Admin\ManagingCustomersContext">-->
+<!--            <argument type="service" id="sylius.behat.api_platform_client.admin" />-->
+<!--            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />-->
+<!--            <argument type="service" id="api_platform.iri_converter" />-->
 <!--        </service>-->
     </services>
 </container>
