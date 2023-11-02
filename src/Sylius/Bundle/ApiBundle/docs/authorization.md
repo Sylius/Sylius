@@ -20,15 +20,15 @@ but all responses will be prepared as for Shop User.
 
     As an Admin User:
     ```bash
-    curl -X POST http://127.0.0.1:8000/api/v2/admin-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
+    curl -X POST http://127.0.0.1:8000/api/v2/admin-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius"}'
     ```
    
-    > Email "api@example.com" and password "sylius-api" are default credentials for API administrator provided in the default
+    > Email "api@example.com" and password "sylius" are default credentials for API administrator provided in the default
     [fixtures suite](https://github.com/Sylius/Sylius/blob/0e4ed2e34e7f255aacef02a43cc2e7bf006d03fd/src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures/shop_configuration.yaml#L158)
     
     As a Shop User:
     ```bash
-    curl -X POST http://127.0.0.1:8000/api/v2/shop-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius-api"}'
+    curl -X POST http://127.0.0.1:8000/api/v2/shop-authentication-token -H "Content-Type: application/json" -H "Accept: application/json" -d '{"email": "api@example.com", "password": "sylius"}'
     ```
 
     > Email "shop@example.com" and password "sylius" are default credentials for API client provided in the default

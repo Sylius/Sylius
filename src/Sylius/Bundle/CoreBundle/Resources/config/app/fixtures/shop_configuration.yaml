@@ -176,7 +176,7 @@ sylius_fixtures:
 
                             -   email: 'api@example.com'
                                 username: 'api'
-                                password: 'sylius-api'
+                                password: 'sylius'
                                 enabled: true
                                 locale_code: '%locale%'
                                 first_name: 'Luke'
