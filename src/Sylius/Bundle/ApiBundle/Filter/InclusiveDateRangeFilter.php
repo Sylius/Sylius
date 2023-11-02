@@ -51,33 +51,30 @@ final class InclusiveDateRangeFilter implements ContextAwareFilterInterface
     {
         foreach ($this->properties as $property) {
             $dateBefore = $context['filters'][$property]['before'] ?? null;
-            if ($this->isExclusive($dateBefore)) {
-                $context['filters'][$property]['before'] = $this->makeDateInclusive($dateBefore);
+            if ($dateBefore !== null) {
+                $context['filters'][$property]['before'] = $this->getDateTime($dateBefore, '23:59');
             }
         }
 
         $this->dateFilter->apply($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
     }
 
-    protected function makeDateInclusive(string $value): string
+    private function getDateTime(mixed $date, string $defaultTime): mixed
     {
-        return (new \DateTimeImmutable($value))
-            ->setTime(23, 59)
-            ->format('Y-m-d H:i');
-    }
-
-    private function isExclusive(mixed $value): bool
-    {
-        if (!$value || !is_string($value)) {
-            return false;
+        if (!$date || !is_string($date)) {
+            return $date;
         }
 
-        $dateParts = date_parse($value);
+        $dateParts = date_parse($date);
 
         if (!empty($dateParts['errors'])) {
-            return false;
+            return $date;
         }
 
-        return empty($dateParts['hour']) && empty($dateParts['minute']);
+        if (!empty($dateParts['hour']) || !empty($dateParts['minute'])) {
+            return $date;
+        }
+
+        return "$date $defaultTime";
     }
 }
