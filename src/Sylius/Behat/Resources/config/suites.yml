@@ -61,6 +61,7 @@ imports:
     - suites/api/taxon/managing_taxons_ajax.yml
     - suites/api/user/managing_administrators.yml
     - suites/api/user/managing_customer_groups.yml
+    - suites/api/user/managing_customers.yml
 
     - suites/cli/canceling_unpaid_orders.yml
     - suites/cli/installer.yml

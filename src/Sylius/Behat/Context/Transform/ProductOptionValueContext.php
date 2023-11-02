@@ -26,6 +26,8 @@ final class ProductOptionValueContext implements Context
 
     /**
      * @Transform /^"([^"]+)" option value$/
+     * @Transform :optionValue
+     * @Transform :productOptionValue
      */
     public function getProductOptionValueByCode(string $code): ProductOptionValueInterface
     {

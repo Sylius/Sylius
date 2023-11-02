@@ -1,0 +1,8 @@
+Sylius\Component\Core\Model\Order:
+    order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "new"
+        tokenValue: "token"
+        customer: "@customer_tony"

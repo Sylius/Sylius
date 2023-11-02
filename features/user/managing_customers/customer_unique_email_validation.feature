@@ -7,7 +7,7 @@ Feature: Customer uniqueness of email validation
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Trying to add a new customer with taken email
         Given the store has customer "f.baggins@example.com"
         When I want to create a new customer

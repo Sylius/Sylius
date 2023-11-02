@@ -116,6 +116,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When /^I set its price to "-(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
+     */
+    public function iSetItsNegativePriceTo(string $price, ChannelInterface $channel): void
+    {
+        $this->createPage->specifyPrice('-' . $price, $channel);
+    }
+
+    /**
      * @When /^I set its minimum price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      */
     public function iSetItsMinimumPriceTo(string $price, ChannelInterface $channel): void
@@ -124,7 +132,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I remove its price for :channel channel
+     * @When I remove its price from :channel channel
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
@@ -188,9 +196,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I do not want to have shipping required for this product
+     * @When I do not want to have shipping required for this product( variant)
      */
-    public function iDoNotWantToHaveShippingRequiredForThisProduct()
+    public function iDoNotWantToHaveShippingRequiredForThisProduct(): void
     {
         $this->createPage->setShippingRequired(false);
     }
@@ -392,6 +400,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should be originally priced at (?:€|£|\$)([^"]+) for (channel "[^"]+")$/
+     * @Then /^the (variant with code "[^"]+") should be originally priced at "(?:€|£|\$)([^"]+)" for (channel "[^"]+")$/
      */
     public function theVariantWithCodeShouldBeOriginalPricedAtForChannel(
         ProductVariantInterface $productVariant,
@@ -415,6 +424,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for (channel "([^"]+)")$/
+     * @Then /^the (variant with code "[^"]+") should have an original price of "(?:€|£|\$)([^"]+)" for (channel "([^"]+)")$/
      */
     public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, ChannelInterface $channel)
     {
@@ -687,6 +697,19 @@ final class ManagingProductVariantsContext implements Context
     public function IShouldSeeCountVariantsWithNoName(int $count = 1): void
     {
         Assert::same($this->indexPage->countItemsWithNoName(), $count);
+    }
+
+    /**
+     * @Then the variant :productVariant should have :optionName option as :optionValue
+     */
+    public function theVariantShouldHaveOptionAs(
+        ProductVariantInterface $productVariant,
+        string $optionName,
+        string $optionValue,
+    ): void {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::true($this->updatePage->isSelectedOptionValueOnPage($optionName, $optionValue));
     }
 
     /**

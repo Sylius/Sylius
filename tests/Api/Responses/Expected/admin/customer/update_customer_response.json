@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/Customer",
+    "@id": "\/api\/v2\/admin\/customers\/@string@",
+    "@type": "Customer",
+    "defaultAddress": "\/api\/v2\/admin\/addresses\/@string@",
+    "user": {
+        "@id": "\/api\/v2\/admin\/shop-users\/@string@",
+        "@type": "ShopUser",
+        "enabled": false,
+        "verified": false
+    },
+    "id": @integer@,
+    "email": "api@example.com",
+    "firstName": "John",
+    "lastName": "Lim",
+    "birthday": "2023-09-24 11:00:00",
+    "gender": "f",
+    "group": "\/api\/v2\/admin\/customer-groups\/premium",
+    "phoneNumber": "+48987654321",
+    "subscribedToNewsletter": true,
+    "createdAt": @date@,
+    "fullName": "John Lim"
+}

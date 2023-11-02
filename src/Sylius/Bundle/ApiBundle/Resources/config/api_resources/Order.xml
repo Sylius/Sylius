@@ -24,6 +24,8 @@
                 <attribute name="path">/admin/orders</attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_customer_filter</attribute>
+                    <attribute>sylius.api.order_channel_order_filter</attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="number">DESC</attribute>
