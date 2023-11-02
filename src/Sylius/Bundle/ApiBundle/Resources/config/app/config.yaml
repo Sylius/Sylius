@@ -13,6 +13,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-scopes/{id}"
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
+        - "%sylius.security.new_api_route%/admin/shop-users/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
     sylius.security.new_api_admin_route: "%sylius.security.new_api_route%/admin"
@@ -55,6 +56,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
