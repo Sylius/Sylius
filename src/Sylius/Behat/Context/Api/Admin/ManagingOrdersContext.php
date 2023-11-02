@@ -413,12 +413,11 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When /^I filter by (products "([^"]+)" and "([^"]+)")$/
-     * @param ProductInterface[] $products
      */
     public function iFilterByProducts(array $products): void
     {
-        foreach ($products as $productName) {
-            $this->client->addFilter('items.variant.product[]', $productName->getId());
+        foreach ($products as $product) {
+            $this->client->addFilter('items.variant.product[]', $product->getId());
         }
 
         $this->iFilter();
@@ -476,7 +475,6 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When /^I filter by (variants "([^"]+)" and "([^"]+)")$/
-     * @param ProductVariantInterface[] $variants
      */
     public function iFilterByVariants(array $variants): void
     {
