@@ -54,7 +54,7 @@ final class AdminAuthenticationTokenDocumentationModifier implements Documentati
                 ],
                 'password' => [
                     'type' => 'string',
-                    'example' => 'sylius-api',
+                    'example' => 'sylius',
                 ],
             ],
         ];
