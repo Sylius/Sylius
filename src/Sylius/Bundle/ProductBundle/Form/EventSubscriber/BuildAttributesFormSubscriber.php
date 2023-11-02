@@ -83,7 +83,7 @@ final class BuildAttributesFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param string[] $localeCode
+     * @param string[] $localeCodes
      */
     private function resolveLocalizedAttributes(
         ProductInterface $product,
