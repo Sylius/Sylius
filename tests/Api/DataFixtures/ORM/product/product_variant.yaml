@@ -38,6 +38,7 @@ Sylius\Component\Core\Model\ProductVariant:
         taxCategory: '@tax_category_default'
         shippingCategory: '@shipping_category_default'
         shippingRequired: true
+        orderItemUnitGenerationMode: 0
     product_variant_2:
         code: 'MUG_2'
         product: '@product'
@@ -48,6 +49,7 @@ Sylius\Component\Core\Model\ProductVariant:
             channel_web: '@product_variant_2_channel_web_pricing'
         translations:
             - '@product_variant_2_translation'
+        orderItemUnitGenerationMode: 0
 
 Sylius\Component\Core\Model\ChannelPricing:
     product_variant_channel_web_pricing:
