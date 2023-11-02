@@ -21,19 +21,25 @@
         </attribute>
 
         <attribute name="email">
+            <group>admin:customer:create</group>
             <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>
 
         <attribute name="firstName">
+            <group>admin:customer:create</group>
             <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>
 
         <attribute name="lastName">
+            <group>admin:customer:create</group>
             <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
         </attribute>
@@ -49,19 +55,49 @@
             <group>shop:customer:update</group>
         </attribute>
 
-        <attribute name="subscribedToNewsletter">
+        <attribute name="user">
+            <group>admin:customer:create</group>
+            <group>admin:customer:update</group>
+            <group>admin:customer:read</group>
             <group>shop:customer:read</group>
-            <group>shop:customer:update</group>
         </attribute>
 
-        <attribute name="user">
-            <group>shop:customer:read</group>
+        <attribute name="group">
+            <group>admin:customer:create</group>
+            <group>admin:customer:update</group>
+            <group>admin:customer:read</group>
         </attribute>
 
         <attribute name="gender">
+            <group>admin:customer:create</group>
             <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
             <group>shop:customer:read</group>
             <group>shop:customer:update</group>
+        </attribute>
+
+        <attribute name="birthday">
+            <group>admin:customer:create</group>
+            <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
+        </attribute>
+
+        <attribute name="phoneNumber">
+            <group>admin:customer:create</group>
+            <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
+        </attribute>
+
+        <attribute name="subscribedToNewsletter">
+            <group>admin:customer:create</group>
+            <group>admin:customer:read</group>
+            <group>admin:customer:update</group>
+            <group>shop:customer:read</group>
+            <group>shop:customer:update</group>
+        </attribute>
+
+        <attribute name="createdAt">
+            <group>admin:customer:read</group>
         </attribute>
     </class>
 </serializer>
