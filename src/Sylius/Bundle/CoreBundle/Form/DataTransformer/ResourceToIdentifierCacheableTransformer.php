@@ -20,14 +20,19 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Webmozart\Assert\Assert;
 
+
+/** @implements DataTransformerInterface<int|string, ResourceInterface> */
 final class ResourceToIdentifierCacheableTransformer implements DataTransformerInterface
 {
+    /** @var RepositoryInterface<ResourceInterface> $repository */
     private RepositoryInterface $repository;
 
     private string $identifier;
 
+    /** @var array<ResourceInterface> */
     private static array $cache;
 
+    /** @param RepositoryInterface<ResourceInterface> $repository */
     public function __construct(RepositoryInterface $repository, ?string $identifier = null)
     {
         $this->repository = $repository;

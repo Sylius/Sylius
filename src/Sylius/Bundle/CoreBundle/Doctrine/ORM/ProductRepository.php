@@ -34,7 +34,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    public function findAggregate($id): ?ProductInterface
+    public function findAggregate(mixed $id): ?ProductInterface
     {
         return $this->createQueryBuilder('o')
             ->addSelect('values')
