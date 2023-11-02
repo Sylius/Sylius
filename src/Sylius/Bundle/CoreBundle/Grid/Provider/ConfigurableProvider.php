@@ -19,6 +19,9 @@ use Webmozart\Assert\Assert;
 
 final class ConfigurableProvider implements GridProviderInterface
 {
+    /**
+     * @param \Traversable&iterable $providers
+     */
     public function __construct(
         private iterable $providers,
         private array $configuration,
