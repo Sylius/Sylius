@@ -29,8 +29,8 @@ final class PostgreSQLDriverExceptionListener
             $event
                 ->setResponse(
                     new JSONResponse(
-                        ['message' => 'Invalid URL parameter for type integer'],
-                        $event->getRequest()->getMethod() === Request::METHOD_GET ? Response::HTTP_NOT_FOUND : Response::HTTP_UNPROCESSABLE_ENTITY,
+                        ['message' => 'No route matches the given filter IRI'],
+                        $event->getRequest()->getMethod() === Request::METHOD_GET ? Response::HTTP_BAD_REQUEST : Response::HTTP_UNPROCESSABLE_ENTITY,
                     ),
                 )
             ;
