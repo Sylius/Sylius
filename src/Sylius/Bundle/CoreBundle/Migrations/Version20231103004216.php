@@ -19,7 +19,7 @@ final class Version20231103004216 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Making the uniqueness of the password_reset_token and email_verification_token a database constraint';
+        return 'Add unique indices for password_reset_token, email_verification_token fields to sylius_shop_user and sylius_admin_user tables';
     }
 
     public function up(Schema $schema): void
