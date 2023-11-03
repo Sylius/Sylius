@@ -88,7 +88,7 @@ final class ProductAttributeValueDenormalizerSpec extends ObjectBehavior
                 ['attribute' => '/attributes/material', 'value' => 'ceramic'],
                 ProductAttributeValueInterface::class,
                 null,
-                [self::ALREADY_CALLED => true]
+                [self::ALREADY_CALLED => true],
             )
             ->shouldBeCalled()
         ;
