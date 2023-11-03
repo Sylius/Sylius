@@ -40,7 +40,7 @@ sylius_admin_product_update:
             permission: true
             redirect: referer
             repository:
-                method: findAggregate
+                method: findPreloaded
                 arguments: $id
             template: "@SyliusAdmin/Crud/update.html.twig"
             vars:

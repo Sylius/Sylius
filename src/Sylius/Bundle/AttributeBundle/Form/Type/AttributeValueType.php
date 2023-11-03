@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
-use Sylius\Bundle\CoreBundle\Form\DataTransformer\ResourceToIdentifierCacheableTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierCacheableTransformer;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
