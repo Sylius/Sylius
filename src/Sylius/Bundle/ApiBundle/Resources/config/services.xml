@@ -183,20 +183,5 @@
             <argument type="tagged_iterator" tag="sylius_api.input_data_processor" />
             <tag name="api_platform.state_processor" priority="-900" />
         </service>
-
-        <service id="api_platform.jsonld.normalizer.item" class="Sylius\Bundle\ApiBundle\ApiPlatform\JsonLd\Serializer\ItemNormalizer" public="false">
-            <argument type="service" id="api_platform.metadata.resource.metadata_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
-            <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="api_platform.resource_class_resolver" />
-            <argument type="service" id="api_platform.jsonld.context_builder" />
-            <argument type="service" id="api_platform.property_accessor" />
-            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
-            <argument type="service" id="serializer.mapping.class_metadata_factory" on-invalid="ignore" />
-            <argument type="collection" />
-            <argument type="service" id="api_platform.security.resource_access_checker" on-invalid="ignore" />
-            <tag name="serializer.normalizer" priority="-890" />
-        </service>
     </services>
 </container>
