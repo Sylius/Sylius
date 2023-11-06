@@ -24,6 +24,8 @@ use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
+use Sylius\Component\Payment\Model\PaymentRequest;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -108,6 +110,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PaymentType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('payment_request')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(PaymentRequest::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PaymentRequestInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('form')->defaultValue(null)->end()
                                     ->end()
                                 ->end()
                             ->end()
