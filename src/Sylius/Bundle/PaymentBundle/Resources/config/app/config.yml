@@ -1,6 +1,14 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
 
+parameters:
+    sylius.uuid_type: Ramsey\Uuid\Doctrine\UuidType
+
+doctrine:
+    dbal:
+        types:
+            sylius_uuid: "%sylius.uuid_type%"
+
 jms_serializer:
     metadata:
         directories:
