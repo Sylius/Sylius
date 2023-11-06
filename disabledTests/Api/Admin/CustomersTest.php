@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Api\Admin;
+namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
