@@ -136,9 +136,9 @@
             <tag name="validator.constraint_validator" alias="sylius_api_validator_shop_user_verification_token_eligibility" />
         </service>
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">-->
-<!--            <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator">-->
 <!--            <argument type="service" id="sylius.repository.shop_user" />-->
