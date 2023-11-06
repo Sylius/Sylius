@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,6 +73,30 @@ final class ChannelsTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /** @test */
+    public function it_prevents_deleting_the_only_channel(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/channels/MOBILE',
+            server: $header,
+        );
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/channels/WEB',
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/channel/delete_channel_that_cannot_be_deleted',
+            Response::HTTP_UNPROCESSABLE_ENTITY
+        );
     }
 
     /** @test */
