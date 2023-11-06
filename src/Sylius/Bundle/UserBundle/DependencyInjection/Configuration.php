@@ -68,8 +68,7 @@ final class Configuration implements ConfigurationInterface
                                                         ->defaultValue('P1D')
                                                         ->validate()
                                                         ->ifTrue(
-                                                            /** @param mixed $ttl */
-                                                            function ($ttl) {
+                                                            function (mixed $ttl) {
                                                                 try {
                                                                     new \DateInterval($ttl);
 
