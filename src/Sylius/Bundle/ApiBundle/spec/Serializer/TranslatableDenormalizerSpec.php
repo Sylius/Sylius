@@ -65,7 +65,7 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
         ;
     }
 
-    function it_adds_default_translation_when_no_translation_passed_in_data(
+    function it_adds_default_translation_when_no_translations_passed_in_data(
         DenormalizerInterface $denormalizer,
         TranslationLocaleProviderInterface $localeProvider,
     ): void {
@@ -80,6 +80,86 @@ final class TranslatableDenormalizerSpec extends ObjectBehavior
 
         $this
             ->denormalize([], TranslatableInterface::class, null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
+            ->shouldReturn($updatedData)
+        ;
+    }
+
+    function it_adds_default_translation_when_no_translation_passed_for_default_locale_in_data(
+        DenormalizerInterface $denormalizer,
+        TranslationLocaleProviderInterface $localeProvider,
+    ): void {
+        $localeProvider->getDefaultLocaleCode()->willReturn('en');
+
+        $originalData = ['translations' => ['en' => []]];
+        $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
+
+        $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+        ])->shouldBeCalled()->willReturn($updatedData);
+
+        $this
+            ->denormalize($originalData, TranslatableInterface::class, null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
+            ->shouldReturn($updatedData)
+        ;
+    }
+
+    function it_adds_default_translation_when_passed_default_translation_has_empty_locale(
+        DenormalizerInterface $denormalizer,
+        TranslationLocaleProviderInterface $localeProvider,
+    ): void {
+        $localeProvider->getDefaultLocaleCode()->willReturn('en');
+
+        $originalData = ['translations' => ['en' => ['locale' => '']]];
+        $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
+
+        $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+        ])->shouldBeCalled()->willReturn($updatedData);
+
+        $this
+            ->denormalize($originalData, TranslatableInterface::class, null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
+            ->shouldReturn($updatedData)
+        ;
+    }
+
+    function it_adds_default_translation_when_passed_default_translation_has_null_locale(
+        DenormalizerInterface $denormalizer,
+        TranslationLocaleProviderInterface $localeProvider,
+    ): void {
+        $localeProvider->getDefaultLocaleCode()->willReturn('en');
+
+        $originalData = ['translations' => ['en' => ['locale' => null]]];
+        $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
+
+        $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+        ])->shouldBeCalled()->willReturn($updatedData);
+
+        $this
+            ->denormalize($originalData, TranslatableInterface::class, null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
+            ->shouldReturn($updatedData)
+        ;
+    }
+
+    function it_adds_default_translation_when_passed_default_translation_has_mismatched_locale(
+        DenormalizerInterface $denormalizer,
+        TranslationLocaleProviderInterface $localeProvider,
+    ): void {
+        $localeProvider->getDefaultLocaleCode()->willReturn('en');
+
+        $originalData = ['translations' => ['en' => ['locale' => 'fr']]];
+        $updatedData = ['translations' => ['en' => ['locale' => 'en']]];
+
+        $denormalizer->denormalize($updatedData, TranslatableInterface::class, null, [
+            'sylius_translatable_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
+            ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+        ])->shouldBeCalled()->willReturn($updatedData);
+
+        $this
+            ->denormalize($originalData, TranslatableInterface::class, null, [ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST'])
             ->shouldReturn($updatedData)
         ;
     }

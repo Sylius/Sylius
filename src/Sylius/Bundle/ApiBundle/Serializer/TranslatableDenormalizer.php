@@ -38,7 +38,7 @@ final class TranslatableDenormalizer implements ContextAwareDenormalizerInterfac
 
         $defaultLocaleCode = $this->localeProvider->getDefaultLocaleCode();
 
-        if (!isset($data['translations'][$defaultLocaleCode])) {
+        if (!$this->hasDefaultTranslation($data['translations'] ?? [], $defaultLocaleCode)) {
             $data['translations'][$defaultLocaleCode] = [
                 'locale' => $defaultLocaleCode,
             ];
@@ -59,5 +59,13 @@ final class TranslatableDenormalizer implements ContextAwareDenormalizerInterfac
     private static function getAlreadyCalledKey(string $class): string
     {
         return sprintf(self::ALREADY_CALLED, $class);
+    }
+
+    private function hasDefaultTranslation(array $translations, string $defaultLocale): bool
+    {
+        return
+            isset($translations[$defaultLocale]['locale']) &&
+            $defaultLocale === $translations[$defaultLocale]['locale']
+        ;
     }
 }
