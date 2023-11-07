@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\StateProvider\Input;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Webmozart\Assert\Assert;
 
 /**
@@ -33,6 +34,6 @@ final class VerifyShopUserStateProvider implements ProviderInterface
 
         Assert::stringNotEmpty($uriVariables['token'] ?? null, 'Token is required.');
 
-        return new VerifyShopUser($uriVariables['token']);
+        return new VerifyShopUser($uriVariables['token'], $context[ContextKeys::CHANNEL]->getCode(), $context[ContextKeys::LOCALE_CODE],);
     }
 }
