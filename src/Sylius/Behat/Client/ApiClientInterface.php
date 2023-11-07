@@ -62,7 +62,9 @@ interface ApiClientInterface
 
     public function addFile(string $key, UploadedFile $file): void;
 
-    public function addRequestData(string $key, string|int|bool|array $value): void;
+    public function addRequestData(string $key, null|string|int|bool|array $value): void;
+
+    public function replaceRequestData(string $key, null|string|int|bool|array $value): void;
 
     public function setSubResourceData(string $key, array $data): void;
 

@@ -51,6 +51,7 @@ api_platform:
         # Sylius exception to status code mapping
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
+        Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422

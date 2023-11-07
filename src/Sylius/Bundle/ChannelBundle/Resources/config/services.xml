@@ -69,5 +69,10 @@
             <argument>false</argument>
             <tag name="data_collector" template="@SyliusChannel/Collector/channel.html.twig" id="sylius.channel_collector" />
         </service>
+
+        <service id="sylius.checker.channel_deletion" class="Sylius\Component\Channel\Checker\ChannelDeletionChecker">
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+        <service id="Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface" alias="sylius.checker.channel_deletion" />
     </services>
 </container>

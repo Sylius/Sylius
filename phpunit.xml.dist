@@ -24,5 +24,7 @@
 
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="ESCAPE_JSON" value="true" />
+
+        <server name="KERNEL_CLASS" value="App\Kernel" />
     </php>
 </phpunit>

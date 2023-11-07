@@ -1,6 +1,16 @@
 # UPGRADE FROM `v1.12.x` TO `v1.13.0`
 
-1. The constructor of 'Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber' has changed:
+1. The constructor of `Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer` has been changed:
+
+    ```diff
+        public function __construct(
+            private FactoryInterface $channelPriceHistoryConfigFactory,
+    +       private FactoryInterface $shopBillingDataFactory
+        ) {
+        }
+    ```
+
+1. The constructor of `Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber` has changed:
 
 ````diff
     public function __construct(
@@ -10,7 +20,7 @@
     }
 ````
 
-1. The signature of constructor of 'Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart' command changed:
+1. The signature of constructor of `Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart` command changed:
 
 ````diff
     public function __construct(
@@ -20,7 +30,7 @@
     } 
 ````
 
-1. The constructor signature of 'Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart' changed:
+1. The constructor signature of `Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart` changed:
 
 ````diff
     public function __construct(
