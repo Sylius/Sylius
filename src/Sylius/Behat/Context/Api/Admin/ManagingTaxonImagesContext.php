@@ -92,6 +92,22 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
+     * @When I change the first image type to :type
+     */
+    public function iChangeTheFirstImageTypeTo(string $type): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxon');
+
+        $taxonImage = $taxon->getImages()->first();
+        Assert::notNull($taxonImage);
+
+        $this->client->buildUpdateRequest(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
+        $this->client->updateRequestData(['type' => $type]);
+        $this->client->update();
+    }
+
+    /**
      * @Then I should be notified that it has been successfully uploaded
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyUploaded(): void
@@ -110,9 +126,9 @@ final class ManagingTaxonImagesContext implements Context
      */
     public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void
     {
+        $response = $this->client->getLastResponse();
         Assert::true(
-            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Taxon image could not be deleted',
+            $this->responseChecker->isDeletionSuccessful($response) || $this->responseChecker->isUpdateSuccessful($response),
         );
     }
 
@@ -132,6 +148,7 @@ final class ManagingTaxonImagesContext implements Context
 
     /**
      * @Then /^(this taxon) should not have(?:| also) any images with "([^"]*)" type$/
+     * @Then /^(it) should not have(?:| also) any images with "([^"]*)" type$/
      */
     public function thisTaxonShouldNotHaveAnyImagesWithType(TaxonInterface $taxon, string $type): void
     {
