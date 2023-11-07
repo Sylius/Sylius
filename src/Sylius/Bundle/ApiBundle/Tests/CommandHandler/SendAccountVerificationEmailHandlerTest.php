@@ -33,10 +33,6 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
     /** @test */
     public function it_sends_account_verification_token_email(): void
     {
-        if ($this->isItSwiftmailerTestEnv()) {
-            $this->markTestSkipped('Test is relevant only for the environment without swiftmailer');
-        }
-
         $container = self::getContainer();
 
         /** @var TranslatorInterface $translator */
@@ -80,12 +76,5 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
             $email,
             $translator->trans('sylius.email.verification_token.message', [], null, 'en_US'),
         );
-    }
-
-    private function isItSwiftmailerTestEnv(): bool
-    {
-        $env = self::getContainer()->getParameter('kernel.environment');
-
-        return $env === 'test_with_swiftmailer';
     }
 }
