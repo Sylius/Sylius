@@ -296,6 +296,19 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I attach the :path image with :type type
+     * @When I attach the :path image with :type type to this taxon
+     * @When I attach the :path image
+     * @When I attach the :path image to this taxon
+     */
+    public function iAttachImageWithType(string $path, string $type = null): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->attachImage($path, $type);
+    }
+
+    /**
      * @Then I should see the taxon named :name in the list
      */
     public function iShouldSeeTheTaxonNamedInTheList($name)
@@ -304,20 +317,9 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I attach the :path image with :type type
-     * @When I attach the :path image
-     */
-    public function iAttachImageWithType($path, $type = null)
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->attachImage($path, $type);
-    }
-
-    /**
      * @Then /^(?:it|this taxon) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisTaxonShouldHaveAnImageWithType($type)
+    public function thisTaxonShouldHaveAnImageWithType(string $type): void
     {
         Assert::true($this->updatePage->isImageWithTypeDisplayed($type));
     }
@@ -467,6 +469,14 @@ final class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->updatePage->isEnabled());
+    }
+
+    /**
+     * @When I save attached images
+     */
+    public function iSaveAttachedImages(): void
+    {
+        $this->updatePage->saveChanges();
     }
 
     private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface|UpdateConfigurableProductPageInterface
