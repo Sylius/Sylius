@@ -81,4 +81,53 @@ final class TaxonImagesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_creates_a_taxon_image(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/taxons/%s/images', $taxon->getCode()),
+            files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $response,
+            'admin/taxon_image/post_taxon_image_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_creates_a_taxon_image_with_type(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/taxons/%s/images', $taxon->getCode()),
+            parameters: ['type' => 'banner'],
+            files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $response,
+            'admin/taxon_image/post_taxon_image_with_type_response',
+            Response::HTTP_CREATED,
+        );
+    }
 }
