@@ -132,6 +132,36 @@ final class TaxonImagesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_updates_only_the_type_of_the_existing_taxon_image(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonImageInterface $taxonImage */
+        $taxonImage = $fixtures['taxon_thumbnail'];
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon_mug'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            server: $header,
+            content: json_encode([
+                'type' => 'logo',
+                'owner' => sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+                'path' => 'logo.jpg',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon_image/put_taxon_image_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_deletes_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);

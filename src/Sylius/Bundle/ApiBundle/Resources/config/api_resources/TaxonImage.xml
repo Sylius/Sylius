@@ -66,6 +66,17 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/taxon-images/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:taxon_image:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:taxon_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
                 <attribute name="path">/admin/taxon-images/{id}</attribute>
