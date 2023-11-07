@@ -35,7 +35,7 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
-     * @Then /^I attach the "([^"]+)" image with "([^"]+)" type to (this taxon)$/
+     * @When /^I attach the "([^"]+)" image with "([^"]+)" type to (this taxon)$/
      */
     public function iAttachTheImageWithTypeToThisTaxon(string $path, ?string $type, TaxonInterface $taxon): void
     {
@@ -56,11 +56,39 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
-     * @Then /^I attach the "([^"]+)" image to (this taxon)$/
+     * @When /^I attach the "([^"]+)" image to (this taxon)$/
      */
     public function iAttachTheImageToThisTaxon(string $path, TaxonInterface $taxon): void
     {
         $this->iAttachTheImageWithTypeToThisTaxon($path, null, $taxon);
+    }
+
+    /**
+     * @When I( also) remove an image with :type type
+     */
+    public function iRemoveAnImageWithType(string $type): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxon');
+
+        $taxonImage = $taxon->getImagesByType($type)->first();
+        Assert::notNull($taxonImage);
+
+        $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
+    }
+
+    /**
+     * @When I remove the first image
+     */
+    public function iRemoveTheFirstImage(): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxon');
+
+        $taxonImage = $taxon->getImages()->first();
+        Assert::notNull($taxonImage);
+
+        $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
     }
 
     /**
@@ -74,6 +102,17 @@ final class ManagingTaxonImagesContext implements Context
                 'Resource could not be created: %s',
                 $this->responseChecker->getError($this->client->getLastResponse()),
             ),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the changes have been successfully applied
+     */
+    public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Taxon image could not be deleted',
         );
     }
 
@@ -92,6 +131,19 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
+     * @Then /^(this taxon) should not have(?:| also) any images with "([^"]*)" type$/
+     */
+    public function thisTaxonShouldNotHaveAnyImagesWithType(TaxonInterface $taxon, string $type): void
+    {
+        Assert::false($this->responseChecker->hasSubResourceWithValue(
+            $this->client->show(Resources::TAXONS, $taxon->getCode()),
+            'images',
+            'type',
+            $type,
+        ));
+    }
+
+    /**
      * @Then /^(this taxon) should have only one image$/
      * @Then /^(this taxon) should(?:| still) have (\d+) images?$/
      */
@@ -101,5 +153,13 @@ final class ManagingTaxonImagesContext implements Context
             $this->responseChecker->getValue($this->client->show(Resources::TAXONS, $taxon->getCode()), 'images'),
             $count,
         );
+    }
+
+    /**
+     * @Then /^(this taxon) should not have any images$/
+     */
+    public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon): void
+    {
+        $this->thisTaxonShouldHaveImages($taxon, 0);
     }
 }

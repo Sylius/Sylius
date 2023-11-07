@@ -362,9 +362,9 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I save attached images
+     * @When I save my changes to the images
      */
-    public function iSaveAttachedImages(): void
+    public function iSaveMyChangesToTheImages(): void
     {
         // Intentionally left blank
     }

@@ -13,7 +13,7 @@ Feature: Adding images to an existing taxon
     Scenario: Adding a single image to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type to this taxon
-        And I save attached images
+        And I save my changes to the images
         Then I should be notified that it has been successfully uploaded
         And this taxon should have an image with "banner" type
 
@@ -21,7 +21,7 @@ Feature: Adding images to an existing taxon
     Scenario: Adding a single image to an existing taxon without specifying the type
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image to this taxon
-        And I save attached images
+        And I save my changes to the images
         Then I should be notified that it has been successfully uploaded
         And this taxon should have only one image
 
@@ -30,7 +30,7 @@ Feature: Adding images to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type to this taxon
         And I attach the "t-shirts.jpg" image with "thumbnail" type to this taxon
-        And I save attached images
+        And I save my changes to the images
         Then I should be notified that it has been successfully uploaded
         And this taxon should have an image with "banner" type
         And it should also have an image with "thumbnail" type
@@ -40,6 +40,6 @@ Feature: Adding images to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type to this taxon
         And I attach the "t-shirts.jpg" image with "banner" type to this taxon
-        And I save attached images
+        And I save my changes to the images
         Then I should be notified that it has been successfully uploaded
         And this taxon should have 2 images

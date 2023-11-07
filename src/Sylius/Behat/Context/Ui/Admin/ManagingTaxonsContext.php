@@ -157,6 +157,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my changes to the images
      */
     public function iSaveMyChanges()
     {
@@ -335,9 +336,9 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function iRemoveAnImageWithType($code)
+    public function iRemoveAnImageWithType(string $type): void
     {
-        $this->updatePage->removeImageWithType($code);
+        $this->updatePage->removeImageWithType($type);
     }
 
     /**
@@ -469,14 +470,6 @@ final class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->updatePage->isEnabled());
-    }
-
-    /**
-     * @When I save attached images
-     */
-    public function iSaveAttachedImages(): void
-    {
-        $this->updatePage->saveChanges();
     }
 
     private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface|UpdateConfigurableProductPageInterface
