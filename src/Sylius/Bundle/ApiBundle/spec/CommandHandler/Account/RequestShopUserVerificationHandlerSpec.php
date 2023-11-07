@@ -44,10 +44,7 @@ final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
     {
         $userRepository->find(42)->willReturn(null);
 
-        $resendVerificationEmail = new RequestShopUserVerification();
-        $resendVerificationEmail->setChannelCode('WEB');
-        $resendVerificationEmail->setLocaleCode('en_US');
-        $resendVerificationEmail->setShopUserId(42);
+        $resendVerificationEmail = new RequestShopUserVerification(42, 'WEB', 'en_US');
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -76,10 +73,7 @@ final class RequestShopUserVerificationHandlerSpec extends ObjectBehavior
             [new DispatchAfterCurrentBusStamp()],
         )->willReturn(new Envelope($sendAccountVerificationEmail))->shouldBeCalled();
 
-        $resendVerificationEmail = new RequestShopUserVerification();
-        $resendVerificationEmail->setChannelCode('WEB');
-        $resendVerificationEmail->setLocaleCode('en_US');
-        $resendVerificationEmail->setShopUserId(42);
+        $resendVerificationEmail = new RequestShopUserVerification(42, 'WEB', 'en_US');
 
         $this($resendVerificationEmail);
     }

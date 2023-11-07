@@ -25,32 +25,16 @@ class RequestShopUserVerification implements
     LocaleCodeAwareInterface,
     IriToIdentifierConversionAwareInterface
 {
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $channelCode;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $localeCode;
-
-    public function __construct(private string|int|null $shopUserId)
-    {
+    public function __construct(
+        protected string|int|null $shopUserId,
+        protected ?string $channelCode,
+        protected ?string $localeCode,
+    ) {
     }
 
-    public function getChannelCode(): string
+    public function getChannelCode(): ?string
     {
         return $this->channelCode;
-    }
-
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
     }
 
     public function getLocaleCode(): ?string
@@ -58,12 +42,7 @@ class RequestShopUserVerification implements
         return $this->localeCode;
     }
 
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->localeCode = $localeCode;
-    }
-
-    public function getShopUserId()
+    public function getShopUserId(): string|int|null
     {
         return $this->shopUserId;
     }

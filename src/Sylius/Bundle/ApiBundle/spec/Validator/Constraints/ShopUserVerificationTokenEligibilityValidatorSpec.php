@@ -46,7 +46,7 @@ final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBeha
 
     function it_throws_an_exception_if_constraint_is_not_type_of_shop_user_verification_eligibility(): void
     {
-        $value = new VerifyShopUser('TOKEN');
+        $value = new VerifyShopUser('TOKEN', 'en_US', 'WEB');
         $constraint = new OrderPaymentMethodEligibility();
 
         $this
@@ -60,7 +60,7 @@ final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBeha
         ExecutionContextInterface $executionContext,
     ): void {
         $constraint = new ShopUserVerificationTokenEligibility();
-        $value = new VerifyShopUser('TOKEN');
+        $value = new VerifyShopUser('TOKEN', 'en_US', 'WEB');
 
         $this->initialize($executionContext);
 
@@ -83,7 +83,7 @@ final class ShopUserVerificationTokenEligibilityValidatorSpec extends ObjectBeha
         ShopUserInterface $user,
     ): void {
         $constraint = new ShopUserVerificationTokenEligibility();
-        $value = new VerifyShopUser('TOKEN');
+        $value = new VerifyShopUser('TOKEN', 'en_US', 'WEB');
 
         $this->initialize($executionContext);
 

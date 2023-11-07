@@ -44,28 +44,28 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
     {
         /** @var ShopUserInterface $user */
         $user = $this->shopUserFactory->createNew();
-        $user->setPlainPassword($command->password);
+        $user->setPlainPassword($command->getPassword());
 
-        $customer = $this->customerResolver->resolve($command->email);
+        $customer = $this->customerResolver->resolve($command->getEmail());
 
         if ($customer->getUser() !== null) {
-            throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->email));
+            throw new \DomainException(sprintf('User with email "%s" is already registered.', $command->getEmail()));
         }
 
-        $customer->setFirstName($command->firstName);
-        $customer->setLastName($command->lastName);
-        $customer->setSubscribedToNewsletter($command->subscribedToNewsletter);
+        $customer->setFirstName($command->getFirstName());
+        $customer->setLastName($command->getLastName());
+        $customer->setSubscribedToNewsletter($command->isSubscribedToNewsletter());
         $customer->setUser($user);
 
         /** @var ChannelInterface $channel */
-        $channel = $this->channelRepository->findOneByCode($command->channelCode);
+        $channel = $this->channelRepository->findOneByCode($command->getChannelCode());
 
         $this->shopUserManager->persist($user);
 
         $this->commandBus->dispatch(new SendAccountRegistrationEmail(
-            $command->email,
-            $command->localeCode,
-            $command->channelCode,
+            $command->getEmail(),
+            $command->getLocaleCode(),
+            $command->getChannelCode(),
         ), [new DispatchAfterCurrentBusStamp()]);
 
         if (!$channel->isAccountVerificationRequired()) {
@@ -78,9 +78,9 @@ final class RegisterShopUserHandler implements MessageHandlerInterface
         $user->setEmailVerificationToken($token);
 
         $this->commandBus->dispatch(new SendShopUserVerificationEmail(
-            $command->email,
-            $command->localeCode,
-            $command->channelCode,
+            $command->getEmail(),
+            $command->getLocaleCode(),
+            $command->getChannelCode(),
         ), [new DispatchAfterCurrentBusStamp()]);
 
         return $user;

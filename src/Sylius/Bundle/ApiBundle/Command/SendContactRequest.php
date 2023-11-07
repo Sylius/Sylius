@@ -17,10 +17,10 @@ namespace Sylius\Bundle\ApiBundle\Command;
 class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareInterface, LoggedInCustomerEmailIfNotSetAwareInterface
 {
     public function __construct(
-        private ?string $channelCode,
-        private ?string $localeCode,
-        private ?string $email = null,
-        private ?string $message = null,
+        protected ?string $channelCode,
+        protected ?string $localeCode,
+        protected ?string $email = null,
+        protected ?string $message = null,
     ) {
     }
 
@@ -39,12 +39,7 @@ class SendContactRequest implements ChannelCodeAwareInterface, LocaleCodeAwareIn
         return $this->email;
     }
 
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->message;
     }
