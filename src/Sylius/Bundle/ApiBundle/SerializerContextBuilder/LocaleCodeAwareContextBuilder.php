@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 /** @experimental */
 final readonly class LocaleCodeAwareContextBuilder implements SerializerContextBuilderInterface
 {
-    public function __construct (
+    public function __construct(
         private SerializerContextBuilderInterface $decoratedContextBuilder,
         private LocaleContextInterface $localeContext,
     ) {
@@ -45,9 +45,11 @@ final readonly class LocaleCodeAwareContextBuilder implements SerializerContextB
 
         $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? 'localeCode';
 
-        $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [
-            $constructorArgumentName => $this->localeContext->getLocaleCode(),
-        ];
+        if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->localeContext->getLocaleCode()]);
+        } else {
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $this->localeContext->getLocaleCode()];
+        }
 
         return $context;
     }

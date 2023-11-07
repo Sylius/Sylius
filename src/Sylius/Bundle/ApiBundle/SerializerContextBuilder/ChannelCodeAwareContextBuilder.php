@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 /** @experimental */
 final readonly class ChannelCodeAwareContextBuilder implements SerializerContextBuilderInterface
 {
-    public function __construct (
+    public function __construct(
         private SerializerContextBuilderInterface $decoratedContextBuilder,
         private ChannelContextInterface $channelContext,
     ) {
@@ -45,9 +45,11 @@ final readonly class ChannelCodeAwareContextBuilder implements SerializerContext
 
         $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? 'channelCode';
 
-        $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [
-            $constructorArgumentName => $this->channelContext->getChannel()->getCode(),
-        ];
+        if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->channelContext->getChannel()->getCode()]);
+        } else {
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $this->channelContext->getChannel()->getCode()];
+        }
 
         return $context;
     }

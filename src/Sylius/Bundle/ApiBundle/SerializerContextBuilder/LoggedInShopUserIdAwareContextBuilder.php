@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 /** @experimental */
 final readonly class LoggedInShopUserIdAwareContextBuilder implements SerializerContextBuilderInterface
 {
-    public function __construct (
+    public function __construct(
         private SerializerContextBuilderInterface $decoratedContextBuilder,
         private UserContextInterface $userContext,
     ) {
@@ -48,9 +48,11 @@ final readonly class LoggedInShopUserIdAwareContextBuilder implements Serializer
 
         $user = $this->getShopUser();
         if (null !== $user) {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [
-                $constructorArgumentName => $user->getId(),
-            ];
+            if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
+                $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $user->getId()]);
+            } else {
+                $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $user->getId()];
+            }
         }
 
         return $context;
