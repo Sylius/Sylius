@@ -74,7 +74,7 @@ Feature: Account registration
         Then I should be notified that the email is required
         And I should not be logged in
 
-    #@api TODO: temporarily disabled due to failing validation
+    @api
     Scenario: Trying to register a new account without providing required fields
         When I want to register a new account
         And I specify the email as "goodman@gmail.com"
