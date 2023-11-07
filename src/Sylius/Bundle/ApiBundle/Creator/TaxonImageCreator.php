@@ -24,6 +24,10 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 /** @experimental */
 final class TaxonImageCreator implements TaxonImageCreatorInterface
 {
+    /**
+     * @param FactoryInterface<TaxonImageInterface> $taxonImageFactory
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     */
     public function __construct(
         private FactoryInterface $taxonImageFactory,
         private TaxonRepositoryInterface $taxonRepository,
