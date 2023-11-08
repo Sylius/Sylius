@@ -19,6 +19,8 @@ sylius:
             max_length: Attribute presentation must not be longer than 1 character.|Attribute presentation must not be longer than {{ limit }} characters.
         type:
             unregistered: The attribute type "%type%" is not registered.
+        locale:
+            not_blank: Please enter the locale.
     attribute_value:
         attribute:
             not_blank: Please select attribute.
