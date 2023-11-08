@@ -26,5 +26,14 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="locale">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+                <option name="message">sylius.shipping_method.locale.not_blank</option>
+            </constraint>
+            <constraint name="Locale">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
