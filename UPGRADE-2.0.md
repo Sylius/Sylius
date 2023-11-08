@@ -111,6 +111,18 @@
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Addressing\Repository\ZoneMemberRepositoryInterface`
 
+  Attribute:
+
+    * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Attribute\Repository\AttributeRepositoryInterface`
+    * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeTranslationRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Attribute\Repository\AttributeTranslationRepositoryInterface`
+    * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeValueRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
+
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
 
@@ -122,6 +134,15 @@
     * `Sylius\Component\Core\Repository\AddressRepositoryInterface` implemented interface changed from
       `Sylius\Component\Resource\Repository\RepositoryInterface` to
       `Sylius\Component\Addressing\Repository\AddressRepositoryInterface`
+
+  Attribute:
+
+    * `Sylius\Bundle\CoreBundle\Doctrine\ORM\AttributeRepository` extended class changed from
+      `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
+      `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository`
+    * `Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface` extended interface changed from
+      `Sylius\Component\Resource\Repository\RepositoryInterface` to
+      `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
 
 ## Frontend
 
