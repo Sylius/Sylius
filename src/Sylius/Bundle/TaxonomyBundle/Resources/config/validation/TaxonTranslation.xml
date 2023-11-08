@@ -30,6 +30,15 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="locale">
+            <constraint name="NotBlank">
+                <option name="groups">sylius</option>
+                <option name="message">sylius.taxon.locale.not_blank</option>
+            </constraint>
+            <constraint name="Locale">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
                 <value>locale</value>

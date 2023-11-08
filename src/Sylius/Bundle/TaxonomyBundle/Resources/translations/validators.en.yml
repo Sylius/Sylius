@@ -13,6 +13,8 @@ sylius:
         slug:
             not_blank: Please enter taxon slug.
             unique: Taxon slug must be unique.
+        locale:
+            not_blank: Please enter the locale.
     taxonomy:
         name:
             max_length: Taxonomy name must not be longer than 255 characters.
