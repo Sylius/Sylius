@@ -105,6 +105,11 @@
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableDenormalizer">
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
         <service id="date_time_normalizer" class="Symfony\Component\Serializer\Normalizer\DateTimeNormalizer">
             <argument type="collection">
                 <argument key="datetime_format">Y-m-d H:i:s</argument>

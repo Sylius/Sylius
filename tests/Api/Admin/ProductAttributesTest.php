@@ -394,13 +394,7 @@ final class ProductAttributesTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/admin/product-attributes',
             server: $header,
-            content: json_encode([
-                'translations' => [
-                    'en_US' => [
-                        'locale' => 'en_US',
-                    ],
-                ],
-            ], JSON_THROW_ON_ERROR),
+            content: '{}',
         );
 
         $this->assertResponse(
@@ -423,6 +417,12 @@ final class ProductAttributesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'test',
                 'type' => 'foobar',
+                'translations' => [
+                    'en_US' => [
+                        'locale' => 'en_US',
+                        'name' => 'Test',
+                    ],
+                ],
             ], JSON_THROW_ON_ERROR),
         );
 

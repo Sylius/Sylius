@@ -128,6 +128,26 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_product_without_required_data(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/products',
+            server: $header,
+            content: '{}',
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/post_product_without_required_data_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
     public function it_updates_the_existing_product(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
