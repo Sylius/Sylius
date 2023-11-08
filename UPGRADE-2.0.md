@@ -93,6 +93,36 @@
 
 * The `swiftmailer/swiftmailer` dependency has been removed. Use `symfony/mailer` instead.
 
+* The following repository classes and interfaces were added, if you have custom repositories,
+  you need to update them to extend the new ones:
+
+  Addressing:
+
+    * `Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Addressing\Repository\AddressRepositoryInterface`
+    * `Sylius\Bundle\AddressingBundle\Doctrine\ORM\CountryRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Addressing\Repository\CountryRepositoryInterface`
+    * `Sylius\Bundle\AddressingBundle\Doctrine\ORM\ProvinceRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Addressing\Repository\ProvinceRepositoryInterface`
+    * `Sylius\Bundle\AddressingBundle\Doctrine\ORM\ZoneMemberRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Addressing\Repository\ZoneMemberRepositoryInterface`
+
+* The following repository classes and interfaces namespaces were changed, if you have custom repositories,
+  you need to update them to extend the new ones:
+
+  Addressing:
+
+    * `Sylius\Bundle\CoreBundle\Doctrine\ORM\AddressRepository` extended class changed from
+      `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
+      `Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressRepository`
+    * `Sylius\Component\Core\Repository\AddressRepositoryInterface` implemented interface changed from
+      `Sylius\Component\Resource\Repository\RepositoryInterface` to
+      `Sylius\Component\Addressing\Repository\AddressRepositoryInterface`
+
 ## Frontend
 
 * `use_webpack` option was removed from the `sylius_ui` configuration, and the Webpack has become the only module
