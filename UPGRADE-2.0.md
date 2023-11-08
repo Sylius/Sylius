@@ -123,6 +123,12 @@
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
 
+  Currency:
+
+    * `Sylius\Bundle\CurrencyBundle\Doctrine\ORM\CurrencyRepository`
+      extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
+      implements `Sylius\Component\Currency\Repository\CurrencyRepositoryInterface`
+
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
 
