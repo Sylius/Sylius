@@ -518,6 +518,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my changes to the images
      */
     public function iSaveMyChanges()
     {
@@ -832,8 +833,10 @@ final class ManagingProductsContext implements Context
     /**
      * @When I attach the :path image with :type type
      * @When I attach the :path image
+     * @When I attach the :path image with :type type to this product
+     * @When I attach the :path image to this product
      */
-    public function iAttachImageWithType($path, $type = null)
+    public function iAttachImageWithType(string $path, ?string $type = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 

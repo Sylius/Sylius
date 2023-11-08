@@ -108,20 +108,6 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully uploaded
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyUploaded(): void
-    {
-        Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            sprintf(
-                'Resource could not be created: %s',
-                $this->responseChecker->getError($this->client->getLastResponse()),
-            ),
-        );
-    }
-
-    /**
      * @Then I should be notified that the changes have been successfully applied
      */
     public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void

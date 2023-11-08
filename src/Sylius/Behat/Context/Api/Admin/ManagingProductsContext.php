@@ -404,6 +404,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I save my changes to the images
+     */
+    public function iSaveMyChangesToTheImages(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
