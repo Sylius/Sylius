@@ -15,6 +15,8 @@ sylius:
             not_blank: Please enter catalog promotion name.
         state:
             processing: The catalog promotion cannot be edited as it is currently being processed.
+        locale:
+            not_blank: Please enter the locale.
     catalog_promotion_action:
         invalid_type: Catalog promotion action type is invalid. Please choose a valid type.
         percentage_discount:
@@ -36,6 +38,8 @@ sylius:
             max_length: Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.
             min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter promotion name.
+        locale:
+            not_blank: Please enter the locale.
     promotion_action:
         percentage_discount_configuration:
             not_in_range: The percentage discount must be between 0% and 100%.

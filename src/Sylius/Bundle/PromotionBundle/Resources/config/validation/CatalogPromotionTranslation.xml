@@ -12,7 +12,7 @@
 -->
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
-    <class name="Sylius\Component\Promotion\Model\PromotionTranslation">
+    <class name="Sylius\Component\Promotion\Model\CatalogPromotionTranslation">
         <property name="label">
             <constraint name="Length">
                 <option name="max">255</option>
@@ -22,7 +22,7 @@
         <property name="locale">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
-                <option name="message">sylius.promotion.locale.not_blank</option>
+                <option name="message">sylius.catalog_promotion.locale.not_blank</option>
             </constraint>
             <constraint name="Locale">
                 <option name="groups">sylius</option>
