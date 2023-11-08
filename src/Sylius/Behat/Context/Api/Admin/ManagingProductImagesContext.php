@@ -64,12 +64,55 @@ final class ManagingProductImagesContext implements Context
     }
 
     /**
+     * @When I( also) remove an image with :type type
+     */
+    public function iRemoveAnImageWithType(string $type): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $productImage = $product->getImagesByType($type)->first();
+        Assert::notNull($productImage);
+
+        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+    }
+
+    /**
+     * @When I remove the first image
+     */
+    public function iRemoveTheFirstImage(): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $productImage = $product->getImages()->first();
+        Assert::notNull($productImage);
+
+        $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+    }
+
+    /**
      * @Then the product :product should have an image with :type type
+     * @Then /^(this product) should(?:| also) have an image with "([^"]*)" type$/
      * @Then /^(it) should(?:| also) have an image with "([^"]*)" type$/
      */
     public function theProductShouldHaveAnImageWithType(ProductInterface $product, string $type): void
     {
         Assert::true($this->responseChecker->hasSubResourceWithValue(
+            $this->client->show(Resources::PRODUCTS, $product->getCode()),
+            'images',
+            'type',
+            $type,
+        ));
+    }
+
+    /**
+     * @Then /^(this product) should not have(?:| also) any images with "([^"]*)" type$/
+     * @Then /^(it) should not have(?:| also) any images with "([^"]*)" type$/
+     */
+    public function thisProductShouldNotHaveAnyImagesWithType(ProductInterface $product, string $type): void
+    {
+        Assert::false($this->responseChecker->hasSubResourceWithValue(
             $this->client->show(Resources::PRODUCTS, $product->getCode()),
             'images',
             'type',
@@ -86,6 +129,25 @@ final class ManagingProductImagesContext implements Context
         Assert::count(
             $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, $product->getCode()), 'images'),
             $count,
+        );
+    }
+
+    /**
+     * @Then /^(this product) should not have any images$/
+     */
+    public function thisProductShouldNotHaveAnyImages(ProductInterface $product): void
+    {
+        $this->thisProductShouldHaveImages($product, 0);
+    }
+
+    /**
+     * @Then I should be notified that the changes have been successfully applied
+     */
+    public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($response) || $this->responseChecker->isUpdateSuccessful($response),
         );
     }
 }
