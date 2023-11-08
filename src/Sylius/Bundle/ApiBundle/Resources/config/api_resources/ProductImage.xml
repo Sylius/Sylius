@@ -25,6 +25,7 @@
                     <attribute name="groups">admin:product_image:read</attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-images/{id}</attribute>
@@ -45,6 +46,14 @@
                 </attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_products_images_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="path" required="true" />

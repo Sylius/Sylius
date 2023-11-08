@@ -8,8 +8,15 @@
             "@type": "ProductImage",
             "id": "@integer@",
             "type": "thumbnail",
-            "path": "\/media\/image\/uo\/product.jpg"
+            "path": "\/media\/image\/uo\/thumbnail.jpg"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@type": "ProductImage",
+            "id": "@integer@",
+            "type": "banner",
+            "path": "\/media\/image\/uo\/banner.jpg"
         }
     ],
-    "hydra:totalItems": 1
+    "hydra:totalItems": 2
 }

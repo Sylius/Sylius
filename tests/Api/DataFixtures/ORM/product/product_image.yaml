@@ -1,11 +1,19 @@
 Sylius\Component\Core\Model\Product:
-    product:
-        fallbackLocale: en_US
-        currentLocale: en
-        code: MUG_SW
-        images: ["@product_thumbnail"]
+    product_mug:
+        code: 'MUG'
+        fallbackLocale: 'en_US'
+        currentLocale: 'en'
+        images: ['@product_mug_thumbnail']
+    product_cap:
+        code: 'CAP'
+        fallbackLocale: 'en_US'
+        currentLocale: 'en'
+        images: ['@product_cap_banner']
         
 Sylius\Component\Core\Model\ProductImage:
-    product_thumbnail:
-        type: "thumbnail"
-        path: "uo/product.jpg"
+    product_mug_thumbnail:
+        type: 'thumbnail'
+        path: 'uo/thumbnail.jpg'
+    product_cap_banner:
+        type: 'banner'
+        path: 'uo/banner.jpg'

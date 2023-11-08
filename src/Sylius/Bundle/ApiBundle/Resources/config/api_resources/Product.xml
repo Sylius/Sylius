@@ -129,6 +129,11 @@
         </itemOperations>
 
         <subresourceOperations>
+            <subresourceOperation name="images_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/products/{code}/images</attribute>
+            </subresourceOperation>
+
             <subresourceOperation name="attributes_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/products/{code}/attributes</attribute>
@@ -169,6 +174,9 @@
         <property name="associations" readable="true" />
         <property name="attributes" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.product_attribute_value.class%" collection="true" />
+        </property>
+        <property name="images" writable="false" required="false">
+            <subresource resourceClass="%sylius.model.product_image.class%" collection="true" />
         </property>
     </resource>
 </resources>
