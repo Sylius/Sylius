@@ -92,4 +92,53 @@ final class ProductImagesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_creates_a_product_image(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
+            files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $response,
+            'admin/product_image/post_product_image_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_creates_a_product_image_with_type(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
+            parameters: ['type' => 'banner'],
+            files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $response,
+            'admin/product_image/post_product_image_with_type_response',
+            Response::HTTP_CREATED,
+        );
+    }
 }

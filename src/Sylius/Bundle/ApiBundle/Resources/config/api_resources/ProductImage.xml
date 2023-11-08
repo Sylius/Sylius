@@ -15,6 +15,46 @@
                     <attribute name="groups">admin:product_image:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/products/{code}/images</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="file">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">binary</attribute>
+                                        </attribute>
+                                        <attribute name="type">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>

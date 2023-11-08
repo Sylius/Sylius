@@ -31,8 +31,12 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction" public="true">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\ProductImageCreator" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction" public="true">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
