@@ -36,6 +36,7 @@
             <group>shop:product_image:read</group>
             <group>admin:product:read</group>
             <group>shop:product:read</group>
+            <group>admin:product_image:update</group>
         </attribute>
     </class>
 </serializer>

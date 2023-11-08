@@ -143,6 +143,36 @@ final class ProductImagesTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_updates_only_the_type_of_the_existing_product_image(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductImageInterface $productImage */
+        $productImage = $fixtures['product_mug_thumbnail'];
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_cap'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-images/%s', $productImage->getId()),
+            server: $header,
+            content: json_encode([
+                'type' => 'logo',
+                'owner' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
+                'path' => 'logo.jpg',
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_image/put_product_image_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_deletes_a_product_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
