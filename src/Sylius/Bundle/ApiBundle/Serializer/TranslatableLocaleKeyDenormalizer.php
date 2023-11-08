@@ -34,10 +34,12 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
         ;
     }
 
+    /**
+     * @param array<string, array{ translations: array }> $data
+     */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
-        $data = (array) $data;
 
         if (array_key_exists('translations', $data)) {
             $newKeys = array_map(static fn (array $translation) => $translation['locale'] ?? '', $data['translations']);

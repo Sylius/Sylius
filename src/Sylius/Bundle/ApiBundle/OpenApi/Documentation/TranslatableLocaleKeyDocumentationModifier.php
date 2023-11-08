@@ -28,15 +28,18 @@ final class TranslatableLocaleKeyDocumentationModifier implements DocumentationM
         }, \ARRAY_FILTER_USE_KEY);
 
         foreach ($actions as $key => $action) {
-            if (null === $properties = $action['properties'] ?? null) {
+            $properties = $action['properties'] ?? null;
+            if (null === $properties) {
                 continue;
             }
 
-            if (null === $translations = $properties['translations'] ?? null) {
+            $translations = $properties['translations'] ?? null;
+            if (null === $translations) {
                 continue;
             }
 
-            if (null === $example = $translations['example'] ?? null) {
+            $example = $translations['example'] ?? null;
+            if (null === $example) {
                 continue;
             }
 
