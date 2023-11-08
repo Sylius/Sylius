@@ -35,7 +35,7 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
     }
 
     /**
-     * @param array<string, array{ translations: array }> $data
+     * @param array<string, array{ translations: array<mixed> }> $data
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
