@@ -99,7 +99,6 @@ final class ProductsTest extends JsonApiTestCase
                 ]],
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'slug' => 'mug',
                         'name' => 'Mug',
                         'description' => 'This is a mug',
@@ -108,7 +107,6 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Mug description',
                     ],
                     'pl_PL' => [
-                        'locale' => 'pl_PL',
                         'slug' => 'kubek',
                         'name' => 'Kubek',
                         'description' => 'To jest kubek',
@@ -160,13 +158,11 @@ final class ProductsTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'MUG',
                 'translations' => [
-                    [
-                        'locale' => 'en_US',
+                    'en_US' => [
                         'slug' => 'mug',
                         'name' => 'Mug',
                     ],
-                    [
-                        'locale' => 'a',
+                    'a' => [
                         'slug' => 'kubek',
                         'name' => 'Kubek',
                     ],
@@ -232,7 +228,6 @@ final class ProductsTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
-                        'locale' => 'en_US',
                         'slug' => 'caps/cap',
                         'name' => 'Cap',
                         'description' => 'This is a cap',
@@ -242,7 +237,6 @@ final class ProductsTest extends JsonApiTestCase
                     ],
                     'pl_PL' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('pl_PL')->getId()),
-                        'locale' => 'pl_PL',
                         'slug' => 'czapki/czapka',
                         'name' => 'Czapka',
                         'description' => 'To jest czapka',

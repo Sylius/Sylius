@@ -146,7 +146,6 @@
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
                         <attribute name="slug">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

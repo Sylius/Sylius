@@ -57,9 +57,8 @@ final class TranslatableLocaleKeyDenormalizerSpec extends ObjectBehavior
         $this->denormalize(
             [
                 'translations' => [
-                    'en' => ['locale' => 'en_US'],
-                    ['locale' => 'de_DE'],
-                    'fr' => ['slug' => 'slug'],
+                    'en_US' => ['locale' => 'en_US'],
+                    'de_DE' => ['locale' => 'locale'],
                 ],
             ],
             TranslatableInterface::class,
@@ -70,7 +69,6 @@ final class TranslatableLocaleKeyDenormalizerSpec extends ObjectBehavior
                 'translations' => [
                     'en_US' => ['locale' => 'en_US'],
                     'de_DE' => ['locale' => 'de_DE'],
-                    '' => ['slug' => 'slug'],
                 ],
             ],
             TranslatableInterface::class,
