@@ -137,7 +137,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
-            <tag name="serializer.normalizer" priority="64" />
+            <tag name="serializer.normalizer" priority="96" />
         </service>
     </services>
 </container>
