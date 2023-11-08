@@ -192,10 +192,10 @@ final class RegistrationContext implements Context
         $content = $this->getResponseContent();
 
         Assert::same(
-            $content['message'],
+            $content['detail'],
             'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
-        Assert::same($content['code'], 400);
+        Assert::same($content['status'], 400);
     }
 
     /**

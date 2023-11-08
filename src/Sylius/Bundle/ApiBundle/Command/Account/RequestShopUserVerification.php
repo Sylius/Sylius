@@ -19,33 +19,22 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 
 /** @experimental */
-class RequestShopUserVerification implements ShopUserIdAwareInterface, ChannelCodeAwareInterface, LocaleCodeAwareInterface, IriToIdentifierConversionAwareInterface
+class RequestShopUserVerification implements
+    ShopUserIdAwareInterface,
+    ChannelCodeAwareInterface,
+    LocaleCodeAwareInterface,
+    IriToIdentifierConversionAwareInterface
 {
-    /** @var string|int|null */
-    public $shopUserId;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $channelCode;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string|null
-     */
-    public $localeCode;
-
-    public function getChannelCode(): string
-    {
-        return $this->channelCode;
+    public function __construct(
+        protected string|int|null $shopUserId,
+        protected ?string $channelCode,
+        protected ?string $localeCode,
+    ) {
     }
 
-    public function setChannelCode(?string $channelCode): void
+    public function getChannelCode(): ?string
     {
-        $this->channelCode = $channelCode;
+        return $this->channelCode;
     }
 
     public function getLocaleCode(): ?string
@@ -53,18 +42,8 @@ class RequestShopUserVerification implements ShopUserIdAwareInterface, ChannelCo
         return $this->localeCode;
     }
 
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->localeCode = $localeCode;
-    }
-
-    public function getShopUserId()
+    public function getShopUserId(): string|int|null
     {
         return $this->shopUserId;
-    }
-
-    public function setShopUserId($shopUserId): void
-    {
-        $this->shopUserId = $shopUserId;
     }
 }

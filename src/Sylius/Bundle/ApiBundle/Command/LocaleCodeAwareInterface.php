@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Command;
 
 /** @experimental */
-interface LocaleCodeAwareInterface extends CommandAwareDataTransformerInterface
+interface LocaleCodeAwareInterface
 {
     public function getLocaleCode(): ?string;
-
-    public function setLocaleCode(?string $localeCode): void;
 }

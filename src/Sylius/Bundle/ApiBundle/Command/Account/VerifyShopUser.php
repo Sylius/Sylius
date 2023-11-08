@@ -24,31 +24,24 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 class VerifyShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(
-        public string $token,
-        private ?string $localeCode = null,
-        private ?string $channelCode = null,
+        protected string $token,
+        protected string $channelCode,
+        protected string $localeCode,
     ) {
     }
 
-    public function getChannelCode(): ?string
+    public function getChannelCode(): string
     {
         return $this->channelCode;
     }
 
-    public function setChannelCode(?string $channelCode): void
-    {
-        /** @psalm-suppress InaccessibleProperty */
-        $this->channelCode = $channelCode;
-    }
-
-    public function getLocaleCode(): ?string
+    public function getLocaleCode(): string
     {
         return $this->localeCode;
     }
 
-    public function setLocaleCode(?string $localeCode): void
+    public function getToken(): string
     {
-        /** @psalm-suppress InaccessibleProperty */
-        $this->localeCode = $localeCode;
+        return $this->token;
     }
 }

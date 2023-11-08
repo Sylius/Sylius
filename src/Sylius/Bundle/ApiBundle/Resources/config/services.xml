@@ -177,11 +177,5 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\StateProcessor\MessengerProcessor" decorates="ApiPlatform\Symfony\Messenger\Processor" public="false">
-            <argument type="service" id=".inner" />
-            <argument type="tagged_iterator" tag="sylius_api.input_data_processor" />
-            <tag name="api_platform.state_processor" priority="-900" />
-        </service>
     </services>
 </container>

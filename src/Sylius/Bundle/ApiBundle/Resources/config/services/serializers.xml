@@ -32,11 +32,11 @@
 <!--            <tag name="serializer.normalizer" priority="128" />-->
 <!--        </service>-->
 
-<!--        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">-->
-<!--            <argument type="service" id="api_platform.serializer.normalizer.item" />-->
-<!--            <argument type="service" id="api_platform.name_converter" />-->
-<!--            <tag name="serializer.normalizer" />-->
-<!--        </service>-->
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
+            <argument type="service" id="api_platform.serializer.normalizer.item" />
+            <argument type="service" id="api_platform.name_converter" />
+            <tag name="serializer.normalizer" />
+        </service>
 
 <!--        <service id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer" decorates="api_platform.hydra.normalizer.error">-->
 <!--            <argument type="service" id="Sylius\Bundle\ApiBundle\Serializer\HydraErrorNormalizer.inner" />-->

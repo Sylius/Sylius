@@ -16,6 +16,8 @@ namespace spec\Sylius\Bundle\ApiBundle\StateProvider\Input;
 use ApiPlatform\Metadata\Operation;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
+use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 final class VerifyShopUserStateProviderSpec extends ObjectBehavior
 {
@@ -44,13 +46,16 @@ final class VerifyShopUserStateProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_verify_customer_account_command_when_token_is_provided(Operation $operation): void
-    {
+    function it_returns_verify_customer_account_command_when_token_is_provided(
+        ChannelInterface $channel,
+        Operation $operation,
+    ): void {
         $operation->getClass()->willReturn(VerifyShopUser::class);
+        $channel->getCode()->willReturn('WEB');
 
         $this
-            ->provide($operation, ['token' => 'TOKEN'])
-            ->shouldBeLike(new VerifyShopUser('TOKEN'))
+            ->provide($operation, ['token' => 'TOKEN'], [ContextKeys::CHANNEL => $channel, ContextKeys::LOCALE_CODE => 'en_US'])
+            ->shouldBeLike(new VerifyShopUser('TOKEN',  'WEB', 'en_US'))
         ;
     }
 }

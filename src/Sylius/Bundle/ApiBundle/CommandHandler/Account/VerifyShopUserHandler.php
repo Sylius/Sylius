@@ -38,10 +38,10 @@ final class VerifyShopUserHandler implements MessageHandlerInterface
     public function __invoke(VerifyShopUser $command): JsonResponse
     {
         /** @var ShopUserInterface|null $user */
-        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
+        $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->getToken()]);
         if (null === $user) {
             throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->token),
+                sprintf('There is no shop user with %s email verification token', $command->getToken()),
             );
         }
 

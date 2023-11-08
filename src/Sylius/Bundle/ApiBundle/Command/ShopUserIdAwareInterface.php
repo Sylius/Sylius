@@ -17,6 +17,4 @@ namespace Sylius\Bundle\ApiBundle\Command;
 interface ShopUserIdAwareInterface extends CommandAwareDataTransformerInterface
 {
     public function getShopUserId();
-
-    public function setShopUserId($shopUserId): void;
 }

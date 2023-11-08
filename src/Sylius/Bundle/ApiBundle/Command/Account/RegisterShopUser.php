@@ -21,69 +21,20 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
  */
 class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    public $firstName;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    public $lastName;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    public $email;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var string
-     */
-    public $password;
-
-    /**
-     * @psalm-immutable
-     *
-     * @var bool
-     */
-    public $subscribedToNewsletter;
-
-    /** @var string|null */
-    public $channelCode;
-
-    /** @var string|null */
-    public $localeCode;
-
     public function __construct(
-        string $firstName,
-        string $lastName,
-        string $email,
-        string $password,
-        bool $subscribedToNewsletter = false,
+        protected string $firstName,
+        protected string $lastName,
+        protected string $email,
+        protected string $password,
+        protected ?string $channelCode,
+        protected ?string $localeCode,
+        protected bool $subscribedToNewsletter = false,
     ) {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
 
-    public function getChannelCode(): string
+    public function getChannelCode(): ?string
     {
         return $this->channelCode;
-    }
-
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
     }
 
     public function getLocaleCode(): ?string
@@ -91,8 +42,28 @@ class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInte
         return $this->localeCode;
     }
 
-    public function setLocaleCode(?string $localeCode): void
+    public function getFirstName(): string
     {
-        $this->localeCode = $localeCode;
+        return $this->firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function isSubscribedToNewsletter(): bool
+    {
+        return $this->subscribedToNewsletter;
     }
 }

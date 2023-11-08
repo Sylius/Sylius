@@ -6,6 +6,94 @@
 - `Sylius\Bundle\ApiBundle\DataPersister\*DataPersister` => `Sylius\Bundle\ApiBundle\StateProcessor\*Processor`
 - `Sylius\Bundle\ApiBundle\DataProvider\*DataProvider` => `Sylius\Bundle\ApiBundle\StateProvider\*Provider`
 
+* API Platform has also dropped `DataTransformers` in favor of which `some of them` have been refactored into `SerializerContextBuilders` as follows:
+- `Sylius\Bundle\ApiBundle\DataTransformer\ChannelCodeAwareInputCommandDataTransformer` => `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelCodeAwareContextBuilder`
+- `Sylius\Bundle\ApiBundle\DataTransformer\LocaleCodeAwareInputCommandDataTransformer` => `Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleCodeAwareContextBuilder`
+- `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInCustomerEmailIfNotSetAwareCommandDataTransformer` => `Sylius\Bundle\ApiBundle\SerializerContextBuilder\LoggedInCustomerEmailIfNotSetAwareContextBuilder`
+- `Sylius\Bundle\ApiBundle\DataTransformer\LoggedInShopUserIdAwareCommandDataTransformer` => `Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelCodeAwareContextBuilder`
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser` has been changed:
+```php
+    public function __construct(
+    -   public string $firstName,
+    -   public string $lastName,
+    -   public string $email,
+    -   public string $password,
+    -   public bool $subscribedToNewsletter = false,
+    +   protected string $firstName,
+    +   protected string $lastName,
+    +   protected string $email,
+    +   protected string $password,
+    +   protected ?string $channelCode,
+    +   protected ?string $localeCode,
+    +   protected bool $subscribedToNewsletter = false,
+    ) {
+    }
+```
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken` has been changed:
+```php
+    public function __construct(
+    -   public string $email,
+    +   protected string $email,
+    +   protected ?string $channelCode,
+    +   protected ?string $localeCode,
+    ) {
+    }
+```
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\SendContactRequest` has been changed:
+```php
+    public function __construct(
+    -   private ?string $email = null,
+    -   private ?string $message = null,
+    +   protected ?string $channelCode,
+    +   protected ?string $localeCode,
+    +   protected ?string $email = null,
+    +   protected ?string $message = null,
+    ) {
+    }
+```
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser` has been changed:
+```php
+    public function __construct(
+    -   public string $token,
+    -   private ?string $localeCode = null,
+    -   private ?string $channelCode = null,
+    +   protected string $token,
+    +   protected string $channelCode,
+    +   protected string $localeCode,
+    ) {
+    }
+```
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\Account\ChangeShopUserPassword` has been changed:
+```php
+    public function __construct(
+    -   public ?string $newPassword,
+    -   public ?string $confirmNewPassword,
+    -   public ?string $currentPassword,
+    +   protected mixed $shopUserId,
+    +   protected string $newPassword,
+    +   protected string $confirmNewPassword,
+    +   protected string $currentPassword,
+    ) {
+    }
+```
+
+* The constructor of `Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification` has been created:
+```php
+    public function __construct(
+    +   protected string|int|null $shopUserId,
+    +   protected ?string $channelCode,
+    +   protected ?string $localeCode,
+    ) {
+    }
+```
+
+All the `setter` methods have been removed from the commands above and also there are some new `getter` methods accordingly to arguments visibility changes.
+
 * The parameter type and order of the `Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction::__construct` has been changed:
 ```php
     public function __construct(
