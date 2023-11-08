@@ -141,4 +141,22 @@ final class ProductImagesTest extends JsonApiTestCase
             Response::HTTP_CREATED,
         );
     }
+
+    /** @test */
+    public function it_deletes_a_product_image(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductImageInterface $productImage */
+        $productImage = $fixtures['product_mug_thumbnail'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: sprintf('/api/v2/admin/product-images/%s', $productImage->getId()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
 }

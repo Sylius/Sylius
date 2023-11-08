@@ -85,6 +85,11 @@
                     </attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-images/{id}</attribute>
+            </itemOperation>
         </itemOperations>
 
         <subresourceOperations>
