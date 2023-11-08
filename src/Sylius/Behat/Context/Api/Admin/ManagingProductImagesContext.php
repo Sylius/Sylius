@@ -92,6 +92,22 @@ final class ManagingProductImagesContext implements Context
     }
 
     /**
+     * @When I change the first image type to :type
+     */
+    public function iChangeTheFirstImageTypeTo(string $type): void
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $productImage = $product->getImages()->first();
+        Assert::notNull($productImage);
+
+        $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
+        $this->client->updateRequestData(['type' => $type]);
+        $this->client->update();
+    }
+
+    /**
      * @Then the product :product should have an image with :type type
      * @Then /^(this product) should(?:| also) have an image with "([^"]*)" type$/
      * @Then /^(it) should(?:| also) have an image with "([^"]*)" type$/
