@@ -42,18 +42,11 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
         $context[self::ALREADY_CALLED] = true;
 
         if (array_key_exists('translations', $data)) {
-            $data = $this->assignLocale($data);
+            foreach ($data['translations'] as $key => &$translation) {
+                $translation['locale'] = $key;
+            }
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
-    }
-
-    private function assignLocale(array $data): array
-    {
-        foreach ($data['translations'] as $key => &$translation) {
-            $translation['locale'] = $key;
-        }
-
-        return $data;
     }
 }
