@@ -33,10 +33,11 @@
         <property name="locale">
             <constraint name="NotBlank">
                 <option name="groups">sylius</option>
-                <option name="message">sylius.taxon.locale.not_blank</option>
+                <option name="message">sylius.translation.locale.not_blank</option>
             </constraint>
             <constraint name="Locale">
                 <option name="groups">sylius</option>
+                <option name="message">sylius.translation.locale.invalid</option>
             </constraint>
         </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">

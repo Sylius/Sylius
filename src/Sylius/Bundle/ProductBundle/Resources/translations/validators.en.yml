@@ -19,8 +19,6 @@ sylius:
             max_length: Product meta keywords must not be longer than 1 character.|Product meta keywords must not be longer than {{ limit }} characters.
         meta_description:
             max_length: Product meta description must not be longer than 1 character.|Product meta description must not be longer than {{ limit }} characters.
-        locale:
-            not_blank: Please enter the locale.
     product_variant:
         combination: Variant with this option set already exists.
         code:
@@ -28,8 +26,6 @@ sylius:
             regex: Product variant code can only be comprised of letters, numbers, dashes and underscores.
             unique: Product variant code must be unique.
             within_product_unique: This code must be unique within this product.
-        locale:
-            not_blank: Please enter the locale.
     simple_product:
         code:
             unique: Simple product code must be unique among all products and product variants.
@@ -44,8 +40,6 @@ sylius:
             max_length: Option name must not be longer than 1 character.|Option name must not be longer than {{ limit }} characters.
         values:
             min_count: Please add at least {{ limit }} option value.|Please add at least {{ limit }} option values.
-        locale:
-            not_blank: Please enter the locale.
     option_value:
         code:
             not_blank: Please enter option value code.
@@ -53,8 +47,6 @@ sylius:
             unique: The option value with given code already exists.
         value:
             not_blank: Please enter option value.
-        locale:
-            not_blank: Please enter the locale.
     association_type:
         name:
             not_blank: Please enter association type name.
@@ -64,5 +56,7 @@ sylius:
             not_blank: Please enter association type code.
             regex: Association type code can only be comprised of letters, numbers, dashes and underscores.
             unique: The association type with given code already exists.
+    translation:
         locale:
             not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
