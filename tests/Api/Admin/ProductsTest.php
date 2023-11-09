@@ -99,7 +99,6 @@ final class ProductsTest extends JsonApiTestCase
                 ]],
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'slug' => 'mug',
                         'name' => 'Mug',
                         'description' => 'This is a mug',
@@ -108,7 +107,6 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Mug description',
                     ],
                     'pl_PL' => [
-                        'locale' => 'pl_PL',
                         'slug' => 'kubek',
                         'name' => 'Kubek',
                         'description' => 'To jest kubek',
@@ -143,6 +141,38 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product/post_product_without_required_data_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_product_without_translation_locale(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/products',
+            server: $header,
+            content: json_encode([
+                'code' => 'MUG',
+                'translations' => [
+                    'en_US' => [
+                        'slug' => 'mug',
+                        'name' => 'Mug',
+                    ],
+                    'a' => [
+                        'slug' => 'kubek',
+                        'name' => 'Kubek',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/post_product_without_translation_locale',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
@@ -198,7 +228,6 @@ final class ProductsTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
-                        'locale' => 'en_US',
                         'slug' => 'caps/cap',
                         'name' => 'Cap',
                         'description' => 'This is a cap',
@@ -208,7 +237,6 @@ final class ProductsTest extends JsonApiTestCase
                     ],
                     'pl_PL' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('pl_PL')->getId()),
-                        'locale' => 'pl_PL',
                         'slug' => 'czapki/czapka',
                         'name' => 'Czapka',
                         'description' => 'To jest czapka',

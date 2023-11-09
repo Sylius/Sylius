@@ -56,3 +56,7 @@ sylius:
             not_blank: Please enter association type code.
             regex: Association type code can only be comprised of letters, numbers, dashes and underscores.
             unique: The association type with given code already exists.
+    translation:
+        locale:
+            not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
