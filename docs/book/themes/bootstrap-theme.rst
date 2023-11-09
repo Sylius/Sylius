@@ -133,8 +133,8 @@ finally in the ``config/packages/_sylius.yaml`` add:
 
 .. code-block:: yaml
 
-sylius_theme:
-    legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
+    sylius_theme:
+        legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
 
 Now you can use one of the commands ``yarn encore dev``, ``yarn encore production`` or ``yarn encore dev-server``
 to compile all assets. Open the page - everything should work.
