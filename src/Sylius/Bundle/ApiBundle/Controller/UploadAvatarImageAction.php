@@ -38,7 +38,7 @@ final readonly class UploadAvatarImageAction
     public function __invoke(Request $request): ImageInterface
     {
         /** @var AdminUserInterface $owner */
-        $owner = $this->adminUserRepository->find($request->attributes->get('id'));
+        $owner = $this->adminUserRepository->find($request->attributes->getString('id'));
         if (null === $owner) {
             throw new AdminUserNotFoundException();
         }
