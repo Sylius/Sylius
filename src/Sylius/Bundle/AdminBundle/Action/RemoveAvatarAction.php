@@ -34,9 +34,11 @@ final class RemoveAvatarAction
 
     public function __invoke(Request $request): Response
     {
-        $userId = $request->attributes->get('id');
+        $userId = $request->attributes->get('id', '');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($userId, (string) $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(
+            new CsrfToken($userId, (string) $request->query->get('_csrf_token', '')),
+        )) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

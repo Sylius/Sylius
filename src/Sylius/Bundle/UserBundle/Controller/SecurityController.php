@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $options = $request->attributes->get('_sylius');
+        $options = $request->attributes->get('_sylius', []);
 
         $template = $options['template'] ?? null;
         Assert::notNull($template, 'Template is not configured.');

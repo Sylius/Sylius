@@ -62,7 +62,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 
         $eventRequest = $event->getRequest();
         $requestAttributes = $eventRequest->attributes;
-        $originalRoute = $requestAttributes->get('_route');
+        $originalRoute = $requestAttributes->get('_route', '');
 
         if (!$this->isMethodDelete($eventRequest) ||
             !$this->isSyliusRoute($originalRoute) ||

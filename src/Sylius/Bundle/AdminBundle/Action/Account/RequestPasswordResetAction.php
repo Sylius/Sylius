@@ -60,7 +60,7 @@ final class RequestPasswordResetAction
                 ->add('success', 'sylius.admin.request_reset_password.success')
             ;
 
-            $options = $request->attributes->get('_sylius');
+            $options = $request->attributes->get('_sylius', []);
             $redirectRoute = $options['redirect'] ?? 'sylius_admin_login';
 
             if (is_array($redirectRoute)) {

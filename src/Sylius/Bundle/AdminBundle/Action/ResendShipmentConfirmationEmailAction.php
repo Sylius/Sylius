@@ -42,9 +42,11 @@ final class ResendShipmentConfirmationEmailAction
 
     public function __invoke(Request $request): Response
     {
-        $shipmentId = $request->attributes->get('id');
+        $shipmentId = $request->attributes->get('id', '');
 
-        if (!$this->csrfTokenManager->isTokenValid(new CsrfToken($shipmentId, (string) $request->query->get('_csrf_token')))) {
+        if (!$this->csrfTokenManager->isTokenValid(
+            new CsrfToken($shipmentId, (string) $request->query->get('_csrf_token', '')),
+        )) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
