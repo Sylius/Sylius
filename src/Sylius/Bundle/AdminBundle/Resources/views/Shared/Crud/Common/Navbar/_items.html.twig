@@ -1,0 +1,5 @@
+{% set event_name = _context.event_prefix ~ '.items' %}
+
+<div class="sylius navbar-nav order-md-last">
+    {{ sylius_template_event(event_name, { event_prefix: event_name }) }}
+</div>

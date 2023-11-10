@@ -22,6 +22,7 @@ final class TemplateBlock
         private ?array $context,
         private ?int $priority,
         private ?bool $enabled,
+        private ?string $component = null,
     ) {
     }
 
@@ -46,6 +47,11 @@ final class TemplateBlock
         }
 
         return $this->template;
+    }
+
+    public function getComponent(): ?string
+    {
+        return $this->component;
     }
 
     public function getContext(): array
@@ -80,6 +86,7 @@ final class TemplateBlock
             $block->context ?? $this->context,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,
+            $block->component ?? $this->component,
         );
     }
 }

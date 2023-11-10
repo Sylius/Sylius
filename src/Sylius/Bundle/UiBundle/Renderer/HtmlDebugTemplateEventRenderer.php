@@ -54,6 +54,20 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
      */
     private function shouldRenderHtmlDebug(array $templateBlocks): bool
     {
-        return count($templateBlocks) === 0 || count(array_filter($templateBlocks, static fn (TemplateBlock $templateBlock): bool => strrpos($templateBlock->getTemplate(), '.html.twig') !== false)) >= 1;
+        return count($templateBlocks) === 0 || $this->hasAnyBlockWithComponentOrTemplate($templateBlocks);
+    }
+
+    /**
+     * @param array<TemplateBlock> $templateBlocks
+     */
+    private function hasAnyBlockWithComponentOrTemplate(array $templateBlocks): bool
+    {
+        foreach ($templateBlocks as $templateBlock) {
+            if (null !== $templateBlock->getComponent() || strrpos($templateBlock->getTemplate(), '.html.twig') !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

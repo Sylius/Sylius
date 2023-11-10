@@ -36,8 +36,8 @@ final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
         TemplateBlockRegistryInterface $templateBlockRegistry,
         TemplateBlockRendererInterface $templateBlockRenderer,
     ): void {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], 0, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], 0, true, null);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], 0, true, null);
 
         $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([$firstTemplateBlock, $secondTemplateBlock]);
 

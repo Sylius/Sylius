@@ -1,0 +1,74 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar;
+
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
+
+final class UserDropdown
+{
+    public function __construct (
+        private UrlGeneratorInterface $urlGenerator,
+        private TranslatorInterface $translator,
+        private Security $security,
+    ) {
+    }
+
+    #[ExposeInTemplate]
+    public function getUser(): UserInterface
+    {
+        return $this->security->getUser();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    #[ExposeInTemplate]
+    public function getMenuElements(): array
+    {
+        return [
+            [
+                'title' => $this->translator->trans('sylius.ui.my_account'),
+                'url' => $this->urlGenerator->generate('sylius_admin_admin_user_update', ['id' => 1]),
+                'icon' => 'user',
+            ],
+            [
+                'title' => $this->translator->trans('sylius.ui.logout'),
+                'url' => $this->urlGenerator->generate('sylius_admin_logout'),
+                'icon' =>  'logout',
+            ],
+            [
+                'type' => 'divider'
+            ],
+            [
+                'title' => $this->translator->trans('sylius.ui.documentation'),
+                'url' => 'https://docs.sylius.com',
+                'class' => 'small text-muted',
+            ],
+            [
+                'title' => $this->translator->trans('sylius.ui.join_slack'),
+                'url' => 'https://sylius.com/slack',
+                'class' => 'small text-muted',
+            ],
+            [
+                'title' => $this->translator->trans('sylius.ui.report_an_issue'),
+                'url' => 'https://github.com/Sylius/Sylius/issues',
+                'class' => 'small text-muted',
+            ],
+        ];
+    }
+}

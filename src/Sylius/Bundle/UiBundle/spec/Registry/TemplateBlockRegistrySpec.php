@@ -31,7 +31,7 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
 
     function it_returns_all_template_blocks(): void
     {
-        $templateBlock = new TemplateBlock('block_name', 'event', 'block.html.twig', [], 10, true);
+        $templateBlock = new TemplateBlock('block_name', 'event', 'block.html.twig', [], 10, true, null);
 
         $this->beConstructedWith(['event' => ['block_name' => $templateBlock]]);
 
@@ -40,9 +40,9 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
 
     function it_returns_enabled_template_blocks_for_a_given_event(): void
     {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event', 'first.html.twig', [], 0, true);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event', 'second.html.twig', [], 10, false);
-        $thirdTemplateBlock = new TemplateBlock('third_block', 'event', 'third.html.twig', [], 50, true);
+        $firstTemplateBlock = new TemplateBlock('first_block', 'event', 'first.html.twig', [], 0, true, null);
+        $secondTemplateBlock = new TemplateBlock('second_block', 'event', 'second.html.twig', [], 10, false, null);
+        $thirdTemplateBlock = new TemplateBlock('third_block', 'event', 'third.html.twig', [], 50, true, null);
 
         $this->beConstructedWith([
             'event' => [
@@ -61,24 +61,24 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
     {
         $this->beConstructedWith([
             'generic_event' => ['block' => new TemplateBlock('block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, true)],
-            'specific_event_template' => ['block' => new TemplateBlock('block', 'specific_event_template', 'specific.html.twig', null, null, null)],
-            'specific_event_context' => ['block' => new TemplateBlock('block', 'specific_event_context', null, ['other' => 'context'], null, null)],
-            'specific_event_priority' => ['block' => new TemplateBlock('block', 'specific_event_priority', null, null, 10, null)],
-            'specific_event_enabled' => ['block' => new TemplateBlock('block', 'specific_event_enabled', null, null, null, false)],
+            'specific_event_template' => ['block' => new TemplateBlock('block', 'specific_event_template', 'specific.html.twig', null, null, null, null)],
+            'specific_event_context' => ['block' => new TemplateBlock('block', 'specific_event_context', null, ['other' => 'context'], null, null, null)],
+            'specific_event_priority' => ['block' => new TemplateBlock('block', 'specific_event_priority', null, null, 10, null, null)],
+            'specific_event_enabled' => ['block' => new TemplateBlock('block', 'specific_event_enabled', null, null, null, false, null)],
         ]);
 
         $this->findEnabledForEvents(['specific_event_template', 'generic_event'])->shouldIterateLike([
-            new TemplateBlock('block', 'specific_event_template', 'specific.html.twig', ['foo' => 'bar'], 0, true),
+            new TemplateBlock('block', 'specific_event_template', 'specific.html.twig', ['foo' => 'bar'], 0, true, null),
         ]);
         $this->findEnabledForEvents(['specific_event_context', 'generic_event'])->shouldIterateLike([
-            new TemplateBlock('block', 'specific_event_context', 'generic.html.twig', ['other' => 'context'], 0, true),
+            new TemplateBlock('block', 'specific_event_context', 'generic.html.twig', ['other' => 'context'], 0, true, null),
         ]);
         $this->findEnabledForEvents(['specific_event_priority', 'generic_event'])->shouldIterateLike([
-            new TemplateBlock('block', 'specific_event_priority', 'generic.html.twig', ['foo' => 'bar'], 10, true),
+            new TemplateBlock('block', 'specific_event_priority', 'generic.html.twig', ['foo' => 'bar'], 10, true, null),
         ]);
         $this->findEnabledForEvents(['specific_event_enabled', 'generic_event'])->shouldReturn([]);
         $this->findEnabledForEvents(['specific_event_priority', 'specific_event_template', 'generic_event'])->shouldIterateLike([
-            new TemplateBlock('block', 'specific_event_priority', 'specific.html.twig', ['foo' => 'bar'], 10, true),
+            new TemplateBlock('block', 'specific_event_priority', 'specific.html.twig', ['foo' => 'bar'], 10, true, null),
         ]);
     }
 
@@ -86,23 +86,23 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
     {
         $this->beConstructedWith([
             'generic_event' => [
-                'first_block' => new TemplateBlock('first_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 50, true),
-                'third_block' => new TemplateBlock('third_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], -10, true),
-                'second_block' => new TemplateBlock('second_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, true),
-                'invisible_block' => new TemplateBlock('invisible_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, false),
+                'first_block' => new TemplateBlock('first_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 50, true, null),
+                'third_block' => new TemplateBlock('third_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], -10, true, null),
+                'second_block' => new TemplateBlock('second_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, true, null),
+                'invisible_block' => new TemplateBlock('invisible_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, false, null),
             ],
             'specific_event' => [
-                'additional_block' => new TemplateBlock('additional_block', 'specific_event', 'specific.html.twig', [], 75, true),
-                'second_block' => new TemplateBlock('second_block', 'specific_event', null, null, null, false),
-                'third_block' => new TemplateBlock('third_block', 'specific_event', null, null, 100, null),
-                'invisible_block' => new TemplateBlock('invisible_block', 'specific_event', null, [], null, null),
+                'additional_block' => new TemplateBlock('additional_block', 'specific_event', 'specific.html.twig', [], 75, true, null),
+                'second_block' => new TemplateBlock('second_block', 'specific_event', null, null, null, false, null),
+                'third_block' => new TemplateBlock('third_block', 'specific_event', null, null, 100, null, null),
+                'invisible_block' => new TemplateBlock('invisible_block', 'specific_event', null, [], null, null, null),
             ],
         ]);
 
         $this->findEnabledForEvents(['specific_event', 'generic_event'])->shouldIterateLike([
-            new TemplateBlock('third_block', 'specific_event', 'generic.html.twig', ['foo' => 'bar'], 100, true),
-            new TemplateBlock('additional_block', 'specific_event', 'specific.html.twig', [], 75, true),
-            new TemplateBlock('first_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 50, true),
+            new TemplateBlock('third_block', 'specific_event', 'generic.html.twig', ['foo' => 'bar'], 100, true, null),
+            new TemplateBlock('additional_block', 'specific_event', 'specific.html.twig', [], 75, true, null),
+            new TemplateBlock('first_block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 50, true, null),
         ]);
     }
 }

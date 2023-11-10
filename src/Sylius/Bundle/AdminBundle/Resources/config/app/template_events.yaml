@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius_ui:
+    events:
+        sylius.admin.index.body:
+            blocks:
+                sidebar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                navbar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                content:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+        sylius.admin.common.navbar:
+            blocks:
+                items:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_items.html.twig'
+                menu:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/_menu.html.twig'
+        sylius.admin.common.navbar.items:
+            blocks:
+                notifications:
+                    component: 'SyliusAdminNavbarNotifications'
+                user_dropdown:
+                    component: 'SyliusAdminUserDropdown'
+        sylius.admin.common.navbar.menu:
+            blocks:
+                search:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Menu/_search.html.twig'

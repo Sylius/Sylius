@@ -1,0 +1,6 @@
+{% set event_name = _context.event_prefix ~ '.content' %}
+{% set resource_event_name = _context.resource_event_prefix ~ '.content' %}
+
+<div class="page-wrapper">
+    {{ sylius_template_event(event_name, { event_prefix: event_name, resource_event_prefix: resource_event_name }) }}
+</div>
