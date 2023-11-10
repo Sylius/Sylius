@@ -17,7 +17,7 @@
                     </div>
                 {% endif %}
                 <div class="ms-auto">
-                    {{ _pagination.perPage(data, definition.limits) }}
+                    {{ _pagination.numberOfResultsSelector(data, definition.limits) }}
                 </div>
             </div>
         </div>
@@ -34,6 +34,14 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer d-flex align-items-center">
+            <div class="text-muted">
+                {{ _pagination.resultsCount(data) }}
+            </div>
+            <div class="ms-auto">
+                {{ _pagination.simple(data) }}
+            </div>
         </div>
     </div>
 {% endif %}

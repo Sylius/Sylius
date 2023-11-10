@@ -73,6 +73,8 @@ sylius:
         no_results: No results found
         no_results_adjust_your_search: 'Adjust your search and try again.'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
+        pagination:
+            number_of_results: 'Showing %from% to %to% of %total% entries'
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         price_history: Price history
         product:

@@ -1,4 +1,16 @@
-{% macro perPage(paginator, paginationLimits) %}
+{% macro simple(paginator) %}
+    {{ pagerfanta(paginator, 'twig', options|default({'template': '@SyliusAdmin/Shared/pagerfanta.html.twig'})) }}
+{% endmacro %}
+
+{% macro resultsCount(paginator) %}
+    {% set from = 1 + (paginator.currentPage - 1) * paginator.maxPerPage %}
+    {% set to = paginator.maxPerPage + (paginator.currentPage - 1) * paginator.maxPerPage %}
+    {% set to = to < paginator.nbResults ? to : paginator.nbResults %}
+
+    {{ 'sylius.ui.pagination.number_of_results'|trans({'%from%': from, '%to%': to, '%total%': paginator.nbResults}) }}
+{% endmacro %}
+
+{% macro numberOfResultsSelector(paginator, paginationLimits) %}
     <div class="dropdown">
         <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
             {{ 'sylius.ui.show'|trans }} {{ paginator.maxPerPage }}
