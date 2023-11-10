@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api;
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sylius\Tests\Api\Utils\HeadersBuilder;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
@@ -55,5 +56,15 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function getUploadedFile(string $path, string $name, string $type = 'image/jpg'): UploadedFile
     {
         return new UploadedFile(__DIR__ . '/../Resources/' . $path, $name, $type);
+    }
+
+    protected function headerBuilder(): HeadersBuilder
+    {
+        return new HeadersBuilder(
+            $this->get('lexik_jwt_authentication.jwt_manager'),
+            $this->get('sylius.repository.admin_user'),
+            $this->get('sylius.repository.shop_user'),
+            self::$kernel->getContainer()->getParameter('sylius.api.authorization_header'),
+        );
     }
 }
