@@ -1,7 +1,0 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% set path = options.link.url|default(path('sylius_admin_product_variant_generate', {'productId': options.product.id})) %}
-
-{% if options.product.options is not empty %}
-    {{ buttons.default(path, 'sylius.ui.generate', null, 'random') }}
-{% endif %}

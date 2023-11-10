@@ -1,9 +1,0 @@
-{% if sm_can(payment, 'refund', 'sylius_payment') %}
-    <div class="ui segment">
-        <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': order.id, 'id': payment.id}) }}" method="post" novalidate>
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
-            <input type="hidden" name="_method" value="PUT">
-            <button type="submit" class="ui icon labeled tiny yellow fluid loadable button"><i class="reply all icon"></i> {{ 'sylius.ui.refund'|trans }}</button>
-        </form>
-    </div>
-{% endif %}
