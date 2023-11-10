@@ -84,7 +84,7 @@
         </itemOperations>
 
         <subresourceOperations>
-            <subresourceOperation name="api_taxa_images_get_subresource">
+            <subresourceOperation name="api_taxa_admin_images_get_subresource">
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon_image:read</attribute>
                 </attribute>

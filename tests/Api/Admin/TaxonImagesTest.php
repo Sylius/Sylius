@@ -98,9 +98,8 @@ final class TaxonImagesTest extends JsonApiTestCase
             server: $header,
         );
 
-        $response = $this->client->getResponse();
         $this->assertResponse(
-            $response,
+            $this->client->getResponse(),
             'admin/taxon_image/post_taxon_image_response',
             Response::HTTP_CREATED,
         );
@@ -123,9 +122,8 @@ final class TaxonImagesTest extends JsonApiTestCase
             server: $header,
         );
 
-        $response = $this->client->getResponse();
         $this->assertResponse(
-            $response,
+            $this->client->getResponse(),
             'admin/taxon_image/post_taxon_image_with_type_response',
             Response::HTTP_CREATED,
         );

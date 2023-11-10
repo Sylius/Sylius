@@ -27,7 +27,7 @@ final class UploadTaxonImageAction
     public function __invoke(Request $request): TaxonImageInterface
     {
         return $this->taxonImageCreator->create(
-            $request->attributes->get('code'),
+            $request->attributes->get('code', ''),
             $request->files->get('file'),
             $request->request->get('type'),
         );

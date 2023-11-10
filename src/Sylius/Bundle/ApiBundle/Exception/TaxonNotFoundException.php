@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Exception;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Throwable;
 
 /** @experimental */
 final class TaxonNotFoundException extends NotFoundHttpException
 {
     public function __construct(
         string $message = 'Taxon not found.',
-        Throwable $previous = null,
+        \Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {
