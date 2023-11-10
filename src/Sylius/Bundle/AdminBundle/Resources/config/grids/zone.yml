@@ -16,7 +16,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.type
                     options:
-                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        template: "@SyliusAdmin/Shared/Grid/Field/label.html.twig"
             filters:
                 name:
                     type: string
