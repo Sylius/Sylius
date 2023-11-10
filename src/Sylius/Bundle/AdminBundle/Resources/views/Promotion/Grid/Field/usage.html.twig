@@ -1,0 +1,42 @@
+{% if data.usageLimit is empty %}
+    <div class="d-flex align-items-center gap-2">
+        <span class="italic">n/a</span>
+    </div>
+{% else %}
+    {% if data.used == data.usageLimit %}
+        {% set color = 'danger' %}
+    {% elseif data.used > data.usageLimit/2 %}
+        {% set color = 'warning' %}
+    {% else %}
+        {% set color = 'success' %}
+    {% endif %}
+
+    <div class="d-flex align-items-center gap-2">
+        <div class="progress" style="width: 4rem">
+            <div class="progress-bar bg-{{ color }}" style="width: 100%" role="progressbar"></div>
+        </div>
+        <div class="text-{{ color }}">{{ data.used }} / {{ data.usageLimit }}</div>
+    </div>
+{% endif %}
+{#{% if data.usageLimit is empty %}#}
+{#    <span class="ui label">#}
+{#        {{ data.used }}#}
+{#    </span>#}
+{#    /#}
+{#    <span class="ui label">∞</span>#}
+{#{% else %}#}
+{#    {% set color = 'teal' %}#}
+
+{#    {% if data.used == data.usageLimit %}#}
+{#        {% set color = 'red' %}#}
+{#    {% elseif data.used > data.usageLimit/2 %}#}
+{#        {% set color = 'yellow' %}#}
+{#    {% endif %}#}
+{#    <span class="ui {{ color }} label">#}
+{#        {{ data.used }}#}
+{#    </span>#}
+{#    /#}
+{#    <span class="ui {{ color }} label">#}
+{#        {{ data.usageLimit }}#}
+{#    </span>#}
+{#{% endif %}#}
