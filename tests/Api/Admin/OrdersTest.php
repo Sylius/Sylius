@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api\Admin;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
+use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,13 +29,12 @@ final class OrdersTest extends JsonApiTestCase
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $headers = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
         $tokenValue = 'nAWw2jewpA';
 
         $this->placeOrder($tokenValue);
-
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/nAWw2jewpA', server: $header);
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/nAWw2jewpA', server: $headers);
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'admin/order/get_order_response', Response::HTTP_OK);
     }
@@ -48,7 +48,14 @@ final class OrdersTest extends JsonApiTestCase
             'customer.yaml',
             'customer_order.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $headers = $this
+            ->headerBuilder()
+            ->withJsonLdAccept()
+            ->withJsonLdContentType()
+            ->withAdminUserAuthorization('api@example.com')
+            ->build()
+        ;
 
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
@@ -56,7 +63,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/orders?customer.id=' . $customer->getId(),
-            server: $header,
+            server: $headers,
         );
 
         $this->assertResponse(
