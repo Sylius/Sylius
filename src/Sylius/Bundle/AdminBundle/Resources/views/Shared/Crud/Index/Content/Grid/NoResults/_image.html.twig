@@ -1,0 +1,5 @@
+{% if _context.hidden is not defined or _context.hidden == false %}
+    <div class="empty-img">
+        <img src="{{ asset(_context.image|default('build/admin/images/no_data.svg'), 'admin') }}" height="128" alt="">
+    </div>
+{% endif %}

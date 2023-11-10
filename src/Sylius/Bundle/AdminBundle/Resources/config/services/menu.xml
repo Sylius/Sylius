@@ -24,6 +24,7 @@
         <service id="sylius.admin.menu_builder.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="router" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.admin.main" />
         </service>
 

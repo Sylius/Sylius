@@ -1,14 +1,13 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
 {% set definition = resources.definition %}
-{% set data = resources.data %}
 {% set event_name = metadata.applicationName ~ '.admin.' ~ 'index.body' %}
 {% set resource_event_name = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index.body' %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 
-{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ sylius_template_event(event_name, { event_prefix: event_name, resource_event_prefix: resource_event_name }) }}
+    {{ sylius_template_event([resource_event_name, event_name], { event_prefix: event_name, resource_event_prefix: resource_event_name, resources: resources, metadata: metadata, configuration: configuration }) }}
 {% endblock %}

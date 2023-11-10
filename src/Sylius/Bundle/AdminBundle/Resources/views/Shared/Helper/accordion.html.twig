@@ -1,0 +1,39 @@
+{% macro default(items, open = false, autoClose = null) %}
+    {% set autoClose = autoClose|default(true) %}
+    {% set id = id|default(random()) %}
+
+    <div class="accordion" id="{{ id }}">
+        {% for item in items %}
+            {% set item = {
+                'open': open,
+                'flag': null,
+            }|merge(item) %}
+            {% set item_id = item.id|default('collapse' ~ loop.index) %}
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button {{ item.open == true ? '' : 'collapsed' }}"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#{{ item_id }}"
+                            aria-expanded="{{ item.open == true ? 'true' : 'false' }}"
+                            aria-controls="{{ item_id }}">
+
+                        {% if item.flag %}
+                            <span class="flag flag-country-{{ item.flag }} me-3"></span>
+                        {% endif %}
+                        {{ item.title|default('Title') }}
+                    </button>
+                </h2>
+                <div id="{{ item_id }}"
+                     class="accordion-collapse collapse {{ item.open == true ? 'show' : '' }}"
+                     {% if autoClose == true %}data-bs-parent="#{{ id }}"{% endif %}>
+
+                    <div class="accordion-body">
+                        {{ item.content|default('Content') }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
