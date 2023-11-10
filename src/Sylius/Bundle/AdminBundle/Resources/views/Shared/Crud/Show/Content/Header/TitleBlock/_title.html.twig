@@ -1,0 +1,10 @@
+{% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
+
+{% set singularName = metadata.applicationName ~ '.ui.' ~ metadata.name %}
+{% set header = configuration.vars.header.create|default(null) %}
+
+<div class="col-12 col-md-6">
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ _header.h1(header is not null ? header|trans : 'sylius.ui.show'|trans ~ ' ' ~ singularName|trans) }}
+    </div>
+</div>
