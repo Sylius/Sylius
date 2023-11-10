@@ -136,10 +136,16 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'TEST',
-                'translations' => ['de_DE' => [
-                    'name' => 'test',
-                    'description' => 'test description'
-                ]]
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/product-association-type-translations/%s', $associationType->getTranslation('en_US')->getId()),
+                        'name' => 'Similar products',
+                    ],
+                    'de_DE' => [
+                        'name' => 'test',
+                        'description' => 'test description'
+                    ],
+                ]
             ], JSON_THROW_ON_ERROR),
         );
 

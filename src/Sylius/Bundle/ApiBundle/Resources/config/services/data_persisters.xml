@@ -80,6 +80,11 @@
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\TranslatableDataPersister">
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="api_platform.data_persister" priority="128" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />

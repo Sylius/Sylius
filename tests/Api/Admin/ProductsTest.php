@@ -146,7 +146,7 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_does_not_create_a_product_without_translation_locale(): void
+    public function it_does_not_create_a_product_with_invalid_translation_locale(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -172,7 +172,7 @@ final class ProductsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product/post_product_without_translation_locale',
+            'admin/product/post_product_with_invalid_translation_locale',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
