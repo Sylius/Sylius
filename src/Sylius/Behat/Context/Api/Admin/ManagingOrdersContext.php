@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,8 +37,7 @@ final class ManagingOrdersContext implements Context
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
-    )
-    {
+    ) {
     }
 
     /**
@@ -358,7 +358,7 @@ final class ManagingOrdersContext implements Context
     public function iWantToModifyACustomerBillingAddress(): void
     {
         $this->client->buildUpdateRequest(
-                Resources::ADDRESSES,
+            Resources::ADDRESSES,
             (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
         );
     }
@@ -383,7 +383,7 @@ final class ManagingOrdersContext implements Context
     {
         $response = $this->client->show(
             Resources::ADDRESSES,
-            (string)$this->sharedStorage->get('order')->getBillingAddress()->getId(),
+            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
         );
 
         $addressProperties = [
