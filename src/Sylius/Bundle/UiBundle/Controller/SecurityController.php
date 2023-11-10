@@ -36,7 +36,7 @@ final class SecurityController
 
     public function loginAction(Request $request): Response
     {
-        $alreadyLoggedInRedirectRoute = $request->attributes->get('_sylius')['logged_in_route'] ?? null;
+        $alreadyLoggedInRedirectRoute = $request->attributes->get('_sylius', [])['logged_in_route'] ?? null;
 
         if ($alreadyLoggedInRedirectRoute && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             return new RedirectResponse($this->router->generate($alreadyLoggedInRedirectRoute));
@@ -45,7 +45,7 @@ final class SecurityController
         $lastError = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        $options = $request->attributes->get('_sylius');
+        $options = $request->attributes->get('_sylius', []);
 
         $template = $options['template'] ?? '@SyliusUi/Security/login.html.twig';
         $formType = $options['form'] ?? SecurityLoginType::class;

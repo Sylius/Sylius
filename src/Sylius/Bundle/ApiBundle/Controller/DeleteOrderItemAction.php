@@ -33,9 +33,11 @@ final class DeleteOrderItemAction
     {
         $orderItemId = $request->attributes->get('itemId');
         $tokenValue = $request->attributes->get('tokenValue');
+        if (null === $orderItemId || null === $tokenValue) {
+            throw new OrderItemNotFoundException();
+        }
 
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue($orderItemId, $tokenValue);
-
         if ($orderItem === null) {
             throw new OrderItemNotFoundException();
         }
