@@ -218,6 +218,7 @@ sylius:
         customer_can_login_to_the_store: 'Customer can login to the store?'
         customer_care: 'Customer Care'
         customer_details: 'Customer details'
+        customer_group: 'Customer group'
         customer_groups: 'Customer groups'
         customer_id: 'Customer ID'
         customer_login: 'Customer login'

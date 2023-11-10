@@ -2,7 +2,7 @@ sylius_admin_catalog_promotion:
     resource: |
         alias: sylius.catalog_promotion
         section: admin
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\Shared\\Crud"
         only: ['index', 'create', 'update']
         redirect: update
         grid: sylius_admin_catalog_promotion
