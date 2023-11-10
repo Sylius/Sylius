@@ -2,8 +2,10 @@
 
 {% import '@SyliusAdmin/Shared/Helper/button.html.twig' as _button %}
 
-{% set event_name = event_prefix ~ '.form' %}
-{% set resource_event_name = resource_event_prefix ~ '.form' %}
+{% set main_event = _context.main_event ~ '.form' %}
+{% set fallback_event = _context.fallback_event ~ '.form' %}
+{% set configuration = _context.configuration %}
+
 {% set index_url = path(
     configuration.vars.index.route.name|default(configuration.getRouteName('index')),
     configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
@@ -17,7 +19,14 @@
                 <div class="card-body">
         {% endif %}
                     {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-                        {{ sylius_template_event([resource_event_name, event_name], _context|merge({ event_prefix: event_name, resource_event_prefix: resource_event_name, form: form })) }}
+                        {{ twig_event(
+                            [main_event, fallback_event],
+                            _context|merge({
+                                main_event: main_event,
+                                fallback_event: fallback_event,
+                                form: form,
+                            })
+                        ) }}
                     {{ form_end(form, {'render_rest': _context.render_rest}) }}
         {% if _context.render_rest %}
                 </div>

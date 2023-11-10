@@ -1,5 +1,5 @@
-{% set event_name = _context.event_prefix ~ '.menu' %}
+{% set main_event = _context.main_event ~ '.menu' %}
 
 <div class="collapse navbar-collapse" id="navbar-menu">
-    {{ sylius_template_event(event_name, { event_prefix: event_name }) }}
+    {{ twig_event(main_event, { main_event: main_event }) }}
 </div>

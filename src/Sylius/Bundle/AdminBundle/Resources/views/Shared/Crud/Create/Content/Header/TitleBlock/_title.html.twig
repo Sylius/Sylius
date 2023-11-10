@@ -1,5 +1,8 @@
 {% import '@SyliusAdmin/Shared/Helper/header.html.twig' as _header %}
 
+{% set metadata = _context.metadata %}
+{% set configuration = _context.configuration %}
+
 {% set singularName = metadata.applicationName ~ '.ui.' ~ metadata.name %}
 {% set header = configuration.vars.header.create|default(null) %}
 

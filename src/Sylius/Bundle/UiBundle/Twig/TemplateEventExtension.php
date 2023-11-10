@@ -28,6 +28,7 @@ final class TemplateEventExtension extends AbstractExtension
     {
         return [
             new TwigFunction('sylius_template_event', [$this, 'render'], ['is_safe' => ['html']]),
+            new TwigFunction('twig_event', [$this, 'render'], ['is_safe' => ['html']]),
         ];
     }
 

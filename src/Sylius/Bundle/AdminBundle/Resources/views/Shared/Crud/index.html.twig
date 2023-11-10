@@ -1,13 +1,31 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
-{% set definition = resources.definition %}
-{% set event_name = metadata.applicationName ~ '.admin.' ~ 'index.body' %}
-{% set resource_event_name = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index.body' %}
+{% set main_event = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}
+{% set fallback_event = metadata.applicationName ~ '.admin.' ~ 'index' %}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+{% set header = configuration.vars.header|default(metadata.applicationName ~ '.ui.' ~ metadata.pluralName) %}
 
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ sylius_template_event([resource_event_name, event_name], { event_prefix: event_name, resource_event_prefix: resource_event_name, resources: resources, metadata: metadata, configuration: configuration }) }}
+    {{ twig_event(
+        [main_event, fallback_event],
+        {
+            main_event: main_event,
+            fallback_event: fallback_event,
+            resources: _context.resources,
+            metadata: _context.metadata,
+            configuration: _context.configuration,
+        }
+    ) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ twig_event([main_event ~ '.stylesheets', fallback_event ~ '.stylesheets']) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ twig_event([main_event ~ '.javascripts', fallback_event ~ '.javascripts']) }}
 {% endblock %}
