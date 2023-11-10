@@ -22,8 +22,16 @@ sylius_ui:
                 notifications:
                     component: 'SyliusAdminNavbarNotifications'
                 user_dropdown:
-                    component: 'SyliusAdminUserDropdown'
+                    template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Items/_userDropdown.html.twig'
         sylius.admin.common.navbar.menu:
             blocks:
                 search:
                     template: '@SyliusAdmin/Shared/Crud/Common/Navbar/Menu/_search.html.twig'
+        sylius.admin.common.sidebar:
+            blocks:
+                logo:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_logo.html.twig'
+                user_dropdown:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_userDropdown.html.twig'
+                menu:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_menu.html.twig'

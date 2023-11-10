@@ -1,4 +1,4 @@
-/*
+/*!
  * This file is part of the Sylius package.
  *
  * (c) Sylius Sp. z o.o.
@@ -7,11 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import './styles/main.scss';
-
-import './scripts/apexcharts';
-import './scripts/choices';
-
-import 'bootstrap';
-
-import './images/sylius-logo.svg';
+.sylius {
+    &.avatar {
+        background-color: $gray-100;
+    }
+}

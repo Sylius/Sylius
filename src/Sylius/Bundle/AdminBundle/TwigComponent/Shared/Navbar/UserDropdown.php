@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar;
 
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
@@ -31,19 +31,25 @@ final class UserDropdown
     #[ExposeInTemplate]
     public function getUser(): UserInterface
     {
-        return $this->security->getUser();
+        $user = $this->security->getUser();
+
+        if (!$user instanceof UserInterface) {
+            throw new \RuntimeException('User must be an instance of Sylius\Component\User\Model\UserInterface');
+        }
+
+        return $user;
     }
 
     /**
      * @return array<string, mixed>
      */
     #[ExposeInTemplate]
-    public function getMenuElements(): array
+    public function getMenuItems(): array
     {
         return [
             [
                 'title' => $this->translator->trans('sylius.ui.my_account'),
-                'url' => $this->urlGenerator->generate('sylius_admin_admin_user_update', ['id' => 1]),
+                'url' => $this->urlGenerator->generate('sylius_admin_admin_user_update', ['id' => $this->getUser()->getId()]),
                 'icon' => 'user',
             ],
             [
