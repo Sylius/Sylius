@@ -4,7 +4,7 @@
     "@type": "ProductAssociationType",
     "id": @integer@,
     "code": "similar_products",
-    "name": null,
+    "name": "Similar products",
     "createdAt": "@string@",
     "updatedAt": "@string@",
     "translations": {
@@ -14,11 +14,11 @@
             "id": @integer@,
             "name": "test"
         },
-        "en": {
-            "@id": "\/api\/v2\/admin\/product-association-type-translations\/",
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-association-type-translations\/@integer@",
             "@type": "ProductAssociationTypeTranslation",
-            "id": null,
-            "name": null
+            "id": @integer@,
+            "name": "Similar products"
         }
     }
 }
