@@ -349,7 +349,7 @@ one is edited, then the ``CatalogPromotionUpdated`` event is dispatched to event
 This event is handled by `CatalogPromotionUpdateListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Listener/CatalogPromotionUpdateListener.php>`_ which resolves the appropriate ``CatalogPromotion``.
 With the needed data and configuration from ``CatalogPromotion`` we can now process the Product Catalog.
 
-Any changes in Catalog Promotion cause recalculations of entire Product Catalog (`BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CommandDispatcher/BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher.php>`_ is called, which dispatch events `ApplyCatalogPromotionsOnVariants <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Command/ApplyCatalogPromotionsOnVariants.php>`_)
+Any changes in Catalog Promotion cause recalculations of entire Product Catalog (`BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CatalogPromotion/CommandDispatcher/BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher.php>`_ is called, which dispatch events `ApplyCatalogPromotionsOnVariants <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/CatalogPromotion/Command/ApplyCatalogPromotionsOnVariants.php>`_)
 
 .. note::
 
