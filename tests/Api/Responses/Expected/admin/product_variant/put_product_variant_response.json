@@ -26,12 +26,12 @@
             "name": "Rote Tasse",
             "locale": "de_DE"
         },
-        "pl_PL": {
+        "en_US": {
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
-            "name": "Czerwony kubek",
-            "locale": "pl_PL"
+            "name": "Red mug",
+            "locale": "en_US"
         }
     },
     "enabled": false,

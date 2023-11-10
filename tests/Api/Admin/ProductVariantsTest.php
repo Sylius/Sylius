@@ -325,13 +325,11 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'minimumPrice' => 500,
                 ]],
                 'translations' => [
-                    'pl_PL' => [
-                        '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('pl_PL')->getId()),
-                        'locale' => 'pl_PL',
-                        'name' => 'Czerwony kubek',
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/product-variant-translations/%s', $productVariant->getTranslation('en_US')->getId()),
+                        'name' => 'Red mug',
                     ],
                     'de_DE' => [
-                        'locale' => 'de_DE',
                         'name' => 'Rote Tasse',
                     ],
                 ],
