@@ -8,6 +8,14 @@
         <div class="ui pointing above ignored label">
             {{ form_help(form.variant.tracked) }}
         </div>
+        <br /><br />
+
+        {{ form_row(form.variant.orderItemUnitGenerationMode) }}
+        <div class="ui pointing above ignored label" style="line-height: 1.5em">
+            {{ 'sylius.form.variant.order_item_unit_generation_mode.help_first_line'|trans }} <br />
+            {{ 'sylius.form.variant.order_item_unit_generation_mode.help_second_line'|trans }} <br />
+            {{ 'sylius.form.variant.order_item_unit_generation_mode.help_third_line'|trans }}
+        </div>
 
         {{ form_row(form.variant.version) }}
     {% endif %}

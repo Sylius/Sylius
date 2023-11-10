@@ -21,13 +21,14 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="quantity" column="quantity" type="integer" />
+        <field name="quantity" column="quantity" type="integer" nullable="false" default="1" />
         <field name="unitPrice" column="unit_price" type="integer" />
         <field name="originalUnitPrice" column="original_unit_price" type="integer" nullable="true"/>
         <field name="unitsTotal" column="units_total" type="integer" />
         <field name="adjustmentsTotal" column="adjustments_total" type="integer" />
         <field name="total" column="total" type="integer" />
         <field name="immutable" column="is_immutable" type="boolean" />
+        <field name="singleUnit" column="is_single_unit" type="boolean" nullable="false" default="false" />
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="items">
             <join-column name="order_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

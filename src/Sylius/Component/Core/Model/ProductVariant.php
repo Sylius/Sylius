@@ -59,6 +59,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     /** @var bool */
     protected $shippingRequired = true;
 
+    /** @var int */
+    protected $orderItemUnitGenerationMode = ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE;
+
     /**
      * @var Collection|ProductImageInterface[]
      *
@@ -137,6 +140,16 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     public function setTracked(bool $tracked): void
     {
         $this->tracked = $tracked;
+    }
+
+    public function getOrderItemUnitGenerationMode(): int
+    {
+        return $this->orderItemUnitGenerationMode;
+    }
+
+    public function setOrderItemUnitGenerationMode(int $orderItemUnitGenerationMode): void
+    {
+        $this->orderItemUnitGenerationMode = $orderItemUnitGenerationMode;
     }
 
     public function getInventoryName(): ?string

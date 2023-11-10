@@ -9,6 +9,7 @@ Feature: Viewing a total quantity of the cart
         And the store has a product "PHP T-Shirt"
         And the store has a product "Sylius T-Shirt"
         And the store has a product "Symfony T-Shirt"
+        And the store has a product "API Platform T-Shirt" configured as single order item unit
 
     @ui @no-api
     Scenario: Viewing a total quantity for 1 product with quantity equals 1
@@ -26,3 +27,11 @@ Feature: Viewing a total quantity of the cart
         And I add 3 products "Sylius T-Shirt" to the cart
         And I add product "Symfony T-Shirt" to the cart
         Then I should see cart total quantity is 6
+
+    @ui @no-api
+    Scenario: Viewing a total quantity for all products including single unit items
+        When I add 2 products "PHP T-Shirt" to the cart
+        And I add 3 products "Sylius T-Shirt" to the cart
+        And I add product "Symfony T-Shirt" to the cart
+        And I add 5 products "API Platform T-Shirt" to the cart
+        Then I should see cart total quantity is 11

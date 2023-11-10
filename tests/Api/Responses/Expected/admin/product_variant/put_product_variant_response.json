@@ -18,6 +18,7 @@
             "minimumPrice": 500
         }
     },
+    "orderItemUnitGenerationMode": 0,
     "translations": {
         "de_DE": {
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",

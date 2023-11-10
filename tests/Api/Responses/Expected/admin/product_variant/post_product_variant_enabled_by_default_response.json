@@ -38,5 +38,6 @@
     "shippingCategory": null,
     "shippingRequired": true,
     "createdAt": @date@,
-    "updatedAt": @date@
+    "updatedAt": @date@,
+    "orderItemUnitGenerationMode": 0
 }

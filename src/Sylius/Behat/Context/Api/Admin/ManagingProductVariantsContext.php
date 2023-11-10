@@ -70,6 +70,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I check its single order item unit option
+     */
+    public function iCheckItsSingleOrderItemUnitOption(): void
+    {
+        $this->client->addRequestData('orderItemUnitGenerationMode', ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
+    }
+
+    /**
      * @When /^I set its price to ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iSetItsPriceToForChannel(int $price, ChannelInterface $channel): void
@@ -355,6 +363,19 @@ final class ManagingProductVariantsContext implements Context
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should have single order item unit mode set$/
+     */
+    public function theVariantWithCodeShouldHaveSingleOrderItemUnitModeSet(ProductVariantInterface $productVariant): void
+    {
+        $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
+
+        Assert::eq(
+            $response[self::FIRST_COLLECTION_ITEM]['orderItemUnitGenerationMode'],
+            ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
+        );
     }
 
     /**

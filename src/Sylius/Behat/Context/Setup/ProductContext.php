@@ -87,6 +87,19 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the store has a product "([^"]+)" configured as single order item unit$/
+     * @Given /^the store has a product "([^"]+)" configured as single order item unit priced at ("[^"]+")$/
+     */
+    public function storeHasAProductConfiguredAsSingleOrderItemUnitPricedAt(
+        string $productName,
+        int $price = 100
+    ): void {
+        $product = $this->createSingleOrderItemUnitProduct($productName, $price, null);
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") belonging to the ("[^"]+" taxon)$/
      */
     public function storeHasAProductPricedAtBelongingToTheTaxon(
@@ -1359,6 +1372,16 @@ final class ProductContext implements Context
     private function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
+    }
+
+    private function createSingleOrderItemUnitProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface
+    {
+        $product = $this->createProduct($productName, $price, $channel);
+        foreach ($product->getVariants() as $variant) {
+            $variant->setOrderItemUnitGenerationMode(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
+        }
+
+        return $product;
     }
 
     private function createProduct(string $productName, int $price = 100, ChannelInterface $channel = null): ProductInterface

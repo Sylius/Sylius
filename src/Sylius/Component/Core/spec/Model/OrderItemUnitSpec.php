@@ -30,6 +30,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
     {
         $orderItem->getUnitPrice()->willReturn(1000);
         $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
+        $orderItem->isSingleUnit()->willReturn(false);
         $this->beConstructedWith($orderItem);
     }
 
@@ -51,6 +52,23 @@ final class OrderItemUnitSpec extends ObjectBehavior
     function it_is_an_order_item_unit(): void
     {
         $this->shouldHaveType(BaseOrderItemUnit::class);
+    }
+
+    function it_is_not_single_unit_by_default(): void
+    {
+        $this->isSingleUnit()->shouldReturn(false);
+        $this->getQuantity()->shouldReturn(1);
+    }
+
+    function it_is_single_unit(OrderItemInterface $orderItem): void
+    {
+        $orderItem->getUnitPrice()->willReturn(1000);
+        $orderItem->addUnit(Argument::type(OrderItemUnitInterface::class))->shouldBeCalled();
+        $orderItem->isSingleUnit()->willReturn(true);
+        $this->beConstructedWith($orderItem, 150);
+
+        $this->isSingleUnit()->shouldReturn(true);
+        $this->getQuantity()->shouldReturn(150);
     }
 
     function its_shipment_is_mutable(ShipmentInterface $shipment): void

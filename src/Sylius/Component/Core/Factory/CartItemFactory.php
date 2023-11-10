@@ -41,8 +41,12 @@ final class CartItemFactory implements CartItemFactoryInterface
     {
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->createNew();
+
+        /** @var ProductVariantInterface|null $variant */
         $variant = $this->variantResolver->getVariant($product);
-        Assert::nullOrIsInstanceOf($variant, ProductVariantInterface::class);
+        Assert::notNull($variant, 'Cannot create cart item for nullable variant');
+
+        $cartItem->setSingleUnit($variant->getOrderItemUnitGenerationMode() === ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
         $cartItem->setVariant($variant);
 
         return $cartItem;

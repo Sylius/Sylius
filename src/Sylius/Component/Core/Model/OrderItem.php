@@ -120,10 +120,13 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         /** @var OrderItemUnitInterface $firstUnit */
         Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
 
-        return
-            $this->unitPrice +
-            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
-        ;
+        $adjustments = $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+
+        if ($this->isSingleUnit()) {
+            $adjustments /= $firstUnit->getQuantity();
+        }
+
+        return $this->unitPrice + (int)$adjustments;
     }
 
     public function getFullDiscountedUnitPrice(): int
@@ -137,18 +140,21 @@ class OrderItem extends BaseOrderItem implements OrderItemInterface
         /** @var OrderItemUnitInterface $firstUnit */
         Assert::isInstanceOf($firstUnit, OrderItemUnitInterface::class);
 
-        return
-            $this->unitPrice +
-            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
-            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-        ;
+        $adjustments = $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) +
+            $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+
+        if ($this->isSingleUnit()) {
+            $adjustments /= $firstUnit->getQuantity();
+        }
+
+        return $this->unitPrice + (int)$adjustments;
     }
 
     public function getSubtotal(): int
     {
         return array_reduce(
             $this->getUnits()->toArray(),
-            fn (int $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
+            fn (int $subtotal, BaseOrderItemUnitInterface $unit) => $subtotal + $this->unitPrice*$unit->getQuantity() + $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT),
             0,
         );
     }

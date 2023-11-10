@@ -28,6 +28,9 @@ class ShipmentUnit implements ShipmentUnitInterface, \Stringable
     /** @var ShippableInterface|null */
     protected $shippable;
 
+    /** @var int */
+    protected $quantity;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -61,5 +64,10 @@ class ShipmentUnit implements ShipmentUnitInterface, \Stringable
     public function setShippable(?ShippableInterface $shippable): void
     {
         $this->shippable = $shippable;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
     }
 }

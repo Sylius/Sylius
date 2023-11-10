@@ -22,7 +22,7 @@
         {{ money.format(item.unitPrice, order.currencyCode) }}
     </td>
     <td class="right aligned unit-discount">
-        {{ money.format(item.units.first.adjustmentsTotal(unitPromotionAdjustment), order.currencyCode) }}
+        {{ money.format(item.units.first.adjustmentsTotal(unitPromotionAdjustment) / item.units.first.quantity, order.currencyCode) }}
     </td>
     <td class="right aligned unit-order-discount">
         <span style="font-style: italic;">~ {{ money.format(item.units.first.adjustmentsTotal(orderPromotionAdjustment), order.currencyCode) }}</span>

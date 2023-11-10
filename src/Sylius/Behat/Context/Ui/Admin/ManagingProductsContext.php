@@ -33,6 +33,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -132,6 +133,14 @@ final class ManagingProductsContext implements Context
     public function iSetItsPriceTo(string $price, ChannelInterface $channel)
     {
         $this->createSimpleProductPage->specifyPrice($channel, $price);
+    }
+
+    /**
+     * @When I check its single order item unit option
+     */
+    public function iCheckItsSingleOrderItemUnitOption(): void
+    {
+        $this->createSimpleProductPage->chooseSingleOrderItemUnitOption(true);
     }
 
     /**
@@ -238,6 +247,18 @@ final class ManagingProductsContext implements Context
         $this->iWantToBrowseProducts();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productName]));
+    }
+
+    /**
+     * @Then /^the (product "[^"]+") should have single order item unit mode set$/
+     */
+    public function theProductShouldHaveSingleOrderItemUnitModeSet(ProductInterface $product): void
+    {
+        Assert::eq(
+            (int)$product->getVariants()->first()->getOrderItemUnitGenerationMode(),
+            ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
+            'Product has to be single unit',
+        );
     }
 
     /**

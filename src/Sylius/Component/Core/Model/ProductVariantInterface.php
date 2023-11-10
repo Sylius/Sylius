@@ -30,6 +30,14 @@ interface ProductVariantInterface extends
     VersionedInterface,
     ProductImagesAwareInterface
 {
+    public const ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE = 0;
+
+    public const ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE = 1;
+
+    public function getOrderItemUnitGenerationMode(): int;
+
+    public function setOrderItemUnitGenerationMode(int $orderItemUnitGenerationMode): void;
+
     public function getWeight(): ?float;
 
     public function setWeight(?float $weight): void;

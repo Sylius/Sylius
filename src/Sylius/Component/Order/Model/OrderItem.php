@@ -38,6 +38,9 @@ class OrderItem implements OrderItemInterface
     /** @var bool */
     protected $immutable = false;
 
+    /** @var bool */
+    protected $singleUnit = false;
+
     /**
      * @var Collection|OrderItemUnitInterface[]
      *
@@ -168,6 +171,16 @@ class OrderItem implements OrderItemInterface
         $this->immutable = $immutable;
     }
 
+    public function isSingleUnit(): bool
+    {
+        return $this->singleUnit;
+    }
+
+    public function setSingleUnit(bool $singleUnit): void
+    {
+        $this->singleUnit = $singleUnit;
+    }
+
     public function getUnits(): Collection
     {
         return $this->units;
@@ -179,10 +192,17 @@ class OrderItem implements OrderItemInterface
             throw new \LogicException('This order item unit is assigned to a different order item.');
         }
 
-        if (!$this->hasUnit($itemUnit)) {
+        if ($this->isSingleUnit()) {
+            $this->units->clear();
             $this->units->add($itemUnit);
+            $this->quantity = $itemUnit->getQuantity();
 
+            $this->unitsTotal += $itemUnit->getTotal();
+            $this->recalculateTotal();
+        } else if (!$this->hasUnit($itemUnit)) {
+            $this->units->add($itemUnit);
             ++$this->quantity;
+
             $this->unitsTotal += $itemUnit->getTotal();
             $this->recalculateTotal();
         }

@@ -23,11 +23,15 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function enableTracking(): void;
 
+    public function chooseSingleOrderItemUnitOption(bool $value): void;
+
     public function isCodeDisabled(): bool;
 
     public function isSelectedOptionValueOnPage(string $optionName, string $valueName): bool;
 
     public function isShippingRequired(): bool;
+
+    public function isSingleUnit(): bool;
 
     public function isTracked(): bool;
 

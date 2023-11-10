@@ -20,6 +20,7 @@ use Sylius\Behat\Service\AutocompleteHelper;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SlugGenerationHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -57,6 +58,17 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
         $this->getElement('price', ['%channelCode%' => $channel->getCode()])->setValue($price);
+    }
+
+    public function chooseSingleOrderItemUnitOption(bool $value): void
+    {
+        if ($value) {
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE);
+        } else {
+            $this->getElement('order_item_unit_generation_mode')
+                ->selectOption(ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE);
+        }
     }
 
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
@@ -285,6 +297,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'price' => '#sylius_product_variant_channelPricings_%channelCode%_price',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error, #sylius_product_variant_channelPricings .sylius-validation-error',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
+            'order_item_unit_generation_mode' => '#sylius_product_variant_orderItemUnitGenerationMode',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'shipping_required' => '#sylius_product_variant_shippingRequired',
             'slug' => '#sylius_product_translations_%locale%_slug',

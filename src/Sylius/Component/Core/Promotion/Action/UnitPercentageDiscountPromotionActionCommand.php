@@ -72,7 +72,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     ): void {
         /** @var OrderItemUnitInterface $unit */
         foreach ($item->getUnits() as $unit) {
-            $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
+            $this->addAdjustmentToUnit($unit, $promotionAmount * $unit->getQuantity(), $promotion);
         }
     }
 }

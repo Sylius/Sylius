@@ -1,9 +1,10 @@
 {
-    "@context": "\/api\/v2\/contexts\/ProductVariant",
-    "@id": "\/api\/v2\/admin\/product-variants\/MUG_RED",
-    "@type": "ProductVariant",
-    "code": "MUG_RED",
-    "product": "\/api\/v2\/admin\/products\/MUG_SW",
+    "@context":"\/api\/v2\/contexts\/ProductVariant",
+    "@id":"\/api\/v2\/admin\/product-variants\/MUG_RED",
+    "@type":"ProductVariant",
+    "code":"MUG_RED",
+    "orderItemUnitGenerationMode": 0,
+    "product":"\/api\/v2\/admin\/products\/MUG_SW",
     "optionValues": [
         "\/api\/v2\/admin\/product-option-values\/COLOR_RED"
     ],

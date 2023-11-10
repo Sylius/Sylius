@@ -99,6 +99,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I check its single order item unit option
+     */
+    public function iCheckItsSingleOrderItemUnitOption(): void
+    {
+        $this->updatePage->chooseSingleOrderItemUnitOption(true);
+    }
+
+    /**
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for ("([^"]+)" channel)$/
      * @When I do not set its price
      */
@@ -367,6 +375,16 @@ final class ManagingProductVariantsContext implements Context
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->updatePage->getPriceForChannel($channel), $price);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should have single order item unit mode set$/
+     */
+    public function theVariantWithCodeShouldHaveSingleOrderItemUnitModeSet(ProductVariantInterface $productVariant): void
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::true($this->updatePage->isSingleUnit());
     }
 
     /**

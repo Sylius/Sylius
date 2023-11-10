@@ -123,6 +123,10 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         OrderItemInterface $item,
         TaxRateInterface $taxRate,
     ): void {
+        if ($item->isSingleUnit()) {
+            $quantity = 1;
+        }
+
         $unitSplitTaxes = $this->distributor->distribute($totalTaxAmount, $quantity);
 
         $units = $item->getUnits()->getValues();

@@ -41,4 +41,9 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
     {
         return new $this->className($orderItem);
     }
+
+    public function createSingleUnitForItem(OrderItemInterface $orderItem, int $quantity): OrderItemUnitInterface
+    {
+        return new $this->className($orderItem, $quantity);
+    }
 }

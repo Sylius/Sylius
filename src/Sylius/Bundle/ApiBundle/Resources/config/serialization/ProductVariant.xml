@@ -50,6 +50,11 @@
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
         </attribute>
+        <attribute name="orderItemUnitGenerationMode">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
         <attribute name="position">
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>

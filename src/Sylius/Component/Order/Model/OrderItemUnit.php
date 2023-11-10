@@ -21,6 +21,9 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var mixed */
     protected $id;
 
+    /** @var int */
+    protected $quantity = 1;
+
     /**
      * @var Collection|AdjustmentInterface[]
      *
@@ -31,10 +34,13 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var int */
     protected $adjustmentsTotal = 0;
 
-    public function __construct(protected OrderItemInterface $orderItem)
-    {
-        $this->adjustments = new ArrayCollection();
+    public function __construct(
+        protected OrderItemInterface $orderItem,
+        int $quantity = 1,
+    ) {
+        $this->quantity = $quantity;
         $this->orderItem->addUnit($this);
+        $this->adjustments = new ArrayCollection();
     }
 
     public function getId()
@@ -42,9 +48,14 @@ class OrderItemUnit implements OrderItemUnitInterface
         return $this->id;
     }
 
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
     public function getTotal(): int
     {
-        $total = $this->orderItem->getUnitPrice() + $this->adjustmentsTotal;
+        $total = $this->orderItem->getUnitPrice() * $this->quantity + $this->adjustmentsTotal;
 
         if ($total < 0) {
             return 0;
@@ -148,5 +159,10 @@ class OrderItemUnit implements OrderItemUnitInterface
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();
         }
+    }
+
+    public function isSingleUnit(): bool
+    {
+        return $this->orderItem->isSingleUnit();
     }
 }

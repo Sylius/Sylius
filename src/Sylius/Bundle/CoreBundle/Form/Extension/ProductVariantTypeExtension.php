@@ -19,8 +19,10 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -37,6 +39,14 @@ final class ProductVariantTypeExtension extends AbstractTypeExtension
             ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
                 'help' => 'sylius.form.variant.tracked_help',
+            ])
+            ->add('orderItemUnitGenerationMode', ChoiceType::class, [
+                'label' => 'sylius.form.variant.order_item_unit_generation_mode.label',
+                'help' => 'sylius.form.variant.order_item_unit_generation_mode.help',
+                'choices' => [
+                    'sylius.form.variant.order_item_unit_generation_mode.multiple' => ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_MULTIPLE,
+                    'sylius.form.variant.order_item_unit_generation_mode.single' => ProductVariantInterface::ORDER_ITEM_UNIT_GENERATION_MODE_SINGLE,
+                ],
             ])
             ->add('shippingRequired', CheckboxType::class, [
                 'label' => 'sylius.form.variant.shipping_required',

@@ -23,4 +23,6 @@ interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterfac
     public function setShipment(?ShipmentInterface $shipment): void;
 
     public function getShippable(): ?ShippableInterface;
+
+    public function getQuantity(): int;
 }

@@ -45,6 +45,10 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
 
     public function setImmutable(bool $immutable): void;
 
+    public function isSingleUnit(): bool;
+
+    public function setSingleUnit(bool $singleUnit): void;
+
     /**
      * @return Collection|OrderItemUnitInterface[]
      *

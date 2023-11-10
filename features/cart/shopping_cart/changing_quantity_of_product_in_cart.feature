@@ -13,10 +13,12 @@ Feature: Changing quantity of a product in cart
     Scenario: Increasing quantity of an item in cart
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 2 in my cart
-        Then I should see "T-Shirt banana" with quantity 2 in my cart
+        Then there should be one item in my cart
+        And I should see "T-Shirt banana" with quantity 2 in my cart
 
     @ui @api
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I see the summary of my cart
         When I change product "T-Shirt banana" quantity to 20000 in my cart
-        Then I should see "T-Shirt banana" with quantity 9999 in my cart
+        Then there should be one item in my cart
+        And I should see "T-Shirt banana" with quantity 9999 in my cart

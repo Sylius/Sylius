@@ -130,6 +130,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'taxCategory' => '/api/v2/admin/tax-categories/default',
                 'shippingCategory' => '/api/v2/admin/shipping-categories/default',
                 'shippingRequired' => true,
+                'orderItemUnitGenerationMode' => 0,
             ], JSON_THROW_ON_ERROR),
         );
 

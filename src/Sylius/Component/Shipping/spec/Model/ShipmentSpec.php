@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class ShipmentSpec extends ObjectBehavior
@@ -129,5 +131,49 @@ final class ShipmentSpec extends ObjectBehavior
 
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
+    }
+
+    function it_returns_weight_for_units_being_single_unit(
+        ShipmentUnitInterface $unit1,
+        ShipmentUnitInterface $unit2,
+        ShippableInterface $shippable1,
+        ShippableInterface $shippable2,
+    ): void {
+        $unit1->getQuantity()->willReturn(2);
+        $unit1->getShippable()->willReturn($shippable1);
+        $unit1->setShipment($this->getWrappedObject())->shouldBeCalledOnce();
+        $shippable1->getShippingWeight()->willReturn(10.0);
+
+        $unit2->getQuantity()->willReturn(3);
+        $unit2->getShippable()->willReturn($shippable2);
+        $unit2->setShipment($this->getWrappedObject())->shouldBeCalledOnce();
+        $shippable2->getShippingWeight()->willReturn(15.0);
+
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $this->getShippingWeight()->shouldReturn(65.0);
+    }
+
+    function it_returns_volume_for_units_being_single_unit(
+        ShipmentUnitInterface $unit1,
+        ShipmentUnitInterface $unit2,
+        ShippableInterface $shippable1,
+        ShippableInterface $shippable2,
+    ): void {
+        $unit1->getQuantity()->willReturn(2);
+        $unit1->getShippable()->willReturn($shippable1);
+        $unit1->setShipment($this->getWrappedObject())->shouldBeCalledOnce();
+        $shippable1->getShippingVolume()->willReturn(15.0);
+
+        $unit2->getQuantity()->willReturn(3);
+        $unit2->getShippable()->willReturn($shippable2);
+        $unit2->setShipment($this->getWrappedObject())->shouldBeCalledOnce();
+        $shippable2->getShippingVolume()->willReturn(25.0);
+
+        $this->addUnit($unit1);
+        $this->addUnit($unit2);
+
+        $this->getShippingVolume()->shouldReturn(105.0);
     }
 }
