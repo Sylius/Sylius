@@ -13,27 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Registry;
 
-final class TemplateBlock
+final class TemplateBlock extends Block
 {
     public function __construct(
-        private string $name,
-        private string $eventName,
+        string $name,
+        string $eventName,
         private ?string $template,
-        private ?array $context,
-        private ?int $priority,
-        private ?bool $enabled,
-        private ?string $component = null,
+        ?array $context,
+        ?int $priority,
+        ?bool $enabled,
     ) {
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getEventName(): string
-    {
-        return $this->eventName;
+        parent::__construct($name, $eventName, $context, $priority, $enabled);
     }
 
     public function getTemplate(): string
@@ -49,28 +39,16 @@ final class TemplateBlock
         return $this->template;
     }
 
-    public function getComponent(): ?string
+    public function overwriteWith(Block $block): self
     {
-        return $this->component;
-    }
+        if (!$block instanceof self) {
+            throw new \DomainException(sprintf(
+                'Trying to overwrite template block "%s" with block of different type "%s".',
+                $this->name,
+                get_class($block),
+            ));
+        }
 
-    public function getContext(): array
-    {
-        return $this->context ?? [];
-    }
-
-    public function getPriority(): int
-    {
-        return $this->priority ?? 0;
-    }
-
-    public function isEnabled(): bool
-    {
-        return $this->enabled ?? true;
-    }
-
-    public function overwriteWith(self $block): self
-    {
         if ($this->name !== $block->name) {
             throw new \DomainException(sprintf(
                 'Trying to overwrite block "%s" with block "%s".',
@@ -86,7 +64,6 @@ final class TemplateBlock
             $block->context ?? $this->context,
             $block->priority ?? $this->priority,
             $block->enabled ?? $this->enabled,
-            $block->component ?? $this->component,
         );
     }
 }

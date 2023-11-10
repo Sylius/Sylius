@@ -89,7 +89,7 @@
                                     <tr>
                                         {% if event.names|length > 1 %}<td>{{ block.definition.eventName }}</td>{% endif %}
                                         <td>{{ block.definition.name }}</td>
-                                        <td>{{ block.definition.component != null ? 'Component' : 'Template' }}</td>
+                                        <td>{{ block.definition.component != [] ? 'Component' : 'Template' }}</td>
                                         <td>{{ block.definition.component ?? block.definition.template }}</td>
                                         <td>{{ '%.0f'|format(block.time * 1000) }}ms</td>
                                         <td>{{ block.definition.priority }}</td>

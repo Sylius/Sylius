@@ -1,0 +1,7 @@
+{% set main_event = twig_event_name(_context.main_event, 'latest_statistics') %}
+
+<div class="container-xl">
+    <div class="row">
+        {{ twig_event(main_event, _context|merge({ main_event: main_event })) }}
+    </div>
+</div>

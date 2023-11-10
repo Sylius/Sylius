@@ -16,8 +16,9 @@ namespace spec\Sylius\Bundle\UiBundle\Renderer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
+use Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface;
 use Twig\Environment;
 
 final class TwigTemplateBlockRendererSpec extends ObjectBehavior
@@ -35,7 +36,17 @@ final class TwigTemplateBlockRendererSpec extends ObjectBehavior
 
     function it_is_a_template_block_renderer(): void
     {
-        $this->shouldImplement(TemplateBlockRendererInterface::class);
+        $this->shouldImplement(BlockRendererInterface::class);
+    }
+
+    function it_throws_an_exception_when_trying_to_render_unsupported_block(): void
+    {
+        $templateBlock = new ComponentBlock('block_name', 'event_name', 'Component', [], [], 0, true);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('render', [$templateBlock])
+        ;
     }
 
     function it_renders_a_template_block(

@@ -15,26 +15,26 @@ namespace spec\Sylius\Bundle\UiBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
-use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
-use Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface;
+use Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface;
+use Sylius\Bundle\UiBundle\Renderer\TwigEventRendererInterface;
 
-final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
+final class DelegatingTwigEventRendererSpec extends ObjectBehavior
 {
-    function let(TemplateBlockRegistryInterface $templateBlockRegistry, TemplateBlockRendererInterface $templateBlockRenderer): void
+    function let(BlockRegistryInterface $templateBlockRegistry, BlockRendererInterface $templateBlockRenderer): void
     {
         $this->beConstructedWith($templateBlockRegistry, $templateBlockRenderer);
     }
 
-    function it_is_a_template_event_renderer(): void
+    function it_is_a_twig_event_renderer(): void
     {
-        $this->shouldImplement(TemplateEventRendererInterface::class);
+        $this->shouldImplement(TwigEventRendererInterface::class);
     }
 
-    function it_renders_template_events(
-        TemplateBlockRegistryInterface $templateBlockRegistry,
-        TemplateBlockRendererInterface $templateBlockRenderer,
+    function it_renders_blocks_for_a_given_template(
+        BlockRegistryInterface $templateBlockRegistry,
+        BlockRendererInterface $templateBlockRenderer,
     ): void {
         $firstTemplateBlock = new TemplateBlock('first_block', 'best_event_ever', 'firstBlock.txt.twig', [], 0, true, null);
         $secondTemplateBlock = new TemplateBlock('second_block', 'best_event_ever', 'secondBlock.txt.twig', [], 0, true, null);
@@ -48,8 +48,8 @@ final class DelegatingTemplateEventRendererSpec extends ObjectBehavior
     }
 
     function it_returns_an_empty_string_if_no_blocks_are_found_for_an_event(
-        TemplateBlockRegistryInterface $templateBlockRegistry,
-        TemplateBlockRendererInterface $templateBlockRenderer,
+        BlockRegistryInterface $templateBlockRegistry,
+        BlockRendererInterface $templateBlockRenderer,
     ): void {
         $templateBlockRegistry->findEnabledForEvents(['best_event_ever'])->willReturn([]);
 

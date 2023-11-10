@@ -1,7 +1,14 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
+{% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
+
+{% set main_event = 'sylius.admin.dashboard' %}
 
 {% block title %}{{ 'sylius.ui.dashboard'|trans }} {{ parent() }}{% endblock %}
 
-{% block content %}
-    {{ sylius_template_event('sylius.admin.dashboard.content', _context) }}
+{% block body %}
+    {{ sylius_template_event(
+        [main_event],
+        _context|merge({
+            main_event: main_event,
+        })
+    ) }}
 {% endblock %}

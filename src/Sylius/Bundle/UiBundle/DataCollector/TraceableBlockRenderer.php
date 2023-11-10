@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\DataCollector;
 
-use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Renderer\TemplateBlockRendererInterface;
+use Sylius\Bundle\UiBundle\Registry\Block;
+use Sylius\Bundle\UiBundle\Renderer\BlockRendererInterface;
 
 /** @internal */
-final class TraceableTemplateBlockRenderer implements TemplateBlockRendererInterface
+final class TraceableBlockRenderer implements BlockRendererInterface
 {
     public function __construct(
-        private TemplateBlockRendererInterface $templateBlockRenderer,
-        private TemplateBlockRenderingHistory $templateBlockRenderingHistory,
+        private BlockRendererInterface $templateBlockRenderer,
+        private BlockRenderingHistory $templateBlockRenderingHistory,
     ) {
     }
 
-    public function render(TemplateBlock $templateBlock, array $context = []): string
+    public function render(Block $templateBlock, array $context = []): string
     {
         $this->templateBlockRenderingHistory->startRenderingBlock($templateBlock, $context);
 

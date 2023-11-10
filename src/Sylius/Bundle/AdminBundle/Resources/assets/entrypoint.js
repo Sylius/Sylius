@@ -9,8 +9,8 @@
 
 import './styles/main.scss';
 
-import './scripts/apexcharts';
 import './scripts/choices';
+import './scripts/statistics_chart';
 
 import 'bootstrap';
 

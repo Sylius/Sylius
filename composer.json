@@ -233,7 +233,7 @@
         "symfony/runtime": "^6.3.2",
         "symfony/web-profiler-bundle": "^6.3.2",
         "symplify/monorepo-builder": "^11.0",
-        "vimeo/psalm": "5.15.*",
+        "vimeo/psalm": "5.14.*",
         "weirdan/doctrine-psalm-plugin": "^2.8"
     },
     "suggest": {

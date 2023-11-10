@@ -14,19 +14,20 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\UiBundle\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UiBundle\Registry\BlockRegistryInterface;
+use Sylius\Bundle\UiBundle\Registry\ComponentBlock;
 use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
-use Sylius\Bundle\UiBundle\Registry\TemplateBlockRegistryInterface;
 
-final class TemplateBlockRegistrySpec extends ObjectBehavior
+final class BlockRegistrySpec extends ObjectBehavior
 {
     function let(): void
     {
         $this->beConstructedWith([]);
     }
 
-    function it_is_a_template_block_registry(): void
+    function it_is_a_block_registry(): void
     {
-        $this->shouldImplement(TemplateBlockRegistryInterface::class);
+        $this->shouldImplement(BlockRegistryInterface::class);
     }
 
     function it_returns_all_template_blocks(): void
@@ -38,26 +39,28 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
         $this->all()->shouldReturn(['event' => ['block_name' => $templateBlock]]);
     }
 
-    function it_returns_enabled_template_blocks_for_a_given_event(): void
+    function it_returns_enabled_blocks_for_a_given_event(): void
     {
-        $firstTemplateBlock = new TemplateBlock('first_block', 'event', 'first.html.twig', [], 0, true, null);
-        $secondTemplateBlock = new TemplateBlock('second_block', 'event', 'second.html.twig', [], 10, false, null);
-        $thirdTemplateBlock = new TemplateBlock('third_block', 'event', 'third.html.twig', [], 50, true, null);
+        $firstBlock = new TemplateBlock('first_block', 'event', 'first.html.twig', [], 0, true, null);
+        $secondBlock = new TemplateBlock('second_block', 'event', 'second.html.twig', [], 10, false, null);
+        $thirdBlock = new TemplateBlock('third_block', 'event', 'third.html.twig', [], 50, true, null);
+        $fourthBlock = new ComponentBlock('fourth_block', 'event', 'fourth.html.twig', [], [], 0, null);
 
         $this->beConstructedWith([
             'event' => [
-                'first_block' => $firstTemplateBlock,
-                'second_block' => $secondTemplateBlock,
+                'first_block' => $firstBlock,
+                'second_block' => $secondBlock,
             ],
             'another_event' => [
-                'third_block' => $thirdTemplateBlock,
+                'third_block' => $thirdBlock,
+                'fourth_block' => $fourthBlock,
             ],
         ]);
 
-        $this->findEnabledForEvents(['event'])->shouldReturn([$firstTemplateBlock]);
+        $this->findEnabledForEvents(['event'])->shouldReturn([$firstBlock]);
     }
 
-    function it_returns_enabled_template_blocks_for_multiple_events(): void
+    function it_returns_enabled_blocks_for_multiple_events(): void
     {
         $this->beConstructedWith([
             'generic_event' => ['block' => new TemplateBlock('block', 'generic_event', 'generic.html.twig', ['foo' => 'bar'], 0, true)],
@@ -82,7 +85,7 @@ final class TemplateBlockRegistrySpec extends ObjectBehavior
         ]);
     }
 
-    function it_returns_enabled_template_blocks_sorted_by_priority_for_multiple_events(): void
+    function it_returns_enabled_blocks_sorted_by_priority_for_multiple_events(): void
     {
         $this->beConstructedWith([
             'generic_event' => [
