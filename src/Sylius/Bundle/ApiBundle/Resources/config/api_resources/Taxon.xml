@@ -71,7 +71,7 @@
         </itemOperations>
 
         <subresourceOperations>
-            <subresourceOperation name="admin_images_get_subresource">
+            <subresourceOperation name="images_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/taxons/{code}/images</attribute>
                 <attribute name="openapi_context">
