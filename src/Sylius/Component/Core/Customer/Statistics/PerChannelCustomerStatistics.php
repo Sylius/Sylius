@@ -41,6 +41,9 @@ final class PerChannelCustomerStatistics
 
     public function getAverageOrderValue(): int
     {
+        if (0 == $this->ordersCount) {
+            return 0;
+        }
         return (int) round($this->ordersValue / $this->ordersCount);
     }
 }
