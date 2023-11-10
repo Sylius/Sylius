@@ -1,0 +1,12 @@
+{% set main_event = twig_event_name(_context.main_event, 'sections') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'sections') %}
+
+<div class="col-12 col-lg-9">
+    <div class="tab-content">
+        {{ twig_event([main_event, fallback_event], _context|merge({
+            main_event: main_event,
+            fallback_event: fallback_event,
+            form: _context.form
+        })) }}
+    </div>
+</div>

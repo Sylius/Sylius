@@ -1,0 +1,11 @@
+{% set main_event = twig_event_name(_context.main_event, 'more') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'more') %}
+
+<div class="dropdown">
+    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ 'sylius.ui.more'|trans }}
+    </button>
+    <ul class="dropdown-menu">
+        {{ twig_event([main_event, fallback_event], _context|merge({ main_event: main_event, fallback_event: fallback_event })) }}
+    </ul>
+</div>

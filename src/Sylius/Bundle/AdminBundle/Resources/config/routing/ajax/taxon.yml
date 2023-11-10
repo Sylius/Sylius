@@ -52,6 +52,7 @@ sylius_admin_ajax_taxon_by_name_phrase:
                     phrase: expr:service('request_stack').getCurrentRequest().query.get('phrase', '')
                     locale: null
                     limit: 25
+                    excludes: $excludes
 
 sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/

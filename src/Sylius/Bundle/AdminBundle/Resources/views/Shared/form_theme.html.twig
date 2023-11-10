@@ -1,0 +1,21 @@
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    <div class="{% if required %}required {% endif %}{% if disabled %}disabled {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        <select
+            class="form-control"
+            data-choices="true"
+            data-choice-label-field="{{ choice_name }}"
+            data-choice-value-field="{{ choice_value }}"
+            data-input-id="{{ form.vars.id }}"
+            data-init-url="{{ init_load_url|default(null) }}"
+            data-search-url="{{ search_url }}"
+            data-no-choices-text="{{ no_choices_translation|default('sylius.ui.start_typing_to_search')|trans }}"
+            {% if form.vars.disabled %}disabled{% endif %}
+            {% if multiple %}multiple{% endif %}
+        ></select>
+        {{ form_widget(form) }}
+        {{- form_errors(form) -}}
+    </div>
+{% endblock %}

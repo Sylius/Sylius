@@ -1,4 +1,4 @@
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% form_theme form '@SyliusAdmin/Shared/form_theme.html.twig' %}
 
 <div class="sylius-filters__group">
     {{ form_row(form.from, { attr: {'class': 'sylius-filters__group'}, 'label': 'sylius.ui.date_filter', 'label_translation_parameters': {'%label%': filter.label|trans, '%altLabel%': form.from.vars.label|trans} }) }}

@@ -1,7 +1,7 @@
 {% extends '@SyliusAdmin/Shared/Layout/base.html.twig' %}
 
 {% set main_event = _context.metadata.applicationName ~ '.admin.' ~ _context.metadata.name ~ '.create' %}
-{% set fallback_event = _context.metadata.applicationName ~ '.admin.' ~ 'create.body' %}
+{% set fallback_event = _context.metadata.applicationName ~ '.admin.' ~ 'create' %}
 
 {% set header = configuration.vars.header|default(_context.metadata.applicationName ~ '.ui.' ~ _context.metadata.pluralName) %}
 

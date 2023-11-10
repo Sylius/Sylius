@@ -46,9 +46,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findByName(string $name, string $locale): array;
 
     /**
+     * @param array<string>|null $excludes
+     *
      * @return array|TaxonInterface[]
      */
-    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array;
+    public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null, ?array $excludes = null): array;
 
     public function createListQueryBuilder(): QueryBuilder;
 }

@@ -70,8 +70,14 @@ sylius:
                 <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a> integration.
         lowest_price_before_discount: 'Lowest price before discount'
         minimum_price_details: Minimum price - this is the pricing threshold below which the current price cannot be discounted by neither catalog nor cart promotions. Use this to guard the profitability of your sales.
+        more: 'More'
+        no_main_taxon: 'no main taxon'
+        no_depth: 'No depth'
+        no_height: 'No height'
         no_results: No results found
         no_results_adjust_your_search: 'Adjust your search and try again.'
+        no_weight: 'No weight'
+        no_width: 'No width'
         original_price_details: Original price - this is the price of the product variant It is displayed as crossed-out in the catalog. It is used as the base for current price calculations. If this value is not defined, Catalog Promotion logic will copy value from Price to Original Price.
         pagination:
             number_of_results: 'Showing %from% to %to% of %total% entries'
@@ -82,6 +88,7 @@ sylius:
         sales_summary: Sales summary
         shipment_for_order: Shipment for order
         show_history_for_channel_pricing: 'Show history for channel pricing'
+        start_typing_to_search: 'Start typing to search'
         statistics:
             day: Day
             lifetime: Lifetime
@@ -89,3 +96,5 @@ sylius:
             week: Week
             2weeks: 2 Weeks
             year: Year
+        view_in_store: 'View in store'
+        work_in_progress: Work in progress
