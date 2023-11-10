@@ -77,3 +77,33 @@ sylius_ui:
             blocks:
                 title:
                     template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/TitleBlock/_title.html.twig'
+
+        # Update
+        sylius.admin.update.body:
+            blocks:
+                sidebar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_sidebar.html.twig'
+                navbar:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_navbar.html.twig'
+                content:
+                    template: '@SyliusAdmin/Shared/Crud/Common/_content.html.twig'
+        sylius.admin.update.body.content:
+            blocks:
+                flashes:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/_flashes.html.twig'
+                header:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/_header.html.twig'
+                form:
+                    template: '@SyliusAdmin/Shared/Crud/Update/Content/_form.html.twig'
+                    context:
+                        render_rest: true
+        sylius.admin.update.body.content.header:
+            blocks:
+                breadcrumbs:
+                    template: '@SyliusAdmin/Shared/Crud/Update/Content/Header/_breadcrumbs.html.twig'
+                title_block:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/_titleBlock.html.twig'
+        sylius.admin.update.body.content.header.title_block:
+            blocks:
+                title:
+                    template: '@SyliusAdmin/Shared/Crud/Update/Content/Header/TitleBlock/_title.html.twig'
