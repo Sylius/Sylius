@@ -35,3 +35,25 @@ sylius_ui:
                     template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_userDropdown.html.twig'
                 menu:
                     template: '@SyliusAdmin/Shared/Crud/Common/Sidebar/_menu.html.twig'
+        sylius.admin.security.login:
+            blocks:
+                logo:
+                    template: '@SyliusAdmin/Security/Login/_logo.html.twig'
+                content:
+                    template: '@SyliusAdmin/Security/Login/_content.html.twig'
+        sylius.admin.security.login.content:
+            blocks:
+                header:
+                    template: '@SyliusAdmin/Security/Login/Content/_header.html.twig'
+                form:
+                    template: '@SyliusAdmin/Security/Login/Content/_form.html.twig'
+        sylius.admin.security.login.content.form:
+            blocks:
+                username_field:
+                    template: '@SyliusAdmin/Security/Login/Content/Form/_usernameField.html.twig'
+                password_field:
+                    template: '@SyliusAdmin/Security/Login/Content/Form/_passwordField.html.twig'
+                remember_me_field:
+                    template: '@SyliusAdmin/Security/Login/Content/Form/_rememberMeField.html.twig'
+                submit_button:
+                    template: '@SyliusAdmin/Security/Login/Content/Form/_submitButton.html.twig'

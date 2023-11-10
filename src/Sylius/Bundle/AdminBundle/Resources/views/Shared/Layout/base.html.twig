@@ -11,7 +11,7 @@
     {{ encore_entry_link_tags('admin-entry', null, 'admin') }}
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 <div class="page">
     {% block body %}{% endblock %}
 </div>

@@ -8,6 +8,7 @@
  */
 
 $assets-base: $rootDir + "/node_modules/@tabler/core/dist";
+$primary: #1ABB9C;
 
 @import "choices.js/src/styles/choices.scss";
 @import "@tabler/core/src/scss/tabler.scss";
