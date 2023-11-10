@@ -96,5 +96,6 @@ sylius:
             week: Week
             2weeks: 2 Weeks
             year: Year
+        taxon: Taxon
         view_in_store: 'View in store'
         work_in_progress: Work in progress

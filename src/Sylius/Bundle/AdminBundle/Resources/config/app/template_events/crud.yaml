@@ -77,6 +77,14 @@ sylius_ui:
             blocks:
                 title:
                     template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/TitleBlock/_title.html.twig'
+                actions:
+                    template: '@SyliusAdmin/Shared/Crud/Create/Content/Header/TitleBlock/_actions.html.twig'
+        sylius.admin.create.content.header.title_block.actions:
+            blocks:
+                cancel:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_cancel.html.twig'
+                create:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_create.html.twig'
 
         # Update
         sylius.admin.update:
@@ -107,6 +115,14 @@ sylius_ui:
             blocks:
                 title:
                     template: '@SyliusAdmin/Shared/Crud/Update/Content/Header/TitleBlock/_title.html.twig'
+                actions:
+                    template: '@SyliusAdmin/Shared/Crud/Update/Content/Header/TitleBlock/_actions.html.twig'
+        sylius.admin.update.content.header.title_block.actions:
+            blocks:
+                cancel:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_cancel.html.twig'
+                update:
+                    template: '@SyliusAdmin/Shared/Crud/Common/Content/Header/TitleBlock/Actions/_update.html.twig'
 
         # Show
         sylius.admin.show:

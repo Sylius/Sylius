@@ -1,0 +1,52 @@
+ul.tree {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+ul.tree li {
+    margin: 0;
+    padding: 3px 0;
+    list-style-type: none;
+}
+
+ul.tree .tree-header-btn:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+ul.tree .tree-header .tree-icon-down,
+ul.tree .tree-header .tree-icon-right {
+    display: none;
+}
+
+ul.tree .tree-header.expanded .tree-icon-down {
+    display: inline-block;
+}
+
+ul.tree .tree-header.collapsed .tree-icon-right {
+    display: inline-block;
+}
+
+ul.tree .tree-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: start;
+    width: 15px;
+    height: 20px;
+}
+
+ul.tree .tree-icon svg {
+    stroke-width: 1px;
+}
+
+.tree-loader {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}

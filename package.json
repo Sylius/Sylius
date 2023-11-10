@@ -10,7 +10,8 @@
     "jquery.dirtyforms": "^2.0.0",
     "lightbox2": "^2.9.0",
     "semantic-ui-css": "^2.2.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
