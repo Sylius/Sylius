@@ -1,0 +1,17 @@
+{% if sm_can(_context.payment, 'complete', 'sylius_payment') %}
+    {% from '@SyliusAdmin/Shared/Helper/icon.html.twig' import icon as _icon %}
+
+    <div class="ui segment">
+        <form
+            action="{{ path('sylius_admin_order_payment_complete', {'orderId': _context.order.id, 'id': _context.payment.id}) }}"
+            method="post"
+            novalidate
+        >
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
+            <input type="hidden" name="_method" value="PUT">
+            <button type="submit" class="btn btn-primary">
+                {{ _icon({ icon: 'check' }) }} {{ 'sylius.ui.complete'|trans }}
+            </button>
+        </form>
+    </div>
+{% endif %}

@@ -1,0 +1,31 @@
+{% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
+
+{% set main_event = twig_event_name(_context.main_event, 'summary') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'summary') %}
+
+{% set order = _context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">{{ (_context.title|default('sylius.ui.summary'))|trans }}</div>
+    </div>
+    <div class="py-3">
+        {% block content %}
+            <table class="table table-sm table-hover table-borderless card-table">
+                {% block table %}
+                    <tbody>
+                        {{ twig_event([main_event, fallback_event], _context|merge({ main_event, fallback_event })) }}
+                    </tbody>
+                {% endblock %}
+            </table>
+        {% endblock %}
+    </div>
+    <div class="card-footer">
+        {% block footer %}
+            <div class="d-flex justify-content-between">
+                <div class="h3 mb-0">{{ 'sylius.ui.order_total'|trans }}:</div>
+                <div class="h3 mb-0">{{ _money.format(order.total, order.currencyCode) }}</div>
+            </div>
+        {% endblock %}
+    </div>
+</div>

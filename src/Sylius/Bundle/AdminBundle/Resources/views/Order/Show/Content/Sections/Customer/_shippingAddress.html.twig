@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/Shared/Helper/address.html.twig' as _address %}
+
+<div>
+    <strong>Shipping address:</strong>
+</div>
+<div class="mb-3">
+    {{ _address.default(_context.order.shippingAddress) }}
+</div>

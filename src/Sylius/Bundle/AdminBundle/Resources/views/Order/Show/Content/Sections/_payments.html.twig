@@ -1,0 +1,51 @@
+{% import '@SyliusAdmin/Shared/Helper/money.html.twig' as _money %}
+
+{% set main_event = twig_event_name(_context.main_event, 'payments') %}
+{% set fallback_event = twig_event_name(_context.fallback_event, 'payments') %}
+
+{% set actions_event = twig_event_name(main_event, 'actions') %}
+{% set actions_fallback_event = twig_event_name(fallback_event, 'actions') %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.payments'|trans }}
+            <span class="ms-2">
+                {{ include('@SyliusAdmin/Order/_Shared/Label/PaymentState/' ~ _context.order.paymentState ~ '.html.twig') }}
+            </span>
+        </div>
+    </div>
+    <div class="py-3">
+        {% if order.hasPayments() %}
+            <table class="table table-vcenter table-borderless table-sm card-table">
+                <tbody>
+                {% for payment in _context.order.payments %}
+                    <tr>
+                        <td class="w-1">
+                            <div class="text-success">{{ payment.state|upper }}</div>
+                        </td>
+                        <td class="px-3">
+                            <strong>{{ payment.method.name }}</strong>
+                        </td>
+                        <td class="text-end">
+                            {{ _money.format(payment.amount, _context.order.currencyCode) }}
+                        </td>
+                        <td class="w-1 text-end">
+                            {{ twig_event(
+                                [actions_event, actions_fallback_event],
+                                _context|merge({
+                                    main_event: actions_event,
+                                    fallback_event: actions_fallback_event,
+                                    payment,
+                                })
+                            ) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <span class="px-3 text-secondary italic">{{ 'sylius.ui.no_payments'|trans }}</span>
+        {% endif %}
+    </div>
+</div>

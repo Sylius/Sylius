@@ -1,0 +1,7 @@
+<div class="channel">
+    <span class="badge" style="background-color: {{ channel.color|default('#000') }}"></span>
+
+    <span class="text-nowrap">
+        {{ channel.name|default(channel.code) }}
+    </span>
+</div>

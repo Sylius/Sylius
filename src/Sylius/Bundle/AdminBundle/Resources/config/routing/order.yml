@@ -53,7 +53,7 @@ sylius_admin_order_update:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/Order/update.html.twig"
+            template: "@SyliusAdmin/Shared/Crud/update.html.twig"
             form:
                 options:
                     validation_groups:
