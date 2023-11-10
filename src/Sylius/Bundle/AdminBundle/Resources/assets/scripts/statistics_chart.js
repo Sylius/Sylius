@@ -9,7 +9,8 @@
 
 import ApexCharts from 'apexcharts';
 
-(function () {
+var chart = null;
+function renderChart() {
   // eslint-disable-next-line no-undef
   const statisticsChart = document.querySelector('#statistics-chart');
 
@@ -18,11 +19,18 @@ import ApexCharts from 'apexcharts';
   }
 
   const options = {
+    colors: ['#32be9f'],
+    fill: {
+      colors: ['#32be9f'],
+    },
     series: [{
       name: 'Sales',
       data: JSON.parse(statisticsChart.dataset.sales),
     }],
     chart: {
+      toolbar: {
+        show: false,
+      },
       height: 350,
       type: 'bar',
     },
@@ -45,7 +53,6 @@ import ApexCharts from 'apexcharts';
         colors: ['#304758'],
       },
     },
-
     xaxis: {
       categories: JSON.parse(statisticsChart.dataset.intervals),
       position: 'top',
@@ -59,8 +66,8 @@ import ApexCharts from 'apexcharts';
         fill: {
           type: 'gradient',
           gradient: {
-            colorFrom: '#D8E3F0',
-            colorTo: '#BED1E6',
+            colorFrom: '#32be9f',
+            colorTo: '#2a9f83',
             stops: [0, 100],
             opacityFrom: 0.4,
             opacityTo: 0.5,
@@ -69,7 +76,7 @@ import ApexCharts from 'apexcharts';
       },
       tooltip: {
         enabled: true,
-      }
+      },
     },
     yaxis: {
       axisBorder: {
@@ -96,6 +103,25 @@ import ApexCharts from 'apexcharts';
     },
   };
 
-  const chart = new ApexCharts(statisticsChart, options);
+  chart = new ApexCharts(statisticsChart, options);
   chart.render();
-}());
+}
+
+renderChart();
+
+let element = document.querySelector('#statistics-chart');
+
+if (element) {
+  let observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.attributeName === 'data-sales' || mutation.attributeName === 'data-intervals') {
+        chart.destroy();
+        renderChart();
+      }
+    });
+  });
+
+  observer.observe(element, {
+    attributes: true,
+  });
+}
