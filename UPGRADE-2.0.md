@@ -133,6 +133,10 @@
 
     * `Sylius\Bundle\InventoryBundle\Doctrine\ORM\InventoryUnitRepository` has been added
 
+  Locale:
+
+    * `Sylius\Bundle\LocaleBundle\Doctrine\ORM\LocaleRepository` has been added
+
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
 
