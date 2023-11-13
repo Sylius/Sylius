@@ -27,7 +27,7 @@ final class UploadProductImageAction
     public function __invoke(Request $request): ImageInterface
     {
         return $this->productImageCreator->create(
-            $request->attributes->get('code'),
+            $request->attributes->get('code', ''),
             $request->files->get('file'),
             $request->request->get('type'),
         );

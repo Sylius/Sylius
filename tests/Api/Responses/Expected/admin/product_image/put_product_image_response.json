@@ -5,5 +5,5 @@
     "id": "@integer@",
     "owner": "\/api\/v2\/admin\/products\/MUG",
     "type": "logo",
-    "path": "\/media\/image\/uo\/thumbnail.jpg"
+    "path": "@string@\/thumbnail.jpg"
 }

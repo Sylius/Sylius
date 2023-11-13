@@ -9,7 +9,7 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/MUG",
             "type": "thumbnail",
-            "path": "\/media\/image\/uo\/thumbnail.jpg"
+            "path": "@string@\/thumbnail.jpg"
         }
     ],
     "hydra:totalItems": 1

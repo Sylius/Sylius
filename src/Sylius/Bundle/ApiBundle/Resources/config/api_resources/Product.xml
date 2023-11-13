@@ -132,6 +132,9 @@
             <subresourceOperation name="images_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/products/{code}/images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of ProductImage resources for a given Product.</attribute>
+                </attribute>
             </subresourceOperation>
 
             <subresourceOperation name="attributes_get_subresource">

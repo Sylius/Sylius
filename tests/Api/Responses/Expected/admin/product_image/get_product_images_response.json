@@ -9,7 +9,7 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/MUG",
             "type": "thumbnail",
-            "path": "\/media\/image\/uo\/thumbnail.jpg"
+            "path": "@string@\/thumbnail.jpg"
         },
         {
             "@id": "\/api\/v2\/admin\/product-images\/@integer@",
@@ -17,7 +17,7 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/CAP",
             "type": "banner",
-            "path": "\/media\/image\/uo\/banner.jpg"
+            "path": "@string@\/banner.jpg"
         }
     ],
     "hydra:totalItems": 2
