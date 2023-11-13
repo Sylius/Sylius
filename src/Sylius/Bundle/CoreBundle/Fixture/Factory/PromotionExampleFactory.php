@@ -38,21 +38,12 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         private ExampleFactoryInterface $promotionRuleExampleFactory,
         private ExampleFactoryInterface $promotionActionExampleFactory,
         private ChannelRepositoryInterface $channelRepository,
-        private ?FactoryInterface $couponFactory = null,
+        private FactoryInterface $couponFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->couponFactory === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.8',
-                'Not passing a $couponFactory to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function create(array $options = []): PromotionInterface
@@ -140,13 +131,9 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
-    private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
+    private static function getCouponNormalizer(FactoryInterface $couponFactory): \Closure
     {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
-            if (null === $couponFactory) {
-                throw new \RuntimeException('You must configure a $couponFactory');
-            }
-
             if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
                 throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
             }

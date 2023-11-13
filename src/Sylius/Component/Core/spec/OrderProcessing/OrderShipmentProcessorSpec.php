@@ -184,43 +184,6 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_adds_new_item_units_to_existing_shipment_without_checking_methods_if_shipping_methods_resolver_is_not_used(
-        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
-        FactoryInterface $shipmentFactory,
-        OrderInterface $order,
-        ShipmentInterface $shipment,
-        Collection $shipments,
-        OrderItemUnitInterface $itemUnit,
-        OrderItemUnitInterface $itemUnitWithoutShipment,
-        OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant,
-    ): void {
-        $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
-
-        $order->canBeProcessed()->willReturn(true);
-
-        $shipments->first()->willReturn($shipment);
-
-        $orderItem->getVariant()->willReturn($productVariant);
-
-        $order->isShippingRequired()->willReturn(true);
-
-        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
-
-        $order->isEmpty()->willReturn(false);
-        $order->hasShipments()->willReturn(true);
-        $order->getItemUnits()->willReturn(new ArrayCollection([$itemUnit->getWrappedObject(), $itemUnitWithoutShipment->getWrappedObject()]));
-        $order->getShipments()->willReturn($shipments);
-
-        $itemUnit->getShipment()->willReturn($shipment);
-
-        $shipment->getUnits()->willReturn(new ArrayCollection([]));
-        $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
-        $shipment->addUnit($itemUnit)->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
     function it_removes_units_before_adding_new_ones(
         ShippingMethodsResolverInterface $shippingMethodsResolver,
         OrderInterface $order,

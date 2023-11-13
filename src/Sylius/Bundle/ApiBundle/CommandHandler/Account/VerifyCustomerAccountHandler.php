@@ -16,9 +16,9 @@ namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 use InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyCustomerAccount;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -29,7 +29,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
 {
     public function __construct(
         private RepositoryInterface $shopUserRepository,
-        private DateTimeProviderInterface $calendar,
+        private ClockInterface $clock,
         private MessageBusInterface $commandBus,
     ) {
     }
@@ -44,7 +44,7 @@ final class VerifyCustomerAccountHandler implements MessageHandlerInterface
             );
         }
 
-        $user->setVerifiedAt($this->calendar->now());
+        $user->setVerifiedAt($this->clock->now());
         $user->setEmailVerificationToken(null);
         $user->enable();
 

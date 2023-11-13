@@ -6,7 +6,7 @@ default:
         api_managing_catalog_promotions:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
+                - sylius.behat.context.hook.calendar
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical

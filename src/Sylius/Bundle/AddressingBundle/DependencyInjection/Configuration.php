@@ -14,6 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressRepository;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\CountryRepository;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\ProvinceRepository;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\ZoneMemberRepository;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
@@ -77,7 +81,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Address::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(AddressInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(AddressRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(AddressType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -109,7 +113,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Country::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CountryInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CountryRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(CountryType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -126,7 +130,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Province::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProvinceInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ProvinceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ProvinceRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProvinceType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -160,7 +164,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ZoneMember::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ZoneMemberInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ZoneMemberRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ZoneMemberType::class)->cannotBeEmpty()->end()
                                     ->end()

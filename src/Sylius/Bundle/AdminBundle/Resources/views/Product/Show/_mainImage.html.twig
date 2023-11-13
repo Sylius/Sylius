@@ -3,11 +3,7 @@
 {% elseif product.images.first %}
     {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
 {% else %}
-    {% if use_webpack %}
-        {% set path = asset('build/admin/images/200x200.png', 'admin') %}
-    {% else %}
-        {% set path = asset('assets/admin/img/200x200.png') %}
-    {% endif %}
+    {% set path = asset('build/admin/images/200x200.png', 'admin') %}
 {% endif %}
 
 <img src="{{ path }}" alt="{{ product.name }}" class="ui bordered image" />

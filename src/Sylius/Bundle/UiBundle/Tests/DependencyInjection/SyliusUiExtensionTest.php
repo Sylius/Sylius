@@ -77,27 +77,6 @@ final class SyliusUiExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /** @test */
-    public function it_uses_webpack_when_parameter_is_not_defined(): void
-    {
-        $this->container->setParameter('kernel.debug', true);
-
-        $this->load();
-
-        $this->assertContainerBuilderHasParameter('sylius_ui.use_webpack', true);
-    }
-
-    /** @test */
-    public function it_doesnt_use_webpack_when_parameter_is_set_to_false(): void
-    {
-        $this->container->setParameter('kernel.debug', true);
-        $this->container->prependExtensionConfig('sylius_ui', ['use_webpack' => false]);
-
-        $this->load();
-
-        $this->assertContainerBuilderHasParameter('sylius_ui.use_webpack', false);
-    }
-
     protected function getContainerExtensions(): array
     {
         return [new SyliusUiExtension()];

@@ -1,0 +1,11 @@
+framework:
+    assets:
+        packages:
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            app.admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+            app.shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'

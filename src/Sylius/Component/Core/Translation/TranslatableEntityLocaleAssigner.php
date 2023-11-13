@@ -25,15 +25,8 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
     public function __construct(
         private LocaleContextInterface $localeContext,
         private TranslationLocaleProviderInterface $translationLocaleProvider,
-        private ?CLIContextCheckerInterface $commandBasedChecker = null,
+        private CLIContextCheckerInterface $commandBasedChecker,
     ) {
-        if ($this->commandBasedChecker === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.11',
-                'Not passing a $commandBasedChecker explicitly as the third argument is deprecated and will be prohibited in Sylius 2.0.',
-            );
-        }
     }
 
     public function assignLocale(TranslatableInterface $translatableEntity): void
@@ -41,7 +34,7 @@ final class TranslatableEntityLocaleAssigner implements TranslatableEntityLocale
         $fallbackLocale = $this->translationLocaleProvider->getDefaultLocaleCode();
         $translatableEntity->setFallbackLocale($fallbackLocale);
 
-        if ($this->commandBasedChecker !== null && $this->commandBasedChecker->isExecutedFromCLI()) {
+        if ($this->commandBasedChecker->isExecutedFromCLI()) {
             $translatableEntity->setCurrentLocale($fallbackLocale);
 
             return;
