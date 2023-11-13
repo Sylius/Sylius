@@ -133,10 +133,10 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon
-     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon taxon
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon taxon and :secondTaxon taxon
      */
-    public function iAddTheHasTaxonRuleConfiguredWith(...$taxons)
+    public function iAddTheHasTaxonRuleConfiguredWith(string ...$taxons): void
     {
         $this->createPage->addRule('Has at least one from taxons');
 
@@ -144,7 +144,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
     public function iAddTheRuleConfiguredWith($taxonName, $amount, ChannelInterface $channel)
     {
@@ -154,7 +154,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "Item total" rule configured with (?:€|£|\$)([^"]+) amount for ("[^"]+" channel) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     * @When /^I add the "Item total" rule configured with "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel) and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
     public function iAddTheItemTotalRuleConfiguredWithTwoChannel(
         $firstAmount,
@@ -218,7 +218,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
         string $actionType,
@@ -230,7 +230,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)%$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%"$/
      * @When I add the :actionType action configured without a percentage value
      */
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
@@ -355,9 +355,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I make it exclusive
+     * @When I set it as exclusive
      */
-    public function iMakeItExclusive()
+    public function iSetItAsExclusive(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
