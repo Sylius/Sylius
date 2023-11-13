@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 final class CustomerProvider implements CustomerProviderInterface

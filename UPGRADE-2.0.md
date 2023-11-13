@@ -149,6 +149,13 @@
     * `Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface` extended interface changed from
       `Sylius\Component\Resource\Repository\RepositoryInterface` to
       `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
+  
+  Customer:
+
+    * `Sylius\Component\Core\Repository\CustomerRepositoryInterface` has been renamed to
+      `Sylius\Component\Customer\Repository\CustomerRepositoryInterface`
+    * `Sylius\Component\CoreBundle\Doctrine\Orm\CustomerRepository` has been renamed to
+      `Sylius\Component\CustomerBundle\Doctrine\Orm\CustomerRepository`
 
 ## Frontend
 
