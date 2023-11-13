@@ -143,6 +143,15 @@
     * `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemUnitRepository` has been added
     * `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderSequenceRepository` has been added
 
+  Promotion:
+ 
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionActionRepository` has been added
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionScopeRepository` has been added
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionTranslationRepository` has been added
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionActionRepository` has been added
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRuleRepository` has been added
+    * `Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionTranslationRepository` has been added
+
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
 

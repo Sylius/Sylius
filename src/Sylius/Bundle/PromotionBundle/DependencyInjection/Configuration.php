@@ -14,6 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
 use Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionActionRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionScopeRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\CatalogPromotionTranslationRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionActionRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRuleRepository;
+use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionTranslationRepository;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionTranslationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
@@ -97,7 +106,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Promotion::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PromotionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PromotionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -112,7 +121,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(PromotionTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(PromotionTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(PromotionTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(PromotionTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -131,7 +140,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(CatalogPromotion::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CatalogPromotionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CatalogPromotionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(CatalogPromotionType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -146,7 +155,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('model')->defaultValue(CatalogPromotionTranslation::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('interface')->defaultValue(CatalogPromotionTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->defaultValue(CatalogPromotionTranslationRepository::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->scalarNode('form')->defaultValue(CatalogPromotionTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -165,7 +174,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(CatalogPromotionScope::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CatalogPromotionScopeInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CatalogPromotionScopeRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -182,7 +191,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(CatalogPromotionAction::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CatalogPromotionActionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CatalogPromotionActionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(DefaultResourceType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -199,7 +208,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(PromotionRule::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PromotionRuleInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PromotionRuleRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionRuleType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -216,7 +225,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(PromotionAction::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PromotionActionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PromotionActionRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionActionType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -233,7 +242,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(PromotionCoupon::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PromotionCouponInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(PromotionCouponController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(PromotionCouponRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionCouponType::class)->cannotBeEmpty()->end()
                                     ->end()
