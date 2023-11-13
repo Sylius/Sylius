@@ -129,6 +129,10 @@
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Currency\Repository\CurrencyRepositoryInterface`
 
+  Inventory:
+
+    * `Sylius\Bundle\InventoryBundle\Doctrine\ORM\InventoryUnitRepository` has been added
+
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
 
