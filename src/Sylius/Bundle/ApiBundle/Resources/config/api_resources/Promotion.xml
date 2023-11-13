@@ -42,7 +42,7 @@
                 </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.promotion_coupon_search_filter</attribute>
-                    <attribute>promotion_order_filter</attribute>
+                    <attribute>sylius.api.promotion_order_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

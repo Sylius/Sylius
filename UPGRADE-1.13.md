@@ -200,3 +200,6 @@
     +       from: [new, processing, authorized]
             to: failed
     ```
+
+1. Change in the `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` constructor:
+   Added the `$localeRepository` argument to the constructor of the `PromotionExampleFactory` class. Not passing an instance of `RepositoryInterface` to `$localeRepository` was marked as deprecated and will be removed in Sylius 2.0.
