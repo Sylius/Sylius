@@ -90,5 +90,10 @@
             <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
             <tag name="api_platform.data_persister" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\PromotionDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
     </services>
 </container>

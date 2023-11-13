@@ -20,9 +20,11 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +41,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         private ExampleFactoryInterface $promotionActionExampleFactory,
         private ChannelRepositoryInterface $channelRepository,
         private ?FactoryInterface $couponFactory = null,
+        private ?RepositoryInterface $localeRepository = null,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -50,6 +53,15 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
                 'sylius/core-bundle',
                 '1.8',
                 'Not passing a $couponFactory to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
+        }
+
+        if ($this->localeRepository === null) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Not passing a $localRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
                 self::class,
             );
         }
@@ -97,6 +109,13 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             $promotion->addCoupon($coupon);
         }
 
+        foreach ($this->getLocales() as $localeCode) {
+            $promotion->setCurrentLocale($localeCode);
+            $promotion->setFallbackLocale($localeCode);
+
+            $promotion->setLabel($options['label']);
+        }
+
         return $promotion;
     }
 
@@ -105,6 +124,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('name', $this->faker->words(3, true))
+            ->setDefault('label', fn (Options $options): string => $options['name'])
             ->setDefault('description', $this->faker->sentence())
             ->setDefault('usage_limit', null)
             ->setDefault('coupon_based', false)
@@ -169,5 +189,18 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
             return $coupons;
         };
+    }
+
+    private function getLocales(): iterable
+    {
+        if (null === $this->localeRepository) {
+            throw new \RuntimeException('You must configure a $localeRepository');
+        }
+
+        /** @var LocaleInterface[] $locales */
+        $locales = $this->localeRepository->findAll();
+        foreach ($locales as $locale) {
+            yield $locale->getCode();
+        }
     }
 }

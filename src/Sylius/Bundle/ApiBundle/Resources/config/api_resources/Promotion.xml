@@ -20,6 +20,10 @@
 
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="priority">DESC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
@@ -36,6 +40,10 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.promotion_coupon_search_filter</attribute>
+                    <attribute>promotion_order_filter</attribute>
+                </attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -46,6 +54,17 @@
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
