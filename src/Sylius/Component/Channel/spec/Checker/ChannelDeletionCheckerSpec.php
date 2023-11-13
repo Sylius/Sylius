@@ -34,7 +34,7 @@ final class ChannelDeletionCheckerSpec extends ObjectBehavior
     function it_returns_a_channel_can_be_deleted_when_at_least_two_channels_are_enabled(
         ChannelRepositoryInterface $channelRepository,
         ChannelInterface $channel,
-        ChannelInterface $anotherChannel
+        ChannelInterface $anotherChannel,
     ): void {
         $channel->isEnabled()->willReturn(true);
         $channelRepository->findEnabled()->willReturn([$channel, $anotherChannel]);
@@ -44,7 +44,7 @@ final class ChannelDeletionCheckerSpec extends ObjectBehavior
 
     function it_returns_a_channel_cannot_be_deleted_when_only_one_channel_is_enabled(
         ChannelRepositoryInterface $channelRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channel->isEnabled()->willReturn(true);
         $channelRepository->findEnabled()->willReturn([$channel]);
@@ -54,7 +54,7 @@ final class ChannelDeletionCheckerSpec extends ObjectBehavior
 
     function it_returns_a_channel_cannot_be_deleted_when_no_channel_is_enabled(
         ChannelRepositoryInterface $channelRepository,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channel->isEnabled()->willReturn(true);
         $channelRepository->findEnabled()->willReturn([]);

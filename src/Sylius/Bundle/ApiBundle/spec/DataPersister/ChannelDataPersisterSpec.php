@@ -36,7 +36,7 @@ final class ChannelDataPersisterSpec extends ObjectBehavior
 
     function it_persists_channel(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $decoratedDataPersister->persist($channel, [])->willReturn($channel);
 
@@ -45,7 +45,7 @@ final class ChannelDataPersisterSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_channel_is_not_deletable(
         ChannelDeletionCheckerInterface $channelDeletionChecker,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelDeletionChecker->isDeletable($channel)->willReturn(false);
 
@@ -58,7 +58,7 @@ final class ChannelDataPersisterSpec extends ObjectBehavior
     function it_removes_channel(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         ChannelDeletionCheckerInterface $channelDeletionChecker,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $channelDeletionChecker->isDeletable($channel)->willReturn(true);
         $decoratedDataPersister->remove($channel, [])->willReturn(null);

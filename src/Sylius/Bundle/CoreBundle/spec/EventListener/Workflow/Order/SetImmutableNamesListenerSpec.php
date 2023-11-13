@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener\Workflow\Order;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Order\OrderItemNamesSetter;
 use Sylius\Component\Core\Order\OrderItemNamesSetterInterface;
 use Symfony\Component\Workflow\Event\CompletedEvent;
 use Symfony\Component\Workflow\Marking;
