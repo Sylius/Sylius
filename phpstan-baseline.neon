@@ -821,6 +821,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ProductVariantDataPersister.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\PromotionDataPersister\\:\\:remove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/DataPersister/PromotionDataPersister.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\DataPersister\\\\ShippingMethodDataPersister\\:\\:persist\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/DataPersister/ShippingMethodDataPersister.php
@@ -3287,6 +3292,11 @@ parameters:
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\PromotionExampleFactory\\:\\:getCouponNormalizer\\(\\) has parameter \\$couponFactory with generic interface Sylius\\\\Component\\\\Resource\\\\Factory\\\\FactoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Fixture/Factory/PromotionExampleFactory.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Fixture\\\\Factory\\\\PromotionExampleFactory\\:\\:getLocales\\(\\) return type has no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Fixture/Factory/PromotionExampleFactory.php
 

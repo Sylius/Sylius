@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -35,6 +36,9 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param RepositoryInterface<LocaleInterface>|null $localeRepository
+     */
     public function __construct(
         private FactoryInterface $promotionFactory,
         private ExampleFactoryInterface $promotionRuleExampleFactory,

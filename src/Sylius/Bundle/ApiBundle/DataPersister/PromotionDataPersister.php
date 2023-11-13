@@ -34,7 +34,7 @@ final class PromotionDataPersister implements ContextAwareDataPersisterInterface
     /** @param array<mixed> $context */
     public function persist($data, array $context = [])
     {
-        $this->decoratedDataPersister->persist($data, $context);
+        return $this->decoratedDataPersister->persist($data, $context);
     }
 
     /** @param array<mixed> $context */
