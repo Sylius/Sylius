@@ -30,6 +30,17 @@ return static function (Config $config): void
         ,
     );
 
+    $testsClassSet = ClassSet::fromDir(__DIR__ . '{/tests,/src/Sylius/Bundle/*/Tests}');
+
+    $config->add(
+        $testsClassSet,
+        Rule::allClasses()
+            ->that(new HaveNameMatching('*Test$'))
+            ->should(new IsFinal())
+            ->because('Tests should not be extendable')
+        ,
+    );
+
     $separationClassSet = ClassSet::fromDir(__DIR__ . '/src/Sylius/{Component,Bundle}');
 
     $config->add(

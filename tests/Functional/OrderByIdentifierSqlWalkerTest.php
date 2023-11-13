@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 
-class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
+final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
 {
     private EntityManagerInterface $entityManager;
 
