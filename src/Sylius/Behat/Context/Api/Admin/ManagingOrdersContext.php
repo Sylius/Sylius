@@ -36,7 +36,8 @@ final class ManagingOrdersContext implements Context
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
-    ) {
+    )
+    {
     }
 
     /**
@@ -45,7 +46,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
-        $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResource($order));
+
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -281,6 +285,8 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTotalShouldBe(int $total): void
     {
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
             $total,
@@ -344,5 +350,53 @@ final class ManagingOrdersContext implements Context
         $firstItem = $items[0];
 
         Assert::same($firstItem['number'], str_replace('#', '', $number));
+    }
+
+    /**
+     * @When /^I want to modify a customer's billing address of this order$/
+     */
+    public function iWantToModifyACustomerBillingAddress(): void
+    {
+        $this->client->buildUpdateRequest(
+                Resources::ADDRESSES,
+            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
+        );
+    }
+
+    /**
+     * @When /^I specify their (?:|new )billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifyTheirBillingAddressAsFor(AddressInterface $address): void
+    {
+        $this->client->addRequestData('firstName', $address->getFirstName());
+        $this->client->addRequestData('lastName', $address->getLastName());
+        $this->client->addRequestData('street', $address->getStreet());
+        $this->client->addRequestData('postcode', $address->getPostcode());
+        $this->client->addRequestData('city', $address->getCity());
+    }
+
+    /**
+     * @Then /^this order billing (address should contain "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Then /^this order should have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its new billing address)$/
+     */
+    public function itsBillingAddressShouldContain(AddressInterface $address): void
+    {
+        $response = $this->client->show(
+            Resources::ADDRESSES,
+            (string)$this->sharedStorage->get('order')->getBillingAddress()->getId(),
+        );
+
+        $addressProperties = [
+            'firstName' => 'getFirstName',
+            'lastName' => 'getLastName',
+            'street' => 'getStreet',
+            'postcode' => 'getPostcode',
+            'city' => 'getCity',
+            'countryCode' => 'getCountryCode',
+        ];
+
+        foreach ($addressProperties as $property => $getter) {
+            Assert::same($this->responseChecker->getValue($response, $property), $address->$getter());
+        }
     }
 }

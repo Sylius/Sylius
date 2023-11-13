@@ -295,15 +295,16 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
+     * @Then /^(this order) should have "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its new billing address$/
      */
-    public function itShouldBeBilledTo(
+    public function itShouldHaveAsItsNewBillingAddress(
         ?OrderInterface $order,
         string $customerName,
         string $street,
         string $postcode,
         string $city,
         string $countryName,
-    ) {
+    ): void {
         if (null !== $order) {
             $this->iSeeTheOrder($order);
         }
