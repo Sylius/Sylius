@@ -255,15 +255,17 @@ final class ManagingChannelsContext implements Context
     ): void {
         $shopBillingDataId = $this->iriConverter->getIriFromResource($channel->getShopBillingData());
 
-        $this->client->addRequestData('shopBillingData', [
+        $this->client->addRequestData(
+            'shopBillingData',
+            [
                 '@id' => $shopBillingDataId,
                 'company' => $company,
                 'street' => $street,
                 'postcode' => $postcode,
                 'city' => $city,
                 'countryCode' => $country->getCode(),
-                'taxId' => $taxId
-            ]
+                'taxId' => $taxId,
+            ],
         );
     }
 

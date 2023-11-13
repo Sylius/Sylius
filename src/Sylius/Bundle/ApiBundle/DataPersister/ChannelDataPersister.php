@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class ChannelDataPersister implements ContextAwareDataPersisterInterface
 {
-    public function __construct (
+    public function __construct(
         private ContextAwareDataPersisterInterface $decoratedDataPersister,
         private ChannelDeletionCheckerInterface $channelDeletionChecker,
     ) {
