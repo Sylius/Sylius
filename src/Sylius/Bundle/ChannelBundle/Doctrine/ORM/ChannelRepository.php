@@ -56,6 +56,17 @@ class ChannelRepository extends EntityRepository implements ChannelRepositoryInt
         ;
     }
 
+    /**
+     * @return ChannelInterface[]
+     */
+    public function findEnabled(): iterable
+    {
+        /** @var ChannelInterface[] $enabledChannels */
+        $enabledChannels = $this->findBy(['enabled' => true]);
+
+        return $enabledChannels;
+    }
+
     public function countAll(): int
     {
         return $this->count([]);

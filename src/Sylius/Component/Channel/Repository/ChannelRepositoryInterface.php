@@ -32,5 +32,10 @@ interface ChannelRepositoryInterface extends RepositoryInterface
 
     public function findAllWithBasicData(): iterable;
 
+    /**
+     * @return ChannelInterface[]
+     */
+    public function findEnabled(): iterable;
+
     public function countAll(): int;
 }

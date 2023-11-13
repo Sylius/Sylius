@@ -25,6 +25,22 @@ final class ManagingChannelsBillingDataContext implements Context
     }
 
     /**
+     * @When I specify shop billing data for this channel as :company, :street, :postcode, :city, :taxId tax ID and :country country
+     */
+    public function iSpecifyNewShopBillingDataForChannelAs(
+        string $company,
+        string $street,
+        string $postcode,
+        string $city,
+        string $taxId,
+        CountryInterface $country,
+    ): void {
+        $this->shopBillingDataElement->specifyCompany($company);
+        $this->shopBillingDataElement->specifyTaxId($taxId);
+        $this->shopBillingDataElement->specifyBillingAddress($street, $postcode, $city, $country->getCode());
+    }
+
+    /**
      * @When I specify company as :company
      */
     public function specifyCompanyAs(string $company): void
@@ -69,6 +85,7 @@ final class ManagingChannelsBillingDataContext implements Context
     }
 
     /**
+     * @Then this channel shop billing address should be :street, :postcode :city and :country country
      * @Then this channel shop billing address should be :street, :postcode :city, :country
      */
     public function thisChannelShopBillingAddressShouldBe(

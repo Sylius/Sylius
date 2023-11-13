@@ -52,7 +52,7 @@ final class ResetPasswordAction
                 ->add('success', 'sylius.admin.password_reset.success')
             ;
 
-            $attributes = $request->attributes->get('_sylius');
+            $attributes = $request->attributes->get('_sylius', []);
             $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
 
             if (is_array($redirect)) {

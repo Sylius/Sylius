@@ -41,7 +41,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_constraint_is_not_a_resetPasswordTokenExists_constraint(): void
+    function it_throws_an_exception_if_constraint_is_not_a_reset_password_token_exists_constraint(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -50,7 +50,7 @@ final class ShopUserResetPasswordTokenExistsValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_add_violation_if_user_exist(
+    function it_does_not_add_violation_if_user_exists(
         UserRepositoryInterface $userRepository,
         ExecutionContextInterface $executionContext,
         UserInterface $user,

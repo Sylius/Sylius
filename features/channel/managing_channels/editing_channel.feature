@@ -8,20 +8,12 @@ Feature: Editing channel
         Given the store operates on a channel named "Web Channel"
         And I am logged in as an administrator
 
-    @todo
-    Scenario: Trying to change channel code
+    @api @ui
+    Scenario: Being unable to change the code of an existing channel
         When I want to modify a channel "Web Channel"
-        And I change its code to "MOBILE"
-        And I save my changes
-        Then I should be notified that code cannot be changed
-        And channel "Web Channel" should still have code "MOBILE"
+        Then I should not be able to edit its code
 
-    @ui
-    Scenario: Seeing disabled code field when editing channel
-        When I want to modify a channel "Web Channel"
-        Then the code field should be disabled
-
-    @ui
+    @api @ui
     Scenario: Renaming the channel
         When I want to modify a channel "Web Channel"
         And I rename it to "Website store"
@@ -29,7 +21,7 @@ Feature: Editing channel
         Then I should be notified that it has been successfully edited
         And this channel name should be "Website store"
 
-    @ui
-    Scenario: Seeing disabled base currency field during channel edition
+    @api @ui
+    Scenario: Being unable to change base currency of an existing channel
         When I want to modify a channel "Web Channel"
-        Then the base currency field should be disabled
+        Then I should not be able to edit its base currency

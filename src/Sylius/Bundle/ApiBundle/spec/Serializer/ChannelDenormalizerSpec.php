@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
+use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -24,9 +25,9 @@ final class ChannelDenormalizerSpec extends ObjectBehavior
 {
     private const ALREADY_CALLED = 'sylius_channel_denormalizer_already_called';
 
-    function let(FactoryInterface $configFactory): void
+    function let(FactoryInterface $configFactory, FactoryInterface $shopBillingDataFactory): void
     {
-        $this->beConstructedWith($configFactory);
+        $this->beConstructedWith($configFactory, $shopBillingDataFactory);
     }
 
     function it_does_not_support_denormalization_when_the_denormalizer_has_already_been_called(): void
@@ -54,15 +55,17 @@ final class ChannelDenormalizerSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('denormalize', [[], 'string']);
     }
 
-    function it_returns_channel_as_is_when_channel_price_history_config_has_already_been_set(
+    function it_returns_channel_as_is_when_shop_billing_data_and_channel_price_history_config_has_already_been_set(
         DenormalizerInterface $denormalizer,
         FactoryInterface $configFactory,
+        ShopBillingDataInterface $shopBillingData,
         ChannelPriceHistoryConfigInterface $config,
         ChannelInterface $channel,
     ): void {
         $this->setDenormalizer($denormalizer);
 
         $channel->getChannelPriceHistoryConfig()->willReturn($config);
+        $channel->getShopBillingData()->willReturn($shopBillingData);
 
         $channel->setChannelPriceHistoryConfig(Argument::any())->shouldNotBeCalled();
         $configFactory->createNew()->shouldNotBeCalled();
@@ -75,15 +78,37 @@ final class ChannelDenormalizerSpec extends ObjectBehavior
     function it_adds_a_new_channel_price_history_config_when_channel_has_none(
         DenormalizerInterface $denormalizer,
         FactoryInterface $configFactory,
+        ShopBillingDataInterface $shopBillingData,
         ChannelPriceHistoryConfigInterface $config,
         ChannelInterface $channel,
     ): void {
         $this->setDenormalizer($denormalizer);
 
         $channel->getChannelPriceHistoryConfig()->willReturn(null);
+        $channel->getShopBillingData()->willReturn($shopBillingData);
 
         $configFactory->createNew()->willReturn($config);
         $channel->setChannelPriceHistoryConfig($config)->shouldBeCalled();
+
+        $denormalizer->denormalize([], ChannelInterface::class, null, [self::ALREADY_CALLED => true])->willReturn($channel);
+
+        $this->denormalize([], ChannelInterface::class)->shouldReturn($channel);
+    }
+
+    function it_adds_a_new_shop_billing_data_when_channel_has_none(
+        DenormalizerInterface $denormalizer,
+        FactoryInterface $shopBillingDataFactory,
+        ShopBillingDataInterface $shopBillingData,
+        ChannelPriceHistoryConfigInterface $config,
+        ChannelInterface $channel,
+    ): void {
+        $this->setDenormalizer($denormalizer);
+
+        $channel->getChannelPriceHistoryConfig()->willReturn($config);
+        $channel->getShopBillingData()->willReturn(null);
+
+        $shopBillingDataFactory->createNew()->willReturn($shopBillingData);
+        $channel->setShopBillingData($shopBillingData)->shouldBeCalled();
 
         $denormalizer->denormalize([], ChannelInterface::class, null, [self::ALREADY_CALLED => true])->willReturn($channel);
 

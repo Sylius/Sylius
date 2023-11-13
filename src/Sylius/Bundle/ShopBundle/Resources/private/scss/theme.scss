@@ -738,13 +738,15 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 }
 
 [data-route="sylius_shop_cart_summary"] .ui.two.column.stackable.grid,
-[data-route="sylius_shop_cart_save"] .ui.two.column.stackable.grid {
+[data-route="sylius_shop_cart_save"] .ui.two.column.stackable.grid,
+[data-route="sylius_shop_cart_checkout"] .ui.two.column.stackable.grid {
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 [data-route="sylius_shop_cart_summary"] .ui.segment,
-[data-route="sylius_shop_cart_save"] .ui.segment {
+[data-route="sylius_shop_cart_save"] .ui.segment,
+[data-route="sylius_shop_cart_checkout"] .ui.segment {
     border: 0;
     box-shadow: none;
     padding: 0;
@@ -752,6 +754,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table tbody td,
 [data-route="sylius_shop_cart_save"] .column:first-child .table tbody td,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table tbody td,
 [data-route="sylius_shop_checkout_complete"] form table tbody td,
 [data-route="sylius_shop_account_order_show"] table tbody td {
     border: 0 !important;
@@ -761,6 +764,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table thead th,
 [data-route="sylius_shop_cart_save"] .column:first-child .table thead th,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table thead th,
 [data-route="sylius_shop_checkout_complete"] form table thead th,
 [data-route="sylius_shop_account_order_show"] table thead th {
     border: none !important;
@@ -774,6 +778,8 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 [data-route="sylius_shop_cart_summary"] .column:first-child .table td:nth-child(2),
 [data-route="sylius_shop_cart_save"] .column:first-child .table th:nth-child(2),
 [data-route="sylius_shop_cart_save"] .column:first-child .table td:nth-child(2),
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table th:nth-child(2),
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table td:nth-child(2),
 [data-route="sylius_shop_checkout_complete"] form table th:nth-child(2),
 [data-route="sylius_shop_checkout_complete"] form table td:nth-child(2),
 [data-route="sylius_shop_account_order_show"] table th:nth-child(2),
@@ -784,6 +790,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table th:nth-child(3),
 [data-route="sylius_shop_cart_save"] .column:first-child .table th:nth-child(3),
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table th:nth-child(3),
 [data-route="sylius_shop_checkout_complete"] form table th:nth-child(3),
 [data-route="sylius_shop_account_order_show"] table th:nth-child(3) {
     text-align: left !important;
@@ -792,6 +799,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table th:nth-child(4),
 [data-route="sylius_shop_cart_save"] .column:first-child .table th:nth-child(4),
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table th:nth-child(4),
 [data-route="sylius_shop_checkout_complete"] form table th:nth-child(4),
 [data-route="sylius_shop_account_order_show"] table th:nth-child(4) {
     text-align: right !important;
@@ -799,6 +807,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sylius-product-name,
 [data-route="sylius_shop_cart_save"] .column:first-child .table .sylius-product-name,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table .sylius-product-name,
 [data-route="sylius_shop_checkout_complete"] form table .sylius-product-name,
 [data-route="sylius_shop_account_order_show"] table .sylius-product-name {
     font-size: 0.9em !important;
@@ -808,6 +817,7 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .image,
 [data-route="sylius_shop_cart_save"] .column:first-child .table .image,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table .image,
 [data-route="sylius_shop_checkout_complete"] form table .image,
 [data-route="sylius_shop_account_order_show"] table .image {
     width: 100px !important;
@@ -817,29 +827,34 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sub.header,
 [data-route="sylius_shop_cart_save"] .column:first-child .table .sub.header,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table .sub.header,
 [data-route="sylius_shop_checkout_complete"] form table .sub.header,
 [data-route="sylius_shop_account_order_show"] table .sub.header {
     color: #adadad !important;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sylius-cart-remove-button,
-[data-route="sylius_shop_cart_save"] .column:first-child .table .sylius-cart-remove-button {
+[data-route="sylius_shop_cart_save"] .column:first-child .table .sylius-cart-remove-button,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table .sylius-cart-remove-button {
     background: transparent;
     border: 1px solid #eee;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:first-child .table .sylius-total,
-[data-route="sylius_shop_cart_save"] .column:first-child .table .sylius-total {
+[data-route="sylius_shop_cart_save"] .column:first-child .table .sylius-total,
+[data-route="sylius_shop_cart_checkout"] .column:first-child .table .sylius-total {
     font-weight: 700;
 }
 
 [data-route="sylius_shop_cart_summary"] .five.column:last-child,
-[data-route="sylius_shop_cart_save"] .five.column:last-child {
+[data-route="sylius_shop_cart_save"] .five.column:last-child,
+[data-route="sylius_shop_cart_checkout"] .five.column:last-child {
     padding-left: 50px !important;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:last-child .ui.dividing.header,
-[data-route="sylius_shop_cart_save"] .column:last-child .ui.dividing.header {
+[data-route="sylius_shop_cart_save"] .column:last-child .ui.dividing.header,
+[data-route="sylius_shop_cart_checkout"] .column:last-child .ui.dividing.header {
     border: 0;
     font-size: 1em;
     color: #999;
@@ -850,12 +865,14 @@ header .ui.three.column.stackable.grid > .column:nth-child(3) .button span {
 }
 
 [data-route="sylius_shop_cart_summary"] .column:last-child .table td,
-[data-route="sylius_shop_cart_save"] .column:last-child .table td {
+[data-route="sylius_shop_cart_save"] .column:last-child .table td,
+[data-route="sylius_shop_cart_checkout"] .column:last-child .table td {
     padding: 16px 0;
 }
 
 [data-route="sylius_shop_cart_summary"] .column:last-child .table .header td,
-[data-route="sylius_shop_cart_save"] .column:last-child .table .header td {
+[data-route="sylius_shop_cart_save"] .column:last-child .table .header td,
+[data-route="sylius_shop_cart_checkout"] .column:last-child .table .header td {
     padding-top: 30px !important;
 }
 

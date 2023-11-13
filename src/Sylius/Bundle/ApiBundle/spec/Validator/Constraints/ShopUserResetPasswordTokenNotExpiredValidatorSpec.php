@@ -42,7 +42,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorSpec extends ObjectBeha
         ;
     }
 
-    function it_throws_an_exception_if_constraint_is_not_a_resetPasswordTokenExpires_constraint(): void
+    function it_throws_an_exception_if_constraint_is_not_a_reset_password_token_not_expired_constraint(): void
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)

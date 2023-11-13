@@ -1821,6 +1821,11 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/Serializer/ShippingMethodNormalizer.php
 
 		-
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\TranslatableDenormalizer\\:\\:hasDefaultTranslation\\(\\) has parameter \\$translations with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/ApiBundle/Serializer/TranslatableDenormalizer.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Serializer\\\\ZoneDenormalizer\\:\\:getZoneMemberByCode\\(\\) has parameter \\$zoneMembers with generic interface Doctrine\\\\Common\\\\Collections\\\\Selectable but does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Sylius/Bundle/ApiBundle/Serializer/ZoneDenormalizer.php
