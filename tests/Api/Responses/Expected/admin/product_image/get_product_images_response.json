@@ -9,7 +9,8 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/MUG",
             "type": "thumbnail",
-            "path": "@string@\/thumbnail.jpg"
+            "path": "@string@\/thumbnail.jpg",
+            "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_BLUE"]
         },
         {
             "@id": "\/api\/v2\/admin\/product-images\/@integer@",
@@ -17,7 +18,8 @@
             "id": "@integer@",
             "owner": "\/api\/v2\/admin\/products\/CAP",
             "type": "banner",
-            "path": "@string@\/banner.jpg"
+            "path": "@string@\/banner.jpg",
+            "productVariants": []
         }
     ],
     "hydra:totalItems": 2

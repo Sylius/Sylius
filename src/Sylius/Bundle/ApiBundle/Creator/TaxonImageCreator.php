@@ -36,7 +36,8 @@ final class TaxonImageCreator implements ImageCreatorInterface
     ) {
     }
 
-    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type): ImageInterface
+    /** @param array<mixed> $context */
+    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
     {
         if (null === $file) {
             throw new NoFileUploadedException();

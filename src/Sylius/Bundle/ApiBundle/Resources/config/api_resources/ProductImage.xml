@@ -45,6 +45,10 @@
                                         <attribute name="type">
                                             <attribute name="type">string</attribute>
                                         </attribute>
+                                        <attribute name="productVariants">
+                                            <attribute name="type">array</attribute>
+                                            <attribute name="format">iri-reference</attribute>
+                                        </attribute>
                                     </attribute>
                                 </attribute>
                             </attribute>
@@ -114,5 +118,6 @@
         <property name="id" identifier="true" writable="false" />
         <property name="path" required="true" />
         <property name="type" />
+        <property name="variants" />
     </resource>
 </resources>

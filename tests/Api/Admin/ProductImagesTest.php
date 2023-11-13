@@ -15,6 +15,7 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -118,7 +119,7 @@ final class ProductImagesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_a_product_image_with_type(): void
+    public function it_creates_a_product_image_with_type_and_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -126,10 +127,18 @@ final class ProductImagesTest extends JsonApiTestCase
         /** @var ProductInterface $product */
         $product = $fixtures['product_mug'];
 
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant_mug_blue'];
+
         $this->client->request(
             method: 'POST',
             uri: sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
-            parameters: ['type' => 'banner'],
+            parameters: [
+                'type' => 'banner',
+                'productVariants' => [
+                    sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+                ],
+            ],
             files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
             server: $header,
         );
@@ -143,7 +152,7 @@ final class ProductImagesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_only_the_type_of_the_existing_product_image(): void
+    public function it_updates_only_the_type_and_variants_of_the_existing_product_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -154,6 +163,12 @@ final class ProductImagesTest extends JsonApiTestCase
         /** @var ProductInterface $product */
         $product = $fixtures['product_cap'];
 
+        /** @var ProductVariantInterface $productVariantBlue */
+        $productVariantBlue = $fixtures['product_variant_mug_blue'];
+
+        /** @var ProductVariantInterface $productVariantRed */
+        $productVariantRed = $fixtures['product_variant_mug_red'];
+
         $this->client->request(
             method: 'PUT',
             uri: sprintf('/api/v2/admin/product-images/%s', $productImage->getId()),
@@ -162,6 +177,10 @@ final class ProductImagesTest extends JsonApiTestCase
                 'type' => 'logo',
                 'owner' => sprintf('/api/v2/admin/products/%s', $product->getCode()),
                 'path' => 'logo.jpg',
+                'productVariants' => [
+                    sprintf('/api/v2/admin/product-variants/%s', $productVariantBlue->getCode()),
+                    sprintf('/api/v2/admin/product-variants/%s', $productVariantRed->getCode()),
+                ],
             ], JSON_THROW_ON_ERROR),
         );
 

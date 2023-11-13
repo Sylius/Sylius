@@ -9,11 +9,24 @@ Sylius\Component\Core\Model\Product:
         fallbackLocale: 'en_US'
         currentLocale: 'en'
         images: ['@product_cap_banner']
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant_mug_blue:
+        code: 'MUG_BLUE'
+        product: '@product_mug'
+        fallbackLocale: 'en_US'
+        currentLocale: 'en'
+    product_variant_mug_red:
+        code: 'MUG_RED'
+        product: '@product_mug'
+        fallbackLocale: 'en_US'
+        currentLocale: 'en'
         
 Sylius\Component\Core\Model\ProductImage:
     product_mug_thumbnail:
         type: 'thumbnail'
         path: 'uo/thumbnail.jpg'
+        productVariants: ['@product_variant_mug_blue']
     product_cap_banner:
         type: 'banner'
         path: 'uo/banner.jpg'

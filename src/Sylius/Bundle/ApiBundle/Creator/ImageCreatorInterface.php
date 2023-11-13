@@ -18,5 +18,5 @@ use Sylius\Component\Core\Model\ImageInterface;
 /** @experimental */
 interface ImageCreatorInterface
 {
-    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type): ImageInterface;
+    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface;
 }
