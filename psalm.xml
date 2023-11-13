@@ -283,6 +283,9 @@
                 <referencedFunction name="SyliusLabs\AssociationHydrator\AssociationHydrator::__construct" />
                 <referencedFunction name="Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken::__construct" />
             </errorLevel>
+            <errorLevel type="suppress">
+                <file name="src/Sylius/Bundle/CoreBundle/Fixture/Factory/ProductReviewExampleFactory.php" />
+            </errorLevel>
         </InvalidArgument>
 
         <!-- level 8 issues - some fatal errors in PHP -->

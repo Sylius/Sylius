@@ -30,6 +30,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private OrderFactoryInterface $cartFactory,
         private OrderRepositoryInterface $cartRepository,

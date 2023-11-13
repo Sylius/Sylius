@@ -20,6 +20,9 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 final class CustomerProvider implements CustomerProviderInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private CustomerRepositoryInterface $customerRepository,
         private CanonicalizerInterface $canonicalizer,

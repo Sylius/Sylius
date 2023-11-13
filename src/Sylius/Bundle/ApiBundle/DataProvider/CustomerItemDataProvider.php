@@ -25,6 +25,9 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 /** @experimental */
 final class CustomerItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private UserContextInterface $userContext,
         private CustomerRepositoryInterface $customerRepository,
