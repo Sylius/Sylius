@@ -14,27 +14,83 @@ use PhpSpec\ObjectBehavior;
 
 return static function (Config $config): void
 {
-    $srcClassSet = ClassSet::fromDir(__DIR__.'/src');
+    $specClassSet = ClassSet::fromDir(__DIR__ . '/src/Sylius/{Behat,Component/*,Bundle/*}/spec');
 
-    $rules = [];
+    $config->add(
+        $specClassSet,
+        Rule::allClasses()
+            ->that(new Extend(ObjectBehavior::class))
+            ->should(new HaveNameMatching('*Spec'))
+            ->because('This is a convention from PHPSpec')
+        ,
+        Rule::allClasses()
+            ->that(new Extend(ObjectBehavior::class))
+            ->should(new IsFinal())
+            ->because('Specifications should not be extendable')
+        ,
+    );
 
-    $rules[] = Rule::allClasses()
-        ->that(new ResideInOneOfTheseNamespaces('Sylius\Component'))
-        ->should(new NotDependsOnTheseNamespaces('Sylius\Bundle'))
-        ->because('Sylius components should be stand-alone')
-    ;
+    $separationClassSet = ClassSet::fromDir(__DIR__ . '/src/Sylius/{Component,Bundle}');
 
-    $rules[] = Rule::allClasses()
-        ->that(new Extend(ObjectBehavior::class))
-        ->should(new HaveNameMatching('*Spec'))
-        ->because('This is a convention from PHPSpec')
-    ;
-
-    $rules[] = Rule::allClasses()
-        ->that(new Extend(ObjectBehavior::class))
-        ->should(new IsFinal())
-        ->because('Specifications should not be extendable')
-    ;
-
-    $config->add($srcClassSet, ...$rules);
+    $config->add(
+        $separationClassSet,
+        Rule::allClasses()
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Component'))
+            ->should(new NotDependsOnTheseNamespaces('Sylius\Bundle'))
+            ->because('Sylius components should be stand-alone')
+        ,
+        Rule::allClasses()
+            ->except('Sylius\Component\Core')
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Component'))
+            ->should(new NotDependsOnTheseNamespaces('Sylius\Component\Core'))
+            ->because('Core should not be used in any other component')
+        ,
+        Rule::allClasses()
+            ->except(
+                'Sylius\Bundle\AdminBundle',
+                'Sylius\Bundle\ApiBundle',
+                'Sylius\Bundle\CoreBundle',
+                'Sylius\Bundle\PayumBundle',
+                'Sylius\Bundle\ShopBundle',
+            )
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle'))
+            ->should(new NotDependsOnTheseNamespaces('Sylius\Component\Core'))
+            ->because('Core should not be used in stand-alone bundles')
+        ,
+        Rule::allClasses()
+            ->except(
+                'Sylius\Bundle\AdminBundle',
+                'Sylius\Bundle\ApiBundle',
+                'Sylius\Bundle\CoreBundle',
+                'Sylius\Bundle\ShopBundle',
+            )
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle'))
+            ->should(new NotDependsOnTheseNamespaces('Sylius\Bundle\CoreBundle'))
+            ->because('CoreBundle should not be used in stand-alone bundles')
+        ,
+        Rule::allClasses()
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ShopBundle'))
+            ->should(new NotDependsOnTheseNamespaces(
+                'Sylius\Bundle\AdminBundle',
+                'Sylius\Bundle\ApiBundle',
+            ))
+            ->because('Shop should not depend on Admin and API')
+        ,
+        Rule::allClasses()
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\AdminBundle'))
+            ->should(new NotDependsOnTheseNamespaces(
+                'Sylius\Bundle\ApiBundle',
+                'Sylius\Bundle\ShopBundle',
+            ))
+            ->because('Admin should not depend on Shop and API')
+        ,
+        Rule::allClasses()
+            ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ApiBundle'))
+            ->should(new NotDependsOnTheseNamespaces(
+                'Sylius\Bundle\AdminBundle',
+                'Sylius\Bundle\ShopBundle',
+            ))
+            ->because('API should not depend on Admin and Shop')
+        ,
+    );
 };
