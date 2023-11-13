@@ -1,0 +1,17 @@
+{
+    "@id": "\/api\/v2\/admin\/addresses\/@integer@",
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@type": "Address",
+    "customer": "\/api\/v2\/admin\/customers\/@integer@",
+    "id": "@integer@",
+    "firstName": "Adam",
+    "lastName": "Handley",
+    "company": "FMŻ",
+    "street": "Kościuszki 21",
+    "countryCode": "FR",
+    "city": "Bordeaux",
+    "postcode": "99-999",
+    "phoneNumber": "911213969",
+    "provinceCode": "PL-PL",
+    "provinceName": "kujawsko-pomorskie"
+}

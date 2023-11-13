@@ -6,3 +6,18 @@ Sylius\Component\Core\Model\Order:
         state: "new"
         tokenValue: "token"
         customer: "@customer_tony"
+        billingAddress: "@billing_address"
+
+Sylius\Component\Core\Model\Address:
+    billing_address:
+        customer: "@customer_tony"
+        firstName: "Andrzej"
+        lastName: "Legs"
+        company: "Polmotors"
+        street: "Moniuszki 16/20"
+        countryCode: "PL"
+        city: "Pabianice"
+        postcode: "31-999"
+        phoneNumber: "111999222"
+        provinceCode: "PL-PL"
+        provinceName: "kujawsko-pomorskie"
