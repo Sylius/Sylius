@@ -146,8 +146,41 @@ final class ProductImagesTest extends JsonApiTestCase
         $response = $this->client->getResponse();
         $this->assertResponse(
             $response,
-            'admin/product_image/post_product_image_with_type_response',
+            'admin/product_image/post_product_image_with_type_and_variant_response',
             Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_creates_a_product_image_with_invalid_variant(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant_cap_yellow'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/products/%s/images', $product->getCode()),
+            parameters: [
+                'type' => 'banner',
+                'productVariants' => [
+                    sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+                ],
+            ],
+            files: ['file' => $this->getUploadedFile('fixtures/mugs.jpg', 'mugs.jpg')],
+            server: $header,
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponse(
+            $response,
+            'admin/product_image/post_product_image_with_invalid_variant_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -188,6 +221,36 @@ final class ProductImagesTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/product_image/put_product_image_response',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_updates_the_existing_product_image_with_invalid_variant(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductImageInterface $productImage */
+        $productImage = $fixtures['product_mug_thumbnail'];
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant_cap_yellow'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-images/%s', $productImage->getId()),
+            server: $header,
+            content: json_encode([
+                'productVariants' => [
+                    sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_image/put_product_image_with_invalid_variant_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

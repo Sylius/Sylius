@@ -21,6 +21,11 @@ Sylius\Component\Core\Model\ProductVariant:
         product: '@product_mug'
         fallbackLocale: 'en_US'
         currentLocale: 'en'
+    product_variant_cap_yellow:
+        code: 'CAP_YELLOW'
+        product: '@product_cap'
+        fallbackLocale: 'en_US'
+        currentLocale: 'en'
         
 Sylius\Component\Core\Model\ProductImage:
     product_mug_thumbnail:
