@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemUnitRepository as BaseOrderItemUnitRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
 
 /**
  * @template T of OrderItemUnitInterface
- *
+ * @extends BaseOrderItemUnitRepository<T>
  * @implements OrderItemUnitRepositoryInterface<T>
  */
-class OrderItemUnitRepository extends EntityRepository implements OrderItemUnitRepositoryInterface
+class OrderItemUnitRepository extends BaseOrderItemUnitRepository implements OrderItemUnitRepositoryInterface
 {
     public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface
     {

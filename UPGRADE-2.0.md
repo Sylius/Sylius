@@ -136,6 +136,12 @@
   Locale:
 
     * `Sylius\Bundle\LocaleBundle\Doctrine\ORM\LocaleRepository` has been added
+  
+  Order:
+
+    * `Sylius\Bundle\OrderBundle\Doctrine\ORM\AdjustmentRepository` has been added
+    * `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemUnitRepository` has been added
+    * `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderSequenceRepository` has been added
 
 * The following repository classes and interfaces namespaces were changed, if you have custom repositories,
   you need to update them to extend the new ones:
@@ -164,6 +170,12 @@
       `Sylius\Component\Customer\Repository\CustomerRepositoryInterface`
     * `Sylius\Component\CoreBundle\Doctrine\Orm\CustomerRepository` has been renamed to
       `Sylius\Component\CustomerBundle\Doctrine\Orm\CustomerRepository`
+  
+  Order:
+
+    * `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository` extended class changed from
+      `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
+      `Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemUnitRepository`
 
 ## Frontend
 
