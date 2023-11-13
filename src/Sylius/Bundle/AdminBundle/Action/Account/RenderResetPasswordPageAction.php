@@ -79,7 +79,7 @@ final class RenderResetPasswordPageAction
             ->add('error', 'sylius.admin.password_reset.token_expired')
         ;
 
-        $attributes = $request->attributes->get('_sylius');
+        $attributes = $request->attributes->get('_sylius', []);
         $redirect = $attributes['redirect'] ?? 'sylius_admin_login';
 
         if (is_array($redirect)) {
