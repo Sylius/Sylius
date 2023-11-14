@@ -180,7 +180,7 @@
     },
     "conflict": {
         "api-platform/core": "2.7.0",
-        "doctrine/doctrine-bundle": "2.3.0",
+        "doctrine/doctrine-bundle": "2.3.0 || 2.11.0",
         "doctrine/migrations": "3.5.3",
         "doctrine/orm": ">= 2.16.0",
         "jms/serializer-bundle": "4.1.0",
