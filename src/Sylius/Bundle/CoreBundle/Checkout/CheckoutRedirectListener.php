@@ -32,13 +32,19 @@ final class CheckoutRedirectListener
     public function handleCheckoutRedirect(ResourceControllerEvent $resourceControllerEvent): void
     {
         $request = $this->requestStack->getCurrentRequest();
-        if (!$this->requestMatcher->matches($request) || isset($request->attributes->get('_sylius')['redirect'])) {
+        if (
+            null === $request ||
+            !$this->requestMatcher->matches($request) ||
+            isset($request->attributes->get('_sylius', [])['redirect'])
+        ) {
             return;
         }
 
         $order = $resourceControllerEvent->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 
-        $resourceControllerEvent->setResponse(new RedirectResponse($this->checkoutStateUrlGenerator->generateForOrderCheckoutState($order)));
+        $resourceControllerEvent->setResponse(
+            new RedirectResponse($this->checkoutStateUrlGenerator->generateForOrderCheckoutState($order)),
+        );
     }
 }

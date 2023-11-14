@@ -62,5 +62,8 @@
         <property name="scopes">
             <constraint name="Valid" />
         </property>
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>

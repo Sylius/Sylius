@@ -31,8 +31,13 @@ final class RemoveCatalogPromotionAction
 
     public function __invoke(Request $request): Response
     {
+        $catalogPromotionCode = $request->attributes->get('code');
+        if (null === $catalogPromotionCode) {
+            throw new NotFoundHttpException('The catalog promotion has not been found');
+        }
+
         try {
-            $this->catalogPromotionRemovalProcessor->removeCatalogPromotion($request->attributes->get('code'));
+            $this->catalogPromotionRemovalProcessor->removeCatalogPromotion($catalogPromotionCode);
 
             /** @var Session $session */
             $session = $request->getSession();

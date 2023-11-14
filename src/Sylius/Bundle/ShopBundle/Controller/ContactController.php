@@ -97,7 +97,7 @@ final class ContactController
 
     private function getSyliusAttribute(Request $request, string $attributeName, ?string $default): ?string
     {
-        $attributes = $request->attributes->get('_sylius');
+        $attributes = $request->attributes->get('_sylius', []);
 
         return $attributes[$attributeName] ?? $default;
     }

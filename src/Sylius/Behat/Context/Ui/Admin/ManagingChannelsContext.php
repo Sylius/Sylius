@@ -292,6 +292,7 @@ final class ManagingChannelsContext implements Context
      * @Given I am modifying a channel :channel
      * @When I want to modify a channel :channel
      * @When /^I want to modify (this channel)$/
+     * @When I want to modify a billing data of channel :channel
      */
     public function iWantToModifyChannel(ChannelInterface $channel): void
     {
@@ -315,6 +316,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save it
      */
     public function iSaveMyChanges(): void
     {
@@ -332,7 +334,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then there should still be only one channel with :element :value
      */
-    public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value)
+    public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value): void
     {
         $this->iWantToBrowseChannels();
 
@@ -375,6 +377,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled(): void
     {
@@ -461,7 +464,7 @@ final class ManagingChannelsContext implements Context
     /**
      * @Then paying in :currencyCode should be possible for the :channel channel
      */
-    public function payingInEuroShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
+    public function payingInCurrencyShouldBePossibleForTheChannel(string $currencyCode, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -607,6 +610,7 @@ final class ManagingChannelsContext implements Context
 
     /**
      * @Then the base currency field should be disabled
+     * @Then I should not be able to edit its base currency
      */
     public function theBaseCurrencyFieldShouldBeDisabled(): void
     {

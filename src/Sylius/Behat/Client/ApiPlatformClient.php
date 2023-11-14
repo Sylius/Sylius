@@ -200,10 +200,16 @@ final class ApiPlatformClient implements ApiClientInterface
         $this->request->updateFiles([$key => $file]);
     }
 
-    /** @param string|int|bool|array $value */
-    public function addRequestData(string $key, $value): void
+    public function addRequestData(string $key, null|string|int|bool|array $value): void
     {
         $this->request->updateContent([$key => $value]);
+    }
+
+    public function replaceRequestData(string $key, null|string|int|bool|array $value): void
+    {
+        $requestContent = $this->request->getContent();
+
+        $this->request->setContent(array_replace($requestContent, [$key => $value]));
     }
 
     public function updateRequestData(array $data): void

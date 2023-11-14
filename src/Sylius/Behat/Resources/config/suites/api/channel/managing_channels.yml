@@ -29,6 +29,7 @@ default:
                 - sylius.behat.context.api.admin.managing_channels
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - Sylius\Behat\Context\Api\Admin\ManagingChannelsBillingDataContext
                 - Sylius\Behat\Context\Api\Admin\ManagingChannelPriceHistoryConfigsContext
 
             filters:
