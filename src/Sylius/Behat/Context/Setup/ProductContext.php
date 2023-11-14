@@ -403,6 +403,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has(?:| a| an) "([^"]+)" variant$/
      * @Given /^(this product) has(?:| a| an) "([^"]+)" variant$/
+     * @Given /^(this product) has "([^"]+)" and "([^"]+)" variants$/
      * @Given /^(this product) has "([^"]+)", "([^"]+)" and "([^"]+)" variants$/
      */
     public function theProductHasVariants(ProductInterface $product, ...$variantNames)

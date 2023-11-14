@@ -74,3 +74,14 @@ Feature: Adding images to an existing product
         And I save my changes to the images
         Then I should be notified that it has been successfully uploaded
         And this product should have only one image
+
+    @ui @javascript @api
+    Scenario: Adding an image to an existing configurable product with selecting a variant
+        Given the store has a "Lamborghini Gallardo Model" configurable product
+        And this product has "Blue" and "Yellow" variants
+        When I want to modify this product
+        And I attach the "lamborghini.jpg" image with selected "Yellow" variant to this product
+        And I save my changes to the images
+        Then I should be notified that it has been successfully uploaded
+        And this product should have only one image
+        And its image should have "Yellow" variant selected

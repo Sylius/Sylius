@@ -33,6 +33,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -844,6 +845,24 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I attach the :path image with selected :productVariant variant to this product
+     */
+    public function iAttachImageWithSelectedVariantToThisProduct(
+        string $path,
+        ProductVariantInterface $productVariant,
+    ): void {
+        $this->updateConfigurableProductPage->attachImage($path, null, $productVariant);
+    }
+
+    /**
+     * @When I select :productVariant variant for the first image
+     */
+    public function iSelectVariantForTheFirstImage(ProductVariantInterface $productVariant): void
+    {
+        $this->updateConfigurableProductPage->selectVariantForFirstImage($productVariant);
+    }
+
+    /**
      * @When I associate as :productAssociationType the :productName product
      * @When I associate as :productAssociationType the :firstProductName and :secondProductName products
      */
@@ -900,6 +919,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then its image should have :productVariant variant selected
+     */
+    public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->updateConfigurableProductPage->hasLastImageAVariant($productVariant));
     }
 
     /**
