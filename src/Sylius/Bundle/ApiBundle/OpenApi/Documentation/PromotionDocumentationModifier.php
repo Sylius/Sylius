@@ -19,6 +19,10 @@ use ApiPlatform\OpenApi\OpenApi;
 /** @experimental */
 final class PromotionDocumentationModifier implements DocumentationModifierInterface
 {
+    /**
+     * @param string[] $actionTypes
+     * @param string[] $ruleTypes
+     */
     public function __construct(
         private string $apiRoute,
         private array $actionTypes,
