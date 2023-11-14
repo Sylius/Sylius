@@ -70,7 +70,3 @@ references related issues.
 
     - https://github.com/stof/StofDoctrineExtensionsBundle/issues/455
     - https://github.com/doctrine-extensions/DoctrineExtensions/issues/2600
-
-- `doctrine/doctrine-bundle:2.11.0`:
-
-  This version uses the [readonly property](https://github.com/doctrine/DoctrineBundle/blob/2.11.0/Repository/ServiceEntityRepositoryProxy.php#L34), which is available from PHP 8.1 while the package also supports PHP 7.4 and 8.0, leading to compatibility issues.
