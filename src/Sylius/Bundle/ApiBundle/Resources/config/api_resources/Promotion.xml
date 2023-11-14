@@ -33,6 +33,36 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_of_items_from_taxon` rule type:
+
+```
+{
+    "type": "total_of_items_from_taxon",
+    "configuration": {
+        "channel-code": [
+            "taxon": "taxon-code",
+            "amount": int
+        ]
+    }
+}
+```
+
+Example configuration for `order_fixed_discount` action type:
+
+```
+{
+    "type": "order_fixed_discount",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+                    </attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_get">
@@ -62,6 +92,36 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_of_items_from_taxon` rule type:
+
+```
+{
+    "type": "total_of_items_from_taxon",
+    "configuration": {
+        "channel-code": [
+            "taxon": "taxon-code",
+            "amount": int
+        ]
+    }
+}
+```
+
+Example configuration for `order_fixed_discount` action type:
+
+```
+{
+    "type": "order_fixed_discount",
+    "configuration": {
+        "channel-code": [
+            "amount": int,
+        ]
+    }
+}
+```
+                    </attribute>
                 </attribute>
             </itemOperation>
 
