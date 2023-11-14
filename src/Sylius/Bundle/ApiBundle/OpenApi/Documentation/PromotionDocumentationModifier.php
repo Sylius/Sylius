@@ -40,7 +40,6 @@ final class PromotionDocumentationModifier implements DocumentationModifierInter
         return $docs->withPaths($paths);
     }
 
-
     public function addDescription(Paths $paths, string $path, string $method): void
     {
         $pathItem = $paths->getPath($path);
@@ -51,7 +50,7 @@ final class PromotionDocumentationModifier implements DocumentationModifierInter
             "%s\n\n Allowed rule types: `%s` \n\n Allowed action types: `%s`",
             $operation->getDescription(),
             implode('`, `', array_keys($this->ruleTypes)),
-            implode('`, `', array_keys($this->actionTypes))
+            implode('`, `', array_keys($this->actionTypes)),
         );
 
         $operation = $operation->withDescription($description);
