@@ -30,7 +30,7 @@ final class UploadProductImageAction
             $request->attributes->get('code', ''),
             $request->files->get('file'),
             $request->request->get('type'),
-            ['productVariants' => $request->request->get('productVariants', [])],
+            ['productVariants' => $request->request->get('productVariants')],
         );
     }
 }

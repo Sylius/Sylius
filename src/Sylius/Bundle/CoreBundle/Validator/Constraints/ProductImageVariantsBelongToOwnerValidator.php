@@ -29,7 +29,7 @@ final class ProductImageVariantsBelongToOwnerValidator extends ConstraintValidat
         /** @var ProductImageVariantsBelongToOwner $constraint */
         Assert::isInstanceOf($constraint, ProductImageVariantsBelongToOwner::class);
 
-        /** @var ProductInterface $product */
+        /** @var ProductInterface $owner */
         $owner = $value->getOwner();
 
         foreach ($value->getProductVariants() as $productVariant) {
