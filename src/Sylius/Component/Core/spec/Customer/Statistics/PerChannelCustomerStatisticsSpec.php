@@ -43,7 +43,7 @@ final class PerChannelCustomerStatisticsSpec extends ObjectBehavior
         $this->getAverageOrderValue()->shouldReturn(2000);
     }
 
-    function it_returns_zero_average_order_value_when_order_count_is_zero(ChannelInterface $channel): void
+    function it_has_zero_average_order_value_when_order_count_is_zero(ChannelInterface $channel): void
     {
         $this->beConstructedWith(0, 0, $channel);
         $this->getAverageOrderValue()->shouldReturn(0);
