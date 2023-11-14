@@ -290,24 +290,20 @@ final class ManagingOrdersContext implements Context
         string $city,
         string $countryName,
     ) {
-        $this->itShouldBeBilledTo(null, $customerName, $street, $postcode, $city, $countryName);
+        Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }
 
     /**
-     * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
-     * @Then /^(this order) should have "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its new billing address$/
+     * @Then /^(?:it|this order) should(?:| still) have "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
      */
-    public function itShouldHaveAsItsNewBillingAddress(
-        ?OrderInterface $order,
+    public function itShouldHaveAsItsBillingAddress(
         string $customerName,
         string $street,
         string $postcode,
         string $city,
         string $countryName,
     ): void {
-        if (null !== $order) {
-            $this->iSeeTheOrder($order);
-        }
+        $this->iSeeTheOrder($this->sharedStorage->get('order'));
 
         Assert::true($this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }

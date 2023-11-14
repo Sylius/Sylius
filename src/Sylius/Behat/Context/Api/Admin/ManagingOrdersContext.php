@@ -298,6 +298,8 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
+        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
             $promotionTotal,
@@ -376,8 +378,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^this order billing (address should contain "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     * @Then /^this order should have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its new billing address)$/
+     * @Then /^this order should(?:| still) have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address)$/
      */
     public function itsBillingAddressShouldContain(AddressInterface $address): void
     {

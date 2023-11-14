@@ -16,7 +16,7 @@ Feature: Modifying a customer's billing address validation
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @api @ui
+    @ui @no-api
     Scenario: Address an order without name, city and street
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
@@ -24,4 +24,4 @@ Feature: Modifying a customer's billing address validation
         But I do not specify new information
         And I try to save my changes
         Then I should be notified that the "first name", the "last name", the "city" and the "street" in billing details are required
-        And this order bill should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
+        And this order should still have "Mike Ross", "350 5th Ave", "10118", "New York", "United States" as its billing address

@@ -22,7 +22,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its new billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
 
     @api @ui
     Scenario: Modifying a customer's billing address when a product's price has been changed
@@ -32,7 +32,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its new billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$400.00"
 
     @api @ui
@@ -43,7 +43,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its new billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$400.00"
 
     @api @ui
@@ -54,7 +54,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its new billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$400.00"
 
     @api @ui
@@ -65,5 +65,5 @@ Feature: Modifying a customer billing address after an order has been placed
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its new billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$400.00"
