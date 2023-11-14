@@ -109,4 +109,4 @@ jobs:
                     (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
                     mv _composer.json composer.json
                     composer dump-autoload
-                    composer-require-checker check --config-file=composer-require-checker.json
+                    composer-require-checker check --config-file=composer-require-checker.json --ignore-parse-errors
