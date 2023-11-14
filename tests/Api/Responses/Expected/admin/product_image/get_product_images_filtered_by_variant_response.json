@@ -11,18 +11,13 @@
             "type": "thumbnail",
             "path": "@string@\/thumbnail.jpg",
             "productVariants": ["\/api\/v2\/admin\/product-variants\/MUG_BLUE"]
-        },
-        {
-            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
-            "@type": "ProductImage",
-            "id": "@integer@",
-            "owner": "\/api\/v2\/admin\/products\/CAP",
-            "type": "banner",
-            "path": "@string@\/banner.jpg",
-            "productVariants": []
         }
     ],
-    "hydra:totalItems": 2,
+    "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": "\/api\/v2\/admin\/product-images?productVariants=MUG_BLUE",
+        "@type": "hydra:PartialCollectionView"
+    },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/admin\/product-images{?productVariants,productVariants[]}",

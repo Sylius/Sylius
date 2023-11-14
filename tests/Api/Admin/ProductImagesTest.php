@@ -89,7 +89,32 @@ final class ProductImagesTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/product_image/get_product_images_for_given_product_response',
+            'admin/product_image/get_product_images_for_product_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_filters_product_images_by_the_given_variant(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant_mug_blue'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/product-images',
+            parameters: [
+                'productVariants' => $productVariant->getCode(),
+            ],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_image/get_product_images_filtered_by_variant_response',
             Response::HTTP_OK,
         );
     }

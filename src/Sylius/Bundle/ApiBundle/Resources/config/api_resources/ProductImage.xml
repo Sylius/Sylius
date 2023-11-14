@@ -11,6 +11,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_image_product_variants_filter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_image:read</attribute>
                 </attribute>
