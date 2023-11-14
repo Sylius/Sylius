@@ -21,7 +21,7 @@ return static function (Config $config): void
         Rule::allClasses()
             ->that(new Extend(ObjectBehavior::class))
             ->should(new HaveNameMatching('*Spec'))
-            ->because('This is a convention from PHPSpec')
+            ->because('Specifications should follow PHPSpec naming convention')
         ,
         Rule::allClasses()
             ->that(new Extend(ObjectBehavior::class))
@@ -48,13 +48,13 @@ return static function (Config $config): void
         Rule::allClasses()
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Component'))
             ->should(new NotDependsOnTheseNamespaces('Sylius\Bundle'))
-            ->because('Sylius components should be stand-alone')
+            ->because('Components should not depend on bundles')
         ,
         Rule::allClasses()
             ->except('Sylius\Component\Core')
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Component'))
             ->should(new NotDependsOnTheseNamespaces('Sylius\Component\Core'))
-            ->because('Core should not be used in any other component')
+            ->because('Stand-alone components should not depend on Core')
         ,
         Rule::allClasses()
             ->except(
@@ -66,7 +66,7 @@ return static function (Config $config): void
             )
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle'))
             ->should(new NotDependsOnTheseNamespaces('Sylius\Component\Core'))
-            ->because('Core should not be used in stand-alone bundles')
+            ->because('Stand-alone bundles should not depend on Core')
         ,
         Rule::allClasses()
             ->except(
@@ -77,7 +77,7 @@ return static function (Config $config): void
             )
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle'))
             ->should(new NotDependsOnTheseNamespaces('Sylius\Bundle\CoreBundle'))
-            ->because('CoreBundle should not be used in stand-alone bundles')
+            ->because('Stand-alone bundles should not depend on CoreBundle')
         ,
         Rule::allClasses()
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ShopBundle'))
@@ -85,7 +85,7 @@ return static function (Config $config): void
                 'Sylius\Bundle\AdminBundle',
                 'Sylius\Bundle\ApiBundle',
             ))
-            ->because('Shop should not depend on Admin and API')
+            ->because('Shop should not depend on Admin and Api')
         ,
         Rule::allClasses()
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\AdminBundle'))
@@ -93,7 +93,7 @@ return static function (Config $config): void
                 'Sylius\Bundle\ApiBundle',
                 'Sylius\Bundle\ShopBundle',
             ))
-            ->because('Admin should not depend on Shop and API')
+            ->because('Admin should not depend on Shop and Api')
         ,
         Rule::allClasses()
             ->that(new ResideInOneOfTheseNamespaces('Sylius\Bundle\ApiBundle'))
@@ -101,7 +101,7 @@ return static function (Config $config): void
                 'Sylius\Bundle\AdminBundle',
                 'Sylius\Bundle\ShopBundle',
             ))
-            ->because('API should not depend on Admin and Shop')
+            ->because('Api should not depend on Admin and Shop')
         ,
     );
 };
