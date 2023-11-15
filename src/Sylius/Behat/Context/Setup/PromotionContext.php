@@ -1023,6 +1023,7 @@ final class PromotionContext implements Context
 
     private function createPromotion(
         string $name,
+        ?string $description = null,
         ?string $code = null,
         array $channels = [],
         ?array $rules = null,
@@ -1045,7 +1046,7 @@ final class PromotionContext implements Context
         /** @var PromotionInterface $promotion */
         $promotion = $this->promotionExampleFactory->create([
             'name' => $name,
-            'description' => $name . ' description',
+            'description' => $description,
             'code' => $code,
             'channels' => $channels,
             'rules' => $rules,
