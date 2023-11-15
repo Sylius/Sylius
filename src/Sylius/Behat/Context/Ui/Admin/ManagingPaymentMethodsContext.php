@@ -247,6 +247,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
+     * @When I switch the way payment methods are sorted descending by :field
      * @Given the payment methods are already sorted by :field
      */
     public function iSortPaymentMethodsBy($field)
@@ -265,6 +266,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that :element is required
+     * @Then I should be notified that I have to specify payment method :element
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
@@ -330,6 +332,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled()
     {

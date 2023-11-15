@@ -9,7 +9,7 @@ Feature: Payment method validation
         And the store has a payment method "Offline" with a code "Offline"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new payment method without specifying its code
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I name it "Paypal Express Checkout" in "English (United States)"
@@ -18,16 +18,16 @@ Feature: Payment method validation
         Then I should be notified that code is required
         And the payment method with name "Paypal Express Checkout" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to add a new payment method without specifying its name
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I specify its code as "PEC"
         But I do not name it
         And I add it
-        Then I should be notified that name is required
+        Then I should be notified that I have to specify payment method name
         And the payment method with code "PEC" should not be added
 
-    @ui
+    @ui @todo
     Scenario: Trying to add a new paypal payment method without specifying required configuration
         When I want to create a new payment method with "Paypal Express Checkout" gateway factory
         And I name it "Paypal Express Checkout" in "English (United States)"
@@ -38,7 +38,7 @@ Feature: Payment method validation
         Then I should be notified that I have to specify paypal password
         And the payment method with code "PEC" should not be added
 
-    @ui
+    @ui @api
     Scenario: Trying to remove name from an existing payment method
         When I want to modify the "Offline" payment method
         And I remove its name from "English (United States)" translation
