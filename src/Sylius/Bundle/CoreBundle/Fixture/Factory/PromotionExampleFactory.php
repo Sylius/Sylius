@@ -182,11 +182,11 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
                 /** @var PromotionCouponInterface $coupon */
                 $coupon = $couponFactory->createNew();
                 $coupon->setCode($couponDefinition['code']);
-                $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit']);
-                $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders']);
+                $coupon->setPerCustomerUsageLimit($couponDefinition['per_customer_usage_limit'] ?? null);
+                $coupon->setReusableFromCancelledOrders($couponDefinition['reusable_from_cancelled_orders'] ?? true);
                 $coupon->setUsageLimit($couponDefinition['usage_limit']);
 
-                if (null !== $couponDefinition['expires_at']) {
+                if (null !== ($couponDefinition['expires_at'] ?? null)) {
                     $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
                 }
 

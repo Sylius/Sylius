@@ -172,17 +172,20 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotionWithCoupon(string $promotionName, string $couponCode, ?int $usageLimit = null): void
     {
-        $coupon = $this->createCoupon($couponCode, $usageLimit);
-
-        $this->createPromotion(
+        $promotion = $this->createPromotion(
             name: $promotionName,
-            coupons: [$coupon],
+            coupons: [
+                [
+                    'code' => $couponCode,
+                    'usage_limit' => $usageLimit,
+                ]
+            ],
             couponBased: true,
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
             endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
 
-        $this->sharedStorage->set('coupon', $coupon);
+        $this->sharedStorage->set('coupon', $promotion->getCoupons()->first());
     }
 
     /**
