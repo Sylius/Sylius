@@ -20,7 +20,6 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\ContentType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -39,7 +38,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -63,7 +62,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -88,7 +87,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -112,7 +111,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -139,7 +138,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -164,7 +163,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
@@ -188,7 +187,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode([]),
         );
 
