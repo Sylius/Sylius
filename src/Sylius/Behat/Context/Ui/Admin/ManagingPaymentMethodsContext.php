@@ -37,7 +37,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I want to modify the :paymentMethod payment method
      */
-    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->updatePage->open(['id' => $paymentMethod->getId()]);
     }
@@ -247,7 +247,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
-     * @When I switch the way payment methods are sorted descending by :field
+     * @When I switch the way payment methods are sorted to descending by :field
      * @Given the payment methods are already sorted by :field
      */
     public function iSortPaymentMethodsBy($field)
