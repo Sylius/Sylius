@@ -345,4 +345,21 @@ final class ManagingOrdersContext implements Context
 
         Assert::same($firstItem['number'], str_replace('#', '', $number));
     }
+
+    /**
+     * @Then /^I should see the order "([^"]+)" with total ("[^"]+")$/
+     */
+    public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
+    {
+         $order = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'number',
+            trim($orderNumber, '#'),
+        )[0];
+
+        Assert::same(
+            $order['total'],
+            $total,
+        );
+    }
 }
