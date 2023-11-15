@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
@@ -59,6 +60,40 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders(): void
     {
         $this->client->index(Resources::ORDERS);
+    }
+
+    /**
+     * @When /^I want to modify a customer's billing address of this order$/
+     */
+    public function iWantToModifyCustomerBillingAddress(): void
+    {
+        $this->client->buildUpdateRequest(
+            Resources::ADDRESSES,
+            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
+        );
+    }
+
+    /**
+     * @When /^I want to modify a customer's shipping address of this order$/
+     */
+    public function iWantToModifyCustomerAddress(): void
+    {
+        $this->client->buildUpdateRequest(
+            Resources::ADDRESSES,
+            (string) $this->sharedStorage->get('order')->getShippingAddress()->getId(),
+        );
+    }
+
+    /**
+     * @When /^I specify their (?:|new )(?:billing|shipping) (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifyTheirAddressAs(AddressInterface $address): void
+    {
+        $this->client->addRequestData('firstName', $address->getFirstName());
+        $this->client->addRequestData('lastName', $address->getLastName());
+        $this->client->addRequestData('street', $address->getStreet());
+        $this->client->addRequestData('postcode', $address->getPostcode());
+        $this->client->addRequestData('city', $address->getCity());
     }
 
     /**
@@ -355,29 +390,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I want to modify a customer's billing address of this order$/
-     */
-    public function iWantToModifyACustomerBillingAddress(): void
-    {
-        $this->client->buildUpdateRequest(
-            Resources::ADDRESSES,
-            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
-        );
-    }
-
-    /**
-     * @When /^I specify their (?:|new )billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
-    public function iSpecifyTheirBillingAddressAsFor(AddressInterface $address): void
-    {
-        $this->client->addRequestData('firstName', $address->getFirstName());
-        $this->client->addRequestData('lastName', $address->getLastName());
-        $this->client->addRequestData('street', $address->getStreet());
-        $this->client->addRequestData('postcode', $address->getPostcode());
-        $this->client->addRequestData('city', $address->getCity());
-    }
-
-    /**
      * @Then /^this order should(?:| still) have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address)$/
      */
     public function itsBillingAddressShouldContain(AddressInterface $address): void
@@ -387,6 +399,24 @@ final class ManagingOrdersContext implements Context
             (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
         );
 
+        $this->assertAddressResponseProperties($response, $address);
+    }
+
+    /**
+     * @Then /^this order should(?:|still ) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     */
+    public function itShouldBeShippedTo(AddressInterface $address): void
+    {
+        $response = $this->client->show(
+            Resources::ADDRESSES,
+            (string) $this->sharedStorage->get('order')->getShippingAddress()->getId(),
+        );
+
+        $this->assertAddressResponseProperties($response, $address);
+    }
+
+    private function assertAddressResponseProperties(Response $response, AddressInterface $exceptedAddress): void
+    {
         $addressProperties = [
             'firstName' => 'getFirstName',
             'lastName' => 'getLastName',
@@ -397,7 +427,7 @@ final class ManagingOrdersContext implements Context
         ];
 
         foreach ($addressProperties as $property => $getter) {
-            Assert::same($this->responseChecker->getValue($response, $property), $address->$getter());
+            Assert::same($this->responseChecker->getValue($response, $property), $exceptedAddress->$getter());
         }
     }
 }

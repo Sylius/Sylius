@@ -105,6 +105,7 @@ final class AddressContext implements Context
      * @Transform /^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
      * @Transform /^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
+     * @Transform /^be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName)
     {
