@@ -114,7 +114,6 @@ final class ProductVariantsTest extends JsonApiTestCase
                 ]],
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Red mug',
                     ],
                 ],
@@ -285,7 +284,6 @@ final class ProductVariantsTest extends JsonApiTestCase
                 ]],
                 'translations' => [
                     'NON-EXISTING-LOCALE-CODE' => [
-                        'locale' => 'NON-EXISTING-LOCALE-CODE',
                         'name' => 'Yellow mug',
                     ],
                 ],
@@ -384,7 +382,6 @@ final class ProductVariantsTest extends JsonApiTestCase
                 ]],
                 'translations' => [
                     'NON-EXISTING-LOCALE-CODE' => [
-                        'locale' => 'NON-EXISTING-LOCALE-CODE',
                         'name' => 'Yellow mug',
                     ],
                 ],

@@ -110,7 +110,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -140,7 +139,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -170,7 +168,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'New',
                     ],
                 ],
@@ -200,7 +197,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Pages',
                     ],
                 ],
@@ -230,7 +226,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Display size',
                     ],
                 ],
@@ -260,7 +255,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Damage reduction',
                     ],
                 ],
@@ -293,7 +287,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Published at',
                     ],
                 ],
@@ -326,7 +319,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => false,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Published at',
                     ],
                 ],
@@ -370,7 +362,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -419,7 +410,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'type' => 'foobar',
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Test',
                     ],
                 ],
@@ -453,7 +443,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -497,7 +486,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -541,7 +529,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -584,7 +571,6 @@ final class ProductAttributesTest extends JsonApiTestCase
                 'translatable' => true,
                 'translations' => [
                     'en_US' => [
-                        'locale' => 'en_US',
                         'name' => 'Material',
                     ],
                 ],
@@ -641,11 +627,9 @@ final class ProductAttributesTest extends JsonApiTestCase
                             '/api/v2/admin/product-attribute-translations/%s',
                             $productAttribute->getTranslation('en_US')->getId(),
                         ),
-                        'locale' => 'en_US',
                         'name' => 'Additional information',
                     ],
                     'pl_PL' => [
-                        'locale' => 'pl_PL',
                         'name' => 'Dodatkowe informacje',
                     ],
                 ]

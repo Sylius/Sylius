@@ -76,7 +76,6 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                        'locale' => 'en_US'
                     ]
                 ]
             ], JSON_THROW_ON_ERROR),
@@ -126,7 +125,6 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                        'locale' => 'en_US'
                     ]
                 ]
             ], JSON_THROW_ON_ERROR),
