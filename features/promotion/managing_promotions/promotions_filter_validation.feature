@@ -13,7 +13,7 @@ Feature: Promotion filters validation
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
-        And I add the "Item percentage discount" action configured with a percentage value of 10% for "United States" channel
+        And I add the "Item percentage discount" action configured with a percentage value of "10%" for "United States" channel
         And I specify that on "United States" channel this action should be applied to items with price greater then "$asdasd"
         And I try to add it
         Then I should be notified that a minimum value should be a numeric value
@@ -24,7 +24,7 @@ Feature: Promotion filters validation
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
-        And I add the "Item percentage discount" action configured with a percentage value of 10% for "United States" channel
+        And I add the "Item percentage discount" action configured with a percentage value of "10%" for "United States" channel
         And I specify that on "United States" channel this action should be applied to items with price lesser then "$asdasda"
         And I try to add it
         Then I should be notified that a maximum value should be a numeric value
