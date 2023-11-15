@@ -16,15 +16,16 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
-use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
@@ -40,10 +41,10 @@ final class PromotionContext implements Context
         private PromotionActionFactoryInterface $actionFactory,
         private PromotionCouponFactoryInterface $couponFactory,
         private PromotionRuleFactoryInterface $ruleFactory,
-        private TestPromotionFactoryInterface $testPromotionFactory,
         private PromotionRepositoryInterface $promotionRepository,
         private PromotionCouponGeneratorInterface $couponGenerator,
         private ObjectManager $objectManager,
+        private ExampleFactoryInterface $promotionExampleFactory,
     ) {
     }
 
@@ -54,7 +55,12 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotion(string $name, ?string $code = null): void
     {
-        $this->createPromotion($name, $code);
+        $this->createPromotion(
+            name: $name,
+            code: $code,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -62,12 +68,15 @@ final class PromotionContext implements Context
      */
     public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, iterable $taxons): void
     {
-        $promotion = $this->createPromotion($name);
         $taxonCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($taxons));
         $rule = $this->ruleFactory->createHasTaxon($taxonCodes);
-        $promotion->addRule($rule);
 
-        $this->objectManager->flush();
+        $this->createPromotion(
+            name: $name,
+            rules: [$rule],
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -79,11 +88,14 @@ final class PromotionContext implements Context
         int $amount,
         ChannelInterface $channel,
     ): void {
-        $promotion = $this->createPromotion($name);
         $rule = $this->ruleFactory->createItemsFromTaxonTotal($channel->getCode(), $taxon->getCode(), $amount);
-        $promotion->addRule($rule);
 
-        $this->objectManager->flush();
+        $this->createPromotion(
+            name: $name,
+            rules: [$rule],
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -91,14 +103,17 @@ final class PromotionContext implements Context
      */
     public function thereIsAPromotionWithContainsProductRuleConfiguredWithProducts(string $name, array $products): void
     {
-        $promotion = $this->createPromotion($name);
-
+        $rules = [];
         foreach ($products as $product) {
-            $rule = $this->ruleFactory->createContainsProduct($product->getCode());
-            $promotion->addRule($rule);
+            $rules[] = $this->ruleFactory->createContainsProduct($product->getCode());
         }
 
-        $this->objectManager->flush();
+        $this->createPromotion(
+            name: $name,
+            rules: $rules,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -116,14 +131,12 @@ final class PromotionContext implements Context
      */
     public function thereIsAPromotionWithPriority(string $promotionName, int $priority): void
     {
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
-
-        $promotion->setPriority($priority);
-
-        $this->promotionRepository->add($promotion);
-        $this->sharedStorage->set('promotion', $promotion);
+        $this->createPromotion(
+            name: $promotionName,
+            priority: $priority,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -131,15 +144,13 @@ final class PromotionContext implements Context
      */
     public function thereIsAnExclusivePromotionWithPriority(string $promotionName, int $priority = 0): void
     {
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
-
-        $promotion->setExclusive(true);
-        $promotion->setPriority($priority);
-
-        $this->promotionRepository->add($promotion);
-        $this->sharedStorage->set('promotion', $promotion);
+        $this->createPromotion(
+            name: $promotionName,
+            priority: $priority,
+            exclusive: true,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -147,14 +158,12 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotionLimitedToUsages(string $promotionName, int $usageLimit): void
     {
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
-
-        $promotion->setUsageLimit($usageLimit);
-
-        $this->promotionRepository->add($promotion);
-        $this->sharedStorage->set('promotion', $promotion);
+        $this->createPromotion(
+            name: $promotionName,
+            usageLimit: $usageLimit,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -165,15 +174,14 @@ final class PromotionContext implements Context
     {
         $coupon = $this->createCoupon($couponCode, $usageLimit);
 
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
-        $promotion->addCoupon($coupon);
-        $promotion->setCouponBased(true);
+        $this->createPromotion(
+            name: $promotionName,
+            coupons: [$coupon],
+            couponBased: true,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
 
-        $this->promotionRepository->add($promotion);
-
-        $this->sharedStorage->set('promotion', $promotion);
         $this->sharedStorage->set('coupon', $coupon);
     }
 
@@ -182,12 +190,12 @@ final class PromotionContext implements Context
      */
     public function thereIsAPromotionThatDoesNotApplyToDiscountedProducts(string $name): void
     {
-        $promotion = $this->createPromotion($name);
-        $promotion->setAppliesToDiscounted(false);
-
-        $this->promotionRepository->add($promotion);
-
-        $this->sharedStorage->set('promotion', $promotion);
+        $this->createPromotion(
+            name: $name,
+            appliesToDiscounted: false,
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
+        );
     }
 
     /**
@@ -995,13 +1003,44 @@ final class PromotionContext implements Context
         return $configuration;
     }
 
-    private function createPromotion(string $name, ?string $code = null): PromotionInterface
-    {
-        $promotion = $this->testPromotionFactory->createForChannel($name, $this->sharedStorage->get('channel'));
-
-        if (null !== $code) {
-            $promotion->setCode($code);
+    private function createPromotion(
+        string $name,
+        ?string $code = null,
+        array $channels = [],
+        ?array $rules = null,
+        ?array $actions = null,
+        array $coupons = [],
+        int $priority = null,
+        int $usageLimit = null,
+        bool $couponBased = false,
+        bool $exclusive = false,
+        bool $appliesToDiscounted = true,
+        ?string $startsAt = null,
+        ?string $endsAt = null,
+    ): PromotionInterface {
+        if (empty($channels) && $this->sharedStorage->has('channel')) {
+            $channels = [$this->sharedStorage->get('channel')];
         }
+
+        $code ??= StringInflector::nameToCode($name);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $this->promotionExampleFactory->create([
+            'name' => $name,
+            'description' => $name . ' description',
+            'code' => $code,
+            'channels' => $channels,
+            'rules' => $rules,
+            'actions' => $actions,
+            'coupons' => $coupons,
+            'priority' => $priority,
+            'usage_limit' => $usageLimit,
+            'coupon_based' => $couponBased,
+            'exclusive' => $exclusive,
+            'applies_to_discounted' => $appliesToDiscounted,
+            'starts_at' => $startsAt,
+            'ends_at' => $endsAt,
+        ]);
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);

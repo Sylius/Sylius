@@ -207,10 +207,10 @@
             <argument type="service" id="sylius.factory.promotion_action" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.factory.promotion_rule" />
-            <argument type="service" id="sylius.test.factory.promotion" />
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.promotion_coupon_generator" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.fixture.example_factory.promotion" />
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">

@@ -84,6 +84,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $promotion->setUsageLimit($options['usage_limit']);
         $promotion->setExclusive($options['exclusive']);
         $promotion->setPriority((int) $options['priority']);
+        $promotion->setAppliesToDiscounted($options['applies_to_discounted']);
 
         if (isset($options['starts_at'])) {
             $promotion->setStartsAt(new \DateTime($options['starts_at']));
@@ -134,6 +135,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setDefault('coupon_based', false)
             ->setDefault('exclusive', $this->faker->boolean(25))
             ->setDefault('priority', 0)
+            ->setDefault('applies_to_discounted', true)
             ->setDefault('starts_at', null)
             ->setAllowedTypes('starts_at', ['null', 'string'])
             ->setDefault('ends_at', null)
@@ -142,20 +144,20 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefined('rules')
-            ->setNormalizer('rules', function (Options $options, array $rules): array {
-                if (empty($rules)) {
-                    return [[]];
+            ->setNormalizer('rules', function (Options $options, ?array $rules): array {
+                if (null === $rules) {
+                    return [];
                 }
 
-                return $rules;
+                return empty($rules) ? [[]] : $rules;
             })
             ->setDefined('actions')
-            ->setNormalizer('actions', function (Options $options, array $actions): array {
-                if (empty($actions)) {
-                    return [[]];
+            ->setNormalizer('actions', function (Options $options, ?array $actions): array {
+                if (null === $actions) {
+                    return [];
                 }
 
-                return $actions;
+                return empty($actions) ? [[]] : $actions;
             })
 
             ->setDefault('coupons', [])
