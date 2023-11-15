@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -36,6 +37,7 @@ final class ManagingOrdersContext implements Context
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
+        private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
     }
 
@@ -361,5 +363,46 @@ final class ManagingOrdersContext implements Context
             $order['total'],
             $total,
         );
+    }
+
+    /**
+     * @Then the administrator should see the order with total :total in order list
+     */
+    public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(string $total): void
+    {
+        $adminUser = $this->sharedStorage->get('administrator');
+        $currencyCode = $this->getCurrencyCodeFromTotal($total);
+        $total = $this->getTotalAsInt($total);
+
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $adminUser,
+            fn () => $this->client->index(Resources::ORDERS),
+        );
+
+        $itemsWithCurrency = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'currencyCode',
+            $currencyCode,
+        );
+
+        $firstItem = array_pop($itemsWithCurrency);
+
+        Assert::notEmpty($firstItem);
+        Assert::same($firstItem['total'], $total);
+    }
+
+    private function getCurrencyCodeFromTotal(string $total): string
+    {
+        return match(true) {
+            str_starts_with($total, '$') => 'USD',
+            str_starts_with($total, '€') => 'EUR',
+            str_starts_with($total, '£') => 'GBP',
+            default => throw new \InvalidArgumentException('Unsupported currency symbol'),
+        };
+    }
+
+    private function getTotalAsInt(string $total): int
+    {
+        return (int) round((float) trim($total, '$€£') * 100, 2);
     }
 }
