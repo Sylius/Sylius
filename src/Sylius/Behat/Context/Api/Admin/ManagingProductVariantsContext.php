@@ -63,7 +63,6 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->client->addRequestData('translations', [
             $localeCode => [
-                'locale' => $localeCode,
                 'name' => $name,
             ],
         ]);
@@ -330,7 +329,6 @@ final class ManagingProductVariantsContext implements Context
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
         $expectedTranslation = [
-            'locale' => $localeCode,
             'name' => $name,
         ];
 

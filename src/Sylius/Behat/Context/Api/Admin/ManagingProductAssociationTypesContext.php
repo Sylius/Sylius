@@ -56,7 +56,6 @@ final class ManagingProductAssociationTypesContext implements Context
             'translations' => [
                  $localeCode => [
                       'name' => $productAssociationTypeName,
-                      'locale' => $localeCode,
                  ],
             ],
         ]);
@@ -167,7 +166,7 @@ final class ManagingProductAssociationTypesContext implements Context
      */
     public function iRenameItToIn(string $name, string $language): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name]]]);
     }
 
     /**
@@ -282,7 +281,6 @@ final class ManagingProductAssociationTypesContext implements Context
             'translations' => [
                 $localeCode => [
                     'name' => null,
-                    'locale' => $localeCode,
                 ],
             ],
         ]);
