@@ -21,8 +21,7 @@
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
-            "name": null,
-            "locale": "en_US"
+            "name": null
         }
     },
     "enabled": true,

@@ -23,8 +23,7 @@
             "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
             "@type": "ProductVariantTranslation",
             "id": @integer@,
-            "name": "Red mug",
-            "locale": "en_US"
+            "name": "Red mug"
         }
     },
     "enabled": false,
