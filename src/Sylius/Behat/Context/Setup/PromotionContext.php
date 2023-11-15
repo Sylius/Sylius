@@ -25,7 +25,10 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
@@ -69,11 +72,15 @@ final class PromotionContext implements Context
     public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, iterable $taxons): void
     {
         $taxonCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($taxons));
-        $rule = $this->ruleFactory->createHasTaxon($taxonCodes);
 
         $this->createPromotion(
             name: $name,
-            rules: [$rule],
+            rules: [
+                [
+                    'type' => HasTaxonRuleChecker::TYPE,
+                    'configuration' => ['taxons' => $taxonCodes],
+                ],
+            ],
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
             endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
@@ -92,7 +99,12 @@ final class PromotionContext implements Context
 
         $this->createPromotion(
             name: $name,
-            rules: [$rule],
+            rules: [
+                [
+                    'type' => TotalOfItemsFromTaxonRuleChecker::TYPE,
+                    'configuration' => [$channel->getCode() => ['taxon' => $taxon->getCode(), 'amount' => $amount]],
+                ],
+            ],
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
             endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
@@ -105,7 +117,10 @@ final class PromotionContext implements Context
     {
         $rules = [];
         foreach ($products as $product) {
-            $rules[] = $this->ruleFactory->createContainsProduct($product->getCode());
+            $rules[] = [
+                'type' => ContainsProductRuleChecker::TYPE,
+                'configuration' => ['product_code' => $product->getCode()],
+            ];
         }
 
         $this->createPromotion(
