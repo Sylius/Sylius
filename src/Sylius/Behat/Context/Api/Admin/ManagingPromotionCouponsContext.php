@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
@@ -9,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,6 +43,15 @@ final class ManagingPromotionCouponsContext implements Context
             $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
         );
         $this->client->filter();
+    }
+
+    /**
+     * @When /^I delete ("[^"]+" coupon) related to this promotion$/
+     * @When /^I try to delete ("[^"]+" coupon) related to this promotion$/
+     */
+    public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon)
+    {
+        $this->client->delete(Resources::PROMOTION_COUPONS, $coupon->getCode());
     }
 
     /**
@@ -116,6 +135,52 @@ final class ManagingPromotionCouponsContext implements Context
             'code',
             $code,
         ));
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
+    {
+        Assert::true(
+            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
+            'Promotion coupon could not be deleted',
+        );
+    }
+
+    /**
+     * @Then /^(this coupon) should no longer exist in the coupon registry$/
+     */
+    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
+    {
+        Assert::false($this->responseChecker->hasItemWithValue(
+            $this->client->index(Resources::PROMOTION_COUPONS),
+            'code',
+            $coupon->getCode(),
+        ));
+    }
+
+    /**
+     * @Then /^(this coupon) should still exist in the registry$/
+     */
+    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->index(Resources::PROMOTION_COUPONS),
+            'code',
+            $coupon->getCode(),
+        ));
+    }
+
+    /**
+     * @Then I should be notified that it is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedThatItIsInUseAndCannotBeDeleted(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the promotion coupon is in use.',
+        );
     }
 
     private function sortBy(string $order, string $field): void

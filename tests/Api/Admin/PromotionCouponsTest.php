@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var PromotionInterface $promotion */
+        /** @var PromotionCouponInterface $coupon */
         $coupon = $fixtures['promotion_1_off_coupon_1'];
 
         $this->client->request(
@@ -57,5 +57,23 @@ final class PromotionCouponsTest extends JsonApiTestCase
             'admin/promotion_coupon/get_promotion_coupons_response',
             Response::HTTP_OK,
         );
+    }
+
+    /** @test */
+    public function it_removes_a_promotion_coupon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionCouponInterface $coupon */
+        $coupon = $fixtures['promotion_1_off_coupon_1'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 }

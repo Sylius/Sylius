@@ -42,6 +42,10 @@
                     <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
         <property name="id" identifier="false" writable="false" />
