@@ -46,12 +46,64 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When /^I want to create a new coupon for (this promotion)$/
+     */
+    public function iWantToCreateANewCouponForPromotion(PromotionInterface $promotion): void
+    {
+        $this->client->buildCreateRequest(Resources::PROMOTION_COUPONS);
+        $this->client->addRequestData(
+            'promotion',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
+        );
+    }
+
+    /**
      * @When /^I delete ("[^"]+" coupon) related to this promotion$/
      * @When /^I try to delete ("[^"]+" coupon) related to this promotion$/
      */
-    public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon)
+    public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon): void
     {
         $this->client->delete(Resources::PROMOTION_COUPONS, $coupon->getCode());
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
+    }
+
+    /**
+     * @When I limit its usage to :times times
+     */
+    public function iLimitItsUsageToTimes(int $times): void
+    {
+        $this->client->addRequestData('usageLimit', $times);
+    }
+
+    /**
+     * @When I limit its per customer usage to :times times
+     */
+    public function iLimitItsPerCustomerUsageToTimes(int $times): void
+    {
+        $this->client->addRequestData('perCustomerUsageLimit', $times);
+    }
+
+    /**
+     * @When I make it valid until :date
+     */
+    public function iMakeItValidUntil(\DateTime $date): void
+    {
+        $this->client->addRequestData('expiresAt', $date->format('d-m-Y'));
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt(): void
+    {
+        $this->client->create();
     }
 
     /**
@@ -113,7 +165,11 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thereShouldBeACouponWithCode(string $code): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $code));
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->index(Resources::PROMOTION_COUPONS),
+            'code',
+            $code,
+        ));
     }
 
     /**
@@ -138,6 +194,17 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Promotion coupon could not be created',
+        );
+    }
+
+    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
@@ -151,7 +218,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^(this coupon) should no longer exist in the coupon registry$/
      */
-    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
+    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->index(Resources::PROMOTION_COUPONS),
@@ -163,7 +230,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^(this coupon) should still exist in the registry$/
      */
-    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
+    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->index(Resources::PROMOTION_COUPONS),

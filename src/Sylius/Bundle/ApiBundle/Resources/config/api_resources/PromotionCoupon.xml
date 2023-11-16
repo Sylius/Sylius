@@ -33,6 +33,16 @@
                     <attribute name="used">DESC</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion_coupon:create</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>

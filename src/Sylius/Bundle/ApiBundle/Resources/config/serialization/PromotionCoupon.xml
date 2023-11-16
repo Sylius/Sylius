@@ -26,14 +26,17 @@
 
         <attribute name="code">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="usageLimit">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="perCustomerUsageLimit">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="used">
@@ -42,14 +45,17 @@
 
         <attribute name="reusableFromCancelledOrders">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="promotion">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
 
         <attribute name="expiresAt">
             <group>admin:promotion_coupon:read</group>
+            <group>admin:promotion_coupon:create</group>
         </attribute>
     </class>
 </serializer>
