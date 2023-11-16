@@ -31,14 +31,12 @@
             "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
             "@type": "ProductAttributeTranslation",
             "id": "@integer@",
-            "locale": "en_US",
             "name": "Additional information"
         },
         "pl_PL": {
             "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
             "@type": "ProductAttributeTranslation",
             "id": "@integer@",
-            "locale": "pl_PL",
             "name": "Dodatkowe informacje"
         }
     }

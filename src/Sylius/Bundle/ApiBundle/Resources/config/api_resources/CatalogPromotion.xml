@@ -164,7 +164,6 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="en_US">
                         <attribute name="label">string</attribute>
                         <attribute name="description">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

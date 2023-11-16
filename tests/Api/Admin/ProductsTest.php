@@ -178,6 +178,35 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_create_a_product_when_locale_differs_from_key(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/products',
+            server: $header,
+            content: json_encode([
+                'code' => 'MUG',
+                'translations' => [
+                    'en_US' => [
+                        'slug' => 'mug',
+                        'name' => 'Mug',
+                        'locale' => 'locale',
+                    ]
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/post_product_when_locale_differs_from_key',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
     public function it_updates_the_existing_product(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

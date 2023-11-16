@@ -146,6 +146,10 @@
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
                         <attribute name="slug">string</attribute>
+                        <attribute name="description">string</attribute>
+                        <attribute name="shortDescription">string</attribute>
+                        <attribute name="metaKeywords">string</attribute>
+                        <attribute name="metaDescription">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

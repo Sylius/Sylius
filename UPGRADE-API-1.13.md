@@ -117,3 +117,11 @@
    * `Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer`
    * `Sylius\Bundle\ApiBundle\Serializer\ProductVariantNormalizer`
    * `Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer`
+
+1. Update in Translations Handling
+
+   The process for creating or updating translations via the API has been refined. Now, the locale for each translation 
+is determined directly from its key, making the explicit transmission of the `locale` field redundant. Although the API 
+continues to support the explicit sending of the `locale` field, it is essential that this explicitly sent locale matches 
+the key in the translation array. In cases of a mismatch between the key and an explicitly sent locale, the API will 
+respond with a `Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException`.

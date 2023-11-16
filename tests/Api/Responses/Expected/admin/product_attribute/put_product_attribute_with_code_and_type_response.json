@@ -12,8 +12,7 @@
             "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
             "@type": "ProductAttributeTranslation",
             "id": "@integer@",
-            "name": "origin",
-            "locale": "en_US"
+            "name": "origin"
         }
     },
     "type": "text"

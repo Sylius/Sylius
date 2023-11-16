@@ -74,7 +74,6 @@ final class PromotionsTest extends JsonApiTestCase
                 'code' => 'tshirts_discount',
                 'appliesToDiscounted' => false,
                 'translations' => ['en_US' => [
-                    'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                 ]],
             ], JSON_THROW_ON_ERROR),
