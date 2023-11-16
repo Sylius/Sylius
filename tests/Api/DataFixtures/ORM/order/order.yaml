@@ -22,6 +22,7 @@ Sylius\Component\Core\Model\Address:
         phoneNumber: "111999222"
         provinceCode: "PL-PL"
         provinceName: "kujawsko-pomorskie"
+
     shipping_address:
         customer: "@customer_tony"
         firstName: "Andrzej"
@@ -34,3 +35,4 @@ Sylius\Component\Core\Model\Address:
         phoneNumber: "111999222"
         provinceCode: "PL-PL"
         provinceName: "kujawsko-pomorskie"
+
