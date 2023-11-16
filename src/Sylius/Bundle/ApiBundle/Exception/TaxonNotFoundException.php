@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /** @experimental */
 final class TaxonNotFoundException extends NotFoundHttpException
 {
+    /** @param array<array-key, mixed> $headers */
     public function __construct(
         string $message = 'Taxon not found.',
         \Throwable $previous = null,

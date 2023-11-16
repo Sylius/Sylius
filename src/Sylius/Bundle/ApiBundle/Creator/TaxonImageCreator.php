@@ -41,13 +41,11 @@ final class TaxonImageCreator implements TaxonImageCreatorInterface
             throw new NoFileUploadedException();
         }
 
-        /** @var TaxonInterface|null $owner */
         $owner = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
         if (null === $owner) {
             throw new TaxonNotFoundException();
         }
 
-        /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $this->taxonImageFactory->createNew();
         $taxonImage->setFile($file);
         $taxonImage->setType($type);
