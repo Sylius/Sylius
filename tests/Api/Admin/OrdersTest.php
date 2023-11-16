@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 final class OrdersTest extends JsonApiTestCase
 {
@@ -27,12 +28,17 @@ final class OrdersTest extends JsonApiTestCase
     public function it_gets_an_order(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-        $headers = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
         $tokenValue = 'nAWw2jewpA';
 
         $this->placeOrder($tokenValue);
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/orders/' . $tokenValue, server: $headers);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/orders/' . $tokenValue,
+            server: $this->createFetchRequestHeaders('api@example.com'),
+        );
+
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'admin/order/get_order_response', Response::HTTP_OK);
     }
@@ -47,21 +53,13 @@ final class OrdersTest extends JsonApiTestCase
             'customer_order.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
 
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/orders?customer.id=' . $customer->getId(),
-            server: $headers,
+            server: $this->createFetchRequestHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -81,20 +79,13 @@ final class OrdersTest extends JsonApiTestCase
             'order/customer.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $billingAddress */
         $billingAddress = $fixtures['billing_address'];
 
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $headers,
+            server: $this->createFetchRequestHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -114,22 +105,13 @@ final class OrdersTest extends JsonApiTestCase
             'order/order.yaml',
         ]);
 
-
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $billingAddress */
         $billingAddress = $fixtures['billing_address'];
 
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $headers,
+            server: $this->createUpdateRequestHeaders('api@example.com'),
             content: json_encode([
                 'firstName' => 'Updated: Adam',
                 'lastName' => 'Updated: Handley',
@@ -161,14 +143,6 @@ final class OrdersTest extends JsonApiTestCase
             'order/customer.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $billingAddress */
         $billingAddress = $fixtures['billing_address'];
 
@@ -181,24 +155,17 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $headers,
+            server: $this->createFetchRequestHeaders('api@example.com'),
             content: json_encode([
                 'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
             ]),
         );
 
+        $content = $this->client->getResponse()->getContent();
+        Assert::notFalse($content, 'Address response content should not be empty.');
+
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $headers,
-        );
-
-        $this->assertSame(
-            '/api/v2/admin/customers/' . $customerTony->getId(),
-            json_decode($this->client->getResponse()->getContent())->customer
-        );
+        $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
     }
 
     /** @test */
@@ -211,20 +178,13 @@ final class OrdersTest extends JsonApiTestCase
             'order/order.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $shippingAddress */
         $shippingAddress = $fixtures['shipping_address'];
 
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $headers,
+            server: $this->createFetchRequestHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -244,21 +204,13 @@ final class OrdersTest extends JsonApiTestCase
             'order/order.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $shippingAddress */
         $shippingAddress = $fixtures['shipping_address'];
 
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $headers,
+            server: $this->createUpdateRequestHeaders('api@example.com'),
             content: json_encode([
                 'firstName' => 'Updated: Julia',
                 'lastName' => 'Updated: Kowalska',
@@ -290,14 +242,6 @@ final class OrdersTest extends JsonApiTestCase
             'order/order.yaml',
         ]);
 
-        $headers = $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
-            ->withAdminUserAuthorization('api@example.com')
-            ->build()
-        ;
-
         /** @var AddressInterface $shippingAddress */
         $shippingAddress = $fixtures['shipping_address'];
 
@@ -310,23 +254,38 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $headers,
+            server: $this->createUpdateRequestHeaders('api@example.com'),
             content: json_encode([
                 'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
             ]),
         );
 
+        $content = $this->client->getResponse()->getContent();
+        Assert::notFalse($content, 'Address response content should not be empty.');
+
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+        $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
+    }
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $headers,
-        );
+    private function createUpdateRequestHeaders(string $adminEmail): array
+    {
+        return $this
+            ->headerBuilder()
+            ->withJsonLdContentType()
+            ->withJsonLdAccept()
+            ->withAdminUserAuthorization($adminEmail)
+            ->build()
+        ;
+    }
 
-        $this->assertSame(
-            '/api/v2/admin/customers/' . $customerTony->getId(),
-            json_decode($this->client->getResponse()->getContent())->customer
-        );
+    private function createFetchRequestHeaders(string $adminEmail): array
+    {
+        return $this
+            ->headerBuilder()
+            ->withJsonLdAccept()
+            ->withJsonLdContentType()
+            ->withAdminUserAuthorization($adminEmail)
+            ->build()
+        ;
     }
 }
