@@ -18,7 +18,16 @@
     <resource class="%sylius.model.promotion_coupon.class%" shortName="PromotionCoupon">
         <attribute name="route_prefix">admin</attribute>
 
-        <collectionOperations/>
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
@@ -29,6 +38,15 @@
             </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" readable="true" />
+        <property name="usageLimit" readable="true" />
+        <property name="perCustomerUsageLimit" readable="true" />
+        <property name="used" readable="true" />
+        <property name="reusableFromCancelledOrders" readable="true" />
+        <property name="promotion" readable="true" />
+        <property name="expiresAt" readable="true" />
+        <property name="createdAt" readable="true" />
+        <property name="updatedAt" readable="true" />
     </resource>
 </resources>

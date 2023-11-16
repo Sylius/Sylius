@@ -9,8 +9,8 @@ Feature: Browsing promotion coupons
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Browsing coupons in store
+    @ui @api
+    Scenario: Browsing coupons of a promotion
         When I want to view all coupons of this promotion
         And there should be 1 coupon related to this promotion
-        And there should be coupon with code "SANTA2016"
+        And there should be a coupon with code "SANTA2016"

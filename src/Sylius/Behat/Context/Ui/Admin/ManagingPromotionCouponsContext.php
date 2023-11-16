@@ -275,9 +275,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^there should be (0|1) coupon related to (this promotion)$/
-     * @Then /^there should be (\b(?![01]\b)\d{1,9}\b) coupons related to (this promotion)$/
-     * @Then /^there should still be (\d+) coupons related to (this promotion)$/
+     * @Then /^there should(?:| still) be (\d+) coupons? related to (this promotion)$/
      */
     public function thereShouldBeCouponRelatedTo(int $number, PromotionInterface $promotion): void
     {
@@ -315,7 +313,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @Then /^there should be coupon with code "([^"]+)"$/
+     * @Then there should be a coupon with code :code
      */
     public function thereShouldBeCouponWithCode($code)
     {
