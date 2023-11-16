@@ -24,9 +24,6 @@
             <itemOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/promotion-translations/{id}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:promotion:read</attribute>
-                </attribute>
             </itemOperation>
         </itemOperations>
 
