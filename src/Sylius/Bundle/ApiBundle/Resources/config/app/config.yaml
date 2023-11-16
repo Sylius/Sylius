@@ -62,6 +62,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
         Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException: 422
