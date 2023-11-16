@@ -65,7 +65,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             trigger_deprecation(
                 'sylius/core-bundle',
                 '1.13',
-                'Not passing a $localRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
+                'Not passing a $localeRepository to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
                 self::class,
             );
         }
