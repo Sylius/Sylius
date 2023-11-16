@@ -23,8 +23,14 @@
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.promotion_coupon_order_filter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="order">
+                    <attribute name="used">DESC</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

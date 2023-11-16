@@ -8,6 +8,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.coupon
+                - sylius.behat.context.transform.date_time
                 - sylius.behat.context.transform.promotion
                 - sylius.behat.context.transform.shared_storage
 

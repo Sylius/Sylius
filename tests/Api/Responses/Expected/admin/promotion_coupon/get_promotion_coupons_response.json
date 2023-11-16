@@ -30,5 +30,42 @@
             "updatedAt": @date@
         }
     ],
-    "hydra:totalItems": 2
+    "hydra:totalItems": 2,
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "\/api\/v2\/admin\/promotion-coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used]}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                    "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[expiresAt]",
+                "property": "expiresAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[usageLimit]",
+                "property": "usageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[perCustomerUsageLimit]",
+                "property": "perCustomerUsageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[used]",
+                "property": "used",
+                "required": false
+            }
+        ]
+    }
 }
