@@ -185,7 +185,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, $minimum)
     {
@@ -193,7 +193,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, $maximum)
     {
@@ -453,9 +453,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -527,9 +527,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion cannot end before it start
+     * @Then I should be notified that promotion cannot end before it starts
      */
-    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
+    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);

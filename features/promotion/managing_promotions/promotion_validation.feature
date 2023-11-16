@@ -34,7 +34,7 @@ Feature: Promotion validation
         And I name it "Full metal promotion"
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to add it
-        Then I should be notified that promotion cannot end before it start
+        Then I should be notified that promotion cannot end before it starts
 
     @api @ui
     Scenario: Trying to remove name from existing promotion
@@ -51,7 +51,7 @@ Feature: Promotion validation
         When I want to modify this promotion
         And I make it available from "24.12.2017" to "12.12.2017"
         And I try to save my changes
-        Then I should be notified that promotion cannot end before it start
+        Then I should be notified that promotion cannot end before it starts
 
     @api @ui @javascript
     Scenario: Adding a promotion with label exceeding 255 characters

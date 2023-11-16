@@ -13,7 +13,7 @@ Feature: Editing promotion
     @api @ui
     Scenario: Seeing disabled code field when editing promotion
         When I want to modify a "Christmas sale" promotion
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
     @api @ui
     Scenario: Editing promotions usage limit

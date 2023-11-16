@@ -79,7 +79,9 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyItsAs(string $field, ?string $value = null): void
     {
-        $this->client->addRequestData($field, (string) $value);
+        if (null !== $value) {
+            $this->client->addRequestData($field, $value);
+        }
     }
 
     /**
@@ -193,19 +195,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of ("[^"]+") for ("[^"]+" channel)$/
+     * @When /^I add the "Item percentage discount" action configured with a percentage value of ("[^"]+") for ("[^"]+" channel)$/
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
-        string $actionType,
         float $percentage,
         ChannelInterface $channel,
     ): void {
-        $actionTypeMapping = [
-            'Item percentage discount' => UnitPercentageDiscountPromotionActionCommand::TYPE,
-        ];
-
         $this->addToRequestAction(
-            $actionTypeMapping[$actionType],
+            UnitPercentageDiscountPromotionActionCommand::TYPE,
             [
                 $channel->getCode() => [
                     'percentage' => $percentage,
@@ -247,7 +244,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I edit (this promotion) percentage action to have ("[^"]+")$/
      */
-    public function iEditPromotionToHaveDiscount(PromotionInterface $promotion, $percentage): void
+    public function iEditPromotionToHaveDiscount(PromotionInterface $promotion, float $percentage): void
     {
         $actions = $this->getActions();
         $actions[0]['configuration']['percentage'] = $percentage;
@@ -256,7 +253,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, int $minimum): void
     {
@@ -267,7 +264,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, int $maximum): void
     {
@@ -389,7 +386,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I filter promotions by coupon code equal "([^"]+)"/
+     * @When I filter promotions by coupon code equal :value
      */
     public function iFilterPromotionsByCouponCodeEqual(string $value): void
     {
@@ -577,7 +574,6 @@ final class ManagingPromotionsContext implements Context
                 'channels',
                 $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
-            sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
     }
 
@@ -614,9 +610,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled(): void
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
@@ -639,13 +635,7 @@ final class ManagingPromotionsContext implements Context
                     'startsAt' => $startsDate->format('Y-m-d H:i:s'),
                     'endsAt' => $endsDate->format('Y-m-d H:i:s'),
                 ],
-            ),
-            sprintf(
-                'Cannot find promotions with name "%s" available between "%s" and "%s" in the list',
-                $promotion->getName(),
-                $startsDate->format('Y-m-d H:i:s'),
-                $endsDate->format('Y-m-d H:i:s'),
-            ),
+            )
         );
     }
 
@@ -661,7 +651,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given the :promotion promotion should have priority :priority
+     * @Then the :promotion promotion should have priority :priority
      */
     public function thePromotionsShouldHavePriority(PromotionInterface $promotion, int $priority): void
     {
@@ -672,11 +662,6 @@ final class ManagingPromotionsContext implements Context
                     'name' => $promotion->getName(),
                     'priority' => $priority,
                 ],
-            ),
-            sprintf(
-                'Cannot find promotions with name "%s" and priority "%s" in the list',
-                $promotion->getName(),
-                $priority,
             ),
         );
     }
@@ -697,10 +682,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatPromotionWithThisCodeAlreadyExists(): void
     {
         $response = $this->client->getLastResponse();
-        Assert::false(
-            $this->responseChecker->isCreationSuccessful($response),
-            'Promotion has been created successfully, but it should not',
-        );
+        Assert::false($this->responseChecker->isCreationSuccessful($response));
         Assert::same(
             $this->responseChecker->getError($response),
             'code: The promotion with given code already exists.',
@@ -715,7 +697,6 @@ final class ManagingPromotionsContext implements Context
         Assert::count(
             $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::PROMOTIONS), $element, $value),
             1,
-            sprintf('There is more than one promotion with %s %s', $element, $value),
         );
     }
 
@@ -724,10 +705,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function promotionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
-        Assert::false(
-            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PROMOTIONS), $element, $value),
-            sprintf('Promotion with %s: %s exists', $element, $value),
-        );
+        Assert::false($this->responseChecker->hasItemWithValue($this->client->index(Resources::PROMOTIONS), $element, $value));
     }
 
     /**
@@ -742,9 +720,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion cannot end before it start
+     * @Then I should be notified that promotion cannot end before it starts
      */
-    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart(): void
+    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
