@@ -16,8 +16,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <service id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface" class="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator">
+        <service id="Sylius\Bundle\ApiBundle\Uploader\TaxonImageUploader">
             <argument type="service" id="sylius.factory.taxon_image" />
+            <argument type="service" id="sylius.repository.taxon_image" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.image_uploader" />
         </service>

@@ -130,7 +130,7 @@ final class TaxonImagesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_only_the_type_of_the_existing_taxon_image(): void
+    public function it_updates_the_existing_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -138,18 +138,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
-        /** @var TaxonInterface $taxon */
-        $taxon = $fixtures['taxon_mug'];
-
         $this->client->request(
             method: 'PUT',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxonImage->getOwner()->getCode(), $taxonImage->getId()),
+            parameters: ['type' => 'logo'],
+            files: ['file' => $this->getUploadedFile('fixtures/t-shirts.jpg', 't-shirts.jpg')],
             server: $header,
-            content: json_encode([
-                'type' => 'logo',
-                'owner' => sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
-                'path' => 'logo.jpg',
-            ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -157,6 +151,29 @@ final class TaxonImagesTest extends JsonApiTestCase
             'admin/taxon_image/put_taxon_image_response',
             Response::HTTP_OK,
         );
+    }
+
+    /** @test */
+    public function it_does_not_update_the_taxon_image_if_it_does_not_belong_to_the_given_owner(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon_mug'];
+
+        /** @var TaxonImageInterface $taxonImage */
+        $taxonImage = $fixtures['taxon_thumbnail'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            parameters: ['type' => 'logo'],
+            files: ['file' => $this->getUploadedFile('fixtures/t-shirts.jpg', 't-shirts.jpg')],
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     /** @test */

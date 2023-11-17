@@ -13,20 +13,29 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface;
-use Sylius\Component\Core\Model\TaxonImageInterface;
+use Sylius\Bundle\ApiBundle\Uploader\ImageUploaderInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
 final class UploadTaxonImageAction
 {
-    public function __construct(private TaxonImageCreatorInterface $taxonImageCreator)
+    public function __construct(private ImageUploaderInterface $taxonImageUploader)
     {
     }
 
-    public function __invoke(Request $request): TaxonImageInterface
+    public function __invoke(Request $request): ImageInterface
     {
-        return $this->taxonImageCreator->create(
+        if ($request->getMethod() === Request::METHOD_PUT) {
+            return $this->taxonImageUploader->modify(
+                $request->attributes->get('code', ''),
+                $request->attributes->get('id', ''),
+                $request->files->get('file'),
+                $request->request->get('type'),
+            );
+        }
+
+        return $this->taxonImageUploader->create(
             $request->attributes->get('code', ''),
             $request->files->get('file'),
             $request->request->get('type'),

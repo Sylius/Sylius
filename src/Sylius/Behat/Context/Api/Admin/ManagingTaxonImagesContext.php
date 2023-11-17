@@ -64,6 +64,46 @@ final class ManagingTaxonImagesContext implements Context
     }
 
     /**
+     * @When I change the image with the :type type to :path
+     */
+    public function iChangeItsImageToPathForTheType(string $path, string $type): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxon');
+
+        $taxonImage = $taxon->getImagesByType($type)->first();
+        Assert::notNull($taxonImage);
+
+        $builder = RequestBuilder::create(
+            sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
+            Request::METHOD_PUT,
+        );
+        $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
+        $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
+        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $path, basename($path)));
+        $builder->withParameter('type', $type);
+
+        $this->client->request($builder->build());
+    }
+
+    /**
+     * @When I change the first image type to :type
+     */
+    public function iChangeTheFirstImageTypeTo(string $type): void
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->sharedStorage->get('taxon');
+
+        $taxonImage = $taxon->getImages()->first();
+        Assert::notNull($taxonImage);
+
+        $this->client->buildCustomUpdateRequest(Resources::TAXONS, $taxon->getCode(), sprintf('images/%s', $taxonImage->getId()));
+        $this->client->addParameter('type', $type);
+        $this->client->update();
+    }
+
+    /**
      * @When I( also) remove an image with :type type
      */
     public function iRemoveAnImageWithType(string $type): void
@@ -89,22 +129,6 @@ final class ManagingTaxonImagesContext implements Context
         Assert::notNull($taxonImage);
 
         $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
-    }
-
-    /**
-     * @When I change the first image type to :type
-     */
-    public function iChangeTheFirstImageTypeTo(string $type): void
-    {
-        /** @var TaxonInterface $taxon */
-        $taxon = $this->sharedStorage->get('taxon');
-
-        $taxonImage = $taxon->getImages()->first();
-        Assert::notNull($taxonImage);
-
-        $this->client->buildUpdateRequest(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
-        $this->client->updateRequestData(['type' => $type]);
-        $this->client->update();
     }
 
     /**
