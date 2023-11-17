@@ -46,6 +46,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I want to create a new coupon
+     */
+    public function iWantToCreateANewCoupon(): void
+    {
+        $this->client->buildCreateRequest(Resources::PROMOTION_COUPONS);
+    }
+
+    /**
      * @When /^I want to create a new coupon for (this promotion)$/
      */
     public function iWantToCreateANewCouponForPromotion(PromotionInterface $promotion): void
@@ -83,7 +91,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I limit its usage to :times times
+     * @When I limit its usage to :times time(s)
      * @When I change its usage limit to :times
      */
     public function iLimitItsUsageToTimes(int $times): void
@@ -92,7 +100,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I limit its per customer usage to :times times
+     * @When I limit its per customer usage to :times time(s)
      * @When I change its per customer usage limit to :times
      */
     public function iLimitItsPerCustomerUsageToTimes(int $times): void
@@ -118,7 +126,15 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I do not specify its :field
+     */
+    public function iDoNotSpecifyIts(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
+     * @When I (try to) add it
      */
     public function iAddIt(): void
     {
@@ -171,7 +187,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldBeCountCouponsRelatedToThisPromotion(int $count, PromotionInterface $promotion): void
     {
         $coupons = $this->responseChecker->getCollectionItemsWithValue(
-            $this->client->getLastResponse(),
+            $this->client->index(Resources::PROMOTION_COUPONS),
             'promotion',
             $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
         );
@@ -185,6 +201,18 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldBeACouponWithCode(string $code): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->index(Resources::PROMOTION_COUPONS),
+            'code',
+            $code,
+        ));
+    }
+
+    /**
+     * @Then there should be no coupon with code :code
+     */
+    public function thereShouldBeNoCouponWithCode(string $code): void
+    {
+        Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->index(Resources::PROMOTION_COUPONS),
             'code',
             $code,
@@ -315,6 +343,83 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'Cannot delete, the promotion coupon is in use.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that code is required
+     */
+    public function iShouldBeNotifiedThatCodeIsRequired(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same($this->responseChecker->getError($response), 'code: Please enter coupon code.');
+    }
+
+    /**
+     * @Then I should be notified that coupon usage limit must be at least one
+     */
+    public function iShouldBeNotifiedThatCouponUsageLimitMustBeAtLeastOne(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'usageLimit: Coupon usage limit must be at least 1.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that coupon usage limit per customer must be at least one
+     */
+    public function iShouldBeNotifiedThatCouponUsageLimitPerCustomerMustBeAtLeastOne(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'perCustomerUsageLimit: Coupon usage limit per customer must be at least 1.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that promotion is required
+     */
+    public function iShouldBeNotifiedThatPromotionIsRequired(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'promotion: Please provide a promotion for this coupon.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that only coupon based promotions can have coupons
+     */
+    public function iShouldBeNotifiedThatOnlyCouponBasedPromotionsCanHaveCoupons(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'promotion: Only coupon based promotions can have coupons.',
         );
     }
 

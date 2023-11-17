@@ -98,7 +98,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I limit generated coupons usage to (\d+) times$/
+     * @When /^I limit generated coupons usage to (\d+) times?$/
      */
     public function iSetGeneratedCouponsUsageLimitTo(int $limit)
     {
@@ -123,7 +123,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I limit its usage to :limit times
+     * @When I limit its usage to :limit time(s)
      */
     public function iLimitItsUsageLimitTo(int $limit)
     {
@@ -149,7 +149,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I limit its per customer usage to ([^"]+) times$/
+     * @When /^I limit its per customer usage to ([^"]+) times?$/
      */
     public function iLimitItsPerCustomerUsageLimitTo(int $limit)
     {
