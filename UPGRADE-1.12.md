@@ -1,3 +1,8 @@
+# UPGRADE FROM `v1.12.11` TO `v1.12.12`
+
+1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
+   interface to fix the compatibility with Symfony 6.
+
 # UPGRADE FROM `v1.12.10` TO `v1.12.11`
 
 1. Due to a bug that was causing the removal of promotion configurations for promotions [REF](https://github.com/Sylius/Sylius/issues/15201),
@@ -36,9 +41,6 @@
 1. The `src/Sylius/Bundle/AdminBundle/Resources/views/Taxon/_treeWithButtons.html.twig` template has been updated to
     implement new changing taxon's position logic. If you have overridden this template, you need to update it.
     If you want to check what has changed, you might use [this PR](https://github.com/Sylius/Sylius/pull/15272) as a reference.
-
-1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
-    interface to fix the compatibilty with Symfony 6.
 
 # UPGRADE FROM `v1.12.9` TO `v1.12.10`
 
