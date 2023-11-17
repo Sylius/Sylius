@@ -1,0 +1,34 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-07-21T09:31:23Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-w5ret4.bunnyenv.com/|
+|php|https://store-w5ret4.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-07-22T05:36:22Z
+
+Hello @sdrenth 👋🏼!
+
+I see there are no tests, neither description. Can you add tests or at least tell us how to reproduce the bug you're trying to fix (we'll be more than happy to help with writing the tests).
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-11-17T11:34:11Z
+
+Thanks, Sander! :tada:
