@@ -108,7 +108,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     ],
                 ],
                 'translations' => ['en_US' => [
-                    'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
@@ -271,7 +270,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     ],
                 ],
                 'translations' => ['en_US' => [
-                    'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],
@@ -370,7 +368,6 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     ],
                 ],
                 'translations' => ['en_US' => [
-                    'locale' => 'en_US',
                     'label' => 'T-Shirts discount',
                     'description' => '50% discount on every T-Shirt',
                 ]],

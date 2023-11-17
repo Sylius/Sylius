@@ -116,7 +116,7 @@ final class ManagingShippingMethodsContext implements Context
         $this->client->setRequestData([
             'code' => 'FED_EX_CARRIER',
             'position' => 0,
-            'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
+            'translations' => ['en_US' => ['name' => 'FedEx Carrier']],
             'zone' => $this->iriConverter->getIriFromResource($this->sharedStorage->get('zone')),
             'calculator' => 'Flat rate per shipment',
             'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]],
@@ -164,7 +164,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iNameItIn(?string $name = '', ?string $localeCode = 'en_US'): void
     {
-        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name, 'locale' => $localeCode]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
     /**
@@ -172,7 +172,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data = ['translations' => [$localeCode => []]];
         $data['translations'][$localeCode]['description'] = $description;
 
         $this->client->updateRequestData($data);

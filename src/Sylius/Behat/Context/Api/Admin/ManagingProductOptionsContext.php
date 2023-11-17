@@ -61,7 +61,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iNameItInLanguage(?string $name = null, ?string $language = 'en_US'): void
     {
-        $data = ['translations' => [$language => ['locale' => $language]]];
+        $data = ['translations' => [$language => []]];
         if ($name !== null) {
             $data['translations'][$language]['name'] = $name;
         }
@@ -74,7 +74,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iRenameItInLanguage(string $name, string $language): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$language => ['name' => $name]]]);
     }
 
     /**
@@ -82,7 +82,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iRemoveItsNameFromTranslation(string $language): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => '', 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$language => ['name' => '']]]);
     }
 
     /**
@@ -103,7 +103,7 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->client->addSubResourceData(
             'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value, 'locale' => 'en_US']]],
+            ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
         );
     }
 

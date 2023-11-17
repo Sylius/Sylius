@@ -90,7 +90,6 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
                 'translations' => ['en_US' => [
                     'name' => 'test',
                     'description' => 'test description',
-                    'locale' => 'en_US'
                 ]]
             ], JSON_THROW_ON_ERROR),
         );

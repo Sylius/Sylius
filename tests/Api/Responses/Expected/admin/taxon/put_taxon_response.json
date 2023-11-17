@@ -14,8 +14,7 @@
             "id": @integer@,
             "name": "Watches",
             "slug": "watches",
-            "description": "Some description Lorem ipsum dolor sit amet.",
-            "locale": "en_US"
+            "description": "Some description Lorem ipsum dolor sit amet."
         }
     },
     "enabled": false
