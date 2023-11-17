@@ -31,12 +31,8 @@
             <group>shop:order:account:read</group>
         </attribute>
         <attribute name="locale">
-            <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
-            <group>admin:order:read</group>
-            <group>shop:product_variant:read</group>
-            <group>shop:order:account:read</group>
         </attribute>
     </class>
 </serializer>

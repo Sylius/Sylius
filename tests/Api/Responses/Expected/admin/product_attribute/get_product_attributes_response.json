@@ -16,15 +16,13 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "dishwasher safe",
-                    "locale": "en_US"
+                    "name": "dishwasher safe"
                 },
                 "pl_PL": {
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "mozna myc w zmywarce",
-                    "locale": "pl_PL"
+                    "name": "mozna myc w zmywarce"
                 }
             },
             "type": "checkbox"
@@ -42,8 +40,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "manufactured",
-                    "locale": "en_US"
+                    "name": "manufactured"
                 }
             },
             "type": "date"
@@ -61,8 +58,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "available until",
-                    "locale": "en_US"
+                    "name": "available until"
                 }
             },
             "type": "datetime"
@@ -80,8 +76,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "capacity",
-                    "locale": "en_US"
+                    "name": "capacity"
                 }
             },
             "type": "integer"
@@ -99,8 +94,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "yixing clay",
-                    "locale": "en_US"
+                    "name": "yixing clay"
                 }
             },
             "type": "percent"
@@ -130,8 +124,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "extra info",
-                    "locale": "en_US"
+                    "name": "extra info"
                 }
             },
             "type": "select"
@@ -149,8 +142,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "note",
-                    "locale": "en_US"
+                    "name": "note"
                 }
             },
             "type": "textarea"
@@ -168,8 +160,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "origin",
-                    "locale": "en_US"
+                    "name": "origin"
                 }
             },
             "type": "text"
@@ -187,8 +178,7 @@
                     "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
                     "@type": "ProductAttributeTranslation",
                     "id": "@integer@",
-                    "name": "text delete",
-                    "locale": "en_US"
+                    "name": "text delete"
                 }
             },
             "type": "text"

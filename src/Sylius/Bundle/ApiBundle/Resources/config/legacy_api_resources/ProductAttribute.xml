@@ -210,7 +210,6 @@ Example configuration for a `select` type attribute:
                 <attribute name="type">object</attribute>
                 <attribute name="example">
                     <attribute name="en_US">
-                        <attribute name="locale">string</attribute>
                         <attribute name="name">string</attribute>
                     </attribute>
                 </attribute>

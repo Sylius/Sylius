@@ -72,7 +72,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iNameItIn(string $name = '', string $localeCode = 'en_US'): void
     {
-        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name, 'locale' => $localeCode]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
     /**

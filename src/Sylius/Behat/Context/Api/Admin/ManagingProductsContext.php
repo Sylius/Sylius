@@ -110,7 +110,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRenameItToIn(?string $name = null, string $localeCode = 'en_US'): void
     {
-        $data['translations'][$localeCode]['locale'] = $localeCode;
+        $data['translations'][$localeCode] = [];
 
         if ($name !== null) {
             $data['translations'][$localeCode]['name'] = $name;
@@ -129,7 +129,6 @@ final class ManagingProductsContext implements Context
         $data = [
             'translations' => [
                 $localeCode => [
-                    'locale' => $localeCode,
                     'slug' => $slug,
                 ],
             ],
@@ -234,7 +233,6 @@ final class ManagingProductsContext implements Context
             'translations' => [
                 $localeCode => [
                     'name' => '',
-                    'locale' => $localeCode,
                 ],
             ],
         ]);
@@ -249,7 +247,6 @@ final class ManagingProductsContext implements Context
             'translations' => [
                 $localeCode => [
                     'metaKeywords' => str_repeat('a', 256),
-                    'locale' => $localeCode,
                 ],
             ],
         ]);
@@ -264,7 +261,6 @@ final class ManagingProductsContext implements Context
             'translations' => [
                 $localeCode => [
                     'metaDescription' => str_repeat('a', 256),
-                    'locale' => $localeCode,
                 ],
             ],
         ]);

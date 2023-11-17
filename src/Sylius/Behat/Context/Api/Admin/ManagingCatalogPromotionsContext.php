@@ -104,7 +104,6 @@ final readonly class ManagingCatalogPromotionsContext implements Context
      */
     public function iSpecifyItsAsIn(string $field, string $value, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
         $data['translations'][$localeCode][$field] = $value;
 
         $this->client->updateRequestData($data);
@@ -131,7 +130,7 @@ final readonly class ManagingCatalogPromotionsContext implements Context
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data = ['translations' => [$localeCode => []]];
         $data['translations'][$localeCode]['description'] = $description;
 
         $this->client->updateRequestData($data);
@@ -1659,7 +1658,6 @@ final readonly class ManagingCatalogPromotionsContext implements Context
             'channels' => [$this->iriConverter->getIriFromResource($channel)],
             'exclusive' => $exclusive,
             'translations' => ['en_US' => [
-                'locale' => 'en_US',
                 'label' => $name,
             ]],
             'actions' => [[

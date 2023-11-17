@@ -21,8 +21,6 @@
             <group>admin:product_attribute:read</group>
         </attribute>
         <attribute name="locale">
-            <group>shop:product_attribute:read</group>
-            <group>admin:product_attribute:read</group>
             <group>admin:product_attribute:create</group>
             <group>admin:product_attribute:update</group>
         </attribute>

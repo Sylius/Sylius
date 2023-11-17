@@ -27,8 +27,7 @@
                     "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
                     "@type": "ProductVariantTranslation",
                     "id": @integer@,
-                    "name": "Mug",
-                    "locale": "en_US"
+                    "name": "Mug"
                 }
             },
             "enabled": true,
@@ -68,8 +67,7 @@
                     "@id": "\/api\/v2\/admin\/product-variant-translations\/@integer@",
                     "@type": "ProductVariantTranslation",
                     "id": @integer@,
-                    "name": "Mug 2",
-                    "locale": "en_US"
+                    "name": "Mug 2"
                 }
             },
             "enabled": true,
