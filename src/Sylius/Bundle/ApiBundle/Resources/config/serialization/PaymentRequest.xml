@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\PaymentRequest">
+        <attribute name="hash">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="payment">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="method">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="type">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="state">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="data">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="details">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="createdAt">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+        <attribute name="updatedAt">
+            <group>admin:payment_request:read</group>
+            <group>shop:payment_request:read</group>
+        </attribute>
+    </class>
+</serializer>
