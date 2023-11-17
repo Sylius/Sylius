@@ -31,6 +31,10 @@
             <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction" public="true">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Uploader\TaxonImageUploader" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />

@@ -15,6 +15,7 @@ namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
@@ -49,5 +50,10 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function getLoggedHeader(): array
     {
         return array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+    }
+
+    protected function getUploadedFile(string $path, string $name, string $type = 'image/jpg'): UploadedFile
+    {
+        return new UploadedFile(__DIR__ . '/../Resources/' . $path, $name, $type);
     }
 }

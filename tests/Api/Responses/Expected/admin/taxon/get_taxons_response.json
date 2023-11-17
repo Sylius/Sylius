@@ -15,6 +15,15 @@
                 "\/api\/v2\/admin\/taxons\/HAT",
                 "\/api\/v2\/admin\/taxons\/T_SHIRTS"
             ],
+            "images": [
+                {
+                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@type": "TaxonImage",
+                    "id": @integer@,
+                    "type": "thumbnail",
+                    "path": "\/category.jpeg"
+                }
+            ],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -34,6 +43,7 @@
             "code": "MUG",
             "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -62,6 +72,7 @@
             "code": "HAT",
             "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -93,6 +104,15 @@
                 "\/api\/v2\/admin\/taxons\/MEN_T_SHIRTS",
                 "\/api\/v2\/admin\/taxons\/WOMEN_T_SHIRTS"
             ],
+            "images": [
+                {
+                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@type": "TaxonImage",
+                    "id": @integer@,
+                    "type": "thumbnail",
+                    "path": "\/tshirt.jpeg"
+                }
+            ],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -121,6 +141,7 @@
             "code": "MEN_T_SHIRTS",
             "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -149,6 +170,7 @@
             "code": "WOMEN_T_SHIRTS",
             "parent": "\/api\/v2\/admin\/taxons\/T_SHIRTS",
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -177,6 +199,7 @@
             "code": "BRAND",
             "parent": null,
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -205,6 +228,7 @@
             "code": "de?lol=xd#boom",
             "parent": null,
             "children": [],
+            "images": [],
             "translations": {
                 "en_US": {
                     "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",

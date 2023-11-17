@@ -40,6 +40,8 @@ final class NotificationContext implements Context
 
     /**
      * @Then I should be notified that it has been successfully edited
+     * @Then I should be notified that it has been successfully uploaded
+     * @Then I should be notified that the changes have been successfully applied
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
