@@ -19,6 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,
@@ -27,7 +28,8 @@ interface UserInterface extends
     \Serializable,
     TimestampableInterface,
     ToggleableInterface,
-    EncoderAwareInterface
+    EncoderAwareInterface,
+    PasswordHasherAwareInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
