@@ -77,7 +77,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'code' => 'XYZ3',
                 'usageLimit' => 100,
                 'perCustomerUsageLimit' => 3,
-                'reusableFromCancelledOrders' => true,
+                'reusableFromCancelledOrders' => false,
                 'expiresAt' => '23-12-2023',
                 'promotion' => 'api/v2/admin/promotions/' . $promotion->getCode(),
             ], JSON_THROW_ON_ERROR)
@@ -87,6 +87,34 @@ final class PromotionCouponsTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/promotion_coupon/post_promotion_coupon_response',
             Response::HTTP_CREATED,
+        );
+    }
+
+    /** @test */
+    public function it_updates_a_promotion_coupon(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionCouponInterface $coupon */
+        $coupon = $fixtures['promotion_1_off_coupon_1'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            server: $header,
+            content: json_encode([
+                'usageLimit' => 1000,
+                'perCustomerUsageLimit' => 5,
+                'reusableFromCancelledOrders' => false,
+                'expiresAt' => '2020-01-01 12:00:00',
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion_coupon/put_promotion_coupon_response',
+            Response::HTTP_OK,
         );
     }
 

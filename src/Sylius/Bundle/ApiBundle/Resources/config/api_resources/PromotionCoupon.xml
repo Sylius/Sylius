@@ -53,6 +53,16 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion_coupon:update</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>

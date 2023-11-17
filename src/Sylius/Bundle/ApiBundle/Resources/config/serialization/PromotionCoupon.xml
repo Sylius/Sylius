@@ -32,11 +32,13 @@
         <attribute name="usageLimit">
             <group>admin:promotion_coupon:read</group>
             <group>admin:promotion_coupon:create</group>
+            <group>admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="perCustomerUsageLimit">
             <group>admin:promotion_coupon:read</group>
             <group>admin:promotion_coupon:create</group>
+            <group>admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="used">
@@ -46,6 +48,7 @@
         <attribute name="reusableFromCancelledOrders">
             <group>admin:promotion_coupon:read</group>
             <group>admin:promotion_coupon:create</group>
+            <group>admin:promotion_coupon:update</group>
         </attribute>
 
         <attribute name="promotion">
@@ -56,6 +59,7 @@
         <attribute name="expiresAt">
             <group>admin:promotion_coupon:read</group>
             <group>admin:promotion_coupon:create</group>
+            <group>admin:promotion_coupon:update</group>
         </attribute>
     </class>
 </serializer>

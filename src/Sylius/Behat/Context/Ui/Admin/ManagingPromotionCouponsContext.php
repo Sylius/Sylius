@@ -165,6 +165,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I make it not reusable from cancelled orders
+     */
+    public function iMakeItReusableFromCancelledOrders(): void
+    {
+        $this->updatePage->toggleReusableFromCancelledOrders(false);
+    }
+
+    /**
      * @When I make it valid until :date
      */
     public function iMakeItValidUntil(\DateTimeInterface $date)
@@ -173,9 +181,9 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When I change expires date to :date
+     * @When I change its expiration date to :date
      */
-    public function iChangeExpiresDateTo(\DateTimeInterface $date)
+    public function iChangeItsExpirationDateTo(\DateTimeInterface $date)
     {
         $this->updatePage->setExpiresAt($date);
     }
@@ -323,9 +331,9 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then this coupon should be valid until :date
      */
-    public function thisCouponShouldBeValidUntil(\DateTimeInterface $date)
+    public function thisCouponShouldBeValidUntil(\DateTime $date)
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]));
+        Assert::true($this->indexPage->isSingleResourceOnPage(['expiresAt' => $date->format('d-m-Y')]));
     }
 
     /**
@@ -350,6 +358,16 @@ final class ManagingPromotionCouponsContext implements Context
     public function thisCouponShouldHavePerCustomerUsageLimit($limit)
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['perCustomerUsageLimit' => $limit]));
+    }
+
+    /**
+     * @Then /^(this coupon) should not be reusable from cancelled orders$/
+     */
+    public function thisCouponShouldBeReusableFromCancelledOrders(PromotionCouponInterface $coupon): void
+    {
+        $this->updatePage->open(['id' => $coupon->getId(), 'promotionId' => $coupon->getPromotion()->getId()]);
+
+        Assert::false($this->updatePage->isReusableFromCancelledOrders());
     }
 
     /**

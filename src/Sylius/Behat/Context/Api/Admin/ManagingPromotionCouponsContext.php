@@ -58,6 +58,14 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When /^I want to modify the ("[^"]+" coupon) for this promotion$/
+     */
+    public function iWantToModifyTheCouponOfThisPromotion(PromotionCouponInterface $coupon): void
+    {
+        $this->client->buildUpdateRequest(Resources::PROMOTION_COUPONS, $coupon->getCode());
+    }
+
+    /**
      * @When /^I delete ("[^"]+" coupon) related to this promotion$/
      * @When /^I try to delete ("[^"]+" coupon) related to this promotion$/
      */
@@ -76,6 +84,7 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I limit its usage to :times times
+     * @When I change its usage limit to :times
      */
     public function iLimitItsUsageToTimes(int $times): void
     {
@@ -84,6 +93,7 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I limit its per customer usage to :times times
+     * @When I change its per customer usage limit to :times
      */
     public function iLimitItsPerCustomerUsageToTimes(int $times): void
     {
@@ -92,10 +102,19 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I make it valid until :date
+     * @When I change its expiration date to :date
      */
     public function iMakeItValidUntil(\DateTime $date): void
     {
         $this->client->addRequestData('expiresAt', $date->format('d-m-Y'));
+    }
+
+    /**
+     * @When I make it not reusable from cancelled orders
+     */
+    public function iMakeItNotReusableFromCancelledOrders(): void
+    {
+        $this->client->addRequestData('reusableFromCancelledOrders', false);
     }
 
     /**
@@ -202,6 +221,55 @@ final class ManagingPromotionCouponsContext implements Context
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Promotion coupon could not be created',
         );
+    }
+
+    /**
+     * @Then this coupon should be valid until :date
+     */
+    public function thisCouponShouldBeValidUntil(\DateTime $date): void
+    {
+        $actualDate = \DateTime::createFromFormat(
+            'Y-m-d h:i:s',
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'expiresAt'),
+        );
+
+        Assert::same(
+            $actualDate->format('Y-m-d'),
+            $date->format('Y-m-d'),
+        );
+    }
+
+    /**
+     * @Then this coupon should have :limit usage limit
+     */
+    public function thisCouponShouldHaveUsageLimit(int $limit): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'usageLimit'),
+            $limit,
+        );
+    }
+
+    /**
+     * @Then this coupon should have :limit per customer usage limit
+     */
+    public function thisCouponShouldHavePerCustomerUsageLimit(int $limit): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'perCustomerUsageLimit'),
+            $limit,
+        );
+    }
+
+    /**
+     * @Then this coupon should not be reusable from cancelled orders
+     */
+    public function thisCouponShouldNotBeReusableFromCancelledOrders(): void
+    {
+        Assert::false($this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'reusableFromCancelledOrders',
+        ));
     }
 
     /**
