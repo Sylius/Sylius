@@ -1,0 +1,60 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-09-12T08:16:05Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-hnj62a.bunnyenv.com/|
+|php|https://store-hnj62a.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by jakubtobiasz at 2023-09-15T17:20:27Z
+
+Hello @delyriand 👋🏼,
+can you add a note about the changed model's interface to the `1.12`'s upgrade file, please?
+
+---------------------------------------------------------------------------
+
+by delyriand at 2023-09-18T07:29:15Z
+
+Hi @jakubtobiasz!
+
+I've just added a step to the update file for version 1.12.
+
+---------------------------------------------------------------------------
+
+by diimpp at 2023-09-18T11:13:15Z
+
+Sylius uses https://github.com/SyliusLabs/PolyfillSymfonySecurity which handles interface mismatch for [UserInterface](https://github.com/SyliusLabs/PolyfillSymfonySecurity/blob/main/src/Core/User/UserInterface.php) as well, should this fix be added over there, while SF5 is supported?
+
+@loic425 Hi, what do you think?
+
+---------------------------------------------------------------------------
+
+by loic425 at 2023-09-18T14:23:01Z
+
+> Sylius uses https://github.com/SyliusLabs/PolyfillSymfonySecurity which handles interface mismatch for [UserInterface](https://github.com/SyliusLabs/PolyfillSymfonySecurity/blob/main/src/Core/User/UserInterface.php) as well, should this fix be added over there, while SF5 is supported?
+>
+> @loic425 Hi, what do you think?
+
+That's a good question, the existing Pollyfill is to create a bc-layer to keep compatibility with legacy Symfony versions.
+It's for complex bc-layer, here it's simple cause it works with Symfony 5 and 6.
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-11-17T11:33:38Z
+
+Thank you, Maxime! :1st_place_medal:
