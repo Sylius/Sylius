@@ -1,3 +1,8 @@
+# UPGRADE FROM `v1.12.11` TO `v1.12.12`
+
+1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
+   interface to fix the compatibility with Symfony 6.
+
 # UPGRADE FROM `v1.12.10` TO `v1.12.11`
 
 1. Due to a bug that was causing the removal of promotion configurations for promotions [REF](https://github.com/Sylius/Sylius/issues/15201),
