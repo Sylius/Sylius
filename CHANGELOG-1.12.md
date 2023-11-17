@@ -1,5 +1,26 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.12 (2023-11-17)
+
+#### Details
+
+- [#15176](https://github.com/Sylius/Sylius/issues/15176) Add if_array check in ProductAttributeValueNormalizer.php ([@sdrenth](https://github.com/sdrenth), [@GSadee](https://github.com/GSadee))
+- [#15273](https://github.com/Sylius/Sylius/issues/15273) [Issue 15271] - Get product variant by id ([@ulinskas](https://github.com/ulinskas), [@GSadee](https://github.com/GSadee))
+- [#15287](https://github.com/Sylius/Sylius/issues/15287) Make the User class compatible with Symfony 6 to use encoder_name ([@delyriand](https://github.com/delyriand), [@GSadee](https://github.com/GSadee))
+- [#15389](https://github.com/Sylius/Sylius/issues/15389) [FIX] Restrict NonChannelLocaleListener to the routes having _locale attribut ([@Prometee](https://github.com/Prometee))
+- [#15402](https://github.com/Sylius/Sylius/issues/15402) Fix failing phpspec scenario on Symfony 6.3.5 and above ([@GSadee](https://github.com/GSadee))
+- [#15416](https://github.com/Sylius/Sylius/issues/15416) [FIX][EMAIL] Use raw filter to avoid html encoded chars ([@Prometee](https://github.com/Prometee))
+- [#15430](https://github.com/Sylius/Sylius/issues/15430) [Fix] Early return in CartCollector on stateless requests ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15437](https://github.com/Sylius/Sylius/issues/15437) [CS][DX] Refactor ([@bot](https://github.com/bot)@[@sylius](https://github.com/sylius).[@org](https://github.com/org))
+- [#15449](https://github.com/Sylius/Sylius/issues/15449) [Behat] Set a LocaleCode via the HTTP Accept-Language header ([@Rafikooo](https://github.com/Rafikooo))
+- [#15487](https://github.com/Sylius/Sylius/issues/15487) Update taxation.rst ([@zairigimad](https://github.com/zairigimad), [@GSadee](https://github.com/GSadee))
+- [#15507](https://github.com/Sylius/Sylius/issues/15507) Fix cart styles after form submission (data-route="sylius_shop_cart_c… ([@dsbe-ak](https://github.com/dsbe-ak))
+- [#15512](https://github.com/Sylius/Sylius/issues/15512) [Maintenance] Fix request parameters accessing ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15513](https://github.com/Sylius/Sylius/issues/15513) Update BootstrapTheme install doc ([@Florian-Merle](https://github.com/Florian-Merle))
+- [#15515](https://github.com/Sylius/Sylius/issues/15515) Update catalog_promotions.rst, fix links to BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher and ApplyCatalogPromotionsOnVariants ([@vldmr-k](https://github.com/vldmr-k))
+- [#15527](https://github.com/Sylius/Sylius/issues/15527) Disable check for security vulnerabilites step ([@Wojdylak](https://github.com/Wojdylak))
+- [#15531](https://github.com/Sylius/Sylius/issues/15531) Add ignore-parse-errors to composer require checker ([@Wojdylak](https://github.com/Wojdylak))
+
 ## v1.12.11 (2023-09-18)
 
 #### Details
