@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.payment_request.class%" shortName="PaymentRequest">
+        <attribute name="validation_groups">sylius</attribute>
+
+        <attribute name="order">
+            <attribute name="createdAt">DESC</attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/payment-requests</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.search_payment_request_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:payment_request:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/shop/payment-requests</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">shop:product_review:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_review:read</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/payment-requests/{hash}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:payment_request:read</attribute>
+                </attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <property name="hash" identifier="true" writable="false" />
+        <property name="createdAt" writable="false" />
+        <property name="updatedAt" writable="false" />
+        <property name="state" writable="false" />
+        <property name="data" writable="true" />
+        <property name="details" writable="false" />
+    </resource>
+</resources>
