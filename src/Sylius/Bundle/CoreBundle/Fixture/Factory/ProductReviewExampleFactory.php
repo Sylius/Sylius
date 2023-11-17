@@ -17,8 +17,9 @@ use Faker\Factory;
 use Faker\Generator;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -31,6 +32,9 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
     private OptionsResolver $optionsResolver;
 
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private ReviewFactoryInterface $productReviewFactory,
         private ProductRepositoryInterface $productRepository,

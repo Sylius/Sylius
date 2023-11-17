@@ -23,7 +23,7 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class RegistrationAfterCheckoutContext implements Context

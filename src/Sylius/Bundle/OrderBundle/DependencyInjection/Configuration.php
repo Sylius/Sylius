@@ -14,6 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 
 use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\AdjustmentRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderItemUnitRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderSequenceRepository;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -73,7 +78,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Order::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(OrderRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(OrderType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -90,7 +95,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(OrderItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderItemInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(OrderItemController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(OrderItemRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(OrderItemType::class)->cannotBeEmpty()->end()
                                     ->end()
@@ -107,7 +112,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(OrderItemUnit::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderItemUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(OrderItemUnitRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(OrderItemUnitFactory::class)->end()
                                     ->end()
                                 ->end()
@@ -123,7 +128,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Adjustment::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(AdjustmentInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(AdjustmentRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
@@ -138,7 +143,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(OrderSequence::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderSequenceInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(OrderSequenceRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()

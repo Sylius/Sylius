@@ -14,11 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 class DashboardStatisticsProvider implements DashboardStatisticsProviderInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(private OrderRepositoryInterface $orderRepository, private CustomerRepositoryInterface $customerRepository)
     {
     }

@@ -20,8 +20,8 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -30,6 +30,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PickupCartHandler implements MessageHandlerInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         private OrderFactoryInterface $cartFactory,
         private OrderRepositoryInterface $cartRepository,

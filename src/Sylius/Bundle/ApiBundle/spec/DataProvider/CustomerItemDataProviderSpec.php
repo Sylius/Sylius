@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CustomerItemDataProviderSpec extends ObjectBehavior

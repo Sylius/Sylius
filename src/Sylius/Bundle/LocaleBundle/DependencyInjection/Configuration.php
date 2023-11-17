@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\LocaleBundle\DependencyInjection;
 
+use Sylius\Bundle\LocaleBundle\Doctrine\ORM\LocaleRepository;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -60,7 +61,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(Locale::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(LocaleInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(LocaleRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(LocaleType::class)->cannotBeEmpty()->end()
                                     ->end()

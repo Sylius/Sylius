@@ -20,7 +20,7 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -35,6 +35,9 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
+    /**
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
         string $supportedUserClass,
         private FactoryInterface $customerFactory,

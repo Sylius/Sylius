@@ -17,8 +17,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 final class DashboardStatisticsProviderSpec extends ObjectBehavior
 {

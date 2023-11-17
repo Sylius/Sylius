@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\InventoryBundle\DependencyInjection;
 
+use Sylius\Bundle\InventoryBundle\Doctrine\ORM\InventoryUnitRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Inventory\Model\InventoryUnit;
@@ -60,7 +61,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(InventoryUnit::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(InventoryUnitInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(InventoryUnitRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()

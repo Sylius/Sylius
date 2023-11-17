@@ -15,14 +15,14 @@ namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Order\Repository\OrderItemUnitRepositoryInterface as BaseOrderItemUnitRepositoryInterface;
 
 /**
  * @template T of OrderItemUnitInterface
  *
- * @extends RepositoryInterface<T>
+ * @extends BaseOrderItemUnitRepositoryInterface<T>
  */
-interface OrderItemUnitRepositoryInterface extends RepositoryInterface
+interface OrderItemUnitRepositoryInterface extends BaseOrderItemUnitRepositoryInterface
 {
     public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface;
 }
