@@ -16,15 +16,9 @@
     "startsAt": null,
     "endsAt": null,
     "couponBased": false,
-    "coupons": [
-
-    ],
-    "rules": [
-
-    ],
-    "actions": [
-
-    ],
+    "coupons": [],
+    "rules": [],
+    "actions": [],
     "appliesToDiscounted": false,
     "createdAt": @date@,
     "updatedAt": @date@,
