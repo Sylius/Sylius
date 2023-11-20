@@ -606,6 +606,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should have no shipping address set
+     */
+    public function itShouldHaveNoShippingAddressSet(): void
+    {
+        Assert::false($this->responseChecker->hasKey($this->client->getLastResponse(), 'shippingAddress'));
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
