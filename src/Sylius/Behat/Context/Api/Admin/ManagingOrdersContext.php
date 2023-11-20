@@ -614,6 +614,28 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see :provinceName as province in the shipping address
+     */
+    public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress')['provinceName'],
+            $provinceName,
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the billing address
+     */
+    public function iShouldSeeAsProvinceInTheBillingAddress(string $provinceName): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress')['provinceName'],
+            $provinceName,
+        );
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(

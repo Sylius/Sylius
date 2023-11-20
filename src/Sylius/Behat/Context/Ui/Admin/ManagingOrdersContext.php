@@ -815,7 +815,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :provinceName ad province in the billing address
+     * @Then I should see :provinceName as province in the billing address
      */
     public function iShouldSeeAdProvinceInTheBillingAddress($provinceName)
     {
