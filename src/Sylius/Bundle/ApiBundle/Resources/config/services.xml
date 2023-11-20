@@ -32,7 +32,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction" public="true">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Uploader\TaxonImageUploader" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
