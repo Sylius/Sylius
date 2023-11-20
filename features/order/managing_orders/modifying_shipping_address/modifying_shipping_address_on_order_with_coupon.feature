@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's shipping address on an order with an applied coupon
     In order to ship an order to a correct place
     As an Administrator

@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's billing address validation
     In order to avoid making mistakes when modifying a customer's billing address
     As an Administrator

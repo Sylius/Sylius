@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer shipping address after an order has been placed
     In order to ship an order to a correct place
     As an Administrator
