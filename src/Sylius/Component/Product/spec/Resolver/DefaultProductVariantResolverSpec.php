@@ -58,6 +58,9 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $productVariantRepository->findOneBy([
             'product' => 1,
             'enabled' => true,
+        ], [
+            'position' => 'ASC',
+            'id' => 'ASC',
         ])->willReturn($variant);
 
         $this->getVariant($product)->shouldReturn($variant);
@@ -73,6 +76,9 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $productVariantRepository->findOneBy([
             'product' => 1,
             'enabled' => true,
+        ], [
+            'position' => 'ASC',
+            'id' => 'ASC',
         ])->willReturn(null);
 
         $this->getVariant($product)->shouldReturn(null);
