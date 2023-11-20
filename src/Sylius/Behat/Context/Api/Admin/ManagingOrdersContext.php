@@ -20,14 +20,12 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
-use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
@@ -60,40 +58,6 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders(): void
     {
         $this->client->index(Resources::ORDERS);
-    }
-
-    /**
-     * @When /^I want to modify a customer's billing address of this order$/
-     */
-    public function iWantToModifyCustomerBillingAddress(): void
-    {
-        $this->client->buildUpdateRequest(
-            Resources::ADDRESSES,
-            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
-        );
-    }
-
-    /**
-     * @When /^I want to modify a customer's shipping address of this order$/
-     */
-    public function iWantToModifyCustomerAddress(): void
-    {
-        $this->client->buildUpdateRequest(
-            Resources::ADDRESSES,
-            (string) $this->sharedStorage->get('order')->getShippingAddress()->getId(),
-        );
-    }
-
-    /**
-     * @When /^I specify their (?:|new )(?:billing|shipping) (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
-    public function iSpecifyTheirAddressAs(AddressInterface $address): void
-    {
-        $this->client->addRequestData('firstName', $address->getFirstName());
-        $this->client->addRequestData('lastName', $address->getLastName());
-        $this->client->addRequestData('street', $address->getStreet());
-        $this->client->addRequestData('postcode', $address->getPostcode());
-        $this->client->addRequestData('city', $address->getCity());
     }
 
     /**
@@ -138,6 +102,15 @@ final class ManagingOrdersContext implements Context
     public function iLimitNumberOfItemsTo(int $limit): void
     {
         $this->client->addFilter('itemsPerPage', $limit);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy(string $fieldName): void
+    {
+        $this->client->addFilter(sprintf('order[%s]', $fieldName), 'asc');
         $this->client->filter();
     }
 
@@ -320,10 +293,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTotalShouldBe(int $total): void
     {
-        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
 
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
+            $this->responseChecker->getValue($response, 'total'),
             $total,
         );
     }
@@ -333,10 +306,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
-        $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
 
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
+            $this->responseChecker->getValue($response, 'orderPromotionTotal'),
             $promotionTotal,
         );
     }
@@ -359,7 +332,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see an order with :orderNumber number
      */
-    public function iShouldSeeOrderWithNumber(string $orderNumber)
+    public function iShouldSeeOrderWithNumber(string $orderNumber): void
     {
         $response = $this->client->getLastResponse();
 
@@ -370,64 +343,13 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I switch the way orders are sorted by :fieldName
-     */
-    public function iSwitchSortingBy($fieldName)
-    {
-        $this->client->addFilter('order[number]', 'asc');
-        $this->client->filter();
-    }
-
-    /**
      * @Then the first order should have number :number
      */
-    public function theFirstOrderShouldHaveNumber(string $number)
+    public function theFirstOrderShouldHaveNumber(string $number): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
         $firstItem = $items[0];
 
         Assert::same($firstItem['number'], str_replace('#', '', $number));
-    }
-
-    /**
-     * @Then /^this order should(?:| still) have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address)$/
-     */
-    public function itsBillingAddressShouldContain(AddressInterface $address): void
-    {
-        $response = $this->client->show(
-            Resources::ADDRESSES,
-            (string) $this->sharedStorage->get('order')->getBillingAddress()->getId(),
-        );
-
-        $this->assertAddressResponseProperties($response, $address);
-    }
-
-    /**
-     * @Then /^this order should(?:|still ) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
-    public function itShouldBeShippedTo(AddressInterface $address): void
-    {
-        $response = $this->client->show(
-            Resources::ADDRESSES,
-            (string) $this->sharedStorage->get('order')->getShippingAddress()->getId(),
-        );
-
-        $this->assertAddressResponseProperties($response, $address);
-    }
-
-    private function assertAddressResponseProperties(Response $response, AddressInterface $exceptedAddress): void
-    {
-        $addressProperties = [
-            'firstName' => 'getFirstName',
-            'lastName' => 'getLastName',
-            'street' => 'getStreet',
-            'postcode' => 'getPostcode',
-            'city' => 'getCity',
-            'countryCode' => 'getCountryCode',
-        ];
-
-        foreach ($addressProperties as $property => $getter) {
-            Assert::same($this->responseChecker->getValue($response, $property), $exceptedAddress->$getter());
-        }
     }
 }

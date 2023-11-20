@@ -3,7 +3,7 @@
 
 default:
     suites:
-        api_modifying_order_address:
+        api_modifying_placed_order_address:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -38,6 +38,7 @@ default:
                 - sylius.behat.context.api.admin.managing_orders
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - Sylius\Behat\Context\Api\Admin\ManagingPlacedOrderAddressesContext
 
             filters:
-                tags: "@modifying_address&&@api"
+                tags: "@modifying_placed_order_address&&@api"
