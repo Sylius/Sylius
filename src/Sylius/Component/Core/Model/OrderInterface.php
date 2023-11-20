@@ -98,6 +98,8 @@ interface OrderInterface extends
 
     public function getTaxTotal(): int;
 
+    public function getShippingTaxTotal(): int;
+
     public function getTaxExcludedTotal(): int;
 
     public function getTaxIncludedTotal(): int;
@@ -105,6 +107,8 @@ interface OrderInterface extends
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;
+
+    public function getShippingPromotionTotal(): int;
 
     public function getItemsSubtotal(): int;
 
