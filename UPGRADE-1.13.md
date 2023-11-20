@@ -200,7 +200,3 @@
     +       from: [new, processing, authorized]
             to: failed
     ```
-
-1. The `Sylius\Bundle\CoreBundle\Doctrine\ORM\TaxonImageRepository` class 
-   and `Sylius\Component\Core\Repository\TaxonImageRepositoryInterface` interfaces have been added, if you have custom 
-   repository for `TaxonImage` resource, you need to update it to extend the new one.

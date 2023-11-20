@@ -9,13 +9,13 @@ Feature: Changing images of an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @ui @javascript @no-api
     Scenario: Changing a single image of a taxon
         Given the "T-Shirts" taxon has an image "ford.jpg" with "banner" type
         When I want to modify the "T-Shirts" taxon
         And I change the image with the "banner" type to "t-shirts.jpg"
-        And I save my changes to the images
-        Then I should be notified that the changes have been successfully applied
+        And I save my changes
+        Then I should be notified that it has been successfully edited
         And this taxon should have an image with "banner" type
 
     @ui @javascript @api

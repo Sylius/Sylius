@@ -68,46 +68,9 @@
 
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
-                <attribute name="path">/admin/taxons/{code}/images/{id}</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction</attribute>
-                <attribute name="deserialize">false</attribute>
-                <attribute name="openapi_context">
-                    <attribute name="parameters">
-                        <attribute>
-                            <attribute name="name">code</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="required">true</attribute>
-                            <attribute name="schema">
-                                <attribute name="type">string</attribute>
-                            </attribute>
-                        </attribute>
-                        <attribute>
-                            <attribute name="name">id</attribute>
-                            <attribute name="in">path</attribute>
-                            <attribute name="required">true</attribute>
-                            <attribute name="schema">
-                                <attribute name="type">string</attribute>
-                            </attribute>
-                        </attribute>
-                    </attribute>
-                    <attribute name="requestBody">
-                        <attribute name="content">
-                            <attribute name="multipart/form-data">
-                                <attribute name="schema">
-                                    <attribute name="type">object</attribute>
-                                    <attribute name="properties">
-                                        <attribute name="file">
-                                            <attribute name="type">string</attribute>
-                                            <attribute name="format">binary</attribute>
-                                        </attribute>
-                                        <attribute name="type">
-                                            <attribute name="type">string</attribute>
-                                        </attribute>
-                                    </attribute>
-                                </attribute>
-                            </attribute>
-                        </attribute>
-                    </attribute>
+                <attribute name="path">/admin/taxon-images/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:taxon_image:update</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:taxon_image:read</attribute>
