@@ -636,6 +636,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see the shipping date as :dateTime
+     */
+    public function iShouldSeeTheShippingDateAs(string $dateTime): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippedAt'),
+            (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
+        );
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
