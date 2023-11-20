@@ -25,11 +25,13 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
@@ -524,6 +526,106 @@ final class ManagingOrdersContext implements Context
 
         Assert::notEmpty($firstItem);
         Assert::same($firstItem['total'], $total);
+    }
+
+    /**
+     * @Then it should have been placed by the customer :customer
+     */
+    public function itShouldHaveBeenPlacedByTheCustomer(CustomerInterface $customer): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'customer'),
+            $this->iriConverter->getIriFromResource($customer),
+        );
+    }
+
+    /**
+     * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
+     */
+    public function itShouldBeShippedTo(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): void {
+        $shippingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress');
+
+        $this->itShouldBeAddressedTo(
+            $shippingAddress,
+            $customerName,
+            $street,
+            $postcode,
+            $city,
+            $countryName,
+        );
+    }
+
+    /**
+     * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
+     */
+    public function itShouldBeBilledToCustomerAtAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): void {
+        $billingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress');
+
+        $this->itShouldBeAddressedTo(
+            $billingAddress,
+            $customerName,
+            $street,
+            $postcode,
+            $city,
+            $countryName,
+        );
+    }
+
+    /**
+     * @Then it should be shipped via the :shippingMethod shipping method
+     */
+    public function itShouldBeShippedViaTheShippingMethod(ShippingMethodInterface $shippingMethod): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shipments')[0]['method'],
+            $this->iriConverter->getIriFromResource($shippingMethod),
+        );
+    }
+
+    /**
+     * @Then it should be paid with :paymentMethod
+     */
+    public function itShouldBePaidWith(PaymentMethodInterface $paymentMethod): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['method'],
+            $this->iriConverter->getIriFromResource($paymentMethod),
+        );
+    }
+
+    /**
+     * @param array<string, mixed> $address
+     */
+    private function itShouldBeAddressedTo(
+        array $address,
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): void {
+        Assert::same($address['firstName'] . ' ' . $address['lastName'], $customerName);
+        Assert::same($address['street'], $street);
+        Assert::same($address['postcode'], $postcode);
+        Assert::same($address['city'], $city);
+        Assert::same($address['countryCode'], $this->getCountryCodeFromName($countryName));
+    }
+
+    private function getCountryCodeFromName(string $name): string
+    {
+        return array_flip(Countries::getNames())[$name];
     }
 
     private function getCurrencyCodeFromTotal(string $total): string
