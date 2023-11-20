@@ -34,13 +34,17 @@ final class DefaultProductVariantResolver implements ProductVariantResolverInter
     {
         if ($this->productVariantRepository && $subject->getId()) {
             /** @var ProductVariantInterface|null $productVariant */
-            $productVariant = $this->productVariantRepository->findOneBy([
-                'product' => $subject,
-                'enabled' => true,
-            ], [
-                'position' => 'ASC',
-                'id' => 'ASC',
-            ]);
+            $productVariant = $this->productVariantRepository->findBy(
+                [
+                    'product' => $subject,
+                    'enabled' => true,
+                ],
+                [
+                    'position' => 'ASC',
+                    'id' => 'ASC',
+                ],
+                1
+            );
 
             return $productVariant;
         }
