@@ -2,6 +2,13 @@
 
 1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
    interface to fix the compatibility with Symfony 6.
+2. The constructor of `Sylius\Component\Product\Resolver\DefaultProductVariantResolver` has been modified, a new argument has been added :
+   
+   ```php
+    public function __construct(
+        private ?ProductVariantRepositoryInterface $productVariantRepository = null,
+    )
+    ```
 
 # UPGRADE FROM `v1.12.10` TO `v1.12.11`
 
