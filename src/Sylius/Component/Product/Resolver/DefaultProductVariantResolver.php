@@ -33,8 +33,8 @@ final class DefaultProductVariantResolver implements ProductVariantResolverInter
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
     {
         if ($this->productVariantRepository && $subject->getId()) {
-            /** @var ProductVariantInterface|null $productVariant */
-            $productVariant = $this->productVariantRepository->findBy(
+            /** @var ProductVariantInterface[] $productVariants */
+            $productVariants = $this->productVariantRepository->findBy(
                 [
                     'product' => $subject,
                     'enabled' => true,
@@ -46,7 +46,7 @@ final class DefaultProductVariantResolver implements ProductVariantResolverInter
                 1
             );
 
-            return $productVariant;
+            return $productVariants[0] ?? null;
         }
 
         if ($subject->getEnabledVariants()->isEmpty()) {
