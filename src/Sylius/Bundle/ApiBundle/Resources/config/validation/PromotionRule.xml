@@ -142,6 +142,9 @@
                             <option name="groups">contains_product</option>
                             <option name="type">string</option>
                         </constraint>
+                        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                            <option name="groups">contains_product</option>
+                        </constraint>
                     </value>
                 </option>
             </constraint>

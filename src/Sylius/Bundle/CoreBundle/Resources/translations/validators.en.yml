@@ -90,6 +90,8 @@ sylius:
     product:
         variants:
             all_prices_defined: You have to define product variants' prices for newly assigned channels first.
+        code:
+            no_exist: Product with code {{ code }} does not exist.
     product_attribute:
         invalid: Position must be an integer.
     product_image:

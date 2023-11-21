@@ -92,5 +92,10 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="validator.constraint_validator" alias="sylius_taxon_code_exists" />
         </service>
+
+        <service id="sylius.validator.product_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExistsValidator">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="validator.constraint_validator" alias="sylius_product_code_exists" />
+        </service>
     </services>
 </container>

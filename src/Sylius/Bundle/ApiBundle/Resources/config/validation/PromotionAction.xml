@@ -44,7 +44,7 @@
                                 <value>shipping_percentage_discount</value>
                             </option>
                             <option name="min">0</option>
-                            <option name="max">1</option>
+                            <option name="max">100</option>
                             <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
                         </constraint>
                     </value>
@@ -113,7 +113,7 @@
                                 <constraint name="Range">
                                     <option name="groups">unit_percentage_discount</option>
                                     <option name="min">0</option>
-                                    <option name="max">1</option>
+                                    <option name="max">100</option>
                                     <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
                                 </constraint>
                             </value>
