@@ -86,28 +86,76 @@
                             </value>
                             <value key="filters">
                                 <constraint name="Optional">
-                                    <constraint name="Type">
-                                        <option name="groups">unit_fixed_discount</option>
-                                        <option name="type">array</option>
-                                    </constraint>
                                     <constraint name="Collection">
                                         <option name="fields">
                                             <value key="price_range_filter">
-                                                <constraint name="Collection">
-                                                    <option name="fields">
-                                                        <value key="min">
-                                                            <constraint name="Type">
-                                                                <option name="groups">unit_fixed_discount</option>
-                                                                <option name="type">numeric</option>
-                                                            </constraint>
-                                                        </value>
-                                                        <value key="max">
-                                                            <constraint name="Type">
-                                                                <option name="groups">unit_fixed_discount</option>
-                                                                <option name="type">numeric</option>
-                                                            </constraint>
-                                                        </value>
-                                                    </option>
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="min">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="groups">unit_fixed_discount</option>
+                                                                        <option name="type">numeric</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                            <value key="max">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="groups">unit_fixed_discount</option>
+                                                                        <option name="type">numeric</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="taxons_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="taxons">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">unit_fixed_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                                                                <option name="groups">unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="products_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="products">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">unit_fixed_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                                                                <option name="groups">unit_fixed_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
                                                 </constraint>
                                             </value>
                                         </option>
@@ -141,10 +189,6 @@
                             </value>
                             <value key="filters">
                                 <constraint name="Optional">
-                                    <constraint name="Type">
-                                        <option name="groups">unit_percentage_discount</option>
-                                        <option name="type">array</option>
-                                    </constraint>
                                     <constraint name="Collection">
                                         <option name="fields">
                                             <value key="price_range_filter">
@@ -164,6 +208,52 @@
                                                                     <constraint name="Type">
                                                                         <option name="groups">unit_percentage_discount</option>
                                                                         <option name="type">numeric</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="taxons_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="taxons">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">unit_percentage_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                                                                <option name="groups">unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                        </option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                            <value key="products_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="products">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="All">
+                                                                        <option name="groups">unit_percentage_discount</option>
+                                                                        <option name="constraints">
+                                                                            <constraint name="NotBlank">
+                                                                                <option name="groups">unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                                                                <option name="groups">unit_percentage_discount</option>
+                                                                            </constraint>
+                                                                        </option>
                                                                     </constraint>
                                                                 </constraint>
                                                             </value>
