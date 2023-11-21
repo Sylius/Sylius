@@ -94,7 +94,22 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldAppearInTheRegistry(string $promotionName): void
     {
         $this->indexPage->open();
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
 
+    /**
+     * @Then the :promotionName promotion shouldn't be listed on the current page
+     */
+    public function thePromotionShouldntBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
+    }
+
+    /**
+     * @Then the :promotionName promotion should be listed on the current page
+     */
+    public function thePromotionShouldBeListedOnTheCurrentPage(string $promotionName): void
+    {
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $promotionName]));
     }
 
@@ -182,6 +197,42 @@ final class ManagingPromotionsContext implements Context
     public function itIsConfiguredWithAmountForChannel($amount, ChannelInterface $channel)
     {
         $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Amount', $amount);
+    }
+
+    /**
+     * @When I archive the :name promotion
+     */
+    public function iArchiveThePromotion($name)
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Archive');
+    }
+
+    /**
+     * @When I restore the :name promotion
+     */
+    public function iRestoreThePromotion($name)
+    {
+        $actions = $this->indexPage->getActionsForResource(['name' => $name]);
+        $actions->pressButton('Restore');
+    }
+
+    /**
+     * @Then I should be viewing non archival promotions
+     */
+    public function iShouldBeViewingNonArchivalPromotions(): void
+    {
+        Assert::false($this->indexPage->isArchivalFilterEnabled());
+    }
+
+    /**
+     * @When I filter archival promotions
+     */
+    public function iFilterArchivalPromotions(): void
+    {
+        $this->indexPage->open();
+        $this->indexPage->chooseArchival('Yes');
+        $this->indexPage->filter();
     }
 
     /**

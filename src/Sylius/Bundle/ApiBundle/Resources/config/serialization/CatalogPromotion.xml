@@ -48,6 +48,10 @@
             <group>admin:catalog_promotion:update</group>
         </attribute>
 
+        <attribute name="archivedAt">
+            <group>admin:catalog_promotion:read</group>
+        </attribute>
+
         <attribute name="priority">
             <group>admin:catalog_promotion:create</group>
             <group>admin:catalog_promotion:update</group>

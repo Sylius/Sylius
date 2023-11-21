@@ -17,6 +17,7 @@ default:
                 - sylius.behat.context.transform.taxon
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product

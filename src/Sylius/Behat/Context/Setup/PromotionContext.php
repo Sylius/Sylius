@@ -58,6 +58,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given there is a promotion :firstName and :secondName
+     */
+    public function thereIsPromotionAnd(string ...$names): void
+    {
+        foreach ($names as $name) {
+            $this->createPromotion($name);
+        }
+    }
+
+    /**
      * @Given /^there is a promotion "([^"]+)" with "Has at least one from taxons" rule (configured with "[^"]+" and "[^"]+")$/
      */
     public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, iterable $taxons): void
@@ -968,6 +978,15 @@ final class PromotionContext implements Context
         $promotion->addRule($this->ruleFactory->createItemTotal($firstChannel->getCode(), $firstAmount));
         $promotion->addRule($this->ruleFactory->createItemTotal($secondChannel->getCode(), $secondAmount));
 
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the (promotion ("[^"]+")) is archival$/
+     */
+    public function thePromotionIsArchival(PromotionInterface $promotion): void
+    {
+        $promotion->setArchivedAt(new \DateTime());
         $this->objectManager->flush();
     }
 

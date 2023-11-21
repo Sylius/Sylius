@@ -43,6 +43,13 @@
         </service>
 
         <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionArchivalAnnouncerInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionArchivalAnnouncer"
+        >
+            <argument type="service" id="sylius.command_bus" />
+        </service>
+
+        <service
             id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncer"
         >

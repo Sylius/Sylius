@@ -851,6 +851,16 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
+    /**
+     * @Given /^the ("[^"]+" catalog promotion) is archival$/
+     */
+    public function theCatalogPromotionIsArchival(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setArchivedAt(new \DateTime());
+        $catalogPromotion->setState(CatalogPromotionStates::STATE_INACTIVE);
+        $this->entityManager->flush();
+    }
+
     private function createCatalogPromotion(
         string $name,
         ?string $code = null,

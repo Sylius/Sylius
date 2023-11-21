@@ -28,6 +28,10 @@
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -35,6 +39,13 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.archived_promotions_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -44,10 +55,38 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+
+                    <!-- We've got to turn off this option here, as it auto-turned on when adding PATCH itemOperations, which would do BC.-->
+                    <!-- Reflink: https://github.com/api-platform/core/issues/3600 -->
+                    <attribute name="skip_null_values">false</attribute>
                 </attribute>
             </itemOperation>
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
+            </itemOperation>
+            <itemOperation name="admin_archive">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/promotions/{code}/archive</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Archives Promotion</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+            </itemOperation>
+            <itemOperation name="admin_restore">
+                <attribute name="method">PATCH</attribute>
+                <attribute name="path">/promotions/{code}/restore</attribute>
+                <attribute name="input">false</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Restores Archived Promotion</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -61,6 +100,7 @@
         <property name="usageLimit" readable="true" />
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
+        <property name="archivedAt" writable="false" />
         <property name="couponBased" readable="true" />
         <property name="coupons" readable="true" />
         <property name="rules" readable="true" />

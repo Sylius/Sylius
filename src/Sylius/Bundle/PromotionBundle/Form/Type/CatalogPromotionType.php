@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -45,10 +46,6 @@ final class CatalogPromotionType extends AbstractResourceType
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => $this->catalogPromotionTranslationType,
                 'label' => 'sylius.form.catalog_promotion.translations',
-            ])
-            ->add('enabled', CheckboxType::class, [
-                'label' => 'sylius.form.catalog_promotion.enabled',
-                'required' => false,
             ])
             ->add('priority', NumberType::class, [
                 'label' => 'sylius.form.catalog_promotion.priority',
@@ -89,6 +86,18 @@ final class CatalogPromotionType extends AbstractResourceType
                 'required' => false,
             ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+            /** @var CatalogPromotionInterface $data */
+            $data = $event->getData();
+
+            $form = $event->getForm();
+            $form->add('enabled', CheckboxType::class, [
+                'label' => 'sylius.form.catalog_promotion.enabled',
+                'required' => false,
+                'disabled' => $data->getArchivedAt() !== null,
+            ]);
+        });
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
             $data = $event->getData();

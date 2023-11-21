@@ -57,4 +57,23 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         return $tableAccessor->getFieldFromRow($table, $tableAccessor->getRowWithFields($table, ['code' => $promotion->getCode()]), $header);
     }
+
+    public function chooseArchival(string $isArchival): void
+    {
+        $this->getElement('filter_archival')->selectOption($isArchival);
+    }
+
+    public function isArchivalFilterEnabled(): bool
+    {
+        $archival = $this->getDocument()->find('css', 'button:contains("Restore")');
+
+        return null !== $archival;
+    }
+
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'filter_archival' => '#criteria_archival',
+        ]);
+    }
 }

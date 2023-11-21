@@ -49,3 +49,13 @@ sylius_admin_catalog_promotion_delete:
             section: admin
             permission: true
             alias: catalog_promotion
+
+sylius_admin_catalog_promotion_archive:
+    path: /catalog-promotions/{code}/archive
+    methods: [PATCH]
+    defaults:
+        _controller: Sylius\Bundle\AdminBundle\Action\ToggleArchivationForCatalogPromotionAction
+        _sylius:
+            section: admin
+            permission: true
+            alias: catalog_promotion

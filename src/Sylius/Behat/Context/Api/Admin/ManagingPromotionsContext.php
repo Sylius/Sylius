@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
 final class ManagingPromotionsContext implements Context
@@ -94,6 +95,48 @@ final class ManagingPromotionsContext implements Context
         ));
 
         Assert::notNull($returnedPromotion, sprintf('There is no promotion %s in registry', $promotionName));
+    }
+
+    /**
+     * @Then the :promotionName promotion shouldn't be listed on the current page
+     */
+    public function thePromotionShouldntBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotionName,
+        ));
+
+        Assert::false($returnedPromotion, sprintf('There is promotion %s in registry', $promotionName));
+    }
+
+    /**
+     * @Then the :promotionName promotion should be listed on the current page
+     */
+    public function thePromotionShouldBeListedOnTheCurrentPage(string $promotionName): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'name',
+            $promotionName,
+        ));
+
+        Assert::isArray($returnedPromotion, sprintf('There is no promotion %s in registry', $promotionName));
+    }
+
+    /**
+     * @Then I should see :amount promotions on the list
+     */
+
+    public function iShouldSeePromotionOnTheList(int $amount): void
+    {
+        $this->client->index(Resources::PROMOTIONS);
+
+        $response = $this->client->getLastResponse();
+        $itemsCount = $this->responseChecker->countCollectionItems($response);
+
+        Assert::same($itemsCount, $amount, sprintf('Expected %d promotion, but got %d', $amount, $itemsCount));
     }
 
     /**
@@ -177,5 +220,39 @@ final class ManagingPromotionsContext implements Context
         Assert::false(
             $this->responseChecker->getValue($this->client->show(Resources::PROMOTIONS, $promotion->getCode()), 'appliesToDiscounted'),
         );
+    }
+
+    /**
+     * @When /^I archive the ("([^"]+)" promotion)$/
+     */
+    public function iArchiveThePromotion(PromotionInterface $promotion): void
+    {
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'archive');
+        $this->client->index(Resources::PROMOTIONS);
+    }
+
+    /**
+     * @When /^I restore the ("([^"]+)" promotion)$/
+     */
+    public function iRestoreThePromotion(PromotionInterface $promotion): void
+    {
+        $this->client->customItemAction(Resources::PROMOTIONS, $promotion->getCode(), Request::METHOD_PATCH, 'restore');
+    }
+
+    /**
+     * @Then I should be viewing non archival promotions
+     */
+    public function iShouldBeViewingNonArchivalPromotions(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
+     * @Given I filter archival promotions
+     */
+    public function iFilterArchivalPromotions(): void
+    {
+        $this->client->addFilter('exists[archivedAt]', true);
+        $this->client->filter();
     }
 }

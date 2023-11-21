@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -25,6 +26,7 @@ final class ManagingPromotionsContext implements Context
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private PromotionRepositoryInterface $promotionRepository,
+        private EntityManagerInterface $promotionManager,
     ) {
     }
 
@@ -46,6 +48,16 @@ final class ManagingPromotionsContext implements Context
         } catch (ForeignKeyConstraintViolationException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
+    }
+
+    /**
+     * @When /^I archive the ("[^"]+" promotion)$/
+     */
+    public function iArchiveThePromotion(PromotionInterface $promotion)
+    {
+        $promotion->setArchivedAt(new \DateTime());
+
+        $this->promotionManager->flush();
     }
 
     /**

@@ -22,6 +22,7 @@
             "coupons": [],
             "rules": [],
             "actions": [],
+            "archivedAt": null,
             "createdAt": @date@,
             "updatedAt": @date@,
             "translations": {
@@ -52,6 +53,7 @@
             "coupons": [],
             "rules": [],
             "actions": [],
+            "archivedAt": null,
             "createdAt": @date@,
             "updatedAt": @date@,
             "translations": {
@@ -64,5 +66,19 @@
             }
         }
     ],
-    "hydra:totalItems": 2
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/promotions{?exists[archivedAt]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+           {
+                "@type": "IriTemplateMapping",
+                "variable": "exists[archivedAt]",
+                "property": "archivedAt",
+                "required": false
+            }
+        ]
+    }
+
 }
