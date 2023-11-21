@@ -61,8 +61,8 @@ final class PromotionRuleGroupValidatorSpec extends ObjectBehavior
         $context->getValidator()->willReturn($validator);
         $validator->inContext($context)->willReturn($contextualValidator);
 
-        $this->validate($promotionRule, new PromotionRuleGroup(['groups' => ['Default', 'test_group']]));
+        $contextualValidator->validate($promotionRule, null, ['Default', 'test_group', 'rule_two'])->willReturn($contextualValidator)->shouldBeCalled();
 
-        $contextualValidator->validate($promotionRule, null, ['Default', 'test_group', 'rule_two'])->shouldHaveBeenCalled();
+        $this->validate($promotionRule, new PromotionRuleGroup(['groups' => ['Default', 'test_group']]));
     }
 }

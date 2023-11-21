@@ -61,8 +61,8 @@ final class PromotionActionGroupValidatorSpec extends ObjectBehavior
         $context->getValidator()->willReturn($validator);
         $validator->inContext($context)->willReturn($contextualValidator);
 
-        $this->validate($promotionAction, new PromotionActionGroup(['groups' => ['Default', 'test_group']]));
+        $contextualValidator->validate($promotionAction, null, ['Default', 'test_group', 'action_two'])->willReturn($contextualValidator)->shouldBeCalled();
 
-        $contextualValidator->validate($promotionAction, null, ['Default', 'test_group', 'action_two'])->shouldHaveBeenCalled();
+        $this->validate($promotionAction, new PromotionActionGroup(['groups' => ['Default', 'test_group']]));
     }
 }

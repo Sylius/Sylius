@@ -80,8 +80,8 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
         $context->getValidator()->willReturn($validator);
         $validator->inContext($context)->willReturn($contextualValidator);
 
-        $this->validate($value, new ChannelCodeCollection(['constraints' => $constraints, 'groups' => $groups]));
+        $contextualValidator->validate($value, $collection, $groups)->willReturn($contextualValidator)->shouldBeCalled();
 
-        $contextualValidator->validate($value, $collection, $groups)->shouldHaveBeenCalled();
+        $this->validate($value, new ChannelCodeCollection(['constraints' => $constraints, 'groups' => $groups]));
     }
 }
