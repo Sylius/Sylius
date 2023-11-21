@@ -41,7 +41,8 @@ final class ManagingOrdersContext implements Context
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
-    ) {
+    )
+    {
     }
 
     /**
@@ -81,7 +82,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->client->applyTransition(
             Resources::PAYMENTS,
-            (string) $order->getLastPayment()->getId(),
+            (string)$order->getLastPayment()->getId(),
             PaymentTransitions::TRANSITION_COMPLETE,
         );
     }
@@ -93,7 +94,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->client->applyTransition(
             Resources::SHIPMENTS,
-            (string) $order->getShipments()->first()->getId(),
+            (string)$order->getShipments()->first()->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
         );
     }
@@ -310,7 +311,8 @@ final class ManagingOrdersContext implements Context
         AdminUserInterface $user,
         OrderInterface $order,
         string $currency,
-    ): void {
+    ): void
+    {
         $this->adminSecurityService->logIn($user);
 
         $currencyCode = $this->responseChecker->getValue($this->client->show(Resources::ORDERS, $order->getTokenValue()), 'currencyCode');
@@ -356,7 +358,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
     {
-         $order = $this->responseChecker->getCollectionItemsWithValue(
+        $order = $this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'number',
             trim($orderNumber, '#'),
@@ -375,11 +377,11 @@ final class ManagingOrdersContext implements Context
     {
         $adminUser = $this->sharedStorage->get('administrator');
         $currencyCode = $this->getCurrencyCodeFromTotal($total);
-        $total = $this->getTotalAsInt($total);
+        $total = $this->getPriceFromString($total);
 
         $this->sharedSecurityService->performActionAsAdminUser(
             $adminUser,
-            fn () => $this->client->index(Resources::ORDERS),
+            fn() => $this->client->index(Resources::ORDERS),
         );
 
         $itemsWithCurrency = $this->responseChecker->getCollectionItemsWithValue(
@@ -414,7 +416,8 @@ final class ManagingOrdersContext implements Context
         string $postcode,
         string $city,
         string $countryName,
-    ): void {
+    ): void
+    {
         $shippingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress');
 
         $this->itShouldBeAddressedTo(
@@ -436,7 +439,8 @@ final class ManagingOrdersContext implements Context
         string $postcode,
         string $city,
         string $countryName,
-    ): void {
+    ): void
+    {
         $billingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress');
 
         $this->itShouldBeAddressedTo(
@@ -513,6 +517,45 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the :productName product's unit price should be :price
+     */
+    public function productUnitPriceShouldBe(string $productName, string $price): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $productName && $item['unitPrice'] === $this->getPriceFromString($price)) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException('There is no product with given name.');
+    }
+
+    /**
+     * @Then the :productName product's item discount should be :price
+     */
+    public function productItemDiscountShouldBe(string $productName, string $price): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
+
+        foreach ($items as $item) {
+            if ($item['productName'] !== $productName) {
+                continue;
+            }
+
+            $discount = $this->calculateDiscount($item['unitPrice'], $item['discountedUnitPrice']);
+
+            Assert::same($discount, abs($this->getPriceFromString($price)));
+        }
+    }
+
+    private function calculateDiscount(int $originalUnitPrice, int $discountedUnitPrice): int
+    {
+        return abs($originalUnitPrice - $discountedUnitPrice);
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
@@ -522,7 +565,8 @@ final class ManagingOrdersContext implements Context
         string $postcode,
         string $city,
         string $countryName,
-    ): void {
+    ): void
+    {
         Assert::same($address['firstName'] . ' ' . $address['lastName'], $customerName);
         Assert::same($address['street'], $street);
         Assert::same($address['postcode'], $postcode);
@@ -537,7 +581,7 @@ final class ManagingOrdersContext implements Context
 
     private function getCurrencyCodeFromTotal(string $total): string
     {
-        return match(true) {
+        return match (true) {
             str_starts_with($total, '$') => 'USD',
             str_starts_with($total, '€') => 'EUR',
             str_starts_with($total, '£') => 'GBP',
@@ -545,8 +589,8 @@ final class ManagingOrdersContext implements Context
         };
     }
 
-    private function getTotalAsInt(string $total): int
+    private function getPriceFromString(string $price): int
     {
-        return (int) round((float) trim($total, '$€£') * 100, 2);
+        return (int)round((float)str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 }
