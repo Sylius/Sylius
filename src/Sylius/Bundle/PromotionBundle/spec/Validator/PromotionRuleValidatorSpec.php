@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRule;
-use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -42,12 +41,11 @@ final class PromotionRuleValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_array(
-        PromotionInterface $promotion,
-    ): void {
+    function it_throws_an_exception_if_value_is_not_an_instance_of_array(): void
+    {
         $this
             ->shouldThrow(UnexpectedValueException::class)
-            ->during('validate', [$promotion, new PromotionRule()])
+            ->during('validate', [new \stdClass(), new PromotionRule()])
         ;
     }
 
