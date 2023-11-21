@@ -29,6 +29,7 @@ final class PromotionActionValidator extends ConstraintValidator
     {
     }
 
+    /** @param PromotionActionInterface $value */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof PromotionAction) {

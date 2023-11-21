@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 /** @experimental */
 final class PromotionRuleGroupValidator extends ConstraintValidator
 {
+    /** @param PromotionRuleInterface $value */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof PromotionRuleGroup) {
