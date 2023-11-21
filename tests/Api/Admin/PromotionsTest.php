@@ -15,7 +15,18 @@ namespace Sylius\Tests\Api\Admin;
 
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +75,14 @@ final class PromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_promotion(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'country.yaml',
+            'customer_group.yaml',
+            'promotion/product.yaml',
+            'promotion/taxon.yaml',
+        ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -95,6 +113,60 @@ final class PromotionsTest extends JsonApiTestCase
                             'count' => 6
                         ],
                     ],
+                    [
+                        'type' => CustomerGroupRuleChecker::TYPE,
+                        'configuration' => [
+                            'group_code' => 'vip'
+                        ],
+                    ],
+                    [
+                        'type' => NthOrderRuleChecker::TYPE,
+                        'configuration' => [
+                            'nth' => 2
+                        ],
+                    ],
+                    [
+                        'type' => ShippingCountryRuleChecker::TYPE,
+                        'configuration' => [
+                            'country' => 'US'
+                        ],
+                    ],
+                    [
+                        'type' => HasTaxonRuleChecker::TYPE,
+                        'configuration' => [
+                            'taxons' => ['MUGS', 'CAPS']
+                        ],
+                    ],
+                    [
+                        'type' => TotalOfItemsFromTaxonRuleChecker::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'taxon' => 'MUGS',
+                                'amount' => 1000,
+                            ],
+                            'MOBILE' => [
+                                'taxon' => 'CAPS',
+                                'amount' => 2000,
+                            ]
+                        ],
+                    ],
+                    [
+                        'type' => ContainsProductRuleChecker::TYPE,
+                        'configuration' => [
+                            'product_code' => 'CAP',
+                        ],
+                    ],
+                    [
+                        'type' => ItemTotalRuleChecker::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 333,
+                            ],
+                            'MOBILE' => [
+                                'amount' => 222,
+                            ]
+                        ],
+                    ],
                 ],
                 'actions' => [
                     [
@@ -103,6 +175,49 @@ final class PromotionsTest extends JsonApiTestCase
                             'WEB' => [
                                 'amount' => 1000,
                             ],
+                            'MOBILE' => [
+                                'amount' => 2000,
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => UnitFixedDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 3000,
+                                'filters' => [
+                                    'price_range_filter' => [
+                                        'min' => 1000,
+                                        'max' => 10000,
+                                    ],
+                                ],
+                            ],
+                            'MOBILE' => [
+                                'amount' => 4000,
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => PercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'percentage' => 5,
+                        ],
+                    ],
+                    [
+                        'type' => UnitPercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'percentage' => 10,
+                            ],
+                            'MOBILE' => [
+                                'percentage' => 100,
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'percentage' => 20,
                         ],
                     ],
                 ],
@@ -181,6 +296,145 @@ final class PromotionsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/promotion/post_promotion_with_invalid_dates_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_promotion_with_invalid_rules(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/promotions',
+            server: $header,
+            content: json_encode([
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'rules' => [
+                    [
+                        'type' => CartQuantityRuleChecker::TYPE,
+                        'configuration' => [
+                            'count' => 'invalid'
+                        ],
+                    ],
+                    [
+                        'type' => CustomerGroupRuleChecker::TYPE,
+                        'configuration' => [
+                            'group_code' => 'wrong'
+                        ],
+                    ],
+                    [
+                        'type' => NthOrderRuleChecker::TYPE,
+                        'configuration' => [
+                            'nth' => 'invalid'
+                        ],
+                    ],
+                    [
+                        'type' => ShippingCountryRuleChecker::TYPE,
+                        'configuration' => [
+                            'country' => 'wrong'
+                        ],
+                    ],
+                    [
+                        'type' => HasTaxonRuleChecker::TYPE,
+                        'configuration' => [
+                            'taxons' => ['wrong']
+                        ],
+                    ],
+                    [
+                        'type' => TotalOfItemsFromTaxonRuleChecker::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'taxon' => 'wrong',
+                                'amount' => 'invalid',
+                            ]
+                        ],
+                    ],
+                    [
+                        'type' => ContainsProductRuleChecker::TYPE,
+                        'configuration' => [
+                            'product_code' => 'wrong',
+                        ],
+                    ],
+                    [
+                        'type' => ItemTotalRuleChecker::TYPE,
+                        'configuration' => [
+                            'MOBILE' => [
+                            ]
+                        ],
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/post_promotion_with_invalid_rules_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_create_a_promotion_with_invalid_actions(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/promotions',
+            server: $header,
+            content: json_encode([
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'actions' => [
+                    [
+                        'type' => FixedDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 'invalid',
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => UnitFixedDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'filters' => 'invalid'
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => PercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'percentage' => -5,
+                        ],
+                    ],
+                    [
+                        'type' => UnitPercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'percentage' => 110,
+                            ],
+                            'MOBILE' => [
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                        ],
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/post_promotion_with_invalid_actions_response',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
