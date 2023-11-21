@@ -32,7 +32,9 @@ final class PromotionRuleGroupValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, PromotionRuleInterface::class);
         }
 
+        /** @var string[] $groups */
+        $groups = array_merge($constraint->groups, [$value->getType()]);
         $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->validate(value: $value, groups: array_merge($constraint->groups, [$value->getType()]));
+        $validator->validate(value: $value, groups: $groups);
     }
 }
