@@ -15,16 +15,17 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class ChannelCodeCollection extends Constraint
+final class CountryCodeExists extends Constraint
 {
-    public array $constraints = [];
-    public bool $allowExtraFields = false;
-    public bool $allowMissingFields = false;
-    public ?string $extraFieldsMessage = null;
-    public ?string $missingFieldsMessage = null;
+    public string $message = 'sylius.country.code.no_exist';
 
     public function validatedBy(): string
     {
-        return 'sylius_channel_code_collection';
+        return 'sylius_country_code_exists';
+    }
+
+    public function getTargets(): string
+    {
+        return Constraint::PROPERTY_CONSTRAINT;
     }
 }

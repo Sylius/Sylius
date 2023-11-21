@@ -41,7 +41,16 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
             $fields[$channel->getCode()] = $constraint->constraints;
         }
 
+        $collection = new Collection(
+            $fields,
+            $constraint->groups,
+            $constraint->payload,
+            $constraint->allowExtraFields,
+            $constraint->allowMissingFields,
+            $constraint->extraFieldsMessage,
+            $constraint->missingFieldsMessage,
+        );
         $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->validate($value, new Collection($fields), $constraint->groups);
+        $validator->validate($value, $collection, $constraint->groups);
     }
 }

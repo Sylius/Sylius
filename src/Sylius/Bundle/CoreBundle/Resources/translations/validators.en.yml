@@ -61,12 +61,18 @@ sylius:
             not_blank: Please enter your email.
         message:
             not_blank: Please enter your message.
+    country:
+        code:
+            no_exist: Country with code {{ code }} does not exist.
     currency:
         enabled:
             cannot_disable_base: The base currency cannot be disabled.
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    customer_group:
+        code:
+            no_exist: Customer group with code {{ code }} does not exist.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
         insufficient_stock: 'Insufficient stock'
@@ -132,6 +138,9 @@ sylius:
         rating:
             range: Review rating must be an integer in the range 1-5.
             not_in_range: Review rating must be between {{ min }} and {{ max }}.
+    taxon:
+        code:
+            no_exist: Taxon with code {{ code }} does not exist.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
