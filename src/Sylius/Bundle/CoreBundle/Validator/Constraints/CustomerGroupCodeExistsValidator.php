@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Repository\CustomerGroupRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,6 +21,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class CustomerGroupCodeExistsValidator extends ConstraintValidator
 {
+    /**
+     * @param CustomerGroupRepositoryInterface<CustomerGroupInterface> $customerGroupRepository
+     */
     public function __construct(private CustomerGroupRepositoryInterface $customerGroupRepository)
     {
     }

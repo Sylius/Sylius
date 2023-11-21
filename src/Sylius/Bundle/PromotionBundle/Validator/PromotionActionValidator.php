@@ -22,6 +22,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class PromotionActionValidator extends ConstraintValidator
 {
+    /**
+     * @param array<string, string> $actionTypes
+     */
     public function __construct(private array $actionTypes)
     {
     }

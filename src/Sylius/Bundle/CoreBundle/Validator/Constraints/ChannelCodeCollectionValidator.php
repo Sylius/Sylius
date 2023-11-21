@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,6 +23,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class ChannelCodeCollectionValidator extends ConstraintValidator
 {
+    /**
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     */
     public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
     }

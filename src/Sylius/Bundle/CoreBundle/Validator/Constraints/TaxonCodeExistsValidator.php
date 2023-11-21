@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,6 +21,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class TaxonCodeExistsValidator extends ConstraintValidator
 {
+    /**
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     */
     public function __construct(private TaxonRepositoryInterface $taxonRepository)
     {
     }

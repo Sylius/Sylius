@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -20,6 +21,9 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductCodeExistsValidator extends ConstraintValidator
 {
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     */
     public function __construct(private ProductRepositoryInterface $productRepository)
     {
     }
