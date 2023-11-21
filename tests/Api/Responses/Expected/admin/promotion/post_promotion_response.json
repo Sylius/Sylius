@@ -147,7 +147,7 @@
             "id": @integer@,
             "type": "order_percentage_discount",
             "configuration": {
-                "percentage": 5
+                "percentage": 0.5
             }
         },
         {
@@ -157,10 +157,10 @@
             "type": "unit_percentage_discount",
             "configuration": {
                 "WEB": {
-                    "percentage": 10
+                    "percentage": 0.1
                 },
                 "MOBILE": {
-                    "percentage": 100
+                    "percentage": 1
                 }
             }
         },
@@ -170,7 +170,7 @@
             "id": @integer@,
             "type": "shipping_percentage_discount",
             "configuration": {
-                "percentage": 20
+                "percentage": 0.2
             }
         }
     ],

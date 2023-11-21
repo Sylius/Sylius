@@ -44,7 +44,7 @@
                                 <value>shipping_percentage_discount</value>
                             </option>
                             <option name="min">0</option>
-                            <option name="max">100</option>
+                            <option name="max">1</option>
                             <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
                         </constraint>
                     </value>
@@ -90,6 +90,28 @@
                                         <option name="groups">unit_fixed_discount</option>
                                         <option name="type">array</option>
                                     </constraint>
+                                    <constraint name="Collection">
+                                        <option name="fields">
+                                            <value key="price_range_filter">
+                                                <constraint name="Collection">
+                                                    <option name="fields">
+                                                        <value key="min">
+                                                            <constraint name="Type">
+                                                                <option name="groups">unit_fixed_discount</option>
+                                                                <option name="type">numeric</option>
+                                                            </constraint>
+                                                        </value>
+                                                        <value key="max">
+                                                            <constraint name="Type">
+                                                                <option name="groups">unit_fixed_discount</option>
+                                                                <option name="type">numeric</option>
+                                                            </constraint>
+                                                        </value>
+                                                    </option>
+                                                </constraint>
+                                            </value>
+                                        </option>
+                                    </constraint>
                                 </constraint>
                             </value>
                         </option>
@@ -113,7 +135,7 @@
                                 <constraint name="Range">
                                     <option name="groups">unit_percentage_discount</option>
                                     <option name="min">0</option>
-                                    <option name="max">100</option>
+                                    <option name="max">1</option>
                                     <option name="notInRangeMessage">sylius.promotion_action.percentage_discount_configuration.not_in_range</option>
                                 </constraint>
                             </value>
@@ -122,6 +144,34 @@
                                     <constraint name="Type">
                                         <option name="groups">unit_percentage_discount</option>
                                         <option name="type">array</option>
+                                    </constraint>
+                                    <constraint name="Collection">
+                                        <option name="fields">
+                                            <value key="price_range_filter">
+                                                <constraint name="Optional">
+                                                    <constraint name="Collection">
+                                                        <option name="fields">
+                                                            <value key="min">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="groups">unit_percentage_discount</option>
+                                                                        <option name="type">numeric</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                            <value key="max">
+                                                                <constraint name="Optional">
+                                                                    <constraint name="Type">
+                                                                        <option name="groups">unit_percentage_discount</option>
+                                                                        <option name="type">numeric</option>
+                                                                    </constraint>
+                                                                </constraint>
+                                                            </value>
+                                                        </option>
+                                                    </constraint>
+                                                </constraint>
+                                            </value>
+                                        </option>
                                     </constraint>
                                 </constraint>
                             </value>

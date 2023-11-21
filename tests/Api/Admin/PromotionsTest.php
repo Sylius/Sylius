@@ -200,24 +200,24 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => PercentageDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
-                            'percentage' => 5,
+                            'percentage' => 0.5,
                         ],
                     ],
                     [
                         'type' => UnitPercentageDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
                             'WEB' => [
-                                'percentage' => 10,
+                                'percentage' => 0.1,
                             ],
                             'MOBILE' => [
-                                'percentage' => 100,
+                                'percentage' => 1,
                             ],
                         ],
                     ],
                     [
                         'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
-                            'percentage' => 20,
+                            'percentage' => 0.2,
                         ],
                     ],
                 ],
@@ -472,6 +472,9 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => FixedDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
                             'WEB' => [
+                                'amount' => 2,
+                            ],
+                            'MOBILE' => [
                                 'amount' => 2,
                             ],
                         ],

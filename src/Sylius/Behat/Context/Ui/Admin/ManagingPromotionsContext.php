@@ -230,6 +230,17 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add the :actionType action configured without a percentage value for :channel channel
+     */
+    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(
+        string $actionType,
+        ChannelInterface $channel
+    ): void {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+    }
+
+    /**
      * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%"$/
      * @When I add the :actionType action configured without a percentage value
      */
