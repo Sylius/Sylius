@@ -19,7 +19,7 @@ Feature: Modifying a customer's shipping address on an order with taxes
         And I am logged in as an administrator
 
     @api @ui
-    Scenario: Modifying a customer's shipping address when the applied promotion is no longer valid
+    Scenario: Modifying a customer's shipping address of already placed order after the VAT tax rate has been changed
         Given the "VAT" tax rate has changed to 10%
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order

@@ -18,13 +18,13 @@ Feature: Modifying a customer's billing address on an order with taxes
         And I am logged in as an administrator
 
     @api @ui
-    Scenario: Modifying a customer's billing address when the applied promotion is no longer valid
+    Scenario: Modifying a customer's billing address of already placed order after the VAT tax rate has been changed
         Given the "VAT" tax rate has changed to 10%
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
         And I specify their new billing address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this order should still have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
+        And this order should have "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as its billing address
         And the order's total should still be "$480.00"
         And the order's tax total should still be "$80.00"

@@ -20,7 +20,7 @@ Feature: Modifying a customer's billing address on an order with an applied prom
         And I am logged in as an administrator
 
     @api @ui
-    Scenario: Modifying a customer's billing address when the applied promotion is no longer valid
+    Scenario: Modifying a customer's billing address of already placed order when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order

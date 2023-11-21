@@ -36,7 +36,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/orders/' . $tokenValue,
-            server: $this->createFetchRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
         );
 
         $response = $this->client->getResponse();
@@ -59,7 +59,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/orders?customer.id=' . $customer->getId(),
-            server: $this->createFetchRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -85,7 +85,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $this->createFetchRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -111,7 +111,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $this->createUpdateRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
             content: json_encode([
                 'firstName' => 'Updated: Adam',
                 'lastName' => 'Updated: Handley',
@@ -155,7 +155,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $billingAddress->getId(),
-            server: $this->createFetchRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
             content: json_encode([
                 'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
             ]),
@@ -184,7 +184,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $this->createFetchRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
         );
 
         $this->assertResponse(
@@ -210,7 +210,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $this->createUpdateRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
             content: json_encode([
                 'firstName' => 'Updated: Julia',
                 'lastName' => 'Updated: Kowalska',
@@ -254,7 +254,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: '/api/v2/admin/addresses/' . $shippingAddress->getId(),
-            server: $this->createUpdateRequestHeaders('api@example.com'),
+            server: $this->buildHeaders('api@example.com'),
             content: json_encode([
                 'customer' => '/api/v2/admin/customers/' . $customerDave->getId(),
             ]),
@@ -267,23 +267,13 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertSame('/api/v2/admin/customers/' . $customerTony->getId(), json_decode($content)->customer);
     }
 
-    private function createUpdateRequestHeaders(string $adminEmail): array
+    /** @return array<string, string> */
+    private function buildHeaders(string $adminEmail): array
     {
         return $this
             ->headerBuilder()
             ->withJsonLdContentType()
             ->withJsonLdAccept()
-            ->withAdminUserAuthorization($adminEmail)
-            ->build()
-        ;
-    }
-
-    private function createFetchRequestHeaders(string $adminEmail): array
-    {
-        return $this
-            ->headerBuilder()
-            ->withJsonLdAccept()
-            ->withJsonLdContentType()
             ->withAdminUserAuthorization($adminEmail)
             ->build()
         ;
