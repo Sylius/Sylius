@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRule;
-use Sylius\Bundle\PromotionBundle\Validator\PromotionRule\RuleValidatorInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -40,11 +39,6 @@ final class PromotionRuleValidator extends ConstraintValidator
         $type = $value->getType();
         if (!array_key_exists($type, $this->ruleTypes)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-
-            return;
         }
-
-        $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->validate(value: $value, groups: [$type]);
     }
 }

@@ -14,13 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionAction;
-use Sylius\Bundle\PromotionBundle\Validator\PromotionAction\ActionValidatorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class PromotionActionValidator extends ConstraintValidator
 {
@@ -41,11 +39,6 @@ final class PromotionActionValidator extends ConstraintValidator
         $type = $value->getType();
         if (!array_key_exists($type, $this->actionTypes)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-
-            return;
         }
-
-        $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->validate(value: $value, groups: [$type]);
     }
 }
