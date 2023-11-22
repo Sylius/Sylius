@@ -788,14 +788,22 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the "([^"]+)", the "([^"]+)", the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
+     * @Then /^I should be notified that all mandatory (shipping|billing) address details are incomplete$/
      */
-    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $thirdElement, $fourthElement, $type)
+    public function iShouldBeNotifiedThatAllMandatoryAddressDetailsAreIncomplete(string $type): void
     {
-        $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
-        $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
-        $this->assertElementValidationMessage($type, $thirdElement, sprintf('Please enter %s.', $thirdElement));
-        $this->assertElementValidationMessage($type, $fourthElement, sprintf('Please enter %s.', $fourthElement));
+        /** @var array<int, string> $mandatoryAddressFields */
+        $mandatoryAddressFields = ['first name', 'last name', 'street', 'city', 'postcode'];
+
+        foreach ($mandatoryAddressFields as $mandatoryAddressField) {
+            $this->assertElementValidationMessage(
+                $type,
+                $mandatoryAddressField,
+                sprintf('Please enter %s.', $mandatoryAddressField),
+            );
+        }
+
+        $this->assertElementValidationMessage($type, 'country', 'Please select country.');
     }
 
     /**
@@ -832,17 +840,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I (clear old billing address) information$/
+     * @When /^I (clear the billing address) information$/
      */
-    public function iSpecifyTheBillingAddressAs(AddressInterface $address)
+    public function iClearTheBillingAddressInformation(AddressInterface $address)
     {
         $this->updatePage->specifyBillingAddress($address);
     }
 
     /**
-     * @When /^I (clear old shipping address) information$/
+     * @When /^I (clear the shipping address) information$/
      */
-    public function iSpecifyTheShippingAddressAs(AddressInterface $address)
+    public function iClearTheShippingAddressInformation(AddressInterface $address)
     {
         $this->updatePage->specifyShippingAddress($address);
     }
@@ -850,7 +858,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @When /^I do not specify new information$/
      */
-    public function iDoNotSpecifyNewInformation()
+    public function iDoNotSpecifyNewInformation(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
