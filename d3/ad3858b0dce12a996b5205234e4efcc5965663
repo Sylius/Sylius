@@ -1,0 +1,42 @@
+---------------------------------------------------------------------------
+
+by github-actions[bot] at 2023-11-13T14:53:00Z
+
+### [Bunnyshell](https://www.bunnyshell.com) Preview Environment deployed
+
+**It will be automatically stopped in 4 hours.**
+
+Use the command `/bns:start` to start it if it's stopped.
+
+|Component|Endpoints|
+|---------|---------|
+|mailhog|https://mailhog-53cdc2.bunnyenv.com/|
+|php|https://store-53cdc2.bunnyenv.com/|
+
+Available commands:
+- `/bns:stop` to stop the environment
+- `/bns:deploy` to redeploy the environment
+- `/bns:delete` to remove the environment
+<!-- thollander/actions-comment-pull-request "bunnyshell-preview-env" -->
+
+---------------------------------------------------------------------------
+
+by sonarcloud[bot] at 2023-11-13T21:19:43Z
+
+SonarCloud Quality Gate failed.&nbsp; &nbsp; [![Quality Gate failed](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/QualityGateBadge/failed-16px.png 'Quality Gate failed')](https://sonarcloud.io/dashboard?id=Sylius_Sylius&pullRequest=15524)
+
+[![Bug](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/bug-16px.png 'Bug')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=BUG) [![B](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/RatingBadge/B-16px.png 'B')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=BUG) [6 Bugs](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=BUG)
+[![Vulnerability](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/vulnerability-16px.png 'Vulnerability')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=VULNERABILITY) [![A](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/RatingBadge/A-16px.png 'A')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=VULNERABILITY) [0 Vulnerabilities](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=VULNERABILITY)
+[![Security Hotspot](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/security_hotspot-16px.png 'Security Hotspot')](https://sonarcloud.io/project/security_hotspots?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=SECURITY_HOTSPOT) [![A](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/RatingBadge/A-16px.png 'A')](https://sonarcloud.io/project/security_hotspots?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=SECURITY_HOTSPOT) [0 Security Hotspots](https://sonarcloud.io/project/security_hotspots?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=SECURITY_HOTSPOT)
+[![Code Smell](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/code_smell-16px.png 'Code Smell')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=CODE_SMELL) [![A](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/RatingBadge/A-16px.png 'A')](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=CODE_SMELL) [15 Code Smells](https://sonarcloud.io/project/issues?id=Sylius_Sylius&pullRequest=15524&resolved=false&types=CODE_SMELL)
+
+[![No Coverage information](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/CoverageChart/NoCoverageInfo-16px.png 'No Coverage information')](https://sonarcloud.io/component_measures?id=Sylius_Sylius&pullRequest=15524) No Coverage information
+[![0.6%](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/checks/Duplications/3-16px.png '0.6%')](https://sonarcloud.io/component_measures?id=Sylius_Sylius&pullRequest=15524&metric=new_duplicated_lines_density&view=list) [0.6% Duplication](https://sonarcloud.io/component_measures?id=Sylius_Sylius&pullRequest=15524&metric=new_duplicated_lines_density&view=list)
+
+![idea](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/light_bulb-16px.png 'idea') Catch issues before they fail your Quality Gate with our IDE extension ![sonarlint](https://sonarsource.github.io/sonarcloud-github-static-resources/v2/common/sonarlint-16px.png 'sonarlint') [SonarLint](https://www.sonarsource.com/products/sonarlint/features/connected-mode/?referrer=sonarcloud-welcome)
+
+---------------------------------------------------------------------------
+
+by GSadee at 2023-11-22T05:28:29Z
+
+Thanks, Karol! :1st_place_medal:
