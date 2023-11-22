@@ -11,7 +11,7 @@ Feature: Editing promotion
         And I am logged in as an administrator
 
     @api @ui
-    Scenario: Seeing disabled code field when editing promotion
+    Scenario: Being unable to change code of promotion
         When I want to modify a "Christmas sale" promotion
         Then I should not be able to edit its code
 

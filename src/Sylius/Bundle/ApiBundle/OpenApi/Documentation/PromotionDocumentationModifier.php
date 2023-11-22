@@ -19,6 +19,9 @@ use ApiPlatform\OpenApi\OpenApi;
 /** @experimental */
 final class PromotionDocumentationModifier implements DocumentationModifierInterface
 {
+    const ROUTE_ADMIN_PROMOTIONS = '/admin/promotions';
+    const ROUTE_ADMIN_PROMOTION = '/admin/promotions/{code}';
+
     /**
      * @param string[] $actionTypes
      * @param string[] $ruleTypes
@@ -34,8 +37,8 @@ final class PromotionDocumentationModifier implements DocumentationModifierInter
     {
         $paths = $docs->getPaths();
 
-        $this->addDescription($paths, sprintf('%s/admin/promotions', $this->apiRoute), 'Post');
-        $this->addDescription($paths, sprintf('%s/admin/promotions/{code}', $this->apiRoute), 'Put');
+        $this->addDescription($paths, sprintf('%s%s', $this->apiRoute, self::ROUTE_ADMIN_PROMOTIONS), 'Post');
+        $this->addDescription($paths, sprintf('%s%s', $this->apiRoute, self::ROUTE_ADMIN_PROMOTION), 'Put');
 
         return $docs->withPaths($paths);
     }

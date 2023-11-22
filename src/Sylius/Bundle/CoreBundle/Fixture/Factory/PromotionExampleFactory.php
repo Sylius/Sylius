@@ -197,10 +197,11 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         };
     }
 
+    /** @return iterable<null|string> */
     private function getLocales(): iterable
     {
         if (null === $this->localeRepository) {
-            throw new \RuntimeException('You must configure a $localeRepository');
+            return [];
         }
 
         /** @var LocaleInterface[] $locales */
