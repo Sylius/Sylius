@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethod",
+    "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+    "@type": "PaymentMethod",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
+    "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+    "id": @integer@,
+    "code": "CASH_ON_DELIVERY",
+    "position": 0,
+    "enabled": true,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+            "@type": "PaymentMethodTranslation",
+            "id": @integer@,
+            "name": "Cash on delivery",
+            "description": "Quisquam recusandae asperiores accusamus. Repellat vero omnis voluptates id amet et. Suscipit qui recusandae totam nulla quam ipsam.",
+            "instructions": null
+        }
+    }
+}
