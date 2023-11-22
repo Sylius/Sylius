@@ -16,12 +16,12 @@ Feature: Modifying a customer's shipping address validation
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @no-api
+    @api @ui
     Scenario: Attempt to save an order with incomplete shipping address
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
         And I clear the shipping address information
         But I do not specify new information
         And I try to save my changes
-        Then I should be notified that all mandatory billing address details are incomplete
+        Then I should be notified that all mandatory shipping address details are incomplete
         And this order should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"

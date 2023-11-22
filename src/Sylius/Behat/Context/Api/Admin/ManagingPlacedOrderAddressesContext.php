@@ -24,6 +24,16 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPlacedOrderAddressesContext implements Context
 {
+    /** @var array<string, string> */
+    private array $addressProperties = [
+        'firstName' => 'getFirstName',
+        'lastName' => 'getLastName',
+        'street' => 'getStreet',
+        'postcode' => 'getPostcode',
+        'city' => 'getCity',
+        'countryCode' => 'getCountryCode',
+    ];
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
@@ -43,14 +53,30 @@ final class ManagingPlacedOrderAddressesContext implements Context
     }
 
     /**
-     * @When /^I want to modify a customer's shipping address of this order$/
+     * @When I want to modify a customer's shipping address of this order
      */
-    public function iWantToModifyCustomerAddress(): void
+    public function iWantToModifyCustomerShippingAddress(): void
     {
         $this->client->buildUpdateRequest(
             Resources::ADDRESSES,
             (string) $this->sharedStorage->get('order')->getShippingAddress()->getId(),
         );
+    }
+
+    /**
+     * @When /^I clear the (?:billing|shipping) address information$/
+     */
+    public function iClearTheAddressInformation(): void
+    {
+        $this->client->updateRequestData(array_fill_keys(array_keys($this->addressProperties), ''));
+    }
+
+    /**
+     * @When /^I do not specify new information$/
+     */
+    public function iDoNotSpecifyNewInformation(): void
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**
@@ -79,7 +105,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
     }
 
     /**
-     * @Then /^this order should(?:|still ) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Then /^this order should(?:| still) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
     public function itShouldBeShippedTo(AddressInterface $address): void
     {
@@ -91,19 +117,53 @@ final class ManagingPlacedOrderAddressesContext implements Context
         $this->assertAddressResponseProperties($response, $address);
     }
 
-    private function assertAddressResponseProperties(Response $response, AddressInterface $exceptedAddress): void
+    /**
+     * @Then /^I should be notified that all mandatory (?:shipping|billing) address details are incomplete$/
+     */
+    public function iShouldBeNotifiedThatAllMandatoryAddressDetailsAreIncomplete(): void
     {
-        $addressProperties = [
-            'firstName' => 'getFirstName',
-            'lastName' => 'getLastName',
-            'street' => 'getStreet',
-            'postcode' => 'getPostcode',
-            'city' => 'getCity',
-            'countryCode' => 'getCountryCode',
+        /** @var array<string, array<string, string>> $mandatoryAddressProperties */
+        $mandatoryAddressProperties = [
+            'firstName' => ['minLength' => '2 characters'],
+            'lastName' => ['minLength' => '2 characters'],
+            'street' => ['minLength' => '2 characters'],
+            'city' => ['minLength' => '2 characters'],
+            'postcode' => ['minLength' => '1 character'],
         ];
 
-        foreach ($addressProperties as $property => $getter) {
+        $violations = $this->responseChecker->getError($this->client->getLastResponse());
+
+        foreach ($mandatoryAddressProperties as $property => $constraints) {
+            Assert::contains(
+                $violations,
+                sprintf('%s: Please enter %s.', $property, $this->camelCaseToSpaces($property)),
+                'Not found violation for ' . $property . ' property.',
+            );
+
+            $formattedProperty = ucfirst($this->camelCaseToSpaces($property));
+            Assert::contains(
+                $violations,
+                sprintf('%s: %s must be at least %s long.', $property, $formattedProperty, $constraints['minLength']),
+                'Not found violation for ' . $property . ' property.',
+            );
+        }
+
+        Assert::contains(
+            $violations,
+            'countryCode: Please select country.',
+            'Not found violation for countryCode property.',
+        );
+    }
+
+    private function assertAddressResponseProperties(Response $response, AddressInterface $exceptedAddress): void
+    {
+        foreach ($this->addressProperties as $property => $getter) {
             Assert::same($this->responseChecker->getValue($response, $property), $exceptedAddress->$getter());
         }
+    }
+
+    private function camelCaseToSpaces(string $string): string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', ' $0', $string));
     }
 }
