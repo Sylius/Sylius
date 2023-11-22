@@ -21,18 +21,32 @@ final class DefaultProductVariantResolver implements ProductVariantResolverInter
 {
     public function __construct(private ?ProductVariantRepositoryInterface $productVariantRepository = null)
     {
+        if (null === $productVariantRepository) {
+            trigger_deprecation('sylius/product', '1.12',
+                'Not passing a service that implements "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in 2.0.',
+                ProductVariantRepositoryInterface::class,
+                self::class
+            );
+        }
     }
 
     public function getVariant(ProductInterface $subject): ?ProductVariantInterface
     {
         if ($this->productVariantRepository && $subject->getId()) {
-            /** @var ProductVariantInterface|null $productVariant */
-            $productVariant = $this->productVariantRepository->findOneBy([
-                'product' => $subject->getId(),
-                'enabled' => true,
-            ]);
+            /** @var ProductVariantInterface[] $productVariants */
+            $productVariants = $this->productVariantRepository->findBy(
+                [
+                    'product' => $subject,
+                    'enabled' => true,
+                ],
+                [
+                    'position' => 'ASC',
+                    'id' => 'ASC',
+                ],
+                1
+            );
 
-            return $productVariant;
+            return $productVariants[0] ?? null;
         }
 
         if ($subject->getEnabledVariants()->isEmpty()) {
