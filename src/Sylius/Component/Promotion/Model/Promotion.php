@@ -318,6 +318,16 @@ class Promotion implements PromotionInterface
         $this->appliesToDiscounted = $applyOnDiscounted;
     }
 
+    public function getLabel(): ?string
+    {
+        return $this->getTranslation()->getLabel();
+    }
+
+    public function setLabel(?string $label): void
+    {
+        $this->getTranslation()->setLabel($label);
+    }
+
     /** @return PromotionTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface
     {

@@ -13,6 +13,8 @@ parameters:
         - "%sylius.security.new_api_route%/admin/catalog-promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/catalog-promotion-scopes/{id}"
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
+        - "%sylius.security.new_api_route%/admin/promotion-actions/{id}"
+        - "%sylius.security.new_api_route%/admin/promotion-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shop-users/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
@@ -65,6 +67,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\ZoneCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveMenuTaxonException: 409
+        Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
         Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400

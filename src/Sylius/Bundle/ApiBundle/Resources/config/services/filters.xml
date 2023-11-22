@@ -245,5 +245,19 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.promotion_coupon_search_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="coupons.code">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.promotion_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="priority" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>

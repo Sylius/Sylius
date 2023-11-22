@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: Please enter promotion code.\nname: Please enter promotion name.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "Please enter promotion code.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "name",
+            "message": "Please enter promotion name.",
+            "code": @string@
+        }
+    ]
+}

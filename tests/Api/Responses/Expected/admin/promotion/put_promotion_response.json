@@ -1,21 +1,21 @@
 {
     "@context": "\/api\/v2\/contexts\/Promotion",
-    "@id": "\/api\/v2\/admin\/promotions\/tshirts_discount",
+    "@id": "\/api\/v2\/admin\/promotions\/50_off",
     "@type": "Promotion",
     "channels": [
-        "\/api\/v2\/admin\/channels\/WEB"
+        "\/api\/v2\/admin\/channels\/MOBILE"
     ],
-    "id":"@integer@",
-    "code": "tshirts_discount",
-    "name": "T-Shirts discount",
-    "description": "T-Shirts discount",
-    "priority": 22,
+    "id": @integer@,
+    "code": "50_off",
+    "name": "Christmas",
+    "description": "Get 50% off of your first purchase",
+    "priority": 1,
     "exclusive": true,
-    "usageLimit": 3,
+    "usageLimit": 11,
     "used": 0,
-    "startsAt": "2023-10-04 12:30:00",
-    "endsAt": "2023-11-04 12:30:00",
-    "couponBased": true,
+    "startsAt": null,
+    "endsAt": null,
+    "couponBased": false,
     "coupons": [],
     "rules": [
         {
@@ -24,7 +24,7 @@
             "id": @integer@,
             "type": "cart_quantity",
             "configuration": {
-                "count": 6
+                "count": 1
             }
         }
     ],
@@ -36,20 +36,20 @@
             "type": "order_fixed_discount",
             "configuration": {
                 "WEB": {
-                    "amount": 1000
+                    "amount": 2
                 }
             }
         }
     ],
-    "appliesToDiscounted": false,
-    "createdAt": @string@,
-    "updatedAt": @string@,
+    "appliesToDiscounted": true,
+    "createdAt": @date@,
+    "updatedAt": @date@,
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
             "@type": "PromotionTranslation",
             "id": @integer@,
-            "label": "T-Shirts discount"
+            "label": "Christmas"
         }
     }
 }
