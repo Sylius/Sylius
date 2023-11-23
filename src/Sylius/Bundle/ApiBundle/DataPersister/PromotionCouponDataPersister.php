@@ -26,20 +26,23 @@ final class PromotionCouponDataPersister implements ContextAwareDataPersisterInt
     ) {
     }
 
+    /** @param array<array-key, mixed> $context */
     public function supports($data, array $context = []): bool
     {
         return $data instanceof PromotionCouponInterface;
     }
 
+    /** @param array<array-key, mixed> $context */
     public function persist($data, array $context = [])
     {
         return $this->decoratedDataPersister->persist($data, $context);
     }
 
-    public function remove($data, array $context = [])
+    /** @param array<array-key, mixed> $context */
+    public function remove($data, array $context = []): void
     {
         try {
-            return $this->decoratedDataPersister->remove($data, $context);
+            $this->decoratedDataPersister->remove($data, $context);
         } catch (ForeignKeyConstraintViolationException) {
             throw new PromotionCouponCannotBeRemoved();
         }
