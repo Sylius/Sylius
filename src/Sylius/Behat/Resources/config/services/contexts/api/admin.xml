@@ -199,6 +199,7 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.api.shared_security" />
         </service>
 
         <service id="Sylius\Behat\Context\Api\Admin\ManagingPaymentMethodsContext">
