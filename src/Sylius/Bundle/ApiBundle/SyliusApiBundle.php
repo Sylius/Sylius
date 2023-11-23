@@ -17,6 +17,7 @@ use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\CommandDataTransformerP
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\ExtractorMergingCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\FlattenExceptionNormalizerDecoratorCompilerPass;
 use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\LegacyErrorHandlingCompilerPass;
+use Sylius\Bundle\ApiBundle\DependencyInjection\Compiler\PaymentRequestCommandProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -27,6 +28,7 @@ final class SyliusApiBundle extends Bundle
         $container->addCompilerPass(new CommandDataTransformerPass());
         $container->addCompilerPass(new FlattenExceptionNormalizerDecoratorCompilerPass());
         $container->addCompilerPass(new LegacyErrorHandlingCompilerPass());
+        $container->addCompilerPass(new PaymentRequestCommandProviderPass());
         $container->addCompilerPass(new ExtractorMergingCompilerPass());
     }
 }

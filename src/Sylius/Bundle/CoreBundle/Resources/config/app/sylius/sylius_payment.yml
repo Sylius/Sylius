@@ -12,3 +12,7 @@ sylius_payment:
                 model: Sylius\Component\Core\Model\PaymentMethod
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
                 controller: Sylius\Bundle\CoreBundle\Controller\PaymentMethodController
+        payment_request:
+            classes:
+                model: Sylius\Component\Payment\Model\PaymentRequest
+                repository: Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentRequestRepository
