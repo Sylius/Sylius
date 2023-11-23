@@ -26,7 +26,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PromotionCouponInterface $coupon */
@@ -48,7 +48,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_gets_promotion_coupons(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(method: 'GET', uri: '/api/v2/admin/promotion-coupons', server: $header);
@@ -63,7 +63,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PromotionInterface $promotion */
@@ -93,7 +93,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_updates_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PromotionCouponInterface $coupon */
@@ -121,7 +121,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
     /** @test */
     public function it_removes_a_promotion_coupon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         /** @var PromotionCouponInterface $coupon */
