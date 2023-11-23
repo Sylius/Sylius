@@ -90,8 +90,8 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
                 'translations' => ['en_US' => [
                     'name' => 'test',
                     'description' => 'test description',
-                ]]
-            ], JSON_THROW_ON_ERROR),
+                ]],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -142,10 +142,10 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
                     ],
                     'de_DE' => [
                         'name' => 'test',
-                        'description' => 'test description'
+                        'description' => 'test description',
                     ],
-                ]
-            ], JSON_THROW_ON_ERROR),
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

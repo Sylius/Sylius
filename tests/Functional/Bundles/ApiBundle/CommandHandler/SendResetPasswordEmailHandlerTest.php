@@ -58,13 +58,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         $resetPasswordEmailHandler = new SendResetPasswordEmailHandler(
             $emailSender,
             $channelRepository->reveal(),
-            $userRepository->reveal()
+            $userRepository->reveal(),
         );
 
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'user@example.com',
             'CHANNEL_CODE',
-            'en_US'
+            'en_US',
         ));
 
         self::assertEmailCount(1);
@@ -106,13 +106,13 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         $resetPasswordEmailHandler = new SendResetPasswordEmailHandler(
             $emailSender,
             $channelRepository->reveal(),
-            $userRepository->reveal()
+            $userRepository->reveal(),
         );
 
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'user@example.com',
             'CHANNEL_CODE',
-            'en_US'
+            'en_US',
         ));
 
         self::assertEmailCount(1);

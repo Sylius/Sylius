@@ -95,7 +95,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/channel/delete_channel_that_cannot_be_deleted',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -148,8 +148,7 @@ final class ChannelsTest extends JsonApiTestCase
                 'accountVerificationRequired' => true,
                 'shippingAddressInCheckoutRequired' => false,
                 'menuTaxon' => null,
-
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -183,7 +182,7 @@ final class ChannelsTest extends JsonApiTestCase
                 'description' => 'different description',
                 'hostname' => 'updated-hostname.com',
                 'color' => 'blue',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -214,9 +213,9 @@ final class ChannelsTest extends JsonApiTestCase
                     'countryCode' => 'DE',
                     'street' => 'Different Street',
                     'city' => 'different City',
-                    'postcode' => '12-124'
-                ]
-            ], JSON_THROW_ON_ERROR),
+                    'postcode' => '12-124',
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode(

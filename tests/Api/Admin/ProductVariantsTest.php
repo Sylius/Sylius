@@ -129,7 +129,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'taxCategory' => '/api/v2/admin/tax-categories/default',
                 'shippingCategory' => '/api/v2/admin/shipping-categories/default',
                 'shippingRequired' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -162,7 +162,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'WEB',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -195,7 +195,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'NON-EXISTING-CHANNEL',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -221,9 +221,9 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'code' => 'CUP',
                 'product' => '/api/v2/admin/products/MUG_SW',
                 'channelPricings' => [
-                    'NON-EXISTING-CHANNEL' => ['price' => 4000]
+                    'NON-EXISTING-CHANNEL' => ['price' => 4000],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -251,7 +251,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'WEB',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -287,7 +287,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Yellow mug',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -343,7 +343,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'taxCategory' => '/api/v2/admin/tax-categories/special',
                 'shippingCategory' => '/api/v2/admin/shipping-categories/special',
                 'shippingRequired' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -385,7 +385,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Yellow mug',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -416,7 +416,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Tasse',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

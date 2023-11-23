@@ -121,7 +121,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'title' => 'Bestest product!',
                 'comment' => 'I\'ve never bought anything better.',
                 'rating' => 5,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

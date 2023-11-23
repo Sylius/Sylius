@@ -121,8 +121,8 @@ final class PromotionsTest extends JsonApiTestCase
                 'priority' => 22,
                 'appliesToDiscounted' => false,
                 'exclusive' => true,
-                "usageLimit" => 3,
-                "couponBased" => true,
+                'usageLimit' => 3,
+                'couponBased' => true,
                 'startsAt' => '2023-10-04 12:30:00',
                 'endsAt' => '2023-11-04 12:30:00',
                 'translations' => ['en_US' => [
@@ -132,7 +132,7 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 6
+                            'count' => 6,
                         ],
                     ],
                     [
@@ -243,7 +243,7 @@ final class PromotionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -263,7 +263,7 @@ final class PromotionsTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/admin/promotions',
             server: $header,
-            content: json_encode([], JSON_THROW_ON_ERROR),
+            content: json_encode([], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -272,7 +272,6 @@ final class PromotionsTest extends JsonApiTestCase
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
-
 
     /** @test */
     public function it_does_not_create_a_promotion_with_taken_code(): void
@@ -287,7 +286,7 @@ final class PromotionsTest extends JsonApiTestCase
             content: json_encode([
                 'name' => '50% Off on your first order',
                 'code' => '50_off',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -312,7 +311,7 @@ final class PromotionsTest extends JsonApiTestCase
                 'code' => 'tshirts_discount',
                 'startsAt' => '2023-12-04 12:30:00',
                 'endsAt' => '2023-11-04 12:30:00',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -477,13 +476,13 @@ final class PromotionsTest extends JsonApiTestCase
                 'code' => 'new_code',
                 'appliesToDiscounted' => true,
                 'exclusive' => true,
-                "usageLimit" => 11,
-                "couponBased" => false,
+                'usageLimit' => 11,
+                'couponBased' => false,
                 'rules' => [
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 1
+                            'count' => 1,
                         ],
                     ],
                 ],
@@ -507,7 +506,7 @@ final class PromotionsTest extends JsonApiTestCase
                     '@id' => sprintf('/api/v2/admin/promotion-translations/%s', $promotion->getTranslation('en_US')->getId()),
                     'label' => 'Christmas',
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

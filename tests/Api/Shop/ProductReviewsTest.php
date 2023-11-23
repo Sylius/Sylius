@@ -76,7 +76,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
                 'product' => '/api/v2/shop/products/' . $product->getCode(),
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -106,7 +106,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
                 'product' => '/api/v2/shop/products/NON-EXISTING-PRODUCT',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -131,7 +131,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'rating' => 3,
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
