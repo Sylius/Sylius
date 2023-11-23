@@ -45,7 +45,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
-        $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResource($order));
+
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -99,6 +102,15 @@ final class ManagingOrdersContext implements Context
     public function iLimitNumberOfItemsTo(int $limit): void
     {
         $this->client->addFilter('itemsPerPage', $limit);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy(string $fieldName): void
+    {
+        $this->client->addFilter(sprintf('order[%s]', $fieldName), 'asc');
         $this->client->filter();
     }
 
@@ -281,8 +293,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTotalShouldBe(int $total): void
     {
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
+            $this->responseChecker->getValue($response, 'total'),
             $total,
         );
     }
@@ -292,8 +306,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
+            $this->responseChecker->getValue($response, 'orderPromotionTotal'),
             $promotionTotal,
         );
     }
@@ -316,7 +332,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see an order with :orderNumber number
      */
-    public function iShouldSeeOrderWithNumber(string $orderNumber)
+    public function iShouldSeeOrderWithNumber(string $orderNumber): void
     {
         $response = $this->client->getLastResponse();
 
@@ -327,18 +343,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I switch the way orders are sorted by :fieldName
-     */
-    public function iSwitchSortingBy($fieldName)
-    {
-        $this->client->addFilter('order[number]', 'asc');
-        $this->client->filter();
-    }
-
-    /**
      * @Then the first order should have number :number
      */
-    public function theFirstOrderShouldHaveNumber(string $number)
+    public function theFirstOrderShouldHaveNumber(string $number): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
         $firstItem = $items[0];

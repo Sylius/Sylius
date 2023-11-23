@@ -24,7 +24,7 @@ final class TranslatableLocaleKeyDenormalizerSpec extends ObjectBehavior
     {
         $this
             ->supportsDenormalization([], TranslatableInterface::class, context: [
-                'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true
+                'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
             ])->shouldReturn(false)
         ;
     }
@@ -47,7 +47,7 @@ final class TranslatableLocaleKeyDenormalizerSpec extends ObjectBehavior
         $this->denormalize([], TranslatableInterface::class);
 
         $denormalizer->denormalize([], TranslatableInterface::class, null, [
-            'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true
+            'sylius_translatable_locale_key_denormalizer_already_called_for_Sylius\Component\Resource\Model\TranslatableInterface' => true,
         ])->shouldHaveBeenCalledOnce();
     }
 

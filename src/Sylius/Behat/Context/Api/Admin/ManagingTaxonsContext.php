@@ -371,7 +371,7 @@ final class ManagingTaxonsContext implements Context
 
     private function updateTranslations(string $localeCode, string $field, ?string $value = null): void
     {
-        $data['translations'][$localeCode]= [];
+        $data['translations'][$localeCode] = [];
 
         if ($value !== null) {
             $data['translations'][$localeCode][$field] = $value;

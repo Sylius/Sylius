@@ -29,7 +29,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/channel-pricing-log-entries',
-            server: $this->getUnloggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
         );
 
         $response = $this->client->getResponse();
@@ -52,7 +52,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/channel-pricing-log-entries/%d', $channelPricingLogEntry->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
@@ -70,7 +70,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/channel-pricing-log-entries',
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
@@ -92,7 +92,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: $uri,
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(

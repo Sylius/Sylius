@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\ContentType;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -486,7 +485,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/shipments/%s', $tokenValue, '1237'),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->build(),
             content: json_encode(['shippingMethod' => 'api/v2/shop/shipping-methods/UPS'])
         );
 
@@ -507,7 +506,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, 'invalid-item-id'),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->build(),
             content: json_encode(['quantity' => 5])
         );
 

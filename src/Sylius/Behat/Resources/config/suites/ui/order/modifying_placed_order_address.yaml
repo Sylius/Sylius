@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_modifying_address:
+        ui_modifying_placed_order_address:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
@@ -48,4 +48,4 @@ default:
                 - sylius.behat.context.ui.shop.currency
 
             filters:
-                tags: "@modifying_address&&@ui"
+                tags: "@modifying_placed_order_address&&@ui"
