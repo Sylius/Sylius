@@ -371,9 +371,10 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then I should not be able to edit its code
      * @Then the code field should be disabled
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }

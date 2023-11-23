@@ -336,6 +336,17 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then /^there should still be only one coupon with code "([^"]+)" related to (this promotion)$/
+     */
+    public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo(string $code, PromotionInterface $promotion): void
+    {
+        Assert::count(
+            $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::PROMOTION_COUPONS), 'code', $code),
+            1
+        );
+    }
+
+    /**
      * @Then I should be notified that it is in use and cannot be deleted
      */
     public function iShouldBeNotifiedThatItIsInUseAndCannotBeDeleted(): void
@@ -421,6 +432,32 @@ final class ManagingPromotionCouponsContext implements Context
             $this->responseChecker->getError($response),
             'promotion: Only coupon based promotions can have coupons.',
         );
+    }
+
+    /**
+     * @Then I should be notified that coupon with this code already exists
+     */
+    public function iShouldBeNotifiedThatCouponWithThisCodeAlreadyExists(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::false(
+            $this->responseChecker->isCreationSuccessful($response),
+            'Coupon has been created successfully, but it should not',
+        );
+        Assert::same(
+            $this->responseChecker->getError($response),
+            'code: This coupon already exists.',
+        );
+    }
+
+    /**
+     * @Then I should not be able to edit its code
+     */
+    public function iShouldNotBeAbleToEditItsCode(): void
+    {
+        $this->client->updateRequestData(['code' => 'NEW_CODE']);
+
+        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
     private function sortBy(string $order, string $field): void

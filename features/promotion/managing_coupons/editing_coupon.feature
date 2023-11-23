@@ -41,7 +41,7 @@ Feature: Editing promotion coupon
         Then I should be notified that it has been successfully edited
         And this coupon should not be reusable from cancelled orders
 
-    @ui @no-api
-    Scenario: Seeing a disabled code field when editing a coupon
+    @ui @api
+    Scenario: Being unable to change code of promotion coupon
         When I want to modify the "SANTA2016" coupon for this promotion
-        Then the code field should be disabled
+        Then I should not be able to edit its code
