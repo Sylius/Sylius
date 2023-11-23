@@ -22,5 +22,19 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProvider" />
         </service>
+
+        <service id="sylius.api.payment_request.command_provider.locator" class="Symfony\Component\DependencyInjection\ServiceLocator">
+            <tag name="container.service_locator" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationChecker">
+            <argument type="service" id="sylius.repository.payment_request" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProvider">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationChecker" />
+            <argument type="service" id="sylius.api.payment_request.command_provider.locator" />
+        </service>
+
     </services>
 </container>

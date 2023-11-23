@@ -38,6 +38,8 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const DATA_TYPE_PAYOUT = 'payout';
 
+    public function getHash(): ?string;
+
     public function getMethod(): ?PaymentMethodInterface;
 
     public function setMethod(?PaymentMethodInterface $method): void;
