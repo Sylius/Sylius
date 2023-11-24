@@ -135,4 +135,27 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
+
+    /** @test */
+    public function it_does_not_delete_the_promotion_coupon_in_use(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'promotion/promotion.yaml',
+            'promotion/promotion_order.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionCouponInterface $coupon */
+        $coupon = $fixtures['promotion_1_off_coupon_1'];
+
+        $this->client->request(
+            method: 'DELETE',
+            uri: '/api/v2/admin/promotion-coupons/' . $coupon->getCode(),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }

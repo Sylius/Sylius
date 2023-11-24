@@ -6,3 +6,4 @@ Sylius\Component\Core\Model\Order:
         state: "new"
         tokenValue: "token"
         promotions: ['@promotion_50_off']
+        promotionCoupon: '@promotion_1_off_coupon_1'
