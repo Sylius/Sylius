@@ -27,6 +27,7 @@ final class PromotionCouponPromotionFilter extends AbstractContextAwareFilter
 {
     const PROPERTY = 'promotion';
 
+    /** @param array<array-key, mixed> $properties */
     public function __construct(
         private IriConverterInterface $iriConverter,
         ManagerRegistry $managerRegistry,
@@ -67,6 +68,7 @@ final class PromotionCouponPromotionFilter extends AbstractContextAwareFilter
         ;
     }
 
+    /** @return array<string, mixed> */
     public function getDescription(string $resourceClass): array
     {
         return [
