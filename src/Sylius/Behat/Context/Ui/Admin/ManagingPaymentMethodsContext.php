@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use _PHPStan_4c4f22f13\Symfony\Component\String\Exception\InvalidArgumentException;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
@@ -285,6 +286,17 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that I have to specify stripe :element
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('stripe_' . str_replace(' ', '_', $element)),
+            sprintf('Please enter stripe %s.', $element),
+        );
+    }
+
+    /**
      * @Then I should be notified that gateway name should contain only letters and underscores
      */
     public function iShouldBeNotifiedThatGatewayNameShouldContainOnlyLettersAndUnderscores()
@@ -457,6 +469,17 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->createPage->setStripeSecretKey('TEST');
         $this->createPage->setStripePublishableKey('TEST');
+    }
+
+    /**
+     * @When I configure it with only :element
+     */
+    public function iConfigureItWithOnly(string $element): void
+    {
+        match ($element) {
+            'publishable key' => $this->createPage->setStripePublishableKey('TEST'),
+            'secret key' => $this->createPage->setStripeSecretKey('TEST'),
+        };
     }
 
     /**
