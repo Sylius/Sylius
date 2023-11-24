@@ -498,7 +498,7 @@ final class PromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_promotion_with_null_priority(): void
+    public function it_updates_promotion_to_last_priority_when_priority_is_minus_one(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -511,13 +511,13 @@ final class PromotionsTest extends JsonApiTestCase
             uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
             server: $header,
             content: json_encode([
-                'priority' => null,
+                'priority' => -1,
             ], JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'admin/promotion/put_promotion_with_null_priority_response',
+            'admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response',
             Response::HTTP_OK,
         );
     }

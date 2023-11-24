@@ -51,8 +51,8 @@ final class PromotionRuleGroupValidatorSpec extends ObjectBehavior
     }
 
     function it_calls_a_validator_with_group(
-        PromotionRuleInterface $promotionRule,
         ExecutionContextInterface $context,
+        PromotionRuleInterface $promotionRule,
         ValidatorInterface $validator,
         ContextualValidatorInterface $contextualValidator,
     ): void {
