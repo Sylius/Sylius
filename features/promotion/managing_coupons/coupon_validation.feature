@@ -45,7 +45,7 @@ Feature: Coupon validation
 
     @api @no-ui
     Scenario: Trying to add a new coupon with no promotion
-        Given I want to create a new coupon
+        When I want to create a new coupon
         And I specify its code as "RANDOM"
         And I limit its usage to 30 times
         And I limit its per customer usage to 3 times

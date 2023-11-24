@@ -21,6 +21,8 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class PromotionNotCouponBasedValidatorSpec extends ObjectBehavior
@@ -50,7 +52,7 @@ final class PromotionNotCouponBasedValidatorSpec extends ObjectBehavior
         $context->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(UnexpectedTypeException::class)
             ->during('validate', [$coupon, $constraint])
         ;
     }
@@ -60,7 +62,7 @@ final class PromotionNotCouponBasedValidatorSpec extends ObjectBehavior
         $context->buildViolation(Argument::any())->shouldNotBeCalled();
 
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
+            ->shouldThrow(UnexpectedValueException::class)
             ->during('validate', [new \stdClass(), new PromotionNotCouponBased()])
         ;
     }

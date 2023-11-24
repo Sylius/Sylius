@@ -322,8 +322,9 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @Then there should be a coupon with code :code
+     * @Then there should be a :promotion promotion with a coupon code :code
      */
-    public function thereShouldBeCouponWithCode($code)
+    public function thereShouldBeCouponWithCode(string $code): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }

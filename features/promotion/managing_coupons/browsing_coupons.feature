@@ -13,4 +13,4 @@ Feature: Browsing promotion coupons
     Scenario: Browsing coupons of a promotion
         When I want to view all coupons of this promotion
         And there should be 1 coupon related to this promotion
-        And there should be a coupon with code "SANTA2016"
+        And there should be a "Christmas sale" promotion with a coupon code "SANTA2016"

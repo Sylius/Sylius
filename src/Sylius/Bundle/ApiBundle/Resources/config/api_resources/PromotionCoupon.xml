@@ -68,6 +68,14 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="api_promotions_coupons_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" readable="true" />
         <property name="usageLimit" readable="true" />

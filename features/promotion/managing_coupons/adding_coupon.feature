@@ -19,4 +19,4 @@ Feature: Adding a new coupon
         And I make it valid until "21.04.2017"
         And I add it
         Then I should be notified that it has been successfully created
-        And there should be a coupon with code "SANTA2016"
+        And there should be a "Christmas sale" promotion with a coupon code "SANTA2016"

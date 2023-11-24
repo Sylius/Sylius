@@ -17,7 +17,8 @@ use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionNotCouponBased;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class PromotionNotCouponBasedValidator extends ConstraintValidator
 {
@@ -27,11 +28,13 @@ final class PromotionNotCouponBasedValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PromotionNotCouponBased $constraint */
-        Assert::isInstanceOf($constraint, PromotionNotCouponBased::class);
+        if (!$constraint instanceof PromotionNotCouponBased) {
+            throw new UnexpectedTypeException($constraint, PromotionNotCouponBased::class);
+        }
 
-        /** @var PromotionCouponInterface $value */
-        Assert::isInstanceOf($value, PromotionCouponInterface::class);
+        if (!$value instanceof PromotionCouponInterface) {
+            throw new UnexpectedValueException($value, PromotionCouponInterface::class);
+        }
 
         $promotion = $value->getPromotion();
         if (null === $promotion) {

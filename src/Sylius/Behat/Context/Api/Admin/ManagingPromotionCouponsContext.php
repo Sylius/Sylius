@@ -66,7 +66,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I want to modify the ("[^"]+" coupon) for this promotion$/
+     * @When I want to modify the :coupon coupon for this promotion
      */
     public function iWantToModifyTheCouponOfThisPromotion(PromotionCouponInterface $coupon): void
     {
@@ -74,8 +74,7 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
-     * @When /^I delete ("[^"]+" coupon) related to this promotion$/
-     * @When /^I try to delete ("[^"]+" coupon) related to this promotion$/
+     * @When I (try to) delete :coupon coupon related to this promotion
      */
     public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon): void
     {
@@ -186,22 +185,19 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thereShouldBeCountCouponsRelatedToThisPromotion(int $count, PromotionInterface $promotion): void
     {
-        $coupons = $this->responseChecker->getCollectionItemsWithValue(
-            $this->client->index(Resources::PROMOTION_COUPONS),
-            'promotion',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
+        $coupons = $this->responseChecker->getCollection(
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
         );
-
         Assert::same(count($coupons), $count);
     }
 
     /**
-     * @Then there should be a coupon with code :code
+     * @Then there should be a :promotion promotion with a coupon code :code
      */
-    public function thereShouldBeACouponWithCode(string $code): void
+    public function thereShouldBeACouponWithCode(PromotionInterface $promotion, string $code): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->index(Resources::PROMOTION_COUPONS),
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
             'code',
             $code,
         ));
@@ -340,10 +336,13 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo(string $code, PromotionInterface $promotion): void
     {
-        Assert::count(
-            $this->responseChecker->getCollectionItemsWithValue($this->client->index(Resources::PROMOTION_COUPONS), 'code', $code),
-            1
+        $coupons = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
+            'code',
+            $code
         );
+
+        Assert::count($coupons, 1);
     }
 
     /**
