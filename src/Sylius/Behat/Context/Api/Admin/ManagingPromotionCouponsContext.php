@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
@@ -24,8 +26,11 @@ use Webmozart\Assert\Assert;
 
 final class ManagingPromotionCouponsContext implements Context
 {
+    private ?RequestInterface $request = null;
+
     public function __construct(
         private ApiClientInterface $client,
+        private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
@@ -71,6 +76,15 @@ final class ManagingPromotionCouponsContext implements Context
     public function iWantToModifyTheCouponOfThisPromotion(PromotionCouponInterface $coupon): void
     {
         $this->client->buildUpdateRequest(Resources::PROMOTION_COUPONS, $coupon->getCode());
+    }
+
+    /**
+     * @When /^I want to generate new coupons for (this promotion)$/
+     */
+    public function iWantToGenerateNewCouponsForThisPromotion(PromotionInterface $promotion): void
+    {
+        $this->request = $this->requestFactory->create('admin', 'promotion-coupons/generate', 'Bearer');
+        $this->request->updateContent(['promotionCode' => $promotion->getCode()]);
     }
 
     /**
@@ -125,6 +139,55 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When I choose the amount of :amount coupons to be generated
+     */
+    public function iSpecifyItsAmountAs(int $amount): void
+    {
+        $this->request->updateContent(['instruction' => ['amount' => $amount]]);
+    }
+
+    /**
+     * @When I specify their prefix as :prefix
+     */
+    public function specifyPrefixAs(string $prefix): void
+    {
+        $this->request->updateContent(['instruction' => ['prefix' => $prefix]]);
+    }
+
+    /**
+     * @When I specify their suffix as :suffix
+     */
+    public function specifySuffixAs(string $suffix): void
+    {
+        $this->request->updateContent(['instruction' => ['suffix' => $suffix]]);
+    }
+
+    /**
+     * @When /^I specify their code length as (\d+)$/
+     * @When I do not specify their code length
+     */
+    public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
+    {
+        $this->request->updateContent(['instruction' => ['codeLength' => $codeLength]]);
+    }
+
+    /**
+     * @When /^I limit generated coupons usage to (\d+) times?$/
+     */
+    public function iSetGeneratedCouponsUsageLimitTo(int $limit):void
+    {
+        $this->request->updateContent(['instruction' => ['usageLimit' => $limit]]);
+    }
+
+    /**
+     * @When I make generated coupons valid until :date
+     */
+    public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
+    {
+        $this->request->updateContent(['instruction' => ['expiresAt' => $date->format('Y-m-d')]]);
+    }
+
+    /**
      * @When I do not specify its :field
      */
     public function iDoNotSpecifyIts(): void
@@ -138,6 +201,15 @@ final class ManagingPromotionCouponsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When I (try to) generate it
+     * @When I (try to) generate these coupons
+     */
+    public function iResetIt(): void
+    {
+        $this->client->executeCustomRequest($this->request);
     }
 
     /**
@@ -332,6 +404,26 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then all of the coupon codes should be prefixed with :prefix
+     */
+    public function allOfTheCouponCodesShouldBePrefixedWith(string $prefix): void
+    {
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $promotionCoupon) {
+            Assert::startsWith($promotionCoupon['code'], $prefix);
+        }
+    }
+
+    /**
+     * @Then all of the coupon codes should be suffixed with :suffix
+     */
+    public function allOfTheCouponCodesShouldBeSuffixedWith(string $suffix): void
+    {
+        foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $promotionCoupon) {
+            Assert::endsWith($promotionCoupon['code'], $suffix);
+        }
+    }
+
+    /**
      * @Then /^there should still be only one coupon with code "([^"]+)" related to (this promotion)$/
      */
     public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo(string $code, PromotionInterface $promotion): void
@@ -430,6 +522,65 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::same(
             $this->responseChecker->getError($response),
             'promotion: Only coupon based promotions can have coupons.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that generating :amount coupons with code length equal to :codeLength is not possible
+     */
+    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf(
+                'Invalid coupon code length or coupons amount. It is not possible to generate %d unique coupons with %d code length',
+                $amount,
+                $codeLength,
+            ),
+        );
+    }
+
+    /**
+     * @Then I should be notified that generate amount is required
+     */
+    public function iShouldBeNotifiedThatGenerateAmountIsRequired(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'instruction.amount: Please enter amount of coupons to generate.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that generate code length is required
+     */
+    public function iShouldBeNotifiedThatCodeLengthIsRequired(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'instruction.codeLength: Please enter coupon code length.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that generate code length is out of range
+     */
+    public function iShouldBeNotifiedThatCodeLengthIsOutOfRange(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'instruction.codeLength: Coupon code length must be between 1 and 40.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that they have been successfully generated
+     */
+    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyGenerated(): void
+    {
+        Assert::true(
+            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
+            'Promotion coupon could not be generated',
         );
     }
 

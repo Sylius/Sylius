@@ -117,6 +117,38 @@ final class PromotionCouponsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+    /** @test */
+    public function it_generates_a_promotion_coupons(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/promotion-coupons/generate' ,
+            server: $header,
+            content: json_encode([
+                'promotionCode' => $promotion->getCode(),
+                'instruction' => [
+                    'amount' => 4,
+                    'prefix' => 'ABC',
+                    'codeLength' => 6,
+                    'suffix' => 'XYZ',
+                    'usageLimit' => 10,
+                    'expiresAt' => '2020-01-01 12:00:00',
+                ],
+            ], JSON_THROW_ON_ERROR)
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion_coupon/generate_promotion_coupons_response',
+            Response::HTTP_CREATED,
+        );
+    }
 
     /** @test */
     public function it_removes_a_promotion_coupon(): void

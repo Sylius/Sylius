@@ -1,0 +1,60 @@
+{
+    "@context": "\/api\/v2\/contexts\/PromotionCoupon",
+    "@id": "\/api\/v2\/admin\/promotion-coupons",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "@string@.startsWith('\/api\/v2\/admin\/promotion-coupons\/ABC').endsWith('XYZ')",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": null,
+            "reusableFromCancelledOrders": true,
+            "code": "@string@.startsWith('ABC').endsWith('XYZ')",
+            "usageLimit": 10,
+            "used": 0,
+            "promotion": "\/api\/v2\/admin\/promotions\/50_off",
+            "expiresAt": "2020-01-01 12:00:00",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "@string@.startsWith('\/api\/v2\/admin\/promotion-coupons\/ABC').endsWith('XYZ')",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": null,
+            "reusableFromCancelledOrders": true,
+            "code": "@string@.startsWith('ABC').endsWith('XYZ')",
+            "usageLimit": 10,
+            "used": 0,
+            "promotion": "\/api\/v2\/admin\/promotions\/50_off",
+            "expiresAt": "2020-01-01 12:00:00",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "@string@.startsWith('\/api\/v2\/admin\/promotion-coupons\/ABC').endsWith('XYZ')",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": null,
+            "reusableFromCancelledOrders": true,
+            "code": "@string@.startsWith('ABC').endsWith('XYZ')",
+            "usageLimit": 10,
+            "used": 0,
+            "promotion": "\/api\/v2\/admin\/promotions\/50_off",
+            "expiresAt": "2020-01-01 12:00:00",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "@string@.startsWith('\/api\/v2\/admin\/promotion-coupons\/ABC').endsWith('XYZ')",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": null,
+            "reusableFromCancelledOrders": true,
+            "code": "@string@.startsWith('ABC').endsWith('XYZ')",
+            "usageLimit": 10,
+            "used": 0,
+            "promotion": "\/api\/v2\/admin\/promotions\/50_off",
+            "expiresAt": "2020-01-01 12:00:00",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 4
+}
