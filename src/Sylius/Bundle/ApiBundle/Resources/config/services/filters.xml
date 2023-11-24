@@ -284,5 +284,11 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter" public="true">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>
