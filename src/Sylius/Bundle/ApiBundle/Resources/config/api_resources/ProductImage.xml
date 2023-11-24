@@ -48,10 +48,19 @@
                                         <attribute name="type">
                                             <attribute name="type">string</attribute>
                                         </attribute>
-                                        <attribute name="productVariants">
+                                        <attribute name="productVariants[]">
                                             <attribute name="type">array</attribute>
-                                            <attribute name="format">iri-reference</attribute>
+                                            <attribute name="items">
+                                                <attribute name="type">string</attribute>
+                                                <attribute name="format">iri-reference</attribute>
+                                            </attribute>
                                         </attribute>
+                                    </attribute>
+                                </attribute>
+                                <attribute name="encoding">
+                                    <attribute name="productVariants[]">
+                                        <attribute name="style">form</attribute>
+                                        <attribute name="explode">true</attribute>
                                     </attribute>
                                 </attribute>
                             </attribute>
