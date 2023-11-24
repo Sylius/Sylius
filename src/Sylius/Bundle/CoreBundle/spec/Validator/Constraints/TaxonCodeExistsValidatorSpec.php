@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class TaxonCodeExistsValidatorSpec extends ObjectBehavior
 {
-    const MESSAGE = 'sylius.taxon.code.no_exist';
+    const MESSAGE = 'sylius.taxon.code.not_exist';
 
     function let(TaxonRepositoryInterface $taxonRepository, ExecutionContextInterface $context): void
     {

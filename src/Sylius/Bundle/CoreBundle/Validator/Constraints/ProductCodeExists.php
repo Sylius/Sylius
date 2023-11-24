@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class ProductCodeExists extends Constraint
 {
-    public string $message = 'sylius.product.code.no_exist';
+    public string $message = 'sylius.product.code.not_exist';
 
     public function validatedBy(): string
     {

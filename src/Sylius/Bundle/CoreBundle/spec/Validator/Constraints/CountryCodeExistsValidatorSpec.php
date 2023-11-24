@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CountryCodeExistsValidatorSpec extends ObjectBehavior
 {
-    const MESSAGE = 'sylius.country.code.no_exist';
+    const MESSAGE = 'sylius.country.code.not_exist';
 
     function let(RepositoryInterface $countryRepository, ExecutionContextInterface $context): void
     {

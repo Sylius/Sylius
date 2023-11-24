@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class CustomerGroupCodeExistsValidatorSpec extends ObjectBehavior
 {
-    const MESSAGE = 'sylius.customer_group.code.no_exist';
+    const MESSAGE = 'sylius.customer_group.code.not_exist';
 
     function let(CustomerGroupRepositoryInterface $customerGroupRepository, ExecutionContextInterface $context): void
     {

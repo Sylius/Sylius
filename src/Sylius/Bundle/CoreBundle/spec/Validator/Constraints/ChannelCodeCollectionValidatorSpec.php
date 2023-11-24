@@ -45,8 +45,8 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_array(
-    ): void {
+    function it_throws_an_exception_if_value_is_not_an_instance_of_array(): void
+    {
         $this
             ->shouldThrow(UnexpectedValueException::class)
             ->during('validate', ['', new ChannelCodeCollection()])
@@ -55,9 +55,9 @@ final class ChannelCodeCollectionValidatorSpec extends ObjectBehavior
 
     function it_calls_a_validate_collection_for_channels(
         ChannelRepositoryInterface $channelRepository,
+        ExecutionContextInterface $context,
         ChannelInterface $channelWeb,
         ChannelInterface $channelMobile,
-        ExecutionContextInterface $context,
         ValidatorInterface $validator,
         ContextualValidatorInterface $contextualValidator,
     ): void {

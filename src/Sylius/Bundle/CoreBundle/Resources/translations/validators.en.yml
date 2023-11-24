@@ -63,7 +63,7 @@ sylius:
             not_blank: Please enter your message.
     country:
         code:
-            no_exist: Country with code {{ code }} does not exist.
+            not_exist: Country with code {{ code }} does not exist.
     currency:
         enabled:
             cannot_disable_base: The base currency cannot be disabled.
@@ -72,7 +72,7 @@ sylius:
             not_valid: The currency code you entered is invalid.
     customer_group:
         code:
-            no_exist: Customer group with code {{ code }} does not exist.
+            not_exist: Customer group with code {{ code }} does not exist.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
         insufficient_stock: 'Insufficient stock'
@@ -91,7 +91,7 @@ sylius:
         variants:
             all_prices_defined: You have to define product variants' prices for newly assigned channels first.
         code:
-            no_exist: Product with code {{ code }} does not exist.
+            not_exist: Product with code {{ code }} does not exist.
     product_attribute:
         invalid: Position must be an integer.
     product_image:
@@ -142,7 +142,7 @@ sylius:
             not_in_range: Review rating must be between {{ min }} and {{ max }}.
     taxon:
         code:
-            no_exist: Taxon with code {{ code }} does not exist.
+            not_exist: Taxon with code {{ code }} does not exist.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

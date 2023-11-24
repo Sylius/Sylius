@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class TaxonCodeExists extends Constraint
 {
-    public string $message = 'sylius.taxon.code.no_exist';
+    public string $message = 'sylius.taxon.code.not_exist';
 
     public function validatedBy(): string
     {

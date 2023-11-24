@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class CustomerGroupCodeExists extends Constraint
 {
-    public string $message = 'sylius.customer_group.code.no_exist';
+    public string $message = 'sylius.customer_group.code.not_exist';
 
     public function validatedBy(): string
     {

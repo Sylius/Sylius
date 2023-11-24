@@ -23,9 +23,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class ChannelCodeCollectionValidator extends ConstraintValidator
 {
-    /**
-     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
-     */
+    /** @param ChannelRepositoryInterface<ChannelInterface> $channelRepository */
     public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
     }

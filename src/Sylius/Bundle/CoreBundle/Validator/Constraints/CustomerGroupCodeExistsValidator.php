@@ -21,9 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class CustomerGroupCodeExistsValidator extends ConstraintValidator
 {
-    /**
-     * @param CustomerGroupRepositoryInterface<CustomerGroupInterface> $customerGroupRepository
-     */
+    /** @param CustomerGroupRepositoryInterface<CustomerGroupInterface> $customerGroupRepository */
     public function __construct(private CustomerGroupRepositoryInterface $customerGroupRepository)
     {
     }

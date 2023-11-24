@@ -21,9 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class CountryCodeExistsValidator extends ConstraintValidator
 {
-    /**
-     * @param RepositoryInterface<CountryInterface> $countryRepository
-     */
+    /** @param RepositoryInterface<CountryInterface> $countryRepository */
     public function __construct(private RepositoryInterface $countryRepository)
     {
     }

@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ProductCodeExistsValidatorSpec extends ObjectBehavior
 {
-    const MESSAGE = 'sylius.product.code.no_exist';
+    const MESSAGE = 'sylius.product.code.not_exist';
 
     function let(ProductRepositoryInterface $productRepository, ExecutionContextInterface $context): void
     {

@@ -21,9 +21,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 final class ProductCodeExistsValidator extends ConstraintValidator
 {
-    /**
-     * @param ProductRepositoryInterface<ProductInterface> $productRepository
-     */
+    /** @param ProductRepositoryInterface<ProductInterface> $productRepository */
     public function __construct(private ProductRepositoryInterface $productRepository)
     {
     }
