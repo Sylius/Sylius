@@ -40,7 +40,7 @@ final class ManagingProductImagesContext implements Context
     /**
      * @When /^I attach the "([^"]+)" image with "([^"]+)" type to (this product)$/
      */
-    public function iAttachTheImageWithTypeToThisProduct(string $path, ?string $type, ProductInterface $product): void
+    public function iAttachTheImageWithTypeToThisProduct(string $path, string $type, ProductInterface $product): void
     {
         $this->createProductImage($path, $product, $type);
     }
@@ -73,7 +73,7 @@ final class ManagingProductImagesContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $productImage = $product->getImagesByType($type)->first();
-        Assert::notNull($productImage);
+        Assert::notFalse($productImage);
 
         $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
     }
@@ -87,7 +87,7 @@ final class ManagingProductImagesContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $productImage = $product->getImages()->first();
-        Assert::notNull($productImage);
+        Assert::notFalse($productImage);
 
         $this->client->delete(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
     }
@@ -101,7 +101,7 @@ final class ManagingProductImagesContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $productImage = $product->getImages()->first();
-        Assert::notNull($productImage);
+        Assert::notFalse($productImage);
 
         $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
         $this->client->updateRequestData(['type' => $type]);
@@ -117,7 +117,7 @@ final class ManagingProductImagesContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $productImage = $product->getImages()->first();
-        Assert::notNull($productImage);
+        Assert::notFalse($productImage);
 
         $this->client->buildUpdateRequest(Resources::PRODUCT_IMAGES, (string) $productImage->getId());
         $this->client->updateRequestData(['productVariants' => [$this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
@@ -149,6 +149,7 @@ final class ManagingProductImagesContext implements Context
             'images',
         );
 
+        Assert::notEmpty($images);
         Assert::inArray(
             $this->sectionAwareIriConverter->getIriFromResourceInSection($productVariant, 'admin'),
             $images[0]['productVariants'],

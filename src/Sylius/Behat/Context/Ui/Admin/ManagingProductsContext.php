@@ -851,7 +851,7 @@ final class ManagingProductsContext implements Context
         string $path,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->updateConfigurableProductPage->attachImage($path, null, $productVariant);
+        $this->updateConfigurableProductPage->attachImage(path: $path, productVariant: $productVariant);
     }
 
     /**

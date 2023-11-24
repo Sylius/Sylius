@@ -15,6 +15,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwner;
 use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -65,14 +66,42 @@ final class ProductImageVariantsBelongToOwnerValidatorSpec extends ObjectBehavio
         $product->getCode()->willReturn('MUG');
         $product->hasVariant($variant)->willReturn(false);
 
-        $variant->getCode()->willReturn('GREEN_MUG');
+        $variant->getCode()->willReturn('GREEN_SHIRT');
 
         $executionContext
             ->addViolation(
                 'sylius.product_image.product_variant.not_belong_to_owner',
-                ['%productVariantCode%' => 'GREEN_MUG', '%ownerCode%' => 'MUG'],
+                ['%productVariantCode%' => 'GREEN_SHIRT', '%ownerCode%' => 'MUG'],
             )
             ->shouldBeCalled()
+        ;
+
+        $this->validate($image, new ProductImageVariantsBelongToOwner());
+    }
+
+    function it_does_nothing_if_all_variants_belong_to_a_product_which_is_an_owner(
+        ExecutionContextInterface $executionContext,
+        ProductImageInterface $image,
+        ProductInterface $product,
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant,
+    ): void {
+        $image->getOwner()->willReturn($product);
+        $image->getProductVariants()->willReturn(new ArrayCollection([
+            $firstVariant->getWrappedObject(),
+            $secondVariant->getWrappedObject(),
+        ]));
+
+        $product->getCode()->willReturn('MUG');
+        $product->hasVariant($firstVariant)->willReturn(true);
+        $product->hasVariant($secondVariant)->willReturn(true);
+
+        $executionContext
+            ->addViolation(
+                'sylius.product_image.product_variant.not_belong_to_owner',
+                Argument::any(),
+            )
+            ->shouldNotBeCalled()
         ;
 
         $this->validate($image, new ProductImageVariantsBelongToOwner());

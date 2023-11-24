@@ -72,7 +72,7 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImagesByType($type)->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
     }
@@ -86,7 +86,7 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImages()->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
     }
@@ -100,7 +100,7 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImages()->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->buildUpdateRequest(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
         $this->client->updateRequestData(['type' => $type]);

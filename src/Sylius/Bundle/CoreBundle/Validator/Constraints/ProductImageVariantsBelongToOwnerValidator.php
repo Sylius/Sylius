@@ -23,10 +23,7 @@ final class ProductImageVariantsBelongToOwnerValidator extends ConstraintValidat
 {
     public function validate(mixed $value, Constraint $constraint): void
     {
-        /** @var ProductImageInterface $value */
         Assert::isInstanceOf($value, ProductImageInterface::class);
-
-        /** @var ProductImageVariantsBelongToOwner $constraint */
         Assert::isInstanceOf($constraint, ProductImageVariantsBelongToOwner::class);
 
         /** @var ProductInterface $owner */

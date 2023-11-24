@@ -177,7 +177,7 @@ final class ProductImagesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_creates_a_product_image_with_invalid_variant(): void
+    public function it_prevents_product_image_creation_with_unrelated_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -250,7 +250,7 @@ final class ProductImagesTest extends JsonApiTestCase
     }
 
     /** @test */
-    public function it_updates_the_existing_product_image_with_invalid_variant(): void
+    public function it_prevents_product_image_update_with_unrelated_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);

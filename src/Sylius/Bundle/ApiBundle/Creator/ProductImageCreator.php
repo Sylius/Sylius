@@ -47,13 +47,11 @@ final class ProductImageCreator implements ImageCreatorInterface
             throw new NoFileUploadedException();
         }
 
-        /** @var ProductInterface|null $owner */
         $owner = $this->productRepository->findOneBy(['code' => $ownerCode]);
         if (null === $owner) {
             throw new ProductNotFoundException();
         }
 
-        /** @var ProductImageInterface $productImage */
         $productImage = $this->productImageFactory->createNew();
         $productImage->setFile($file);
         $productImage->setType($type);
