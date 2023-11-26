@@ -29,8 +29,8 @@ sylius:
     country:
         code:
             not_blank: Please enter country ISO code.
-            regex: Country code can only be comprised of letters, numbers, dashes and underscores.
             unique: Country ISO code must be unique.
+            invalid: Country ISO code is invalid.
         unique_provinces: All provinces within this country need to have unique codes and names.
     province:
         code:

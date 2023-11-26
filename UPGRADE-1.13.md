@@ -203,3 +203,6 @@
 
 1. Change in the `Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionExampleFactory` constructor:
    Added the `$localeRepository` argument to the constructor of the `PromotionExampleFactory` class. Not passing an instance of `RepositoryInterface` for the `locale` entity repository in `$localeRepository` was marked as deprecated and will be prohibited in Sylius 2.0.
+
+1. The `Regex` constraint has been removed from `Sylius\Component\Addressing\Model\Country` in favour of the `Country` constraint.
+   Due to that, it's translation message `sylius.country.code.regex` was also removed.
