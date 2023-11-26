@@ -17,7 +17,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCase
+final class CancelOrderStateMachineCallbackPassTest extends AbstractCompilerPassTestCase
 {
     public array $smConfigs = [
         'sylius_order' => [

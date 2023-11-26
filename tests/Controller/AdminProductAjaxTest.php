@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Controller;
 
-use ApiTestCase\JsonApiTestCase;
 use Exception;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminProductAjaxTest extends SessionAwareAjaxTest
+final class AdminProductAjaxTest extends SessionAwareAjaxTestCase
 {
     /**
      * @test
