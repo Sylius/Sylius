@@ -20,7 +20,7 @@ class GeneratePromotionCoupon
 {
     public function __construct(
         private string $promotionCode,
-        private PromotionCouponGeneratorInstructionInterface $instruction,
+        private PromotionCouponGeneratorInstructionInterface $promotionCouponGeneratorInstruction,
     ) {
     }
 
@@ -31,6 +31,6 @@ class GeneratePromotionCoupon
 
     public function getPromotionCouponGeneratorInstruction(): PromotionCouponGeneratorInstructionInterface
     {
-        return $this->instruction;
+        return $this->promotionCouponGeneratorInstruction;
     }
 }

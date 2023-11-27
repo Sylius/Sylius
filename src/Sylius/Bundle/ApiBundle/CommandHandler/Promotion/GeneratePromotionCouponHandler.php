@@ -20,6 +20,7 @@ use Sylius\Bundle\ApiBundle\Exception\PromotionNotFoundException;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -34,6 +35,7 @@ final class GeneratePromotionCouponHandler implements MessageHandlerInterface
     ) {
     }
 
+    /** @return Collection<array-key, PromotionCouponInterface> */
     public function __invoke(GeneratePromotionCoupon $generatePromotionCoupon): Collection
     {
         /** @var PromotionInterface|null $promotion */

@@ -19,7 +19,7 @@
         <attribute name="promotionCode">
             <group>admin:promotion_coupon:update</group>
         </attribute>
-        <attribute name="instruction">
+        <attribute name="promotionCouponGeneratorInstruction">
             <group>admin:promotion_coupon:update</group>
         </attribute>
     </class>
