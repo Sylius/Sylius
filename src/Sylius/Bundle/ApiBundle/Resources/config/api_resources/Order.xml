@@ -78,6 +78,16 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_adjustments">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/adjustments</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:adjustment:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/orders/{tokenValue}</attribute>

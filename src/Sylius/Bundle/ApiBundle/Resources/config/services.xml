@@ -74,6 +74,11 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="controller.service_arguments" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
             <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />
             <argument type="service" id="sylius.context.channel" />
