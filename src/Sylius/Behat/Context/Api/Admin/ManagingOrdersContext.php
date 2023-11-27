@@ -21,6 +21,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -417,6 +418,31 @@ final class ManagingOrdersContext implements Context
         Assert::same(
             $this->responseChecker->getValue($response, 'orderPromotionTotal'),
             $promotionTotal,
+        );
+    }
+
+    /**
+     * @Then the order's promotion discount should be :promotionAmount from :promotionName promotion
+     */
+    public function theOrdersPromotionDiscountShouldBeFromPromotion(string $promotionAmount, string $promotionName): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $adjustments = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            $order->getTokenValue(),
+            true,
+        );
+
+        $this->responseChecker->hasItemWithValues(
+            $adjustments,
+            [
+                'type' => AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+                'label' => $promotionName,
+                'amount' => $this->getTotalAsInt($promotionAmount),
+            ],
         );
     }
 

@@ -17,6 +17,8 @@ final class Resources
 {
     public const ADDRESSES = 'addresses';
 
+    public const ADJUSTMENTS = 'adjustments';
+
     public const ADMINISTRATORS = 'administrators';
 
     public const AVATAR_IMAGES = 'avatar-images';
