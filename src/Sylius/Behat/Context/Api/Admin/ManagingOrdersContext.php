@@ -447,6 +447,55 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order's shipping promotion should be :promotionAmount
+     */
+    public function theOrdersShippingPromotionDiscountShouldBe(string $promotionAmount): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $adjustments = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            $order->getTokenValue(),
+            true,
+        );
+
+        $this->responseChecker->hasItemWithValues(
+            $adjustments,
+            [
+                'type' => AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
+                'amount' => $this->getTotalAsInt($promotionAmount),
+            ],
+        );
+    }
+
+    /**
+     * @Then there should be a shipping charge :shippingCharge for :shippingMethodName method
+     */
+    public function thereShouldBeAShippingChargeForMethod(string $shippingCharge, string $shippingMethodName): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $adjustments = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            $order->getTokenValue(),
+            true,
+        );
+
+        $this->responseChecker->hasItemWithValues(
+            $adjustments,
+            [
+                'type' => AdjustmentInterface::SHIPPING_ADJUSTMENT,
+                'label' => $shippingMethodName,
+                'amount' => $this->getTotalAsInt($shippingCharge),
+            ],
+        );
+    }
+
+    /**
      * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
      */
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
