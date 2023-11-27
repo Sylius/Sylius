@@ -27,8 +27,7 @@ final class PromotionActionValidator extends ConstraintValidator
     {
     }
 
-    /** @param PromotionActionInterface $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof PromotionAction) {
             throw new UnexpectedTypeException($constraint, PromotionAction::class);

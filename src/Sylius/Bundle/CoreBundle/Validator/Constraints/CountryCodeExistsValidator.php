@@ -26,8 +26,7 @@ final class CountryCodeExistsValidator extends ConstraintValidator
     {
     }
 
-    /** @param string $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof CountryCodeExists) {
             throw new UnexpectedTypeException($constraint, CountryCodeExists::class);
