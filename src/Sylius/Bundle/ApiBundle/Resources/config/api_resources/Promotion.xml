@@ -44,10 +44,10 @@ Example configuration for `total_of_items_from_taxon` rule type:
 {
     "type": "total_of_items_from_taxon",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "taxon": "taxon-code",
             "amount": int
-        ]
+        }
     }
 }
 ```
@@ -58,9 +58,9 @@ Example configuration for `order_fixed_discount` action type:
 {
     "type": "order_fixed_discount",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "amount": int,
-        ]
+        }
     }
 }
 ```
@@ -104,10 +104,10 @@ Example configuration for `total_of_items_from_taxon` rule type:
 {
     "type": "total_of_items_from_taxon",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "taxon": "taxon-code",
             "amount": int
-        ]
+        }
     }
 }
 ```
@@ -118,9 +118,9 @@ Example configuration for `order_fixed_discount` action type:
 {
     "type": "order_fixed_discount",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "amount": int,
-        ]
+        }
     }
 }
 ```

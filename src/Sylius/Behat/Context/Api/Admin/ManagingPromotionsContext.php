@@ -120,7 +120,7 @@ final class ManagingPromotionsContext implements Context
      * @When I set its priority to :priority
      * @When I remove its priority
      */
-    public function iRemoveItsPriority(int $priority = -1): void
+    public function iRemoveItsPriority(?int $priority = null): void
     {
         $this->client->addRequestData('priority', $priority);
     }

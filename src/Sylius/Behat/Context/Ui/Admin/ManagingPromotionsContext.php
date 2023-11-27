@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
@@ -36,6 +37,7 @@ final class ManagingPromotionsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -77,11 +79,12 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
      * @When I remove its priority
      */
-    public function iRemoveItsPriority()
+    public function iRemoveItsPriority(?int $priority = null): void
     {
-        $this->updatePage->setPriority(null);
+        $this->formElement->prioritizeIt($priority);
     }
 
     /**

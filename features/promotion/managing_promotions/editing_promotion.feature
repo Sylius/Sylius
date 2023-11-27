@@ -61,10 +61,18 @@ Feature: Editing promotion
         When the store also operates on another channel named "EU-WEB"
         Then I should be able to modify a "Christmas sale" promotion
 
-    @api @ui
+    @ui @no-api
     Scenario: Remove priority from existing promotion
         When I want to modify a "Christmas sale" promotion
         And I remove its priority
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And the "Christmas sale" promotion should have priority 1
+
+    @api @ui
+    Scenario: Setting promotion to the lowest priority
+        When I want to modify a "Christmas sale" promotion
+        And I set its priority to "-1"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should have priority 1
