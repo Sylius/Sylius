@@ -496,6 +496,31 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then there should be a shipping tax :shippingTax for :shippingMethodName method
+     */
+    public function thereShouldBeAShippingTaxForMethod(string $shippingTax, string $shippingMethodName): void
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $adjustments = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            $order->getTokenValue(),
+            true,
+        );
+
+        $this->responseChecker->hasItemWithValues(
+            $adjustments,
+            [
+                'type' => AdjustmentInterface::TAX_ADJUSTMENT,
+                'label' => $shippingMethodName,
+                'amount' => $this->getTotalAsInt($shippingTax),
+            ],
+        );
+    }
+
+    /**
      * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
      */
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
