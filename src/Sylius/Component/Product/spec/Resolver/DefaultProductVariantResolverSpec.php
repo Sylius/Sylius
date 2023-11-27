@@ -64,7 +64,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
                 'position' => 'ASC',
                 'id' => 'ASC',
             ],
-            1
+            1,
         )->willReturn([$variant]);
 
         $this->getVariant($product)->shouldReturn($variant);
@@ -86,7 +86,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
                 'position' => 'ASC',
                 'id' => 'ASC',
             ],
-            1
+            1,
         )->willReturn([]);
 
         $this->getVariant($product)->shouldReturn(null);
