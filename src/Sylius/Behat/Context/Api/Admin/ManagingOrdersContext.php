@@ -347,6 +347,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order :order should have order payment state :orderPaymentState
      * @Then /^(this order) should have order payment state "([^"]+)"$/
      */
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $paymentState): void
