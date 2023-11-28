@@ -27,7 +27,7 @@ interface ApiClientInterface
 
     public function showByIri(string $iri, bool $forgetResponse = false): Response;
 
-    public function subResourceIndex(string $resource, string $subResource, string $id, bool $forgetResponse = false): Response;
+    public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response;
 
     public function show(string $resource, string $id, bool $forgetResponse = false): Response;
 

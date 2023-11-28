@@ -52,9 +52,9 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->request($request, $forgetResponse);
     }
 
-    public function subResourceIndex(string $resource, string $subResource, string $id, bool $forgetResponse = false): Response
+    public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response
     {
-        $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource);
+        $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource, $queryParameters);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
         return $this->request($request, $forgetResponse);

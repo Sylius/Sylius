@@ -221,6 +221,40 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I check :itemName data
+     */
+    public function iCheckData(string $itemName): void
+    {
+        /** @var string $lastResponseContent */
+        $lastResponseContent = $this->client->getLastResponse()->getContent();
+        /**
+         * @var array{
+         *      "@id": string,
+         *      "@type": string,
+         *      "variant": string,
+         *      "productName": string,
+         *      "id": int,
+         *      "quantity": int,
+         *      "unitPrice": int,
+         *      "originalUnitPrice": int,
+         *      "total": int,
+         *      "subtotal": int
+         *   }[] $items
+         */
+        $items = json_decode($lastResponseContent, true)['items'];
+
+        foreach ($items as $item) {
+            if ($item['productName'] === $itemName) {
+                $this->sharedStorage->set('item', $item);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('There is no item with name "%s".', $itemName));
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
@@ -743,6 +777,29 @@ final class ManagingOrdersContext implements Context
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'shippedAt'),
             (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
+        );
+    }
+
+    /**
+     * @Then /^its discounted unit price should be ([^"]+)$/
+     */
+    public function itemDiscountedUnitPriceShouldBe(string $discountedUnitPrice): void
+    {
+        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
+
+        $unitDiscounts = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            (string) $orderToken,
+            forgetResponse: true,
+        );
+
+        $this->responseChecker->hasItemWithValues(
+            $unitDiscounts,
+            [
+                'type' => AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+                'amount' => $this->getTotalAsInt($discountedUnitPrice),
+            ],
         );
     }
 
