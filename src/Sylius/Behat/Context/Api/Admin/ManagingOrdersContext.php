@@ -305,6 +305,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should have shipment in state :state
+     * @Then /^order "[^"]+" should have shipment state "([^"]+)"$/
      */
     public function itShouldHaveShipmentState(string $state): void
     {
