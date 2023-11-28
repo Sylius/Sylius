@@ -37,6 +37,9 @@
             "configuration": {
                 "WEB": {
                     "amount": 2
+                },
+                "MOBILE": {
+                    "amount": 2
                 }
             }
         }

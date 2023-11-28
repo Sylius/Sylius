@@ -61,7 +61,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion label in "Polish (Poland)" locale is too long
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Trying to add a new promotion without specifying a order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -71,17 +71,17 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Trying to add a new promotion without specifying an item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
-        And I add the "Item percentage discount" action configured without a percentage value
+        And I add the "Item percentage discount" action configured without a percentage value for "United States" channel
         And I try to add it
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Trying to add a new promotion with a wrong order percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
@@ -91,12 +91,12 @@ Feature: Promotion validation
         Then I should be notified that a percentage discount value must be between 0% and 100%
         And promotion with name "Christmas sale" should not be added
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Trying to add a new promotion with a wrong item percentage discount
         When I want to create a new promotion
         And I specify its code as "christmas_sale"
         And I name it "Christmas sale"
-        And I add the "Item percentage discount" action configured with a percentage value of "130%"
+        And I add the "Item percentage discount" action configured with a percentage value of "130%" for "United States" channel
         And I try to add it
         Then I should be notified that a percentage discount value must be between 0% and 100%
         And promotion with name "Christmas sale" should not be added

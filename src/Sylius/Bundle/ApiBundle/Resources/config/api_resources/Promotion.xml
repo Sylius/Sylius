@@ -18,7 +18,10 @@
     <resource class="%sylius.model.promotion.class%" shortName="Promotion">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="validation_groups">
+            <attribute>sylius</attribute>
+            <attribute>sylius_api</attribute>
+        </attribute>
 
         <attribute name="order">
             <attribute name="priority">DESC</attribute>
@@ -41,10 +44,10 @@ Example configuration for `total_of_items_from_taxon` rule type:
 {
     "type": "total_of_items_from_taxon",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "taxon": "taxon-code",
             "amount": int
-        ]
+        }
     }
 }
 ```
@@ -55,9 +58,9 @@ Example configuration for `order_fixed_discount` action type:
 {
     "type": "order_fixed_discount",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "amount": int,
-        ]
+        }
     }
 }
 ```
@@ -101,10 +104,10 @@ Example configuration for `total_of_items_from_taxon` rule type:
 {
     "type": "total_of_items_from_taxon",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "taxon": "taxon-code",
             "amount": int
-        ]
+        }
     }
 }
 ```
@@ -115,9 +118,9 @@ Example configuration for `order_fixed_discount` action type:
 {
     "type": "order_fixed_discount",
     "configuration": {
-        "channel-code": [
+        "channel-code": {
             "amount": int,
-        ]
+        }
     }
 }
 ```

@@ -212,6 +212,21 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add the "Item percentage discount" action configured without a percentage value for :channel channel
+     */
+    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(ChannelInterface $channel): void {
+
+        $this->addToRequestAction(
+            UnitPercentageDiscountPromotionActionCommand::TYPE,
+            [
+                $channel->getCode() => [
+                    'percentage' => null,
+                ],
+            ],
+        );
+    }
+
+    /**
      * @When /^I add the "([^"]+)" action configured with a percentage value of ("[^"]+")$/
      * @When I add the :actionType action configured without a percentage value
      */
@@ -255,7 +270,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater than "(?:€|£|\$)([^"]+)"$/
      */
-    public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, int $minimum): void
+    public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, int|string $minimum): void
     {
         $actions = $this->getActions();
         $actions[0]['configuration'][$channel->getCode()]['filters']['price_range_filter']['min'] = $minimum;
@@ -266,7 +281,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser than "(?:€|£|\$)([^"]+)"$/
      */
-    public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, int $maximum): void
+    public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, int|string $maximum): void
     {
         $actions = $this->getActions();
         $actions[0]['configuration'][$channel->getCode()]['filters']['price_range_filter']['max'] = $maximum;
@@ -751,6 +766,42 @@ final class ManagingPromotionsContext implements Context
             'This value should not be blank.',
         );
     }
+
+    /**
+     * @Then I should be notified that a percentage discount value must be between 0% and 100%
+     * @Then I should be notified that a percentage discount value must be at least 0%
+     * @Then I should be notified that the maximum value of a percentage discount is 100%
+     */
+    public function iShouldBeNotifiedThatPercentageDiscountShouldBeBetween(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'The percentage discount must be between 0% and 100%.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that a minimum value should be a numeric value
+     */
+    public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            '[min]: This value should be of type numeric.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that a maximum value should be a numeric value
+     */
+    public function iShouldBeNotifiedThatAMaximumValueShouldBeNumeric(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            '[max]: This value should be of type numeric.',
+        );
+    }
+
     /**
      * @Then I should see :count promotions on the list
      * @Then I should see a single promotion on the list

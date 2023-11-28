@@ -45,9 +45,6 @@
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
             <group>admin:promotion:update</group>
-            <denormalization_context>
-                <entry name="disable_type_enforcement">true</entry>
-            </denormalization_context>
         </attribute>
 
         <attribute name="exclusive">
