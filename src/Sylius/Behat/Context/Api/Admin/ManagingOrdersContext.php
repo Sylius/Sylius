@@ -518,7 +518,7 @@ final class ManagingOrdersContext implements Context
             Resources::ORDERS,
             Resources::ADJUSTMENTS,
             $order->getTokenValue(),
-            true,
+            forgetResponse: true,
         );
 
         $this->responseChecker->hasItemWithValues(
