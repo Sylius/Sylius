@@ -40,7 +40,6 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         }
 
-
         try {
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         } catch (UnexpectedValueException $exception) {
