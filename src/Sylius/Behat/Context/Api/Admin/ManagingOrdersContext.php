@@ -805,6 +805,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should be informed that there are no payments
+     */
+    public function iShouldSeeInformationAboutNoPayments(): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments'),
+            [],
+        );
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
