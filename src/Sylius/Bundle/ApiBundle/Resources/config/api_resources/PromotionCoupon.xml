@@ -59,45 +59,6 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Generate promotion coupons</attribute>
                     <attribute name="description">Generate promotion coupons</attribute>
-                    <attribute name="requestBody">
-                        <attribute name="required">true</attribute>
-                        <attribute name="content">
-                            <attribute name="application/ld+json">
-                                <attribute name="schema">
-                                    <attribute name="type">object</attribute>
-                                    <attribute name="properties">
-                                        <attribute name="promotionCode">
-                                            <attribute name="type">string</attribute>
-                                        </attribute>
-                                        <attribute name="promotionCouponGeneratorInstruction">
-                                            <attribute name="type">object</attribute>
-                                            <attribute name="properties">
-                                                <attribute name="amount">
-                                                    <attribute name="type">integer</attribute>
-                                                </attribute>
-                                                <attribute name="prefix">
-                                                    <attribute name="type">string</attribute>
-                                                </attribute>
-                                                <attribute name="codeLength">
-                                                    <attribute name="type">integer</attribute>
-                                                </attribute>
-                                                <attribute name="suffix">
-                                                    <attribute name="type">string</attribute>
-                                                </attribute>
-                                                <attribute name="expiresAt">
-                                                    <attribute name="type">string</attribute>
-                                                    <attribute name="format">date-time</attribute>
-                                                </attribute>
-                                                <attribute name="usageLimit">
-                                                    <attribute name="type">integer</attribute>
-                                                </attribute>
-                                            </attribute>
-                                        </attribute>
-                                    </attribute>
-                                </attribute>
-                            </attribute>
-                        </attribute>
-                    </attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

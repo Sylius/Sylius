@@ -15,11 +15,11 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Promotion;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon;
+use Sylius\Bundle\ApiBundle\Command\Promotion\PromotionCouponGeneratorInstruction;
 use Sylius\Bundle\ApiBundle\Exception\PromotionNotFoundException;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 
 final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
@@ -36,7 +36,7 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
 
     function it_throws_exception_if_promotion_is_not_found(
         PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponGeneratorInstructionInterface $promotionCouponGeneratorInstruction
+        PromotionCouponGeneratorInstruction $promotionCouponGeneratorInstruction
     ): void {
         $promotionRepository->findOneBy(['code' => 'promotion_code'])->willReturn(null);
 
@@ -51,7 +51,7 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
         PromotionRepositoryInterface $promotionRepository,
         PromotionCouponGeneratorInterface $promotionCouponGenerator,
         PromotionInterface $promotion,
-        PromotionCouponGeneratorInstructionInterface $promotionCouponGeneratorInstruction,
+        PromotionCouponGeneratorInstruction $promotionCouponGeneratorInstruction,
         PromotionCouponInterface $promotionCouponOne,
         PromotionCouponInterface $promotionCouponTwo
     ): void {

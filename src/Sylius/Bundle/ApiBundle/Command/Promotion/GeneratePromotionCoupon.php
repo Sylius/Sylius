@@ -13,14 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Promotion;
 
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
-
 /** @experimental */
 class GeneratePromotionCoupon
 {
     public function __construct(
         private string $promotionCode,
-        private PromotionCouponGeneratorInstructionInterface $promotionCouponGeneratorInstruction,
+        private PromotionCouponGeneratorInstruction $promotionCouponGeneratorInstruction,
     ) {
     }
 
@@ -29,7 +27,7 @@ class GeneratePromotionCoupon
         return $this->promotionCode;
     }
 
-    public function getPromotionCouponGeneratorInstruction(): PromotionCouponGeneratorInstructionInterface
+    public function getPromotionCouponGeneratorInstruction(): PromotionCouponGeneratorInstruction
     {
         return $this->promotionCouponGeneratorInstruction;
     }

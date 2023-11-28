@@ -138,15 +138,5 @@
         <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
             <tag name="serializer.normalizer" priority="96" />
         </service>
-
-        <service
-            id="sylius.api.serializer.denormalizer.promotion_coupon_generator_instruction"
-            class="Sylius\Bundle\ApiBundle\Serializer\ObjectDenormalizer"
-        >
-            <argument type="service" id="serializer.normalizer.object" />
-            <argument type="string">Sylius\Bundle\ApiBundle\Command\Promotion\PromotionCouponGeneratorInstruction</argument>
-            <argument type="string">Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface</argument>
-            <tag name="serializer.normalizer" priority="64" />
-        </service>
     </services>
 </container>
