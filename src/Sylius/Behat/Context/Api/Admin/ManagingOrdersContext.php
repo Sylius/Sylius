@@ -817,6 +817,31 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then /^the order "[^"]+" should have order shipping state "([^"]+)"$/
+     * @Then it should have order's shipping state :orderShippingState
+     */
+    public function theOrderShouldHaveShippingState(string $orderShippingState): void
+    {
+        $ordersResponse = $this->client->index(Resources::ORDERS, forgetResponse: true);
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($ordersResponse, 'shippingState', strtolower($orderShippingState)),
+            sprintf('Order does not have %s shipping state', $orderShippingState),
+        );
+    }
+
+    /**
+     * @Then I should not see information about shipments
+     */
+    public function iShouldNotSeeInformationAboutShipping(): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shipments'),
+            [],
+        );
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
