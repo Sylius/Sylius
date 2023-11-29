@@ -16,6 +16,11 @@ namespace Sylius\Bundle\UserBundle\Provider;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @template TUser of UserInterface
+ *
+ * @extends AbstractUserProvider<TUser>
+ */
 class EmailProvider extends AbstractUserProvider
 {
     protected function findUser(string $uniqueIdentifier): ?UserInterface

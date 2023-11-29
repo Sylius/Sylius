@@ -20,6 +20,11 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @template TUser of UserInterface
+ *
+ * @implements UserProviderInterface<TUser>
+ */
 abstract class AbstractUserProvider implements UserProviderInterface
 {
     /**
@@ -35,6 +40,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
     public function loadUserByUsername($username): UserInterface
     {
         $username = $this->canonicalizer->canonicalize($username);
+
         $user = $this->findUser($username);
 
         if (null === $user) {
@@ -48,7 +54,10 @@ abstract class AbstractUserProvider implements UserProviderInterface
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        return $this->loadUserByUsername($identifier);
+        /** @var TUser $user */
+        $user = $this->loadUserByUsername($identifier);
+
+        return $user;
     }
 
     public function refreshUser(UserInterface $user): UserInterface
@@ -65,7 +74,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
             );
         }
 
-        /** @var UserInterface|null $reloadedUser */
+        /** @var TUser|null $reloadedUser */
         $reloadedUser = $this->userRepository->find($user->getId());
         if (null === $reloadedUser) {
             throw new UserNotFoundException(

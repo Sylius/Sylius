@@ -16,6 +16,11 @@ namespace Sylius\Bundle\UserBundle\Provider;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface as BaseUserProviderInterface;
 
+/**
+ * @template TUser of UserInterface
+ *
+ * @extends BaseUserProviderInterface<TUser>
+ */
 interface UserProviderInterface extends BaseUserProviderInterface
 {
     public function loadUserByUsername($username): UserInterface;

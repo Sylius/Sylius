@@ -16,6 +16,9 @@ namespace Sylius\Bundle\UserBundle\Provider;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Webmozart\Assert\Assert;
 
+/**
+ * @extends AbstractUserProvider<UserInterface>
+ */
 class UsernameOrEmailProvider extends AbstractUserProvider
 {
     protected function findUser(string $uniqueIdentifier): ?UserInterface
