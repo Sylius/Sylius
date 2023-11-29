@@ -147,7 +147,7 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
+     * @Then /^the ("[^"]+" product) should have unit price discounted by ("[^"]+")$/
      */
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, int $amount): void
     {

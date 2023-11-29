@@ -115,7 +115,7 @@ Feature: Receiving discounts with product minimum price specified
         Then I should be on the checkout summary step
         And the "T-Shirt" product should have unit prices discounted by "$5.00" and "$5.00"
         And the "PHP Mug" product should have unit prices discounted by "$4.25" and "$4.25"
-        And the "Symfony Mug" product should have unit price discounted by "$8.5"
+        And the "Symfony Mug" product should have unit price discounted by "$8.50"
 
     @api
     Scenario: Distributing discount proportionally between different products when one has minimum price specified
