@@ -30,6 +30,7 @@ final class ImpersonateUserController
 {
     private ?RouterInterface $router;
 
+    /** @param UserProviderInterface<SymfonyUserInterface> $userProvider */
     public function __construct(
         private UserImpersonatorInterface $impersonator,
         private AuthorizationCheckerInterface $authorizationChecker,
