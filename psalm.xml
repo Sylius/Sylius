@@ -271,6 +271,11 @@
                 <referencedFunction name="Symfony\Component\PasswordHasher\PasswordHasherInterface::hash" />
             </errorLevel>
         </TooManyArguments>
+        <TooManyTemplateParams>
+            <errorLevel type="info">
+                <file name="src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php" /> <!-- TODO: remove after dropping Symfony 5.4 -->
+            </errorLevel>
+        </TooManyTemplateParams>
         <UndefinedClass>
             <errorLevel type="info">
                 <referencedClass name="Symfony\Component\Clock\Clock" /> <!-- introduced in Symfony 6.2 -->
