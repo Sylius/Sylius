@@ -42,3 +42,4 @@ parameters:
         - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize\(\) invoked with 2 parameters, 1 required./'
+        - '/PHPDoc tag \@extends contains generic type Symfony\\Component\\Security\\Core\\User\\UserProviderInterface\<Symfony\\Component\\Security\\Core\\User\\UserInterface\> but interface Symfony\\Component\\Security\\Core\\User\\UserProviderInterface is not generic\./'
