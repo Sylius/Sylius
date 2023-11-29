@@ -6,7 +6,7 @@ Feature: Seeing estimated shipping costs based on total weight
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Jacket for the Lochness Monster" priced at "$1337.00"
+        And the store has a product "Jacket for the Lochness Monster" priced at "$1,337.00"
         And this product's weight is 200
         And the store has a product "T-Shirt for Tinkerbell" priced at "$1.00"
         And this product's weight is 0.1
