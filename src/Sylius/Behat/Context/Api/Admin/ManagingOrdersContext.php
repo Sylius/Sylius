@@ -842,6 +842,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the :productName product's unit price should be :price
+     */
+    public function productUnitPriceShouldBe(string $productName, string $price): void
+    {
+        ray(
+            json_decode($this->client->getLastResponse()->getContent(), true),
+            json_decode($this->client->subResourceIndex(Resources::ORDERS, Resources::ADJUSTMENTS, $this->sharedStorage->get('order')->getTokenValue())->getContent(), true),
+        );
+    }
+
+    /**
      * @param array<string, mixed> $address
      */
     private function itShouldBeAddressedTo(
