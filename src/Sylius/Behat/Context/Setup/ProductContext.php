@@ -486,12 +486,18 @@ final class ProductContext implements Context
     /**
      * @Given /^(this variant) is also priced at ("[^"]+") in ("([^"]+)" channel)$/
      */
-    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, string $price, ChannelInterface $channel)
+    public function thisVariantIsAlsoPricedAtInChannel(ProductVariantInterface $productVariant, int $price, ChannelInterface $channel)
     {
-        $productVariant->addChannelPricing($this->createChannelPricingForChannel(
-            $this->getPriceFromString(str_replace(['$', '€', '£'], '', $price)),
-            $channel,
-        ));
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+
+        if (null === $channelPricing) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel(
+                $price,
+                $channel,
+            ));
+        } else {
+            $channelPricing->setPrice($price);
+        }
 
         $this->objectManager->flush();
     }
