@@ -42,18 +42,10 @@ class Order extends BaseOrder implements OrderInterface
     /** @var AddressInterface|null */
     protected $billingAddress;
 
-    /**
-     * @var Collection|PaymentInterface[]
-     *
-     * @psalm-var Collection<array-key, PaymentInterface>
-     */
+    /** @var Collection<array-key, PaymentInterface> */
     protected $payments;
 
-    /**
-     * @var Collection|ShipmentInterface[]
-     *
-     * @psalm-var Collection<array-key, ShipmentInterface>
-     */
+    /** @var Collection<array-key, ShipmentInterface> */
     protected $shipments;
 
     /** @var string|null */
@@ -74,11 +66,7 @@ class Order extends BaseOrder implements OrderInterface
     /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
-    /**
-     * @var Collection|BasePromotionInterface[]
-     *
-     * @psalm-var Collection<array-key, BasePromotionInterface>
-     */
+    /** @var Collection<array-key, BasePromotionInterface> */
     protected $promotions;
 
     /** @var string|null */
@@ -203,10 +191,6 @@ class Order extends BaseOrder implements OrderInterface
         });
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getPayments(): Collection
     {
         /** @phpstan-ignore-next-line */

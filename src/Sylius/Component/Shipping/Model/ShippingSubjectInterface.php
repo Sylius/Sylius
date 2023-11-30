@@ -26,9 +26,7 @@ interface ShippingSubjectInterface
     public function getShippingUnitTotal(): int;
 
     /**
-     * @return Collection|ShippableInterface[]
-     *
-     * @psalm-return Collection<array-key, ShippableInterface>
+     * @return Collection<array-key, ShippableInterface>
      */
     public function getShippables(): Collection;
 }

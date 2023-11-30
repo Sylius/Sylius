@@ -59,9 +59,7 @@ interface ProductInterface extends
     public function setMainTaxon(?TaxonInterface $mainTaxon): void;
 
     /**
-     * @return Collection|ReviewInterface[]
-     *
-     * @psalm-return Collection<array-key, ReviewInterface>
+     * @return Collection<array-key, ReviewInterface>
      */
     public function getAcceptedReviews(): Collection;
 

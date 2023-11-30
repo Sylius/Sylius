@@ -37,9 +37,6 @@ final class SyliusPaymentBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterPaymentMethodsResolversPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Payment\Model';

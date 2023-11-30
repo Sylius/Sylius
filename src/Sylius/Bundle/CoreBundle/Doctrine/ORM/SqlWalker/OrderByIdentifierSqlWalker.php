@@ -78,7 +78,6 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
      */
     private function getDqlAlias(): ?string
     {
-        /** @psalm-suppress UndefinedDocblockClass */
         foreach ($this->getQueryComponents() as $dqlAlias => $queryComponent) {
             if (
                 isset($queryComponent['metadata']) &&

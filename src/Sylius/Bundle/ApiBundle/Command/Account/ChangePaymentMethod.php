@@ -24,14 +24,14 @@ class ChangePaymentMethod implements OrderTokenValueAwareInterface, SubresourceI
     public $orderTokenValue;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */
     public $paymentId;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */

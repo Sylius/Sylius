@@ -44,7 +44,6 @@ class ImageUploader implements ImageUploaderInterface
                 self::class,
             ), \E_USER_DEPRECATED);
 
-            /** @psalm-suppress DeprecatedClass */
             $this->filesystem = new GaufretteFilesystemAdapter($this->filesystem);
         }
 

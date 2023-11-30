@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 class PickupCart implements ChannelCodeAwareInterface, CustomerEmailAwareInterface, LocaleCodeAwareInterface
 {
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string|null
      */

@@ -36,9 +36,7 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     public function setMethod(?ShippingMethodInterface $method): void;
 
     /**
-     * @return Collection|ShipmentUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, ShipmentUnitInterface>
+     * @return Collection<array-key, ShipmentUnitInterface>
      */
     public function getUnits(): Collection;
 

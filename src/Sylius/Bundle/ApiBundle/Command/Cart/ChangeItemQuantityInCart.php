@@ -26,7 +26,7 @@ class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, Subreso
     public $orderItemId;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var int
      */

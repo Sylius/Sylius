@@ -221,7 +221,6 @@
         "phpstan/phpstan-webmozart-assert": "^1.1",
         "phpunit/phpunit": "^8.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "psalm/plugin-mockery": "0.7.0",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^0.12.20",
         "stripe/stripe-php": "^8.1",
@@ -232,8 +231,7 @@
         "symfony/flex": "^1.7",
         "symfony/runtime": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
-        "symplify/monorepo-builder": "^11.0",
-        "vimeo/psalm": "^4.19"
+        "symplify/monorepo-builder": "^11.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",

@@ -116,9 +116,6 @@ final class ShippingMethodType extends AbstractResourceType
         $builder->setAttribute('prototypes', $prototypes);
     }
 
-    /**
-     * @psalm-suppress MissingPropertyType
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['rules_help'] = $options['rules_help'] ?? '';

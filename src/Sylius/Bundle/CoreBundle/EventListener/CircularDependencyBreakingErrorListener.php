@@ -59,11 +59,7 @@ final class CircularDependencyBreakingErrorListener extends ErrorListener
     public function onKernelException(ExceptionEvent $event, string $eventName = null, EventDispatcherInterface $eventDispatcher = null): void
     {
         try {
-            /**
-             * @psalm-suppress TooManyArguments
-             *
-             * @phpstan-ignore-next-line
-             */
+            /** @phpstan-ignore-next-line */
             $this->decoratedListener->onKernelException($event, $eventName, $eventDispatcher);
         } catch (\Throwable $throwable) {
             $this->breakCircularDependency($throwable);

@@ -95,9 +95,6 @@ jobs:
             -   name: Run PHPArkitect
                 run: vendor/bin/phparkitect check
 
-            -   name: Run Psalm
-                run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
-
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
 

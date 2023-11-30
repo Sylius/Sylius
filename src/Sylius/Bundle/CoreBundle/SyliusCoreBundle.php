@@ -95,9 +95,6 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Core\Model';

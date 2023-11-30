@@ -97,7 +97,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         }
 
         if (method_exists($connection, 'getSchemaManager')) {
-            /** @psalm-suppress DeprecatedMethod */
             return $connection->getSchemaManager();
         }
 

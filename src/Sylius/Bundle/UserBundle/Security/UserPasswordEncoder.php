@@ -43,10 +43,6 @@ class UserPasswordEncoder implements UserPasswordEncoderInterface
 
     public function encode(CredentialsHolderInterface $user): string
     {
-        /**
-         * @psalm-suppress InvalidArgument
-         * @psalm-suppress UndefinedMethod
-         */
         $encoder = $this->encoderOrPasswordHasherFactory->getEncoder($user);
 
         return $encoder->encodePassword($user->getPlainPassword(), $user->getSalt());

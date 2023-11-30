@@ -35,25 +35,13 @@ class Channel extends BaseChannel implements ChannelInterface
     /** @var string|null */
     protected $taxCalculationStrategy;
 
-    /**
-     * @var Collection|CurrencyInterface[]
-     *
-     * @psalm-var Collection<array-key, CurrencyInterface>
-     */
+    /** @var Collection<array-key, CurrencyInterface> */
     protected $currencies;
 
-    /**
-     * @var Collection|LocaleInterface[]
-     *
-     * @psalm-var Collection<array-key, LocaleInterface>
-     */
+    /** @var Collection<array-key, LocaleInterface> */
     protected $locales;
 
-    /**
-     * @var Collection|CountryInterface[]
-     *
-     * @psalm-var Collection<array-key, CountryInterface>
-     */
+    /** @var Collection<array-key, CountryInterface> */
     protected $countries;
 
     /** @var string|null */

@@ -33,21 +33,13 @@ class Order implements OrderInterface
     /** @var string|null */
     protected $notes;
 
-    /**
-     * @var Collection|OrderItemInterface[]
-     *
-     * @psalm-var Collection<array-key, OrderItemInterface>
-     */
+    /** @var Collection<array-key, OrderItemInterface> */
     protected $items;
 
     /** @var int */
     protected $itemsTotal = 0;
 
-    /**
-     * @var Collection|AdjustmentInterface[]
-     *
-     * @psalm-var Collection<array-key, AdjustmentInterface>
-     */
+    /** @var Collection<array-key, AdjustmentInterface> */
     protected $adjustments;
 
     /** @var int */
