@@ -138,25 +138,25 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => CustomerGroupRuleChecker::TYPE,
                         'configuration' => [
-                            'group_code' => 'vip'
+                            'group_code' => 'vip',
                         ],
                     ],
                     [
                         'type' => NthOrderRuleChecker::TYPE,
                         'configuration' => [
-                            'nth' => 2
+                            'nth' => 2,
                         ],
                     ],
                     [
                         'type' => ShippingCountryRuleChecker::TYPE,
                         'configuration' => [
-                            'country' => 'US'
+                            'country' => 'US',
                         ],
                     ],
                     [
                         'type' => HasTaxonRuleChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['MUGS', 'CAPS']
+                            'taxons' => ['MUGS', 'CAPS'],
                         ],
                     ],
                     [
@@ -169,7 +169,7 @@ final class PromotionsTest extends JsonApiTestCase
                             'MOBILE' => [
                                 'taxon' => 'CAPS',
                                 'amount' => 2000,
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -186,7 +186,7 @@ final class PromotionsTest extends JsonApiTestCase
                             ],
                             'MOBILE' => [
                                 'amount' => 222,
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -338,31 +338,31 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 'invalid'
+                            'count' => 'invalid',
                         ],
                     ],
                     [
                         'type' => CustomerGroupRuleChecker::TYPE,
                         'configuration' => [
-                            'group_code' => 'wrong'
+                            'group_code' => 'wrong',
                         ],
                     ],
                     [
                         'type' => NthOrderRuleChecker::TYPE,
                         'configuration' => [
-                            'nth' => 'invalid'
+                            'nth' => 'invalid',
                         ],
                     ],
                     [
                         'type' => ShippingCountryRuleChecker::TYPE,
                         'configuration' => [
-                            'country' => 'wrong'
+                            'country' => 'wrong',
                         ],
                     ],
                     [
                         'type' => HasTaxonRuleChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['wrong']
+                            'taxons' => ['wrong'],
                         ],
                     ],
                     [
@@ -371,7 +371,7 @@ final class PromotionsTest extends JsonApiTestCase
                             'WEB' => [
                                 'taxon' => 'wrong',
                                 'amount' => 'invalid',
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -384,11 +384,11 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => ItemTotalRuleChecker::TYPE,
                         'configuration' => [
                             'MOBILE' => [
-                            ]
+                            ],
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -424,7 +424,7 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => UnitFixedDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
                             'WEB' => [
-                                'filters' => 'invalid'
+                                'filters' => 'invalid',
                             ],
                         ],
                     ],
@@ -448,7 +448,7 @@ final class PromotionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -531,7 +531,7 @@ final class PromotionsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'priority' => -1,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

@@ -488,7 +488,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
     {
-         $order = $this->responseChecker->getCollectionItemsWithValue(
+        $order = $this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'number',
             trim($orderNumber, '#'),
@@ -528,7 +528,7 @@ final class ManagingOrdersContext implements Context
 
     private function getCurrencyCodeFromTotal(string $total): string
     {
-        return match(true) {
+        return match (true) {
             str_starts_with($total, '$') => 'USD',
             str_starts_with($total, '€') => 'EUR',
             str_starts_with($total, '£') => 'GBP',

@@ -19,8 +19,9 @@ use ApiPlatform\OpenApi\OpenApi;
 /** @experimental */
 final class PromotionDocumentationModifier implements DocumentationModifierInterface
 {
-    const ROUTE_ADMIN_PROMOTIONS = '/admin/promotions';
-    const ROUTE_ADMIN_PROMOTION = '/admin/promotions/{code}';
+    public const ROUTE_ADMIN_PROMOTIONS = '/admin/promotions';
+
+    public const ROUTE_ADMIN_PROMOTION = '/admin/promotions/{code}';
 
     /**
      * @param string[] $actionTypes
