@@ -33,6 +33,7 @@ final class GatewayConfigValidatorSpec extends ObjectBehavior
     ): void {
         $this->beConstructedWith(
             ['paypal_express_checkout' => 'sylius.payum_gateway_factory.paypal_express_checkout', 'stripe_checkout' => 'sylius.payum_gateway_factory.stripe_checkout'],
+            ['Default', 'test_group', 'paypal_express_checkout', 'stripe_checkout']
         );
 
         $this->initialize($executionContext);
