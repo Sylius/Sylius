@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "translations[pl_PL].translatable: This value is already used.",
+    "violations": [
+        {
+            "propertyPath": "translations[pl_PL].translatable",
+            "message": "This value is already used.",
+            "code": @string@
+        }
+    ]
+}

@@ -22,6 +22,7 @@
         </attribute>
         <attribute name="locale">
             <group>admin:product:create</group>
+            <group>admin:product:update</group>
         </attribute>
         <attribute name="name">
             <group>admin:product:read</group>
