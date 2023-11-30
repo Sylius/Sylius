@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Viewing details of a product with variants
     In order to view detailed product information
     As an Administrator
@@ -44,7 +44,7 @@ Feature: Viewing details of a product with variants
         And I should see "Iron Shield - very big" variant with code "123456789-xl", priced "$25.00" and current stock 5 and in "United States" channel
         And I should see "Iron Shield - very small" variant with code "123456789-xs", priced "$15.00" and current stock 12 and in "United States" channel
 
-    @ui @javascript
+    @ui @javascript @api
     Scenario: Viewing media block
         Given the "Iron Shield" product has an image "mugs.jpg" with "main" type
         When I access "Iron Shield" product page

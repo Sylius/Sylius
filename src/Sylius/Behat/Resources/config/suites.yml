@@ -41,6 +41,7 @@ imports:
 #    - suites/api/product/managing_products.yml
 #    - suites/api/product/viewing_price_history.yml
 #    - suites/api/product/viewing_price_history_after_catalog_promotions.yml
+#    - suites/api/product/viewing_product_in_admin_panel.yaml
 #    - suites/api/product/viewing_product_reviews.yml
 #    - suites/api/product/viewing_product_variants.yml
 #    - suites/api/product/viewing_products.yml
@@ -125,6 +126,7 @@ imports:
     - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
+    - suites/ui/product/viewing_product_in_admin_panel.yaml
     - suites/ui/product/viewing_product_reviews.yml
     - suites/ui/product/viewing_products.yml
     - suites/ui/promotion/applying_catalog_promotions.yml

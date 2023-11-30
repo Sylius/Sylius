@@ -396,6 +396,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I access :product product page
+     */
+    public function iAccessProductPage(ProductInterface $product): void
+    {
+        $this->client->show(Resources::PRODUCTS, $product->getCode());
+    }
+
+    /**
+     * @When I save my changes to the images
+     */
+    public function iSaveMyChangesToTheImages(): void
+    {
+        // Intentionally left blank
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -794,6 +810,14 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('The value of attribute "%s" has an invalid type', $attributeName),
         );
+    }
+
+    /**
+     * @Then I should see an image related to this product
+     */
+    public function iShouldSeeImageRelatedToThisProduct(): void
+    {
+        Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'images'));
     }
 
     private function getAdminLocaleCode(): string

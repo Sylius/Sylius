@@ -72,7 +72,7 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImagesByType($type)->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
     }
@@ -86,7 +86,7 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImages()->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->delete(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
     }
@@ -100,25 +100,11 @@ final class ManagingTaxonImagesContext implements Context
         $taxon = $this->sharedStorage->get('taxon');
 
         $taxonImage = $taxon->getImages()->first();
-        Assert::notNull($taxonImage);
+        Assert::notFalse($taxonImage);
 
         $this->client->buildUpdateRequest(Resources::TAXON_IMAGES, (string) $taxonImage->getId());
         $this->client->updateRequestData(['type' => $type]);
         $this->client->update();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully uploaded
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyUploaded(): void
-    {
-        Assert::true(
-            $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            sprintf(
-                'Resource could not be created: %s',
-                $this->responseChecker->getError($this->client->getLastResponse()),
-            ),
-        );
     }
 
     /**
