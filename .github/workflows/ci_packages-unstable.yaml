@@ -30,14 +30,14 @@ jobs:
                 uses: notiz-dev/github-action-json-property@release
                 with:
                     path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.packages'
+                    prop_path: 'unstable.packages'
 
     test_unstable:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (Unstable Dependencies)"
         timeout-minutes: 25
-        
+
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -56,6 +56,11 @@ jobs:
                 with:
                     php-version: "${{ matrix.php }}"
                     coverage: none
+
+            -   name: Change minimum-stability to dev
+                run: |
+                    composer config minimum-stability dev
+                    composer config prefer-stable false
 
             -   name: Restrict Symfony version
                 run: |
