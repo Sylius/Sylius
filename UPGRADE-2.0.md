@@ -150,6 +150,18 @@
     * `Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeValueRepository`
       extends `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository`
       implements `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
+  
+  Product:
+
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationTypeTranslationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeTranslationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionTranslationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionValueRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionValueTranslationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductTranslationRepository`
+    * `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantTranslationRepository`
 
   Currency:
 
@@ -177,6 +189,12 @@
     * `Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface` extended interface changed from
       `Sylius\Component\Resource\Repository\RepositoryInterface` to
       `Sylius\Component\Attribute\Repository\AttributeValueRepositoryInterface`
+  
+  Product:
+
+    * `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductAssociationRepository` extended class changed from
+      `Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository` to
+      `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAssociationRepository`
 
 ## Frontend
 

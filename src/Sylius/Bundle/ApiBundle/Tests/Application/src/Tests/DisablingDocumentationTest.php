@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class DisablingDocumentationTest extends ApiTestCase
+final class DisablingDocumentationTest extends ApiTestCase
 {
     use SetUpTestsTrait;
 

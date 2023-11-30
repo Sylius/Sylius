@@ -20,9 +20,9 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Sylius\Tests\Api\Utils\ContentType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Webmozart\Assert\Assert;
 
 final class CheckoutCompletionTest extends JsonApiTestCase
 {
@@ -39,7 +39,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -63,7 +63,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -88,7 +88,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -112,7 +112,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -139,7 +139,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -164,7 +164,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -188,7 +188,7 @@ final class CheckoutCompletionTest extends JsonApiTestCase
         $this->client->request(
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/complete', $tokenValue),
-            server: ContentType::APPLICATION_JSON_MERGE_PATCH,
+            server: $this->buildHeaders(),
             content: json_encode([]),
         );
 
@@ -268,7 +268,10 @@ final class CheckoutCompletionTest extends JsonApiTestCase
             uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
         );
 
-        return (string) json_decode($this->client->getResponse()->getContent())->shipments[0]->id;
+        $content = $this->client->getResponse()->getContent();
+        Assert::notFalse($content);
+
+        return (string) json_decode($content)->shipments[0]->id;
     }
 
     private function getFirstPaymentId(string $tokenValue): string
@@ -278,6 +281,20 @@ final class CheckoutCompletionTest extends JsonApiTestCase
             uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
         );
 
-        return (string) json_decode($this->client->getResponse()->getContent())->payments[0]->id;
+        $content = $this->client->getResponse()->getContent();
+        Assert::notFalse($content);
+
+        return (string) json_decode($content)->payments[0]->id;
+    }
+
+    /** @return array<string, string> */
+    private function buildHeaders(): array
+    {
+        return $this
+            ->headerBuilder()
+            ->withMergePatchJsonContentType()
+            ->withJsonLdAccept()
+            ->build()
+        ;
     }
 }

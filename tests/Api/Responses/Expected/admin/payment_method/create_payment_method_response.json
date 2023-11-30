@@ -1,0 +1,21 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentMethod",
+    "@id": "\/api\/v2\/admin\/payment-methods\/test",
+    "@type": "PaymentMethod",
+    "channels": [],
+    "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+    "id": @integer@,
+    "code": "test",
+    "position": 0,
+    "enabled": true,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+            "@type": "PaymentMethodTranslation",
+            "id": @integer@,
+            "name": "Test",
+            "description": "Test",
+            "instructions": "Testing instructions"
+        }
+    }
+}

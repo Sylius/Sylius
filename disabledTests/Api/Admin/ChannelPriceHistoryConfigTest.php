@@ -27,7 +27,7 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/channel-price-history-configs/%d', $fixtures['web_price_history_config']->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
@@ -47,7 +47,7 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: sprintf('/api/v2/admin/channel-price-history-configs/%d', $fixtures['web_price_history_config']->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
             content: json_encode([
                 'lowestPriceForDiscountedProductsVisible' => true,
                 'lowestPriceForDiscountedProductsCheckingPeriod' => 60,

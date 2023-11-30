@@ -17,12 +17,12 @@ use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProvider;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class EligibleCatalogPromotionsProcessorTest extends WebTestCase
+final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 {
-    /** @var Client */
-    private static $client;
+    private static KernelBrowser $client;
 
     protected function setUp(): void
     {

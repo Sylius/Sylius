@@ -361,9 +361,17 @@ final class ManagingTaxonsContext implements Context
         Assert::null($product->getMainTaxon());
     }
 
+    /**
+     * @When I save my changes to the images
+     */
+    public function iSaveMyChangesToTheImages(): void
+    {
+        // Intentionally left blank
+    }
+
     private function updateTranslations(string $localeCode, string $field, ?string $value = null): void
     {
-        $data['translations'][$localeCode]= [];
+        $data['translations'][$localeCode] = [];
 
         if ($value !== null) {
             $data['translations'][$localeCode][$field] = $value;

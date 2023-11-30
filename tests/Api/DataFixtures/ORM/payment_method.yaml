@@ -21,12 +21,27 @@ Sylius\Component\Core\Model\PaymentMethod:
         translations:
             - '@disabled_payment_method_translation'
         channels: ['@channel_web']
+    paypal_payment_method:
+        code: 'PAYPAL'
+        enabled: true
+        gatewayConfig: '@gateway_paypal'
+        translations:
+            - '@paypal_payment_method_translation'
+        channels: ['@channel_web']
 
 Sylius\Bundle\PayumBundle\Model\GatewayConfig:
     gateway_offline:
         gatewayName: 'Offline'
         factoryName: 'offline'
         config: []
+    gateway_paypal:
+        gatewayName: 'paypal_express_checkout'
+        factoryName: 'paypal_express_checkout'
+        config:
+            username: 'test'
+            password: 'test'
+            signature: 'test'
+            sandbox: true
 
 Sylius\Component\Payment\Model\PaymentMethodTranslation:
     payment_method_cash_on_delivery_translation:
@@ -44,3 +59,8 @@ Sylius\Component\Payment\Model\PaymentMethodTranslation:
         locale: 'en_US'
         description: '<paragraph(2)>'
         translatable: '@disabled_payment_method'
+    paypal_payment_method_translation:
+        name: 'PayPal'
+        locale: 'en_US'
+        description: '<paragraph(2)>'
+        translatable: '@paypal_payment_method'

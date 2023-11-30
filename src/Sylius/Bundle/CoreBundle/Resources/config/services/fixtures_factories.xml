@@ -83,6 +83,7 @@
             <argument type="service" id="sylius.fixture.example_factory.promotion_action" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
+            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.fixture.example_factory.promotion_action" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionActionExampleFactory">

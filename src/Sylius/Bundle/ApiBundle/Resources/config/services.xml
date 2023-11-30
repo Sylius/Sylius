@@ -48,6 +48,10 @@
             <argument type="service" id="sylius.image_uploader" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction" public="true">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />
