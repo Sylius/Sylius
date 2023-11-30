@@ -24,25 +24,6 @@
     </parameters>
 
     <services>
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.image_uploader" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadTaxonImageAction" public="true">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreatorInterface" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="api_platform.symfony.iri_converter" />
-            <argument type="service" id="request_stack" />
-        </service>
-
         <!--    TODO: Remove after bumping to Api Platform 3.0    -->
         <service id="api_platform.action.post_item" alias="api_platform.action.placeholder" public="true" />
 
@@ -91,15 +72,6 @@
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
-            <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.repository.order_item" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" public="true">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">

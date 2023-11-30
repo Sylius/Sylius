@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Creator;
 
-use Sylius\Component\Core\Model\TaxonImageInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 
 /** @experimental */
-interface TaxonImageCreatorInterface
+interface ImageCreatorInterface
 {
-    public function create(string $taxonCode, ?\SplFileInfo $file, ?string $type): TaxonImageInterface;
+    /** @param array<mixed> $context */
+    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface;
 }

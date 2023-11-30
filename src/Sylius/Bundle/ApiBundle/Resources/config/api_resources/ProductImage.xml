@@ -11,6 +11,62 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-images</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_image_product_variants_filter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/products/{code}/images</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\UploadProductImageAction</attribute>
+                <attribute name="deserialize">false</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="parameters">
+                        <attribute>
+                            <attribute name="name">code</attribute>
+                            <attribute name="in">path</attribute>
+                            <attribute name="required">true</attribute>
+                            <attribute name="schema">
+                                <attribute name="type">string</attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                    <attribute name="requestBody">
+                        <attribute name="content">
+                            <attribute name="multipart/form-data">
+                                <attribute name="schema">
+                                    <attribute name="type">object</attribute>
+                                    <attribute name="properties">
+                                        <attribute name="file">
+                                            <attribute name="type">string</attribute>
+                                            <attribute name="format">binary</attribute>
+                                        </attribute>
+                                        <attribute name="type">
+                                            <attribute name="type">string</attribute>
+                                        </attribute>
+                                        <attribute name="productVariants[]">
+                                            <attribute name="type">array</attribute>
+                                            <attribute name="items">
+                                                <attribute name="type">string</attribute>
+                                                <attribute name="format">iri-reference</attribute>
+                                            </attribute>
+                                        </attribute>
+                                    </attribute>
+                                </attribute>
+                                <attribute name="encoding">
+                                    <attribute name="productVariants[]">
+                                        <attribute name="style">form</attribute>
+                                        <attribute name="explode">true</attribute>
+                                    </attribute>
+                                </attribute>
+                            </attribute>
+                        </attribute>
+                    </attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_image:read</attribute>
                 </attribute>
@@ -25,6 +81,7 @@
                     <attribute name="groups">admin:product_image:read</attribute>
                 </attribute>
             </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-images/{id}</attribute>
@@ -44,10 +101,35 @@
                     </attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-images/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_image:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-images/{id}</attribute>
+            </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="api_products_images_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_image:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="true" writable="false" />
         <property name="path" required="true" />
         <property name="type" />
+        <property name="variants" />
     </resource>
 </resources>

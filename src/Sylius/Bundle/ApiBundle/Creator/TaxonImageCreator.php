@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Creator;
 
 use Sylius\Bundle\ApiBundle\Exception\NoFileUploadedException;
 use Sylius\Bundle\ApiBundle\Exception\TaxonNotFoundException;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -22,7 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /** @experimental */
-final class TaxonImageCreator implements TaxonImageCreatorInterface
+final class TaxonImageCreator implements ImageCreatorInterface
 {
     /**
      * @param FactoryInterface<TaxonImageInterface> $taxonImageFactory
@@ -35,13 +36,14 @@ final class TaxonImageCreator implements TaxonImageCreatorInterface
     ) {
     }
 
-    public function create(string $taxonCode, ?\SplFileInfo $file, ?string $type): TaxonImageInterface
+    /** @param array<mixed> $context */
+    public function create(string $ownerCode, ?\SplFileInfo $file, ?string $type, array $context = []): ImageInterface
     {
         if (null === $file) {
             throw new NoFileUploadedException();
         }
 
-        $owner = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
+        $owner = $this->taxonRepository->findOneBy(['code' => $ownerCode]);
         if (null === $owner) {
             throw new TaxonNotFoundException();
         }

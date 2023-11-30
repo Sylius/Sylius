@@ -179,6 +179,7 @@
                 <file name="src/Sylius/Bundle/ProductBundle/Form/DataTransformer/ProductsToProductAssociationsTransformer.php" />
                 <file name="src/Sylius/Bundle/PromotionBundle/Form/Type/PromotionCouponToCodeType.php" />
                 <file name="src/Sylius/Bundle/UserBundle/Form/UserVerifiedAtToBooleanTransformer.php" />
+                <file name="src/Sylius/Bundle/UserBundle/Provider/UserProviderInterface.php" />
             </errorLevel>
         </MissingTemplateParam>
 
