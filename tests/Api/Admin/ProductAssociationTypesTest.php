@@ -154,4 +154,33 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_does_not_update_a_product_association_type_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['product/product_with_many_locales.yaml', 'authentication/api_administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductAssociationTypeInterface $associationType */
+        $associationType = $fixtures['product_association_type'];
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-association-types/%s', $associationType->getCode()),
+            server: $header,
+            content: json_encode([
+                'code' => 'TEST',
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Similar products',
+                    ],
+                ]
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_association_type/put_product_association_type_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
 }
