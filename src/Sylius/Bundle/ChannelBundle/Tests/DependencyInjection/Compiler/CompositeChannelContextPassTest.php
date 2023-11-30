@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
+final class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test

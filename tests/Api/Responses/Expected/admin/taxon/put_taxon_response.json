@@ -6,6 +6,7 @@
     "code": "MUG",
     "parent": "\/api\/v2\/admin\/taxons\/BRAND",
     "children": [],
+    "images": [],
     "position": @integer@,
     "translations": {
         "en_US": {

@@ -1,4 +1,4 @@
-@modifying_address
+@modifying_placed_order_address
 Feature: Modifying a customer's shipping address on an order with taxes
     In order to ship an order to a correct place
     As an Administrator
@@ -18,8 +18,8 @@ Feature: Modifying a customer's shipping address on an order with taxes
         And the customer chose "Free" shipping method with "Offline" payment
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Modifying a customer's shipping address when the applied promotion is no longer valid
+    @api @ui
+    Scenario: Modifying a customer's shipping address of already placed order after the VAT tax rate has been changed
         Given the "VAT" tax rate has changed to 10%
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order

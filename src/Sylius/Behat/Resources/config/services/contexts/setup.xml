@@ -35,6 +35,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.cart" class="Sylius\Behat\Context\Setup\CartContext">
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.random_generator" />
@@ -211,10 +212,10 @@
             <argument type="service" id="sylius.factory.promotion_action" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.factory.promotion_rule" />
-            <argument type="service" id="sylius.test.factory.promotion" />
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.promotion_coupon_generator" />
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sylius.fixture.example_factory.promotion" />
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">

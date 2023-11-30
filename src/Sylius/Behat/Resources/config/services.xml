@@ -64,6 +64,10 @@
             <argument type="service" id="sylius.behat.admin_security" />
         </service>
 
+        <service id="sylius.behat.api.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
+            <argument type="service" id="sylius.behat.api_security" />
+        </service>
+
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
         <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">

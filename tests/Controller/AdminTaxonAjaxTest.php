@@ -18,7 +18,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-final class AdminTaxonAjaxTest extends SessionAwareAjaxTest
+final class AdminTaxonAjaxTest extends SessionAwareAjaxTestCase
 {
     /** @test */
     public function it_denies_access_to_taxons_for_not_authenticated_user(): void

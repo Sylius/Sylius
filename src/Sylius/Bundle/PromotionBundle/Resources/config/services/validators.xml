@@ -40,5 +40,15 @@
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.scope_validator" index-by="key" />
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionValidator">
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_action" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleValidator">
+            <argument>%sylius.promotion_rules%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_rule" />
+        </service>
     </services>
 </container>

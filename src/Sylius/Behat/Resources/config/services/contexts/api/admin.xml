@@ -146,6 +146,13 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
+        <service id="sylius.behat.context.api.admin.managing_taxon_images" class="Sylius\Behat\Context\Api\Admin\ManagingTaxonImagesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="behat.mink.parameters" />
+        </service>
+
         <service id="sylius.behat.context.api.admin.managing_shipping_categories" class="Sylius\Behat\Context\Api\Admin\ManagingShippingCategoriesContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
@@ -192,6 +199,14 @@
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.behat.api_security" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.api.shared_security" />
+        </service>
+
+        <service id="Sylius\Behat\Context\Api\Admin\ManagingPaymentMethodsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.section_iri_converter" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_zones" class="Sylius\Behat\Context\Api\Admin\ManagingZonesContext">
@@ -216,6 +231,8 @@
         <service id="sylius.behat.context.api.admin.managing_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="sylius.behat.section_iri_converter" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_catalog_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingCatalogPromotionsContext">
@@ -258,6 +275,12 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
+        </service>
+
+        <service id="Sylius\Behat\Context\Api\Admin\ManagingPlacedOrderAddressesContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
     </services>
 </container>

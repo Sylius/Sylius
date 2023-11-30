@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\Product:
+    product_cap:
+        code: 'CAP'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+    product_socks:
+        code: 'SOCKS'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'

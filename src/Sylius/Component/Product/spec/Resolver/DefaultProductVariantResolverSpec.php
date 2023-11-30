@@ -55,10 +55,17 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->beConstructedWith($productVariantRepository);
 
         $product->getId()->willReturn(1);
-        $productVariantRepository->findOneBy([
-            'product' => 1,
-            'enabled' => true,
-        ])->willReturn($variant);
+        $productVariantRepository->findBy(
+            [
+                'product' => $product,
+                'enabled' => true,
+            ],
+            [
+                'position' => 'ASC',
+                'id' => 'ASC',
+            ],
+            1,
+        )->willReturn([$variant]);
 
         $this->getVariant($product)->shouldReturn($variant);
     }
@@ -70,10 +77,17 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->beConstructedWith($productVariantRepository);
 
         $product->getId()->willReturn(1);
-        $productVariantRepository->findOneBy([
-            'product' => 1,
-            'enabled' => true,
-        ])->willReturn(null);
+        $productVariantRepository->findBy(
+            [
+                'product' => $product,
+                'enabled' => true,
+            ],
+            [
+                'position' => 'ASC',
+                'id' => 'ASC',
+            ],
+            1,
+        )->willReturn([]);
 
         $this->getVariant($product)->shouldReturn(null);
     }

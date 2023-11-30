@@ -48,7 +48,7 @@ final class TranslatableLocaleKeyDenormalizer implements ContextAwareDenormalize
                     throw new TranslationLocaleMismatchException(sprintf(
                         'The locale of translation does not match the key. Key: "%s", locale: "%s"',
                         $key,
-                        $translation['locale']
+                        $translation['locale'],
                     ));
                 }
 

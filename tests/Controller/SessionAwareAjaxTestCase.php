@@ -8,7 +8,7 @@ use ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class SessionAwareAjaxTest extends JsonApiTestCase
+abstract class SessionAwareAjaxTestCase extends JsonApiTestCase
 {
     protected function setUp(): void
     {

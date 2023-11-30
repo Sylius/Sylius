@@ -8,7 +8,7 @@ Feature: Adding a new promotion
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Adding a new promotion
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
@@ -17,7 +17,7 @@ Feature: Adding a new promotion
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should appear in the registry
 
-    @ui
+    @api @ui
     Scenario: Adding a new promotion with usage limit
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
@@ -27,17 +27,17 @@ Feature: Adding a new promotion
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should be available to be used only 50 times
 
-    @ui
+    @api @ui
     Scenario: Adding a new exclusive promotion
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
-        And I make it exclusive
+        And I set it as exclusive
         And I add it
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should be exclusive
 
-    @ui
+    @api @ui
     Scenario: Adding a new coupon based promotion
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
@@ -47,7 +47,7 @@ Feature: Adding a new promotion
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should be coupon based
 
-    @ui
+    @api @ui
     Scenario: Adding a new channels promotion
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"
@@ -57,7 +57,7 @@ Feature: Adding a new promotion
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should be applicable for the "United States" channel
 
-    @ui
+    @api @ui
     Scenario: Adding a promotion with start and end date
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"

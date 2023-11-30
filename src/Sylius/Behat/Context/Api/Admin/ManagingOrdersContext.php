@@ -19,6 +19,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -36,6 +37,7 @@ final class ManagingOrdersContext implements Context
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
+        private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
     }
 
@@ -45,7 +47,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iSeeTheOrder(OrderInterface $order): void
     {
-        $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResource($order));
+
+        $this->sharedStorage->set('order', $order);
     }
 
     /**
@@ -99,6 +104,15 @@ final class ManagingOrdersContext implements Context
     public function iLimitNumberOfItemsTo(int $limit): void
     {
         $this->client->addFilter('itemsPerPage', $limit);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy(string $fieldName): void
+    {
+        $this->client->addFilter(sprintf('order[%s]', $fieldName), 'asc');
         $this->client->filter();
     }
 
@@ -281,8 +295,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersTotalShouldBe(int $total): void
     {
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
+            $this->responseChecker->getValue($response, 'total'),
             $total,
         );
     }
@@ -292,8 +308,10 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
+        $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
+
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
+            $this->responseChecker->getValue($response, 'orderPromotionTotal'),
             $promotionTotal,
         );
     }
@@ -316,7 +334,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see an order with :orderNumber number
      */
-    public function iShouldSeeOrderWithNumber(string $orderNumber)
+    public function iShouldSeeOrderWithNumber(string $orderNumber): void
     {
         $response = $this->client->getLastResponse();
 
@@ -327,22 +345,71 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I switch the way orders are sorted by :fieldName
-     */
-    public function iSwitchSortingBy($fieldName)
-    {
-        $this->client->addFilter('order[number]', 'asc');
-        $this->client->filter();
-    }
-
-    /**
      * @Then the first order should have number :number
      */
-    public function theFirstOrderShouldHaveNumber(string $number)
+    public function theFirstOrderShouldHaveNumber(string $number): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
         $firstItem = $items[0];
 
         Assert::same($firstItem['number'], str_replace('#', '', $number));
+    }
+
+    /**
+     * @Then /^I should see the order "([^"]+)" with total ("[^"]+")$/
+     */
+    public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
+    {
+         $order = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'number',
+            trim($orderNumber, '#'),
+        )[0];
+
+        Assert::same(
+            $order['total'],
+            $total,
+        );
+    }
+
+    /**
+     * @Then the administrator should see the order with total :total in order list
+     */
+    public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(string $total): void
+    {
+        $adminUser = $this->sharedStorage->get('administrator');
+        $currencyCode = $this->getCurrencyCodeFromTotal($total);
+        $total = $this->getTotalAsInt($total);
+
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $adminUser,
+            fn () => $this->client->index(Resources::ORDERS),
+        );
+
+        $itemsWithCurrency = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'currencyCode',
+            $currencyCode,
+        );
+
+        $firstItem = array_pop($itemsWithCurrency);
+
+        Assert::notEmpty($firstItem);
+        Assert::same($firstItem['total'], $total);
+    }
+
+    private function getCurrencyCodeFromTotal(string $total): string
+    {
+        return match(true) {
+            str_starts_with($total, '$') => 'USD',
+            str_starts_with($total, '€') => 'EUR',
+            str_starts_with($total, '£') => 'GBP',
+            default => throw new \InvalidArgumentException('Unsupported currency symbol'),
+        };
+    }
+
+    private function getTotalAsInt(string $total): int
+    {
+        return (int) round((float) trim($total, '$€£') * 100, 2);
     }
 }
