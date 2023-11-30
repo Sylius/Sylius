@@ -89,7 +89,8 @@
                     "@type": "ProductImage",
                     "id": @integer@,
                     "type": "thumbnail",
-                    "path": "\/media\/image\/product.jpg"
+                    "path": "\/media\/image\/product.jpg",
+                    "productVariants": []
                 }
             ],
             "translations": {

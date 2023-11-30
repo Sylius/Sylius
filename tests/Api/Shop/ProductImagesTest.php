@@ -24,7 +24,7 @@ final class ProductImagesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
-        $productImage = $fixtures['product_thumbnail'];
+        $productImage = $fixtures['product_mug_thumbnail'];
 
         $this->client->request(
             method: 'GET',
@@ -41,7 +41,7 @@ final class ProductImagesTest extends JsonApiTestCase
     {
         $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml', 'authentication/api_administrator.yaml']);
         /** @var ProductImageInterface $productImage */
-        $productImage = $fixtures['product_thumbnail'];
+        $productImage = $fixtures['product_mug_thumbnail'];
 
         $this->client->request(
             method: 'GET',

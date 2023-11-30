@@ -18,18 +18,19 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
-final class UploadTaxonImageAction
+final class UploadProductImageAction
 {
-    public function __construct(private ImageCreatorInterface $taxonImageCreator)
+    public function __construct(private ImageCreatorInterface $productImageCreator)
     {
     }
 
     public function __invoke(Request $request): ImageInterface
     {
-        return $this->taxonImageCreator->create(
+        return $this->productImageCreator->create(
             $request->attributes->get('code', ''),
             $request->files->get('file'),
             $request->request->get('type'),
+            ['productVariants' => $request->request->all('productVariants')],
         );
     }
 }

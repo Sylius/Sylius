@@ -33,6 +33,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -518,6 +519,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my changes to the images
      */
     public function iSaveMyChanges()
     {
@@ -832,12 +834,32 @@ final class ManagingProductsContext implements Context
     /**
      * @When I attach the :path image with :type type
      * @When I attach the :path image
+     * @When I attach the :path image with :type type to this product
+     * @When I attach the :path image to this product
      */
-    public function iAttachImageWithType($path, $type = null)
+    public function iAttachImageWithType(string $path, ?string $type = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->attachImage($path, $type);
+    }
+
+    /**
+     * @When I attach the :path image with selected :productVariant variant to this product
+     */
+    public function iAttachImageWithSelectedVariantToThisProduct(
+        string $path,
+        ProductVariantInterface $productVariant,
+    ): void {
+        $this->updateConfigurableProductPage->attachImage(path: $path, productVariant: $productVariant);
+    }
+
+    /**
+     * @When I select :productVariant variant for the first image
+     */
+    public function iSelectVariantForTheFirstImage(ProductVariantInterface $productVariant): void
+    {
+        $this->updateConfigurableProductPage->selectVariantForFirstImage($productVariant);
     }
 
     /**
@@ -897,6 +919,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then its image should have :productVariant variant selected
+     */
+    public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->updateConfigurableProductPage->hasLastImageAVariant($productVariant));
     }
 
     /**

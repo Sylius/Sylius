@@ -57,6 +57,8 @@ final class Resources
 
     public const PRODUCT_ATTRIBUTES = 'product-attributes';
 
+    public const PRODUCT_IMAGES = 'product-images';
+
     public const PRODUCT_OPTIONS = 'product-options';
 
     public const PRODUCT_REVIEWS = 'product-reviews';

@@ -98,6 +98,8 @@ sylius:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'The product variant with code "%productVariantCode%" does not belong to the product with code "%ownerCode%", which is the owner of the image.'
     product_taxon:
         unique: Product taxons cannot be duplicated.
         product:
