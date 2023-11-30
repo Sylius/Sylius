@@ -18,8 +18,7 @@ use Behat\Behat\Context\Context;
 final class LexicalContext implements Context
 {
     /**
-     * @Transform /^"(\-)?(?:€|£|￥|\$)([^"]+)"$/
-     * @Transform /^"(\-)?(?:€|£|￥|\$)([^"]+\.[^"]+)"$/
+     * @Transform /^"(\-)?(?:€|£|￥|\$)([0-9,]+(\.[0-9]*)?)"$/
      */
     public function getPriceFromString(string $sign, string $price): int
     {
@@ -52,7 +51,7 @@ final class LexicalContext implements Context
             throw new \InvalidArgumentException('The price string should have exactly 2 decimal digits.');
         }
 
-        if (preg_match('/^\d{4}+\.\d{2}$/', $price)) {
+        if (!preg_match('/^\d{1,3}(,\d{3})*\.\d{2}$/', $price)) {
             throw new \InvalidArgumentException('Thousands and larger numbers should be separated by commas.');
         }
     }
