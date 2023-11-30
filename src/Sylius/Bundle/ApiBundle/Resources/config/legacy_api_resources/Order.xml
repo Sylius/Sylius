@@ -23,9 +23,15 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders</attribute>
                 <attribute name="filters">
-                    <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_channel_filter</attribute>
+                    <attribute>sylius.api.order_currency_filter</attribute>
                     <attribute>sylius.api.order_customer_filter</attribute>
-                    <attribute>sylius.api.order_channel_order_filter</attribute>
+                    <attribute>sylius.api.order_date_filter</attribute>
+                    <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_product_filter</attribute>
+                    <attribute>sylius.api.order_shipping_method_filter</attribute>
+                    <attribute>sylius.api.order_total_filter</attribute>
+                    <attribute>sylius.api.order_variants_filter</attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="number">DESC</attribute>
