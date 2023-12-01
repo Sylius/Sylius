@@ -19,6 +19,7 @@ use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Api\Subresources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -258,7 +259,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldBeCountCouponsRelatedToThisPromotion(int $count, PromotionInterface $promotion): void
     {
         $coupons = $this->responseChecker->getCollection(
-            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Subresources::PROMOTION_COUPONS, $promotion->getCode()),
         );
         Assert::same(count($coupons), $count);
     }
@@ -269,7 +270,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldBeACouponWithCode(PromotionInterface $promotion, string $code): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Subresources::PROMOTION_COUPONS, $promotion->getCode()),
             'code',
             $code,
         ));
@@ -429,7 +430,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo(string $code, PromotionInterface $promotion): void
     {
         $coupons = $this->responseChecker->getCollectionItemsWithValue(
-            $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
+            $this->client->subResourceIndex(Resources::PROMOTIONS, Subresources::PROMOTION_COUPONS, $promotion->getCode()),
             'code',
             $code,
         );

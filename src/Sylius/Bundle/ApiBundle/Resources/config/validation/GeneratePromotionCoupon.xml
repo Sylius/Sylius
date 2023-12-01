@@ -20,7 +20,7 @@
                 </option>
             </constraint>
         </property>
-        <property name="promotionCouponGeneratorInstruction">
+        <property name="instruction">
             <constraint name="Valid" />
         </property>
     </class>

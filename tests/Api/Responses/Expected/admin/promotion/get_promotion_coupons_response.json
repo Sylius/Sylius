@@ -1,6 +1,6 @@
 {
     "@context": "\/api\/v2\/contexts\/PromotionCoupon",
-    "@id": "\/api\/v2\/admin\/promotions/dollar_off/promotion-coupons",
+    "@id": "\/api\/v2\/admin\/promotions/dollar_off/coupons",
     "@type": "hydra:Collection",
     "hydra:member": [
         {

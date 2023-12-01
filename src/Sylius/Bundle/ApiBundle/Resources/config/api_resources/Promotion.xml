@@ -136,7 +136,7 @@ Example configuration for `order_fixed_discount` action type:
         <subresourceOperations>
             <subresourceOperation name="coupons_get_subresource">
                 <attribute name="method">GET</attribute>
-                <attribute name="path">/admin/promotions/{code}/promotion-coupons</attribute>
+                <attribute name="path">/admin/promotions/{code}/coupons</attribute>
             </subresourceOperation>
         </subresourceOperations>
 
