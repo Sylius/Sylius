@@ -34,7 +34,6 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument type="service" id="api_platform.name_converter" />
             <tag name="serializer.normalizer" />
         </service>
 
