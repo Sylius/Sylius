@@ -1,0 +1,77 @@
+{
+    "@context": "\/api\/v2\/contexts\/PromotionCoupon",
+    "@id": "\/api\/v2\/admin\/promotion-coupons",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": 1,
+            "reusableFromCancelledOrders": true,
+            "code": "XYZ1",
+            "usageLimit": 2,
+            "used": 1,
+            "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
+            "expiresAt": null,
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ2",
+            "@type": "PromotionCoupon",
+            "perCustomerUsageLimit": null,
+            "reusableFromCancelledOrders": false,
+            "code": "XYZ2",
+            "usageLimit": null,
+            "used": 0,
+            "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
+            "expiresAt": @date@,
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 2,
+        "hydra:search": {
+            "@type": "hydra:IriTemplate",
+            "hydra:template": "\/api\/v2\/admin\/promotion-coupons{?order[code],order[expiresAt],order[usageLimit],order[perCustomerUsageLimit],order[used],promotion}",
+            "hydra:variableRepresentation": "BasicRepresentation",
+            "hydra:mapping": [
+                {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[expiresAt]",
+                "property": "expiresAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[usageLimit]",
+                "property": "usageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[perCustomerUsageLimit]",
+                "property": "perCustomerUsageLimit",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[used]",
+                "property": "used",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "promotion",
+                "property": null,
+                "required": false
+            }
+        ]
+    }
+}

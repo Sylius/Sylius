@@ -315,5 +315,22 @@
             </argument>
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.promotion_coupon_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="code" />
+                <argument key="expiresAt" />
+                <argument key="usageLimit" />
+                <argument key="perCustomerUsageLimit" />
+                <argument key="used" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter" public="true">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>

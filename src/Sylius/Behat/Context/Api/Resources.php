@@ -71,6 +71,8 @@ final class Resources
 
     public const PROMOTIONS = 'promotions';
 
+    public const PROMOTION_COUPONS = 'promotion-coupons';
+
     public const PROVINCES = 'provinces';
 
     public const SHIPMENTS = 'shipments';
