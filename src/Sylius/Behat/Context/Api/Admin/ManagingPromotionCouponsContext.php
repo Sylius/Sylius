@@ -144,7 +144,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsAmountAs(int $amount): void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['amount' => $amount]]);
+        $this->request->updateContent(['instruction' => ['amount' => $amount]]);
     }
 
     /**
@@ -152,7 +152,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function specifyPrefixAs(string $prefix): void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['prefix' => $prefix]]);
+        $this->request->updateContent(['instruction' => ['prefix' => $prefix]]);
     }
 
     /**
@@ -160,7 +160,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function specifySuffixAs(string $suffix): void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['suffix' => $suffix]]);
+        $this->request->updateContent(['instruction' => ['suffix' => $suffix]]);
     }
 
     /**
@@ -169,7 +169,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['codeLength' => $codeLength]]);
+        $this->request->updateContent(['instruction' => ['codeLength' => $codeLength]]);
     }
 
     /**
@@ -177,7 +177,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSetGeneratedCouponsUsageLimitTo(int $limit):void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['usageLimit' => $limit]]);
+        $this->request->updateContent(['instruction' => ['usageLimit' => $limit]]);
     }
 
     /**
@@ -185,7 +185,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
     {
-        $this->request->updateContent(['promotionCouponGeneratorInstruction' => ['expiresAt' => $date->format('Y-m-d')]]);
+        $this->request->updateContent(['instruction' => ['expiresAt' => $date->format('Y-m-d')]]);
     }
 
     /**
@@ -548,7 +548,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'promotionCouponGeneratorInstruction.amount: Please enter amount of coupons to generate.',
+            'instruction.amount: Please enter amount of coupons to generate.',
         );
     }
 
@@ -559,7 +559,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'promotionCouponGeneratorInstruction.codeLength: Please enter coupon code length.',
+            'instruction.codeLength: Please enter coupon code length.',
         );
     }
 
@@ -570,7 +570,7 @@ final class ManagingPromotionCouponsContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'promotionCouponGeneratorInstruction.codeLength: Coupon code length must be between 1 and 40.',
+            'instruction.codeLength: Coupon code length must be between 1 and 40.',
         );
     }
 

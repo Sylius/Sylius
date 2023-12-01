@@ -132,7 +132,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'promotionCode' => $promotion->getCode(),
-                'promotionCouponGeneratorInstruction' => [
+                'instruction' => [
                     'amount' => 4,
                     'prefix' => 'ABC',
                     'codeLength' => 6,
