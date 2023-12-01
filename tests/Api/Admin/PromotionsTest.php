@@ -303,7 +303,7 @@ final class PromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_rules(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -380,7 +380,7 @@ final class PromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_actions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -418,8 +418,6 @@ final class PromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'WEB' => [
                                 'percentage' => 110,
-                            ],
-                            'MOBILE' => [
                             ],
                         ],
                     ],

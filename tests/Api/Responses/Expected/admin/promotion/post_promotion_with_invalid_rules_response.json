@@ -40,11 +40,6 @@
             "code": null
         },
         {
-            "propertyPath": "rules[5].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
-        },
-        {
             "propertyPath": "rules[6].configuration[product_code]",
             "message": "Product with code wrong does not exist.",
             "code": null
@@ -55,8 +50,8 @@
             "code": @string@
         },
         {
-            "propertyPath": "rules[7].configuration[MOBILE][amount]",
-            "message": "This field is missing.",
+            "propertyPath": "rules[7].configuration[MOBILE]",
+            "message": "This field was not expected.",
             "code": @string@
         }
     ]
