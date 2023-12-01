@@ -14,7 +14,7 @@ Feature: Adding a new promotion with action configured in different channels
         When I want to create a new promotion
         And I specify its code as "20_for_all_products"
         And I name it "Item fixed discount for all products!"
-        And I add the "Item fixed discount" action configured with amount of "$10" for "United States" channel
+        And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
         And it is also configured with amount of "£16.00" for "Web-GB" channel
         And I add it
         Then I should be notified that it has been successfully created

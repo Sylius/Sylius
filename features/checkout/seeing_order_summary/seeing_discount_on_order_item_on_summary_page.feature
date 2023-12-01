@@ -19,5 +19,5 @@ Feature: Seeing a order item discount
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And the "Lannister Coat" product should have unit price discounted by "$10"
-        And my order total should be "$90"
+        And the "Lannister Coat" product should have unit price discounted by "$10.00"
+        And my order total should be "$90.00"

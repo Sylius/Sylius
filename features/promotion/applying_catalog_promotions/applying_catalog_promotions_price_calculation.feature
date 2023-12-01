@@ -7,7 +7,7 @@ Feature: Applying percentage catalog promotions
     Background:
         Given the store operates on a single channel in "United States"
         And the store classifies its products as "Soft Drinks"
-        And the store has a product "Orange Juice" priced at "$20"
+        And the store has a product "Orange Juice" priced at "$20.00"
         And this product belongs to "Soft Drinks"
         And the store has a product "Apple Juice" priced at "$20.25"
         And this product belongs to "Soft Drinks"

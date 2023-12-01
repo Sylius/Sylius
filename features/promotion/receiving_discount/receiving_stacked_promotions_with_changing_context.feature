@@ -11,7 +11,7 @@ Feature: Receiving stacked promotion with changing context
         And there is a promotion "Holiday promotion" with priority 1
         And it gives "50%" discount to every order
         And there is a promotion "Free shiping over" with priority 0
-        And it gives free shipping to every order over "$100"
+        And it gives free shipping to every order over "$100.00"
 
     @ui @api
     Scenario: Receiving only the "Holiday promotion"

@@ -6,7 +6,7 @@ Feature: Accessing the price history from the simple product show page
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Ursus C-355" priced at "$1000.00" in "United States" channel
+        And the store has a product "Ursus C-355" priced at "$1,000.00" in "United States" channel
         And there is a catalog promotion with "company_bankruptcy_sale" code and "Company bankruptcy sale" name
         And the catalog promotion "Company bankruptcy sale" is available in "United States"
         And it applies on "Ursus C-355" product

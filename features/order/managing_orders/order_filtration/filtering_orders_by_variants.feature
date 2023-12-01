@@ -9,10 +9,10 @@ Feature: Filtering orders by variants
         And the store ships everywhere for Free
         And the store allows paying Offline
         And the store has a product "Galaxy Shirt" with code "cosmic-tee"
-        And this product has "Nebula Top" variant priced at "$25"
-        And this product also has "Neutron Sleeveless" variant priced at "$20"
+        And this product has "Nebula Top" variant priced at "$25.00"
+        And this product also has "Neutron Sleeveless" variant priced at "$20.00"
         And the store has a product "Space Dress" with code "cosmic-dress"
-        And this product has "Sundress" variant priced at "$40"
+        And this product has "Sundress" variant priced at "$40.00"
         And there is a customer "tanith@low.com" that placed an order "#0000001"
         And the customer bought a single "Nebula Top" variant of product "Galaxy Shirt"
         And the customer also bought a "Neutron Sleeveless" variant of product "Galaxy Shirt"
