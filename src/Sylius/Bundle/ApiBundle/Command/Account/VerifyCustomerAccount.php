@@ -37,7 +37,6 @@ class VerifyCustomerAccount implements ChannelCodeAwareInterface, LocaleCodeAwar
 
     public function setChannelCode(?string $channelCode): void
     {
-        /** @psalm-suppress InaccessibleProperty */
         $this->channelCode = $channelCode;
     }
 
@@ -48,7 +47,6 @@ class VerifyCustomerAccount implements ChannelCodeAwareInterface, LocaleCodeAwar
 
     public function setLocaleCode(?string $localeCode): void
     {
-        /** @psalm-suppress InaccessibleProperty */
         $this->localeCode = $localeCode;
     }
 }

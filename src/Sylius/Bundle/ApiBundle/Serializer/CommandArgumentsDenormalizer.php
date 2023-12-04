@@ -53,7 +53,6 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         $denormalizedCommand = $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
 
         if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedCommand, $type, $context)) {
-            /** @psalm-suppress PossiblyInvalidArgument */
             return $this->commandAwareInputDataTransformer->transform($denormalizedCommand, $type, $context);
         }
 

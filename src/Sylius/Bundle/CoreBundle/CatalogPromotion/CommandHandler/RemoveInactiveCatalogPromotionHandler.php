@@ -36,7 +36,6 @@ final class RemoveInactiveCatalogPromotionHandler
         );
     }
 
-    /** @psalm-suppress DeprecatedClass */
     public function __invoke(RemoveInactiveCatalogPromotion $command): void
     {
         /** @var CatalogPromotionInterface|null $catalogPromotion */

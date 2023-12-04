@@ -62,7 +62,6 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
         $now = $this->dateTimeProvider->now();
         Assert::methodExists($now, 'modify');
 
-        /** @psalm-suppress UndefinedInterfaceMethod */
         return $now->modify(sprintf('-%d days', $fromDays));
     }
 }
