@@ -120,14 +120,6 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="sylius.promotion_rule_updater.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater">
-            <argument type="service" id="sylius.repository.promotion_rule" />
-        </service>
-
-        <service id="Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater">
-            <argument type="service" id="sylius.repository.promotion_rule" />
-        </service>
-
         <service id="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface" class="Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleChecker">
             <argument type="service" id="sylius.repository.promotion_rule" />
         </service>

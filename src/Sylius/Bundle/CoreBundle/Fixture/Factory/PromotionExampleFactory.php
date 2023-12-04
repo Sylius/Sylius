@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
-use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
@@ -36,39 +35,19 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
 
     private OptionsResolver $optionsResolver;
 
-    /**
-     * @param RepositoryInterface<LocaleInterface>|null $localeRepository
-     */
+    /** @param RepositoryInterface<LocaleInterface> $localeRepository */
     public function __construct(
         private FactoryInterface $promotionFactory,
         private ExampleFactoryInterface $promotionRuleExampleFactory,
         private ExampleFactoryInterface $promotionActionExampleFactory,
         private ChannelRepositoryInterface $channelRepository,
-        private ?FactoryInterface $couponFactory = null,
-        private ?RepositoryInterface $localeRepository = null,
+        private FactoryInterface $couponFactory,
+        private RepositoryInterface $localeRepository,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->couponFactory === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.8',
-                'Not passing a $couponFactory to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
-        if ($this->localeRepository === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                'Not passing a $localeRepository to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function create(array $options = []): PromotionInterface
@@ -166,13 +145,9 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
-    private static function getCouponNormalizer(?FactoryInterface $couponFactory): \Closure
+    private static function getCouponNormalizer(FactoryInterface $couponFactory): \Closure
     {
         return function (Options $options, array $couponDefinitions) use ($couponFactory): array {
-            if (null === $couponFactory) {
-                throw new \RuntimeException('You must configure a $couponFactory');
-            }
-
             if (!$options['coupon_based'] && count($couponDefinitions) > 0) {
                 throw new InvalidArgumentException('Cannot define coupons for promotion that is not coupon based');
             }
@@ -200,10 +175,6 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
     /** @return iterable<null|string> */
     private function getLocales(): iterable
     {
-        if (null === $this->localeRepository) {
-            return [];
-        }
-
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
         foreach ($locales as $locale) {

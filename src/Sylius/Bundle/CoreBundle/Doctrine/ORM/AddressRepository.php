@@ -13,17 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressRepository as BaseAddressRepository;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
-/**
- * @template T of AddressInterface
- *
- * @implements AddressRepositoryInterface<T>
- */
-class AddressRepository extends EntityRepository implements AddressRepositoryInterface
+class AddressRepository extends BaseAddressRepository implements AddressRepositoryInterface
 {
     public function findByCustomer(CustomerInterface $customer): array
     {

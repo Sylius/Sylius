@@ -33,28 +33,14 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         private AdjustmentFactoryInterface $adjustmentFactory,
         private IntegerDistributorInterface $distributor,
         private TaxRateResolverInterface $taxRateResolver,
-        private ?ProportionalIntegerDistributorInterface $proportionalIntegerDistributor = null,
+        private ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
     ) {
-        if ($this->proportionalIntegerDistributor === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing an $proportionalIntegerDistributor to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     /** @throws \InvalidArgumentException */
     public function apply(OrderInterface $order, ZoneInterface $zone): void
     {
         $this->checkItemsQuantities($order);
-
-        if ($this->proportionalIntegerDistributor === null) {
-            $this->applyWithoutDistributionToItems($order, $zone);
-
-            return;
-        }
 
         $items = $order->getItems()->getValues();
         $itemTaxFloatAmounts = [];
@@ -83,21 +69,6 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
             }
 
             $this->distributeTaxesToUnits($itemSplitTaxes[$index], $item->getQuantity(), $item, $itemTaxRates[$index]);
-        }
-    }
-
-    private function applyWithoutDistributionToItems(OrderInterface $order, ZoneInterface $zone): void
-    {
-        foreach ($order->getItems() as $item) {
-            /** @var TaxRateInterface|null $taxRate */
-            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
-            if (null === $taxRate) {
-                continue;
-            }
-
-            $totalTaxAmount = $this->calculator->calculate($item->getTotal(), $taxRate);
-
-            $this->distributeTaxesToUnits($totalTaxAmount, $item->getQuantity(), $item, $taxRate);
         }
     }
 

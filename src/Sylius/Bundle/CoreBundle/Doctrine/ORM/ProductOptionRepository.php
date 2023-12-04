@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository as BaseProductOptionRepository;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -28,7 +28,7 @@ class ProductOptionRepository extends BaseProductOptionRepository
 {
     protected AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, ClassMetadata $class)
+    public function __construct(EntityManagerInterface $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 

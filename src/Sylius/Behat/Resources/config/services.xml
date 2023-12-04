@@ -19,6 +19,10 @@
         <import resource="services/pages.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -114,6 +118,14 @@
             <argument type="service" id="test.mailer_pool" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service id="sylius.behat.clock" class="Sylius\Behat\Service\Clock">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+        <service id="clock" alias="sylius.behat.clock" />
+        <service id="Symfony\Component\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
 
         <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
             <argument type="service" id="api_platform.route_name_resolver" />

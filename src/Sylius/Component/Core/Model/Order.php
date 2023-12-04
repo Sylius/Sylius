@@ -491,26 +491,4 @@ class Order extends BaseOrder implements OrderInterface
     {
         return $this->createdByGuest;
     }
-
-    public function getCreatedByGuest(): bool
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.',
-        );
-
-        return $this->isCreatedByGuest();
-    }
-
-    public function setCreatedByGuest(bool $createdByGuest): void
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.',
-        );
-
-        $this->createdByGuest = $createdByGuest;
-    }
 }
