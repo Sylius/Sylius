@@ -35,5 +35,10 @@
             <argument type="service" id="sylius.repository.locale" />
             <argument type="string">%locale%</argument>
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Provider\SalesStatisticsProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\SalesStatisticsProvider" >
+            <argument type="service" id="Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface"/>
+            <argument type="service" id="Sylius\Component\Core\Dashboard\SalesDataProviderInterface"/>
+        </service>
     </services>
 </container>

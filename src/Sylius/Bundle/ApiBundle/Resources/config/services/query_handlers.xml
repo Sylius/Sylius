@@ -16,7 +16,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults>
+        <defaults public="true">
             <tag name="messenger.message_handler" bus="sylius.query_bus" />
         </defaults>
 
@@ -27,6 +27,12 @@
 
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler">
             <argument type="service" id="sylius.repository.address_log_entry" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\QueryHandler\Admin\GetSalesStatisticsHandler">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\SalesStatisticsProviderInterface" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="messenger.message_handler" bus="sylius.query_bus" />
         </service>
     </services>
 </container>

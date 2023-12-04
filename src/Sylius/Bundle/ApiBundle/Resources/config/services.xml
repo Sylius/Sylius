@@ -161,5 +161,11 @@
         <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
             <argument type="service" id="validator" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetSalesStatisticsAction" public="true">
+            <argument type="service" id="sylius.query_bus" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="serializer" />
+        </service>
     </services>
 </container>
