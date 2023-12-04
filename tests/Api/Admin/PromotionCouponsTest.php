@@ -117,6 +117,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
     /** @test */
     public function it_generates_a_promotion_coupons(): void
     {
@@ -132,14 +133,12 @@ final class PromotionCouponsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'promotionCode' => $promotion->getCode(),
-                'instruction' => [
-                    'amount' => 4,
-                    'prefix' => 'ABC',
-                    'codeLength' => 6,
-                    'suffix' => 'XYZ',
-                    'usageLimit' => 10,
-                    'expiresAt' => '2020-01-01 12:00:00',
-                ],
+                'amount' => 4,
+                'prefix' => 'ABC',
+                'codeLength' => 6,
+                'suffix' => 'XYZ',
+                'usageLimit' => 10,
+                'expiresAt' => '2020-01-01 12:00:00',
             ], JSON_THROW_ON_ERROR)
         );
 

@@ -46,7 +46,7 @@ final class GeneratePromotionCouponHandler implements MessageHandlerInterface
 
         $promotionCoupons = $this->promotionCouponGenerator->generate(
             $promotion,
-            $generatePromotionCoupon->getInstruction()
+            $generatePromotionCoupon
         );
 
         return new ArrayCollection($promotionCoupons);

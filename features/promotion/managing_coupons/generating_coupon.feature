@@ -36,6 +36,6 @@ Feature: Generating new coupons
         When I want to generate new coupons for this promotion
         And I choose the amount of 10 coupons to be generated
         And I specify their code length as 40
-        And I generate it
+        And I generate these coupons
         Then I should be notified that they have been successfully generated
         And there should be 10 coupons related to this promotion

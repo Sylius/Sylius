@@ -15,7 +15,6 @@ namespace spec\Sylius\Bundle\ApiBundle\CommandHandler\Promotion;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon;
-use Sylius\Bundle\ApiBundle\Command\Promotion\PromotionCouponGeneratorInstruction;
 use Sylius\Bundle\ApiBundle\Exception\PromotionNotFoundException;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -35,12 +34,11 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_promotion_is_not_found(
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponGeneratorInstruction $promotionCouponGeneratorInstruction
+        PromotionRepositoryInterface $promotionRepository
     ): void {
         $promotionRepository->findOneBy(['code' => 'promotion_code'])->willReturn(null);
 
-        $generatePromotionCoupon = new GeneratePromotionCoupon('promotion_code', $promotionCouponGeneratorInstruction->getWrappedObject());
+        $generatePromotionCoupon = new GeneratePromotionCoupon('promotion_code');
 
         $this->shouldThrow(PromotionNotFoundException::class)
             ->during('__invoke', [$generatePromotionCoupon])
@@ -51,15 +49,14 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
         PromotionRepositoryInterface $promotionRepository,
         PromotionCouponGeneratorInterface $promotionCouponGenerator,
         PromotionInterface $promotion,
-        PromotionCouponGeneratorInstruction $promotionCouponGeneratorInstruction,
         PromotionCouponInterface $promotionCouponOne,
         PromotionCouponInterface $promotionCouponTwo
     ): void {
         $promotionRepository->findOneBy(['code' => 'promotion_code'])->willReturn($promotion);
 
-        $generatePromotionCoupon = new GeneratePromotionCoupon('promotion_code', $promotionCouponGeneratorInstruction->getWrappedObject());
+        $generatePromotionCoupon = new GeneratePromotionCoupon('promotion_code');
 
-        $promotionCouponGenerator->generate($promotion, $promotionCouponGeneratorInstruction)->willReturn([$promotionCouponOne, $promotionCouponTwo]);
+        $promotionCouponGenerator->generate($promotion, $generatePromotionCoupon)->willReturn([$promotionCouponOne, $promotionCouponTwo]);
 
         $this($generatePromotionCoupon)->shouldIterateAs([$promotionCouponOne, $promotionCouponTwo]);
     }
