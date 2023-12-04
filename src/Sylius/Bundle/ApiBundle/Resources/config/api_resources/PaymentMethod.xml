@@ -16,10 +16,8 @@
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.payment_method.class%" shortName="PaymentMethod">
-        <attribute name="validation_groups">
-            <attribute>sylius</attribute>
-            <attribute>sylius_api</attribute>
-        </attribute>
+        <attribute name="validation_groups">Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator</attribute>
+
 
         <attribute name="order">
             <attribute name="position">ASC</attribute>
