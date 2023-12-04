@@ -38,8 +38,6 @@ class SecurityController extends AbstractController
 
     /**
      * Login form action.
-     *
-     * @psalm-suppress DeprecatedMethod
      */
     public function loginAction(Request $request): Response
     {

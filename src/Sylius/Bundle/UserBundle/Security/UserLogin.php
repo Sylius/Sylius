@@ -62,7 +62,6 @@ class UserLogin implements UserLoginInterface
             );
         }
 
-        /** @psalm-suppress NullArgument */
         return new UsernamePasswordToken(
             $user,
             null, // @phpstan-ignore-line continue to support Sf < 6

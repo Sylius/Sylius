@@ -37,11 +37,7 @@ class ProductVariant implements ProductVariantInterface
     /** @var ProductInterface|null */
     protected $product;
 
-    /**
-     * @var Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductOptionValueInterface>
-     */
+    /** @var Collection<array-key, ProductOptionValueInterface> */
     protected $optionValues;
 
     /** @var int|null */

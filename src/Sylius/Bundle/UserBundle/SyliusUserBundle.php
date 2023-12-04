@@ -34,9 +34,6 @@ final class SyliusUserBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RemoveUserPasswordEncoderPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\User\Model';

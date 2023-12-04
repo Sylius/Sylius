@@ -143,9 +143,6 @@ class OrderController extends ResourceController
         }
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

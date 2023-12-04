@@ -32,8 +32,6 @@ class ProductTaxonController extends ResourceController
      * @throws HttpException
      *
      * @deprecated This ajax action is deprecated and will be removed in Sylius 2.0 - use ProductTaxonController::updateProductTaxonsPositionsAction instead.
-     *
-     * @psalm-suppress DeprecatedMethod
      */
     public function updatePositionsAction(Request $request): Response
     {
@@ -43,7 +41,7 @@ class ProductTaxonController extends ResourceController
         $this->validateCsrfProtection($request, $configuration);
 
         if ($this->shouldProductsPositionsBeUpdated($request, $productTaxons)) {
-            /** @psalm-var array{position: string|int, id: int} $productTaxon */
+            /** @var array{position: string|int, id: int} $productTaxon */
             foreach ($productTaxons as $productTaxon) {
                 try {
                     $id = $productTaxon['id'];

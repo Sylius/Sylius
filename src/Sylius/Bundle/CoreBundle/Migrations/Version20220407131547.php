@@ -54,7 +54,6 @@ final class Version20220407131547 extends AbstractMigration
         if (method_exists($this->connection, 'createSchemaManager')) {
             $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
         } else {
-            /** @psalm-suppress DeprecatedMethod */
             $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
         }
         $indexesNames = [];

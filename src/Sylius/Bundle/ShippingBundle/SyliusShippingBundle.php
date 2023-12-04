@@ -40,9 +40,6 @@ final class SyliusShippingBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterShippingMethodsResolversPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Shipping\Model';

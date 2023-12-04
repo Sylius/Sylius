@@ -23,14 +23,14 @@ class AddItemToCart implements OrderTokenValueAwareInterface, IriToIdentifierCon
     public $orderTokenValue;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $productVariantCode;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var int
      */

@@ -21,9 +21,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 interface AvailableProductOptionValuesResolverInterface
 {
     /**
-     * @return Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductOptionValueInterface>
+     * @return Collection<array-key, ProductOptionValueInterface>
      */
     public function resolve(ProductInterface $product, ProductOptionInterface $productOption): Collection;
 }

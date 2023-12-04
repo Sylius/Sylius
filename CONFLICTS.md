@@ -20,8 +20,6 @@ references related issues.
    
    This version is causing a problem with mink session:
   `InvalidArgumentException: Specify session name to get in vendor/friends-of-behat/mink/src/Mink.php:198`,
-   Psalm error: 
-   `UndefinedDocblockClass: Docblock-defined class, interface or enum named UnitEnum does not exist`.
 
  - `symfony/framework-bundle:5.4.5`:
 

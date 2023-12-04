@@ -61,6 +61,7 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
             $unitTotalTaxWholeAmount = (int) round(array_sum($unitTaxFloatAmounts));
             $unitSplitTaxes = $this->proportionalIntegerDistributor->distribute($unitTaxWholeAmounts, $unitTotalTaxWholeAmount);
 
+            /** @var OrderItemUnitInterface $unit */
             foreach ($units as $index => $unit) {
                 if (0 === $unitSplitTaxes[$index] || !isset($unitTaxRates[$index])) {
                     continue;

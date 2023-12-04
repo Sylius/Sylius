@@ -28,9 +28,7 @@ interface ProductAssociationInterface extends TimestampableInterface, ResourceIn
     public function setOwner(?ProductInterface $owner): void;
 
     /**
-     * @return Collection|ProductInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductInterface>
+     * @return Collection<array-key, ProductInterface>
      */
     public function getAssociatedProducts(): Collection;
 

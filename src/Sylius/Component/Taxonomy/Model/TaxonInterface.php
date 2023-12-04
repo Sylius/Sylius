@@ -32,16 +32,12 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function setParent(?self $taxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getAncestors(): Collection;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getChildren(): Collection;
 
@@ -54,9 +50,7 @@ interface TaxonInterface extends CodeAwareInterface, TranslatableInterface, Reso
     public function removeChild(self $taxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getEnabledChildren(): Collection;
 

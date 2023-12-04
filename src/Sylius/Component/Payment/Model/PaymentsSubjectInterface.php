@@ -18,9 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface PaymentsSubjectInterface
 {
     /**
-     * @return Collection|PaymentInterface[]
-     *
-     * @psalm-return Collection<array-key, PaymentInterface>
+     * @return Collection<array-key, PaymentInterface>
      */
     public function getPayments(): Collection;
 

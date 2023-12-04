@@ -18,9 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface ChannelsAwareInterface
 {
     /**
-     * @return Collection|ChannelInterface[]
-     *
-     * @psalm-return Collection<array-key, ChannelInterface>
+     * @return Collection<array-key, ChannelInterface>
      */
     public function getChannels(): Collection;
 

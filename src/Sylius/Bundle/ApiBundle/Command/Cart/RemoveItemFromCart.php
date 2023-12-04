@@ -22,7 +22,7 @@ class RemoveItemFromCart implements OrderTokenValueAwareInterface
     public $orderTokenValue;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */

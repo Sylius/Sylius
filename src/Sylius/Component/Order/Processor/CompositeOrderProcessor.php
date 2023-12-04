@@ -18,11 +18,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 
 final class CompositeOrderProcessor implements OrderProcessorInterface
 {
-    /**
-     * @var PriorityQueue|OrderProcessorInterface[]
-     *
-     * @psalm-var PriorityQueue<OrderProcessorInterface>
-     */
+    /** @var PriorityQueue<OrderProcessorInterface> */
     private PriorityQueue $orderProcessors;
 
     public function __construct()

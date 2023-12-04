@@ -59,11 +59,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
     /** @var bool */
     protected $shippingRequired = true;
 
-    /**
-     * @var Collection|ProductImageInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductImageInterface>
-     */
+    /** @var Collection<array-key, ProductImageInterface> */
     protected $images;
 
     public function __construct()
@@ -286,20 +282,12 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface, Com
         return ($channelPricing !== null) ? $channelPricing->getAppliedPromotions() : new ArrayCollection();
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getImages(): Collection
     {
         /** @phpstan-ignore-next-line */
         return $this->images;
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getImagesByType(string $type): Collection
     {
         /** @var Collection<array-key, ImageInterface> $imagesByType */

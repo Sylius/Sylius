@@ -18,9 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface LocalesAwareInterface
 {
     /**
-     * @return Collection|LocaleInterface[]
-     *
-     * @psalm-return Collection<array-key, LocaleInterface>
+     * @return Collection<array-key, LocaleInterface>
      */
     public function getLocales(): Collection;
 

@@ -24,11 +24,7 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
 {
     use TimestampableTrait;
 
-    /**
-     * @var Collection|ImageInterface[]
-     *
-     * @psalm-var Collection<array-key, ImageInterface>
-     */
+    /** @var Collection<array-key, ImageInterface> */
     protected $images;
 
     public function __construct()

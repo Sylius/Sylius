@@ -40,7 +40,7 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
     }
 
     /**
-     * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
+     * @param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
@@ -58,7 +58,7 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
             }
 
             foreach ($blocksPriorityQueue->toArray() as $details) {
-                /** @psalm-var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
+                /** @var array{name: string, eventName: string, template: string, context: array, priority: int, enabled: bool} $details */
                 $blocksForEvents[$eventName][$details['name']] = new Definition(TemplateBlock::class, [
                     $details['name'],
                     $details['eventName'],
