@@ -131,7 +131,7 @@ final class ManagingProductImagesContext implements Context
      */
     public function theProductShouldHaveAnImageWithType(ProductInterface $product, string $type): void
     {
-        Assert::true($this->responseChecker->hasSubResourceWithValue(
+        Assert::true($this->responseChecker->hasValueInAnySubresourceObjectCollection(
             $this->client->show(Resources::PRODUCTS, $product->getCode()),
             'images',
             'type',
@@ -162,7 +162,7 @@ final class ManagingProductImagesContext implements Context
      */
     public function thisProductShouldNotHaveAnyImagesWithType(ProductInterface $product, string $type): void
     {
-        Assert::false($this->responseChecker->hasSubResourceWithValue(
+        Assert::false($this->responseChecker->hasValueInAnySubresourceObjectCollection(
             $this->client->show(Resources::PRODUCTS, $product->getCode()),
             'images',
             'type',

@@ -132,16 +132,52 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    /** @param string|int $value */
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, $value): bool
-    {
+    public function hasValueInAnySubresourceObjectCollection(
+        Response $response,
+        string $subResource,
+        string $key,
+        int|string $expectedValue,
+    ): bool {
         foreach ($this->getResponseContentValue($response, $subResource) as $resource) {
-            if ($resource[$key] === $value) {
+            if (!is_array($resource)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected subresource "%s" to be an array, got "%s"',
+                    $subResource,
+                    gettype($resource),
+                ));
+            }
+
+            if (!array_key_exists($key, $resource)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Expected subresource "%s" to have key "%s", has these keys instead: "%s"',
+                    $subResource,
+                    $key,
+                    implode(', ', array_keys($resource)),
+                ));
+            }
+
+            if ($resource[$key] === $expectedValue) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function hasValueInSubresourceObject(Response $response, string $subResource, string $key, int|string $expectedValue): bool
+    {
+        $resource = $this->getResponseContentValue($response, $subResource);
+
+        if (array_key_exists($key, $resource)) {
+            return $resource[$key] === $expectedValue;
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'Expected subresource "%s" to have key "%s", has these keys instead: "%s"',
+            $subResource,
+            $key,
+            implode(', ', array_keys($resource)),
+        ));
     }
 
     /** @param string|array $value */
