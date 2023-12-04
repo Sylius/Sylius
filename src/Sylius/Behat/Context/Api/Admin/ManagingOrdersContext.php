@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -270,6 +271,15 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should( still) have a :state state
+     */
+    public function itShouldHaveState(string $state): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'state', $state));
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), 1);
+    }
+
+    /**
      * @Then I should see a single order in the list
      * @Then I should see :number orders in the list
      */
@@ -466,10 +476,10 @@ final class ManagingOrdersContext implements Context
         $order = $this->sharedStorage->get('order');
 
         $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            true,
+            resource: Resources::ORDERS,
+            subResource: Resources::ADJUSTMENTS,
+            id: $order->getTokenValue(),
+            forgetResponse: true,
         );
 
         $this->responseChecker->hasItemWithValues(
@@ -491,10 +501,10 @@ final class ManagingOrdersContext implements Context
         $order = $this->sharedStorage->get('order');
 
         $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            true,
+            resource: Resources::ORDERS,
+            subResource: Resources::ADJUSTMENTS,
+            id: $order->getTokenValue(),
+            forgetResponse: true,
         );
 
         $this->responseChecker->hasItemWithValues(
@@ -676,50 +686,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
-     */
-    public function itShouldBeShippedTo(
-        string $customerName,
-        string $street,
-        string $postcode,
-        string $city,
-        string $countryName,
-    ): void {
-        $shippingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress');
-
-        $this->itShouldBeAddressedTo(
-            $shippingAddress,
-            $customerName,
-            $street,
-            $postcode,
-            $city,
-            $countryName,
-        );
-    }
-
-    /**
-     * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
-     */
-    public function itShouldBeBilledToCustomerAtAddress(
-        string $customerName,
-        string $street,
-        string $postcode,
-        string $city,
-        string $countryName,
-    ): void {
-        $billingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress');
-
-        $this->itShouldBeAddressedTo(
-            $billingAddress,
-            $customerName,
-            $street,
-            $postcode,
-            $city,
-            $countryName,
-        );
-    }
-
-    /**
      * @Then it should be shipped via the :shippingMethod shipping method
      */
     public function itShouldBeShippedViaTheShippingMethod(ShippingMethodInterface $shippingMethod): void
@@ -747,6 +713,50 @@ final class ManagingOrdersContext implements Context
     public function itShouldHaveNoShippingAddressSet(): void
     {
         Assert::false($this->responseChecker->hasKey($this->client->getLastResponse(), 'shippingAddress'));
+    }
+
+    /**
+     * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
+     */
+    public function itShouldBeShippedTo(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): void {
+        $shippingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress');
+
+        $this->itShouldBeAddressedTo(
+            $shippingAddress,
+            $customerName,
+            $street,
+            $postcode,
+            $city,
+            $countryName,
+        );
+    }
+
+    /**
+     * @Then it should have :customerName, :street, :postcode, :city, :countryName as its billing address
+     */
+    public function itShouldHaveAddressAsItBillingAddress(
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
+    ): void {
+        $billingAddress = $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress');
+
+        $this->itShouldBeAddressedTo(
+            $billingAddress,
+            $customerName,
+            $street,
+            $postcode,
+            $city,
+            $countryName,
+        );
     }
 
     /**
@@ -789,20 +799,116 @@ final class ManagingOrdersContext implements Context
     {
         $orderToken = $this->sharedStorage->get('order')->getTokenValue();
 
-        $unitDiscounts = $this->client->subResourceIndex(
+        $response = $this->client->subResourceIndex(
             Resources::ORDERS,
             Resources::ADJUSTMENTS,
             (string) $orderToken,
             forgetResponse: true,
         );
 
+        $this->sharedStorage->set('adjustments_response', $response);
+
         $this->responseChecker->hasItemWithValues(
-            $unitDiscounts,
+            $response,
             [
                 'type' => AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
                 'amount' => $this->getTotalAsInt($discountedUnitPrice),
             ],
         );
+    }
+
+    /**
+     * @Then /^(its) unit price should be ([^"]+)$/
+     */
+    public function itemUnitPriceShouldBe(array $orderItem, string $unitPrice): void
+    {
+        Assert::same($this->getTotalAsInt($unitPrice), $orderItem['unitPrice']);
+    }
+
+    /**
+     * @Then /^its subtotal should be ([^"]+)$/
+     */
+    public function itemSubtotalShouldBe(string $subtotal): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        $unitPromotionAdjustments = 0;
+        foreach ($this->responseChecker->getCollection($this->sharedStorage->get('adjustments_response')) as $item) {
+            if (in_array($item['type'], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
+                $unitPromotionAdjustments += $item['amount'];
+            }
+        }
+
+        Assert::same($this->getTotalAsInt($subtotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+    }
+
+    /**
+     * @Then /^its discount should be ([^"]+)$/
+     */
+    public function theItemShouldHaveDiscount(string $discount): void
+    {
+        $this->responseChecker->hasItemWithValues(
+            $this->sharedStorage->get('adjustments_response'),
+            [
+                'type' => AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
+                'amount' => $this->getTotalAsInt($discount),
+            ],
+        );
+    }
+
+    /**
+     * @Then /^its tax should be ([^"]+)$/
+     */
+    public function itemTaxShouldBe(string $tax): void
+    {
+        $this->responseChecker->hasItemWithValues(
+            $this->sharedStorage->get('adjustments_response'),
+            [
+                'type' => AdjustmentInterface::TAX_ADJUSTMENT,
+                'amount' => $this->getTotalAsInt($tax),
+            ],
+        );
+    }
+
+    /**
+     * @Then /^its tax included in price should be ([^"]+)$/
+     */
+    public function itsTaxIncludedInPriceShouldBe(string $tax): void
+    {
+        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
+        $response = $this->client->subResourceIndex(Resources::ORDERS, Resources::ADJUSTMENTS, (string) $orderToken);
+        $unitPromotionAdjustments = $this->responseChecker->getCollectionItemsWithValue($response, 'type', AdjustmentInterface::TAX_ADJUSTMENT);
+        $total = 0;
+        foreach ($unitPromotionAdjustments as $unitPromotionAdjustment) {
+            if (true === $unitPromotionAdjustment['neutral']) {
+                $total += $unitPromotionAdjustment['amount'];
+            }
+        }
+
+        Assert::same($this->getTotalAsInt($tax), $total);
+    }
+
+    /**
+     * @Then /^(its) total should be ([^"]+)$/
+     */
+    public function itemTotalShouldBe(array $orderItem, string $total): void
+    {
+        Assert::same($this->getTotalAsInt($total), $orderItem['total']);
+    }
+
+    /**
+     * @Then /^(its) code should be "([^"]+)"$/
+     */
+    public function itemCodeShouldBe(array $orderItem, string $code): void
+    {
+        Assert::endsWith($orderItem['variant'], $code);
+    }
+
+    /**
+     * @Then /^(its) quantity should be ([^"]+)$/
+     */
+    public function itemQuantityShouldBe(array $orderItem, int $quantity): void
+    {
+        Assert::same($quantity, $orderItem['quantity']);
     }
 
     /**
@@ -846,11 +952,95 @@ final class ManagingOrdersContext implements Context
      */
     public function productUnitPriceShouldBe(string $productName, string $price): void
     {
-        ray(
-            json_decode($this->client->getLastResponse()->getContent(), true),
-            json_decode($this->client->subResourceIndex(Resources::ORDERS, Resources::ADJUSTMENTS, $this->sharedStorage->get('order')->getTokenValue())->getContent(), true),
-        );
+        $this->iCheckData($productName);
+        $orderItem = $this->sharedStorage->get('item');
+        Assert::same($this->getTotalAsInt($price), $orderItem['unitPrice']);
     }
+
+    /**
+     * @Then the :productName product's discounted unit price should be :price
+     */
+    public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        Assert::same($this->getTotalAsInt($price), $orderItem['fullDiscountedUnitPrice']);
+    }
+
+    /**
+     * @Then the :productName product's quantity should be :quantity
+     */
+    public function productQuantityShouldBe(string $productName, int $quantity): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        Assert::same($quantity, $orderItem['quantity']);
+    }
+
+    /**
+     * @Then the :productName product's item discount should be :price
+     */
+    public function productItemDiscountShouldBe(string $productName, string $price): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
+
+        $response = $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            (string) $orderToken,
+            forgetResponse: true,
+        );
+
+        $this->sharedStorage->set('adjustments_response', $response);
+
+        $adjustments = $this->responseChecker->getCollectionItemsWithValue($response,'type', AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+
+        foreach ($adjustments as $adjustment) {
+            if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+                Assert::same($this->getTotalAsInt($price), $adjustment['amount']);
+
+                return;
+            }
+        }
+    }
+
+    /**
+     * @Then the :productName product's order discount should be :price
+     */
+    public function productOrderDiscountShouldBe(string $productName, string $price): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        $adjustments = $this->responseChecker->getCollectionItemsWithValue(
+            $this->sharedStorage->get('adjustments_response'),
+            'type',
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
+        );
+
+        foreach ($adjustments as $adjustment) {
+            if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+                Assert::same($this->getTotalAsInt(trim($price," ~")), $adjustment['amount']);
+                return;
+            }
+        }
+    }
+
+    /**
+     * @Then the :productName product's subtotal should be :subTotal
+     */
+    public function productSubtotalShouldBe(string $productName, string $subTotal): void
+    {
+        $orderItem = $this->sharedStorage->get('item');
+        $unitPromotionAdjustments = 0;
+        foreach ($this->responseChecker->getCollection($this->sharedStorage->get('adjustments_response')) as $adjustment) {
+            if (in_array($adjustment['type'], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
+                if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
+                    $unitPromotionAdjustments += $adjustment['amount'];
+                }
+            }
+        }
+
+        Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+    }
+
 
     /**
      * @param array<string, mixed> $address
@@ -887,6 +1077,14 @@ final class ManagingOrdersContext implements Context
 
     private function getTotalAsInt(string $total): int
     {
-        return (int) round((float) trim($total, '$€£') * 100, 2);
+        if ($isMinus = str_starts_with($total, '-')) {
+            $total = substr($total, 1);
+        }
+        $amount = (int) round((float) trim($total, '$€£') * 100, 2);
+
+        if ($isMinus) {
+            return $amount * -1;
+        }
+        return $amount;
     }
 }
