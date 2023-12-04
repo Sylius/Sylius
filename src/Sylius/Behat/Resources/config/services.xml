@@ -130,5 +130,10 @@
             <argument type="service" id="api_platform.iri_converter.legacy" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
+
+        <service id="Sylius\Behat\Service\SharedStorageChannelContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <tag name="sylius.context.channel" priority="-128" />
+        </service>
     </services>
 </container>
