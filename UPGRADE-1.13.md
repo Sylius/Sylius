@@ -1,5 +1,23 @@
 # UPGRADE FROM `v1.12.X` TO `v1.13.0`
 
+1. There has been a naw parameter added to specify the validation groups for given gateway factory.
+   If you have any custom validation groups for your factory, you need to add them to your `config/packages/_sylius.yaml` file.
+   Also, if you have your own gateway factory and want to add your validation groups you can add another key to the `gateway_config_validation_groups` parameter.
+   It is handled by `GatewayConfigGroupsGenerator` and it resolves the groups based on the passed factory name.
+```yaml
+sylius_payum:
+    gateway_config_validation_groups:
+        paypal_express_checkout:
+            - 'sylius'
+            - 'paypal_express_checkout'
+        stripe_checkout:
+            - 'sylius'
+            - 'stripe_checkout'
+        your_gateway:
+            - 'sylius'
+            - 'your_custom_validation_group'
+```
+
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is no more used.
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more used.
