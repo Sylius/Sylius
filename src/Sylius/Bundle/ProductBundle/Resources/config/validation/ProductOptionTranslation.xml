@@ -15,10 +15,11 @@
     <class name="Sylius\Component\Product\Model\ProductOptionTranslation">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
-                <value>translatable</value>
                 <value>locale</value>
+                <value>translatable</value>
             </option>
             <option name="groups">sylius</option>
+            <option name="message">sylius.translation.locale.unique</option>
         </constraint>
         <property name="name">
             <constraint name="NotBlank">
