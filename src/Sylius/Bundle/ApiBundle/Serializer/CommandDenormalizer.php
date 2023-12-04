@@ -23,8 +23,6 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 /** @experimental */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
-    private const OBJECT_TO_POPULATE = 'object_to_populate';
-
     public function __construct(private DenormalizerInterface $itemNormalizer)
     {
     }
@@ -36,10 +34,6 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        if (isset($context[self::OBJECT_TO_POPULATE])) {
-            return $this->itemNormalizer->denormalize($data, $type, $format, $context);
-        }
-
         try {
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
         } catch (UnexpectedValueException $exception) {
