@@ -34,9 +34,6 @@ final class SyliusReviewBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterReviewFactoryPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Review\Model';

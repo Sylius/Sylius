@@ -67,25 +67,13 @@ class Promotion implements PromotionInterface
     /** @var bool */
     protected $couponBased = false;
 
-    /**
-     * @var Collection|PromotionCouponInterface[]
-     *
-     * @psalm-var Collection<array-key, PromotionCouponInterface>
-     */
+    /** @var Collection<array-key, PromotionCouponInterface> */
     protected $coupons;
 
-    /**
-     * @var Collection|PromotionRuleInterface[]
-     *
-     * @psalm-var Collection<array-key, PromotionRuleInterface>
-     */
+    /** @var Collection<array-key, PromotionRuleInterface> */
     protected $rules;
 
-    /**
-     * @var Collection|PromotionActionInterface[]
-     *
-     * @psalm-var Collection<array-key, PromotionActionInterface>
-     */
+    /** @var Collection<array-key, PromotionActionInterface> */
     protected $actions;
 
     protected bool $appliesToDiscounted = true;

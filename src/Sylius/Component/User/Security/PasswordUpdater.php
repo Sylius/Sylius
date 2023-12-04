@@ -17,7 +17,6 @@ use Sylius\Component\User\Model\CredentialsHolderInterface;
 
 final class PasswordUpdater implements PasswordUpdaterInterface
 {
-    /** @psalm-suppress DeprecatedClass */
     public function __construct(private UserPasswordEncoderInterface|UserPasswordHasherInterface $userPasswordEncoderOrHasher)
     {
         if ($this->userPasswordEncoderOrHasher instanceof UserPasswordEncoderInterface) {

@@ -25,9 +25,6 @@ final class SyliusCustomerBundle extends AbstractResourceBundle
         ];
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Customer\Model';

@@ -46,9 +46,6 @@ final class SyliusPromotionBundle extends AbstractResourceBundle
         $container->addCompilerPass(new SetCatalogPromotionScopeTypesPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Promotion\Model';

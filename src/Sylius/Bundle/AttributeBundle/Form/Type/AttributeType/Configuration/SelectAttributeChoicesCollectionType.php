@@ -40,9 +40,6 @@ class SelectAttributeChoicesCollectionType extends AbstractType
         }
     }
 
-    /**
-     * @psalm-suppress InvalidScalarArgument Some weird magic going on here, not sure about refactor
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {

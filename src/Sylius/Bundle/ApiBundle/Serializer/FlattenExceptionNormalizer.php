@@ -26,7 +26,6 @@ final class FlattenExceptionNormalizer implements ContextAwareNormalizerInterfac
     ) {
     }
 
-    /** @psalm-suppress TooManyArguments */
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         $request = $this->requestStack->getMainRequest();

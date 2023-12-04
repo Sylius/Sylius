@@ -23,13 +23,13 @@ class UpdateCart implements OrderTokenValueAwareInterface, CustomerEmailAwareInt
 {
     public ?string $orderTokenValue = null;
 
-    /** @psalm-immutable */
+    /** @immutable */
     public ?string $email = null;
 
-    /** @psalm-immutable */
+    /** @immutable */
     public ?AddressInterface $billingAddress = null;
 
-    /** @psalm-immutable */
+    /** @immutable */
     public ?AddressInterface $shippingAddress = null;
 
     public ?string $couponCode = null;

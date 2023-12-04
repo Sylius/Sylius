@@ -22,11 +22,7 @@ class PromotionSubject implements ResourceInterface, PromotionSubjectInterface
 {
     private int $id;
 
-    /**
-     * @var Collection|PromotionInterface[]
-     *
-     * @psalm-var Collection<array-key, PromotionInterface>
-     */
+    /** @var Collection<array-key, PromotionInterface> */
     protected $promotions;
 
     public function getId(): int

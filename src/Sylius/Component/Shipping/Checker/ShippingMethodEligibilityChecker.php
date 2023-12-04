@@ -27,8 +27,6 @@ trigger_deprecation(
 
 /**
  * @deprecated since Sylius 1.8. Use {@see CompositeShippingMethodEligibilityChecker} instead.
- *
- * @psalm-suppress DeprecatedInterface
  */
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {

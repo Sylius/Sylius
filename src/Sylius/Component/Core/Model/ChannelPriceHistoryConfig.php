@@ -26,11 +26,7 @@ class ChannelPriceHistoryConfig implements ChannelPriceHistoryConfigInterface
 
     protected bool $lowestPriceForDiscountedProductsVisible = true;
 
-    /**
-     * @var Collection|TaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, TaxonInterface>
-     */
+    /** @var Collection<array-key, TaxonInterface> */
     protected Collection $taxonsExcludedFromShowingLowestPrice;
 
     public function __construct()

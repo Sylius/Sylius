@@ -41,10 +41,6 @@ class ExchangeRate implements ExchangeRateInterface
         return $this->id;
     }
 
-    /**
-     * @psalm-suppress TypeDoesNotContainType
-     * @psalm-suppress RedundantCondition
-     */
     public function getRatio(): ?float
     {
         /**

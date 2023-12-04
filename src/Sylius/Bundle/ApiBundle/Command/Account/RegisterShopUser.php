@@ -22,35 +22,35 @@ use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $firstName;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $lastName;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $email;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */
     public $password;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var bool
      */

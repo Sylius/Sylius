@@ -29,8 +29,6 @@ trigger_deprecation(
 
 /**
  * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Items subtotal calculations is now available by using {@see Order::getSubtotalItems} method.
- *
- * @psalm-suppress DeprecatedClass
  */
 class OrderItemsSubtotalExtension extends AbstractExtension
 {

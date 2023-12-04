@@ -30,8 +30,6 @@ trigger_deprecation(
 
 /**
  * @deprecated since Sylius 1.12 and will be removed in Sylius 2.0. Use methods "getTaxExcludedTotal" and "getTaxIncludedTotal" from {@see Order} instead.
- *
- * @psalm-suppress DeprecatedClass
  */
 class OrderTaxesTotalExtension extends AbstractExtension
 {

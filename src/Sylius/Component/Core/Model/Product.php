@@ -27,38 +27,22 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /** @var string|null */
     protected $variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
 
-    /**
-     * @var Collection|ProductTaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductTaxonInterface>
-     */
+    /** @var Collection<array-key, ProductTaxonInterface> */
     protected $productTaxons;
 
-    /**
-     * @var Collection|ChannelInterface[]
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected $channels;
 
-    /** @var \Sylius\Component\Core\Model\TaxonInterface|null */
+    /** @var TaxonInterface|null */
     protected $mainTaxon;
 
-    /**
-     * @var Collection|ReviewInterface[]
-     *
-     * @psalm-var Collection<array-key, ReviewInterface>
-     */
+    /** @var Collection<array-key, ReviewInterface> */
     protected $reviews;
 
     /** @var float */
     protected $averageRating = 0.0;
 
-    /**
-     * @var Collection|ImageInterface[]
-     *
-     * @psalm-var Collection<array-key, ImageInterface>
-     */
+    /** @var Collection<array-key, ImageInterface> */
     protected $images;
 
     public function __construct()
@@ -143,10 +127,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $this->getTaxons()->contains($taxon);
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
         /** @phpstan-ignore-next-line */

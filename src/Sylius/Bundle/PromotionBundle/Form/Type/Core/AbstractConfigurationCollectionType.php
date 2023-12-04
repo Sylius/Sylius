@@ -46,9 +46,6 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
         $builder->setAttribute('prototypes', $prototypes);
     }
 
-    /**
-     * @psalm-suppress MissingPropertyType
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['prototypes'] = [];

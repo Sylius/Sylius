@@ -6,7 +6,7 @@ Sometimes, due to legal constraint in some countries, you'll want to only author
 Authorizing payments
 --------------------
 
-Sylius supports the use of `Payums payment authorization <https://github.com/Payum/Payum/blob/master/docs/symfony/authorize.md>_`
+Sylius supports the use of `Payums payment authorization <https://github.com/Payum/Payum/blob/master/docs/symfony/authorize.md>`_.
 Not all payment gateways support this and it is up to the payment plugin to make use of this functionality.
 
 To use authorize status for your payments, your plugin must set a flag in it's GatewayConfig called `use_authorize`. This is easily done with a hidden input field.
