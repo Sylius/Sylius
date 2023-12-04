@@ -1,5 +1,5 @@
 # This file is part of the Sylius package.
-# (c) Sylius Sp. z o.o.
+# (c) Paweł Jędrzejewski
 
 sylius:
     form:
@@ -47,6 +47,8 @@ sylius:
             tax_category: Catégorie de taxe
             translations: Traductions
         shipping_method_rule:
+            items_total_greater_than_or_equal: Total de commande supérieur ou égal à
+            items_total_less_than_or_equal: Total de commande inférieur ou égal à
             type: Type
             total: Total
             total_weight_greater_than_or_equal: Poids total supérieur ou égal à
