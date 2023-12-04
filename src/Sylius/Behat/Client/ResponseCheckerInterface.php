@@ -51,7 +51,9 @@ interface ResponseCheckerInterface
 
     public function hasItemWithValue(Response $response, string $key, int|string $value): bool;
 
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, int|string $value): bool;
+    public function hasValueInAnySubresourceObjectCollection(Response $response, string $subResource, string $key, int|string $expectedValue): bool;
+
+    public function hasValueInSubresourceObject(Response $response, string $subResource, string $key, int|string $expectedValue): bool;
 
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;
 
