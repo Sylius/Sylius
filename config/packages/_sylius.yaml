@@ -13,6 +13,15 @@ parameters:
 sylius_api:
     enabled: true
 
+sylius_payum:
+    gateway_config_validation_groups:
+        paypal_express_checkout:
+            - 'sylius'
+            - 'paypal_express_checkout'
+        stripe_checkout:
+            - 'sylius'
+            - 'stripe_checkout'
+
 sylius_shop:
     product_grid:
         include_all_descendants: true

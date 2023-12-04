@@ -36,6 +36,10 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->arrayNode('gateway_config_validation_groups')
+                    ->useAttributeAsKey('name')
+                    ->variablePrototype()->end()
+                ->end()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->arrayNode('template')
                     ->addDefaultsIfNotSet()
