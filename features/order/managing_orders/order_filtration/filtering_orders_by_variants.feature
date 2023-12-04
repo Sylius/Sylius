@@ -19,10 +19,10 @@ Feature: Filtering orders by variants
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And there is a customer "jack@zweiblumen.com" that placed an order "#0000002"
         And the customer bought a single "Nebula Top" variant of product "Galaxy Shirt"
-        And the customer also bought a "Sundress" variant of product "Space dress"
+        And the customer also bought a "Sundress" variant of product "Space Dress"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And there is a customer "lirael@abhorsen.com" that placed an order "#0000003"
-        And the customer bought a single "Sundress" variant of product "Space dress"
+        And the customer bought a single "Sundress" variant of product "Space Dress"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
