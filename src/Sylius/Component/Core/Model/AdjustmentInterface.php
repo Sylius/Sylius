@@ -33,5 +33,6 @@ interface AdjustmentInterface extends BaseAdjustmentInterface
 
     public function setShipment(?ShipmentInterface $shipment): void;
 
+    /** @return string[] */
     public static function getAdjustmentTypeChoices(): array;
 }
