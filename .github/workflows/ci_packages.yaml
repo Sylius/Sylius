@@ -70,7 +70,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-        
+
         env:
             COMPOSER_ROOT_VERSION: "dev-master"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
@@ -111,13 +111,13 @@ jobs:
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
                     restore-keys: |
                         "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
-                    
+
             -   name: Install dependencies
                 run: composer update --no-interaction --no-scripts
 
             -   name: "Run pipeline"
                 run: find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq  --raw-input . | jq --slurp . | jq -c . | xargs -0 vendor/bin/robo ci:packages
-    
+
     test_with_swiftmailer:
         needs: get-matrix-swiftmailer
         runs-on: ubuntu-latest
@@ -127,7 +127,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{fromJson(needs.get-matrix-swiftmailer.outputs.matrix)}}
-        
+
         env:
             APP_ENV: "test_with_swiftmailer"
             COMPOSER_ROOT_VERSION: "dev-master"
@@ -159,7 +159,7 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
-                    
+
             -   name: Get Composer cache directory
                 id: composer-cache
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
