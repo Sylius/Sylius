@@ -11,21 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\PayumBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class GatewayConfig extends Constraint
+final class GatewayFactoryExists extends Constraint
 {
     public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';
 
     public function validatedBy(): string
     {
-        return 'sylius_gateway_config';
+        return 'sylius_gateway_factory_exists_validator';
     }
 
     public function getTargets(): string
     {
-        return self::CLASS_CONSTRAINT;
+        return self::PROPERTY_CONSTRAINT;
     }
 }

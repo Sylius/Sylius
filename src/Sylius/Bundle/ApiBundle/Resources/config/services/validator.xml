@@ -15,15 +15,6 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
-    <parameters>
-        <parameter key="sylius.gateway_config.validation_groups" type="collection">
-            <parameter>sylius</parameter>
-            <parameter>sylius_api</parameter>
-            <parameter>stripe_checkout</parameter>
-            <parameter>paypal_express_checkout</parameter>
-        </parameter>
-    </parameters>
-
     <services>
         <defaults public="true" />
 
@@ -204,12 +195,6 @@
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionRuleGroupValidator">
             <tag name="validator.constraint_validator" alias="sylius_promotion_rule_group" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Validator\GatewayConfig\GatewayConfigValidator">
-            <argument>%sylius.gateway_factories%</argument>
-            <argument>%sylius.gateway_config.validation_groups%</argument>
-            <tag name="validator.constraint_validator" alias="sylius_gateway_config" />
         </service>
     </services>
 </container>

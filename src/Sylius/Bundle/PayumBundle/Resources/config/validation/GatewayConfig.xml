@@ -13,12 +13,6 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
-        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\GatewayConfig">
-            <option name="groups">
-                <value>sylius_api</value>
-            </option>
-        </constraint>
-
         <property name="gatewayName">
             <constraint name="NotBlank">
                 <option name="message">sylius.gateway_config.gateway_name.not_blank</option>
@@ -29,6 +23,11 @@
             <constraint name="NotBlank">
                 <option name="message">sylius.gateway_config.factory_name.not_blank</option>
                 <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\PayumBundle\Validator\Constraints\GatewayFactoryExists">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
             </constraint>
         </property>
         <property name="config">

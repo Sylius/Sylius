@@ -20,7 +20,6 @@
 
         <attribute name="validation_groups">
             <attribute>sylius</attribute>
-            <attribute>sylius_api</attribute>
         </attribute>
 
         <collectionOperations />
