@@ -10,11 +10,6 @@
             "code": @string@
         },
         {
-            "propertyPath": "actions[0].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
-        },
-        {
             "propertyPath": "actions[1].configuration[WEB][amount]",
             "message": "This field is missing.",
             "code": @string@
@@ -25,11 +20,6 @@
             "code": null
         },
         {
-            "propertyPath": "actions[1].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
-        },
-        {
             "propertyPath": "actions[2].configuration[percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
             "code": @string@
@@ -37,11 +27,6 @@
         {
             "propertyPath": "actions[3].configuration[WEB][percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
-            "code": @string@
-        },
-        {
-            "propertyPath": "actions[3].configuration[MOBILE][percentage]",
-            "message": "This field is missing.",
             "code": @string@
         },
         {

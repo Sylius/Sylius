@@ -33,7 +33,7 @@ Feature: Editing a select product attribute
         Then I should be notified that it has been successfully edited
         And this product attribute should have value "Orange skin"
 
-    @ui @javascript @api
+    @ui @javascript @api @no-postgres # LIKE on a json column issue
     Scenario: Deleting a value from an existing select product attribute
         When I want to edit this product attribute
         And I delete value "Banana skin"

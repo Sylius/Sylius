@@ -16,6 +16,9 @@ namespace Sylius\Component\Product\Factory;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 
+/**
+ * @extends TranslatableFactoryInterface<ProductInterface>
+ */
 interface ProductFactoryInterface extends TranslatableFactoryInterface
 {
     public function createWithVariant(): ProductInterface;

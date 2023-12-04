@@ -26,9 +26,6 @@ class ChannelPricingLogEntry implements ChannelPricingLogEntryInterface
     ) {
     }
 
-    /**
-     * @psalm-suppress MissingReturnType
-     */
     public function getId()
     {
         return $this->id;

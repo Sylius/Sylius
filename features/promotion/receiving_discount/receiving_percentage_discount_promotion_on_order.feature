@@ -28,7 +28,7 @@ Feature: Receiving percentage discount promotion on order
 
     @ui @api
     Scenario: Receiving percentage discount is correct for two items with different price
-        Given the store has a product "Vintage Watch" priced at "$1000.00"
+        Given the store has a product "Vintage Watch" priced at "$1,000.00"
         When I add product "PHP T-Shirt" to the cart
         And I add product "Vintage Watch" to the cart
         Then my cart total should be "$880.00"

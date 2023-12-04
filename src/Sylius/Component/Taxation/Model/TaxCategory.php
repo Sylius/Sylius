@@ -33,11 +33,7 @@ class TaxCategory implements TaxCategoryInterface, \Stringable
     /** @var string|null */
     protected $description;
 
-    /**
-     * @var Collection|TaxRateInterface[]
-     *
-     * @psalm-var Collection<array-key, TaxRateInterface>
-     */
+    /** @var Collection<array-key, TaxRateInterface> */
     protected $rates;
 
     public function __construct()

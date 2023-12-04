@@ -54,10 +54,6 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
             throw new InvalidArgumentException(sprintf('No resource associated to "%s".', $iri));
         }
 
-        /**
-         * @psalm-suppress InternalClass
-         * @psalm-suppress InternalMethod
-         */
         $attributes = AttributesExtractor::extractAttributes($parameters);
 
         try {

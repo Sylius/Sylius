@@ -6,7 +6,9 @@
     "code": "50_off",
     "name": "50% Off on your first order",
     "description": "Get 50% off of your first purchase",
-    "channels": ["\/api\/v2\/admin\/channels\/MOBILE"],
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
     "priority": 1,
     "exclusive": true,
     "appliesToDiscounted": false,

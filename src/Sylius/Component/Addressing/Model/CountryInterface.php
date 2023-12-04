@@ -23,9 +23,7 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
     public function getName(?string $locale = null): ?string;
 
     /**
-     * @return Collection|ProvinceInterface[]
-     *
-     * @psalm-return Collection<array-key, ProvinceInterface>
+     * @return Collection<array-key, ProvinceInterface>
      */
     public function getProvinces(): Collection;
 

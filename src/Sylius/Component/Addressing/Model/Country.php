@@ -32,11 +32,7 @@ class Country implements CountryInterface, \Stringable
      */
     protected $code;
 
-    /**
-     * @var Collection|ProvinceInterface[]
-     *
-     * @psalm-var Collection<array-key, ProvinceInterface>
-     */
+    /** @var Collection<array-key, ProvinceInterface> */
     protected $provinces;
 
     public function __construct()

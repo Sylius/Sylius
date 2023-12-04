@@ -20,9 +20,7 @@ interface PromotionSubjectInterface
     public function getPromotionSubjectTotal(): int;
 
     /**
-     * @return Collection|PromotionInterface[]
-     *
-     * @psalm-return Collection<array-key, PromotionInterface>
+     * @return Collection<array-key, PromotionInterface>
      */
     public function getPromotions(): Collection;
 

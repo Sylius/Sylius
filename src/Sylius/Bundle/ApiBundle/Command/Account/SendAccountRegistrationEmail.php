@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 /**
  * @experimental
  *
- * @psalm-immutable
+ * @immutable
  */
 class SendAccountRegistrationEmail
 {

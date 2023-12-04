@@ -28,7 +28,6 @@ final class StatusAction implements ActionInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        /** @psalm-suppress DocblockTypeContradiction */
         if (false === $model[Constants::FIELD_STATUS]) {
             $request->markNew();
 

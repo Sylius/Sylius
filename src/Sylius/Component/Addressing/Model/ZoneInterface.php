@@ -43,9 +43,7 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     public function setScope(?string $scope): void;
 
     /**
-     * @return Collection|ZoneMemberInterface[]
-     *
-     * @psalm-return Collection<array-key, ZoneMemberInterface>
+     * @return Collection<array-key, ZoneMemberInterface>
      */
     public function getMembers(): Collection;
 

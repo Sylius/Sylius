@@ -13,8 +13,8 @@ Feature: Adding promotion with filter
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
-        And I add the "Item fixed discount" action configured with amount of "$10" for "United States" channel
-        And I specify that on "United States" channel this action should be applied to items with price greater than "$10"
+        And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
+        And I specify that on "United States" channel this action should be applied to items with price greater than "$10.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for all products over $10!" promotion should appear in the registry
@@ -24,8 +24,8 @@ Feature: Adding promotion with filter
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
-        And I add the "Item fixed discount" action configured with amount of "$10" for "United States" channel
-        And I specify that on "United States" channel this action should be applied to items with price between "$10" and "$100"
+        And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
+        And I specify that on "United States" channel this action should be applied to items with price between "$10.00" and "$100.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry
@@ -36,7 +36,7 @@ Feature: Adding promotion with filter
         When I want to create a new promotion
         And I specify its code as "10_for_all_t_shirts"
         And I name it "$10 discount for all T-Shirts!"
-        And I add the "Item fixed discount" action configured with amount of "$10" for "United States" channel
+        And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
         And I specify that this action should be applied to items from "T-Shirts" category
         And I add it
         Then I should be notified that it has been successfully created
@@ -48,7 +48,7 @@ Feature: Adding promotion with filter
         When I want to create a new promotion
         And I specify its code as "10_for_php_t_shirt"
         And I name it "$10 discount for PHP T-Shirts!"
-        And I add the "Item fixed discount" action configured with amount of "$10" for "United States" channel
+        And I add the "Item fixed discount" action configured with amount of "$10.00" for "United States" channel
         And I specify that this action should be applied to the "PHP T-Shirt" product
         And I add it
         Then I should be notified that it has been successfully created
@@ -60,7 +60,7 @@ Feature: Adding promotion with filter
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
         And I add the "Item percentage discount" action configured with a percentage value of "10%" for "United States" channel
-        And I specify that on "United States" channel this action should be applied to items with price greater than "$10"
+        And I specify that on "United States" channel this action should be applied to items with price greater than "$10.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for all products over $10!" promotion should appear in the registry
@@ -71,7 +71,7 @@ Feature: Adding promotion with filter
         And I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
         And I add the "Item percentage discount" action configured with a percentage value of "10%" for "United States" channel
-        And I specify that on "United States" channel this action should be applied to items with price between "$10" and "$100"
+        And I specify that on "United States" channel this action should be applied to items with price between "$10.00" and "$100.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry

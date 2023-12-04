@@ -39,11 +39,7 @@ class Taxon implements TaxonInterface, \Stringable
     /** @var TaxonInterface|null */
     protected $parent;
 
-    /**
-     * @var Collection|TaxonInterface[]
-     *
-     * @psalm-var Collection<array-key, TaxonInterface>
-     */
+    /** @var Collection<array-key, TaxonInterface> */
     protected $children;
 
     /** @var int|null */

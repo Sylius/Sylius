@@ -49,6 +49,7 @@ imports:
     - suites/api/promotion/applying_promotion_coupon.yml
     - suites/api/promotion/applying_promotion_rules.yml
     - suites/api/promotion/managing_catalog_promotions.yml
+    - suites/api/promotion/managing_promotion_coupons.yml
     - suites/api/promotion/managing_promotions.yml
     - suites/api/promotion/receiving_discount.yml
     - suites/api/promotion/removing_catalog_promotions.yml

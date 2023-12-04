@@ -47,6 +47,9 @@ sylius:
             regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.
             unique: This coupon already exists.
         is_invalid: Coupon code is invalid.
+        promotion:
+            not_blank: Please provide a promotion for this coupon.
+            not_coupon_based: Only coupon based promotions can have coupons.
         usage_limit:
             min: Coupon usage limit must be at least {{ limit }}.
     promotion_coupon_generator_instruction:

@@ -47,7 +47,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-        
+
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
             SYMFONY_VERSION: "${{ matrix.symfony }}"
@@ -88,7 +88,7 @@ jobs:
                     key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
                     restore-keys: |
                         "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
-                    
+
             -   name: Install dependencies
                 run: composer update --no-interaction --no-scripts
 

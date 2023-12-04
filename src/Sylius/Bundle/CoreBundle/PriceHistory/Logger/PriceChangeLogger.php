@@ -32,7 +32,6 @@ final class PriceChangeLogger implements PriceChangeLoggerInterface
     {
         Assert::notNull($channelPricing->getPrice());
 
-        /** @psalm-suppress PossiblyNullArgument */
         $logEntry = $this->logEntryFactory->create(
             $channelPricing,
             $this->clock->now(),

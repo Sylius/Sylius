@@ -22,11 +22,7 @@ use Sylius\Component\Payment\Model\PaymentMethodTranslation;
 
 class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {
-    /**
-     * @var Collection|BaseChannelInterface[]
-     *
-     * @psalm-var Collection<array-key, BaseChannelInterface>
-     */
+    /** @var Collection<array-key, BaseChannelInterface> */
     protected $channels;
 
     /** @var GatewayConfigInterface|null */

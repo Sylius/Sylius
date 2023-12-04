@@ -33,11 +33,7 @@ class Zone implements ZoneInterface, \Stringable
     /** @var string */
     protected $scope = Scope::ALL;
 
-    /**
-     * @var Collection|ZoneMemberInterface[]
-     *
-     * @psalm-var Collection<array-key, ZoneMemberInterface>
-     */
+    /** @var Collection<array-key, ZoneMemberInterface> */
     protected $members;
 
     public function __construct()

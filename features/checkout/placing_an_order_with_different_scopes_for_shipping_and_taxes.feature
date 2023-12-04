@@ -8,7 +8,7 @@ Feature: Placing an order with different scopes for shipping and taxes
         Given the store operates on a single channel in "USD" currency
         And the store operates in "United States"
         And the store operates in "Germany"
-        And the store has a product "Jane's Vest" priced at "$20"
+        And the store has a product "Jane's Vest" priced at "$20.00"
         And the store allows paying Offline
         And I am a logged in customer
 
@@ -58,4 +58,4 @@ Feature: Placing an order with different scopes for shipping and taxes
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And my order total should be "$20"
+        And my order total should be "$20.00"

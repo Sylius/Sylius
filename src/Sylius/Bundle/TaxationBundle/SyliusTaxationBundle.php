@@ -34,9 +34,6 @@ final class SyliusTaxationBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterCalculatorsPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Taxation\Model';

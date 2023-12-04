@@ -18,9 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface ProductTaxonsAwareInterface
 {
     /**
-     * @return Collection|ProductTaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductTaxonInterface>
+     * @return Collection<array-key, ProductTaxonInterface>
      */
     public function getProductTaxons(): Collection;
 
@@ -31,9 +29,7 @@ interface ProductTaxonsAwareInterface
     public function removeProductTaxon(ProductTaxonInterface $productTaxon): void;
 
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getTaxons(): Collection;
 

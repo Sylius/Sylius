@@ -36,9 +36,6 @@ final class SyliusAttributeBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterAttributeFactoryPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Attribute\Model';

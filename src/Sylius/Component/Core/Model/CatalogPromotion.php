@@ -22,11 +22,7 @@ use Webmozart\Assert\Assert;
 
 class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionInterface
 {
-    /**
-     * @var Collection<array-key, ChannelInterface>
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected Collection $channels;
 
     public function __construct()
@@ -36,10 +32,6 @@ class CatalogPromotion extends BaseCatalogPromotion implements CatalogPromotionI
         $this->channels = new ArrayCollection();
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
         /** @phpstan-ignore-next-line */

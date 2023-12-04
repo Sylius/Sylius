@@ -13,7 +13,7 @@ Feature: Seeing errors in shipping method charges
 
     @ui @no-api
     Scenario: Seeing the number of errors with per shipment charges
-        Given the store has "FedEx Carrier" shipping method with "$20" fee per shipment for "Web" channel and "$15" for "Mobile" channel
+        Given the store has "FedEx Carrier" shipping method with "$20.00" fee per shipment for "Web" channel and "$15.00" for "Mobile" channel
         When I want to modify this shipping method
         And I remove the shipping charges of "Mobile" channel
         And I try to save my changes
@@ -21,7 +21,7 @@ Feature: Seeing errors in shipping method charges
 
     @ui @no-api
     Scenario: Seeing the number of errors with per unit charges
-        Given the store has "FedEx Carrier" shipping method with "$20" fee per unit for "Web" channel and "$15" for "Mobile" channel
+        Given the store has "FedEx Carrier" shipping method with "$20.00" fee per unit for "Web" channel and "$15.00" for "Mobile" channel
         When I want to modify this shipping method
         And I remove the shipping charges of "Mobile" channel
         And I try to save my changes
