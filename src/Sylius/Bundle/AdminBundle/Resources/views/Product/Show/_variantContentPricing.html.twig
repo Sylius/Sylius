@@ -7,11 +7,13 @@
         </div>
         <table class="ui very basic celled table">
             <tbody>
-            <tr>
+            <tr class="pricing-header">
                 <td class="gray text"><strong>{{ 'sylius.ui.channels'|trans }}</strong></td>
                 <td class="gray text"><strong>{{ 'sylius.ui.price'|trans }}</strong></td>
                 <td class="gray text"><strong>{{ 'sylius.ui.original_price'|trans }}</strong></td>
+                <td class="gray text"><strong>{{ 'sylius.ui.lowest_price_before_discount'|trans }}</strong></td>
                 <td class="gray text"><strong>{{ 'sylius.ui.discounted_by'|trans }}</strong></td>
+                <td class="gray text"><strong>{{ 'sylius.ui.history'|trans }}</strong></td>
             </tr>
             {% set currencies = sylius_channels_currencies() %}
             {% for channelPricing in variant.channelPricings %}
@@ -19,14 +21,20 @@
                     <td class="five wide gray text">
                         <strong>{{ channelPricing.channelCode|sylius_channel_name }}</strong>
                     </td>
-                    {% set channelCode = channelPricing.channelCode %}
-                    <td>{{ money.format(channelPricing.price, currencies[channelCode]) }}</td>
-                    {% if channelPricing.originalPrice != null %}
-                        <td>{{ money.format(channelPricing.originalPrice, currencies[channelCode]) }}</td>
-                    {% else %}
-                        <td><span class="gray text">-</span></td>
-                    {% endif %}
+                    <td>{{ money.format(channelPricing.price, product.channels.first.baseCurrency) }}</td>
+                    <td>{{ channelPricing.originalPrice ? money.format(channelPricing.originalPrice, product.channels.first.baseCurrency) : '-' }}</td>
+                    <td>{{ channelPricing.lowestPriceBeforeDiscount ? money.format(channelPricing.lowestPriceBeforeDiscount, product.channels.first.baseCurrency) : '-' }}</td>
                     {% include '@SyliusAdmin/Product/Show/_appliedPromotions.html.twig' %}
+                    <td>
+                        <a class="ui blue labeled icon button" href="{{ path('sylius_admin_channel_pricing_log_entry_index', {
+                            'productId': product.id,
+                            'variantId': variant.id,
+                            'channelPricingId': channelPricing.id
+                        }) }}">
+                            <i class="icon search"></i>
+                            {{ 'sylius.ui.show'|trans }}
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

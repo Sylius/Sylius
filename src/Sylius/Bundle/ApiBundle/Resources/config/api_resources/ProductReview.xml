@@ -36,6 +36,9 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">shop:product_review:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_review:read</attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="shop_get">
@@ -80,10 +83,10 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-reviews/{id}</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">product_review:update</attribute>
-                </attribute>
-                <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_review:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_review:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -95,8 +98,8 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Accepts Product Review</attribute>
                 </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_review:update</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_review:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -108,8 +111,8 @@
                 <attribute name="openapi_context">
                     <attribute name="summary">Rejects Product Review</attribute>
                 </attribute>
-                <attribute name="denormalization_context">
-                    <attribute name="groups">admin:product_review:update</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_review:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>

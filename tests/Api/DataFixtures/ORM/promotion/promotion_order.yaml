@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\Order:
+    order:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "new"
+        tokenValue: "token"
+        promotions: ['@promotion_50_off']
+        promotionCoupon: '@promotion_1_off_coupon_1'

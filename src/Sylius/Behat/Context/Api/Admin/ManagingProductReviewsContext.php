@@ -65,14 +65,6 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I choose :rating as its rating
      */
     public function iChooseAsItsRating(int $rating): void
@@ -187,17 +179,6 @@ final class ManagingProductReviewsContext implements Context
     public function thisProductReviewShouldStillHaveAComment(ReviewInterface $productReview, string $comment): void
     {
         $this->assertIfReviewHasElementWithValue($productReview, 'comment', $comment);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product review could not be edited',
-        );
     }
 
     /**

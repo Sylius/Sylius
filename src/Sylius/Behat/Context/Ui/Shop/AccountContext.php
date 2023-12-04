@@ -46,7 +46,7 @@ final class AccountContext implements Context
     /**
      * @When I want to modify my profile
      */
-    public function iWantToModifyMyProfile()
+    public function iWantToModifyMyProfile(): void
     {
         $this->profileUpdatePage->open();
     }
@@ -55,7 +55,7 @@ final class AccountContext implements Context
      * @When I specify the first name as :firstName
      * @When I remove the first name
      */
-    public function iSpecifyTheFirstName($firstName = null)
+    public function iSpecifyTheFirstName($firstName = null): void
     {
         $this->profileUpdatePage->specifyFirstName($firstName);
     }
@@ -64,7 +64,7 @@ final class AccountContext implements Context
      * @When I specify the last name as :lastName
      * @When I remove the last name
      */
-    public function iSpecifyTheLastName($lastName = null)
+    public function iSpecifyTheLastName($lastName = null): void
     {
         $this->profileUpdatePage->specifyLastName($lastName);
     }
@@ -73,7 +73,7 @@ final class AccountContext implements Context
      * @When I specify the customer email as :email
      * @When I remove the customer email
      */
-    public function iSpecifyCustomerTheEmail($email = null)
+    public function iSpecifyCustomerTheEmail($email = null): void
     {
         $this->profileUpdatePage->specifyEmail($email);
     }
@@ -82,7 +82,7 @@ final class AccountContext implements Context
      * @When I save my changes
      * @When I try to save my changes
      */
-    public function iSaveMyChanges()
+    public function iSaveMyChanges(): void
     {
         $this->profileUpdatePage->saveChanges();
     }
@@ -90,16 +90,24 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         $this->notificationChecker->checkNotification('has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that I can no longer change payment method of this order
+     */
+    public function iShouldBeNotifiedThatICanNoLongerChangePaymentMethodOfThisOrder(): void
+    {
+        Assert::true($this->orderIndexPage->hasFlashMessage('You can no longer change payment method of this order'));
     }
 
     /**
      * @Then my name should be :name
      * @Then my name should still be :name
      */
-    public function myNameShouldBe($name)
+    public function myNameShouldBe($name): void
     {
         $this->dashboardPage->open();
 
@@ -110,7 +118,7 @@ final class AccountContext implements Context
      * @Then my email should be :email
      * @Then my email should still be :email
      */
-    public function myEmailShouldBe($email)
+    public function myEmailShouldBe($email): void
     {
         $this->dashboardPage->open();
 
@@ -120,7 +128,7 @@ final class AccountContext implements Context
     /**
      * @Then /^I should be notified that the (email|password|city|street|first name|last name) is required$/
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired($element): void
     {
         Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             StringInflector::nameToCode($element),
@@ -131,7 +139,7 @@ final class AccountContext implements Context
     /**
      * @Then /^I should be notified that the (email) is invalid$/
      */
-    public function iShouldBeNotifiedThatElementIsInvalid($element)
+    public function iShouldBeNotifiedThatElementIsInvalid($element): void
     {
         Assert::true($this->profileUpdatePage->checkValidationMessageFor(
             StringInflector::nameToCode($element),
@@ -142,7 +150,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that the email is already used
      */
-    public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed()
+    public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         Assert::true($this->profileUpdatePage->checkValidationMessageFor('email', 'This email is already used.'));
     }
@@ -150,7 +158,7 @@ final class AccountContext implements Context
     /**
      * @When /^I want to change my password$/
      */
-    public function iWantToChangeMyPassword()
+    public function iWantToChangeMyPassword(): void
     {
         $this->changePasswordPage->open();
     }
@@ -158,7 +166,7 @@ final class AccountContext implements Context
     /**
      * @Given I change password from :oldPassword to :newPassword
      */
-    public function iChangePasswordTo($oldPassword, $newPassword)
+    public function iChangePasswordTo($oldPassword, $newPassword): void
     {
         $this->iSpecifyTheCurrentPasswordAs($oldPassword);
         $this->iSpecifyTheNewPasswordAs($newPassword);
@@ -166,9 +174,22 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Given I am changing this order's payment method
+     */
+    public function iWantToChangeThisOrdersPaymentMethod(): void
+    {
+        $this->iBrowseMyOrders();
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderIndexPage->changePaymentMethod($order);
+    }
+
+    /**
      * @Then I should be notified that my password has been successfully changed
      */
-    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged()
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
     {
         $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
     }
@@ -176,7 +197,7 @@ final class AccountContext implements Context
     /**
      * @Given I specify the current password as :password
      */
-    public function iSpecifyTheCurrentPasswordAs($password)
+    public function iSpecifyTheCurrentPasswordAs($password): void
     {
         $this->changePasswordPage->specifyCurrentPassword($password);
     }
@@ -184,7 +205,7 @@ final class AccountContext implements Context
     /**
      * @Given I specify the new password as :password
      */
-    public function iSpecifyTheNewPasswordAs($password)
+    public function iSpecifyTheNewPasswordAs($password): void
     {
         $this->changePasswordPage->specifyNewPassword($password);
     }
@@ -192,7 +213,7 @@ final class AccountContext implements Context
     /**
      * @Given I confirm this password as :password
      */
-    public function iSpecifyTheConfirmationPasswordAs($password)
+    public function iSpecifyTheConfirmationPasswordAs($password): void
     {
         $this->changePasswordPage->specifyConfirmationPassword($password);
     }
@@ -200,7 +221,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that provided password is different than the current one
      */
-    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
+    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
     {
         Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'current_password',
@@ -211,7 +232,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that the entered passwords do not match
      */
-    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
         Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'new_password',
@@ -222,7 +243,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be notified that the password should be at least :length characters long
      */
-    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length)
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length): void
     {
         Assert::true($this->changePasswordPage->checkValidationMessageFor(
             'new_password',
@@ -253,9 +274,18 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I try to change my payment method to :paymentMethod
+     */
+    public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    {
+        $this->orderShowPage->choosePaymentMethod($paymentMethod);
+        $this->orderShowPage->pay();
+    }
+
+    /**
      * @Then I should see a single order in the list
      */
-    public function iShouldSeeASingleOrderInTheList()
+    public function iShouldSeeASingleOrderInTheList(): void
     {
         Assert::same($this->orderIndexPage->countOrders(), 1);
     }
@@ -263,7 +293,7 @@ final class AccountContext implements Context
     /**
      * @Then this order should have :order number
      */
-    public function thisOrderShouldHaveNumber(OrderInterface $order)
+    public function thisOrderShouldHaveNumber(OrderInterface $order): void
     {
         Assert::true($this->orderIndexPage->isOrderWithNumberInTheList($order->getNumber()));
     }
@@ -280,7 +310,7 @@ final class AccountContext implements Context
     /**
      * @When I am viewing the summary of my last order
      */
-    public function iViewingTheSummaryOfMyLastOrder()
+    public function iViewingTheSummaryOfMyLastOrder(): void
     {
         $this->orderIndexPage->open();
         $this->orderIndexPage->openLastOrderPage();
@@ -309,7 +339,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :customerName, :street, :postcode, :city, :countryName as shipping address
      */
-    public function iShouldSeeAsShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function iShouldSeeAsShippingAddress($customerName, $street, $postcode, $city, $countryName): void
     {
         Assert::true($this->orderShowPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName));
     }
@@ -317,7 +347,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :customerName, :street, :postcode, :city, :countryName as billing address
      */
-    public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName)
+    public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName): void
     {
         Assert::true($this->orderShowPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName));
     }
@@ -325,7 +355,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :total as order's total
      */
-    public function iShouldSeeAsOrderSTotal($total)
+    public function iShouldSeeAsOrderSTotal($total): void
     {
         Assert::same($this->orderShowPage->getTotal(), $total);
     }
@@ -333,7 +363,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :itemsTotal as order's subtotal
      */
-    public function iShouldSeeAsOrderSSubtotal($subtotal)
+    public function iShouldSeeAsOrderSSubtotal($subtotal): void
     {
         Assert::same($this->orderShowPage->getSubtotal(), $subtotal);
     }
@@ -342,7 +372,7 @@ final class AccountContext implements Context
      * @Then I should see that I have to pay :paymentAmount for this order
      * @Then I should see :paymentTotal as payment total
      */
-    public function iShouldSeeIHaveToPayForThisOrder($paymentAmount)
+    public function iShouldSeeIHaveToPayForThisOrder($paymentAmount): void
     {
         Assert::same($this->orderShowPage->getPaymentPrice(), $paymentAmount);
     }
@@ -350,7 +380,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :numberOfItems items in the list
      */
-    public function iShouldSeeItemsInTheList($numberOfItems)
+    public function iShouldSeeItemsInTheList($numberOfItems): void
     {
         Assert::same($this->orderShowPage->countItems(), (int) $numberOfItems);
     }
@@ -358,7 +388,7 @@ final class AccountContext implements Context
     /**
      * @Then the product named :productName should be in the items list
      */
-    public function theProductShouldBeInTheItemsList($productName)
+    public function theProductShouldBeInTheItemsList($productName): void
     {
         Assert::true($this->orderShowPage->isProductInTheList($productName));
     }
@@ -381,7 +411,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :itemPrice as item price
      */
-    public function iShouldSeeAsItemPrice($itemPrice)
+    public function iShouldSeeAsItemPrice($itemPrice): void
     {
         Assert::same($this->orderShowPage->getItemPrice(), $itemPrice);
     }
@@ -389,7 +419,7 @@ final class AccountContext implements Context
     /**
      * @When I subscribe to the newsletter
      */
-    public function iSubscribeToTheNewsletter()
+    public function iSubscribeToTheNewsletter(): void
     {
         $this->profileUpdatePage->subscribeToTheNewsletter();
     }
@@ -397,7 +427,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be subscribed to the newsletter
      */
-    public function iShouldBeSubscribedToTheNewsletter()
+    public function iShouldBeSubscribedToTheNewsletter(): void
     {
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
     }
@@ -405,7 +435,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :provinceName as province in the shipping address
      */
-    public function iShouldSeeAsProvinceInTheShippingAddress($provinceName)
+    public function iShouldSeeAsProvinceInTheShippingAddress($provinceName): void
     {
         Assert::true($this->orderShowPage->hasShippingProvinceName($provinceName));
     }
@@ -413,7 +443,7 @@ final class AccountContext implements Context
     /**
      * @Then I should see :provinceName as province in the billing address
      */
-    public function iShouldSeeAsProvinceInTheBillingAddress($provinceName)
+    public function iShouldSeeAsProvinceInTheBillingAddress($provinceName): void
     {
         Assert::true($this->orderShowPage->hasBillingProvinceName($provinceName));
     }
@@ -421,7 +451,7 @@ final class AccountContext implements Context
     /**
      * @Then I should be redirected to my account dashboard
      */
-    public function iShouldBeRedirectedToMyAccountDashboard()
+    public function iShouldBeRedirectedToMyAccountDashboard(): void
     {
         Assert::true($this->dashboardPage->isOpen(), 'User should be on the account panel dashboard page but they are not.');
     }
@@ -429,7 +459,7 @@ final class AccountContext implements Context
     /**
      * @When I want to log in
      */
-    public function iWantToLogIn()
+    public function iWantToLogIn(): void
     {
         $this->loginPage->tryToOpen();
     }

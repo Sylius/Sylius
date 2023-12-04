@@ -1,0 +1,14 @@
+{
+    "@context": "\/api\/v2\/contexts\/PromotionCoupon",
+    "@id": "\/api\/v2\/admin\/promotion-coupons\/XYZ3",
+    "@type": "PromotionCoupon",
+    "code": "XYZ3",
+    "usageLimit": 100,
+    "perCustomerUsageLimit": 3,
+    "used": 0,
+    "reusableFromCancelledOrders": false,
+    "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "expiresAt": @date@
+}

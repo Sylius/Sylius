@@ -21,7 +21,7 @@ Feature: Province unique fields validation
     Scenario: Trying to add a new province with a taken name
         When I want to edit this country
         And I add the "Northern Ireland" province with "GB-NI" code
-        And I try to save changes
+        And I save my changes
         Then I should be notified that province name must be unique
 
     @ui @javascript @api
@@ -29,7 +29,7 @@ Feature: Province unique fields validation
         When I want to edit this country
         And I add the "Scotland" province with "GB-SCO" code
         And I add the "Not Scotland" province with "GB-SCO" code
-        And I try to save changes
+        And I save my changes
         Then I should be notified that all province codes and names within this country need to be unique
 
     @ui @javascript @api
@@ -37,5 +37,5 @@ Feature: Province unique fields validation
         When I want to edit this country
         And I add the "Scotland" province with "GB-SC" code
         And I add the "Scotland" province with "GB-SCO" code
-        And I try to save changes
+        And I save my changes
         Then I should be notified that all province codes and names within this country need to be unique

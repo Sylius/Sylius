@@ -91,6 +91,19 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I filter by group :groupName
+     * @When I filter by groups :firstGroup and :secondGroup
+     */
+    public function iFilterByGroup(string ...$groupsNames): void
+    {
+        foreach ($groupsNames as $groupName) {
+            $this->indexPage->specifyFilterGroup($groupName);
+        }
+
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then the customer :customer should appear in the store
      * @Then the customer :customer should still have this email
      */
@@ -180,8 +193,9 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then /^I should see (\d+) customers in the list$/
+     * @Then /^I should see a single customer on the list$/
      */
-    public function iShouldSeeCustomersInTheList($amountOfCustomers)
+    public function iShouldSeeCustomersInTheList($amountOfCustomers = 1)
     {
         Assert::same($this->indexPage->countItems(), (int) $amountOfCustomers);
     }
@@ -361,11 +375,11 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I sort them by :sortBy
+     * @When I sort the orders :sortType by :field
      */
-    public function iSortThemByChannel(string $sortBy): void
+    public function iSortTheOrderByField(string $field): void
     {
-        $this->ordersIndexPage->sort(ucfirst($sortBy));
+        $this->ordersIndexPage->sort(ucfirst($field));
     }
 
     /**
@@ -390,9 +404,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his name should be :name
+     * @Then /^(?:their|his) name should be "([^"]+)"$/
      */
-    public function hisNameShouldBe($name)
+    public function hisNameShouldBe(string $name): void
     {
         Assert::same($this->showPage->getCustomerName(), $name);
     }
@@ -406,27 +420,44 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his email should be :email
+     * @Then /^(?:their|his) email should be "([^"]+)"$/
      */
-    public function hisEmailShouldBe($email)
+    public function hisEmailShouldBe(string $email): void
     {
         Assert::same($this->showPage->getCustomerEmail(), $email);
     }
 
     /**
-     * @Then his phone number should be :phoneNumber
+     * @Then /^(?:their|his) phone number should be "([^"]+)"$/
      */
-    public function hisPhoneNumberShouldBe($phoneNumber)
+    public function hisPhoneNumberShouldBe(string $phoneNumber): void
     {
         Assert::same($this->showPage->getCustomerPhoneNumber(), $phoneNumber);
     }
 
     /**
-     * @Then his default address should be :defaultAddress
+     * @Then /^(?:their|his) default address should be "([^"]+)"$/
      */
-    public function hisShippingAddressShouldBe($defaultAddress)
+    public function hisShippingAddressShouldBe(string $defaultAddress): void
     {
         Assert::same($this->showPage->getDefaultAddress(), str_replace(',', '', $defaultAddress));
+    }
+
+    /**
+     * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
+     */
+    public function theirSDefaultAddressShouldBe(
+        string $firstName,
+        string $lastName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $country,
+    ): void {
+        Assert::same(
+            $this->showPage->getDefaultAddress(),
+            sprintf('%s %s %s %s %s %s', $firstName, $lastName, $street, $city, strtoupper($country), $postcode),
+        );
     }
 
     /**

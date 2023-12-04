@@ -30,6 +30,7 @@ Configuration reference
             customer_group:
                 classes:
                     model: Sylius\Component\Customer\Model\CustomerGroup
+                    repository: Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerGroupRepository
                     interface: Sylius\Component\Customer\Model\CustomerGroupInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     factory: Sylius\Component\Resource\Factory\Factory

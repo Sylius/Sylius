@@ -1,0 +1,52 @@
+name: Upmerge PR
+
+on:
+    schedule:
+        -
+            cron: "0 2 * * *"
+    workflow_dispatch: ~
+
+jobs:
+    upmerge:
+        runs-on: ubuntu-latest
+        if: github.repository == 'Sylius/Sylius'
+        name: "Upmerge PR"
+        timeout-minutes: 5
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        base_branch: "1.12"
+                        target_branch: "1.13"
+                    -
+                        base_branch: "1.13"
+                        target_branch: "2.0"
+
+        steps:
+            -
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ matrix.target_branch }}
+
+            -   
+                name: Reset upmerge branch
+                run: |
+                    git fetch origin ${{ matrix.base_branch }}:${{ matrix.base_branch }}
+                    git reset --hard ${{ matrix.base_branch }}
+
+            -
+                name: Create Pull Request
+                uses: peter-evans/create-pull-request@v4
+                with:
+                    token: ${{ secrets.SYLIUS_BOT_PAT }}
+                    title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
+                    body: |
+                        This PR has been generated automatically.
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        
+                        **Remember!** Use **Rebase and merge** when merging this PR if **no conflict** occurred. If any conflict occurs, checkout the branch, push changes and use **Create a merge commit**.
+                    branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
+                    delete-branch: true
+                    branch-suffix: "short-commit-hash"
+                    base: ${{ matrix.target_branch }}

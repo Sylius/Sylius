@@ -12,3 +12,18 @@
 <span class="ui huge header" id="product-price" {{ sylius_test_html_attribute('product-price', money.calculatePrice(variant)) }}>
     {{ money.calculatePrice(variant) }}
 </span>
+
+{% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
+{% set hasLowestPrice = variant|sylius_has_lowest_price({'channel': sylius.channel})%}
+
+<div class="ui mini label" id="lowest-price-before-discount"
+    {% if hasDiscount and hasLowestPrice %}
+        style="white-space: nowrap"
+    {% else %}
+        style="display: none;"
+    {% endif %}
+>
+    {% if hasDiscount and hasLowestPrice %}
+        {{ 'sylius.ui.lowest_price_days_before_discount_was'|trans({'%days%': days, '%price%': money.calculateLowestPrice(variant)}) }}
+    {% endif %}
+</div>

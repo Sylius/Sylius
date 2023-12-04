@@ -34,11 +34,11 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/product-options</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_option:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_option:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -63,11 +63,11 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/product-options/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_option:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:product_option:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_option:read</attribute>
                 </attribute>
             </itemOperation>
         </itemOperations>
@@ -95,7 +95,6 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

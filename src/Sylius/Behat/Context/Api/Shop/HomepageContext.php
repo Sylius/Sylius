@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class HomepageContext implements Context
@@ -24,6 +27,8 @@ final class HomepageContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
+        private ObjectManager $objectManager,
         private string $apiUrlPrefix,
     ) {
     }
@@ -72,6 +77,7 @@ final class HomepageContext implements Context
      */
     public function iCheckAvailableTaxons(): void
     {
+        $this->objectManager->clear(); // avoiding doctrine cache
         $this->client->customAction(sprintf('%s/shop/taxons', $this->apiUrlPrefix), HttpRequest::METHOD_GET);
     }
 
@@ -89,12 +95,12 @@ final class HomepageContext implements Context
      */
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
-        $response = json_decode($this->client->getLastResponse()->getContent(), true);
-        Assert::keyExists($response, 'hydra:member');
-        $menuItems = array_column($response['hydra:member'], 'name');
+        $menuItems = $this->getAvailableTaxonMenuItemsFromTaxonCollection($this->client->getLastResponse());
 
-        Assert::notEmpty($menuItems);
-        Assert::allOneOf($menuItems, $expectedMenuItems);
+        Assert::true(
+            $this->areAllMenuItemsVisible($menuItems, $expectedMenuItems),
+            sprintf('Menu items %s should be present in the menu', implode(', ', $expectedMenuItems)),
+        );
     }
 
     /**
@@ -104,13 +110,42 @@ final class HomepageContext implements Context
      */
     public function iShouldNotSeeAndInTheMenu(string ...$unexpectedMenuItems): void
     {
-        $response = json_decode($this->client->getLastResponse()->getContent(), true);
-        $menuItems = array_column($response, 'name');
+        $menuItems = $this->getAvailableTaxonMenuItemsFromTaxonCollection($this->client->getLastResponse());
 
-        foreach ($unexpectedMenuItems as $unexpectedMenuItem) {
-            if (in_array($unexpectedMenuItem, $menuItems, true)) {
-                throw new \InvalidArgumentException(sprintf('There is menu item %s but it should not be', $unexpectedMenuItem));
+        Assert::false(
+            $this->areAllMenuItemsVisible($menuItems, $unexpectedMenuItems),
+            sprintf('Menu items %s should not be present in the menu', implode(', ', $unexpectedMenuItems)),
+        );
+    }
+
+    private function areAllMenuItemsVisible(array $menuItems, array $expectedMenuItems): bool
+    {
+        foreach ($expectedMenuItems as $expectedMenuItem) {
+            if (!in_array($expectedMenuItem, $menuItems)) {
+                return false;
             }
         }
+
+        return true;
+    }
+
+    private function getAvailableTaxonMenuItemsFromTaxonCollection(Response $response): array
+    {
+        $taxons = $this->responseChecker->getCollection($response);
+        if ([] === $taxons) {
+            return [];
+        }
+        $menuItems = array_column($taxons, 'name');
+
+        Assert::notEmpty($menuItems);
+
+        $children = array_column($taxons, 'children');
+        foreach ($children[0] as $child) {
+            if (!empty($child)) {
+                array_push($menuItems, $this->iriConverter->getResourceFromIri($child)->getName());
+            }
+        }
+
+        return $menuItems;
     }
 }

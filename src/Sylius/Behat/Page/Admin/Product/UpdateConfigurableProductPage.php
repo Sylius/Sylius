@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -62,7 +63,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
@@ -102,19 +103,31 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return in_array($statusCode, [200, 304], true);
     }
 
-    public function attachImage(string $path, string $type = null): void
+    public function hasLastImageAVariant(ProductVariantInterface $productVariant): bool
     {
         $this->clickTabIfItsNotActive('media');
 
-        $filesPath = $this->getParameter('files_path');
+        $imageForm = $this->getLastImageElement();
 
+        return $productVariant->getCode() === $imageForm->find('css', 'input[type="hidden"]')->getValue();
+    }
+
+    public function attachImage(string $path, string $type = null, ?ProductVariantInterface $productVariant = null): void
+    {
+        $this->clickTabIfItsNotActive('media');
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
+
         if (null !== $type) {
             $imageForm->fillField('Type', $type);
         }
 
+        if (null !== $productVariant) {
+            $imageForm->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
+        }
+
+        $filesPath = $this->getParameter('files_path');
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
@@ -162,6 +175,14 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
         $firstImage = $this->getFirstImageElement();
         $this->setImageType($firstImage, $type);
+    }
+
+    public function selectVariantForFirstImage(ProductVariantInterface $productVariant): void
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageElement = $this->getFirstImageElement();
+        $imageElement->find('css', 'input[type="hidden"]')->setValue($productVariant->getCode());
     }
 
     public function countImages(): int

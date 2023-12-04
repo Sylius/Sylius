@@ -16,6 +16,11 @@ namespace Sylius\Component\Channel\Repository;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of ChannelInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
     /** @deprecated since Sylius 1.11, use the `findOneEnabledByHostname` method instead */
@@ -25,8 +30,15 @@ interface ChannelRepositoryInterface extends RepositoryInterface
 
     public function findOneByCode(string $code): ?ChannelInterface;
 
-    /**
-     * @return iterable|ChannelInterface[]
-     */
+    /** @return iterable|ChannelInterface[] */
     public function findByName(string $name): iterable;
+
+    public function findAllWithBasicData(): iterable;
+
+    /**
+     * @return ChannelInterface[]
+     */
+    public function findEnabled(): iterable;
+
+    public function countAll(): int;
 }

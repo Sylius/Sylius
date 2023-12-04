@@ -26,7 +26,6 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:locale:read</attribute>
                 </attribute>
-
             </collectionOperation>
 
             <collectionOperation name="admin_post">
@@ -34,6 +33,9 @@
                 <attribute name="path">/admin/locales</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:locale:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:locale:read</attribute>
                 </attribute>
             </collectionOperation>
 
@@ -53,6 +55,11 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:locale:read</attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">admin/locales/{code}</attribute>
             </itemOperation>
 
             <itemOperation name="shop_get">

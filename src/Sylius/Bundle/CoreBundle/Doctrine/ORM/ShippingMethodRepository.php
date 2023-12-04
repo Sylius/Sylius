@@ -16,8 +16,16 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ShippingBundle\Doctrine\ORM\ShippingMethodRepository as BaseShippingMethodRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 
+/**
+ * @template T of ShippingMethodInterface
+ *
+ * @extends BaseShippingMethodRepository<T>
+ *
+ * @implements ShippingMethodRepositoryInterface<T>
+ */
 class ShippingMethodRepository extends BaseShippingMethodRepository implements ShippingMethodRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder

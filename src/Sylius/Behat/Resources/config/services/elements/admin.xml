@@ -29,5 +29,29 @@
         <service id="Sylius\Behat\Element\Admin\CatalogPromotion\FilterElement" parent="sylius.behat.element" />
 
         <service id="Sylius\Behat\Element\Admin\TaxRate\FilterElement" parent="sylius.behat.element" />
+
+        <service
+            id="Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface"
+            class="Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElement"
+            parent="sylius.behat.element"
+        />
+
+        <service
+            id="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface"
+            class="Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElement"
+            parent="sylius.behat.element"
+        />
+
+        <service
+            id="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface"
+            class="Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElement"
+            parent="sylius.behat.element"
+        />
+
+        <service
+            id="Sylius\Behat\Element\Admin\Promotion\FormElementInterface"
+            class="Sylius\Behat\Element\Admin\Promotion\FormElement"
+            parent="sylius.behat.element"
+        />
     </services>
 </container>

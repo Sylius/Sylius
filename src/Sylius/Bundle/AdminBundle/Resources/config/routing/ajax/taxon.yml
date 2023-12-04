@@ -60,6 +60,7 @@ sylius_admin_ajax_generate_taxon_slug:
         _controller: sylius.controller.taxon_slug::generateAction
         _format: json
 
+# This route is deprecated since Sylius 1.13.0 and will be removed in 2.0.0.
 sylius_admin_ajax_taxon_move:
     path: /{id}/move
     methods: [PUT]

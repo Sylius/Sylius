@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -42,7 +42,7 @@ final class ProductReviewContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $this->client->index(Resources::PRODUCT_REVIEWS);
-        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResource($product));
         $this->client->filter();
     }
 
@@ -61,7 +61,7 @@ final class ProductReviewContext implements Context
     public function iWantToReviewProduct(ProductInterface $product): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_REVIEWS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
     }
 
     /**
@@ -103,7 +103,7 @@ final class ProductReviewContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $this->client->index(Resources::PRODUCT_REVIEWS);
-        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromItem($product));
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResource($product));
         $this->client->addFilter('itemsPerPage', 3);
         $this->client->addFilter('order[createdAt]', 'desc');
         $this->client->filter();
@@ -214,11 +214,11 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Then I should be notified that rate must be an integer in the range 1-5
+     * @Then I should be notified that rating must be between 1 and 5
      */
-    public function iShouldBeNotifiedThatRateMustBeAnIntegerInTheRange15(): void
+    public function iShouldBeNotifiedThatRatingMustBeBetween1And5(): void
     {
-        $this->assertViolation('Review rating must be an integer in the range 1-5.', 'rating');
+        $this->assertViolation('Review rating must be between 1 and 5.', 'rating');
     }
 
     private function hasReviewsWithTitles(array $titles): bool

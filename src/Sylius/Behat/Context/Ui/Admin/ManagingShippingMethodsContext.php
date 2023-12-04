@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
@@ -446,14 +445,6 @@ final class ManagingShippingMethodsContext implements Context
     public function thisShippingMethodShouldNoLongerExistInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['code' => $shippingMethod->getCode()]));
-    }
-
-    /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Shipping method is in use.', NotificationType::failure());
     }
 
     /**

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer;
@@ -108,9 +108,9 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
             $franceZone->getWrappedObject(),
         ]));
 
-        $iriConverter->getIriFromItem($belgiumZone)->willReturn('iri/EU-BE');
-        $iriConverter->getIriFromItem($germanyZone)->willReturn('iri/EU-DE');
-        $iriConverter->getIriFromItem($franceZone)->willReturn('iri/EU-FR');
+        $iriConverter->getIriFromResource($belgiumZone)->willReturn('iri/EU-BE');
+        $iriConverter->getIriFromResource($germanyZone)->willReturn('iri/EU-DE');
+        $iriConverter->getIriFromResource($franceZone)->willReturn('iri/EU-FR');
 
         $denormalizer->denormalize(
             [
@@ -163,9 +163,9 @@ final class ZoneDenormalizerSpec extends ObjectBehavior
             $franceZone->getWrappedObject(),
         ]));
 
-        $iriConverter->getIriFromItem($belgiumZone)->shouldNotBeCalled();
-        $iriConverter->getIriFromItem($germanyZone)->shouldNotBeCalled();
-        $iriConverter->getIriFromItem($franceZone)->shouldNotBeCalled();
+        $iriConverter->getIriFromResource($belgiumZone)->shouldNotBeCalled();
+        $iriConverter->getIriFromResource($germanyZone)->shouldNotBeCalled();
+        $iriConverter->getIriFromResource($franceZone)->shouldNotBeCalled();
 
         $denormalizer->denormalize(
             [],

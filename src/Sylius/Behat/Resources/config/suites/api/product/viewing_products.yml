@@ -12,11 +12,13 @@ default:
                 - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_association_type
+                - sylius.behat.context.transform.product_option_value
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
                 - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
@@ -28,11 +30,14 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
+                - Sylius\Behat\Context\Setup\PriceHistoryContext
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
                 - sylius.behat.context.api.shop.product_attribute
                 - sylius.behat.context.api.shop.product_variant
+                - Sylius\Behat\Context\Api\Shop\TaxonContext
 
             filters:
                 tags: "@viewing_products&&@api"

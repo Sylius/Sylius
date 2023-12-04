@@ -18,6 +18,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
+use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -35,6 +36,7 @@ final class CheckoutCompleteContext implements Context
         private SharedStorageInterface $sharedStorage,
         private CompletePageInterface $completePage,
         private NotificationCheckerInterface $notificationChecker,
+        private ThankYouPageInterface $thankYouPage,
     ) {
     }
 
@@ -145,7 +147,7 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
+     * @Then /^the ("[^"]+" product) should have unit price discounted by ("[^"]+")$/
      */
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, int $amount): void
     {
@@ -321,14 +323,15 @@ final class CheckoutCompleteContext implements Context
     }
 
     /**
-     * @Then I should be informed that order total has been changed
+     * @Then my order should not be placed due to changed order total
      */
-    public function iShouldBeInformedThatOrderTotalHasBeenChanged()
+    public function myOrderShouldNotBePlacedDueToChangedOrderTotal(): void
     {
         $this->notificationChecker->checkNotification(
             'Your order total has been changed, check your order information and confirm it again.',
             NotificationType::failure(),
         );
+        Assert::false($this->thankYouPage->isOpen());
     }
 
     /**

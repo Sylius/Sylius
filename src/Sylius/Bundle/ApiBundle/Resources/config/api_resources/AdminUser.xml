@@ -34,8 +34,11 @@
                     <attribute>sylius</attribute>
                     <attribute>sylius_user_create</attribute>
                 </attribute>
-                <attribute name="normalization_context">
+                <attribute name="denormalization_context">
                     <attribute name="groups">admin:admin_user:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -52,6 +55,9 @@
                 <attribute name="method">PUT</attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:admin_user:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:admin_user:read</attribute>
                 </attribute>
             </itemOperation>
 

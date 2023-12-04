@@ -130,7 +130,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         AutocompleteHelper::chooseValue($this->getSession(), $mainTaxonElement, $taxon->getName());
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();

@@ -21,8 +21,14 @@ use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionAction
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements PromotionActionFactoryInterface<PromotionActionInterface>
+ */
 final class PromotionActionFactory implements PromotionActionFactoryInterface
 {
+    /**
+     * @param FactoryInterface<PromotionActionInterface> $decoratedFactory
+     */
     public function __construct(private FactoryInterface $decoratedFactory)
     {
     }

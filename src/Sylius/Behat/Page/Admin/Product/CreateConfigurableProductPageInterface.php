@@ -24,9 +24,13 @@ interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
 
     public function nameItIn(string $name, string $localeCode): void;
 
-    public function isMainTaxonChosen(string $taxonName): bool;
+    public function hasMainTaxonWithName(string $taxonName): bool;
 
     public function selectMainTaxon(TaxonInterface $taxon): void;
 
     public function attachImage(string $path, ?string $type = null): void;
+
+    public function activateLanguageTab(string $localeCode): void;
+
+    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string;
 }

@@ -22,7 +22,7 @@ final class MenuElement extends Element implements MenuElementInterface
     {
         $menu = $this->getElement('menu');
 
-        return array_map(fn (NodeElement $element): string => $element->getText(), $menu->findAll('css', '[data-test-menu-item]'));
+        return array_map(fn (NodeElement $element): string => $element->getAttribute('data-test-menu-item'), $menu->findAll('css', '[data-test-menu-item]'));
     }
 
     protected function getDefinedElements(): array

@@ -104,6 +104,8 @@ interface OrderInterface extends
 
     public function getOrderPromotionTotal(): int;
 
+    public function getItemsSubtotal(): int;
+
     public function getTokenValue(): ?string;
 
     public function setTokenValue(?string $tokenValue): void;
@@ -116,8 +118,14 @@ interface OrderInterface extends
 
     public function isCreatedByGuest(): bool;
 
+    /**
+     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see isCreatedByGuest()} instead.
+     */
     public function getCreatedByGuest(): bool;
 
+    /**
+     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. This flag should be changed only through {@see setCustomerWithAuthorization()} method.
+     */
     public function setCreatedByGuest(bool $createdByGuest): void;
 
     /**

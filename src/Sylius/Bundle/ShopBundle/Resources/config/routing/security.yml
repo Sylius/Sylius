@@ -30,7 +30,7 @@ sylius_shop_register:
             form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
             event: register
             redirect:
-                route: sylius_shop_account_dashboard
+                route: sylius_shop_register_thank_you
             flash: sylius.customer.register
 
 sylius_shop_register_after_checkout:
@@ -47,8 +47,14 @@ sylius_shop_register_after_checkout:
             template: "@SyliusShop/register.html.twig"
             event: register
             redirect:
-                route: sylius_shop_account_dashboard
+                route: sylius_shop_register_thank_you
             flash: sylius.customer.register
+
+sylius_shop_register_thank_you:
+    path: /register/thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shop.register_thank_you::thankYouAction
 
 sylius_shop_request_password_reset_token:
     path: /forgotten-password

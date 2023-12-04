@@ -2,7 +2,6 @@
     "@context": "\/api\/v2\/contexts\/ProductVariant",
     "@id": "\/api\/v2\/shop\/product-variants\/MUG_RED",
     "@type": "ProductVariant",
-    "id": @integer@,
     "code": "MUG_RED",
     "name": "Red Mug",
     "product": "\/api\/v2\/shop\/products\/MUG",
@@ -11,5 +10,6 @@
     ],
     "price": 2000,
     "originalPrice": 2000,
+    "lowestPriceBeforeDiscount": null,
     "inStock": true
 }

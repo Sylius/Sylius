@@ -29,6 +29,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     public function nameItIn(string $name, string $localeCode): void
     {
         $this->clickTabIfItsNotActive('details');
+        $this->activateLanguageTab($localeCode);
 
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode),
@@ -40,7 +41,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         }
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
@@ -80,11 +81,34 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
     }
 
+    public function activateLanguageTab(string $localeCode): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%localeCode%' => $localeCode]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+    }
+
+    public function getAttributeValidationErrors(string $attributeName, string $localeCode): string
+    {
+        $this->clickTabIfItsNotActive('attributes');
+
+        $validationError = $this->getElement('attribute')->find('css', '.sylius-validation-error');
+
+        return $validationError->getText();
+    }
+
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'attribute' => '.attribute',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
+            'language_tab' => '[data-locale="%localeCode%"] .title',
             'main_taxon' => '#sylius_product_mainTaxon',
             'name' => '#sylius_product_translations_en_US_name',
             'options_choice' => '#sylius_product_options',

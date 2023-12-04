@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
@@ -38,7 +37,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I want to modify the :paymentMethod payment method
      */
-    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->updatePage->open(['id' => $paymentMethod->getId()]);
     }
@@ -97,14 +96,6 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
-    }
-
-    /**
-     * @Then I should be notified that it is in use
-     */
-    public function iShouldBeNotifiedThatItIsInUse()
-    {
-        $this->notificationChecker->checkNotification('Cannot delete, the Payment method is in use.', NotificationType::failure());
     }
 
     /**
@@ -256,6 +247,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
+     * @When I switch the way payment methods are sorted to descending by :field
      * @Given the payment methods are already sorted by :field
      */
     public function iSortPaymentMethodsBy($field)
@@ -274,6 +266,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then I should be notified that :element is required
+     * @Then I should be notified that I have to specify payment method :element
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
@@ -339,6 +332,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
     public function theCodeFieldShouldBeDisabled()
     {

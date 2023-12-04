@@ -18,6 +18,8 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Attribute\AttributeType\DateAttributeType;
+use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -63,7 +65,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent) product attribute "([^"]+)"$/
+     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent|float) product attribute "([^"]+)"$/
      */
     public function theStoreHasAProductAttribute(string $type, string $name): void
     {
@@ -73,7 +75,7 @@ final class ProductAttributeContext implements Context
     }
 
     /**
-     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent) product attribute "([^"]+)"$/
+     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent|float) product attribute "([^"]+)"$/
      */
     public function theStoreHasANonTranslatableProductAttribute(string $type, string $name): void
     {
@@ -153,6 +155,53 @@ final class ProductAttributeContext implements Context
             'min' => null,
             'max' => null,
         ]);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given the store has a non-translatable select product attribute :name with value :value
+     */
+    public function theStoreHasANonTranslatableSelectProductAttributeWithValue(string $name, string $value): void
+    {
+        $choices[$this->faker->uuid] = ['en_US' => $value];
+
+        $productAttribute = $this->createProductAttribute(SelectAttributeType::TYPE, $name);
+        $productAttribute->setConfiguration([
+            'multiple' => true,
+            'choices' => $choices,
+            'min' => null,
+            'max' => null,
+        ]);
+        $productAttribute->setTranslatable(false);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given the store has a non-translatable date product attribute :name with format :format
+     */
+    public function theStoreHasANonTranslatableDateProductAttributeWithFormat(string $name, string $format): void
+    {
+        $productAttribute = $this->createProductAttribute(DateAttributeType::TYPE, $name);
+        $productAttribute->setConfiguration([
+            'format' => $format,
+        ]);
+        $productAttribute->setTranslatable(false);
+
+        $this->saveProductAttribute($productAttribute);
+    }
+
+    /**
+     * @Given the store has a non-translatable datetime product attribute :name with format :format
+     */
+    public function theStoreHasANonTranslatableDatetimeProductAttributeWithFormat(string $name, string $format): void
+    {
+        $productAttribute = $this->createProductAttribute(DatetimeAttributeType::TYPE, $name);
+        $productAttribute->setConfiguration([
+            'format' => $format,
+        ]);
+        $productAttribute->setTranslatable(false);
 
         $this->saveProductAttribute($productAttribute);
     }

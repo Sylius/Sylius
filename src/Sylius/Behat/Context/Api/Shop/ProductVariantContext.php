@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
@@ -27,6 +30,7 @@ final class ProductVariantContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -58,6 +62,27 @@ final class ProductVariantContext implements Context
         $response = $this->client->index(Resources::PRODUCT_VARIANTS);
 
         $this->sharedStorage->set('response', $response);
+    }
+
+    /**
+     * @When /^I view variants of the ("[^"]+" product)$/
+     */
+    public function iViewVariantsOfTheProduct(ProductInterface $product): void
+    {
+        $response = $this->client->index(Resources::PRODUCT_VARIANTS, ['product' => $this->iriConverter->getIriFromResource($product)]);
+
+        $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
+    }
+
+    /**
+     * @When /^I filter (?:them|variants) by ("[^"]+" option value)$/
+     */
+    public function iFilterVariantsByOption(ProductOptionValueInterface $optionValue): void
+    {
+        $this->client->addFilter('optionValues[]', $this->iriConverter->getIriFromResource($optionValue));
+        $response = $this->client->filter();
+
+        $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
     }
 
     /**
@@ -274,6 +299,68 @@ final class ProductVariantContext implements Context
         }
     }
 
+    /**
+     * @Then /^I should see variant with ("[^"]+" option) and ("[^"]+" option value) priced at ("[^"]+") at (\d)(?:st|nd|rd|th) position$/
+     */
+    public function iShouldSeeVariantWithOptionPricedAtAtPosition(
+        string $expectedOptionName,
+        string $expectedOptionValueValue,
+        int $price,
+        int $position,
+    ): void {
+        $variants = $this->sharedStorage->get('product_variant_collection');
+        Assert::greaterThan(count($variants), $position - 1, 'There are less variants than expected');
+
+        $variant = $variants[$position - 1];
+        Assert::same($variant['price'], $price);
+
+        foreach ($variant['optionValues'] as $optionValue) {
+            $optionValueData = $this->fetchItemByIri($optionValue);
+            $optionData = $this->fetchItemByIri($optionValueData['option']);
+
+            if ($optionData['name'] === $expectedOptionName && $optionValueData['value'] === $expectedOptionValueValue) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'There is no variant with "%s" option and "%s" option value',
+            $expectedOptionName,
+            $expectedOptionValueValue,
+        ));
+    }
+
+    /**
+     * @Then /^I should not see variant with "([^"]+)" option "([^"]+)"$/
+     */
+    public function iShouldNotSeeVariantWithOptionPricedAt(string $expectedOptionName, string $expectedOptionValueValue): void
+    {
+        $variants = $this->sharedStorage->get('product_variant_collection');
+
+        foreach ($variants as $variant) {
+            foreach ($variant['optionValues'] as $optionValueIri) {
+                $optionValueData = $this->fetchItemByIri($optionValueIri);
+                $optionData = $this->fetchItemByIri($optionValueData['option']);
+
+                Assert::false(
+                    $optionData['name'] === $expectedOptionName &&
+                    $optionValueData['value'] === $expectedOptionValueValue,
+                );
+            }
+        }
+    }
+
+    /**
+     * @Then I should not see any variants
+     */
+    public function iShouldNotSeeAnyVariants(): void
+    {
+        Assert::same(
+            count($this->sharedStorage->get('product_variant_collection')),
+            0,
+        );
+    }
+
     private function findVariant(?ProductVariantInterface $variant): array
     {
         $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
@@ -285,5 +372,10 @@ final class ProductVariantContext implements Context
         }
 
         return $this->responseChecker->getResponseContent($response);
+    }
+
+    private function fetchItemByIri(string $iri): array
+    {
+        return $this->responseChecker->getResponseContent($this->client->showByIri($iri));
     }
 }

@@ -16,9 +16,17 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository as BaseProductVariantRepository;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
+/**
+ * @template T of ProductVariantInterface
+ *
+ * @extends BaseProductVariantRepository<T>
+ *
+ * @implements ProductVariantRepositoryInterface<T>
+ */
 class ProductVariantRepository extends BaseProductVariantRepository implements ProductVariantRepositoryInterface
 {
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder

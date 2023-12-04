@@ -25,6 +25,9 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 class CheckoutCompletionValidator extends ConstraintValidator
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private FactoryInterface $stateMachineFactory,

@@ -127,7 +127,7 @@ and let's take first variant `@id` from list:
       ],
       "translations": {
         "en_US": {
-          "@id": "/api/v2/shop/product-variant-translation/123889",
+          "@id": "/api/v2/shop/product-variant-translations/123889",
           "@type": "ProductVariantTranslation",
           "id": 123889,
           "name": "S",

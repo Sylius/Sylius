@@ -49,7 +49,7 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             return;
         }
 
-        $multiple = $value->getConfiguration()['multiple'];
+        $multiple = $value->getConfiguration()['multiple'] ?? false;
         if (!$multiple) {
             $this->context->addViolation($constraint->messageMultiple);
 

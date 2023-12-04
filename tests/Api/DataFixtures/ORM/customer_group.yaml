@@ -1,0 +1,7 @@
+Sylius\Component\Customer\Model\CustomerGroup:
+    group_premium:
+        code: 'premium'
+        name: 'Premium'
+    group_vip:
+        code: 'vip'
+        name: 'VIP'

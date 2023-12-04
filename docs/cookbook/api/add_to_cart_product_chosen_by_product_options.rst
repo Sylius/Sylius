@@ -74,7 +74,7 @@ In the response you should get a collection with only one item:
               ],
               "translations": {
                 "en_US": {
-                  "@id": "/api/v2/shop/product-variant-translation/579960",
+                  "@id": "/api/v2/shop/product-variant-translations/579960",
                   "@type": "ProductVariantTranslation",
                   "id": 579960,
                   "name": "S Petite",

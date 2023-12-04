@@ -1,0 +1,19 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttribute",
+    "@id": "\/api\/v2\/admin\/product-attributes/origin",
+    "@type": "ProductAttribute",
+    "code": "origin",
+    "configuration": [],
+    "position": 7,
+    "storageType": "text",
+    "translatable": true,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@type": "ProductAttributeTranslation",
+            "id": "@integer@",
+            "name": "origin"
+        }
+    },
+    "type": "text"
+}

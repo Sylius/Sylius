@@ -21,6 +21,7 @@ use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Model\LocalesAwareInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 interface ChannelInterface extends
     BaseChannelInterface,
@@ -89,4 +90,8 @@ interface ChannelInterface extends
     public function removeCountry(CountryInterface $country): void;
 
     public function hasCountry(CountryInterface $country): bool;
+
+    public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void;
+
+    public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface;
 }

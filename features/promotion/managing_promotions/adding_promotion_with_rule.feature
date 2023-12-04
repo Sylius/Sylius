@@ -9,27 +9,27 @@ Feature: Adding a new promotion with rule
         And the store classifies its products as "T-Shirts" and "Mugs"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a new promotion with taxon rule
         When I want to create a new promotion
         And I specify its code as "HOLIDAY_SALE"
         And I name it "Holiday sale"
-        And I add the "Has at least one from taxons" rule configured with "T-Shirts" and "Mugs"
+        And I add the "Has at least one from taxons" rule configured with "T-Shirts" taxon and "Mugs" taxon
         And I add it
         Then I should be notified that it has been successfully created
         And the "Holiday sale" promotion should appear in the registry
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a new promotion with total price of items from taxon rule
         When I want to create a new promotion
         And I specify its code as "100_MUGS_PROMOTION"
         And I name it "100 Mugs promotion"
-        And I add the "Total price of items from taxon" rule configured with "Mugs" taxon and $100 amount for "United States" channel
+        And I add the "Total price of items from taxon" rule configured with "Mugs" taxon and "$100.00" amount for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the "100 Mugs promotion" promotion should appear in the registry
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a new promotion with contains product rule
         Given the store has a product "PHP T-Shirt" priced at "$100.00"
         When I want to create a new promotion
@@ -40,7 +40,7 @@ Feature: Adding a new promotion with rule
         Then I should be notified that it has been successfully created
         And the "PHP T-Shirt promotion" promotion should appear in the registry
 
-    @ui @javascript
+    @api @ui @javascript
     Scenario: Adding a new group based promotion
         Given the store has a customer group "Wholesale"
         When I want to create a new promotion
@@ -51,7 +51,7 @@ Feature: Adding a new promotion with rule
         Then I should be notified that it has been successfully created
         And the "Wholesale promotion" promotion should appear in the registry
 
-    @ui @javascript
+    @ui @javascript @no-api
     Scenario: Adding a new promotion of default type with one action
         When I want to create a new promotion
         And I add a new rule

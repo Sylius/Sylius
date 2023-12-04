@@ -167,12 +167,28 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $productTaxonsElement->setValue(implode(',', $productTaxonsCodes));
     }
 
-    public function isMainTaxonChosen(string $taxonName): bool
+    public function hasMainTaxon(): bool
+    {
+        $this->openTaxonBookmarks();
+
+        return $this->getDocument()->find('css', '.search > .text')->getText() !== '';
+    }
+
+    public function hasMainTaxonWithName(string $taxonName): bool
     {
         $this->openTaxonBookmarks();
         $mainTaxonElement = $this->getElement('main_taxon')->getParent();
 
         return $taxonName === $mainTaxonElement->find('css', '.search > .text')->getText();
+    }
+
+    public function isTaxonChosen(string $taxonName): bool
+    {
+        $productTaxonsElement = $this->getElement('product_taxons');
+
+        $taxonName = strtolower(str_replace('-', '_', $taxonName));
+
+        return str_contains($productTaxonsElement->getValue(), $taxonName);
     }
 
     public function disableTracking(): void

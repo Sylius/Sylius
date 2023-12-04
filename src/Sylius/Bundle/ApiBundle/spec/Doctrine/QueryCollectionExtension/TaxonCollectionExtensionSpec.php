@@ -65,7 +65,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
         $queryBuilder->addSelect('child')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->innerJoin('o.parent', 'parent')->willReturn($queryBuilder->getWrappedObject());
-        $queryBuilder->leftJoin('o.children', 'child')->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->leftJoin('o.children', 'child', 'WITH', 'child.enabled = true')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.enabled = :enabled')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->andWhere('parent.code = :parentCode')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.position')->willReturn($queryBuilder->getWrappedObject());
@@ -108,7 +108,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
         $queryBuilder->getRootAliases()->shouldBeCalled()->willReturn('o');
         $queryBuilder->addSelect('child')->shouldBeCalled()->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->innerJoin('o.parent', 'parent')->willReturn($queryBuilder->getWrappedObject());
-        $queryBuilder->leftJoin('o.children', 'child')->willReturn($queryBuilder->getWrappedObject());
+        $queryBuilder->leftJoin('o.children', 'child', 'WITH', 'child.enabled = true')->shouldBeCalled()->willReturn($queryBuilder);
         $queryBuilder->andWhere('o.enabled = :enabled')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->andWhere('parent.code = :parentCode')->willReturn($queryBuilder->getWrappedObject());
         $queryBuilder->addOrderBy('o.position')->willReturn($queryBuilder->getWrappedObject());
@@ -130,11 +130,7 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_conditions_if_logged_in_user_is_admin(
-        TaxonRepositoryInterface $taxonRepository,
         UserContextInterface $userContext,
-        TaxonInterface $menuTaxon,
-        TaxonInterface $firstTaxon,
-        TaxonInterface $secondTaxon,
         ChannelInterface $channel,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
@@ -142,23 +138,17 @@ final class TaxonCollectionExtensionSpec extends ObjectBehavior
     ): void {
         $userContext->getUser()->willReturn($admin);
 
-        $channel->getMenuTaxon()->willReturn($menuTaxon);
-
         $admin->getRoles()->shouldBeCalled()->willReturn(['ROLE_API_ACCESS']);
-
-        $menuTaxon->getCode()->willReturn('code');
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
         $queryBuilder->addSelect('child')->shouldNotBeCalled();
         $queryBuilder->innerJoin('o.parent', 'parent')->shouldNotBeCalled();
-        $queryBuilder->leftJoin('o.children', 'child')->shouldNotBeCalled();
+        $queryBuilder->leftJoin('o.children', 'child', 'WITH', 'child.enabled = true')->shouldNotBeCalled();
         $queryBuilder->andWhere('o.enabled = :enabled')->shouldNotBeCalled();
         $queryBuilder->andWhere('parent.code = :parentCode')->shouldNotBeCalled();
         $queryBuilder->addOrderBy('o.position')->shouldNotBeCalled();
         $queryBuilder->setParameter('parentCode', 'code')->shouldNotBeCalled();
         $queryBuilder->setParameter('enabled', true)->shouldNotBeCalled();
-
-        $taxonRepository->findChildrenByChannelMenuTaxon($menuTaxon)->willReturn([$firstTaxon, $secondTaxon]);
 
         $this->applyToCollection(
             $queryBuilder->getWrappedObject(),

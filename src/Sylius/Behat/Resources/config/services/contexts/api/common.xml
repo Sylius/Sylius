@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.behat.context.api.admin.save" class="Sylius\Behat\Context\Api\Common\SaveContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+        </service>
+
+        <service id="sylius.behat.context.api.shop.save" class="Sylius\Behat\Context\Api\Common\SaveContext">
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+        </service>
+
+        <service id="sylius.behat.context.api.admin.response" class="Sylius\Behat\Context\Api\Common\ResponseContext">
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+        </service>
+
+        <service id="sylius.behat.context.api.shop.response" class="Sylius\Behat\Context\Api\Common\ResponseContext">
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="sylius.behat.api_platform_client.shop" />
+        </service>
+    </services>
+</container>

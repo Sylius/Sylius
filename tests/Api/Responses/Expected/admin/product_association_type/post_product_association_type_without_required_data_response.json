@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "Please enter association type code.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "translations[en_US].name",
+            "message": "Please enter association type name.",
+            "code": @string@
+        }
+    ]
+}

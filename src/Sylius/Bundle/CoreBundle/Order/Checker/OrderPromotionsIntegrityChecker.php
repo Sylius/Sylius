@@ -26,10 +26,12 @@ final class OrderPromotionsIntegrityChecker implements OrderPromotionsIntegrityC
 
     public function check(OrderInterface $order): ?PromotionInterface
     {
+        /** @var PromotionInterface[]|ArrayCollection $previousPromotions */
         $previousPromotions = new ArrayCollection($order->getPromotions()->toArray());
 
         $this->orderProcessor->process($order);
 
+        /** @var PromotionInterface $previousPromotion */
         foreach ($previousPromotions as $previousPromotion) {
             if (!$order->getPromotions()->contains($previousPromotion)) {
                 return $previousPromotion;

@@ -16,6 +16,11 @@ namespace Sylius\Component\Channel\Factory;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @template T of ChannelInterface
+ *
+ * @implements ChannelFactoryInterface<T>
+ */
 final class ChannelFactory implements ChannelFactoryInterface
 {
     public function __construct(private FactoryInterface $defaultFactory)

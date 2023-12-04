@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
@@ -128,15 +128,6 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $response = $this->client->update();
-        $this->responseChecker->isUpdateSuccessful($response);
-    }
-
-    /**
      * @When I delete administrator with email :adminUser
      */
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
@@ -156,7 +147,7 @@ final class ManagingAdministratorsContext implements Context
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
         $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
-        $builder->withParameter('owner', $this->iriConverter->getIriFromItem($administrator));
+        $builder->withParameter('owner', $this->iriConverter->getIriFromResource($administrator));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
 
         $response = $this->client->request($builder->build());
@@ -242,17 +233,6 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Administrator could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Administrator could not be edited',
         );
     }
 

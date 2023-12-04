@@ -13,13 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Checker;
 
+use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-@trigger_error(sprintf('The "%s" class is deprecated since Sylius 1.8, use "%s" instead.', 'Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker', 'Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker'), \E_USER_DEPRECATED);
+trigger_deprecation(
+    'sylius/shipping',
+    '1.8',
+    'The "%s" class is deprecated, use "%s" instead.',
+    ShippingMethodEligibilityChecker::class,
+    CompositeShippingMethodEligibilityChecker::class,
+);
 
 /**
- * @deprecated since Sylius 1.8. Use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker instead
+ * @deprecated since Sylius 1.8. Use {@see CompositeShippingMethodEligibilityChecker} instead.
  */
 final class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {

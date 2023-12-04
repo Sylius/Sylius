@@ -17,6 +17,11 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @template T of OrderInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface OrderRepositoryInterface extends RepositoryInterface
 {
     public function countPlacedOrders(): int;
@@ -32,7 +37,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
-    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Component/Core/Repository/OrderRepositoryInterface instead */
+    /** @deprecated since Sylius 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Component/Core/Repository/OrderRepositoryInterface instead */
     public function findCartByTokenValue(string $tokenValue): ?OrderInterface;
 
     public function findCartById($id): ?OrderInterface;

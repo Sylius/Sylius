@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Behat\Service\Mocker;
 
 use Mockery\MockInterface;
-use Payum\Core\Bridge\Guzzle\HttpClient;
 use PhpSpec\ObjectBehavior;
+use Psr\Http\Client\ClientInterface;
 use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Sylius\Behat\Service\Mocker\Mocker;
 use Sylius\Behat\Service\Mocker\MockerInterface;
@@ -39,13 +39,13 @@ final class MockerSpec extends ObjectBehavior
 
     function it_mocks_given_service($container)
     {
-        $container->mock('sylius.payum.http_client', HttpClient::class)->shouldBeCalled();
+        $container->mock('sylius.payum.http_client', ClientInterface::class)->shouldBeCalled();
 
-        $this->mockService('sylius.payum.http_client', HttpClient::class);
+        $this->mockService('sylius.payum.http_client', ClientInterface::class);
     }
 
     function it_mocks_collaborator()
     {
-        $this->mockCollaborator(HttpClient::class)->shouldHaveType(MockInterface::class);
+        $this->mockCollaborator(ClientInterface::class)->shouldHaveType(MockInterface::class);
     }
 }

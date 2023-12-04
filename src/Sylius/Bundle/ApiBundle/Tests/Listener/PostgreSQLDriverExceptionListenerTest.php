@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class PostgreSQLDriverExceptionListenerTest extends TestCase
+final class PostgreSQLDriverExceptionListenerTest extends TestCase
 {
     /** @test */
     public function it_does_nothing_if_exception_is_not_a_driver_exception(): void

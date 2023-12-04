@@ -251,6 +251,14 @@ final class RegistrationContext implements Context
         Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
     }
 
+    /**
+     * @Then I should be on my account dashboard
+     * @Then I should be on registration thank you page
+     */
+    public function intentionallyLeftBlank(): void
+    {
+    }
+
     private function assertFieldValidationMessage(string $path, string $message): void
     {
         $decodedResponse = $this->getResponseContent();

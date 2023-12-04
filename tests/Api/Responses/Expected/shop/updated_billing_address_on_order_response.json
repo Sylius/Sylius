@@ -11,6 +11,7 @@
         "phoneNumber": "666111333",
         "company": "Potato Corp.",
         "countryCode": "US",
+        "provinceCode": "US-MI",
         "street": "Top secret",
         "city": "Nebraska",
         "postcode": "12343"
@@ -23,6 +24,7 @@
         "phoneNumber": "666111333",
         "company": "Potato Corp.",
         "countryCode": "US",
+        "provinceCode": "US-MI",
         "street": "Top secret",
         "city": "Nebraska",
         "postcode": "12343"
@@ -67,6 +69,7 @@
     ],
     "itemsTotal": 6000,
     "total": 6500,
+    "itemsSubtotal": 6000,
     "state": "cart",
     "taxTotal": 0,
     "taxExcludedTotal": 0,

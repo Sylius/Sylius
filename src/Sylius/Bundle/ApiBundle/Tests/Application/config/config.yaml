@@ -1,6 +1,7 @@
 imports:
     - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
+    - { resource: "_sylius.yaml" }
     - { resource: "security.yaml" }
 
 parameters:
@@ -38,6 +39,7 @@ framework:
             paths: ['%kernel.project_dir%/config/serialization']
     mailer:
         dsn: 'null://null'
+    workflows: ~
 
 doctrine_migrations:
     storage:
@@ -82,6 +84,11 @@ services:
     test.channel.id_filter:
         parent: api_platform.doctrine.orm.search_filter
         arguments: [{id: 'exact', hostname: 'partial'}]
+        tags: ['api_platform.filter']
+
+    test.country.id_filter:
+        parent: api_platform.doctrine.orm.search_filter
+        arguments: [{id: 'exact', code: 'partial'}]
         tags: ['api_platform.filter']
 
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:

@@ -42,11 +42,11 @@
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/shipping-methods/{code}</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_method:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -112,11 +112,11 @@
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/admin/shipping-methods</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:shipping_method:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:shipping_method:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shipping_method:read</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -140,7 +140,6 @@
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
                         <attribute name="description">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

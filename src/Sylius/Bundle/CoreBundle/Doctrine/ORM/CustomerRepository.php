@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
+/**
+ * @template T of CustomerInterface
+ *
+ * @implements CustomerRepositoryInterface<T>
+ */
 class CustomerRepository extends EntityRepository implements CustomerRepositoryInterface
 {
     public function countCustomers(): int

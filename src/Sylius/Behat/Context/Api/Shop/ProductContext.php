@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -25,9 +25,11 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductContext implements Context
@@ -58,6 +60,14 @@ final class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
         $this->sharedStorage->remove('product_attributes');
+    }
+
+    /**
+     * @When I try to reach unexistent product
+     */
+    public function iTryToReachUnexistentProduct(): void
+    {
+        $this->client->show(Resources::PRODUCTS, 'unexistent');
     }
 
     /**
@@ -103,7 +113,7 @@ final class ProductContext implements Context
         $this->client->index(Resources::PRODUCTS);
 
         if ($taxon !== null) {
-            $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
+            $this->client->addFilter('taxon', $this->iriConverter->getIriFromResource($taxon));
             $this->client->filter();
         }
     }
@@ -248,7 +258,7 @@ final class ProductContext implements Context
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->sharedStorage->get('product_variant');
 
-        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromItem($productVariant));
+        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromResource($productVariant));
 
         Assert::false($this->responseChecker->getValue($variantResponse, 'inStock'));
     }
@@ -270,10 +280,12 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductPrice(int $price): void
     {
-        Assert::true($this->hasProductWithPrice(
-            [$this->responseChecker->getResponseContent($this->client->getLastResponse())],
-            $price,
-        ));
+        /** @var ProductVariantInterface $checkedVariant */
+        $checkedVariant = $this->sharedStorage->get('product_variant');
+        $variant = $this->fetchItemByIri($this->iriConverter->getIriFromResource($checkedVariant));
+
+        Assert::same($variant['price'], $price);
+        Assert::same($variant['code'], $checkedVariant->getCode());
     }
 
     /**
@@ -576,9 +588,21 @@ final class ProductContext implements Context
     /**
      * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
      */
-    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValue, string $optionName): void
+    public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValueValue, string $optionName): void
     {
-        Assert::false($this->hasProductOptionWithNameAndValue($optionValue, $optionName));
+        Assert::false($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue));
+    }
+
+    /**
+     * @Then /^I should be able to select the "([^"]+)" and "([^"]+)" ([^\s]+) option values$/
+     */
+    public function iShouldBeAbleToSelectTheAndColorOptionValues(
+        string $optionValueValue1,
+        string $optionValueValue2,
+        string $optionName,
+    ): void {
+        Assert::true($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue1));
+        Assert::true($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue2));
     }
 
     /**
@@ -608,13 +632,88 @@ final class ProductContext implements Context
      */
     public function iShouldSeeTheProductAssociationWithProductsAnd(string $productAssociationName, array $products): void
     {
+        Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, $products));
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
+    }
+
+    /**
+     * @Then /^I should(?:| also) not see the product association "([^"]+)" with (product "[^"]+")$/
+     */
+    public function iShouldNotSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
+    {
+        Assert::false($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
+    }
+
+    /**
+     * @Then /^I should not see the product (association "([^"]+)")$/
+     */
+    public function iShouldNotSeeTheProductAssociation(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $productAssociationTypeIri = $this->iriConverter->getIriFromResource($productAssociationType);
+
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
 
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
         $associations = $this->responseChecker->getValue($response, 'associations');
 
-        Assert::true($this->hasAssociationsWithProducts($associations, $productAssociationName, $products));
+        foreach ($associations as $association) {
+            $associationResponse = $this->client->showByIri($association);
+            $associationTypeIri = $this->responseChecker->getValue($associationResponse, 'type');
+
+            Assert::notSame($associationTypeIri, $productAssociationTypeIri);
+        }
+    }
+
+    /**
+     * @Then I should not see information about its lowest price
+     */
+    public function iShouldNotSeeInformationAboutItsLowestPrice(): void
+    {
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $variant = $this->responseChecker->getResponseContent(
+            $this->client->showByIri((string) $product['defaultVariant']),
+        );
+
+        Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
+        Assert::same($variant['lowestPriceBeforeDiscount'], null);
+    }
+
+    /**
+     * @Then /^I should see ("[^"]+") as its lowest price before the discount$/
+     */
+    public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(int $lowestPriceBeforeDiscount): void
+    {
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $variant = $this->responseChecker->getResponseContent(
+            $this->client->showByIri((string) $product['defaultVariant']),
+        );
+
+        Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
+        Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);
+    }
+
+    /**
+     * @Then I should be informed that the product does not exist
+     */
+    public function iShouldBeInformedThatTheProductDoesNotExist(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @Then /^I should be informed that the taxon does not exist$/
+     */
+    public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
     private function hasProductWithPrice(
@@ -666,51 +765,27 @@ final class ProductContext implements Context
         return false;
     }
 
-    private function hasProductOptionWithNameAndValue(string $optionValue, string $optionName): bool
+    private function hasProductOptionWithNameAndValue(string $expectedOptionName, string $expectedOptionValueValue): bool
     {
-        $response = $this->client->getLastResponse();
-        $productOptions = $this->responseChecker->getValue($response, 'options');
+        $productVariants = $this->responseChecker->getCollection(
+            $this->client->index(
+                Resources::PRODUCT_VARIANTS,
+                ['product' => $this->iriConverter->getIriFromResource($this->sharedStorage->get('product'))],
+            ),
+        );
 
-        foreach ($productOptions as $optionIri) {
-            if (!$this->hasProductOptionWithName($optionIri, $optionName)) {
-                continue;
-            }
+        foreach ($productVariants as $productVariant) {
+            foreach ($productVariant['optionValues'] as $optionValueIri) {
+                $optionValueData = $this->fetchItemByIri($optionValueIri);
+                $optionData = $this->fetchItemByIri($optionValueData['option']);
 
-            $variants = $this->responseChecker->getValue($response, 'variants');
-            foreach ($variants as $variantIri) {
-                if ($this->variantHasProductOptionValue($variantIri, $optionValue)) {
+                if ($optionData['name'] === $expectedOptionName && $optionValueData['value'] === $expectedOptionValueValue) {
                     return true;
                 }
             }
         }
 
         return false;
-    }
-
-    private function hasProductOptionWithName(string $optionIri, string $optionName): bool
-    {
-        $response = $this->client->showByIri($optionIri);
-
-        return $this->responseChecker->hasValue($response, 'code', StringInflector::nameToUppercaseCode($optionName));
-    }
-
-    private function variantHasProductOptionValue(string $variantIri, string $optionValue): bool
-    {
-        $variants = $this->client->showByIri($variantIri);
-        $optionValues = $this->responseChecker->getValue($variants, 'optionValues');
-
-        foreach ($optionValues as $valueIri) {
-            if ($this->hasProductOptionWithValue($valueIri, $optionValue)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function hasProductOptionWithValue(string $valueIri, string $optionValue): bool
-    {
-        return $this->responseChecker->hasValue($this->client->ShowByIri($valueIri), 'code', StringInflector::nameToUppercaseCode($optionValue));
     }
 
     private function productHasProductVariantWithName(array $variants, string $variantName): bool
@@ -770,8 +845,24 @@ final class ProductContext implements Context
 
     private function isProductAssociated(ProductInterface $product, array $associatedProducts): bool
     {
-        $productIri = $this->iriConverter->getIriFromItem($product);
+        $productIri = $this->iriConverter->getIriFromResource($product);
 
         return in_array($productIri, $associatedProducts, true);
+    }
+
+    private function fetchItemByIri(string $iri): array
+    {
+        return $this->responseChecker->getResponseContent($this->client->showByIri($iri));
+    }
+
+    private function isProductAssociationWithProductsAvailable(string $productAssociationName, array $associatedProducts): bool
+    {
+        /** @var ProductInterface $product */
+        $product = $this->sharedStorage->get('product');
+
+        $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
+        $associations = $this->responseChecker->getValue($response, 'associations');
+
+        return $this->hasAssociationsWithProducts($associations, $productAssociationName, $associatedProducts);
     }
 }

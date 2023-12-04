@@ -30,16 +30,8 @@ class ChangePaymentMethod implements OrderTokenValueAwareInterface, SubresourceI
      */
     public $paymentId;
 
-    /**
-     * @immutable
-     *
-     * @var string
-     */
-    public $paymentMethodCode;
-
-    public function __construct(string $paymentMethodCode)
+    public function __construct(public string $paymentMethodCode)
     {
-        $this->paymentMethodCode = $paymentMethodCode;
     }
 
     public function getOrderTokenValue(): ?string

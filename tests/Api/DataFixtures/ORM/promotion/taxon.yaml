@@ -1,0 +1,5 @@
+Sylius\Component\Core\Model\Taxon:
+    taxon_mugs:
+        code: 'MUGS'
+    taxon_caps:
+        code: 'CAPS'

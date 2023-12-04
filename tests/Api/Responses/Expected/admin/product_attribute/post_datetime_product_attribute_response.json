@@ -1,0 +1,21 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttribute",
+    "@id": "\/api\/v2\/admin\/product-attributes\/published_at",
+    "@type": "ProductAttribute",
+    "code": "published_at",
+    "configuration": {
+        "format": "Y-m-d H:i:s"
+    },
+    "position": 0,
+    "storageType": "datetime",
+    "type": "datetime",
+    "translatable": false,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@type": "ProductAttributeTranslation",
+            "id": "@integer@",
+            "name": "Published at"
+        }
+    }
+}

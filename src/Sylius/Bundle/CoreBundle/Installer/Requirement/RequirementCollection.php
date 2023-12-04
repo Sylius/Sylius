@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
+/**
+ * @implements \IteratorAggregate<Requirement>
+ */
 abstract class RequirementCollection implements \IteratorAggregate
 {
     /** @var array|Requirement[] */

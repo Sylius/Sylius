@@ -46,6 +46,19 @@ abstract class AutocompleteHelper
         static::waitForElementToBeVisible($session, $element);
     }
 
+    public static function removeValue(Session $session, NodeElement $element, string $value): void
+    {
+        $session->wait(3000, sprintf(
+            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
+            str_replace('"', '\"', $element->getXpath()),
+        ));
+
+        $elementToRemove = $element->find('css', sprintf('a.ui.label:contains("%s")', $value));
+        $elementToRemove->find('css', 'i.delete')->click();
+
+        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+    }
+
     public static function isValueVisible(Session $session, NodeElement $element, $value): bool
     {
         static::activateAutocompleteDropdown($session, $element);

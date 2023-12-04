@@ -23,8 +23,8 @@
         <import resource="services/emails.xml" />
         <import resource="services/factories.xml" />
         <import resource="services/fixtures.xml" />
-        <import resource="services/fixtures_listeners.xml" />
         <import resource="services/fixtures_factories.xml" />
+        <import resource="services/fixtures_listeners.xml" />
         <import resource="services/form.xml" />
         <import resource="services/installer.xml" />
         <import resource="services/installer_requirements.xml" />
@@ -32,9 +32,12 @@
         <import resource="services/message_handlers.xml" />
         <import resource="services/order_processing.xml" />
         <import resource="services/payment.xml" />
+        <import resource="services/price_history.xml" />
+        <import resource="services/product_variant_map.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/providers.xml" />
         <import resource="services/shipping.xml" />
+        <import resource="services/state_machines.xml" />
         <import resource="services/state_resolvers.xml" />
         <import resource="services/taxation.xml" />
         <import resource="services/templating.xml" />
@@ -45,6 +48,7 @@
         <parameter key="sylius.order_item_quantity_modifier.limit">9999</parameter>
         <parameter key="env(SYLIUS_UNSECURED_URLS)">yes</parameter>
         <parameter key="sylius.unsecured_urls">%env(bool:SYLIUS_UNSECURED_URLS)%</parameter>
+        <parameter key="sylius.channel_pricing_log_entry.old_logs_removal_batch_size">100</parameter>
     </parameters>
 
     <services>
@@ -142,7 +146,7 @@
 
         <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.order_item.inner" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
         <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address" decoration-priority="256" public="false">
@@ -152,6 +156,7 @@
         <service id="sylius.custom_factory.channel" class="Sylius\Component\Core\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.channel.inner" />
             <argument>order_items_based</argument>
+            <argument type="service" id="sylius.factory.channel_price_history_config" />
         </service>
 
         <service id="sylius.factory.customer_after_checkout" class="Sylius\Component\Core\Factory\CustomerAfterCheckoutFactory">
@@ -161,6 +166,11 @@
 
         <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension">
+            <argument type="service" id="Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface" />
             <tag name="twig.extension" />
         </service>
 
@@ -192,7 +202,12 @@
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
         <service id="Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface" alias="sylius.customer_ip_assigner" />
 
-        <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
+        <service
+            id="sylius.calculator.product_variant_price"
+            class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator"
+        >
+            <argument type="service" id="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface" />
+        </service>
         <service id="Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
         <service id="sylius.section_resolver.uri_based_section_resolver" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
@@ -208,11 +223,20 @@
         </service>
         <service id="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface" alias="sylius.reviewer_reviews_remover" />
 
+        <service id="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface" class="Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemover">
+            <argument type="service" id="sylius.repository.channel_pricing_log_entry" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="event_dispatcher" />
+            <argument>%sylius.channel_pricing_log_entry.old_logs_removal_batch_size%</argument>
+        </service>
+
         <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sm.factory" />
             <argument>%sylius_order.order_expiration_period%</argument>
             <argument type="service" id="logger" />
+            <argument type="service" id="sylius.manager.order" />
         </service>
         <service id="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface" alias="sylius.unpaid_orders_state_updater" />
 

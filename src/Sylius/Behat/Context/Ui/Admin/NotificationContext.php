@@ -40,6 +40,8 @@ final class NotificationContext implements Context
 
     /**
      * @Then I should be notified that it has been successfully edited
+     * @Then I should be notified that it has been successfully uploaded
+     * @Then I should be notified that the changes have been successfully applied
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
@@ -76,14 +78,14 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been failed deleted :name
+     * @Then I should be notified that it is in use
      */
-    public function iShouldBeNotifiedThatItHasBeenFailedDeleted(string $name): void
+    public function iShouldBeNotifiedThatItIsInUse(): void
     {
         $this->testHelper->waitUntilNotificationPopups(
             $this->notificationChecker,
             NotificationType::failure(),
-            'Cannot delete, the ' . ucfirst($name) . ' is in use.',
+            'Cannot delete',
         );
     }
 }

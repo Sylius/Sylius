@@ -29,7 +29,6 @@
                 <option name="default">0</option>
             </options>
         </field>
-
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface" fetch="EAGER">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
@@ -79,6 +78,13 @@
 
         <one-to-one field="shopBillingData" target-entity="Sylius\Component\Core\Model\ShopBillingDataInterface">
             <join-column name="shop_billing_data_id" on-delete="CASCADE"/>
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-one>
+
+        <one-to-one field="channelPriceHistoryConfig" target-entity="Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface">
+            <join-column name="channel_price_history_config_id" on-delete="CASCADE"/>
             <cascade>
                 <cascade-all />
             </cascade>

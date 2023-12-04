@@ -45,10 +45,6 @@
             <argument>%locale%</argument>
         </service>
 
-        <service id="sylius.test.factory.promotion" class="Sylius\Component\Core\Test\Factory\TestPromotionFactory">
-            <argument type="service" id="sylius.factory.promotion" />
-        </service>
-
         <service id="sylius.liip.filter_service" alias="liip_imagine.service.filter" public="true" />
     </services>
 </container>

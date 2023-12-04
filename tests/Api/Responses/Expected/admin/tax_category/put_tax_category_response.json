@@ -1,0 +1,11 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxCategory",
+    "@id": "\/api\/v2\/admin\/tax-categories\/default",
+    "@type": "TaxCategory",
+    "id": "@integer@",
+    "code": "default",
+    "name": "Not so default",
+    "description": null,
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

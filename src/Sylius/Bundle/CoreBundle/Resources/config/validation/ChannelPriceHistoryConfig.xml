@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping https://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Core\Model\ChannelPriceHistoryConfig">
+        <property name="lowestPriceForDiscountedProductsCheckingPeriod">
+            <constraint name="NotNull">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Type">
+                <option name="value">int</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="LessThan">
+                <option name="value">2147483647</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+                <option name="message">sylius.channel_price_history_config.lowest_price_for_discounted_products_checking_period.less_than</option>
+            </constraint>
+            <constraint name="GreaterThan">
+                <option name="value">0</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+                <option name="message">sylius.channel_price_history_config.lowest_price_for_discounted_products_checking_period.greater_than</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

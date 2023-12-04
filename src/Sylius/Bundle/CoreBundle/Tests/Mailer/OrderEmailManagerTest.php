@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Mailer;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class OrderEmailManagerTest extends KernelTestCase
 {
+    use ProphecyTrait;
     use SwiftmailerAssertionTrait;
 
     private const RECIPIENT_EMAIL = 'test@example.com';

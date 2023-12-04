@@ -39,6 +39,10 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:channel:create</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel:read</attribute>
+                </attribute>
+                <attribute name="validation_groups">sylius</attribute>
             </collectionOperation>
         </collectionOperations>
 
@@ -71,6 +75,15 @@
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:channel:update</attribute>
                 </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:channel:read</attribute>
+                </attribute>
+                <attribute name="validation_groups">sylius</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/channels/{code}</attribute>
             </itemOperation>
         </itemOperations>
 
@@ -78,12 +91,16 @@
             <subresourceOperation name="shop_billing_data_get_subresource">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/channels/{code}/shop-billing-data</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:shop_billing_data:read</attribute>
+                </attribute>
             </subresourceOperation>
         </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" writable="true" readable="true" />
+        <property name="enabled" writable="true" readable="true" />
         <property name="description" writable="true" readable="true" />
         <property name="hostname" writable="true" readable="true" />
         <property name="color" writable="true" readable="true" />
@@ -105,5 +122,6 @@
             <subresource resourceClass="%sylius.model.shop_billing_data.class%" collection="false" />
         </property>
         <property name="menuTaxon" writable="true" readable="true" />
+        <property name="channelPriceHistoryConfig" writable="true" readable="true" />
     </resource>
 </resources>

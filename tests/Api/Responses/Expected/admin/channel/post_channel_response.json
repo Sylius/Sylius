@@ -1,0 +1,30 @@
+{
+    "@context": "\/api\/v2\/contexts\/Channel",
+    "@id": "\/api\/v2\/admin\/channels\/@string@",
+    "@type": "Channel",
+    "code": "WEB",
+    "name": "Web Store",
+    "enabled": true,
+    "description": "Lorem ipsum",
+    "hostname": "test.com",
+    "color": "blue",
+    "baseCurrency": "\/api\/v2\/admin\/currencies\/USD",
+    "defaultLocale": "\/api\/v2\/admin\/locales\/en_US",
+    "defaultTaxZone": null,
+    "taxCalculationStrategy": "order_items_based",
+    "currencies": [],
+    "locales": [
+        "\/api\/v2\/admin\/locales\/en_US"
+    ],
+    "countries": [],
+    "themeName": "garish",
+    "contactEmail": "contact@test.com",
+    "contactPhoneNumber": "1-800-00-00-00",
+    "skippingShippingStepAllowed": false,
+    "skippingPaymentStepAllowed": true,
+    "accountVerificationRequired": true,
+    "shippingAddressInCheckoutRequired": false,
+    "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
+    "menuTaxon": null,
+    "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
+}

@@ -38,11 +38,11 @@
             <collectionOperation name="admin_post">
                 <attribute name="path">/admin/catalog-promotions</attribute>
                 <attribute name="method">POST</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -94,11 +94,11 @@ Example configuration for `percentage_discount` action type:
             <itemOperation name="admin_put">
                 <attribute name="path">/admin/catalog-promotions/{code}</attribute>
                 <attribute name="method">PUT</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:catalog_promotion:read</attribute>
-                </attribute>
                 <attribute name="denormalization_context">
                     <attribute name="groups">admin:catalog_promotion:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:catalog_promotion:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
                     <attribute name="description">
@@ -164,7 +164,6 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="en_US">
                         <attribute name="label">string</attribute>
                         <attribute name="description">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

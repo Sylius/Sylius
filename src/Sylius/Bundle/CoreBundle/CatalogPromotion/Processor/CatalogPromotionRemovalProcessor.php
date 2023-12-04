@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
-use Sylius\Bundle\CoreBundle\CatalogPromotion\Command\RemoveInactiveCatalogPromotion;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncer;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
-use Sylius\Component\Promotion\Event\CatalogPromotionEnded;
 use Sylius\Component\Promotion\Exception\CatalogPromotionNotFoundException;
 use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
@@ -26,29 +26,37 @@ final class CatalogPromotionRemovalProcessor implements CatalogPromotionRemovalP
 {
     public function __construct(
         private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
-        private MessageBusInterface $commandBus,
-        private MessageBusInterface $eventBus,
+        /** @var CatalogPromotionRemovalAnnouncerInterface $catalogPromotionRemovalAnnouncer */
+        private CatalogPromotionRemovalAnnouncerInterface|MessageBusInterface $catalogPromotionRemovalAnnouncer,
+        private ?MessageBusInterface $eventBus = null, /** @phpstan-ignore-line */
     ) {
+        if ($catalogPromotionRemovalAnnouncer instanceof MessageBusInterface) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Passing an instance of %s as second constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
+                MessageBusInterface::class,
+                self::class,
+                CatalogPromotionRemovalAnnouncerInterface::class,
+            );
+
+            $this->catalogPromotionRemovalAnnouncer = new CatalogPromotionRemovalAnnouncer($catalogPromotionRemovalAnnouncer);
+        }
+
+        if (null !== $eventBus) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Passing third constructor argument for %s is deprecated and will be removed in Sylius 2.0.',
+                self::class,
+            );
+        }
     }
 
     public function removeCatalogPromotion(string $catalogPromotionCode): void
     {
         /** @var CatalogPromotionInterface|null $catalogPromotion */
         $catalogPromotion = $this->getCatalogPromotion($catalogPromotionCode);
-
-        if ($catalogPromotion->getState() === CatalogPromotionStates::STATE_INACTIVE) {
-            $this->announceInactiveCatalogPromotionRemoval($catalogPromotionCode);
-
-            return;
-        }
-
-        if ($catalogPromotion->getState() === CatalogPromotionStates::STATE_ACTIVE) {
-            $this->disableCatalogPromotion($catalogPromotion);
-            $this->announceCatalogPromotionEnd($catalogPromotionCode);
-            $this->announceInactiveCatalogPromotionRemoval($catalogPromotionCode);
-
-            return;
-        }
 
         if ($catalogPromotion->getState() === CatalogPromotionStates::STATE_PROCESSING) {
             throw new InvalidCatalogPromotionStateException(
@@ -59,22 +67,11 @@ final class CatalogPromotionRemovalProcessor implements CatalogPromotionRemovalP
             );
         }
 
-        throw new \DomainException('Invalid catalog promotion state.');
-    }
+        if (!in_array($catalogPromotion->getState(), [CatalogPromotionStates::STATE_ACTIVE, CatalogPromotionStates::STATE_INACTIVE], true)) {
+            throw new \DomainException('Invalid catalog promotion state.');
+        }
 
-    private function announceCatalogPromotionEnd(string $catalogPromotionCode): void
-    {
-        $this->eventBus->dispatch(new CatalogPromotionEnded($catalogPromotionCode));
-    }
-
-    private function announceInactiveCatalogPromotionRemoval(string $catalogPromotionCode): void
-    {
-        $this->commandBus->dispatch(new RemoveInactiveCatalogPromotion($catalogPromotionCode));
-    }
-
-    private function disableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
-    {
-        $catalogPromotion->setEnabled(false);
+        $this->catalogPromotionRemovalAnnouncer->dispatchCatalogPromotionRemoval($catalogPromotion);
     }
 
     private function getCatalogPromotion(string $catalogPromotionCode): CatalogPromotionInterface

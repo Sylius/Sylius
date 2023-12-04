@@ -36,6 +36,9 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     /** @var int */
     protected $minimumPrice = 0;
 
+    /** @var int|null */
+    protected $lowestPriceBeforeDiscount;
+
     /** @var ArrayCollection<array-key, CatalogPromotionInterface> */
     protected $appliedPromotions;
 
@@ -92,6 +95,16 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     public function setOriginalPrice(?int $originalPrice): void
     {
         $this->originalPrice = $originalPrice;
+    }
+
+    public function getLowestPriceBeforeDiscount(): ?int
+    {
+        return $this->lowestPriceBeforeDiscount;
+    }
+
+    public function setLowestPriceBeforeDiscount(?int $lowestPriceBeforeDiscount): void
+    {
+        $this->lowestPriceBeforeDiscount = $lowestPriceBeforeDiscount;
     }
 
     public function isPriceReduced(): bool

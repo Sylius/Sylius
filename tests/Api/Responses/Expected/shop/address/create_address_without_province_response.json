@@ -1,0 +1,16 @@
+{
+    "@context": "\/api\/v2\/contexts\/Address",
+    "@id": "\/api\/v2\/shop\/addresses\/@integer@",
+    "@type": "Address",
+    "id": "@integer@",
+    "firstName":"TEST",
+    "lastName":"TEST",
+    "phoneNumber":"666111333",
+    "company":"Potato Corp.",
+    "countryCode":"DE",
+    "provinceCode":null,
+    "provinceName":null,
+    "street":"Top secret",
+    "city":"Nebraska",
+    "postcode":"12343"
+}

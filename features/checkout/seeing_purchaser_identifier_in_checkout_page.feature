@@ -6,7 +6,7 @@ Feature: Seeing purchaser identifier in checkout page
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Gaming chair" priced at "$399"
+        And the store has a product "Gaming chair" priced at "$399.00"
         And the store ships everywhere for Free
         And the store allows paying Offline
         And there is a customer "John Doe" identified by an email "john@example.com" and a password "secret"
