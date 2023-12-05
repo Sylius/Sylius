@@ -996,6 +996,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then I should see the cart promotion label :label
+     */
+    public function iShouldSeeTheCartPromotionLabel(string $label): void
+    {
+        Assert::true($this->showPage->hasPromotionLabel($label));
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

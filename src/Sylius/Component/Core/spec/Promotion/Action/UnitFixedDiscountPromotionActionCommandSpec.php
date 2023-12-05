@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -71,6 +72,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
         ChannelPricingInterface $channelPricing2,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -101,6 +103,18 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
         $promotion->getAppliesToDiscounted()->willReturn(true);
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $orderItem1->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $unit2->getOrderItem()->willReturn($orderItem2);
+        $orderItem2->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
@@ -142,6 +156,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing1,
         ChannelPricingInterface $channelPricing2,
         CatalogPromotionInterface $catalogPromotion,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -177,6 +192,18 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
         $promotion->getAppliesToDiscounted()->willReturn(false);
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $orderItem1->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $unit2->getOrderItem()->willReturn($orderItem2);
+        $orderItem2->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment);
         $promotionAdjustment->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
@@ -249,6 +276,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
         ChannelPricingInterface $channelPricing2,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -279,6 +307,18 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
         $promotion->getAppliesToDiscounted()->willReturn(true);
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $orderItem1->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $unit2->getOrderItem()->willReturn($orderItem2);
+        $orderItem2->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
@@ -321,6 +361,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion,
         ChannelPricingInterface $channelPricing1,
         ChannelPricingInterface $channelPricing2,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
@@ -353,6 +394,18 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
+
+        $unit1->getOrderItem()->willReturn($orderItem1);
+        $orderItem1->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $unit2->getOrderItem()->willReturn($orderItem1);
+        $orderItem1->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Test promotion');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 

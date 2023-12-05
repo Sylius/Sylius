@@ -27,6 +27,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 
 final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
@@ -60,6 +61,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
         ChannelPricingInterface $magnumItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -94,8 +96,20 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
             ->willReturn(new ArrayCollection([$magnumUnit->getWrappedObject()]))
         ;
 
-        $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
+
+        $firstColtUnit->getOrderItem()->willReturn($coltItem);
+        $secondColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $magnumUnit->getOrderItem()->willReturn($magnumItem);
+        $magnumItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 500)
@@ -132,6 +146,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
         ChannelPricingInterface $magnumItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -167,6 +182,18 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
+        $coltUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $magnumUnit->getOrderItem()->willReturn($magnumItem);
+        $magnumItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($adjustment)
@@ -200,6 +227,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ChannelPricingInterface $coltItemChannelPricing,
         ChannelPricingInterface $magnumItemChannelPricing,
         ChannelPricingInterface $winchesterItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(3);
         $order->getChannel()->willReturn($channel);
@@ -248,6 +276,24 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
+        $coltUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $magnumUnit->getOrderItem()->willReturn($magnumItem);
+        $magnumItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $winchesterUnit->getOrderItem()->willReturn($winchesterItem);
+        $winchesterItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($firstAdjustment, $secondAdjustment)
@@ -277,6 +323,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ChannelInterface $channel,
         ProductVariantInterface $coltItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getChannel()->willReturn($channel);
@@ -309,6 +356,24 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
+        $firstColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $secondColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $thirdColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($firstAdjustment, $secondAdjustment)
@@ -336,6 +401,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ChannelInterface $channel,
         ProductVariantInterface $coltItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(1);
         $order->getChannel()->willReturn($channel);
@@ -362,6 +428,18 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
+
+        $firstColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $secondColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
@@ -394,6 +472,7 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ProductVariantInterface $magnumItemVariant,
         ChannelPricingInterface $coltItemChannelPricing,
         ChannelPricingInterface $magnumItemChannelPricing,
+        PromotionTranslationInterface $translation,
     ): void {
         $order->countItems()->willReturn(2);
         $order->getChannel()->willReturn($channel);
@@ -430,6 +509,24 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $promotion->getName()->willReturn('Winter guns promotion!');
         $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
+
+        $firstColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $secondColtUnit->getOrderItem()->willReturn($coltItem);
+        $coltItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
+
+        $magnumUnit->getOrderItem()->willReturn($magnumItem);
+        $magnumItem->getOrder()->willReturn($order);
+        $order->getLocaleCode()->willReturn('en_US');
+        $translation->getLabel()->willReturn('Winter guns promotion!');
+        $promotion->getTranslation('en_US')->willReturn($translation);
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', -500)

@@ -121,6 +121,11 @@ parameters:
 			path: src/Sylius/Bundle/AdminBundle/Controller/DashboardController.php
 
 		-
+			message: "#^Call to static method create\\(\\) on an unknown class Nyholm\\\\Psr7\\\\Stream\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/AdminBundle/Controller/NotificationController.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\AdminBundle\\\\Controller\\\\RedirectHandler\\:\\:redirectToRoute\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/AdminBundle/Controller/RedirectHandler.php
@@ -4304,6 +4309,16 @@ parameters:
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\FilterExtension\\:\\:filter\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/CoreBundle/Twig/FilterExtension.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\GenerateUrlFromAdjustmentExtension\\:\\:__construct\\(\\) has parameter \\$adjustmentRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Twig/GenerateUrlFromAdjustmentExtension.php
+
+		-
+			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Twig\\\\GenerateUrlFromAdjustmentExtension\\:\\:__construct\\(\\) has parameter \\$promotionRepository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: src/Sylius/Bundle/CoreBundle/Twig/GenerateUrlFromAdjustmentExtension.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\CoreBundle\\\\Validator\\\\Constraints\\\\CartItemAvailabilityValidator\\:\\:validate\\(\\) has parameter \\$value with no type specified\\.$#"

@@ -22,6 +22,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface as OrderAdjustmentInterface
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -68,7 +69,7 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
             return;
         }
 
-        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+        $adjustment = $this->createAdjustment($promotion, $unit, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
 
         /** @var OrderItemInterface $orderItem */
         $orderItem = $unit->getOrderItem();
@@ -90,12 +91,19 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
 
     protected function createAdjustment(
         PromotionInterface $promotion,
+        OrderItemUnitInterface $unit,
         string $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
     ): OrderAdjustmentInterface {
+        /** @var OrderInterface $order */
+        $order = $unit->getOrderItem()->getOrder();
+
+        /** @var PromotionTranslationInterface $translation */
+        $translation = $promotion->getTranslation($order->getLocaleCode());
+
         /** @var OrderAdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
-        $adjustment->setLabel($promotion->getName());
+        $adjustment->setLabel($translation->getLabel() ?? $promotion->getName());
         $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;

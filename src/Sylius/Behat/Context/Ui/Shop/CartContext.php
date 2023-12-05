@@ -124,6 +124,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^I use the ("([^"]+)" locale)$/
+     */
+    public function iUseTheLocale(string $localeCode): void
+    {
+        $this->sharedStorage->set('current_locale_code', $localeCode);
+    }
+
+    /**
      * @Then the grand total value should be :total
      * @Then my cart total should be :total
      * @Then the cart total should be :total
