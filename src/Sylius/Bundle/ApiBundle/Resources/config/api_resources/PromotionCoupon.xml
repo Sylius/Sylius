@@ -51,14 +51,14 @@
                 <attribute name="path">/promotion-coupons/generate</attribute>
                 <attribute name="input">Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon</attribute>
                 <attribute name="denormalization_context">
-                    <attribute name="groups">admin:promotion_coupon:update</attribute>
+                    <attribute name="groups">admin:promotion_coupon:generate</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>
                 <attribute name="openapi_context">
-                    <attribute name="summary">Generate promotion coupons</attribute>
-                    <attribute name="description">Generate promotion coupons</attribute>
+                    <attribute name="summary">Generates promotion coupons</attribute>
+                    <attribute name="description">Generates promotion coupons</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>

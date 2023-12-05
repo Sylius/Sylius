@@ -150,7 +150,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I specify their prefix as :prefix
      */
-    public function specifyPrefixAs(string $prefix): void
+    public function iSpecifyPrefixAs(string $prefix): void
     {
         $this->request->updateContent(['prefix' => $prefix]);
     }
@@ -158,7 +158,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When I specify their suffix as :suffix
      */
-    public function specifySuffixAs(string $suffix): void
+    public function iSpecifySuffixAs(string $suffix): void
     {
         $this->request->updateContent(['suffix' => $suffix]);
     }
