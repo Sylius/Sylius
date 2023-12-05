@@ -115,14 +115,14 @@ final class OrdersTest extends JsonApiTestCase
             content: json_encode([
                 'firstName' => 'Updated: Adam',
                 'lastName' => 'Updated: Handley',
-                'company'=> 'Updated: FMŻ',
+                'company' => 'Updated: FMŻ',
                 'street' => 'Updated: Kościuszki 21',
                 'countryCode' => 'Updated: FR',
                 'city' => 'Updated: Bordeaux',
                 'postcode' => 'Updated: 99-999',
                 'phoneNumber' => 'Updated: 911213969',
                 'provinceCode' => 'Updated: PL-WP',
-                'provinceName' => 'Updated: wielkopolskie'
+                'provinceName' => 'Updated: wielkopolskie',
             ]),
         );
 
@@ -221,7 +221,7 @@ final class OrdersTest extends JsonApiTestCase
                 'postcode' => 'Updated: 00-001',
                 'phoneNumber' => 'Updated: 48222333444',
                 'provinceCode' => 'Updated: PL-MA',
-                'provinceName' => 'Updated: mazowieckie'
+                'provinceName' => 'Updated: mazowieckie',
             ]),
         );
 

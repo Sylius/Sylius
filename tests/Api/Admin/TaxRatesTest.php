@@ -81,7 +81,7 @@ final class TaxRatesTest extends JsonApiTestCase
                 'amount' => '0.9',
                 'includedInPrice' => true,
                 'calculator' => 'default',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -111,7 +111,7 @@ final class TaxRatesTest extends JsonApiTestCase
                 'amount' => '0.3',
                 'includedInPrice' => true,
                 'calculator' => 'default',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

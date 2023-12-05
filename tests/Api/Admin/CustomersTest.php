@@ -78,11 +78,11 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
-                'birthday' => "2023-10-24T11:00:00.000Z",
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'gender' => 'm',
                 'phoneNumber' => '+48123456789',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -114,12 +114,12 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
-                'birthday' => "2023-10-24T11:00:00.000Z",
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'gender' => 'm',
                 'group' => '/api/v2/admin/customer-groups/' . $group->getCode(),
                 'phoneNumber' => '+48123456789',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -141,13 +141,13 @@ final class CustomersTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'email' => 'api@com',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_email_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -165,13 +165,13 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'J',
                 'lastName' => 'D',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_name_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -188,13 +188,13 @@ final class CustomersTest extends JsonApiTestCase
             content: json_encode([
                 'email' => 'api@example.com',
                 'gender' => 'a',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_gender_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -223,12 +223,12 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Lim',
-                'birthday' => "2023-09-24T11:00:00.000Z",
+                'birthday' => '2023-09-24T11:00:00.000Z',
                 'gender' => 'f',
                 'group' => '/api/v2/admin/customer-groups/' . $group->getCode(),
                 'phoneNumber' => '+48987654321',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -253,13 +253,13 @@ final class CustomersTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'gender' => 'a',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/update_customer_with_invalid_gender_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 }

@@ -193,7 +193,7 @@ final class PromotionContext implements Context
                 [
                     'code' => $couponCode,
                     'usage_limit' => $usageLimit,
-                ]
+                ],
             ],
             couponBased: true,
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),

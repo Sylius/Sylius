@@ -35,7 +35,7 @@ final class CustomersTest extends JsonApiTestCase
             method: 'PUT',
             uri: '/api/v2/shop/customers/' . $customer->getId(),
             server: $header,
-            content: json_encode(['firstName' => 'John'], JSON_THROW_ON_ERROR),
+            content: json_encode(['firstName' => 'John'], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -58,7 +58,7 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'shop@example.com',
                 'password' => 'sylius',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -77,8 +77,8 @@ final class CustomersTest extends JsonApiTestCase
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'oliver@doe.com',
-                'password' => 'sylius'
-            ], JSON_THROW_ON_ERROR),
+                'password' => 'sylius',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -104,8 +104,8 @@ final class CustomersTest extends JsonApiTestCase
                 'firstName' => 'John',
                 'lastName' => 'Wick',
                 'gender' => 'm',
-                'subscribedToNewsletter' => true
-            ], JSON_THROW_ON_ERROR),
+                'subscribedToNewsletter' => true,
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();

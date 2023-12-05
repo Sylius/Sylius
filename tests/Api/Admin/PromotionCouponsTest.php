@@ -80,7 +80,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'reusableFromCancelledOrders' => false,
                 'expiresAt' => '23-12-2023',
                 'promotion' => 'api/v2/admin/promotions/' . $promotion->getCode(),
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -108,7 +108,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'perCustomerUsageLimit' => 5,
                 'reusableFromCancelledOrders' => false,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

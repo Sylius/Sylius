@@ -76,9 +76,9 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                    ]
-                ]
-            ], JSON_THROW_ON_ERROR),
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -125,9 +125,9 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                    ]
-                ]
-            ], JSON_THROW_ON_ERROR),
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -160,7 +160,7 @@ final class TaxonsTest extends JsonApiTestCase
                     ],
                 ],
                 'enabled' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

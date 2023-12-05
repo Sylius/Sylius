@@ -58,15 +58,15 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountVerificationEmailHandler(
             new SendAccountVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);
@@ -108,15 +108,15 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $sendAccountVerificationEmailHandler = new SendAccountVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountVerificationEmailHandler(
             new SendAccountVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);

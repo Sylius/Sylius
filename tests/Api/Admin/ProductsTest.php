@@ -115,7 +115,7 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Opis kubka',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -167,7 +167,7 @@ final class ProductsTest extends JsonApiTestCase
                         'name' => 'Kubek',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -194,9 +194,9 @@ final class ProductsTest extends JsonApiTestCase
                         'slug' => 'mug',
                         'name' => 'Mug',
                         'locale' => 'locale',
-                    ]
+                    ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -234,7 +234,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         '@id' => sprintf(
                             '/api/v2/admin/product-attribute-values/%s',
-                            $product->getAttributeByCodeAndLocale('MATERIAL', 'en_US')->getId()
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'en_US')->getId(),
                         ),
                         'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
                         'value' => 'Cotton',
@@ -243,7 +243,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         '@id' => sprintf(
                             '/api/v2/admin/product-attribute-values/%s',
-                            $product->getAttributeByCodeAndLocale('MATERIAL', 'pl_PL')->getId()
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'pl_PL')->getId(),
                         ),
                         'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
                         'value' => 'Bawełna',
@@ -252,7 +252,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         'attribute' => '/api/v2/admin/product-attributes/dishwasher_safe',
                         'value' => true,
-                    ]
+                    ],
                 ],
                 'translations' => [
                     'en_US' => [
@@ -274,7 +274,7 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Opis czapki',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
