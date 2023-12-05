@@ -19,9 +19,13 @@ final class ChannelCodeCollection extends Constraint
 {
     /** @var array<Constraint> */
     public array $constraints = [];
+
     public bool $allowExtraFields = false;
+
     public bool $allowMissingFields = false;
+
     public ?string $extraFieldsMessage = null;
+
     public ?string $missingFieldsMessage = null;
 
     public function validatedBy(): string

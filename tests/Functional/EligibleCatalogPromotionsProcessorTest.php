@@ -54,7 +54,7 @@ final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
 
         $actualDateTimes = array_map(
             fn (CatalogPromotionInterface $eligibleCatalogPromotion) => $eligibleCatalogPromotion->getStartDate(),
-            $eligibleCatalogPromotions
+            $eligibleCatalogPromotions,
         );
 
         foreach ($actualDateTimes as $actualDateTime) {

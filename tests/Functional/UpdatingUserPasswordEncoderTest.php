@@ -43,7 +43,7 @@ final class UpdatingUserPasswordEncoderTest extends AbstractWebTestCase
             ],
             [],
             [],
-            PurgeMode::createDeleteMode()
+            PurgeMode::createDeleteMode(),
         );
     }
 
@@ -127,7 +127,7 @@ final class UpdatingUserPasswordEncoderTest extends AbstractWebTestCase
             AbstractResourceOwner::class,
             [
                 'getName' => 'resourceProviderName',
-            ]
+            ],
         );
 
         $responseMock = $this->createConfiguredMock(
@@ -137,7 +137,7 @@ final class UpdatingUserPasswordEncoderTest extends AbstractWebTestCase
                 'getResourceOwner' => $resourceOwnerMock,
                 'getAccessToken' => 'LongAccessToken',
                 'getRefreshToken' => 'LongRefreshToken',
-            ]
+            ],
         );
 
         $oAuthUserProvider->connect($shopUser, $responseMock);

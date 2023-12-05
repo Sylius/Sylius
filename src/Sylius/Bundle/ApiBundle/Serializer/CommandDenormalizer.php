@@ -40,7 +40,7 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
             $previousException = $exception->getPrevious();
             if ($previousException instanceof NotNormalizableValueException) {
                 throw new InvalidRequestArgumentException(
-                    sprintf('Request field "%s" should be of type "%s".', $previousException->getPath(), implode(', ', $previousException->getExpectedTypes()))
+                    sprintf('Request field "%s" should be of type "%s".', $previousException->getPath(), implode(', ', $previousException->getExpectedTypes())),
                 );
             }
 

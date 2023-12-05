@@ -13,12 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Promotion;
 
-use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
-use Sylius\Behat\Service\TabsHelper;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Webmozart\Assert\Assert;
 
 final class FormElement extends Element implements FormElementInterface
 {

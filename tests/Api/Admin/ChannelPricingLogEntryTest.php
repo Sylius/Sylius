@@ -58,7 +58,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_pricing_log_entry_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -76,7 +76,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_pricing_log_entries_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -98,7 +98,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_filtered_channel_pricing_log_entries_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

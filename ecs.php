@@ -22,7 +22,7 @@ return static function (ECSConfig $config): void {
     $config->import('vendor/sylius-labs/coding-standard/ecs.php');
 
     $config->parallel();
-    $config->paths(['src/Sylius']);
+    $config->paths(['src/Sylius', 'tests']);
     $config->skip([
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',

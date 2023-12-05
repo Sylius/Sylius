@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class PromotionCouponPromotionFilter extends AbstractContextAwareFilter
 {
-    const PROPERTY = 'promotion';
+    public const PROPERTY = 'promotion';
 
     /** @param array<array-key, mixed> $properties */
     public function __construct(

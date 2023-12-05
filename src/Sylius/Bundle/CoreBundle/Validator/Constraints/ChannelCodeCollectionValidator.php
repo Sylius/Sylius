@@ -28,7 +28,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
     {
     }
 
-    /** @param null|array<array-key, mixed> $value */
+    /** @param mixed $value */
     public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof ChannelCodeCollection) {

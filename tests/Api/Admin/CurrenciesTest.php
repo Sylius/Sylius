@@ -71,7 +71,7 @@ final class CurrenciesTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'KRW',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

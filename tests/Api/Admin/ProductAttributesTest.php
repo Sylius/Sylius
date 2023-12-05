@@ -113,7 +113,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -142,7 +142,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -171,7 +171,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'New',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -200,7 +200,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Pages',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -229,7 +229,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Display size',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -258,7 +258,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Damage reduction',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -290,7 +290,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Published at',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -322,7 +322,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Published at',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -365,7 +365,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -413,7 +413,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Test',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -446,7 +446,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -489,7 +489,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -532,7 +532,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -574,7 +574,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                         'name' => 'Material',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -607,7 +607,7 @@ final class ProductAttributesTest extends JsonApiTestCase
                             'fr_FR' => 'fait la main',
                         ],
                         '0afb4e88-cd08-11ec-bcd4-0242ac120005' => [
-                            'fr_FR' =>  'coffret cadeau',
+                            'fr_FR' => 'coffret cadeau',
                             'en_US' => 'gift wrapping',
                             'pl_PL' => 'pakowanie na prezent',
                         ],
@@ -632,8 +632,8 @@ final class ProductAttributesTest extends JsonApiTestCase
                     'pl_PL' => [
                         'name' => 'Dodatkowe informacje',
                     ],
-                ]
-            ], JSON_THROW_ON_ERROR),
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -661,7 +661,7 @@ final class ProductAttributesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'NEW_CODE',
                 'type' => TextAreaAttributeType::TYPE,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

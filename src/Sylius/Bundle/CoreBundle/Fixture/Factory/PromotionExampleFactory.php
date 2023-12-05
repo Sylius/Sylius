@@ -172,7 +172,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         };
     }
 
-    /** @return iterable<null|string> */
+    /** @return iterable<string|null> */
     private function getLocales(): iterable
     {
         /** @var LocaleInterface[] $locales */

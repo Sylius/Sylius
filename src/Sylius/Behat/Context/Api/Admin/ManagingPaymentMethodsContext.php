@@ -358,7 +358,8 @@ final class ManagingPaymentMethodsContext implements Context
     public function thisPaymentMethodNameShouldStillBeNamed(string $paymentMethodName): void
     {
         Assert::inArray(
-            $paymentMethodName, $this->getPaymentMethodNamesFromCollection(),
+            $paymentMethodName,
+            $this->getPaymentMethodNamesFromCollection(),
             sprintf('Payment method with name %s does not exist', $paymentMethodName),
         );
     }

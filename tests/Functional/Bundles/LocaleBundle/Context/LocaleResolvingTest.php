@@ -31,7 +31,7 @@ final class LocaleResolvingTest extends KernelTestCase
             uri: '/en_US/',
             server: [
                 'HTTP_ACCEPT_LANGUAGE' => 'pl_PL',
-            ]
+            ],
         );
 
         $this->bootKernel();
@@ -55,7 +55,7 @@ final class LocaleResolvingTest extends KernelTestCase
             uri: '/admin/login',
             server: [
                 'HTTP_ACCEPT_LANGUAGE' => 'pl_PL',
-            ]
+            ],
         );
 
         $this->bootKernel();

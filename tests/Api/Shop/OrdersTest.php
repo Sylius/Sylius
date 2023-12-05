@@ -184,7 +184,7 @@ final class OrdersTest extends JsonApiTestCase
             content: json_encode([
                 'productVariant' => '/api/v2/shop/product-variants/MUG_BLUE',
                 'quantity' => 3,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -230,7 +230,7 @@ final class OrdersTest extends JsonApiTestCase
             server: array_merge($authentication, self::PATCH_CONTENT_TYPE_HEADER),
             content: json_encode([
                 'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -268,7 +268,7 @@ final class OrdersTest extends JsonApiTestCase
             server: array_merge($authentication, self::PATCH_CONTENT_TYPE_HEADER),
             content: json_encode([
                 'paymentMethod' => '/api/v2/shop/payment-methods/CASH_ON_DELIVERY',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -326,15 +326,15 @@ final class OrdersTest extends JsonApiTestCase
         $country = $fixtures['country_US'];
 
         $billingAddress = [
-            'firstName'=> 'Jane',
-            'lastName'=> 'Doe',
-            'phoneNumber'=> '666111333',
-            'company'=> 'Potato Corp.',
-            'countryCode'=> $country->getCode(),
+            'firstName' => 'Jane',
+            'lastName' => 'Doe',
+            'phoneNumber' => '666111333',
+            'company' => 'Potato Corp.',
+            'countryCode' => $country->getCode(),
             'provinceCode' => 'US-MI',
-            'street'=> 'Top secret',
-            'city'=> 'Nebraska',
-            'postcode'=> '12343',
+            'street' => 'Top secret',
+            'city' => 'Nebraska',
+            'postcode' => '12343',
         ];
 
         $this->client->request(
@@ -344,7 +344,7 @@ final class OrdersTest extends JsonApiTestCase
             content: json_encode([
                 'email' => 'oliver@doe.com',
                 'billingAddress' => $billingAddress,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -417,7 +417,7 @@ final class OrdersTest extends JsonApiTestCase
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'quantity' => 3,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -444,7 +444,7 @@ final class OrdersTest extends JsonApiTestCase
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'productVariant' => 'MUG_BLUE',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
         $response = $this->client->getResponse();
 
@@ -486,13 +486,13 @@ final class OrdersTest extends JsonApiTestCase
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/shipments/%s', $tokenValue, '1237'),
             server: $this->headerBuilder()->withMergePatchJsonContentType()->build(),
-            content: json_encode(['shippingMethod' => 'api/v2/shop/shipping-methods/UPS'])
+            content: json_encode(['shippingMethod' => 'api/v2/shop/shipping-methods/UPS']),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/assign_shipping_method_to_non_existing_shipment_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -507,7 +507,7 @@ final class OrdersTest extends JsonApiTestCase
             method: 'PATCH',
             uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, 'invalid-item-id'),
             server: $this->headerBuilder()->withMergePatchJsonContentType()->build(),
-            content: json_encode(['quantity' => 5])
+            content: json_encode(['quantity' => 5]),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);

@@ -114,7 +114,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'enabled' => true,
                 'exclusive' => false,
                 'priority' => 100,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -134,7 +134,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/admin/catalog-promotions',
             server: $header,
-            content: json_encode([], JSON_THROW_ON_ERROR),
+            content: json_encode([], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -157,7 +157,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             content: json_encode([
                 'name' => 'Mugs discount',
                 'code' => 'mugs_discount',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -182,7 +182,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'code' => 'catalog_promotion',
                 'startDate' => '2021-11-04 10:42:00',
                 'endDate' => '2021-10-04 10:42:00',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -275,7 +275,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ]],
                 'enabled' => true,
                 'exclusive' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -373,7 +373,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 ]],
                 'enabled' => true,
                 'exclusive' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -424,7 +424,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                 'enabled' => true,
                 'exclusive' => false,
                 'priority' => 1000,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
