@@ -1,5 +1,19 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.13 (2023-12-05)
+
+#### Details
+
+- [#15548](https://github.com/Sylius/Sylius/issues/15548) [FIX] Default variant ([@Prometee](https://github.com/Prometee))
+- [#15565](https://github.com/Sylius/Sylius/issues/15565) [DOC] Fix display link in authorize page ([@Jibbarth](https://github.com/Jibbarth))
+- [#15571](https://github.com/Sylius/Sylius/issues/15571) Resolve psalm issues ([@Wojdylak](https://github.com/Wojdylak))
+- [#15580](https://github.com/Sylius/Sylius/issues/15580) [DX] Improve ChannelCollector customizability ([@coldic3](https://github.com/coldic3))
+- [#15582](https://github.com/Sylius/Sylius/issues/15582) Bye Psalm 👋🏼 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15585](https://github.com/Sylius/Sylius/issues/15585) [Fix] Do not show cart id after saving ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#15587](https://github.com/Sylius/Sylius/issues/15587) [CI] Update Symfony versions in builds ([@GSadee](https://github.com/GSadee))
+- [#15602](https://github.com/Sylius/Sylius/issues/15602) Add the sylius-labs/suite-tags-extension package ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#15603](https://github.com/Sylius/Sylius/issues/15603) Fix build ([@jakubtobiasz](https://github.com/jakubtobiasz))
+
 ## v1.12.12 (2023-11-17)
 
 #### Details
