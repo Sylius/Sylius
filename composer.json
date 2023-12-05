@@ -41,7 +41,7 @@
         "doctrine/inflector": "^1.4 || ^2.0",
         "doctrine/migrations": "^3.0",
         "doctrine/orm": "^2.13",
-        "doctrine/persistence": "^2.3",
+        "doctrine/persistence": "^2.3 || ^3.0",
         "egulias/email-validator": "^3.1",
         "enshrined/svg-sanitize": "^0.15.4 || ^0.16",
         "fakerphp/faker": "^1.10",
