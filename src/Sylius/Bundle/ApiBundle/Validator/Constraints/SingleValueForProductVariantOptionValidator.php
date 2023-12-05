@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class SingleValueForProductVariantOptionValidator extends ConstraintValidator
 {
-    public function validate(mixed $value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ProductVariantInterface $value */
         Assert::isInstanceOf($value, ProductVariantInterface::class);

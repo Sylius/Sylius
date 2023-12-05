@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 
 final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ProductInterface $value */
         Assert::isInstanceOf($value, ProductInterface::class);

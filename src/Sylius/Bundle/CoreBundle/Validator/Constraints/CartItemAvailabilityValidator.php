@@ -27,7 +27,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var AddToCartCommandInterface $value */
         Assert::isInstanceOf($value, AddToCartCommandInterface::class);

@@ -33,7 +33,7 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ChooseShippingMethod $value */
         Assert::isInstanceOf($value, ChooseShippingMethod::class);

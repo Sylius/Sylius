@@ -23,7 +23,7 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
     /**
      * @throws \InvalidArgumentException
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var OrderInterface $value */
         Assert::isInstanceOf($value, OrderInterface::class);

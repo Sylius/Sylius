@@ -29,7 +29,7 @@ final class CatalogPromotionActionValidator extends ConstraintValidator
         $this->actionValidators = $actionValidators instanceof \Traversable ? iterator_to_array($actionValidators) : $actionValidators;
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var CatalogPromotionAction $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionAction::class);
