@@ -84,7 +84,7 @@ final class PromotionsTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/promotions/%s/promotion-coupons', $promotion->getCode()),
-            server: $header
+            server: $header,
         );
 
         $this->assertResponse(

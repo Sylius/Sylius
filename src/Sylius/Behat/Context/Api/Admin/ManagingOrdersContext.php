@@ -97,7 +97,6 @@ final class ManagingOrdersContext implements Context
         $this->client->addFilter('checkoutCompletedAt[before]', $dateTime);
     }
 
-
     /**
      * @When I filter by product :productName
      * @When I filter by products :firstProduct and :secondProduct
@@ -147,7 +146,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyFilterTotalBeingLessThan(string $total): void
     {
-        $this->client->addFilter('total[lt]', $total. '00');
+        $this->client->addFilter('total[lt]', $total . '00');
     }
 
     /**

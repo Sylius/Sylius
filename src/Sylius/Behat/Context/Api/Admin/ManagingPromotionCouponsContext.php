@@ -339,7 +339,7 @@ final class ManagingPromotionCouponsContext implements Context
         $coupons = $this->responseChecker->getCollectionItemsWithValue(
             $this->client->subResourceIndex(Resources::PROMOTIONS, Resources::PROMOTION_COUPONS, $promotion->getCode()),
             'code',
-            $code
+            $code,
         );
 
         Assert::count($coupons, 1);
