@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Promotion;
 
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface;
 
 /** @experimental */
-class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionInterface
+class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionReadInterface
 {
     public function __construct(
         private string $promotionCode,
@@ -39,19 +39,9 @@ class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionInte
         return $this->amount;
     }
 
-    public function setAmount(?int $amount): void
-    {
-        $this->amount = $amount;
-    }
-
     public function getCodeLength(): int
     {
         return $this->codeLength;
-    }
-
-    public function setCodeLength(?int $codeLength): void
-    {
-        $this->codeLength = $codeLength;
     }
 
     public function getPrefix(): ?string
@@ -59,19 +49,9 @@ class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionInte
         return $this->prefix;
     }
 
-    public function setPrefix(?string $prefix): void
-    {
-        $this->prefix = $prefix;
-    }
-
     public function getSuffix(): ?string
     {
         return $this->suffix;
-    }
-
-    public function setSuffix(?string $suffix): void
-    {
-        $this->suffix = $suffix;
     }
 
     public function getExpiresAt(): ?\DateTimeInterface
@@ -79,18 +59,8 @@ class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionInte
         return $this->expiresAt;
     }
 
-    public function setExpiresAt(?\DateTimeInterface $expiresAt): void
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
     public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
-    }
-
-    public function setUsageLimit(?int $usageLimit): void
-    {
-        $this->usageLimit = $usageLimit;
     }
 }
