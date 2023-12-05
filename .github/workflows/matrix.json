@@ -89,13 +89,25 @@
     "static-checks": {
       "php": [ "8.0", "8.1" ],
       "symfony": [ "^5.4", "^6.4" ],
-      "api-platform": [ "^2.7.10" ]
+      "api-platform": [ "^2.7.10" ],
+      "exclude": [
+        {
+          "php": "8.0",
+          "symfony": "^6.4"
+        }
+      ]
     },
     "e2e-mariadb": {
       "php": [ "8.0", "8.1" ],
       "symfony": [ "^5.4", "^6.4" ],
       "mariadb": [ "10.4.10" ],
-      "dbal": [ "^2.7", "^3.0" ]
+      "dbal": [ "^2.7", "^3.0" ],
+      "exclude": [
+        {
+          "php": "8.0",
+          "symfony": "^6.4"
+        }
+      ]
     },
     "e2e-mysql": {
       "php": [ "8.0", "8.1" ],
@@ -145,16 +157,34 @@
           "twig": "^3.3",
           "dbal": "^3.0"
         }
+      ],
+      "exclude": [
+        {
+          "php": "8.0",
+          "symfony": "^6.4"
+        }
       ]
     },
     "e2e-pgsql": {
       "php": [ "8.0", "8.1" ],
       "symfony": [ "^5.4", "^6.4" ],
-      "postgres": [ "13.9", "14.6" ]
+      "postgres": [ "13.9", "14.6" ],
+      "exclude": [
+        {
+          "php": "8.0",
+          "symfony": "^6.4"
+        }
+      ]
     },
     "packages": {
       "php": [ "8.0", "8.1" ],
-      "symfony": [ "^5.4", "^6.4" ]
+      "symfony": [ "^5.4", "^6.4" ],
+      "exclude": [
+        {
+          "php": "8.0",
+          "symfony": "^6.4"
+        }
+      ]
     },
     "packages-swiftmailer": {
       "php": [ "8.0", "8.1" ],
