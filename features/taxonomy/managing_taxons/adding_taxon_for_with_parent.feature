@@ -12,7 +12,7 @@ Feature: Adding a new taxon with parent specified
     @ui @javascript
     Scenario: Adding a new taxon with parent
         When I want to create a new taxon
-        And I set its parent taxon to "category"
+        And I set its parent taxon to "Category"
         And I specify its code as "guns"
         And I name it "Guns" in "English (United States)"
         And I set its slug to "guns" in "English (United States)"
