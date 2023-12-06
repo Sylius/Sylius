@@ -1,0 +1,26 @@
+framework:
+    workflows:
+        !php/const Sylius\Component\Promotion\Model\CatalogPromotionTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: state
+            supports:
+                - Sylius\Component\Core\Model\CatalogPromotionInterface
+            initial_marking: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
+            places:
+                - !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
+                - !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_PROCESSING
+                - !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE
+            transitions:
+                !php/const Sylius\Component\Promotion\Model\CatalogPromotionTransitions::TRANSITION_PROCESS:
+                    from:
+                        - !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
+                        - !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE
+                    to: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_PROCESSING
+                !php/const Sylius\Component\Promotion\Model\CatalogPromotionTransitions::TRANSITION_ACTIVATE:
+                    from: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_PROCESSING
+                    to: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_ACTIVE
+                !php/const Sylius\Component\Promotion\Model\CatalogPromotionTransitions::TRANSITION_DEACTIVATE:
+                    from: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_PROCESSING
+                    to: !php/const Sylius\Component\Promotion\Model\CatalogPromotionStates::STATE_INACTIVE
