@@ -15,7 +15,7 @@ namespace Sylius\Component\Promotion\Generator;
 
 interface GenerationPolicyInterface
 {
-    public function isGenerationPossible(PromotionCouponGeneratorInstructionReadInterface $instruction): bool;
+    public function isGenerationPossible(ReadablePromotionCouponGeneratorInstructionInterface $instruction): bool;
 
-    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionReadInterface $instruction): int;
+    public function getPossibleGenerationAmount(ReadablePromotionCouponGeneratorInstructionInterface $instruction): int;
 }

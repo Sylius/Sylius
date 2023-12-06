@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Generator;
 
-interface PromotionCouponGeneratorInstructionInterface extends PromotionCouponGeneratorInstructionReadInterface
+interface PromotionCouponGeneratorInstructionInterface extends ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function setAmount(?int $amount): void;
 

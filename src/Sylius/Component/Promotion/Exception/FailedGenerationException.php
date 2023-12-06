@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Promotion\Exception;
 
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
 final class FailedGenerationException extends \InvalidArgumentException
 {
     public function __construct(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         int $exceptionCode = 0,
         ?\Exception $previousException = null,
     ) {

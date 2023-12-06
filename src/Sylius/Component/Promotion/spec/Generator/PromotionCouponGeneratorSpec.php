@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -52,7 +52,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         ObjectManager $objectManager,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCoupon,
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy,
     ): void {
         $instruction->getAmount()->willReturn(1);
@@ -82,7 +82,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         ObjectManager $objectManager,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCoupon,
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy,
     ): void {
         $instruction->getAmount()->willReturn(1);
@@ -115,7 +115,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
     function it_throws_a_failed_generation_exception_when_generation_is_not_possible(
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(1);
@@ -131,7 +131,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         FactoryInterface $promotionCouponFactory,
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): void {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(-1);

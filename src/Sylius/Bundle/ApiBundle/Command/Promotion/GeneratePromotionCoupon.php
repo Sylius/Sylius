@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Promotion;
 
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
 /** @experimental */
-class GeneratePromotionCoupon implements PromotionCouponGeneratorInstructionReadInterface
+class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstructionInterface
 {
     public function __construct(
         private string $promotionCode,

@@ -22,7 +22,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     {
     }
 
-    public function isGenerationPossible(PromotionCouponGeneratorInstructionReadInterface $instruction): bool
+    public function isGenerationPossible(ReadablePromotionCouponGeneratorInstructionInterface $instruction): bool
     {
         $expectedGenerationAmount = $instruction->getAmount();
         $possibleGenerationAmount = $this->calculatePossibleGenerationAmount($instruction);
@@ -30,7 +30,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
         return $possibleGenerationAmount >= $expectedGenerationAmount;
     }
 
-    public function getPossibleGenerationAmount(PromotionCouponGeneratorInstructionReadInterface $instruction): int
+    public function getPossibleGenerationAmount(ReadablePromotionCouponGeneratorInstructionInterface $instruction): int
     {
         return $this->calculatePossibleGenerationAmount($instruction);
     }
@@ -38,7 +38,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * @throws \InvalidArgumentException
      */
-    private function calculatePossibleGenerationAmount(PromotionCouponGeneratorInstructionReadInterface $instruction): int
+    private function calculatePossibleGenerationAmount(ReadablePromotionCouponGeneratorInstructionInterface $instruction): int
     {
         $expectedAmount = $instruction->getAmount();
         $expectedCodeLength = $instruction->getCodeLength();

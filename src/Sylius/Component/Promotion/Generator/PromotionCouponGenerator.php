@@ -32,8 +32,8 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     public function generate(
-        PromotionInterface $promotion,
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        PromotionInterface                                   $promotion,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): array {
         $generatedCoupons = [];
 
@@ -94,7 +94,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     /**
      * @throws FailedGenerationException
      */
-    private function assertGenerationIsPossible(PromotionCouponGeneratorInstructionReadInterface $instruction): void
+    private function assertGenerationIsPossible(ReadablePromotionCouponGeneratorInstructionInterface $instruction): void
     {
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
             throw new FailedGenerationException($instruction);

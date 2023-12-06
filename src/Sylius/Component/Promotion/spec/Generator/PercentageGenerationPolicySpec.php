@@ -15,7 +15,7 @@ namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 final class PercentageGenerationPolicySpec extends ObjectBehavior
@@ -31,7 +31,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_examines_possibility_of_coupon_generation(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository,
     ): void {
         $instruction->getAmount()->willReturn(17);
@@ -44,7 +44,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_examines_possibility_of_coupon_generation_with_prefix_and_suffix(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository,
     ): void {
         $instruction->getAmount()->willReturn(7);
@@ -60,7 +60,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_returns_possible_generation_amount(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository,
     ): void {
         $instruction->getAmount()->willReturn(17);
@@ -73,7 +73,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_returns_php_int_max_value_as_possible_generation_amount_when_code_length_is_too_large(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository,
     ): void {
         $instruction->getAmount()->willReturn(1000);
@@ -86,7 +86,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_returns_possible_generation_amount_with_prefix_and_suffix(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository,
     ): void {
         $instruction->getAmount()->willReturn(3);
@@ -102,7 +102,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_throws_an_invalid_argument_exception_when_expected_amount_is_null(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): void {
         $instruction->getAmount()->willReturn(null);
         $instruction->getCodeLength()->willReturn(1);
@@ -112,7 +112,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_throws_an_invalid_argument_exception_when_expecte_code_length_is_null(
-        PromotionCouponGeneratorInstructionReadInterface $instruction,
+        ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): void {
         $instruction->getAmount()->willReturn(18);
         $instruction->getCodeLength()->willReturn(null);
