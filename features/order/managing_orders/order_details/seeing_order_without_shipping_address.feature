@@ -16,10 +16,10 @@ Feature: Seeing an order without shipping address
         And the customer chose "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing basic information about an order
         When I view the summary of the order "#00000666"
         Then it should have been placed by the customer "lucy@teamlucifer.com"
-        And it should be billed to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
+        And it should have "Mike Ross", "350 5th Ave", "10118", "New York", "United States" as its billing address
         And it should be paid with "Cash on Delivery"
         And it should have no shipping address set

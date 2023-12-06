@@ -23,14 +23,14 @@ Feature: Seeing order item detailed data
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing details of item in one row
         Given I view the summary of the order "#00000666"
-        When I check "Iron Man T-Shirt" data
+        When I check "Marvel T-Shirt" data
         Then its code should be "IRON_MAN_T_SHIRT"
         And its unit price should be $49.00
-        And its discounted unit price should be $44.00
+        And its total should be $193.60
         And its quantity should be 4
+        And its discounted unit price should be $44.00
         And its subtotal should be $176.00
         And its tax should be $17.60
-        And its total should be $193.60

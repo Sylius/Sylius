@@ -19,11 +19,15 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.shop_api_security
                 - sylius.behat.context.setup.taxation
+                - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.zone
+                
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart

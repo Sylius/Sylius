@@ -16,7 +16,7 @@ Feature: Seeing aggregated discounts of an order
         And there is a customer "robin.hood@sherwood.com" that placed an order "#00000006"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing shipping and order promotions, but the shipping promotion is not aggregated in summary's promotion total
         Given the customer bought 2 "Longbow" products
         And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
@@ -28,7 +28,7 @@ Feature: Seeing aggregated discounts of an order
         And the order's shipping total should be "$5.00"
         And the order's total should be "$285.00"
 
-    @ui
+    @api @ui
     Scenario: Seeing multiple order promotions aggregated in summary
         Given there is a promotion "Big order discount"
         And it gives "$70.00" discount to every order with quantity at least 3

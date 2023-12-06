@@ -59,6 +59,12 @@
             "unitPrice": 2000,
             "originalUnitPrice": 2000,
             "total": 6000,
+            "units": [
+                "\/api\/v2\/admin\/order-item-units\/@integer@",
+                "\/api\/v2\/admin\/order-item-units\/@integer@",
+                "\/api\/v2\/admin\/order-item-units\/@integer@"
+            ],
+            "fullDiscountedUnitPrice": 2000,
             "subtotal": 6000
         }
     ],
@@ -67,8 +73,10 @@
     "state": "new",
     "itemsSubtotal": 6000,
     "taxTotal": 0,
-    "taxIncludedTotal": 0,
+    "shippingTaxTotal": 500,
     "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
     "shippingTotal": 500,
-    "orderPromotionTotal": 0
+    "orderPromotionTotal": 0,
+    "shippingPromotionTotal": 0
 }

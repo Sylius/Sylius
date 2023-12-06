@@ -18,21 +18,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ApiClientInterface
 {
-    public function request(RequestInterface $request): Response;
+    public function request(RequestInterface $request, bool $forgetResponse = true): Response;
 
-    public function index(string $resource, array $queryParameters = []): Response;
+    /**
+     * @param array<string, mixed> $queryParameters
+     */
+    public function index(string $resource, array $queryParameters = [], bool $forgetResponse = false): Response;
 
-    public function showByIri(string $iri): Response;
+    public function showByIri(string $iri, bool $forgetResponse = false): Response;
 
-    public function subResourceIndex(string $resource, string $subResource, string $id): Response;
+    public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response;
 
-    public function show(string $resource, string $id): Response;
+    public function show(string $resource, string $id, bool $forgetResponse = false): Response;
 
-    public function create(?RequestInterface $request = null): Response;
+    public function create(?RequestInterface $request = null, bool $forgetResponse = false): Response;
 
-    public function update(): Response;
+    public function update(bool $forgetResponse = false): Response;
 
-    public function delete(string $resource, string $id): Response;
+    public function delete(string $resource, string $id, bool $forgetResponse = false): Response;
 
     public function filter(): Response;
 

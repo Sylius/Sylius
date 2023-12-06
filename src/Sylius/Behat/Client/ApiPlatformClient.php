@@ -23,6 +23,8 @@ final class ApiPlatformClient implements ApiClientInterface
 {
     private ?RequestInterface $request = null;
 
+    private ?Response $lastResponse = null;
+
     public function __construct(
         private AbstractBrowser $client,
         private SharedStorageInterface $sharedStorage,
@@ -32,33 +34,33 @@ final class ApiPlatformClient implements ApiClientInterface
     ) {
     }
 
-    public function index(string $resource, array $queryParameters = []): Response
+    public function index(string $resource, array $queryParameters = [], bool $forgetResponse = false): Response
     {
         $this->request = $this
             ->requestFactory
             ->index($this->section, $resource, $this->authorizationHeader, $this->getToken(), $queryParameters)
         ;
 
-        return $this->request($this->request);
+        return $this->request($this->request, $forgetResponse);
     }
 
-    public function showByIri(string $iri): Response
+    public function showByIri(string $iri, bool $forgetResponse = false): Response
     {
         $request = $this->requestFactory->custom($iri, HttpRequest::METHOD_GET);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
-        return $this->request($request);
+        return $this->request($request, $forgetResponse);
     }
 
-    public function subResourceIndex(string $resource, string $subResource, string $id): Response
+    public function subResourceIndex(string $resource, string $subResource, string $id, array $queryParameters = [], bool $forgetResponse = false): Response
     {
-        $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource);
+        $request = $this->requestFactory->subResourceIndex($this->section, $resource, $id, $subResource, $queryParameters);
         $request->authorize($this->getToken(), $this->authorizationHeader);
 
-        return $this->request($request);
+        return $this->request($request, $forgetResponse);
     }
 
-    public function show(string $resource, string $id): Response
+    public function show(string $resource, string $id, bool $forgetResponse = false): Response
     {
         return $this->request(
             $this->requestFactory->show(
@@ -68,25 +70,26 @@ final class ApiPlatformClient implements ApiClientInterface
                 $this->authorizationHeader,
                 $this->getToken(),
             ),
+            $forgetResponse
         );
     }
 
-    public function create(?RequestInterface $request = null): Response
+    public function create(?RequestInterface $request = null, bool $forgetResponse = false): Response
     {
-        return $this->request($request ?? $this->request);
+        return $this->request($request ?? $this->request, $forgetResponse);
     }
 
-    public function update(): Response
+    public function update(bool $forgetResponse = false): Response
     {
-        return $this->request($this->request);
+        return $this->request($this->request, $forgetResponse);
     }
 
-    public function resend(): Response
+    public function resend(bool $forgetResponse = false): Response
     {
-        return $this->request($this->request);
+        return $this->request($this->request, $forgetResponse);
     }
 
-    public function delete(string $resource, string $id): Response
+    public function delete(string $resource, string $id, bool $forgetResponse = false): Response
     {
         return $this->request(
             $this->requestFactory->delete(
@@ -96,6 +99,7 @@ final class ApiPlatformClient implements ApiClientInterface
                 $this->authorizationHeader,
                 $this->getToken(),
             ),
+            $forgetResponse,
         );
     }
 
@@ -239,7 +243,11 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function getLastResponse(): Response
     {
-        return $this->client->getResponse();
+        if (null === $this->lastResponse) {
+            throw new \RuntimeException('There is no last response.');
+        }
+
+        return $this->lastResponse;
     }
 
     public function getToken(): ?string
@@ -247,7 +255,7 @@ final class ApiPlatformClient implements ApiClientInterface
         return $this->sharedStorage->has('token') ? $this->sharedStorage->get('token') : null;
     }
 
-    public function request(RequestInterface $request): Response
+    public function request(RequestInterface $request, bool $forgetResponse = false): Response
     {
         $this->setServerParameters();
 
@@ -260,7 +268,14 @@ final class ApiPlatformClient implements ApiClientInterface
             $request->content() ?? null,
         );
 
-        return $this->getLastResponse();
+        /** @var Response $response */
+        $response = $this->client->getResponse();
+
+        if (false === $forgetResponse) {
+            $this->lastResponse = $response;
+        }
+
+        return $response;
     }
 
     private function setServerParameters(): void

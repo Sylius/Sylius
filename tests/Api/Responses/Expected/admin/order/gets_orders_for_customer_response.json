@@ -49,10 +49,12 @@
             "state": "new",
             "itemsSubtotal": 0,
             "taxTotal": 0,
+            "shippingTaxTotal": 0,
             "taxExcludedTotal": 0,
             "taxIncludedTotal": 0,
             "shippingTotal": 0,
-            "orderPromotionTotal": 0
+            "orderPromotionTotal": 0,
+            "shippingPromotionTotal": 0
         }
     ],
     "hydra:totalItems": 1,

@@ -19,8 +19,8 @@ Feature: Seeing province created manually on order summary page
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing manually definied province on order summary page
         When I view the summary of the order "#00000666"
         Then I should see "East of England" as province in the shipping address
-        And I should see "East of England" ad province in the billing address
+        And I should see "East of England" as province in the billing address
