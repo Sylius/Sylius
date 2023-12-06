@@ -14,17 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Query\Admin;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
-use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
 
 /** @experimental */
-class GetSalesStatistics implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
+class GetSalesStatistics implements ChannelCodeAwareInterface
 {
-    public ?\DateTimeInterface $startDate = null;
-
-    public ?\DateTimeInterface $endDate = null;
-
-    public function __construct(private ?string $localeCode = null, private ?string $channelCode = null)
+    public function __construct(private SalesPeriod $salesPeriod, private ?string $channelCode = null)
     {
+    }
+
+    public function getSalesPeriod(): SalesPeriod
+    {
+        return $this->salesPeriod;
     }
 
     public function getChannelCode(): ?string
@@ -35,15 +36,5 @@ class GetSalesStatistics implements ChannelCodeAwareInterface, LocaleCodeAwareIn
     public function setChannelCode(?string $channelCode): void
     {
         $this->channelCode = $channelCode;
-    }
-
-    public function getLocaleCode(): ?string
-    {
-        return $this->localeCode;
-    }
-
-    public function setLocaleCode(?string $localeCode): void
-    {
-        $this->localeCode = $localeCode;
     }
 }

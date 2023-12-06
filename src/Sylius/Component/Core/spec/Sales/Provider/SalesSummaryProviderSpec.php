@@ -17,12 +17,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Sales\Provider\SalesPerPeriodProviderInterface;
-use Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface;
 use Sylius\Component\Core\Sales\Provider\SalesSummaryProviderInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesInPeriod;
 use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesStatistics;
 use Sylius\Component\Core\Sales\ValueObject\SalesSummary;
 
 final class SalesSummaryProviderSpec extends ObjectBehavior

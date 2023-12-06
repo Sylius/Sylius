@@ -30,7 +30,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\Admin\GetSalesStatisticsHandler">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\Provider\SalesStatisticsProviderInterface" />
+            <argument type="service" id="Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface" />
             <argument type="service" id="sylius.repository.channel" />
             <tag name="messenger.message_handler" bus="sylius.query_bus" />
         </service>

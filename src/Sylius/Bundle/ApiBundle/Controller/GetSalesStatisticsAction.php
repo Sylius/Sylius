@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Controller;
 
 use Sylius\Bundle\ApiBundle\Query\Admin\GetSalesStatistics;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,10 +38,14 @@ final class GetSalesStatisticsAction
     {
         $channelCode = $request->query->get('channelCode') ?? $this->channelContext->getChannel()->getCode();
 
+        $salesPeriod = new SalesPeriod(
+            new \DateTimeImmutable('first day of january this year 00:00:00'),
+            new \DateTimeImmutable('last day of december this year 23:59:59'),
+            \DateInterval::createFromDateString('1 month'),
+        );
+
         try {
-            $envelope = $this->queryBus->dispatch(
-                new GetSalesStatistics(channelCode: $channelCode),
-            );
+            $envelope = $this->queryBus->dispatch(new GetSalesStatistics($salesPeriod, $channelCode));
         } catch (HandlerFailedException $exception) {
             return new JsonResponse(['error' => $exception->getPrevious()->getMessage()], Response::HTTP_BAD_REQUEST);
         }
