@@ -33,6 +33,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
 
@@ -228,20 +229,7 @@ final class ManagingOrdersContext implements Context
     {
         /** @var string $lastResponseContent */
         $lastResponseContent = $this->client->getLastResponse()->getContent();
-        /**
-         * @var array{
-         *      "@id": string,
-         *      "@type": string,
-         *      "variant": string,
-         *      "productName": string,
-         *      "id": int,
-         *      "quantity": int,
-         *      "unitPrice": int,
-         *      "originalUnitPrice": int,
-         *      "total": int,
-         *      "subtotal": int
-         *   }[] $items
-         */
+        /** @var array{productName: string}[] $items */
         $items = json_decode($lastResponseContent, true)['items'];
 
         foreach ($items as $item) {
@@ -314,13 +302,13 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should have shipment in state :state
-     * @Then /^order "[^"]+" should have shipment state "([^"]+)"$/
+     * @Then /^(it) should have shipment in state "([^"]+)"$/
+     * @Then /^(order "[^"]+") should have shipment state "([^"]+)"$/
      */
-    public function itShouldHaveShipmentState(string $state): void
+    public function itShouldHaveShipmentState(OrderInterface $order, string $state): void
     {
         $shipmentIri = $this->responseChecker->getValue(
-            $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue()),
+            $this->client->show(Resources::ORDERS, $order->getTokenValue()),
             'shipments',
         )[0];
 
@@ -472,18 +460,8 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersPromotionDiscountShouldBeFromPromotion(string $promotionAmount, string $promotionName): void
     {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            forgetResponse: true,
-        );
-
         $this->responseChecker->hasItemWithValues(
-            $adjustments,
+            $this->getAdjustmentsResponseForOrder(true),
             [
                 'type' => AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
                 'label' => $promotionName,
@@ -497,18 +475,8 @@ final class ManagingOrdersContext implements Context
      */
     public function theOrdersShippingPromotionDiscountShouldBe(string $promotionAmount): void
     {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            forgetResponse: true,
-        );
-
         $this->responseChecker->hasItemWithValues(
-            $adjustments,
+            $this->getAdjustmentsResponseForOrder(true),
             [
                 'type' => AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
                 'amount' => $this->getTotalAsInt($promotionAmount),
@@ -521,18 +489,8 @@ final class ManagingOrdersContext implements Context
      */
     public function thereShouldBeAShippingChargeForMethod(string $shippingCharge, string $shippingMethodName): void
     {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            forgetResponse: true,
-        );
-
         $this->responseChecker->hasItemWithValues(
-            $adjustments,
+            $this->getAdjustmentsResponseForOrder(true),
             [
                 'type' => AdjustmentInterface::SHIPPING_ADJUSTMENT,
                 'label' => $shippingMethodName,
@@ -546,18 +504,8 @@ final class ManagingOrdersContext implements Context
      */
     public function thereShouldBeAShippingTaxForMethod(string $shippingTax, string $shippingMethodName): void
     {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        $adjustments = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            $order->getTokenValue(),
-            forgetResponse: true,
-        );
-
         $this->responseChecker->hasItemWithValues(
-            $adjustments,
+            $this->getAdjustmentsResponseForOrder(true),
             [
                 'type' => AdjustmentInterface::TAX_ADJUSTMENT,
                 'label' => $shippingMethodName,
@@ -829,16 +777,8 @@ final class ManagingOrdersContext implements Context
      */
     public function itemDiscountedUnitPriceShouldBe(string $discountedUnitPrice): void
     {
-        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
-
-        $response = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            (string) $orderToken,
-        );
-
         $this->responseChecker->hasItemWithValues(
-            $response,
+            $this->getAdjustmentsResponseForOrder(),
             [
                 'type' => AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
                 'amount' => $this->getTotalAsInt($discountedUnitPrice),
@@ -896,14 +836,8 @@ final class ManagingOrdersContext implements Context
      */
     public function itsTaxIncludedInPriceShouldBe(string $tax): void
     {
-        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
-        $response = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            (string) $orderToken
-        );
         $unitPromotionAdjustments = $this->responseChecker->getCollectionItemsWithValue(
-            $response,
+            $this->getAdjustmentsResponseForOrder(),
             'type',
             AdjustmentInterface::TAX_ADJUSTMENT
         );
@@ -988,17 +922,9 @@ final class ManagingOrdersContext implements Context
     public function productItemDiscountShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
-        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
-
-        $response = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            (string) $orderToken,
-            forgetResponse: true,
-        );
 
         $adjustments = $this->responseChecker->getCollectionItemsWithValue(
-            $response,
+            $this->getAdjustmentsResponseForOrder(true),
             'type',
             AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT
         );
@@ -1018,17 +944,9 @@ final class ManagingOrdersContext implements Context
     public function productOrderDiscountShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
-        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
-
-        $response = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            (string) $orderToken,
-            forgetResponse: true,
-        );
 
         $adjustments = $this->responseChecker->getCollectionItemsWithValue(
-            $response,
+            $this->getAdjustmentsResponseForOrder(true),
             'type',
             AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
         );
@@ -1047,14 +965,7 @@ final class ManagingOrdersContext implements Context
     public function productSubtotalShouldBe(string $productName, string $subTotal): void
     {
         $orderItem = $this->sharedStorage->get('item');
-        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
-
-        $response = $this->client->subResourceIndex(
-            Resources::ORDERS,
-            Resources::ADJUSTMENTS,
-            (string) $orderToken,
-            forgetResponse: true,
-        );
+        $response = $this->getAdjustmentsResponseForOrder(true);
 
         $unitPromotionAdjustments = 0;
         foreach ($this->responseChecker->getCollection($response) as $adjustment) {
@@ -1113,5 +1024,17 @@ final class ManagingOrdersContext implements Context
             return $amount * -1;
         }
         return $amount;
+    }
+
+    private function getAdjustmentsResponseForOrder(bool $forgetResponse = false): Response
+    {
+        $orderToken = $this->sharedStorage->get('order')->getTokenValue();
+
+        return $this->client->subResourceIndex(
+            Resources::ORDERS,
+            Resources::ADJUSTMENTS,
+            (string) $orderToken,
+            forgetResponse: $forgetResponse,
+        );
     }
 }
