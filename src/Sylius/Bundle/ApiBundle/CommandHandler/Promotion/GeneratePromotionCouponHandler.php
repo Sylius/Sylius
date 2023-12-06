@@ -41,7 +41,7 @@ final class GeneratePromotionCouponHandler implements MessageHandlerInterface
         /** @var PromotionInterface|null $promotion */
         $promotion = $this->promotionRepository->findOneBy(['code' => $generatePromotionCoupon->getPromotionCode()]);
         if ($promotion === null) {
-            throw new PromotionNotFoundException();
+            throw new PromotionNotFoundException($generatePromotionCoupon->getPromotionCode());
         }
 
         $promotionCoupons = $this->promotionCouponGenerator->generate(

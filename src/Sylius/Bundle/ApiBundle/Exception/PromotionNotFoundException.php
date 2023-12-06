@@ -20,11 +20,17 @@ final class PromotionNotFoundException extends NotFoundHttpException
 {
     /** @param array<array-key, mixed> $headers */
     public function __construct(
-        string $message = 'Promotion not found.',
+        string $promotionCode,
+        string $message = 'Promotion with the "%s" code not found.',
         \Throwable $previous = null,
         int $code = 0,
         array $headers = [],
     ) {
-        parent::__construct($message, $previous, $code, $headers);
+        parent::__construct(
+            sprintf($message, $promotionCode),
+            $previous,
+            $code,
+            $headers,
+        );
     }
 }
