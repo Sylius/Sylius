@@ -32,7 +32,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     public function generate(
-        PromotionInterface                                   $promotion,
+        PromotionInterface $promotion,
         ReadablePromotionCouponGeneratorInstructionInterface $instruction,
     ): array {
         $generatedCoupons = [];
