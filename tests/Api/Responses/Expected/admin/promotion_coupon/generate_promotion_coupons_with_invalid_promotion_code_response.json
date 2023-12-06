@@ -1,0 +1,6 @@
+{
+    "@context": "\/api\/v2\/contexts\/Error",
+    "@type": "hydra:Error",
+    "hydra:title": "An error occurred",
+    "hydra:description": "Promotion with the \"invalid\" code not found."
+}

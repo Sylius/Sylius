@@ -35,11 +35,11 @@ Feature: Editing payment methods
         And this payment method should be enabled
 
     @ui @api
-    Scenario: Seeing disabled code field while editing payment method
+    Scenario: Being unable to edit code of an existing payment method
         When I want to modify the "Offline" payment method
         Then I should not be able to edit its code
 
     @ui @api
-    Scenario: Seeing disabled gateway factory field while editing payment method
+    Scenario: Being unable to edit gateway factory field of existing payment method
         When I want to modify the "Offline" payment method
         Then the factory name field should be disabled

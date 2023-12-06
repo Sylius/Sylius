@@ -81,5 +81,11 @@
             <argument>%sylius.promotion_rules%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.model.adjustment.class%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
     </services>
 </container>

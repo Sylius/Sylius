@@ -17,6 +17,8 @@ final class Resources
 {
     public const ADDRESSES = 'addresses';
 
+    public const ADJUSTMENTS = 'adjustments';
+
     public const ADMINISTRATORS = 'administrators';
 
     public const AVATAR_IMAGES = 'avatar-images';
@@ -45,7 +47,7 @@ final class Resources
 
     public const ORDER_ITEM_UNITS = 'order-item-units';
 
-    public const ORDER_ITEMS = 'order-item-units';
+    public const ORDER_ITEMS = 'order-items';
 
     public const ORDERS = 'orders';
 

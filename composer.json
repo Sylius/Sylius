@@ -225,12 +225,12 @@
         "rector/rector": "^0.18.0",
         "sylius-labs/coding-standard": "^4.2",
         "sylius-labs/suite-tags-extension": "~0.1",
-        "symfony/browser-kit": "^6.4",
-        "symfony/debug-bundle": "^6.4",
-        "symfony/dotenv": "^6.4",
+        "symfony/browser-kit": "^6.3.2",
+        "symfony/debug-bundle": "^6.3.2",
+        "symfony/dotenv": "^6.3.0",
         "symfony/flex": "^2.2",
-        "symfony/runtime": "^6.4",
-        "symfony/web-profiler-bundle": "^6.4",
+        "symfony/runtime": "^6.3",
+        "symfony/web-profiler-bundle": "^6.3",
         "symplify/monorepo-builder": "^11.0"
     },
     "suggest": {

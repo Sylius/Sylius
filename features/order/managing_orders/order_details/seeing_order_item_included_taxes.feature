@@ -15,12 +15,12 @@ Feature: Seeing included in price taxes of order items
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing included in price taxes of order items are not counted in taxes total
         Given the customer bought 2 "Winchester M1866" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
         And I check "Winchester M1866" data
-        Then its tax included in price should be $40.00
-        And the order's tax total should be "$40.00"
+        Then the order's tax total should be "$40.00"
         And the order's total should be "$440.00"
+        And its tax included in price should be $40.00

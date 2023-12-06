@@ -198,6 +198,12 @@ class OrderController extends ResourceController
 
     protected function redirectToCartSummary(RequestConfiguration $configuration): Response
     {
+        trigger_deprecation(
+            'sylius/order-bundle',
+            '1.13',
+            'The %s::redirectToCartSummary() method is deprecated and will be removed in Sylius 2.0.',
+            self::class,
+        );
         if (null === $configuration->getParameters()->get('redirect')) {
             return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
         }

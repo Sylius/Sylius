@@ -47,10 +47,22 @@ final class RequestFactory implements RequestFactoryInterface
         return $builder->build();
     }
 
-    public function subResourceIndex(string $section, string $resource, string $id, string $subResource): RequestInterface
-    {
+    public function subResourceIndex(
+        string $section,
+        string $resource,
+        string $id,
+        string $subResource,
+        array $queryParameters = [],
+    ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s/%s/%s', $this->apiUrlPrefix, $section, $resource, $id, $subResource),
+            sprintf('%s/%s/%s/%s/%s%s',
+                $this->apiUrlPrefix,
+                $section,
+                $resource,
+                $id,
+                $subResource,
+                $this->getQueryString($queryParameters),
+            ),
             HttpRequest::METHOD_GET,
         );
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);

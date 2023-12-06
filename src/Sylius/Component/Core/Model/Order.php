@@ -411,6 +411,17 @@ class Order extends BaseOrder implements OrderInterface
         return $taxTotal;
     }
 
+    public function getShippingTaxTotal(): int
+    {
+        $shippingTaxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
+            $shippingTaxTotal += $shippingAdjustment->getAmount();
+        }
+
+        return $shippingTaxTotal;
+    }
+
     public function getTaxExcludedTotal(): int
     {
         return array_reduce(
@@ -451,6 +462,11 @@ class Order extends BaseOrder implements OrderInterface
             $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) +
             $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
         ;
+    }
+
+    public function getShippingPromotionTotal(): int
+    {
+        return $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
     }
 
     public function getTokenValue(): ?string

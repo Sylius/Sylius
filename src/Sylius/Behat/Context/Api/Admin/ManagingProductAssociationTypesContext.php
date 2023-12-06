@@ -162,11 +162,11 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @When I rename it to :name in :language
+     * @When I rename it to :name in :localeCode
      */
-    public function iRenameItToIn(string $name, string $language): void
+    public function iRenameItToIn(string $name, string $localeCode): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
     /**

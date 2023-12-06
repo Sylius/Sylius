@@ -26,7 +26,7 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (null === $value->getCodeLength() || null === $value->getAmount()) {
             return;

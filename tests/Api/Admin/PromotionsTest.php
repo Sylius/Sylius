@@ -83,7 +83,7 @@ final class PromotionsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/promotions/%s/promotion-coupons', $promotion->getCode()),
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
             server: $header,
         );
 
@@ -538,6 +538,33 @@ final class PromotionsTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_promotion_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => ['en_US' => [
+                    'label' => 'Christmas',
+                ]],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/put_promotion_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

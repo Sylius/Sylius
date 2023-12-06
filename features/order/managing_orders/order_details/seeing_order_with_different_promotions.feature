@@ -17,21 +17,21 @@ Feature: Seeing order with different promotions
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing prices and discount prices of order item
         Given the customer bought 2 "PHP T-Shirt" products
         And the customer bought a single "Symfony Mug"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
         Then the "PHP T-Shirt" product's unit price should be "$60.00"
-        And the "PHP T-Shirt" product's item discount should be "-$20.00"
-        And the "PHP T-Shirt" product's order discount should be "~ -$3.34"
         And the "PHP T-Shirt" product's discounted unit price should be "$36.66"
         And the "PHP T-Shirt" product's quantity should be 2
+        And the "PHP T-Shirt" product's item discount should be "-$20.00"
+        And the "PHP T-Shirt" product's order discount should be "~ -$3.34"
         And the "PHP T-Shirt" product's subtotal should be "$73.33"
         And the "Symfony Mug" product's unit price should be "$40.00"
-        And the "Symfony Mug" product's item discount should be "$0.00"
-        And the "Symfony Mug" product's order discount should be "~ -$3.33"
         And the "Symfony Mug" product's discounted unit price should be "$36.67"
         And the "Symfony Mug" product's quantity should be 1
+        And the "Symfony Mug" product's item discount should be "$0.00"
+        And the "Symfony Mug" product's order discount should be "~ -$3.33"
         And the "Symfony Mug" product's subtotal should be "$36.67"

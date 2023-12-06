@@ -170,4 +170,39 @@ final class PaymentMethodsTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_does_not_update_a_payment_method_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PaymentMethodInterface $paymentMethod */
+        $paymentMethod = $fixtures['paypal_payment_method'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/payment-methods/%s', $paymentMethod->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Different name',
+                        'description' => 'Different description',
+                    ],
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/payment_method/put_payment_method_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
 }

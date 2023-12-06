@@ -224,5 +224,12 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Promotion\GeneratePromotionCouponHandler">
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.promotion_coupon_generator" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
     </services>
 </container>

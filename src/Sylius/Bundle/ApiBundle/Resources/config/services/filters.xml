@@ -332,5 +332,12 @@
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />
         </service>
+
+        <service id="sylius.api.order_token_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="order.tokenValue">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>

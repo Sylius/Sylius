@@ -30,7 +30,7 @@ final class InStockValidator extends ConstraintValidator
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var InStock $constraint */
         Assert::isInstanceOf($constraint, InStock::class);

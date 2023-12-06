@@ -434,6 +434,33 @@ final class CatalogPromotionsTest extends JsonApiTestCase
         );
     }
 
+    /** @test */
+    public function it_does_not_update_a_catalog_promotion_with_duplicate_locale_translation(): void
+    {
+        $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/catalog-promotions/%s', $catalogPromotion->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'slug' => 'caps/cap',
+                        'name' => 'Cap',
+                    ]
+                ],
+            ], JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/catalog_promotion/put_catalog_promotion_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
     private function loadFixturesAndGetCatalogPromotion(): CatalogPromotionInterface
     {
         $fixtures = $this->loadFixturesFromFiles([

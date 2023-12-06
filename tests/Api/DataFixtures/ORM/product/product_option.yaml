@@ -1,6 +1,14 @@
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'
+        translations:
+            - '@product_option_translation_color'
+
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    product_option_translation_color:
+        locale: 'en_US'
+        name: 'Color'
+        translatable: '@product_option_color'
 
 Sylius\Component\Product\Model\ProductOptionValue:
     product_option_value_color_blue:

@@ -76,7 +76,7 @@ final class TranslatableLocaleKeyDenormalizerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(TranslationLocaleMismatchException::class)
-            ->during('denormalize', [['translations' => ['de_DE' => ['locale' => 'locale']]], TranslatableInterface::class])
+            ->during('denormalize', [['translations' => ['de_DE' => ['locale' => 'en_US']]], TranslatableInterface::class])
         ;
     }
 }
