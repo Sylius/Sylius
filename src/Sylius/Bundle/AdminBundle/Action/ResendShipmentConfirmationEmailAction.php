@@ -21,30 +21,19 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class ResendShipmentConfirmationEmailAction
+final readonly class ResendShipmentConfirmationEmailAction
 {
     public function __construct(
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShipmentEmailManagerInterface $shipmentEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack $requestStack,
     ) {
-        if ($this->requestStackOrSession instanceof SessionInterface) {
-            trigger_deprecation(
-                'sylius/admin-bundle',
-                '1.12',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
-                SessionInterface::class,
-                self::class,
-                RequestStack::class,
-            );
-        }
     }
 
     public function __invoke(Request $request): Response
@@ -66,7 +55,7 @@ final class ResendShipmentConfirmationEmailAction
         $this->shipmentEmailManager->sendConfirmationEmail($shipment);
 
         FlashBagProvider
-            ::getFlashBag($this->requestStackOrSession)
+            ::getFlashBag($this->requestStack)
             ->add('success', 'sylius.email.shipment_confirmation_resent')
         ;
 

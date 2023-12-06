@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Provider;
 
+use Symfony\Component\Clock\Clock;
+
 trigger_deprecation(
     'sylius/shipping-bundle',
     '1.11',
     'The "%s" class is deprecated and will be removed in Sylius 2.0. Use "%s" instead.',
     Calendar::class,
-    'Symfony\Component\Clock\Clock',
+    Clock::class,
 );
 
 /**

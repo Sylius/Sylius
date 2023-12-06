@@ -28,10 +28,10 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "sylius/registry": "^1.5",
-        "sylius/resource": "^1.9",
-        "symfony/options-resolver": "^5.4.21 || ^6.0"
+        "php": "^8.2",
+        "sylius/registry": "^1.6",
+        "sylius/resource": "^1.10",
+        "symfony/options-resolver": "^6.3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

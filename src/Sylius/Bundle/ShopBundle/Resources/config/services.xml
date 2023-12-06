@@ -44,9 +44,5 @@
         <service id="sylius.grid_filter.shop_string" class="Sylius\Component\Grid\Filter\StringFilter">
             <tag name="sylius.grid_filter" type="shop_string" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
         </service>
-
-        <service id="sylius.calculator.order_items_subtotal" class="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculator" />
-
-        <service id="Sylius\Bundle\ShopBundle\Calculator\OrderItemsSubtotalCalculatorInterface" alias="sylius.calculator.order_items_subtotal" />
     </services>
 </container>

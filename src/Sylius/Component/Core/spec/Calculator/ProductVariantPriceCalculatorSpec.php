@@ -23,6 +23,11 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 {
+    function let(ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker): void
+    {
+        $this->beConstructedWith($productVariantLowestPriceDisplayChecker);
+    }
+
     function it_implements_product_variant_price_calculator_interface(): void
     {
         $this->shouldImplement(ProductVariantPricesCalculatorInterface::class);
@@ -149,8 +154,6 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->beConstructedWith($productVariantLowestPriceDisplayChecker);
-
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $productVariantLowestPriceDisplayChecker->isLowestPriceDisplayable($productVariant, ['channel' => $channel])->willReturn(true);
 
@@ -165,27 +168,8 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         ChannelPricingInterface $channelPricing,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->beConstructedWith($productVariantLowestPriceDisplayChecker);
-
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $productVariantLowestPriceDisplayChecker->isLowestPriceDisplayable($productVariant, ['channel' => $channel])->willReturn(false);
-
-        $channelPricing->getLowestPriceBeforeDiscount()->shouldNotBeCalled();
-
-        $this->calculateLowestPriceBeforeDiscount($productVariant, ['channel' => $channel])->shouldReturn(null);
-    }
-
-    function it_returns_null_when_is_not_constructed_with_product_variant_lowest_price_display_checker(
-        ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker,
-        ChannelInterface $channel,
-        ChannelPricingInterface $channelPricing,
-        ProductVariantInterface $productVariant,
-    ): void {
-        $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
-        $productVariantLowestPriceDisplayChecker
-            ->isLowestPriceDisplayable($productVariant, ['channel' => $channel])
-            ->shouldNotBeCalled()
-        ;
 
         $channelPricing->getLowestPriceBeforeDiscount()->shouldNotBeCalled();
 
@@ -197,8 +181,6 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
     ): void {
-        $this->beConstructedWith($productVariantLowestPriceDisplayChecker);
-
         $productVariant->getChannelPricingForChannel($channel)->willReturn(null);
         $productVariant->getDescriptor()->willReturn('Red variant (RED_VARIANT)');
         $channel->getName()->shouldBeCalled();

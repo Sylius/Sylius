@@ -26,12 +26,12 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "sylius/core-bundle": "^1.12",
-        "sylius/ui-bundle": "^1.12",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0",
-        "symfony/security-bundle": "^5.4.21 || ^6.0",
-        "symfony/webpack-encore-bundle": "^1.15",
+        "php": "^8.2",
+        "sylius/core-bundle": "^2.0",
+        "sylius/ui-bundle": "^2.0",
+        "symfony/framework-bundle": "^6.3.4",
+        "symfony/security-bundle": "^6.3.4",
+        "symfony/webpack-encore-bundle": "^1.17.1",
         "twig/intl-extra": "^2.12 || ^3.4",
         "twig/twig": "^2.12 || ^3.3"
     },
@@ -41,7 +41,7 @@
         "mockery/mockery": "^1.4",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0"
+        "symfony/dependency-injection": "^6.3.4"
     },
     "config": {
         "allow-plugins": {
@@ -50,7 +50,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

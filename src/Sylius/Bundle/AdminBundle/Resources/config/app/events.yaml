@@ -162,10 +162,10 @@ sylius_ui:
                     context:
                         event: sylius.admin.layout.sidebar_top
                 logo:
-                    template: "@SyliusAdmin/_logo.html.twig"
+                    template: "@SyliusAdmin/Layout/_logo.html.twig"
                     priority: 20
                 menu:
-                    template: "@SyliusAdmin/_menu.html.twig"
+                    template: "@SyliusAdmin/Layout/_menu.html.twig"
                     priority: 10
                 down_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
@@ -176,7 +176,7 @@ sylius_ui:
         sylius.admin.layout.javascripts:
             blocks:
                 scripts:
-                    template: "@SyliusAdmin/_scripts.html.twig"
+                    template: "@SyliusAdmin/Layout/_scripts.html.twig"
                     priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
@@ -187,7 +187,7 @@ sylius_ui:
         sylius.admin.layout.stylesheets:
             blocks:
                 styles:
-                    template: "@SyliusAdmin/_styles.html.twig"
+                    template: "@SyliusAdmin/Layout/_styles.html.twig"
                     priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
@@ -209,7 +209,7 @@ sylius_ui:
                     template: "@SyliusAdmin/Layout/_channelLinksWidget.html.twig"
                     priority: 20
                 search:
-                    template: "@SyliusAdmin/_search.html.twig"
+                    template: "@SyliusAdmin/Layout/_search.html.twig"
                     priority: 10
 
         sylius.admin.layout.topbar_middle:
@@ -225,10 +225,10 @@ sylius_ui:
                     template: "@SyliusAdmin/Layout/_notificationWidget.html.twig"
                     priority: 30
                 support:
-                    template: "@SyliusAdmin/_support.html.twig"
+                    template: "@SyliusAdmin/Layout/_support.html.twig"
                     priority: 20
                 security:
-                    template: "@SyliusAdmin/_security.html.twig"
+                    template: "@SyliusAdmin/Layout/_security.html.twig"
                     priority: 10
                 legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
