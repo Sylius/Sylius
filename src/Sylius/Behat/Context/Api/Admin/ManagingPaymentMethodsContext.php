@@ -269,6 +269,24 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I configure it for username :username with :signature signature and password, but with sandbox that has wrong type
+     */
+    public function iConfigureItForUsernameWithSignatureButWithWrongSandboxType(string $username, string $signature): void
+    {
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                    'username' => $username,
+                    'signature' => $signature,
+                    'password' => 'TEST',
+                    'sandbox' => "test",
+                ],
+            ],
+        );
+    }
+
+    /**
      * @When I configure it with only :element
      */
     public function iConfigureItWithOnly(string $element): void
@@ -425,6 +443,17 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'gatewayConfig.config[sandbox]: Please set your paypal sandbox status.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify paypal sandbox status that is boolean
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypalSandboxStatusThatIsBoolean(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.config[sandbox]: This value should be of type bool.',
         );
     }
 
