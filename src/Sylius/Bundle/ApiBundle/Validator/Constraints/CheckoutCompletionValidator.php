@@ -34,8 +34,7 @@ class CheckoutCompletionValidator extends ConstraintValidator
     ) {
     }
 
-    /** @param OrderTokenValueAwareInterface $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, OrderTokenValueAwareInterface::class);
 

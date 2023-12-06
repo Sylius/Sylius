@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ChannelDefaultLocaleEnabledValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ChannelDefaultLocaleEnabled $constraint */
         Assert::isInstanceOf($constraint, ChannelDefaultLocaleEnabled::class);
