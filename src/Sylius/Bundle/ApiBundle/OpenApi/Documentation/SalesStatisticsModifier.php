@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,79 +22,108 @@ use Symfony\Component\HttpFoundation\Response;
 /** @experimental */
 final class SalesStatisticsModifier implements DocumentationModifierInterface
 {
+    private const PATH = '/admin/sales-statistics';
+
     public function __construct(private string $apiRoute)
     {
     }
 
     public function modify(OpenApi $docs): OpenApi
     {
-        $components = $docs->getComponents();
-        $schemas = $components->getSchemas();
-
+        $schemas = $docs->getComponents()->getSchemas();
         $schemas['SalesStatistics'] = [
             'type' => 'object',
             'properties' => [
-                'salesInPeriod' => [
-                    [
-                        'period' => '2023-01-01 00:00:00',
-                        'total' => 0,
+                'salesPerPeriod' => [
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'object',
+                        'properties' => [
+                            'period' => [
+                                'type' => 'string',
+                                'format' => 'date-time',
+                            ],
+                            'total' => [
+                                'type' => 'integer',
+                                'example' => '1000',
+                            ],
+                        ],
                     ],
-                    [
-                        'period' => '2023-02-01 00:00:00',
-                        'total' => 0,
-                    ],
-                    [
-                        'period' => '2023-03-01 00:00:00',
-                        'total' => 0,
-                    ],
-                    [
-                        'period' => '2023-04-01 00:00:00',
-                        'total' => 0,
-                    ],
-                    [
-                        'period' => '2023-05-01 00:00:00',
-                        'total' => 0,
-                    ],
-                    // The rest of the months are omitted for brevity.
-                    [
-                        'period' => '2023-12-01 00:00:00',
-                        'total' => 19500,
-                    ],
+                    'minItems' => 12,
                 ],
-                'totalSales' => 19500,
-                'newCustomersCount' => 4,
-                'newOrdersCount' => 3,
-                'averageOrderValue' => 6500,
-                'intervalType' => 'month',
+                'newCustomersCount' => [
+                    'type' => 'integer',
+                    'example' => '10',
+                ],
+                'newOrdersCount' => [
+                    'type' => 'integer',
+                    'example' => '12',
+                ],
+                'averageOrderValue' => [
+                    'type' => 'integer',
+                    'example' => '1000',
+                ],
+                'totalSales' => [
+                    'type' => 'integer',
+                    'example' => '12000',
+                ],
+                'intervalType' => [
+                    'type' => 'string',
+                    'enum' => ['month', 'year', 'week', 'day'],
+                ],
             ],
         ];
 
-        $components = $components->withSchemas($schemas);
-        $docs = $docs->withComponents($components);
+        $path = $this->apiRoute . self::PATH;
+        $paths = $docs->getPaths();
+        $paths->addPath($path, $this->getPathItem());
 
-        $docs->getPaths()->addPath(
-            $this->apiRoute . '/admin/sales-statistics',
-            new PathItem(
-                get: new Operation(
-                    operationId: 'postCredentialsItem',
-                    tags: ['SalesStatistics'],
-                    responses: [
-                        Response::HTTP_OK => [
-                            'description' => 'Get sales statistics data.',
-                            'content' => [
-                                'application/json' => [
-                                    'schema' => [
-                                        '$ref' => '#/components/schemas/SalesStatistics',
-                                    ],
+        return $docs
+            ->withPaths($paths)
+            ->withComponents($docs->getComponents()->withSchemas($schemas))
+        ;
+    }
+
+    private function getPathItem(): PathItem
+    {
+        return new PathItem(
+            ref: 'Sales statistics',
+            summary: 'Get sales statistics',
+            get: new Operation(
+                operationId: 'get_sales_statistics',
+                tags: ['Sales statistics'],
+                responses: [
+                    Response::HTTP_OK => [
+                        'description' => 'Sales statistics',
+                        'content' => [
+                            'application/json' => [
+                                'schema' => [
+                                    '$ref' => '#/components/schemas/SalesStatistics',
                                 ],
                             ],
                         ],
                     ],
-                    summary: 'Get sales statistics data.',
-                ),
+                ],
+                summary: 'Get sales statistics',
+                description: 'Get sales statistics',
+                parameters: $this->getParameters(),
             ),
         );
+    }
 
-        return $docs;
+    /** @return Parameter[] */
+    private function getParameters(): array
+    {
+        $channelCode = new Parameter(
+            name: 'channelCode',
+            in: 'query',
+            description: 'Channel to get statistics for',
+            required: true,
+            schema: [
+                'type' => 'string',
+            ],
+        );
+
+        return [$channelCode];
     }
 }
