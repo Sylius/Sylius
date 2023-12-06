@@ -18,7 +18,9 @@
     <resource class="%sylius.model.gateway_config.class%" shortName="GatewayConfig">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="validation_groups">
+            <attribute>sylius</attribute>
+        </attribute>
 
         <collectionOperations />
 
