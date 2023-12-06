@@ -17,7 +17,7 @@ Feature: Adding product review as a customer
         And I add it
         Then I should be notified that my review is waiting for the acceptation
 
-    @ui
+    @ui @no-api
     Scenario: Adding product reviews as a logged in customer with remember me option
         Given I am a logged in customer by using remember me option
         When I want to review product "Necronomicon"
