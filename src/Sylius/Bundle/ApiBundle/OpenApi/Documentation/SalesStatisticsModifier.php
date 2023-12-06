@@ -76,7 +76,7 @@ final class SalesStatisticsModifier implements DocumentationModifierInterface
             new PathItem(
                 get: new Operation(
                     operationId: 'postCredentialsItem',
-                    tags: ['DashboardStatistics'],
+                    tags: ['SalesStatistics'],
                     responses: [
                         Response::HTTP_OK => [
                             'description' => 'Get sales statistics data.',

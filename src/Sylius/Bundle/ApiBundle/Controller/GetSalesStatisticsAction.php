@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller;
 
 use Sylius\Bundle\ApiBundle\Query\Admin\GetSalesStatistics;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,16 +26,17 @@ use Webmozart\Assert\Assert;
 
 final class GetSalesStatisticsAction
 {
-    public function __construct(
-        private MessageBusInterface $queryBus,
-        private ChannelContextInterface $channelContext,
-        private SerializerInterface $serializer,
-    ) {
+    public function __construct(private MessageBusInterface $queryBus, private SerializerInterface $serializer)
+    {
     }
 
     public function __invoke(Request $request): Response
     {
-        $channelCode = $request->query->get('channelCode') ?? $this->channelContext->getChannel()->getCode();
+        $channelCode = $request->query->get('channelCode');
+
+        if ($channelCode === null) {
+            return new JsonResponse(['error' => 'Missing channelCode parameter.'], Response::HTTP_BAD_REQUEST);
+        }
 
         $salesPeriod = new SalesPeriod(
             new \DateTimeImmutable('first day of january this year 00:00:00'),
