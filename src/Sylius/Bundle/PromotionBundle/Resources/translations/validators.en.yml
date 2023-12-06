@@ -68,4 +68,4 @@ sylius:
         locale:
             not_blank: Please enter the locale.
             invalid: This value is not a valid locale.
-            unique: Translation in {{ value }} locale already exists.
+            unique: A translation for the {{ value }} locale code already exists.
