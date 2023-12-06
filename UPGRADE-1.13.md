@@ -208,3 +208,7 @@
    Due to that, it's translation message `sylius.country.code.regex` was also removed.
 
 1. The `redirectToCartSummary` protected method of `Sylius\Bundle\OrderBundle\Controller\OrderController` has been deprecated as it was never used and will be removed in Sylius 2.0.
+
+1. Interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` has been refactored. It now extends a new interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface`, which contains only getter methods.
+    - If your services or custom implementations previously relied on `PromotionCouponGeneratorInstructionInterface` for read operations, you should now use `PromotionCouponGeneratorInstructionReadInterface` for better clarity and separation of concerns.
+    - This change is backward compatible as long as your implementations or services were using only the getter methods from `PromotionCouponGeneratorInstructionInterface`. However, if you also utilized setter methods, you should continue using `PromotionCouponGeneratorInstructionInterface`.
