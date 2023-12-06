@@ -10,6 +10,4 @@ sylius_admin_currency:
         vars:
             all:
                 subheader: sylius.ui.manage_currencies_available_in_the_store
-            index:
-                icon: dollar
     type: sylius.resource
