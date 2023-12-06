@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\ValueObject;
+namespace Sylius\Component\Core\Sales\ValueObject;
 
 class SalesInPeriod
 {
