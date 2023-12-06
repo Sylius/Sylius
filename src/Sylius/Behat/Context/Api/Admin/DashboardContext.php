@@ -49,8 +49,9 @@ final class DashboardContext implements Context
     public function iShouldSeeNewOrders(int $count): void
     {
         Assert::true(
-            $this->responseChecker->hasValue(
+            $this->responseChecker->hasValueInSubresourceObject(
                 $this->client->getLastResponse(),
+                'businessActivitySummary',
                 'newOrdersCount',
                 $count,
             ),
@@ -58,13 +59,14 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :number new customers
+     * @Then I should see :number new customers( in the list)
      */
     public function iShouldSeeNewCustomers(int $count): void
     {
         Assert::true(
-            $this->responseChecker->hasValue(
+            $this->responseChecker->hasValueInSubresourceObject(
                 $this->client->getLastResponse(),
+                'businessActivitySummary',
                 'newCustomersCount',
                 $count,
             ),
@@ -77,8 +79,9 @@ final class DashboardContext implements Context
     public function thereShouldBeTotalSalesOf(int $totalSales): void
     {
         Assert::true(
-            $this->responseChecker->hasValue(
+            $this->responseChecker->hasValueInSubresourceObject(
                 $this->client->getLastResponse(),
+                'businessActivitySummary',
                 'totalSales',
                 $totalSales,
             ),
@@ -91,33 +94,24 @@ final class DashboardContext implements Context
     public function myAverageOrderValueShouldBe(int $averageTotalValue): void
     {
         Assert::true(
-            $this->responseChecker->hasValue(
+            $this->responseChecker->hasValueInSubresourceObject(
                 $this->client->getLastResponse(),
+                'businessActivitySummary',
                 'averageOrderValue',
                 $averageTotalValue,
             ),
-        );
-    }
-
-    /**
-     * @Then I should see :count new customers in the list
-     */
-    public function iShouldSeeNewCustomersInTheList(int $count): void
-    {
-        $this->responseChecker->hasValue(
-            $this->client->getLastResponse(),
-            'newCustomersCount',
-            $count,
+            sprintf('Average order value should be %s, but it does not.', $averageTotalValue),
         );
     }
 
     /**
      * @Then I should see :count new orders in the list
      */
-    public function iShouldSeeNewOrdersInTheList($count): void
+    public function iShouldSeeNewOrdersInTheList(int $count): void
     {
-        $this->responseChecker->hasValue(
+        $this->responseChecker->hasValueInSubresourceObject(
             $this->client->getLastResponse(),
+            'businessActivitySummary',
             'newOrdersCount',
             $count,
         );
