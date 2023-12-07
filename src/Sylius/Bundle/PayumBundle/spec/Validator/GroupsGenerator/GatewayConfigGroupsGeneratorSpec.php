@@ -18,7 +18,6 @@ use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Form\FormInterface;
 
-
 final class GatewayConfigGroupsGeneratorSpec extends ObjectBehavior
 {
     function let(): void

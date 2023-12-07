@@ -175,7 +175,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @When /^I limit generated coupons usage to (\d+) times?$/
      */
-    public function iSetGeneratedCouponsUsageLimitTo(int $limit):void
+    public function iSetGeneratedCouponsUsageLimitTo(int $limit): void
     {
         $this->request->updateContent(['usageLimit' => $limit]);
     }

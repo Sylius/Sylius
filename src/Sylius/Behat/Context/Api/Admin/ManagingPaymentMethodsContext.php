@@ -280,7 +280,7 @@ final class ManagingPaymentMethodsContext implements Context
                     'username' => $username,
                     'signature' => $signature,
                     'password' => 'TEST',
-                    'sandbox' => "test",
+                    'sandbox' => 'test',
                 ],
             ],
         );

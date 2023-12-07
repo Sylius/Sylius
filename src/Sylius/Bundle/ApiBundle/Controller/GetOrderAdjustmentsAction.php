@@ -24,7 +24,7 @@ final class GetOrderAdjustmentsAction
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      */
-    public function __construct (
+    public function __construct(
         private OrderRepositoryInterface $orderRepository,
     ) {
     }

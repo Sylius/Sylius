@@ -50,8 +50,7 @@ final class CatalogPromotionWorkflowTest extends KernelTestCase
     public function it_applies_all_available_transition_for_catalog_promotion_processing_status(
         string $transition,
         string $expectedStatus,
-    ): void
-    {
+    ): void {
         $stateMachine = $this->getStateMachine();
         $catalogPromotion = new CatalogPromotion();
         $catalogPromotion->setState('processing');

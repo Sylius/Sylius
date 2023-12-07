@@ -70,7 +70,7 @@ final class ApiPlatformClient implements ApiClientInterface
                 $this->authorizationHeader,
                 $this->getToken(),
             ),
-            $forgetResponse
+            $forgetResponse,
         );
     }
 

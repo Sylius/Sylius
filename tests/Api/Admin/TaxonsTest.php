@@ -189,7 +189,7 @@ final class TaxonsTest extends JsonApiTestCase
                         'name' => 'Watches',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

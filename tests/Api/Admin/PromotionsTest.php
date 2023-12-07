@@ -558,7 +558,7 @@ final class PromotionsTest extends JsonApiTestCase
                 'translations' => ['en_US' => [
                     'label' => 'Christmas',
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

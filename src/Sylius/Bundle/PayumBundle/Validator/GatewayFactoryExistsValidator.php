@@ -13,16 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Validator;
 
-use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Bundle\PayumBundle\Validator\Constraints\GatewayFactoryExists;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class GatewayFactoryExistsValidator extends ConstraintValidator
 {
-
     /** @param array<string, string> $factoryNames */
     public function __construct(private array $factoryNames)
     {

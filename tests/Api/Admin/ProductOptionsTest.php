@@ -46,7 +46,7 @@ final class ProductOptionsTest extends JsonApiTestCase
                         'name' => 'New Color',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -86,7 +86,7 @@ final class ProductOptionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

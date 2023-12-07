@@ -152,7 +152,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
                         'name' => 'New UPS',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
