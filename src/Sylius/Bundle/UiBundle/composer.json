@@ -35,11 +35,11 @@
         "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.12",
-        "symfony/config": "^6.3.2",
-        "symfony/framework-bundle": "^6.3.4",
-        "symfony/security-core": "^6.3.3",
-        "symfony/security-bundle": "^6.3.4",
-        "symfony/templating": "^6.3.0",
+        "symfony/config": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1",
+        "symfony/security-core": "^6.4.0",
+        "symfony/security-bundle": "^6.4.0",
+        "symfony/templating": "^6.4.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
         "laminas/laminas-stdlib": "^3.3.1"
     },
@@ -51,8 +51,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.3.4",
-        "symfony/form": "^6.3.2",
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/form": "^6.4.1",
         "twig/twig": "^2.12 || ^3.3"
     },
     "config": {
@@ -76,13 +76,13 @@
             "url": "../../*/*"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "test": [
             "@composer validate --strict",
             "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
