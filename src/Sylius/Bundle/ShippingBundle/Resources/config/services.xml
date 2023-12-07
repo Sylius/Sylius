@@ -73,8 +73,6 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
 
-        <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
-
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
             <argument type="service" id="clock"/>
         </service>
