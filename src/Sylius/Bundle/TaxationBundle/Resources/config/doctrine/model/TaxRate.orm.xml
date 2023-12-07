@@ -21,7 +21,7 @@
 
         <field name="code" column="code" type="string" unique="true" />
         <field name="name" column="name" type="string" />
-        <field name="amount" column="amount" type="decimal" precision="10" scale="5" />
+        <field name="amount" column="amount" type="decimal" precision="10" scale="5" nullable="true" />
         <field name="includedInPrice" column="included_in_price" type="boolean" />
         <field name="calculator" column="calculator" type="string" />
         <field name="startDate" column="start_date" type="datetime" nullable="true"/>
