@@ -48,6 +48,16 @@ Feature: Payment method validation
         Then I should be notified that I have to specify paypal sandbox status
         And the payment method with code "PEC" should not be added
 
+    @no-ui @api
+    Scenario: Trying to add a new paypal payment method, but with sandbox that has wrong type
+        When I want to create a new payment method with "Paypal Express Checkout" gateway factory
+        And I name it "Paypal Express Checkout" in "English (United States)"
+        And I specify its code as "PEC"
+        And I configure it for username "TEST" with "TEST" signature and password, but with sandbox that has wrong type
+        And I add it
+        Then I should be notified that I have to specify paypal sandbox status that is boolean
+        And the payment method with code "PEC" should not be added
+
     @ui @api
     Scenario: Trying to add a new stripe payment method with only publishable key specified
         When I want to create a new payment method with "Stripe Checkout" gateway factory
