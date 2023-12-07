@@ -129,7 +129,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate' ,
+            uri: '/api/v2/admin/promotion-coupons/generate',
             server: $header,
             content: json_encode([
                 'promotionCode' => $promotion->getCode(),
@@ -139,7 +139,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'suffix' => 'XYZ',
                 'usageLimit' => 10,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -157,7 +157,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/promotion-coupons/generate' ,
+            uri: '/api/v2/admin/promotion-coupons/generate',
             server: $header,
             content: json_encode([
                 'promotionCode' => 'invalid',
@@ -167,7 +167,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
                 'suffix' => 'XYZ',
                 'usageLimit' => 10,
                 'expiresAt' => '2020-01-01 12:00:00',
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

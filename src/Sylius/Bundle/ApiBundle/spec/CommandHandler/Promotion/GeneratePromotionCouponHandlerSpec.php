@@ -34,7 +34,7 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_promotion_is_not_found(
-        PromotionRepositoryInterface $promotionRepository
+        PromotionRepositoryInterface $promotionRepository,
     ): void {
         $promotionRepository->findOneBy(['code' => 'promotion_code'])->willReturn(null);
 
@@ -50,7 +50,7 @@ final class GeneratePromotionCouponHandlerSpec extends ObjectBehavior
         PromotionCouponGeneratorInterface $promotionCouponGenerator,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCouponOne,
-        PromotionCouponInterface $promotionCouponTwo
+        PromotionCouponInterface $promotionCouponTwo,
     ): void {
         $promotionRepository->findOneBy(['code' => 'promotion_code'])->willReturn($promotion);
 

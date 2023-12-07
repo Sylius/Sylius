@@ -55,7 +55,8 @@ final class RequestFactory implements RequestFactoryInterface
         array $queryParameters = [],
     ): RequestInterface {
         $builder = RequestBuilder::create(
-            sprintf('%s/%s/%s/%s/%s%s',
+            sprintf(
+                '%s/%s/%s/%s/%s%s',
                 $this->apiUrlPrefix,
                 $section,
                 $resource,

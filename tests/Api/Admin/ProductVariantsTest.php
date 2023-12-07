@@ -451,7 +451,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Mug 3',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

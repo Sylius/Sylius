@@ -312,7 +312,7 @@ final class ProductsTest extends JsonApiTestCase
                         'name' => 'Czapka',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

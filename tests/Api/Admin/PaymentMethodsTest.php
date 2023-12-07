@@ -196,7 +196,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
                         'description' => 'Different description',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
