@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Sales\Provider;
+namespace Sylius\Component\Core\Statistics\Provider;
 
+use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesInPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
+use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
 
 interface SalesPerPeriodProviderInterface
 {
     /** @return SalesInPeriod[] */
-    public function provide(SalesPeriod $salesPeriod, ChannelInterface $channel): array;
+    public function provide(Period $period, ChannelInterface $channel): array;
 }

@@ -36,17 +36,17 @@
             <argument type="string">%locale%</argument>
         </service>
 
-        <service id="Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface" class="Sylius\Component\Core\Sales\Provider\SalesStatisticsProvider" >
-            <argument type="service" id="Sylius\Component\Core\Sales\Provider\SalesPerPeriodProviderInterface"/>
-            <argument type="service" id="Sylius\Component\Core\Sales\Provider\SalesSummaryProviderInterface"/>
+        <service id="Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface" class="Sylius\Component\Core\Statistics\Provider\StatisticsProvider" >
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface"/>
+            <argument type="service" id="Sylius\Component\Core\Statistics\Provider\SalesSummaryProviderInterface"/>
         </service>
 
-        <service id="Sylius\Component\Core\Sales\Provider\SalesPerPeriodProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\SalesPerPeriodProvider">
+        <service id="Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface" class="Sylius\Bundle\CoreBundle\Provider\SalesPerPeriodProvider">
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="Sylius\Component\Core\Sales\Mapper\SalesPeriodMapperInterface" />
+            <argument type="service" id="Sylius\Component\Core\Statistics\Mapper\SalesPeriodMapperInterface" />
         </service>
 
-        <service id="Sylius\Component\Core\Sales\Provider\SalesSummaryProviderInterface" class="Sylius\Component\Core\Sales\Provider\SalesSummaryProvider">
+        <service id="Sylius\Component\Core\Statistics\Provider\SalesSummaryProviderInterface" class="Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProvider">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.customer" />
         </service>

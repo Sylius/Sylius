@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Sales\ValueObject;
+namespace Sylius\Component\Core\DateTime;
 
-class SalesPeriod
+class Period
 {
     private \DatePeriod $period;
 

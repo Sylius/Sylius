@@ -20,9 +20,9 @@ use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @experimental */
-final class SalesStatisticsModifier implements DocumentationModifierInterface
+final class StatisticsModifier implements DocumentationModifierInterface
 {
-    private const PATH = '/admin/sales-statistics';
+    private const PATH = '/admin/statistics';
 
     public function __construct(private string $apiRoute)
     {
@@ -31,7 +31,7 @@ final class SalesStatisticsModifier implements DocumentationModifierInterface
     public function modify(OpenApi $docs): OpenApi
     {
         $schemas = $docs->getComponents()->getSchemas();
-        $schemas['SalesStatistics'] = [
+        $schemas['Statistics'] = [
             'type' => 'object',
             'properties' => [
                 'salesPerPeriod' => [
@@ -87,25 +87,25 @@ final class SalesStatisticsModifier implements DocumentationModifierInterface
     private function getPathItem(): PathItem
     {
         return new PathItem(
-            ref: 'Sales statistics',
-            summary: 'Get sales statistics',
+            ref: 'Statistics',
+            summary: 'Get statistics',
             get: new Operation(
-                operationId: 'get_sales_statistics',
-                tags: ['Sales statistics'],
+                operationId: 'get_statistics',
+                tags: ['Statistics'],
                 responses: [
                     Response::HTTP_OK => [
-                        'description' => 'Sales statistics',
+                        'description' => 'Statistics',
                         'content' => [
                             'application/json' => [
                                 'schema' => [
-                                    '$ref' => '#/components/schemas/SalesStatistics',
+                                    '$ref' => '#/components/schemas/Statistics',
                                 ],
                             ],
                         ],
                     ],
                 ],
-                summary: 'Get sales statistics',
-                description: 'Get sales statistics',
+                summary: 'Get statistics',
+                description: 'Get statistics',
                 parameters: $this->getParameters(),
             ),
         );

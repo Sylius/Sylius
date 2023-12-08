@@ -13,24 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\QueryHandler\Admin;
 
-use Sylius\Bundle\ApiBundle\Query\Admin\GetSalesStatistics;
+use Sylius\Bundle\ApiBundle\Query\Admin\GetStatistics;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesStatistics;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
+use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
 /** @experimental */
-final class GetSalesStatisticsHandler
+final class GetStatisticsHandler
 {
     /** @param ChannelRepositoryInterface<ChannelInterface> $channelRepository */
     public function __construct(
-        private SalesStatisticsProviderInterface $salesStatisticsProvider,
+        private StatisticsProviderInterface $statisticsProvider,
         private ChannelRepositoryInterface $channelRepository,
     ) {
     }
 
-    public function __invoke(GetSalesStatistics $query): SalesStatistics
+    public function __invoke(GetStatistics $query): Statistics
     {
         /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneByCode($query->getChannelCode());
@@ -39,6 +39,6 @@ final class GetSalesStatisticsHandler
             throw new ChannelNotFoundException(sprintf('Channel with code "%s" does not exist.', $query->getChannelCode()));
         }
 
-        return $this->salesStatisticsProvider->provide($query->getSalesPeriod(), $channel);
+        return $this->statisticsProvider->provide($query->getPeriod(), $channel);
     }
 }

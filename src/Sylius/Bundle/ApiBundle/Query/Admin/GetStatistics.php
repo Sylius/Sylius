@@ -14,18 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Query\Admin;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
+use Sylius\Component\Core\DateTime\Period;
 
 /** @experimental */
-class GetSalesStatistics implements ChannelCodeAwareInterface
+class GetStatistics implements ChannelCodeAwareInterface
 {
-    public function __construct(private SalesPeriod $salesPeriod, private ?string $channelCode = null)
+    public function __construct(private Period $period, private ?string $channelCode = null)
     {
     }
 
-    public function getSalesPeriod(): SalesPeriod
+    public function getPeriod(): Period
     {
-        return $this->salesPeriod;
+        return $this->period;
     }
 
     public function getChannelCode(): ?string

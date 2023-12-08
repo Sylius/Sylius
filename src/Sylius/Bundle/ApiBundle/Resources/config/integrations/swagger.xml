@@ -80,7 +80,7 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\SalesStatisticsModifier">
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsModifier">
             <argument>%sylius.security.new_api_route%</argument>
             <tag name="sylius.open_api.modifier" />
         </service>

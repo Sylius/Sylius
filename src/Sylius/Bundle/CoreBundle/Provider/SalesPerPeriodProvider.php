@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Provider;
 
 use Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\Sales\Mapper\SalesPeriodMapperInterface;
-use Sylius\Component\Core\Sales\Provider\SalesPerPeriodProviderInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
+use Sylius\Component\Core\Statistics\Mapper\SalesPeriodMapperInterface;
+use Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface;
 
 final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
 {
@@ -28,7 +28,7 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
     {
     }
 
-    public function provide(SalesPeriod $salesPeriod, ChannelInterface $channel): array
+    public function provide(Period $period, ChannelInterface $channel): array
     {
         $queryBuilder = $this->orderRepository->createQueryBuilder('o')
             ->select('SUM(o.total) AS total')
@@ -38,14 +38,14 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
             ->setParameter('channel', $channel)
         ;
 
-        switch ($salesPeriod->getInterval()) {
+        switch ($period->getInterval()) {
             case 'year':
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
                     ->groupBy('year')
                     ->andWhere('YEAR(o.checkoutCompletedAt) >= :startYear AND YEAR(o.checkoutCompletedAt) <= :endYear')
-                    ->setParameter('startYear', $salesPeriod->getStartDate()->format('Y'))
-                    ->setParameter('endYear', $salesPeriod->getEndDate()->format('Y'))
+                    ->setParameter('startYear', $period->getStartDate()->format('Y'))
+                    ->setParameter('endYear', $period->getEndDate()->format('Y'))
                 ;
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('Y');
@@ -67,10 +67,10 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) <= :endMonth',
                         'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
-                    ->setParameter('startYear', $salesPeriod->getStartDate()->format('Y'))
-                    ->setParameter('startMonth', $salesPeriod->getStartDate()->format('n'))
-                    ->setParameter('endYear', $salesPeriod->getEndDate()->format('Y'))
-                    ->setParameter('endMonth', $salesPeriod->getEndDate()->format('n'))
+                    ->setParameter('startYear', $period->getStartDate()->format('Y'))
+                    ->setParameter('startMonth', $period->getStartDate()->format('n'))
+                    ->setParameter('endYear', $period->getEndDate()->format('Y'))
+                    ->setParameter('endMonth', $period->getEndDate()->format('n'))
                 ;
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('n.Y');
@@ -92,10 +92,10 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND WEEK(o.checkoutCompletedAt) <= :endWeek',
                         'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
-                    ->setParameter('startYear', $salesPeriod->getStartDate()->format('Y'))
-                    ->setParameter('startWeek', (ltrim($salesPeriod->getStartDate()->format('W'), '0') ?: '0'))
-                    ->setParameter('endYear', $salesPeriod->getEndDate()->format('Y'))
-                    ->setParameter('endWeek', (ltrim($salesPeriod->getEndDate()->format('W'), '0') ?: '0'))
+                    ->setParameter('startYear', $period->getStartDate()->format('Y'))
+                    ->setParameter('startWeek', (ltrim($period->getStartDate()->format('W'), '0') ?: '0'))
+                    ->setParameter('endYear', $period->getEndDate()->format('Y'))
+                    ->setParameter('endWeek', (ltrim($period->getEndDate()->format('W'), '0') ?: '0'))
                 ;
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return (ltrim($date->format('W'), '0') ?: '0') . ' ' . $date->format('Y');
@@ -124,12 +124,12 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                         'YEAR(o.checkoutCompletedAt) = :endYear AND YEAR(o.checkoutCompletedAt) != :startYear AND MONTH(o.checkoutCompletedAt) < :endMonth',
                         'YEAR(o.checkoutCompletedAt) > :startYear AND YEAR(o.checkoutCompletedAt) < :endYear',
                     ))
-                    ->setParameter('startYear', $salesPeriod->getStartDate()->format('Y'))
-                    ->setParameter('startMonth', $salesPeriod->getStartDate()->format('n'))
-                    ->setParameter('startDay', $salesPeriod->getStartDate()->format('j'))
-                    ->setParameter('endYear', $salesPeriod->getEndDate()->format('Y'))
-                    ->setParameter('endMonth', $salesPeriod->getEndDate()->format('n'))
-                    ->setParameter('endDay', $salesPeriod->getEndDate()->format('j'))
+                    ->setParameter('startYear', $period->getStartDate()->format('Y'))
+                    ->setParameter('startMonth', $period->getStartDate()->format('n'))
+                    ->setParameter('startDay', $period->getStartDate()->format('j'))
+                    ->setParameter('endYear', $period->getEndDate()->format('Y'))
+                    ->setParameter('endMonth', $period->getEndDate()->format('n'))
+                    ->setParameter('endDay', $period->getEndDate()->format('j'))
                 ;
                 $dateFormatter = static function (\DateTimeInterface $date): string {
                     return $date->format('j.n.Y');
@@ -140,11 +140,11 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
 
                 break;
             default:
-                throw new \RuntimeException(sprintf('Interval "%s" not supported.', $salesPeriod->getInterval()));
+                throw new \RuntimeException(sprintf('Interval "%s" not supported.', $period->getInterval()));
         }
 
         $ordersTotals = $queryBuilder->getQuery()->getArrayResult();
 
-        return $this->salesPeriodMapper->map($salesPeriod, $ordersTotals);
+        return $this->salesPeriodMapper->map($period, $ordersTotals);
     }
 }

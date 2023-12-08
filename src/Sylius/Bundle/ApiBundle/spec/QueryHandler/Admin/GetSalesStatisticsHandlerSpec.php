@@ -15,49 +15,49 @@ namespace spec\Sylius\Bundle\ApiBundle\QueryHandler\Admin;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Query\Admin\GetSalesStatistics;
+use Sylius\Bundle\ApiBundle\Query\Admin\GetStatistics;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesStatistics;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
+use Sylius\Component\Core\Statistics\ValueObject\Period;
+use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
-final class GetSalesStatisticsHandlerSpec extends ObjectBehavior
+final class GetStatisticsHandlerSpec extends ObjectBehavior
 {
-    function let(SalesStatisticsProviderInterface $salesStatisticsProvider, ChannelRepositoryInterface $channelRepository): void
+    function let(StatisticsProviderInterface $statisticsProvider, ChannelRepositoryInterface $channelRepository): void
     {
-        $this->beConstructedWith($salesStatisticsProvider, $channelRepository);
+        $this->beConstructedWith($statisticsProvider, $channelRepository);
     }
 
     function it_throws_an_exception_if_channel_has_not_been_found(
-        SalesStatisticsProviderInterface $salesStatisticsProvider,
+        StatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
-        SalesPeriod $salesPeriod,
+        Period $period,
     ): void {
         $channelRepository->findOneByCode('NON_EXISTING_CHANNEL_CODE')->willReturn(null);
 
-        $salesStatisticsProvider->provide(Argument::cetera())->shouldNotBeCalled();
+        $statisticsProvider->provide(Argument::cetera())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(ChannelNotFoundException::class)
             ->during(
                 '__invoke',
-                [new GetSalesStatistics($salesPeriod->getWrappedObject(), 'NON_EXISTING_CHANNEL_CODE')],
+                [new GetStatistics($period->getWrappedObject(), 'NON_EXISTING_CHANNEL_CODE')],
             );
     }
 
     function it_provides_sales_statistics_for_given_channel(
-        SalesStatisticsProviderInterface $salesStatisticsProvider,
+        StatisticsProviderInterface $statisticsProvider,
         ChannelRepositoryInterface $channelRepository,
-        SalesPeriod $salesPeriod,
+        Period $period,
         ChannelInterface $channel,
-        SalesStatistics $salesStatistics,
+        Statistics $statistics,
     ): void {
         $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel);
-        $salesStatisticsProvider->provide($salesPeriod, $channel)->willReturn($salesStatistics);
+        $statisticsProvider->provide($period, $channel)->willReturn($statistics);
 
-        $this(new GetSalesStatistics($salesPeriod->getWrappedObject(), 'CHANNEL_CODE'))
-            ->shouldReturn($salesStatistics);
+        $this(new GetStatistics($period->getWrappedObject(), 'CHANNEL_CODE'))
+            ->shouldReturn($statistics);
     }
 }

@@ -11,37 +11,37 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Component\Core\Sales\Provider;
+namespace spec\Sylius\Component\Core\Statistics\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Sales\Provider\SalesPerPeriodProviderInterface;
-use Sylius\Component\Core\Sales\Provider\SalesStatisticsProviderInterface;
-use Sylius\Component\Core\Sales\Provider\SalesSummaryProviderInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesInPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesStatistics;
-use Sylius\Component\Core\Sales\ValueObject\SalesSummary;
+use Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface;
+use Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface;
+use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
+use Sylius\Component\Core\Statistics\ValueObject\Period;
+use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
+use Sylius\Component\Core\Statistics\ValueObject\SalesSummary;
+use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
-final class SalesStatisticsProviderSpec extends ObjectBehavior
+final class StatisticsProviderSpec extends ObjectBehavior
 {
     function let(
         SalesPerPeriodProviderInterface $salesPerPeriodProvider,
-        SalesSummaryProviderInterface $salesSummaryProvider,
+        BusinessActivitySummaryProviderInterface $salesSummaryProvider,
     ): void {
         $this->beConstructedWith($salesPerPeriodProvider, $salesSummaryProvider);
     }
 
     function it_implements_sales_statistics_provider_interface(): void
     {
-        $this->shouldImplement(SalesStatisticsProviderInterface::class);
+        $this->shouldImplement(StatisticsProviderInterface::class);
     }
 
     function it_provides_sales_statistics_for_given_period_and_channel(
         SalesPerPeriodProviderInterface $salesPerPeriodProvider,
-        SalesSummaryProviderInterface $salesSummaryProvider,
+        BusinessActivitySummaryProviderInterface $salesSummaryProvider,
         ChannelInterface $channel,
-        SalesPeriod $salesPeriod,
+        Period $period,
         SalesInPeriod $lastYearSales,
         SalesInPeriod $thisYearSales,
         SalesSummary $salesSummary,
@@ -49,17 +49,17 @@ final class SalesStatisticsProviderSpec extends ObjectBehavior
         $startDate = new \DateTimeImmutable('first day of january this year 00:00:00');
         $endDate = new \DateTimeImmutable('last day of december this year 23:59:59');
 
-        $salesPeriod->getStartDate()->willReturn($startDate);
-        $salesPeriod->getEndDate()->willReturn($endDate);
-        $salesPeriod->getInterval()->willReturn('year');
+        $period->getStartDate()->willReturn($startDate);
+        $period->getEndDate()->willReturn($endDate);
+        $period->getInterval()->willReturn('year');
 
         $salesPerPeriod = [$lastYearSales->getWrappedObject(), $thisYearSales->getWrappedObject()];
-        $salesPerPeriodProvider->provide($salesPeriod, $channel)->willReturn($salesPerPeriod);
+        $salesPerPeriodProvider->provide($period, $channel)->willReturn($salesPerPeriod);
 
-        $salesSummaryProvider->provide($salesPeriod, $channel)->willReturn($salesSummary);
+        $salesSummaryProvider->provide($period, $channel)->willReturn($salesSummary);
 
-        $salesStatistics = new SalesStatistics($salesPerPeriod, $salesSummary->getWrappedObject(), $salesPeriod->getWrappedObject());
+        $statistics = new Statistics($salesPerPeriod, $salesSummary->getWrappedObject(), $period->getWrappedObject());
 
-        $this->provide($salesPeriod, $channel)->shouldBeLike($salesStatistics);
+        $this->provide($period, $channel)->shouldBeLike($statistics);
     }
 }

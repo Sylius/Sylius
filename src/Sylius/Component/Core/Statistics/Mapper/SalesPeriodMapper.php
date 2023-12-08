@@ -11,21 +11,21 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Sales\Mapper;
+namespace Sylius\Component\Core\Statistics\Mapper;
 
-use Sylius\Component\Core\Sales\ValueObject\SalesInPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
+use Sylius\Component\Core\DateTime\Period;
+use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
 
 class SalesPeriodMapper implements SalesPeriodMapperInterface
 {
-    public function map(SalesPeriod $salesPeriod, array $ordersTotals): array
+    public function map(Period $period, array $ordersTotals): array
     {
         $salesData = [];
 
         $period = new \DatePeriod(
-            $salesPeriod->getStartDate(),
-            \DateInterval::createFromDateString(sprintf('1 %s', $salesPeriod->getInterval())),
-            $salesPeriod->getEndDate(),
+            $period->getStartDate(),
+            \DateInterval::createFromDateString(sprintf('1 %s', $period->getInterval())),
+            $period->getEndDate(),
         );
 
         foreach ($period as $date) {

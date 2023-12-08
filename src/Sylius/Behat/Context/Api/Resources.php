@@ -41,7 +41,7 @@ final class Resources
 
     public const CUSTOMERS = 'customers';
 
-    public const SALES_STATISTICS = 'sales-statistics';
+    public const STATISTICS = 'statistics';
 
     public const EXCHANGE_RATES = 'exchange-rates';
 

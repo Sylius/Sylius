@@ -31,7 +31,7 @@ final class DashboardContext implements Context
      */
     public function iBrowseAdministrationDashboardStatistics(): void
     {
-        $this->client->index(Resources::SALES_STATISTICS);
+        $this->client->index(Resources::STATISTICS);
     }
 
     /**
@@ -40,7 +40,7 @@ final class DashboardContext implements Context
      */
     public function iBrowseAdministrationDashboardStatisticsForChannel(ChannelInterface $channel): void
     {
-        $this->client->index(Resources::SALES_STATISTICS, ['channelCode' => $channel->getCode()]);
+        $this->client->index(Resources::STATISTICS, ['channelCode' => $channel->getCode()]);
     }
 
     /**

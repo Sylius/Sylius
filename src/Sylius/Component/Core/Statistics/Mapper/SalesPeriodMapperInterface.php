@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Sales\Mapper;
+namespace Sylius\Component\Core\Statistics\Mapper;
 
-use Sylius\Component\Core\Sales\ValueObject\SalesInPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
+use Sylius\Component\Core\DateTime\Period;
+use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
 
 interface SalesPeriodMapperInterface
 {
@@ -23,5 +23,5 @@ interface SalesPeriodMapperInterface
      *
      * @return SalesInPeriod[]
      */
-    public function map(SalesPeriod $salesPeriod, array $ordersTotals): array;
+    public function map(Period $period, array $ordersTotals): array;
 }

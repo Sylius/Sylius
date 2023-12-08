@@ -11,17 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Sales\Provider;
+namespace Sylius\Component\Core\Statistics\Provider;
 
+use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Sales\ValueObject\SalesPeriod;
-use Sylius\Component\Core\Sales\ValueObject\SalesSummary;
+use Sylius\Component\Core\Statistics\ValueObject\BusinessActivitySummary;
 
-class SalesSummaryProvider implements SalesSummaryProviderInterface
+class BusinessActivitySummaryProvider implements BusinessActivitySummaryProviderInterface
 {
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
@@ -31,12 +31,12 @@ class SalesSummaryProvider implements SalesSummaryProviderInterface
     {
     }
 
-    public function provide(SalesPeriod $salesPeriod, ChannelInterface $channel): SalesSummary
+    public function provide(Period $period, ChannelInterface $channel): BusinessActivitySummary
     {
-        return new SalesSummary(
-            $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $salesPeriod->getStartDate(), $salesPeriod->getEndDate()),
-            $this->orderRepository->countPaidForChannelInPeriod($channel, $salesPeriod->getStartDate(), $salesPeriod->getEndDate()),
-            $this->customerRepository->countCustomersInPeriod($salesPeriod->getStartDate(), $salesPeriod->getEndDate()),
+        return new BusinessActivitySummary(
+            $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $period->getStartDate(), $period->getEndDate()),
+            $this->orderRepository->countPaidForChannelInPeriod($channel, $period->getStartDate(), $period->getEndDate()),
+            $this->customerRepository->countCustomersInPeriod($period->getStartDate(), $period->getEndDate()),
         );
     }
 }
