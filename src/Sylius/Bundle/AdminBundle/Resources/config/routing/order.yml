@@ -20,6 +20,10 @@ sylius_admin_order_show:
         _controller: sylius.controller.order:showAction
         _sylius:
             section: admin
+            repository:
+              method: findOrderById
+              arguments:
+                - '$id'
             permission: true
             template: "@SyliusAdmin/Order/show.html.twig"
 
@@ -30,6 +34,10 @@ sylius_admin_order_history:
         _controller: sylius.controller.order:showAction
         _sylius:
             section: admin
+            repository:
+              method: findOrderById
+              arguments:
+                - '$id'
             permission: true
             template: "@SyliusAdmin/Order/history.html.twig"
 
@@ -40,6 +48,10 @@ sylius_admin_order_update:
         _controller: sylius.controller.order:updateAction
         _sylius:
             section: admin
+            repository:
+              method: findOrderById
+              arguments:
+                - '$id'
             permission: true
             template: "@SyliusAdmin/Order/update.html.twig"
             form:
@@ -53,6 +65,10 @@ sylius_admin_order_cancel:
     defaults:
         _controller: sylius.controller.order:applyStateMachineTransitionAction
         _sylius:
+            repository:
+              method: findOrderById
+              arguments:
+                - '$id'
             permission: true
             state_machine:
                 graph: sylius_order

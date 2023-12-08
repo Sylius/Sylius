@@ -18,6 +18,10 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\PaymentMethod" table="sylius_payment_method">
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_payment_method_channels">
                 <join-columns>
                     <join-column name="payment_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />

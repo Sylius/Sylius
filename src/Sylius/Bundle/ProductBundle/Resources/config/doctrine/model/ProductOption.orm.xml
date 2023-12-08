@@ -36,7 +36,12 @@
         </field>
 
         <one-to-many target-entity="Sylius\Component\Product\Model\ProductOptionValueInterface" mapped-by="option" field="values" orphan-removal="true">
-            <cascade><cascade-all /></cascade>
+            <cascade>
+                <cascade-all />
+            </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
     </mapped-superclass>
 

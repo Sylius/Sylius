@@ -269,9 +269,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^I don't have access to see the summary of my (previous cart)$/
+     * @Then /^I should not have access to the summary of my (previous cart)$/
      */
-    public function iDoNotHaveAccessToSeeTheSummaryOfMyCart(string $tokenValue): void
+    public function iShouldNotHaveAccessToTheSummaryOfMyCart(string $tokenValue): void
     {
         Assert::same($this->cartsClient->show($tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
@@ -533,7 +533,7 @@ final class CartContext implements Context
 
         Assert::same($response->getStatusCode(), 404);
 
-        Assert::same($this->responseChecker->getResponseContent($response)['message'], 'Not Found');
+        Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
     /**

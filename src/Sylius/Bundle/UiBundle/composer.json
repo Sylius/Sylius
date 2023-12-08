@@ -43,6 +43,7 @@
         "laminas/laminas-stdlib": "^3.2"
     },
     "conflict": {
+        "doctrine/annotations": "^2.0",
         "twig/twig": "^1.0"
     },
     "require-dev": {
@@ -62,6 +63,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"
+        },
+        "symfony": {
+            "endpoint": [
+                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
+            ]
         }
     },
     "autoload": {

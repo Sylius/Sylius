@@ -1,5 +1,89 @@
 # CHANGELOG FOR `1.11.X`
 
+## v1.11.15 (2023-03-28)
+
+#### Details
+
+- [#14784](https://github.com/Sylius/Sylius/issues/14784) [Documentation] Update Sylius versions in release cycle ([@GSadee](https://github.com/GSadee))
+- [#14871](https://github.com/Sylius/Sylius/issues/14871) Fix dependency security vulerability for enshrined/svg-sanitize package ([@cosminsandu](https://github.com/cosminsandu))
+- [#14876](https://github.com/Sylius/Sylius/issues/14876) Fix CI on Sylius 1.11 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+
+## v1.11.14 (2023-02-02)
+
+#### Details
+
+- [#12996](https://github.com/Sylius/Sylius/issues/12996) Remove sylius.model.shop_billing_data.class ([@vvasiloi](https://github.com/vvasiloi))
+- [#13448](https://github.com/Sylius/Sylius/issues/13448) Remove wrong trailing space in test attribute ([@mmenozzi](https://github.com/mmenozzi))
+- [#13835](https://github.com/Sylius/Sylius/issues/13835) chore: Replace NBSP by Space in doc ([@sad270](https://github.com/sad270))
+- [#14174](https://github.com/Sylius/Sylius/issues/14174) [Admin] Fix 500 error when showing cart in admin panel ([@lchrusciel](https://github.com/lchrusciel))
+- [#14416](https://github.com/Sylius/Sylius/issues/14416) [Product] Fixed product attribute translations #11570 ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14576](https://github.com/Sylius/Sylius/issues/14576) Fix notInRangeMessage usage for a few Range validations ([@diimpp](https://github.com/diimpp), [@GSadee](https://github.com/GSadee))
+- [#14577](https://github.com/Sylius/Sylius/issues/14577) Product taxon position don't affect parent taxon - API ([@everwhatever](https://github.com/everwhatever))
+- [#14719](https://github.com/Sylius/Sylius/issues/14719) [CS][DX] Refactor
+- [#14721](https://github.com/Sylius/Sylius/issues/14721) Added forgotten import to docblock. ([@kkevindev](https://github.com/kkevindev))
+- [#14722](https://github.com/Sylius/Sylius/issues/14722) [User] Allow configuring `lastLogin` tracking frequency ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14730](https://github.com/Sylius/Sylius/issues/14730) [UI][DX] Extract form collection event handlers to the separate module ([@coldic3](https://github.com/coldic3))
+- [#14731](https://github.com/Sylius/Sylius/issues/14731) [Fix] Request stack with null request ([@Prometee](https://github.com/Prometee))
+- [#14736](https://github.com/Sylius/Sylius/issues/14736) Updated UPGRADE-1.11.md to add a BC Break on channel pricing ([@devantoine](https://github.com/devantoine))
+- [#14740](https://github.com/Sylius/Sylius/issues/14740) [CS][DX] Refactor
+- [#14746](https://github.com/Sylius/Sylius/issues/14746) Optimize jeans_04.svg size ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14751](https://github.com/Sylius/Sylius/issues/14751) Fix applying catalog promotions when there is no applied promotions and price differ from original price ([@TheMilek](https://github.com/TheMilek))
+- [#14755](https://github.com/Sylius/Sylius/issues/14755) [Maintenance][ApiBundle] Move test app into `Tests` dir ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14762](https://github.com/Sylius/Sylius/issues/14762) Add missing interface to OrderIntegrityChecker ([@Zales0123](https://github.com/Zales0123))
+- [#14768](https://github.com/Sylius/Sylius/issues/14768) [CS][DX] Refactor
+- [#14773](https://github.com/Sylius/Sylius/issues/14773) [Maintenance][UserBundle] Fix UserLastLoginSubscriber arguments ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14782](https://github.com/Sylius/Sylius/issues/14782) Fix the wrong DQL alias in OrderByIdentifierSqlWalker ([@coldic3](https://github.com/coldic3))
+- [#14783](https://github.com/Sylius/Sylius/issues/14783) [Admin] Fix 500 when resending order confirmation email for a cart ([@NoResponseMate](https://github.com/NoResponseMate))
+
+## v1.11.13 (2023-01-13)
+
+#### Details
+
+- [#14715](https://github.com/Sylius/Sylius/issues/14715) [Core] Fix default query hint config ([@coldic3](https://github.com/coldic3))
+
+## v1.11.12 (2023-01-13)
+
+#### Details
+
+- [#12099](https://github.com/Sylius/Sylius/issues/12099) Make link buttons with confirmation modal work again ([@stefandoorn](https://github.com/stefandoorn))
+- [#12712](https://github.com/Sylius/Sylius/issues/12712) Fix sprintf parameters order ([@Creeperface01](https://github.com/Creeperface01))
+- [#13157](https://github.com/Sylius/Sylius/issues/13157) Add missing space to taxes <tr> ([@pavol-tuka](https://github.com/pavol-tuka))
+- [#13207](https://github.com/Sylius/Sylius/issues/13207) Changing replacement interface as previous one does not exist ([@Roshyo](https://github.com/Roshyo))
+- [#13689](https://github.com/Sylius/Sylius/issues/13689) Fix typo in sylius_order state machine callback ([@vvasiloi](https://github.com/vvasiloi), [@Rafikooo](https://github.com/Rafikooo), [@Zales0123](https://github.com/Zales0123))
+- [#13820](https://github.com/Sylius/Sylius/issues/13820) [Doc] Add depth to theme configuration ([@Nek-](https://github.com/Nek-))
+- [#14177](https://github.com/Sylius/Sylius/issues/14177) [Docs] Fix API docs for Shop User token response ([@loic425](https://github.com/loic425))
+- [#14289](https://github.com/Sylius/Sylius/issues/14289) [Api] Change int to integer in ProductVariant and ShippingMethod documentation normalizers ()
+- [#14525](https://github.com/Sylius/Sylius/issues/14525) Adding skipIf for migrations to allow future runs when they should apply ([@stefantalen](https://github.com/stefantalen))
+- [#14575](https://github.com/Sylius/Sylius/issues/14575) [DX] Add EditorConfig for test API responses ([@coldic3](https://github.com/coldic3))
+- [#14580](https://github.com/Sylius/Sylius/issues/14580) [Enchancement] Optimize memory usage by sylius:remove-expired-carts command ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14605](https://github.com/Sylius/Sylius/issues/14605) [CS][DX] Refactor ()
+- [#14608](https://github.com/Sylius/Sylius/issues/14608) [UI][Shop][Cart] Reset chosen options on refresh in firefox ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14619](https://github.com/Sylius/Sylius/issues/14619) Update catalog_promotions.rst ([@Xusifob](https://github.com/Xusifob))
+- [#14632](https://github.com/Sylius/Sylius/issues/14632) [Documentation] Extend the maintenance period of Sylius 1.11 by one month ([@GSadee](https://github.com/GSadee))
+- [#14633](https://github.com/Sylius/Sylius/issues/14633) [Documentation] Remove Sylius 1.12 scope from the release cycle page ([@GSadee](https://github.com/GSadee))
+- [#14634](https://github.com/Sylius/Sylius/issues/14634) [API] Fix ProductVariantNormalizer exception catching ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14642](https://github.com/Sylius/Sylius/issues/14642) Fix invalid API errors normalization ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14643](https://github.com/Sylius/Sylius/issues/14643) [ProductAssociation] Fix empty product associations ([@coldic3](https://github.com/coldic3))
+- [#14645](https://github.com/Sylius/Sylius/issues/14645) Move Upgrade API from 1.11.11 to 1.11.12 section to the top of file ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14650](https://github.com/Sylius/Sylius/issues/14650) Validate existence of coupon ([@bashilbers](https://github.com/bashilbers), [@everwhatever](https://github.com/everwhatever))
+- [#14651](https://github.com/Sylius/Sylius/issues/14651) Remove unit from shipment ([@kayue](https://github.com/kayue), [@everwhatever](https://github.com/everwhatever))
+- [#14659](https://github.com/Sylius/Sylius/issues/14659) [CS][DX] Refactor ([@bot](https://github.com/bot)@[@sylius](https://github.com/sylius).[@org](https://github.com/org))
+- [#14661](https://github.com/Sylius/Sylius/issues/14661) [Maintenance][Psalm] Add LifecycleEventArgs to deprecated classes ([@Rafikooo](https://github.com/Rafikooo))
+- [#14662](https://github.com/Sylius/Sylius/issues/14662) Improve loading taxons ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14669](https://github.com/Sylius/Sylius/issues/14669) Wrong Rounding of the prices in the percentage discount catalog promotions ([@maxmishyn](https://github.com/maxmishyn), [@everwhatever](https://github.com/everwhatever))
+- [#14677](https://github.com/Sylius/Sylius/issues/14677) [Maintenance] Remove Doctrine's LifecycleEventArgs deprecations ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14678](https://github.com/Sylius/Sylius/issues/14678) [UX] Fix cart button on small screens ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14682](https://github.com/Sylius/Sylius/issues/14682) It's 2023! 🎉 ([@coldic3](https://github.com/coldic3))
+- [#14683](https://github.com/Sylius/Sylius/issues/14683) Extract authorized user assignment to separate method/ cp to 1.11 ([@everwhatever](https://github.com/everwhatever))
+- [#14685](https://github.com/Sylius/Sylius/issues/14685) Default ORDER BY for all entities and their relationships ([@coldic3](https://github.com/coldic3))
+- [#14689](https://github.com/Sylius/Sylius/issues/14689) [CS][DX] Refactor ()
+- [#14691](https://github.com/Sylius/Sylius/issues/14691) [Fix] Symfony container reanimation after friendsofsymfony/rest-bundle: 3.5.0 release ([@Rafikooo](https://github.com/Rafikooo))
+- [#14697](https://github.com/Sylius/Sylius/issues/14697) Remove error suppression to fix unit tests ([@coldic3](https://github.com/coldic3))
+- [#14700](https://github.com/Sylius/Sylius/issues/14700) Add a conflict for doctrine/migrations:3.5.3 ([@jakubtobiasz](https://github.com/jakubtobiasz))
+- [#14701](https://github.com/Sylius/Sylius/issues/14701) [API] Fix IRI converter catching homepage ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#14704](https://github.com/Sylius/Sylius/issues/14704) [Conflicts] Doctrine/annotations:^2.0 ([@Rafikooo](https://github.com/Rafikooo))
+- [#14706](https://github.com/Sylius/Sylius/issues/14706) [Promotion][UI] Fix hardcoded "sylius_promotion" selector ([@coldic3](https://github.com/coldic3))
+
 ## v1.11.11 (2022-12-08)
 
 #### Details

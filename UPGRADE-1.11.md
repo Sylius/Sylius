@@ -1,3 +1,12 @@
+# UPGRADE FROM `v1.11.11` TO `v1.11.12`
+
+1. All entities and their relationships have a default order by identifier if no order is specified. You can disable
+this behavior by setting the `sylius_core.order_by_identifier` parameter to `false`:
+```yaml
+sylius_core:
+    order_by_identifier: false
+```
+
 # UPGRADE FROM `v1.11.7` TO `v1.11.8`
 
 1. Cloning `Sylius\Component\Order\Model\Adjustment` resets values of fields `id`, `createdAt` and `updatedAt`.
@@ -167,6 +176,11 @@ This means that your form type extensions, including autowired ones, may now con
 stock form type extensions without you having to explicitly specify their priorities. However, if you relied on the old
 default values, you might have to review priorities of your own form type extensions, as well as any that you have overridden.
 Please note that **unlike state machine callbacks**, form extension priorities are being executed in descending order. 
+
+#### Channel pricing view
+
+All form fields are now hardcoded into the `AdminBundle/Resources/views/ProductVariant/Tab/_channelPricings.html.twig` view.
+If you have custom properties which were previously rendered automatically you now have to override this view in `templates/bundles/SyliusAdminBundle/ProductVariant/Tab/_channelPricings.html.twig`.
 
 ### API v2
 

@@ -70,7 +70,7 @@ final class OrderGetMethodItemExtension implements QueryItemExtensionInterface
                     $queryBuilder->expr()->andX(
                         sprintf('%s.customer IS NOT NULL', $rootAlias),
                         sprintf('%s.createdByGuest = true', $rootAlias),
-                    )
+                    ),
                 ))
             ;
 

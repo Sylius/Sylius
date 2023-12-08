@@ -17,7 +17,7 @@ use Symfony\Component\ErrorHandler\Debug;
 
 set_time_limit(0);
 
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../../../vendor/autoload.php';
 
 if (!class_exists(Application::class)) {
     throw new RuntimeException('You need to add "symfony/framework-bundle" as a Composer dependency.');

@@ -15,6 +15,7 @@ parameters:
         - '**/Bundle/*/test/**.php'
         - '**/Bundle/*/test/app/**.php'
         - '**/Bundle/*/test/src/**.php'
+        - '**/Bundle/*/Tests/Application/**/**.php'
         - '**/Bundle/*/Tests/Functional/app/**.php'
         - '**/Bundle/*/Tests/Functional/var/**.php'
 
@@ -30,8 +31,13 @@ parameters:
         - 'src/Sylius/Bundle/CoreBundle/EventListener/CircularDependencyBreakingExceptionListener.php'
         - 'src/Sylius/Bundle/CoreBundle/Tests/DependencyInjection/CircularDependencyBreakingExceptionListenerPassTest.php'
         - 'src/Sylius/Bundle/CoreBundle/Tests/Listener/CircularDependencyBreakingExceptionListenerTest.php'
+
+        # To investigate, occurs after release of doctrine/orm 2.14, the processing of these classes ends with exit code 143
+        - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
+        - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
     ignoreErrors:
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
+        - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\CustomerStatisticsController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\Dashboard\\StatisticsController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'
         - '/Parameter \$templatingEngine of method Sylius\\Bundle\\AdminBundle\\Controller\\DashboardController\:\:\_\_construct\(\) has invalid typehint type Symfony\\Bundle\\FrameworkBundle\\Templating\\EngineInterface\./'

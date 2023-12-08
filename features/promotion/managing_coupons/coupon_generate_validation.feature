@@ -33,6 +33,17 @@ Feature: Coupon generate instruction validation
         And there should be 0 coupon related to this promotion
 
     @ui
+    Scenario: Trying to generate new coupons with code length impossible to generate
+        When I want to generate new coupons for this promotion
+        And I specify their code length as 50
+        And I choose the amount of 4 coupons to be generated
+        And I limit generated coupons usage to 25 times
+        And I make generated coupons valid until "26.03.2017"
+        And I try to generate these coupons
+        Then I should be notified that generate code length is out of range
+        And there should be 0 coupon related to this promotion
+
+    @ui
     Scenario: Trying to generate new coupons with amount and code length impossible to generate
         When I want to generate new coupons for this promotion
         And I specify their code length as 1

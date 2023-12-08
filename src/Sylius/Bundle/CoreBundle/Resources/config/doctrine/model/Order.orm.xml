@@ -46,12 +46,20 @@
         </many-to-one>
 
         <one-to-many field="payments" target-entity="Sylius\Component\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>
         </one-to-many>
 
         <one-to-many field="shipments" target-entity="Sylius\Component\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>
@@ -65,6 +73,10 @@
         </many-to-one>
 
         <many-to-many field="promotions" target-entity="Sylius\Component\Promotion\Model\PromotionInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_promotion_order">
                 <join-columns>
                     <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />

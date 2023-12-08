@@ -118,6 +118,7 @@
             <argument type="service" id="sylius.behat.page.admin.order.show" />
             <argument type="service" id="sylius.behat.page.admin.order.update" />
             <argument type="service" id="sylius.behat.page.admin.order.history" />
+            <argument type="service" id="sylius.behat.page.error" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.shared_security" />
         </service>

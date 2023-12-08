@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
@@ -51,12 +52,19 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
 
         $context[self::ALREADY_CALLED] = true;
         $data = $this->normalizer->normalize($object, $format, $context);
-        $channel = $this->channelContext->getChannel();
+
+        $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
+
+        try {
+            $channel = $this->channelContext->getChannel();
+        } catch (ChannelNotFoundException) {
+            return $data;
+        }
 
         try {
             $data['price'] = $this->priceCalculator->calculate($object, ['channel' => $channel]);
             $data['originalPrice'] = $this->priceCalculator->calculateOriginal($object, ['channel' => $channel]);
-        } catch (ChannelNotFoundException) {
+        } catch (MissingChannelConfigurationException) {
             unset($data['price'], $data['originalPrice']);
         }
 
@@ -68,8 +76,6 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
                 $appliedPromotions->toArray(),
             );
         }
-
-        $data['inStock'] = $this->availabilityChecker->isStockAvailable($object);
 
         return $data;
     }

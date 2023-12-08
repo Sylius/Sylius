@@ -44,8 +44,18 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $value->couponCode]);
+
+        if (!$promotionCoupon instanceof PromotionCouponInterface) {
+            $this->context
+                ->buildViolation($constraint->message)
+                ->atPath('couponCode')
+                ->addViolation()
+            ;
+
+            return;
+        }
+
         /** @var OrderInterface $cart */
         $cart = $this->orderRepository->findCartByTokenValue($value->getOrderTokenValue());
 

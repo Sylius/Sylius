@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\AvatarImageRepository;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -50,6 +49,7 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
                 ->booleanNode('shipping_address_based_taxation')->defaultFalse()->end()
+                ->booleanNode('order_by_identifier')->defaultTrue()->end()
                 ->booleanNode('process_shipments_before_recalculating_prices')
                     ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
                     ->defaultFalse()

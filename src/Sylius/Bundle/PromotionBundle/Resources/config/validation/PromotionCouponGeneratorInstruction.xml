@@ -32,9 +32,8 @@
         <property name="codeLength">
             <constraint name="Range">
                 <option name="min">1</option>
-                <option name="minMessage">sylius.promotion_coupon_generator_instruction.code_length.min</option>
                 <option name="max">40</option>
-                <option name="maxMessage">sylius.promotion_coupon_generator_instruction.code_length.max</option>
+                <option name="notInRangeMessage">sylius.promotion_coupon_generator_instruction.code_length.not_in_range</option>
             </constraint>
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generator_instruction.code_length.not_blank</option>

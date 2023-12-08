@@ -109,4 +109,28 @@ final class PromotionCouponEligibilityValidatorSpec extends ObjectBehavior
 
         $this->validate($value, $constraint);
     }
+
+    function it_adds_violation_if_promotion_coupon_is_not_instance_of_promotion_coupon_interface(
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
+        OrderRepositoryInterface $orderRepository,
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+    ): void {
+        $this->initialize($executionContext);
+        $constraint = new PromotionCouponEligibility();
+        $constraint->message = 'message';
+
+        $value = UpdateCart::createWithCouponData('couponCode');
+        $value->setOrderTokenValue('token');
+
+        $promotionCouponRepository->findOneBy(['code' => 'couponCode'])->willReturn(null);
+
+        $executionContext->buildViolation($constraint->message)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->atPath('couponCode')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $orderRepository->findCartByTokenValue('token')->shouldNotBeCalled();
+
+        $this->validate($value, $constraint);
+    }
 }

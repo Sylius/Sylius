@@ -34,6 +34,10 @@
         </field>
         <field name="channelCode" column="channel_code" type="string" />
         <many-to-many field="appliedPromotions" target-entity="Sylius\Component\Promotion\Model\CatalogPromotionInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_channel_pricing_catalog_promotions">
                 <join-columns>
                     <join-column name="channel_pricing_id" nullable="false"/>

@@ -447,7 +447,7 @@ Now connecting the validation of the ``ShippingMethod`` to the validation of eac
       properties:
         ...
         images:
-          - Valid: ~    
+          - Valid: ~
 
 Learn more
 ----------

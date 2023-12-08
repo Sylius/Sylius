@@ -225,6 +225,7 @@ final class ProductContext implements Context
 
     /**
      * @When I browse products from taxon :taxon
+     * @When I browse products from product taxon code :taxon
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon): void
     {
@@ -800,6 +801,17 @@ final class ProductContext implements Context
         foreach ($products as $product) {
             $this->assertProductIsInAssociation($product->getName(), $productAssociationName);
         }
+    }
+
+    /**
+     * @Then /^I should not see the product association "([^"]+)"$/
+     */
+    public function iShouldNotSeeTheProductAssociationWithProducts(string $productAssociationName): void
+    {
+        Assert::false(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('There should not be an association named "%s" but it does.', $productAssociationName),
+        );
     }
 
     /**

@@ -30,7 +30,8 @@
                 <cascade-all/>
             </cascade>
             <order-by>
-                <order-by-field name="name" direction="ASC" />
+                <order-by-field name="name" />
+                <order-by-field name="id" />
             </order-by>
         </one-to-many>
     </mapped-superclass>

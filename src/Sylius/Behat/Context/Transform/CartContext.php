@@ -15,11 +15,16 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Webmozart\Assert\Assert;
 
-final class CartTokenContext implements Context
+final class CartContext implements Context
 {
-    public function __construct(private SharedStorageInterface $sharedStorage)
-    {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private SharedStorageInterface $sharedStorage,
+    ) {
     }
 
     /**
@@ -44,5 +49,21 @@ final class CartTokenContext implements Context
         }
 
         return $this->provideCartToken();
+    }
+
+    /**
+     * @Transform /^(customer's latest cart)$/
+     */
+    public function provideLatestCart(): OrderInterface
+    {
+        $carts = $this->orderRepository->findBy(
+            ['state' => OrderInterface::STATE_CART],
+            ['createdAt' => 'DESC'],
+            1,
+        );
+
+        Assert::count($carts, 1);
+
+        return $carts[0];
     }
 }

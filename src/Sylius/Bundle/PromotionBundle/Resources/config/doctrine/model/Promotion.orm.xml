@@ -39,16 +39,25 @@
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
         <one-to-many field="rules" target-entity="Sylius\Component\Promotion\Model\PromotionRuleInterface" mapped-by="promotion" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
         <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\PromotionActionInterface" mapped-by="promotion" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
         </one-to-many>
 
         <field name="createdAt" column="created_at" type="datetime">

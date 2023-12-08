@@ -19,6 +19,7 @@ use Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -163,5 +164,61 @@ class ZoneMemberIntegrityListenerSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('protectFromRemovingProvinceWithinCountry', [$event])
         ;
+    }
+
+    function it_throws_an_exception_if_no_session_is_available_during_zone_protection(
+        ZoneInterface $zone,
+        GenericEvent $event,
+        ZoneDeletionCheckerInterface $zoneDeletionChecker,
+        RequestStack $requestStack,
+    ): void {
+        $event->getSubject()->willReturn($zone);
+
+        $zoneDeletionChecker->isDeletable($zone)->willReturn(false);
+
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            $requestStack->getMasterRequest()->willReturn(null);
+
+            // SessionNotFoundException is not available in Symfony 4.4
+            $this
+                ->shouldThrow(\InvalidArgumentException::class)
+                ->during('protectFromRemovingZone', [$event])
+            ;
+        } else {
+            $requestStack->getSession()->willThrow(new SessionNotFoundException());
+
+            $this
+                ->shouldThrow(SessionNotFoundException::class)
+                ->during('protectFromRemovingZone', [$event])
+            ;
+        }
+    }
+
+    function it_throws_an_exception_if_no_session_is_available_during_province_protection(
+        CountryInterface $country,
+        GenericEvent $event,
+        CountryProvincesDeletionCheckerInterface $countryProvincesDeletionChecker,
+        RequestStack $requestStack,
+    ): void {
+        $event->getSubject()->willReturn($country);
+
+        $countryProvincesDeletionChecker->isDeletable($country)->willReturn(false);
+
+        if (!method_exists(RequestStack::class, 'getSession')) {
+            $requestStack->getMasterRequest()->willReturn(null);
+
+            // SessionNotFoundException is not available in Symfony 4.4
+            $this
+                ->shouldThrow(\InvalidArgumentException::class)
+                ->during('protectFromRemovingProvinceWithinCountry', [$event])
+            ;
+        } else {
+            $requestStack->getSession()->willThrow(new SessionNotFoundException());
+
+            $this
+                ->shouldThrow(SessionNotFoundException::class)
+                ->during('protectFromRemovingProvinceWithinCountry', [$event])
+            ;
+        }
     }
 }

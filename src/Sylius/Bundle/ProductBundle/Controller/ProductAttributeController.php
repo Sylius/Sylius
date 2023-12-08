@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ProductBundle\Controller;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,13 +86,13 @@ class ProductAttributeController extends ResourceController
         $forms = [];
 
         if (!$attribute->isTranslatable()) {
-            array_push($localeCodes, null);
+            $adminLocaleCode = $this->get(LocaleContextInterface::class)->getLocaleCode();
 
-            return [null => $this->createFormAndView($attributeForm, $attribute)];
+            return [null => $this->createFormAndView($attributeForm, $attribute, $adminLocaleCode)];
         }
 
         foreach ($localeCodes as $localeCode) {
-            $forms[$localeCode] = $this->createFormAndView($attributeForm, $attribute);
+            $forms[$localeCode] = $this->createFormAndView($attributeForm, $attribute, $localeCode);
         }
 
         return $forms;
@@ -100,6 +101,7 @@ class ProductAttributeController extends ResourceController
     private function createFormAndView(
         $attributeForm,
         AttributeInterface $attribute,
+        string $localeCode,
     ): FormView {
         return $this
             ->get('form.factory')
@@ -107,7 +109,11 @@ class ProductAttributeController extends ResourceController
                 'value',
                 $attributeForm,
                 null,
-                ['label' => $attribute->getName(), 'configuration' => $attribute->getConfiguration()],
+                [
+                    'label' => $attribute->getTranslation($localeCode)->getName(),
+                    'configuration' => $attribute->getConfiguration(),
+                    'locale_code' => $localeCode,
+                ],
             )
             ->createView()
         ;

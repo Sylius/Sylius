@@ -25,11 +25,14 @@ import './sylius-variants-prices';
 $(document).ready(() => {
   $('.popup-js').popup();
 
-  $('.cart.button')
-    .popup({
-      popup: $('.cart.popup'),
-      on: 'click',
-    });
+  $('.cart.button').popup({
+    popup: $('.cart.popup'),
+    on: 'click',
+    onUnplaceable() {
+      window.location.href = $('#sylius-go-to-cart').attr('href');
+    },
+    silent: true,
+  });
 
   $('.star.rating').rating({
     fireOnInit: true,
@@ -85,6 +88,6 @@ $(document).ready(() => {
     slidesToScroll: 1,
     prevArrow: $('.carousel-left'),
     nextArrow: $('.carousel-right'),
-    appendArrows: false
+    appendArrows: false,
   });
 });

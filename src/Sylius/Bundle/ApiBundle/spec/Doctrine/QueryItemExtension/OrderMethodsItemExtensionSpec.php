@@ -63,13 +63,19 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
             ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -108,7 +114,7 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         $userContext->getUser()->willReturn(null);
 
         $queryBuilder
-            ->leftJoin(sprintf('%s.customer', 'o'), 'customer')
+            ->leftJoin('o.customer', 'customer')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -126,13 +132,19 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
             ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -189,13 +201,19 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
         ;
 
         $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
             ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
@@ -371,15 +389,26 @@ final class OrderMethodsItemExtensionSpec extends ObjectBehavior
             ->willReturn($queryBuilder)
         ;
 
-        $queryBuilder->expr()->shouldBeCalled()->willReturn($expr);
-        $expr
-            ->orX('user IS NULL', sprintf('%s.customer IS NULL', 'o'))
+        $queryBuilder
+            ->expr()
             ->shouldBeCalled()
-            ->willReturn(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->willReturn($expr)
+        ;
+
+        $expr
+            ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
+            ->shouldBeCalled()
+            ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
+        ;
+
+        $expr
+            ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->shouldBeCalled()
+            ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
-            ->andWhere(sprintf('user IS NULL OR %s.customer IS NULL', 'o'))
+            ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
             ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;

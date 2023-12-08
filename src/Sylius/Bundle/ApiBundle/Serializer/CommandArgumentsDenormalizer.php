@@ -29,7 +29,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
     ) {
     }
 
-    public function supportsDenormalization($data, $type, $format = null, array $context = [])
+    public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
         /** @psalm-var class-string $inputClassName|null */
         $inputClassName = $this->getInputClassName($context);

@@ -55,6 +55,7 @@ class AddressExampleFactory extends AbstractExampleFactory
             ->setDefault('city', fn (Options $options): string => $this->faker->city)
             ->setDefault('postcode', fn (Options $options): string => $this->faker->postcode)
             ->setDefault('country_code', function (Options $options): string {
+                /** @var CountryInterface[] $countries */
                 $countries = $this->countryRepository->findAll();
                 shuffle($countries);
 

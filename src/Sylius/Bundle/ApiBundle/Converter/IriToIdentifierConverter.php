@@ -80,11 +80,11 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
         }
 
         try {
-            $this->router->match($fieldValue);
+            $parameters = $this->router->match($fieldValue);
         } catch (RoutingExceptionInterface) {
             return false;
         }
 
-        return true;
+        return isset($parameters['_api_resource_class']);
     }
 }

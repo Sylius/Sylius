@@ -62,16 +62,19 @@ final class OrderGetMethodItemExtensionSpec extends ObjectBehavior
 
         $expr
             ->andX('o.customer IS NOT NULL', 'o.createdByGuest = true')
+            ->shouldBeCalled()
             ->willReturn('o.customer IS NOT NULL AND o.createdByGuest = true')
         ;
 
         $expr
             ->orX('user IS NULL', 'o.customer IS NULL', 'o.customer IS NOT NULL AND o.createdByGuest = true')
+            ->shouldBeCalled()
             ->willReturn('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
         ;
 
         $queryBuilder
             ->andWhere('user IS NULL OR o.customer IS NULL OR (o.customer IS NOT NULL AND o.createdByGuest = true)')
+            ->shouldBeCalled()
             ->willReturn($queryBuilder)
         ;
 

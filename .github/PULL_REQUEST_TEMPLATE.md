@@ -1,6 +1,6 @@
 | Q               | A
 | --------------- | -----
-| Branch?         | 1.11, 1.12 or 1.13 <!-- see the comment below -->
+| Branch?         | 1.12 or 1.13 <!-- see the comment below -->
 | Bug fix?        | no/yes
 | New feature?    | no/yes
 | BC breaks?      | no/yes
@@ -9,7 +9,7 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.11 or 1.12 branch
+ - Bug fixes must be submitted against the 1.12 branch
  - Features and deprecations must be submitted against the 1.13 branch
  - Make sure that the correct base branch is set
 

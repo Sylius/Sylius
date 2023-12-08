@@ -38,7 +38,7 @@ final class Kernel extends BaseKernel
 
     public function getProjectDir(): string
     {
-        return parent::getProjectDir() . '/test';
+        return parent::getProjectDir() . '/Tests/Application';
     }
 
     public function registerBundles(): iterable

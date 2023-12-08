@@ -86,6 +86,28 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
+    public function it_loads_default_order_by_identifier_parameter_value_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_core.order_by_identifier', true);
+    }
+
+    /** @test */
+    public function it_loads_order_by_identifier_parameter_value_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['order_by_identifier' => true]);
+        $this->assertContainerBuilderHasParameter('sylius_core.order_by_identifier', true);
+
+        $this->load(['order_by_identifier' => false]);
+        $this->assertContainerBuilderHasParameter('sylius_core.order_by_identifier', false);
+    }
+
+    /** @test */
     public function it_loads_batch_size_parameter_value_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');

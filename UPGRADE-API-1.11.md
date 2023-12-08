@@ -1,3 +1,32 @@
+# UPGRADE FROM `v1.11.11` TO `v1.11.12`
+
+1. So far, on production environment when any non-validation related error occurred, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` was used, even on API Platform endpoints.
+   Now, depending on the path of the request, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` or `ApiPlatform\Hydra\Serializer\ErrorNormalizer` is used. If your code
+   rely on the previous behavior, you should add the following configuration to your `config/packages/_sylius.yaml` file:
+    ```yaml
+    sylius_api:
+        legacy_error_handling: true
+    ```
+
+   Example response before bugfix:
+    ```json
+    {
+        "code": 500,
+        "message": "Internal Server Error"
+    }
+    ```
+
+   Example response after bugfix:
+    ```json
+    {
+        "@context": "/api/v2/contexts/Error",
+        "@type": "hydra:Error",
+        "hydra:title": "An error occurred",
+        "hydra:description": "Internal Server Error"
+    }
+    ```
+   The status code is passed along the response as an HTTP status code, and the `message` value is returned in a `hydra:description` field.
+
 # UPGRADE FROM `v1.10.X` TO `v1.11.0`
  
 1. The product images should have a proper prefix (`/media/image/`) added to the path, so the images could be resolved. 

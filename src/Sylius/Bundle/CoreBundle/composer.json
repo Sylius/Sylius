@@ -30,7 +30,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "egulias/email-validator": "^3.0",
         "fakerphp/faker": "^1.10",
-        "jms/serializer-bundle": "^3.5",
+        "jms/serializer-bundle": "^3.5 || ^4.0",
         "knplabs/gaufrette": "^0.8 || ^0.9 || ^0.10 || ^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.7 || ^0.8",
         "liip/imagine-bundle": "^2.3",
@@ -68,7 +68,7 @@
         "symfony/messenger": "^4.4 || ^5.4",
         "symfony/swiftmailer-bundle": "^3.4",
         "symfony/templating": "^4.4 || ^5.4",
-        "winzou/state-machine-bundle": "^0.5"
+        "winzou/state-machine-bundle": "~0.5"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
@@ -90,6 +90,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.9-dev"
+        },
+        "symfony": {
+            "endpoint": [
+                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
+            ]
         }
     },
     "autoload": {

@@ -31,6 +31,8 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      */
     public function findRootNodes(): array;
 
+    public function findHydratedRootNodes(): array;
+
     public function findOneBySlug(string $slug, string $locale): ?TaxonInterface;
 
     /**

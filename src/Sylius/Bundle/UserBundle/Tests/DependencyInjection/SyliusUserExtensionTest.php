@@ -17,6 +17,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Assert;
 use Sylius\Bundle\UserBundle\DependencyInjection\SyliusUserExtension;
 use Sylius\Bundle\UserBundle\EventListener\UpdateUserEncoderListener;
+use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\Factory\UserWithEncoderFactory;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\User;
@@ -98,7 +99,35 @@ final class SyliusUserExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
-    public function it_creates_a_update_user_encoder_listener_for_each_user_type(): void
+    public function it_creates_last_login_subscriber_for_each_user_type(): void
+    {
+        $this->load([
+            'resources' => [
+                'admin' => [
+                    'user' => [
+                        'login_tracking_interval' => 'P1D',
+                        'classes' => [
+                            'model' => 'AdminUserClass',
+                        ],
+                    ],
+                ],
+                'custom' => [],
+            ],
+        ]);
+
+        $adminLastLoginSubscriber = $this->container->getDefinition('sylius.listener.admin_user_last_login');
+        Assert::assertSame(UserLastLoginSubscriber::class, $adminLastLoginSubscriber->getClass());
+        Assert::assertSame('AdminUserClass', $adminLastLoginSubscriber->getArgument(1));
+        Assert::assertEquals('P1D', $adminLastLoginSubscriber->getArgument(2));
+
+        $customLastLoginSubscriber = $this->container->getDefinition('sylius.listener.custom_user_last_login');
+        Assert::assertSame(UserLastLoginSubscriber::class, $customLastLoginSubscriber->getClass());
+        Assert::assertSame(User::class, $customLastLoginSubscriber->getArgument(1));
+        Assert::assertNull($customLastLoginSubscriber->getArgument(2));
+    }
+
+    /** @test */
+    public function it_creates_an_update_user_encoder_listener_for_each_user_type(): void
     {
         $this->load([
             'encoder' => 'customencoder',

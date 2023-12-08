@@ -12,7 +12,7 @@
         {{ 'sylius.ui.items_total'|trans }}: {{ money.convertAndFormat(itemsSubtotal) }}
     </th>
 </tr>
-<tr{% if taxIncluded and not taxExcluded %}class="tax-disabled"{% endif %}>
+<tr{% if taxIncluded and not taxExcluded %} class="tax-disabled"{% endif %}>
     <td colspan="4" class="right aligned" id="tax-total">
         <div style="display: flex; justify-content: flex-end; align-items: center">
             <div>{{ 'sylius.ui.taxes_total'|trans }}:&nbsp;</div>

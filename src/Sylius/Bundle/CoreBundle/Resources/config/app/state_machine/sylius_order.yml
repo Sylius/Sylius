@@ -92,7 +92,7 @@ winzou_state_machine:
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
                     priority: -300
-                sylis_cancel_order:
+                sylius_cancel_order:
                     on: ["cancel"]
                     do: ["@sylius.inventory.order_inventory_operator", "cancel"]
                     args: ["object"]

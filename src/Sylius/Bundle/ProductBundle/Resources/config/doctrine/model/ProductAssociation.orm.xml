@@ -43,6 +43,10 @@
         </many-to-one>
 
         <many-to-many field="associatedProducts" target-entity="Sylius\Component\Product\Model\ProductInterface">
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <join-table name="sylius_product_association_product">
                 <join-columns>
                     <join-column name="association_id" referenced-column-name="id" nullable="false" unique="false" on-delete="CASCADE" />

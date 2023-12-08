@@ -79,7 +79,14 @@ final class OrderMethodsItemExtension implements QueryItemExtensionInterface
         $queryBuilder
             ->leftJoin(sprintf('%s.customer', $rootAlias), 'customer')
             ->leftJoin('customer.user', 'user')
-            ->andWhere($queryBuilder->expr()->orX('user IS NULL', sprintf('%s.customer IS NULL', $rootAlias)))
+            ->andWhere($queryBuilder->expr()->orX(
+                'user IS NULL',
+                sprintf('%s.customer IS NULL', $rootAlias),
+                $queryBuilder->expr()->andX(
+                    sprintf('%s.customer IS NOT NULL', $rootAlias),
+                    sprintf('%s.createdByGuest = true', $rootAlias),
+                ),
+            ))
         ;
 
         if ($operationName !== 'shop_select_payment_method') {

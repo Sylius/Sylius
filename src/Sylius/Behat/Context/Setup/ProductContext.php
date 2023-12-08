@@ -988,6 +988,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(products "[^"]+" and "[^"]+") are disabled$/
+     */
+    public function productsAreDisabled(array $products): void
+    {
+        foreach ($products as $product) {
+            $this->theProductIsDisabled($product);
+        }
+    }
+
+    /**
      * @Given /^all (the product) variants with the "([^"]*)" ([^\s]+) are disabled$/
      */
     public function allTheProductVariantsWithTheColorAreDisabled(

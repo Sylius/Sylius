@@ -36,6 +36,21 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
 
     public function findChildrenByChannelMenuTaxon(?TaxonInterface $menuTaxon = null, ?string $locale = null): array
     {
+        $hydrationQuery = $this->createTranslationBasedQueryBuilder($locale)
+            ->addSelect('o')
+            ->addSelect('oc')
+            ->leftJoin('o.children', 'oc')
+        ;
+
+        if (null !== $menuTaxon) {
+            $hydrationQuery
+                ->andWhere('o.root = :root')
+                ->setParameter('root', $menuTaxon)
+            ;
+        }
+
+        $hydrationQuery->getQuery()->getResult();
+
         return $this->createTranslationBasedQueryBuilder($locale)
             ->addSelect('child')
             ->innerJoin('o.parent', 'parent')
@@ -88,6 +103,19 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findHydratedRootNodes(): array
+    {
+        $this->createQueryBuilder('o')
+            ->select(['o', 'oc', 'ot'])
+            ->leftJoin('o.children', 'oc')
+            ->leftJoin('o.translations', 'ot')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $this->findRootNodes();
     }
 
     public function findByNamePart(string $phrase, ?string $locale = null, ?int $limit = null): array

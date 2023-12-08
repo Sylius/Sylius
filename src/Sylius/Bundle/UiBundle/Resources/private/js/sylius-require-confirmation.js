@@ -19,7 +19,11 @@ $.fn.extend({
         const actionButton = $(evt.currentTarget);
 
         if (actionButton.is('a')) {
-          $('#confirmation-button').attr('href', actionButton.attr('href'));
+          $('#confirmation-button').on('click', (event) => {
+            event.preventDefault();
+
+            window.location.href = actionButton.attr('href');
+          });
         }
 
         if (actionButton.is('button')) {

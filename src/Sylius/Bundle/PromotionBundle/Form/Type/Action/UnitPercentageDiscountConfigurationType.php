@@ -35,8 +35,7 @@ final class UnitPercentageDiscountConfigurationType extends AbstractType
                     new Range([
                         'min' => 0,
                         'max' => 1,
-                        'minMessage' => 'sylius.promotion_action.percentage_discount_configuration.min',
-                        'maxMessage' => 'sylius.promotion_action.percentage_discount_configuration.max',
+                        'notInRangeMessage' => 'sylius.promotion_action.percentage_discount_configuration.not_in_range',
                         'groups' => ['sylius'],
                     ]),
                 ],

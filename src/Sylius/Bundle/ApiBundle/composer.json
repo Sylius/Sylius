@@ -26,7 +26,7 @@
         "php": "^8.0",
         "doctrine/dbal": "^2.7",
         "api-platform/core": "^2.6",
-        "enshrined/svg-sanitize": "^0.15.4",
+        "enshrined/svg-sanitize": "^0.15.4 || ^0.16",
         "lexik/jwt-authentication-bundle": "^2.6",
         "sylius/core-bundle": "^1.7",
         "symfony/messenger": "^4.4 || ^5.4"
@@ -58,6 +58,11 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.7-dev"
+        },
+        "symfony": {
+            "endpoint": [
+                "https://raw.githubusercontent.com/symfony/recipes/c8d90298241f176a261dadc4814d7058415a4c1f/index.json"
+            ]
         }
     },
     "autoload": {
@@ -71,9 +76,9 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "Tests/Application/src/",
             "Sylius\\Bundle\\ApiBundle\\spec\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/",
-            "Sylius\\Bundle\\ApiBundle\\Application\\": "test/src/"
+            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
         }
     },
     "repositories": [

@@ -32,7 +32,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
-    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Bundle/CoreBundle/Doctrine/ORM/OrderRepositoryInterface instead */
+    /** @deprecated since 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Component/Core/Repository/OrderRepositoryInterface instead */
     public function findCartByTokenValue(string $tokenValue): ?OrderInterface;
 
     public function findCartById($id): ?OrderInterface;
@@ -40,7 +40,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
     /**
      * @return array|OrderInterface[]
      */
-    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate): array;
+    public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
 
     public function createCartQueryBuilder(): QueryBuilder;
 

@@ -20,6 +20,7 @@ import 'sylius/ui/sylius-prototype-handler';
 import './sylius-catalog-promotion-actions';
 import './sylius-catalog-promotion-scopes';
 import './sylius-compound-form-errors';
+import './sylius-form-collection';
 import './sylius-lazy-choice-tree';
 import './sylius-menu-search';
 import './sylius-move-product-variant';
@@ -61,16 +62,8 @@ $(document).ready(() => {
     containerSelector: '.configuration',
   });
 
-  $('#sylius_promotion_actions > a[data-form-collection="add"]').on('click', () => {
-    setTimeout(() => {
-      $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
-    }, 50);
-  });
-  $('#sylius_promotion_rules > a[data-form-collection="add"]').on('click', () => {
-    setTimeout(() => {
-      $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
-    }, 50);
-  });
+  $(document).setFromCollectionOnClickEventHandler('sylius_promotion_actions', 'actions');
+  $(document).setFromCollectionOnClickEventHandler('sylius_promotion_rules', 'rules');
 
   $(document).on('collection-form-add', () => {
     $('.sylius-autocomplete').each((index, element) => {

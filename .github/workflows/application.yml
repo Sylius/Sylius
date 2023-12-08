@@ -35,11 +35,6 @@ jobs:
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
 
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-
         steps:
             -
                 uses: actions/checkout@v3
@@ -66,6 +61,11 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -
                 name: Restrict API Platform version
@@ -181,11 +181,6 @@ jobs:
                 symfony: ["^4.4", "^5.4"]
                 api-platform: ["^2.7"]
 
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-
         steps:
             -   uses: actions/checkout@v3
 
@@ -209,6 +204,11 @@ jobs:
                 name: Restrict API Platform version
                 if: matrix.api-platform != ''
                 run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -   name: Get Composer cache directory
                 id: composer-cache
@@ -270,6 +270,11 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
@@ -356,6 +361,10 @@ jobs:
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
             -
                 name: Get Composer cache directory
                 id: composer-cache
@@ -455,13 +464,6 @@ jobs:
                 node: ["14.x"]
                 mysql: ["5.7", "8.0"]
 
-                include:
-                    -   php: "8.1"
-                        symfony: "^5.4"
-                        api-platform: "~2.6.0"
-                        node: "14.x"
-                        mysql: "8.0"
-
         env:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?serverVersion=${{ matrix.mysql }}"
@@ -498,11 +500,21 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+            
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -
                 name: Restrict API Platform version
                 if: matrix.api-platform != ''
                 run: composer require "api-platform/core:${{ matrix.api-platform }}" --no-update --no-scripts --no-interaction
+
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -
                 name: Get Composer cache directory
@@ -582,7 +594,7 @@ jobs:
                     name: "Behat logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }})"
                     path: etc/build/
                     if-no-files-found: ignore
-
+                    
     test-application-with-frontend:
         runs-on: ubuntu-latest
 
@@ -634,6 +646,11 @@ jobs:
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:1.18.5"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
+
+            -
+                name: Force LexikJWTAuthenticationBundle version compatible with Symfony 4.4
+                if: matrix.symfony == '^4.4'
+                run: composer require "lexik/jwt-authentication-bundle:2.17.*" --no-update --no-scripts --no-interaction
 
             -
                 name: Install certificates

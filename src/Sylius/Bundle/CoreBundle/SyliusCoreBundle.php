@@ -20,6 +20,8 @@ use Doctrine\Inflector\Rules\Substitution;
 use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
+use Doctrine\ORM\Query;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingExceptionListenerPass;
@@ -29,6 +31,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\Metadata;
@@ -46,6 +49,10 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     public function boot(): void
     {
         parent::boot();
+
+        if ($this->container->getParameter('sylius_core.order_by_identifier')) {
+            $this->setDefaultOutputWalker(OrderByIdentifierSqlWalker::class);
+        }
 
         $factory = InflectorFactory::create();
         $factory->withPluralRules(new Ruleset(
@@ -71,6 +78,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
         $container->addCompilerPass(new RegisterUriBasedSectionResolverPass());
         $container->addCompilerPass(new LiipImageFiltersPass());
+        $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
     }
 
     /**
@@ -79,5 +87,17 @@ final class SyliusCoreBundle extends AbstractResourceBundle
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Core\Model';
+    }
+
+    private function setDefaultOutputWalker(string $outputWalkerClass): void
+    {
+        $this->container
+            ->get('doctrine.orm.entity_manager')
+            ->getConfiguration()
+            ->setDefaultQueryHint(
+                Query::HINT_CUSTOM_TREE_WALKERS,
+                [$outputWalkerClass],
+            )
+        ;
     }
 }

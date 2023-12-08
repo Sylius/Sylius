@@ -74,6 +74,7 @@
         <service id="sylius.behat.context.transform.order" class="Sylius\Behat\Context\Transform\OrderContext">
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
         <service id="sylius.behat.context.transform.payment" class="Sylius\Behat\Context\Transform\PaymentMethodContext">
@@ -158,7 +159,8 @@
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 
-        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartTokenContext">
+        <service id="sylius.behat.context.transform.cart" class="Sylius\Behat\Context\Transform\CartContext">
+            <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.behat.shared_storage" />
         </service>
 

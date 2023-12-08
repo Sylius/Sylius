@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderIntegrityChecker
+final class OrderIntegrityChecker implements OrderIntegrityCheckerInterface
 {
     public function __construct(
         private RouterInterface $router,

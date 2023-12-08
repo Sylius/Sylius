@@ -39,6 +39,10 @@
             orphan-removal="true"
             index-by="channelCode"
         >
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-all/>
             </cascade>
@@ -48,6 +52,10 @@
             target-entity="Sylius\Component\Core\Model\ProductImageInterface"
             mapped-by="productVariants"
         >
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+
             <cascade>
                 <cascade-persist/>
             </cascade>
