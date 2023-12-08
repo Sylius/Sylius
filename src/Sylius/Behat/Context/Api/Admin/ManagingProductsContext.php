@@ -404,11 +404,29 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I choose :channel as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
+    {
+        $this->client->addFilter('channel', $this->iriConverter->getIriFromResource($channel));
+    }
+
+    /**
      * @When I save my changes to the images
      */
     public function iSaveMyChangesToTheImages(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
+
+        $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
     /**
@@ -486,9 +504,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should see a single product in the list
      * @Then I should see :count products in the list
      */
-    public function iShouldSeeProductsInTheList(int $count): void
+    public function iShouldSeeProductsInTheList(int $count = 1): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }

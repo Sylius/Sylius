@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 /** @experimental */
-final class CatalogPromotionChannelFilter extends AbstractContextAwareFilter
+final class ChannelsAwareChannelFilter extends AbstractContextAwareFilter
 {
     public function __construct(
         private IriConverterInterface $iriConverter,

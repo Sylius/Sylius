@@ -246,7 +246,7 @@
             <tag name="api_platform.filter" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter" public="true">
+        <service id="Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter" public="true">
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="doctrine" />
             <tag name="api_platform.filter" />

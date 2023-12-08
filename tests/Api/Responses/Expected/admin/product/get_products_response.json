@@ -162,7 +162,7 @@
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],channel,order[translation.name],localeCode for order[translation.name]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -193,6 +193,12 @@
                 "@type": "IriTemplateMapping",
                 "variable": "productTaxons.taxon.code[]",
                 "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channel",
+                "property": "channels",
                 "required": false
             },
             {
