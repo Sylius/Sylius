@@ -97,7 +97,7 @@ final class CartSessionStorageSpec extends ObjectBehavior
         $channel->getCode()->willReturn('channel_code');
 
         $requestStack->getSession()->willReturn($session);
-        $session->remove('session_key_name.channel_code')->shouldBeCalled();
+        $session->remove('session_key_name.channel_code')->willReturn(null)->shouldBeCalled();
 
         $this->removeForChannel($channel);
     }
