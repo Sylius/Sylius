@@ -3,7 +3,7 @@
 
 default:
     suites:
-        api_checkout_inventory:
+        api_managing_inventory:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -23,12 +23,13 @@ default:
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
 
-                - sylius.behat.context.api.shop.cart
-                - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.admin.managing_product_variants
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
 
             filters:
-                tags: "@checkout_inventory&&@api"
+                tags: "@managing_inventory&&@api"

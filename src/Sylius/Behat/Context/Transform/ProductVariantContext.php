@@ -32,6 +32,7 @@ final class ProductVariantContext implements Context
 
     /**
      * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
+     * @Transform /^"([^"]+)" variant of "([^"]+)" product$/
      */
     public function getProductVariantByNameAndProduct(string $variantName, string $productName): ProductVariantInterface
     {
@@ -71,6 +72,7 @@ final class ProductVariantContext implements Context
     /**
      * @Transform /^"([^"]+)" product variant$/
      * @Transform /^"([^"]+)" variant$/
+     * @Transform /^variant "([^"]+)"$/
      * @Transform :productVariant
      * @Transform :variant
      */
