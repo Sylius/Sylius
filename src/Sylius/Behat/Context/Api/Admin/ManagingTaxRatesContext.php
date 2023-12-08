@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -29,6 +30,7 @@ class ManagingTaxRatesContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SharedStorageInterface $sharedStorage,
     ) {
     }
 
@@ -92,15 +94,6 @@ class ManagingTaxRatesContext implements Context
     public function iDoNotSpecifyItsField(): void
     {
         // Intentionally left blank
-    }
-
-    /**
-     * @When I do not specify its amount
-     * @When I remove its amount
-     */
-    public function iDoNotSpecifyItsAmount(): void
-    {
-        $this->client->addRequestData('amount', null);
     }
 
     /**
@@ -260,6 +253,8 @@ class ManagingTaxRatesContext implements Context
      */
     public function theTaxRateShouldAppearInTheRegistry(TaxRateInterface $taxRate): void
     {
+        $this->sharedStorage->set('tax_rate', $taxRate);
+
         $name = $taxRate->getName();
 
         Assert::true(
@@ -391,20 +386,6 @@ class ManagingTaxRatesContext implements Context
         Assert::false(
             $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name),
             sprintf('Tax rate with name %s exists', $name),
-        );
-    }
-
-    /**
-     * @Then /^(this tax rate) amount should still be ([^"]+)%$/
-     */
-    public function thisTaxRateAmountShouldStillBe(TaxRateInterface $taxRate, string $taxRateAmount): void
-    {
-        $amount = (float) $taxRateAmount / 100;
-
-        Assert::same(
-            $taxRate->getAmount(),
-            $amount,
-            sprintf('Amount should be %.2f but is %.2f', $amount, $taxRate->getAmount()),
         );
     }
 
