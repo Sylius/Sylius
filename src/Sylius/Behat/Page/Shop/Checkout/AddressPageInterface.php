@@ -26,6 +26,8 @@ interface AddressPageInterface extends SymfonyPageInterface
 
     public function checkValidationMessageFor(string $element, string $message): bool;
 
+    public function checkFormValidationMessage(string $message): bool;
+
     public function specifyShippingAddress(AddressInterface $shippingAddress): void;
 
     public function selectShippingAddressProvince(string $province): void;
