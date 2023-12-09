@@ -144,16 +144,15 @@ final class AddressType extends AbstractResourceType
 
                 $event->setData($orderData);
             })
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options): void {
+            ->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event): void {
                 $orderData = $event->getData();
+                $form = $event->getForm();
 
-                if ($options['customer'] instanceof CustomerInterface && array_key_exists('customer', $orderData)) {
+                if (array_key_exists('customer', $orderData) && !$form->has('customer')) {
                     // Logged-in user try to submit customer while reloading page after login
                     unset($orderData['customer']);
-                    $event->getForm()->remove('customer');
+                    $event->setData($orderData);
                 }
-
-                $event->setData($orderData);
             })
         ;
     }
