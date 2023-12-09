@@ -29,8 +29,6 @@ sylius:
             min: Le prix ne peut pas être inférieur à 0.
             not_blank: Veuillez saisir un prix.
     checkout:
-        addressing:
-            csrf_error: Merci de soumettre à nouveau le formulaire complet.
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
     contact:
