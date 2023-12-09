@@ -17,14 +17,17 @@ use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /** @experimental */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
-    public function __construct(private DenormalizerInterface $itemNormalizer)
-    {
+    public function __construct(
+        private DenormalizerInterface $itemNormalizer,
+        private AdvancedNameConverterInterface $nameConverter,
+    ) {
     }
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
@@ -40,7 +43,11 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
             $previousException = $exception->getPrevious();
             if ($previousException instanceof NotNormalizableValueException) {
                 throw new InvalidRequestArgumentException(
-                    sprintf('Request field "%s" should be of type "%s".', $previousException->getPath(), implode(', ', $previousException->getExpectedTypes())),
+                    sprintf(
+                        'Request field "%s" should be of type "%s".',
+                        $this->nameConverter->normalize($previousException->getPath(), class: $context['input']['class']),
+                        implode(', ', $previousException->getExpectedTypes()),
+                    ),
                 );
             }
 

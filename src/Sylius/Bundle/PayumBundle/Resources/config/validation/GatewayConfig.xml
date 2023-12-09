@@ -71,6 +71,10 @@
                         </constraint>
                     </value>
                     <value key="sandbox">
+                        <constraint name="Type">
+                            <option name="type">bool</option>
+                            <option name="groups">paypal_express_checkout</option>
+                        </constraint>
                         <constraint name="NotNull">
                             <option name="message">sylius.gateway_config.paypal.sandbox.not_null</option>
                             <option name="groups">paypal_express_checkout</option>

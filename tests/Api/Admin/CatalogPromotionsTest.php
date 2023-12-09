@@ -449,9 +449,9 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     'en_US' => [
                         'slug' => 'caps/cap',
                         'name' => 'Cap',
-                    ]
+                    ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

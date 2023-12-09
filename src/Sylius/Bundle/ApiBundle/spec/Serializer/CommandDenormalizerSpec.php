@@ -19,14 +19,15 @@ use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class CommandDenormalizerSpec extends ObjectBehavior
 {
-    function let(DenormalizerInterface $baseNormalizer): void
+    function let(DenormalizerInterface $baseNormalizer, AdvancedNameConverterInterface $nameConverter): void
     {
-        $this->beConstructedWith($baseNormalizer);
+        $this->beConstructedWith($baseNormalizer, $nameConverter);
     }
 
     function it_throws_exception_if_not_all_required_parameters_are_present_in_the_context(
@@ -46,7 +47,9 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
     function it_throws_exception_for_mismatched_argument_type(
         DenormalizerInterface $baseNormalizer,
+        AdvancedNameConverterInterface $nameConverter,
     ): void {
+        $nameConverter->normalize('firstName', class: RegisterShopUser::class)->willReturn('first_name');
         $previousException = NotNormalizableValueException::createForUnexpectedDataType('Not normalizable value', 1, ['string'], 'firstName');
         $exception = new UnexpectedValueException('Unexpected value', 400, $previousException);
         $context = ['input' => ['class' => RegisterShopUser::class]];
@@ -55,7 +58,7 @@ final class CommandDenormalizerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new InvalidRequestArgumentException(
-                'Request field "firstName" should be of type "string".',
+                'Request field "first_name" should be of type "string".',
             ))
             ->during('denormalize', [$data, '', null, $context]);
     }

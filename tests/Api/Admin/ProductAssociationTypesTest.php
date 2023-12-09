@@ -173,8 +173,8 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Similar products',
                     ],
-                ]
-            ], JSON_THROW_ON_ERROR),
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

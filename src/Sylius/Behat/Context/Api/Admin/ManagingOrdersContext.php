@@ -26,7 +26,6 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -838,7 +837,7 @@ final class ManagingOrdersContext implements Context
         $unitPromotionAdjustments = $this->responseChecker->getCollectionItemsWithValue(
             $this->getAdjustmentsResponseForOrder(),
             'type',
-            AdjustmentInterface::TAX_ADJUSTMENT
+            AdjustmentInterface::TAX_ADJUSTMENT,
         );
         $totalTax = 0;
 
@@ -925,7 +924,7 @@ final class ManagingOrdersContext implements Context
         $adjustments = $this->responseChecker->getCollectionItemsWithValue(
             $this->getAdjustmentsResponseForOrder(true),
             'type',
-            AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT
+            AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
         );
 
         foreach ($adjustments as $adjustment) {
@@ -947,12 +946,13 @@ final class ManagingOrdersContext implements Context
         $adjustments = $this->responseChecker->getCollectionItemsWithValue(
             $this->getAdjustmentsResponseForOrder(true),
             'type',
-            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
         );
 
         foreach ($adjustments as $adjustment) {
             if (in_array($adjustment['order_item_unit']['@id'], $orderItem['units'])) {
-                Assert::same($this->getTotalAsInt(trim($price," ~")), $adjustment['amount']);
+                Assert::same($this->getTotalAsInt(trim($price, ' ~')), $adjustment['amount']);
+
                 return;
             }
         }
@@ -977,7 +977,6 @@ final class ManagingOrdersContext implements Context
 
         Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
     }
-
 
     /**
      * @param array<string, mixed> $address
@@ -1022,6 +1021,7 @@ final class ManagingOrdersContext implements Context
         if ($isMinus) {
             return $amount * -1;
         }
+
         return $amount;
     }
 
