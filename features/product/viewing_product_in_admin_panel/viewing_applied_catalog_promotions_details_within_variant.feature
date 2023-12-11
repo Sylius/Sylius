@@ -21,9 +21,17 @@ Feature: Seeing applied catalog promotions details within variant
         And it is enabled
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Seeing applied catalog promotion details within variant
         When I access "Wyborowa Vodka" product
+        Then "Wyborowa Vodka Exquisite" variant price should be decreased by catalog promotion "Winter sale" in "United States" channel
+        And "Wyborowa Vodka Lemon" variant price should not be decreased by catalog promotion "Winter sale" in "United States" channel
+        And "Wyborowa Vodka Exquisite" variant price should not be decreased by catalog promotion "Christmas sale" in "United States" channel
+        And "Wyborowa Vodka Lemon" variant price should be decreased by catalog promotion "Christmas sale" in "United States" channel
+
+    @api @no-ui
+    Scenario: Seeing applied catalog promotion details within variant
+        When I view all variants of the product "Wyborowa Vodka"
         Then "Wyborowa Vodka Exquisite" variant price should be decreased by catalog promotion "Winter sale" in "United States" channel
         And "Wyborowa Vodka Lemon" variant price should not be decreased by catalog promotion "Winter sale" in "United States" channel
         And "Wyborowa Vodka Exquisite" variant price should not be decreased by catalog promotion "Christmas sale" in "United States" channel
