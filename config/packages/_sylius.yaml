@@ -22,6 +22,51 @@ sylius_payum:
             - 'sylius'
             - 'stripe_checkout'
 
+sylius_promotion:
+    promotion_action:
+        validation_groups:
+            order_percentage_discount:
+                - 'sylius'
+                - 'order_percentage_discount'
+            shipping_percentage_discount:
+                - 'sylius'
+                - 'shipping_percentage_discount'
+            order_fixed_discount:
+                - 'sylius'
+                - 'order_fixed_discount'
+            unit_fixed_discount:
+                - 'sylius'
+                - 'unit_fixed_discount'
+            unit_percentage_discount:
+                - 'sylius'
+                - 'unit_percentage_discount'
+    promotion_rule:
+        validation_groups:
+            cart_quantity:
+                - 'sylius'
+                - 'cart_quantity'
+            customer_group:
+                - 'sylius'
+                - 'customer_group'
+            nth_order:
+                - 'sylius'
+                - 'nth_order'
+            shipping_country:
+                - 'sylius'
+                - 'shipping_country'
+            has_taxon:
+                - 'sylius'
+                - 'has_taxon'
+            total_of_items_from_taxon:
+                - 'sylius'
+                - 'total_of_items_from_taxon'
+            contains_product:
+                - 'sylius'
+                - 'contains_product'
+            item_total:
+                - 'sylius'
+                - 'item_total'
+
 sylius_shop:
     product_grid:
         include_all_descendants: true
