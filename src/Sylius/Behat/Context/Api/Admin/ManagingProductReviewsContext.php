@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
@@ -189,6 +190,20 @@ final class ManagingProductReviewsContext implements Context
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
             'Product review could not be deleted',
+        );
+    }
+
+    /**
+     * @Then average rating of product :product should be :rating
+     */
+    public function averageRatingOfProductShouldBe(ProductInterface $product, int $expectedRating): void
+    {
+        $averageRating = $this->responseChecker->getValue($this->client->show(Resources::PRODUCTS, (string) $product->getCode()), 'averageRating');
+
+        Assert::same(
+            $averageRating,
+            $expectedRating,
+            sprintf('Average rating of product %s is not %s', $product->getName(), $expectedRating),
         );
     }
 
