@@ -19,11 +19,13 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -32,6 +34,7 @@ final class ManagingProductVariantsContext implements Context
     private const FIRST_COLLECTION_ITEM = 0;
 
     public function __construct(
+        private ProductVariantResolverInterface $variantResolver,
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
@@ -225,6 +228,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I want to view all variants of (this product)$/
+     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product): void
     {
@@ -285,6 +289,14 @@ final class ManagingProductVariantsContext implements Context
             'depth' => $value,
             'weight' => $value,
         ]);
+    }
+
+    /**
+     * @When I change its quantity of inventory to :amount
+     */
+    public function iChangeItsQuantityOfInventoryTo(int $amount): void
+    {
+        $this->client->updateRequestData(['onHand' => $amount]);
     }
 
     /**
@@ -585,6 +597,71 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^(\d+) units of (this product) should be (on hand|on hold)$/
+     */
+    public function unitsOfThisProductShouldBeOn(
+        int $quantity,
+        ProductInterface $product,
+        string $field,
+    ): void {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->variantResolver->getVariant($product);
+        Assert::isInstanceOf($variant, ProductVariantInterface::class);
+
+        $this->iWantToViewAllVariantsOfThisProduct($product);
+        $this->theVariantShouldHaveItemsOn($variant, $quantity, $field);
+    }
+
+    /**
+     * @Then /^there should be no units of (this product) on hold$/
+     */
+    public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product): void
+    {
+        $this->unitsOfThisProductShouldBeOn(0, $product, 'on hold');
+    }
+
+    /**
+     * @Then /^the ("[^"]+" variant) should have (\d+) items (on hand|on hold)$/
+     * @Then /^the (variant "[^"]+") should have (\d+) items (on hand|on hold)$/
+     */
+    public function theVariantShouldHaveItemsOn(ProductVariantInterface $variant, int $quantity, string $field): void
+    {
+        $variantsData = $this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $variant->getCode(),
+        );
+
+        $variantData = array_pop($variantsData);
+
+        Assert::same(
+            (int) $variantData[StringInflector::nameToCamelCase($field)],
+            $quantity,
+        );
+    }
+
+    /**
+     * @Then /^the ("[^"]+" variant of product "[^"]+") should have (\d+) items (on hand|on hold)$/
+     * @Then /^the ("[^"]+" variant of "[^"]+" product) should have (\d+) items (on hand|on hold)$/
+     * @Then /^(this variant) should have a (\d+) item currently in stock$/
+     */
+    public function theVariantOfProductShouldHaveItemsOn(
+        ProductVariantInterface $variant,
+        int $quantity,
+        string $field = 'on hand',
+    ): void {
+        $actualQuantity = $this->responseChecker->getValue(
+            $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()),
+            StringInflector::nameToCamelCase($field),
+        );
+
+        Assert::same(
+            (int) $actualQuantity,
+            $quantity,
+        );
+    }
+
+    /**
      * @Then I should be notified that code has to be unique
      */
     public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
@@ -642,6 +719,17 @@ final class ManagingProductVariantsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'The product variant can have only one value configured for a single option.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that on hand quantity must be greater than the number of on hold units
+     */
+    public function iShouldBeNotifiedThatOnHandQuantityMustBeGreaterThanTheNumberOfOnHoldUnits(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'On hand must be greater than the number of on hold units',
         );
     }
 }

@@ -25,6 +25,7 @@ imports:
     - suites/api/homepage/viewing_products.yml
     - suites/api/inventory/cart_inventory.yml
     - suites/api/inventory/checkout_inventory.yaml
+    - suites/api/inventory/managing_inventory.yaml
     - suites/api/locale/locales.yaml
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
