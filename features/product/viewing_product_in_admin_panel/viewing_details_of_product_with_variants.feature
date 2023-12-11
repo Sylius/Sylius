@@ -17,13 +17,13 @@ Feature: Viewing details of a product with variants
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui
+    @ui @no-api
     Scenario: Viewing a configurable product show page
         When I access "Iron Shield" product page
         Then I should see product show page with variants
         And I should see product name "Iron Shield"
 
-    @ui
+    @ui @no-api
     Scenario: Viewing taxonomy block
         Given the store classifies its products as "Shield" and "Equipment"
         And the product "Iron Shield" has a main taxon "Equipment"
@@ -32,12 +32,12 @@ Feature: Viewing details of a product with variants
         Then I should see main taxon is "Equipment"
         And I should see product taxon is "Shield"
 
-    @ui
+    @ui @no-api
     Scenario: Viewing options block
         When I access "Iron Shield" product page
         Then I should see option "Shield size"
 
-    @ui
+    @ui @no-api
     Scenario: Viewing variants block
         When I access "Iron Shield" product page
         Then I should see 2 variants
@@ -50,7 +50,7 @@ Feature: Viewing details of a product with variants
         When I access "Iron Shield" product page
         Then I should see an image related to this product
 
-    @ui
+    @ui @no-api
     Scenario: Viewing "more details" block
         Given the product "Iron Shield" has the slug "iron-shield"
         And the description of product "Iron Shield" is "Shield created by dwarf"
@@ -63,7 +63,7 @@ Feature: Viewing details of a product with variants
         And I should see product's meta keywords is "shield"
         And I should see product's short description is "good shield"
 
-    @ui
+    @ui @no-api
     Scenario: Viewing associations block
         Given the store has a "Glass shield" product
         And the product "Iron Shield" has an association "Similar" with product "Glass shield"
