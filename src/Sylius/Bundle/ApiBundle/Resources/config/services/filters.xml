@@ -71,6 +71,20 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_taxon_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
+            <argument type="collection">
+                <argument key="taxon.code">exact</argument>
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
+        <service id="sylius.api.product_taxon_order_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="position" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
+
         <service id="sylius.api.product_variant_product_filter" parent="api_platform.doctrine.orm.search_filter" public="true">
             <argument type="collection">
                 <argument key="product">exact</argument>

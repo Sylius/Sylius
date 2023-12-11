@@ -631,11 +631,31 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
-        $response = $this->getLastResponse();
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
 
-        $products = $this->responseChecker->getCollection($response);
+        Assert::same($this->getFieldValueOfProduct($products[0], $field), $value);
+    }
 
-        Assert::same($this->getFieldValueOfFirstProduct($products[0], $field), $value);
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName(string $name): void
+    {
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
+
+        Assert::same($this->getFieldValueOfProduct(end($products), 'name'), $name);
+    }
+
+    /**
+     * @Then /^the (first|last) product on the list shouldn't have a name$/
+     */
+    public function theProductOnTheListShouldNotHaveAName(string $position): void
+    {
+        $products = $this->responseChecker->getCollection($this->getLastResponse());
+
+        $product = $position === 'last' ? end($products) : reset($products);
+
+        Assert::null($this->getFieldValueOfProduct($product, 'name'));
     }
 
     /**
@@ -849,14 +869,14 @@ final class ManagingProductsContext implements Context
         return $this->responseChecker->getValue($response, 'localeCode');
     }
 
-    private function getFieldValueOfFirstProduct(array $product, string $field): ?string
+    private function getFieldValueOfProduct(array $product, string $field): ?string
     {
         if ($field === 'code') {
             return $product['code'];
         }
 
         if ($field === 'name') {
-            return $product['translations'][$this->getAdminLocaleCode()]['name'];
+            return $product['translations'][$this->getAdminLocaleCode()]['name'] ?? null;
         }
 
         return null;
