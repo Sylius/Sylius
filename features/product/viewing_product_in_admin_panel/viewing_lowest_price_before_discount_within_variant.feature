@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Seeing the lowest price before the discount within variant
     In order to be aware of variant's prices
     As an Administrator
