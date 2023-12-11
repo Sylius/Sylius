@@ -14,7 +14,7 @@ Feature: Seeing applied catalog promotions details for a simple product
         And it is enabled
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Seeing applied catalog promotion details on a simple product
         When I access "Ursus C-355" product
         Then this product price should be decreased by catalog promotion "Company bankruptcy sale" in "United States" channel
