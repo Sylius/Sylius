@@ -42,7 +42,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
 
                 $queryBuilder
                     ->addSelect('translation')
-                    ->innerJoin(
+                    ->leftJoin(
                         sprintf('%s.translations', $rootAlias),
                         'translation',
                         'WITH',

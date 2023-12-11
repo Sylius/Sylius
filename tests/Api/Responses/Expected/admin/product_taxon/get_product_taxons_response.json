@@ -23,7 +23,7 @@
     "hydra:totalItems": 2,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-taxons{?product.code,product.code[],taxon.code,taxon.code[]}",
+        "hydra:template": "\/api\/v2\/admin\/product-taxons{?product.code,product.code[],taxon.code,taxon.code[],order[position]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -48,6 +48,12 @@
                 "@type": "IriTemplateMapping",
                 "variable": "taxon.code[]",
                 "property": "taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[position]",
+                "property": "position",
                 "required": false
             }
         ]
