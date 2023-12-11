@@ -48,11 +48,6 @@
             "propertyPath": "rules[7].configuration[WEB]",
             "message": "This field is missing.",
             "code": @string@
-        },
-        {
-            "propertyPath": "rules[7].configuration[MOBILE]",
-            "message": "This field was not expected.",
-            "code": @string@
         }
     ]
 }
