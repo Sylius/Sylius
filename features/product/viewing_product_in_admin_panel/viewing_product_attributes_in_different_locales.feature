@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Viewing product's attributes in different locales
     In order to see product's specification in all locales
     As a Administrator
@@ -15,7 +15,7 @@ Feature: Viewing product's attributes in different locales
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui
+    @ui @api
     Scenario: Viewing product's attributes defined in different locales
         When I access "Iron Shield" product page
         Then I should see attribute "material" with value "oak wood" in "English (United States)" locale

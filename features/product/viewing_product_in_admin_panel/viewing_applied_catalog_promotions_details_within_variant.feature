@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Seeing applied catalog promotions details within variant
     In order to be aware of variant's price change reason
     As an Administrator
@@ -20,6 +20,7 @@ Feature: Seeing applied catalog promotions details within variant
         And it reduces price by "37%"
         And it is enabled
         And I am logged in as an administrator
+        And I am browsing products
 
     @ui @no-api
     Scenario: Seeing applied catalog promotion details within variant

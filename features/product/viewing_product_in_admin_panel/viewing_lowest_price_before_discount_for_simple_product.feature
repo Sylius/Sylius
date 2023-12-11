@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Seeing the lowest price before the discount for a simple product
     In order to be aware of simple product prices
     As an Administrator

@@ -18,8 +18,8 @@ default:
                 - sylius.behat.context.transform.taxon
                 - Sylius\Behat\Context\Transform\CatalogPromotionContext
 
-                - sylius.behat.context.setup.admin_user
-                - sylius.behat.context.setup.admin_api_security
+#                - sylius.behat.context.setup.admin_user
+#                - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.locale
@@ -34,7 +34,6 @@ default:
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
                 - sylius.behat.context.setup.calendar
 
-                - sylius.behat.context.api.admin.managing_product_variants
                 - sylius.behat.context.api.shop.channel
                 - sylius.behat.context.api.shop.product
                 - sylius.behat.context.api.shop.product_attribute

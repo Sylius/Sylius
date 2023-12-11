@@ -14,7 +14,6 @@ Feature: Not seeing the lowest price for a product that has a taxon excluded on 
         And the store also has a product "Cauliflower" priced at "$25.00"
         And it belongs to "Vegetables" and "Special offers"
         And this product's price changed to "$15.00" and original price changed to "$25.00"
-        And I am logged in as an administrator
 
     @api @ui
     Scenario: Not seeing the lowest price for a product that has a taxon excluded on the channel

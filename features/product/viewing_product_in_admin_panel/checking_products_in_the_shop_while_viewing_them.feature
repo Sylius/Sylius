@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Checking products in the shop while viewing them
     In order to check a product in shop in all channels it is available in
     As an Administrator

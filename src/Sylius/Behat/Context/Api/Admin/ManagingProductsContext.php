@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -738,6 +739,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then I should see non-translatable attribute :attribute with value :value%
+     * @Then I should see non-translatable attribute :attribute with value :value %
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(ProductAttributeInterface $attribute, int $value): void
     {
@@ -857,6 +859,17 @@ final class ManagingProductsContext implements Context
     public function iShouldSeeImageRelatedToThisProduct(): void
     {
         Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'images'));
+    }
+
+    /**
+     * @Then I should see attribute :attribute with value :value in :locale locale
+     */
+    public function iShouldSeeAttributeWithValueInLocale(
+        ProductAttributeInterface $attribute,
+        string $value,
+        LocaleInterface $locale,
+    ): void {
+        $this->hasAttributeWithValueInLastResponse($attribute, $value, $locale->getCode());
     }
 
     private function getAdminLocaleCode(): string

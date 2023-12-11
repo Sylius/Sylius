@@ -432,7 +432,7 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see non-translatable attribute :attribute with value :value
+     * @Then /^I should see non-translatable attribute "([^"]+)" with value ([^"]+)%$/
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
