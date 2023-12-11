@@ -22,9 +22,14 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class PromotionActionValidator extends ConstraintValidator
 {
-    /** @param array<string, string> $actionTypes */
-    public function __construct(private array $actionTypes)
-    {
+    /**
+     * @param array<string, string> $actionTypes
+     * @param array<string, array<string, string>> $validationGroups
+     */
+    public function __construct(
+        private array $actionTypes,
+        private array $validationGroups,
+    ) {
     }
 
     public function validate(mixed $value, Constraint $constraint): void
@@ -40,6 +45,12 @@ final class PromotionActionValidator extends ConstraintValidator
         $type = $value->getType();
         if (!array_key_exists($type, $this->actionTypes)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
+            return;
         }
+
+        /** @var string[] $groups */
+        $groups = $this->validationGroups[$type] ?? $constraint->groups;
+        $validator = $this->context->getValidator()->inContext($this->context);
+        $validator->validate(value: $value, groups: $groups);
     }
 }

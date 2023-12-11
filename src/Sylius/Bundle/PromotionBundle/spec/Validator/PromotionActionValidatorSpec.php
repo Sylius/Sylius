@@ -20,13 +20,18 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class PromotionActionValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context): void
     {
-        $this->beConstructedWith(['action_one' => 'action_one', 'action_two' => 'action_two']);
+        $this->beConstructedWith(
+            ['action_one' => 'action_one', 'action_two' => 'action_two'],
+            ['action_two' => ['Default', 'action_two']],
+        );
 
         $this->initialize($context);
     }
@@ -61,5 +66,37 @@ final class PromotionActionValidatorSpec extends ObjectBehavior
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
         $this->validate($promotionAction, new PromotionAction());
+    }
+
+    function it_calls_a_validator_with_group(
+        ExecutionContextInterface $context,
+        PromotionActionInterface $promotionAction,
+        ValidatorInterface $validator,
+        ContextualValidatorInterface $contextualValidator,
+    ): void {
+        $promotionAction->getType()->willReturn('action_two');
+
+        $context->getValidator()->willReturn($validator);
+        $validator->inContext($context)->willReturn($contextualValidator);
+
+        $contextualValidator->validate($promotionAction, null, ['Default', 'action_two'])->willReturn($contextualValidator)->shouldBeCalled();
+
+        $this->validate($promotionAction, new PromotionAction(['groups' => ['Default', 'test_group']]));
+    }
+
+    function it_calls_validator_with_default_groups_if_none_provided_for_promotion_action_type(
+        ExecutionContextInterface $context,
+        PromotionActionInterface $promotionAction,
+        ValidatorInterface $validator,
+        ContextualValidatorInterface $contextualValidator,
+    ): void {
+        $promotionAction->getType()->willReturn('action_one');
+
+        $context->getValidator()->willReturn($validator);
+        $validator->inContext($context)->willReturn($contextualValidator);
+
+        $contextualValidator->validate($promotionAction, null, ['Default', 'test_group'])->willReturn($contextualValidator)->shouldBeCalled();
+
+        $this->validate($promotionAction, new PromotionAction(['groups' => ['Default', 'test_group']]));
     }
 }

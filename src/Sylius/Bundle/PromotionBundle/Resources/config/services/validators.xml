@@ -43,11 +43,13 @@
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionValidator">
             <argument>%sylius.promotion_actions%</argument>
+            <argument>%sylius.promotion.promotion_action.validation_groups%</argument>
             <tag name="validator.constraint_validator" alias="sylius_promotion_action" />
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleValidator">
             <argument>%sylius.promotion_rules%</argument>
+            <argument>%sylius.promotion.promotion_rule.validation_groups%</argument>
             <tag name="validator.constraint_validator" alias="sylius_promotion_rule" />
         </service>
 
