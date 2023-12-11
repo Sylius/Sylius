@@ -13,7 +13,8 @@
             "price": 4000,
             "originalPrice": null,
             "minimumPrice": 0,
-            "lowestPriceBeforeDiscount": null
+            "lowestPriceBeforeDiscount": null,
+            "appliedPromotions": []
         }
     },
     "translations": {

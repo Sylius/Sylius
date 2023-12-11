@@ -42,5 +42,9 @@
         <attribute name="lowestPriceBeforeDiscount">
             <group>admin:product_variant:read</group>
         </attribute>
+
+        <attribute name="appliedPromotions">
+            <group>admin:product_variant:read</group>
+        </attribute>
     </class>
 </serializer>
