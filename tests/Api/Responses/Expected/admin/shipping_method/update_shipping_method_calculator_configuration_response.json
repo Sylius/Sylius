@@ -2,13 +2,14 @@
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
     "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
     "@type": "ShippingMethod",
-    "id": "@integer@",
+    "zone": "\/api\/v2\/admin\/zones\/WORLD",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
+    "id": @integer@,
     "code": "UPS",
     "position": 0,
-    "calculator": "flat_rate",
-    "enabled": true,
-    "createdAt": @date@,
-    "updatedAt": @date@,
+    "calculator": "per_unit_rate",
     "configuration": {
         "WEB": {
             "amount": 500
@@ -16,13 +17,11 @@
         "MOBILE": {
             "amount": 1000
         }
-
     },
-    "zone": "\/api\/v2\/admin\/zones\/WORLD",
-    "channels": [
-        "\/api\/v2\/admin\/channels\/WEB"
-    ],
     "rules": [],
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
+    "enabled": true,
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",

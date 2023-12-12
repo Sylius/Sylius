@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "configuration[WEB][amount]: This value should be a valid number.\nconfiguration[WEB][amount]: This value should be of type numeric.\nconfiguration[MOBILE]: This field is missing.\nconfiguration[WRONG_CODE]: This field was not expected.",
+    "violations": [
+        {
+            "propertyPath": "configuration[WEB][amount]",
+            "message": "This value should be a valid number.",
+            "code": "ad9a9798-7a99-4df7-8ce9-46e416a1e60b"
+        },
+        {
+            "propertyPath": "configuration[WEB][amount]",
+            "message": "This value should be of type numeric.",
+            "code": "ba785a8c-82cb-4283-967c-3cf342181b40"
+        },
+        {
+            "propertyPath": "configuration[MOBILE]",
+            "message": "This field is missing.",
+            "code": "2fa2158c-2a7f-484b-98aa-975522539ff8"
+        },
+        {
+            "propertyPath": "configuration[WRONG_CODE]",
+            "message": "This field was not expected.",
+            "code": "7703c766-b5d5-4cef-ace7-ae0dd82304e9"
+        }
+    ]
+}
