@@ -16,6 +16,7 @@ sylius:
         calculator:
             min: 'Shipping charge cannot be lower than 0.'
             not_blank: 'Please select shipping method calculator.'
+            invalid_calculator: 'Invalid calculator. Available calculators are {{ available_calculators }}.'
         name:
             max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
             min_length: 'Shipping method name must be at least {{ limit }} characters long.'
@@ -26,6 +27,8 @@ sylius:
             unique: 'The shipping method with given code already exists.'
         zone:
             not_blank: 'Please select shipping method zone.'
+        rule:
+            invalid_type: 'Invalid rule type. Available rule types are {{ available_rule_types }}.'
 
     shipment:
         shipping_method:
