@@ -34,6 +34,39 @@
                 <option name="message">sylius.shipping_method.calculator.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Sylius\Bundle\ShippingBundle\Validator\Constraint\ShippingMethodCalculatorExists">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="configuration">
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="groups">sylius_rate</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="fields">
+                            <value key="amount">
+                                <constraint name="Range">
+                                    <option name="min">0</option>
+                                    <option name="minMessage">sylius.shipping_method.calculator.min</option>
+                                    <option name="groups">sylius_rate</option>
+                                </constraint>
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_rate</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="groups">sylius_rate</option>
+                                    <option name="type">numeric</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+        </property>
+        <property name="rules">
+            <constraint name="Valid" />
         </property>
         <property name="translations">
             <constraint name="Valid" />
