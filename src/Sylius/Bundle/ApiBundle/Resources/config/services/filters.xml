@@ -389,5 +389,11 @@
             <tag name="api_platform.filter" />
         </service>
 
+        <service id="sylius.api.product_variant_position_filter" parent="api_platform.doctrine.orm.order_filter" public="true">
+            <argument type="collection">
+                <argument key="position" />
+            </argument>
+            <tag name="api_platform.filter" />
+        </service>
     </services>
 </container>
