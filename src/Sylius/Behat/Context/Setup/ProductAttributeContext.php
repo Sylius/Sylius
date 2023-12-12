@@ -423,6 +423,59 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
+    /**
+     * @When /^(this product attribute)'s value changed from "([^"]+)" to "([^"]+)"$/
+     */
+    public function thisAttributeValueChangedFromTo(
+        ProductAttributeInterface $attribute,
+        string $from,
+        string $to,
+    ): void {
+        $configuration = $attribute->getConfiguration();
+        $choices = $configuration['choices'] ?? [];
+
+        foreach ($choices as $uuid => $choice) {
+            foreach ($choice as $localeCode => $item) {
+                if ($item === $from) {
+                    $choices[$uuid][$localeCode] = $to;
+
+                    break 2;
+                }
+            }
+        }
+
+        $configuration['choices'] = $choices;
+        $attribute->setConfiguration($configuration);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @When /^(this product attribute)'s value "([^"]+)" has been removed$/
+     */
+    public function thisAttributeValueHasBeenRemoved(
+        ProductAttributeInterface $attribute,
+        string $value,
+    ): void {
+        $configuration = $attribute->getConfiguration();
+        $choices = $configuration['choices'] ?? [];
+
+        foreach ($choices as $uuid => $choice) {
+            foreach ($choice as $item) {
+                if ($value === $item) {
+                    unset($choices[$uuid]);
+
+                    break 2;
+                }
+            }
+        }
+
+        $configuration['choices'] = $choices;
+        $attribute->setConfiguration($configuration);
+
+        $this->objectManager->flush();
+    }
+
     private function createProductAttribute(
         string $type,
         string $name,
