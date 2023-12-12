@@ -15,163 +15,163 @@
     <class name="Sylius\Component\Promotion\Model\PromotionRule">
         <property name="configuration">
             <constraint name="Collection">
-                <option name="groups">cart_quantity</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_cart_quantity</option>
                 <option name="fields">
                     <value key="count">
                         <constraint name="NotBlank">
-                            <option name="groups">cart_quantity</option>
+                            <option name="groups">sylius_cart_quantity</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">cart_quantity</option>
                             <option name="type">numeric</option>
+                            <option name="groups">sylius_cart_quantity</option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">customer_group</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_customer_group</option>
                 <option name="fields">
                     <value key="group_code">
                         <constraint name="NotBlank">
-                            <option name="groups">customer_group</option>
+                            <option name="groups">sylius_customer_group</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">customer_group</option>
                             <option name="type">string</option>
+                            <option name="groups">sylius_customer_group</option>
                         </constraint>
                         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CustomerGroupCodeExists">
-                            <option name="groups">customer_group</option>
+                            <option name="groups">sylius_customer_group</option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">nth_order</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_nth_order</option>
                 <option name="fields">
                     <value key="nth">
                         <constraint name="NotBlank">
-                            <option name="groups">nth_order</option>
+                            <option name="groups">sylius_nth_order</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">nth_order</option>
                             <option name="type">numeric</option>
+                            <option name="groups">sylius_nth_order</option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">shipping_country</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_shipping_country</option>
                 <option name="fields">
                     <value key="country">
                         <constraint name="NotBlank">
-                            <option name="groups">shipping_country</option>
+                            <option name="groups">sylius_shipping_country</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">shipping_country</option>
                             <option name="type">string</option>
+                            <option name="groups">sylius_shipping_country</option>
                         </constraint>
                         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExists">
-                            <option name="groups">shipping_country</option>
+                            <option name="groups">sylius_shipping_country</option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">has_taxon</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_has_taxon</option>
                 <option name="fields">
                     <value key="taxons">
                         <constraint name="All">
-                            <option name="groups">has_taxon</option>
+                            <option name="groups">sylius_has_taxon</option>
                             <option name="constraints">
                                 <constraint name="NotBlank">
-                                    <option name="groups">has_taxon</option>
+                                    <option name="groups">sylius_has_taxon</option>
                                 </constraint>
                                 <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
-                                    <option name="groups">has_taxon</option>
+                                    <option name="groups">sylius_has_taxon</option>
                                 </constraint>
                             </option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
-                <option name="groups">total_of_items_from_taxon</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_total_of_items_from_taxon</option>
                 <option name="constraints">
                     <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
                         <option name="fields">
                             <value key="amount">
                                 <constraint name="Required">
                                     <constraint name="NotBlank">
-                                        <option name="groups">total_of_items_from_taxon</option>
+                                        <option name="groups">sylius_total_of_items_from_taxon</option>
                                     </constraint>
                                     <constraint name="Type">
-                                        <option name="groups">total_of_items_from_taxon</option>
                                         <option name="type">numeric</option>
+                                        <option name="groups">sylius_total_of_items_from_taxon</option>
                                     </constraint>
                                 </constraint>
                             </value>
                             <value key="taxon">
                                 <constraint name="Optional">
                                     <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
-                                        <option name="groups">total_of_items_from_taxon</option>
+                                        <option name="groups">sylius_total_of_items_from_taxon</option>
                                     </constraint>
                                 </constraint>
                             </value>
                         </option>
-                        <option name="allowExtraFields">true</option>
                     </constraint>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">contains_product</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_contains_product</option>
                 <option name="fields">
                     <value key="product_code">
                         <constraint name="NotBlank">
-                            <option name="groups">contains_product</option>
+                            <option name="groups">sylius_contains_product</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">contains_product</option>
                             <option name="type">string</option>
+                            <option name="groups">sylius_contains_product</option>
                         </constraint>
                         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
-                            <option name="groups">contains_product</option>
+                            <option name="groups">sylius_contains_product</option>
                         </constraint>
                     </value>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
 
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
-                <option name="groups">item_total</option>
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_item_total</option>
                 <option name="constraints">
                     <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
                         <option name="fields">
                             <value key="amount">
                                 <constraint name="NotBlank">
-                                    <option name="groups">item_total</option>
+                                    <option name="groups">sylius_item_total</option>
                                 </constraint>
                                 <constraint name="Type">
-                                    <option name="groups">item_total</option>
                                     <option name="type">numeric</option>
+                                    <option name="groups">sylius_item_total</option>
                                 </constraint>
                             </value>
                         </option>
-                        <option name="allowExtraFields">true</option>
                     </constraint>
                 </option>
-                <option name="allowExtraFields">true</option>
             </constraint>
         </property>
     </class>

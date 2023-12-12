@@ -242,10 +242,10 @@ sylius_promotion:
         validation_groups:
             order_percentage_discount:
                 - 'sylius'
-                - 'order_percentage_discount'
+                - 'sylius_order_percentage_discount'
             shipping_percentage_discount:
                 - 'sylius'
-                - 'shipping_percentage_discount'
+                - 'sylius_shipping_percentage_discount'
             your_promotion_action:
                 - 'sylius'
                 - 'your_custom_validation_group'
@@ -262,10 +262,10 @@ sylius_promotion:
         validation_groups:
             cart_quantity:
                 - 'sylius'
-                - 'cart_quantity'
+                - 'sylius_cart_quantity'
             customer_group:
                 - 'sylius'
-                - 'customer_group'
+                - 'sylius_customer_group'
             your_promotion_rule:
                 - 'sylius'
                 - 'your_custom_validation_group'

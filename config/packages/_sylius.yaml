@@ -27,45 +27,45 @@ sylius_promotion:
         validation_groups:
             order_percentage_discount:
                 - 'sylius'
-                - 'order_percentage_discount'
+                - 'sylius_order_percentage_discount'
             shipping_percentage_discount:
                 - 'sylius'
-                - 'shipping_percentage_discount'
+                - 'sylius_shipping_percentage_discount'
             order_fixed_discount:
                 - 'sylius'
-                - 'order_fixed_discount'
+                - 'sylius_order_fixed_discount'
             unit_fixed_discount:
                 - 'sylius'
-                - 'unit_fixed_discount'
+                - 'sylius_unit_fixed_discount'
             unit_percentage_discount:
                 - 'sylius'
-                - 'unit_percentage_discount'
+                - 'sylius_unit_percentage_discount'
     promotion_rule:
         validation_groups:
             cart_quantity:
                 - 'sylius'
-                - 'cart_quantity'
+                - 'sylius_cart_quantity'
             customer_group:
                 - 'sylius'
-                - 'customer_group'
+                - 'sylius_customer_group'
             nth_order:
                 - 'sylius'
-                - 'nth_order'
+                - 'sylius_nth_order'
             shipping_country:
                 - 'sylius'
-                - 'shipping_country'
+                - 'sylius_shipping_country'
             has_taxon:
                 - 'sylius'
-                - 'has_taxon'
+                - 'sylius_has_taxon'
             total_of_items_from_taxon:
                 - 'sylius'
-                - 'total_of_items_from_taxon'
+                - 'sylius_total_of_items_from_taxon'
             contains_product:
                 - 'sylius'
-                - 'contains_product'
+                - 'sylius_contains_product'
             item_total:
                 - 'sylius'
-                - 'item_total'
+                - 'sylius_item_total'
 
 sylius_shop:
     product_grid:
