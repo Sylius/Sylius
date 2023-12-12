@@ -78,6 +78,12 @@
             <group>admin:shipping_method:update</group>
         </attribute>
 
+        <attribute name="rules">
+            <group>admin:shipping_method:read</group>
+            <group>admin:shipping_method:create</group>
+            <group>admin:shipping_method:update</group>
+        </attribute>
+
         <attribute name="createdAt">
             <group>admin:shipping_method:read</group>
         </attribute>
