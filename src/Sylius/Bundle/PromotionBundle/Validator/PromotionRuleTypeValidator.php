@@ -13,44 +13,32 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
-use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRule;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRuleType;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-final class PromotionRuleValidator extends ConstraintValidator
+final class PromotionRuleTypeValidator extends ConstraintValidator
 {
-    /**
-     * @param array<string, string> $ruleTypes
-     * @param array<string, array<string, string>> $validationGroups
-     */
-    public function __construct(
-        private array $ruleTypes,
-        private array $validationGroups,
-    ) {
+    /** @param array<string, string> $ruleTypes */
+    public function __construct(private array $ruleTypes)
+    {
     }
 
     public function validate(mixed $value, Constraint $constraint): void
     {
-        if (!$constraint instanceof PromotionRule) {
-            throw new UnexpectedTypeException($constraint, PromotionRule::class);
+        if (!$constraint instanceof PromotionRuleType) {
+            throw new UnexpectedTypeException($constraint, PromotionRuleType::class);
         }
 
         if (!$value instanceof PromotionRuleInterface) {
             throw new UnexpectedValueException($value, PromotionRuleInterface::class);
         }
 
-        $type = $value->getType();
-        if (!array_key_exists($type, $this->ruleTypes)) {
+        if (!array_key_exists($value->getType(), $this->ruleTypes)) {
             $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-            return;
         }
-
-        /** @var string[] $groups */
-        $groups = $this->validationGroups[$type] ?? $constraint->groups;
-        $validator = $this->context->getValidator()->inContext($this->context);
-        $validator->validate(value: $value, groups: $groups);
     }
 }

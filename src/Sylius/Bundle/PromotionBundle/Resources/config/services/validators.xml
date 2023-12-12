@@ -51,6 +51,16 @@
             <tag name="validator.constraint_validator" alias="sylius_promotion_action_type" />
         </service>
 
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleGroupValidator">
+            <argument>%sylius.promotion.promotion_rule.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_rule_group" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleTypeValidator">
+            <argument>%sylius.promotion_rules%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_rule_type" />
+        </service>
+
         <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionNotCouponBasedValidator">
             <tag name="validator.constraint_validator" alias="sylius_promotion_not_coupon_based_validator" />
         </service>

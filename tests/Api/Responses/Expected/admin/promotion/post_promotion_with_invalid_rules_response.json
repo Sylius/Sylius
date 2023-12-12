@@ -48,6 +48,11 @@
             "propertyPath": "rules[7].configuration[WEB]",
             "message": "This field is missing.",
             "code": @string@
+        },
+        {
+            "propertyPath": "rules[8].type",
+            "message": "Promotion rule type is invalid. Please choose a valid type.",
+            "code": null
         }
     ]
 }
