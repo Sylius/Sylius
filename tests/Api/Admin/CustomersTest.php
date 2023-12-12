@@ -73,7 +73,7 @@ final class CustomersTest extends JsonApiTestCase
             'channel.yaml',
             'order/fulfilled_order.yaml',
         ]);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
         /** @var CustomerInterface $customer */
         $customer = $fixtures['customer_tony'];
