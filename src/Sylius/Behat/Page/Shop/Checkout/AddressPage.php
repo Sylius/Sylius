@@ -101,6 +101,23 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $message === $validationMessage->getText();
     }
 
+    public function checkFormValidationMessage(string $message): bool
+    {
+        $formElement = $this->getElement('form');
+        if (null === $formElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Form');
+        }
+
+        $validationMessage = $formElement->findAll('css', '[data-test-validation-error]');
+        foreach ($validationMessage as $validationMessage) {
+            if ($validationMessage->getText() === $message) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function specifyShippingAddress(AddressInterface $shippingAddress): void
     {
         $this->specifyAddress($shippingAddress, self::TYPE_SHIPPING);
@@ -296,6 +313,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_postcode' => '[data-test-shipping-postcode]',
             'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
             'shipping_street' => '[data-test-shipping-street]',
+            'form' => 'form[name="sylius_checkout_address"]',
         ]);
     }
 
