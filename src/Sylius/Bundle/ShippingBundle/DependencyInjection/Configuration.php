@@ -49,6 +49,14 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->arrayNode('shipping_method_rules_validation_groups')
+                    ->useAttributeAsKey('name')
+                    ->variablePrototype()->end()
+                ->end()
+                ->arrayNode('shipping_method_calculators_validation_groups')
+                    ->useAttributeAsKey('name')
+                    ->variablePrototype()->end()
+                ->end()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;

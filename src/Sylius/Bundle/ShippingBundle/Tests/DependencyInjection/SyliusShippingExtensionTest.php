@@ -99,6 +99,38 @@ final class SyliusShippingExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /** @test */
+    public function it_loads_shipping_method_rules_validation_groups_parameter_value_properly(): void
+    {
+        $this->load(['shipping_method_rules_validation_groups' => [
+            'total_weight_greater_than_or_equal' => ['sylius', 'total_weight'],
+            'order_total_greater_than_or_equal' => ['sylius'],
+            'order_total_less_than_or_equal' => ['sylius', 'order_total'],
+            'total_weight_less_than_or_equal' => ['sylius'],
+        ]]);
+
+        $this->assertContainerBuilderHasParameter('sylius.shipping.shipping_method_rules.validation_groups', [
+            'total_weight_greater_than_or_equal' => ['sylius', 'total_weight'],
+            'order_total_greater_than_or_equal' => ['sylius'],
+            'order_total_less_than_or_equal' => ['sylius', 'order_total'],
+            'total_weight_less_than_or_equal' => ['sylius'],
+        ]);
+    }
+
+    /** @test */
+    public function it_loads_shipping_method_calculators_validation_groups_parameter_value_properly(): void
+    {
+        $this->load(['shipping_method_calculators_validation_groups' => [
+            'flat_rate' => ['sylius'],
+            'per_unit_rate' => ['sylius', 'per_unit_rate'],
+        ]]);
+
+        $this->assertContainerBuilderHasParameter('sylius.shipping.shipping_method_calculators.validation_groups', [
+            'flat_rate' => ['sylius'],
+            'per_unit_rate' => ['sylius', 'per_unit_rate'],
+        ]);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusShippingExtension()];

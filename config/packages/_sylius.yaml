@@ -67,6 +67,28 @@ sylius_promotion:
                 - 'sylius'
                 - 'sylius_promotion_rule_item_total'
 
+sylius_shipping:
+    shipping_method_rules_validation_groups:
+        total_weight_greater_than_or_equal:
+            - 'sylius'
+            - 'total_weight'
+        total_weight_less_than_or_equal:
+            - 'sylius'
+            - 'total_weight'
+        order_total_greater_than_or_equal:
+            - 'sylius'
+            - 'order_total'
+        order_total_less_than_or_equal:
+            - 'sylius'
+            - 'order_total'
+    shipping_method_calculators_validation_groups:
+        flat_rate:
+            - 'sylius'
+            - 'rate'
+        per_unit_rate:
+            - 'sylius'
+            - 'rate'
+
 sylius_shop:
     product_grid:
         include_all_descendants: true

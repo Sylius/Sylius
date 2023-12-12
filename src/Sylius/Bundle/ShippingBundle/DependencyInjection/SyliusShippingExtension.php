@@ -33,6 +33,9 @@ final class SyliusShippingExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
+        $container->setParameter('sylius.shipping.shipping_method_rules.validation_groups', $config['shipping_method_rules_validation_groups']);
+        $container->setParameter('sylius.shipping.shipping_method_calculators.validation_groups', $config['shipping_method_calculators_validation_groups']);
+
         $loader->load('services.xml');
         $this->registerAutoconfiguration($container);
     }
