@@ -33,6 +33,11 @@
             "propertyPath": "actions[4].configuration[percentage]",
             "message": "This field is missing.",
             "code": @string@
+        },
+        {
+            "propertyPath": "actions[5].type",
+            "message": "Promotion action type is invalid. Please choose a valid type.",
+            "code": null
         }
     ]
 }

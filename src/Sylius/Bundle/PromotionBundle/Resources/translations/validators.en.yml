@@ -37,6 +37,7 @@ sylius:
             min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter promotion name.
     promotion_action:
+        invalid_type: Promotion action type is invalid. Please choose a valid type.
         percentage_discount_configuration:
             not_in_range: The percentage discount must be between 0% and 100%.
     promotion_coupon:

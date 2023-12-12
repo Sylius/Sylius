@@ -447,6 +447,11 @@ final class PromotionsTest extends JsonApiTestCase
                         'configuration' => [
                         ],
                     ],
+                    [
+                        'type' => 'wrong_type',
+                        'configuration' => [
+                        ],
+                    ],
                 ],
             ], \JSON_THROW_ON_ERROR),
         );
