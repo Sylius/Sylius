@@ -24,7 +24,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
-            <argument type="service" id="sylius.command_bus" />
+            <argument type="service" id="sylius.query_bus" />
             <tag name="controller.service_arguments" />
         </service>
 

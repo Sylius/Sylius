@@ -16,11 +16,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <defaults>
+            <tag name="messenger.message_handler" bus="sylius.query_bus" />
+        </defaults>
+
         <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler">
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.customer_statistics_provider" />
-            <tag name="messenger.message_handler" bus="sylius.command_bus" />
-            <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
     </services>
 </container>
