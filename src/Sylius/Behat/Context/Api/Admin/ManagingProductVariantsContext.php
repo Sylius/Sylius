@@ -234,6 +234,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
         $this->client->addFilter('product', $this->iriConverter->getIriFromResource($product));
+        $this->client->addFilter('order[position]', 'asc');
         $this->client->filter();
     }
 

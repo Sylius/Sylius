@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,22 +25,7 @@ final class BrowsingProductVariantsContext implements Context
     public function __construct (
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
     ) {
-    }
-
-    /**
-     * @When I view all variants of the product :product
-     */
-    public function iViewAllVariantsOfTheProduct(ProductInterface $product): void
-    {
-        $this->client->index(
-            Resources::PRODUCT_VARIANTS,
-            [
-                'product' => $this->iriConverter->getIriFromResource($product),
-                'order[position]' => 'asc',
-            ],
-        );
     }
 
     /**
