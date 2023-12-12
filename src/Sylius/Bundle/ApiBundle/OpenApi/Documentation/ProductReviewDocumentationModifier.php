@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
 use ApiPlatform\Core\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\OpenApi;
+use Sylius\Component\Review\Model\ReviewInterface;
 
 /** @experimental */
 final class ProductReviewDocumentationModifier implements DocumentationModifierInterface
@@ -45,7 +46,7 @@ final class ProductReviewDocumentationModifier implements DocumentationModifierI
             description: 'Status of product reviews you want to get',
             schema: [
                 'type' => 'string',
-                'enum' => ['new', 'accepted', 'rejected'],
+                'enum' => [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED],
                 'nullable' => true,
                 'default' => null,
             ],

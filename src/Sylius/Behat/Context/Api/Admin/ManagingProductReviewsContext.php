@@ -42,7 +42,7 @@ final class ManagingProductReviewsContext implements Context
     /**
      * @When I choose :status as a status filter
      */
-    public function iChooseStateAsStatusFilter(string $status): void
+    public function iChooseAsStatusFilter(string $status): void
     {
         $this->client->addFilter('status', $status);
     }
