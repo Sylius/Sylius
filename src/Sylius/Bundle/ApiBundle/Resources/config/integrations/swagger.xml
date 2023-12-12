@@ -53,6 +53,11 @@
             <tag name="sylius.open_api.modifier" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
             <tag name="sylius.open_api.modifier" />

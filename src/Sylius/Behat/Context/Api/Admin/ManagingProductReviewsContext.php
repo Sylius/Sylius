@@ -40,6 +40,22 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I choose :status as a status filter
+     */
+    public function iChooseStateAsStatusFilter(string $status): void
+    {
+        $this->client->addFilter('status', $status);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter(): void
+    {
+        $this->client->filter();
+    }
+
+    /**
      * @When I want to modify the :productReview product review
      */
     public function iWantToModifyTheProductReview(ReviewInterface $productReview): void
