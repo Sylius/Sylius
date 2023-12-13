@@ -44,8 +44,11 @@ final class ProductTaxonDataPersister implements ContextAwareDataPersisterInterf
         $this->eventBus->dispatch(new ProductUpdated($product->getCode()));
     }
 
+    /** @param ProductTaxonInterface $data */
     public function remove($data, array $context = [])
     {
-        return $this->decoratedDataPersister->remove($data, $context);
+        $this->decoratedDataPersister->remove($data, $context);
+
+        $this->eventBus->dispatch(new ProductUpdated($data->getProduct()->getCode()));
     }
 }
