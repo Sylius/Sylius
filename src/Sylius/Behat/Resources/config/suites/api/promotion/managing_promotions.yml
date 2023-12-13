@@ -27,6 +27,7 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.taxonomy

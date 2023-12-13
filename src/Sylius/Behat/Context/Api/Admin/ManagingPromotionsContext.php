@@ -827,6 +827,25 @@ final class ManagingPromotionsContext implements Context
         Assert::same($item[$field], $value);
     }
 
+    /**
+     * @Then the promotion :promotion should be used :usage time(s)
+     * @Then the promotion :promotion should not be used
+     */
+    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, int $usage = 0): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $promotion->getCode()
+        ));
+
+        Assert::same(
+            $returnedPromotion['used'],
+            $usage,
+            sprintf('The promotion %s has been used %s times', $promotion->getName(), $returnedPromotion['used']),
+        );
+    }
+
     private function addToRequestAction(string $type, array $configuration): void
     {
         $data['actions'][] = [
