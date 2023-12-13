@@ -38,8 +38,10 @@ framework:
                 middleware:
                     - 'validation'
                     - 'doctrine_transaction'
+            sylius.query_bus:
+                middleware:
+                    - validation
             sylius.event_bus: &event_bus
                 default_middleware: allow_no_handlers
             sylius_default.bus: *command_bus
             sylius_event.bus: *event_bus
-
