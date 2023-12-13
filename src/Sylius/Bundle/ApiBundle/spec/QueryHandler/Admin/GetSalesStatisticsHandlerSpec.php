@@ -15,7 +15,7 @@ namespace spec\Sylius\Bundle\ApiBundle\QueryHandler\Admin;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ApiBundle\Query\Admin\GetStatistics;
+use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;

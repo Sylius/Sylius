@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use Sylius\Bundle\ApiBundle\Query\Admin\GetStatistics;
+use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Component\Core\DateTime\Period;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

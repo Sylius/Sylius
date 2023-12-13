@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Query\Admin;
+namespace Sylius\Bundle\ApiBundle\Query;
 
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Component\Core\DateTime\Period;
