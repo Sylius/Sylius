@@ -18,6 +18,36 @@ sylius_payum:
             - 'your_custom_validation_group'
 ```
 
+1. There have been a naw parameters added to specify the validation groups for given shipping method rule and calculator.
+   If you have any custom validation groups for your calculator or rules, you need to add them to your `config/packages/_sylius.yaml` file.
+   Also, if you have your own shipping method rule or calculator and want to add your validation groups you can add another key to the `validation_groups` parameter.
+
+```yaml
+sylius_shipping:
+    shipping_method_rule:
+        validation_groups:
+            total_weight_greater_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_total_weight'
+            order_total_greater_than_or_equal:
+                - 'sylius'
+                - 'sylius_shipping_method_rule_order_total'
+            your_shipping_method_rule:
+                - 'sylius'
+                - 'your_custom_validation_group'
+    shipping_method_calculator:
+        validation_groups:
+            flat_rate:
+                - 'sylius'
+                - 'sylius_shipping_method_calculator_rate'
+            per_unit_rate:
+                - 'sylius'
+                - 'sylius_shipping_method_calculator_rate'
+            your_shipping_method_calculator:
+                - 'sylius'
+                - 'your_custom_validation_group'
+```
+
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\TotalOfItemsFromTaxonRuleUpdater` has been deprecated, as it is no more used.
 
 1. Class `Sylius\Component\Core\Promotion\Updater\Rule\ContainsProductRuleUpdater` has been deprecated, as it is no more used.
