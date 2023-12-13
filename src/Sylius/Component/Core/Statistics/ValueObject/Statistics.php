@@ -14,47 +14,29 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Statistics\ValueObject;
 
 use Sylius\Component\Core\DateTime\Period;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Core\Statistics\Chart\ChartInterface;
 
 class Statistics
 {
-    /** @param SalesInPeriod[] $salesInPeriod */
     public function __construct(
-        private array $salesInPeriod,
+        private ChartInterface $chart,
         private BusinessActivitySummary $businessActivitySummary,
         private Period $period,
     ) {
-        Assert::allIsInstanceOf($salesInPeriod, SalesInPeriod::class);
     }
 
-    /** @return SalesInPeriod[] */
-    public function getSalesPerPeriod(): array
+    public function getSalesChart(): ChartInterface
     {
-        return $this->salesInPeriod;
+        return $this->chart;
     }
 
-    public function getTotalSales(): int
+    public function getBusinessActivitySummary(): BusinessActivitySummary
     {
-        return $this->businessActivitySummary->getTotalSales();
-    }
-
-    public function getNewCustomersCount(): int
-    {
-        return $this->businessActivitySummary->getNewCustomersCount();
-    }
-
-    public function getNewOrdersCount(): int
-    {
-        return $this->businessActivitySummary->getNewOrdersCount();
-    }
-
-    public function getAverageOrderValue(): int
-    {
-        return $this->businessActivitySummary->getAverageOrderValue();
+        return $this->businessActivitySummary;
     }
 
     public function getIntervalType(): string
     {
-        return $this->period->getInterval();
+        return $this->period->getIntervalType();
     }
 }

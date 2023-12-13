@@ -36,7 +36,7 @@ class Period
         return $this->period->getEndDate();
     }
 
-    public function getInterval(): string
+    public function getIntervalType(): string
     {
         $interval = $this->period->getDateInterval();
 

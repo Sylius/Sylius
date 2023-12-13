@@ -16,17 +16,17 @@ namespace spec\Sylius\Component\Core\Statistics\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\BusinessActivitySummaryProviderInterface;
-use Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface;
+use Sylius\Component\Core\Statistics\Provider\SalesTimeSeriesProviderInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\Component\Core\Statistics\ValueObject\Period;
-use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
+use Sylius\Component\Core\Statistics\ValueObject\SalesPoint;
 use Sylius\Component\Core\Statistics\ValueObject\SalesSummary;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
 final class StatisticsProviderSpec extends ObjectBehavior
 {
     function let(
-        SalesPerPeriodProviderInterface $salesPerPeriodProvider,
+        SalesTimeSeriesProviderInterface $salesPerPeriodProvider,
         BusinessActivitySummaryProviderInterface $salesSummaryProvider,
     ): void {
         $this->beConstructedWith($salesPerPeriodProvider, $salesSummaryProvider);
@@ -38,12 +38,12 @@ final class StatisticsProviderSpec extends ObjectBehavior
     }
 
     function it_provides_sales_statistics_for_given_period_and_channel(
-        SalesPerPeriodProviderInterface $salesPerPeriodProvider,
+        SalesTimeSeriesProviderInterface $salesPerPeriodProvider,
         BusinessActivitySummaryProviderInterface $salesSummaryProvider,
         ChannelInterface $channel,
         Period $period,
-        SalesInPeriod $lastYearSales,
-        SalesInPeriod $thisYearSales,
+        SalesPoint $lastYearSales,
+        SalesPoint $thisYearSales,
         SalesSummary $salesSummary,
     ): void {
         $startDate = new \DateTimeImmutable('first day of january this year 00:00:00');

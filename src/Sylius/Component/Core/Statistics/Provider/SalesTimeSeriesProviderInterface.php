@@ -15,10 +15,9 @@ namespace Sylius\Component\Core\Statistics\Provider;
 
 use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Statistics\ValueObject\SalesInPeriod;
+use Sylius\Component\Core\Statistics\Chart\ChartInterface;
 
-interface SalesPerPeriodProviderInterface
+interface SalesTimeSeriesProviderInterface
 {
-    /** @return SalesInPeriod[] */
-    public function provide(Period $period, ChannelInterface $channel): array;
+    public function provide(Period $period, ChannelInterface $channel): ChartInterface;
 }

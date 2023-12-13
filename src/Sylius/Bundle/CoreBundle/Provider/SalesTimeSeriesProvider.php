@@ -18,17 +18,20 @@ use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\Statistics\Mapper\SalesPeriodMapperInterface;
-use Sylius\Component\Core\Statistics\Provider\SalesPerPeriodProviderInterface;
+use Sylius\Component\Core\Statistics\Chart\ChartFactoryInterface;
+use Sylius\Component\Core\Statistics\Chart\ChartInterface;
+use Sylius\Component\Core\Statistics\Provider\SalesTimeSeriesProviderInterface;
 
-final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
+final class SalesTimeSeriesProvider implements SalesTimeSeriesProviderInterface
 {
+    private const SALES = 'sales';
+
     /** @param EntityRepository<OrderInterface> $orderRepository */
-    public function __construct(private EntityRepository $orderRepository, private SalesPeriodMapperInterface $salesPeriodMapper)
+    public function __construct(private EntityRepository $orderRepository, private ChartFactoryInterface $chartFactory)
     {
     }
 
-    public function provide(Period $period, ChannelInterface $channel): array
+    public function provide(Period $period, ChannelInterface $channel): ChartInterface
     {
         $queryBuilder = $this->orderRepository->createQueryBuilder('o')
             ->select('SUM(o.total) AS total')
@@ -38,7 +41,7 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
             ->setParameter('channel', $channel)
         ;
 
-        switch ($period->getInterval()) {
+        switch ($period->getIntervalType()) {
             case 'year':
                 $queryBuilder
                     ->addSelect('YEAR(o.checkoutCompletedAt) as year')
@@ -47,12 +50,6 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                     ->setParameter('startYear', $period->getStartDate()->format('Y'))
                     ->setParameter('endYear', $period->getEndDate()->format('Y'))
                 ;
-                $dateFormatter = static function (\DateTimeInterface $date): string {
-                    return $date->format('Y');
-                };
-                $resultFormatter = static function (array $data): string {
-                    return (string) $data['year'];
-                };
 
                 break;
             case 'month':
@@ -72,12 +69,6 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                     ->setParameter('endYear', $period->getEndDate()->format('Y'))
                     ->setParameter('endMonth', $period->getEndDate()->format('n'))
                 ;
-                $dateFormatter = static function (\DateTimeInterface $date): string {
-                    return $date->format('n.Y');
-                };
-                $resultFormatter = static function (array $data): string {
-                    return $data['month'] . '.' . $data['year'];
-                };
 
                 break;
             case 'week':
@@ -97,12 +88,6 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                     ->setParameter('endYear', $period->getEndDate()->format('Y'))
                     ->setParameter('endWeek', (ltrim($period->getEndDate()->format('W'), '0') ?: '0'))
                 ;
-                $dateFormatter = static function (\DateTimeInterface $date): string {
-                    return (ltrim($date->format('W'), '0') ?: '0') . ' ' . $date->format('Y');
-                };
-                $resultFormatter = static function (array $data): string {
-                    return $data['week'] . ' ' . $data['year'];
-                };
 
                 break;
             case 'day':
@@ -131,20 +116,14 @@ final class SalesPerPeriodProvider implements SalesPerPeriodProviderInterface
                     ->setParameter('endMonth', $period->getEndDate()->format('n'))
                     ->setParameter('endDay', $period->getEndDate()->format('j'))
                 ;
-                $dateFormatter = static function (\DateTimeInterface $date): string {
-                    return $date->format('j.n.Y');
-                };
-                $resultFormatter = static function (array $data): string {
-                    return $data['day'] . '.' . $data['month'] . '.' . $data['year'];
-                };
 
                 break;
             default:
-                throw new \RuntimeException(sprintf('Interval "%s" not supported.', $period->getInterval()));
+                throw new \RuntimeException(sprintf('Interval "%s" not supported.', $period->getIntervalType()));
         }
 
         $ordersTotals = $queryBuilder->getQuery()->getArrayResult();
 
-        return $this->salesPeriodMapper->map($period, $ordersTotals);
+        return $this->chartFactory->createTimeSeries($period, [self::SALES => $ordersTotals]);
     }
 }

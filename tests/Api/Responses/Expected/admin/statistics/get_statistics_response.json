@@ -1,57 +1,41 @@
 {
-    "salesPerPeriod": [
-        {
-            "period": "2023-01-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-02-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-03-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-04-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-05-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-06-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-07-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-08-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-09-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-10-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-11-01 00:00:00",
-            "total": 0
-        },
-        {
-            "period": "2023-12-01 00:00:00",
-            "total": 19500
+    "salesChart": {
+        "labels": [
+            "2023-01-01",
+            "2023-02-01",
+            "2023-03-01",
+            "2023-04-01",
+            "2023-05-01",
+            "2023-06-01",
+            "2023-07-01",
+            "2023-08-01",
+            "2023-09-01",
+            "2023-10-01",
+            "2023-11-01",
+            "2023-12-01"
+        ],
+        "datasets": {
+            "sales": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                19500
+            ]
         }
-    ],
-    "totalSales": 19500,
-    "newCustomersCount": 4,
-    "newOrdersCount": 3,
-    "averageOrderValue": 6500,
+    },
+    "businessActivitySummary": {
+        "totalSales": 19500,
+        "newCustomersCount": 4,
+        "newOrdersCount": 3,
+        "averageOrderValue": 6500
+    },
     "intervalType": "month"
 }
