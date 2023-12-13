@@ -58,7 +58,7 @@ final class TaxRateDenormalizerSpec extends ObjectBehavior
                 ['amount' => null],
                 TaxRateInterface::class,
                 null,
-                [self::ALREADY_CALLED => true]
+                [self::ALREADY_CALLED => true],
             )
             ->shouldReturn($taxRate)
         ;
@@ -78,7 +78,7 @@ final class TaxRateDenormalizerSpec extends ObjectBehavior
                 [],
                 TaxRateInterface::class,
                 null,
-                [self::ALREADY_CALLED => true]
+                [self::ALREADY_CALLED => true],
             )
             ->shouldReturn($taxRate)
         ;

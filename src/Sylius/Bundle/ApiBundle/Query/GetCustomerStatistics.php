@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Query;
 
 final class GetCustomerStatistics
 {
-    public function __construct (
+    public function __construct(
         private int $customerId,
     ) {
     }

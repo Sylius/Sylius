@@ -25,7 +25,7 @@ final class GetCustomerStatisticsHandler
     /**
      * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
      */
-    public function __construct (
+    public function __construct(
         private CustomerRepositoryInterface $customerRepository,
         private CustomerStatisticsProviderInterface $customerStatisticsProvider,
     ) {
