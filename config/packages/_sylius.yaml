@@ -27,45 +27,45 @@ sylius_promotion:
         validation_groups:
             order_percentage_discount:
                 - 'sylius'
-                - 'sylius_order_percentage_discount'
+                - 'sylius_promotion_action_order_percentage_discount'
             shipping_percentage_discount:
                 - 'sylius'
-                - 'sylius_shipping_percentage_discount'
+                - 'sylius_promotion_action_shipping_percentage_discount'
             order_fixed_discount:
                 - 'sylius'
-                - 'sylius_order_fixed_discount'
+                - 'sylius_promotion_action_order_fixed_discount'
             unit_fixed_discount:
                 - 'sylius'
-                - 'sylius_unit_fixed_discount'
+                - 'sylius_promotion_action_unit_fixed_discount'
             unit_percentage_discount:
                 - 'sylius'
-                - 'sylius_unit_percentage_discount'
+                - 'sylius_promotion_action_unit_percentage_discount'
     promotion_rule:
         validation_groups:
             cart_quantity:
                 - 'sylius'
-                - 'sylius_cart_quantity'
+                - 'sylius_promotion_rule_cart_quantity'
             customer_group:
                 - 'sylius'
-                - 'sylius_customer_group'
+                - 'sylius_promotion_rule_customer_group'
             nth_order:
                 - 'sylius'
-                - 'sylius_nth_order'
+                - 'sylius_promotion_rule_nth_order'
             shipping_country:
                 - 'sylius'
-                - 'sylius_shipping_country'
+                - 'sylius_promotion_rule_shipping_country'
             has_taxon:
                 - 'sylius'
-                - 'sylius_has_taxon'
+                - 'sylius_promotion_rule_has_taxon'
             total_of_items_from_taxon:
                 - 'sylius'
-                - 'sylius_total_of_items_from_taxon'
+                - 'sylius_promotion_rule_total_of_items_from_taxon'
             contains_product:
                 - 'sylius'
-                - 'sylius_contains_product'
+                - 'sylius_promotion_rule_contains_product'
             item_total:
                 - 'sylius'
-                - 'sylius_item_total'
+                - 'sylius_promotion_rule_item_total'
 
 sylius_shop:
     product_grid:
