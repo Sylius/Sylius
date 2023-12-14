@@ -31,7 +31,7 @@ final class TaxonDeletionListener
     private array $ruleUpdaters;
 
     public function __construct(
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack|SessionInterface $requestStackOrSession,
         private ChannelRepositoryInterface $channelRepository,
         private TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters,

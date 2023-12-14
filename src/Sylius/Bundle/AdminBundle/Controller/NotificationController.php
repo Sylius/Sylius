@@ -29,7 +29,7 @@ final class NotificationController
 {
     public function __construct(
         private ClientInterface|DeprecatedClientInterface $client,
-        private RequestFactoryInterface|MessageFactory $requestFactory,
+        private MessageFactory|RequestFactoryInterface $requestFactory,
         private string $hubUri,
         private string $environment,
         private ?StreamFactoryInterface $streamFactory = null,

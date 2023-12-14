@@ -26,7 +26,7 @@ use Webmozart\Assert\Assert;
 
 final class UserDeleteListener
 {
-    public function __construct(private TokenStorageInterface $tokenStorage, private SessionInterface|RequestStack $requestStackOrSession)
+    public function __construct(private TokenStorageInterface $tokenStorage, private RequestStack|SessionInterface $requestStackOrSession)
     {
         if ($requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class FilterStorage implements FilterStorageInterface
 {
-    public function __construct(private SessionInterface|RequestStack $requestStackOrSession)
+    public function __construct(private RequestStack|SessionInterface $requestStackOrSession)
     {
         if ($this->requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(

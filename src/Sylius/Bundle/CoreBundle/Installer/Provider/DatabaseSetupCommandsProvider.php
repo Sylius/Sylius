@@ -31,7 +31,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /** @var AbstractSchemaManager<PostgreSQLPlatform|MySQLPlatform>|null */
     private ?AbstractSchemaManager $schemaManager = null;
 
-    public function __construct(private Registry|EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface|Registry $entityManager)
     {
         if ($this->entityManager instanceof Registry) {
             trigger_deprecation(

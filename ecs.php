@@ -11,6 +11,7 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ErrorSuppressionFixer;
@@ -31,6 +32,7 @@ return static function (ECSConfig $config): void {
         '**/var/*',
     ]);
     $config->ruleWithConfiguration(PhpdocSeparationFixer::class, ['groups' => [['Given', 'When', 'Then']]]);
+    $config->ruleWithConfiguration(OrderedTypesFixer::class, ['null_adjustment' => 'always_last']);
     $config->ruleWithConfiguration(
         HeaderCommentFixer::class,
         [

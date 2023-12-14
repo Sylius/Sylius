@@ -33,7 +33,7 @@ final class ResendShipmentConfirmationEmailAction
         private ShipmentRepositoryInterface $shipmentRepository,
         private ShipmentEmailManagerInterface $shipmentEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack|SessionInterface $requestStackOrSession,
     ) {
         if ($this->requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(
