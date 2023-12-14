@@ -15,7 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -32,8 +32,8 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
             return;
         }
 
-        /** @var PromotionCouponGeneratorInstructionInterface $value */
-        Assert::isInstanceOf($value, PromotionCouponGeneratorInstructionInterface::class);
+        /** @var ReadablePromotionCouponGeneratorInstructionInterface $value */
+        Assert::isInstanceOf($value, ReadablePromotionCouponGeneratorInstructionInterface::class);
 
         /** @var CouponPossibleGenerationAmount $constraint */
         Assert::isInstanceOf($constraint, CouponPossibleGenerationAmount::class);
