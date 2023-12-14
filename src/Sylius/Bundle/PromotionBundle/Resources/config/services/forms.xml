@@ -34,6 +34,9 @@
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.promotion_coupon_generator_instruction.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -129,6 +132,7 @@
 
         <service id="sylius.form.type.promotion_coupon_generator_instruction" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType">
             <argument>Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction</argument>
+            <argument>%sylius.form.type.promotion_coupon_generator_instruction.validation_groups%</argument>
             <tag name="form.type" />
         </service>
     </services>
