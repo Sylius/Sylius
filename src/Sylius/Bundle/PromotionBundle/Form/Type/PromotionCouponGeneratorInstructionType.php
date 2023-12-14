@@ -13,14 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class PromotionCouponGeneratorInstructionType extends AbstractResourceType
+final class PromotionCouponGeneratorInstructionType extends AbstractType
 {
+    /** @param array<string> $validationGroups */
+    public function __construct(
+        private string $dataClass,
+        private array $validationGroups = []
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -48,6 +56,14 @@ final class PromotionCouponGeneratorInstructionType extends AbstractResourceType
                 'widget' => 'single_text',
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+        ]);
     }
 
     public function getBlockPrefix(): string
