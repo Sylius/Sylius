@@ -86,6 +86,7 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="associations">
+            <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="attributes">

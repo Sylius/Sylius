@@ -44,6 +44,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.api.admin.managing_product_associations
                 - sylius.behat.context.api.admin.managing_product_images
                 - sylius.behat.context.api.admin.managing_products
                 - sylius.behat.context.api.admin.response

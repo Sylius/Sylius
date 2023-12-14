@@ -24,6 +24,9 @@
         "\/api\/v2\/admin\/product-reviews\/@integer@",
         "\/api\/v2\/admin\/product-reviews\/@integer@"
     ],
+    "associations": [
+        "\/api\/v2\/admin\/product-associations\/@integer@"
+    ],
     "attributes": [
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",

@@ -51,68 +51,89 @@
                 "\/api\/v2\/shop\/product-associations\/@integer@"
             ],
             "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+        },
+        {
+            "@id": "\/api\/v2\/shop\/products\/TANKARD",
+            "@type": "Product",
+            "productTaxons": [],
+            "mainTaxon": null,
+            "reviews": [],
+            "averageRating": @integer@,
+            "images": [],
+            "id": @integer@,
+            "code": "TANKARD",
+            "variants": [],
+            "options": [],
+            "associations": [],
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "shortDescription": "Tankard",
+            "name": "Tankard",
+            "description": "Tankard description",
+            "slug": "Tankard",
+            "defaultVariant": null
         }
     ],
-    "hydra:totalItems": 2,
+    "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/shop\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "translations.name",
-              "property": "translations.name",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "order[code]",
-              "property": "code",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "order[createdAt]",
-              "property": "createdAt",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "productTaxons.taxon.code",
-              "property": "productTaxons.taxon.code",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "productTaxons.taxon.code[]",
-              "property": "productTaxons.taxon.code",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "order[price]",
-              "property": "price",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "order[translation.name]",
-              "property": "translation",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "localeCode for order[translation.name]",
-              "property": "localeCode",
-              "required": false
-          },
-          {
-              "@type": "IriTemplateMapping",
-              "variable": "taxon",
-              "property": null,
-              "required": false
-          }
-      ]
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code[]",
+                "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[price]",
+                "property": "price",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "taxon",
+                "property": null,
+                "required": false
+            }
+        ]
     }
 }

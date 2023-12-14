@@ -9,7 +9,7 @@ Sylius\Component\Core\Model\Product:
         translations:
             en_US: '@product_translation_mug_en_US'
             pl_PL: '@product_translation_mug_pl_PL'
-        attributes: 
+        attributes:
             - '@product_attribute_value_material_en_US'
             - '@product_attribute_value_material_pl_PL'
     product_cap:
@@ -95,7 +95,7 @@ Sylius\Component\Product\Model\ProductVariantTranslation:
         locale: 'en_US'
         name: 'Red Mug'
         translatable: '@product_variant_mug_red'
-    
+
 Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_mug_blue_web:
         channelCode: 'WEB'
@@ -114,7 +114,7 @@ Sylius\Component\Core\Model\ChannelPricing:
     channel_pricing_cap_red_web:
         channelCode: 'WEB'
         price: 2000
-    
+
 Sylius\Component\Product\Model\ProductOption:
     product_option_color:
         code: 'COLOR'
@@ -228,3 +228,21 @@ Sylius\Component\Core\Model\OrderItem:
     order_item:
         variant: '@product_variant_cap_red'
         order: '@cart_with_items'
+
+Sylius\Component\Product\Model\ProductAssociation:
+    product_association:
+        type: '@product_association_type'
+        owner: '@product_mug'
+        associatedProducts: ['@product_cap']
+
+Sylius\Component\Product\Model\ProductAssociationType:
+    product_association_type:
+        code: 'similar_products'
+        translations:
+            en_US: '@product_association_type_translation'
+
+Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
+    product_association_type_translation:
+        name: 'Similar products'
+        locale: 'en_US'
+        translatable: '@product_association_type'

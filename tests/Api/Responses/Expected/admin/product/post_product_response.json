@@ -16,6 +16,7 @@
         "\/api\/v2\/admin\/channels\/WEB_GB"
     ],
     "reviews": [],
+    "associations": [],
     "attributes": [
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
