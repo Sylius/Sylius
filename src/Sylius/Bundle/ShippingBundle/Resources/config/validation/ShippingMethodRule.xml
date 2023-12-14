@@ -19,14 +19,14 @@
 
         <property name="configuration">
             <constraint name="Collection">
-                <option name="groups">sylius_total_weight</option>
+                <option name="groups">sylius_shipping_method_rule_total_weight</option>
                 <option name="fields">
                     <value key="weight">
                         <constraint name="NotBlank">
-                            <option name="groups">sylius_total_weight</option>
+                            <option name="groups">sylius_shipping_method_rule_total_weight</option>
                         </constraint>
                         <constraint name="Type">
-                            <option name="groups">sylius_total_weight</option>
+                            <option name="groups">sylius_shipping_method_rule_total_weight</option>
                             <option name="type">numeric</option>
                         </constraint>
                     </value>
@@ -35,14 +35,14 @@
             </constraint>
 
             <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
-                <option name="groups">sylius_order_total</option>
+                <option name="groups">sylius_shipping_method_rule_order_total</option>
                 <option name="constraints">
                     <constraint name="Collection">
                         <option name="fields">
                             <value key="amount">
                                 <constraint name="Required">
                                     <constraint name="Type">
-                                        <option name="groups">sylius_order_total</option>
+                                        <option name="groups">sylius_shipping_method_rule_order_total</option>
                                         <option name="type">numeric</option>
                                     </constraint>
                                 </constraint>
