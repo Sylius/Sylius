@@ -836,7 +836,7 @@ final class ManagingPromotionsContext implements Context
         $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'code',
-            $promotion->getCode()
+            $promotion->getCode(),
         ));
 
         Assert::same(
