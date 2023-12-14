@@ -44,7 +44,7 @@ final class PostgreSQLDriverExceptionListenerTest extends TestCase
     }
 
     /** @test */
-    public function it_responses_with_not_found_status_if_exception_is_a_driver_exception_with_sql_state_22P02_and_request_method_is_get(): void
+    public function it_responses_with_bad_request_status_if_exception_is_a_driver_exception_with_sql_state_22P02_and_request_method_is_get(): void
     {
         $event = $this->createDriverExceptionEvent('22P02', Request::METHOD_GET);
 
@@ -54,8 +54,8 @@ final class PostgreSQLDriverExceptionListenerTest extends TestCase
 
         $this->assertNotNull($response);
         $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $response->getStatusCode());
-        $this->assertEquals(json_encode(['message' => 'Invalid URL parameter for type integer']), $response->getContent());
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals(json_encode(['message' => 'No route matches the given filter IRI']), $response->getContent());
     }
 
     /** @test */
@@ -70,7 +70,7 @@ final class PostgreSQLDriverExceptionListenerTest extends TestCase
         $this->assertNotNull($response);
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response->getStatusCode());
-        $this->assertEquals(json_encode(['message' => 'Invalid URL parameter for type integer']), $response->getContent());
+        $this->assertEquals(json_encode(['message' => 'No route matches the given filter IRI']), $response->getContent());
     }
 
     private function createExceptionEvent(): ExceptionEvent

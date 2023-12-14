@@ -62,6 +62,32 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_returns_bad_request_http_status_code_if_invalid_filter_parameter_is_passed(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/product-variants',
+            parameters: ['product' => 'WRONG-IRI'],
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_variant/invalid_filter_parameter_response',
+            Response::HTTP_BAD_REQUEST
+        );
+    }
+
+    /** @test */
     public function it_gets_a_product_variant(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
