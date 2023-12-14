@@ -58,7 +58,6 @@
             <argument type="service" id="sylius.behat.factory.default_channel" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.manager.channel" />
-            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.behat.context.setup.currency" class="Sylius\Behat\Context\Setup\CurrencyContext">
