@@ -882,7 +882,7 @@ final class ManagingProductsContext implements Context
     private function getAttributeValueInProperType(
         ProductAttributeInterface $productAttribute,
         string $value,
-    ): string|bool|float|int {
+    ): bool|float|int|string {
         switch ($productAttribute->getStorageType()) {
             case AttributeValueInterface::STORAGE_BOOLEAN:
                 return (bool) $value;

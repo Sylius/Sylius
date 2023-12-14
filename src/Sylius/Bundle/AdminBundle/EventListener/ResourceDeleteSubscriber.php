@@ -29,7 +29,7 @@ final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private UrlGeneratorInterface $router,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack|SessionInterface $requestStackOrSession,
     ) {
         if ($this->requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(

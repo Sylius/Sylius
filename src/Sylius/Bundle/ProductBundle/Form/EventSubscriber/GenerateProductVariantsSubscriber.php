@@ -28,7 +28,7 @@ final class GenerateProductVariantsSubscriber implements EventSubscriberInterfac
 {
     public function __construct(
         private ProductVariantGeneratorInterface $generator,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack|SessionInterface $requestStackOrSession,
     ) {
         if ($requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(

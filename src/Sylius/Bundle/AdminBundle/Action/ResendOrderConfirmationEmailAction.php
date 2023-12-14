@@ -33,7 +33,7 @@ final class ResendOrderConfirmationEmailAction
         private OrderRepositoryInterface $orderRepository,
         private OrderEmailManagerInterface $orderEmailManager,
         private CsrfTokenManagerInterface $csrfTokenManager,
-        private SessionInterface|RequestStack $requestStackOrSession,
+        private RequestStack|SessionInterface $requestStackOrSession,
     ) {
         if ($this->requestStackOrSession instanceof SessionInterface) {
             trigger_deprecation(
