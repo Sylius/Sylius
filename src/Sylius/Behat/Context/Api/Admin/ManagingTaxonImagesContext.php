@@ -124,11 +124,10 @@ final class ManagingTaxonImagesContext implements Context
      */
     public function thisTaxonShouldHaveAnImageWithType(TaxonInterface $taxon, string $type): void
     {
-        Assert::true($this->responseChecker->hasValueInAnySubresourceObjectCollection(
+        Assert::true($this->responseChecker->hasValuesInAnySubresourceObjectCollection(
             $this->client->show(Resources::TAXONS, $taxon->getCode()),
             'images',
-            'type',
-            $type,
+            ['type' => $type],
         ));
     }
 
@@ -138,11 +137,10 @@ final class ManagingTaxonImagesContext implements Context
      */
     public function thisTaxonShouldNotHaveAnyImagesWithType(TaxonInterface $taxon, string $type): void
     {
-        Assert::false($this->responseChecker->hasValueInAnySubresourceObjectCollection(
+        Assert::false($this->responseChecker->hasValuesInAnySubresourceObjectCollection(
             $this->client->show(Resources::TAXONS, $taxon->getCode()),
             'images',
-            'type',
-            $type,
+            ['type' => $type],
         ));
     }
 

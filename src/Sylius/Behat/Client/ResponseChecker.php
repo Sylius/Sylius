@@ -132,52 +132,48 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    public function hasValueInAnySubresourceObjectCollection(
+    public function hasValuesInAnySubresourceObjectCollection(
         Response $response,
         string $subResource,
-        string $key,
-        int|string $expectedValue,
+        array $expectedValues,
     ): bool {
-        foreach ($this->getResponseContentValue($response, $subResource) as $resource) {
-            if (!is_array($resource)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Expected subresource "%s" to be an array, got "%s"',
-                    $subResource,
-                    gettype($resource),
-                ));
+        $resourceCollection = $this->getResponseContentValue($response, $subResource);
+
+        $this->assertIsArray($resourceCollection);
+
+        foreach ($resourceCollection as $resource) {
+            $this->assertIsArray($resource);
+
+            foreach ($expectedValues as $key => $expectedValue) {
+                if (!array_key_exists($key, $resource) || $resource[$key] !== $expectedValue) {
+                    continue 2;
+                }
             }
 
-            if (!array_key_exists($key, $resource)) {
-                throw new \InvalidArgumentException(sprintf(
-                    'Expected subresource "%s" to have key "%s", has these keys instead: "%s"',
-                    $subResource,
-                    $key,
-                    implode(', ', array_keys($resource)),
-                ));
-            }
-
-            if ($resource[$key] === $expectedValue) {
-                return true;
-            }
+            return true;
         }
 
         return false;
     }
 
-    public function hasValueInSubresourceObject(Response $response, string $subResource, string $key, int|string $expectedValue): bool
-    {
+    public function hasValuesInSubresourceObject(
+        Response $response,
+        string $subResource,
+        array $expectedValues,
+    ): bool {
         $resource = $this->getResponseContentValue($response, $subResource);
 
-        if (array_key_exists($key, $resource)) {
-            return $resource[$key] === $expectedValue;
+        $this->assertIsArray($resource);
+
+        $this->assertAllExpectedKeysArePresent($expectedValues, $resource);
+
+        foreach ($expectedValues as $key => $expectedValue) {
+            if ($resource[$key] !== $expectedValue) {
+                return false;
+            }
         }
 
-        throw new \InvalidArgumentException(sprintf(
-            'Expected subresource "%s" to have key "%s", has these keys instead: "%s"',
-            $subResource,
-            $key,
-            implode(', ', array_keys($resource)),
-        ));
+        return true;
     }
 
     /** @param string|array $value */
@@ -270,9 +266,10 @@ final class ResponseChecker implements ResponseCheckerInterface
         Assert::keyExists(
             $content,
             $key,
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
-                'Expected \'' . $key . '\' not found.',
-                $response,
+            sprintf(
+                'Expected to get: "%s" key in response, got keys: [%s]',
+                $key,
+                implode(', ', array_keys($content)),
             ),
         );
 
@@ -288,5 +285,27 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return true;
+    }
+
+    private function assertIsArray(mixed $resource): void
+    {
+        Assert::isArray($resource, sprintf('Expected to get an array, got "%s"', gettype($resource)));
+    }
+
+    /**
+     * @param array<string, int|string> $expectedValues
+     * @param array<string, int|string> $resource
+     */
+    private function assertAllExpectedKeysArePresent(array $expectedValues, array $resource): void
+    {
+        Assert::count(
+            array_diff_key($expectedValues, $resource),
+            0,
+            sprintf(
+                'Expected values array has keys: [%s], that are not present in the responses keys: [%s]',
+                implode(', ', array_keys(array_diff_key($expectedValues, $resource))),
+                implode(', ', array_keys($resource)),
+            ),
+        );
     }
 }
