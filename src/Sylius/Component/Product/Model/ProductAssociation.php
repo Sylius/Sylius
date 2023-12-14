@@ -64,6 +64,7 @@ class ProductAssociation implements ProductAssociationInterface
 
     public function setOwner(?ProductInterface $owner): void
     {
+        $owner?->addAssociation($this);
         $this->owner = $owner;
     }
 

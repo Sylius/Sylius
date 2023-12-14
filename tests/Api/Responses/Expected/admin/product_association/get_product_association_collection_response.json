@@ -1,0 +1,36 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAssociation",
+    "@id": "\/api\/v2\/admin\/product-associations",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-associations\/@integer@",
+            "@type": "ProductAssociation",
+            "type": "\/api\/v2\/admin\/product-association-types\/similar_products",
+            "owner": "\/api\/v2\/admin\/products\/MUG",
+            "associatedProducts": [
+                "\/api\/v2\/admin\/products\/CUP"
+            ]
+        }
+    ],
+    "hydra:totalItems": 1,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-associations{?owner.code,type.code}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "owner.code",
+                "property": "owner.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "type.code",
+                "property": "type.code",
+                "required": false
+            }
+        ]
+    }
+}

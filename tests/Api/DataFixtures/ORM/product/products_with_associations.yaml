@@ -33,6 +33,12 @@ Sylius\Component\Core\Model\Product:
         currentLocale: 'en_US'
         translations:
             en_US: '@product_translation_cup_en_US'
+    product_tankard:
+        code: 'TANKARD'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_tankard_en_US'
     product_hat:
         code: 'HAT'
         channels: [ '@channel_web' ]
@@ -56,6 +62,13 @@ Sylius\Component\Core\Model\ProductTranslation:
         description: 'Short cup description'
         shortDescription: 'Cup'
         translatable: '@product_cup'
+    product_translation_tankard_en_US:
+        slug: 'Tankard'
+        locale: 'en_US'
+        name: 'Tankard'
+        description: 'Tankard description'
+        shortDescription: 'Tankard'
+        translatable: '@product_tankard'
     product_translation_hat_en_US:
         slug: 'Hat'
         locale: 'en_US'
