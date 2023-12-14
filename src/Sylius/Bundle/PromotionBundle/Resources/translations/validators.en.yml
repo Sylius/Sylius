@@ -41,7 +41,7 @@ sylius:
         percentage_discount_configuration:
             not_in_range: The percentage discount must be between 0% and 100%.
     promotion_rule:
-        invalid_type: Promotion rule type is invalid. Please choose a valid type.
+        invalid_type: Promotion rule type is invalid. Available rule types are {{ available_rule_types }}.
     promotion_coupon:
         code:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.

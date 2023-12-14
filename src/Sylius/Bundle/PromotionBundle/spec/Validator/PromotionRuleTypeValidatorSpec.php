@@ -57,6 +57,7 @@ final class PromotionRuleTypeValidatorSpec extends ObjectBehavior
         $promotionRule->getType()->willReturn('wrong_type');
 
         $context->buildViolation('sylius.promotion_rule.invalid_type')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setParameter('{{ available_rule_types }}', 'rule_one, rule_two')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
