@@ -29,20 +29,10 @@ final class ManagingProductTaxonsContext implements Context
     }
 
     /**
-     * @When I change that the :product product belongs to the :taxon taxon
-     */
-    public function iChangeThatTheProductBelongsToTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
-    {
-        $this->client->buildUpdateRequest(Resources::PRODUCT_TAXONS, (string) $product->getProductTaxons()->current()->getId());
-        $this->client->updateRequestData(['taxon' => $this->iriConverter->getIriFromResource($taxon)]);
-        $this->client->update();
-    }
-
-    /**
      * @When I assign the :taxon taxon to the :product product
      * @When I (try to) add :taxon taxon to the :product product
      */
-    public function iAddTaxonToTheProduct(TaxonInterface $taxon, ProductInterface $product): void
+    public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_TAXONS);
         $this->client->addRequestData('taxon', $this->iriConverter->getIriFromResource($taxon));
@@ -76,15 +66,22 @@ final class ManagingProductTaxonsContext implements Context
     public function iTryToAssignTheProductTaxonOfProductAndTaxonToTheProduct(
         ProductInterface $productTaxonProduct,
         TaxonInterface $productTaxonTaxon,
-        ProductInterface $product,
     ): void {
-        $productTaxon = $productTaxonProduct->getProductTaxons()->filter(
-            fn (ProductTaxonInterface $productTaxon) => $productTaxonTaxon === $productTaxon->getTaxon(),
+        $this->iAddTaxonToTheProduct($productTaxonProduct, $productTaxonTaxon);
+    }
+
+    /**
+     * @When I change that the :product product does not belong to the :taxon taxon
+     */
+    public function iChangeThatTheProductDoesNotBelongToTheTaxon(
+        ProductInterface $product,
+        TaxonInterface $taxon,
+    ): void {
+        $productTaxon = $product->getProductTaxons()->filter(
+            fn (ProductTaxonInterface $productTaxon) => $taxon === $productTaxon->getTaxon(),
         )->first();
 
-        $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
-        $this->client->addRequestData('productTaxons', [$this->iriConverter->getIriFromResource($productTaxon)]);
-        $this->client->update();
+        $this->client->delete(Resources::PRODUCT_TAXONS, (string) $productTaxon->getId());
     }
 
     /**

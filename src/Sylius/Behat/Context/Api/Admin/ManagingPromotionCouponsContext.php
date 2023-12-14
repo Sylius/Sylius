@@ -40,6 +40,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Given /^I am browsing coupons of (this promotion)$/
      * @When /^I want to view all coupons of (this promotion)$/
+     * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion): void
     {
@@ -608,6 +609,24 @@ final class ManagingPromotionCouponsContext implements Context
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
         Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+    }
+
+    /**
+     * @Then /^("[^"]+" coupon) should be used (\d+) time(?:|s)$/
+     */
+    public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, int $used): void
+    {
+        $returnedPromotionCoupon = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $promotionCoupon->getCode(),
+        ));
+
+        Assert::same(
+            $returnedPromotionCoupon['used'],
+            $used,
+            sprintf('The promotion coupon %s has been used %s times', $promotionCoupon->getCode(), $returnedPromotionCoupon['used']),
+        );
     }
 
     private function sortBy(string $order, string $field): void

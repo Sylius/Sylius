@@ -889,6 +889,18 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
+     * @When I sort catalog promotions by :order :field
+     */
+    public function iSortCatalogPromotionByOrderField(string $order, string $field): void
+    {
+        $this->client->addFilter(
+            sprintf('order[%s]', lcfirst(str_replace(' ', '', ucwords($field)))),
+            $order === 'descending' ? 'desc' : 'asc',
+        );
+        $this->client->filter();
+    }
+
+    /**
      * @When I request the removal of :catalogPromotion catalog promotion
      */
     public function iRequestTheRemovalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
@@ -1552,6 +1564,24 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasItemWithValue($response, 'name', $name),
             sprintf('Catalog promotion with name "%s" has been found, but should not.', $name),
         );
+    }
+
+    /**
+     * @Then I should see :count catalog promotions on the list
+     */
+    public function iShouldSeeCountCatalogPromotionsOnTheList(int $count): void
+    {
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then the first catalog promotion should have code :code
+     */
+    public function theFirstCatalogPromotionShouldHaveCode(string $code): void
+    {
+        $catalogPromotions = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(reset($catalogPromotions)['code'], $code);
     }
 
     private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
