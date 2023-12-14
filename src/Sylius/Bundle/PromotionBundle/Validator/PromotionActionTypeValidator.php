@@ -38,7 +38,10 @@ final class PromotionActionTypeValidator extends ConstraintValidator
         }
 
         if (!array_key_exists($value->getType(), $this->actionTypes)) {
-            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
+            $this->context->buildViolation($constraint->invalidType)
+                ->setParameter('{{ available_action_types }}', implode(', ', array_keys($this->actionTypes)))
+                ->atPath('type')
+                ->addViolation();
         }
     }
 }

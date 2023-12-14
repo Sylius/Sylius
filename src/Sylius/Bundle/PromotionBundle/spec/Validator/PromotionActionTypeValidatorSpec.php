@@ -57,6 +57,7 @@ final class PromotionActionTypeValidatorSpec extends ObjectBehavior
         $promotionAction->getType()->willReturn('wrong_type');
 
         $context->buildViolation('sylius.promotion_action.invalid_type')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->setParameter('{{ available_action_types }}', 'action_one, action_two')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->atPath('type')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
 
