@@ -7,10 +7,14 @@ sylius:
             unique: La promotion catalogue avec le code spécifié existe déjà.
             regex: Le code de promotion catalogue ne peut être constitué que de lettres, chiffres, tirets et traits de soulignement.
             not_blank: Veuillez entrer un code de promotion catalogue.
+        date:
+            greater_than_start_date: La date de fin ne peut pas être définie avant la date de début.
         name:
             max_length: Le nom de la promotion catalogue ne peut pas dépasser les {{ limit }} caractères.
             min_length: Le nom de la promotion catalogue doit contenir au moins {{ limit }} caractères.
             not_blank: Veuillez entrer le nom de la promotion catalogue.
+        state:
+            processing: La promotion du catalogue ne peut pas être modifiée car elle est en cours de traitement.
     catalog_promotion_action:
         invalid_type: Le type d'action de la promotion catalogue n'est pas valide. Veuillez choisir un type d'action valide.
         percentage_discount:
@@ -53,6 +57,7 @@ sylius:
             min: Le code du code promo doit être au moins de {{ limit }} caractères.
             max: Le code du code promo ne doit pas faire plus de {{ limit }} caractères.
             not_blank: Veuillez saisir la longueur du code pour le code promo.
+            not_in_range: La longueur du code promo doit être comprise entre {{ min }} et {{ max }}.
         possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:
             min: La limite d'utilisation du code promo généré doit être au moins de {{ limit }}.

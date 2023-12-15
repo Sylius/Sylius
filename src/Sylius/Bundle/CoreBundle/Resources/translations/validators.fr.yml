@@ -2,12 +2,33 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: Cette adresse email n'est pas valide.
+                max: L'email doit contenir au maximum {{ limit }} caractères.
+                min: L'e-mail doit contenir au moins {{ limit }} caractères.
+                not_blank: Veuillez saisir un e-mail.
+        reset_password:
+            mismatch: Les mots de passe saisis ne correspondent pas.
+            password:
+                min: Le mot de passe doit contenir au moins {{ limit }} caractères
+                max: Le mot de passe doit comporter au maximum {{ limit }} caractères.
+                not_blank: Veuillez saisir le mot de passe.
     avatar_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: La configuration pour l'un des canaux requis n'est pas fournie.
+            invalid_channel: La configuration fournie contient des erreurs. Au moins un des codes de canal fournis n'existe pas.
+            not_valid: La configuration fournie contient des erreurs. Veuillez ajouter le montant de remise fixe qui est un nombre supérieur à 0.
     catalog_promotion_scope:
         invalid_type: Le type de champ d'application pour la promotion catalogue est invalide. Veuillez choisir un type valide.
+        for_products:
+            invalid_products: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des produits existants.
+            not_empty: La configuration fournie contient des erreurs. Veuillez ajouter au moins 1 produit.
         for_variants:
             invalid_variants: La configuration fournie contient des erreurs. Veuillez ajouter uniquement des variantes existantes.
             not_empty: Veuillez ajouter au moins une variante.
@@ -31,6 +52,8 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
+        email:
+            not_changeable: L'e-mail ne peut pas être modifié pour le client connecté.
     contact:
         email:
             invalid: Cet e-mail n'est pas valide.
@@ -48,9 +71,11 @@ sylius:
     order:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
+        invalid_state_transition: 'Impossible de terminer car la commande est dans un mauvais état. Actuellement : %currentState%. Transitions possibles : %possibleTransitions%.'
         payment_method_eligibility: 'Cette méthode de paiement %paymentMethodName% a été désactivée. Veuillez sélectionner une nouvelle fois votre mode de paiement.'
         product_eligibility: 'Le produit %productName% a été désactivé.'
         shipping_method_eligibility: 'Ce produit n''est pas éligible au mode de livraison %shippingMethodName%. Veuillez sélectionner une nouvelle fois votre mode de livraison.'
+        shipping_method_not_available: 'Le mode d''expédition "%shippingMethodName%" n''est pas disponible. Veuillez sélectionner à nouveau votre mode de livraison.'
     locale:
         enabled:
             cannot_disable_base: La base locale ne peut pas être désactivée.
@@ -84,6 +109,9 @@ sylius:
             invalid: La profondeur doit être un nombre.
         channel_pricing:
             all_defined: 'Vous devez définir un prix pour tous les canaux.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: La limite d'utilisation du coupon par client doit être d'au moins {{ limit }}.
     product_translation:
         short_description:
             max: La description courte ne doit pas dépasser {{ limit }} caractères.
