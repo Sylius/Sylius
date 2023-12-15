@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Bundle\ApiBundle\Serializer\TaxRateDenormalizer;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final class TaxRateDenormalizerSpec extends ObjectBehavior
@@ -26,61 +27,49 @@ final class TaxRateDenormalizerSpec extends ObjectBehavior
         $this->setDenormalizer($denormalizer);
     }
 
-    function it_does_not_support_denormalization_when_the_denormalizer_has_already_been_called(): void
+    function it_supports_denormalization_of_tax_rate_with_amount_set(): void
     {
         $this
-            ->supportsDenormalization([], TaxRateInterface::class, context: [self::ALREADY_CALLED => true])
+            ->supportsDenormalization(['amount' => 0.23], \stdClass::class)
             ->shouldReturn(false)
         ;
+        $this
+            ->supportsDenormalization(0.23, TaxRateInterface::class)
+            ->shouldReturn(false)
+        ;
+        $this
+            ->supportsDenormalization([], TaxRateInterface::class)
+            ->shouldReturn(false)
+        ;
+        $this
+            ->supportsDenormalization(['amount' => 0.23], TaxRateInterface::class, null, [self::ALREADY_CALLED => true])
+            ->shouldReturn(false)
+        ;
+        $this
+            ->supportsDenormalization(['amount' => 0.23], TaxRateInterface::class)
+            ->shouldReturn(true)
+        ;
     }
 
-    function it_does_not_support_denormalization_when_data_is_not_an_array(): void
-    {
-        $this->supportsDenormalization('string', TaxRateInterface::class)->shouldReturn(false);
-    }
-
-    function it_does_not_support_denormalization_when_type_is_not_a_tax_rate(): void
-    {
-        $this->supportsDenormalization([], 'string')->shouldReturn(false);
-    }
-
-    function it_removes_amount_from_data_if_its_null(
+    function it_denormalizes_tax_rate_changing_float_amount_to_string(
         DenormalizerInterface $denormalizer,
         TaxRateInterface $taxRate,
     ): void {
-        $denormalizer
-            ->denormalize([], TaxRateInterface::class, null, [self::ALREADY_CALLED => true])
+        $denormalizer->denormalize(['amount' => '0.23'], TaxRateInterface::class, null, [self::ALREADY_CALLED => true])
             ->willReturn($taxRate)
         ;
 
-        $this
-            ->denormalize(
-                ['amount' => null],
-                TaxRateInterface::class,
-                null,
-                [self::ALREADY_CALLED => true],
-            )
-            ->shouldReturn($taxRate)
-        ;
+        $this->denormalize(['amount' => 0.23], TaxRateInterface::class)->shouldReturn($taxRate);
     }
 
-    function it_does_nothing_when_amount_is_missing(
+    function it_denormalizes_tax_rate_changing_int_amount_to_string(
         DenormalizerInterface $denormalizer,
         TaxRateInterface $taxRate,
     ): void {
-        $denormalizer
-            ->denormalize([], TaxRateInterface::class, null, [self::ALREADY_CALLED => true])
+        $denormalizer->denormalize(['amount' => '12'], TaxRateInterface::class, null, [self::ALREADY_CALLED => true])
             ->willReturn($taxRate)
         ;
 
-        $this
-            ->denormalize(
-                [],
-                TaxRateInterface::class,
-                null,
-                [self::ALREADY_CALLED => true],
-            )
-            ->shouldReturn($taxRate)
-        ;
+        $this->denormalize(['amount' => 12], TaxRateInterface::class)->shouldReturn($taxRate);
     }
 }
