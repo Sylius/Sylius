@@ -39,3 +39,9 @@ sylius:
                 sales:
                     header: Shitjet
                     orders: Porositë
+                official_support:
+                    header: Mbështetje zyrtare
+                    browse_plugins: Shfleto shtojcat
+                    sylius_plus: Sylius Plus
+                    professional_services: Shërbime profesionale
+                    find_a_partner: Gjej një partner
