@@ -84,7 +84,6 @@ class TaxRate implements TaxRateInterface
         $this->name = $name;
     }
 
-    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function getAmount(): float
     {
         return (float) $this->amount;

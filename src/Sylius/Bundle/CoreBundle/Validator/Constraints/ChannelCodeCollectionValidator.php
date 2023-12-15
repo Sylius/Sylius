@@ -28,8 +28,7 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
     {
     }
 
-    /** @param null|array<array-key, mixed> $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof ChannelCodeCollection) {
             throw new UnexpectedTypeException($constraint, ChannelCodeCollection::class);

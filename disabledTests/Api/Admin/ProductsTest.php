@@ -115,7 +115,7 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Opis kubka',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -167,7 +167,7 @@ final class ProductsTest extends JsonApiTestCase
                         'name' => 'Kubek',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -194,9 +194,9 @@ final class ProductsTest extends JsonApiTestCase
                         'slug' => 'mug',
                         'name' => 'Mug',
                         'locale' => 'locale',
-                    ]
+                    ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -234,7 +234,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         '@id' => sprintf(
                             '/api/v2/admin/product-attribute-values/%s',
-                            $product->getAttributeByCodeAndLocale('MATERIAL', 'en_US')->getId()
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'en_US')->getId(),
                         ),
                         'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
                         'value' => 'Cotton',
@@ -243,7 +243,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         '@id' => sprintf(
                             '/api/v2/admin/product-attribute-values/%s',
-                            $product->getAttributeByCodeAndLocale('MATERIAL', 'pl_PL')->getId()
+                            $product->getAttributeByCodeAndLocale('MATERIAL', 'pl_PL')->getId(),
                         ),
                         'attribute' => '/api/v2/admin/product-attributes/MATERIAL',
                         'value' => 'Bawełna',
@@ -252,7 +252,7 @@ final class ProductsTest extends JsonApiTestCase
                     [
                         'attribute' => '/api/v2/admin/product-attributes/dishwasher_safe',
                         'value' => true,
-                    ]
+                    ],
                 ],
                 'translations' => [
                     'en_US' => [
@@ -274,13 +274,51 @@ final class ProductsTest extends JsonApiTestCase
                         'metaDescription' => 'Opis czapki',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product/put_product_response',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_product_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'product/product.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/products/%s', $product->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
+                        'slug' => 'caps/cap',
+                        'name' => 'Cap',
+                    ],
+                    'pl_PL' => [
+                        'name' => 'Czapka',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product/put_product_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

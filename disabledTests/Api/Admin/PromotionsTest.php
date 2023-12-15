@@ -73,6 +73,28 @@ final class PromotionsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_promotion_coupons(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/get_promotion_coupons_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_creates_promotion(): void
     {
         $this->loadFixturesFromFiles([
@@ -99,8 +121,8 @@ final class PromotionsTest extends JsonApiTestCase
                 'priority' => 22,
                 'appliesToDiscounted' => false,
                 'exclusive' => true,
-                "usageLimit" => 3,
-                "couponBased" => true,
+                'usageLimit' => 3,
+                'couponBased' => true,
                 'startsAt' => '2023-10-04 12:30:00',
                 'endsAt' => '2023-11-04 12:30:00',
                 'translations' => ['en_US' => [
@@ -110,31 +132,31 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 6
+                            'count' => 6,
                         ],
                     ],
                     [
                         'type' => CustomerGroupRuleChecker::TYPE,
                         'configuration' => [
-                            'group_code' => 'vip'
+                            'group_code' => 'vip',
                         ],
                     ],
                     [
                         'type' => NthOrderRuleChecker::TYPE,
                         'configuration' => [
-                            'nth' => 2
+                            'nth' => 2,
                         ],
                     ],
                     [
                         'type' => ShippingCountryRuleChecker::TYPE,
                         'configuration' => [
-                            'country' => 'US'
+                            'country' => 'US',
                         ],
                     ],
                     [
                         'type' => HasTaxonRuleChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['MUGS', 'CAPS']
+                            'taxons' => ['MUGS', 'CAPS'],
                         ],
                     ],
                     [
@@ -147,7 +169,7 @@ final class PromotionsTest extends JsonApiTestCase
                             'MOBILE' => [
                                 'taxon' => 'CAPS',
                                 'amount' => 2000,
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -164,7 +186,7 @@ final class PromotionsTest extends JsonApiTestCase
                             ],
                             'MOBILE' => [
                                 'amount' => 222,
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -221,7 +243,7 @@ final class PromotionsTest extends JsonApiTestCase
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -241,7 +263,7 @@ final class PromotionsTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/admin/promotions',
             server: $header,
-            content: json_encode([], JSON_THROW_ON_ERROR),
+            content: json_encode([], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -250,7 +272,6 @@ final class PromotionsTest extends JsonApiTestCase
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
-
 
     /** @test */
     public function it_does_not_create_a_promotion_with_taken_code(): void
@@ -265,7 +286,7 @@ final class PromotionsTest extends JsonApiTestCase
             content: json_encode([
                 'name' => '50% Off on your first order',
                 'code' => '50_off',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -290,7 +311,7 @@ final class PromotionsTest extends JsonApiTestCase
                 'code' => 'tshirts_discount',
                 'startsAt' => '2023-12-04 12:30:00',
                 'endsAt' => '2023-11-04 12:30:00',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -303,7 +324,7 @@ final class PromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_rules(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -317,31 +338,31 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 'invalid'
+                            'count' => 'invalid',
                         ],
                     ],
                     [
                         'type' => CustomerGroupRuleChecker::TYPE,
                         'configuration' => [
-                            'group_code' => 'wrong'
+                            'group_code' => 'wrong',
                         ],
                     ],
                     [
                         'type' => NthOrderRuleChecker::TYPE,
                         'configuration' => [
-                            'nth' => 'invalid'
+                            'nth' => 'invalid',
                         ],
                     ],
                     [
                         'type' => ShippingCountryRuleChecker::TYPE,
                         'configuration' => [
-                            'country' => 'wrong'
+                            'country' => 'wrong',
                         ],
                     ],
                     [
                         'type' => HasTaxonRuleChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['wrong']
+                            'taxons' => ['wrong'],
                         ],
                     ],
                     [
@@ -350,7 +371,7 @@ final class PromotionsTest extends JsonApiTestCase
                             'WEB' => [
                                 'taxon' => 'wrong',
                                 'amount' => 'invalid',
-                            ]
+                            ],
                         ],
                     ],
                     [
@@ -363,11 +384,16 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => ItemTotalRuleChecker::TYPE,
                         'configuration' => [
                             'MOBILE' => [
-                            ]
+                            ],
+                        ],
+                    ],
+                    [
+                        'type' => 'wrong_type',
+                        'configuration' => [
                         ],
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -380,7 +406,7 @@ final class PromotionsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_create_a_promotion_with_invalid_actions(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
         $this->client->request(
@@ -403,7 +429,7 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => UnitFixedDiscountPromotionActionCommand::TYPE,
                         'configuration' => [
                             'WEB' => [
-                                'filters' => 'invalid'
+                                'filters' => 'invalid',
                             ],
                         ],
                     ],
@@ -419,8 +445,6 @@ final class PromotionsTest extends JsonApiTestCase
                             'WEB' => [
                                 'percentage' => 110,
                             ],
-                            'MOBILE' => [
-                            ],
                         ],
                     ],
                     [
@@ -428,8 +452,13 @@ final class PromotionsTest extends JsonApiTestCase
                         'configuration' => [
                         ],
                     ],
+                    [
+                        'type' => 'wrong_type',
+                        'configuration' => [
+                        ],
+                    ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -457,13 +486,13 @@ final class PromotionsTest extends JsonApiTestCase
                 'code' => 'new_code',
                 'appliesToDiscounted' => true,
                 'exclusive' => true,
-                "usageLimit" => 11,
-                "couponBased" => false,
+                'usageLimit' => 11,
+                'couponBased' => false,
                 'rules' => [
                     [
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
-                            'count' => 1
+                            'count' => 1,
                         ],
                     ],
                 ],
@@ -487,7 +516,7 @@ final class PromotionsTest extends JsonApiTestCase
                     '@id' => sprintf('/api/v2/admin/promotion-translations/%s', $promotion->getTranslation('en_US')->getId()),
                     'label' => 'Christmas',
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -512,13 +541,40 @@ final class PromotionsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'priority' => -1,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/promotion/put_promotion_to_last_priority_when_priority_is_minus_one_response',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_promotion_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'promotion/promotion.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/promotions/%s', $promotion->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => ['en_US' => [
+                    'label' => 'Christmas',
+                ]],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/promotion/put_promotion_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

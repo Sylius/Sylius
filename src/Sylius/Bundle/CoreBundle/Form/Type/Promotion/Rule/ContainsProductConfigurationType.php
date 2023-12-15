@@ -33,10 +33,6 @@ final class ContainsProductConfigurationType extends AbstractType
         $builder
             ->add('product_code', ProductAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'string', 'groups' => ['sylius']]),
-                ],
             ])
         ;
 

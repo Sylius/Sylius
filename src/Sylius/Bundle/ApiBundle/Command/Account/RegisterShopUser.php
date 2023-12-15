@@ -16,9 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Command\Account;
 use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
 use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
 
-/**
- * @experimental
- */
+/** @experimental */
 class RegisterShopUser implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
     public function __construct(

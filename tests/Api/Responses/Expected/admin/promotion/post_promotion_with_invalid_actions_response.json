@@ -10,11 +10,6 @@
             "code": @string@
         },
         {
-            "propertyPath": "actions[0].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
-        },
-        {
             "propertyPath": "actions[1].configuration[WEB][amount]",
             "message": "This field is missing.",
             "code": @string@
@@ -23,11 +18,6 @@
             "propertyPath": "actions[1].configuration[WEB][filters]",
             "message": "This value should be of type array|(Traversable&ArrayAccess).",
             "code": null
-        },
-        {
-            "propertyPath": "actions[1].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
         },
         {
             "propertyPath": "actions[2].configuration[percentage]",
@@ -40,14 +30,14 @@
             "code": @string@
         },
         {
-            "propertyPath": "actions[3].configuration[MOBILE][percentage]",
+            "propertyPath": "actions[4].configuration[percentage]",
             "message": "This field is missing.",
             "code": @string@
         },
         {
-            "propertyPath": "actions[4].configuration[percentage]",
-            "message": "This field is missing.",
-            "code": @string@
+            "propertyPath": "actions[5].type",
+            "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, unit_percentage_discount, shipping_percentage_discount.",
+            "code": null
         }
     ]
 }

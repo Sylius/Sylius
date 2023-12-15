@@ -95,10 +95,10 @@ Feature: Editing a product
     Scenario: Enabling product in channel when all its variants already have specified price in this channel
         Given the store operates on another channel named "Mobile"
         And the store has a "7 Wonders" configurable product
-        And this product has "7 Wonders: Cities" variant priced at "$30" in "United States" channel
-        And this variant is also priced at "$25" in "Mobile" channel
-        And this product has "7 Wonders: Leaders" variant priced at "$20" in "United States" channel
-        And this variant is also priced at "$20" in "Mobile" channel
+        And this product has "7 Wonders: Cities" variant priced at "$30.00" in "United States" channel
+        And this variant is also priced at "$25.00" in "Mobile" channel
+        And this product has "7 Wonders: Leaders" variant priced at "$20.00" in "United States" channel
+        And this variant is also priced at "$20.00" in "Mobile" channel
         When I want to modify the "7 Wonders" product
         And I assign it to channel "Mobile"
         And I save my changes

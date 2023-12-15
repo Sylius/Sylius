@@ -91,6 +91,7 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" priority="100" />
         </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">

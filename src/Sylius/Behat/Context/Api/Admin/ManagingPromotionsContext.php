@@ -177,7 +177,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheActionConfiguredWithAmountForChannel(
         string $actionType,
         int $amount,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $actionTypeMapping = [
             'Order fixed discount' => FixedDiscountPromotionActionCommand::TYPE,
@@ -214,8 +214,8 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I add the "Item percentage discount" action configured without a percentage value for :channel channel
      */
-    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(ChannelInterface $channel): void {
-
+    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(ChannelInterface $channel): void
+    {
         $this->addToRequestAction(
             UnitPercentageDiscountPromotionActionCommand::TYPE,
             [
@@ -358,7 +358,7 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheItemTotalRuleConfiguredWithTwoChannel(
         int $firstAmount,
         ChannelInterface $firstChannel,
-        int$secondAmount,
+        int $secondAmount,
         ChannelInterface $secondChannel,
     ): void {
         $this->addToRequestRule(
@@ -640,7 +640,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldBeAvailableFromTo(
         PromotionInterface $promotion,
         \DateTimeInterface $startsDate,
-        \DateTimeInterface $endsDate
+        \DateTimeInterface $endsDate,
     ): void {
         Assert::true(
             $this->responseChecker->hasItemWithValues(
@@ -650,7 +650,7 @@ final class ManagingPromotionsContext implements Context
                     'startsAt' => $startsDate->format('Y-m-d H:i:s'),
                     'endsAt' => $endsDate->format('Y-m-d H:i:s'),
                 ],
-            )
+            ),
         );
     }
 
@@ -680,6 +680,7 @@ final class ManagingPromotionsContext implements Context
             ),
         );
     }
+
     /**
      * @Then I should be notified that it is in use and cannot be deleted
      */
@@ -826,6 +827,25 @@ final class ManagingPromotionsContext implements Context
         Assert::same($item[$field], $value);
     }
 
+    /**
+     * @Then the promotion :promotion should be used :usage time(s)
+     * @Then the promotion :promotion should not be used
+     */
+    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, int $usage = 0): void
+    {
+        $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $promotion->getCode()
+        ));
+
+        Assert::same(
+            $returnedPromotion['used'],
+            $usage,
+            sprintf('The promotion %s has been used %s times', $promotion->getName(), $returnedPromotion['used']),
+        );
+    }
+
     private function addToRequestAction(string $type, array $configuration): void
     {
         $data['actions'][] = [
@@ -836,7 +856,7 @@ final class ManagingPromotionsContext implements Context
         $this->client->updateRequestData($data);
     }
 
-     private function getActions(): array
+    private function getActions(): array
     {
         return $this->client->getContent()['actions'];
     }

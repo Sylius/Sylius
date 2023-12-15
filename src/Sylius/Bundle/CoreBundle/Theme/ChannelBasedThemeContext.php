@@ -28,9 +28,6 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
     {
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType
-     */
     public function getTheme(): ?ThemeInterface
     {
         if (false === $this->theme) {

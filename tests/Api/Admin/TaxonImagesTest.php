@@ -149,7 +149,7 @@ final class TaxonImagesTest extends JsonApiTestCase
                 'type' => 'logo',
                 'owner' => sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
                 'path' => 'logo.jpg',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

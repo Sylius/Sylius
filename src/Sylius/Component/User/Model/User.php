@@ -95,11 +95,7 @@ class User implements UserInterface, \Stringable
      */
     protected $roles = [UserInterface::DEFAULT_ROLE];
 
-    /**
-     * @var Collection|UserOAuthInterface[]
-     *
-     * @psalm-var Collection<array-key, UserOAuthInterface>
-     */
+    /** @var Collection<array-key, UserOAuthInterface> */
     protected $oauthAccounts;
 
     /** @var string|null */
@@ -124,7 +120,6 @@ class User implements UserInterface, \Stringable
         $this->enabled = false;
     }
 
-    /** @psalm-suppress RedundantCastGivenDocblockType */
     public function __toString(): string
     {
         return (string) $this->getUsername();

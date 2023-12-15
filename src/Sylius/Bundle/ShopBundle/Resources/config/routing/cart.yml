@@ -17,7 +17,9 @@ sylius_shop_cart_save:
         _controller: sylius.controller.order::saveAction
         _sylius:
             template: "@SyliusShop/Cart/summary.html.twig"
-            redirect: sylius_shop_cart_summary
+            redirect:
+                route: sylius_shop_cart_summary
+                parameters: {}
             form: Sylius\Bundle\OrderBundle\Form\Type\CartType
             flash: sylius.cart.save
 

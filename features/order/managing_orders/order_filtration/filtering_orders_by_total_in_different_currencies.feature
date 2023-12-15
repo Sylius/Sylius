@@ -9,12 +9,12 @@ Feature: Filtering orders by total in different currencies
         And the store operates on a channel named "Web-UK" in "GBP" currency
         And the store has "Apple T-Shirt", "Pineapple T-Shirt" and "Pen T-Shirt" products
         And the store has customer "John Hancock" with email "hancock@superheronope.com"
-        And this customer has placed an order "#00000001" buying a single "Apple T-Shirt" product for "$100" on the "Web-US" channel
-        And this customer has also placed an order "#00000002" buying a single "Pineapple T-Shirt" product for "$200" on the "Web-US" channel
+        And this customer has placed an order "#00000001" buying a single "Apple T-Shirt" product for "$100.00" on the "Web-US" channel
+        And this customer has also placed an order "#00000002" buying a single "Pineapple T-Shirt" product for "$200.00" on the "Web-US" channel
         And this customer has also placed an order "#00000003" buying a single "Pen T-Shirt" product for "$150.50" on the "Web-US" channel
-        And this customer has also placed an order "#00000004" buying a single "Apple T-Shirt" product for "£200" on the "Web-UK" channel
+        And this customer has also placed an order "#00000004" buying a single "Apple T-Shirt" product for "£200.00" on the "Web-UK" channel
         And this customer has also placed an order "#00000005" buying a single "Pineapple T-Shirt" product for "£150.50" on the "Web-UK" channel
-        And this customer has also placed an order "#00000006" buying a single "Pen T-Shirt" product for "£100" on the "Web-UK" channel
+        And this customer has also placed an order "#00000006" buying a single "Pen T-Shirt" product for "£100.00" on the "Web-UK" channel
         And I am logged in as an administrator
         And I am browsing orders
 

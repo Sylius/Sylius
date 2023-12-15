@@ -65,6 +65,33 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_customer_statistics(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'customer.yaml',
+            'channel.yaml',
+            'order/fulfilled_order.yaml',
+        ]);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/customers/%s/statistics', $customer->getId()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/customer/get_customer_statistics_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_creates_a_customer(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -78,11 +105,11 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
-                'birthday' => "2023-10-24T11:00:00.000Z",
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'gender' => 'm',
                 'phoneNumber' => '+48123456789',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -114,12 +141,12 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
-                'birthday' => "2023-10-24T11:00:00.000Z",
+                'birthday' => '2023-10-24T11:00:00.000Z',
                 'gender' => 'm',
                 'group' => '/api/v2/admin/customer-groups/' . $group->getCode(),
                 'phoneNumber' => '+48123456789',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -141,13 +168,13 @@ final class CustomersTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'email' => 'api@com',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_email_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -165,13 +192,13 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'J',
                 'lastName' => 'D',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_name_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -188,13 +215,13 @@ final class CustomersTest extends JsonApiTestCase
             content: json_encode([
                 'email' => 'api@example.com',
                 'gender' => 'a',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/post_customer_with_invalid_gender_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -223,12 +250,12 @@ final class CustomersTest extends JsonApiTestCase
                 'email' => 'api@example.com',
                 'firstName' => 'John',
                 'lastName' => 'Lim',
-                'birthday' => "2023-09-24T11:00:00.000Z",
+                'birthday' => '2023-09-24T11:00:00.000Z',
                 'gender' => 'f',
                 'group' => '/api/v2/admin/customer-groups/' . $group->getCode(),
                 'phoneNumber' => '+48987654321',
                 'subscribedToNewsletter' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -253,13 +280,13 @@ final class CustomersTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'gender' => 'a',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/customer/update_customer_with_invalid_gender_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 }

@@ -36,3 +36,9 @@ sylius:
                 sales:
                     header: מכירות
                     orders: הזמנות
+                official_support:
+                    header: תוספותתמיכה רשמית
+                    browse_plugins: עיין בתוספים
+                    sylius_plus: Sylius Plus
+                    professional_services: שירותים מקצועיים
+                    find_a_partner: מצא שותף

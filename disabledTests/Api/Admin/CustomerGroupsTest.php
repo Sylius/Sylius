@@ -76,7 +76,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
             content: json_encode([
                 'name' => 'Special',
                 'code' => 'special',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -102,7 +102,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'name' => 'Very Important People',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

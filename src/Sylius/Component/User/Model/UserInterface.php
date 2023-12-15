@@ -101,9 +101,7 @@ interface UserInterface extends
     public function removeRole(string $role): void;
 
     /**
-     * @return Collection|UserOAuthInterface[]
-     *
-     * @psalm-return Collection<array-key, UserOAuthInterface>
+     * @return Collection<array-key, UserOAuthInterface>
      */
     public function getOAuthAccounts(): Collection;
 

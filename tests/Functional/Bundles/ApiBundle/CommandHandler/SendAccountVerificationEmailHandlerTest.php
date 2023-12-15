@@ -15,7 +15,6 @@ namespace Sylius\Tests\Functional\Bundles\ApiBundle\CommandHandler;
 
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use Sylius\Bundle\ApiBundle\Command\Account\SendShopUserVerificationEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -58,15 +57,15 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $sendAccountVerificationEmailHandler = new SendShopUserVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountVerificationEmailHandler(
-            new SendShopUserVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+            new SendAccountVerificationEmail(
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);
@@ -108,15 +107,15 @@ final class SendAccountVerificationEmailHandlerTest extends KernelTestCase
         $sendAccountVerificationEmailHandler = new SendShopUserVerificationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountVerificationEmailHandler(
-            new SendShopUserVerificationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+            new SendAccountVerificationEmail(
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);

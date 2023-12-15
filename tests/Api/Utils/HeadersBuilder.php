@@ -21,9 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface as BaseUserInterface;
 
 class HeadersBuilder
 {
-    /**
-     * @var array<string, string>
-     */
+    /** @var array<string, string> */
     private array $headers = [];
 
     /**

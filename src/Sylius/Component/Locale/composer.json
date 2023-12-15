@@ -28,7 +28,7 @@
     "require": {
         "php": "^8.2",
         "sylius/resource": "^1.10",
-        "symfony/intl": "^6.3.2",
+        "symfony/intl": "^6.4.0",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {

@@ -14,10 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface as BaseCatalogPromotionInterface;
 
 interface CatalogPromotionInterface extends BaseCatalogPromotionInterface, ChannelsAwareInterface
 {
+    /**
+     * @return Collection<array-key, ChannelInterface>
+     */
     public function getChannels(): Collection;
 }

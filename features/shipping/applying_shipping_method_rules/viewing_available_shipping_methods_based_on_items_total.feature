@@ -8,11 +8,11 @@ Feature: Viewing available shipping methods based on items total
         Given the store operates on a single channel in "United States"
         And the store has a product "Cheap Jacket" priced at "$20.00"
         And the store has a product "Expensive Jacket" priced at "$50.00"
-        And the store has "Above $50" shipping method with "$1" fee
-        And this shipping method is only available for orders over or equal to "$50"
-        And the store has "Below $29.99" shipping method with "$10" fee
+        And the store has "Above $50" shipping method with "$1.00" fee
+        And this shipping method is only available for orders over or equal to "$50.00"
+        And the store has "Below $29.99" shipping method with "$10.00" fee
         And this shipping method is only available for orders under or equal to "$29.99"
-        And the store has "DHL" shipping method with "$20" fee
+        And the store has "DHL" shipping method with "$20.00" fee
         And I am a logged in customer
 
     @ui @api

@@ -90,11 +90,11 @@ jobs:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
-                    
+
             -   name: "Require ext-random"
                 if: matrix.php == '8.2'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
-                    
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
@@ -119,9 +119,6 @@ jobs:
 
             -   name: Run PHPArkitect
                 run: vendor/bin/phparkitect check
-
-            -   name: Run Psalm
-                run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
 
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse

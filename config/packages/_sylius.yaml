@@ -13,6 +13,60 @@ parameters:
 sylius_api:
     enabled: true
 
+sylius_payum:
+    gateway_config_validation_groups:
+        paypal_express_checkout:
+            - 'sylius'
+            - 'paypal_express_checkout'
+        stripe_checkout:
+            - 'sylius'
+            - 'stripe_checkout'
+
+sylius_promotion:
+    promotion_action:
+        validation_groups:
+            order_percentage_discount:
+                - 'sylius'
+                - 'sylius_promotion_action_order_percentage_discount'
+            shipping_percentage_discount:
+                - 'sylius'
+                - 'sylius_promotion_action_shipping_percentage_discount'
+            order_fixed_discount:
+                - 'sylius'
+                - 'sylius_promotion_action_order_fixed_discount'
+            unit_fixed_discount:
+                - 'sylius'
+                - 'sylius_promotion_action_unit_fixed_discount'
+            unit_percentage_discount:
+                - 'sylius'
+                - 'sylius_promotion_action_unit_percentage_discount'
+    promotion_rule:
+        validation_groups:
+            cart_quantity:
+                - 'sylius'
+                - 'sylius_promotion_rule_cart_quantity'
+            customer_group:
+                - 'sylius'
+                - 'sylius_promotion_rule_customer_group'
+            nth_order:
+                - 'sylius'
+                - 'sylius_promotion_rule_nth_order'
+            shipping_country:
+                - 'sylius'
+                - 'sylius_promotion_rule_shipping_country'
+            has_taxon:
+                - 'sylius'
+                - 'sylius_promotion_rule_has_taxon'
+            total_of_items_from_taxon:
+                - 'sylius'
+                - 'sylius_promotion_rule_total_of_items_from_taxon'
+            contains_product:
+                - 'sylius'
+                - 'sylius_promotion_rule_contains_product'
+            item_total:
+                - 'sylius'
+                - 'sylius_promotion_rule_item_total'
+
 sylius_shop:
     product_grid:
         include_all_descendants: true

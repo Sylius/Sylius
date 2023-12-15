@@ -17,14 +17,10 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Templating\FilterExtension as BaseFilterExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @psalm-suppress DeprecatedClass
- */
 final class FilterExtension extends BaseFilterExtension
 {
     public function __construct(private string $imagesPath, CacheManager $cache)
     {
-        /** @psalm-suppress DeprecatedClass */
         parent::__construct($cache);
     }
 
@@ -39,7 +35,6 @@ final class FilterExtension extends BaseFilterExtension
             return $this->imagesPath . $path;
         }
 
-        /** @psalm-suppress DeprecatedClass */
         return parent::filter($path, $filter, $config, $resolver, $referenceType);
     }
 

@@ -24,7 +24,7 @@ Feature: Adding a new promotion with rule
         When I want to create a new promotion
         And I specify its code as "100_MUGS_PROMOTION"
         And I name it "100 Mugs promotion"
-        And I add the "Total price of items from taxon" rule configured with "Mugs" taxon and "$100" amount for "United States" channel
+        And I add the "Total price of items from taxon" rule configured with "Mugs" taxon and "$100.00" amount for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the "100 Mugs promotion" promotion should appear in the registry

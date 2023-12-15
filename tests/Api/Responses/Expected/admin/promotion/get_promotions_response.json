@@ -10,7 +10,10 @@
             "code": "dollar_off",
             "name": "1 dollar off each item",
             "description": "Get 1 dollar off every item when buying more than 10",
-            "channels": ["\/api\/v2\/admin\/channels\/WEB", "\/api\/v2\/admin\/channels\/MOBILE"],
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB",
+                "\/api\/v2\/admin\/channels\/MOBILE"
+            ],
             "priority": 2,
             "exclusive": false,
             "appliesToDiscounted": true,
@@ -19,7 +22,10 @@
             "couponBased": true,
             "startsAt": null,
             "endsAt": null,
-            "coupons": [],
+            "coupons": [
+                "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
+                "\/api\/v2\/admin\/promotion-coupons\/XYZ2"
+            ],
             "rules": [],
             "actions": [],
             "createdAt": @date@,
@@ -40,7 +46,9 @@
             "code": "50_off",
             "name": "50% Off on your first order",
             "description": "Get 50% off of your first purchase",
-            "channels": ["\/api\/v2\/admin\/channels\/MOBILE"],
+            "channels": [
+                "\/api\/v2\/admin\/channels\/MOBILE"
+            ],
             "priority": 1,
             "exclusive": true,
             "appliesToDiscounted": false,
@@ -67,7 +75,7 @@
     "hydra:totalItems": 2,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "/api/v2/admin/promotions{?coupons.code,coupons.code[],order[priority]}",
+        "hydra:template": "\/api\/v2\/admin\/promotions{?coupons.code,coupons.code[],order[priority]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {

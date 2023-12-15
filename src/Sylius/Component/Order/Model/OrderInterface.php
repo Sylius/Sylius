@@ -44,9 +44,7 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function setNotes(?string $notes): void;
 
     /**
-     * @return Collection|OrderItemInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemInterface>
+     * @return Collection<array-key, OrderItemInterface>
      */
     public function getItems(): Collection;
 
@@ -75,9 +73,7 @@ interface OrderInterface extends AdjustableInterface, ResourceInterface, Timesta
     public function isEmpty(): bool;
 
     /**
-     * @return Collection|AdjustmentInterface[]
-     *
-     * @psalm-return Collection<array-key, AdjustmentInterface>
+     * @return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;
 

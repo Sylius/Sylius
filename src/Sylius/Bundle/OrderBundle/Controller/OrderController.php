@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\OrderBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -162,9 +161,6 @@ class OrderController extends ResourceController
         }
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function clearAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -172,7 +168,7 @@ class OrderController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->getCurrentCart();
 
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $this->getParameterFromRequest($request, '_csrf_token'))) {
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $request->request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 
@@ -199,15 +195,6 @@ class OrderController extends ResourceController
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
-    protected function redirectToCartSummary(RequestConfiguration $configuration): Response
-    {
-        if (null === $configuration->getParameters()->get('redirect')) {
-            return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
-        }
-
-        return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
-    }
-
     protected function getCartSummaryRoute(): string
     {
         return 'sylius_cart_summary';
@@ -231,28 +218,5 @@ class OrderController extends ResourceController
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
-    }
-
-    /**
-     * @return mixed
-     *
-     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
-     * based on Symfony\Component\HttpFoundation\Request::get
-     */
-    private function getParameterFromRequest(Request $request, string $key)
-    {
-        if ($request !== $result = $request->attributes->get($key, $request)) {
-            return $result;
-        }
-
-        if ($request->query->has($key)) {
-            return $request->query->all()[$key];
-        }
-
-        if ($request->request->has($key)) {
-            return $request->request->all()[$key];
-        }
-
-        return null;
     }
 }

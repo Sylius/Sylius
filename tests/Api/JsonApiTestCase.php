@@ -26,7 +26,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
-    public function __construct(?string $name = null, array $data = [], string|int $dataName = '')
+    public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 

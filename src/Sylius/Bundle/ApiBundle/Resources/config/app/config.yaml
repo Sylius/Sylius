@@ -55,12 +55,14 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
+        Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
         Sylius\Bundle\ApiBundle\Exception\OrderNoLongerEligibleForPromotion: 422
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductAttributeCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProductVariantCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\PromotionCouponCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ProvinceCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TaxonCannotBeRemoved: 422
@@ -71,6 +73,7 @@ api_platform:
         Sylius\Bundle\ApiBundle\Exception\PromotionCannotBeRemoved: 422
         Sylius\Bundle\LocaleBundle\Checker\Exception\LocaleIsUsedException: 422
         Sylius\Bundle\UserBundle\Exception\UserNotFoundException: 404
+        Sylius\Component\Promotion\Exception\FailedGenerationException: 422
         Symfony\Component\Serializer\Exception\UnexpectedValueException: 400
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
         Sylius\Bundle\ApiBundle\CommandHandler\Checkout\Exception\OrderTotalHasChangedException: 409

@@ -26,11 +26,7 @@ class Shipment extends BaseShipment implements ShipmentInterface
     /** @var BaseOrderInterface|null */
     protected $order;
 
-    /**
-     * @var Collection|BaseAdjustmentInterface[]
-     *
-     * @psalm-var Collection<array-key, BaseAdjustmentInterface>
-     */
+    /** @var Collection<array-key, BaseAdjustmentInterface> */
     protected $adjustments;
 
     /** @var int */

@@ -18,13 +18,13 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 /** @internal */
 final class TemplateBlockRenderingHistory
 {
-    /** @psalm-var list<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
+    /** @var array<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
     private $renderedEvents = [];
 
-    /** @psalm-var list<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
+    /** @var array<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: TemplateBlock, start: float, stop: float, time: float}>}> */
     private array $currentlyRenderedEvents = [];
 
-    /** @psalm-var list<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
+    /** @var array<array{definition: TemplateBlock, start: float, stop?: float, time?: float}> */
     private array $currentlyRenderedBlocks = [];
 
     public function startRenderingEvent(array $eventNames, array $context): void

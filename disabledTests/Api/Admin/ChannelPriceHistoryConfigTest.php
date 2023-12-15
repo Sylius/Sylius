@@ -33,7 +33,7 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_price_history_config_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -54,13 +54,13 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
                 'taxonsExcludedFromShowingLowestPrice' => [
                     sprintf('/api/v2/admin/taxons/%s', $brandTaxon->getCode()),
                 ],
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/put_channel_price_history_config_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

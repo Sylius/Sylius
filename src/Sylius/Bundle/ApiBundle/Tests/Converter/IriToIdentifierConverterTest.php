@@ -29,7 +29,7 @@ final class IriToIdentifierConverterTest extends TestCase
 {
     use ProphecyTrait;
 
-    private RouterInterface|ObjectProphecy $router;
+    private ObjectProphecy|RouterInterface $router;
 
     private IdentifierConverterInterface|ObjectProphecy $identifierConverter;
 

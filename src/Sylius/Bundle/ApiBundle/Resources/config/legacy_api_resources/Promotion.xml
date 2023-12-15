@@ -133,6 +133,13 @@ Example configuration for `order_fixed_discount` action type:
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="coupons_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/promotions/{code}/coupons</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" readable="true" />
         <property name="name" readable="true" />
@@ -144,7 +151,9 @@ Example configuration for `order_fixed_discount` action type:
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
         <property name="couponBased" readable="true" />
-        <property name="coupons" readable="true" />
+        <property name="coupons" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.promotion_coupon.class%" collection="true" />
+        </property>
         <property name="rules" readable="true" />
         <property name="actions" readable="true" />
         <property name="channels" readable="true" />

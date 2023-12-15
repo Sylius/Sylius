@@ -18,7 +18,50 @@
     <resource class="%sylius.model.promotion_coupon.class%" shortName="PromotionCoupon">
         <attribute name="route_prefix">admin</attribute>
 
-        <collectionOperations/>
+        <attribute name="validation_groups">sylius</attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.promotion_coupon_order_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\PromotionCouponPromotionFilter</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="order">
+                    <attribute name="used">DESC</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion_coupon:create</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_generate">
+                <attribute name="method">POST</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="path">/promotion-coupons/generate</attribute>
+                <attribute name="input">Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion_coupon:generate</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Generates promotion coupons</attribute>
+                    <attribute name="description">Generates promotion coupons</attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
             <itemOperation name="admin_get">
@@ -27,8 +70,39 @@
                     <attribute name="groups">admin:promotion_coupon:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion_coupon:update</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+            </itemOperation>
         </itemOperations>
 
-        <property name="id" identifier="true" writable="false" />
+        <subresourceOperations>
+            <subresourceOperation name="api_promotions_coupons_get_subresource">
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion_coupon:read</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" readable="true" />
+        <property name="usageLimit" readable="true" />
+        <property name="perCustomerUsageLimit" readable="true" />
+        <property name="used" readable="true" />
+        <property name="reusableFromCancelledOrders" readable="true" />
+        <property name="promotion" readable="true" />
+        <property name="expiresAt" readable="true" />
+        <property name="createdAt" readable="true" />
+        <property name="updatedAt" readable="true" />
     </resource>
 </resources>

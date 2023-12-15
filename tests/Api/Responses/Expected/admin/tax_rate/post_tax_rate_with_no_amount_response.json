@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxRate",
+    "@id": "\/api\/v2\/admin\/tax-rates\/unregular_tax",
+    "@type": "TaxRate",
+    "zone": "\/api\/v2\/admin\/zones\/EU",
+    "id": @integer@,
+    "code": "unregular_tax",
+    "category": "\/api\/v2\/admin\/tax-categories\/TC1",
+    "name": "Unregular Tax 90%",
+    "amount": 0,
+    "includedInPrice": true,
+    "calculator": "default",
+    "startDate": null,
+    "endDate": null,
+    "createdAt": @datetime@,
+    "updatedAt": @datetime@
+}

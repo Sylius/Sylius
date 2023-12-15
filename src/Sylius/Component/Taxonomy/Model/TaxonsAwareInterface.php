@@ -18,9 +18,7 @@ use Doctrine\Common\Collections\Collection;
 interface TaxonsAwareInterface
 {
     /**
-     * @return Collection|TaxonInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxonInterface>
+     * @return Collection<array-key, TaxonInterface>
      */
     public function getTaxons(): Collection;
 

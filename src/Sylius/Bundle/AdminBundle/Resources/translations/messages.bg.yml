@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Продажби
                     orders: Поръчки
+                official_support:
+                    header: официална поддръжка
+                    browse_plugins: Преглед на добавки
+                    sylius_plus: Sylius Plus
+                    professional_services: Професионални услуги
+                    find_a_partner: Намерете партньор

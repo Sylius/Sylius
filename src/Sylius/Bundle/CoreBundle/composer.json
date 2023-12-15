@@ -65,14 +65,14 @@
         "sylius/theme-bundle": "^2.3",
         "sylius/ui-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/clock": "^6.3.4",
-        "symfony/framework-bundle": "^6.3.4",
-        "symfony/intl": "^6.3.2",
-        "symfony/mailer": "^6.3.0",
-        "symfony/messenger": "^6.3.4",
-        "symfony/templating": "^6.3.0",
+        "symfony/clock": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1",
+        "symfony/intl": "^6.4.0",
+        "symfony/mailer": "^6.4.0",
+        "symfony/messenger": "^6.4.0",
+        "symfony/templating": "^6.4.0",
         "symfony/webpack-encore-bundle": "^1.17.1",
-        "symfony/workflow": "^6.3.4",
+        "symfony/workflow": "^6.4.0",
         "winzou/state-machine-bundle": "^0.6"
     },
     "require-dev": {
@@ -83,8 +83,8 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.3.4",
-        "symfony/dotenv": "^6.3.0"
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/dotenv": "^6.4.0"
     },
     "config": {
         "allow-plugins": {

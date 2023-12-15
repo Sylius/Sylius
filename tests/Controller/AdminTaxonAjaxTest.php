@@ -65,11 +65,11 @@ final class AdminTaxonAjaxTest extends SessionAwareAjaxTestCase
     {
         Assert::assertNotEmpty(
             $this->loadFixturesFromFile('authentication/administrator.yml'),
-            'Could not load administrator.yml'
+            'Could not load administrator.yml',
         );
         Assert::assertNotEmpty(
             $this->loadFixturesFromFile('resources/taxons.yml'),
-            'Could not load taxons.yml'
+            'Could not load taxons.yml',
         );
 
         $this->authenticateAdminUser();

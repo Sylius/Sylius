@@ -15,8 +15,8 @@ Feature: Statistics dashboard per channel
 
     @ui
     Scenario: Seeing basic statistics for the first channel by default
-        Given 3 customers have fulfilled 4 orders placed for total of "$8566.00" mostly "Onion" product
-        And then 2 more customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
+        Given 3 customers have fulfilled 4 orders placed for total of "$8,566.00" mostly "Onion" product
+        And 2 more customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
         When I open administration dashboard
         Then I should see 4 new orders
         And I should see 5 new customers
@@ -25,9 +25,9 @@ Feature: Statistics dashboard per channel
 
     @ui
     Scenario: Changing channel in administration dashboard
-        Given 4 customers have fulfilled 4 orders placed for total of "$5241.00" mostly "Onion" product
-        And then 2 more customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
-        And then 2 more customers have placed 3 orders for total of "$1259.00" mostly "Banana" product
+        Given 4 customers have fulfilled 4 orders placed for total of "$5,241.00" mostly "Onion" product
+        And 2 more customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
+        And 2 more customers have placed 3 orders for total of "$1,259.00" mostly "Banana" product
         When I open administration dashboard
         And I choose "United States" channel
         Then I should see 2 new orders
@@ -37,14 +37,14 @@ Feature: Statistics dashboard per channel
 
     @ui
     Scenario: Seeing recent orders in a specific channel
-        Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
-        And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
+        Given 3 customers have placed 4 orders for total of "$8,566.00" mostly "Onion" product
+        And 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
         When I open administration dashboard for "Poland" channel
         Then I should see 4 new orders in the list
 
     @ui
     Scenario: Seeing recent orders in a specific channel
-        Given 3 customers have placed 4 orders for total of "$8566.00" mostly "Onion" product
-        And then 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
+        Given 3 customers have placed 4 orders for total of "$8,566.00" mostly "Onion" product
+        And 2 more customers have placed 2 orders for total of "$459.00" mostly "Banana" product
         When I open administration dashboard for "United States" channel
         Then I should see 2 new orders in the list

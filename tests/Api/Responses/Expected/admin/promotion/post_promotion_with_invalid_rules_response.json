@@ -40,11 +40,6 @@
             "code": null
         },
         {
-            "propertyPath": "rules[5].configuration[MOBILE]",
-            "message": "This field is missing.",
-            "code": @string@
-        },
-        {
             "propertyPath": "rules[6].configuration[product_code]",
             "message": "Product with code wrong does not exist.",
             "code": null
@@ -55,9 +50,9 @@
             "code": @string@
         },
         {
-            "propertyPath": "rules[7].configuration[MOBILE][amount]",
-            "message": "This field is missing.",
-            "code": @string@
+            "propertyPath": "rules[8].type",
+            "message": "Promotion rule type is invalid. Available rule types are cart_quantity, customer_group, nth_order, shipping_country, has_taxon, total_of_items_from_taxon, contains_product, item_total.",
+            "code": null
         }
     ]
 }

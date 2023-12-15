@@ -17,8 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
-use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverter;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -94,10 +92,51 @@ final class ManagingPaymentMethodsContext implements Context
      * @When I want to create a new offline payment method
      * @When I want to create a new payment method with :factory gateway factory
      */
-    public function iWantToCreateANewPaymentMethod($factory = 'Offline'): void
+    public function iWantToCreateANewPaymentMethod(string $factory = 'Offline'): void
     {
+        $factory = str_replace(' ', '_', strtolower($factory));
+
         $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
         $this->client->addRequestData('gatewayConfig', ['factoryName' => $factory, 'gatewayName' => $factory]);
+    }
+
+    /**
+     * @When I want to create a new payment method without gateway configuration
+     */
+    public function iWantToCreateANewPaymentMethodWithoutGatewayConfiguration(): void
+    {
+        $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
+        $this->client->addRequestData('code', 'TEST');
+    }
+
+    /**
+     * @When I want to create a new payment method without gateway name
+     */
+    public function iWantToCreateANewPaymentMethodWithoutGatewayName(): void
+    {
+        $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
+        $this->client->addRequestData('code', 'TEST');
+        $this->client->addRequestData('gatewayConfig', ['factoryName' => 'offline']);
+    }
+
+    /**
+     * @When I want to create a new payment method without factory name
+     */
+    public function iWantToCreateANewPaymentMethodWithoutFactoryName(): void
+    {
+        $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
+        $this->client->addRequestData('code', 'TEST');
+        $this->client->addRequestData('gatewayConfig', ['gatewayName' => 'offline']);
+    }
+
+    /**
+     * @When I want to create a new payment method with wrong factory name
+     */
+    public function iWantToCreateANewPaymentMethodWithWrongFactoryName(): void
+    {
+        $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
+        $this->client->addRequestData('code', 'TEST');
+        $this->client->addRequestData('gatewayConfig', ['factoryName' => 'gateway_with_wrong_factory_name', 'gatewayName' => 'gateway with wrong factory name']);
     }
 
     /**
@@ -188,6 +227,7 @@ final class ManagingPaymentMethodsContext implements Context
                     'username' => 'test',
                     'password' => 'test',
                     'signature' => 'test',
+                    'sandbox' => true,
                 ],
             ],
         );
@@ -198,11 +238,70 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iConfigureItForUsernameWithSignature(string $username, string $signature): void
     {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                    'username' => $username,
+                    'signature' => $signature,
+                    'sandbox' => true,
+                ],
+            ],
+        );
+    }
 
-        $currentPage->setPaypalGatewayUsername($username);
-        $currentPage->setPaypalGatewaySignature($signature);
+    /**
+     * @When I configure it for username :username with :signature signature and password, but without sandbox
+     */
+    public function iConfigureItForUsernameWithSignatureButWithoutSandbox(string $username, string $signature): void
+    {
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                    'username' => $username,
+                    'signature' => $signature,
+                    'password' => 'TEST',
+                    'sandbox' => null,
+                ],
+            ],
+        );
+    }
+
+    /**
+     * @When I configure it for username :username with :signature signature and password, but with sandbox that has wrong type
+     */
+    public function iConfigureItForUsernameWithSignatureButWithWrongSandboxType(string $username, string $signature): void
+    {
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                    'username' => $username,
+                    'signature' => $signature,
+                    'password' => 'TEST',
+                    'sandbox' => 'test',
+                ],
+            ],
+        );
+    }
+
+    /**
+     * @When I configure it with only :element
+     */
+    public function iConfigureItWithOnly(string $element): void
+    {
+        $element = str_replace(' ', '_', strtolower($element));
+
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                   $element => 'TEST',
+                   $element === 'secret_key' ? 'publishable_key' : 'secret_key' => null,
+                ],
+            ],
+        );
     }
 
     /**
@@ -210,7 +309,14 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iDoNotSpecifyConfigurationPassword(): void
     {
-        // Intentionally left blank to fulfill context expectation
+        $this->client->addRequestData(
+            'gatewayConfig',
+            [
+                'config' => [
+                    'password' => null,
+                ],
+            ],
+        );
     }
 
     /**
@@ -324,8 +430,85 @@ final class ManagingPaymentMethodsContext implements Context
     public function iShouldBeNotifiedThatIHaveToSpecifyPaypal(string $element): void
     {
         Assert::same(
-            $this->createPage->getValidationMessage('paypal_' . $element),
-            sprintf('Please enter paypal %s.', $element),
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('gatewayConfig.config[%s]: Please enter paypal %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify paypal sandbox status
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypalSandboxStatus(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.config[sandbox]: Please set your paypal sandbox status.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify paypal sandbox status that is boolean
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyPaypalSandboxStatusThatIsBoolean(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.config[sandbox]: This value should be of type bool.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify stripe :element
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyStripe(string $element): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('gatewayConfig.config[%s]: Please enter stripe %s.', str_replace(' ', '_', strtolower($element)), $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify gateway configuration
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyGatewayConfiguration(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig: This value should not be blank.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify gateway name
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyGatewayName(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.gatewayName: Please enter gateway name.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify factory name
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyFactoryName(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.factoryName: Please enter gateway factory name.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that I have to specify factory name that is available
+     */
+    public function iShouldBeNotifiedThatIHaveToSpecifyFactoryNameThatIsAvailable(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'gatewayConfig.factoryName: Invalid gateway factory. Available factories are paypal_express_checkout, stripe_checkout, offline.',
         );
     }
 
@@ -358,7 +541,8 @@ final class ManagingPaymentMethodsContext implements Context
     public function thisPaymentMethodNameShouldStillBeNamed(string $paymentMethodName): void
     {
         Assert::inArray(
-            $paymentMethodName, $this->getPaymentMethodNamesFromCollection(),
+            $paymentMethodName,
+            $this->getPaymentMethodNamesFromCollection(),
             sprintf('Payment method with name %s does not exist', $paymentMethodName),
         );
     }

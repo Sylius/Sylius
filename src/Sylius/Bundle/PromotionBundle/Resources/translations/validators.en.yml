@@ -37,8 +37,11 @@ sylius:
             min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter promotion name.
     promotion_action:
+        invalid_type: Promotion action type is invalid. Available action types are {{ available_action_types }}.
         percentage_discount_configuration:
             not_in_range: The percentage discount must be between 0% and 100%.
+    promotion_rule:
+        invalid_type: Promotion rule type is invalid. Available rule types are {{ available_rule_types }}.
     promotion_coupon:
         code:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
@@ -47,6 +50,9 @@ sylius:
             regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.
             unique: This coupon already exists.
         is_invalid: Coupon code is invalid.
+        promotion:
+            not_blank: Please provide a promotion for this coupon.
+            not_coupon_based: Only coupon based promotions can have coupons.
         usage_limit:
             min: Coupon usage limit must be at least {{ limit }}.
     promotion_coupon_generator_instruction:
@@ -65,3 +71,4 @@ sylius:
         locale:
             not_blank: Please enter the locale.
             invalid: This value is not a valid locale.
+            unique: A translation for the {{ value }} locale code already exists.

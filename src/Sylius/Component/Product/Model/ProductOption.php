@@ -36,11 +36,7 @@ class ProductOption implements ProductOptionInterface, \Stringable
     /** @var int|null */
     protected $position;
 
-    /**
-     * @var Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductOptionValueInterface>
-     */
+    /** @var Collection<array-key, ProductOptionValueInterface> */
     protected $values;
 
     public function __construct()

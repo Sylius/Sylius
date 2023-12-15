@@ -19,11 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class CompositeRequestResolver implements RequestResolverInterface
 {
-    /**
-     * @var PriorityQueue|RequestResolverInterface[]
-     *
-     * @psalm-var PriorityQueue<RequestResolverInterface>
-     */
+    /** @var PriorityQueue<RequestResolverInterface> */
     private PriorityQueue $requestResolvers;
 
     public function __construct()

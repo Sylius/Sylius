@@ -129,7 +129,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'taxCategory' => '/api/v2/admin/tax-categories/default',
                 'shippingCategory' => '/api/v2/admin/shipping-categories/default',
                 'shippingRequired' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -162,7 +162,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'WEB',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -195,7 +195,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'NON-EXISTING-CHANNEL',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -221,9 +221,9 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'code' => 'CUP',
                 'product' => '/api/v2/admin/products/MUG_SW',
                 'channelPricings' => [
-                    'NON-EXISTING-CHANNEL' => ['price' => 4000]
+                    'NON-EXISTING-CHANNEL' => ['price' => 4000],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -251,7 +251,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                     'channelCode' => 'WEB',
                     'price' => 4000,
                 ]],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -287,7 +287,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Yellow mug',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -343,7 +343,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                 'taxCategory' => '/api/v2/admin/tax-categories/special',
                 'shippingCategory' => '/api/v2/admin/shipping-categories/special',
                 'shippingRequired' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -385,7 +385,7 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Yellow mug',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -416,12 +416,47 @@ final class ProductVariantsTest extends JsonApiTestCase
                         'name' => 'Tasse',
                     ],
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/product_variant/put_product_variant_without_translation_in_default_locale_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_product_variant_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $fixtures['product_variant'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Mug 3',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_variant/put_product_variant_with_duplicate_locale_translation',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }

@@ -58,9 +58,7 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     public function getTranslation(?string $locale = null): TranslationInterface;
 
     /**
-     * @return Collection|CatalogPromotionScopeInterface[]
-     *
-     * @psalm-return Collection<array-key, CatalogPromotionScopeInterface>
+     * @return Collection<array-key, CatalogPromotionScopeInterface>
      */
     public function getScopes(): Collection;
 
@@ -71,9 +69,7 @@ interface CatalogPromotionInterface extends ResourceInterface, CodeAwareInterfac
     public function removeScope(CatalogPromotionScopeInterface $scope): void;
 
     /**
-     * @return Collection|CatalogPromotionActionInterface[]
-     *
-     * @psalm-return Collection<array-key, CatalogPromotionActionInterface>
+     * @return Collection<array-key, CatalogPromotionActionInterface>
      */
     public function getActions(): Collection;
 

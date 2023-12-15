@@ -29,7 +29,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);

@@ -22,6 +22,8 @@
         <import resource="services/command_handlers.xml" />
         <import resource="services/context_builders.xml" />
         <import resource="services/contexts.xml" />
+        <import resource="services/controllers.xml" />
+        <import resource="services/creators.xml" />
         <import resource="services/event_handlers.xml" />
         <import resource="services/event_subscribers.xml" />
         <import resource="services/extensions.xml" />
@@ -75,6 +77,27 @@
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
+
+<!--        <service id="Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction">-->
+<!--            <argument type="service" id="sylius.repository.order" />-->
+<!--            <tag name="controller.service_arguments" />-->
+<!--        </service>-->
+
+<!--        <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">-->
+<!--            <argument type="service" id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider.inner" />-->
+<!--            <argument type="service" id="sylius.context.channel" />-->
+<!--        </service>-->
+
+<!--        <service id="Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver">-->
+<!--            <argument>%sylius.security.new_api_admin_route%</argument>-->
+<!--            <tag name="sylius.uri_based_section_resolver" priority="30" />-->
+<!--        </service>-->
+
+<!--        <service id="Sylius\Bundle\ApiBundle\SectionResolver\ShopApiUriBasedSectionResolver">-->
+<!--            <argument>%sylius.security.new_api_shop_route%</argument>-->
+<!--            <argument>orders</argument>-->
+<!--            <tag name="sylius.uri_based_section_resolver" priority="40" />-->
+<!--        </service>-->
 
 <!--        <service id="Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener">-->
 <!--            <argument type="service" id="sylius.context.cart" />-->

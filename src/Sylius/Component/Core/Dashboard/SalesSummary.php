@@ -19,7 +19,7 @@ namespace Sylius\Component\Core\Dashboard;
 final class SalesSummary implements SalesSummaryInterface
 {
     public function __construct(
-        /** @psalm-var array<string, string> */
+        /** @var array<string, string> */
         private array $intervalsSalesMap,
     ) {
     }

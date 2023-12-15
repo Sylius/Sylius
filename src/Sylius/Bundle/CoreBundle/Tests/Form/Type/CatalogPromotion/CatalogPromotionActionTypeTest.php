@@ -35,7 +35,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
 {
     use ProphecyTrait;
 
-    private ProphecyInterface|ChannelInterface $channel;
+    private ChannelInterface|ProphecyInterface $channel;
 
     private ObjectProphecy $channelRepository;
 

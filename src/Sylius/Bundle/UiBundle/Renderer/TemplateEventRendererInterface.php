@@ -16,9 +16,7 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 interface TemplateEventRendererInterface
 {
     /**
-     * @param string[] $eventNames
-     *
-     * @psalm-param non-empty-list<string> $eventNames
+     * @param non-empty-list<string> $eventNames
      */
     public function render(array $eventNames, array $context = []): string;
 }

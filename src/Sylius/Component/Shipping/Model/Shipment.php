@@ -30,11 +30,7 @@ class Shipment implements ShipmentInterface, \Stringable
     /** @var ShippingMethodInterface|null */
     protected $method;
 
-    /**
-     * @var Collection|ShipmentUnitInterface[]
-     *
-     * @psalm-var Collection<array-key, ShipmentUnitInterface>
-     */
+    /** @var Collection<array-key, ShipmentUnitInterface> */
     protected $units;
 
     /** @var string|null */

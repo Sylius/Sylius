@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class SingleValueForProductVariantOptionValidator extends ConstraintValidator
 {
-    public function validate(mixed $value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ProductVariantInterface $value */
         Assert::isInstanceOf($value, ProductVariantInterface::class);
@@ -31,7 +31,7 @@ final class SingleValueForProductVariantOptionValidator extends ConstraintValida
         Assert::isInstanceOf($constraint, SingleValueForProductVariantOption::class);
 
         $map = array_map(fn (ProductOptionValueInterface $productOptionValue) => $productOptionValue->getOptionCode(), $value->getOptionValues()->toArray());
-        /** @psalm-var array<string, int> */
+        /** @var array<string, int> $flippedMap */
         $flippedMap = array_flip($map);
         if (count($map) !== count($flippedMap)) {
             $this->context->addViolation($constraint->message);

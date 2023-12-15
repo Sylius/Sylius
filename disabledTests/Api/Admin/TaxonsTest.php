@@ -76,9 +76,9 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                    ]
-                ]
-            ], JSON_THROW_ON_ERROR),
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -125,9 +125,9 @@ final class TaxonsTest extends JsonApiTestCase
                     'en_US' => [
                         'name' => 'Watches',
                         'slug' => 'watches',
-                    ]
-                ]
-            ], JSON_THROW_ON_ERROR),
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -160,13 +160,42 @@ final class TaxonsTest extends JsonApiTestCase
                     ],
                 ],
                 'enabled' => false,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/taxon/put_taxon_response',
             Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
+    public function it_does_not_update_a_taxon_with_duplicate_locale_translation(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxonomy.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['mug_taxon'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/taxons/%s', $taxon->getCode()),
+            server: $header,
+            content: json_encode([
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Watches',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/taxon/put_taxon_with_duplicate_locale_translation',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

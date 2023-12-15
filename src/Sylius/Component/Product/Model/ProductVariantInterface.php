@@ -35,9 +35,7 @@ interface ProductVariantInterface extends
     public function getDescriptor(): string;
 
     /**
-     * @return Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductOptionValueInterface>
+     * @return Collection<array-key, ProductOptionValueInterface>
      */
     public function getOptionValues(): Collection;
 

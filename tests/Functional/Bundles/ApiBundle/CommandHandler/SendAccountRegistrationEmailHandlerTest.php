@@ -61,15 +61,15 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $sendAccountRegistrationEmailHandler = new SendAccountRegistrationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountRegistrationEmailHandler(
             new SendAccountRegistrationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);
@@ -114,15 +114,15 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $sendAccountRegistrationEmailHandler = new SendAccountRegistrationEmailHandler(
             $userRepository->reveal(),
             $channelRepository->reveal(),
-            $emailSender
+            $emailSender,
         );
 
         $sendAccountRegistrationEmailHandler(
             new SendAccountRegistrationEmail(
-            'user@example.com',
-            'en_US',
-            'CHANNEL_CODE'
-        )
+                'user@example.com',
+                'en_US',
+                'CHANNEL_CODE',
+            ),
         );
 
         self::assertEmailCount(1);

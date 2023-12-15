@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -37,6 +38,15 @@ final class CommandNormalizerSpec extends ObjectBehavior
                 public function getClass(): string
                 {
                     return MissingConstructorArgumentsException::class;
+                }
+            },
+        )->shouldReturn(true);
+
+        $this->supportsNormalization(
+            new class() {
+                public function getClass(): string
+                {
+                    return InvalidRequestArgumentException::class;
                 }
             },
         )->shouldReturn(true);

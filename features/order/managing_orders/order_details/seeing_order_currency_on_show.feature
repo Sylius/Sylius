@@ -22,7 +22,7 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And there is a customer "Satin" identified by an email "satin@teamlucifer.com" and a password "pswd"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: All prices are in the base currency when the client haven't chosen any other
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
@@ -31,14 +31,14 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment
         When I view the summary of the order "#00000666"
         And I check "Angel T-Shirt" data
-        Then its discounted unit price should be $5.00
-        And its unit price should be $20.00
-        And its subtotal should be $5.00
-        And its discount should be -$10.00
-        And its tax should be $0.50
-        And its total should be $5.50
-        And the order's items total should be "$5.50"
+        Then the order's items total should be "$5.50"
         And the order's shipping total should be "$20.00"
         And the order's tax total should be "$0.50"
         And the order's promotion total should be "-$15.00"
         And the order's total should be "$25.50"
+        And its unit price should be $20.00
+        And its total should be $5.50
+        And its discounted unit price should be $5.00
+        And its subtotal should be $5.00
+        And its discount should be -$10.00
+        And its tax should be $0.50

@@ -14,6 +14,10 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_taxon:read</attribute>
                 </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.search_filter.product.code</attribute>
+                    <attribute>sylius.api.search_filter.taxon.code</attribute>
+                </attribute>
             </collectionOperation>
             <collectionOperation name="admin_post">
                 <attribute name="method">POST</attribute>
@@ -45,6 +49,11 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">shop:product_taxon:read</attribute>
                 </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-taxons/{id}</attribute>
             </itemOperation>
         </itemOperations>
 

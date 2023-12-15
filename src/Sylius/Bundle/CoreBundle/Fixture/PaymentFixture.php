@@ -58,11 +58,7 @@ class PaymentFixture extends AbstractFixture
 
         $payments = $this->paymentRepository->findAll();
 
-        /**
-         * @psalm-suppress UndefinedMagicMethod
-         *
-         * @var PaymentInterface $payment
-         */
+        /** @var PaymentInterface $payment */
         foreach ($payments as $payment) {
             if ($this->faker->boolean($options['percentage_completed'])) {
                 $this->completePayment($payment);

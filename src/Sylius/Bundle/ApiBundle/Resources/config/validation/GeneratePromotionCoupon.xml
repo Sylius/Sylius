@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon">
+        <property name="promotionCode">
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="amount">
+            <constraint name="NotBlank">
+                <option name="message">sylius.promotion_coupon_generator_instruction.amount.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon_generator_instruction.amount.min</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="codeLength">
+            <constraint name="NotBlank">
+                <option name="message">sylius.promotion_coupon_generator_instruction.code_length.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">40</option>
+                <option name="notInRangeMessage">sylius.promotion_coupon_generator_instruction.code_length.not_in_range</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="usageLimit">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon_generator_instruction.usage_limit.min</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

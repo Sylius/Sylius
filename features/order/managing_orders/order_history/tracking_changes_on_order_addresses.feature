@@ -8,7 +8,7 @@ Feature: Tracking changes on order addresses
         Given the store operates on a single channel in "United States"
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
-        And the store has a product "Italian suit" priced at "$4000.00"
+        And the store has a product "Italian suit" priced at "$4,000.00"
         And there is a customer "barney@stinson.com" that placed an order "#00000001"
         And the customer bought a single "Italian suit"
         When I am logged in as an administrator

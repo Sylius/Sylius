@@ -39,8 +39,15 @@ final class ProductTaxonDataPersisterSpec extends ObjectBehavior
     function it_uses_decorated_data_persister_to_remove_product_taxon(
         ContextAwareDataPersisterInterface $decoratedDataPersister,
         ProductTaxonInterface $productTaxon,
+        ProductInterface $product,
+        MessageBusInterface $eventBus,
     ): void {
+        $productTaxon->getProduct()->willReturn($product);
+        $product->getCode()->willReturn('t_shirt');
+        $message = new ProductUpdated('t_shirt');
+
         $decoratedDataPersister->remove($productTaxon, [])->shouldBeCalled();
+        $eventBus->dispatch($message)->willReturn(new Envelope($message))->shouldBeCalled();
 
         $this->remove($productTaxon, []);
     }

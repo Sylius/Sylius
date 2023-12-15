@@ -29,8 +29,7 @@ final class ShopUserVerificationTokenEligibilityValidator extends ConstraintVali
     {
     }
 
-    /** @param VerifyShopUser|mixed $value */
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, VerifyShopUser::class);
 

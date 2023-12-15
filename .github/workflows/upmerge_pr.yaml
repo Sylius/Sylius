@@ -45,7 +45,21 @@ jobs:
                         This PR has been generated automatically.
                         For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
                         
-                        **Remember!** Use **Rebase and merge** when merging this PR if **no conflict** occurred. If any conflict occurs, checkout the branch, push changes and use **Create a merge commit**.
+                        **Remember!** The upmerge should always be merged with using `Merge pull request` button.
+                        
+                        In case of conflicts, please resolve them manually with usign the following commands:
+                        ```
+                        git fetch upstream
+                        gh pr checkout ${{ github.event.number }}
+                        git merge upstream/${{ matrix.target_branch }} --no-commit
+                        ```
+                        
+                        If you use other name for the upstream remote, please replace `upstream` with the name of your remote pointing to the `Sylius/Sylius` repository.
+                        
+                        Once the conflicts are resolved, please run `git merge --continue` and change the commit title to
+                        ```
+                        Resolve conflicts between ${{ matrix.base_branch }} and ${{ matrix.target_branch }}
+                        ```
                     branch: "upmerge/${{ matrix.base_branch }}_${{ matrix.target_branch }}"
                     delete-branch: true
                     branch-suffix: "short-commit-hash"

@@ -239,7 +239,7 @@ final class ProductImagesTest extends JsonApiTestCase
                     sprintf('/api/v2/admin/product-variants/%s', $productVariantBlue->getCode()),
                     sprintf('/api/v2/admin/product-variants/%s', $productVariantRed->getCode()),
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -269,7 +269,7 @@ final class ProductImagesTest extends JsonApiTestCase
                 'productVariants' => [
                     sprintf('/api/v2/admin/product-variants/%s', $productVariant->getCode()),
                 ],
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

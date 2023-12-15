@@ -343,7 +343,7 @@ final class ManagingCountriesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            $constraint === 'required' ? 'Please enter country ISO code.' : 'Country ISO code is invalid.'
+            $constraint === 'required' ? 'Please enter country ISO code.' : 'Country ISO code is invalid.',
         );
     }
 
