@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Prodaja u trenutnom mjesecu
                     orders: Narudžbe
+                official_support:
+                    header: Službena podrška
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Pregledaj dodatke
+                    professional_services: Profesionalne usluge
+                    find_a_partner: Pronađite partnera

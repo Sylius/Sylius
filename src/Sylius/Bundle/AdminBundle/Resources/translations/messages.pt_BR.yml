@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Vendas
                     orders: Pedidos
+                official_support:
+                    header: Suporte oficial
+                    browse_plugins: Navegar em plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Serviços profissionais
+                    find_a_partner: Encontre um parceiro
