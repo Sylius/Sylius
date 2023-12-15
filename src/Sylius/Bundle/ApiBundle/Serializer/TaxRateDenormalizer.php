@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -30,6 +30,7 @@ final class TaxRateDenormalizer implements ContextAwareDenormalizerInterface, De
         return
             !isset($context[self::ALREADY_CALLED]) &&
             is_array($data) &&
+            isset($data['amount']) &&
             is_a($type, TaxRateInterface::class, true)
         ;
     }
@@ -37,10 +38,10 @@ final class TaxRateDenormalizer implements ContextAwareDenormalizerInterface, De
     public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
     {
         $context[self::ALREADY_CALLED] = true;
-        $data = (array) $data;
 
-        if (null === ($data['amount'] ?? null)) {
-            unset($data['amount']);
+        $data = (array) $data;
+        if (is_numeric($data['amount'])) {
+            $data['amount'] = (string) $data['amount'];
         }
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
