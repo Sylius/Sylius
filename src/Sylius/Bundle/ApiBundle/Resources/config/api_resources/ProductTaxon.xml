@@ -29,7 +29,7 @@
                 <attribute name="filters">
                     <attribute>sylius.api.search_filter.product.code</attribute>
                     <attribute>sylius.api.search_filter.taxon.code</attribute>
-                    <attribute>sylius.api.product_taxon_order_filter</attribute>
+                    <attribute>sylius.api.order_filter.position</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_taxon:read</attribute>
