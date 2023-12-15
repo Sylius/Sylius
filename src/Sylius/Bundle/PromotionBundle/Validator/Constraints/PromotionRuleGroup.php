@@ -11,16 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
-final class PromotionActionGroup extends Constraint
+final class PromotionRuleGroup extends Constraint
 {
     public function validatedBy(): string
     {
-        return 'sylius_promotion_action_group';
+        return 'sylius_promotion_rule_group';
     }
 
     public function getTargets(): string

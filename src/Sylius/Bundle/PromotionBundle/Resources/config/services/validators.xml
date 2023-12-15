@@ -41,14 +41,24 @@
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionValidator">
-            <argument>%sylius.promotion_actions%</argument>
-            <tag name="validator.constraint_validator" alias="sylius_promotion_action" />
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator">
+            <argument>%sylius.promotion.promotion_action.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_action_group" />
         </service>
 
-        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleValidator">
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionTypeValidator">
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_action_type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleGroupValidator">
+            <argument>%sylius.promotion.promotion_rule.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_promotion_rule_group" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionRuleTypeValidator">
             <argument>%sylius.promotion_rules%</argument>
-            <tag name="validator.constraint_validator" alias="sylius_promotion_rule" />
+            <tag name="validator.constraint_validator" alias="sylius_promotion_rule_type" />
         </service>
 
         <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionNotCouponBasedValidator">

@@ -230,3 +230,57 @@ sylius_payum:
 1. Interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface` has been refactored. It now extends a new interface `Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionReadInterface`, which contains only getter methods.
     - If your services or custom implementations previously relied on `PromotionCouponGeneratorInstructionInterface` for read operations, you should now use `PromotionCouponGeneratorInstructionReadInterface` for better clarity and separation of concerns.
     - This change is backward compatible as long as your implementations or services were using only the getter methods from `PromotionCouponGeneratorInstructionInterface`. However, if you also utilized setter methods, you should continue using `PromotionCouponGeneratorInstructionInterface`.
+
+1. A new parameter has been added to specify the validation groups for a given promotion action. 
+   If you have any custom validation groups for your promotion action, you need to add them to your `config/packages/_sylius.yaml` file. 
+   Additionally, if you have your own promotion action and want to add your validation groups, you can add another key to the `promotion_action.validation_groups` parameter.
+   This is handled by `Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator` and it resolves the groups based on the type of the passed promotion action.
+
+    ```yaml
+    sylius_promotion:
+        promotion_action:
+            validation_groups:
+                order_percentage_discount:
+                    - 'sylius'
+                    - 'sylius_promotion_action_order_percentage_discount'
+                shipping_percentage_discount:
+                    - 'sylius'
+                    - 'sylius_promotion_action_shipping_percentage_discount'
+                your_promotion_action:
+                    - 'sylius'
+                    - 'your_custom_validation_group'
+    ```
+   Along with this update, constraints have been removed from specific action form types. The affected form types include:
+   - `Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType`
+   - `Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType`
+   - `Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType`
+   - `Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType`
+   
+   The constraints previously defined in these forms are now in `src/Sylius/Bundle/CoreBundle/Resources/config/validation/PromotionAction.xml` and managed via the new validation groups parameters in the configuration.
+
+1. A new parameter has been added to specify the validation groups for a given promotion rule.
+   If you have any custom validation groups for your promotion rule, you need to add them to your `config/packages/_sylius.yaml` file.
+   Additionally, if you have your own promotion rule and want to add your validation groups, you can add another key to the `promotion_rule.validation_groups` parameter.
+   This is handled by `Sylius\Bundle\PromotionBundle\Validator\PromotionRuleGroupValidator` and it resolves the groups based on the type of the passed promotion rule.
+
+    ```yaml
+    sylius_promotion:
+        promotion_rule:
+            validation_groups:
+                cart_quantity:
+                    - 'sylius'
+                    - 'sylius_promotion_rule_cart_quantity'
+                customer_group:
+                    - 'sylius'
+                    - 'sylius_promotion_rule_customer_group'
+                your_promotion_rule:
+                    - 'sylius'
+                    - 'your_custom_validation_group'
+    ```
+   Along with this update, constraints have been removed from specific rule form types. The affected form types include:
+    - `Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ContainsProductConfigurationType`
+    - `Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\NthOrderConfigurationType`
+    - `Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType`
+    - `Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType`
+
+   The constraints previously defined in these forms are now in `src/Sylius/Bundle/CoreBundle/Resources/config/validation/PromotionRule.xml` and managed via the new validation groups parameters in the configuration.

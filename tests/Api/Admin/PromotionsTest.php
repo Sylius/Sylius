@@ -387,6 +387,11 @@ final class PromotionsTest extends JsonApiTestCase
                             ],
                         ],
                     ],
+                    [
+                        'type' => 'wrong_type',
+                        'configuration' => [
+                        ],
+                    ],
                 ],
             ], \JSON_THROW_ON_ERROR),
         );
@@ -444,6 +449,11 @@ final class PromotionsTest extends JsonApiTestCase
                     ],
                     [
                         'type' => ShippingPercentageDiscountPromotionActionCommand::TYPE,
+                        'configuration' => [
+                        ],
+                    ],
+                    [
+                        'type' => 'wrong_type',
                         'configuration' => [
                         ],
                     ],

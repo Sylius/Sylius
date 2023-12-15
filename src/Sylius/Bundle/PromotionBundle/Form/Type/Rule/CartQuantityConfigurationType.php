@@ -26,10 +26,6 @@ final class CartQuantityConfigurationType extends AbstractType
         $builder
             ->add('count', IntegerType::class, [
                 'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.count',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                ],
             ])
         ;
     }

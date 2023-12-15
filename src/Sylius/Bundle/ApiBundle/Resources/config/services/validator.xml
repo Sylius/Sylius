@@ -188,13 +188,5 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
         </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionActionGroupValidator">
-            <tag name="validator.constraint_validator" alias="sylius_promotion_action_group" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionRuleGroupValidator">
-            <tag name="validator.constraint_validator" alias="sylius_promotion_rule_group" />
-        </service>
     </services>
 </container>

@@ -33,6 +33,11 @@
             "propertyPath": "actions[4].configuration[percentage]",
             "message": "This field is missing.",
             "code": @string@
+        },
+        {
+            "propertyPath": "actions[5].type",
+            "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, unit_percentage_discount, shipping_percentage_discount.",
+            "code": null
         }
     ]
 }
