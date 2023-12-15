@@ -32,7 +32,7 @@ class ManagingProductAssociationsContext implements Context
     /**
      * @When /^I (associate as "[^"]+") the (product "[^"]+") with the ("[^"]+" product)$/
      */
-    public function iAssociateAtTypeTheProductWithTheProduct(
+    public function iAssociateAsTypeTheProductWithTheProduct(
         ProductAssociationTypeInterface $type,
         ProductInterface $owner,
         ProductInterface $product,

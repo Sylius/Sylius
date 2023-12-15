@@ -739,7 +739,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then I should see non-translatable attribute :attribute with value :value%
-     * @Then I should see non-translatable attribute :attribute with value :value %
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(ProductAttributeInterface $attribute, int $value): void
     {

@@ -119,6 +119,8 @@
 
 1. The `Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter` service and class has been renamed to `Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter`.
 
+1. The `sylius.api.product_taxon_filter` filter has been removed and its functionality has been superseded by the `sylius.api.search_filter.taxon.code` filter. The usage stays the same.
+
 1. Update in Translations Handling
 
    The process for creating or updating translations via the API has been refined. Now, the locale for each translation 
