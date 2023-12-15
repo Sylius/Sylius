@@ -21,7 +21,6 @@ imports:
 #    - suites/api/currency/currencies.yml
     - suites/api/currency/managing_currencies.yml
     - suites/api/currency/managing_exchange_rates.yml
-<<<<<<< HEAD
 #    - suites/api/currency/viewing_exchange_rates.yml
 #    - suites/api/homepage/viewing_products.yml
 #    - suites/api/inventory/cart_inventory.yml
