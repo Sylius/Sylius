@@ -40,30 +40,18 @@ Feature: Sorting listed product variants from a product by position
         Then I should see 4 variants in the list
         And the first variant in the list should have name "Opel Insignia Country Tourer"
 
-    @ui @javascript @no-api
+    @ui @javascript @api
     Scenario: Setting product variant as the first one in the list
         When I view all variants of the product "Opel Insignia"
         And I set the position of "Opel Insignia Sedan" to 0
         And I save my new configuration
+        And I view all variants of the product "Opel Insignia" again
         Then the first variant in the list should have name "Opel Insignia Sedan"
 
-    @api @no-ui
-    Scenario: Setting product variant as the first one in the list
-        When I set the position of "Opel Insignia Sedan" to 0
-        And I save my new configuration
-        And I view all variants of the product "Opel Insignia"
-        Then the first variant in the list should have name "Opel Insignia Sedan"
-
-    @ui @javascript @no-api
+    @ui @javascript @api
     Scenario: Setting product variant as the last one in the list
         When I view all variants of the product "Opel Insignia"
         And I set the position of "Opel Insignia Sedan" to 7
         And I save my new configuration
-        Then the last variant in the list should have name "Opel Insignia Sedan"
-
-    @api @no-ui
-    Scenario: Setting product variant as the last one in the list
-        When I set the position of "Opel Insignia Sedan" to 7
-        And I save my new configuration
-        And I view all variants of the product "Opel Insignia"
+        And I view all variants of the product "Opel Insignia" again
         Then the last variant in the list should have name "Opel Insignia Sedan"
