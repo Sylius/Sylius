@@ -50,9 +50,9 @@
             "code": @string@
         },
         {
-            "propertyPath": "rules[7].configuration[MOBILE]",
-            "message": "This field was not expected.",
-            "code": @string@
+            "propertyPath": "rules[8].type",
+            "message": "Promotion rule type is invalid. Available rule types are cart_quantity, customer_group, nth_order, shipping_country, has_taxon, total_of_items_from_taxon, contains_product, item_total.",
+            "code": null
         }
     ]
 }

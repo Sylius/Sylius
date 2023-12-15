@@ -11,17 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace Sylius\Bundle\PromotionBundle\Validator;
 
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRuleGroup;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-/** @experimental */
 final class PromotionRuleGroupValidator extends ConstraintValidator
 {
+    /** @param array<string, array<string, string>> $validationGroups */
+    public function __construct(private array $validationGroups)
+    {
+    }
+
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof PromotionRuleGroup) {
@@ -33,7 +38,7 @@ final class PromotionRuleGroupValidator extends ConstraintValidator
         }
 
         /** @var string[] $groups */
-        $groups = array_merge($constraint->groups, [$value->getType()]);
+        $groups = $this->validationGroups[$value->getType()] ?? $constraint->groups;
         $validator = $this->context->getValidator()->inContext($this->context);
         $validator->validate(value: $value, groups: $groups);
     }

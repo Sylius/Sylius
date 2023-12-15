@@ -31,16 +31,6 @@ final class UnitPercentageDiscountConfigurationType extends AbstractType
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
                 'html5' => true,
                 'scale' => 2,
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                    new Range([
-                        'min' => 0,
-                        'max' => 1,
-                        'notInRangeMessage' => 'sylius.promotion_action.percentage_discount_configuration.not_in_range',
-                        'groups' => ['sylius'],
-                    ]),
-                ],
             ])
             ->add('filters', PromotionFilterCollectionType::class, [
                 'label' => 'sylius.form.promotion_action.filters',

@@ -27,10 +27,6 @@ final class ItemTotalConfigurationType extends AbstractType
         $builder
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_rule.item_total_configuration.amount',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                ],
                 'currency' => $options['currency'],
             ])
         ;

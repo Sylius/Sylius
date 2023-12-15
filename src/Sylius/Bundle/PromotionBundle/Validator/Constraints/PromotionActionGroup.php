@@ -15,13 +15,11 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-final class PromotionAction extends Constraint
+final class PromotionActionGroup extends Constraint
 {
-    public string $invalidType = 'sylius.promotion_action.invalid_type';
-
     public function validatedBy(): string
     {
-        return 'sylius_promotion_action';
+        return 'sylius_promotion_action_group';
     }
 
     public function getTargets(): string

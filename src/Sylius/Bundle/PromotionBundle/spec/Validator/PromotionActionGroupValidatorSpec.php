@@ -11,11 +11,10 @@
 
 declare(strict_types=1);
 
-namespace spec\Sylius\Bundle\ApiBundle\Validator\Constraints;
+namespace spec\Sylius\Bundle\PromotionBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionActionGroup;
-use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionActionGroup;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -28,6 +27,8 @@ final class PromotionActionGroupValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context): void
     {
+        $this->beConstructedWith(['action_two' => ['Default', 'action_two']]);
+
         $this->initialize($context);
     }
 
@@ -41,12 +42,11 @@ final class PromotionActionGroupValidatorSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_an_exception_if_value_is_not_an_instance_of_promotion_action(
-        PromotionInterface $promotion,
-    ): void {
+    function it_throws_an_exception_if_value_is_not_an_instance_of_promotion_action(): void
+    {
         $this
             ->shouldThrow(UnexpectedValueException::class)
-            ->during('validate', [$promotion, new PromotionActionGroup()])
+            ->during('validate', [new \stdClass(), new PromotionActionGroup()])
         ;
     }
 
@@ -61,7 +61,23 @@ final class PromotionActionGroupValidatorSpec extends ObjectBehavior
         $context->getValidator()->willReturn($validator);
         $validator->inContext($context)->willReturn($contextualValidator);
 
-        $contextualValidator->validate($promotionAction, null, ['Default', 'test_group', 'action_two'])->willReturn($contextualValidator)->shouldBeCalled();
+        $contextualValidator->validate($promotionAction, null, ['Default', 'action_two'])->willReturn($contextualValidator)->shouldBeCalled();
+
+        $this->validate($promotionAction, new PromotionActionGroup(['groups' => ['Default', 'test_group']]));
+    }
+
+    function it_calls_validator_with_default_groups_if_none_provided_for_promotion_action_type(
+        ExecutionContextInterface $context,
+        PromotionActionInterface $promotionAction,
+        ValidatorInterface $validator,
+        ContextualValidatorInterface $contextualValidator,
+    ): void {
+        $promotionAction->getType()->willReturn('action_one');
+
+        $context->getValidator()->willReturn($validator);
+        $validator->inContext($context)->willReturn($contextualValidator);
+
+        $contextualValidator->validate($promotionAction, null, ['Default', 'test_group'])->willReturn($contextualValidator)->shouldBeCalled();
 
         $this->validate($promotionAction, new PromotionActionGroup(['groups' => ['Default', 'test_group']]));
     }
