@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Satışlar
                     orders: Siparişler
+                official_support:
+                    header: Resmi destek
+                    browse_plugins: Eklentilere göz at
+                    sylius_plus: Sylius Plus
+                    professional_services: Profesyonel hizmetler
+                    find_a_partner: Bir ortak bul

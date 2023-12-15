@@ -41,3 +41,9 @@ sylius:
                 sales:
                     header: Pardavimai
                     orders: Užsakymai
+                official_support:
+                    header: Oficiali parama
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Naršyti įskiepius
+                    professional_services: Profesionalios paslaugos
+                    find_a_partner: Rasti partnerį

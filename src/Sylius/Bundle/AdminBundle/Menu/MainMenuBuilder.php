@@ -35,6 +35,7 @@ final class MainMenuBuilder
         $this->addCustomersSubMenu($menu);
         $this->addMarketingSubMenu($menu);
         $this->addConfigurationSubMenu($menu);
+        $this->addOfficialSupportSubMenu($menu);
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
 
@@ -317,6 +318,46 @@ final class MainMenuBuilder
             ]]])
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
             ->setLabelAttribute('icon', 'lock')
+        ;
+    }
+
+    private function addOfficialSupportSubMenu(ItemInterface $menu): void
+    {
+        $configuration = $menu
+            ->addChild('official_support')
+            ->setLabel('sylius.menu.admin.main.official_support.header' )
+        ;
+
+        $configuration
+            ->addChild('sylius_plus')
+            ->setUri('https://sylius.com/plus/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.sylius_plus')
+            ->setLabelAttribute('icon', 'plus')
+        ;
+
+        $configuration
+            ->addChild('browse_plugins')
+            ->setUri('https://store.sylius.com/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.browse_plugins')
+            ->setLabelAttribute('icon', 'plug')
+        ;
+
+        $configuration
+            ->addChild('professional_services')
+            ->setUri('https://sylius.com/services/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.professional_services')
+            ->setLabelAttribute('icon', 'cog')
+        ;
+
+        $configuration
+            ->addChild('find_a_partner')
+            ->setUri('https://sylius.com/find-a-partner/')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.official_support.find_a_partner')
+            ->setLabelAttribute('icon', 'handshake')
         ;
     }
 }

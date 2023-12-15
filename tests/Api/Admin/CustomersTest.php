@@ -65,6 +65,33 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_gets_customer_statistics(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'customer.yaml',
+            'channel.yaml',
+            'order/fulfilled_order.yaml',
+        ]);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
+
+        /** @var CustomerInterface $customer */
+        $customer = $fixtures['customer_tony'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/customers/%s/statistics', $customer->getId()),
+            server: $header,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/customer/get_customer_statistics_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    /** @test */
     public function it_creates_a_customer(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);

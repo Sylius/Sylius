@@ -557,13 +557,13 @@ final class ManagingProductsContext implements Context
      */
     public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
     {
-        $productTaxonId = $this->getProductTaxonId($product);
-
-        $response = $this->client->show(Resources::PRODUCT_TAXONS, (string) $productTaxonId);
-        $productTaxonIri = $this->responseChecker->getValue($response, 'taxon');
-        $productTaxonCodes = explode('/', $productTaxonIri);
-
-        Assert::same(array_pop($productTaxonCodes), $taxon->getCode());
+        $this->client->index(Resources::PRODUCT_TAXONS);
+        Assert::true(
+            $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
+                'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
+                'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+            ])
+        );
     }
 
     /**
@@ -871,18 +871,10 @@ final class ManagingProductsContext implements Context
         return $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
     }
 
-    private function getProductTaxonId(ProductInterface $product): string
-    {
-        $productResponse = $this->client->show(Resources::PRODUCTS, (string) $product->getCode());
-        $productTaxonUrl = explode('/', $this->responseChecker->getValue($productResponse, 'productTaxons')[0]);
-
-        return array_pop($productTaxonUrl);
-    }
-
     private function getAttributeValueInProperType(
         ProductAttributeInterface $productAttribute,
         string $value,
-    ): string|bool|float|int {
+    ): bool|float|int|string {
         switch ($productAttribute->getStorageType()) {
             case AttributeValueInterface::STORAGE_BOOLEAN:
                 return (bool) $value;

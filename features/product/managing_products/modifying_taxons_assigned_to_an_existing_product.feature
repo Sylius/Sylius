@@ -14,7 +14,8 @@ Feature: Modifying taxons assigned to an existing product
 
     @ui @api
     Scenario: Modifying taxons assigned to a product
-        When I change that the "T-Shirt" product belongs to the "T-Shirts" taxon
+        When I change that the "T-Shirt" product does not belong to the "Clothes" taxon
+        And I add "T-Shirts" taxon to the "T-Shirt" product
         Then the product "T-Shirt" should have the "T-Shirts" taxon
 
     @ui @api

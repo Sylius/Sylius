@@ -1,0 +1,55 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductTaxon",
+    "@id": "\/api\/v2\/admin\/product-taxons",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-taxons\/@integer@",
+            "@type": "ProductTaxon",
+            "id": @integer@,
+            "product": "\/api\/v2\/admin\/products\/MUG",
+            "taxon": "\/api\/v2\/admin\/taxons\/MUGS",
+            "position": 1
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-taxons\/@integer@",
+            "@type": "ProductTaxon",
+            "id": @integer@,
+            "product": "\/api\/v2\/admin\/products\/CAP",
+            "taxon": "\/api\/v2\/admin\/taxons\/CAPS",
+            "position": 2
+        }
+    ],
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-taxons{?product.code,product.code[],taxon.code,taxon.code[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product.code",
+                "property": "product.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "product.code[]",
+                "property": "product.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "taxon.code",
+                "property": "taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "taxon.code[]",
+                "property": "taxon.code",
+                "required": false
+            }
+        ]
+    }
+}

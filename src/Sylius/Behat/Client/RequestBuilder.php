@@ -57,7 +57,7 @@ final class RequestBuilder
         return $this;
     }
 
-    public function withParameter(string $key, string|array $value): self
+    public function withParameter(string $key, array|string $value): self
     {
         $this->parameters[$key] = $value;
 

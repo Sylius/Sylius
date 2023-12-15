@@ -38,3 +38,9 @@ sylius:
                 sales:
                     header: sylius.breadcrumb.sales
                     orders: sylius.breadcrumb.order.index
+                official_support:
+                    header: 公式サポート
+                    browse_plugins: プラグインを参照
+                    sylius_plus: Sylius Plus
+                    professional_services: プロフェッショナルサービス
+                    find_a_partner: パートナーを探す

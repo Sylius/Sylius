@@ -23,6 +23,11 @@
             <argument type="service" id="sylius.repository.order_item" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction">
+            <argument type="service" id="sylius.query_bus" />
+            <tag name="controller.service_arguments" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.locale" />

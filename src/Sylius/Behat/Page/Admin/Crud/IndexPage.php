@@ -39,7 +39,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
 
             return 1 === count($rows);
-        } catch (\InvalidArgumentException|ElementNotFoundException) {
+        } catch (ElementNotFoundException|\InvalidArgumentException) {
             return false;
         }
     }
@@ -76,7 +76,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             }
 
             return null !== $rows[0]->find('css', $element);
-        } catch (\InvalidArgumentException|ElementNotFoundException) {
+        } catch (ElementNotFoundException|\InvalidArgumentException) {
             return false;
         }
     }

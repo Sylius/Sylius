@@ -71,6 +71,15 @@
                 </attribute>
             </itemOperation>
 
+            <itemOperation name="admin_statistics_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers/{id}/statistics</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:statistics:read</attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_put">
                 <attribute name="method">PUT</attribute>
                 <attribute name="path">/admin/customers/{id}</attribute>
