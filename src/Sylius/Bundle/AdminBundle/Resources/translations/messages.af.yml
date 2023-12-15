@@ -26,8 +26,8 @@ sylius:
                 sales:
                     header: Verkope
                     orders: Bestellings
-                extras:
-                    header: Ekstras
+                official_support:
+                    header: Amptelike ondersteuning
                     browse_plugins: Deurblaai invoegings
                     sylius_plus: Sylius Plus
                     professional_services: Professionele dienste

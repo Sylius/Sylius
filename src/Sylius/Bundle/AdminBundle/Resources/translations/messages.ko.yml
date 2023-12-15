@@ -7,8 +7,8 @@ sylius:
             main:
                 customers:
                     groups: 그룹
-            extras:
-                header: 추가 항목
+            official_support:
+                header: 공식 지원
                 browse_plugins: 플러그인 탐색
                 sylius_plus: Sylius Plus
                 professional_services: 전문 서비스

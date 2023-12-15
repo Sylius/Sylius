@@ -41,8 +41,8 @@ sylius:
                 sales:
                     header: المبيعات
                     orders: طلبات الشراء
-                extras:
-                    header: إضافات
+                official_support:
+                    header: الدعم الرسمي
                     browse_plugins: تصفح الإضافات
                     sylius_plus: Sylius Plus
                     professional_services: الخدمات المحترفة

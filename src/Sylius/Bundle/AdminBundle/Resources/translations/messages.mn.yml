@@ -45,8 +45,8 @@ sylius:
                 sales:
                     header: Борлуулалт
                     orders: Захиалгууд
-                extras:
-                    header: Нэмэлтүүд
+                official_support:
+                    header: Албан ёсны дэмжлэг
                     browse_plugins: Плагинуудыг үзэх
                     sylius_plus: Sylius Plus
                     professional_services: Мэргэжлийн үйлчилгээнүүд

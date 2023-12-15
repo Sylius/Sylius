@@ -38,8 +38,8 @@ sylius:
                 sales:
                     header: Πωλήσεις
                     orders: Παραγγελίες
-                extras:
-                    header: Επιπλέον
+                official_support:
+                    header: Επίσημη υποστήριξη
                     browse_plugins: Περιήγηση σε πρόσθετα
                     sylius_plus: Sylius Plus
                     professional_services: Επαγγελματικές υπηρεσίες

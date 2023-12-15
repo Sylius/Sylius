@@ -42,8 +42,8 @@ sylius:
                 sales:
                     header: Продажи
                     orders: Заказы
-                extras:
-                    header: Дополнения
+                official_support:
+                    header: Официальная поддержка
                     browse_plugins: Просмотр плагинов
                     sylius_plus: Sylius Plus
                     professional_services: Профессиональные услуги

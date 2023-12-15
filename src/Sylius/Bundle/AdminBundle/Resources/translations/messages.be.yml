@@ -38,9 +38,9 @@ sylius:
                 sales:
                     header: Продажы
                     orders: Замовы
-                extras:
-                    header: Extra's
+                official_support:
+                    header: афіцыйная падтрымка
                     sylius_plus: Sylius Plus
-                    browse_plugins: Plugins durchsuchen
-                    professional_services: Professionelle Dienstleistungen
-                    find_a_partner: Einen Partner finden
+                    browse_plugins: праглядаць убудовы
+                    professional_services: прафесійныя паслугі
+                    find_a_partner: знайсці партнёра

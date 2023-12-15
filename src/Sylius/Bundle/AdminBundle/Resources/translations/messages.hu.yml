@@ -41,8 +41,8 @@ sylius:
                 sales:
                     header: Értékesítés
                     orders: Rendelések
-                extras:
-                    header: Kiegészítők
+                official_support:
+                    header: Hivatalos támogatás
                     browse_plugins: Bővítmények böngészése
                     sylius_plus: Sylius Plus
                     professional_services: Szakmai szolgáltatások

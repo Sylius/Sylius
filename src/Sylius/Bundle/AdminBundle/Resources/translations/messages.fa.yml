@@ -44,8 +44,8 @@ sylius:
                 sales:
                     header: فروش‌ها
                     orders: سفارش‌ها
-                extras:
-                    header: افزونه‌ها
+                official_support:
+                    header: افزونه‌هاپشتیبانی رسمی
                     browse_plugins: مرور افزونه‌ها
                     sylius_plus: Sylius Plus
                     professional_services: خدمات حرفه‌ای

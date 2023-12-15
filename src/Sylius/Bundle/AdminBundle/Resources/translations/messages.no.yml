@@ -38,8 +38,8 @@ sylius:
                 sales:
                     header: Salg
                     orders: Bestillinger
-                extras:
-                    header: Ekstra
+                official_support:
+                    header: Offisiell støtte
                     browse_plugins: Bla gjennom plugins
                     sylius_plus: Sylius Plus
                     professional_services: Profesjonelle tjenester

@@ -28,8 +28,8 @@ sylius:
                 sales:
                     header: Продаје
                     orders: Наруџбине
-                extras:
-                    header: Додаци
+                official_support:
+                    header: Званична подршка
                     browse_plugins: Прегледај додатке
                     sylius_plus: Sylius Plus
                     professional_services: Професионалне услуге

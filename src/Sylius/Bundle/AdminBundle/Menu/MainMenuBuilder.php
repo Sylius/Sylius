@@ -35,7 +35,7 @@ final class MainMenuBuilder
         $this->addCustomersSubMenu($menu);
         $this->addMarketingSubMenu($menu);
         $this->addConfigurationSubMenu($menu);
-        $this->addSupportSubMenu($menu);
+        $this->addOfficialSupportSubMenu($menu);
 
         $this->eventDispatcher->dispatch(new MenuBuilderEvent($this->factory, $menu), self::EVENT_NAME);
 
@@ -321,18 +321,18 @@ final class MainMenuBuilder
         ;
     }
 
-    private function addSupportSubMenu(ItemInterface $menu): void
+    private function addOfficialSupportSubMenu(ItemInterface $menu): void
     {
         $configuration = $menu
-            ->addChild('extras')
-            ->setLabel('sylius.menu.admin.main.extras.header' )
+            ->addChild('official_support')
+            ->setLabel('sylius.menu.admin.main.official_support.header' )
         ;
 
         $configuration
             ->addChild('sylius_plus')
             ->setUri('https://sylius.com/plus/')
             ->setLinkAttribute('target', '_blank')
-            ->setLabel('sylius.menu.admin.main.extras.sylius_plus')
+            ->setLabel('sylius.menu.admin.main.official_support.sylius_plus')
             ->setLabelAttribute('icon', 'plus')
         ;
 
@@ -340,7 +340,7 @@ final class MainMenuBuilder
             ->addChild('browse_plugins')
             ->setUri('https://store.sylius.com/')
             ->setLinkAttribute('target', '_blank')
-            ->setLabel('sylius.menu.admin.main.extras.browse_plugins')
+            ->setLabel('sylius.menu.admin.main.official_support.browse_plugins')
             ->setLabelAttribute('icon', 'plug')
         ;
 
@@ -348,7 +348,7 @@ final class MainMenuBuilder
             ->addChild('professional_services')
             ->setUri('https://sylius.com/services/')
             ->setLinkAttribute('target', '_blank')
-            ->setLabel('sylius.menu.admin.main.extras.professional_services')
+            ->setLabel('sylius.menu.admin.main.official_support.professional_services')
             ->setLabelAttribute('icon', 'cog')
         ;
 
@@ -356,7 +356,7 @@ final class MainMenuBuilder
             ->addChild('find_a_partner')
             ->setUri('https://sylius.com/find-a-partner/')
             ->setLinkAttribute('target', '_blank')
-            ->setLabel('sylius.menu.admin.main.extras.find_a_partner')
+            ->setLabel('sylius.menu.admin.main.official_support.find_a_partner')
             ->setLabelAttribute('icon', 'handshake')
         ;
     }

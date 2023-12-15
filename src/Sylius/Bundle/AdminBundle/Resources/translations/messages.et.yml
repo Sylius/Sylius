@@ -9,8 +9,8 @@ sylius:
                     channels: Kanalid
                     currencies: Valuutad
                     locales: Keeled
-            extras:
-                header: Lisad
+            official_support:
+                header: Ametlik tugi
                 browse_plugins: Sirvi pluginaid
                 sylius_plus: Sylius Plus
                 professional_services: Professionaalsed teenused

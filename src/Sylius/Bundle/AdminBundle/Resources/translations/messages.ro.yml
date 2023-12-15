@@ -45,8 +45,8 @@ sylius:
                 sales:
                     header: Vânzări
                     orders: Comenzi
-                extras:
-                    header: Extra
+                official_support:
+                    header: Sprijin oficial
                     browse_plugins: Răsfoiește plugin-uri
                     sylius_plus: Sylius Plus
                     professional_services: Servicii profesionale

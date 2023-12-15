@@ -41,8 +41,8 @@ sylius:
                 sales:
                     header: 销售额
                     orders: 订单
-                extras:
-                    header: 额外
+                official_support:
+                    header: 官方支持
                     browse_plugins: 浏览插件
                     sylius_plus: Sylius Plus
                     professional_services: 专业服务

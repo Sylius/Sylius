@@ -38,8 +38,8 @@ sylius:
                 sales:
                     header: 銷售
                     orders: 訂單
-                extras:
-                    header: 額外
+                official_support:
+                    header: 官方支持
                     browse_plugins: 瀏覽插件
                     sylius_plus: Sylius Plus
                     professional_services: 專業服務

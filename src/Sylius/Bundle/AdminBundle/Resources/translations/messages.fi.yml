@@ -37,8 +37,8 @@ sylius:
                 sales:
                     header: Myynnit
                     orders: Tilaukset
-                extras:
-                    header: Lisäosat
+                official_support:
+                    header: Virallinen tuki
                     browse_plugins: Selaa lisäosia
                     sylius_plus: Sylius Plus
                     professional_services: Ammattipalvelut

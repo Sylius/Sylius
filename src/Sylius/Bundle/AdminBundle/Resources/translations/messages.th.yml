@@ -41,8 +41,8 @@ sylius:
                 sales:
                     header: ยอดขาย
                     orders: ใบสั่งซื้อ
-                extras:
-                    header: เสริม
+                official_support:
+                    header: การสนับสนุนอย่างเป็นทางการ
                     browse_plugins: ค้นหาปลั๊กอิน
                     sylius_plus: Sylius Plus
                     professional_services: บริการระดับมืออาชีพ

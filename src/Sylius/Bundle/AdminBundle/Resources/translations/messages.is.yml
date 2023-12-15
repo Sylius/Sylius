@@ -41,8 +41,8 @@ sylius:
                 sales:
                     header: Sala
                     orders: Pantanir
-                extras:
-                    header: Aukahlutir
+                official_support:
+                    header: Opinber stuðningur
                     browse_plugins: Skoða viðbæti
                     sylius_plus: Sylius Plus
                     professional_services: Fagleg þjónusta
