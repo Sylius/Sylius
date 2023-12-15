@@ -210,7 +210,7 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then average rating of product :product should be :rating
+     * @Then average rating of product :product should be :expectedRating
      */
     public function averageRatingOfProductShouldBe(ProductInterface $product, int $expectedRating): void
     {

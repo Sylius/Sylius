@@ -67,15 +67,7 @@ final class BrowsingProductVariantsContext implements Context
 
         $firstVariant = reset($variants);
 
-        Assert::same(
-            $firstVariant['translations']['en_US']['name'],
-            $variantName,
-            sprintf(
-                'Expected first variant to have name "%s", but it is named "%s".',
-                $variantName,
-                $firstVariant['translations']['en_US']['name'],
-            ),
-        );
+        $this->assertProductVariantName($firstVariant['translations']['en_US']['name'], $variantName);
     }
 
     /**
@@ -87,13 +79,18 @@ final class BrowsingProductVariantsContext implements Context
 
         $lastVariant = end($variants);
 
+        $this->assertProductVariantName($lastVariant['translations']['en_US']['name'], $variantName);
+    }
+
+    private function assertProductVariantName(string $variantName, string $expectedVariantName): void
+    {
         Assert::same(
-            $lastVariant['translations']['en_US']['name'],
             $variantName,
+            $expectedVariantName,
             sprintf(
-                'Expected last variant to have name "%s", but it is named "%s".',
+                'Expected product variant to have name "%s", but it is named "%s".',
+                $expectedVariantName,
                 $variantName,
-                $lastVariant['translations']['en_US']['name'],
             ),
         );
     }
