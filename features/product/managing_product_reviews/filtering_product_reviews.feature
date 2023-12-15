@@ -14,7 +14,7 @@ Feature: Browsing product reviews
     @ui @api
     Scenario: Browsing accepted reviews
         When I want to browse product reviews
-        And I choose "Accepted" as a status filter
+        And I choose "accepted" as a status filter
         And I filter
         Then I should see a single product review in the list
         And I should see the product review "Awesome" in the list
