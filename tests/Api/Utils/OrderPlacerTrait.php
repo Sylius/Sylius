@@ -21,67 +21,115 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Webmozart\Assert\Assert;
 
 trait OrderPlacerTrait
 {
-    protected function placeOrder(string $tokenValue, string $email = 'sylius@example.com'): void
+    private MessageBusInterface $commandBus;
+
+    private OrderRepositoryInterface $orderRepository;
+
+    public function setUp(): void
     {
-        /** @var MessageBusInterface $commandBus */
-        $commandBus = self::getContainer()->get('sylius.command_bus');
+        parent::setUp();
 
-        $pickupCartCommand = new PickupCart($tokenValue, 'en_US');
-        $pickupCartCommand->setChannelCode('WEB');
-        $commandBus->dispatch($pickupCartCommand);
+        $this->commandBus = self::getContainer()->get('sylius.command_bus');
+        $this->orderRepository = $this->get('sylius.repository.order');
+    }
 
-        $addItemToCartCommand = new AddItemToCart('MUG_BLUE', 3);
-        $addItemToCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($addItemToCartCommand);
+    protected function fulfillOrder(
+        string $tokenValue,
+        string $productVariantCode = 'MUG_BLUE',
+        int $quantity = 3,
+        string $email = 'sylius@example.com',
+        ?\DateTimeImmutable $checkoutCompletedAt = null,
+    ): OrderInterface {
+        $this->pickUpCart($tokenValue);
+        $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
+        $cart = $this->updateCartWithAddress($tokenValue, $email);
+        $this->dispatchShippingMethodChooseCommand($tokenValue, 'UPS', (string) $cart->getShipments()->first()->getId());
+        $this->dispatchPaymentMethodChooseCommand(
+            $tokenValue,
+            'CASH_ON_DELIVERY',
+            (string) $cart->getLastPayment()->getId(),
+        );
+        $order = $this->dispatchCompleteOrderCommand($tokenValue);
+        $this->payOrder($order);
+        $this->setCheckoutCompletedAt($order, $checkoutCompletedAt);
 
-        $address = new Address();
-        $address->setFirstName('John');
-        $address->setLastName('Doe');
-        $address->setCity('New York');
-        $address->setStreet('Avenue');
-        $address->setCountryCode('US');
-        $address->setPostcode('90000');
+        return $order;
+    }
 
-        $updateCartCommand = new UpdateCart($email, $address);
-        $updateCartCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($updateCartCommand);
+    protected function placeOrder(
+        string $tokenValue,
+        string $email = 'sylius@example.com',
+        string $productVariantCode = 'MUG_BLUE',
+        int $quantity = 3,
+        ?\DateTimeImmutable $checkoutCompletedAt = null,
+    ): OrderInterface {
+        $this->pickUpCart($tokenValue);
+        $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
+        $cart = $this->updateCartWithAddress($tokenValue, $email);
+        $this->dispatchShippingMethodChooseCommand($tokenValue, 'UPS', (string) $cart->getShipments()->first()->getId());
+        $this->dispatchPaymentMethodChooseCommand(
+            $tokenValue,
+            'CASH_ON_DELIVERY',
+            (string) $cart->getLastPayment()->getId(),
+        );
 
-        /** @var OrderRepositoryInterface $orderRepository */
-        $orderRepository = $this->get('sylius.repository.order');
-        /** @var OrderInterface|null $cart */
-        $cart = $orderRepository->findCartByTokenValue($tokenValue);
-        Assert::notNull($cart);
+        $order = $this->dispatchCompleteOrderCommand($tokenValue);
 
-        $chooseShippingMethodCommand = new ChooseShippingMethod('UPS');
+        return $order;
+    }
+
+    private function dispatchShippingMethodChooseCommand(
+        string $tokenValue,
+        string $shippingMethodCode = 'UPS',
+        ?string $subresourceId = null,
+    ): OrderInterface {
+        $chooseShippingMethodCommand = new ChooseShippingMethod($shippingMethodCode);
         $chooseShippingMethodCommand->setOrderTokenValue($tokenValue);
-        $chooseShippingMethodCommand->setSubresourceId((string) $cart->getShipments()->first()->getId());
-        $commandBus->dispatch($chooseShippingMethodCommand);
+        $chooseShippingMethodCommand->setSubresourceId($subresourceId);
 
-        $choosePaymentMethodCommand = new ChoosePaymentMethod('CASH_ON_DELIVERY');
+        $envelope = $this->commandBus->dispatch($chooseShippingMethodCommand);
+
+        return $envelope->last(HandledStamp::class)->getResult();
+    }
+
+    private function dispatchPaymentMethodChooseCommand(
+        string $tokenValue,
+        string $paymentMethodCode = 'CASH_ON_DELIVERY',
+        ?string $subresourceId = null,
+    ): OrderInterface {
+        $choosePaymentMethodCommand = new ChoosePaymentMethod($paymentMethodCode);
         $choosePaymentMethodCommand->setOrderTokenValue($tokenValue);
-        $choosePaymentMethodCommand->setSubresourceId((string) $cart->getLastPayment()->getId());
-        $commandBus->dispatch($choosePaymentMethodCommand);
+        $choosePaymentMethodCommand->setSubresourceId($subresourceId);
 
+        $envelope = $this->commandBus->dispatch($choosePaymentMethodCommand);
+
+        return $envelope->last(HandledStamp::class)->getResult();
+    }
+
+    protected function dispatchCompleteOrderCommand(
+        string $tokenValue,
+    ): OrderInterface {
         $completeOrderCommand = new CompleteOrder();
         $completeOrderCommand->setOrderTokenValue($tokenValue);
-        $commandBus->dispatch($completeOrderCommand);
+        $envelope = $this->commandBus->dispatch($completeOrderCommand);
+
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 
     protected function cancelOrder(string $tokenValue): void
     {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        /** @var OrderRepositoryInterface $orderRepository */
-        $orderRepository = $this->get('sylius.repository.order');
-        /** @var OrderInterface|null $order */
-        $order = $orderRepository->findOneByTokenValue($tokenValue);
+        $order = $this->orderRepository->findOneByTokenValue($tokenValue);
         Assert::notNull($order);
 
         $stateMachineFactory = $this->get('sm.factory');
@@ -90,6 +138,70 @@ trait OrderPlacerTrait
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);
 
         $objectManager->flush();
-        $objectManager->clear();
+    }
+
+    protected function payOrder(OrderInterface $order): OrderInterface
+    {
+        $objectManager = $this->get('doctrine.orm.entity_manager');
+
+        $stateMachineFactory = $this->get('sm.factory');
+
+        $stateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY);
+
+        $objectManager->flush();
+
+        return $order;
+    }
+
+    private function setCheckoutCompletedAt(
+        OrderInterface $order,
+        ?\DateTimeImmutable $checkoutCompletedAt,
+    ): OrderInterface {
+        $objectManager = $this->get('doctrine.orm.entity_manager');
+
+        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+
+        $objectManager->flush();
+
+        return $order;
+    }
+
+    protected function pickUpCart(string $tokenValue = 'nAWw2jewpA', string $channelCode = 'WEB'): string
+    {
+        $pickupCartCommand = new PickupCart($tokenValue);
+        $pickupCartCommand->setChannelCode($channelCode);
+
+        $this->commandBus->dispatch($pickupCartCommand);
+
+        return $tokenValue;
+    }
+
+    protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): string
+    {
+        $addItemToCartCommand = new AddItemToCart($productVariantCode, $quantity);
+        $addItemToCartCommand->setOrderTokenValue($tokenValue);
+
+        $this->commandBus->dispatch($addItemToCartCommand);
+
+        return $tokenValue;
+    }
+
+    protected function updateCartWithAddress(string $tokenValue, string $email = 'sylius@example.com'): OrderInterface
+    {
+        $address = new Address();
+        $address->setFirstName('John');
+        $address->setLastName('Doe');
+        $address->setCity('New York');
+        $address->setStreet('Avenue');
+        $address->setCountryCode('US');
+        $address->setPostcode('90000');
+
+        $updateCartCommand = new UpdateCart(email: $email, billingAddress: $address);
+        $updateCartCommand->setOrderTokenValue($tokenValue);
+
+        $envelope = $this->commandBus->dispatch($updateCartCommand);
+
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 }
