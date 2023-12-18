@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Serializer\TaxRateDenormalizer;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
