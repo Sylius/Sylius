@@ -6,7 +6,7 @@ sylius:
         city:
             max_length: Le nom de la ville ne doit pas dépasser {{ limit }} caractères|Le nom de la ville ne doit pas dépasser {{ limit }} caractères.
             min_length: Le nom de la ville doit comporter au moins {{ limit }} caractères|Le nom de la ville doit comporter au moins {{ limit }} caractères.
-            not_blank: Veuillez entrer une ville.
+            not_blank: Veuillez entrer une ville
         country:
             not_blank: Veuillez choisir un pays.
             disabled: Le pays choisi est désactivé. Veuillez en choisir un autre.
@@ -34,6 +34,7 @@ sylius:
             not_blank: Veuillez entrer le code ISO du pays.
             regex: Le code du pays peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Le code ISO du pays doit être unique.
+        unique_provinces: Toutes les provinces de ce pays doivent avoir des codes et des noms uniques.
     province:
         code:
             min_length: Le code de la région doit comporter au moins 5 caractères.
