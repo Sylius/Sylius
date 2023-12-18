@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
