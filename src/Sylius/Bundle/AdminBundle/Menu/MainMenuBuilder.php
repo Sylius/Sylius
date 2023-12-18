@@ -325,7 +325,7 @@ final class MainMenuBuilder
     {
         $configuration = $menu
             ->addChild('official_support')
-            ->setLabel('sylius.menu.admin.main.official_support.header' )
+            ->setLabel('sylius.menu.admin.main.official_support.header')
         ;
 
         $configuration

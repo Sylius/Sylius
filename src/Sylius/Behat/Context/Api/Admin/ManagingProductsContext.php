@@ -562,7 +562,7 @@ final class ManagingProductsContext implements Context
             $this->responseChecker->hasItemWithValues($this->client->getLastResponse(), [
                 'product' => $this->sectionAwareIriConverter->getIriFromResourceInSection($product, 'admin'),
                 'taxon' => $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
-            ])
+            ]),
         );
     }
 

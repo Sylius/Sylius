@@ -124,14 +124,14 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             'promotion_action' => [
                 'validation_groups' => [
                     'order_percentage_discount' => ['sylius', 'order_percentage_discount'],
-                    'order_fixed_discount' => ['sylius', 'order_fixed_discount']
-                ]
-            ]
+                    'order_fixed_discount' => ['sylius', 'order_fixed_discount'],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion.promotion_action.validation_groups',
-            ['order_percentage_discount' => ['sylius', 'order_percentage_discount'], 'order_fixed_discount' => ['sylius', 'order_fixed_discount']]
+            ['order_percentage_discount' => ['sylius', 'order_percentage_discount'], 'order_fixed_discount' => ['sylius', 'order_fixed_discount']],
         );
     }
 
@@ -142,14 +142,14 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
             'promotion_rule' => [
                 'validation_groups' => [
                     'cart_quantity' => ['sylius', 'cart_quantity'],
-                    'nth_order' => ['sylius', 'nth_order']
-                ]
-            ]
+                    'nth_order' => ['sylius', 'nth_order'],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter(
             'sylius.promotion.promotion_rule.validation_groups',
-            ['cart_quantity' => ['sylius', 'cart_quantity'], 'nth_order' => ['sylius', 'nth_order']]
+            ['cart_quantity' => ['sylius', 'cart_quantity'], 'nth_order' => ['sylius', 'nth_order']],
         );
     }
 
