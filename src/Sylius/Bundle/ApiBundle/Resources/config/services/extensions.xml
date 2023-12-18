@@ -129,6 +129,15 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\OrderExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="collection" >
+                <argument type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_CART</argument>
+            </argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\TaxonItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
