@@ -89,9 +89,15 @@
     "hydra:totalItems": 2,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/product-variants{?product,product[],catalogPromotion}",
+        "hydra:template": "\/api\/v2\/admin\/product-variants{?order[position],product,product[],catalogPromotion}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[position]",
+                "property": "position",
+                "required": false
+            },
             {
                 "@type": "IriTemplateMapping",
                 "variable": "product",

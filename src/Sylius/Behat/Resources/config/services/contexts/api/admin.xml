@@ -40,6 +40,11 @@
             <argument type="service" id="api_platform.iri_converter" />
         </service>
 
+        <service id="Sylius\Behat\Context\Api\Admin\BrowsingProductVariantsContext">
+            <argument type="service" id="sylius.behat.api_platform_client.admin" />
+            <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+        </service>
+
         <service id="Sylius\Behat\Context\Api\Admin\CreatingProductVariantContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="api_platform.iri_converter" />

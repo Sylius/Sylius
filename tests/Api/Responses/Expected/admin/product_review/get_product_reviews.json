@@ -69,5 +69,24 @@
             "updatedAt": @date@
         }
     ],
-    "hydra:totalItems": 5
+    "hydra:totalItems": 5,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-reviews{?status,status[]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "status",
+                "property": "status",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "status[]",
+                "property": "status",
+                "required": false
+            }
+        ]
+    }
 }

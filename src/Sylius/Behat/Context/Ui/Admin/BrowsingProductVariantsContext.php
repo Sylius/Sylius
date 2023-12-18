@@ -87,7 +87,7 @@ final class BrowsingProductVariantsContext implements Context
     /**
      * @When /^I browse variants of (this product)$/
      * @When /^I (?:|want to )view all variants of (this product)$/
-     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
+     * @When /^I view(?:| all) variants of the (product "[^"]+")(?:| again)$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {

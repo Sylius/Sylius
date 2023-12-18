@@ -40,6 +40,7 @@ default:
                 - sylius.behat.context.api.admin.managing_product_variants
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - Sylius\Behat\Context\Api\Admin\BrowsingProductVariantsContext
                 - Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext
 
             filters:
