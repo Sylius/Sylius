@@ -147,4 +147,34 @@ final class TaxRatesTest extends JsonApiTestCase
             Response::HTTP_OK,
         );
     }
+
+    /** @test */
+    public function it_returns_an_error_when_trying_to_update_with_a_malformed_amount(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var TaxRateInterface $taxRate */
+        $taxRate = $fixtures['regular_tax'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: '/api/v2/admin/tax-rates/' . $taxRate->getCode(),
+            server: $header,
+            content: json_encode([
+                'zone' => '/api/v2/admin/zones/EU',
+                'category' => '/api/v2/admin/tax-categories/TC2',
+                'name' => 'Regular Tax 30%',
+                'amount' => '0.3_test',
+                'includedInPrice' => true,
+                'calculator' => 'default',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/tax_rate/put_tax_rate_with_malformed_amount_response',
+            Response::HTTP_BAD_REQUEST,
+        );
+    }
 }

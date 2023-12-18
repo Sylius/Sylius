@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Sylius\Bundle\ApiBundle\Serializer\Exception\InvalidAmountTypeException;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
@@ -40,9 +41,12 @@ final class TaxRateDenormalizer implements ContextAwareDenormalizerInterface, De
         $context[self::ALREADY_CALLED] = true;
 
         $data = (array) $data;
-        if (is_numeric($data['amount'])) {
-            $data['amount'] = (string) $data['amount'];
+
+        if (!is_numeric($data['amount'])) {
+            throw new InvalidAmountTypeException();
         }
+
+        $data['amount'] = (string) $data['amount'];
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
