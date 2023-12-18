@@ -60,6 +60,19 @@ final class ManagingShipmentsContext implements Context
     }
 
     /**
+     * @When I move to the details of first shipment's order
+     */
+    public function iMoveToDetailsOfFirstShipment(): void
+    {
+        $firstShipment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
+
+        /** @var OrderInterface $order */
+        $order = $this->iriConverter->getResourceFromIri($firstShipment['order']);
+
+        $this->client->customItemAction(Resources::ORDERS, $order->getTokenValue(), HttpRequest::METHOD_GET, 'shipments');
+    }
+
+    /**
      * @When I choose :channel as a channel filter
      */
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
@@ -288,6 +301,21 @@ final class ManagingShipmentsContext implements Context
         }
 
         Assert::same($productUnitsCounter, $amount);
+    }
+
+    /**
+     * @Then I should see the details of order :order
+     */
+    public function iShouldSeeOrderWithDetails(OrderInterface $order): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->getLastResponse(),
+                'order',
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'),
+            ),
+            sprintf('Order with number %s does not exist', $order->getNumber()),
+        );
     }
 
     private function isShipmentForOrder(OrderInterface $order): bool
