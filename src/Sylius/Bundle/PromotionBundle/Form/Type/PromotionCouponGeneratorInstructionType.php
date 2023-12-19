@@ -13,19 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
+use Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class PromotionCouponGeneratorInstructionType extends AbstractType
+final class PromotionCouponGeneratorInstructionType extends AbstractType implements DataMapperInterface
 {
     /** @param array<string> $validationGroups */
     public function __construct(
+        private DataMapperInterface $propertyPathDataMapper,
+        private PromotionCouponGeneratorInstructionFactoryInterface $promotionCouponGeneratorInstructionFactory,
         private string $dataClass,
-        private array $validationGroups = []
+        private array $validationGroups = [],
     ) {
     }
 
@@ -55,6 +59,7 @@ final class PromotionCouponGeneratorInstructionType extends AbstractType
                 'label' => 'sylius.form.promotion_coupon_generator_instruction.expires_at',
                 'widget' => 'single_text',
             ])
+            ->setDataMapper($this)
         ;
     }
 
@@ -64,6 +69,21 @@ final class PromotionCouponGeneratorInstructionType extends AbstractType
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
         ]);
+    }
+
+    public function mapDataToForms($viewData, \Traversable $forms): void
+    {
+        $this->propertyPathDataMapper->mapDataToForms($viewData, $forms);
+    }
+
+    public function mapFormsToData(\Traversable $forms, &$viewData): void
+    {
+        $data = [];
+        foreach ($forms as $form) {
+            $data[$form->getName()] = $form->getData();
+        }
+
+        $viewData = $this->promotionCouponGeneratorInstructionFactory->createFromArray($data);
     }
 
     public function getBlockPrefix(): string
