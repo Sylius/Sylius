@@ -130,7 +130,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\OrderExtension">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
             <argument type="collection" >
                 <argument type="constant">Sylius\Component\Order\Model\OrderInterface::STATE_CART</argument>
             </argument>
