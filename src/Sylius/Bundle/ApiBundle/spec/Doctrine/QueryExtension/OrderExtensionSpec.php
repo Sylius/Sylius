@@ -17,25 +17,26 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class OrderExtensionSpec extends ObjectBehavior
 {
-    function let(UserContextInterface $userContext): void
+    function let(SectionProviderInterface $sectionProvider): void
     {
-        $this->beConstructedWith($userContext, ['cart']);
+        $this->beConstructedWith($sectionProvider, ['cart']);
     }
 
-    function it_does_not_apply_conditions_to_collection_for_shop_user(
-        UserContextInterface $userContext,
+    function it_does_not_apply_conditions_to_collection_for_shop(
         QueryBuilder $queryBuilder,
-        ShopUserInterface $shopUser,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($shopUser);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
 
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
@@ -48,13 +49,14 @@ final class OrderExtensionSpec extends ObjectBehavior
         );
     }
 
-    function it_does_not_apply_conditions_to_item_for_shop_user(
-        UserContextInterface $userContext,
+    function it_does_not_apply_conditions_to_item_for_shop(
         QueryBuilder $queryBuilder,
-        ShopUserInterface $shopUser,
+        SectionProviderInterface $sectionProvider,
+        ShopApiSection $shopApiSection,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($shopUser);
+        $sectionProvider->getSection()->willReturn($shopApiSection);
+
         $queryBuilder->getRootAliases()->shouldNotBeCalled();
 
         $this->applyToItem(
@@ -68,13 +70,12 @@ final class OrderExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_to_collection_for_admin(
-        UserContextInterface $userContext,
-        AdminUserInterface $adminUser,
+        AdminApiSection $adminApiSection,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
-        $userContext->getUser()->willReturn($adminUser);
-        $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
@@ -91,15 +92,14 @@ final class OrderExtensionSpec extends ObjectBehavior
     }
 
     function it_applies_conditions_to_item_for_admin(
-        UserContextInterface $userContext,
-        AdminUserInterface $adminUser,
+        AdminApiSection $adminApiSection,
+        SectionProviderInterface $sectionProvider,
         QueryBuilder $queryBuilder,
         QueryNameGeneratorInterface $queryNameGenerator,
     ): void {
         $queryBuilder->getRootAliases()->willReturn(['o']);
 
-        $userContext->getUser()->willReturn($adminUser);
-        $adminUser->getRoles()->willReturn(['ROLE_API_ACCESS']);
+        $sectionProvider->getSection()->willReturn($adminApiSection);
 
         $queryBuilder->getRootAliases()->willReturn(['o']);
 

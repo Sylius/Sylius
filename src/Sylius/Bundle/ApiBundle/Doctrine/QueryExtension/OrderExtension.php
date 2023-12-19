@@ -18,6 +18,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
+use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
+use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -28,7 +30,7 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
      * @param array<string> $orderStatesToFilterOut
      */
     public function __construct(
-        private UserContextInterface $userContext,
+        private SectionProviderInterface $sectionProvider,
         private array $orderStatesToFilterOut,
     ) {
     }
@@ -47,8 +49,7 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
             return;
         }
 
-        $user = $this->userContext->getUser();
-        if ($user instanceof AdminUserInterface && in_array('ROLE_API_ACCESS', $user->getRoles(), true)) {
+        if ($this->sectionProvider->getSection() instanceof AdminApiSection) {
 
             $stateParameter = $queryNameGenerator->generateParameterName('state');
             $rootAlias = $queryBuilder->getRootAliases()[0];
