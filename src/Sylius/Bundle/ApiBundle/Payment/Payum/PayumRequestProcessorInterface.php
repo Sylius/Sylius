@@ -18,6 +18,5 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 interface PayumRequestProcessorInterface
 {
-
     public function process( PaymentRequestInterface $paymentRequest, TokenAggregateInterface $request): void;
 }

@@ -43,7 +43,7 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
         return $this->getCommandProvider($paymentRequest)->handle($paymentRequest);
     }
 
-    protected function getCommandProvider(PaymentRequestInterface $paymentRequest): PaymentRequestCommandProviderInterface
+    private function getCommandProvider(PaymentRequestInterface $paymentRequest): PaymentRequestCommandProviderInterface
     {
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $paymentRequest->getMethod();
@@ -54,6 +54,7 @@ final class PaymentRequestCommandProvider implements PaymentRequestCommandProvid
         /** @var PaymentRequestCommandProviderInterface $service */
         $factoryName = $gatewayConfig->getConfig()['factory'] ?? $gatewayConfig->getFactoryName();
 
+        /** @todo consider founding better nested service provider */
         $id = sprintf('%s::%s', $factoryName, $paymentRequest->getType());
 
         /** @var PaymentRequestCommandProviderInterface $provider */

@@ -27,12 +27,12 @@
             <tag name="container.service_locator" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationChecker">
+        <service id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationCheckerInterface" class="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationChecker">
             <argument type="service" id="sylius.repository.payment_request" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProvider">
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationChecker" />
+        <service id="Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProviderInterface" class="Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProvider">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Checker\PaymentRequestDuplicationCheckerInterface" />
             <argument type="service" id="sylius.api.payment_request.command_provider.locator" />
         </service>
 
