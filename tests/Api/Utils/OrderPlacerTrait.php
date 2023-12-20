@@ -34,12 +34,14 @@ trait OrderPlacerTrait
 
     private OrderRepositoryInterface $orderRepository;
 
-    public function setUp(): void
-    {
-        parent::setUp();
+    private bool $isSetUpOrderPlacerCalled = false;
 
+    final public function setUpOrderPlacer(): void
+    {
         $this->commandBus = self::getContainer()->get('sylius.command_bus');
         $this->orderRepository = $this->get('sylius.repository.order');
+
+        $this->isSetUpOrderPlacerCalled = true;
     }
 
     protected function fulfillOrder(
@@ -49,10 +51,16 @@ trait OrderPlacerTrait
         string $email = 'sylius@example.com',
         ?\DateTimeImmutable $checkoutCompletedAt = null,
     ): OrderInterface {
+        $this->checkSetUpOrderPlacerCalled();
+
         $this->pickUpCart($tokenValue);
         $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
         $cart = $this->updateCartWithAddress($tokenValue, $email);
-        $this->dispatchShippingMethodChooseCommand($tokenValue, 'UPS', (string) $cart->getShipments()->first()->getId());
+        $this->dispatchShippingMethodChooseCommand(
+            $tokenValue,
+            'UPS',
+            (string) $cart->getShipments()->first()->getId(),
+        );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
@@ -72,10 +80,16 @@ trait OrderPlacerTrait
         int $quantity = 3,
         ?\DateTimeImmutable $checkoutCompletedAt = null,
     ): OrderInterface {
+        $this->checkSetUpOrderPlacerCalled();
+
         $this->pickUpCart($tokenValue);
         $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
         $cart = $this->updateCartWithAddress($tokenValue, $email);
-        $this->dispatchShippingMethodChooseCommand($tokenValue, 'UPS', (string) $cart->getShipments()->first()->getId());
+        $this->dispatchShippingMethodChooseCommand(
+            $tokenValue,
+            'UPS',
+            (string) $cart->getShipments()->first()->getId(),
+        );
         $this->dispatchPaymentMethodChooseCommand(
             $tokenValue,
             'CASH_ON_DELIVERY',
@@ -203,5 +217,12 @@ trait OrderPlacerTrait
         $envelope = $this->commandBus->dispatch($updateCartCommand);
 
         return $envelope->last(HandledStamp::class)->getResult();
+    }
+
+    private function checkSetUpOrderPlacerCalled(): void
+    {
+        if (!$this->isSetUpOrderPlacerCalled) {
+            throw new \LogicException('The setUpOrderPlacer() method must be called in setUp() method.');
+        }
     }
 }

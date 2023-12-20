@@ -22,6 +22,13 @@ final class CheckoutCompletionTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
 
+    protected function setUp(): void
+    {
+        $this->setUpOrderPlacer();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_prevents_from_order_completion_if_order_is_in_the_cart_state(): void
     {
