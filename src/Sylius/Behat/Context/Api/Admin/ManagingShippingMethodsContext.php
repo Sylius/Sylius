@@ -21,6 +21,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -69,25 +70,13 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iAddTheRuleConfiguredWithWeight(string $rule, int $weight): void
     {
-        match ($rule) {
-            'Total weight less than or equal' => $this->client->addRequestData('rules', [
-                [
-                    'type' => 'total_weight_less_than_or_equal',
-                    'configuration' => [
-                        'weight' => $weight,
-                    ],
-                ],
-            ]),
-            'Total weight greater than or equal' => $this->client->addRequestData('rules', [
-                [
-                    'type' => 'total_weight_greater_than_or_equal',
-                    'configuration' => [
-                        'weight' => $weight,
-                    ],
-                ],
-            ]),
-            default => throw new \InvalidArgumentException('Unsupported shipping method rule'),
-        };
+        $type = StringInflector::nameToLowercaseCode($rule);
+        $this->client->addRequestData('rules', [[
+            'type' => $type,
+            'configuration' => [
+                'weight' => $weight,
+            ],
+        ]]);
     }
 
     /**
@@ -106,7 +95,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the ([^"]+) rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
     public function iAddTheRuleConfiguredWithForChannel(string $rule, int $value, ChannelInterface $channel): void
     {

@@ -514,22 +514,11 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When /^I add the "Items total greater than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
-     * @When /^I add the Items total greater than or equal rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
      */
-    public function iAddTheItemsTotalGreaterThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith(string $rule, mixed $value, ChannelInterface $channel): void
     {
-        $this->createPage->addRule('Items total greater than or equal');
-        $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
-    }
-
-    /**
-     * @When /^I add the "Items total less than or equal" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
-     * @When /^I add the Items total less than or equal rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
-     */
-    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWith($value, ChannelInterface $channel): void
-    {
-        $this->createPage->addRule('Items total less than or equal');
+        $this->createPage->addRule($rule);
         $this->createPage->fillRuleOptionForChannel($channel->getCode(), 'Amount', (string) $value);
     }
 
