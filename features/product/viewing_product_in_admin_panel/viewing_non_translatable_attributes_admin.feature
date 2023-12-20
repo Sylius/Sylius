@@ -16,7 +16,7 @@ Feature: Viewing product's non translatable attributes
 
     @ui @api
     Scenario: Viewing product's non translatable attributes along with default ones
-        When I access "Iron Pickaxe" product page
+        When I access the "Iron Pickaxe" product
         Then I should see non-translatable attribute "crit chance" with value 10%
         And I should see attribute "Material" with value "Iron" in "English (United States)" locale
         And I should see attribute "Material" with value "Żelazo" in "Polish (Poland)" locale
