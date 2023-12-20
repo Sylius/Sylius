@@ -15,12 +15,12 @@ namespace Sylius\Bundle\ApiBundle\QueryHandler;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntry;
+use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntryCollection;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepositoryInterface;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 
 /** @experimental */
-final class GetAddressLogEntryHandler
+final class GetAddressLogEntryCollectionHandler
 {
     public function __construct(
         private ResourceLogEntryRepositoryInterface $addressLogEntryRepository,
@@ -28,7 +28,7 @@ final class GetAddressLogEntryHandler
     }
 
     /** @return Collection<array-key, AddressLogEntry> */
-    public function __invoke(GetAddressLogEntry $query): Collection
+    public function __invoke(GetAddressLogEntryCollection $query): Collection
     {
         $queryBuilder = $this->addressLogEntryRepository->createByObjectIdQueryBuilder((string)$query->getAddressId());
 

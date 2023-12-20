@@ -55,7 +55,7 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Creator\TaxonImageCreator" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryAction">
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction">
             <argument type="service" id="sylius.query_bus" />
             <tag name="controller.service_arguments" />
         </service>

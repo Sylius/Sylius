@@ -64,7 +64,7 @@
             <itemOperation name="admin_get_log_entries">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/addresses/{id}/log-entries</attribute>
-                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryAction</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetAddressLogEntryCollectionAction</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:address:log_entry:read</attribute>
                 </attribute>

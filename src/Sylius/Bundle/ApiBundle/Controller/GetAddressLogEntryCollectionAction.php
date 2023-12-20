@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntry;
+use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntryCollection;
 use Sylius\Component\Addressing\Model\AddressLogEntry;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 /** @experimental */
-final class GetAddressLogEntryAction
+final class GetAddressLogEntryCollectionAction
 {
     use HandleTrait;
 
@@ -34,7 +34,7 @@ final class GetAddressLogEntryAction
     {
         return $this->handle(
             $this->messageBus->dispatch(
-                new GetAddressLogEntry($id),
+                new GetAddressLogEntryCollection($id),
             ),
         );
     }
