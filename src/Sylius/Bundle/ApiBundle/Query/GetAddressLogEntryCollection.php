@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Query;
 
 /** @experimental */
-final class GetAddressLogEntry
+final class GetAddressLogEntryCollection
 {
     public function __construct(
         private int $addressId,

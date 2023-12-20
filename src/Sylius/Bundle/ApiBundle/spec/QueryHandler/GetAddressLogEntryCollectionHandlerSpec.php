@@ -17,10 +17,10 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Loggable\LogEntryInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntry;
+use Sylius\Bundle\ApiBundle\Query\GetAddressLogEntryCollection;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepositoryInterface;
 
-final class GetAddressLogEntryHandlerSpec extends ObjectBehavior
+final class GetAddressLogEntryCollectionHandlerSpec extends ObjectBehavior
 {
     function let(ResourceLogEntryRepositoryInterface $addressLogEntryRepository): void
     {
@@ -38,6 +38,6 @@ final class GetAddressLogEntryHandlerSpec extends ObjectBehavior
         $queryBuilder->getQuery()->willReturn($query);
         $addressLogEntryRepository->createByObjectIdQueryBuilder('3')->willReturn($queryBuilder);
 
-        $this(new GetAddressLogEntry(3))->shouldIterateAs([$addressLogEntryOne, $addressLogEntryTwo]);
+        $this(new GetAddressLogEntryCollection(3))->shouldIterateAs([$addressLogEntryOne, $addressLogEntryTwo]);
     }
 }
