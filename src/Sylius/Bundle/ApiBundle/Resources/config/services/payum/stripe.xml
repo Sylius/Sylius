@@ -18,8 +18,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.api.payment_request.command_provider.stripe" class="Sylius\Bundle\ApiBundle\Payment\PayumCapturePaymentRequestCommandProvider">
+        <service id="sylius.api.payment_request.command_provider.payum.stripe.capture" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumCapturePaymentRequestCommandProvider">
             <tag name="sylius.api.payment_request.command_provider" factory="stripe" type="capture" />
+        </service>
+
+        <service id="sylius.api.payment_request.command_provider.payum.stripe.status" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumStatusPaymentRequestCommandProvider">
+            <tag name="sylius.api.payment_request.command_provider" factory="stripe" type="status" />
         </service>
 
     </services>
