@@ -17,30 +17,43 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
 {
-    public function __construct(private ApiClientInterface $client, private ResponseCheckerInterface $responseChecker)
-    {
+    public function __construct(
+        private ApiClientInterface $client,
+        private ResponseCheckerInterface $responseChecker,
+        private DateTimeProviderInterface $dateTimeProvider,
+    ) {
     }
 
     /**
-     * @When I browse administration dashboard statistics
+     * @When I view statistics
      */
-    public function iBrowseAdministrationDashboardStatistics(): void
+    public function iBrowseStatistics(): void
     {
         $this->client->index(Resources::STATISTICS);
     }
 
     /**
-     * @When I browse administration dashboard statistics for :channel channel
+     * @When /^I view statistics for ("[^"]+" channel) and current year split by month$/
      * @When I choose :channel channel
+     * @When I view statistics for :channel channel
      */
-    public function iBrowseAdministrationDashboardStatisticsForChannel(ChannelInterface $channel): void
+    public function iViewStatisticsForChannelAndYear(ChannelInterface $channel): void
     {
-        $this->client->index(Resources::STATISTICS, ['channelCode' => $channel->getCode()]);
+        $this->client->index(
+            Resources::STATISTICS,
+            [
+                'channelCode' => $channel->getCode(),
+                'startDate' => $this->dateTimeProvider->now()->format('Y-01-01\T00:00:00'),
+                'dateInterval' => 'P1M',
+                'endDate' => $this->dateTimeProvider->now()->format('Y-12-31\T23:59:59'),
+            ],
+        );
     }
 
     /**
@@ -49,11 +62,10 @@ final class DashboardContext implements Context
     public function iShouldSeeNewOrders(int $count): void
     {
         Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject(
+            $this->responseChecker->hasValuesInSubresourceObject(
                 $this->client->getLastResponse(),
                 'businessActivitySummary',
-                'newOrdersCount',
-                $count,
+                ['newOrdersCount' => $count],
             ),
         );
     }
@@ -64,11 +76,17 @@ final class DashboardContext implements Context
     public function iShouldSeeNewCustomers(int $count): void
     {
         Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject(
+            $this->responseChecker->hasValuesInSubresourceObject(
                 $this->client->getLastResponse(),
                 'businessActivitySummary',
-                'newCustomersCount',
+                ['newCustomersCount' => $count],
+            ),
+            sprintf(
+                'There should be %s new customers, but got %s.',
                 $count,
+                json_encode(
+                    $this->responseChecker->getValue($this->client->getLastResponse(), 'businessActivitySummary'),
+                ),
             ),
         );
     }
@@ -79,11 +97,10 @@ final class DashboardContext implements Context
     public function thereShouldBeTotalSalesOf(int $totalSales): void
     {
         Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject(
+            $this->responseChecker->hasValuesInSubresourceObject(
                 $this->client->getLastResponse(),
                 'businessActivitySummary',
-                'totalSales',
-                $totalSales,
+                ['totalSales' => $totalSales],
             ),
         );
     }
@@ -94,11 +111,10 @@ final class DashboardContext implements Context
     public function myAverageOrderValueShouldBe(int $averageTotalValue): void
     {
         Assert::true(
-            $this->responseChecker->hasValueInSubresourceObject(
+            $this->responseChecker->hasValuesInSubresourceObject(
                 $this->client->getLastResponse(),
                 'businessActivitySummary',
-                'averageOrderValue',
-                $averageTotalValue,
+                ['averageOrderValue' => $averageTotalValue],
             ),
             sprintf('Average order value should be %s, but it does not.', $averageTotalValue),
         );
@@ -109,11 +125,10 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrdersInTheList(int $count): void
     {
-        $this->responseChecker->hasValueInSubresourceObject(
+        $this->responseChecker->hasValuesInSubresourceObject(
             $this->client->getLastResponse(),
             'businessActivitySummary',
-            'newOrdersCount',
-            $count,
+            ['newOrdersCount' => $count],
         );
     }
 }

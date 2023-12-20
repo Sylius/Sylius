@@ -6,10 +6,12 @@ default:
         api_dashboard:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
                     
                 - sylius.behat.context.transform.admin
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
+                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
