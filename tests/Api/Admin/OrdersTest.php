@@ -72,8 +72,8 @@ final class OrdersTest extends JsonApiTestCase
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
             'channel.yaml',
-            'customer.yaml',
-            'customer_order.yaml',
+            'order/customer.yaml',
+            'order/fulfilled.yaml',
         ]);
 
         /** @var CustomerInterface $customer */
