@@ -18,4 +18,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 interface PaymentStateMachineTransitionApplicatorInterface
 {
     public function complete(PaymentInterface $data): PaymentInterface;
+
+    public function process(PaymentInterface $data): PaymentInterface;
 }

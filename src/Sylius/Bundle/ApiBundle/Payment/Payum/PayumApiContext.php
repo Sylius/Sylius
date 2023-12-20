@@ -13,22 +13,29 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Payment\Payum;
 
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
+
 final class PayumApiContext implements PayumApiContextInterface
 {
-    private bool $enabled = false;
+    private ?PaymentRequestInterface $paymentRequest = null;
 
     public function isEnabled(): bool
     {
-        return $this->enabled;
+        return null !== $this->paymentRequest;
     }
 
-    public function enable(): void
+    public function enable(PaymentRequestInterface $paymentRequest): void
     {
-        $this->enabled = true;
+        $this->paymentRequest = $paymentRequest;
+    }
+
+    public function getPaymentRequest(): ?PaymentRequestInterface
+    {
+        return $this->paymentRequest;
     }
 
     public function disable(): void
     {
-        $this->enabled = false;
+        $this->paymentRequest = null;
     }
 }

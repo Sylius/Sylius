@@ -18,8 +18,12 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.api.payment_request.command_provider.offline" class="Sylius\Bundle\ApiBundle\Payment\PayumCapturePaymentRequestCommandProvider">
-            <tag name="sylius.api.payment_request.command_provider" factory="offline" type="capture" />
+        <service id="sylius.api.payment_request.command_provider.payum.offline.capture" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumCapturePaymentRequestCommandProvider">
+            <tag name="sylius.api.payment_request.command_provider" factory="offline" type="capture" priority="-200" />
+        </service>
+
+        <service id="sylius.api.payment_request.command_provider.payum.offline.status" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumStatusPaymentRequestCommandProvider">
+            <tag name="sylius.api.payment_request.command_provider" factory="offline" type="status" priority="-200" />
         </service>
 
     </services>

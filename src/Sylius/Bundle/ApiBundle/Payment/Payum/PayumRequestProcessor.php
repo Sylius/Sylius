@@ -33,7 +33,7 @@ final class PayumRequestProcessor implements PayumRequestProcessorInterface
 
         $gateway = $this->payum->getGateway($token->getGatewayName());
 
-        $this->payumApiContext->enable();
+        $this->payumApiContext->enable($paymentRequest);
         $reply = $gateway->execute($request, true);
         $this->payumApiContext->disable();
 
