@@ -17,10 +17,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionEx
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /** @experimental */
@@ -45,28 +43,43 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
         string $operationName = null,
         array $context = [],
     ): void {
-        if (!is_a($resourceClass, OrderInterface::class, true)) {
-            return;
-        }
-
-        if ($this->sectionProvider->getSection() instanceof AdminApiSection) {
-
-            $stateParameter = $queryNameGenerator->generateParameterName('state');
-            $rootAlias = $queryBuilder->getRootAliases()[0];
-
-            $queryBuilder
-                ->andWhere(sprintf('%s.state != :%s', $rootAlias, $stateParameter))
-                ->setParameter($stateParameter, $this->orderStatesToFilterOut)
-            ;
-        }
+        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
     }
 
     /**
      * @param array<mixed> $context
      * @param array<mixed> $identifiers
      */
-    public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator, string $resourceClass, array $identifiers, string $operationName = null, array $context = []): void
-    {
-        $this->applyToCollection($queryBuilder, $queryNameGenerator, $resourceClass, $operationName, $context);
+    public function applyToItem(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+        array $identifiers,
+        string $operationName = null,
+        array $context = []
+    ): void {
+        $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
+    }
+
+    private function filterOutOrders(
+        QueryBuilder $queryBuilder,
+        QueryNameGeneratorInterface $queryNameGenerator,
+        string $resourceClass,
+    ): void {
+        if (!is_a($resourceClass, OrderInterface::class, true)) {
+            return;
+        }
+
+        if (!$this->sectionProvider->getSection() instanceof AdminApiSection) {
+            return;
+        }
+
+        $stateParameter = $queryNameGenerator->generateParameterName('state');
+        $rootAlias = $queryBuilder->getRootAliases()[0];
+
+        $queryBuilder
+            ->andWhere(sprintf('%s.state != :%s', $rootAlias, $stateParameter))
+            ->setParameter($stateParameter, $this->orderStatesToFilterOut)
+        ;
     }
 }
