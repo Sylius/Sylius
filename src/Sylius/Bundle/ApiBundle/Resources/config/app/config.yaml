@@ -31,6 +31,8 @@ sylius_api:
             '%sylius.model.product.class%':
                 operations:
                     shop_get: ~
+    order_states_to_filter_out:
+        - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 
 api_platform:
     patch_formats:

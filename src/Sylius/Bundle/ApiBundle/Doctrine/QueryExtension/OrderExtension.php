@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Doctrine\QueryExtension;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\ContextAwareQueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
@@ -56,7 +57,7 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
         string $resourceClass,
         array $identifiers,
         string $operationName = null,
-        array $context = []
+        array $context = [],
     ): void {
         $this->filterOutOrders($queryBuilder, $queryNameGenerator, $resourceClass);
     }
@@ -78,8 +79,8 @@ final class OrderExtension implements ContextAwareQueryCollectionExtensionInterf
         $rootAlias = $queryBuilder->getRootAliases()[0];
 
         $queryBuilder
-            ->andWhere(sprintf('%s.state != :%s', $rootAlias, $stateParameter))
-            ->setParameter($stateParameter, $this->orderStatesToFilterOut)
+            ->andWhere($queryBuilder->expr()->notIn(sprintf('%s.state', $rootAlias), sprintf(':%s', $stateParameter)))
+            ->setParameter($stateParameter, $this->orderStatesToFilterOut, ArrayParameterType::STRING)
         ;
     }
 }
