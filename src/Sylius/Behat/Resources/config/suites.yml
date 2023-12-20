@@ -30,6 +30,7 @@ imports:
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
     - suites/api/order/modifying_placed_order_address.yaml
+    - suites/api/order/order_history.yaml
     - suites/api/payment/managing_payment_methods.yaml
     - suites/api/payment/managing_payments.yml
     - suites/api/product/adding_product_review.yml

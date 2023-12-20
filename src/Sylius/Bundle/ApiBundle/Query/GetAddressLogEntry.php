@@ -11,15 +11,18 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Context\Api;
+namespace Sylius\Bundle\ApiBundle\Query;
 
-final class Subresources
+/** @experimental */
+final class GetAddressLogEntry
 {
-    public const PROMOTION_COUPONS = 'coupons';
+    public function __construct(
+        private int $addressId,
+    ) {
+    }
 
-    public const ADDRESSES_LOG_ENTRIES = 'log-entries';
-
-    private function __construct()
+    public function getAddressId(): int
     {
+        return $this->addressId;
     }
 }

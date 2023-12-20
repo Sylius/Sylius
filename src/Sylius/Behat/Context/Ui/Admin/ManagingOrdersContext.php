@@ -888,11 +888,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then there should be :count changes in the registry
+     * @Then there should be :count shipping address changes in the registry
      */
-    public function thereShouldBeCountChangesInTheRegistry($count)
+    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
     {
-        Assert::same($this->historyPage->countShippingAddressChanges(), (int) $count);
+        Assert::same($this->historyPage->countShippingAddressChanges(), $count);
+    }
+
+    /**
+     * @Then there should be :count billing address changes in the registry
+     */
+    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
+    {
+        Assert::same($this->historyPage->countBillingAddressChanges(), $count);
     }
 
     /**
