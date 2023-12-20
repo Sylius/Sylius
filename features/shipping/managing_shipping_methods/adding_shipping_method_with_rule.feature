@@ -47,7 +47,7 @@ Feature: Adding a new shipping method with rule
         And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
-        And I add the Items total greater than or equal rule configured with $200 for "Web-US" channel
+        And I add the "Items total greater than or equal" rule configured with $200 for "Web-US" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
@@ -61,7 +61,7 @@ Feature: Adding a new shipping method with rule
         And I define it for the zone named "United States"
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50 for "Web-US" channel
-        And I add the Items total less than or equal rule configured with $200 for "Web-US" channel
+        And I add the "Items total less than or equal" rule configured with $200 for "Web-US" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
