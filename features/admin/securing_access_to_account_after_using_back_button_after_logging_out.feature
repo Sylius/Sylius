@@ -10,7 +10,7 @@ Feature: Securing access to the administration panel after using the back button
 
     @ui @mink:chromedriver @no-api
     Scenario: Securing access to administration dashboard after using the back button after logging out
-        When I browse administration dashboard statistics
+        When I am on the administration dashboard
         And I log out
         And I go back one page in the browser
         Then I should not see the administration dashboard

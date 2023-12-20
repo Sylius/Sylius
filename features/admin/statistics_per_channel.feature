@@ -47,14 +47,14 @@ Feature: Statistics for a specific channel
         And there should be total sales of "$5,241.00"
         And the average order value should be "$1,310.25"
 
-    @ui
+    @api @ui
     Scenario: Seeing recent orders in a specific channel
         Given 3 new customers have placed 4 orders for total of "$8,566.00" mostly "Onion" product
         And 2 more new customers have placed 2 orders for total of "$459.00" mostly "Banana" product
         When I view statistics for "WEB-POLAND" channel
         Then I should see 4 new orders in the list
 
-    @ui
+    @api @ui
     Scenario: Seeing recent orders in a specific channel
         Given 3 new customers have placed 4 orders for total of "$8,566.00" mostly "Onion" product
         And 2 more new customers have placed 2 orders for total of "$459.00" mostly "Banana" product
