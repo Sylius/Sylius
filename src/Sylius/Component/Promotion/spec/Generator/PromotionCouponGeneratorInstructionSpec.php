@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
 final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
     function it_implements_an_promotion_coupon_genarator_instruction_interface(): void
     {
-        $this->shouldImplement(PromotionCouponGeneratorInstructionInterface::class);
+        $this->shouldImplement(ReadablePromotionCouponGeneratorInstructionInterface::class);
     }
 
     function it_has_amount_equal_to_5_by_default(): void
@@ -30,25 +30,25 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 
     function its_amount_should_be_mutable(): void
     {
-        $this->setAmount(500);
+        $this->beConstructedWith(500);
         $this->getAmount()->shouldReturn(500);
     }
 
     function its_prefix_is_mutable(): void
     {
-        $this->setPrefix('PREFIX_');
+        $this->beConstructedWith(null, 'PREFIX_');
         $this->getPrefix()->shouldReturn('PREFIX_');
     }
 
     function its_code_length_is_mutable(): void
     {
-        $this->setCodeLength(4);
+        $this->beConstructedWith(null, null, 4);
         $this->getCodeLength()->shouldReturn(4);
     }
 
     function its_suffix_is_mutable(): void
     {
-        $this->setSuffix('_SUFFIX');
+        $this->beConstructedWith(null, null, null, '_SUFFIX');
         $this->getSuffix()->shouldReturn('_SUFFIX');
     }
 
@@ -59,7 +59,7 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 
     function its_usage_limit_is_mutable(): void
     {
-        $this->setUsageLimit(3);
+        $this->beConstructedWith(null, null, null, null, null, 3);
         $this->getUsageLimit()->shouldReturn(3);
     }
 }
