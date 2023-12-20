@@ -20,6 +20,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.order
