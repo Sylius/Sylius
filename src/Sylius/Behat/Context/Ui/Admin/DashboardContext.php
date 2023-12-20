@@ -16,7 +16,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 final class DashboardContext implements Context
@@ -39,32 +39,26 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I view statistics for :name channel
+     * @When I view statistics for :channel channel
      *
      * @throws UnexpectedPageException
      */
-    public function iViewStatisticsForChannel(string $channelName): void
+    public function iViewStatisticsForChannel(ChannelInterface $channel): void
     {
-        $channelName === 'United States' ?
-            $channelName = 'WEB-US' : $channelName = StringInflector::nameToLowercaseCode($channelName);
-
-        $this->dashboardPage->open(['channel' => $channelName]);
+        $this->dashboardPage->open(['channel' => $channel->getCode()]);
     }
 
     /**
-     * @When /^I view statistics for "([^"]+)" channel and (current|previous|next) year split by (month|day)$/
+     * @When /^I view statistics for ("[^"]+" channel) and (current|previous|next) year split by (month|day)$/
      *
      * @throws UnexpectedPageException
      */
     public function iViewStatisticsForChannelAndYear(
-        string $channelName,
+        ChannelInterface $channel,
         string $period,
         string $interval,
     ): void {
-        $channelName === 'United States'
-            ? $channelName = 'WEB-US' : $channelName = StringInflector::nameToLowercaseCode($channelName);
-
-        $this->dashboardPage->open(['channel' => $channelName]);
+        $this->dashboardPage->open(['channel' => $channel->getCode()]);
 
         match ($interval) {
             'month' => $this->dashboardPage->chooseYearSplitByMonthsInterval(),
