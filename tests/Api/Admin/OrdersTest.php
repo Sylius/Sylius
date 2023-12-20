@@ -24,6 +24,13 @@ final class OrdersTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
 
+    protected function setUp(): void
+    {
+        $this->setUpOrderPlacer();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_gets_an_order(): void
     {

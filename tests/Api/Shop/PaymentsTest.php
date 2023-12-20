@@ -23,6 +23,13 @@ final class PaymentsTest extends JsonApiTestCase
     use ShopUserLoginTrait;
     use OrderPlacerTrait;
 
+    protected function setUp(): void
+    {
+        $this->setUpOrderPlacer();
+
+        parent::setUp();
+    }
+
     /** @test */
     public function it_gets_payment_from_placed_order(): void
     {
