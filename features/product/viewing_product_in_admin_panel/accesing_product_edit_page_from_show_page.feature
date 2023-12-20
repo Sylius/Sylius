@@ -14,12 +14,12 @@ Feature: Accessing to product edit page from show page
 
     @ui @no-api
     Scenario: Accessing to product edit page from product show page
-        When I access "Iron shield" product page
+        When I access the "Iron Shield" product
         And I go to edit page
         Then I should be on "Iron shield" product edit page
 
     @ui @no-api
     Scenario: Accessing to variant edit page from product show page
-        When I access "Iron shield" product page
+        When I access the "Iron Shield" product
         And I go to edit page of "Iron shield - very big" variant
         Then I should be on "Iron shield - very big" variant edit page

@@ -24,8 +24,12 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -397,9 +401,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I access :product product page
+     * @When I access the :product product
      */
-    public function iAccessProductPage(ProductInterface $product): void
+    public function iAccessTheProduct(ProductInterface $product): void
     {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
     }
@@ -428,6 +432,115 @@ final class ManagingProductsContext implements Context
         $this->client->filter();
 
         $this->sharedStorage->set('response', $this->client->getLastResponse());
+    }
+
+    /**
+     * @Then I should see main taxon is :taxon
+     */
+    public function iShouldSeeMainTaxonIs(TaxonInterface $taxon): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'mainTaxon'),
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($taxon, 'admin'),
+        );
+    }
+
+    /**
+     * @Then I should see product taxon :taxon
+     */
+    public function iShouldSeeProductTaxon(TaxonInterface $taxon): void
+    {
+        $product = $this->sharedStorage->get('product');
+        Assert::isInstanceOf($product, ProductInterface::class);
+        $productTaxon = $product->getProductTaxons()->filter(
+            fn(ProductTaxonInterface $productTaxon) => $productTaxon->getTaxon()->getCode() === $taxon->getCode()
+        )->first();
+        Assert::isInstanceOf($productTaxon, ProductTaxonInterface::class);
+
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'productTaxons',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($productTaxon, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see option :productOption
+     */
+    public function iShouldSeeOption(ProductOptionInterface $productOption): void
+    {
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'options',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($productOption, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see :count variants
+     */
+    public function iShouldSeeVariants(int $count): void
+    {
+        Assert::count(
+            $this->responseChecker->getResponseContent($this->client->getLastResponse())['variants'] ?? [],
+            $count,
+        );
+    }
+
+    /**
+     * @Then I should see the :variant variant
+     */
+    public function iShouldSeeTheVariant(ProductVariantInterface $variant): void
+    {
+        Assert::true($this->responseChecker->hasValueInCollection(
+            $this->client->getLastResponse(),
+            'variants',
+            $this->sectionAwareIriConverter->getIriFromResourceInSection($variant, 'admin'),
+        ));
+    }
+
+    /**
+     * @Then I should see product :field is :value
+     * @Then I should see product's :field is :value
+     */
+    public function iShouldSeeProductFieldIs(string $field, string $value): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue($field, $value);
+    }
+
+    /**
+     * @Then I should see product's meta keyword(s) is/are :metaKeywords
+     */
+    public function iShouldSeeProductMetaKeywordsAre(string $metaKeywords): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue('metaKeywords', $metaKeywords);
+    }
+
+    /**
+     * @Then I should see product's short description is :shortDescription
+     */
+    public function iShouldSeeProductShortDescriptionIs(string $shortDescription): void
+    {
+        $this->assertResponseHasTranslationFieldWithValue('shortDescription', $shortDescription);
+    }
+
+    /**
+     * @Then I should see product association type :productAssociationType
+     */
+    public function iShouldSeeProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
+    {
+        $associations = $this->responseChecker->getValue($this->client->getLastResponse(), 'associations');
+        foreach ($associations as $associationIri) {
+            /** @var ProductAssociationInterface $association */
+            $association = $this->iriConverter->getResourceFromIri($associationIri);
+            if ($association->getType()->getCode() === $productAssociationType->getCode()) {
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(
+            sprintf('Product association type "%s" not found.', $productAssociationType->getCode()),
+        );
     }
 
     /**
@@ -984,5 +1097,13 @@ final class ManagingProductsContext implements Context
         }
 
         Assert::same((string) $value, $expectedValue);
+    }
+
+    private function assertResponseHasTranslationFieldWithValue(string $field, string $value): void
+    {
+        Assert::same(
+            $this->responseChecker->getTranslationValue($this->client->getLastResponse(), $field),
+            $value,
+        );
     }
 }

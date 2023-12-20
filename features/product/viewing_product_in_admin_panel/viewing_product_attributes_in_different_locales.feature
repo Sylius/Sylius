@@ -17,7 +17,7 @@ Feature: Viewing product's attributes in different locales
 
     @ui @api
     Scenario: Viewing product's attributes defined in different locales
-        When I access "Iron Shield" product page
+        When I access the "Iron Shield" product
         Then I should see attribute "material" with value "oak wood" in "English (United States)" locale
         And I should see attribute "shield details" with value "oak wood is a very good material." in "English (United States)" locale
         And I should see attribute "material" with value "drewno dębowe" in "Polish (Poland)" locale

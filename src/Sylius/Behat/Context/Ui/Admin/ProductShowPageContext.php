@@ -60,9 +60,9 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @When I access :product product page
+     * @When I access the :product product
      */
-    public function iAccessProductPage(ProductInterface $product): void
+    public function iAccessTheProduct(ProductInterface $product): void
     {
         $this->indexPage->showProductPage($product->getName());
     }
@@ -285,9 +285,9 @@ final class ProductShowPageContext implements Context
     }
 
     /**
-     * @Then I should see product taxon is :taxonName
+     * @Then I should see product taxon :taxonName
      */
-    public function iShouldSeeProductTaxonIs(string $taxonName): void
+    public function iShouldSeeProductTaxon(string $taxonName): void
     {
         Assert::true($this->taxonomyElement->hasProductTaxon($taxonName));
     }
@@ -385,7 +385,15 @@ final class ProductShowPageContext implements Context
      */
     public function iShouldSeeProductAssociationWith(string $association, string $productName): void
     {
-        Assert::true($this->associationsElement->isProductAssociated($association, $productName));
+        Assert::true($this->associationsElement->isAssociatedWith($association, $productName));
+    }
+
+    /**
+     * @Then I should see product association type :association
+     */
+    public function iShouldSeeProductAssociationType(string $association): void
+    {
+        Assert::true($this->associationsElement->hasAssociation($association));
     }
 
     /**
@@ -421,6 +429,14 @@ final class ProductShowPageContext implements Context
             $currentStock,
             $channel,
         ));
+    }
+
+    /**
+     * @Then I should see the :variantName variant
+     */
+    public function iShouldSeeTheVariant(string $variantName): void
+    {
+        Assert::true($this->variantsElement->hasProductVariant($variantName));
     }
 
     /**
