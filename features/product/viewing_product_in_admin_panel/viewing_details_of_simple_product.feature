@@ -51,7 +51,7 @@ Feature: Viewing details of a simple product
         And the product "Iron Shield" has a main taxon "Equipment"
         When I access the "Iron Shield" product
         Then I should see main taxon is "Equipment"
-        And I should see product taxon is "Shield"
+        And I should see product taxon "Shield"
 
     @ui @no-api
     Scenario: Viewing shipping block
