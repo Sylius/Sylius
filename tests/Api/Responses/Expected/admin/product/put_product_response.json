@@ -50,6 +50,7 @@
             "localeCode": null
         }
     ],
+    "averageRating": 0,
     "images": [
         {
             "@id": "\/api\/v2\/admin\/product-images\/@integer@",

@@ -20,6 +20,14 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
 {
     public function modify(OpenApi $docs): OpenApi
     {
+        $docs = $this->updateVerifiedPropertyType($docs);
+        $docs = $this->updateCustomerStatisticsExampleResponse($docs);
+
+        return $docs;
+    }
+
+    private function updateVerifiedPropertyType(OpenApi $docs): OpenApi
+    {
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
@@ -36,5 +44,79 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
         ];
 
         return $docs->withComponents($components->withSchemas($schemas));
+    }
+
+    private function updateCustomerStatisticsExampleResponse(OpenApi $docs): OpenApi
+    {
+        $components = $docs->getComponents();
+        $schemas = $components->getSchemas();
+
+        $schemas['Customer-admin.customer.statistics.read'] = [
+            'type' => 'object',
+            'properties' => [
+                'perChannelsStatistics' => [
+                    'readOnly' => true,
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'string'
+                    ],
+                ],
+                'allOrdersCount' => [
+                    'readOnly' => true,
+                    'type' => 'integer',
+                ],
+            ],
+        ];
+
+        $schemas['Customer.jsonld-admin.customer.statistics.read'] = [
+            'type' => 'object',
+            'properties' => [
+                '@context' => [
+                    'readOnly' => true,
+                    'oneOf' => [
+                        [
+                            'type' => 'string',
+                        ],
+                        [
+                            'type' => 'object',
+                            'properties' => [
+                                '@vocab' => [
+                                    'type' => 'string',
+                                ],
+                                'hydra' => [
+                                    'type' => 'string',
+                                    'enum' => ['http://www.w3.org/ns/hydra/core#'],
+                                ],
+                            ],
+                            'required' => ['@vocab', 'hydra'],
+                            'additionalProperties' => true,
+                        ],
+                    ],
+                ],
+                '@id' => [
+                    'readOnly' => true,
+                    'type' => 'string',
+                ],
+                '@type' => [
+                    'readOnly' => true,
+                    'type' => 'string',
+                ],
+                'perChannelsStatistics' => [
+                    'readOnly' => true,
+                    'type' => 'array',
+                    'items' => [
+                        'type' => 'string'
+                    ],
+                ],
+                'allOrdersCount' => [
+                    'readOnly' => true,
+                    'type' => 'integer',
+                ],
+            ],
+        ];
+
+        $components = $components->withSchemas($schemas);
+
+        return $docs->withComponents($components);
     }
 }

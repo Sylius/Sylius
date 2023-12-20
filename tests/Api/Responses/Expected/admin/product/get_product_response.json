@@ -42,6 +42,7 @@
             "localeCode": "pl_PL"
         }
     ],
+    "averageRating": 0,
     "images": [
         {
             "@id": "\/api\/v2\/admin\/product-images\/@integer@",

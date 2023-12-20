@@ -23,6 +23,9 @@
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-reviews</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.product_review_status_filter</attribute>
+                </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:product_review:read</attribute>
                 </attribute>

@@ -228,12 +228,13 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I want to view all variants of (this product)$/
-     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
+     * @When /^I view(?:| all) variants of the (product "[^"]+")(?:| again)$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product): void
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
         $this->client->addFilter('product', $this->iriConverter->getIriFromResource($product));
+        $this->client->addFilter('order[position]', 'asc');
         $this->client->filter();
     }
 
