@@ -24,5 +24,9 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.customer_statistics_provider" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryHandler">
+            <argument type="service" id="sylius.repository.address_log_entry" />
+        </service>
     </services>
 </container>

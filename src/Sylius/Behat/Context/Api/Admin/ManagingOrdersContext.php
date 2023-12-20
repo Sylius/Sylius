@@ -18,6 +18,8 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Api\Subresources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -45,6 +47,7 @@ final class ManagingOrdersContext implements Context
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -55,7 +58,7 @@ final class ManagingOrdersContext implements Context
     public function iSeeTheOrder(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
-        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResource($order));
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'));
 
         $this->sharedStorage->set('order', $order);
     }
@@ -67,6 +70,14 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders(): void
     {
         $this->client->index(Resources::ORDERS);
+    }
+
+    /**
+     * @When I browse order's :order history
+     */
+    public function iBrowseOrderHistory(OrderInterface $order): void
+    {
+        $this->iSeeTheOrder($order);
     }
 
     /**
@@ -976,6 +987,34 @@ final class ManagingOrdersContext implements Context
         }
 
         Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+    }
+
+    /**
+     * @Then there should be :count shipping address changes in the registry
+     */
+    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
+    {
+        $order = $this->sharedStorage->get('order');
+        $response = $this->client->subResourceIndex(
+            Resources::ADDRESSES,
+            Subresources::ADDRESSES_LOG_ENTRIES,
+            (string) $order->getShippingAddress()->getId(),
+        );
+        Assert::same($this->responseChecker->countCollectionItems($response), $count);
+    }
+
+    /**
+     * @Then there should be :count billing address changes in the registry
+     */
+    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
+    {
+        $order = $this->sharedStorage->get('order');
+        $response = $this->client->subResourceIndex(
+            Resources::ADDRESSES,
+            Subresources::ADDRESSES_LOG_ENTRIES,
+            (string) $order->getBillingAddress()->getId(),
+        );
+        Assert::same($this->responseChecker->countCollectionItems($response), $count);
     }
 
     /**
