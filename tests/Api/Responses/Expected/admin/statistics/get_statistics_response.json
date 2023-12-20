@@ -16,6 +16,7 @@
         ],
         "datasets": {
             "sales": [
+                2500,
                 0,
                 0,
                 0,
@@ -26,16 +27,14 @@
                 0,
                 0,
                 0,
-                0,
-                19500
+                0
             ]
         }
     },
     "businessActivitySummary": {
-        "totalSales": 19500,
-        "newCustomersCount": 4,
-        "newOrdersCount": 3,
-        "averageOrderValue": 6500
-    },
-    "intervalType": "month"
+        "totalSales": 2500,
+        "newOrdersCount": 1,
+        "newCustomersCount": 1,
+        "averageOrderValue": 2500
+    }
 }

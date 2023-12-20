@@ -21,20 +21,56 @@ final class StatisticsTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;
 
-    /** @test */
-    public function it_gets_statistics_data(): void
+    protected function setUp(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->setUpOrderPlacer();
 
-        for ($i = 0; $i < 3; ++$i) {
-            $this->placeOrder('ORDER_TOKEN' . $i, sprintf('customer_%s@example.com', $i));
-            $this->payOrder('ORDER_TOKEN' . $i);
-        }
+        parent::setUp();
+    }
+
+    /** @test */
+    public function it_gets_fulfilled_orders_in_specific_year_statistics(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'statistics.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $this->fulfillOrder(
+            tokenValue: 'ORDER_FULFILLED_BEFORE_REQUESTED_PERIOD',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2022-12-31T23:59:59'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: 'ORDER_FULFILLED_IN_JANUARY',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2023-01-01T00:00:00'),
+        );
+
+        $this->fulfillOrder(
+            tokenValue: 'ORDER_FULFILLED_AFTER_REQUESTED_PERIOD',
+            productVariantCode: 'product_variant_that_costs_1000',
+            quantity: 2,
+            checkoutCompletedAt: new \DateTimeImmutable('2024-01-01T00:00:00'),
+        );
+
+        $parameters = [
+            'channelCode' => 'WEB',
+            'startDate' => '2023-01-01T00:00:00',
+            'dateInterval' => 'P1M',
+            'endDate' => '2023-12-31T23:59:59',
+        ];
 
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/statistics',
-            parameters: ['channelCode' => 'WEB'],
+            parameters: $parameters,
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
@@ -48,44 +84,273 @@ final class StatisticsTest extends JsonApiTestCase
     /** @test */
     public function it_does_not_get_statistics_data_for_non_admin_user(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
-        for ($i = 0; $i < 3; ++$i) {
-            $this->placeOrder('ORDER_TOKEN' . $i, sprintf('customer_%s@example.com', $i));
-            $this->payOrder('ORDER_TOKEN' . $i);
-        }
+        $this->client->request(method: 'GET', uri: '/api/v2/admin/statistics');
 
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/statistics',
-        );
-
-        $this->assertResponseCode(
-            $this->client->getResponse(),
-            Response::HTTP_UNAUTHORIZED,
-        );
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     /** @test */
-    public function it_returns_a_bad_request_status_code_if_the_channel_code_is_not_provided(): void
+    public function it_returns_a_not_found_status_code_if_channel_does_not_exist(): void
     {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml', 'cart.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
-
-        for ($i = 0; $i < 3; ++$i) {
-            $this->placeOrder('ORDER_TOKEN' . $i, sprintf('customer_%s@example.com', $i));
-            $this->payOrder('ORDER_TOKEN' . $i);
-        }
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
 
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/statistics',
+            parameters: [
+                'channelCode' => 'CHANNEL_DOES_NOT_EXIST',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/statistics/get_statistics_missing_channel_code_response',
-            Response::HTTP_BAD_REQUEST,
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider missingQueryParameters
+     * @dataProvider emptyQueryParameters
+     * @dataProvider invalidQueryParameters
+     * @dataProvider invalidPeriods
+     */
+    public function it_returns_a_bad_request_status_code_if_any_of_required_parameters_is_missing_empty_or_invalid(
+        array $queryParameters,
+    ): void {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel.yaml']);
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/admin/statistics',
+            parameters: $queryParameters,
+            server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_BAD_REQUEST);
+    }
+
+    public function missingQueryParameters(): iterable
+    {
+        yield 'missing channelCode' => [
+             'parameters' => [
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+             ],
+        ];
+
+        yield 'missing startDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'missing dateInterval' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'missing endDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+            ],
+        ];
+
+        yield 'missing all parameters' => [
+            'parameters' => [],
+        ];
+    }
+
+    public function emptyQueryParameters(): iterable
+    {
+        yield 'empty channelCode' => [
+            'parameters' => [
+                'channelCode' => '',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'empty startDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'empty dateInterval' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => '',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'empty endDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '',
+            ],
+        ];
+    }
+
+    public function invalidQueryParameters(): iterable
+    {
+        yield 'invalid channelCode as bool value' => [
+            'parameters' => [
+                'channelCode' => true,
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'invalid channelCode as int value' => [
+            'parameters' => [
+                'channelCode' => 1,
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'invalid channelCode as float value' => [
+            'parameters' => [
+                'channelCode' => 1.1,
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'invalid startDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => 'INVALID_START_DATE',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'invalid dateInterval' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'INVALID_DATE_INTERVAL',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'invalid endDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => 'INVALID_END_DATE',
+            ],
+        ];
+
+        yield 'interval is not a valid ISO 8601 interval' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M1D',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+    }
+
+    public function invalidPeriods(): iterable
+    {
+        yield 'startDate is after endDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2022-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'n-th date from interval is not matching the end date' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-15T23:59:59',
+            ],
+        ];
+
+        yield 'n-th date from interval matches the end date but not the time' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-12-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T00:00:00',
+            ],
+        ];
+
+        /** @see https://www.php.net/manual/en/class.dateperiod.php - DatePeriod::INCLUDE_END_DATE */
+        yield 'n-th date from interval is exact n-times bigger than the start date' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2024-01-01T00:00:00', // Supports only closed intervals
+            ],
+        ];
+
+        yield 'interval is bigger than date range' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-12-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-15T23:59:59',
+            ],
+        ];
+
+        yield 'interval is bigger than date range and startDate is not the first day of the month' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-12-15T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'timezone included in startDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-12-01T00:00:00+00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'timezone included in endDate' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-12-01T00:00:00',
+                'dateInterval' => 'P1M',
+                'endDate' => '2023-12-31T23:59:59+00:00',
+            ],
+        ];
     }
 }
