@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\Chart;
 
-use Sylius\Component\Core\DateTime\Period;
-
 interface ChartFactoryInterface
 {
     /**
-     * @param array<array-key, array<string, object>> $namedDatasets
+     * @param array<string, array<array{total: int, year: int, month: int}>> $namedDatasets
      */
-    public function createTimeSeries(Period $period, array $namedDatasets): ChartInterface;
+    public function createTimeSeries(\DatePeriod $datePeriod, array $namedDatasets): ChartInterface;
 }

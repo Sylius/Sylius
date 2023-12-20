@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\Provider;
 
-use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
@@ -25,11 +24,11 @@ class StatisticsProvider implements StatisticsProviderInterface
     ) {
     }
 
-    public function provide(Period $period, ChannelInterface $channel): Statistics
+    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): Statistics
     {
-        $salesTimeSeries = $this->salesTimeSeriesProvider->provide($period, $channel);
-        $businessActivitySummary = $this->businessActivitySummaryProvider->provide($period, $channel);
+        $salesTimeSeries = $this->salesTimeSeriesProvider->provide($datePeriod, $channel);
+        $businessActivitySummary = $this->businessActivitySummaryProvider->provide($datePeriod, $channel);
 
-        return new Statistics($salesTimeSeries, $businessActivitySummary, $period);
+        return new Statistics($salesTimeSeries, $businessActivitySummary);
     }
 }

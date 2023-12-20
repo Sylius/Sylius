@@ -13,28 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Query;
 
-use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
-use Sylius\Component\Core\DateTime\Period;
-
 /** @experimental */
-class GetStatistics implements ChannelCodeAwareInterface
+class GetStatistics
 {
-    public function __construct(private Period $period, private ?string $channelCode = null)
+    public function __construct(private \DatePeriod $datePeriod, private string $channelCode)
     {
     }
 
-    public function getPeriod(): Period
+    public function getDatePeriod(): \DatePeriod
     {
-        return $this->period;
+        return $this->datePeriod;
     }
 
-    public function getChannelCode(): ?string
+    public function getChannelCode(): string
     {
         return $this->channelCode;
-    }
-
-    public function setChannelCode(?string $channelCode): void
-    {
-        $this->channelCode = $channelCode;
     }
 }

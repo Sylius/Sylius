@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\Provider;
 
-use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
 interface StatisticsProviderInterface
 {
-    public function provide(Period $period, ChannelInterface $channel): Statistics;
+    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): Statistics;
 }

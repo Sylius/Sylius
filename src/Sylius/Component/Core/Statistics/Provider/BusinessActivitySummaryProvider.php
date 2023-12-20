@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\Provider;
 
-use Sylius\Component\Core\DateTime\Period;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -27,16 +26,24 @@ class BusinessActivitySummaryProvider implements BusinessActivitySummaryProvider
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
      */
-    public function __construct(private OrderRepositoryInterface $orderRepository, private CustomerRepositoryInterface $customerRepository)
-    {
+    public function __construct(
+        private OrderRepositoryInterface $orderRepository,
+        private CustomerRepositoryInterface $customerRepository,
+    ) {
     }
 
-    public function provide(Period $period, ChannelInterface $channel): BusinessActivitySummary
+    public function provide(\DatePeriod $datePeriod, ChannelInterface $channel): BusinessActivitySummary
     {
         return new BusinessActivitySummary(
-            $this->orderRepository->getTotalPaidSalesForChannelInPeriod($channel, $period->getStartDate(), $period->getEndDate()),
-            $this->orderRepository->countPaidForChannelInPeriod($channel, $period->getStartDate(), $period->getEndDate()),
-            $this->customerRepository->countCustomersInPeriod($period->getStartDate(), $period->getEndDate()),
+            $this
+                ->orderRepository
+                ->getTotalPaidSalesForChannelInPeriod($channel, $datePeriod->getStartDate(), $datePeriod->getEndDate()),
+            $this
+                ->orderRepository
+                ->countPaidForChannelInPeriod($channel, $datePeriod->getStartDate(), $datePeriod->getEndDate()),
+            $this
+                ->customerRepository
+                ->countCustomersInPeriod($datePeriod->getStartDate(), $datePeriod->getEndDate()),
         );
     }
 }

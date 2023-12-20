@@ -13,32 +13,30 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Statistics\Chart;
 
-use Sylius\Component\Core\DateTime\Period;
 use Webmozart\Assert\Assert;
 
 final class ChartFactory implements ChartFactoryInterface
 {
-    public function createTimeSeries(Period $period, array $namedDatasets): ChartInterface
+    public function createTimeSeries(\DatePeriod $datePeriod, array $namedDatasets): ChartInterface
     {
         $this->validateDatasetsDataKeys($namedDatasets);
 
-        return $this->createChart($period, $namedDatasets);
+        return $this->createChart($datePeriod, $namedDatasets);
     }
 
     /**
-     * @param array<string, array<object>> $inputDatasets
+     * @param array<string, array<array{total: int, year: int, month: int}>> $inputDatasets
      */
-    private function createChart(Period $period, array $inputDatasets): ChartInterface
+    private function createChart(\DatePeriod $datePeriod, array $inputDatasets): ChartInterface
     {
-        $period = $this->getDatePeriod($period);
-
         $labels = [];
         $datasets = [];
 
-        foreach ($period as $date) {
+        foreach ($datePeriod as $date) {
             $labels[] = $date->format('Y-m-d');
 
             foreach ($inputDatasets as $datasetName => $dataset) {
+                Assert::isInstanceOf($date, \DateTimeImmutable::class);
                 $datasets[$datasetName][] = $this->populateDataByDate($date, $dataset);
             }
         }
@@ -47,7 +45,7 @@ final class ChartFactory implements ChartFactoryInterface
     }
 
     /** @param array<array-key, mixed> $ordersTotals */
-    private function populateDataByDate(\DateTimeInterface $date, array $ordersTotals): int
+    private function populateDataByDate(\DateTimeImmutable $date, array $ordersTotals): int
     {
         $year = (int) $date->format('Y');
         $month = (int) $date->format('n');
@@ -59,15 +57,6 @@ final class ChartFactory implements ChartFactoryInterface
         }
 
         return 0;
-    }
-
-    private function getDatePeriod(Period $period): \DatePeriod
-    {
-        return new \DatePeriod(
-            $period->getStartDate(),
-            \DateInterval::createFromDateString(sprintf('1 %s', $period->getIntervalType())),
-            $period->getEndDate(),
-        );
     }
 
     /**
@@ -85,7 +74,7 @@ final class ChartFactory implements ChartFactoryInterface
      */
     private function validateDataKeysForDataset(array $dataset): void
     {
-        $requiredFields = ['year', 'month'];
+        $requiredFields = ['total', 'year', 'month'];
 
         foreach ($dataset as $data) {
             Assert::isArray($data, sprintf('The dataset element must be an array, got %s.', get_debug_type($data)));
