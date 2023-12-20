@@ -12,8 +12,12 @@
     "configuration": {
         "WEB": {
             "amount": 500
+        },
+        "MOBILE": {
+            "amount": 1000
         }
     },
+    "rules": [],
     "zone": "\/api\/v2\/admin\/zones\/WORLD",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
