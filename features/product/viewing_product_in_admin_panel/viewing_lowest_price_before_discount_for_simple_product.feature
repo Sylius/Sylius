@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Seeing the lowest price before the discount for a simple product
     In order to be aware of simple product prices
     As an Administrator
@@ -13,10 +13,10 @@ Feature: Seeing the lowest price before the discount for a simple product
     @ui @no-api
     Scenario: Seeing price block with lowest price before the discount
         Given this product's price changed to "$21.00" and original price changed to "$37.00"
-        When I access "Bizon Z056" product page
+        When I access the "Bizon Z056" product
         Then I should see "$42.00" as its lowest price before the discount in "United States" channel
 
     @ui @no-api
     Scenario: Seeing price block without lowest price before the discount
-        When I access "Bizon Z056" product page
+        When I access the "Bizon Z056" product
         Then I should not see the lowest price before the discount in "United States" channel

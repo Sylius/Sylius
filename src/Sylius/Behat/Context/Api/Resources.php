@@ -57,6 +57,8 @@ final class Resources
 
     public const PRODUCT_ASSOCIATION_TYPES = 'product-association-types';
 
+    public const PRODUCT_ASSOCIATIONS = 'product-associations';
+
     public const PRODUCT_ATTRIBUTES = 'product-attributes';
 
     public const PRODUCT_IMAGES = 'product-images';

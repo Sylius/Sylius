@@ -18,9 +18,13 @@ use FriendsOfBehat\PageObjectExtension\Element\Element;
 
 final class AssociationsElement extends Element implements AssociationsElementInterface
 {
-    public function isProductAssociated(string $associationName, string $productName): bool
+    public function hasAssociation(string $associationName): bool
     {
-        /** @var NodeElement $associations */
+        return [] !== $this->getAssociatedProducts($this->getElement('associations'), $associationName);
+    }
+
+    public function isAssociatedWith(string $associationName, string $productName): bool
+    {
         $associations = $this->getElement('associations');
 
         /** @var NodeElement $product */

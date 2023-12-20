@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <resources xmlns="https://api-platform.com/schema/metadata"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
@@ -7,16 +18,21 @@
     <resource class="%sylius.model.product_taxon.class%" shortName="ProductTaxon">
         <attribute name="validation_groups">sylius</attribute>
 
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
         <collectionOperations>
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/product-taxons</attribute>
-                <attribute name="normalization_context">
-                    <attribute name="groups">admin:product_taxon:read</attribute>
-                </attribute>
                 <attribute name="filters">
                     <attribute>sylius.api.search_filter.product.code</attribute>
                     <attribute>sylius.api.search_filter.taxon.code</attribute>
+                    <attribute>sylius.api.order_filter.position</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_taxon:read</attribute>
                 </attribute>
             </collectionOperation>
             <collectionOperation name="admin_post">

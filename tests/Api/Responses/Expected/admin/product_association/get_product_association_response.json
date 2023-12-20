@@ -1,0 +1,10 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAssociation",
+    "@id": "\/api\/v2\/admin\/product-associations\/@integer@",
+    "@type": "ProductAssociation",
+    "type": "\/api\/v2\/admin\/product-association-types\/similar_products",
+    "owner": "\/api\/v2\/admin\/products\/MUG",
+    "associatedProducts": [
+        "\/api\/v2\/admin\/products\/CUP"
+    ]
+}

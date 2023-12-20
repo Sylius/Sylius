@@ -22,6 +22,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "reviews": [],
+            "associations": [],
             "attributes": [],
             "averageRating": 0,
             "images": [],
@@ -65,6 +66,9 @@
             "reviews": [
                 "\/api\/v2\/admin\/product-reviews\/@integer@",
                 "\/api\/v2\/admin\/product-reviews\/@integer@"
+            ],
+            "associations": [
+                "\/api\/v2\/admin\/product-associations\/@integer@"
             ],
             "attributes": [
                 {
@@ -139,6 +143,7 @@
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
             "reviews": [],
+            "associations": [],
             "attributes": [],
             "averageRating": 0,
             "images": [],
@@ -162,7 +167,7 @@
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],channel,order[translation.name],localeCode for order[translation.name]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -193,6 +198,12 @@
                 "@type": "IriTemplateMapping",
                 "variable": "productTaxons.taxon.code[]",
                 "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "channel",
+                "property": "channels",
                 "required": false
             },
             {

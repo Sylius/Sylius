@@ -207,7 +207,6 @@
             <argument type="service" id="sylius.behat.page.admin.product_attribute.index" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <argument type="service" id="sylius.behat.shared_security" />
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_options" class="Sylius\Behat\Context\Ui\Admin\ManagingProductOptionsContext">

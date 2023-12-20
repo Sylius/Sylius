@@ -37,8 +37,15 @@ final class ProductAttributeContext implements Context
     public function iShouldSeeTheProductAttributeWithValue(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
+        $attributeValue = $attribute['value'];
 
-        Assert::same($attribute['value'], $expectedAttribute);
+        if (is_array($attributeValue)) {
+            Assert::inArray($expectedAttribute, $attributeValue);
+
+            return;
+        }
+
+        Assert::same($attributeValue, $expectedAttribute);
     }
 
     /**
@@ -69,6 +76,14 @@ final class ProductAttributeContext implements Context
         $attribute = $this->getAttributeByName($attributeName);
 
         Assert::inArray($expectedAttribute, $attribute['value']);
+    }
+
+    /**
+     * @Then I should not see the product attribute :attributeName
+     */
+    public function iShouldNotSeeTheProductAttribute(string $attributeName): void
+    {
+        Assert::false($this->hasAttributeByName($attributeName));
     }
 
     /**
@@ -111,6 +126,17 @@ final class ProductAttributeContext implements Context
 
         Assert::isArray($attribute);
         Assert::same($attribute['name'], $name);
+    }
+
+    private function hasAttributeByName(string $name): bool
+    {
+        foreach ($this->getAttributes() as $attribute) {
+            if ($attribute['name'] === $name) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function getAttributeByName(string $name): array

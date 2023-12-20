@@ -14,6 +14,6 @@ Feature: Accessing the price history from the configurable product show page
     @ui @no-api
     Scenario: Being able to access the price history of variant from the configurable product show page
         Given I am browsing products
-        When I access "Wyborowa Vodka" product page
+        When I access the "Wyborowa Vodka" product
         And I access the price history of a product variant "Wyborowa Vodka Exquisite" for "United States" channel
         Then I should see 1 log entries in the catalog price history

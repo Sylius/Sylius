@@ -44,8 +44,6 @@ default:
                 - Sylius\Behat\Context\Setup\PriceHistoryContext
                 - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
-                - sylius.behat.context.ui.admin.managing_product_attributes
-                - sylius.behat.context.ui.admin.product_showpage
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product

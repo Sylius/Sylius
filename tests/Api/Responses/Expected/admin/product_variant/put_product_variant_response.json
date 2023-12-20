@@ -15,7 +15,8 @@
             "price": 3000,
             "originalPrice": 4000,
             "lowestPriceBeforeDiscount": 2000,
-            "minimumPrice": 500
+            "minimumPrice": 500,
+            "appliedPromotions": []
         }
     },
     "translations": {

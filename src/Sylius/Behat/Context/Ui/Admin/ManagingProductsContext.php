@@ -310,6 +310,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the first product on the list should have :field :value
+     * @Then the first product on the list within this taxon should have :field :value
      */
     public function theFirstProductOnTheListShouldHave($field, $value)
     {
@@ -366,6 +367,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the last product on the list should have :field :value
+     * @Then the last product on the list within this taxon should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
     {
@@ -398,6 +400,17 @@ final class ManagingProductsContext implements Context
     public function iSortProductsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
+    }
+
+    /**
+     * @When I sort this taxon's products :sortType by :field
+     */
+    public function iSortThisTaxonsProductsBy(string $sortType, string $field): void
+    {
+        $this->indexPerTaxonPage->sortBy(
+            $field,
+            str_starts_with($sortType, 'de') ? 'desc' : 'asc',
+        );
     }
 
     /**
