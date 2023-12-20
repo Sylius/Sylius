@@ -71,7 +71,7 @@ final class CustomersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'customer.yaml',
             'channel.yaml',
-            'order/fulfilled_order.yaml',
+            'order/fulfilled.yaml',
         ]);
         $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 

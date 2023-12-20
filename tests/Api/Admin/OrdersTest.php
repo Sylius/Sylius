@@ -73,7 +73,7 @@ final class OrdersTest extends JsonApiTestCase
             'authentication/api_administrator.yaml',
             'channel.yaml',
             'order/customer.yaml',
-            'order/fulfilled_order.yaml',
+            'order/fulfilled.yaml',
         ]);
 
         /** @var CustomerInterface $customer */
