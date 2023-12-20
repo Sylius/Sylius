@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\QueryHandler;
 
+use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
-use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
@@ -36,9 +36,11 @@ final class GetStatisticsHandler
         $channel = $this->channelRepository->findOneByCode($query->getChannelCode());
 
         if ($channel === null) {
-            throw new ChannelNotFoundException(sprintf('Channel with code "%s" does not exist.', $query->getChannelCode()));
+            throw new ChannelNotFoundException(
+                sprintf('Channel with code "%s" does not exist.', $query->getChannelCode()),
+            );
         }
 
-        return $this->statisticsProvider->provide($query->getPeriod(), $channel);
+        return $this->statisticsProvider->provide($query->getDatePeriod(), $channel);
     }
 }
