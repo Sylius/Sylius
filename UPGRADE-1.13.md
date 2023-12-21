@@ -2,7 +2,7 @@
 
 1. There has been a naw parameter added to specify the validation groups for given gateway factory.
    If you have any custom validation groups for your factory, you need to add them to your `config/packages/_sylius.yaml` file.
-   Also, if you have your own gateway factory and want to add your validation groups you can add another key to the `validation_groups` parameter.
+   Also, if you have your own gateway factory and want to add your validation groups you can add another entry to the `validation_groups` configuration node.
    It is handled by `GatewayConfigGroupsGenerator` and it resolves the groups based on the passed factory name.
     ```yaml
     sylius_payum:
