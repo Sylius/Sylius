@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Payum;
+namespace Sylius\Bundle\PayumBundle\Api;
 
-use Sylius\Bundle\ApiBundle\Command\Payment\Payum\PayumStatusPaymentRequest;
 use Sylius\Bundle\ApiBundle\Payment\PaymentRequestCommandProviderInterface;
+use Sylius\Bundle\PayumBundle\Command\StatusPaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class PayumStatusPaymentRequestCommandProvider implements PaymentRequestCommandProviderInterface
@@ -17,6 +17,6 @@ final class PayumStatusPaymentRequestCommandProvider implements PaymentRequestCo
 
     public function handle(PaymentRequestInterface $paymentRequest): object
     {
-        return new PayumStatusPaymentRequest($paymentRequest->getHash());
+        return new StatusPaymentRequest($paymentRequest->getHash());
     }
 }

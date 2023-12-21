@@ -23,12 +23,6 @@
             <tag name="payum.action" all="true" alias="sylius.resolve_next_route" />
         </service>
 
-        <!-- PayPal -->
-        <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
-            <argument type="service" id="sylius.invoice_number_generator" />
-            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
-        </service>
-
         <!-- Offline -->
         <service id="sylius.payum_action.offline.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction">
             <tag name="payum.action" factory="offline" alias="sylius.offline.convert_payment" />

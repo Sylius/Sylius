@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\RenderTemplate;
-use Sylius\Bundle\ApiBundle\Payment\Payum\PayumApiContextInterface;
+use Sylius\Bundle\PayumBundle\Api\PayumApiContextInterface;
 use Webmozart\Assert\Assert;
 
 final class SyliusApiRenderTemplateAction implements ActionInterface

@@ -1,7 +1,7 @@
 {
     "name": "sylius/payum-bundle",
     "type": "symfony-bundle",
-    "description": "Payum integration for Symfony e-commerce applications.",
+    "description": "CommandHandler integration for Symfony e-commerce applications.",
     "keywords": [
         "payments",
         "payment",
@@ -44,7 +44,8 @@
     },
     "suggest": {
         "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",
-        "payum/stripe": "To use Stripe Checkout"
+        "payum/stripe": "To use Stripe Checkout",
+        "sylius/api-bundle": "To use Payum with the Sylius API Bundle"
     },
     "config": {
         "allow-plugins": {

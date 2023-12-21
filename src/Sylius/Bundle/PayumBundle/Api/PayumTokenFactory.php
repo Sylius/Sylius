@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Payum;
+namespace Sylius\Bundle\PayumBundle\Api;
 
 use Payum\Core\Payum;
 use Payum\Core\Security\TokenInterface;
@@ -40,19 +40,19 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
 
         $gatewayName = $gatewayConfig->getGatewayName();
 
-        /** @var array|null $data */
-        $data = $paymentRequest->getRequestPayload();
-        Assert::notNull($data);
+        /** @var array|null $payload */
+        $payload = $paymentRequest->getRequestPayload();
+        Assert::notNull($payload);
 
-        $targetPath = $data['target_path'] ?? null;
+        $targetPath = $payload['target_path'] ?? null;
         Assert::notNull($targetPath);
 
-        $targetPathParameters = $data['target_path_parameters'] ?? [];
+        $targetPathParameters = $payload['target_path_parameters'] ?? [];
 
-        $afterPath = $data['after_path'] ?? null;
+        $afterPath = $payload['after_path'] ?? null;
         Assert::notNull($afterPath);
 
-        $afterPathParameters = $data['after_path_parameters'] ?? [];
+        $afterPathParameters = $payload['after_path_parameters'] ?? [];
 
         return $this->payum->getTokenFactory()->createToken(
             $gatewayName,

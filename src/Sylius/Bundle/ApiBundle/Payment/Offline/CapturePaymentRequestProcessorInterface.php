@@ -15,7 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Payment\Offline;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-interface PaymentRequestToDetailsConverterInterface
+interface CapturePaymentRequestProcessorInterface
 {
-    public function convert(PaymentRequestInterface $paymentRequest): array;
+    public function process(PaymentRequestInterface $paymentRequest): void;
 }
