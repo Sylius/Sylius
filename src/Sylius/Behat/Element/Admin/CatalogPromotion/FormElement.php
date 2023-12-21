@@ -39,7 +39,7 @@ final class FormElement extends Element implements FormElementInterface
 
     public function prioritizeIt(int $priority): void
     {
-        $this->getElement('priority')->setValue($priority);
+        $this->getElement('priority')->setValue((string) $priority);
     }
 
     public function changeEnableTo(bool $enabled): void
