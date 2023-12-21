@@ -77,14 +77,14 @@ final class PaymentRequestSpec extends ObjectBehavior
 
     function it_has_null_data_by_default(): void
     {
-        $this->getData()->shouldReturn(null);
+        $this->getPayload()->shouldReturn(null);
     }
 
     function its_data_is_mutable(): void
     {
         $stdClass = new stdClass();
-        $this->setData($stdClass);
-        $this->getData()->shouldReturn($stdClass);
+        $this->setPayload($stdClass);
+        $this->getPayload()->shouldReturn($stdClass);
     }
 
     function it_has_empty_array_details_by_default(): void

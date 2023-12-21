@@ -36,7 +36,7 @@
             <group>admin:payment_request:read</group>
             <group>shop:payment_request:read</group>
         </attribute>
-        <attribute name="data">
+        <attribute name="payload">
             <group>admin:payment_request:read</group>
             <group>shop:payment_request:read</group>
         </attribute>

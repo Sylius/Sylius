@@ -54,13 +54,12 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
 
         $details = $this->paymentRequestToDetailsConverter->convert($paymentRequest);
         $paymentRequest->setDetails($details);
+        $payment->setDetails($details);
 
         if ($paymentRequest->getDetails()['paid']) {
             $this->paymentStateMachineTransitionApplicator->complete($payment);
         } else {
             $this->paymentStateMachineTransitionApplicator->process($payment);
         }
-
-        $payment->setDetails($paymentRequest->getDetails());
     }
 }

@@ -29,9 +29,8 @@ class PaymentRequest implements PaymentRequestInterface
 
     protected string $type = PaymentRequestInterface::DATA_TYPE_CAPTURE;
 
-    protected mixed $data = null;
+    protected mixed $payload = null;
 
-    /** @var mixed[] */
     protected array $details = [];
 
     public function __construct()
@@ -89,14 +88,14 @@ class PaymentRequest implements PaymentRequestInterface
         $this->type = $type;
     }
 
-    public function getData(): mixed
+    public function getPayload(): mixed
     {
-        return $this->data;
+        return $this->payload;
     }
 
-    public function setData(mixed $data): void
+    public function setPayload(mixed $payload): void
     {
-        $this->data = $data;
+        $this->payload = $payload;
     }
 
     public function getDetails(): array
