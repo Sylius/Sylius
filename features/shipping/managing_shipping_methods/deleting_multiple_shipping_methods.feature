@@ -9,7 +9,7 @@ Feature: Deleting multiple shipping methods
         And the store allows shipping with "UPS", "FedEx" and "DHL"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Deleting multiple shipping methods at once
         When I browse shipping methods
         And I check the "UPS" shipping method

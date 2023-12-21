@@ -7,7 +7,7 @@ Feature: Changing images of an existing product
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Changing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "ford.jpg" with "thumbnail" type
@@ -17,7 +17,7 @@ Feature: Changing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an image with "thumbnail" type
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Changing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "ford.jpg" with "thumbnail" type
