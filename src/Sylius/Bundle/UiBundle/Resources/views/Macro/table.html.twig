@@ -24,7 +24,7 @@
 {% macro row(grid, definition, row) %}
     <tr class="item" {{ sylius_test_html_attribute('row') }}>
     {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-        <td class="center aligned"><input class="bulk-select-checkbox" type="checkbox" value="{{ row.id }}" /></td>
+        <td class="center aligned"><input class="bulk-select-checkbox" name="bulk-select-checkbox-{{ row.id }}" type="checkbox" value="{{ row.id }}" /></td>
     {% endif %}
     {% for field in definition.enabledFields|sort_by('position') %}
         <td>{{ sylius_grid_render_field(grid, field, row) }}</td>

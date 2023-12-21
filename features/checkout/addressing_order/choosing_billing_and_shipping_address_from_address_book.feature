@@ -22,14 +22,14 @@ Feature: Choosing an address from address book
         When I choose "Seaside Fwy" street for billing address
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
-    @ui @mink:chromedriver @api
+    @ui @javascript @api
     Scenario: Choosing shipping address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for shipping address
         Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as shipping address
 
-    @ui @mink:chromedriver @api
+    @ui @javascript @api
     Scenario: Choosing billing address which contains a country with provinces from my address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step

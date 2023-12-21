@@ -7,7 +7,7 @@ Feature: Adding images to an existing product
     Background:
         Given I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Adding a single image to an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -16,7 +16,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully edited
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Adding multiple images to an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product
@@ -37,7 +37,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully edited
         And this product should have 2 images
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Adding a single image to an existing configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         When I want to modify this product

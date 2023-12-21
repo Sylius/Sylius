@@ -9,7 +9,7 @@ Feature: Adding images to an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Adding a single image to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type
@@ -25,7 +25,7 @@ Feature: Adding images to an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should have only one image
 
-    @ui @mink:chromedriver
+    @ui @javascript
     Scenario: Adding multiple images to an existing taxon
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image with "banner" type
