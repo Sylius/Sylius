@@ -32,52 +32,52 @@
         </property>
         <property name="config">
             <constraint name="Collection">
-                <option name="groups">stripe_checkout</option>
+                <option name="groups">sylius_stripe_checkout</option>
                 <option name="fields">
                     <value key="secret_key">
                         <constraint name="NotBlank">
                             <option name="message">sylius.gateway_config.stripe.secret_key.not_blank</option>
-                            <option name="groups">stripe_checkout</option>
+                            <option name="groups">sylius_stripe_checkout</option>
                         </constraint>
                     </value>
                     <value key="publishable_key">
                         <constraint name="NotBlank">
                             <option name="message">sylius.gateway_config.stripe.publishable_key.not_blank</option>
-                            <option name="groups">stripe_checkout</option>
+                            <option name="groups">sylius_stripe_checkout</option>
                         </constraint>
                     </value>
                 </option>
             </constraint>
 
             <constraint name="Collection">
-                <option name="groups">paypal_express_checkout</option>
+                <option name="groups">sylius_paypal_express_checkout</option>
                 <option name="fields">
                     <value key="username">
                         <constraint name="NotBlank">
                             <option name="message">sylius.gateway_config.paypal.username.not_blank</option>
-                            <option name="groups">paypal_express_checkout</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
                         </constraint>
                     </value>
                     <value key="password">
                         <constraint name="NotBlank">
                             <option name="message">sylius.gateway_config.paypal.password.not_blank</option>
-                            <option name="groups">paypal_express_checkout</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
                         </constraint>
                     </value>
                     <value key="signature">
                         <constraint name="NotBlank">
                             <option name="message">sylius.gateway_config.paypal.signature.not_blank</option>
-                            <option name="groups">paypal_express_checkout</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
                         </constraint>
                     </value>
                     <value key="sandbox">
                         <constraint name="Type">
                             <option name="type">bool</option>
-                            <option name="groups">paypal_express_checkout</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
                         </constraint>
                         <constraint name="NotNull">
                             <option name="message">sylius.gateway_config.paypal.sandbox.not_null</option>
-                            <option name="groups">paypal_express_checkout</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
                         </constraint>
                     </value>
                 </option>

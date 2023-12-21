@@ -9,10 +9,11 @@ jms_serializer:
                 path: "@SyliusPaymentBundle/Resources/config/serializer"
 
 sylius_payum:
-    gateway_config_validation_groups:
-        paypal_express_checkout:
-            - 'sylius'
-            - 'paypal_express_checkout'
-        stripe_checkout:
-            - 'sylius'
-            - 'stripe_checkout'
+    gateway_config:
+        validation_groups:
+            paypal_express_checkout:
+                - 'sylius'
+                - 'sylius_paypal_express_checkout'
+            stripe_checkout:
+                - 'sylius'
+                - 'sylius_stripe_checkout'
