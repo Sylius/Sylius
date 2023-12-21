@@ -68,7 +68,7 @@ final class AddPaymentRequestHandler implements MessageHandlerInterface
         $paymentRequest->setPayment($payment);
         $paymentRequest->setMethod($paymentMethod);
         $paymentRequest->setType($addPaymentRequest->type);
-        $paymentRequest->setData($addPaymentRequest->data);
+        $paymentRequest->setPayload($addPaymentRequest->data);
 
         $this->paymentRequestManager->persist($paymentRequest);
         return $paymentRequest;

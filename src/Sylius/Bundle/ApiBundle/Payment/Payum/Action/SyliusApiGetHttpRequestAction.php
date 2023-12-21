@@ -40,7 +40,7 @@ final class SyliusApiGetHttpRequestAction implements ActionInterface
         Assert::notNull($paymentRequest);
 
         /** @var array $details */
-        $details = $paymentRequest->getData();
+        $details = $paymentRequest->getPayload();
         $httpRequest = $details['http_request'] ?? [];
 
         $request->query = $httpRequest['query'];

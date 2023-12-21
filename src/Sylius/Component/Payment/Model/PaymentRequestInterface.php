@@ -56,17 +56,11 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public function setType(string $type): void;
 
-    public function getData(): mixed;
+    public function getPayload(): mixed;
 
-    public function setData(mixed $data): void;
+    public function setPayload(mixed $payload): void;
 
-    /**
-     * @return mixed[]
-     */
     public function getDetails(): array;
 
-    /**
-     * @param mixed[] $details
-     */
     public function setDetails(array $details): void;
 }
