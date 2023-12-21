@@ -25,6 +25,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
 {
+    private const NO_CODE_VALID_STUB = 'NO_CODE_VALID_STUB';
+
     public function __construct(private RequestStack $requestStack, private LocaleProviderInterface $localeProvider)
     {
     }
@@ -40,10 +42,10 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
 
         // Request::getPreferredLanguage() returns first available locale code if none matches. To allow detection of
         // this unwanted behavior, we will prepend special locale code to the list of available locale codes.
-        $prependedAvailableLocalesCodes = array_merge(['FIRSTLOCALECODE'], $availableLocalesCodes);
+        $prependedAvailableLocalesCodes = array_merge([self::NO_CODE_VALID_STUB], $availableLocalesCodes);
 
         $bestLocaleCode = $request->getPreferredLanguage($prependedAvailableLocalesCodes);
-        if ('FIRSTLOCALECODE' === $bestLocaleCode) {
+        if (self::NO_CODE_VALID_STUB === $bestLocaleCode) {
             throw new LocaleNotFoundException(sprintf(
                 'None of the available locales is acceptable: "%s".',
                 implode('", "', $availableLocalesCodes),
