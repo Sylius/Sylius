@@ -34,6 +34,10 @@ default:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
+                chrome_headless_second_session:
+                    chrome:
+                        api_url: http://127.0.0.1:9222
+                        validate_certificate: false
                 panther:
                     panther:
                         manager_options:
