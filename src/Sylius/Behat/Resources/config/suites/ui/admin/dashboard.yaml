@@ -8,6 +8,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
@@ -18,7 +19,6 @@ default:
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
                 - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.customer

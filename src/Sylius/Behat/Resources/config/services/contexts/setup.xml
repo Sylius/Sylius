@@ -123,7 +123,7 @@
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="sylius.behat.clock" />
         </service>
 
         <service id="sylius.behat.context.setup.payment" class="Sylius\Behat\Context\Setup\PaymentContext">
