@@ -17,6 +17,6 @@ Feature: Accessing the price history from the simple product show page
     @ui @no-api
     Scenario: Being able to access price history from simple product show page
         Given I am browsing products
-        When I access "Ursus C-355" product page
+        When I access the "Ursus C-355" product
         And I access the price history of a simple product for "United States" channel
         Then I should see 2 log entries in the catalog price history

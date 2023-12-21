@@ -30,6 +30,7 @@
                     <attribute>sylius.api.product_name_filter</attribute>
                     <attribute>sylius.api.product_order_filter</attribute>
                     <attribute>sylius.api.product_taxon_code_filter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</attribute>
                     <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter</attribute>
                 </attribute>
                 <attribute name="normalization_context">

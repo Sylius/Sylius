@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Command;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
+use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
@@ -83,12 +84,11 @@ final class GenerateCouponsCommand extends Command
         return 0;
     }
 
-    public function getGeneratorInstructions(int $count, int $codeLength): PromotionCouponGeneratorInstructionInterface
+    public function getGeneratorInstructions(int $count, int $codeLength): ReadablePromotionCouponGeneratorInstructionInterface
     {
-        $instruction = new PromotionCouponGeneratorInstruction();
-        $instruction->setAmount($count);
-        $instruction->setCodeLength($codeLength);
-
-        return $instruction;
+        return new PromotionCouponGeneratorInstruction(
+            amount: $count,
+            codeLength: $codeLength,
+        );
     }
 }

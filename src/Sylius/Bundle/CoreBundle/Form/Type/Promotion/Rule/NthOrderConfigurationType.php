@@ -16,8 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class NthOrderConfigurationType extends AbstractType
 {

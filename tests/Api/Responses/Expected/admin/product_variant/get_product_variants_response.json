@@ -19,7 +19,8 @@
                     "price": 2000,
                     "originalPrice": null,
                     "lowestPriceBeforeDiscount": null,
-                    "minimumPrice": 0
+                    "minimumPrice": 0,
+                    "appliedPromotions": []
                 }
             },
             "translations": {
@@ -59,7 +60,8 @@
                     "price": 3000,
                     "originalPrice": null,
                     "lowestPriceBeforeDiscount": null,
-                    "minimumPrice": 0
+                    "minimumPrice": 0,
+                    "appliedPromotions": []
                 }
             },
             "translations": {

@@ -184,5 +184,18 @@
             "type": "text"
         }
     ],
-    "hydra:totalItems": 9
+    "hydra:totalItems": 9,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/product-attributes{?order[position]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[position]",
+                "property": "position",
+                "required": false
+            }
+        ]
+    }
 }

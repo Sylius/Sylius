@@ -172,20 +172,3 @@ Feature: Allowing access only for correctly logged in users
         And the customer has product "Stark T-Shirt" in the cart
         And the customer logged out
         Then the visitor has no access to change product "Stark T-Shirt" quantity to 2 in the customer cart
-
-    @api
-    Scenario: Accessing to the customers cart by the admin
-        Given the customer logged in
-        And the customer has product "Stark T-Shirt" in the cart
-        And the customer logged out
-        And there is logged in the administrator
-        When the administrator try to see the summary of customer's cart
-        Then the administrator should see "Stark T-Shirt" product with quantity 1 in the customer cart
-
-    @api
-    Scenario: Accessing to the visitors cart by the admin
-        Given there is the visitor
-        And the visitor has product "Stark T-Shirt" in the cart
-        And there is logged in the administrator
-        When the administrator try to see the summary of customer's cart
-        Then the administrator should see "Stark T-Shirt" product with quantity 1 in the visitor cart

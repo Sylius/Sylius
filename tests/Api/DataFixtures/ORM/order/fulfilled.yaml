@@ -4,6 +4,7 @@ Sylius\Component\Core\Model\Order:
         currencyCode: "USD"
         localeCode: "en_US"
         state: "fulfilled"
+        checkoutState: "fulfilled"
         tokenValue: "token"
         customer: "@customer_tony"
         billingAddress: "@billing_address"

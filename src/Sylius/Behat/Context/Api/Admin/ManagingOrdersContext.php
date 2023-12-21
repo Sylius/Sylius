@@ -16,8 +16,11 @@ namespace Sylius\Behat\Context\Api\Admin;
 use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Api\Subresources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -27,6 +30,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -41,10 +45,12 @@ final class ManagingOrdersContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private RequestFactoryInterface $requestFactory,
         private IriConverterInterface $iriConverter,
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -55,7 +61,7 @@ final class ManagingOrdersContext implements Context
     public function iSeeTheOrder(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
-        Assert::same($this->responseChecker->getValue($response, '@id'), $this->iriConverter->getIriFromResource($order));
+        Assert::same($this->responseChecker->getValue($response, '@id'), $this->sectionAwareIriConverter->getIriFromResourceInSection($order, 'admin'));
 
         $this->sharedStorage->set('order', $order);
     }
@@ -67,6 +73,14 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders(): void
     {
         $this->client->index(Resources::ORDERS);
+    }
+
+    /**
+     * @When I browse order's :order history
+     */
+    public function iBrowseOrderHistory(OrderInterface $order): void
+    {
+        $this->iSeeTheOrder($order);
     }
 
     /**
@@ -91,6 +105,30 @@ final class ManagingOrdersContext implements Context
     public function iSpecifyFilterDateFromAs(string $dateTime): void
     {
         $this->client->addFilter('checkoutCompletedAt[after]', $dateTime);
+    }
+
+    /**
+     * @When specify its tracking code as :trackingCode
+     */
+    public function specifyItsTrackingCodeAs(string $trackingCode): void
+    {
+        $shipment = $this->sharedStorage->get('order')->getShipments()->first();
+
+        $this->client->buildUpdateRequest(
+            Resources::SHIPMENTS,
+            (string) $shipment->getId(),
+        );
+
+        $this->client->addRequestData('tracking', $trackingCode);
+        $this->client->update();
+    }
+
+    /**
+     * @When /^I try to view the summary of the (customer's latest cart)$/
+     */
+    public function iTryToViewTheSummaryOfTheCustomersLatestCart(OrderInterface $cart): void
+    {
+        $this->client->show(Resources::ORDERS, $cart->getTokenValue());
     }
 
     /**
@@ -976,6 +1014,105 @@ final class ManagingOrdersContext implements Context
         }
 
         Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+    }
+
+    /**
+     * @Then I should be notified that the order has been successfully shipped
+     */
+    public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped(): void
+    {
+        $response = $this->client->getLastResponse();
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($response),
+            'Order could not be shipped. Reason: ' . $response->getContent(),
+        );
+    }
+
+    /**
+     * @Then it should have shipment in state shipped
+     */
+    public function itShouldHaveShipmentInStateShipped(): void
+    {
+        $shipmentIri = $this->responseChecker->getValue(
+            $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue()),
+            'shipments',
+        )[0];
+
+        Assert::true(
+            $this->responseChecker->hasValue($this->client->showByIri($shipmentIri['@id']), 'state', ShipmentInterface::STATE_SHIPPED),
+            sprintf('Shipment for this order is not %s', ShipmentInterface::STATE_SHIPPED),
+        );
+    }
+
+    /**
+     * @Then this order should have order shipping state :orderShippingState
+     */
+    public function thisOrderShouldHaveOrderShippingState(string $orderShippingState): void
+    {
+        $ordersResponse = $this->client->index(Resources::ORDERS);
+
+        Assert::true(
+            $this->responseChecker->hasItemWithValue($ordersResponse, 'shippingState', strtolower($orderShippingState)),
+            sprintf('Order does not have %s shipping state', $orderShippingState),
+        );
+    }
+
+    /**
+     * @Then I should not be able to ship this order
+     */
+    public function iShouldNotBeAbleToShipThisOrder(): void
+    {
+        $order = $this->sharedStorage->get('order');
+
+        $this->client->applyTransition(
+            Resources::SHIPMENTS,
+            (string) $order->getShipments()->first()->getId(),
+            ShipmentTransitions::TRANSITION_SHIP,
+        );
+
+        Assert::false(
+            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
+            'Order has been shipped, but should not.',
+        );
+    }
+
+    /**
+     * @Then I should be informed that the order does not exist
+     */
+    public function iShouldBeInformedThatTheOrderDoesNotExist(): void
+    {
+        Assert::same(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Not Found',
+        );
+    }
+
+    /**
+     * @Then there should be :count shipping address changes in the registry
+     */
+    public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
+    {
+        $order = $this->sharedStorage->get('order');
+        $response = $this->client->subResourceIndex(
+            Resources::ADDRESSES,
+            Subresources::ADDRESSES_LOG_ENTRIES,
+            (string) $order->getShippingAddress()->getId(),
+        );
+        Assert::same($this->responseChecker->countCollectionItems($response), $count);
+    }
+
+    /**
+     * @Then there should be :count billing address changes in the registry
+     */
+    public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
+    {
+        $order = $this->sharedStorage->get('order');
+        $response = $this->client->subResourceIndex(
+            Resources::ADDRESSES,
+            Subresources::ADDRESSES_LOG_ENTRIES,
+            (string) $order->getBillingAddress()->getId(),
+        );
+        Assert::same($this->responseChecker->countCollectionItems($response), $count);
     }
 
     /**

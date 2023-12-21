@@ -1581,14 +1581,14 @@ parameters:
 			path: src/Sylius/Bundle/ApiBundle/EventSubscriber/TaxonDeletionEventSubscriber.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\CatalogPromotionChannelFilter\\:\\:__construct\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ChannelsAwareChannelFilter\\:\\:__construct\\(\\) has parameter \\$properties with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/CatalogPromotionChannelFilter.php
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ChannelsAwareChannelFilter.php
 
 		-
-			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\CatalogPromotionChannelFilter\\:\\:getDescription\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ChannelsAwareChannelFilter\\:\\:getDescription\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/CatalogPromotionChannelFilter.php
+			path: src/Sylius/Bundle/ApiBundle/Filter/Doctrine/ChannelsAwareChannelFilter.php
 
 		-
 			message: "#^Method Sylius\\\\Bundle\\\\ApiBundle\\\\Filter\\\\Doctrine\\\\ExchangeRateFilter\\:\\:filterProperty\\(\\) has no return type specified\\.$#"

@@ -44,6 +44,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
@@ -64,6 +65,7 @@ final class OrderContext implements Context
         private ProductVariantResolverInterface $variantResolver,
         private OrderItemQuantityModifierInterface $itemQuantityModifier,
         private ObjectManager $objectManager,
+        private ClockInterface $clock,
     ) {
     }
 
@@ -558,7 +560,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) customers have added products to the cart for total of ("[^"]+")$/
+     * @Given /^(\d+) new customers have added products to the cart for total of ("[^"]+")$/
      */
     public function customersHaveAddedProductsToTheCartForTotalOf(int $numberOfCustomers, int $total): void
     {
@@ -589,7 +591,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) (?:|more )customers have placed (\d+) orders for total of ("[^"]+")$/
+     * @Given /^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+")$/
      */
     public function customersHavePlacedOrdersForTotalOf(int $numberOfCustomers, int $numberOfOrders, int $total): void
     {
@@ -597,7 +599,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) customers have fulfilled (\d+) orders placed for total of ("[^"]+")$/
+     * @Given /^(\d+) new customers have fulfilled (\d+) orders placed for total of ("[^"]+")$/
      */
     public function customersHaveFulfilledOrdersPlacedForTotalOf(
         int $numberOfCustomers,
@@ -608,7 +610,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) (?:|more )customers have placed (\d+) orders for total of ("[^"]+") mostly ("[^"]+" product)$/
+     * @Given /^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+") mostly ("[^"]+" product)$/
      */
     public function customersHavePlacedOrdersForTotalOfMostlyProduct(
         int $numberOfCustomers,
@@ -620,7 +622,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) (?:|more )customers have fulfilled (\d+) orders placed for total of ("[^"]+") mostly ("[^"]+" product)$/
+     * @Given /^(\d+) (?:|more )new customers have fulfilled (\d+) orders placed for total of ("[^"]+") mostly ("[^"]+" product)$/
      */
     public function customersHaveFulfilledOrdersPlacedForTotalOfMostlyProduct(
         int $numberOfCustomers,
@@ -632,7 +634,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(\d+) (?:|more )customers have paid (\d+) orders placed for total of ("[^"]+")$/
+     * @Given /^(\d+) (?:|more )new customers have paid (\d+) orders placed for total of ("[^"]+")$/
      */
     public function moreCustomersHavePaidOrdersPlacedForTotalOf(
         int $numberOfCustomers,
@@ -918,6 +920,8 @@ final class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
+            $customer->setCreatedAt($this->clock->now());
+
             $customers[] = $customer;
 
             $this->customerRepository->add($customer);
@@ -1019,6 +1023,8 @@ final class OrderContext implements Context
                 $this->payOrder($order);
                 $this->shipOrder($order);
             }
+
+            $order->setCheckoutCompletedAt($this->clock->now());
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);

@@ -15,6 +15,7 @@ parameters:
         - "%sylius.security.new_api_route%/admin/channel-pricings/{id}"
         - "%sylius.security.new_api_route%/admin/promotion-actions/{id}"
         - "%sylius.security.new_api_route%/admin/promotion-rules/{id}"
+        - "%sylius.security.new_api_route%/admin/shipping-method-rules/{id}"
         - "%sylius.security.new_api_route%/admin/shop-users/{id}"
     sylius.security.new_api_route: "/api/v2"
     sylius.security.new_api_regex: "^%sylius.security.new_api_route%"
@@ -31,6 +32,8 @@ sylius_api:
             '%sylius.model.product.class%':
                 operations:
                     shop_get: ~
+    order_states_to_filter_out:
+        - !php/const Sylius\Component\Core\Model\OrderInterface::STATE_CART
 
 api_platform:
     patch_formats:

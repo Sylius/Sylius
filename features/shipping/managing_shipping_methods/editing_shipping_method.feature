@@ -10,14 +10,6 @@ Feature: Editing shipping method
         And the store allows shipping with "UPS Carrier" identified by "UPS_CARRIER"
         And I am logged in as an administrator
 
-    @todo
-    Scenario: Trying to change shipping method code
-        When I want to modify a shipping method "UPS Carrier"
-        And I change its code to "UPS"
-        And I save my changes
-        Then I should be notified that code cannot be changed
-        And shipping method "UPS Carrier" should still have code "UPS_CARRIER"
-
     @ui @api
     Scenario: Seeing disabled code field when editing shipping method
         When I want to modify a shipping method "UPS Carrier"

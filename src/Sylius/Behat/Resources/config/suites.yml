@@ -30,6 +30,7 @@ imports:
     - suites/api/locale/managing_locales.yml
     - suites/api/order/managing_orders.yml
     - suites/api/order/modifying_placed_order_address.yaml
+    - suites/api/order/order_history.yaml
     - suites/api/payment/managing_payment_methods.yaml
     - suites/api/payment/managing_payments.yml
     - suites/api/product/adding_product_review.yml
@@ -90,7 +91,7 @@ imports:
     - suites/ui/account/login.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
-    - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/dashboard.yaml
     - suites/ui/admin/impersonating_customers.yml
     - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
