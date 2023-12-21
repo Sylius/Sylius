@@ -33,8 +33,8 @@ final class SyliusApiRenderTemplateAction implements ActionInterface
         $paymentRequest = $this->payumApiContext->getPaymentRequest();
         Assert::notNull($paymentRequest);
 
-        $details = $paymentRequest->getDetails();
-        $paymentRequest->setDetails(array_merge($details, $request->getParameters()));
+        $details = $paymentRequest->getResponseData();
+        $paymentRequest->setResponseData(array_merge($details, $request->getParameters()));
 
         $request->setResult('');
     }

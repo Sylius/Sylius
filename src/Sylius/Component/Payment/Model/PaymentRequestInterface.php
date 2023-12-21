@@ -32,6 +32,8 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public const DATA_TYPE_AUTHORIZE = 'authorize';
 
+    public const DATA_TYPE_REFUND = 'refund';
+
     public const DATA_TYPE_STATUS = 'status';
 
     public const DATA_TYPE_SYNC = 'sync';
@@ -56,11 +58,11 @@ interface PaymentRequestInterface extends TimestampableInterface, ResourceInterf
 
     public function setType(string $type): void;
 
-    public function getPayload(): mixed;
+    public function getRequestPayload(): mixed;
 
-    public function setPayload(mixed $payload): void;
+    public function setRequestPayload(mixed $requestPayload): void;
 
-    public function getDetails(): array;
+    public function getResponseData(): array;
 
-    public function setDetails(array $details): void;
+    public function setResponseData(array $responseData): void;
 }

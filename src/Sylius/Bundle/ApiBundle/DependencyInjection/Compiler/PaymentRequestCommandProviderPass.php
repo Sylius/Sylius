@@ -34,7 +34,10 @@ final class PaymentRequestCommandProviderPass implements CompilerPassInterface
                 );
 
                 $commandProviders[sprintf('%s::%s', $factoryName, $type)] = new Reference($serviceId);
-            }
+            }// offline::capture,
+            // stripe::capture
+            // stripe::status
+            // stripe::refund
         }
 
         $container->getDefinition('sylius.api.payment_request.command_provider.locator')->addArgument($commandProviders);

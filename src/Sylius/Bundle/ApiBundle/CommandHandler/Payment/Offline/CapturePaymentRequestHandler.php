@@ -53,10 +53,10 @@ final class CapturePaymentRequestHandler implements MessageHandlerInterface
         Assert::notNull($payment);
 
         $details = $this->paymentRequestToDetailsConverter->convert($paymentRequest);
-        $paymentRequest->setDetails($details);
-        $payment->setDetails($details);
+        $paymentRequest->setResponseData($details);
+        // @todo modify Payment->getDetails() to retrieve last payment request `responseData`
 
-        if ($paymentRequest->getDetails()['paid']) {
+        if ($details['paid']) {
             $this->paymentStateMachineTransitionApplicator->complete($payment);
         } else {
             $this->paymentStateMachineTransitionApplicator->process($payment);
