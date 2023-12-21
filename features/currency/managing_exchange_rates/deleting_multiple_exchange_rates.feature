@@ -11,7 +11,7 @@ Feature: Deleting multiple exchange rates
         And the exchange rate of "Polish Zloty" to "Euro" is 0.22
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Deleting multiple exchange rates at once
         When I browse exchange rates
         And I check the exchange rate between "Euro" and "British Pound"

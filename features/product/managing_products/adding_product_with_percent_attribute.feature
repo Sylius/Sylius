@@ -10,7 +10,7 @@ Feature: Adding a new product with a percent attribute
         And the store has a non-translatable percent product attribute "Accuracy"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a percent attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
@@ -22,7 +22,7 @@ Feature: Adding a new product with a percent attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Awesomeness rating" of product "44 Magnum" should be "80"
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a non-translatable percent attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"

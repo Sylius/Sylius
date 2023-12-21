@@ -30,36 +30,10 @@ default:
             sessions:
                 symfony:
                     symfony: ~
-                chrome_headless:
+                chromedriver:
                     chrome:
                         api_url: http://127.0.0.1:9222
                         validate_certificate: false
-                chrome_headless_second_session:
-                    chrome:
-                        api_url: http://127.0.0.1:9222
-                        validate_certificate: false
-                chrome:
-                    selenium2:
-                        browser: chrome
-                        capabilities:
-                            browserName: chrome
-                            browser: chrome
-                            version: ""
-                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
-                            chrome:
-                                switches:
-                                    - "start-fullscreen"
-                                    - "start-maximized"
-                                    - "no-sandbox"
-                            extra_capabilities:
-                                acceptSslCerts: true
-                                acceptInsecureCerts: true
-                                unexpectedAlertBehaviour: accept
-                                goog:chromeOptions:
-                                    w3c: false # https://github.com/Sylius/Sylius/issues/10561
-                firefox:
-                    selenium2:
-                        browser: firefox
                 panther:
                     panther:
                         manager_options:

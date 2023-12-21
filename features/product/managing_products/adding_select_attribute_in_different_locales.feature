@@ -14,7 +14,7 @@ Feature: Adding select attributes in different locales to a product
         And this product attribute's "Ceramic" value is labeled "Ceramika" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a product with a select attribute with choices in different locales
         When I want to create a new simple product
         And I specify its code as "mug"

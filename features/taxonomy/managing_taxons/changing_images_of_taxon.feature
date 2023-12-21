@@ -9,7 +9,7 @@ Feature: Changing images of an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Changing a single image of a taxon
         Given the "T-Shirts" taxon has an image "ford.jpg" with "banner" type
         When I want to modify the "T-Shirts" taxon
