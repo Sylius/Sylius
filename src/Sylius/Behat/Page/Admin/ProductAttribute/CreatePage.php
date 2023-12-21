@@ -53,12 +53,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
     public function specifyMinValue(int $min): void
     {
-        $this->getElement('min')->setValue($min);
+        $this->getElement('min')->setValue((string) $min);
     }
 
     public function specifyMaxValue(int $max): void
     {
-        $this->getElement('max')->setValue($max);
+        $this->getElement('max')->setValue((string) $max);
     }
 
     public function checkMultiple(): void

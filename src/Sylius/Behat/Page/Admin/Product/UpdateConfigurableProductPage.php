@@ -95,11 +95,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             return false;
         }
 
-        $this->getDriver()->visit($imageUrl);
-        $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
-
-        return in_array($statusCode, [200, 304], true);
+        return false !== @file_get_contents($imageUrl);
     }
 
     public function attachImage(string $path, string $type = null): void
