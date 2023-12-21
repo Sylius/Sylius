@@ -82,7 +82,7 @@ In order to send emails you need to configure Mailer Service. Basically there ar
 * (deprecated) Use SwiftMailer with this short configuration:
 
 1. **Create an account on a mailing service.**
-2. **In your** ``.env`` **file modify the** ``MAILER_DSN`` **variable.**
+2. **In your** ``.env`` **file modify/add the** ``MAILER_URL`` **variable.**
 
 .. code-block:: text
 
