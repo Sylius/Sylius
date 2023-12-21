@@ -36,11 +36,11 @@
             <group>admin:payment_request:read</group>
             <group>shop:payment_request:read</group>
         </attribute>
-        <attribute name="payload">
+        <attribute name="requestPayload">
             <group>admin:payment_request:read</group>
             <group>shop:payment_request:read</group>
         </attribute>
-        <attribute name="details">
+        <attribute name="responseData">
             <group>admin:payment_request:read</group>
             <group>shop:payment_request:read</group>
         </attribute>

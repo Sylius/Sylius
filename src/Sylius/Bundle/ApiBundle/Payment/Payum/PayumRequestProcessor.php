@@ -40,11 +40,8 @@ final class PayumRequestProcessor implements PayumRequestProcessorInterface
         $payment = $paymentRequest->getPayment();
         Assert::notNull($payment);
 
-        $details = $paymentRequest->getDetails();
         if (null === $reply) {
             $details['after_url'] = $token->getAfterUrl();
         }
-
-        $payment->setDetails($details);
     }
 }

@@ -41,7 +41,7 @@ final class PayumTokenFactory implements PayumTokenFactoryInterface
         $gatewayName = $gatewayConfig->getGatewayName();
 
         /** @var array|null $data */
-        $data = $paymentRequest->getPayload();
+        $data = $paymentRequest->getRequestPayload();
         Assert::notNull($data);
 
         $targetPath = $data['target_path'] ?? null;
