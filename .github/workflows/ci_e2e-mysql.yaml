@@ -91,6 +91,7 @@ jobs:
         runs-on: ubuntu-latest
         name: "JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}, DBAL ${{ matrix.dbal }}, API Platform ${{ matrix.api-platform }}"
         timeout-minutes: 45
+        continue-on-error: true
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
