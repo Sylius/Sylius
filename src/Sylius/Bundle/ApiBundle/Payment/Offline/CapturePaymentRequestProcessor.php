@@ -17,19 +17,21 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Webmozart\Assert\Assert;
 
-final class PaymentRequestToDetailsConverter implements PaymentRequestToDetailsConverterInterface
+final class CapturePaymentRequestProcessor implements CapturePaymentRequestProcessorInterface
 {
-    public function convert(PaymentRequestInterface $paymentRequest): array
+    public function process(PaymentRequestInterface $paymentRequest): void
     {
         $payment = $paymentRequest->getPayment();
         Assert::notNull($payment);
 
+        $responseData = $payment->getDetails();
         if (PaymentInterface::STATE_NEW === $payment->getState()) {
-            return [
+            $responseData = [
                 'paid' => false,
             ];
         }
 
-        return $payment->getDetails();
+        $paymentRequest->setResponseData($responseData);
+        $paymentRequest->setState(PaymentRequestInterface::STATE_COMPLETED);
     }
 }

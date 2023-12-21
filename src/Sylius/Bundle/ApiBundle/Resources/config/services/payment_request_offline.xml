@@ -24,13 +24,13 @@
 
         <service id="sylius.api.payment_request.offline.capture" class="Sylius\Bundle\ApiBundle\CommandHandler\Payment\Offline\CapturePaymentRequestHandler">
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Offline\PaymentRequestToDetailsConverterInterface" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Offline\CapturePaymentRequestProcessorInterface" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Applicator\PaymentStateMachineTransitionApplicatorInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Payment\Offline\PaymentRequestToDetailsConverterInterface" class="Sylius\Bundle\ApiBundle\Payment\Offline\PaymentRequestToDetailsConverter" />
+        <service id="Sylius\Bundle\ApiBundle\Payment\Offline\CapturePaymentRequestProcessorInterface" class="Sylius\Bundle\ApiBundle\Payment\Offline\CapturePaymentRequestProcessor" />
 
     </services>
 </container>

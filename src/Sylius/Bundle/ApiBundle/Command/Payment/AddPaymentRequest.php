@@ -22,7 +22,7 @@ class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
         public string $type,
-        public mixed $data,
+        public mixed $requestPayload,
         public ?string $paymentId,
         public ?string $paymentMethodCode,
     ) {
