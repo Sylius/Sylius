@@ -11,19 +11,19 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment\Payum;
+namespace Sylius\Bundle\PayumBundle\CommandHandler;
 
 use Payum\Core\Security\TokenAggregateInterface;
 use Sylius\Bundle\ApiBundle\Command\PaymentRequestHashAwareInterface;
-use Sylius\Bundle\ApiBundle\Payment\Payum\PayumRequestProcessorInterface;
-use Sylius\Bundle\ApiBundle\Payment\Payum\PayumTokenFactoryInterface;
+use Sylius\Bundle\PayumBundle\Api\PayumRequestProcessorInterface;
+use Sylius\Bundle\PayumBundle\Api\PayumTokenFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Webmozart\Assert\Assert;
 
 /** @experimental */
-final class PayumPaymentRequestHandler implements MessageHandlerInterface
+final class PaymentRequestHandler implements MessageHandlerInterface
 {
     public function __construct(
         private RepositoryInterface $paymentRequestRepository,

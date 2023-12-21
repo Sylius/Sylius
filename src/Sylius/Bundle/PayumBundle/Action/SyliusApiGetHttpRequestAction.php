@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Payment\Payum\Action;
+namespace Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
-use Sylius\Bundle\ApiBundle\Payment\Payum\PayumApiContextInterface;
+use Sylius\Bundle\PayumBundle\Api\PayumApiContextInterface;
 use Webmozart\Assert\Assert;
 
 final class SyliusApiGetHttpRequestAction implements ActionInterface
@@ -39,9 +39,9 @@ final class SyliusApiGetHttpRequestAction implements ActionInterface
         $paymentRequest = $this->payumApiContext->getPaymentRequest();
         Assert::notNull($paymentRequest);
 
-        /** @var array $details */
-        $details = $paymentRequest->getRequestPayload();
-        $httpRequest = $details['http_request'] ?? [];
+        /** @var array $payload */
+        $payload = $paymentRequest->getRequestPayload();
+        $httpRequest = $payload['http_request'] ?? [];
 
         $request->query = $httpRequest['query'];
         $request->request = $httpRequest['request'];

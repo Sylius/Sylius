@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
+use Payum\Offline\OfflineGatewayFactory;
+use Payum\Paypal\ExpressCheckout\Nvp\PaypalExpressCheckoutGatewayFactory;
+use Payum\Stripe\StripeCheckoutGatewayFactory;
 use Sylius\Bundle\PayumBundle\Attribute\AsGatewayConfigurationType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
@@ -31,6 +34,14 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
 
         $loader->load('services.xml');
 
+        if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
+            $loader->load('paypal.xml');
+        }
+
+        if (class_exists(StripeCheckoutGatewayFactory::class)) {
+            $loader->load('stripe.xml');
+        }
+
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
         $container->setParameter('sylius.payum.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
@@ -39,6 +50,26 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
     }
 
     public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependSyliusPayment($container);
+        $this->prependSyliusApi($container);
+    }
+
+    private function registerAutoconfiguration(ContainerBuilder $container): void
+    {
+        $container->registerAttributeForAutoconfiguration(
+            AsGatewayConfigurationType::class,
+            static function (ChildDefinition $definition, AsGatewayConfigurationType $attribute): void {
+                $definition->addTag(AsGatewayConfigurationType::SERVICE_TAG, [
+                    'type' => $attribute->getType(),
+                    'label' => $attribute->getLabel(),
+                    'priority' => $attribute->getPriority(),
+                ]);
+            },
+        );
+    }
+
+    private function prependSyliusPayment(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('sylius_payment')) {
             return;
@@ -60,17 +91,26 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
     }
 
-    private function registerAutoconfiguration(ContainerBuilder $container): void
+    private function prependSyliusApi(ContainerBuilder $container): void
     {
-        $container->registerAttributeForAutoconfiguration(
-            AsGatewayConfigurationType::class,
-            static function (ChildDefinition $definition, AsGatewayConfigurationType $attribute): void {
-                $definition->addTag(AsGatewayConfigurationType::SERVICE_TAG, [
-                    'type' => $attribute->getType(),
-                    'label' => $attribute->getLabel(),
-                    'priority' => $attribute->getPriority(),
-                ]);
-            },
-        );
+        if (!$container->hasExtension('sylius_api')) {
+            return;
+        }
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        $loader->load('integrations/sylius_api.xml');
+
+        if (class_exists(OfflineGatewayFactory::class)) {
+            $loader->load('integrations/offline.xml');
+        }
+
+        if (class_exists(PaypalExpressCheckoutGatewayFactory::class)) {
+            $loader->load('integrations/paypal.xml');
+        }
+
+        if (class_exists(StripeCheckoutGatewayFactory::class)) {
+            $loader->load('integrations/stripe.xml');
+        }
     }
 }

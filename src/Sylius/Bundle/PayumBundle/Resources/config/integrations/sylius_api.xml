@@ -22,42 +22,42 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumRequestProcessorInterface" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumRequestProcessor">
+        <service id="Sylius\Bundle\PayumBundle\Api\PayumRequestProcessorInterface" class="Sylius\Bundle\PayumBundle\Api\PayumRequestProcessor">
             <argument type="service" id="payum" />
             <argument type="service" id="sylius.api.payment.payum.context" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumTokenFactoryInterface" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumTokenFactory">
+        <service id="Sylius\Bundle\PayumBundle\Api\PayumTokenFactoryInterface" class="Sylius\Bundle\PayumBundle\Api\PayumTokenFactory">
             <argument type="service" id="payum" />
         </service>
 
-        <service id="sylius.api.payment_request.payum.capture" class="Sylius\Bundle\ApiBundle\CommandHandler\Payment\Payum\PayumPaymentRequestHandler">
+        <service id="sylius.api.payment_request.payum.capture" class="Sylius\Bundle\PayumBundle\CommandHandler\PaymentRequestHandler">
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumTokenFactoryInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumRequestProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Api\PayumTokenFactoryInterface" />
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Api\PayumRequestProcessorInterface" />
             <argument type="string">%sylius_api.payment_request.payum.capture.class%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="sylius.api.payment_request.payum.status" class="Sylius\Bundle\ApiBundle\CommandHandler\Payment\Payum\PayumPaymentRequestHandler">
+        <service id="sylius.api.payment_request.payum.status" class="Sylius\Bundle\PayumBundle\CommandHandler\PaymentRequestHandler">
             <argument type="service" id="sylius.repository.payment_request" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumTokenFactoryInterface" />
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Payment\Payum\PayumRequestProcessorInterface" />
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Api\PayumTokenFactoryInterface" />
+            <argument type="service" id="Sylius\Bundle\PayumBundle\Api\PayumRequestProcessorInterface" />
             <argument type="string">%sylius_api.payment_request.payum.status.class%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
 
-        <service id="sylius.api.payment.payum.context" class="Sylius\Bundle\ApiBundle\Payment\Payum\PayumApiContext" />
+        <service id="sylius.api.payment.payum.context" class="Sylius\Bundle\PayumBundle\Api\PayumApiContext" />
 
-        <service id="sylius_api.action.get_http_request" class="Sylius\Bundle\ApiBundle\Payment\Payum\Action\SyliusApiGetHttpRequestAction">
+        <service id="sylius_api.action.get_http_request" class="Sylius\Bundle\PayumBundle\Action\SyliusApiGetHttpRequestAction">
             <argument type="service" id="sylius.api.payment.payum.context" />
 
             <tag name="payum.action" all="true" prepend="true" />
         </service>
 
-        <service id="sylius_api.action.render_template" class="Sylius\Bundle\ApiBundle\Payment\Payum\Action\SyliusApiRenderTemplateAction">
+        <service id="sylius_api.action.render_template" class="Sylius\Bundle\PayumBundle\Action\SyliusApiRenderTemplateAction">
             <argument type="service" id="sylius.api.payment.payum.context" />
 
             <tag name="payum.action" all="true" prepend="true" />
