@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Command;
 
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
-use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;

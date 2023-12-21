@@ -30,7 +30,7 @@ final class GetAddressLogEntryCollectionHandler
     /** @return Collection<array-key, AddressLogEntry> */
     public function __invoke(GetAddressLogEntryCollection $query): Collection
     {
-        $queryBuilder = $this->addressLogEntryRepository->createByObjectIdQueryBuilder((string)$query->getAddressId());
+        $queryBuilder = $this->addressLogEntryRepository->createByObjectIdQueryBuilder((string) $query->getAddressId());
 
         return new ArrayCollection($queryBuilder->getQuery()->getResult());
     }

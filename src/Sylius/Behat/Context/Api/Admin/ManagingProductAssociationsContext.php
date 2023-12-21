@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
@@ -150,7 +159,7 @@ class ManagingProductAssociationsContext implements Context
         throw new \InvalidArgumentException(sprintf(
             'Product %s does not have an association of type %s',
             $product->getCode(),
-            $type->getName()
+            $type->getName(),
         ));
     }
 

@@ -21,7 +21,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
         private ?int $codeLength = 6,
         private ?string $suffix = null,
         private ?\DateTimeInterface $expiresAt = null,
-        private ?int $usageLimit = null
+        private ?int $usageLimit = null,
     ) {
     }
 
