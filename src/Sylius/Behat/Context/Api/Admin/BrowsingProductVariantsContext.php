@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 
 final class BrowsingProductVariantsContext implements Context
 {
-    public function __construct (
+    public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
     ) {

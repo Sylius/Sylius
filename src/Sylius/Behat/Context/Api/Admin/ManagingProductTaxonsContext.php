@@ -63,7 +63,7 @@ final class ManagingProductTaxonsContext implements Context
     /**
      * @When I set the position of :product to :position
      */
-    public function iSetThePositionOfProductTo(ProductInterface $product, string|int $position): void
+    public function iSetThePositionOfProductTo(ProductInterface $product, int|string $position): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCT_TAXONS, (string) $product->getProductTaxons()->current()->getId());
         $this->client->updateRequestData(['position' => is_numeric($position) ? (int) $position : $position]);
