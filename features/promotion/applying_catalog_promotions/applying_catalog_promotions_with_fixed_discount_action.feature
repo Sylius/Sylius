@@ -16,7 +16,7 @@ Feature: Applying catalog promotions with fixed discount action
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Applying simple catalog promotion on another variant
         When I view "Java T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$30.00" to "$20.00" with "Winter sale" promotion

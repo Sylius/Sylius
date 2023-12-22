@@ -63,7 +63,7 @@ Feature: Adding a new shipping method
         And the shipping method "FedEx Carrier" should appear in the registry
         And the shipping method "FedEx Carrier" should be available in channel "Web-US"
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a new shipping method with flat rate per shipment specified for different channels
         Given the store operates on another channel named "Web-GB" in "GBP" currency
         When I want to create a new shipping method
