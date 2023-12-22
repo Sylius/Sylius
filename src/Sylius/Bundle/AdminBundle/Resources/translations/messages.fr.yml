@@ -79,12 +79,7 @@ sylius:
             pay_pal_express_checkout_deprecation_notice: >
                 PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
         lowest_price_before_discount: 'Prix le plus bas avant remise'
-        minimum_price_details: Prix minimum - il s'agit du seuil de prix en dessous duquel le prix actuel ne peut être remisé par une quelconque promotion. Utilisez ceci pour garder la rentabilité de vos ventes.
-        original_price_details: Prix original (aussi appelé prix barré) - il s'agit du prix de la variante de produit, il est affiché barré dans le catalogue. Il est utilisé comme base pour les calculs de prix actuels. Si cette valeur n'est pas définie, la logique de promotion du catalogue (Catalog Promotion) copiera la valeur du prix dans le prix d'origine.
-        price_details: 'Prix - il s''agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être modifié par des mécanismes internes, ex: les promotions du catalogue.'
         price_history: Historique des prix
-        product:
-            product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
         sales_summary: Récapitulatif des ventes
         shipment_for_order: Expédition pour la commande
         show_history_for_channel_pricing: 'Afficher l''historique des prix des canaux'
