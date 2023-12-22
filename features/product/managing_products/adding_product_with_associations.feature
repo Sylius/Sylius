@@ -38,7 +38,7 @@ Feature: Adding a new product with associations
         And this product should not have an association "Accessories" with product "LG earphones"
         And the product "LG G3" should appear in the store
 
-    @ui @mink:chromedriver @api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new product with association with numeric code
         Given the store has 123 product association type
         When I want to create a new simple product
