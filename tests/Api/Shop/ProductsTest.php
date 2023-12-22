@@ -53,8 +53,11 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
-    public function it_returns_product_with_translations_in_locale_from_header(): void
+    /**
+     * @test
+     * @dataProvider getGermanLocales
+     */
+    public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
 
@@ -65,7 +68,7 @@ final class ProductsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/products/%s', $product->getCode()),
             [],
             [],
-            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => 'de_DE']
+            ['CONTENT_TYPE' => 'application/ld+json', 'HTTP_ACCEPT' => 'application/ld+json', 'HTTP_ACCEPT_LANGUAGE' => $germanLocale]
         );
 
         $this->assertResponse(
@@ -95,9 +98,13 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
-    public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(): void
-    {
+    /**
+     * @test
+     * @dataProvider getPolishLocales
+     */
+    public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(
+        string $polishLocale,
+    ): void {
         $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
@@ -105,7 +112,7 @@ final class ProductsTest extends JsonApiTestCase
             sprintf('/api/v2/shop/products/%s/attributes', 'MUG_SW'),
             [],
             [],
-            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => 'pl_PL'])
+            array_merge(self::CONTENT_TYPE_HEADER, ['HTTP_ACCEPT_LANGUAGE' => $polishLocale])
         );
 
         $this->assertResponse(
@@ -128,5 +135,21 @@ final class ProductsTest extends JsonApiTestCase
         );
 
         $this->assertCount(2, json_decode($this->client->getResponse()->getContent(), true)['hydra:member']);
+    }
+
+    public function getGermanLocales(): iterable
+    {
+        yield ['de_DE']; // Locale code syntax
+        yield ['de-DE']; // RFC 4647 and RFC 3066
+        yield ['DE-DE']; // RFC 4647 and RFC 3066
+        yield ['de-de']; // RFC 4647 and RFC 3066
+    }
+
+    public function getPolishLocales(): iterable
+    {
+        yield ['pl_PL']; // Locale code syntax
+        yield ['pl-PL']; // RFC 4647 and RFC 3066
+        yield ['PL-PL']; // RFC 4647 and RFC 3066
+        yield ['pl-pl']; // RFC 4647 and RFC 3066
     }
 }
