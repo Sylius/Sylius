@@ -58,7 +58,7 @@ jobs:
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain,@hybrid" --rerun
 
             -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --suite-tags="@ui" --rerun
+                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v3

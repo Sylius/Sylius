@@ -23,7 +23,7 @@ Feature: Statistics for a specific channel
         And there should be total sales of "$8,566.00"
         And the average order value should be "$2,141.50"
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Switching to the channel with only fulfilled orders
         Given 4 new customers have fulfilled 4 orders placed for total of "$5,241.00" mostly "Onion" product
         And 2 more new customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product
@@ -35,7 +35,7 @@ Feature: Statistics for a specific channel
         And there should be total sales of "$459.00"
         And the average order value should be "$229.50"
 
-    @ui @javascript
+    @ui @mink:chromedriver
     Scenario: Switching to the channel with both fulfilled and placed orders
         Given 4 new customers have fulfilled 4 orders placed for total of "$5,241.00" mostly "Onion" product
         And 2 more new customers have fulfilled 2 orders placed for total of "$459.00" mostly "Banana" product

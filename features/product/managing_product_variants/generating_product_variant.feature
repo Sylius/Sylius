@@ -37,7 +37,7 @@ Feature: Generating product variants
         Then I should be notified that it has been successfully generated
         And I should see 2 variants in the list
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Generating only a part of product variants
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code and costs "$90.00" in "United States" channel

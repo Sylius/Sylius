@@ -21,7 +21,7 @@ Feature: Filtering customers by groups
         Then I should see a single customer on the list
         And I should see the customer "g.bespoke@example.com" in the list
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Filtering customers by multiple groups
         When I want to see all customers in store
         And I filter by groups "Retail" and "Wholesale"
