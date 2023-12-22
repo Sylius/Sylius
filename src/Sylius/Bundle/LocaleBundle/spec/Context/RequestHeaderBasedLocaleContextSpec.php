@@ -48,6 +48,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
         $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('getLocaleCode');
@@ -62,6 +63,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
         $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->getLocaleCode()->shouldReturn('de_DE');
@@ -76,6 +78,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
         $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->getLocaleCode()->shouldReturn('de_DE');
@@ -90,6 +93,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
         $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->getLocaleCode()->shouldReturn('de_DE');
@@ -104,6 +108,7 @@ final class RequestHeaderBasedLocaleContextSpec extends ObjectBehavior
 
         $requestStack->getMainRequest()->willReturn($request);
 
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'de_DE']);
 
         $this->getLocaleCode()->shouldReturn('de_DE');

@@ -18,7 +18,7 @@ Feature: Picking up the cart with the locale other than the default
 
     @api
     Scenario: Picking up the cart without specified locale
-        When I pick up cart
+        When I pick up cart without specifying locale
         And I check details of my cart
         Then my cart's locale should be "French (France)"
 
