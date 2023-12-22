@@ -228,7 +228,7 @@
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^0.18.0",
         "robertfausk/behat-panther-extension": "^1.1",
-        "stripe/stripe-php": "^8.1",
+        "stripe/stripe-php": "^7.0 || ^8.1",
         "sylius-labs/coding-standard": "^4.2",
         "sylius-labs/suite-tags-extension": "~0.1",
         "symfony/browser-kit": "^5.4.21 || ^6.0",
