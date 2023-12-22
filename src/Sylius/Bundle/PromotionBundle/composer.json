@@ -27,14 +27,15 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
-        "sylius/money-bundle": "^1.12",
-        "sylius/promotion": "^1.12",
-        "sylius/registry": "^1.5",
-        "sylius/resource-bundle": "^1.9",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0"
+        "sylius/calendar": "^0.5",
+        "sylius/money-bundle": "^2.0",
+        "sylius/promotion": "^2.0",
+        "sylius/registry": "^1.6",
+        "sylius/resource-bundle": "^1.10",
+        "symfony/clock": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1"
     },
     "conflict": {
         "doctrine/orm": "2.15.2",
@@ -48,10 +49,10 @@
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4.21 || ^6.0",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/form": "^5.4.21 || ^6.0",
-        "symfony/validator": "^5.4.21 || ^6.0"
+        "symfony/browser-kit": "^6.4.0",
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/form": "^6.4.1",
+        "symfony/validator": "^6.4.0"
     },
     "config": {
         "allow-plugins": {
@@ -60,7 +61,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {

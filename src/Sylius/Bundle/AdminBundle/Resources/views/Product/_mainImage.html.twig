@@ -3,11 +3,7 @@
 {% elseif product.images.first %}
     {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
 {% else %}
-    {% if use_webpack %}
-        {% set path = asset('build/admin/images/50x50.png', 'admin') %}
-    {% else %}
-        {% set path = asset('assets/admin/img/50x50.png') %}
-    {% endif %}
+    {% set path = asset('build/admin/images/50x50.png', 'admin') %}
 {% endif %}
 
 <img src="{{ path }}" alt="" class="ui bordered image sylius-grid-image" />
