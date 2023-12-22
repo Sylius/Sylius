@@ -47,7 +47,7 @@ Third scenario::
     Then the cart should be empty
 
 .. note::
-    The cart mentioned in the last scenario will we available once you log in again.
+    The cart mentioned in the last scenario will be available once you log in again.
 
 Learn more
 ----------
