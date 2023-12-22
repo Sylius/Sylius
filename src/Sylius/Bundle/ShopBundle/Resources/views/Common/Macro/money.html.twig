@@ -19,3 +19,9 @@
 
     {{- convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}
 {%- endmacro -%}
+
+{%- macro calculateLowestPrice(variant) -%}
+    {% from _self import convertAndFormat %}
+
+    {{- convertAndFormat(variant|sylius_calculate_lowest_price({'channel': sylius.channel})) -}}
+{%- endmacro -%}

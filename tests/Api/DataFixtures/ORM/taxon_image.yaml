@@ -1,0 +1,16 @@
+Sylius\Component\Core\Model\Taxon:
+    taxon:
+        code: 'CATEGORY'
+        currentLocale: 'en_US'
+        images: ['@taxon_thumbnail', '@taxon_banner']
+    taxon_mug:
+        code: 'MUG'
+        currentLocale: 'en_US'
+
+Sylius\Component\Core\Model\TaxonImage:
+    taxon_thumbnail:
+        type: 'thumbnail'
+        path: 'uo/thumbnail.jpg'
+    taxon_banner:
+        type: 'banner'
+        path: 'uo/banner.jpg'

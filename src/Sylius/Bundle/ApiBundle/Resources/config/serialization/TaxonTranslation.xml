@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
@@ -16,18 +27,28 @@
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
         </attribute>
         <attribute name="description">
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
+        </attribute>
+        <attribute name="locale">
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
         </attribute>
         <attribute name="slug">
             <group>admin:taxon:read</group>
             <group>shop:taxon:read</group>
             <group>admin:taxon_translation:read</group>
             <group>shop:taxon_translation:read</group>
+            <group>admin:taxon:create</group>
+            <group>admin:taxon:update</group>
         </attribute>
     </class>
 </serializer>

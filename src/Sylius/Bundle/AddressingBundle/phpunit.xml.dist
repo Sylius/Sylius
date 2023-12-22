@@ -5,7 +5,16 @@
          colors="true"
 >
     <php>
+        <ini name="error_reporting" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="test"/>
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <!-- ###- symfony/framework-bundle ### -->
+
         <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
+        <server name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/db.sql" />
     </php>
 
     <testsuites>

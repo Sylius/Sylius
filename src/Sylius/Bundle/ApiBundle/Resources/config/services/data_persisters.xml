@@ -31,6 +31,12 @@
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ChannelDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="sylius.checker.channel_deletion" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataPersister\MessengerDataPersister">
             <argument type="service" id="api_platform.messenger.data_persister" />
             <tag name="api_platform.data_persister" />
@@ -42,14 +48,61 @@
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\LocaleDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ShippingMethodDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <tag name="api_platform.data_persister" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\PaymentMethodDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductAttributeDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductTaxonDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <argument type="service" id="sylius.event_bus" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\ProductVariantDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\PromotionCouponDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\TranslatableDataPersister">
+            <argument type="service" id="sylius.translation_locale_provider" />
+            <tag name="api_platform.data_persister" priority="128" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\DataPersister\ZoneDataPersister">
             <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <argument type="service" id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
+            <tag name="api_platform.data_persister" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\DataPersister\PromotionDataPersister">
+            <argument type="service" id="api_platform.doctrine.orm.data_persister" />
             <tag name="api_platform.data_persister" />
         </service>
     </services>

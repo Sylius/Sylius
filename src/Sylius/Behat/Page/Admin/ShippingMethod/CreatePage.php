@@ -75,21 +75,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function getValidationMessageForAmount(string $channelCode): string
     {
         $foundElement = $this->getFieldElement('amount', ['%channelCode%' => $channelCode]);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Field element');
-        }
 
-        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
-        if (null === $validationMessage) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'Validation message',
-                'css',
-                '.sylius-validation-error',
-            );
-        }
+        return $this->getValidationMessageForElement($foundElement);
+    }
 
-        return $validationMessage->getText();
+    public function getValidationMessageForRuleAmount(string $channelCode): string
+    {
+        $foundElement = $this->getChannelConfigurationOfLastRule($channelCode);
+
+        return $this->getValidationMessageForElement($foundElement);
     }
 
     public function addRule(string $ruleName): void
@@ -126,11 +120,31 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'channel' => '#sylius_shipping_method_channels .ui.checkbox:contains("%channel%")',
             'calculator' => '#sylius_shipping_method_calculator',
             'calculator_configuration' => '.ui.segment.configuration',
+            'weight' => '[id*="sylius_shipping_method_rules_"][id*="_configuration_weight"]',
             'code' => '#sylius_shipping_method_code',
             'name' => '#sylius_shipping_method_translations_en_US_name',
             'zone' => '#sylius_shipping_method_zone',
             'rules' => '#sylius_shipping_method_rules',
         ]);
+    }
+
+    private function getValidationMessageForElement(NodeElement $element): string
+    {
+        if (null === $element) {
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
+        }
+
+        $validationMessage = $element->find('css', '.sylius-validation-error');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'Validation message',
+                'css',
+                '.sylius-validation-error',
+            );
+        }
+
+        return $validationMessage->getText();
     }
 
     /**
@@ -167,7 +181,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return $items;
     }
 
-    private function getChannelConfigurationOfLastRule(string $channelCode): NodeElement
+    private function getChannelConfigurationOfLastRule(string $channelCode): ?NodeElement
     {
         return $this
             ->getLastCollectionItem('rules')

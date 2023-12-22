@@ -24,7 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class GenerateCouponsCommandTest extends KernelTestCase
+final class GenerateCouponsCommandTest extends KernelTestCase
 {
     private Command $command;
 
@@ -72,7 +72,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
         $this->assertNotEquals($this->commandTester->getStatusCode(), 0);
-        $this->assertContains('No promotion found with this code', $output);
+        $this->assertStringContainsString('No promotion found with this code', $output);
     }
 
     /**
@@ -97,7 +97,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
         $this->assertNotEquals($this->commandTester->getStatusCode(), 0);
-        $this->assertContains('This promotion is not coupon based', $output);
+        $this->assertStringContainsString('This promotion is not coupon based', $output);
     }
 
     /**
@@ -136,7 +136,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
         $this->assertEquals($this->commandTester->getStatusCode(), 1);
-        $this->assertContains('Could not generate', $output);
+        $this->assertStringContainsString('Could not generate', $output);
     }
 
     /**
@@ -175,7 +175,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
         $this->assertEquals($this->commandTester->getStatusCode(), 0);
-        $this->assertContains('Coupons have been generated', $output);
+        $this->assertStringContainsString('Coupons have been generated', $output);
     }
 
     /**
@@ -217,6 +217,6 @@ class GenerateCouponsCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $this->commandTester->getDisplay();
         $this->assertEquals($this->commandTester->getStatusCode(), 0);
-        $this->assertContains('Coupons have been generated', $output);
+        $this->assertStringContainsString('Coupons have been generated', $output);
     }
 }

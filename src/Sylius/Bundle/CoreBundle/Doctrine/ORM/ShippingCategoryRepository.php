@@ -16,7 +16,13 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Repository\ShippingCategoryRepositoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
+/**
+ * @template T of ShippingCategoryInterface
+ *
+ * @implements ShippingCategoryRepositoryInterface<T>
+ */
 class ShippingCategoryRepository extends EntityRepository implements ShippingCategoryRepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder

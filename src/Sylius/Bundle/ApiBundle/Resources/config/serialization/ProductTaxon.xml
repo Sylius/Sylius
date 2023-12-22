@@ -1,5 +1,16 @@
 <?xml version="1.0" ?>
 
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
 <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd">
@@ -11,6 +22,20 @@
         </attribute>
         <attribute name="taxon">
             <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:update</group>
+            <group>admin:product_taxon:create</group>
+            <group>shop:product_taxon:read</group>
+        </attribute>
+        <attribute name="product">
+            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:update</group>
+            <group>admin:product_taxon:create</group>
+            <group>shop:product_taxon:read</group>
+        </attribute>
+        <attribute name="position">
+            <group>admin:product_taxon:read</group>
+            <group>admin:product_taxon:update</group>
+            <group>admin:product_taxon:create</group>
             <group>shop:product_taxon:read</group>
         </attribute>
     </class>

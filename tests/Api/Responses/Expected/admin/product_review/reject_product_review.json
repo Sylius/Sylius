@@ -1,0 +1,14 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductReview",
+    "@id": "\/api\/v2\/admin\/product-reviews\/@integer@",
+    "@type": "ProductReview",
+    "id": @integer@,
+    "title": "Hello",
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "rating": 3,
+    "comment": "I seem to have a problem with...",
+    "author": "\/api\/v2\/admin\/customers\/@integer@",
+    "status": "rejected",
+    "reviewSubject": "\/api\/v2\/admin\/products\/MUG"
+}

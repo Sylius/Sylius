@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -266,7 +266,7 @@ final class AddressContext implements Context
      */
     public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
     {
-        $this->client->showByIri($this->iriConverter->getIriFromItem($address));
+        $this->client->showByIri($this->iriConverter->getIriFromResource($address));
     }
 
     /**

@@ -24,8 +24,8 @@ interface TaxonTreeRepositoryInterface
     public function children(
         ?object $node = null,
         bool $direct = false,
-        string|array|null $sortByField = null,
-        string|array $direction = 'ASC',
+        array|string|null $sortByField = null,
+        array|string $direction = 'ASC',
         bool $includeNode = false,
     ): array|null;
 }

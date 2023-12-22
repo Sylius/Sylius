@@ -24,21 +24,6 @@
     </parameters>
 
     <services>
-        <service id="Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction" public="true">
-            <argument type="service" id="sylius.factory.avatar_image" />
-            <argument type="service" id="sylius.repository.avatar_image" />
-            <argument type="service" id="sylius.image_uploader" />
-            <argument type="service" id="api_platform.iri_converter" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\GetProductBySlugAction" public="true">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.repository.product" />
-            <argument type="service" id="api_platform.iri_converter" />
-            <argument type="service" id="request_stack" />
-        </service>
-
         <!--    TODO: Remove after bumping to Api Platform 3.0    -->
         <service id="api_platform.action.post_item" alias="api_platform.action.placeholder" public="true" />
 
@@ -89,13 +74,9 @@
             <argument type="service" id="sylius.repository.payment_method" />
         </service>
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\DeleteOrderItemAction" public="true">
-            <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.repository.order_item" />
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCatalogPromotionAction" public="true">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        <service id="Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="controller.service_arguments" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\DataProvider\ChannelAwareItemDataProvider" decorates="api_platform.item_data_provider">
@@ -122,7 +103,7 @@
         </service>
 
         <service id="sylius.listener.api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
@@ -140,6 +121,8 @@
         <service id="Sylius\Bundle\ApiBundle\ApiPlatform\ResourceMetadataPropertyValueResolver">
             <argument type="service" id="Sylius\Bundle\ApiBundle\ApiPlatform\ApiResourceConfigurationMerger" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Merger\LegacyResourceMetadataMerger" />
 
         <service
             id="api_platform.metadata.resource.metadata_factory.yaml"
@@ -168,6 +151,15 @@
         <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
+        </service>
+
+        <service id="sylius.listener.admin_api_authentication_success_listener" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
+            <argument type="service" id="validator" />
         </service>
     </services>
 </container>

@@ -16,9 +16,18 @@
             <group>admin:promotion:read</group>
         </attribute>
 
+        <attribute name="createdAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
+        <attribute name="updatedAt">
+            <group>admin:promotion:read</group>
+        </attribute>
+
         <attribute name="name">
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="code">
@@ -28,35 +37,54 @@
 
         <attribute name="description">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="priority">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="exclusive">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="appliesToDiscounted">
             <group>admin:promotion:read</group>
             <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="usageLimit">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
+        </attribute>
+
+        <attribute name="used">
             <group>admin:promotion:read</group>
         </attribute>
 
         <attribute name="startsAt">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="endsAt">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="couponBased">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="coupons">
@@ -65,14 +93,26 @@
 
         <attribute name="rules">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="actions">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
 
         <attribute name="channels">
             <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
+        </attribute>
+
+        <attribute name="translations">
+            <group>admin:promotion:read</group>
+            <group>admin:promotion:create</group>
+            <group>admin:promotion:update</group>
         </attribute>
     </class>
 </serializer>

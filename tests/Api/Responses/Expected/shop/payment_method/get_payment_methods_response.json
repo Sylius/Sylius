@@ -22,26 +22,36 @@
             "name": "Bank transfer",
             "description": @string@,
             "instructions": null
+        },
+        {
+            "@id": "\/api\/v2\/shop\/payment-methods\/PAYPAL",
+            "@type": "PaymentMethod",
+            "id": @integer@,
+            "code": "PAYPAL",
+            "position": 3,
+            "name": "PayPal",
+            "description": @string@,
+            "instructions": null
         }
     ],
-   "hydra:totalItems": 2,
-   "hydra:search": {
-     "@type": "hydra:IriTemplate",
-     "hydra:template": "/api/v2/shop/payment-methods{?paymentId,tokenValue}",
-     "hydra:variableRepresentation": "BasicRepresentation",
-      "hydra:mapping": [
-        {
-         "@type": "IriTemplateMapping",
-         "variable": "paymentId",
-         "property": null,
-         "required": false
-       },
-       {
-         "@type": "IriTemplateMapping",
-         "variable": "tokenValue",
-         "property": null,
-         "required": false
-       }
-     ]
-   }
+    "hydra:totalItems": 3,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/shop\/payment-methods{?paymentId,tokenValue}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "paymentId",
+                "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "tokenValue",
+                "property": null,
+                "required": false
+            }
+        ]
+    }
 }

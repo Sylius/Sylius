@@ -28,9 +28,10 @@ final class ProductOptionValueChoiceType extends AbstractType
     public function __construct(?AvailableProductOptionValuesResolverInterface $availableProductOptionValuesResolver = null)
     {
         if (null === $availableProductOptionValuesResolver) {
-            @trigger_error(
-                'Not passing availableProductOptionValuesResolver thru constructor is deprecated in Sylius 1.8 and ' .
-                'it will be removed in Sylius 2.0',
+            trigger_deprecation(
+                'sylius/product-bundle',
+                '1.8',
+                'Not passing an $availableProductOptionValuesResolver through constructor is deprecated and will be removed in Sylius 2.0',
             );
         }
 

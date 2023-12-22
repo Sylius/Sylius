@@ -101,14 +101,6 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I (try to) save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
-    }
-
-    /**
      * @When I browse tax categories
      */
     public function iWantToBrowseTaxCategories(): void
@@ -222,17 +214,6 @@ final class ManagingTaxCategoriesContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Tax category could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Tax category could not be edited',
         );
     }
 

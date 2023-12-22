@@ -2,4 +2,5 @@
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': data.id}))) %}
 
-{{ buttons.delete(path, action.label, true, data.id) }}
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+{{ buttons.delete(path, action.label, labeled, data.id) }}

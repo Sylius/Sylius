@@ -10,7 +10,7 @@ Feature: Deleting multiple coupons
         And this promotion has "SANTA1", "SANTA2" and "SANTA3" coupons
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple coupons at once
         When I browse coupons of this promotion
         And I check the "SANTA1" coupon

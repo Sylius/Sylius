@@ -31,6 +31,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SyliusPriceHistoryLegacyAliasesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -40,15 +41,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '1.12.14-DEV';
+    public const VERSION = '1.13.0-DEV';
 
-    public const VERSION_ID = '11214';
+    public const VERSION_ID = '11300';
 
     public const MAJOR_VERSION = '1';
 
-    public const MINOR_VERSION = '12';
+    public const MINOR_VERSION = '13';
 
-    public const RELEASE_VERSION = '14';
+    public const RELEASE_VERSION = '0';
 
     public const EXTRA_VERSION = 'DEV';
 
@@ -93,6 +94,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
         $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
+        $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
     }
 
     protected function getModelNamespace(): string

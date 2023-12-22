@@ -49,7 +49,7 @@ Feature: Verifying account's email address
     Scenario: Receiving account verification email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be notified that my account has been created and the verification email has been sent
-        And 2 emails should be sent to "ghastly@bespoke.com"
+        And 1 email should be sent to "ghastly@bespoke.com"
         But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password
 
     @ui @email @api

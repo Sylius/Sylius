@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="%sylius.model.country.class%" shortName="Country">
+        <collectionOperations>
+            <collectionOperation name="another_admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/updated/countries</attribute>
+                <attribute name="filters">
+                    <attribute>test.country.id_filter</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="shop_get">
+                <attribute name="enabled">false</attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <itemOperations>
+            <itemOperation name="shop_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/shop/countries/new/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:country:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="enabled">false</attribute>
+            </itemOperation>
+
+            <itemOperation name="custom_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/countries/{code}</attribute>
+            </itemOperation>
+        </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="provinces_get_subresource">
+                <attribute name="enabled">false</attribute>
+            </subresourceOperation>
+
+            <subresourceOperation name="provinces_delete_subresource">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/countries/{code}/provinces/{id}</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
+        <property name="id" identifier="false" writable="false" />
+        <property name="code" identifier="true" required="true" />
+        <property name="name" writable="false" readable="false" />
+        <property name="provinces" readable="false" writable="true" />
+    </resource>
+</resources>

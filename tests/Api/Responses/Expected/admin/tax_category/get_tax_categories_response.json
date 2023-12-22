@@ -1,0 +1,28 @@
+{
+    "@context": "\/api\/v2\/contexts\/TaxCategory",
+    "@id": "\/api\/v2\/admin\/tax-categories",
+    "@type": "hydra:Collection",
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/tax-categories\/default",
+            "@type": "TaxCategory",
+            "id": "@integer@",
+            "code": "default",
+            "name": "Default",
+            "description": null,
+            "createdAt": @date@,
+            "updatedAt": @date@
+        },
+        {
+            "@id": "\/api\/v2\/admin\/tax-categories\/special",
+            "@type": "TaxCategory",
+            "id": "@integer@",
+            "code": "special",
+            "name": "Special",
+            "description": "For peculiar places",
+            "createdAt": @date@,
+            "updatedAt": @date@
+        }
+    ],
+    "hydra:totalItems": 2
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+>
+    <class name="Sylius\Component\Product\Model\ProductAttributeTranslation">
+        <attribute name="id">
+            <group>shop:product_attribute:read</group>
+            <group>admin:product_attribute:read</group>
+        </attribute>
+        <attribute name="locale">
+            <group>admin:product_attribute:create</group>
+            <group>admin:product_attribute:update</group>
+        </attribute>
+        <attribute name="name">
+            <group>shop:product_attribute:read</group>
+            <group>admin:product_attribute:read</group>
+            <group>admin:product_attribute:create</group>
+            <group>admin:product_attribute:update</group>
+        </attribute>
+    </class>
+</serializer>

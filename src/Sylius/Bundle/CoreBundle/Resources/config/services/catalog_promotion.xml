@@ -32,6 +32,7 @@
         <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria\MinimumPriceCriteria">
             <tag name="sylius.catalog_promotion.applicator_criteria" />
         </service>
+
         <service
             id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncerInterface"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionAnnouncer"
@@ -39,6 +40,13 @@
             <argument type="service" id="sylius.event_bus" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface" />
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        </service>
+
+        <service
+            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface"
+            class="Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncer"
+        >
+            <argument type="service" id="sylius.command_bus" />
         </service>
 
         <service

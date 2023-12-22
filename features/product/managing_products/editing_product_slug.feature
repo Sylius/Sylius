@@ -25,7 +25,7 @@ Feature: Editing product's slug
         And I add it
         Then the slug of the "Mansion of Madness" product should be "mom-board-game"
 
-    @ui
+    @ui @no-api
     Scenario: Seeing disabled slug field when editing a product
         Given the store has a product "Mansion of Madness"
         When I want to modify this product

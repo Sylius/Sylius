@@ -89,7 +89,9 @@ final class LocaleSetup implements LocaleSetupInterface
         $region = null;
 
         if (count(explode('_', $code, 2)) === 2) {
-            [$language, $region] = explode('_', $code, 2);
+            $codeParts = explode('_', $code, 2);
+            $language = $codeParts[0];
+            $region = $codeParts[1] ?? null;
         }
 
         try {

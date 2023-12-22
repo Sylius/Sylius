@@ -37,8 +37,9 @@ final class UserPasswordHasherSpec extends ObjectBehavior
         CredentialsHolderInterface $user,
     ): void {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
+        $user->getSalt()->willReturn('salt123');
         $passwordHasherFactory->getPasswordHasher($user->getWrappedObject()::class)->willReturn($passwordHasher);
-        $passwordHasher->hash('topSecretPlainPassword')->willReturn('topSecretHashedPassword');
+        $passwordHasher->hash('topSecretPlainPassword', 'salt123')->willReturn('topSecretHashedPassword');
 
         $this->hash($user)->shouldReturn('topSecretHashedPassword');
     }

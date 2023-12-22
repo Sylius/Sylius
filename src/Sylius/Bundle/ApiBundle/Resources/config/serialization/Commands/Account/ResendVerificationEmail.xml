@@ -16,5 +16,14 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Bundle\ApiBundle\Command\Account\ResendVerificationEmail">
+        <attribute name="shopUserId">
+            <group>shop:resend_verification_email:create</group>
+        </attribute>
+        <attribute name="channelCode">
+            <group>shop:resend_verification_email:create</group>
+        </attribute>
+        <attribute name="localeCode">
+            <group>shop:resend_verification_email:create</group>
+        </attribute>
     </class>
 </serializer>

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ProductBundle\Attribute\AsProductVariantResolver;
 use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductAttributeValueRepository;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
@@ -26,6 +27,7 @@ use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -42,6 +44,8 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $this->registerAutoconfiguration($container);
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -49,6 +53,16 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         $this->prependAttribute($container, $config);
+    }
+
+    private function registerAutoconfiguration(ContainerBuilder $container): void
+    {
+        $container->registerAttributeForAutoconfiguration(
+            AsProductVariantResolver::class,
+            static function (ChildDefinition $definition, AsProductVariantResolver $attribute): void {
+                $definition->addTag(AsProductVariantResolver::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+            },
+        );
     }
 
     private function prependAttribute(ContainerBuilder $container, array $config): void

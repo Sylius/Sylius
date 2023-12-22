@@ -18,6 +18,10 @@ sylius_admin_ajax_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_variant.yml"
     prefix: /product-variants
 
+sylius_admin_ajax_customer_group:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/customer_group.yml"
+    prefix: /customer-groups
+
 sylius_admin_ajax_product_option:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_option.yml"
     prefix: /product-options

@@ -1,0 +1,187 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: 'WEB'
+        name: 'Web Channel'
+        hostname: 'localhost'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en']
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
+
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Product:
+    product_mug:
+        code: 'MUG'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_mug_en_US'
+        options: ['@product_option_color']
+    product_cup:
+        code: 'CUP'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_cup_en_US'
+    product_tankard:
+        code: 'TANKARD'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_tankard_en_US'
+    product_hat:
+        code: 'HAT'
+        channels: [ '@channel_web' ]
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_translation_hat_en_US'
+        enabled: false
+
+Sylius\Component\Core\Model\ProductTranslation:
+    product_translation_mug_en_US:
+        slug: 'mug'
+        locale: 'en_US'
+        name: 'Mug'
+        description: 'This is a mug'
+        shortDescription: 'Short mug description'
+        translatable: '@product_mug'
+    product_translation_cup_en_US:
+        slug: 'Cup'
+        locale: 'en_US'
+        name: 'Cup'
+        description: 'Short cup description'
+        shortDescription: 'Cup'
+        translatable: '@product_cup'
+    product_translation_tankard_en_US:
+        slug: 'Tankard'
+        locale: 'en_US'
+        name: 'Tankard'
+        description: 'Tankard description'
+        shortDescription: 'Tankard'
+        translatable: '@product_tankard'
+    product_translation_hat_en_US:
+        slug: 'Hat'
+        locale: 'en_US'
+        name: 'Hat'
+        description: 'Short hat description'
+        shortDescription: 'Hat'
+        translatable: '@product_hat'
+
+Sylius\Component\Core\Model\ProductVariant:
+    product_variant_mug_blue:
+        code: 'MUG_BLUE'
+        product: '@product_mug'
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_variant_mug_blue_translation_en_EN'
+        optionValues: ['@product_option_value_color_blue']
+        channelPricings:
+            WEB: '@channel_pricing_product_variant_mug_blue_web'
+
+    product_variant_mug_red:
+        code: 'MUG_RED'
+        product: '@product_mug'
+        currentLocale: 'en_US'
+        translations:
+            en_US: '@product_variant_mug_red_translation_en_EN'
+        optionValues: ['@product_option_value_color_red']
+        channelPricings:
+            WEB: '@channel_pricing_product_variant_mug_red_web'
+
+Sylius\Component\Product\Model\ProductVariantTranslation:
+    product_variant_mug_blue_translation_en_EN:
+        locale: 'en_US'
+        name: 'Blue Mug'
+        translatable: '@product_variant_mug_blue'
+    product_variant_mug_red_translation_en_EN:
+        locale: 'en_US'
+        name: 'Red Mug'
+        translatable: '@product_variant_mug_red'
+
+Sylius\Component\Core\Model\ChannelPricing:
+    channel_pricing_product_variant_mug_blue_web:
+        channelCode: 'WEB'
+        price: 2000
+        originalPrice: 3000
+    channel_pricing_product_variant_mug_red_web:
+        channelCode: 'WEB'
+        price: 2000
+
+Sylius\Component\Product\Model\ProductOption:
+    product_option_color:
+        code: 'COLOR'
+        currentLocale: 'en_US'
+        translations:
+            - '@product_option_translation_en_EN'
+
+Sylius\Component\Product\Model\ProductOptionTranslation:
+    product_option_translation_en_EN:
+        locale: 'en_US'
+        name: 'Color'
+        translatable: '@product_option_color'
+
+Sylius\Component\Product\Model\ProductOptionValue:
+    product_option_value_color_blue:
+        code: 'COLOR_BLUE'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+        translations:
+            - '@product_option_value_translation_blue'
+    product_option_value_color_red:
+        code: 'COLOR_RED'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        option: '@product_option_color'
+        translations:
+            - '@product_option_value_translation_red'
+
+Sylius\Component\Product\Model\ProductOptionValueTranslation:
+    product_option_value_translation_blue:
+        locale: 'en_US'
+        value: 'Blue'
+        translatable: '@product_option_value_color_blue'
+    product_option_value_translation_red:
+        locale: 'en_US'
+        value: 'Red'
+        translatable: '@product_option_value_color_red'
+
+Sylius\Component\Product\Model\ProductAssociation:
+    product_association:
+        type: '@product_association_type'
+        owner: '@product_mug'
+        associatedProducts: ['@product_cup']
+    another_product_association:
+        type: '@another_product_association_type'
+        owner: '@product_mug'
+        associatedProducts: ['@product_hat']
+
+Sylius\Component\Product\Model\ProductAssociationType:
+    product_association_type:
+        code: 'similar_products'
+        translations:
+            en_US: '@product_association_type_translation'
+    another_product_association_type:
+        code: 'another_similar_products'
+        translations:
+            en_US: '@another_product_association_type_translation'
+
+Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
+    product_association_type_translation:
+        name: 'Similar products'
+        locale: 'en_US'
+        translatable: '@product_association_type'
+    another_product_association_type_translation:
+        name: 'Another similar products'
+        locale: 'en_US'
+        translatable: '@another_product_association_type'

@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "rules[0].type: Invalid rule type. Available rule types are total_weight_greater_than_or_equal, total_weight_less_than_or_equal, order_total_greater_than_or_equal, order_total_less_than_or_equal.",
+    "violations": [
+        {
+            "propertyPath": "rules[0].type",
+            "message": "Invalid rule type. Available rule types are total_weight_greater_than_or_equal, total_weight_less_than_or_equal, order_total_greater_than_or_equal, order_total_less_than_or_equal.",
+            "code": null
+        }
+    ]
+}

@@ -43,6 +43,11 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AvailableProductAssociationsInProductCollectionExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\OrdersByChannelExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
@@ -98,11 +103,13 @@
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderShopUserItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument>%sylius.api.doctrine_extension.order_shop_user_item.filter_cart.allowed_non_get_operations%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\OrderVisitorItemExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <argument>%sylius.api.doctrine_extension.order_visitor_item.filter_cart.allowed_non_get_operations%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
@@ -111,9 +118,26 @@
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\EnabledProductInProductAssociationItemExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\ExchangeRateExtension">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryExtension\OrderExtension">
+            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
+            <argument>%sylius_api.order_states_to_filter_out%</argument>
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryItemExtension\TaxonItemExtension">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
     </services>

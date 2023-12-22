@@ -8,25 +8,27 @@ Feature: Tracking changes on order addresses
         Given the store operates on a single channel in "United States"
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
-        And the store has a product "Italian suit" priced at "$4000.00"
+        And the store has a product "Italian suit" priced at "$4,000.00"
         And there is a customer "barney@stinson.com" that placed an order "#00000001"
         And the customer bought a single "Italian suit"
         When I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Browsing order's addresses history after changing it by customer
         Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States" with identical billing address
         And the customer changed shipping address' street to "211 Madison Avenue"
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         When I browse order's "#00000001" history
-        Then there should be 2 changes in the registry
+        Then there should be 2 shipping address changes in the registry
+        Then there should be 1 billing address changes in the registry
 
-    @ui
+    @api @ui
     Scenario: Browsing order's addresses history after changing it by administrator
         Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States" with identical billing address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
-        When I want to modify a customer's shipping address of this order
-        And I specify their shipping address as "New York", "150 W. 85th Street", "10028", "United States" for "Ted Mosby"
+        When I want to modify a customer's billing address of this order
+        And I specify their billing address as "New York", "150 W. 85th Street", "10028", "United States" for "Ted Mosby"
         And I save my changes
         And I browse order's "#00000001" history
-        Then there should be 2 changes in the registry
+        Then there should be 1 shipping address changes in the registry
+        Then there should be 2 billing address changes in the registry

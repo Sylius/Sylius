@@ -35,6 +35,7 @@ final class OrderModifier implements OrderModifierInterface
     public function removeFromOrder(OrderInterface $cart, OrderItemInterface $item): void
     {
         $cart->removeItem($item);
+
         $this->orderProcessor->process($cart);
     }
 

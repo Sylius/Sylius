@@ -26,7 +26,7 @@
         </service>
 
         <service id="sylius.commands_provider.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
-            <argument type="service" id="doctrine" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
         <service id="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface" alias="sylius.commands_provider.database_setup" />
 

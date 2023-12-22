@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInterface
 {
     public function __construct(
-        private DenormalizerInterface $objectNormalizer,
+        private DenormalizerInterface $commandDenormalizer,
         private IriToIdentifierConverterInterface $iriToIdentifierConverter,
         private DataTransformerInterface $commandAwareInputDataTransformer,
     ) {
@@ -38,13 +38,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
             return false;
         }
 
-        foreach (class_implements($inputClassName) as $classInterface) {
-            if ($classInterface === IriToIdentifierConversionAwareInterface::class) {
-                return true;
-            }
-        }
-
-        return false;
+        return is_subclass_of($inputClassName, IriToIdentifierConversionAwareInterface::class);
     }
 
     public function denormalize($data, $type, $format = null, array $context = [])
@@ -52,29 +46,41 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         /** @var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
-        foreach (class_implements($inputClassName) as $classInterface) {
-            if ($classInterface !== IriToIdentifierConversionAwareInterface::class) {
-                continue;
-            }
-
-            foreach ($data as $classFieldName => $classFieldValue) {
-                if ($this->iriToIdentifierConverter->isIdentifier($data[$classFieldName]) && $data[$classFieldName] != '') {
-                    $data[$classFieldName] = $this->iriToIdentifierConverter->getIdentifier((string) $data[$classFieldName]);
-                }
-            }
+        if (is_subclass_of($inputClassName, IriToIdentifierConversionAwareInterface::class)) {
+            $data = $this->convertIrisToIdentifiers($data);
         }
 
-        $denormalizedInput = $this->objectNormalizer->denormalize($data, $this->getInputClassName($context), $format, $context);
+        $denormalizedCommand = $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
 
-        if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedInput, $type, $context)) {
-            return $this->commandAwareInputDataTransformer->transform($denormalizedInput, $type, $context);
+        if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedCommand, $type, $context)) {
+            return $this->commandAwareInputDataTransformer->transform($denormalizedCommand, $type, $context);
         }
 
-        return $denormalizedInput;
+        return $denormalizedCommand;
     }
 
     private function getInputClassName(array $context): ?string
     {
         return $context['input']['class'] ?? null;
+    }
+
+    /**
+     * @param array<array-key, mixed>|string|int|mixed $data
+     *
+     * @return array<array-key, mixed>|string|int|mixed
+     */
+    private function convertIrisToIdentifiers(mixed $data): mixed
+    {
+        if (is_string($data) && $data !== '' && $this->iriToIdentifierConverter->isIdentifier($data)) {
+            return $this->iriToIdentifierConverter->getIdentifier($data);
+        }
+
+        if (is_array($data)) {
+            foreach ($data as $classFieldName => $classFieldValue) {
+                $data[$classFieldName] = $this->convertIrisToIdentifiers($classFieldValue);
+            }
+        }
+
+        return $data;
     }
 }

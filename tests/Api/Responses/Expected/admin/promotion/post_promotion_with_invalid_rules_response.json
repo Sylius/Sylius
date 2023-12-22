@@ -1,0 +1,58 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": @string@,
+    "violations": [
+        {
+            "propertyPath": "rules[0].configuration[count]",
+            "message": "This value should be of type numeric.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "rules[1].configuration[group_code]",
+            "message": "Customer group with code wrong does not exist.",
+            "code": null
+        },
+        {
+            "propertyPath": "rules[2].configuration[nth]",
+            "message": "This value should be of type numeric.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "rules[3].configuration[country]",
+            "message": "Country with code wrong does not exist.",
+            "code": null
+        },
+        {
+            "propertyPath": "rules[4].configuration[taxons][0]",
+            "message": "Taxon with code wrong does not exist.",
+            "code": null
+        },
+        {
+            "propertyPath": "rules[5].configuration[WEB][amount]",
+            "message": "This value should be of type numeric.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "rules[5].configuration[WEB][taxon]",
+            "message": "Taxon with code wrong does not exist.",
+            "code": null
+        },
+        {
+            "propertyPath": "rules[6].configuration[product_code]",
+            "message": "Product with code wrong does not exist.",
+            "code": null
+        },
+        {
+            "propertyPath": "rules[7].configuration[WEB]",
+            "message": "This field is missing.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "rules[8].type",
+            "message": "Promotion rule type is invalid. Available rule types are cart_quantity, customer_group, nth_order, shipping_country, has_taxon, total_of_items_from_taxon, contains_product, item_total.",
+            "code": null
+        }
+    ]
+}

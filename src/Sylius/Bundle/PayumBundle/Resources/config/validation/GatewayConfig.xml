@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Bundle\PayumBundle\Model\GatewayConfig">
+        <property name="gatewayName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.gateway_config.gateway_name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="factoryName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.gateway_config.factory_name.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\PayumBundle\Validator\Constraints\GatewayFactoryExists">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
+        <property name="config">
+            <constraint name="Collection">
+                <option name="groups">sylius_stripe_checkout</option>
+                <option name="fields">
+                    <value key="secret_key">
+                        <constraint name="NotBlank">
+                            <option name="message">sylius.gateway_config.stripe.secret_key.not_blank</option>
+                            <option name="groups">sylius_stripe_checkout</option>
+                        </constraint>
+                    </value>
+                    <value key="publishable_key">
+                        <constraint name="NotBlank">
+                            <option name="message">sylius.gateway_config.stripe.publishable_key.not_blank</option>
+                            <option name="groups">sylius_stripe_checkout</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+
+            <constraint name="Collection">
+                <option name="groups">sylius_paypal_express_checkout</option>
+                <option name="fields">
+                    <value key="username">
+                        <constraint name="NotBlank">
+                            <option name="message">sylius.gateway_config.paypal.username.not_blank</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
+                        </constraint>
+                    </value>
+                    <value key="password">
+                        <constraint name="NotBlank">
+                            <option name="message">sylius.gateway_config.paypal.password.not_blank</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
+                        </constraint>
+                    </value>
+                    <value key="signature">
+                        <constraint name="NotBlank">
+                            <option name="message">sylius.gateway_config.paypal.signature.not_blank</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
+                        </constraint>
+                    </value>
+                    <value key="sandbox">
+                        <constraint name="Type">
+                            <option name="type">bool</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
+                        </constraint>
+                        <constraint name="NotNull">
+                            <option name="message">sylius.gateway_config.paypal.sandbox.not_null</option>
+                            <option name="groups">sylius_paypal_express_checkout</option>
+                        </constraint>
+                    </value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

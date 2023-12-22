@@ -42,7 +42,6 @@
            <group>admin:product_review:read</group>
            <group>admin:product_review:update</group>
            <group>shop:product_review:read</group>
-           <group>shop:product_review:create</group>
        </attribute>
        <attribute name="author">
            <group>admin:product_review:read</group>

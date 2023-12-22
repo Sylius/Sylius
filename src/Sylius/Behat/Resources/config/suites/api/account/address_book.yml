@@ -32,6 +32,7 @@ default:
 
                 - sylius.behat.context.api.shop.address
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.save
 
             filters:
                 tags: "@address_book&&@api"

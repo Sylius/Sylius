@@ -22,6 +22,9 @@ use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
+/**
+ * @implements PromotionRuleFactoryInterface<PromotionRuleInterface>
+ */
 final class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
     public function __construct(private FactoryInterface $decoratedFactory)

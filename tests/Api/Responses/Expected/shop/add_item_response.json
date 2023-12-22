@@ -34,17 +34,20 @@
             "id": @integer@,
             "quantity": 3,
             "unitPrice": 2000,
+            "originalUnitPrice": 2000,
             "total": 6000,
             "discountedUnitPrice": 2000,
-            "subtotal": 6000,
-            "originalUnitPrice": 2000
+            "subtotal": 6000
         }
     ],
     "itemsTotal": 6000,
     "total": 6500,
+    "itemsSubtotal": 6000,
     "taxTotal": 0,
-    "taxIncludedTotal": 0,
+    "shippingTaxTotal": 500,
     "taxExcludedTotal": 0,
+    "taxIncludedTotal": 0,
     "shippingTotal": 500,
-    "orderPromotionTotal": 0
+    "orderPromotionTotal": 0,
+    "shippingPromotionTotal": 0
 }

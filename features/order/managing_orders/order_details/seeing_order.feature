@@ -16,11 +16,11 @@ Feature: Seeing basic information about an order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing basic information about an order
         When I view the summary of the order "#00000666"
         Then it should have been placed by the customer "lucy@teamlucifer.com"
         And it should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
-        And it should be billed to "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States"
+        And it should have "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" as its billing address
         And it should be shipped via the "Free" shipping method
         And it should be paid with "Cash on Delivery"

@@ -25,6 +25,7 @@ sylius:
             description: Description
             ends_at: Se termine le
             exclusive: Exclusif
+            label: Libellé
             name: Nom
             priority: Priorité
             rules: Règles
@@ -36,6 +37,7 @@ sylius:
             order_fixed_discount: Remise sur la commande
             order_percentage_discount: Rabais en pourcentage commande
             shipping_percentage_discount: Rabais en pourcentage expédition
+            filters: Filtres
             fixed_discount_configuration:
                 amount: Montant
             percentage_discount_configuration:

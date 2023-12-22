@@ -30,7 +30,7 @@ final class AttributesElement extends Element implements AttributesElementInterf
     {
         $attributeValue = $this->getDocument()->find('css', sprintf('.ui.segment[data-tab="non-translatable"] tr:contains("%s") td:nth-child(2)', $attribute))->getText();
 
-        return $attributeValue === $value;
+        return str_contains($attributeValue, $value);
     }
 
     protected function getDefinedElements(): array

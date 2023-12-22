@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
+use Sylius\Bundle\ApiBundle\Exception\ProductNotFoundException;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /** @experimental */
@@ -36,8 +38,12 @@ final class AddProductReviewHandler implements MessageHandlerInterface
 
     public function __invoke(AddProductReview $addProductReview): ReviewInterface
     {
-        /** @var ProductInterface $product */
+        /** @var ProductInterface|null $product */
         $product = $this->productRepository->findOneByCode($addProductReview->productCode);
+
+        if ($product === null) {
+            throw new ProductNotFoundException(Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
         /** @var string|null $email */
         $email = $addProductReview->getEmail();

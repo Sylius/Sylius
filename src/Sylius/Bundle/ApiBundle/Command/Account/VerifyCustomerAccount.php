@@ -13,18 +13,40 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Account;
 
+use Sylius\Bundle\ApiBundle\Command\ChannelCodeAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\LocaleCodeAwareInterface;
+
 /**
  * @experimental
  *
  * @immutable
  */
-class VerifyCustomerAccount
+class VerifyCustomerAccount implements ChannelCodeAwareInterface, LocaleCodeAwareInterface
 {
-    /** @var string */
-    public $token;
+    public function __construct(
+        public string $token,
+        private ?string $localeCode = null,
+        private ?string $channelCode = null,
+    ) {
+    }
 
-    public function __construct(string $token)
+    public function getChannelCode(): ?string
     {
-        $this->token = $token;
+        return $this->channelCode;
+    }
+
+    public function setChannelCode(?string $channelCode): void
+    {
+        $this->channelCode = $channelCode;
+    }
+
+    public function getLocaleCode(): ?string
+    {
+        return $this->localeCode;
+    }
+
+    public function setLocaleCode(?string $localeCode): void
+    {
+        $this->localeCode = $localeCode;
     }
 }

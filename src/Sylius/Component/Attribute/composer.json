@@ -29,7 +29,7 @@
         "doctrine/collections": "^1.6",
         "sylius/registry": "^1.5",
         "sylius/resource": "^1.9",
-        "symfony/validator": "^5.4 || ^6.0"
+        "symfony/validator": "^5.4.21 || ^6.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"

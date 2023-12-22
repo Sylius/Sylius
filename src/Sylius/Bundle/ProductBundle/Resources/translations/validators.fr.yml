@@ -59,3 +59,7 @@ sylius:
             not_blank: Veuillez entrer le code du type d'association.
             regex: Le code du type d'association peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le type d'association avec le code donné existe déjà.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.

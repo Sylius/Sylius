@@ -89,6 +89,12 @@
             <group>shop:order:account:read</group>
         </attribute>
 
+        <attribute name="shippingPromotionTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
         <attribute name="tokenValue">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
@@ -113,7 +119,20 @@
             <group>shop:order:account:read</group>
         </attribute>
 
+        <attribute name="itemsSubtotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
         <attribute name="taxTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="shippingTaxTotal">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>
@@ -126,6 +145,12 @@
         </attribute>
 
         <attribute name="taxIncludedTotal">
+            <group>admin:order:read</group>
+            <group>shop:cart:read</group>
+            <group>shop:order:account:read</group>
+        </attribute>
+
+        <attribute name="itemsSubtotal">
             <group>admin:order:read</group>
             <group>shop:cart:read</group>
             <group>shop:order:account:read</group>

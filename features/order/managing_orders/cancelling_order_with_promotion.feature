@@ -10,7 +10,7 @@ Feature: Cancelling order with promotion applied
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Suit" priced at "$400.00"
         And there is a promotion "Holiday promotion"
-        And the promotion gives "$50" discount to every order
+        And the promotion gives "$50.00" discount to every order
         And there is a customer "mike@ross.com" that placed an order "#00000001"
         And the customer bought a single "Suit"
         And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical billing address

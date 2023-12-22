@@ -3,6 +3,16 @@ The Cookbook
 
 The Sylius Cookbook is a collection of solution articles helping you with some specific, narrow problems.
 
+CLI
+---
+
+.. toctree::
+    :hidden:
+
+    cli/handle-multiple-channels-in-cli
+
+.. include:: /cookbook/cli/map.rst.inc
+
 Entities
 --------
 

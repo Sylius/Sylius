@@ -6,6 +6,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         configuration:
             WEB:
                 amount: 500
+            MOBILE:
+                amount: 1000
         zone: '@zone_world'
         currentLocale: 'en_US'
         translations: ["@shipping_method_translation_ups"]
@@ -17,6 +19,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         configuration:
             WEB:
                 amount: 1000
+            MOBILE:
+                amount: 2000
         zone: '@zone_world'
         currentLocale: 'en_US'
         translations: ["@shipping_method_translation_dhl"]

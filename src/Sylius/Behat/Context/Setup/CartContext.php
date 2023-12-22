@@ -20,9 +20,11 @@ use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -31,7 +33,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CartContext implements Context
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     */
     public function __construct(
+        private OrderRepositoryInterface $orderRepository,
         private MessageBusInterface $commandBus,
         private ProductVariantResolverInterface $productVariantResolver,
         private RandomnessGeneratorInterface $generator,
@@ -48,7 +54,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I have(?:| added) (\d+) (products "[^"]+") (?:to|in) the (cart)$/
+     * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
      */
     public function iHaveAddedProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
@@ -60,6 +66,7 @@ final class CartContext implements Context
      * @Given /^I (?:have|had) (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
+     * @Given /^the (?:customer|visitor) added ("[^"]+" product) to the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
      */
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
@@ -176,7 +183,7 @@ final class CartContext implements Context
 
     private function addProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
-        if ($tokenValue === null) {
+        if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
             $tokenValue = $this->pickupCart();
         }
 
@@ -187,5 +194,10 @@ final class CartContext implements Context
         ));
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    private function doesCartWithTokenExist(string $tokenValue): bool
+    {
+        return $this->orderRepository->findCartByTokenValue($tokenValue) !== null;
     }
 }

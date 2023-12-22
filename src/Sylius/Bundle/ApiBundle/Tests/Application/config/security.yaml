@@ -7,8 +7,7 @@ security:
             id: sylius.shop_user_provider.email_or_name_based
 
     password_hashers:
-        sha512: sha512
-        Sylius\Component\User\Model\UserInterface: sha512
+        Sylius\Component\User\Model\UserInterface: plaintext
 
     firewalls:
         new_api_admin_user:
@@ -45,6 +44,3 @@ security:
         - { path: "%sylius.security.new_api_user_account_regex%/.*", role: ROLE_USER }
         - { path: "%sylius.security.new_api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.new_api_shop_regex%/.*", role: PUBLIC_ACCESS }
-
-sylius_user:
-    encoder: sha512

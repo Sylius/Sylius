@@ -1,0 +1,23 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "code: Please enter product code.\ntranslations[en_US].name: Please enter product name.\ntranslations[en_US].slug: Please enter product slug.",
+    "violations": [
+        {
+            "propertyPath": "code",
+            "message": "Please enter product code.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "translations[en_US].name",
+            "message": "Please enter product name.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "translations[en_US].slug",
+            "message": "Please enter product slug.",
+            "code": @string@
+        }
+    ]
+}
