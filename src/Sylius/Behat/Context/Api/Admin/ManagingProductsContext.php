@@ -453,7 +453,7 @@ final class ManagingProductsContext implements Context
         $product = $this->sharedStorage->get('product');
         Assert::isInstanceOf($product, ProductInterface::class);
         $productTaxon = $product->getProductTaxons()->filter(
-            fn(ProductTaxonInterface $productTaxon) => $productTaxon->getTaxon()->getCode() === $taxon->getCode()
+            fn (ProductTaxonInterface $productTaxon) => $productTaxon->getTaxon()->getCode() === $taxon->getCode(),
         )->first();
         Assert::isInstanceOf($productTaxon, ProductTaxonInterface::class);
 

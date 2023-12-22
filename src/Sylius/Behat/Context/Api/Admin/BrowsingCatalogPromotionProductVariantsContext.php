@@ -122,7 +122,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     private function variantHasCatalogPromotionInChannel(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): bool {
         $variantData = $this->getDataOfVariantWithCode($variant->getCode());
 

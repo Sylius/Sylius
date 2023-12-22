@@ -58,7 +58,7 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
                     'readOnly' => true,
                     'type' => 'array',
                     'items' => [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                 ],
                 'allOrdersCount' => [
@@ -105,7 +105,7 @@ final class CustomerDocumentationModifier implements DocumentationModifierInterf
                     'readOnly' => true,
                     'type' => 'array',
                     'items' => [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                 ],
                 'allOrdersCount' => [
