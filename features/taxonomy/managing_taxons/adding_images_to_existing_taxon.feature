@@ -17,7 +17,7 @@ Feature: Adding images to an existing taxon
         Then I should be notified that it has been successfully uploaded
         And this taxon should have an image with "banner" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a single image to an existing taxon without specifying the type
         When I want to modify the "T-Shirts" taxon
         And I attach the "t-shirts.jpg" image to this taxon

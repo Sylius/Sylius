@@ -75,7 +75,7 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And this product should have only one image
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding an image to an existing configurable product with selecting a variant
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has "Blue" and "Yellow" variants

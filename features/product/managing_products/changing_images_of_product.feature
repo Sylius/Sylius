@@ -52,7 +52,7 @@ Feature: Changing images of an existing product
         And this product should still have 2 images
         But it should not have any images with "thumbnail" type
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Changing the variants of image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has "Blue" and "Yellow" variants
