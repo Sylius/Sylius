@@ -33,7 +33,7 @@ final class SyliusPayumExtension extends AbstractResourceExtension implements Pr
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
-        $container->setParameter('sylius.payum.gateway_config.validation_groups', $config['gateway_config_validation_groups']);
+        $container->setParameter('sylius.payum.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
 
         $this->registerAutoconfiguration($container);
     }
