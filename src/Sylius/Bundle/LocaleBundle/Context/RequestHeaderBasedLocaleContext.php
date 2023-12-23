@@ -27,7 +27,7 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
 {
     private const NO_CODE_VALID_STUB = 'NO_CODE_VALID_STUB';
 
-    /** @var array<array-key, string> $availableLocalesCodes */
+    /** @var array<array-key, string> */
     private array $availableLocalesCodes = [];
 
     public function __construct(private RequestStack $requestStack, private LocaleProviderInterface $localeProvider)
@@ -44,7 +44,7 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface
         if ([] === $this->availableLocalesCodes) {
             $this->availableLocalesCodes = array_unique(array_merge(
                 [$this->localeProvider->getDefaultLocaleCode()],
-                $this->localeProvider->getAvailableLocalesCodes()
+                $this->localeProvider->getAvailableLocalesCodes(),
             ));
         }
 
