@@ -48,9 +48,9 @@ final class SyliusPayumExtensionTest extends AbstractExtensionTestCase
             'gateway_config' => [
                 'validation_groups' => [
                         'paypal_express_checkout' => ['sylius', 'paypal'],
-                        'offline' => ['sylius']
-                ]
-            ]
+                        'offline' => ['sylius'],
+                ],
+            ],
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.payum.gateway_config.validation_groups', ['paypal_express_checkout' => ['sylius', 'paypal'], 'offline' => ['sylius']]);
