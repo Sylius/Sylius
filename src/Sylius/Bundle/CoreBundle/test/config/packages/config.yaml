@@ -15,6 +15,7 @@ framework:
     test: ~
     mailer:
         dsn: 'null://null'
+    workflows: ~
 
 security:
     firewalls:

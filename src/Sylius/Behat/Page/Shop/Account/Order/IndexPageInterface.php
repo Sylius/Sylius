@@ -22,6 +22,8 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function changePaymentMethod(OrderInterface $order);
 
+    public function hasFlashMessage(string $message): bool;
+
     public function isOrderWithNumberInTheList(string $number): bool;
 
     public function openLastOrderPage(): void;

@@ -34,5 +34,14 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="channelCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.channel_pricing.channel_code.not_null</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ExistingChannelCode">
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

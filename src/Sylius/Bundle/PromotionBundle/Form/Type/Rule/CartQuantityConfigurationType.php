@@ -16,8 +16,6 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class CartQuantityConfigurationType extends AbstractType
 {
@@ -26,10 +24,6 @@ final class CartQuantityConfigurationType extends AbstractType
         $builder
             ->add('count', IntegerType::class, [
                 'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.count',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
-                ],
             ])
         ;
     }

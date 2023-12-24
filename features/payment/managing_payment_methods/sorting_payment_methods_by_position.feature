@@ -11,20 +11,20 @@ Feature: Sorting listed payment methods by position
         And the store allows paying with "Offline" at position 1
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Payment methods are sorted by position in ascending order by default
         When I browse payment methods
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have name "Paypal Express Checkout"
         And the last payment method on the list should have name "Cash on Delivery"
 
-    @ui
+    @ui @api
     Scenario: Payment method added at no position is added as the last one
         Given the store allows paying with "Credit Card"
         When I browse payment methods
         Then the last payment method on the list should have name "Credit Card"
 
-    @ui
+    @ui @api
     Scenario: Payment method added at position 0 is added as the first one
         Given the store also allows paying with "Credit Card" at position 0
         When I browse payment methods

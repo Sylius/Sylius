@@ -19,6 +19,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
@@ -39,6 +40,8 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRule;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
+use Sylius\Component\Promotion\Model\PromotionTranslation;
+use Sylius\Component\Promotion\Model\PromotionTranslationInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -55,6 +58,24 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
+                ->arrayNode('promotion_action')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('validation_groups')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('promotion_rule')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('validation_groups')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;
@@ -97,6 +118,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(PromotionType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('translation')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->variableNode('options')->end()
+                                        ->arrayNode('classes')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('model')->defaultValue(PromotionTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(PromotionTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                                ->scalarNode('form')->defaultValue(PromotionTranslationType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

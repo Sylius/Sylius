@@ -4,4 +4,5 @@
 sylius:
     ui:
         item.choice: '{count, plural, =0 {} one {, 1 élément} other {, # éléments}}'
+        lowest_price_days_before_discount_was: '{days, plural, one {Le prix le plus bas à partir de # jour avant la remise actuelle était {price}} other {Le prix le plus bas à partir de # jours avant la remise actuelle était {price}}}'
         overall_this_customer_has_placed_orders_across_all_channels.choice: "{count, plural, =0 {Ce client n'a passé aucune commande} one {Ce client a passé une commande} other {Au total, ce client a passé # commandes tous canaux condondus}}\n"

@@ -20,6 +20,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class Channel extends BaseChannel implements ChannelInterface
 {
@@ -69,6 +70,8 @@ class Channel extends BaseChannel implements ChannelInterface
 
     /** @var TaxonInterface|null */
     protected $menuTaxon;
+
+    protected ?ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig = null;
 
     public function __construct()
     {
@@ -282,5 +285,15 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setMenuTaxon(?TaxonInterface $menuTaxon): void
     {
         $this->menuTaxon = $menuTaxon;
+    }
+
+    public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface
+    {
+        return $this->channelPriceHistoryConfig;
+    }
+
+    public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void
+    {
+        $this->channelPriceHistoryConfig = $channelPriceHistoryConfig;
     }
 }

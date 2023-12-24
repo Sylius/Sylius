@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/Administrator",
+    "@id": "\/api\/v2\/admin\/administrators\/@integer@",
+    "@type": "Administrator",
+    "firstName": "John",
+    "lastName": "Api",
+    "localeCode": "ga_IE",
+    "avatar": null,
+    "id": @integer@,
+    "username": "johnApi",
+    "lastLogin": null,
+    "verifiedAt": null,
+    "email": "j.api@test.com",
+    "createdAt": @date@,
+    "updatedAt": @date@,
+    "enabled": true
+}

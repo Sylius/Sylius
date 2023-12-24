@@ -13,6 +13,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.channel.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+
         <parameter key="sylius.form.type.channel.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
@@ -65,5 +69,10 @@
             <argument>false</argument>
             <tag name="data_collector" template="@SyliusChannel/Collector/channel.html.twig" id="sylius.channel_collector" />
         </service>
+
+        <service id="sylius.checker.channel_deletion" class="Sylius\Component\Channel\Checker\ChannelDeletionChecker">
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+        <service id="Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface" alias="sylius.checker.channel_deletion" />
     </services>
 </container>

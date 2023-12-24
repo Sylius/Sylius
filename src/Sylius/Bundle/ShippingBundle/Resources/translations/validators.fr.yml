@@ -28,3 +28,7 @@ sylius:
     shipment:
         shipping_method:
             not_blank: 'Veuillez sélectionner un mode de livraison.'
+    translation:
+        locale:
+            not_blank: 'Vous devez entrer une valeur.'
+            invalid: 'Ce paramètre régional n''est pas valide.'

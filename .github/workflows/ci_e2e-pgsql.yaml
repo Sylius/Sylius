@@ -4,6 +4,11 @@ on:
     workflow_dispatch: ~
     workflow_call:
         inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
             type:
                 description: "Type of the build"
                 required: true
@@ -38,11 +43,29 @@ jobs:
             DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
 
         steps:
-            -
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.12" ]; then
+                        echo "USE_LEGACY_POSTGRES_SETUP=yes" >> $GITHUB_ENV
+                    else
+                        echo "USE_LEGACY_POSTGRES_SETUP=no" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v3
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.2
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
@@ -50,6 +73,7 @@ jobs:
                     e2e: "yes"
                     database: "postgresql"
                     database_version: ${{ matrix.postgres }}
+                    legacy_postgresql_setup: ${{ env.USE_LEGACY_POSTGRES_SETUP }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
 

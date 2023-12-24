@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
@@ -38,6 +39,7 @@ final class ManagingCatalogPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -104,7 +106,6 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iSpecifyItsAsIn(string $field, string $value, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
         $data['translations'][$localeCode][$field] = $value;
 
         $this->client->updateRequestData($data);
@@ -131,7 +132,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data = ['translations' => [$localeCode => []]];
         $data['translations'][$localeCode]['description'] = $description;
 
         $this->client->updateRequestData($data);
@@ -142,7 +143,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItemInSection($channel, 'admin')]);
+        $this->client->addRequestData('channels', [$this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')]);
     }
 
     /**
@@ -152,7 +153,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $channels = $this->responseChecker->getValue($this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()), 'channels');
 
-        foreach (array_keys($channels, $this->iriConverter->getIriFromItemInSection($channel, 'admin')) as $key) {
+        foreach (array_keys($channels, $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')) as $key) {
             unset($channels[$key]);
         }
 
@@ -319,14 +320,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iMakeCatalogPromotionOperateFrom(string $startDate): void
     {
         $this->client->updateRequestData(['startDate' => $startDate]);
-    }
-
-    /**
-     * @When I save my changes
-     */
-    public function iSaveMyChanges(): void
-    {
-        $this->client->update();
     }
 
     /**
@@ -767,7 +760,7 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotionCode);
         $content = $this->client->getContent();
-        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromItem($channel)) as $key) {
+        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromResource($channel)) as $key) {
             unset($content['channels'][$key]);
         }
 
@@ -785,7 +778,7 @@ final class ManagingCatalogPromotionsContext implements Context
     ): void {
         $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
         $content = $this->client->getContent();
-        $content['channels'][] = $this->iriConverter->getIriFromItem($channel);
+        $content['channels'][] = $this->iriConverter->getIriFromResource($channel);
         $this->client->updateRequestData(['channels' => $content['channels']]);
         $this->client->update();
     }
@@ -804,11 +797,11 @@ final class ManagingCatalogPromotionsContext implements Context
 
         $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotionCode);
         $content = $this->client->getContent();
-        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromItem($removedChannel)) as $key) {
+        foreach (array_keys($content['channels'], $this->iriConverter->getIriFromResource($removedChannel)) as $key) {
             unset($content['channels'][$key]);
         }
 
-        $content['channels'][] = $this->iriConverter->getIriFromItem($addedChannel);
+        $content['channels'][] = $this->iriConverter->getIriFromResource($addedChannel);
         $this->client->setRequestData($content);
         $this->client->update();
     }
@@ -845,7 +838,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iFilterByChannel(ChannelInterface $channel): void
     {
-        $this->client->addFilter('channel', $this->iriConverter->getIriFromItem($channel));
+        $this->client->addFilter('channel', $this->iriConverter->getIriFromResource($channel));
         $this->client->filter();
     }
 
@@ -892,6 +885,18 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->client->addFilter(sprintf('%sDate[after]', $dateType), $fromDate);
         $this->client->addFilter(sprintf('%sDate[before]', $dateType), $toDate);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I sort catalog promotions by :order :field
+     */
+    public function iSortCatalogPromotionByOrderField(string $order, string $field): void
+    {
+        $this->client->addFilter(
+            sprintf('order[%s]', lcfirst(str_replace(' ', '', ucwords($field)))),
+            $order === 'descending' ? 'desc' : 'asc',
+        );
         $this->client->filter();
     }
 
@@ -1182,7 +1187,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
@@ -1201,7 +1206,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName()),
         );
@@ -1215,17 +1220,6 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
             'Catalog promotion could not be created',
-        );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
-    {
-        Assert::true(
-            $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Catalog promotion could not be edited',
         );
     }
 
@@ -1572,6 +1566,24 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
+    /**
+     * @Then I should see :count catalog promotions on the list
+     */
+    public function iShouldSeeCountCatalogPromotionsOnTheList(int $count): void
+    {
+        Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
+    }
+
+    /**
+     * @Then the first catalog promotion should have code :code
+     */
+    public function theFirstCatalogPromotionShouldHaveCode(string $code): void
+    {
+        $catalogPromotions = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        Assert::same(reset($catalogPromotions)['code'], $code);
+    }
+
     private function catalogPromotionAppliesOnVariants(ProductVariantInterface ...$productVariants): bool
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -1675,10 +1687,9 @@ final class ManagingCatalogPromotionsContext implements Context
             'name' => $name,
             'priority' => $priority,
             'enabled' => true,
-            'channels' => [$this->iriConverter->getIriFromItem($channel)],
+            'channels' => [$this->iriConverter->getIriFromResource($channel)],
             'exclusive' => $exclusive,
             'translations' => ['en_US' => [
-                'locale' => 'en_US',
                 'label' => $name,
             ]],
             'actions' => [[

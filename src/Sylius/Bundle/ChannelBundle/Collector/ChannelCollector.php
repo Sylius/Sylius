@@ -58,7 +58,7 @@ final class ChannelCollector extends DataCollector
 
         $this->data = [
             'channel' => $channel,
-            'channels' => array_map([$this, 'pluckChannel'], $this->channelRepository->findAll()),
+            'channels' => $this->channelRepository->findAllWithBasicData(),
             'channel_change_support' => $this->channelChangeSupport,
         ];
     }

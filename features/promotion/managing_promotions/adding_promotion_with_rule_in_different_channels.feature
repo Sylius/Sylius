@@ -9,12 +9,12 @@ Feature: Adding a new promotion with rule configured in different channels
         And the store operates on a channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
 
-    @ui @mink:chromedriver
+    @api @ui @mink:chromedriver
     Scenario: Adding a new promotion with total price of items from taxon rule
         When I want to create a new promotion
         And I specify its code as "100_IN_EVERY_CURRENCY"
         And I name it "100 in every currency"
-        And I add the "Item total" rule configured with €100 amount for "United States" channel and £100 amount for "Web-GB" channel
+        And I add the "Item total" rule configured with "€100.00" amount for "United States" channel and "£100.00" amount for "Web-GB" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the "100 in every currency" promotion should appear in the registry

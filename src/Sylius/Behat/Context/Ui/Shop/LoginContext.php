@@ -200,14 +200,6 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Then I should be notified about disabled account
-     */
-    public function iShouldBeNotifiedAboutDisabledAccount(): void
-    {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
-    }
-
-    /**
      * @Then I should be notified that email with reset instruction has been sent
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
@@ -285,6 +277,15 @@ final class LoginContext implements Context
     {
         $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
 
+        $this->iShouldNotBeAbleToChangeMyPasswordWithThisToken();
+    }
+
+    /**
+     * @Then I should not be able to change my password with this token
+     * @Then I should not be able to change my password
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
+    {
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }
 }

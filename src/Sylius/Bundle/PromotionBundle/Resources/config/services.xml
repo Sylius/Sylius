@@ -28,6 +28,9 @@
         </service>
         <service id="Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface" alias="sylius.factory.promotion_coupon" />
 
+        <service id="sylius.factory.promotion_coupon_generator_instruction" class="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactory" public="false" />
+        <service id="Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactoryInterface" alias="sylius.factory.promotion_coupon_generator_instruction" />
+
         <service id="sylius.promotion_processor" class="Sylius\Component\Promotion\Processor\PromotionProcessor">
             <argument type="service" id="sylius.active_promotions_provider" />
             <argument type="service" id="sylius.promotion_eligibility_checker" />

@@ -6,14 +6,14 @@ Feature: Viewing available shipping methods based on total weight
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a product "Jacket for the Lochness Monster" priced at "$1337.00"
+        And the store has a product "Jacket for the Lochness Monster" priced at "$1,337.00"
         And this product's weight is 200
         And the store has a product "T-Shirt for Tinkerbell" priced at "$1.00"
         And this product's weight is 0.1
-        And the store has "DHL" shipping method with "$20" fee
-        And the store has "Heavy Duty Courier" shipping method with "$150" fee
+        And the store has "DHL" shipping method with "$20.00" fee
+        And the store has "Heavy Duty Courier" shipping method with "$150.00" fee
         And this shipping method is only available for orders with a total weight greater or equal to 100.0
-        And the store has "Fairytale Delivery Service" shipping method with "$2" fee
+        And the store has "Fairytale Delivery Service" shipping method with "$2.00" fee
         And this shipping method is only available for orders with a total weight less or equal to 1.0
         And I am a logged in customer
 

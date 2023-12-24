@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Viewing product's non translatable attributes
     In order to see product's non translatable attribute
     As an Administrator
@@ -14,9 +14,9 @@ Feature: Viewing product's non translatable attributes
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui
+    @ui @api
     Scenario: Viewing product's non translatable attributes along with default ones
-        When I access "Iron Pickaxe" product page
-        Then I should see non-translatable attribute "crit chance" with value "10 %"
+        When I access the "Iron Pickaxe" product
+        Then I should see non-translatable attribute "crit chance" with value 10%
         And I should see attribute "Material" with value "Iron" in "English (United States)" locale
         And I should see attribute "Material" with value "Żelazo" in "Polish (Poland)" locale

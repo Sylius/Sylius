@@ -25,9 +25,13 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     public function __construct(private ProductVariantPriceCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
         if ($this->productVariantPriceCalculator instanceof ProductVariantPriceCalculatorInterface) {
-            @trigger_error(
-                sprintf('Passing a "Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface" to "%s" constructor is deprecated since Sylius 1.11 and will be prohibited in 2.0. Use "Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" instead.', self::class),
-                \E_USER_DEPRECATED,
+            trigger_deprecation(
+                'sylius/core',
+                '1.11',
+                'Passing a "%s" to "%s" constructor is deprecated and will be prohibited in 2.0. Use "%s" instead.',
+                ProductVariantPriceCalculatorInterface::class,
+                self::class,
+                ProductVariantPricesCalculatorInterface::class,
             );
         }
     }

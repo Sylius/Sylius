@@ -16,15 +16,6 @@
             xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
 >
     <class name="Sylius\Component\Addressing\Model\Province">
-        <attribute name="id">
-            <group>admin:province:read</group>
-        </attribute>
-        <attribute name="createdAt">
-           <group>admin:province:read</group>
-       </attribute>
-        <attribute name="updatedAt">
-           <group>admin:province:read</group>
-       </attribute>
        <attribute name="code">
            <group>admin:country:create</group>
            <group>admin:country:update</group>

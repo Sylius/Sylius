@@ -40,7 +40,7 @@
         "egulias/email-validator": "^3.1",
         "sylius/customer": "^1.12",
         "sylius/resource-bundle": "^1.9",
-        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4.21 || ^6.0",
         "webmozart/assert": "^1.9"
     },
     "conflict": {
@@ -49,11 +49,11 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4 || ^6.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/form": "^5.4 || ^6.0"
+        "symfony/browser-kit": "^5.4.21 || ^6.0",
+        "symfony/dependency-injection": "^5.4.21 || ^6.0",
+        "symfony/form": "^5.4.21 || ^6.0"
     },
     "config": {
         "allow-plugins": {

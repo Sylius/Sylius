@@ -45,6 +45,10 @@ sylius:
             invalid: Cet e-mail n'est pas valide.
             max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
             min: L'e-mail doit contenir au moins {{ limit }} caractères.
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'La valeur doit être supérieure à {{ compared_value }}'
+            less_than: 'La valeur doit être inférieure à {{ compared_value }}'
     channel_pricing:
         price:
             min: Le prix ne peut pas être inférieur à 0.
@@ -68,6 +72,7 @@ sylius:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
     cart_item:
         not_available: '%itemName% est en rupture de stock.'
+        insufficient_stock: 'Stock insuffisant'
     order:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
@@ -88,6 +93,12 @@ sylius:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    product_taxon:
+        unique: Les taxons de produits ne peuvent pas être dupliqués.
+        product:
+            not_blank: Veuillez sélectionner un produit.
+        taxon:
+            not_blank: Veuillez sélectionner un taxon.
     product_variant:
         onHand:
             min: Le stock disponible doit être plus grand que {{ limit }}.
@@ -108,7 +119,8 @@ sylius:
             min: La profondeur ne peut pas être négative.
             invalid: La profondeur doit être un nombre.
         channel_pricing:
-            all_defined: 'Vous devez définir un prix pour tous les canaux.'
+            all_defined: 'Vous devez définir le prix pour chaque canal activé.'
+            existing_code: Le canal avec le code {{ channelCode }} n'existe pas.
     promotion_coupon:
         per_customer_usage_limit:
             min: La limite d'utilisation du coupon par client doit être d'au moins {{ limit }}.
@@ -118,12 +130,18 @@ sylius:
     review:
         author:
             not_blank: Veuillez saisir votre adresse email.
+        product:
+            not_blank: Veuillez saisir un produit.
         rating:
             range: La note de l'avis doit être un entier entre 1 et 5.
+            not_in_range: L'évaluation doit être comprise entre {{ min }} et {{ max }}.
     taxon_image:
         file:
             max_size: L'image est trop grande - {{ size }}{{ suffix }}. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
             upload_ini_size: L'image est trop grande. La taille maximum autorisée est de {{ limit }}{{ suffix }}.
+    translation:
+        locale_code:
+            invalid: 'Veuillez choisir l''une des langues disponibles : %locales%'
     user:
         email:
             unique: Cet e-mail est déjà utilisé.

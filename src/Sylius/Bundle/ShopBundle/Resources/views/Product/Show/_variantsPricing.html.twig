@@ -1,13 +1,15 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
+
 <div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
-{% for price in pricing %}
+{% for option_data in pricing %}
     {% set catalog_promotions = [] %}
-    {% if price.applied_promotions is defined %}
-        {% for promotion in price.applied_promotions %}
+    {% if option_data.applied_promotions is defined %}
+        {% for promotion in option_data.applied_promotions %}
             {% set catalog_promotions = catalog_promotions|merge([{'label': promotion.name, 'description': promotion.description}]) %}
         {% endfor %}
     {% endif %}
-    <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'applied_promotions' %}{{ catalog_promotions|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
+    <div {% for option, value in option_data %}data-{{ option }}="{% if option == 'value' or option == 'original-price' %}{{ money.convertAndFormat(value) }}{% elseif option == 'lowest-price-before-discount' %}{{ 'sylius.ui.lowest_price_days_before_discount_was'|trans({'%days%': days, '%price%': money.convertAndFormat(value)}) }}{% elseif option == 'applied_promotions' %}{{ catalog_promotions|json_encode }}{% else %}{{ value|replace({'\"': '\''}) }}{% endif %}" {{ sylius_test_html_attribute('variant-price') }}{% endfor %}></div>
 {% endfor %}
 </div>

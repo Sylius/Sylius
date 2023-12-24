@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+default:
+    suites:
+        api_managing_promotion_coupons:
+            contexts:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.coupon
+                - sylius.behat.context.transform.address
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.date_time
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.promotion
+                - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.admin_api_security
+
+                - sylius.behat.context.api.admin.managing_promotion_coupons
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
+
+            filters:
+                tags: "@managing_promotion_coupons&&@api"
+            javascript: false

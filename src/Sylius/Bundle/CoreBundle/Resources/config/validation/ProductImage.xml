@@ -13,6 +13,10 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Core\Model\ProductImage">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwner">
+            <option name="groups">sylius</option>
+        </constraint>
+
         <property name="file">
             <constraint name="Image">
                 <option name="maxSize">10M</option>

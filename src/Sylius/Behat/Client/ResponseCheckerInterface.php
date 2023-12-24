@@ -29,7 +29,7 @@ interface ResponseCheckerInterface
 
     public function getTranslationValue(Response $response, string $key, ?string $localeCode): string;
 
-    public function getError(Response $response): string;
+    public function getError(Response $response): ?string;
 
     public function isAccepted(Response $response): bool;
 
@@ -51,7 +51,19 @@ interface ResponseCheckerInterface
 
     public function hasItemWithValue(Response $response, string $key, int|string $value): bool;
 
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, int|string $value): bool;
+    /** @param array<string, int|string> $expectedValues */
+    public function hasValuesInAnySubresourceObjectCollection(
+        Response $response,
+        string $subResource,
+        array $expectedValues,
+    ): bool;
+
+    /** @param array<string, int|string> $expectedValues */
+    public function hasValuesInSubresourceObject(
+        Response $response,
+        string $subResource,
+        array $expectedValues,
+    ): bool;
 
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;
 

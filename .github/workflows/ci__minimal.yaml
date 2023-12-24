@@ -9,8 +9,9 @@ on:
     workflow_dispatch: ~
     push:
         branches-ignore:
+            - 'dependabot/**'
             - 'upmerge/**'
-    
+
 concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-minimal
     cancel-in-progress: true

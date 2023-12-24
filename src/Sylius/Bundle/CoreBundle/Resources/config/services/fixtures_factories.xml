@@ -83,6 +83,7 @@
             <argument type="service" id="sylius.fixture.example_factory.promotion_action" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
+            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.fixture.example_factory.promotion_action" class="Sylius\Bundle\CoreBundle\Fixture\Factory\PromotionActionExampleFactory">
@@ -181,5 +182,14 @@
             <argument type="service" id="sylius.checker.order_shipping_method_selection_requirement" />
             <argument type="service" id="sylius.checker.order_payment_method_selection_requirement" />
         </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Fixture\PaymentFixture">
+            <argument type="service" id="sylius.repository.payment" />
+            <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.manager.payment" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="Sylius\Bundle\CoreBundle\Fixture\Factory\PaymentFixture" alias="Sylius\Bundle\CoreBundle\Fixture\PaymentFixture" />
     </services>
 </container>

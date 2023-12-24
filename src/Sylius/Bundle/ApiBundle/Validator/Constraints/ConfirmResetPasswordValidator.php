@@ -21,8 +21,7 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class ConfirmResetPasswordValidator extends ConstraintValidator
 {
-    /** @param ResetPassword|mixed $value */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, ResetPassword::class);
 

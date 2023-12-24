@@ -16,121 +16,85 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
+        <defaults public="false" />
 
-        <service id="api_platform.swagger.action.ui" class="Sylius\Bundle\ApiBundle\ApiPlatform\Bridge\Symfony\Bundle\Action\SwaggerUiAction">
-            <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
-            <argument type="service" id="api_platform.serializer" />
-            <argument type="service" id="twig" />
-            <argument type="service" id="router" />
-            <argument>%api_platform.title%</argument>
-            <argument>%api_platform.description%</argument>
-            <argument>%api_platform.version%</argument>
-            <argument>%api_platform.formats%</argument>
-            <argument>%api_platform.oauth.enabled%</argument>
-            <argument>%api_platform.oauth.clientId%</argument>
-            <argument>%api_platform.oauth.clientSecret%</argument>
-            <argument>%api_platform.oauth.type%</argument>
-            <argument>%api_platform.oauth.flow%</argument>
-            <argument>%api_platform.oauth.tokenUrl%</argument>
-            <argument>%api_platform.oauth.authorizationUrl%</argument>
-            <argument>%api_platform.oauth.scopes%</argument>
-            <argument>%api_platform.show_webby%</argument>
-            <argument>%api_platform.enable_swagger_ui%</argument>
-            <argument>%api_platform.enable_re_doc%</argument>
-            <argument>%api_platform.graphql.enabled%</argument>
-            <argument>%api_platform.graphql.graphiql.enabled%</argument>
-            <argument>%api_platform.graphql.graphql_playground.enabled%</argument>
-            <argument>%api_platform.swagger.versions%</argument>
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory" decorates="api_platform.openapi.factory">
+            <argument type="service" id="Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory.inner" />
+            <argument type="tagged_iterator" tag="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AdminAuthenticationTokenDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AcceptLanguageHeaderDocumentationModifier">
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AdminAuthenticationTokenDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="10"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShopAuthenticationTokenDocumentationNormalizer.inner" />
-            <argument>%sylius.security.new_api_route%</argument>
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PathHiderDocumentationModifier">
+            <argument>%sylius.api.paths_to_hide%</argument>
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AttributeTypeDocumentationModifier">
+            <argument type="service" id="sylius.registry.attribute_type" />
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductImageDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductDocumentationModifier">
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductImageDocumentationModifier">
             <argument type="service" id="Sylius\Bundle\ApiBundle\Provider\ProductImageFilterProviderInterface" />
             <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductSlugDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductReviewDocumentationModifier">
             <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ProductVariantDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductSlugDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\ShippingMethodDocumentationNormalizer.inner" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationModifier">
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\PathHiderDocumentationNormalizer.inner" />
-            <argument>%sylius.api.paths_to_hide%</argument>
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier">
+            <tag name="sylius.open_api.modifier" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer"
-            decorates="api_platform.swagger.normalizer.documentation"
-            autoconfigure="false"
-            decoration-priority="20"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Swagger\AcceptLanguageHeaderDocumentationNormalizer.inner" />
-            <argument type="service" id="sylius.repository.locale" />
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShopAuthenticationTokenDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\CustomerDocumentationModifier">
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.promotion_actions%</argument>
+            <argument>%sylius.promotion_rules%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\OrderAdjustmentsTypeDocumentationModifier">
+            <argument>%sylius.security.new_api_route%</argument>
+            <argument>%sylius.model.adjustment.class%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier">
+            <tag name="sylius.open_api.modifier" />
         </service>
     </services>
 </container>

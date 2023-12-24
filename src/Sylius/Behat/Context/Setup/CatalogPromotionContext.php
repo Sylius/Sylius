@@ -773,6 +773,84 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
+    /**
+     * @Given the :catalogPromotion catalog promotion is enabled
+     */
+    public function theCatalogPromotionIsEnabled(CatalogPromotionInterface $catalogPromotion): void
+    {
+        $catalogPromotion->setEnabled(true);
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given there is disabled catalog promotion named :name
+     */
+    public function thereIsCatalogPromotionsNamed(string $name): void
+    {
+        $this->createCatalogPromotion(name: $name, enabled: false);
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
+     */
+    public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        float $discount,
+        ProductInterface $product,
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            name: $name,
+            scopes: [[
+                'type' => InForProductScopeVariantChecker::TYPE,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            actions: [[
+                'type' => PercentageDiscountPriceCalculator::TYPE,
+                'configuration' => ['amount' => $discount],
+            ]],
+            priority: $priority,
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
+    /**
+     * @Given /^there is disabled catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
+     */
+    public function thereIsDisabledCatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
+        string $name,
+        int $priority,
+        int $discount,
+        ChannelInterface $channel,
+        ProductInterface $product,
+    ): void {
+        $catalogPromotion = $this->createCatalogPromotion(
+            name: $name,
+            channels: [$channel],
+            scopes: [[
+                'type' => InForProductScopeVariantChecker::TYPE,
+                'configuration' => ['products' => [$product->getCode()]],
+            ]],
+            actions: [[
+                'type' => FixedDiscountPriceCalculator::TYPE,
+                'configuration' => [$channel->getCode() => ['amount' => $discount / 100]],
+            ]],
+            priority: $priority,
+            enabled: false,
+        );
+
+        $this->entityManager->flush();
+
+        $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
+    }
+
     private function createCatalogPromotion(
         string $name,
         ?string $code = null,

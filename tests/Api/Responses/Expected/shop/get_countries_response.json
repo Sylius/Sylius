@@ -8,7 +8,20 @@
             "@type": "Country",
             "code": "US",
             "name": "United States",
-            "provinces": []
+            "provinces": [
+                {
+                    "@id": "\/api\/v2\/admin\/provinces\/US-MI",
+                    "@type": "Province",
+                    "code": "US-MI",
+                    "name": "Minnesota"
+                },
+                {
+                    "@id": "\/api\/v2\/admin\/provinces\/US-WY",
+                    "@type": "Province",
+                    "code": "US-WY",
+                    "name": "Wyoming"
+                }
+            ]
         },
         {
             "@id": "\/api\/v2\/shop\/countries\/FR",

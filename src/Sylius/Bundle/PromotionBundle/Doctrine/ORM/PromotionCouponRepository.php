@@ -18,6 +18,11 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
+/**
+ * @template T of PromotionCouponInterface
+ *
+ * @implements PromotionCouponRepositoryInterface<T>
+ */
 class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface
 {
     public function createQueryBuilderByPromotionId($promotionId): QueryBuilder

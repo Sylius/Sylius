@@ -16,8 +16,16 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository as BasePaymentMethodRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 
+/**
+ * @template T of PaymentMethodInterface
+ *
+ * @extends BasePaymentMethodRepository<T>
+ *
+ * @implements PaymentMethodRepositoryInterface<T>
+ */
 class PaymentMethodRepository extends BasePaymentMethodRepository implements PaymentMethodRepositoryInterface
 {
     public function createListQueryBuilder(string $locale): QueryBuilder

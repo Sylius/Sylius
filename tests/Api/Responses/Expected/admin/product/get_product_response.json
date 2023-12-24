@@ -1,0 +1,85 @@
+{
+    "@context": "\/api\/v2\/contexts\/Product",
+    "@id": "\/api\/v2\/admin\/products\/MUG",
+    "@type": "Product",
+    "id": @integer@,
+    "code": "MUG",
+    "variantSelectionMethod": "choice",
+    "enabled": true,
+    "options": [
+        "\/api\/v2\/admin\/product-options\/COLOR"
+    ],
+    "variants": [
+        "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+        "\/api\/v2\/admin\/product-variants\/MUG_RED"
+    ],
+    "mainTaxon": "\/api\/v2\/admin\/taxons\/MUGS",
+    "productTaxons": [
+        "\/api\/v2\/admin\/product-taxons\/@integer@"
+    ],
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
+    "reviews": [
+        "\/api\/v2\/admin\/product-reviews\/@integer@",
+        "\/api\/v2\/admin\/product-reviews\/@integer@"
+    ],
+    "associations": [
+        "\/api\/v2\/admin\/product-associations\/@integer@"
+    ],
+    "attributes": [
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
+            "value": "Ceramic",
+            "localeCode": "en_US"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
+            "value": "Ceramika",
+            "localeCode": "pl_PL"
+        }
+    ],
+    "averageRating": 0,
+    "images": [
+        {
+            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@type": "ProductImage",
+            "id": @integer@,
+            "type": "thumbnail",
+            "path": "\/media\/image\/product.jpg",
+            "productVariants": []
+        }
+    ],
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@type": "ProductTranslation",
+            "id": @integer@,
+            "name": "Mug",
+            "slug": "mug",
+            "description": "This is a mug",
+            "shortDescription": "Short mug description",
+            "metaKeywords": "mug",
+            "metaDescription": "Mug description"
+        },
+        "pl_PL": {
+            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@type": "ProductTranslation",
+            "id": @integer@,
+            "name": "Kubek",
+            "slug": "kubek",
+            "description": "To jest kubek",
+            "shortDescription": "Krótki opis kubka",
+            "metaKeywords": "kubek",
+            "metaDescription": "Opis kubka"
+        }
+    },
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

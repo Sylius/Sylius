@@ -13,7 +13,7 @@ Feature: Increasing a promotion usage after placing an order
         And it gives "$10.00" discount to every order
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Seeing promotion usage increased after order placement
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt"

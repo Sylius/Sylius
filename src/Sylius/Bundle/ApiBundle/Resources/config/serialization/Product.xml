@@ -21,9 +21,18 @@
             <group>shop:product:read</group>
         </attribute>
         <attribute name="code">
-            <group>admin:product:create</group>
             <group>admin:product:read</group>
+            <group>admin:product:create</group>
             <group>shop:product:read</group>
+        </attribute>
+        <attribute name="variantSelectionMethod">
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+        </attribute>
+        <attribute name="enabled">
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
         </attribute>
         <attribute name="name">
             <group>shop:product:read</group>
@@ -37,32 +46,18 @@
         <attribute name="shortDescription">
             <group>shop:product:read</group>
         </attribute>
-        <attribute name="createdAt">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
-        </attribute>
-        <attribute name="updatedAt">
-            <group>admin:product:read</group>
-            <group>shop:product:read</group>
-        </attribute>
         <attribute name="translations">
-            <group>admin:product:create</group>
             <group>admin:product:read</group>
+            <group>admin:product:create</group>
             <group>admin:product:update</group>
         </attribute>
         <attribute name="mainTaxon">
-            <group>admin:product:create</group>
             <group>admin:product:read</group>
+            <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="productTaxons">
-            <group>admin:product:create</group>
-            <group>admin:product:read</group>
-            <group>admin:product:update</group>
-            <group>shop:product:read</group>
-        </attribute>
-        <attribute name="reviews">
             <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
@@ -72,20 +67,44 @@
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
+        <attribute name="variants">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+        </attribute>
         <attribute name="images">
             <group>admin:product:read</group>
             <group>admin:product:create</group>
             <group>admin:product:update</group>
             <group>shop:product:read</group>
         </attribute>
-        <attribute name="variants">
+        <attribute name="reviews">
             <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="averageRating">
+            <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
         <attribute name="associations">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="attributes">
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+        </attribute>
+        <attribute name="channels">
+            <group>admin:product:read</group>
+            <group>admin:product:create</group>
+            <group>admin:product:update</group>
+        </attribute>
+        <attribute name="createdAt">
+            <group>admin:product:read</group>
+            <group>shop:product:read</group>
+        </attribute>
+        <attribute name="updatedAt">
+            <group>admin:product:read</group>
             <group>shop:product:read</group>
         </attribute>
     </class>

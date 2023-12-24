@@ -16,20 +16,187 @@
    xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
 >
     <resource class="%sylius.model.product_attribute.class%" shortName="ProductAttribute">
-        <attribute name="normalization_context">
-            <attribute name="groups">
-                <attribute>shop:product_attribute:read</attribute>
-            </attribute>
-        </attribute>
-
         <attribute name="validation_groups">sylius</attribute>
 
-        <collectionOperations />
+        <attribute name="order">
+            <attribute name="position">ASC</attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-attributes</attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.order_filter.position</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/product-attributes</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_attribute:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for a `text` type attribute:
+
+```
+{
+    "type": "text",
+    "configuration": {
+        "min": 5,
+        "max": 255
+    }
+}
+```
+
+Example configuration for a `datetime` type attribute:
+
+```
+{
+    "type": "datetime",
+    "configuration": {
+        "format": "Y-m-d H:i:s"
+    }
+}
+```
+
+Example configuration for a `date` type attribute:
+
+```
+{
+    "type": "date",
+    "configuration": {
+        "format": "Y-m-d"
+    }
+}
+```
+
+Example configuration for a `select` type attribute:
+
+```
+{
+    "type": "select",
+    "configuration": {
+        "choices": {
+            "0afb212e-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Plastic",
+                "fr_FR": "Plastique"
+            },
+            "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Cotton",
+                "fr_FR": "Coton"
+            }
+        },
+        "multiple": true,
+        "min": 1,
+        "max": 3
+    }
+}
+```
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
 
         <itemOperations>
+            <itemOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/product-attributes/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_delete">
+                <attribute name="method">DELETE</attribute>
+                <attribute name="path">/admin/product-attributes/{code}</attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/product-attributes/{code}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:product_attribute:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:product_attribute:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for a `text` type attribute:
+
+```
+{
+    "type": "text",
+    "configuration": {
+        "min": 5,
+        "max": 255
+    }
+}
+```
+
+Example configuration for a `datetime` type attribute:
+
+```
+{
+    "type": "datetime",
+    "configuration": {
+        "format": "Y-m-d H:i:s"
+    }
+}
+```
+
+Example configuration for a `date` type attribute:
+
+```
+{
+    "type": "date",
+    "configuration": {
+        "format": "Y-m-d"
+    }
+}
+```
+
+Example configuration for a `select` type attribute:
+
+```
+{
+    "type": "select",
+    "configuration": {
+        "choices": {
+            "0afb212e-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Plastic",
+                "fr_FR": "Plastique"
+            },
+            "3bfb211f-cd08-11ec-871e-0242ac120005": {
+                "en_US": "Cotton",
+                "fr_FR": "Coton"
+            }
+        },
+        "multiple": true,
+        "min": 1,
+        "max": 3
+    }
+}
+```
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="shop_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/shop/product-attributes/{code}</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">shop:product_attribute:read</attribute>
+                </attribute>
             </itemOperation>
         </itemOperations>
 
@@ -39,6 +206,17 @@
         <property name="type" />
         <property name="configuration" />
         <property name="storageType" />
+        <property name="translatable" />
         <property name="position" />
+        <property name="translations" readable="true" writable="true">
+            <attribute name="openapi_context">
+                <attribute name="type">object</attribute>
+                <attribute name="example">
+                    <attribute name="en_US">
+                        <attribute name="name">string</attribute>
+                    </attribute>
+                </attribute>
+            </attribute>
+        </property>
     </resource>
 </resources>

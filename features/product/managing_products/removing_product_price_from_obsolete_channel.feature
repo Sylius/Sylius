@@ -13,20 +13,20 @@ Feature: Removing a product's price from the channel where it is not available i
         And this product is disabled in "Web-GB" channel
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Removing a product's price from disabled channel
         Given the channel "Web-GB" has been disabled
         When I want to modify the "Dice Brewing" product
-        And I remove its price for "Web-GB" channel
+        And I remove its price from "Web-GB" channel
         And I save my changes
         Then I should not have configured price for "Web-GB" channel
         But I should have original price equal to "£70.00" in "Web-GB" channel
 
-    @ui
+    @ui @no-api
     Scenario: Removing a product's price from obsolete channel
         Given this product is disabled in "Web-GB" channel
         When I want to modify the "Dice Brewing" product
-        And I remove its price for "Web-GB" channel
+        And I remove its price from "Web-GB" channel
         And I save my changes
         Then I should not have configured price for "Web-GB" channel
         But I should have original price equal to "£70.00" in "Web-GB" channel

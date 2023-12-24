@@ -1,0 +1,26 @@
+{
+    "@context": {
+        "@vocab": "@string@/api/v2/docs.jsonld#",
+        "hydra": "http://www.w3.org/ns/hydra/core#",
+        "perChannelsStatistics": "CustomerStatistics\/perChannelsStatistics",
+        "allOrdersCount": "CustomerStatistics\/allOrdersCount"
+    },
+    "@type": "CustomerStatistics",
+    "@id": "\/api\/v2\/.well-known\/genid\/@string@",
+    "perChannelsStatistics": {
+        "@context": "\/api\/v2\/contexts\/Customer",
+        "@id": "\/api\/v2\/admin\/customers",
+        "@type": "hydra:Collection",
+        "hydra:member": [
+            {
+                "@type": "PerChannelCustomerStatistics",
+                "ordersCount": 1,
+                "ordersValue": 0,
+                "channel": "\/api\/v2\/admin\/channels\/WEB",
+                "averageOrderValue": 0
+            }
+        ],
+        "hydra:totalItems": 1
+    },
+    "allOrdersCount": 1
+}

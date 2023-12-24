@@ -38,15 +38,15 @@ That's it! All other files are just a boilerplate to show you what can be done i
 
 * ``src/Controller/GreetingController.php``
 
-* ``src/Resources/config/admin_routing.yml``
+* ``config/admin_routing.yml``
 
-* ``src/Resources/config/shop_routing.yml``
+* ``config/shop_routing.yml``
 
-* ``src/Resources/public/greeting.js``
+* ``public/greeting.js``
 
-* ``src/Resources/views/dynamic_greeting.html.twig``
+* ``templates/dynamic_greeting.html.twig``
 
-* ``src/Resources/views/static_greeting.html.twig``
+* ``templates/static_greeting.html.twig``
 
 * All files from ``tests/Behat/Page/Shop/`` (with corresponding services)
 

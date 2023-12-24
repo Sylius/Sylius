@@ -20,6 +20,8 @@ default:
                 - sylius.behat.context.setup.product_review
 
                 - sylius.behat.context.api.admin.managing_product_reviews
+                - sylius.behat.context.api.admin.response
+                - sylius.behat.context.api.admin.save
 
             filters:
                 tags: "@managing_product_reviews&&@api"

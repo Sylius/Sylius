@@ -29,8 +29,7 @@
             "id": "@integer@",
             "code": "T_SHIRTS",
             "children": [
-                "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS",
-                "\/api\/v2\/shop\/taxons\/WOMEN_T_SHIRTS"
+                "\/api\/v2\/shop\/taxons\/MEN_T_SHIRTS"
             ],
             "name": "T-Shirts",
             "slug": "categories\/t-shirts",
@@ -38,5 +37,4 @@
         }
     ],
     "hydra:totalItems": 3
-
 }

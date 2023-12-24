@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -80,7 +80,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
         $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
         $defaultProductVariantResolver->getVariant($product)->willReturn($variant);
-        $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
+        $iriConverter->getIriFromResource($variant)->willReturn('/api/v2/shop/product-variants/CODE');
 
         $this->normalize($product, null, [])->shouldReturn([
             'variants' => ['/api/v2/shop/product-variants/CODE'],
@@ -98,7 +98,7 @@ final class ProductNormalizerSpec extends ObjectBehavior
         $this->setNormalizer($normalizer);
 
         $normalizer->normalize($product, null, ['sylius_product_normalizer_already_called' => true])->willReturn([]);
-        $iriConverter->getIriFromItem($variant)->willReturn('/api/v2/shop/product-variants/CODE');
+        $iriConverter->getIriFromResource($variant)->willReturn('/api/v2/shop/product-variants/CODE');
         $product->getEnabledVariants()->willReturn(new ArrayCollection([$variant->getWrappedObject()]));
 
         $defaultProductVariantResolver->getVariant($product)->willReturn(null);

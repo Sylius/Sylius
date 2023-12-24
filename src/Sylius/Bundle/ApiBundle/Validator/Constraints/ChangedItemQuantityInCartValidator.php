@@ -27,6 +27,9 @@ use Webmozart\Assert\Assert;
 
 final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 {
+    /**
+     * @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository
+     */
     public function __construct(
         private OrderItemRepositoryInterface $orderItemRepository,
         private OrderRepositoryInterface $orderRepository,
@@ -34,12 +37,16 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, ChangeItemQuantityInCart::class);
 
         /** @var ChangedItemQuantityInCart $constraint */
         Assert::isInstanceOf($constraint, ChangedItemQuantityInCart::class);
+
+        if ($value->quantity === null) {
+            return;
+        }
 
         /** @var OrderItemInterface|null $orderItem */
         $orderItem = $this->orderItemRepository->findOneByIdAndCartTokenValue(

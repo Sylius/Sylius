@@ -11,6 +11,9 @@ sylius:
             your_order_with_number: 'Votre commande numéro'
     form:
         admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Afficher le prix le plus bas des produits faisant l''objet d''une remise avant la remise en cours ?'
+                period_for_which_the_lowest_price_is_calculated: 'Période pour laquelle le prix le plus bas est calculé'
             reset_password:
                 password:
                     label: Nouveau mot de passe
@@ -53,11 +56,18 @@ sylius:
                 sales:
                     header: Ventes
                     orders: Commandes
+                official_support:
+                    header: Soutien officiel
+                    sylius_plus: Sylius Plus
+                    browse_plugins: Parcourir les plugins
+                    professional_services: Services professionnels
+                    find_a_partner: Trouver un partenaire
     ui:
         catalog_promotion:
             dates_details: Cette opération prend du temps ! Veuillez tenir compte d'un délai de 2 à 10 minutes à partir des dates spécifiées. Le délai dépend de la taille du catalogue.
         channel:
             account_verification_required_details: En désactivant cette option, il sera possible de créer des comptes et d'y accéder sans vérification de l'adresse électronique et donc d'accéder potentiellement aux données des commandes passées en tant qu'invité.
+        channel_pricing_history: 'Historique des prix des canaux'
         channel_pricings: Prix du canal
         product:
             product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
@@ -68,8 +78,11 @@ sylius:
             no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
             pay_pal_express_checkout_deprecation_notice: >
                 PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
+        lowest_price_before_discount: 'Prix le plus bas avant remise'
+        price_history: Historique des prix
         sales_summary: Récapitulatif des ventes
         shipment_for_order: Expédition pour la commande
+        show_history_for_channel_pricing: 'Afficher l''historique des prix des canaux'
         statistics:
             day: Jour
             lifetime: Durée de vie

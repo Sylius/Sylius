@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Tests\CommandHandler;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler;
@@ -27,6 +28,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
 {
+    use ProphecyTrait;
     use SwiftmailerAssertionTrait;
 
     /** @test */
@@ -51,6 +53,9 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $channel = $this->prophesize(ChannelInterface::class);
         /** @var UserInterface|ObjectProphecy $user */
         $user = $this->prophesize(UserInterface::class);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $channel->getHostname()->willReturn('example.com');
 
         $user->getUsername()->willReturn('username');
         $user->getEmailVerificationToken()->willReturn('token');
@@ -107,6 +112,9 @@ final class SendAccountRegistrationEmailHandlerTest extends KernelTestCase
         $channel = $this->prophesize(ChannelInterface::class);
         /** @var UserInterface|ObjectProphecy $user */
         $user = $this->prophesize(UserInterface::class);
+
+        $channel->isAccountVerificationRequired()->willReturn(false);
+        $channel->getHostname()->willReturn('example.com');
 
         $user->getUsername()->willReturn('username');
         $user->getEmailVerificationToken()->willReturn('token');

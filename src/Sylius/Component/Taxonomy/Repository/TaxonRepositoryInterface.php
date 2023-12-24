@@ -17,6 +17,11 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+/**
+ * @template T of TaxonInterface
+ *
+ * @extends RepositoryInterface<T>
+ */
 interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**

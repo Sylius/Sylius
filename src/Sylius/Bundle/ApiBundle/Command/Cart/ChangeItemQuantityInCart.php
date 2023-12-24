@@ -25,16 +25,8 @@ class ChangeItemQuantityInCart implements OrderTokenValueAwareInterface, Subreso
     /** @var string|null */
     public $orderItemId;
 
-    /**
-     * @immutable
-     *
-     * @var int
-     */
-    public $quantity;
-
-    public function __construct(int $quantity)
+    public function __construct(public ?int $quantity)
     {
-        $this->quantity = $quantity;
     }
 
     public static function createFromData(string $tokenValue, string $orderItemId, int $quantity): self

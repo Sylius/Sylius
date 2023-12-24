@@ -10,7 +10,7 @@ Feature: Viewing product's non translatable attributes on edit page
         And this product has non-translatable percent attribute "crit chance" with value 10%
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Viewing product's attributes defined in different locales
         When I modify the "Iron Pickaxe" product
-        And I should see non-translatable attribute "crit chance" with value "10"
+        And I should see non-translatable attribute "crit chance" with value 10%

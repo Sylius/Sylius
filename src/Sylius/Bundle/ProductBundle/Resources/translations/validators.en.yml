@@ -47,6 +47,12 @@ sylius:
             unique: The option value with given code already exists.
         value:
             not_blank: Please enter option value.
+    association:
+        unique: An association with this owner and type already exists.
+        type:
+            not_blank: Please enter association type.
+        owner:
+            not_blank: Please enter association owner.
     association_type:
         name:
             not_blank: Please enter association type name.
@@ -56,3 +62,8 @@ sylius:
             not_blank: Please enter association type code.
             regex: Association type code can only be comprised of letters, numbers, dashes and underscores.
             unique: The association type with given code already exists.
+    translation:
+        locale:
+            not_blank: Please enter the locale.
+            invalid: This value is not a valid locale.
+            unique: A translation for the {{ value }} locale code already exists.

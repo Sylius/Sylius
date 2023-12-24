@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+
+    <mapped-superclass name="Sylius\Component\Core\Model\ChannelPriceHistoryConfig" table="sylius_channel_price_history_config">
+        <id name="id" column="id" type="integer">
+            <generator />
+        </id>
+
+        <field name="lowestPriceForDiscountedProductsCheckingPeriod" column="lowest_price_for_discounted_products_checking_period" type="integer">
+            <options>
+                <option name="default">30</option>
+            </options>
+        </field>
+
+        <field name="lowestPriceForDiscountedProductsVisible" column="lowest_price_for_discounted_products_visible" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+
+        <many-to-many field="taxonsExcludedFromShowingLowestPrice" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
+            <join-table name="sylius_channel_price_history_config_excluded_taxons">
+                <join-columns>
+                    <join-column name="channel_id" nullable="false" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="taxon_id" nullable="false" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+            <order-by>
+                <order-by-field name="id" />
+            </order-by>
+        </many-to-many>
+    </mapped-superclass>
+</doctrine-mapping>

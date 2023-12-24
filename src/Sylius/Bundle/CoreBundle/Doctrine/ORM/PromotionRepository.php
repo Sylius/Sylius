@@ -17,9 +17,17 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository as BasePromotionRepository;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
+/**
+ * @template T of PromotionInterface
+ *
+ * @extends BasePromotionRepository<T>
+ *
+ * @implements PromotionRepositoryInterface<T>
+ */
 class PromotionRepository extends BasePromotionRepository implements PromotionRepositoryInterface
 {
     private AssociationHydrator $associationHydrator;

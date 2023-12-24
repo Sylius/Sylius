@@ -16,6 +16,7 @@ namespace Sylius\Bundle\UserBundle\Security;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 final class UserPasswordHasher implements UserPasswordHasherInterface
 {
@@ -23,6 +24,9 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
     {
     }
 
+    /**
+     * @param CredentialsHolderInterface&LegacyPasswordAuthenticatedUserInterface $user
+     */
     public function hash(CredentialsHolderInterface $user): string
     {
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
@@ -33,6 +37,6 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
          * LegacyPasswordHasherInterface. Anyway this error can be suppressed as in PHP it is not considered as an error
          * pass more parameters than expecting (LegacyPasswordHasherInterface)
          */
-        return $passwordHasher->hash($user->getPlainPassword());
+        return $passwordHasher->hash($user->getPlainPassword(), $user->getSalt());
     }
 }

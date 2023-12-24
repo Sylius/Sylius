@@ -20,12 +20,15 @@ abstract class AbstractMigration extends BaseAbstractMigration
 {
     public function preUp(Schema $schema): void
     {
-        $this->abortIf(!$this->isMySql(), 'Migration can only be executed safely on \'mysql\'.');
+        if (!$this->isMySql()) {
+            $this->markAsExecuted($this->getVersion());
+            $this->skipIf(true, 'This migration can only be executed on \'MySQL\'.');
+        }
     }
 
     public function preDown(Schema $schema): void
     {
-        $this->abortIf(!$this->isMySql(), 'Migration can only be executed safely on \'mysql\'.');
+        $this->skipIf(!$this->isMySql(), 'This migration can only be executed on \'MySQL\'.');
     }
 
     protected function isMariaDb(): bool
@@ -60,7 +63,20 @@ abstract class AbstractMigration extends BaseAbstractMigration
         return false;
     }
 
-    private function classExistsCaseSensitive(string $className): bool
+    private function getVersion(): string
+    {
+        return (new \ReflectionClass($this))->getName();
+    }
+
+    protected function markAsExecuted(string $version): void
+    {
+        $this->connection->executeQuery(
+            sprintf('INSERT INTO sylius_migrations (version, executed_at) VALUES (\'%s\', NOW())', $version),
+        );
+        $this->connection->commit();
+    }
+
+    protected function classExistsCaseSensitive(string $className): bool
     {
         return class_exists(strtolower($className)) && (new \ReflectionClass($className))->getName() === $className;
     }

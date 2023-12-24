@@ -61,3 +61,7 @@ sylius:
         possible_generation_amount: Longueur de code ou nombre de bons de réduction invalide. Il n'est pas possible de générer %expectedAmount% coupons uniques avec la longueur de code %codeLength%. Le nombre possible à générer est de %possibleAmount%.
         usage_limit:
             min: La limite d'utilisation du code promo généré doit être au moins de {{ limit }}.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.

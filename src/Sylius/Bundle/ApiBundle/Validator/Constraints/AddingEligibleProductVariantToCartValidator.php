@@ -34,12 +34,16 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
     ) {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, AddItemToCart::class);
 
         /** @var AddingEligibleProductVariantToCart $constraint */
         Assert::isInstanceOf($constraint, AddingEligibleProductVariantToCart::class);
+
+        if ($value->productVariantCode === null) {
+            return;
+        }
 
         /** @var ProductVariantInterface|null $productVariant */
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);

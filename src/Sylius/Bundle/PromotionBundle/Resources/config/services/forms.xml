@@ -22,6 +22,9 @@
         <parameter key="sylius.form.type.promotion.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
+        <parameter key="sylius.form.type.promotion_translation.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
         <parameter key="sylius.form.type.promotion_action.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
@@ -29,6 +32,9 @@
             <parameter>sylius</parameter>
         </parameter>
         <parameter key="sylius.form.type.promotion_coupon.validation_groups" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.form.type.promotion_coupon_generator_instruction.validation_groups" type="collection">
             <parameter>sylius</parameter>
         </parameter>
     </parameters>
@@ -71,6 +77,13 @@
         <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
             <argument>%sylius.model.promotion.class%</argument>
             <argument>%sylius.form.type.promotion.validation_groups%</argument>
+            <argument>Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType">
+            <argument>%sylius.model.promotion_translation.class%</argument>
+            <argument>%sylius.form.type.promotion_translation.validation_groups%</argument>
             <tag name="form.type" />
         </service>
 
@@ -118,8 +131,14 @@
         </service>
 
         <service id="sylius.form.type.promotion_coupon_generator_instruction" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType">
+            <argument type="service">
+                <service class="\Symfony\Component\Form\Extension\Core\DataMapper\DataMapper" />
+            </argument>
+            <argument type="service" id="sylius.factory.promotion_coupon_generator_instruction" />
             <argument>Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction</argument>
+            <argument>%sylius.form.type.promotion_coupon_generator_instruction.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
     </services>
 </container>

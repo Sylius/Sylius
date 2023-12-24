@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
@@ -25,21 +24,27 @@ use Webmozart\Assert\Assert;
 
 final class HasEnabledEntityValidator extends ConstraintValidator
 {
-    private PropertyAccessor $accessor;
+    public function __construct(
+        private ManagerRegistry $registry,
+        private ?PropertyAccessorInterface $accessor = null,
+    ) {
+        if (null === $this->accessor) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '1.13',
+                'Not passing a PropertyAccessorInterface as the second constructor argument for %s is deprecated and will be required in Sylius 2.0.',
+                self::class,
+            );
 
-    public function __construct(private ManagerRegistry $registry)
-    {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+            $this->accessor = PropertyAccess::createPropertyAccessor();
+        }
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     * @throws ConstraintDefinitionException
-     */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var HasEnabledEntity $constraint */
         Assert::isInstanceOf($constraint, HasEnabledEntity::class);
+        Assert::object($value, 'This validator can only be used with objects.');
 
         $enabled = $this->accessor->getValue($value, $constraint->enabledPath);
 
@@ -51,10 +56,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 
         $this->ensureEntityHasProvidedEnabledField($objectManager, $value, $constraint->enabledPath);
 
-        $criteria = [$constraint->enabledPath => true];
-
         $repository = $objectManager->getRepository($value::class);
-        $results = $repository->{$constraint->repositoryMethod}($criteria);
+        $results = $repository->{$constraint->repositoryMethod}([$constraint->enabledPath => true]);
 
         /* If the result is a MongoCursor, it must be advanced to the first
          * element. Rewinding should have no ill effect if $result is another
@@ -67,7 +70,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         }
 
         if ($this->isLastEnabledEntity($results, $value)) {
-            $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
+            $errorPath = $constraint->errorPath ?? $constraint->enabledPath;
 
             $this->context->buildViolation($constraint->message)->atPath($errorPath)->addViolation();
         }
@@ -76,19 +79,16 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     /**
      * If no entity matched the query criteria or a single entity matched, which is the same as the entity being
      * validated, the entity is the last enabled entity available.
-     *
-     * @param object $entity
      */
-    private function isLastEnabledEntity(array|\Iterator $result, $entity): bool
+    private function isLastEnabledEntity(array|\Iterator $result, object $entity): bool
     {
-        return !\is_countable($result) || 0 === count($result) ||
-        (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)));
+        return
+            !\is_countable($result) || 0 === count($result) ||
+            (1 === count($result) && $entity === ($result instanceof \Iterator ? $result->current() : current($result)))
+        ;
     }
 
-    /**
-     * @param object $entity
-     */
-    private function getProperObjectManager(?string $manager, $entity): ?ObjectManager
+    private function getProperObjectManager(?string $manager, object $entity): ObjectManager
     {
         if ($manager) {
             $objectManager = $this->registry->getManager($manager);
@@ -114,19 +114,19 @@ final class HasEnabledEntityValidator extends ConstraintValidator
      */
     private function validateObjectManager(?ObjectManager $objectManager, string $exceptionMessage): void
     {
-        if (!$objectManager) {
+        if (null === $objectManager) {
             throw new ConstraintDefinitionException($exceptionMessage);
         }
     }
 
     /**
-     * @param object $entity
-     *
      * @throws ConstraintDefinitionException
      */
-    private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, string $enabledPropertyPath): void
-    {
-        /** @var ClassMetadata $class */
+    private function ensureEntityHasProvidedEnabledField(
+        ObjectManager $objectManager,
+        object $entity,
+        string $enabledPropertyPath,
+    ): void {
         $class = $objectManager->getClassMetadata($entity::class);
 
         if (!$class->hasField($enabledPropertyPath) && !$class->hasAssociation($enabledPropertyPath)) {

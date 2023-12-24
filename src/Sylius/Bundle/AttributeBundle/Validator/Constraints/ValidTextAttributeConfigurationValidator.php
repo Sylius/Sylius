@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class ValidTextAttributeConfigurationValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var AttributeInterface $value */
         Assert::isInstanceOf($value, AttributeInterface::class);

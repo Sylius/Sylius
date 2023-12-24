@@ -171,12 +171,14 @@ class Order extends BaseOrder implements OrderInterface
 
     public function getItemUnits(): Collection
     {
-        /** @var ArrayCollection<int, OrderItemUnitInterface> $units */
+        /** @var ArrayCollection<array-key, OrderItemUnitInterface> $units */
         $units = new ArrayCollection();
 
         /** @var OrderItem $item */
         foreach ($this->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
+                Assert::isInstanceOf($unit, OrderItemUnitInterface::class);
+
                 $units->add($unit);
             }
         }
@@ -319,6 +321,20 @@ class Order extends BaseOrder implements OrderInterface
         return $this->getTotalQuantity();
     }
 
+    public function getItemsSubtotal(): int
+    {
+        /** @var array<OrderItemInterface> $items */
+        $items = $this->getItems()->toArray();
+
+        return array_reduce(
+            $items,
+            static function (int $subtotal, OrderItemInterface $item): int {
+                return $subtotal + $item->getSubtotal();
+            },
+            0,
+        );
+    }
+
     public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
@@ -395,6 +411,17 @@ class Order extends BaseOrder implements OrderInterface
         return $taxTotal;
     }
 
+    public function getShippingTaxTotal(): int
+    {
+        $shippingTaxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
+            $shippingTaxTotal += $shippingAdjustment->getAmount();
+        }
+
+        return $shippingTaxTotal;
+    }
+
     public function getTaxExcludedTotal(): int
     {
         return array_reduce(
@@ -435,6 +462,11 @@ class Order extends BaseOrder implements OrderInterface
             $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) +
             $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)
         ;
+    }
+
+    public function getShippingPromotionTotal(): int
+    {
+        return $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
     }
 
     public function getTokenValue(): ?string
@@ -478,14 +510,22 @@ class Order extends BaseOrder implements OrderInterface
 
     public function getCreatedByGuest(): bool
     {
-        @trigger_error('This method is deprecated since Sylius 1.12 and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.');
+        trigger_deprecation(
+            'sylius/core',
+            '1.12',
+            'This method is deprecated and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.',
+        );
 
         return $this->isCreatedByGuest();
     }
 
     public function setCreatedByGuest(bool $createdByGuest): void
     {
-        @trigger_error('This method is deprecated since Sylius 1.12 and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.');
+        trigger_deprecation(
+            'sylius/core',
+            '1.12',
+            'This method is deprecated and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.',
+        );
 
         $this->createdByGuest = $createdByGuest;
     }

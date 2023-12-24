@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 
+/**
+ * @template T of ProductInterface
+ *
+ * @implements ProductRepositoryInterface<T>
+ */
 class ProductRepository extends EntityRepository implements ProductRepositoryInterface
 {
     public function findByName(string $name, string $locale): array

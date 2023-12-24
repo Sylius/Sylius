@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as IndexPageCouponInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
@@ -36,6 +37,7 @@ final class ManagingPromotionsContext implements Context
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
+        private FormElementInterface $formElement,
     ) {
     }
 
@@ -77,11 +79,12 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
      * @When I remove its priority
      */
-    public function iRemoveItsPriority()
+    public function iRemoveItsPriority(?int $priority = null): void
     {
-        $this->updatePage->setPriority(null);
+        $this->formElement->prioritizeIt($priority);
     }
 
     /**
@@ -108,10 +111,35 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon
-     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
+     * @When I specify its label as :label in :localeCode locale
      */
-    public function iAddTheHasTaxonRuleConfiguredWith(...$taxons)
+    public function iSpecifyItsLabelInLocaleCode(string $label, string $localeCode): void
+    {
+        $this->createPage->specifyLabel($label, $localeCode);
+    }
+
+    /**
+     * @When I replace its label with a string exceeding the limit in :localeCode locale
+     */
+    public function iSpecifyItsLabelWithAStringExceedingTheLimitInLocale(string $localeCode): void
+    {
+        $this->createPage->specifyLabel(str_repeat('a', 256), $localeCode);
+    }
+
+    /**
+     * @When the :promotion promotion should have a label :label in :localeCode locale
+     */
+    public function thePromotionShouldHaveLabelInLocale(PromotionInterface $promotion, string $label, string $localeCode): void
+    {
+        $this->updatePage->open(['id' => $promotion->getId()]);
+        $this->createPage->hasLabel($label, $localeCode);
+    }
+
+    /**
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon taxon
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon taxon and :secondTaxon taxon
+     */
+    public function iAddTheHasTaxonRuleConfiguredWith(string ...$taxons): void
     {
         $this->createPage->addRule('Has at least one from taxons');
 
@@ -119,7 +147,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
     public function iAddTheRuleConfiguredWith($taxonName, $amount, ChannelInterface $channel)
     {
@@ -129,7 +157,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "Item total" rule configured with (?:€|£|\$)([^"]+) amount for ("[^"]+" channel) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
+     * @When /^I add the "Item total" rule configured with "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel) and "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/
      */
     public function iAddTheItemTotalRuleConfiguredWithTwoChannel(
         $firstAmount,
@@ -160,7 +188,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price greater than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMinPriceFilterRangeForChannel(ChannelInterface $channel, $minimum)
     {
@@ -168,7 +196,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that on ("[^"]+" channel) this action should be applied to items with price lesser than "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMaxPriceFilterRangeForChannel(ChannelInterface $channel, $maximum)
     {
@@ -193,7 +221,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
+     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%" for ("[^"]+" channel)$/
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel(
         string $actionType,
@@ -205,7 +233,18 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)%$/
+     * @When I add the :actionType action configured without a percentage value for :channel channel
+     */
+    public function iAddTheActionConfiguredWithoutAPercentageValueForChannel(
+        string $actionType,
+        ChannelInterface $channel,
+    ): void {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOptionForChannel($channel->getCode(), 'Percentage', '');
+    }
+
+    /**
+     * @When /^I add the "([^"]+)" action configured with a percentage value of "(?:|-)([^"]+)%"$/
      * @When I add the :actionType action configured without a percentage value
      */
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
@@ -330,9 +369,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I make it exclusive
+     * @When I set it as exclusive
      */
-    public function iMakeItExclusive()
+    public function iSetItAsExclusive(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -428,9 +467,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
@@ -502,9 +541,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion cannot end before it start
+     * @Then I should be notified that promotion cannot end before it starts
      */
-    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
+    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStarts(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -773,6 +812,20 @@ final class ManagingPromotionsContext implements Context
         $this->notificationChecker->checkNotification(
             sprintf('Some rules of the promotions with codes %s have been updated.', $promotion->getCode()),
             NotificationType::info(),
+        );
+    }
+
+    /**
+     * @Then I should be notified that promotion label in :localeCode locale is too long
+     */
+    public function iShouldBeNotifiedThatPromotionLabelIsTooLong(string $localeCode): void
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForTranslation('label', $localeCode),
+            'This value is too long. It should have 255 characters or less.',
         );
     }
 

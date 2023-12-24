@@ -16,6 +16,13 @@ namespace Sylius\Bundle\CoreBundle\Provider;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.13',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0',
+    SessionProvider::class,
+);
+
 final class SessionProvider
 {
     public static function getSession(RequestStack|SessionInterface $requestStackOrSession): SessionInterface
