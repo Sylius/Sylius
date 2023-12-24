@@ -28,19 +28,19 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.2",
         "doctrine/collections": "^1.6",
         "knplabs/knp-menu": "^3.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "sonata-project/block-bundle": "^4.2 || ^5.0",
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
-        "sylius/grid-bundle": "^1.11",
-        "symfony/config": "^5.4.21 || ^6.0",
-        "symfony/framework-bundle": "^5.4.21 || ^6.0",
-        "symfony/security-core": "^5.4.21 || ^6.0",
-        "symfony/security-bundle": "^5.4.21 || ^6.0",
-        "symfony/templating": "^5.4.21 || ^6.0",
-        "symfony/webpack-encore-bundle": "^1.15",
+        "sylius/grid-bundle": "^1.12",
+        "symfony/config": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1",
+        "symfony/security-core": "^6.4.0",
+        "symfony/security-bundle": "^6.4.0",
+        "symfony/templating": "^6.4.0",
+        "symfony/webpack-encore-bundle": "^1.17.1",
         "laminas/laminas-stdlib": "^3.3.1"
     },
     "conflict": {
@@ -51,8 +51,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.0",
-        "symfony/form": "^5.4.21 || ^6.0",
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/form": "^6.4.1",
         "twig/twig": "^2.12 || ^3.3"
     },
     "config": {
@@ -62,7 +62,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.12-dev"
+            "dev-main": "2.0-dev"
         }
     },
     "autoload": {
@@ -76,13 +76,13 @@
             "url": "../../*/*"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "test": [
             "@composer validate --strict",
             "bin/phpunit --colors=always",
             "bin/phpspec run --ansi --no-interaction"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
