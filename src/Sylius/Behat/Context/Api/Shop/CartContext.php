@@ -226,6 +226,7 @@ final class CartContext implements Context
     /**
      * @When I pick up (my )cart (again)
      * @When I pick up cart in the :localeCode locale
+     * @When I pick up cart without specifying locale
      * @When the visitor picks up the cart
      */
     public function iPickUpMyCart(?string $localeCode = null): void
@@ -812,8 +813,9 @@ final class CartContext implements Context
         $request = $this->requestFactory->custom(
             sprintf('%s/shop/orders', $this->apiUrlPrefix),
             HttpRequest::METHOD_POST,
-            $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : [],
+            ['HTTP_ACCEPT_LANGUAGE' => $localeCode ?? ''],
         );
+
         $this->shopClient->executeCustomRequest($request);
 
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');

@@ -1,3 +1,8 @@
+# UPGRADING FROM `v1.12.13` TO `v1.12.14`
+
+1. The `Accept-Language` header should now correctly resolve locale codes based on RFC 4647 using Symfony's request language negotiation,
+   meaning that values `en_US`, `en-US`, `en-us` etc. will all result in the `en_US` locale.
+
 # UPGRADE FROM `v1.12.11` TO `v1.12.12`
 
 1. The `Sylius\Component\User\Model\UserInterface` extends the `Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface`
