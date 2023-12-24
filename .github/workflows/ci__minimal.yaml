@@ -16,6 +16,9 @@ concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-minimal
     cancel-in-progress: true
 
+permissions:
+    contents: read
+
 jobs:
     static-checks:
         name: Static checks

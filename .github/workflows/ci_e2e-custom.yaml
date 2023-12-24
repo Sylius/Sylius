@@ -10,6 +10,9 @@ on:
                 type: string
                 default: ""
 
+permissions:
+    contents: read
+
 jobs:
     behat-no-js-unstable-symfony:
         runs-on: ubuntu-latest
