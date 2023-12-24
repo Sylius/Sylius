@@ -37,7 +37,6 @@ final class CartItemFactory implements CartItemFactoryInterface
 
     public function createForProduct(ProductInterface $product): OrderItemInterface
     {
-        /** @var OrderItemInterface $cartItem */
         $cartItem = $this->createNew();
         $variant = $this->variantResolver->getVariant($product);
         Assert::nullOrIsInstanceOf($variant, ProductVariantInterface::class);
@@ -48,7 +47,6 @@ final class CartItemFactory implements CartItemFactoryInterface
 
     public function createForCart(OrderInterface $order): OrderItemInterface
     {
-        /** @var OrderItemInterface $cartItem */
         $cartItem = $this->createNew();
         $cartItem->setOrder($order);
 
