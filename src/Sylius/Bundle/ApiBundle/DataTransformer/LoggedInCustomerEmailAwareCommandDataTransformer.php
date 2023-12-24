@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Command\CustomerEmailAwareInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
 final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandDataTransformerInterface
@@ -26,9 +25,12 @@ final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandD
     {
     }
 
-    public function transform($object, string $to, array $context = [])
+    /**
+     * @param mixed $object
+     * @param array<string, mixed> $context
+     */
+    public function transform($object, string $to, array $context = []): object
     {
-        /** @var CustomerInterface|null $customer */
         $customer = $this->getCustomer();
 
         /** @var CustomerEmailAwareInterface|mixed $object */
@@ -41,6 +43,9 @@ final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandD
         return $object;
     }
 
+    /**
+     * @param mixed $object
+     */
     public function supportsTransformation($object): bool
     {
         return $object instanceof CustomerEmailAwareInterface;
@@ -48,15 +53,15 @@ final class LoggedInCustomerEmailAwareCommandDataTransformer implements CommandD
 
     private function getCustomer(): ?CustomerInterface
     {
-        /** @var UserInterface|null $user */
         $user = $this->userContext->getUser();
-        if ($user instanceof ShopUserInterface) {
-            $customer = $user->getCustomer();
-            Assert::nullOrIsInstanceOf($customer, CustomerInterface::class);
 
-            return $customer;
+        if (!$user instanceof ShopUserInterface) {
+            return null;
         }
 
-        return null;
+        $customer = $user->getCustomer();
+        Assert::nullOrIsInstanceOf($customer, CustomerInterface::class);
+
+        return $customer;
     }
 }

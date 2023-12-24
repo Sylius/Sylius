@@ -42,7 +42,6 @@ final class PromotionCouponFactory implements PromotionCouponFactoryInterface
             sprintf('Promotion with name %s is not coupon based.', $promotion->getName()),
         );
 
-        /** @var PromotionCouponInterface $coupon */
         $coupon = $this->factory->createNew();
         $coupon->setPromotion($promotion);
 

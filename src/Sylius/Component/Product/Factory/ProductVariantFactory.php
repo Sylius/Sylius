@@ -36,7 +36,6 @@ class ProductVariantFactory implements ProductVariantFactoryInterface
 
     public function createForProduct(ProductInterface $product): ProductVariantInterface
     {
-        /** @var ProductVariantInterface $variant */
         $variant = $this->createNew();
         $variant->setProduct($product);
 

@@ -31,7 +31,11 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
     ) {
     }
 
-    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
+    /**
+     * @param string $id
+     * @param array<string, mixed> $context
+     */
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = []): ?ProductInterface
     {
         $user = $this->userContext->getUser();
         Assert::string($id);
@@ -48,6 +52,9 @@ final class ProductItemDataProvider implements RestrictedDataProviderInterface, 
         return $this->productRepository->findOneByChannelAndCodeWithAvailableAssociations($channel, $id);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ProductInterface::class, true);

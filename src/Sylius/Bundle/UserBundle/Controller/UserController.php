@@ -260,9 +260,6 @@ class UserController extends ResourceController
         ));
     }
 
-    /**
-     * @psalm-suppress UndefinedClass FlashBagAwareSessionInterface does not exist in Symfony 5
-     */
     protected function addTranslatedFlash(string $type, string $message): void
     {
         $translator = $this->container->get('translator');
@@ -270,7 +267,7 @@ class UserController extends ResourceController
             $session = $this->container->get('session');
         } else {
             $session = $this->container->get('request_stack')->getSession();
-            if (!$session instanceof FlashBagAwareSessionInterface) { // @phpstan-ignore-line
+            if (!$session instanceof FlashBagAwareSessionInterface) {
                 return;
             }
         }

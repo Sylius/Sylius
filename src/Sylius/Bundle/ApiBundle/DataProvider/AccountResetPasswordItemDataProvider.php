@@ -20,13 +20,20 @@ use Webmozart\Assert\Assert;
 
 final class AccountResetPasswordItemDataProvider implements RestrictedDataProviderInterface, ItemDataProviderInterface
 {
-    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = [])
+    /**
+     * @param string $id
+     * @param array<string, mixed> $context
+     */
+    public function getItem(string $resourceClass, $id, ?string $operationName = null, array $context = []): ResetPassword
     {
         Assert::string($id);
 
         return new ResetPassword($id);
     }
 
+    /**
+     * @param array<string, mixed> $context
+     */
     public function supports(string $resourceClass, ?string $operationName = null, array $context = []): bool
     {
         return is_a($resourceClass, ResetPassword::class, true);

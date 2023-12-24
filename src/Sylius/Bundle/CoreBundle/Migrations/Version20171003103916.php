@@ -91,7 +91,7 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
 
     private function getProductAttributes(): array
     {
-        /** @var string $productAttributeClass */
+        /** @var class-string $productAttributeClass */
         $productAttributeClass = $this->container->getParameter('sylius.model.product_attribute.class');
 
         $entityManager = $this->getEntityManager($productAttributeClass);
@@ -106,6 +106,9 @@ class Version20171003103916 extends AbstractMigration implements ContainerAwareI
         ;
     }
 
+    /**
+     * @param class-string $class
+     */
     private function getEntityManager(string $class): EntityManagerInterface
     {
         /** @var ManagerRegistry $managerRegistry */

@@ -43,7 +43,6 @@ final class PaymentMethodFactory implements PaymentMethodFactoryInterface
         $gatewayConfig = $this->gatewayConfigFactory->createNew();
         $gatewayConfig->setFactoryName($gatewayFactory);
 
-        /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->decoratedFactory->createNew();
         $paymentMethod->setGatewayConfig($gatewayConfig);
 

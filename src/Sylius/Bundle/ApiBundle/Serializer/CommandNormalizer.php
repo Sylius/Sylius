@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
 use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -40,11 +41,19 @@ final class CommandNormalizer implements ContextAwareNormalizerInterface
         ;
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /**
+     * @param mixed $object
+     * @param string|null $format
+     * @param array<string, mixed> $context
+     * @return array{ code: int, message: string }
+     * @throws ExceptionInterface
+     */
+    public function normalize($object, $format = null, array $context = []): array
     {
         $context[self::ALREADY_CALLED] = true;
         $data = $this->objectNormalizer->normalize($object, $format, $context);
         Assert::isArray($data);
+        Assert::keyExists($data, 'message');
 
         return [
             'code' => 400,
