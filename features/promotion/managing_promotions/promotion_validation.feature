@@ -53,7 +53,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion cannot end before it starts
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with label exceeding 255 characters
         Given there is a promotion "Christmas sale"
         When I want to modify this promotion

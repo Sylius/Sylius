@@ -17,7 +17,7 @@ Feature: Excluding chosen taxons from displaying the lowest price of discounted 
         Then I should be notified that it has been successfully edited
         And this channel should have "T-Shirts" taxon excluded from displaying the lowest price of discounted products
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Excluding multiple taxons from displaying the lowest price of discounted products
         When I want to modify a channel "Poland"
         And I exclude the "T-Shirts" and "Caps" taxons from showing the lowest price of discounted products
@@ -25,7 +25,7 @@ Feature: Excluding chosen taxons from displaying the lowest price of discounted 
         Then I should be notified that it has been successfully edited
         And this channel should have "T-Shirts" and "Caps" taxons excluded from displaying the lowest price of discounted products
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Removing excluded taxon from displaying the lowest price of discounted products
         Given the channel "Poland" has "T-Shirts" and "Caps" taxons excluded from showing the lowest price of discounted products
         When I want to modify this channel

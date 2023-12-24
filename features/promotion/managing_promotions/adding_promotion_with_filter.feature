@@ -8,7 +8,7 @@ Feature: Adding promotion with filter
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a promotion with item fixed discount only for products over 10
         When I want to create a new promotion
         And I specify its code as "10_for_all_products_over_10"
