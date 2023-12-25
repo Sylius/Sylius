@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\LocaleBundle\Form\DataTransformer\LocaleToCodeTransformer;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
@@ -20,6 +21,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -35,7 +37,18 @@ abstract class AttributeValueType extends AbstractResourceType
         protected RepositoryInterface $attributeRepository,
         protected RepositoryInterface $localeRepository,
         protected FormTypeRegistryInterface $formTypeRegistry,
+        protected ?DataTransformerInterface $localeToCodeTransformer = null,
     ) {
+        if (null === $this->localeToCodeTransformer) {
+            trigger_deprecation(
+                'sylius/attribute-bundle',
+                '1.12',
+                'Not passing a "%s" instance as argument 7 to "%s" is deprecated. It will not be possible in Sylius 2.0.',
+                LocaleToCodeTransformer::class,
+                self::class,
+            );
+        }
+
         parent::__construct($dataClass, $validationGroups);
     }
 
@@ -78,7 +91,7 @@ abstract class AttributeValueType extends AbstractResourceType
         ;
 
         $builder->get('localeCode')->addModelTransformer(
-            new ReversedTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code')),
+            new ReversedTransformer($this->localeToCodeTransformer ?? new ResourceToIdentifierTransformer($this->localeRepository, 'code')),
         );
     }
 
