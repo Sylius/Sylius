@@ -25,6 +25,17 @@ final class TranslationLocaleProvider implements TranslationLocaleProviderInterf
      */
     public function __construct(private RepositoryInterface|LocaleCollectionProviderInterface $localeRepository, private string $defaultLocaleCode)
     {
+        if ($this->localeRepository instanceof RepositoryInterface) {
+            trigger_deprecation(
+                'sylius/core',
+                '1.13',
+                sprintf(
+                    'Passing an instance of "%s" as first argument of "%s" is deprecated. Use an instance of "%s" instead.',
+                    RepositoryInterface::class, self::class,
+                    LocaleCollectionProviderInterface::class,
+                ),
+            );
+        }
     }
 
     public function getDefinedLocalesCodes(): array

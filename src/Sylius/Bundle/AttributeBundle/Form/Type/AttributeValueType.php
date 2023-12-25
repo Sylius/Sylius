@@ -42,7 +42,7 @@ abstract class AttributeValueType extends AbstractResourceType
         if (null === $this->localeToCodeTransformer) {
             trigger_deprecation(
                 'sylius/attribute-bundle',
-                '1.12',
+                '1.13',
                 'Not passing a "%s" instance as argument 7 to "%s" is deprecated. It will not be possible in Sylius 2.0.',
                 LocaleToCodeTransformer::class,
                 self::class,
