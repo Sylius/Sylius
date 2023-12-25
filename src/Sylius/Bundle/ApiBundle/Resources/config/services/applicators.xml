@@ -19,7 +19,7 @@
         <defaults public="true" />
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\ArchivingShippingMethodApplicator">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicatorInterface" class="Sylius\Bundle\ApiBundle\Applicator\OrderStateMachineTransitionApplicator">
