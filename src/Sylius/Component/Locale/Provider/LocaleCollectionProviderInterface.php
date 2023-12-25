@@ -18,7 +18,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 interface LocaleCollectionProviderInterface
 {
     /**
-     * @return array<string, LocaleInterface>
+     * @return array<array-key, LocaleInterface>
      */
     public function getAll(): array;
 }

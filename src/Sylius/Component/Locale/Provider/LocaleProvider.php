@@ -49,7 +49,7 @@ final class LocaleProvider implements LocaleProviderInterface
     }
 
     /**
-     * @return array<string, LocaleInterface>
+     * @return array<array-key, LocaleInterface>
      */
     private function getLocales(): array
     {
