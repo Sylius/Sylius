@@ -188,5 +188,17 @@
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
             <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
         </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\DateIntervalValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_date_interval" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\EndDateIsNotBeforeStartDateValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_date_period_end_date_is_not_before_start_date" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\EndDateAgainstIntervalValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_end_date_against_interval" />
+        </service>
     </services>
 </container>

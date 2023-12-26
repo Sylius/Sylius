@@ -214,24 +214,6 @@ final class StatisticsTest extends JsonApiTestCase
 
     public function invalidQueryParameters(): iterable
     {
-        yield 'invalid channelCode as bool value' => [
-            'parameters' => [
-                'channelCode' => true,
-                'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
-                'endDate' => '2023-12-31T23:59:59',
-            ],
-        ];
-
-        yield 'invalid channelCode as int value' => [
-            'parameters' => [
-                'channelCode' => 1,
-                'startDate' => '2023-01-01T00:00:00',
-                'dateInterval' => 'P1M',
-                'endDate' => '2023-12-31T23:59:59',
-            ],
-        ];
-
         yield 'invalid channelCode as float value' => [
             'parameters' => [
                 'channelCode' => 1.1,
@@ -274,6 +256,16 @@ final class StatisticsTest extends JsonApiTestCase
                 'startDate' => '2023-01-01T00:00:00',
                 'dateInterval' => 'P1M1D',
                 'endDate' => '2023-12-31T23:59:59',
+            ],
+        ];
+
+        yield 'unexpected parameter' => [
+            'parameters' => [
+                'channelCode' => 'WEB',
+                'startDate' => '2023-01-01T00:00:00',
+                'dateInterval' => 'P1M1D',
+                'endDate' => '2023-12-31T23:59:59',
+                'unexpected_parameter' => 'unexpected_value',
             ],
         ];
     }
