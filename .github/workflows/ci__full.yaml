@@ -10,6 +10,9 @@ concurrency:
     group: ci-${{ github.workflow }}-${{ github.ref }}-full
     cancel-in-progress: true
 
+permissions: 
+    contents: read
+
 jobs:
     static-checks:
         strategy:

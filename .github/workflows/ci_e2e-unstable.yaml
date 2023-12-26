@@ -10,6 +10,9 @@ on:
                 default: false
     workflow_dispatch: ~
 
+permissions:
+    contents: read
+
 jobs:
     behat-no-js-unstable:
         runs-on: ubuntu-latest
