@@ -132,6 +132,7 @@
         "symfony/translation": "^6.3.3",
         "symfony/translation-contracts": "^2.5.2",
         "symfony/twig-bundle": "^6.3.0",
+        "symfony/ux-autocomplete": "^2.13",
         "symfony/ux-live-component": "^2.12",
         "symfony/ux-twig-component": "^2.11.2",
         "symfony/validator": "^6.3.4",
