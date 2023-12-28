@@ -31,6 +31,7 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            /** TODO: Extract to AdminBundle and replace with new TaxonAutocompleteChoiceType once the CRUD implemented */
             ->add('taxon', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
             ])

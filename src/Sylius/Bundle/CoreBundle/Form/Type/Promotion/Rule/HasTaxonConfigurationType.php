@@ -27,6 +27,7 @@ final class HasTaxonConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            /** TODO: Extract to AdminBundle and replace with new TaxonAutocompleteChoiceType once the CRUD implemented */
             ->add('taxons', TaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.has_taxon.taxons',
                 'multiple' => true,

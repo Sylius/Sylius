@@ -27,6 +27,7 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** TODO: Extract to AdminBundle and replace with new TaxonAutocompleteChoiceType once the CRUD implemented */
         $builder->add('taxons', TaxonAutocompleteChoiceType::class, [
             'label' => 'sylius.ui.taxons',
             'multiple' => true,
