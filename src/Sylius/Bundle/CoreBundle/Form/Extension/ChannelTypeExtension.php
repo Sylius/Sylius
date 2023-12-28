@@ -23,7 +23,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\ShopBillingDataType;
 use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Sylius\Component\Core\Model\Scope;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -99,9 +98,6 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ])
             ->add('shopBillingData', ShopBillingDataType::class, [
                 'label' => 'sylius.form.channel.shop_billing_data',
-            ])
-            ->add('menuTaxon', TaxonAutocompleteChoiceType::class, [
-                'label' => 'sylius.form.channel.menu_taxon',
             ])
             ->add('channelPriceHistoryConfig', ChannelPriceHistoryConfigType::class, [
                 'label' => false,

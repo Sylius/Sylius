@@ -19,6 +19,10 @@ $primary: #1ABB9C;
 @import "_flags.scss";
 
 body {
+    --bs-body-bg: #{$body-bg};
+    --bs-tertiary-bg: #{$body-bg};
+    --bs-body-color: #{$body-color};
+
     font-family: "Inter", sans-serif;
     font-feature-settings: "cv03", "cv04", "cv11";
 }

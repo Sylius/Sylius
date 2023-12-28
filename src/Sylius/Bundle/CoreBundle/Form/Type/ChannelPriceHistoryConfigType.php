@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\Form\DataMapperInterface;
@@ -44,11 +43,6 @@ final class ChannelPriceHistoryConfigType extends AbstractResourceType implement
             ])
             ->add('lowestPriceForDiscountedProductsCheckingPeriod', IntegerType::class, [
                 'label' => 'sylius.form.admin.channel.period_for_which_the_lowest_price_is_calculated',
-            ])
-            ->add('taxonsExcludedFromShowingLowestPrice', TaxonAutocompleteChoiceType::class, [
-                'label' => 'sylius.ui.taxons_for_which_the_lowest_price_is_not_displayed',
-                'required' => false,
-                'multiple' => true,
             ])
         ;
 

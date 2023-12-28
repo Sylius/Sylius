@@ -45,5 +45,33 @@
             <argument>%sylius.form.type.admin.reset_password.validation_groups%</argument>
             <tag name="form.type" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\ChannelPricingHistoryConfigTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\ProductTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Type\TaxonAutocompleteChoiceType">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="form.type" />
+            <tag name="ux.entity_autocomplete_field" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Extension\TaxonTypeExtension">
+            <tag name="form.type_extension" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotion\ForTaxonsScopeConfigurationType">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
+            <tag name="sylius.catalog_promotion.scope_configuration_type" key="%sylius.catalog_promotion.scope.for_taxons%" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
