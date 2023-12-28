@@ -16,7 +16,6 @@
         <import resource="services/context.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/email.xml" />
-        <import resource="services/form.xml" />
         <import resource="services/listeners.xml" />
         <import resource="services/menu.xml" />
         <import resource="services/twig.xml" />
