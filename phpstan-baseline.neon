@@ -3881,6 +3881,11 @@ parameters:
 			path: src/Sylius/Bundle/UserBundle/Command/PromoteUserCommand.php
 
 		-
+			message: "#^Class Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\FlashBagAwareSessionInterface not found\\.$#"
+			count: 1
+			path: src/Sylius/Bundle/UserBundle/Controller/UserController.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\UserBundle\\\\Controller\\\\UserController\\:\\:getSyliusAttribute\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/UserBundle/Controller/UserController.php
