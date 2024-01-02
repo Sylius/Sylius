@@ -14,11 +14,11 @@ Feature: Statistics
 
     @ui @no-api
     Scenario: Seeing statistics for the current year and default channel when expectations are not specified
-        Given it is "2022-12-31" now
+        Given it is "last day of December last year" now
         And 2 new customers have fulfilled 2 orders placed for total of "$1,000.00"
-        And it is "2023-01-01" now
+        And it is "first day of January this year" now
         And 3 new customers have fulfilled 4 orders placed for total of "$2,000.21"
-        And it is "2023-02-01" now
+        And it is "first day of February this year" now
         And 2 more new customers have paid 2 orders placed for total of "$5,000.37"
         When I view statistics
         Then I should see 5 new customers
@@ -28,9 +28,9 @@ Feature: Statistics
 
     @ui @javascript
     Scenario: Seeing statistics for the previous year
-        Given it is "2022-01-01" now
+        Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
-        And it is "2023-02-01" now
+        And it is "first day of February this year" now
         And 4 more new customers have paid 5 orders placed for total of "$5,000.37"
         And 2 more new customers have paid 2 orders placed for total of "$5,000.37"
         When I view statistics for "United States" channel and previous year split by month
@@ -41,9 +41,9 @@ Feature: Statistics
 
     @ui @javascript
     Scenario: Seeing statistics for the next year
-        Given it is "2022-01-01" now
+        Given it is "first day of January last year" now
         And 3 new customers have fulfilled 2 orders placed for total of "$2,000.00"
-        And it is "2023-02-01" now
+        And it is "first day of February this year" now
         And 4 more new customers have paid 5 orders placed for total of "$5,000.37"
         And 2 more new customers have paid 2 orders placed for total of "$5,000.37"
         When I view statistics for "United States" channel and previous year split by month
