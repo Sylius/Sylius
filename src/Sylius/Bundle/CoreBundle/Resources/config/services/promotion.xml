@@ -66,10 +66,10 @@
         </service>
         <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.promotion_filter.price_range" />
-            <argument type="service" id="sylius.promotion_filter.taxon" />
-            <argument type="service" id="sylius.promotion_filter.product" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface" />
+            <argument>null</argument>
+            <argument>null</argument>
+            <argument>null</argument>
+            <argument type="service" id="Sylius\Component\Core\Promotion\Filter\CompositeFilter" />
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="sylius.form.promotion_action.item_fixed_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
@@ -80,10 +80,10 @@
         </service>
         <service id="sylius.promotion_action.unit_percentage_discount" class="Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.promotion_filter.price_range" />
-            <argument type="service" id="sylius.promotion_filter.taxon" />
-            <argument type="service" id="sylius.promotion_filter.product" />
-            <argument type="service" id="Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface" />
+            <argument>null</argument>
+            <argument>null</argument>
+            <argument>null</argument>
+            <argument type="service" id="Sylius\Component\Core\Promotion\Filter\CompositeFilter" />
             <tag name="sylius.promotion_action" type="unit_percentage_discount" label="sylius.form.promotion_action.item_percentage_discount" form-type="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitPercentageDiscountConfigurationType" />
         </service>
         <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand">
@@ -98,10 +98,15 @@
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
 
-        <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter" />
-        <service id="sylius.promotion_filter.product" class="Sylius\Component\Core\Promotion\Filter\ProductFilter" />
+        <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter">
+            <tag name="sylius.promotion_filter" />
+        </service>
+        <service id="sylius.promotion_filter.product" class="Sylius\Component\Core\Promotion\Filter\ProductFilter" >
+            <tag name="sylius.promotion_filter" />
+        </service>
         <service id="sylius.promotion_filter.price_range" class="Sylius\Component\Core\Promotion\Filter\PriceRangeFilter">
             <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.promotion_filter" />
         </service>
 
         <service id="sylius.promotion.units_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator">
@@ -110,8 +115,8 @@
         </service>
         <service id="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface" alias="sylius.promotion.units_promotion_adjustments_applicator" />
 
-        <service id="Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface" class="Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicator">
-            <argument type="tagged_iterator" tag="sylius.promotion_additional_item_filters" />
+        <service id="Sylius\Component\Core\Promotion\Filter\CompositeFilter">
+            <argument type="tagged_iterator" tag="sylius.promotion_filter" />
         </service>
 
         <service id="sylius.promotion_usage_modifier" class="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier">

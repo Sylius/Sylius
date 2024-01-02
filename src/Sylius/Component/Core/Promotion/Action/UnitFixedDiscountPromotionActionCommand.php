@@ -16,7 +16,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Applicator\AdditionalFiltersApplicatorInterface;
+use Sylius\Component\Core\Promotion\Filter\CompositeFilter;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -29,12 +29,22 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
     public function __construct(
         FactoryInterface $adjustmentFactory,
-        private FilterInterface $priceRangeFilter,
-        private FilterInterface $taxonFilter,
-        private FilterInterface $productFilter,
-        private AdditionalFiltersApplicatorInterface $additionalFiltersApplicator,
+        private ?FilterInterface $priceRangeFilter,
+        private ?FilterInterface $taxonFilter,
+        private ?FilterInterface $productFilter,
+        private ?FilterInterface $compositeFilter = null,
     ) {
         parent::__construct($adjustmentFactory);
+
+        if (null !== $this->priceRangeFilter || null !== $this->taxonFilter || null !== $this->productFilter || null === $this->compositeFilter) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '1.13',
+                'Passing separate instances of "%s" is deprecated. Use "%s" instance instead.',
+                FilterInterface::class,
+                CompositeFilter::class,
+            );
+        }
     }
 
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
@@ -53,13 +63,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             return false;
         }
 
-        $filteredItems = $this->priceRangeFilter->filter(
-            $subject->getItems()->toArray(),
-            array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode]),
-        );
-        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
-        $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
-        $filteredItems = $this->additionalFiltersApplicator->apply($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->filterItems($subject, $configuration, $channelCode);
 
         if (empty($filteredItems)) {
             return false;
@@ -82,5 +86,32 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
                 $promotion,
             );
         }
+    }
+
+    /**
+     * @param array<string, mixed> $configuration
+     * @return array<string, mixed>
+     */
+    private function filterItems(OrderInterface $subject, array $configuration, string $channelCode): array
+    {
+        $filteredItems = [];
+
+        if (null === $this->compositeFilter) {
+            $filteredItems = $this->priceRangeFilter->filter(
+                $subject->getItems()->toArray(),
+                array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode]),
+            );
+            $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
+            $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
+        }
+
+        if (null !== $this->compositeFilter) {
+            $filteredItems = $this->compositeFilter->filter(
+                $subject->getItems()->toArray(),
+                array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode]),
+            );
+        }
+
+        return $filteredItems;
     }
 }
