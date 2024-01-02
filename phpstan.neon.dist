@@ -50,5 +50,6 @@ parameters:
     symfony:
         containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
 
-    scanDirectories:
-        - var/cache/dev/Symfony/Config
+    # Uncomment once we start using PHP configs, on Symfony 6+ it doesn't generate the below directory if no PHP config is present
+    #scanDirectories:
+    #    - var/cache/dev/Symfony/Config
