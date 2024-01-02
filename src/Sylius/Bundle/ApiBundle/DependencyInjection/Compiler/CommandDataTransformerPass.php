@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class CommandDataTransformerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $commandDataTransformersChainDefinition = new Definition(CommandAwareInputDataTransformer::class);
 
