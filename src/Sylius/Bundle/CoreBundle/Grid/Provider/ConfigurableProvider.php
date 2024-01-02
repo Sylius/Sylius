@@ -20,6 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class ConfigurableProvider implements GridProviderInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function __construct(
         private ContainerInterface $providers,
         private array $configuration,
