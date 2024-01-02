@@ -107,6 +107,24 @@
     }
    ```
 
+1. The constructors of `Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand` and `Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand` have been changed:
+
+    ```diff
+      public function __construct(
+          FactoryInterface $adjustmentFactory,
+    -     private FilterInterface $priceRangeFilter,
+    -     private FilterInterface $taxonFilter,
+    -     private FilterInterface $productFilter,
+    +     private ?FilterInterface $priceRangeFilter,
+    +     private ?FilterInterface $taxonFilter,
+    +     private ?FilterInterface $productFilter,
+    +     private ?FilterInterface $compositeFilter = null,
+      ) {
+          ...
+      }
+    ```
+   Passing several arguments of `Sylius\Component\Core\Promotion\Filter\FilterInterface` on second, third and fourth position has been deprecated.
+
 1. Not passing `Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface` 
    to `Sylius\Component\Core\Calculator\ProductVariantPriceCalculator`
    as a first argument is deprecated.
