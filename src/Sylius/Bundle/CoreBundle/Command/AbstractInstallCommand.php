@@ -39,7 +39,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     /** @var CommandExecutor|null */
     protected $commandExecutor;
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $application = $this->getApplication();
         $application->setCatchExceptions(false);

@@ -34,7 +34,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
     ) {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, ChangeItemQuantityInCart::class);
 

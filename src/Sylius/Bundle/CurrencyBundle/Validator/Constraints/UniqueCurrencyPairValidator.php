@@ -27,7 +27,7 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var UniqueCurrencyPair $constraint */
         Assert::isInstanceOf($constraint, UniqueCurrencyPair::class);

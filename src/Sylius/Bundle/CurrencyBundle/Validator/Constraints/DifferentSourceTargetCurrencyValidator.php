@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 
 class DifferentSourceTargetCurrencyValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var DifferentSourceTargetCurrency $constraint */
         Assert::isInstanceOf($constraint, DifferentSourceTargetCurrency::class);

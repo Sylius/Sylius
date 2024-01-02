@@ -28,7 +28,7 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var UniqueSimpleProductCode $constraint */
         Assert::isInstanceOf($constraint, UniqueSimpleProductCode::class);
