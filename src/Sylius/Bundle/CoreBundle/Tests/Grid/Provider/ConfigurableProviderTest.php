@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Grid\Provider;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Sylius\Bundle\CoreBundle\Grid\Provider\ConfigurableProvider;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Provider\GridProviderInterface;
@@ -41,14 +42,17 @@ final class ConfigurableProviderTest extends TestCase
     /** @test */
     public function it_can_use_the_configured_provider_for_a_specific_grid(): void
     {
+        $providers = $this->createMock(ContainerInterface::class);
+
+        $providers->method('get')
+            ->with('bar')
+            ->willReturn($this->barProvider);
+
         $this->barProvider->method('get')
             ->with('app_book')
             ->willReturn($this->gridDefinition);
 
-        $configurableProvider = new ConfigurableProvider([
-            'foo' => $this->fooProvider,
-            'bar' => $this->barProvider,
-        ], [
+        $configurableProvider = new ConfigurableProvider($providers, [
             'default_type' => 'foo',
             'grids' => [
                 'app_book' => ['type' => 'bar'],
@@ -63,14 +67,17 @@ final class ConfigurableProviderTest extends TestCase
     /** @test */
     public function it_can_use_the_default_configured_provider(): void
     {
+        $providers = $this->createMock(ContainerInterface::class);
+
+        $providers->method('get')
+            ->with('foo')
+            ->willReturn($this->fooProvider);
+
         $this->fooProvider->method('get')
             ->with('app_book')
             ->willReturn($this->gridDefinition);
 
-        $configurableProvider = new ConfigurableProvider([
-            'foo' => $this->fooProvider,
-            'bar' => $this->barProvider,
-        ], [
+        $configurableProvider = new ConfigurableProvider($providers, [
             'default_type' => 'foo',
         ]);
 
@@ -82,10 +89,9 @@ final class ConfigurableProviderTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_the_default_configured_provider_does_not_exist(): void
     {
-        $configurableProvider = new ConfigurableProvider([
-            'foo' => $this->fooProvider,
-            'bar' => $this->barProvider,
-        ], [
+        $providers = $this->createMock(ContainerInterface::class);
+
+        $configurableProvider = new ConfigurableProvider($providers, [
             'default_type' => 'unknown',
         ]);
 
@@ -98,10 +104,9 @@ final class ConfigurableProviderTest extends TestCase
     /** @test */
     public function it_throws_an_exception_when_the_configured_provider_for_specific_grid_does_not_exist(): void
     {
-        $configurableProvider = new ConfigurableProvider([
-            'foo' => $this->fooProvider,
-            'bar' => $this->barProvider,
-        ], [
+        $providers = $this->createMock(ContainerInterface::class);
+
+        $configurableProvider = new ConfigurableProvider($providers, [
             'default_type' => 'foo',
             'grids' => [
                 'app_book' => ['type' => 'unknown'],

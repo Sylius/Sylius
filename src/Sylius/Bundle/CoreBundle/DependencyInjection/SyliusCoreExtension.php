@@ -74,6 +74,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
         $container->setParameter('sylius_core.state_machine.default_adapter', $config['state_machine']['default_adapter']);
         $container->setParameter('sylius_core.state_machine.graphs_to_adapters_mapping', $config['state_machine']['graphs_to_adapters_mapping']);
+        $container->setParameter('sylius_core.grids_configuration', $config['grid']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
