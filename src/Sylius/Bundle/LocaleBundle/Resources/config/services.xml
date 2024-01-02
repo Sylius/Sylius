@@ -89,5 +89,12 @@
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener">
+            <argument type="service" id="cache.app" />
+            <tag name="doctrine.orm.entity_listener" event="postPersist" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
+            <tag name="doctrine.orm.entity_listener" event="postUpdate" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
+            <tag name="doctrine.orm.entity_listener" event="postRemove" entity="Sylius\Component\Locale\Model\Locale" method="invalidateCachedLocales" />
+        </service>
     </services>
 </container>

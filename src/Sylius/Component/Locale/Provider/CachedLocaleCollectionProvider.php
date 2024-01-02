@@ -17,13 +17,15 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 final class CachedLocaleCollectionProvider implements LocaleCollectionProviderInterface
 {
+    public const LOCALES_CACHE_KEY = 'sylius_locales';
+
     public function __construct(private LocaleCollectionProviderInterface $decorated, private CacheInterface $cache)
     {
     }
 
     public function getAll(): array
     {
-        return $this->cache->get('sylius_locales', function () {
+        return $this->cache->get(self::LOCALES_CACHE_KEY, function () {
             return $this->decorated->getAll();
         });
     }
