@@ -179,7 +179,7 @@ just like in the example mentioned above.
         }
     }
 
-**2.** Extend the ``Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture`` in ``App\Entity\Fixture\ShippingMethodFixture``:
+**2.** Extend the ``Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture`` in ``App\Fixture\ShippingMethodFixture``:
 
 .. code-block:: php
 
