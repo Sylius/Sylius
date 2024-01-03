@@ -56,7 +56,6 @@ final class CreateAdminUserCommandTest extends TestCase
         parent::setUp();
 
         $this->messageBus = $this->createMock(MessageBusInterface::class);
-
         $this->questionFactory = $this->createMock(QuestionFactoryInterface::class);
 
         $this->command = new CommandTester(

@@ -21,7 +21,7 @@ final class QuestionFactory implements QuestionFactoryInterface
     {
         $question = new Question('Email');
         $question->setValidator(function (?string $email) {
-            if (!filter_var($email, \FILTER_VALIDATE_EMAIL) || $email === null) {
+            if ($email === null || !filter_var($email, \FILTER_VALIDATE_EMAIL)) {
                 throw new \InvalidArgumentException('The email address provided is invalid. Please try again.');
             }
 

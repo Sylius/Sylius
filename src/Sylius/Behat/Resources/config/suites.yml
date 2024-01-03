@@ -70,8 +70,8 @@ imports:
     - suites/api/user/managing_customers.yml
 
     - suites/cli/canceling_unpaid_orders.yml
-    - suites/cli/installer.yml
     - suites/cli/change_admin_password.yml
+    - suites/cli/installer.yml
     - suites/cli/showing_available_plugins.yml
 
     - suites/hybrid/cart/shopping_cart.yml

@@ -92,6 +92,7 @@ final class ChangeAdminPasswordContext implements Context
         /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->adminUserRepository->findOneByEmail($email);
         $adminUser->setPlainPassword($password);
+
         Assert::same($adminUser->getPassword(), $this->userPasswordHasher->hash($adminUser));
     }
 }

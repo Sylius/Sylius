@@ -43,9 +43,7 @@ final class ChangeAdminUserPasswordCommandTest extends TestCase
         parent::setUp();
 
         $this->userRepository = $this->createMock(UserRepositoryInterface::class);
-
         $this->passwordUpdater = $this->createMock(PasswordUpdaterInterface::class);
-
         $this->questionFactory = $this->createMock(QuestionFactoryInterface::class);
 
         $this->command = new CommandTester(
