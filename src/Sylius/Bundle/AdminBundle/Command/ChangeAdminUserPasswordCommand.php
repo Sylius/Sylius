@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Command;
 
+use Sylius\Bundle\AdminBundle\Command\Factory\QuestionFactoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
@@ -20,18 +21,28 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'sylius:admin-user:change-password',
     description: 'Change password of admin user'
 )]
-final class ChangeAdminUserPasswordCommand extends AbstractAdminUserCommand
+final class ChangeAdminUserPasswordCommand extends Command
 {
+    protected SymfonyStyle $io;
+
+    /** @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository */
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
-        private PasswordUpdaterInterface $passwordUpdater
+        private PasswordUpdaterInterface $passwordUpdater,
+        private QuestionFactoryInterface $questionFactory,
     ) {
         parent::__construct();
+    }
+
+    protected function initialize(InputInterface $input, OutputInterface $output): void
+    {
+        $this->io = new SymfonyStyle($input, $output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -44,7 +55,7 @@ final class ChangeAdminUserPasswordCommand extends AbstractAdminUserCommand
 
         $this->io->title('Change admin user password');
 
-        $email = $this->io->askQuestion($this->createEmailQuestion());
+        $email = $this->io->askQuestion($this->questionFactory->createEmail());
 
         /** @var AdminUserInterface|null $adminUser */
         $adminUser = $this->adminUserRepository->findOneByEmail($email);
@@ -54,7 +65,7 @@ final class ChangeAdminUserPasswordCommand extends AbstractAdminUserCommand
             return Command::INVALID;
         }
 
-        $password = $this->io->askQuestion($this->createQuestionWithNonBlankValidator('New password', true));
+        $password = $this->io->askQuestion($this->questionFactory->createWithNotNullValidator('New password', true));
         $adminUser->setPlainPassword($password);
 
         $this->passwordUpdater->updatePassword($adminUser);

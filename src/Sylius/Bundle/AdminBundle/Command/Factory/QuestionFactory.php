@@ -11,24 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Command;
+namespace Sylius\Bundle\AdminBundle\Command\Factory;
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
-abstract class AbstractAdminUserCommand extends Command
+final class QuestionFactory implements QuestionFactoryInterface
 {
-    protected SymfonyStyle $io;
-
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->io = new SymfonyStyle($input, $output);
-    }
-
-    protected function createEmailQuestion(): Question
+    public function createEmail(): Question
     {
         $question = new Question('Email');
         $question->setValidator(function (?string $email) {
@@ -43,7 +32,7 @@ abstract class AbstractAdminUserCommand extends Command
         return $question;
     }
 
-    protected function createQuestionWithNonBlankValidator(string $askedQuestion, bool $hidden = false): Question
+    public function createWithNotNullValidator(string $askedQuestion, bool $hidden = false): Question
     {
         $question = new Question($askedQuestion);
         $question->setValidator(function (?string $value) {
@@ -54,10 +43,7 @@ abstract class AbstractAdminUserCommand extends Command
             return $value;
         });
         $question->setMaxAttempts(3);
-
-        if ($hidden) {
-            $question->setHidden(true);
-        }
+        $question->setHidden($hidden);
 
         return $question;
     }
