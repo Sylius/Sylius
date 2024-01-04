@@ -36,6 +36,7 @@
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0.1",
         "sylius/grid-bundle": "^1.12",
         "symfony/config": "^6.4.0",
+        "symfony/expression-language": "^6.4.0",
         "symfony/framework-bundle": "^6.4.1",
         "symfony/security-core": "^6.4.0",
         "symfony/security-bundle": "^6.4.0",
