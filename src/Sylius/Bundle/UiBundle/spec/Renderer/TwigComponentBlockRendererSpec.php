@@ -83,9 +83,9 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
 
         $contextProvider->provide([], $componentBlock)->willReturn($context);
 
-        $expressionLanguage->evaluate('foo', $context)->willReturn('bar');
-        $expressionLanguage->evaluate('bar', $context)->willReturn('baz');
-        $expressionLanguage->evaluate('baz', $context)->willReturn('qux');
+        $expressionLanguage->evaluate('foo', ['context' => $context])->willReturn('bar');
+        $expressionLanguage->evaluate('bar', ['context' => $context])->willReturn('baz');
+        $expressionLanguage->evaluate('baz', ['context' => $context])->willReturn('qux');
 
         $componentRenderer
             ->createAndRender('Component', [
