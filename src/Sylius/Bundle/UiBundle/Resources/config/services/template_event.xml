@@ -32,7 +32,9 @@
         <service id="Sylius\Bundle\UiBundle\Renderer\TwigComponentBlockRenderer">
             <argument type="service" id="ux.twig_component.component_renderer" />
             <argument type="service" id="Sylius\Bundle\UiBundle\ContextProvider\ContextProviderInterface" />
-            <argument type="service" id="sylius.expression_language" />
+            <argument type="service">
+                <service class="Symfony\Component\ExpressionLanguage\ExpressionLanguage" />
+            </argument>
             <tag name="sylius.ui.block_renderer" />
         </service>
 
