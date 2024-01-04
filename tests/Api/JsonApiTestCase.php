@@ -60,13 +60,13 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /** @throws \Exception */
-    protected function assertResponseViolations(Response $response, array $expectedViolations, int $statusCode = 200): void
+    protected function assertResponseViolations(Response $response, array $expectedViolations): void
     {
         if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
             $this->showErrorInBrowserIfOccurred($response);
         }
 
-        $this->assertResponseCode($response, $statusCode);
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonHeader($response);
         $this->assertJsonResponseViolations($response, $expectedViolations);
     }
