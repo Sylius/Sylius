@@ -59,7 +59,19 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         );
     }
 
-    protected function assertResponseViolations(Response $response, array $expectedViolations): void
+    /** @throws \Exception */
+    protected function assertResponseViolations(Response $response, array $expectedViolations, int $statusCode = 200): void
+    {
+        if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
+            $this->showErrorInBrowserIfOccurred($response);
+        }
+
+        $this->assertResponseCode($response, $statusCode);
+        $this->assertJsonHeader($response);
+        $this->assertJsonResponseViolations($response, $expectedViolations);
+    }
+
+    protected function assertJsonResponseViolations(Response $response, array $expectedViolations): void
     {
         $violations = json_decode($response->getContent(), true)['violations'] ?? [];
         $this->assertCount(count($expectedViolations), $violations, 'Expected number of violations does not match.');

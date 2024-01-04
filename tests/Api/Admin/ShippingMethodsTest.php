@@ -162,7 +162,8 @@ final class ShippingMethodsTest extends JsonApiTestCase
                     'propertyPath' => 'translations[en_US].locale',
                     'message' => 'A translation for the "en_US" locale code already exists.',
                 ],
-            ]
+            ],
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -251,7 +252,9 @@ final class ShippingMethodsTest extends JsonApiTestCase
                     'propertyPath' => 'rules[3].configuration[WEB][amount]',
                     'message' => 'This value should be of type numeric.',
                 ],
-            ]);
+            ],
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
     }
 
     /** @test */
@@ -291,7 +294,8 @@ final class ShippingMethodsTest extends JsonApiTestCase
                     'propertyPath' => 'rules[0].type',
                     'message' => 'Invalid rule type. Available rule types are total_weight_greater_than_or_equal, total_weight_less_than_or_equal, order_total_greater_than_or_equal, order_total_less_than_or_equal.',
                 ],
-            ]
+            ],
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -410,7 +414,8 @@ final class ShippingMethodsTest extends JsonApiTestCase
                     'propertyPath' => 'configuration[WRONG_CODE]',
                     'message' => 'This field was not expected.',
                 ],
-            ]
+            ],
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
