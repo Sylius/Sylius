@@ -50,11 +50,6 @@ final class LocaleTypeExtension extends AbstractTypeExtension
         });
     }
 
-    public function getExtendedType(): string
-    {
-        return LocaleType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [LocaleType::class];

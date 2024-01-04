@@ -58,11 +58,6 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
         ;
     }
 
-    public function getExtendedType(): string
-    {
-        return GatewayConfigType::class;
-    }
-
     public static function getExtendedTypes(): iterable
     {
         return [GatewayConfigType::class];
