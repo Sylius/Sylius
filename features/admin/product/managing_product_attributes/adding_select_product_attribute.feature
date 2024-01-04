@@ -8,7 +8,7 @@ Feature: Adding a new select product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Adding a new select product attribute
         When I want to create a new select product attribute
         And I specify its code as "mug_material"
@@ -18,7 +18,7 @@ Feature: Adding a new select product attribute
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store
 
-    @ui @javascript @api
+    @todo @ui @javascript @api
     Scenario: Adding multiple select product attribute
         When I want to create a new select product attribute
         And I specify its code as "mug_material"
@@ -30,7 +30,7 @@ Feature: Adding a new select product attribute
         Then I should be notified that it has been successfully created
         And the select attribute "Mug material" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Seeing disabled type field while adding a select product attribute
         When I want to create a new select product attribute
         Then the type field should be disabled

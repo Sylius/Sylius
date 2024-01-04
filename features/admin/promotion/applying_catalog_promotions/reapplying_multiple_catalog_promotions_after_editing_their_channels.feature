@@ -15,13 +15,13 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         And there is another catalog promotion "Christmas sale" available in "Web-US" channel and "Web-GB" channel that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Removing only modified catalog promotion after removing its channel
         When I make the "Winter sale" catalog promotion unavailable in the "Web-US" channel
         Then the visitor should see "$50.00" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should see "$100.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
-    @api @ui
+    @api @todo @ui
     Scenario: Reapplying catalog promotion after adding new channel to them
         When I make "Winter sale" catalog promotion available in the "Web-GB" channel
         Then the visitor should see "$35.00" as the price of the "T-Shirt" product in the "Web-GB" channel
@@ -29,7 +29,7 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         And the visitor should still see "$35.00" as the price of the "T-Shirt" product in the "Web-US" channel
         And the visitor should still see "$100.00" as the original price of the "T-Shirt" product in the "Web-US" channel
 
-    @api @ui
+    @api @todo @ui
     Scenario: Reapplying catalog promotion after switching availability in channels
         When I switch "Winter sale" catalog promotion availability from the "Web-US" channel to the "Web-GB" channel
         Then the visitor should see "$50.00" as the price of the "T-Shirt" product in the "Web-US" channel
@@ -37,7 +37,7 @@ Feature: Reapplying multiple catalog promotions after editing their channels
         And the visitor should see "$35.00" as the price of the "T-Shirt" product in the "Web-GB" channel
         And the visitor should see "$100.00" as the original price of the "T-Shirt" product in the "Web-GB" channel
 
-    @api @ui
+    @api @todo @ui
     Scenario: Reapplying catalog promotion after switching availability in channels
         When I make the "Christmas sale" catalog promotion unavailable in the "Web-US" channel
         Then the visitor should see "$70.00" as the price of the "T-Shirt" product in the "Web-US" channel

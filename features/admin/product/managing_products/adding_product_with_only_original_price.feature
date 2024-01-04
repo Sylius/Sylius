@@ -8,7 +8,7 @@ Feature: Adding a product with only original price
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple product without price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"

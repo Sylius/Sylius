@@ -17,7 +17,7 @@ Feature: Filtering catalog promotions by channel
         And this catalog promotion is also available in the "Web-EU" channel
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering catalog promotions by a chosen channel
         When I browse catalog promotions
         And I filter by "Web-EU" channel

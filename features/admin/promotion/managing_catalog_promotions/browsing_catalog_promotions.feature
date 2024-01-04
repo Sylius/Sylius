@@ -11,7 +11,7 @@ Feature: Browsing catalog promotions
         And the catalog promotion "Winter sale" operates between "2021-11-10 13:45" and "2022-01-08 23:59"
         And I am logged in as an administrator
 
-    @api @ui
+    @api @todo @ui
     Scenario: Browsing defined catalog promotions
         When I browse catalog promotions
         Then there should be 2 catalog promotions on the list

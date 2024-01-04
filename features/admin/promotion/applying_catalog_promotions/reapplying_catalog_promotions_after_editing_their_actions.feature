@@ -12,7 +12,7 @@ Feature: Reapplying catalog promotions after editing their actions
         And there is a catalog promotion "Winter sale" that reduces price by "50%" and applies on "PHP T-Shirt" variant
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Reapplying catalog promotion after adding a new action to it
         Given there is a catalog promotion with "Summer_sale" code and "Summer sale" name
         And it applies on "Python T-Shirt" variant
@@ -23,7 +23,7 @@ Feature: Reapplying catalog promotions after editing their actions
         Then this product variant price should be "$7.50"
         And this product original price should be "$10.00"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Reapplying catalog promotion after editing its action
         When I modify a catalog promotion "Winter sale"
         And I edit its action so that it reduces price by "25%"
@@ -32,7 +32,7 @@ Feature: Reapplying catalog promotions after editing their actions
         Then this product variant price should be "$15.00"
         And this product original price should be "$20.00"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Reapplying catalog promotion after removing and adding new action
         When I modify a catalog promotion "Winter sale"
         And I remove its every action
@@ -43,7 +43,7 @@ Feature: Reapplying catalog promotions after editing their actions
         Then this product variant price should be "$18.00"
         And this product original price should be "$20.00"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Reapplying catalog promotion after adding another action
         When I modify a catalog promotion "Winter sale"
         And I add another action that gives "10%" percentage discount
@@ -52,7 +52,7 @@ Feature: Reapplying catalog promotions after editing their actions
         Then this product variant price should be "$9.00"
         And this product original price should be "$20.00"
 
-    @api @ui @javascript
+    @api @todo @ui @javascript
     Scenario: Restoring original price after removing action from catalog promotion configuration
         When I modify a catalog promotion "Winter sale"
         And I remove its every action

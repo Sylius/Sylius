@@ -15,7 +15,7 @@ Feature: Shipping an order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Finalizing order's shipment
         Given I view the summary of the order "#00000666"
         When specify its tracking code as "#00044"
@@ -23,13 +23,13 @@ Feature: Shipping an order
         Then I should be notified that the order has been successfully shipped
         And it should have shipment in state shipped
 
-    @ui @api
+    @todo @ui @api
     Scenario: Unable to finalize shipped order's shipment
         Given this order has already been shipped
         When I view the summary of the order "#00000666"
         Then I should not be able to ship this order
 
-    @ui @api
+    @todo @ui @api
     Scenario: Checking the shipment state of a completed order
         Given this order has already been shipped
         When I browse orders

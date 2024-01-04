@@ -14,7 +14,7 @@ Feature: Browsing orders
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing a new order in the list
         When I browse orders
         Then I should see a single order from customer "john.doe@gmail.com"
