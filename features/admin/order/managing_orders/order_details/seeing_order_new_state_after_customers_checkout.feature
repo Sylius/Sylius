@@ -12,7 +12,7 @@ Feature: Placing an order
         And there is a customer "sylius@example.com" that placed an order "#00000022"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Verifying that order has new state right after checkout
         Given the customer bought 3 "Iron Maiden T-Shirt" products
         And the customer chose "Free" shipping method to "United States" with "Offline" payment

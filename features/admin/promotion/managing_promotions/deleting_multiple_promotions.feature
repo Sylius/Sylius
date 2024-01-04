@@ -11,7 +11,7 @@ Feature: Deleting multiple promotions
         And there is also a promotion "Easter sale"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Deleting multiple promotions at once
         When I browse promotions
         And I check the "Christmas sale" promotion

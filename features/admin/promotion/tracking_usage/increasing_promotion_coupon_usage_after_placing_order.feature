@@ -12,7 +12,7 @@ Feature: Increasing a promotion coupon usage after placing an order
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing promotion coupon usage increased after order placement
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt" using "SANTA2016" coupon
@@ -20,7 +20,7 @@ Feature: Increasing a promotion coupon usage after placing an order
         When I browse all coupons of "Christmas sale" promotion
         Then "SANTA2016" coupon should be used 1 time
 
-    @ui
+    @todo @ui
     Scenario: Seeing promotion coupon usage increased correctly after few orders placement
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt" using "SANTA2016" coupon

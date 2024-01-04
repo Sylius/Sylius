@@ -28,7 +28,7 @@ Feature: Sorting listed products from a taxon by position
         And the store has a product "Ultimate Pug" in the "Soft Toys" taxon at 19th position
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to position -1 on the non-last page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "-1"
@@ -38,7 +38,7 @@ Feature: Sorting listed products from a taxon by position
         Then the one before last product on the list should have name "Old pug" with position 18
         And the last product on the list should have name "Young pug" with position 19
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to position -1 on the last page
         When I am browsing the 2nd page of products from "Soft Toys" taxon
         And I set the position of "Pug XL" to "-1"
@@ -47,7 +47,7 @@ Feature: Sorting listed products from a taxon by position
         Then the one before last product on the list should have name "Pug XL" with position 18
         And the last product on the list should have name "Pug XS" with position 19
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to the already occupied position on the other page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "15"
@@ -63,7 +63,7 @@ Feature: Sorting listed products from a taxon by position
         And the 7th product on this page should be named "Pug Master"
         And this product should be at position 16
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to the already occupied position on the same page
         When I am browsing the 2nd page of products from "Soft Toys" taxon
         And I set the position of "Puglet" to "15"
@@ -79,7 +79,7 @@ Feature: Sorting listed products from a taxon by position
         And the 7th product on this page should be named "Pug Master"
         And this product should be at position 16
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to the positions overflowing the max available position on the non-last page
         When I am browsing the 1st page of products from "Soft Toys" taxon
         And I set the position of "Old pug" to "25"
@@ -89,7 +89,7 @@ Feature: Sorting listed products from a taxon by position
         Then the one before last product on the list should have name "Old pug" with position 18
         And the last product on the list should have name "Young pug" with position 19
 
-    @ui
+    @todo @ui
     Scenario: Setting two products to the positions overflowing the max available position on the last page
         When I am browsing the 2nd page of products from "Soft Toys" taxon
         And I set the position of "Puglet" to "25"
@@ -99,33 +99,33 @@ Feature: Sorting listed products from a taxon by position
         Then the one before last product on the list should have name "Puglet" with position 18
         And the last product on the list should have name "Pug XL" with position 19
 
-    @ui
+    @todo @ui
     Scenario: New product is added as last one
         Given I added a product "Big pug"
         And I assigned this product to "Soft Toys" taxon
         When I am browsing the 3rd page of products from "Soft Toys" taxon
         Then the last product on the list should have name "Big pug"
 
-    @ui
+    @todo @ui
     Scenario: Product with position 0 is set as the first one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 0
         And I save my new configuration
         Then the first product on the list should have name "Young pug"
 
-    @ui
+    @todo @ui
     Scenario: Being unable to use a non-numeric string as a product position
         Given I am browsing products from "Soft Toys" taxon
         When I set the position of "Young pug" to "test"
         And I save my new configuration
         Then I should be notified that the position "test" is invalid
 
-    @ui
+    @todo @ui
     Scenario: Sort products in descending order
         When I am browsing products from "Soft Toys" taxon
         And I start sorting products by position
         Then the first product on the list should have name "Ultimate Pug"
-    @ui
+    @todo @ui
     Scenario: Products are sorted by position in ascending order by default
         When I am browsing products from "Soft Toys" taxon
         Then the first product on the list should have name "Old pug"

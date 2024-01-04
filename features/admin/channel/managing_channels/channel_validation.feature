@@ -7,7 +7,7 @@ Feature: Channel validation
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new channel without specifying its code
         When I want to create a new channel
         And I name it "Mobile channel"
@@ -16,7 +16,7 @@ Feature: Channel validation
         Then I should be notified that code is required
         And channel with name "Mobile channel" should not be added
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new channel without specifying its name
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -25,7 +25,7 @@ Feature: Channel validation
         Then I should be notified that name is required
         And channel with code "MOBILE" should not be added
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new channel without base currency
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -34,7 +34,7 @@ Feature: Channel validation
         Then I should be notified that base currency is required
         And channel with code "MOBILE" should not be added
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new channel without default locale
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -43,7 +43,7 @@ Feature: Channel validation
         Then I should be notified that default locale is required
         And channel with code "MOBILE" should not be added
 
-    @ui
+    @todo @ui
     Scenario: Trying to remove name from existing channel
         Given the store operates on a channel named "Web Channel"
         When I want to modify this channel

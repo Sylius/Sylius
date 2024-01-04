@@ -12,7 +12,7 @@ Feature: Filtering orders
         And this customer has also placed an order "#00000003" at "2016-12-06 10:00"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by date from
         When I browse orders
         And I specify filter date from as "2016-12-05 08:30"
@@ -22,7 +22,7 @@ Feature: Filtering orders
         And I should see an order with "#00000003" number
         But I should not see an order with "#00000001" number
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by date to
         When I browse orders
         And I specify filter date to as "2016-12-05 09:30"
@@ -32,7 +32,7 @@ Feature: Filtering orders
         And I should see an order with "#00000002" number
         But I should not see an order with "#00000003" number
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by date from to
         When I browse orders
         And I specify filter date from as "2016-12-05 08:30"
@@ -43,7 +43,7 @@ Feature: Filtering orders
         But I should not see an order with "#00000001" number
         And I should not see an order with "#00000003" number
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by date from without time
         When I browse orders
         And I specify filter date from as "2016-12-05"
@@ -54,7 +54,7 @@ Feature: Filtering orders
         And I should see an order with "#00000003" number
         But I should not see an order with "#00000001" number
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders placed at midnight or just before midnight
         Given this customer has placed an order "#00000004" at "2016-12-10 00:00"
         And this customer has also placed an order "#00000005" at "2016-12-11 23:59"

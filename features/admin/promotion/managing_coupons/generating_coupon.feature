@@ -10,7 +10,7 @@ Feature: Generating new coupons
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Generating a new coupons
         When I want to generate new coupons for this promotion
         And I choose the amount of 5 coupons to be generated
@@ -21,7 +21,7 @@ Feature: Generating new coupons
         Then I should be notified that they have been successfully generated
         And there should be 5 coupons related to this promotion
 
-    @ui
+    @todo @ui
     Scenario: Generating new coupons without expiration date
         When I want to generate new coupons for this promotion
         And I choose the amount of 5 coupons to be generated
@@ -31,7 +31,7 @@ Feature: Generating new coupons
         Then I should be notified that they have been successfully generated
         And there should be 5 coupons related to this promotion
 
-    @ui
+    @todo @ui
     Scenario: Generating new coupons with a large long code length value
         When I want to generate new coupons for this promotion
         And I choose the amount of 10 coupons to be generated

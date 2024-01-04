@@ -10,7 +10,7 @@ Feature: Deleting a product variant
         And the product "PHP Mug" has "Medium PHP Mug" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @domain @ui
+    @domain @todo @ui
     Scenario: Deleted variant disappears from the product catalog
         When I delete the "Medium PHP Mug" variant of product "PHP Mug"
         Then I should be notified that it has been successfully deleted

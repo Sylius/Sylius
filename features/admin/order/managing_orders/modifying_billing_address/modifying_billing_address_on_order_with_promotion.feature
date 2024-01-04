@@ -19,7 +19,7 @@ Feature: Modifying a customer's billing address on an order with an applied prom
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"

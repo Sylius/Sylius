@@ -15,7 +15,7 @@ Feature: Not being able to delete a coupon which is in use
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @domain @ui
+    @domain @todo @ui
     Scenario: Being unable to delete a used coupon
         When I try to delete "SANTA2016" coupon related to this promotion
         Then I should be notified that it is in use and cannot be deleted

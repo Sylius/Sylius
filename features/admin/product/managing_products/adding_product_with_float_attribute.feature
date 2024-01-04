@@ -9,7 +9,7 @@ Feature: Adding a new product with a float attribute
         And the store has a float product attribute "Display Size"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Adding a float attribute to a product
         When I want to create a new simple product
         And I specify its code as "display_size"

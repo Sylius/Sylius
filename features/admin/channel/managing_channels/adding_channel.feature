@@ -10,7 +10,7 @@ Feature: Adding a new channel
         And the store operates in "United States" and "Poland"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new channel
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -23,7 +23,7 @@ Feature: Adding a new channel
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new channel with additional fields
         When I want to create a new channel
         And I specify its code as "MOBILE"

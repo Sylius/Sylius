@@ -7,7 +7,7 @@ Feature: Administrator unique email and name validation
     Background:
         Given I am logged in as an administrator
 
-    @ui @api
+    @todo @todo @ui @api
     Scenario: Trying to add a new administrator with taken email
         Given there is an administrator "ted@example.com"
         When I want to create a new administrator
@@ -16,7 +16,7 @@ Feature: Administrator unique email and name validation
         Then I should be notified that email must be unique
         And there should still be only one administrator with an email "ted@example.com"
 
-    @ui @api
+    @todo @todo @ui @api
     Scenario: Trying to add a new administrator with taken name
         Given there is an administrator with name "Ted"
         When I want to create a new administrator

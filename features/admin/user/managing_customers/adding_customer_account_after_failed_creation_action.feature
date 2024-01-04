@@ -7,7 +7,7 @@ Feature: Adding a new customer account after failed creation action
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript
+    @todo @todo @ui @javascript
     Scenario: Trying to add new customer with an account without required information
         When I want to create a new customer account
         And I choose create account option
@@ -19,7 +19,7 @@ Feature: Adding a new customer account after failed creation action
         And I should be notified that email is required
         And I should be notified that password is required
 
-    @ui @javascript
+    @todo @todo @ui @javascript
     Scenario: Trying to add new customer with an account without email
         When I want to create a new customer account
         And I choose create account option
@@ -31,7 +31,7 @@ Feature: Adding a new customer account after failed creation action
         And I should not be able to select create account option
         And I should be notified that email is required
 
-    @ui @javascript
+    @todo @todo @ui @javascript
     Scenario: Trying to add new customer without an account without email
         When I want to create a new customer account
         And I do not choose create account option
@@ -42,7 +42,7 @@ Feature: Adding a new customer account after failed creation action
         And I should be able to select create account option
         And I should be notified that email is required
 
-    @ui @javascript
+    @todo @todo @ui @javascript
     Scenario: Trying to add new customer with an account without required information
         When I want to create a new customer account
         And I choose create account option

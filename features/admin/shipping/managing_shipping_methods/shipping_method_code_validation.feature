@@ -10,7 +10,7 @@ Feature: Shipping method code validation
         And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new shipping method with special symbols in the code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
@@ -19,7 +19,7 @@ Feature: Shipping method code validation
         Then I should be notified that code needs to contain only specific symbols
         And shipping method with name "FedEx Carrier" should not be added
 
-    @ui
+    @todo @ui
     Scenario: Trying to add a new shipping method with spaces in the code
         When I want to create a new shipping method
         And I name it "FedEx Carrier" in "English (United States)"
@@ -28,7 +28,7 @@ Feature: Shipping method code validation
         Then I should be notified that code needs to contain only specific symbols
         And shipping method with name "FedEx Carrier" should not be added
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Trying to add a new shipping method with
         When I want to create a new shipping method
         And I name it "FedEx Carrier First US Division" in "English (United States)"

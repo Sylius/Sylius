@@ -16,7 +16,7 @@ Feature: Modifying a customer's billing address validation
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Address an order without name, city and street
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order

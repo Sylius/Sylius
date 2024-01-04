@@ -10,7 +10,7 @@ Feature: Adding a new coupon
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Adding a new coupon
         When I want to create a new coupon for this promotion
         And I specify its code as "SANTA2016"

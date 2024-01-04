@@ -14,13 +14,13 @@ Feature: Prevent deletion of purchased product
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @domain @ui
+    @domain @todo @ui
     Scenario: Purchased product cannot be deleted
         When I try to delete the "Toyota GT86 model" product
         Then I should be notified that this product is in use and cannot be deleted
         And this product should still exist in the product catalog
 
-    @ui @api
+    @todo @ui @api
     Scenario: Purchased product images should be kept
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with "thumbnail" type

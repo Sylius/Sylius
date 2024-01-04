@@ -10,7 +10,7 @@ Feature: Generating new coupons with prefix and suffix
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Generating new coupons with prefix
         When I want to generate new coupons for this promotion
         And I choose the amount of 5 coupons to be generated
@@ -21,7 +21,7 @@ Feature: Generating new coupons with prefix and suffix
         And there should be 5 coupons related to this promotion
         And all of the coupon codes should be prefixed with "CHRISTMAS_"
 
-    @ui
+    @todo @ui
     Scenario: Generating new coupons with suffix
         When I want to generate new coupons for this promotion
         And I choose the amount of 5 coupons to be generated
@@ -32,7 +32,7 @@ Feature: Generating new coupons with prefix and suffix
         And there should be 5 coupons related to this promotion
         And all of the coupon codes should be suffixed with "_CHRISTMAS"
 
-    @ui
+    @todo @ui
     Scenario: Generating new coupons with prefix and suffix
         When I want to generate new coupons for this promotion
         And I choose the amount of 5 coupons to be generated

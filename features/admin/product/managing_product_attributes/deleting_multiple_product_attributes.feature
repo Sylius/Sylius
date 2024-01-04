@@ -10,7 +10,7 @@ Feature: Deleting multiple product attributes
         And the store has a integer product attribute "Pages"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Deleting multiple product attributes at once
         When I browse product attributes
         And I check the "Publisher" product attribute

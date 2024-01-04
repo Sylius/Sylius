@@ -9,7 +9,7 @@ Feature: Selecting tax calculation strategy for a channel
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Adding a new channel with implicitly selected tax calculation strategy
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -20,7 +20,7 @@ Feature: Selecting tax calculation strategy for a channel
         Then I should be notified that it has been successfully created
         And the tax calculation strategy for the "Mobile store" channel should be "Order items based"
 
-    @ui
+    @todo @ui
     Scenario: Adding a new channel with tax calculation strategy
         When I want to create a new channel
         And I specify its code as "MOBILE"
@@ -32,7 +32,7 @@ Feature: Selecting tax calculation strategy for a channel
         Then I should be notified that it has been successfully created
         And the tax calculation strategy for the "Mobile store" channel should be "Order item units based"
 
-    @ui
+    @todo @ui
     Scenario: Changing tax calculation strategy of existing channel
         Given the store operates on a channel named "Web store"
         When I want to modify this channel

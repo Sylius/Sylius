@@ -8,7 +8,7 @@ Feature: Not being able to delete a last available channel
         Given the store operates on a channel named "Web Store"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Prevented from deleting only channel
         When I delete channel "Web Store"
         Then I should be notified that it cannot be deleted

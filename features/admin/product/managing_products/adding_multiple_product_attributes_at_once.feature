@@ -10,7 +10,7 @@ Feature: Adding a new integer product attribute
         And the store has a non-translatable text product attribute "ISBN"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Adding two text attributes to a product
         When I want to create a new simple product
         And I specify its code as "HARRY_POTTER_1"

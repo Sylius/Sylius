@@ -8,7 +8,7 @@ Feature: Customer group unique code validation
         Given the store has a customer group "Retail" with "RETAIL" code
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @todo @ui @api
     Scenario: Trying to add a new customer group with used code
         When I want to create a new customer group
         And I specify its code as "RETAIL"

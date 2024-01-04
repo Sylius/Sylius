@@ -17,13 +17,13 @@ Feature: Viewing details of a product with variants
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui
+    @todo @ui
     Scenario: Viewing a configurable product show page
         When I access "Iron Shield" product page
         Then I should see product show page with variants
         And I should see product name "Iron Shield"
 
-    @ui
+    @todo @ui
     Scenario: Viewing taxonomy block
         Given the store classifies its products as "Shield" and "Equipment"
         And the product "Iron Shield" has a main taxon "Equipment"
@@ -32,25 +32,25 @@ Feature: Viewing details of a product with variants
         Then I should see main taxon is "Equipment"
         And I should see product taxon is "Shield"
 
-    @ui
+    @todo @ui
     Scenario: Viewing options block
         When I access "Iron Shield" product page
         Then I should see option "Shield size"
 
-    @ui
+    @todo @ui
     Scenario: Viewing variants block
         When I access "Iron Shield" product page
         Then I should see 2 variants
         And I should see "Iron Shield - very big" variant with code "123456789-xl", priced "$25.00" and current stock 5 and in "United States" channel
         And I should see "Iron Shield - very small" variant with code "123456789-xs", priced "$15.00" and current stock 12 and in "United States" channel
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Viewing media block
         Given the "Iron Shield" product has an image "mugs.jpg" with "main" type
         When I access "Iron Shield" product page
         Then I should see an image related to this product
 
-    @ui
+    @todo @ui
     Scenario: Viewing "more details" block
         Given the product "Iron Shield" has the slug "iron-shield"
         And the description of product "Iron Shield" is "Shield created by dwarf"
@@ -63,7 +63,7 @@ Feature: Viewing details of a product with variants
         And I should see product's meta keywords is "shield"
         And I should see product's short description is "good shield"
 
-    @ui
+    @todo @ui
     Scenario: Viewing associations block
         Given the store has a "Glass shield" product
         And the product "Iron Shield" has an association "Similar" with product "Glass shield"

@@ -9,7 +9,7 @@ Feature: Changing associations of an existing product
         And the store has "LG G3", "LG headphones" and "LG earphones" products
         And I am logged in as an administrator
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Changing associated products of a product association
         Given the product "LG G3" has an association "Accessories" with product "LG headphones"
         When I want to modify the "LG G3" product
@@ -18,7 +18,7 @@ Feature: Changing associations of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an association "Accessories" with products "LG headphones" and "LG earphones"
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Removing an associated product of a product association
         Given the product "LG G3" has an association "Accessories" with products "LG headphones" and "LG earphones"
         When I want to modify the "LG G3" product

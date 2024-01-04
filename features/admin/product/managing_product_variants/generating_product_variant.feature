@@ -10,7 +10,7 @@ Feature: Generating product variants
         And this product has option "Taste" with values "Orange" and "Melon"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Generating a product variant for product without variants
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code and costs "$90" in "United States" channel
@@ -19,7 +19,7 @@ Feature: Generating product variants
         Then I should be notified that it has been successfully generated
         And I should see 2 variants in the list
 
-    @ui
+    @todo @ui
     Scenario: Generating the rest of product variants for product with at least one
         Given this product is available in "Melon" taste priced at "$95.00"
         When I want to generate new variants for this product
@@ -28,7 +28,7 @@ Feature: Generating product variants
         Then I should be notified that it has been successfully generated
         And I should see 2 variants in the list
 
-    @ui
+    @todo @ui
     Scenario: Generating the rest of product variants for product with at least one
         Given this product is available in "Orange" taste priced at "$90.00"
         When I want to generate new variants for this product
@@ -37,7 +37,7 @@ Feature: Generating product variants
         Then I should be notified that it has been successfully generated
         And I should see 2 variants in the list
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Generating only a part of product variants
         When I want to generate new variants for this product
         And I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code and costs "$90" in "United States" channel

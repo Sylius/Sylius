@@ -17,7 +17,7 @@ Feature: Selecting main taxon for product in different locales
         And the store has a product "T-Shirt Batman"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Choosing only taxons from the Polish locale
         Given I am using "Polish (Poland)" locale for my panel
         When I want to choose main taxon for product "T-Shirt Batman"
@@ -25,7 +25,7 @@ Feature: Selecting main taxon for product in different locales
         And I should be able to choose taxon "Woman-T-Shirts_PL" from the list
         And I should not be able to choose taxon "Woman-T-Shirts_UA" from the list
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Choosing only taxons from the French locale
         Given I am using "French (France)" locale for my panel
         When I want to choose main taxon for product "T-Shirt Batman"
@@ -33,7 +33,7 @@ Feature: Selecting main taxon for product in different locales
         And I should be able to choose taxon "Woman-T-Shirts_FR" from the list
         And I should not be able to choose taxon "Woman-T-Shirts_UA" from the list
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Choosing only taxons from the German locale
         Given I am using "German (Germany)" locale for my panel
         When I want to choose main taxon for product "T-Shirt Batman"

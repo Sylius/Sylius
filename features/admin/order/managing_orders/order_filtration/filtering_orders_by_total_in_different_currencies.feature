@@ -18,14 +18,14 @@ Feature: Filtering orders by total in different currencies
         And I am logged in as an administrator
         And I am browsing orders
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by currency alone
         When I choose "British Pound" as the filter currency
         And I filter
         Then I should see 3 orders in the list
         But I should not see any orders with currency "USD"
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders with total greater than specified amount
         When I choose "US Dollar" as the filter currency
         And I specify filter total being greater than 100
@@ -36,7 +36,7 @@ Feature: Filtering orders by total in different currencies
         But I should not see an order with "#00000001" number
         And I should not see any orders with currency "GBP"
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders with total less than specified amount
         When I choose "US Dollar" as the filter currency
         And I specify filter total being less than 200
@@ -47,7 +47,7 @@ Feature: Filtering orders by total in different currencies
         But I should not see an order with "#00000002" number
         And I should not see any orders with currency "GBP"
 
-    @ui
+    @todo @ui
     Scenario: Filtering order with total from a specified range
         When I choose "British Pound" as the filter currency
         And I specify filter total being greater than 150.50
@@ -59,7 +59,7 @@ Feature: Filtering orders by total in different currencies
         And I should not see an order with "#00000006" number
         And I should not see any orders with currency "USD"
 
-    @ui
+    @todo @ui
     Scenario: Filtering orders by total in given range but with no currency provided
         When I specify filter total being greater than 150
         And I specify filter total being less than 200

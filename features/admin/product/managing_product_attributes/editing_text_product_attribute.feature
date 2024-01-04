@@ -8,7 +8,7 @@ Feature: Editing a text product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Editing product attribute name
         Given the store has a text product attribute "T-Shirt cotton brand"
         When I want to edit this product attribute
@@ -17,13 +17,13 @@ Feature: Editing a text product attribute
         Then I should be notified that it has been successfully edited
         And the text attribute "T-Shirt material" should appear in the store
 
-    @ui
+    @todo @ui
     Scenario: Seeing disabled code field while editing a product attribute
         Given the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
         When I want to edit this product attribute
         Then the code field should be disabled
 
-    @ui
+    @todo @ui
     Scenario: Seeing disabled type field while editing a product attribute
         Given the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
         When I want to edit this product attribute

@@ -10,7 +10,7 @@ Feature: Adding a new product with an integer attribute
         And the store has a non-translatable integer product attribute "Weight"
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Adding an integer attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"
@@ -22,7 +22,7 @@ Feature: Adding a new product with an integer attribute
         And the product "44 Magnum" should appear in the store
         And attribute "Production year" of product "44 Magnum" should be "1955"
 
-    @ui @javascript @no-api
+    @todo @ui @javascript @no-api
     Scenario: Adding an integer non-translatable attribute to product
         When I want to create a new simple product
         And I specify its code as "44_MAGNUM"

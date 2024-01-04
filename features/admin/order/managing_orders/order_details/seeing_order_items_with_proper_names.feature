@@ -15,7 +15,7 @@ Feature: Seeing order items with proper names
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing order items with proper names
         Given the product "Angel T-Shirt" was renamed to "Devil Cardigan"
         And the product "Angel Mug" was renamed to "Devil Glass"

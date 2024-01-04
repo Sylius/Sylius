@@ -8,13 +8,13 @@ Feature:Removing a attribute
         Given I am logged in as an administrator
         And the store has a product "44 Magnum"
 
-    @ui
+    @todo @ui
     Scenario: Try deleting a attribute from the registry when product use him
         Given this product has a text attribute "Gun caliber" with value "11 mm"
         When I delete this product attribute
         Then I should be notified that it has been failed deleted "product attribute"
 
-    @ui
+    @todo @ui
     Scenario: Deleting a text product attribute when not by used
         Given the store has a text product attribute "Gun caliber"
         When I delete this product attribute

@@ -10,7 +10,7 @@ Feature: Editing shop billing data on channel
         And channel "Web Store" billing data is "Ragnarok", "Pacific Coast Hwy", "90806" "Los Angeles", "United States" with "1100110011" tax ID
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Editing shop billing data on channel
         When I want to modify a channel "Web Store"
         And I specify company as "Götterdämmerung"

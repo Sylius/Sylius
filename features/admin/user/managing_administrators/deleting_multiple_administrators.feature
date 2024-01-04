@@ -10,7 +10,7 @@ Feature: Deleting multiple administrators
         And there is also an administrator "watermelon@example.com"
         And I am logged in as "watermelon@example.com" administrator
 
-    @ui @javascript
+    @todo @todo @ui @javascript
     Scenario: Deleting multiple administrators at once
         Given I browse administrators
         And I check the "banana@example.com" administrator

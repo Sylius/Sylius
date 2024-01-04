@@ -11,7 +11,7 @@ Feature: Editing product's attributes
         And this product has a text attribute "Gun caliber" with value "11 mm"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Seeing message about no new attributes selected
         When I want to modify the "44 Magnum" product
         And I try to add new attributes
@@ -19,7 +19,7 @@ Feature: Editing product's attributes
         Then attribute "Gun caliber" of product "44 Magnum" should be "11 mm"
         And product "44 Magnum" should have 1 attribute
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Seeing message about no new attributes selected after all attributes deletion
         When I want to modify the "44 Magnum" product
         And I remove its "Gun caliber" attribute

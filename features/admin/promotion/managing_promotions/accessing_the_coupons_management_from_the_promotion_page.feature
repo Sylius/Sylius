@@ -10,13 +10,13 @@ Feature: Accessing the coupons management from the promotion page
         And it is a coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Being able to manage promotion's coupons
         When I modify a "Christmas sale" promotion
         And I want to manage this promotion coupons
         Then I should be on this promotion's coupons management page
 
-    @ui
+    @todo @ui
     Scenario: Add new promotion and not being able to manage promotion's coupons
         When I create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"

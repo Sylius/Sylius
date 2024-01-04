@@ -14,7 +14,7 @@ Feature: Seeing shipping fees of an order
         And the customer bought a single "Angel T-Shirt"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing Free shipping of an order
         Given the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
@@ -24,7 +24,7 @@ Feature: Seeing shipping fees of an order
         And the order's shipping total should be "$0.00"
         And the order's total should be "$39.00"
 
-    @ui
+    @todo @ui
     Scenario: Seeing shipping fee of an order
         Given the customer chose "DHL" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"

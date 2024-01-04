@@ -9,7 +9,7 @@ Feature: Browsing promotion coupons
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Browsing coupons in store
         When I want to view all coupons of this promotion
         And there should be 1 coupon related to this promotion

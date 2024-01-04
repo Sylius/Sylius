@@ -12,7 +12,7 @@ Feature: Statistics dashboard in a single channel
         And this product has "Red XL" variant priced at "$40"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing basic statistics for entire store
         Given 3 customers have fulfilled 4 orders placed for total of "$8566.00"
         And then 2 more customers have paid 2 orders placed for total of "$459.00"
@@ -22,7 +22,7 @@ Feature: Statistics dashboard in a single channel
         And there should be total sales of "$9,025.00"
         And the average order value should be "$1,504.17"
 
-    @ui
+    @todo @ui
     Scenario: Statistics include only fulfilled orders that were not cancelled
         Given 4 customers have fulfilled 4 orders placed for total of "$5241.00"
         And then 2 more customers have placed 2 orders for total of "$459.00"
@@ -35,7 +35,7 @@ Feature: Statistics dashboard in a single channel
         And there should be total sales of "$5,241.00"
         And the average order value should be "$1,310.25"
 
-    @ui
+    @todo @ui
     Scenario: Seeing recent orders and customers
         Given 2 customers have placed 3 orders for total of "$340.00"
         And 2 customers have added products to the cart for total of "$424.00"

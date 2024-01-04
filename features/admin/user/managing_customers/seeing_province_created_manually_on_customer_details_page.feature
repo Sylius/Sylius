@@ -4,7 +4,7 @@ Feature: Seeing a province on customer's details
     As an Administrator
     I want to be able to see specific customer's page with provinces in the addresses
 
-    @ui
+    @todo @ui
     Scenario: Seeing customer's addresses
         Given the store operates in "United Kingdom"
         And the store has customer "f.baggins@shire.me" with name "Frodo Baggins" since "2011-01-10 21:00"

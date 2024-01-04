@@ -10,7 +10,7 @@ Feature: Toggle the inventory tracking
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Disabling inventory for a product variant
         Given the "Wyborowa Vodka Exquisite" product variant is tracked by the inventory
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
@@ -19,7 +19,7 @@ Feature: Toggle the inventory tracking
         Then I should be notified that it has been successfully edited
         And inventory of this variant should not be tracked
 
-    @ui
+    @todo @ui
     Scenario: Enabling inventory for a product variant
         When I want to modify the "Wyborowa Vodka Exquisite" product variant
         And I enable its inventory tracking

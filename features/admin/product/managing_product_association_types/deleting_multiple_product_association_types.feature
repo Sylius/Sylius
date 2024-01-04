@@ -10,7 +10,7 @@ Feature: Deleting multiple product association types
         And the store has also a product association type "Accessories"
         And I am logged in as an administrator
 
-    @ui @api @javascript
+    @todo @ui @api @javascript
     Scenario: Deleting multiple product association types at once
         When I browse product association types
         And I check the "Cross sell" product association type

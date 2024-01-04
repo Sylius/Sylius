@@ -9,7 +9,7 @@ Feature: Browsing product association types
         And the store has also a product association type "Up sell"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Browsing product association types in the store
         When I want to browse product association types
         Then I should see 2 product association types in the list

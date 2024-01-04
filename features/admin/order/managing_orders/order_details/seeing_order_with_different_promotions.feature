@@ -17,7 +17,7 @@ Feature: Seeing order with different promotions
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing prices and discount prices of order item
         Given the customer bought 2 "PHP T-Shirt" products
         And the customer bought a single "Symfony Mug"

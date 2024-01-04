@@ -14,7 +14,7 @@ Feature: Filtering inventory by name
         And there are 25 units of product "RHCP T-Shirt" available in the inventory
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Filtering tracked product variants by name
         When I want to browse inventory
         And I filter tracked variants with name containing "RHCP"

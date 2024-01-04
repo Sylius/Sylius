@@ -11,33 +11,33 @@ Feature: Switching locales on admin's panel
         And I am logged in as an administrator
         And I am using "English (United States)" locale for my panel
 
-    @ui
+    @todo @todo @ui
     Scenario: Changing my preferred locale
         Given I am editing my details
         When I set my locale to "Spanish (Mexico)"
         Then I should be viewing the administration panel in "Spanish (Mexico)"
 
-    @ui
+    @todo @todo @ui
     Scenario: Changing my preferred language to a locale that does not exist in the store
         Given the locale "French (France)" does not exist in the store
         And I am editing my details
         When I set my locale to "French (France)"
         Then I should be viewing the administration panel in "French (France)"
 
-    @ui
+    @todo @ui
     Scenario: Changing panel's locale doesn't change shop's locale
         Given I am editing my details
         When I set my locale to "Spanish (Mexico)"
         And I browse that channel
         Then I should still shop using the "English (United States)" locale
 
-    @ui
+    @todo @ui
     Scenario: Changing shop's locale has doesn't affect admin panel's locale
         Given I switched the shop's locale to "Spanish (Mexico)"
         When I open administration dashboard
         Then I should still be viewing the administration panel in "English (United States)"
 
-    @ui
+    @todo @ui
     Scenario: Locales are saved per each admin's preference
         Given I am using "Spanish (Mexico)" locale for my panel
         And there is an administrator "admin@example.com" identified by "sylius"

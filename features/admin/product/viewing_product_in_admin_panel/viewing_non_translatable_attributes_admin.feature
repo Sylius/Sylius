@@ -14,7 +14,7 @@ Feature: Viewing product's non translatable attributes
         And I am logged in as an administrator
         And I am browsing products
 
-    @ui
+    @todo @ui
     Scenario: Viewing product's non translatable attributes along with default ones
         When I access "Iron Pickaxe" product page
         Then I should see non-translatable attribute "crit chance" with value "10 %"

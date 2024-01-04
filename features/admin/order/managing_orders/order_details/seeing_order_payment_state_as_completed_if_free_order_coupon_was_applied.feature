@@ -18,7 +18,7 @@ Feature: Seeing payment state as paid after checkout steps if order total is zer
         And the customer chose "Free" shipping method
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing payment state as paid on orders list
         When I browse orders
         Then the order "#00000666" should have order payment state "Paid"

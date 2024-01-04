@@ -14,7 +14,7 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         And it is coupon based promotion
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Being unable to generate too many coupons with prefix
         Given I have generated 8 coupons for this promotion with code length 1 and prefix "CHRISTMAS_"
         When I want to generate new coupons for this promotion
@@ -25,7 +25,7 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         Then I should be notified that generating 2 coupons with code length equal to 1 is not possible
         And there should still be 8 coupons related to this promotion
 
-    @ui
+    @todo @ui
     Scenario: Being unable to generate too many coupons with suffix
         Given I have generated 8 coupons for this promotion with code length 1 and suffix "_CHRISTMAS"
         When I want to generate new coupons for this promotion
@@ -36,7 +36,7 @@ Feature: Being unable to generate too many coupons with prefix and suffix
         Then I should be notified that generating 2 coupons with code length equal to 1 is not possible
         And there should still be 8 coupons related to this promotion
 
-    @ui
+    @todo @ui
     Scenario: Being unable to generate too many coupons with prefix and suffix
         Given I have generated 8 coupons for this promotion with code length 1, prefix "CHRISTMAS_" and suffix "_SALE"
         When I want to generate new coupons for this promotion

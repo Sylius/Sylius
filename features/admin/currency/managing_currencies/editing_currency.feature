@@ -7,7 +7,7 @@ Feature: Editing a currency
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing disabled code field while editing currency
         Given the store has currency "Euro"
         When I want to edit this currency

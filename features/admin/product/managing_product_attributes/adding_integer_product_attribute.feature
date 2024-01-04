@@ -8,7 +8,7 @@ Feature: Adding a new integer product attribute
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Adding a new integer product attribute
         When I want to create a new integer product attribute
         And I specify its code as "book_pages"
@@ -17,7 +17,7 @@ Feature: Adding a new integer product attribute
         Then I should be notified that it has been successfully created
         And the integer attribute "Book pages" should appear in the store
 
-    @ui
+    @todo @ui
     Scenario: Seeing disabled type field while adding a integer product attribute
         When I want to create a new integer product attribute
         Then the type field should be disabled

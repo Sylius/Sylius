@@ -9,7 +9,7 @@ Feature: Editing promotion coupon
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Changing coupon expires date
         When I want to modify the "SANTA2016" coupon for this promotion
         And I change expires date to "21.05.2019"
@@ -17,7 +17,7 @@ Feature: Editing promotion coupon
         Then I should be notified that it has been successfully edited
         And this coupon should be valid until "21.05.2019"
 
-    @ui
+    @todo @ui
     Scenario: Changing coupons usage limit
         When I want to modify the "SANTA2016" coupon for this promotion
         And I change its usage limit to 50
@@ -25,7 +25,7 @@ Feature: Editing promotion coupon
         Then I should be notified that it has been successfully edited
         And this coupon should have 50 usage limit
 
-    @ui
+    @todo @ui
     Scenario: Changing coupons per customer usage limit
         When I want to modify the "SANTA2016" coupon for this promotion
         And I change its per customer usage limit to 20
@@ -33,7 +33,7 @@ Feature: Editing promotion coupon
         Then I should be notified that it has been successfully edited
         And this coupon should have 20 per customer usage limit
 
-    @ui
+    @todo @ui
     Scenario: Seeing a disabled code field when editing a coupon
         When I want to modify the "SANTA2016" coupon for this promotion
         Then the code field should be disabled

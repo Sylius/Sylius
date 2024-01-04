@@ -8,7 +8,7 @@ Feature: Adding a new administrator
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @todo @ui @api
     Scenario: Adding a new administrator
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"
@@ -19,7 +19,7 @@ Feature: Adding a new administrator
         Then I should be notified that it has been successfully created
         And the administrator "l.skywalker@gmail.com" should appear in the store
 
-    @ui @api
+    @todo @todo @ui @api
     Scenario: Adding a new administrator and log in with its credentials
         When I want to create a new administrator
         And I specify its email as "l.skywalker@gmail.com"

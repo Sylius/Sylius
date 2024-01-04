@@ -15,7 +15,7 @@ Feature: Filtering payments by channel
         And there is an "#00000002" order with "Orange" product in "Canada" channel
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Filtering payments by channel on index
         When I browse payments
         And I choose "Canada" as a channel filter

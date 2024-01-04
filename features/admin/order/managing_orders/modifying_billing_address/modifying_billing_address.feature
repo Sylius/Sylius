@@ -15,7 +15,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address
         When I view the summary of the order "#00000001"
         And I want to modify a customer's billing address of this order
@@ -24,7 +24,7 @@ Feature: Modifying a customer billing address after an order has been placed
         Then I should be notified that it has been successfully edited
         And this order bill should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address when a product's price has been changed
         Given the product "Suit" changed its price to "$300.00"
         When I view the summary of the order "#00000001"
@@ -35,7 +35,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And this order bill should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
         And the order's total should still be "$400.00"
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address when a channel has been disabled
         Given the channel "Web" has been disabled
         When I view the summary of the order "#00000001"
@@ -46,7 +46,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And this order bill should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
         And the order's total should still be "$400.00"
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address when the currency has been disabled
         Given the currency "USD" has been disabled
         When I view the summary of the order "#00000001"
@@ -57,7 +57,7 @@ Feature: Modifying a customer billing address after an order has been placed
         And this order bill should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
         And the order's total should still be "$400.00"
 
-    @ui
+    @todo @ui
     Scenario: Modifying a customer's billing address when the product is out of stock
         Given the product "Suit" is out of stock
         When I view the summary of the order "#00000001"

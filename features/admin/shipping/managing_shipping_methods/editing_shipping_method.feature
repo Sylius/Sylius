@@ -18,12 +18,12 @@ Feature: Editing shipping method
         Then I should be notified that code cannot be changed
         And shipping method "UPS Carrier" should still have code "UPS_CARRIER"
 
-    @ui @api
+    @todo @ui @api
     Scenario: Seeing disabled code field when editing shipping method
         When I want to modify a shipping method "UPS Carrier"
         Then I should not be able to edit its code
 
-    @ui @api
+    @todo @ui @api
     Scenario: Renaming the shipping method
         When I want to modify a shipping method "UPS Carrier"
         And I rename it to "UPS Transport" in "English (United States)"

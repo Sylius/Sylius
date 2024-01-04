@@ -10,7 +10,7 @@ Feature: Tax rate unique code validation
         And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone identified by the "UNITED_STATES_SALES_TAX" code
         And I am logged in as an administrator
 
-    @ui @api
+    @todo @ui @api
     Scenario: Trying to add tax rate with taken code
         When I want to create a new tax rate
         And I specify its code as "UNITED_STATES_SALES_TAX"

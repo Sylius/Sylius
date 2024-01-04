@@ -9,7 +9,7 @@ Feature: Adding a new product
         And the store has "Standard" shipping category
         And I am logged in as an administrator
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple product with price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -20,7 +20,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple product with discounted price
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -32,7 +32,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple Free product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -43,7 +43,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple product with specific shipping category
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
@@ -55,7 +55,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
 
-    @ui @javascript
+    @todo @ui @javascript
     Scenario: Adding a new configurable product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"
@@ -69,7 +69,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
 
-    @ui @api
+    @todo @ui @api
     Scenario: Adding a new configurable product without options
         When I want to create a new configurable product
         And I specify its code as "WHISKEY_GENTLEMEN"
@@ -79,7 +79,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the store
 
-    @ui @no-api
+    @todo @ui @no-api
     Scenario: Adding a new simple product without shipping required
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"

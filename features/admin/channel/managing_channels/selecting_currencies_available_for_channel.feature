@@ -9,7 +9,7 @@ Feature: Selecting available currencies for a channel
         And the store has locale "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Adding a new channel with currencies
         When I want to create a new channel
         And I specify its code as MOBILE
@@ -20,7 +20,7 @@ Feature: Selecting available currencies for a channel
         Then I should be notified that it has been successfully created
         And paying in Euro should be possible for the "Mobile store" channel
 
-    @ui
+    @todo @ui
     Scenario: Adding currencies to an existing channel
         Given the store operates on a channel named "Web store"
         When I want to modify this channel

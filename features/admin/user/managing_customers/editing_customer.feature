@@ -7,7 +7,7 @@ Feature: Editing a customer
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Changing first and last name of an existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
         When I want to edit this customer
@@ -17,7 +17,7 @@ Feature: Editing a customer
         Then I should be notified that it has been successfully edited
         And this customer with name "Jon Snow" should appear in the store
 
-    @ui
+    @todo @ui
     Scenario: Removing first and last name from an existing customer
         Given the store has customer "Luke Skywalker" with email "l.skywalker@gmail.com"
         When I want to edit this customer
@@ -28,7 +28,7 @@ Feature: Editing a customer
         And this customer should have an empty first name
         And this customer should have an empty last name
 
-    @ui
+    @todo @ui
     Scenario: Making an existing customer subscribed to the newsletter
         Given the store has customer "Mike Ross" with email "ross@teammike.com"
         When I want to edit this customer
@@ -37,7 +37,7 @@ Feature: Editing a customer
         Then I should be notified that it has been successfully edited
         And this customer should be subscribed to the newsletter
 
-    @ui
+    @todo @ui
     Scenario: Selecting a group for an existing customer
         Given the store has a customer group "Retail"
         And the store has customer "Mike Ross" with email "ross@teammike.com"

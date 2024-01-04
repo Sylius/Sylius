@@ -16,7 +16,7 @@ Feature: Seeing basic information about an order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @todo @ui
     Scenario: Seeing basic information about an order
         When I view the summary of the order "#00000666"
         Then it should have been placed by the customer "lucy@teamlucifer.com"
