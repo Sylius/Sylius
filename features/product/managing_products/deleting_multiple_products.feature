@@ -8,7 +8,7 @@ Feature: Deleting multiple products
         Given the store has "Audi RS5 model", "Audi RS6 model" and "Audi RS7 model" products
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @mink:chromedriver @no-api
     Scenario: Deleting multiple products at once
         When I browse products
         And I check the "Audi RS5 model" product

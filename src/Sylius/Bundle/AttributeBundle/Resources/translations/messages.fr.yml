@@ -17,6 +17,7 @@ sylius:
             configuration: Configuration
             date: Date
             datetime: Date et heure
+            float: Décimal
             integer: Entier
             percent: Pourcentage
             select: Sélectionner

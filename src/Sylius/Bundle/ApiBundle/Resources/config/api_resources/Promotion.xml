@@ -18,7 +18,14 @@
     <resource class="%sylius.model.promotion.class%" shortName="Promotion">
         <attribute name="route_prefix">admin</attribute>
 
-        <attribute name="validation_groups">sylius</attribute>
+        <attribute name="validation_groups">
+            <attribute>sylius</attribute>
+            <attribute>sylius_api</attribute>
+        </attribute>
+
+        <attribute name="order">
+            <attribute name="priority">DESC</attribute>
+        </attribute>
 
         <collectionOperations>
             <collectionOperation name="admin_post">
@@ -29,12 +36,46 @@
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_of_items_from_taxon` rule type:
+
+```
+{
+    "type": "total_of_items_from_taxon",
+    "configuration": {
+        "channel-code": {
+            "taxon": "taxon-code",
+            "amount": int
+        }
+    }
+}
+```
+
+Example configuration for `order_fixed_discount` action type:
+
+```
+{
+    "type": "order_fixed_discount",
+    "configuration": {
+        "channel-code": {
+            "amount": int,
+        }
+    }
+}
+```
+                    </attribute>
+                </attribute>
             </collectionOperation>
 
             <collectionOperation name="admin_get">
                 <attribute name="method">GET</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.promotion_coupon_search_filter</attribute>
+                    <attribute>sylius.api.promotion_order_filter</attribute>
                 </attribute>
             </collectionOperation>
         </collectionOperations>
@@ -46,10 +87,58 @@
                     <attribute name="groups">admin:promotion:read</attribute>
                 </attribute>
             </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:promotion:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:promotion:read</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="description">
+Example configuration for `total_of_items_from_taxon` rule type:
+
+```
+{
+    "type": "total_of_items_from_taxon",
+    "configuration": {
+        "channel-code": {
+            "taxon": "taxon-code",
+            "amount": int
+        }
+    }
+}
+```
+
+Example configuration for `order_fixed_discount` action type:
+
+```
+{
+    "type": "order_fixed_discount",
+    "configuration": {
+        "channel-code": {
+            "amount": int,
+        }
+    }
+}
+```
+                    </attribute>
+                </attribute>
+            </itemOperation>
+
             <itemOperation name="admin_delete">
                 <attribute name="method">DELETE</attribute>
             </itemOperation>
         </itemOperations>
+
+        <subresourceOperations>
+            <subresourceOperation name="coupons_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/promotions/{code}/coupons</attribute>
+            </subresourceOperation>
+        </subresourceOperations>
 
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" readable="true" />
@@ -62,7 +151,9 @@
         <property name="startsAt" readable="true" />
         <property name="endsAt" readable="true" />
         <property name="couponBased" readable="true" />
-        <property name="coupons" readable="true" />
+        <property name="coupons" readable="true" writable="true">
+            <subresource resourceClass="%sylius.model.promotion_coupon.class%" collection="true" />
+        </property>
         <property name="rules" readable="true" />
         <property name="actions" readable="true" />
         <property name="channels" readable="true" />
@@ -72,7 +163,6 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="label">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

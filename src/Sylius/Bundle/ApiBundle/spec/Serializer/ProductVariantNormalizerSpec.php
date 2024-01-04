@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -152,7 +152,7 @@ final class ProductVariantNormalizerSpec extends ObjectBehavior
 
         $variant->getAppliedPromotionsForChannel($channel)->willReturn(new ArrayCollection([$catalogPromotion->getWrappedObject()]));
         $availabilityChecker->isStockAvailable($variant)->willReturn(true);
-        $iriConverter->getIriFromItem($catalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
+        $iriConverter->getIriFromResource($catalogPromotion)->willReturn('/api/v2/shop/catalog-promotions/winter_sale');
 
         $this
             ->normalize($variant, null, [ContextKeys::CHANNEL => $channel])

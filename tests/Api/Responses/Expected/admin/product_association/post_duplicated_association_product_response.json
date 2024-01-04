@@ -1,0 +1,13 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "owner: An association with this owner and type already exists.",
+    "violations": [
+        {
+            "propertyPath": "owner",
+            "message": "An association with this owner and type already exists.",
+            "code": @string@
+        }
+    ]
+}

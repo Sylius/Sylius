@@ -1,0 +1,18 @@
+{
+    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
+    "@type": "ConstraintViolationList",
+    "hydra:title": "An error occurred",
+    "hydra:description": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
+    "violations": [
+        {
+            "propertyPath": "firstName",
+            "message": "First name must be at least 2 characters long.",
+            "code": @string@
+        },
+        {
+            "propertyPath": "lastName",
+            "message": "Last name must be at least 2 characters long.",
+            "code": @string@
+        }
+    ]
+}

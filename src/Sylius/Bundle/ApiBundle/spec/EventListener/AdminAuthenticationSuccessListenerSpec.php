@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -32,7 +32,7 @@ final class AdminAuthenticationSuccessListenerSpec extends ObjectBehavior
         AdminUserInterface $adminUser,
     ): void {
         $event = new AuthenticationSuccessEvent([], $adminUser->getWrappedObject(), new Response());
-        $iriConverter->getIriFromItem($adminUser->getWrappedObject())->shouldBeCalled();
+        $iriConverter->getIriFromResource($adminUser->getWrappedObject())->shouldBeCalled();
 
         $this->onAuthenticationSuccessResponse($event);
     }
@@ -44,7 +44,7 @@ final class AdminAuthenticationSuccessListenerSpec extends ObjectBehavior
     ): void {
         $event = new AuthenticationSuccessEvent([], $shopUser->getWrappedObject(), new Response());
 
-        $iriConverter->getIriFromItem($adminUser->getWrappedObject())->shouldNotBeCalled();
+        $iriConverter->getIriFromResource($adminUser->getWrappedObject())->shouldNotBeCalled();
 
         $this->onAuthenticationSuccessResponse($event);
     }

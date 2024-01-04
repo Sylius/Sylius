@@ -70,6 +70,16 @@
             </itemOperation>
         </itemOperations>
 
+        <subresourceOperations>
+            <subresourceOperation name="images_get_subresource">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/taxons/{code}/images</attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Retrieves the collection of TaxonImage resources for a given Taxon.</attribute>
+                </attribute>
+            </subresourceOperation>
+        </subresourceOperations>
+
         <property name="id" identifier="false" writable="false" />
         <property name="code" identifier="true" required="true" />
         <property name="name" required="true" />
@@ -84,11 +94,14 @@
                 <attribute name="example">
                     <attribute name="en_US">
                         <attribute name="name">string</attribute>
+                        <attribute name="description">string</attribute>
                         <attribute name="slug">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>
+        </property>
+        <property name="images" writable="false" required="false">
+            <subresource resourceClass="%sylius.model.taxon_image.class%" collection="true" />
         </property>
     </resource>
 </resources>

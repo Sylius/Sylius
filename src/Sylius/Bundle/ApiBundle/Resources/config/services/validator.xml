@@ -115,9 +115,24 @@
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
 
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_exists" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpiredValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_not_expired" />
+        </service>
+
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_shop_user_not_verified" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibilityValidator">

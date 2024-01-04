@@ -1,0 +1,61 @@
+winzou_state_machine:
+    app_blog_post:
+        class: Sylius\Bundle\CoreBundle\Application\Model\BlogPost
+        property_path: state
+        graph: app_blog_post
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new: ~
+            published: ~
+            unpublished: ~
+        transitions:
+            post:
+                from: [new, unpublished]
+                to: published
+            unpost:
+                from: [published]
+                to: unpublished
+    app_comment:
+        class: Sylius\Bundle\CoreBundle\Application\Model\Comment
+        property_path: state
+        graph: app_comment
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new: ~
+            published: ~
+            unpublished: ~
+        transitions:
+            post:
+                from: [new, unpublished]
+                to: published
+            unpost:
+                from: [published]
+                to: unpublished
+
+framework:
+    workflows:
+        app_blog_post:
+            type: state_machine
+            marking_store:
+                type: method
+                property: state
+            supports:
+                - Sylius\Bundle\CoreBundle\Application\Model\BlogPost
+            initial_marking: new
+            places:
+                - new
+                - published
+                - unpublished
+            transitions:
+                publish:
+                    from: [new, unpublished]
+                    to: published
+                unpublish:
+                    from: published
+                    to: unpublished
+
+sylius_core:
+    state_machine:
+        default_adapter: 'winzou_state_machine'
+        graphs_to_adapters_mapping:
+            app_blog_post: 'symfony_workflow'

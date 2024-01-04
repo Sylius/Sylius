@@ -3,8 +3,12 @@ name: Refactor
 on:
     schedule:
         -
-            cron: "0 2 * * MON" # Run at 2am every Monday
+            cron: "0 2 * * *" # Run every day at 2am
     workflow_dispatch: ~
+
+permissions:
+    contents: write
+    pull-requests: write
 
 jobs:
     coding-standard:

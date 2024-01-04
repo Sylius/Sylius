@@ -4,13 +4,51 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
+            "@id": "\/api\/v2\/admin\/promotions\/dollar_off",
+            "@type": "Promotion",
+            "id": @integer@,
+            "code": "dollar_off",
+            "name": "1 dollar off each item",
+            "description": "Get 1 dollar off every item when buying more than 10",
+            "channels": [
+                "\/api\/v2\/admin\/channels\/WEB",
+                "\/api\/v2\/admin\/channels\/MOBILE"
+            ],
+            "priority": 2,
+            "exclusive": false,
+            "appliesToDiscounted": true,
+            "usageLimit": null,
+            "used": 0,
+            "couponBased": true,
+            "startsAt": null,
+            "endsAt": null,
+            "coupons": [
+                "\/api\/v2\/admin\/promotion-coupons\/XYZ1",
+                "\/api\/v2\/admin\/promotion-coupons\/XYZ2"
+            ],
+            "rules": [],
+            "actions": [],
+            "createdAt": @date@,
+            "updatedAt": @date@,
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
+                    "@type": "PromotionTranslation",
+                    "id": @integer@,
+                    "label": "1$ off every item!"
+                }
+            }
+        },
+        {
             "@id": "\/api\/v2\/admin\/promotions\/50_off",
             "@type": "Promotion",
             "id": @integer@,
             "code": "50_off",
             "name": "50% Off on your first order",
             "description": "Get 50% off of your first purchase",
-            "channels": ["\/api\/v2\/admin\/channels\/MOBILE"],
+            "channels": [
+                "\/api\/v2\/admin\/channels\/MOBILE"
+            ],
             "priority": 1,
             "exclusive": true,
             "appliesToDiscounted": false,
@@ -32,37 +70,32 @@
                     "label": "-50% on first order!"
                 }
             }
-        },
-        {
-            "@id": "\/api\/v2\/admin\/promotions\/dollar_off",
-            "@type": "Promotion",
-            "id": @integer@,
-            "code": "dollar_off",
-            "name": "1 dollar off each item",
-            "description": "Get 1 dollar off every item when buying more than 10",
-            "channels": ["\/api\/v2\/admin\/channels\/WEB", "\/api\/v2\/admin\/channels\/MOBILE"],
-            "priority": 2,
-            "exclusive": false,
-            "appliesToDiscounted": true,
-            "usageLimit": null,
-            "used": 0,
-            "couponBased": true,
-            "startsAt": null,
-            "endsAt": null,
-            "coupons": [],
-            "rules": [],
-            "actions": [],
-            "createdAt": @date@,
-            "updatedAt": @date@,
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/promotion-translations\/@integer@",
-                    "@type": "PromotionTranslation",
-                    "id": @integer@,
-                    "label": "1$ off every item!"
-                }
-            }
         }
     ],
-    "hydra:totalItems": 2
+    "hydra:totalItems": 2,
+    "hydra:search": {
+        "@type": "hydra:IriTemplate",
+        "hydra:template": "\/api\/v2\/admin\/promotions{?coupons.code,coupons.code[],order[priority]}",
+        "hydra:variableRepresentation": "BasicRepresentation",
+        "hydra:mapping": [
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "coupons.code",
+                "property": "coupons.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "coupons.code[]",
+                "property": "coupons.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[priority]",
+                "property": "priority",
+                "required": false
+            }
+        ]
+    }
 }

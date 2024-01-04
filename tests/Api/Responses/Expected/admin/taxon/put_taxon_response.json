@@ -6,6 +6,7 @@
     "code": "MUG",
     "parent": "\/api\/v2\/admin\/taxons\/BRAND",
     "children": [],
+    "images": [],
     "position": @integer@,
     "translations": {
         "en_US": {
@@ -14,8 +15,7 @@
             "id": @integer@,
             "name": "Watches",
             "slug": "watches",
-            "description": "Some description Lorem ipsum dolor sit amet.",
-            "locale": "en_US"
+            "description": "Some description Lorem ipsum dolor sit amet."
         }
     },
     "enabled": false

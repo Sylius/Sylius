@@ -21,11 +21,7 @@ class OrderItemUnit implements OrderItemUnitInterface
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var Collection|AdjustmentInterface[]
-     *
-     * @psalm-var Collection<array-key, AdjustmentInterface>
-     */
+    /** @var Collection<array-key, AdjustmentInterface> */
     protected $adjustments;
 
     /** @var int */

@@ -36,32 +36,16 @@ class Product implements ProductInterface, \Stringable
     /** @var string|null */
     protected $code;
 
-    /**
-     * @var Collection|AttributeValueInterface[]
-     *
-     * @psalm-var Collection<array-key, AttributeValueInterface>
-     */
+    /** @var Collection<array-key, AttributeValueInterface> */
     protected $attributes;
 
-    /**
-     * @var Collection|ProductVariantInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductVariantInterface>
-     */
+    /** @var Collection<array-key, ProductVariantInterface> */
     protected $variants;
 
-    /**
-     * @var Collection|ProductOptionInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductOptionInterface>
-     */
+    /** @var Collection<array-key, ProductOptionInterface> */
     protected $options;
 
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductAssociationInterface>
-     */
+    /** @var Collection<array-key, ProductAssociationInterface> */
     protected $associations;
 
     public function __construct()

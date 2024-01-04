@@ -62,18 +62,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         private RepositoryInterface $productOptionRepository,
         private RepositoryInterface $channelRepository,
         private RepositoryInterface $localeRepository,
-        private ?RepositoryInterface $taxCategoryRepository = null,
-        private ?FileLocatorInterface $fileLocator = null,
+        private RepositoryInterface $taxCategoryRepository,
+        private FileLocatorInterface $fileLocator,
     ) {
-        if ($this->taxCategoryRepository === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.6',
-                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -163,9 +154,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('tax_category', ['string', 'null', TaxCategoryInterface::class])
         ;
 
-        if ($this->taxCategoryRepository !== null) {
-            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
-        }
+        $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
     private function createTranslations(ProductInterface $product, array $options): void
@@ -241,21 +230,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     private function createImages(ProductInterface $product, array $options): void
     {
         foreach ($options['images'] as $image) {
-            if (!array_key_exists('path', $image)) {
-                trigger_deprecation(
-                    'sylius/core-bundle',
-                    '1.3',
-                    'It is deprecated to pass indexed array as an image definition. Please use associative array with "path" and "type" keys instead.',
-                );
+            $imagePath = $image['path'];
+            $imageType = $image['type'] ?? null;
 
-                $imagePath = array_shift($image);
-                $imageType = array_pop($image);
-            } else {
-                $imagePath = $image['path'];
-                $imageType = $image['type'] ?? null;
-            }
-
-            $imagePath = $this->fileLocator === null ? $imagePath : $this->fileLocator->locate($imagePath);
+            $imagePath = $this->fileLocator->locate($imagePath);
             $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
             /** @var ImageInterface $productImage */

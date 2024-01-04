@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -44,62 +44,56 @@ class ManagingTaxRatesContext implements Context
 
     /**
      * @When I specify its code as :code
-     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs(string $code = ''): void
+    public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
     /**
      * @When I name it :name
-     * @When I do not name it
      * @When I rename it to :name
      */
-    public function iNameIt(string $name = ''): void
+    public function iNameIt(string $name): void
     {
         $this->client->addRequestData('name', $name);
     }
 
     /**
      * @When I define it for the :zone zone
-     * @When I do not specify its zone
      * @When I change its zone to :zone
      */
-    public function iDefineItForTheZone(?ZoneInterface $zone = null): void
+    public function iDefineItForTheZone(ZoneInterface $zone): void
     {
-        if (null === $zone) {
-            return;
-        }
-
-        $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+        $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));
     }
 
     /**
      * @When I make it applicable for the :taxCategory tax category
      * @When I change it to be applicable for the :taxCategory tax category
-     * @When I do not specify related tax category
      */
-    public function iMakeItApplicableForTheTaxCategory(?TaxCategoryInterface $taxCategory = null): void
+    public function iMakeItApplicableForTheTaxCategory(TaxCategoryInterface $taxCategory): void
     {
-        if (null === $taxCategory) {
-            return;
-        }
-
-        $this->client->addRequestData('category', $this->iriConverter->getIriFromItem($taxCategory));
+        $this->client->addRequestData('category', $this->iriConverter->getIriFromResource($taxCategory));
     }
 
     /**
      * @When I specify its amount as :amount%
-     * @When I do not specify its amount
      */
-    public function iSpecifyItsAmountAs(?string $amount = null): void
+    public function iSpecifyItsAmountAs(string $amount): void
     {
-        if (null === $amount) {
-            return;
-        }
-
         $this->client->addRequestData('amount', $amount);
+    }
+
+    /**
+     * @When I do not specify related tax category
+     * @When I do not specify its zone
+     * @When I do not name it
+     * @When I do not specify its code
+     */
+    public function iDoNotSpecifyItsField(): void
+    {
+        // Intentionally left blank
     }
 
     /**
@@ -163,43 +157,11 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @When I remove its amount
-     */
-    public function iRemoveItsAmount(): void
-    {
-        $this->client->addRequestData('amount', '');
-    }
-
-    /**
      * @When I browse tax rates
      */
     public function iBrowseTaxRates(): void
     {
         $this->client->index(Resources::TAX_RATES);
-    }
-
-    /**
-     * @When I check the :taxRate tax rate
-     * @When I check also the :taxRate tax rate
-     */
-    public function iCheckTheTaxRate(TaxRateInterface $taxRate): void
-    {
-        $taxRatesToDelete = [];
-        if ($this->sharedStorage->has('tax_rates_to_delete')) {
-            $taxRatesToDelete = $this->sharedStorage->get('tax_rates_to_delete');
-        }
-        $taxRatesToDelete[] = $taxRate->getCode();
-        $this->sharedStorage->set('tax_rates_to_delete', $taxRatesToDelete);
-    }
-
-    /**
-     * @When I delete them
-     */
-    public function iDeleteThem(): void
-    {
-        foreach ($this->sharedStorage->get('tax_rates_to_delete') as $id) {
-            $this->client->delete(Resources::TAX_RATES, (string) $id)->getContent();
-        }
     }
 
     /**
@@ -291,6 +253,8 @@ class ManagingTaxRatesContext implements Context
      */
     public function theTaxRateShouldAppearInTheRegistry(TaxRateInterface $taxRate): void
     {
+        $this->sharedStorage->set('tax_rate', $taxRate);
+
         $name = $taxRate->getName();
 
         Assert::true(
@@ -335,17 +299,6 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @Then I should be notified that they have been successfully deleted
-     */
-    public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyDeleted(): void
-    {
-        Assert::true(
-            $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Tax rate could not be deleted',
-        );
-    }
-
-    /**
      * @Then I should see a single tax rate in the list
      */
     public function iShouldSeeASingleTaxRateInTheList(): void
@@ -384,7 +337,7 @@ class ManagingTaxRatesContext implements Context
     /**
      * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatCodeIsRequired(string $element): void
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
@@ -437,14 +390,6 @@ class ManagingTaxRatesContext implements Context
     }
 
     /**
-     * @Then /^(this tax rate) amount should still be ([^"]+)%$/
-     */
-    public function thisTaxRateAmountShouldStillBe(TaxRateInterface $taxRate, string $taxRateAmount): void
-    {
-        Assert::true($taxRate->getAmount(), $taxRateAmount);
-    }
-
-    /**
      * @Then /^(this tax rate) should still be named "([^"]+)"$/
      * @Then /^(this tax rate) name should be "([^"]*)"$/
      */
@@ -458,8 +403,9 @@ class ManagingTaxRatesContext implements Context
 
     /**
      * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled(): void
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
@@ -483,7 +429,7 @@ class ManagingTaxRatesContext implements Context
     public function thisTaxRateShouldBeApplicableForTheTaxCategory(TaxRateInterface $taxRate, TaxCategoryInterface $taxCategory): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'category', $this->iriConverter->getIriFromItem($taxCategory)),
+            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'category', $this->iriConverter->getIriFromResource($taxCategory)),
             sprintf('Tax rate is not applicable for %s tax category', $taxCategory),
         );
     }
@@ -494,8 +440,36 @@ class ManagingTaxRatesContext implements Context
     public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, ZoneInterface $zone): void
     {
         Assert::true(
-            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'zone', $this->iriConverter->getIriFromItem($zone)),
+            $this->responseChecker->hasValue($this->client->show(Resources::TAX_RATES, (string) $taxRate->getCode()), 'zone', $this->iriConverter->getIriFromResource($zone)),
             sprintf('Tax rate is not applicable for %s zone', $zone),
+        );
+    }
+
+    /**
+     * @Then I should be notified that amount is invalid
+     */
+    public function iShouldBeNotifiedThatAmountIsInvalid(): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->client->getLastResponse(),
+                'The tax rate amount is invalid.',
+                'amount',
+            ),
+        );
+    }
+
+    /**
+     * @Then I should be notified that tax rate should not end before it starts
+     */
+    public function iShouldBeNotifiedThatTaxRateShouldNotEndBeforeItStarts(): void
+    {
+        Assert::true(
+            $this->responseChecker->hasViolationWithMessage(
+                $this->client->getLastResponse(),
+                'The tax rate should not end before it starts',
+                'endDate',
+            ),
         );
     }
 }

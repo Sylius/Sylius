@@ -43,7 +43,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('html');
 
-        $attributes->get('_route')->willReturn('sylius_admin_product_index');
+        $attributes->get('_route', '')->willReturn('sylius_admin_product_index');
         $attributes->get('_sylius', [])->willReturn(['section' => 'admin']);
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
@@ -82,7 +82,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
 
-        $attributes->get('_route')->willReturn('sylius_admin_product_index');
+        $attributes->get('_route', '')->willReturn('sylius_admin_product_index');
         $attributes->get('_sylius', [])->willReturn(['section' => 'admin']);
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
@@ -109,7 +109,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
 
-        $attributes->get('_route')->willReturn('sylius_admin_product_index');
+        $attributes->get('_route', '')->willReturn('sylius_admin_product_index');
         $attributes->get('_sylius', [])->willReturn(['section' => 'shop']);
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
@@ -136,9 +136,36 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
 
-        $attributes->get('_route')->willReturn('sylius_admin_product_index');
+        $attributes->get('_route', '')->willReturn('sylius_admin_product_index');
         $attributes->get('_sylius', [])->willReturn(['section' => 'shop']);
         $attributes->get('_controller')->willReturn(null);
+        $request->attributes = $attributes;
+
+        $query->all()->willReturn(['filter' => 'foo']);
+        $request->query = $query;
+
+        $filterStorage->all()->willReturn([]);
+
+        $event->getRequest()->willReturn($request);
+
+        $filterStorage->set(Argument::any())->shouldNotBeCalled();
+
+        $this->onKernelRequest($event);
+    }
+
+    function it_does_not_add_filter_to_filter_storage_if_route_is_missing(
+        RequestEvent $event,
+        Request $request,
+        ParameterBag $attributes,
+        ParameterBag $query,
+        FilterStorageInterface $filterStorage,
+    ): void {
+        $event->isMainRequest()->willReturn(true);
+        $request->getRequestFormat()->willReturn('json');
+
+        $attributes->get('_route', '')->willReturn('');
+        $attributes->get('_sylius', [])->willReturn(['section' => 'shop']);
+        $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;
 
         $query->all()->willReturn(['filter' => 'foo']);
@@ -163,7 +190,7 @@ final class AdminFilterSubscriberSpec extends ObjectBehavior
         $event->isMainRequest()->willReturn(true);
         $request->getRequestFormat()->willReturn('json');
 
-        $attributes->get('_route')->willReturn('sylius_admin_product_update');
+        $attributes->get('_route', '')->willReturn('sylius_admin_product_update');
         $attributes->get('_sylius', [])->willReturn(['section' => 'shop']);
         $attributes->get('_controller')->willReturn('Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction');
         $request->attributes = $attributes;

@@ -11,6 +11,15 @@
         "\/api\/v2\/admin\/taxons\/HAT",
         "\/api\/v2\/admin\/taxons\/T_SHIRTS"
     ],
+    "images": [
+        {
+            "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+            "@type": "TaxonImage",
+            "id": @integer@,
+            "type": "thumbnail",
+            "path": "\/category.jpeg"
+        }
+    ],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
@@ -18,8 +27,7 @@
             "id": @integer@,
             "name": "Categories",
             "slug": "categories",
-            "description": "Some description Lorem ipsum dolor sit amet.",
-            "locale": "en_US"
+            "description": "Some description Lorem ipsum dolor sit amet."
         }
     },
     "enabled": true

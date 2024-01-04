@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Selectable;
@@ -67,7 +67,7 @@ final class ZoneDenormalizer implements ContextAwareDenormalizerInterface, Denor
             if (isset($member['code']) && in_array($member['code'], $membersCodes)) {
                 unset($data['members'][$key]);
 
-                $data['members'][$key] = $this->iriConverter->getIriFromItem(
+                $data['members'][$key] = $this->iriConverter->getIriFromResource(
                     $this->getZoneMemberByCode($members, $member['code']),
                 );
             }

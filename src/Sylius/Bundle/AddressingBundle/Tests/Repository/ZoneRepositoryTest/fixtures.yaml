@@ -1,0 +1,57 @@
+Sylius\Component\Addressing\Model\Country:
+    country_PL:
+        code: PL
+
+Sylius\Component\Addressing\Model\Province:
+    province_{AL, CA, FL, NY, MA, LD}:
+        code: <current()>
+        name: <current()>
+        abbreviation: <current()>
+        country: "@country_PL"
+
+Sylius\Component\Addressing\Model\ZoneMember:
+    member_eu_country_{NL, BE, PL, DE, CZ, SK, HU}:
+        code: <current()>
+    member_visegrad_country_{CZ, SK, HU, PL}:
+        code: <current()>
+    member_province_{AL, CA, FL, NY, MA, LD}:
+        code: <current()>
+    member_zone_{visegrad}:
+        code: "VISEGRAD_GROUP"
+    member_zone_{visegrad}_2:
+        code: "VISEGRAD_GROUP"
+
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu:
+        code: EU
+        name: European Union
+        type: country
+        members: ["@member_eu_country_NL", "@member_eu_country_BE", "@member_eu_country_PL", "@member_eu_country_DE", "@member_eu_country_CZ", "@member_eu_country_SK", "@member_eu_country_HU"]
+        scope: 'tax'
+    zone_eu_middle:
+        code: EU_MIDDLE
+        name: European Union Middle
+        type: zone
+        members: ["@member_zone_visegrad"]
+        scope: 'tax'
+    nato:
+        code: NATO
+        name: NATO
+        type: zone
+        members: ["@member_zone_visegrad_2"]
+        scope: 'shipping'
+    zone_visegrad:
+        code: VISEGRAD_GROUP
+        name: Visegrad Group
+        type: country
+        members: ["@member_visegrad_country_CZ", "@member_visegrad_country_SK", "@member_visegrad_country_HU", "@member_visegrad_country_PL"]
+    zone_usa_provinces:
+        code: USA_PROVINCES
+        name: USA Provinces
+        type: province
+        members: ["@member_province_AL", "@member_province_CA", "@member_province_FL", "@member_province_NY"]
+    zone_polish_provinces:
+        code: POLISH_PROVINCES
+        name: Polish Provinces
+        type: province
+        members: ["@member_province_MA", "@member_province_LD"]

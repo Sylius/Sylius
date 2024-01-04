@@ -56,15 +56,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createSearchListQueryBuilder(): QueryBuilder
-    {
-        return $this->createListQueryBuilder()
-            ->leftJoin('o.items', 'item')
-            ->leftJoin('item.variant', 'variant')
-            ->leftJoin('variant.product', 'product')
-        ;
-    }
-
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder
     {
         if ($criteria === null) {
@@ -90,14 +81,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         }
 
         return $queryBuilder;
-    }
-
-    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
-    {
-        return $this->createListQueryBuilder()
-            ->andWhere('o.customer = :customerId')
-            ->setParameter('customerId', $customerId)
-        ;
     }
 
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder
@@ -136,7 +119,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findByCustomer(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdQueryBuilder($customer->getId())
+        return $this->createByCustomerIdCriteriaAwareQueryBuilder(null, (string) $customer->getId())
             ->getQuery()
             ->getResult()
         ;

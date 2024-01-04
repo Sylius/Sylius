@@ -157,6 +157,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my changes to the images
      */
     public function iSaveMyChanges()
     {
@@ -296,6 +297,19 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I attach the :path image with :type type
+     * @When I attach the :path image with :type type to this taxon
+     * @When I attach the :path image
+     * @When I attach the :path image to this taxon
+     */
+    public function iAttachImageWithType(string $path, string $type = null): void
+    {
+        $currentPage = $this->resolveCurrentPage();
+
+        $currentPage->attachImage($path, $type);
+    }
+
+    /**
      * @Then I should see the taxon named :name in the list
      */
     public function iShouldSeeTheTaxonNamedInTheList($name)
@@ -304,20 +318,9 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I attach the :path image with :type type
-     * @When I attach the :path image
-     */
-    public function iAttachImageWithType($path, $type = null)
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->attachImage($path, $type);
-    }
-
-    /**
      * @Then /^(?:it|this taxon) should(?:| also) have an image with "([^"]*)" type$/
      */
-    public function thisTaxonShouldHaveAnImageWithType($type)
+    public function thisTaxonShouldHaveAnImageWithType(string $type): void
     {
         Assert::true($this->updatePage->isImageWithTypeDisplayed($type));
     }
@@ -333,9 +336,9 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When /^I(?:| also) remove an image with "([^"]*)" type$/
      */
-    public function iRemoveAnImageWithType($code)
+    public function iRemoveAnImageWithType(string $type): void
     {
-        $this->updatePage->removeImageWithType($code);
+        $this->updatePage->removeImageWithType($type);
     }
 
     /**
@@ -469,7 +472,7 @@ final class ManagingTaxonsContext implements Context
         Assert::false($this->updatePage->isEnabled());
     }
 
-    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdatePageInterface|UpdateConfigurableProductPageInterface
+    private function resolveCurrentPage(): CreateForParentPageInterface|CreatePageInterface|UpdateConfigurableProductPageInterface|UpdatePageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->createPage,

@@ -13,10 +13,7 @@
     "defaultTaxZone": null,
     "taxCalculationStrategy": "order_items_based",
     "currencies": [],
-    "locales": [
-        "\/api\/v2\/admin\/locales\/en_US",
-        "\/api\/v2\/admin\/locales\/pl_PL"
-    ],
+    "locales": "@array@.inArray(\"/api\/v2\/admin\/locales\/en_US\").inArray(\"\/api\/v2\/admin\/locales\/pl_PL\")",
     "countries": [],
     "themeName": null,
     "contactEmail": "web@sylius.com",
@@ -25,7 +22,7 @@
     "skippingPaymentStepAllowed": false,
     "accountVerificationRequired": true,
     "shippingAddressInCheckoutRequired": false,
-    "shopBillingData": null,
+    "shopBillingData": "\/api\/v2\/admin\/shop-billing-datas\/@integer@",
     "menuTaxon": null,
     "channelPriceHistoryConfig": "\/api\/v2\/admin\/channel-price-history-configs\/@integer@"
 }

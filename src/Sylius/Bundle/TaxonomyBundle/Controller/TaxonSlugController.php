@@ -56,15 +56,7 @@ final class TaxonSlugController
     private function getParentTaxon(Request $request): ?TaxonInterface
     {
         $parentCode = $request->query->get('parentCode');
-        if (null !== $parentCode) {
-            return $this->taxonRepository->findOneBy(['code' => $parentCode]);
-        }
 
-        $parentId = $request->query->get('parentId');
-        if (null !== $parentId) {
-            return $this->taxonRepository->find($parentId);
-        }
-
-        return null;
+        return $this->taxonRepository->findOneBy(['code' => $parentCode]);
     }
 }

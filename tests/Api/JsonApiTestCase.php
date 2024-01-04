@@ -15,6 +15,8 @@ namespace Sylius\Tests\Api;
 
 use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
+use Sylius\Tests\Api\Utils\HeadersBuilder;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
@@ -24,7 +26,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     public const PATCH_CONTENT_TYPE_HEADER = ['CONTENT_TYPE' => 'application/merge-patch+json', 'HTTP_ACCEPT' => 'application/ld+json'];
 
-    public function __construct(?string $name = null, array $data = [], string $dataName = '')
+    public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
@@ -41,13 +43,18 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return parent::get($id);
     }
 
-    protected function getUnloggedHeader(): array
+    protected function getUploadedFile(string $path, string $name, string $type = 'image/jpg'): UploadedFile
     {
-        return self::CONTENT_TYPE_HEADER;
+        return new UploadedFile(__DIR__ . '/../Resources/' . $path, $name, $type);
     }
 
-    protected function getLoggedHeader(): array
+    protected function headerBuilder(): HeadersBuilder
     {
-        return array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        return new HeadersBuilder(
+            $this->get('lexik_jwt_authentication.jwt_manager'),
+            $this->get('sylius.repository.admin_user'),
+            $this->get('sylius.repository.shop_user'),
+            self::$kernel->getContainer()->getParameter('sylius.api.authorization_header'),
+        );
     }
 }

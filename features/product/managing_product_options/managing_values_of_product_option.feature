@@ -11,7 +11,7 @@ Feature: Managing option values of a product option
         And this product option has also the "M" option value with code "OV2"
         And I am logged in as an administrator
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding an option value to an existing product option
         When I want to modify the "T-Shirt size" product option
         And I add the "L" option value identified by "OV3"

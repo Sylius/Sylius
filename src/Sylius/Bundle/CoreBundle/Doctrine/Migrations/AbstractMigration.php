@@ -35,12 +35,10 @@ abstract class AbstractMigration extends BaseAbstractMigration
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        /** @psalm-suppress DeprecatedClass */
         if (class_exists(\Doctrine\DBAL\Platforms\MariaDb1027Platform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MariaDb1027Platform::class)) {
             return true;
         }
 
-        /** @psalm-suppress DeprecatedClass */
         if (class_exists(\Doctrine\DBAL\Platforms\MariaDBPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MariaDBPlatform::class)) {
             return true;
         }
@@ -52,20 +50,12 @@ abstract class AbstractMigration extends BaseAbstractMigration
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        /**
-         * @phpstan-ignore-next-line
-         *
-         * @psalm-suppress InvalidClass
-         */
+        /** @phpstan-ignore-next-line */
         if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySQLPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySQLPlatform::class, true)) {
             return true;
         }
 
-        /**
-         * @phpstan-ignore-next-line
-         *
-         * @psalm-suppress InvalidClass
-         */
+        /** @phpstan-ignore-next-line */
         if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySqlPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySqlPlatform::class, true)) {
             return true;
         }

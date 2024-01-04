@@ -99,29 +99,25 @@ Let's remove the registration column in this example:
 
 .. code-block:: twig
 
-    {% extends '@SyliusShop/layout.html.twig' %}
+   {% extends '@SyliusShop/layout.html.twig' %}
 
-    {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+   {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
-    {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+   {% block title %}{{ 'sylius.ui.customer_login'|trans }} | {{ parent() }}{% endblock %}
 
-    {% block content %}
-        {% include '@SyliusShop/Login/_header.html.twig' %}
-        <div class="ui padded segment">
-            <div class="ui one column very relaxed stackable grid">
-                <div class="column">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
-                    <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
-                    {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                    {% include '@SyliusShop/Login/_form.html.twig' %}
-                    <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
-                    <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
-                    {{ form_end(form, {'render_rest': false}) }}
-                </div>
-            </div>
-        </div>
-    {% endblock %}
+   {% block content %}
+       {% include '@SyliusShop/Login/_header.html.twig' %}
 
+       {{ sylius_template_event('sylius.shop.login.after_content_header') }}
+
+       <div class="ui padded segment">
+           <div class="ui one column very relaxed stackable grid">
+               <div class="column">
+                   {{ sylius_template_event('sylius.shop.login.main_column', _context) }}
+               </div>
+           </div>
+       </div>
+   {% endblock %}
 
 .. tip::
 

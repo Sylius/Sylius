@@ -14,7 +14,7 @@ Feature: Filtering inventory by code
         And there are 25 units of product "RHCP T-Shirt" available in the inventory
         And I am logged in as an administrator
 
-    @ui
+    @ui @no-api
     Scenario: Filtering tracked product variants by code
         When I want to browse inventory
         And I filter tracked variants with code containing "iron"

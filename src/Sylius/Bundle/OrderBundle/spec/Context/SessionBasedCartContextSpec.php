@@ -59,7 +59,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         $session->get('session_key_name')->willReturn(12345);
         $orderRepository->findCartById(12345)->willReturn(null);
 
-        $session->remove('session_key_name')->shouldBeCalled();
+        $session->remove('session_key_name')->willReturn(null)->shouldBeCalled();
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }

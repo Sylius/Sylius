@@ -37,7 +37,7 @@ final class AddressesPostTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/addresses',
             server: self::CONTENT_TYPE_HEADER,
-            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
+            content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -63,7 +63,7 @@ final class AddressesPostTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/addresses',
             server: $header,
-            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
+            content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -92,7 +92,7 @@ final class AddressesPostTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/addresses',
             server: $header,
-            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
+            content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -121,7 +121,7 @@ final class AddressesPostTest extends JsonApiTestCase
             method: 'POST',
             uri: '/api/v2/shop/addresses',
             server: $header,
-            content: json_encode($bodyRequest, JSON_THROW_ON_ERROR),
+            content: json_encode($bodyRequest, \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();

@@ -36,6 +36,7 @@ Sylius\Component\Core\Model\Taxon:
         code: "CATEGORY"
         currentLocale: "en_US"
         translations: ["@en_us_category_translation"]
+        images: ["@category_taxon_thumbnail"]
         children: ["@mug_taxon", "@hat_taxon", "@t_shirt_taxon"]
     mug_taxon:
         code: "MUG"
@@ -162,6 +163,9 @@ Sylius\Component\Taxonomy\Model\TaxonTranslation:
         translatable: "@brand_taxon"
 
 Sylius\Component\Core\Model\TaxonImage:
+    category_taxon_thumbnail:
+        type: "thumbnail"
+        path: "/category.jpeg"
     t_shirt_taxon_thumbnail:
         type: "thumbnail"
-        path: "/pants.jpeg"
+        path: "/tshirt.jpeg"

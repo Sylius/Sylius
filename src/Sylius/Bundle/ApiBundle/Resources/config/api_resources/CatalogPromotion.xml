@@ -28,7 +28,12 @@
                     <attribute>sylius.api.catalog_promotion_enabled_filter</attribute>
                     <attribute>sylius.api.catalog_promotion_start_date_filter</attribute>
                     <attribute>sylius.api.catalog_promotion_end_date_filter</attribute>
-                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\CatalogPromotionChannelFilter</attribute>
+                    <attribute>Sylius\Bundle\ApiBundle\Filter\Doctrine\ChannelsAwareChannelFilter</attribute>
+                    <attribute>sylius.api.order_filter.code</attribute>
+                    <attribute>sylius.api.order_filter.name</attribute>
+                    <attribute>sylius.api.order_filter.start_date</attribute>
+                    <attribute>sylius.api.order_filter.end_date</attribute>
+                    <attribute>sylius.api.order_filter.priority</attribute>
                 </attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:catalog_promotion:read</attribute>
@@ -164,7 +169,6 @@ Example configuration for `percentage_discount` action type:
                     <attribute name="en_US">
                         <attribute name="label">string</attribute>
                         <attribute name="description">string</attribute>
-                        <attribute name="locale">string</attribute>
                     </attribute>
                 </attribute>
             </attribute>

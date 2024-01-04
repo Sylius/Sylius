@@ -64,9 +64,7 @@ interface OrderInterface extends
     public function isShippingRequired(): bool;
 
     /**
-     * @return Collection|ShipmentInterface[]
-     *
-     * @psalm-return Collection<array-key, ShipmentInterface>
+     * @return Collection<array-key, ShipmentInterface>
      */
     public function getShipments(): Collection;
 
@@ -98,6 +96,8 @@ interface OrderInterface extends
 
     public function getTaxTotal(): int;
 
+    public function getShippingTaxTotal(): int;
+
     public function getTaxExcludedTotal(): int;
 
     public function getTaxIncludedTotal(): int;
@@ -105,6 +105,8 @@ interface OrderInterface extends
     public function getShippingTotal(): int;
 
     public function getOrderPromotionTotal(): int;
+
+    public function getShippingPromotionTotal(): int;
 
     public function getItemsSubtotal(): int;
 
@@ -120,18 +122,10 @@ interface OrderInterface extends
 
     public function isCreatedByGuest(): bool;
 
-    public function getCreatedByGuest(): bool;
-
-    public function setCreatedByGuest(bool $createdByGuest): void;
-
     /**
-     * @return Collection|OrderItemInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemInterface>
-     *
-     * @psalm-suppress ImplementedReturnTypeMismatch
-     *
      * @phpstan-ignore-next-line
+     *
+     * @return Collection<array-key, OrderItemInterface>
      */
     public function getItems(): Collection;
 

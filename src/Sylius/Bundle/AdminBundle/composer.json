@@ -35,7 +35,7 @@
         "knplabs/knp-menu-bundle": "^3.0",
         "sylius/core-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
-        "symfony/framework-bundle": "^6.3.4",
+        "symfony/framework-bundle": "^6.4.1",
         "symfony/stimulus-bundle": "^2.12",
         "symfony/ux-live-component": "^2.12",
         "symfony/webpack-encore-bundle": "^1.17.1",
@@ -47,8 +47,8 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^6.3.4",
-        "symfony/dotenv": "^6.3.0"
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/dotenv": "^6.4.0"
     },
     "config": {
         "allow-plugins": {

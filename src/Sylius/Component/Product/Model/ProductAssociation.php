@@ -30,11 +30,7 @@ class ProductAssociation implements ProductAssociationInterface
     /** @var ProductInterface|null */
     protected $owner;
 
-    /**
-     * @var Collection|ProductInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductInterface>
-     */
+    /** @var Collection<array-key, ProductInterface> */
     protected $associatedProducts;
 
     public function __construct()

@@ -31,11 +31,14 @@ final class GetPaymentConfiguration
 
     public function __invoke(Request $request): JsonResponse
     {
+        $paymentId = $request->attributes->get('paymentId');
+        $tokenValue = $request->attributes->get('tokenValue');
+        if (null === $paymentId || null === $tokenValue) {
+            throw new PaymentNotFoundException();
+        }
+
         /** @var PaymentInterface|null $payment */
-        $payment = $this->paymentRepository->findOneByOrderToken(
-            $request->attributes->get('paymentId'),
-            $request->attributes->get('tokenValue'),
-        );
+        $payment = $this->paymentRepository->findOneByOrderToken($paymentId, $tokenValue);
 
         if ($payment === null) {
             throw new PaymentNotFoundException();

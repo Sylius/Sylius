@@ -63,6 +63,7 @@
         </service>
 
         <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
+            <argument type="service" id="sylius.repository.product_variant" />
             <tag name="sylius.product_variant_resolver" priority="-999" />
         </service>
 

@@ -34,8 +34,8 @@ final class AdminUsersTest extends JsonApiTestCase
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
-                'password' => 'sylius'
-            ], JSON_THROW_ON_ERROR),
+                'password' => 'sylius',
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -54,7 +54,7 @@ final class AdminUsersTest extends JsonApiTestCase
             server: self::CONTENT_TYPE_HEADER,
             content: json_encode([
                 'email' => 'api@example.com',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $response = $this->client->getResponse();
@@ -116,7 +116,7 @@ final class AdminUsersTest extends JsonApiTestCase
                 'firstName' => 'John',
                 'lastName' => 'Api',
                 'localeCode' => 'ga_IE',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -147,7 +147,7 @@ final class AdminUsersTest extends JsonApiTestCase
                 'firstName' => 'John',
                 'lastName' => 'Api',
                 'localeCode' => 'ga_IE',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

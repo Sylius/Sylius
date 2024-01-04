@@ -14,9 +14,13 @@ declare(strict_types=1);
 namespace Sylius\Bundle\TaxonomyBundle\Repository;
 
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class TaxonTreeRepository implements TaxonTreeRepositoryInterface
 {
+    /**
+     * @param NestedTreeRepository<TaxonInterface> $nestedTreeRepository
+     */
     public function __construct(
         private NestedTreeRepository $nestedTreeRepository,
     ) {

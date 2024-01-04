@@ -31,7 +31,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
 
     public function supportsDenormalization($data, $type, $format = null, array $context = []): bool
     {
-        /** @psalm-var class-string|null $inputClassName */
+        /** @var class-string|null $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
         if ($inputClassName === null) {
@@ -43,7 +43,7 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        /** @psalm-var class-string $inputClassName */
+        /** @var class-string $inputClassName */
         $inputClassName = $this->getInputClassName($context);
 
         if (is_subclass_of($inputClassName, IriToIdentifierConversionAwareInterface::class)) {
@@ -53,7 +53,6 @@ final class CommandArgumentsDenormalizer implements ContextAwareDenormalizerInte
         $denormalizedCommand = $this->commandDenormalizer->denormalize($data, $inputClassName, $format, $context);
 
         if ($this->commandAwareInputDataTransformer->supportsTransformation($denormalizedCommand, $type, $context)) {
-            /** @psalm-suppress PossiblyInvalidArgument */
             return $this->commandAwareInputDataTransformer->transform($denormalizedCommand, $type, $context);
         }
 

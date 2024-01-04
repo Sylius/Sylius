@@ -18,36 +18,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 class ProductSlugController extends AbstractController
 {
-    public function __construct(private ?SlugGeneratorInterface $slugGenerator = null)
+    public function __construct(private readonly SlugGeneratorInterface $slugGenerator)
     {
-        if ($this->slugGenerator === null) {
-            trigger_deprecation(
-                'sylius/product-bundle',
-                '1.11',
-                'Not passing a $slugGenerator to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
-    /**
-     * @psalm-suppress DeprecatedMethod
-     */
     public function generateAction(Request $request): Response
     {
         $name = $request->query->get('name');
+        Assert::string($name);
 
-        if ($this->slugGenerator !== null) {
-            return new JsonResponse([
-                'slug' => $this->slugGenerator->generate((string) $name),
-            ]);
-        }
-
-        return new JsonResponse([
-            'slug' => $this->container->get('sylius.generator.slug')->generate($name),
-        ]);
+        return new JsonResponse(['slug' => $this->slugGenerator->generate($name)]);
     }
 }

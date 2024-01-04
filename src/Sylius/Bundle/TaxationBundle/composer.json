@@ -29,11 +29,11 @@
     "require": {
         "php": "^8.2",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/calendar": "^0.5",
         "sylius/registry": "^1.6",
         "sylius/resource-bundle": "^1.10",
         "sylius/taxation": "^2.0",
-        "symfony/framework-bundle": "^6.3.4"
+        "symfony/clock": "^6.4.0",
+        "symfony/framework-bundle": "^6.4.1"
     },
     "conflict": {
         "doctrine/orm": ">= 2.16.0",
@@ -46,9 +46,9 @@
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^6.3.2",
-        "symfony/dependency-injection": "^6.3.4",
-        "symfony/form": "^6.3.2"
+        "symfony/browser-kit": "^6.4.0",
+        "symfony/dependency-injection": "^6.4.1",
+        "symfony/form": "^6.4.1"
     },
     "config": {
         "allow-plugins": {

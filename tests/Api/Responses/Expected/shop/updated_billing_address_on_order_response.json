@@ -69,11 +69,13 @@
     ],
     "itemsTotal": 6000,
     "total": 6500,
-    "itemsSubtotal": 6000,
     "state": "cart",
+    "itemsSubtotal": 6000,
     "taxTotal": 0,
+    "shippingTaxTotal": 500,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
     "shippingTotal": 500,
-    "orderPromotionTotal": 0
+    "orderPromotionTotal": 0,
+    "shippingPromotionTotal": 0
 }

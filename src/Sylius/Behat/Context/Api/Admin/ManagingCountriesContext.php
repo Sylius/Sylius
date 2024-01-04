@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -47,7 +47,15 @@ final class ManagingCountriesContext implements Context
      */
     public function iChoose(string $countryName): void
     {
-        $this->client->addRequestData('code', $this->getCountryCodeByName($countryName));
+        $this->iSpecifyTheCountryCodeAs($this->getCountryCodeByName($countryName));
+    }
+
+    /**
+     * @When I specify the country code as :code
+     */
+    public function iSpecifyTheCountryCodeAs(string $code): void
+    {
+        $this->client->addRequestData('code', $code);
     }
 
     /**
@@ -145,10 +153,11 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @When I do not specify the country code
      * @When I do not specify the province code
      * @When I do not name the province
      */
-    public function iDoNotSpecifyTheProvince(): void
+    public function iDoNotSpecifyTheField(): void
     {
         // Intentionally left blank
     }
@@ -239,15 +248,17 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^(this country) should be (enabled|disabled)$/
      */
-    public function thisCountryShouldBeDisabled(CountryInterface $country, string $enabled): void
+    public function thisCountryShouldBe(CountryInterface $country, string $state): void
     {
+        $isEnabled = 'enabled' === $state;
+
         Assert::true(
             $this->responseChecker->hasValue(
                 $this->client->show(Resources::COUNTRIES, $country->getCode()),
                 'enabled',
-                $enabled === 'enabled',
+                $isEnabled,
             ),
-            'Country is not disabled',
+            sprintf('Country is not %s', $isEnabled ? 'enabled' : 'disabled'),
         );
     }
 
@@ -326,6 +337,17 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that the country code is (required|invalid)$/
+     */
+    public function iShouldBeNotifiedThatTheCountryCodeIsRequired(string $constraint): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            $constraint === 'required' ? 'Please enter country ISO code.' : 'Country ISO code is invalid.',
+        );
+    }
+
+    /**
      * @Then I should be notified that name of the province is required
      */
     public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
@@ -359,13 +381,14 @@ final class ManagingCountriesContext implements Context
         return $countryList[$countryName];
     }
 
+    /** @return iterable<ProvinceInterface> */
     private function getProvincesOfCountry(CountryInterface $country): iterable
     {
         $response = $this->client->show(Resources::COUNTRIES, $country->getCode());
         $countryFromResponse = $this->responseChecker->getResponseContent($response);
 
         foreach ($countryFromResponse['provinces'] as $provinceFromResponse) {
-            yield $this->iriConverter->getItemFromIri($provinceFromResponse);
+            yield $this->iriConverter->getResourceFromIri($provinceFromResponse);
         }
     }
 }

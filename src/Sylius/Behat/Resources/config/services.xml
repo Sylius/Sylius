@@ -19,6 +19,10 @@
         <import resource="services/pages.xml" />
     </imports>
 
+    <parameters>
+        <parameter key="sylius.behat.clock.date_file">%kernel.project_dir%/var/date.txt</parameter>
+    </parameters>
+
     <services>
         <defaults public="true" />
 
@@ -60,6 +64,10 @@
             <argument type="service" id="sylius.behat.admin_security" />
         </service>
 
+        <service id="sylius.behat.api.shared_security" class="Sylius\Behat\Service\SharedSecurityService" public="false">
+            <argument type="service" id="sylius.behat.api_security" />
+        </service>
+
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
         <service id="sylius.behat.checker.image_existence" class="Sylius\Behat\Service\Checker\ImageExistenceChecker">
@@ -94,7 +102,7 @@
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
 
         <service id="sylius.behat.java_script_test_helper" class="Sylius\Behat\Service\Helper\JavaScriptTestHelper" >
-            <argument>100000</argument>
+            <argument>1000000</argument>
             <argument>7</argument>
         </service>
 
@@ -111,18 +119,28 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter" public="false">
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
-            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
-            <argument type="service" id="api_platform.item_data_provider" />
+        <service id="sylius.behat.clock" class="Sylius\Behat\Service\Clock">
+            <argument>%sylius.behat.clock.date_file%</argument>
+        </service>
+        <service id="clock" alias="sylius.behat.clock" />
+        <service id="Symfony\Component\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="Psr\Clock\ClockInterface" alias="sylius.behat.clock" />
+        <service id="argument_resolver.datetime" alias="sylius.behat.clock" />
+
+        <service id="sylius.behat.section_iri_converter" class="Sylius\Behat\Service\Converter\SectionAwareIriConverter" public="false">
             <argument type="service" id="api_platform.route_name_resolver" />
             <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.metadata.property.name_collection_factory" />
+            <argument type="service" id="api_platform.metadata.property.metadata_factory" />
             <argument type="service" id="api_platform.property_accessor" />
             <argument type="service" id="api_platform.identifiers_extractor.cached" />
-            <argument type="service" id="api_platform.subresource_data_provider" on-invalid="ignore" />
-            <argument type="service" id="api_platform.identifier.converter" on-invalid="ignore" />
             <argument type="service" id="api_platform.resource_class_resolver" />
             <argument type="service" id="api_platform.metadata.resource.metadata_factory" />
+        </service>
+
+        <service id="api_platform.iri_converter" class="Sylius\Behat\Service\Converter\IriConverter">
+            <argument type="service" id="api_platform.iri_converter.legacy" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
         </service>
     </services>
 </container>

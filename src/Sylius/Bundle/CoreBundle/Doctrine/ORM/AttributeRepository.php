@@ -15,14 +15,14 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository as BaseAttributeRepository;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @template T of AttributeInterface
  */
-class AttributeRepository extends EntityRepository
+class AttributeRepository extends BaseAttributeRepository
 {
     protected AssociationHydrator $associationHydrator;
 

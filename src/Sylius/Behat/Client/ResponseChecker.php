@@ -132,16 +132,48 @@ final class ResponseChecker implements ResponseCheckerInterface
         return false;
     }
 
-    /** @param string|int $value */
-    public function hasSubResourceWithValue(Response $response, string $subResource, string $key, $value): bool
-    {
-        foreach ($this->getResponseContentValue($response, $subResource) as $resource) {
-            if ($resource[$key] === $value) {
-                return true;
+    public function hasValuesInAnySubresourceObjectCollection(
+        Response $response,
+        string $subResource,
+        array $expectedValues,
+    ): bool {
+        $resourceCollection = $this->getResponseContentValue($response, $subResource);
+
+        $this->assertIsArray($resourceCollection);
+
+        foreach ($resourceCollection as $resource) {
+            $this->assertIsArray($resource);
+
+            foreach ($expectedValues as $key => $expectedValue) {
+                if (!array_key_exists($key, $resource) || $resource[$key] !== $expectedValue) {
+                    continue 2;
+                }
             }
+
+            return true;
         }
 
         return false;
+    }
+
+    public function hasValuesInSubresourceObject(
+        Response $response,
+        string $subResource,
+        array $expectedValues,
+    ): bool {
+        $resource = $this->getResponseContentValue($response, $subResource);
+
+        $this->assertIsArray($resource);
+
+        $this->assertAllExpectedKeysArePresent($expectedValues, $resource);
+
+        foreach ($expectedValues as $key => $expectedValue) {
+            if ($resource[$key] !== $expectedValue) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /** @param string|array $value */
@@ -234,9 +266,10 @@ final class ResponseChecker implements ResponseCheckerInterface
         Assert::keyExists(
             $content,
             $key,
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent(
-                'Expected \'' . $key . '\' not found.',
-                $response,
+            sprintf(
+                'Expected to get: "%s" key in response, got keys: [%s]',
+                $key,
+                implode(', ', array_keys($content)),
             ),
         );
 
@@ -252,5 +285,27 @@ final class ResponseChecker implements ResponseCheckerInterface
         }
 
         return true;
+    }
+
+    private function assertIsArray(mixed $resource): void
+    {
+        Assert::isArray($resource, sprintf('Expected to get an array, got "%s"', gettype($resource)));
+    }
+
+    /**
+     * @param array<string, int|string> $expectedValues
+     * @param array<string, int|string> $resource
+     */
+    private function assertAllExpectedKeysArePresent(array $expectedValues, array $resource): void
+    {
+        Assert::count(
+            array_diff_key($expectedValues, $resource),
+            0,
+            sprintf(
+                'Expected values array has keys: [%s], that are not present in the responses keys: [%s]',
+                implode(', ', array_keys(array_diff_key($expectedValues, $resource))),
+                implode(', ', array_keys($resource)),
+            ),
+        );
     }
 }

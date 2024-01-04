@@ -7,9 +7,6 @@ phpspec:
 phpstan:
 	vendor/bin/phpstan analyse
 
-psalm:
-	vendor/bin/psalm
-
 behat-cli:
 	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&@cli&&~@todo" --rerun
 
@@ -35,11 +32,11 @@ behat: behat-cli behat-non-js behat-js
 
 init: install backend frontend
 
-ci: init phpstan psalm phpunit phpspec behat
+ci: init phpstan phpunit phpspec behat
 
 integration: init phpunit behat-cli behat-non-js
 
-static: install phpspec phpstan psalm
+static: install phpspec phpstan
 
 # Example execution: make profile url=http://app
 profile:

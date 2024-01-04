@@ -18,8 +18,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\SharedSecurityServiceInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -30,7 +28,6 @@ final class ManagingProductAttributesContext implements Context
         private IndexPageInterface $indexPage,
         private UpdatePageInterface $updatePage,
         private CurrentPageResolverInterface $currentPageResolver,
-        private SharedSecurityServiceInterface $sharedSecurityService,
     ) {
     }
 
@@ -115,6 +112,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @Then the :type attribute :name should appear in the store
+     * @Then the :type attribute :name should still be in the store
      */
     public function theAttributeShouldAppearInTheStore($type, $name)
     {
@@ -152,17 +150,18 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then the code field should be disabled
+     * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
 
     /**
      * @Then the type field should be disabled
+     * @Then I should not be able to edit its type
      */
-    public function theTypeFieldShouldBeDisabled()
+    public function theTypeFieldShouldBeDisabled(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
@@ -232,25 +231,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^(the administrator) changes (this product attribute)'s value "([^"]*)" to "([^"]*)"$/
-     */
-    public function theAdministratorChangesThisProductAttributesValueTo(
-        AdminUserInterface $user,
-        ProductAttributeInterface $productAttribute,
-        string $oldValue,
-        string $newValue,
-    ): void {
-        $this->sharedSecurityService->performActionAsAdminUser(
-            $user,
-            function () use ($productAttribute, $oldValue, $newValue) {
-                $this->iWantToEditThisAttribute($productAttribute);
-                $this->iChangeItsValueTo($oldValue, $newValue);
-                $this->iSaveMyChanges();
-            },
-        );
-    }
-
-    /**
      * @When I specify its min length as :min
      * @When I specify its min entries value as :min
      */
@@ -285,24 +265,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^(the administrator) deletes the value "([^"]+)" from (this product attribute)$/
-     */
-    public function theAdministratorDeletesTheValueFromThisProductAttribute(
-        AdminUserInterface $user,
-        string $value,
-        ProductAttributeInterface $productAttribute,
-    ): void {
-        $this->sharedSecurityService->performActionAsAdminUser(
-            $user,
-            function () use ($productAttribute, $value) {
-                $this->iWantToEditThisAttribute($productAttribute);
-                $this->iDeleteValue($value);
-                $this->iSaveMyChanges();
-            },
-        );
-    }
-
-    /**
      * @When I check (also) the :productAttributeName product attribute
      */
     public function iCheckTheProductAttribute(string $productAttributeName): void
@@ -328,7 +290,7 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When /^I delete (this product attribute)$/
+     * @When /^I(?:| try to) delete (this product attribute)$/
      */
     public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute)
     {

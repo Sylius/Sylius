@@ -21,11 +21,7 @@ use Webmozart\Assert\Assert;
 
 class Promotion extends BasePromotion implements PromotionInterface
 {
-    /**
-     * @var Collection|ChannelInterface[]
-     *
-     * @psalm-var Collection<array-key, ChannelInterface>
-     */
+    /** @var Collection<array-key, ChannelInterface> */
     protected $channels;
 
     public function __construct()
@@ -36,10 +32,6 @@ class Promotion extends BasePromotion implements PromotionInterface
         $this->channels = new ArrayCollection();
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getChannels(): Collection
     {
         /** @phpstan-ignore-next-line */

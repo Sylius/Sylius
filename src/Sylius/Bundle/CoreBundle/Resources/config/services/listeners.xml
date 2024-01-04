@@ -12,11 +12,15 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="listeners/workflow/*.xml" />
+    </imports>
+
     <services>
         <defaults public="true" />
 
         <service id="sylius.listener.channel" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
-            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.checker.channel_deletion" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
 
@@ -98,7 +102,6 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleCheckerInterface" />
-            <argument type="service" id="sylius.promotion_rule_updater.total_of_items_from_taxon" />
             <argument type="service" id="sylius.promotion_rule_updater.has_taxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />

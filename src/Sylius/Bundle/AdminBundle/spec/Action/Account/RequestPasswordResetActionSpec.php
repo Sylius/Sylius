@@ -81,7 +81,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
 
         $flashBag->add('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
-        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
+        $attributesBag->get('_sylius', [])->shouldBeCalled()->willReturn([
             'redirect' => 'my_custom_route',
         ]);
         $request->attributes = $attributesBag->getWrappedObject();
@@ -120,7 +120,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
         $parameters = [
             'my_parameter' => 'my_value',
         ];
-        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn([
+        $attributesBag->get('_sylius', [])->shouldBeCalled()->willReturn([
             'redirect' => [
                 'route' => $route,
                 'params' => $parameters,
@@ -158,7 +158,7 @@ final class RequestPasswordResetActionSpec extends ObjectBehavior
 
         $flashBag->add('success', 'sylius.admin.request_reset_password.success')->shouldBeCalled();
 
-        $attributesBag->get('_sylius')->shouldBeCalled()->willReturn(null);
+        $attributesBag->get('_sylius', [])->shouldBeCalled()->willReturn([]);
         $request->attributes = $attributesBag->getWrappedObject();
 
         $router->generate('sylius_admin_login')->shouldBeCalled()->willReturn('/login');

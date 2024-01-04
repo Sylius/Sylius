@@ -67,9 +67,6 @@ final class ShippingMethodChoiceType extends AbstractType
         ;
     }
 
-    /**
-     * @psalm-suppress MissingPropertyType
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (!isset($options['subject'])) {

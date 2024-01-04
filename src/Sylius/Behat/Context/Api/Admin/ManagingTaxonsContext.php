@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -29,7 +29,7 @@ final class ManagingTaxonsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
-        private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -122,7 +122,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iSetItsParentTaxonTo(TaxonInterface $parentTaxon): void
     {
-        $this->client->addRequestData('parent', $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'));
+        $this->client->addRequestData('parent', $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'));
     }
 
     /**
@@ -253,7 +253,7 @@ final class ManagingTaxonsContext implements Context
             $this->client->getLastResponse(),
             [
                 'code' => $taxon->getCode(),
-                'parent' => $this->iriConverter->getIriFromItemInSection($parentTaxon, 'admin'),
+                'parent' => $this->sectionAwareIriConverter->getIriFromResourceInSection($parentTaxon, 'admin'),
             ],
         ));
     }
@@ -361,9 +361,17 @@ final class ManagingTaxonsContext implements Context
         Assert::null($product->getMainTaxon());
     }
 
+    /**
+     * @When I save my changes to the images
+     */
+    public function iSaveMyChangesToTheImages(): void
+    {
+        // Intentionally left blank
+    }
+
     private function updateTranslations(string $localeCode, string $field, ?string $value = null): void
     {
-        $data['translations'][$localeCode]['locale'] = $localeCode;
+        $data['translations'][$localeCode] = [];
 
         if ($value !== null) {
             $data['translations'][$localeCode][$field] = $value;

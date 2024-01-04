@@ -40,3 +40,9 @@ sylius:
                 sales:
                     header: Vendes
                     orders: Comandes
+                official_support:
+                    header: Suport oficial
+                    browse_plugins: Navega pels complements
+                    sylius_plus: Sylius Plus
+                    professional_services: Serveis professionals
+                    find_a_partner: Troba un soci

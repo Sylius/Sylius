@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -142,7 +142,7 @@ final class HomepageContext implements Context
         $children = array_column($taxons, 'children');
         foreach ($children[0] as $child) {
             if (!empty($child)) {
-                array_push($menuItems, $this->iriConverter->getItemFromIri($child)->getName());
+                array_push($menuItems, $this->iriConverter->getResourceFromIri($child)->getName());
             }
         }
 

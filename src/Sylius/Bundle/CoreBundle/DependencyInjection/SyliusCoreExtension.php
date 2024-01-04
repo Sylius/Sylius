@@ -28,7 +28,6 @@ use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
@@ -72,6 +71,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.catalog_promotions.batch_size', $config['catalog_promotions']['batch_size']);
         $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
+        $container->setParameter('sylius_core.state_machine.default_adapter', $config['state_machine']['default_adapter']);
+        $container->setParameter('sylius_core.state_machine.graphs_to_adapters_mapping', $config['state_machine']['graphs_to_adapters_mapping']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -79,18 +80,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load('test_services.xml');
         }
 
-        if ($config['process_shipments_before_recalculating_prices']) {
-            $this->switchOrderProcessorsPriorities(
-                $container->getDefinition('sylius.order_processing.order_shipment_processor'),
-                $container->getDefinition('sylius.order_processing.order_prices_recalculator'),
-            );
-        }
-
         $container->setAlias(
             FilesystemAdapterInterface::class,
             match ($config['filesystem']['adapter']) {
                 'default', 'flysystem' => FlysystemFilesystemAdapter::class,
-                'gaufrette' => 'Sylius\Component\Core\Filesystem\Adapter\GaufretteFilesystemAdapter',
                 default => throw new InvalidArgumentException(sprintf(
                     'Invalid filesystem adapter "%s" provided.',
                     $config['filesystem']['adapter'],
@@ -188,26 +181,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->prependExtensionConfig('sylius_order', [
             'autoconfigure_with_attributes' => $config['autoconfigure_with_attributes'] ?? false,
         ]);
-    }
-
-    private function switchOrderProcessorsPriorities(
-        Definition $firstServiceDefinition,
-        Definition $secondServiceDefinition,
-    ) {
-        $firstServicePriority = $firstServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-        $secondServicePriority = $secondServiceDefinition->getTag('sylius.order_processor')[0]['priority'];
-
-        $firstServiceDefinition->clearTag('sylius.order_processor');
-        $secondServiceDefinition->clearTag('sylius.order_processor');
-
-        $firstServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $secondServicePriority],
-        );
-        $secondServiceDefinition->addTag(
-            'sylius.order_processor',
-            ['priority' => $firstServicePriority],
-        );
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void

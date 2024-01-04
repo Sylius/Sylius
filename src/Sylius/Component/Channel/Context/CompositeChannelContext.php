@@ -18,11 +18,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class CompositeChannelContext implements ChannelContextInterface
 {
-    /**
-     * @var PriorityQueue|ChannelContextInterface[]
-     *
-     * @psalm-var PriorityQueue<ChannelContextInterface>
-     */
+    /** @var PriorityQueue<ChannelContextInterface> */
     private PriorityQueue $channelContexts;
 
     public function __construct()

@@ -27,7 +27,7 @@ class ChooseShippingMethod implements OrderTokenValueAwareInterface, Subresource
     public $shipmentId;
 
     /**
-     * @psalm-immutable
+     * @immutable
      *
      * @var string
      */

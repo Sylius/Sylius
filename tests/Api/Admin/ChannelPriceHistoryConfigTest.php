@@ -27,13 +27,13 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/channel-price-history-configs/%d', $fixtures['web_price_history_config']->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_price_history_config_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -47,20 +47,20 @@ final class ChannelPriceHistoryConfigTest extends JsonApiTestCase
         $this->client->request(
             method: 'PUT',
             uri: sprintf('/api/v2/admin/channel-price-history-configs/%d', $fixtures['web_price_history_config']->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdContentType()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
             content: json_encode([
                 'lowestPriceForDiscountedProductsVisible' => true,
                 'lowestPriceForDiscountedProductsCheckingPeriod' => 60,
                 'taxonsExcludedFromShowingLowestPrice' => [
                     sprintf('/api/v2/admin/taxons/%s', $brandTaxon->getCode()),
                 ],
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/put_channel_price_history_config_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

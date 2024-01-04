@@ -26,6 +26,5 @@ final class IgnoreAnnotationsPass implements CompilerPassInterface
         $annotationsReader = $container->getDefinition('annotations.reader');
 
         $annotationsReader->addMethodCall('addGlobalIgnoredName', ['template']);
-        $annotationsReader->addMethodCall('addGlobalIgnoredName', ['psalm']);
     }
 }

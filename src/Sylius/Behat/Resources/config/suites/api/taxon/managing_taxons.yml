@@ -20,6 +20,7 @@ default:
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.taxonomy
 
+                - sylius.behat.context.api.admin.managing_taxon_images
                 - sylius.behat.context.api.admin.managing_taxons
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save

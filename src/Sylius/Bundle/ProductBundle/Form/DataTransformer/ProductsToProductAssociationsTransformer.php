@@ -26,11 +26,7 @@ use Webmozart\Assert\Assert;
 
 final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
 {
-    /**
-     * @var Collection|ProductAssociationInterface[]
-     *
-     * @psalm-var Collection<array-key, ProductAssociationInterface>
-     */
+    /** @var Collection<array-key, ProductAssociationInterface> */
     private ?Collection $productAssociations = null;
 
     public function __construct(
@@ -66,9 +62,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             return null;
         }
 
-        /**
-         * @psalm-var Collection<array-key, ProductAssociationInterface> $productAssociations
-         */
+        /** @var Collection<array-key, ProductAssociationInterface> $productAssociations */
         $productAssociations = new ArrayCollection();
         foreach ($value as $productAssociationTypeCode => $productCodes) {
             if (null === $productCodes) {

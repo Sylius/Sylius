@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_in_admin_panel
 Feature: Seeing the lowest price before the discount within variant
     In order to be aware of variant's prices
     As an Administrator
@@ -15,6 +15,6 @@ Feature: Seeing the lowest price before the discount within variant
 
     @ui @no-api
     Scenario: Seeing price block with lowest price before the discount within variant
-        When I access "Wyborowa Vodka" product page
+        When I access the "Wyborowa Vodka" product
         Then I should not see the lowest price before the discount for "Wyborowa Vodka Rye" variant in "United States" channel
         And I should see the lowest price before the discount of "$11.00" for "Wyborowa Vodka Potato" variant in "United States" channel

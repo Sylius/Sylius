@@ -13,16 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
@@ -34,6 +37,7 @@ final class ManagingShippingMethodsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
@@ -58,6 +62,82 @@ final class ManagingShippingMethodsContext implements Context
         $this->client->sort([
             'translation.name' => self::SORT_TYPES[$sortType],
             'localeCode' => $this->getAdminLocaleCode(),
+        ]);
+    }
+
+    /**
+     * @When I add the :rule rule configured with :weight
+     */
+    public function iAddTheRuleConfiguredWithWeight(string $rule, int $weight): void
+    {
+        $type = StringInflector::nameToLowercaseCode($rule);
+        $this->client->addRequestData('rules', [[
+            'type' => $type,
+            'configuration' => [
+                'weight' => $weight,
+            ],
+        ]]);
+    }
+
+    /**
+     * @When I add the "Total weight greater than or equal" rule configured with invalid data
+     */
+    public function iAddTheTotalWeightGreaterThanOrEqualRuleConfiguredWithInvalidData(): void
+    {
+        $this->client->addRequestData('rules', [
+            [
+                'type' => 'total_weight_greater_than_or_equal',
+                'configuration' => [
+                    'weight' => true,
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @When /^I add the "([^"]+)" rule configured with (?:€|£|\$)([^"]+) for ("[^"]+" channel)$/
+     */
+    public function iAddTheRuleConfiguredWithForChannel(string $rule, int $value, ChannelInterface $channel): void
+    {
+        match ($rule) {
+            'Items total less than or equal' => $this->client->addRequestData('rules', [
+                [
+                    'type' => 'order_total_less_than_or_equal',
+                    'configuration' => [
+                        $channel->getCode() => [
+                            'amount' => $value,
+                        ],
+                    ],
+                ],
+            ]),
+            'Items total greater than or equal' => $this->client->addRequestData('rules', [
+                [
+                    'type' => 'order_total_greater_than_or_equal',
+                    'configuration' => [
+                        $channel->getCode() => [
+                            'amount' => $value,
+                        ],
+                    ],
+                ],
+            ]),
+            default => throw new \InvalidArgumentException('Unsupported shipping method rule'),
+        };
+    }
+
+    /**
+     * @When /^I add the "Items total less than or equal" rule configured with invalid data for ("[^"]+" channel)$/
+     */
+    public function iAddTheItemsTotalLessThanOrEqualRuleConfiguredWithInvalidData(ChannelInterface $channel): void
+    {
+        $this->client->addRequestData('rules', [
+            [
+                'type' => 'order_total_greater_than_or_equal',
+                'configuration' => [
+                    $channel->getCode() => [
+                        'amount' => true,
+                    ],
+                ],
+            ],
         ]);
     }
 
@@ -114,11 +194,34 @@ final class ManagingShippingMethodsContext implements Context
         $this->client->setRequestData([
             'code' => 'FED_EX_CARRIER',
             'position' => 0,
-            'translations' => ['en_US' => ['name' => 'FedEx Carrier', 'locale' => 'en_US']],
-            'zone' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('zone')),
+            'translations' => ['en_US' => ['name' => 'FedEx Carrier']],
+            'zone' => $this->iriConverter->getIriFromResource($this->sharedStorage->get('zone')),
             'calculator' => 'Flat rate per shipment',
             'configuration' => [$this->sharedStorage->get('channel')->getCode() => ['amount' => 50]],
         ]);
+    }
+
+    /**
+     * @When I do not specify amount for :calculatorName calculator
+     */
+    public function iDoNotSpecifyAmountForCalculator(string $calculatorName): void
+    {
+        match ($calculatorName) {
+            'Flat rate per shipment' => $this->client->addRequestData('calculator', DefaultCalculators::FLAT_RATE),
+            'Flat rate per unit' => $this->client->addRequestData('calculator', DefaultCalculators::PER_UNIT_RATE),
+            'default' => throw new \InvalidArgumentException('Unsupported calculator name'),
+        };
+
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
+        $this->client->addRequestData('configuration', [$channelCode => ['amount' => null]]);
+    }
+
+    /**
+     * @When I remove its zone
+     */
+    public function iRemoveItsZone(): void
+    {
+        $this->client->replaceRequestData('zone', null);
     }
 
     /**
@@ -162,7 +265,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iNameItIn(?string $name = '', ?string $localeCode = 'en_US'): void
     {
-        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name, 'locale' => $localeCode]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
     /**
@@ -170,7 +273,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
-        $data = ['translations' => [$localeCode => ['locale' => $localeCode]]];
+        $data = ['translations' => [$localeCode => []]];
         $data['translations'][$localeCode]['description'] = $description;
 
         $this->client->updateRequestData($data);
@@ -183,7 +286,7 @@ final class ManagingShippingMethodsContext implements Context
     public function iDefineItForTheZone(ZoneInterface $zone = null): void
     {
         if (null !== $zone) {
-            $this->client->addRequestData('zone', $this->iriConverter->getIriFromItem($zone));
+            $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));
         }
     }
 
@@ -208,7 +311,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
     /**
@@ -309,6 +412,17 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then the shipping method :name should not appear in the registry
+     */
+    public function theShippingMethodShouldNotAppearInTheRegistry(string $name): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithTranslation($this->client->index(Resources::SHIPPING_METHODS), 'en_US', 'name', $name),
+            sprintf('Shipping method with name %s exists', $name),
+        );
+    }
+
+    /**
      * @Then /^(this shipping method) should still be in the registry$/
      */
     public function thisShippingMethodShouldAppearInTheRegistry(ShippingMethodInterface $shippingMethod): void
@@ -373,7 +487,7 @@ final class ManagingShippingMethodsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()),
                 'channels',
-                $this->iriConverter->getIriFromItemInSection($channel, 'admin'),
+                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Shipping method is not assigned to %s channel', $channel->getName()),
         );
@@ -526,6 +640,17 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that the zone is required
+     */
+    public function iShouldBeNotifiedThatZoneHasToBeIriAndCannotBeNull(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Expected IRI or nested document for attribute "zone", "NULL" given.',
+        );
+    }
+
+    /**
      * @Then shipping method with :element :value should not be added
      */
     public function theShippingMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
@@ -574,6 +699,72 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeViewingNonArchivalShippingMethods(): void
     {
         // Intentionally left blank
+    }
+
+    /**
+     * @Then shipping method :shippingMethod should still have code :code
+     */
+    public function shippingMethodShouldStillHaveCode(ShippingMethodInterface $shippingMethod, string $code): void
+    {
+        Assert::same(
+            $this->responseChecker->getValue($this->client->show(Resources::SHIPPING_METHODS, $shippingMethod->getCode()), 'code'),
+            $code,
+        );
+    }
+
+    /**
+     * @Then I should be notified that amount for :channel channel should not be blank
+     */
+    public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('configuration[%s][amount]: This value should not be blank.', $channel->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should be notified that code needs to contain only specific symbols
+     */
+    public function iShouldBeNotifiedThatCodeNeedsToContainOnlySpecificSymbols(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'code: Shipping method code can only be comprised of letters, numbers, dashes and underscores.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that shipping charge for :channel channel cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatShippingChargeForChannelCannotBeLowerThan0(ChannelInterface $channel): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('configuration[%s][amount]: Shipping charge cannot be lower than 0.', $channel->getCode()),
+        );
+    }
+
+    /**
+     * @Then I should be notified that the weight rule has an invalid configuration
+     */
+    public function iShouldBeNotifiedThatTheWeightRuleHasAnInvalidConfiguration(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'configuration[weight]: This value should be of type numeric.',
+        );
+    }
+
+    /**
+     * @Then I should be notified that the amount rule has an invalid configuration in :channel channel
+     */
+    public function iShouldBeNotifiedThatTheAmountRuleHasAnInvalidConfigurationInChannel(ChannelInterface $channel): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            sprintf('configuration[%s][amount]: This value should be of type numeric.', $channel->getCode()),
+        );
     }
 
     private function getAdminLocaleCode(): string

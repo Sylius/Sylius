@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
@@ -98,7 +98,7 @@ final class LoginContext implements Context
     {
         $this->iWantToResetPassword();
         $this->iSpecifyTheEmail($email);
-        $this->addLocale($this->iriConverter->getIriFromItem($locale));
+        $this->sharedStorage->set('current_locale_code', $locale->getCode());
         $this->iResetIt();
     }
 
@@ -271,7 +271,7 @@ final class LoginContext implements Context
                 $this->shopAuthenticationTokenClient->getResponse(),
                 'customer',
             ),
-            $this->iriConverter->getIriFromItem($customer),
+            $this->iriConverter->getIriFromResource($customer),
         );
     }
 
@@ -280,16 +280,18 @@ final class LoginContext implements Context
      */
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
     {
-        $this->client->executeCustomRequest($this->request);
-
-        // token is removed when used
-        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
-        $message = $this->responseChecker->getError($this->client->getLastResponse());
-        Assert::startsWith($message, 'No user found with reset token:');
+        $response = $this->client->executeCustomRequest($this->request);
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token itotallyforgotmypassword is invalid.');
     }
 
-    private function addLocale(string $locale): void
+    /**
+     * @Then I should not be able to change my password with this token
+     */
+    public function iShouldNotBeAbleToChangeMyPasswordWithThisToken(): void
     {
-        $this->request->updateContent(['locale' => $locale]);
+        $response = $this->client->getLastResponse();
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'resetPasswordToken: Password reset token has expired.');
     }
 }

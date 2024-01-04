@@ -57,7 +57,12 @@ final class ProductReviewsTest extends JsonApiTestCase
     /** @test */
     public function it_creates_a_product_review(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['product/product_variant.yaml']);
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
         /** @var ProductInterface $product */
         $product = $fixtures['product'];
 
@@ -71,7 +76,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
                 'product' => '/api/v2/shop/products/' . $product->getCode(),
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -84,7 +89,12 @@ final class ProductReviewsTest extends JsonApiTestCase
     /** @test */
     public function it_prevents_from_creating_a_product_review_with_non_existing_product(): void
     {
-        $this->loadFixturesFromFiles(['product/product_variant.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
 
         $this->client->request(
             method: 'POST',
@@ -96,7 +106,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
                 'product' => '/api/v2/shop/products/NON-EXISTING-PRODUCT',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -105,7 +115,12 @@ final class ProductReviewsTest extends JsonApiTestCase
     /** @test */
     public function it_prevents_from_creating_a_product_review_if_no_product_provided(): void
     {
-        $this->loadFixturesFromFiles(['product/product_variant.yaml']);
+        $this->loadFixturesFromFiles([
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
 
         $this->client->request(
             method: 'POST',
@@ -116,7 +131,7 @@ final class ProductReviewsTest extends JsonApiTestCase
                 'rating' => 3,
                 'comment' => 'I\'ve never bought anything better.',
                 'email' => 'test@test.com',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);

@@ -25,7 +25,7 @@ final class CatalogPromotionStateChangedListener
     {
     }
 
-    public function __invoke(CatalogPromotionCreated|CatalogPromotionUpdated|CatalogPromotionEnded $event): void
+    public function __invoke(CatalogPromotionCreated|CatalogPromotionEnded|CatalogPromotionUpdated $event): void
     {
         $this->messageBus->dispatch(new UpdateCatalogPromotionState($event->code));
     }

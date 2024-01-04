@@ -30,7 +30,6 @@
     "require": {
         "php": "^8.2",
         "payum/offline": "^1.7.3",
-        "payum/paypal-express-checkout-nvp": "^1.7.3",
         "payum/payum-bundle": "^2.5",
         "sylius/core": "^2.0",
         "sylius/currency": "^2.0",
@@ -41,7 +40,11 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
-        "symfony/dependency-injection": "^6.3.4"
+        "symfony/dependency-injection": "^6.4.1"
+    },
+    "suggest": {
+        "payum/paypal-express-checkout-nvp": "To use PayPal Express Chekout NVP",
+        "payum/stripe": "To use Stripe Checkout"
     },
     "config": {
         "allow-plugins": {

@@ -69,6 +69,34 @@ final class CartCollectorTest extends KernelTestCase
     }
 
     /** @test */
+    public function it_returns_no_cart_data_when_request_is_stateless(): void
+    {
+        $sessionFactory = self::getContainer()->get('session.factory');
+        $session = $sessionFactory->createSession();
+
+        $request = new Request();
+        $request->setSession($session);
+        $request->attributes->set('_stateless', true);
+
+        $requestStack = self::getContainer()->get('request_stack');
+        $requestStack->push($request);
+
+        $fixtures = $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/cart.yml']);
+        /** @var ChannelInterface $channel */
+        $channel = $fixtures['channel_web'];
+        /** @var OrderInterface $cart */
+        $cart = $fixtures['order_001'];
+
+        $sessionCartStorage = self::getContainer()->get(CartStorageInterface::class);
+        $sessionCartStorage->setForChannel($channel, $cart);
+
+        $collector = self::getContainer()->get(CartCollector::class);
+        $collector->collect($request, new Response());
+
+        $this->assertFalse($collector->hasCart());
+    }
+
+    /** @test */
     public function it_collects_cart_data(): void
     {
         $sessionFactory = self::getContainer()->get('session.factory');
@@ -108,7 +136,7 @@ final class CartCollectorTest extends KernelTestCase
         ], $collector->getStates());
         $this->assertSame(
             array_map(fn (OrderItemInterface $item) => $item->getId(), $cart->getItems()->toArray()),
-            array_column($collector->getItems(), 'id')
+            array_column($collector->getItems(), 'id'),
         );
     }
 
