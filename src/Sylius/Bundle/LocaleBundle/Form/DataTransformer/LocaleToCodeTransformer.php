@@ -16,6 +16,8 @@ namespace Sylius\Bundle\LocaleBundle\Form\DataTransformer;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleCollectionProviderInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /** @phpstan-ignore-next-line */
 final class LocaleToCodeTransformer implements DataTransformerInterface
@@ -27,12 +29,7 @@ final class LocaleToCodeTransformer implements DataTransformerInterface
     public function transform(mixed $value): string
     {
         if (!$value instanceof LocaleInterface) {
-            throw new \InvalidArgumentException(
-                sprintf('Value must be instance of %s. Got "%s"',
-                    LocaleInterface::class,
-                    is_object($value) ? get_class($value) : gettype($value)
-                ),
-            );
+            throw new UnexpectedTypeException($value, LocaleInterface::class);
         }
 
         return $value->getCode();
@@ -52,7 +49,7 @@ final class LocaleToCodeTransformer implements DataTransformerInterface
         $locales = $this->localesProvider->getAll();
 
         if (!isset($locales[$localeCode])) {
-            throw new \InvalidArgumentException(sprintf('Locale with code "%s" does not exist.', $localeCode));
+            throw new TransformationFailedException(sprintf('Locale with code "%s" does not exist.', $localeCode));
         }
 
         return $locales[$localeCode];
