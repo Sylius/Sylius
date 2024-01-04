@@ -132,9 +132,11 @@ final class Kernel extends HttpKernel
             'template_event_with_context' => [
                 'blocks' => [
                     'block' => [
-                        'component' => 'SomeTwigComponent',
-                        'context' => [
-                            'baz' => 'qux',
+                        'component' => [
+                            'name' => 'SomeTwigComponent',
+                            'inputs' => [
+                                'context' => 'expr:context',
+                            ],
                         ],
                     ],
                 ],

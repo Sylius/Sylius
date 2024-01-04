@@ -64,7 +64,7 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
             'Component',
             [
                 'foo' => 'bar',
-                'bar' => 'expr:foo',
+                'bar' => 'expr:baz',
                 'nested' => [
                     'foo' => 'expr:bar',
                     'bar' => 'expr:baz',
@@ -90,7 +90,7 @@ final class TwigComponentBlockRendererSpec extends ObjectBehavior
         $componentRenderer
             ->createAndRender('Component', [
                 'foo' => 'bar',
-                'bar' => 'bar',
+                'bar' => 'qux',
                 'nested' => [
                     'foo' => 'baz',
                     'bar' => 'qux',
