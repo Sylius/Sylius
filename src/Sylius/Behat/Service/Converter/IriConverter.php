@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Converter;
 
-use ApiPlatform\Api\IriConverterInterface as BaseIriConverterInterface;
 use ApiPlatform\Api\UrlGeneratorInterface;
+use ApiPlatform\Metadata\IriConverterInterface as BaseIriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Util\ClassInfoTrait;
 use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;

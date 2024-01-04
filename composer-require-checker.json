@@ -16,6 +16,7 @@
     "ApiPlatform\\Core\\Bridge\\Symfony\\Routing\\RouteNameResolverInterface",
     "ApiPlatform\\Core\\Cache\\CachedTrait",
     "ApiPlatform\\Core\\DataPersister\\ContextAwareDataPersisterInterface",
+    "ApiPlatform\\Core\\DataPersister\\ResumableDataPersisterInterface",
     "ApiPlatform\\Core\\DataProvider\\ContextAwareCollectionDataProviderInterface",
     "ApiPlatform\\Core\\DataProvider\\ItemDataProviderInterface",
     "ApiPlatform\\Core\\DataProvider\\OperationDataProviderTrait",
