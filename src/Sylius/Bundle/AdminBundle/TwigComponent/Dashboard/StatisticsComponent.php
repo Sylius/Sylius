@@ -62,6 +62,10 @@ final class StatisticsComponent
         $this->eventName = 'sylius.admin.dashboard.statistics';
     }
 
+    /**
+     * @return array<string, mixed>
+     * @throws \Exception
+     */
     #[ExposeInTemplate]
     public function getStatistics(): array
     {

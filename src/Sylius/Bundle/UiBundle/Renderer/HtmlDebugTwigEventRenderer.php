@@ -27,7 +27,7 @@ final class HtmlDebugTwigEventRenderer implements TwigEventRendererInterface
     }
 
     /**
-     * @param array<string> $eventNames
+     * @param non-empty-list<string> $eventNames
      * @param array<string, mixed> $context
      */
     public function render(array $eventNames, array $context = []): string

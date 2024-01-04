@@ -43,6 +43,7 @@ final class TemplateEventExtension extends AbstractExtension
         }
         Assert::notEmpty($eventName);
 
+        /** @var non-empty-list<string> $eventName */
         $eventName = array_filter($eventName, fn (?string $eventName) => $eventName !== null);
 
         return $this->templateEventRenderer->render($eventName, $context);
