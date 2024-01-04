@@ -41,6 +41,21 @@ final class SyliusPayumExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /** @test */
+    public function it_loads_gateway_config_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'gateway_config' => [
+                'validation_groups' => [
+                        'paypal_express_checkout' => ['sylius', 'paypal'],
+                        'offline' => ['sylius'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius.payum.gateway_config.validation_groups', ['paypal_express_checkout' => ['sylius', 'paypal'], 'offline' => ['sylius']]);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusPayumExtension()];

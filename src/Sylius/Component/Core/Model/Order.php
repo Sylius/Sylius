@@ -42,18 +42,10 @@ class Order extends BaseOrder implements OrderInterface
     /** @var AddressInterface|null */
     protected $billingAddress;
 
-    /**
-     * @var Collection|PaymentInterface[]
-     *
-     * @psalm-var Collection<array-key, PaymentInterface>
-     */
+    /** @var Collection<array-key, PaymentInterface> */
     protected $payments;
 
-    /**
-     * @var Collection|ShipmentInterface[]
-     *
-     * @psalm-var Collection<array-key, ShipmentInterface>
-     */
+    /** @var Collection<array-key, ShipmentInterface> */
     protected $shipments;
 
     /** @var string|null */
@@ -74,11 +66,7 @@ class Order extends BaseOrder implements OrderInterface
     /** @var string */
     protected $shippingState = OrderShippingStates::STATE_CART;
 
-    /**
-     * @var Collection|BasePromotionInterface[]
-     *
-     * @psalm-var Collection<array-key, BasePromotionInterface>
-     */
+    /** @var Collection<array-key, BasePromotionInterface> */
     protected $promotions;
 
     /** @var string|null */
@@ -205,10 +193,6 @@ class Order extends BaseOrder implements OrderInterface
         });
     }
 
-    /**
-     * @psalm-suppress InvalidReturnType https://github.com/doctrine/collections/pull/220
-     * @psalm-suppress InvalidReturnStatement https://github.com/doctrine/collections/pull/220
-     */
     public function getPayments(): Collection
     {
         /** @phpstan-ignore-next-line */
@@ -427,6 +411,17 @@ class Order extends BaseOrder implements OrderInterface
         return $taxTotal;
     }
 
+    public function getShippingTaxTotal(): int
+    {
+        $shippingTaxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
+            $shippingTaxTotal += $shippingAdjustment->getAmount();
+        }
+
+        return $shippingTaxTotal;
+    }
+
     public function getTaxExcludedTotal(): int
     {
         return array_reduce(
@@ -469,6 +464,11 @@ class Order extends BaseOrder implements OrderInterface
         ;
     }
 
+    public function getShippingPromotionTotal(): int
+    {
+        return $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+    }
+
     public function getTokenValue(): ?string
     {
         return $this->tokenValue;
@@ -506,27 +506,5 @@ class Order extends BaseOrder implements OrderInterface
     public function isCreatedByGuest(): bool
     {
         return $this->createdByGuest;
-    }
-
-    public function getCreatedByGuest(): bool
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `isCreatedByGuest` instead.',
-        );
-
-        return $this->isCreatedByGuest();
-    }
-
-    public function setCreatedByGuest(bool $createdByGuest): void
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.12',
-            'This method is deprecated and it will be removed in Sylius 2.0. This flag should be changed only through `setCustomerWithAuthorization` method.',
-        );
-
-        $this->createdByGuest = $createdByGuest;
     }
 }

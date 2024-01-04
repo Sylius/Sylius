@@ -20,7 +20,6 @@ use Sylius\Bundle\UiBundle\Registry\TemplateBlock;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -41,7 +40,7 @@ final class SyliusUiExtension extends Extension
     }
 
     /**
-     * @psalm-param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
+     * @param array<string, array{blocks: array<string, array{template: string, context: array, priority?: int, enabled: bool}>}> $eventsConfig
      */
     private function loadEvents(array $eventsConfig, ContainerBuilder $container): void
     {
@@ -58,7 +57,7 @@ final class SyliusUiExtension extends Extension
                 $blocksPriorityQueue->insert($details, $details['priority'] ?? 0);
             }
 
-            /** @psalm-var array{name: string, eventName: string, template: string, component: array{name?: string, inputs?: array<string, mixed>}, context: array, priority: int, enabled: bool} $details */
+            /** @var array{name: string, eventName: string, template: string, component: array{name?: string, inputs?: array<string, mixed>}, context: array, priority: int, enabled: bool} $details */
             foreach ($blocksPriorityQueue->toArray() as $details) {
                 $blockType = [] !== $details['component'] ? 'component' : 'template';
                 $blocksForEvents[$eventName][$details['name']] = match ($blockType) {

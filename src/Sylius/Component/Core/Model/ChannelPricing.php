@@ -39,11 +39,7 @@ class ChannelPricing implements ChannelPricingInterface, \Stringable
     /** @var int|null */
     protected $lowestPriceBeforeDiscount;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @psalm-var ArrayCollection<array-key, CatalogPromotionInterface>
-     */
+    /** @var ArrayCollection<array-key, CatalogPromotionInterface> */
     protected $appliedPromotions;
 
     public function __construct()

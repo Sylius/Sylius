@@ -46,9 +46,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setImmutable(bool $immutable): void;
 
     /**
-     * @return Collection|OrderItemUnitInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderItemUnitInterface>
+     * @return Collection<array-key, OrderItemUnitInterface>
      */
     public function getUnits(): Collection;
 
@@ -59,9 +57,7 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function removeUnit(OrderItemUnitInterface $itemUnit): void;
 
     /**
-     * @return Collection|AdjustmentInterface[]
-     *
-     * @psalm-return Collection<array-key, AdjustmentInterface>
+     * @return Collection<array-key, AdjustmentInterface>
      */
     public function getAdjustmentsRecursively(?string $type = null): Collection;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -226,6 +226,7 @@ final class CartContext implements Context
     /**
      * @When I pick up (my )cart (again)
      * @When I pick up cart in the :localeCode locale
+     * @When I pick up cart without specifying locale
      * @When the visitor picks up the cart
      */
     public function iPickUpMyCart(?string $localeCode = null): void
@@ -812,8 +813,9 @@ final class CartContext implements Context
         $request = $this->requestFactory->custom(
             sprintf('%s/shop/orders', $this->apiUrlPrefix),
             HttpRequest::METHOD_POST,
-            $localeCode ? ['HTTP_ACCEPT_LANGUAGE' => $localeCode] : [],
+            ['HTTP_ACCEPT_LANGUAGE' => $localeCode ?? ''],
         );
+
         $this->shopClient->executeCustomRequest($request);
 
         $tokenValue = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'tokenValue');
@@ -835,7 +837,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($this->productVariantResolver->getVariant($product)),
+            'productVariant' => $this->iriConverter->getIriFromResource($this->productVariantResolver->getVariant($product)),
             'quantity' => $quantity,
         ]);
 
@@ -854,7 +856,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromItem($productVariant),
+            'productVariant' => $this->iriConverter->getIriFromResource($productVariant),
             'quantity' => $quantity,
         ]);
 

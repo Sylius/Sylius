@@ -105,6 +105,30 @@ final class ProductAttributeValueNormalizerSpec extends ObjectBehavior
         ]);
     }
 
+    function it_serializes_product_attribute_select_values_when_attribute_has_no_value(
+        NormalizerInterface $normalizer,
+        ProductAttributeValueInterface $productAttributeValue,
+        ProductAttributeInterface $productAttribute,
+        LocaleProviderInterface $localeProvider,
+    ): void {
+        $normalizer
+            ->normalize($productAttributeValue, null, ['sylius_product_attribute_value_normalizer_already_called' => true])
+            ->willReturn([])
+        ;
+
+        $productAttributeValue->getType()->willReturn('select');
+        $productAttributeValue->getAttribute()->willReturn($productAttribute);
+
+        $productAttributeValue->getValue()->willReturn(null);
+
+        $productAttribute->getConfiguration()->shouldNotBeCalled();
+        $productAttributeValue->getLocaleCode()->shouldNotBeCalled();
+        $localeProvider->getDefaultLocaleCode()->shouldNotBeCalled();
+
+        $this->setNormalizer($normalizer);
+        $this->normalize($productAttributeValue, null, [])->shouldReturn(['value' => []]);
+    }
+
     function it_serializes_product_attribute_date_values(
         NormalizerInterface $normalizer,
         ProductAttributeValueInterface $productAttributeValue,

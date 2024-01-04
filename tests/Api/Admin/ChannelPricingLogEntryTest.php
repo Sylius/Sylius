@@ -29,7 +29,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/channel-pricing-log-entries',
-            server: $this->getUnloggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
         );
 
         $response = $this->client->getResponse();
@@ -52,13 +52,13 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: sprintf('/api/v2/admin/channel-pricing-log-entries/%d', $channelPricingLogEntry->getId()),
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_pricing_log_entry_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -70,13 +70,13 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/channel-pricing-log-entries',
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_channel_pricing_log_entries_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -92,13 +92,13 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: $uri,
-            server: $this->getLoggedHeader(),
+            server: $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/get_filtered_channel_pricing_log_entries_response',
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

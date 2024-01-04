@@ -22,7 +22,7 @@ Feature: Adding a new zone with country type members
         Then I should be notified that it has been successfully created
         And the zone named "European Union" with the "France" country member should appear in the registry
 
-    @ui @javascript @api
+    @ui @mink:chromedriver @api
     Scenario: Adding a zone with province type member
         When I want to create a new zone consisting of province
         And I name it "United States"

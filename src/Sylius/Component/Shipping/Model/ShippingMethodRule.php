@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Shipping\Model;
 
-/**
- * @psalm-suppress MissingConstructor
- */
 class ShippingMethodRule implements ShippingMethodRuleInterface
 {
     /** @var mixed */

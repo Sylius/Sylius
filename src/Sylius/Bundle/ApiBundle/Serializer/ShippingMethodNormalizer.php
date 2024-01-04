@@ -55,9 +55,7 @@ final class ShippingMethodNormalizer implements ContextAwareNormalizerInterface,
 
         $filters = $request->attributes->get('_api_filters');
         if (null === $filters) {
-            /** @psalm-suppress InternalMethod **/
             $queryString = RequestParser::getQueryString($request);
-            /** @psalm-suppress InternalMethod **/
             $filters = $queryString ? RequestParser::parseRequestParams($queryString) : null;
         }
 

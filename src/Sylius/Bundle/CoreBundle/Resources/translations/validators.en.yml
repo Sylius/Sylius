@@ -51,6 +51,8 @@ sylius:
             min: Price cannot be lower than 0.
             not_blank: Please enter the price.
     checkout:
+        addressing:
+            csrf_error: Please resubmit complete form.
         shipping_method:
             not_blank: Please select shipping method.
         email:
@@ -61,12 +63,18 @@ sylius:
             not_blank: Please enter your email.
         message:
             not_blank: Please enter your message.
+    country:
+        code:
+            not_exist: Country with code {{ code }} does not exist.
     currency:
         enabled:
             cannot_disable_base: The base currency cannot be disabled.
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    customer_group:
+        code:
+            not_exist: Customer group with code {{ code }} does not exist.
     cart_item:
         not_available: '%itemName% does not have sufficient stock.'
         insufficient_stock: 'Insufficient stock'
@@ -84,12 +92,16 @@ sylius:
     product:
         variants:
             all_prices_defined: You have to define product variants' prices for newly assigned channels first.
+        code:
+            not_exist: Product with code {{ code }} does not exist.
     product_attribute:
         invalid: Position must be an integer.
     product_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
             upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
+        product_variant:
+            not_belong_to_owner: 'The product variant with code "%productVariantCode%" does not belong to the product with code "%ownerCode%", which is the owner of the image.'
     product_taxon:
         unique: Product taxons cannot be duplicated.
         product:
@@ -132,6 +144,9 @@ sylius:
         rating:
             range: Review rating must be an integer in the range 1-5.
             not_in_range: Review rating must be between {{ min }} and {{ max }}.
+    taxon:
+        code:
+            not_exist: Taxon with code {{ code }} does not exist.
     taxon_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

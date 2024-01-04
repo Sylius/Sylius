@@ -6,6 +6,7 @@
     "code": "WATCHES",
     "parent": "\/api\/v2\/admin\/taxons\/CATEGORY",
     "children": [],
+    "images": [],
     "position": @integer@,
     "translations": {
         "en_US": {
@@ -14,8 +15,7 @@
             "id": @integer@,
             "name": "Watches",
             "slug": "watches",
-            "description": null,
-            "locale": "en_US"
+            "description": null
         }
     },
     "enabled": true

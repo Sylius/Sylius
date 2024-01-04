@@ -153,7 +153,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="messenger.default_bus" />
             <argument type="service" id="sylius.shop_user.token_generator.password_reset" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>
@@ -212,7 +212,7 @@
 
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyCustomerAccountHandler">
             <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <argument type="service" id="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
@@ -221,6 +221,13 @@
         <service id="Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler">
             <argument type="service" id="sylius.email_sender" />
             <argument type="service" id="sylius.repository.channel" />
+            <tag name="messenger.message_handler" bus="sylius.command_bus" />
+            <tag name="messenger.message_handler" bus="sylius_default.bus" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\CommandHandler\Promotion\GeneratePromotionCouponHandler">
+            <argument type="service" id="sylius.repository.promotion" />
+            <argument type="service" id="sylius.promotion_coupon_generator" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />
         </service>

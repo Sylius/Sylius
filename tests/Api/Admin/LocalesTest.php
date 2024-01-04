@@ -36,13 +36,13 @@ final class LocalesTest extends JsonApiTestCase
             $header,
             json_encode([
                 'code' => 'lol',
-            ], JSON_THROW_ON_ERROR)
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'admin/post_locale_with_invalid_code_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -102,7 +102,7 @@ final class LocalesTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'code' => 'is_IS',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

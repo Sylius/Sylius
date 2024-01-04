@@ -57,5 +57,8 @@
             <group>admin:taxon:read</group>
             <group>admin:taxon:update</group>
         </attribute>
+        <attribute name="images">
+            <group>admin:taxon:read</group>
+        </attribute>
     </class>
 </serializer>

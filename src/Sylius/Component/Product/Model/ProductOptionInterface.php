@@ -47,9 +47,7 @@ interface ProductOptionInterface extends
     public function setPosition(?int $position): void;
 
     /**
-     * @return Collection|ProductOptionValueInterface[]
-     *
-     * @psalm-return Collection<array-key, ProductOptionValueInterface>
+     * @return Collection<array-key, ProductOptionValueInterface>
      */
     public function getValues(): Collection;
 

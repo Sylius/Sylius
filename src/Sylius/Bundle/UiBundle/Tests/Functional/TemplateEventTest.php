@@ -114,7 +114,7 @@ final class TemplateEventTest extends KernelTestCase
             '<!-- BEGIN EVENT | event name: "template_event_with_context" -->',
             '<!-- BEGIN BLOCK | event name: "template_event_with_context", block name: "block", component: "SomeTwigComponent", priority: 0 -->',
             'Hello from the Twig Component :)',
-            'Context: baz=qux, foo=bar',
+            'Context: foo=bar',
             '<!-- END BLOCK | event name: "template_event_with_context", block name: "block" -->',
             '<!-- END EVENT | event name: "template_event_with_context" -->',
         ];

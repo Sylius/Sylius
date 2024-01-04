@@ -46,7 +46,16 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ProductNormalizer">
             <argument type="service" id="Sylius\Component\Product\Resolver\ProductVariantResolverInterface" />
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductAttributeValueDenormalizer">
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\ProductDenormalizer">
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -72,7 +81,7 @@
             <argument type="service" id="sylius.calculator.product_variant_price" />
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.section_resolver.uri_based_section_resolver" />
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -92,7 +101,12 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ZoneDenormalizer">
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableDenormalizer">
+            <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -104,7 +118,7 @@
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ChannelPriceHistoryConfigDenormalizer">
-            <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="sylius.factory.channel_price_history_config" />
             <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" />
             <argument>%sylius.form.type.channel_price_history_config.validation_groups%</argument>
@@ -113,7 +127,21 @@
 
         <service id="Sylius\Bundle\ApiBundle\Serializer\ChannelDenormalizer">
             <argument type="service" id="sylius.factory.channel_price_history_config" />
+            <argument type="service" id="sylius.factory.shop_billing_data" />
             <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\TaxRateDenormalizer">
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\CustomerDenormalizer">
+            <argument type="service" id="clock" />
+            <tag name="serializer.normalizer" priority="64" />
+        </service>
+
+        <service id="Sylius\Bundle\ApiBundle\Serializer\TranslatableLocaleKeyDenormalizer">
+            <tag name="serializer.normalizer" priority="96" />
         </service>
     </services>
 </container>

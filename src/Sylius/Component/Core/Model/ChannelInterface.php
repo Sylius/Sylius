@@ -81,9 +81,7 @@ interface ChannelInterface extends
     public function setMenuTaxon(?TaxonInterface $menuTaxon): void;
 
     /**
-     * @return Collection|CountryInterface[]
-     *
-     * @psalm-return Collection<array-key, CountryInterface>
+     * @return Collection<array-key, CountryInterface>
      */
     public function getCountries(): Collection;
 

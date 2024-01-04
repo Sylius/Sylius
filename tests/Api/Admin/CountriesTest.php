@@ -72,7 +72,7 @@ final class CountriesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'IE',
                 'enabled' => true,
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -101,8 +101,8 @@ final class CountriesTest extends JsonApiTestCase
                     'code' => 'US-WA',
                     'name' => 'Washington',
                     'country' => $country->getCode(),
-                ]]
-            ], JSON_THROW_ON_ERROR),
+                ]],
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

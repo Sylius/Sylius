@@ -29,30 +29,13 @@ use Webmozart\Assert\Assert;
 
 final class ShopBasedCartContext implements ResettableCartContextInterface
 {
-    private CartContextInterface $cartContext;
-
-    private ShopperContextInterface $shopperContext;
-
-    private ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver;
-
     private ?OrderInterface $cart = null;
 
     public function __construct(
-        CartContextInterface $cartContext,
-        ShopperContextInterface $shopperContext,
-        ?CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver = null,
+        private CartContextInterface $cartContext,
+        private ShopperContextInterface $shopperContext,
+        private CreatedByGuestFlagResolverInterface $createdByGuestFlagResolver,
     ) {
-        $this->cartContext = $cartContext;
-        $this->shopperContext = $shopperContext;
-        $this->createdByGuestFlagResolver = $createdByGuestFlagResolver;
-
-        if ($createdByGuestFlagResolver === null) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.10.9',
-                'Not passing a $createdByGuestFlagResolver through constructor is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
     }
 
     public function getCart(): BaseOrderInterface
@@ -107,7 +90,7 @@ final class ShopBasedCartContext implements ResettableCartContextInterface
 
     private function setCustomer(OrderInterface $cart, CustomerInterface $customer): void
     {
-        if ($this->createdByGuestFlagResolver !== null && !$this->createdByGuestFlagResolver->resolveFlag()) {
+        if (!$this->createdByGuestFlagResolver->resolveFlag()) {
             $cart->setCustomerWithAuthorization($customer);
 
             return;

@@ -27,7 +27,7 @@ final class ProductVariantCombinationValidator extends ConstraintValidator
     {
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var ProductVariantCombination $constraint */
         Assert::isInstanceOf($constraint, ProductVariantCombination::class);

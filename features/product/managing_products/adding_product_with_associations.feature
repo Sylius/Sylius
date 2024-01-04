@@ -10,7 +10,7 @@ Feature: Adding a new product with associations
         And the store has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
         And I am logged in as an administrator
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
@@ -24,7 +24,7 @@ Feature: Adding a new product with associations
         And this product should also have an association "Alternatives" with products "LG G4" and "LG G5"
         And the product "LG G3" should appear in the store
 
-    @ui @javascript @no-api
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new product with associations after changing associated items
         When I want to create a new simple product
         And I specify its code as "lg_g3"
@@ -38,7 +38,7 @@ Feature: Adding a new product with associations
         And this product should not have an association "Accessories" with product "LG earphones"
         And the product "LG G3" should appear in the store
 
-    @ui @javascript
+    @ui @mink:chromedriver @no-api
     Scenario: Adding a new product with association with numeric code
         Given the store has 123 product association type
         When I want to create a new simple product

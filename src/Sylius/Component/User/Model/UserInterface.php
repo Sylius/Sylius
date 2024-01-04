@@ -19,15 +19,16 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\Encoder\EncoderAwareInterface;
 use SyliusLabs\Polyfill\Symfony\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherAwareInterface;
 
 interface UserInterface extends
     AdvancedUserInterface,
     CredentialsHolderInterface,
     ResourceInterface,
-    \Serializable,
     TimestampableInterface,
     ToggleableInterface,
-    EncoderAwareInterface
+    EncoderAwareInterface,
+    PasswordHasherAwareInterface
 {
     public const DEFAULT_ROLE = 'ROLE_USER';
 
@@ -100,9 +101,7 @@ interface UserInterface extends
     public function removeRole(string $role): void;
 
     /**
-     * @return Collection|UserOAuthInterface[]
-     *
-     * @psalm-return Collection<array-key, UserOAuthInterface>
+     * @return Collection<array-key, UserOAuthInterface>
      */
     public function getOAuthAccounts(): Collection;
 
@@ -114,5 +113,6 @@ interface UserInterface extends
 
     public function __serialize(): array;
 
+    /** @param array<array-key, mixed> $data */
     public function __unserialize(array $data): void;
 }

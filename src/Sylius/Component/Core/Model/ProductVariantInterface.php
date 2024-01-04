@@ -51,9 +51,7 @@ interface ProductVariantInterface extends
     public function setShippingCategory(?ShippingCategoryInterface $shippingCategory): void;
 
     /**
-     * @return Collection|ChannelPricingInterface[]
-     *
-     * @psalm-return Collection<array-key, ChannelPricingInterface>
+     * @return Collection<array-key, ChannelPricingInterface>
      */
     public function getChannelPricings(): Collection;
 

@@ -10,18 +10,10 @@ Feature: Editing tax rate
         And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I am logged in as an administrator
 
-    @todo
-    Scenario: Trying to change tax rate code
-        When I want to modify a tax rate "United States Sales Tax"
-        And I change its code to "us_vat"
-        And I save my changes
-        Then I should be notified that code cannot be changed
-        And tax rate "United States Sales Tax" should still have code "united_states_sales_tax"
-
     @ui @api
-    Scenario: Seeing disabled code field when editing tax rate
+    Scenario: Inability of changing the code of an existing tax rate
         When I want to modify a tax rate "United States Sales Tax"
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
     @ui @api
     Scenario: Renaming the tax rate

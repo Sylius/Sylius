@@ -16,9 +16,9 @@ namespace Sylius\Tests\Functional;
 use PHPUnit\Framework\Assert;
 use Sylius\Component\Core\Model\ProductImage;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\BrowserKit\Client;
 
 final class ImageUploaderTest extends WebTestCase
 {
@@ -31,7 +31,7 @@ final class ImageUploaderTest extends WebTestCase
         self::$client = static::createClient();
 
         $imageUploader = self::$kernel->getContainer()->get('sylius.image_uploader');
-        $fileSystem =  self::$kernel->getContainer()->get('gaufrette.sylius_image_filesystem');
+        $fileSystem = self::$kernel->getContainer()->get('gaufrette.sylius_image_filesystem');
 
         $file = new UploadedFile(__DIR__ . '/../Resources/xss.svg', 'xss.svg');
         Assert::assertStringContainsString('<script', $this->getContent($file));

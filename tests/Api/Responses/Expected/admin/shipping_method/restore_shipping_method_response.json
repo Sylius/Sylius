@@ -12,12 +12,17 @@
     "configuration": {
         "WEB": {
             "amount": 500
+        },
+        "MOBILE": {
+            "amount": 1000
         }
+
     },
     "zone": "\/api\/v2\/admin\/zones\/WORLD",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
+    "rules": [],
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/shipping-method-translations\/@integer@",

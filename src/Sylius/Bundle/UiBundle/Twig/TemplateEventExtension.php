@@ -36,13 +36,14 @@ final class TemplateEventExtension extends AbstractExtension
     /**
      * @param string|string[] $eventName
      */
-    public function render(string|array $eventName, array $context = []): string
+    public function render(array|string $eventName, array $context = []): string
     {
         if (is_string($eventName)) {
             $eventName = [$eventName];
         }
         Assert::notEmpty($eventName);
 
+        /** @var non-empty-list<string> $eventName */
         $eventName = array_filter($eventName, fn (?string $eventName) => $eventName !== null);
 
         return $this->templateEventRenderer->render($eventName, $context);

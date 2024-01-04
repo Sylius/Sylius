@@ -11,6 +11,7 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Fixer\ClassNotation\OrderedTypesFixer;
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 use PhpCsFixer\Fixer\LanguageConstruct\ErrorSuppressionFixer;
@@ -22,16 +23,15 @@ return static function (ECSConfig $config): void {
     $config->import('vendor/sylius-labs/coding-standard/ecs.php');
 
     $config->parallel();
-    $config->paths(['src/Sylius']);
+    $config->paths(['src/Sylius', 'tests']);
     $config->skip([
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         InlineDocCommentDeclarationSniff::class . '.NoAssignment',
         VisibilityRequiredFixer::class => ['*Spec.php'],
-        ErrorSuppressionFixer::class => 'src/Sylius/Bundle/CoreBundle/DependencyInjection/Compiler/BackwardsCompatibility/CancelOrderStateMachineCallbackPass.php',
         '**/var/*',
-        'src/Sylius/Behat/Service/Converter/IriConverter.php',
     ]);
     $config->ruleWithConfiguration(PhpdocSeparationFixer::class, ['groups' => [['Given', 'When', 'Then']]]);
+    $config->ruleWithConfiguration(OrderedTypesFixer::class, ['null_adjustment' => 'always_last']);
     $config->ruleWithConfiguration(
         HeaderCommentFixer::class,
         [

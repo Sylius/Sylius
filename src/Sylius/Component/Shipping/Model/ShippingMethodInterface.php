@@ -79,9 +79,7 @@ interface ShippingMethodInterface extends
     public function setConfiguration(array $configuration): void;
 
     /**
-     * @return Collection|ShippingMethodRuleInterface[]
-     *
-     * @psalm-return Collection<array-key, ShippingMethodRuleInterface>
+     * @return Collection<array-key, ShippingMethodRuleInterface>
      */
     public function getRules(): Collection;
 

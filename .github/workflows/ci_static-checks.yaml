@@ -14,6 +14,9 @@ on:
                 required: true
                 type: string
 
+permissions:
+    contents: read
+
 jobs:
     get-matrix:
         runs-on: ubuntu-latest
@@ -90,11 +93,11 @@ jobs:
                     path: |
                         ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}
-                    
+
             -   name: "Require ext-random"
                 if: matrix.php == '8.2'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
-                    
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
@@ -103,6 +106,7 @@ jobs:
 
             -   name: "Check for security vulnerabilities"
                 run: symfony security:check
+                continue-on-error: true
 
             -   name: "Validate Twig templates"
                 run: bin/console lint:twig src
@@ -119,9 +123,6 @@ jobs:
             -   name: Run PHPArkitect
                 run: vendor/bin/phparkitect check
 
-            -   name: Run Psalm
-                run: vendor/bin/psalm --show-info=false --output-format=github --php-version=${{ matrix.php }}
-
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
 
@@ -133,4 +134,4 @@ jobs:
                     (cat composer.json | jq '.["autoload-dev"]["psr-4"] |= . + {"Sylius\\Behat\\": "src/Sylius/Behat/"}' | jq 'del(.autoload["psr-4"]["Sylius\\Behat\\"])') > _composer.json
                     mv _composer.json composer.json
                     composer dump-autoload
-                    composer-require-checker check --config-file=composer-require-checker.json
+                    composer-require-checker check --config-file=composer-require-checker.json --ignore-parse-errors

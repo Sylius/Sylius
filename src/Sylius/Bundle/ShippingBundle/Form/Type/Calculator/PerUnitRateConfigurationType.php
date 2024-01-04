@@ -17,9 +17,6 @@ use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Range;
-use Symfony\Component\Validator\Constraints\Type;
 
 final class PerUnitRateConfigurationType extends AbstractType
 {
@@ -28,11 +25,6 @@ final class PerUnitRateConfigurationType extends AbstractType
         $builder
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.amount',
-                'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
-                    new Range(['min' => 0, 'minMessage' => 'sylius.shipping_method.calculator.min', 'groups' => ['sylius']]),
-                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
-                ],
                 'currency' => $options['currency'],
             ])
         ;

@@ -16,7 +16,7 @@ namespace Sylius\Bundle\UiBundle\Renderer;
 interface TwigEventRendererInterface
 {
     /**
-     * @param string[] $eventNames
+     * @param non-empty-list<string> $eventNames
      * @param array<string, mixed> $context
      */
     public function render(array $eventNames, array $context = []): string;

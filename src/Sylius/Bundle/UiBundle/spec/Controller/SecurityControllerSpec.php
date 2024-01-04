@@ -55,7 +55,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius')->willReturn([
+        $requestAttributes->get('_sylius', [])->willReturn([
             'template' => 'CustomTemplateName',
             'form' => 'custom_form_type',
         ]);
@@ -82,7 +82,7 @@ final class SecurityControllerSpec extends ObjectBehavior
         RouterInterface $router,
     ): void {
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius')->willReturn(['logged_in_route' => 'foo_bar']);
+        $requestAttributes->get('_sylius', [])->willReturn(['logged_in_route' => 'foo_bar']);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')->willReturn(true);
         $router->generate('foo_bar')->willReturn('/login');
 

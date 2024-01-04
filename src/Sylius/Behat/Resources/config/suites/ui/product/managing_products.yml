@@ -19,6 +19,7 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.product_option
+                - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon

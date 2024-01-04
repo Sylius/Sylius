@@ -59,7 +59,7 @@ final class ProvincesTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'abbreviation' => 'Minn.',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

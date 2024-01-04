@@ -23,7 +23,15 @@
                 <attribute name="method">GET</attribute>
                 <attribute name="path">/admin/orders</attribute>
                 <attribute name="filters">
+                    <attribute>sylius.api.order_channel_filter</attribute>
+                    <attribute>sylius.api.order_currency_filter</attribute>
+                    <attribute>sylius.api.order_customer_filter</attribute>
+                    <attribute>sylius.api.order_date_filter</attribute>
                     <attribute>sylius.api.order_number_filter</attribute>
+                    <attribute>sylius.api.order_product_filter</attribute>
+                    <attribute>sylius.api.order_shipping_method_filter</attribute>
+                    <attribute>sylius.api.order_total_filter</attribute>
+                    <attribute>sylius.api.order_variants_filter</attribute>
                 </attribute>
                 <attribute name="order">
                     <attribute name="number">DESC</attribute>
@@ -67,6 +75,16 @@
                 <attribute name="path">/admin/orders/{tokenValue}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:order:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_adjustments">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/orders/{tokenValue}/adjustments</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetOrderAdjustmentsAction</attribute>
+                <attribute name="write">false</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:adjustment:read</attribute>
                 </attribute>
             </itemOperation>
 
@@ -409,12 +427,14 @@
         <property name="shippingState" writable="false" />
         <property name="total" writable="false" />
         <property name="orderPromotionTotal" writable="false" />
+        <property name="shippingPromotionTotal" writable="false" />
         <property name="items" readable="true" writable="true">
             <subresource resourceClass="%sylius.model.order_item.class%" />
         </property>
         <property name="notes" writable="true" />
         <property name="itemsTotal" readable="true" />
         <property name="taxTotal" readable="true"/>
+        <property name="shippingTaxTotal" readable="true"/>
         <property name="taxExcludedTotal" readable="true"/>
         <property name="taxIncludedTotal" readable="true"/>
         <property name="adjustments" writable="false">

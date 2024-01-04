@@ -21,9 +21,7 @@ use Sylius\Component\User\Model\UserInterface;
 interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, ProductReviewerInterface
 {
     /**
-     * @return Collection|OrderInterface[]
-     *
-     * @psalm-return Collection<array-key, OrderInterface>
+     * @return Collection<array-key, OrderInterface>
      */
     public function getOrders(): Collection;
 
@@ -38,9 +36,7 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, P
     public function hasAddress(AddressInterface $address): bool;
 
     /**
-     * @return Collection|AddressInterface[]
-     *
-     * @psalm-return Collection<array-key, AddressInterface>
+     * @return Collection<array-key, AddressInterface>
      */
     public function getAddresses(): Collection;
 

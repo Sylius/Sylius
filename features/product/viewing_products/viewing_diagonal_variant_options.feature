@@ -34,6 +34,6 @@ Feature: Viewing diagonal variants options
     @api @no-ui
     Scenario: Not seeing unavailable variants
         When I view variants of the "Extra Cool T-Shirt" product
-        And I filter them by "BLUE" option value
-        And I filter them by "SMALL" option value
+        And I filter them by "Blue" option value
+        And I filter them by "Small" option value
         Then I should not see any variants

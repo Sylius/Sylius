@@ -3,8 +3,11 @@
 
 {% set dropdown_trigger %}
     <div class="d-flex lh-1 text-reset p-0 cursor-pointer">
-        {% set avatarPath = user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail') %}
-        {{ avatar.small(avatarPath) }}
+        {% if user.avatar.path is not defined %}
+            {{ avatar.small() }}
+        {% else %}
+            {{ avatar.small(user.avatar.path|imagine_filter('sylius_admin_admin_user_avatar_thumbnail')) }}
+        {% endif %}
         <div class="d-none d-xl-block ps-2">
             <div class="mb-1 small text-muted">Hello</div>
             <div>{{ user.firstName }}</div>

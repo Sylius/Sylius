@@ -1,0 +1,25 @@
+framework:
+    workflows:
+        !php/const Sylius\Component\Shipping\ShipmentTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: state
+            supports:
+                - Sylius\Component\Core\Model\ShipmentInterface
+            initial_marking: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CART
+            places:
+                - !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CART
+                - !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_READY
+                - !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_SHIPPED
+                - !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CANCELLED
+            transitions:
+                !php/const Sylius\Component\Shipping\ShipmentTransitions::TRANSITION_CREATE:
+                    from: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CART
+                    to: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_READY
+                !php/const Sylius\Component\Shipping\ShipmentTransitions::TRANSITION_SHIP:
+                    from: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_READY
+                    to: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_SHIPPED
+                !php/const Sylius\Component\Shipping\ShipmentTransitions::TRANSITION_CANCEL:
+                    from: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_READY
+                    to: !php/const Sylius\Component\Shipping\Model\ShipmentInterface::STATE_CANCELLED

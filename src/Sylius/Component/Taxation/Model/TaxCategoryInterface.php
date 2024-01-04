@@ -29,9 +29,7 @@ interface TaxCategoryInterface extends CodeAwareInterface, TimestampableInterfac
     public function setDescription(?string $description): void;
 
     /**
-     * @return Collection|TaxRateInterface[]
-     *
-     * @psalm-return Collection<array-key, TaxRateInterface>
+     * @return Collection<array-key, TaxRateInterface>
      */
     public function getRates(): Collection;
 

@@ -29,7 +29,6 @@ final class UserPasswordHasher implements UserPasswordHasherInterface
      */
     public function hash(CredentialsHolderInterface $user): string
     {
-        /** @psalm-suppress InvalidArgument */
         $passwordHasher = $this->passwordHasherFactory->getPasswordHasher($user::class);
 
         /**

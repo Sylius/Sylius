@@ -13,19 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
+use Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException;
 use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
+use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /** @experimental */
 final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 {
-    private const OBJECT_TO_POPULATE = 'object_to_populate';
-
     public function __construct(
         private DenormalizerInterface $itemNormalizer,
-        private NameConverterInterface $nameConverter,
+        private AdvancedNameConverterInterface $nameConverter,
     ) {
     }
 
@@ -36,38 +37,24 @@ final class CommandDenormalizer implements ContextAwareDenormalizerInterface
 
     public function denormalize($data, $type, $format = null, array $context = [])
     {
-        if (isset($context[self::OBJECT_TO_POPULATE])) {
+        try {
             return $this->itemNormalizer->denormalize($data, $type, $format, $context);
-        }
-
-        $class = $context['input']['class'];
-        $constructor = (new \ReflectionClass($class))->getConstructor();
-
-        if (null !== $constructor) {
-            $this->assertConstructorArgumentsPresence($constructor, $class, $data);
-        }
-
-        return $this->itemNormalizer->denormalize($data, $type, $format, $context);
-    }
-
-    private function assertConstructorArgumentsPresence(
-        \ReflectionMethod $constructor,
-        string $class,
-        mixed $data,
-    ): void {
-        $parameters = $constructor->getParameters();
-
-        $missingFields = [];
-        foreach ($parameters as $parameter) {
-            $name = $this->nameConverter->normalize($parameter->getName(), $class);
-            if (!isset($data[$name]) && !($parameter->allowsNull() || $parameter->isDefaultValueAvailable())) {
-                $missingFields[] = $name;
+        } catch (UnexpectedValueException $exception) {
+            $previousException = $exception->getPrevious();
+            if ($previousException instanceof NotNormalizableValueException) {
+                throw new InvalidRequestArgumentException(
+                    sprintf(
+                        'Request field "%s" should be of type "%s".',
+                        $this->nameConverter->normalize($previousException->getPath(), class: $context['input']['class']),
+                        implode(', ', $previousException->getExpectedTypes()),
+                    ),
+                );
             }
-        }
 
-        if (count($missingFields) > 0) {
+            throw $exception;
+        } catch (MissingConstructorArgumentsException $exception) {
             throw new MissingConstructorArgumentsException(
-                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $missingFields)),
+                sprintf('Request does not have the following required fields specified: %s.', implode(', ', $exception->getMissingConstructorArguments())),
             );
         }
     }

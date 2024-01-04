@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
@@ -74,7 +74,7 @@ final class ProductVariantNormalizer implements ContextAwareNormalizerInterface,
         $appliedPromotions = $object->getAppliedPromotionsForChannel($channel);
         if (!$appliedPromotions->isEmpty()) {
             $data['appliedPromotions'] = array_map(
-                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromItem($catalogPromotion),
+                fn (CatalogPromotionInterface $catalogPromotion) => $this->iriConverter->getIriFromResource($catalogPromotion),
                 $appliedPromotions->toArray(),
             );
         }

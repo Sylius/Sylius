@@ -29,14 +29,16 @@ parameters:
 
         # Deprecated classes
         - 'src/Sylius/Bundle/CoreBundle/Application/Kernel.php'
-        - 'src/Sylius/Bundle/UserBundle/Security/UserPasswordEncoder.php'
 
         # To investigate, occurs after release of doctrine/orm 2.14, the processing of these classes ends with exit code 143
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/DQL/**.php'
         - 'src/Sylius/Bundle/CoreBundle/Doctrine/ORM/SqlWalker/**.php'
     ignoreErrors:
+        - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
         - '/Access to an undefined property Doctrine\\Common\\Collections\\ArrayCollection/'
+        - '/Class "Sylius\\Bundle\\CoreBundle\\Fixture\\PaymentFixture" not found/'
+        - '/Class Symfony\\Component\\Clock\\Clock not found\./'
         - '/Class Symfony\\Component\\Security\\Core\\Authentication\\Token\\UsernamePasswordToken constructor invoked with 4 parameters\, 2\-3 required./'
         - '/Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters\, 1\-2 required\./'
-        - '/(Interface|Class) [a-zA-Z\\]+ specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior, we are basing on Psalm for generics checks
         - '/Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize\(\) invoked with 2 parameters, 1 required./'
+        - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'

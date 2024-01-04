@@ -42,13 +42,10 @@ class CatalogPromotion implements CatalogPromotionInterface
 
     protected string $state = CatalogPromotionStates::STATE_INACTIVE;
 
-    /**
-     * @var Collection|CatalogPromotionScopeInterface[]
-     *
-     * @psalm-var Collection<array-key, CatalogPromotionScopeInterface>
-     */
+    /** @var Collection<array-key, CatalogPromotionScopeInterface> */
     protected Collection $scopes;
 
+    /** @var Collection<array-key, CatalogPromotionActionInterface> */
     protected Collection $actions;
 
     protected ?bool $enabled = true;

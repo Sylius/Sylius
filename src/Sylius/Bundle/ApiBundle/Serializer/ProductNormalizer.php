@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -46,12 +46,12 @@ final class ProductNormalizer implements ContextAwareNormalizerInterface, Normal
 
         $data['variants'] = $object
             ->getEnabledVariants()
-            ->map(fn (ProductVariantInterface $variant): string => $this->iriConverter->getIriFromItem($variant))
+            ->map(fn (ProductVariantInterface $variant): string => $this->iriConverter->getIriFromResource($variant))
             ->getValues()
         ;
 
         $defaultVariant = $this->defaultProductVariantResolver->getVariant($object);
-        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromItem($defaultVariant);
+        $data['defaultVariant'] = $defaultVariant === null ? null : $this->iriConverter->getIriFromResource($defaultVariant);
 
         return $data;
     }

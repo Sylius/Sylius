@@ -18,13 +18,13 @@ use Sylius\Bundle\UiBundle\Registry\Block;
 /** @internal */
 final class BlockRenderingHistory
 {
-    /** @psalm-var list<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: Block, start: float, stop: float, time: float}>}> */
+    /** @var array<array{name: string, start: float, stop: float, time: float, blocks: list<array{definition: Block, start: float, stop: float, time: float}>}> */
     private $renderedEvents = [];
 
-    /** @psalm-var list<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: Block, start: float, stop: float, time: float}>}> */
+    /** @var array<array{name: string, start: float, stop?: float, time?: float, blocks: list<array{definition: Block, start: float, stop: float, time: float}>}> */
     private array $currentlyRenderedEvents = [];
 
-    /** @psalm-var list<array{definition: Block, start: float, stop?: float, time?: float}> */
+    /** @var array<array{definition: Block, start: float, stop?: float, time?: float}> */
     private array $currentlyRenderedBlocks = [];
 
     /**

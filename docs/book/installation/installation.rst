@@ -75,10 +75,14 @@ After everything is in place, run the following command to install Sylius:
 Configuring Mailer
 ------------------
 
-In order to send emails you need to configure Mailer Service. Basically you need to:
+In order to send emails you need to configure Mailer Service. Basically there are multiple ways to do it:
+
+* We are recommending to use `Symfony Mailer <https://symfony.com/doc/current/mailer.html>`_ where out of the box, you can deliver emails by configuring the ``MAILER_DSN`` variable in your .env file.
+* In Symfony Mailer use the `3rd Party Transports <https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport>`_
+* (deprecated) Use SwiftMailer with this short configuration:
 
 1. **Create an account on a mailing service.**
-2. **In your** ``.env`` **file modify the** ``MAILER_URL`` **variable.**
+2. **In your** ``.env`` **file modify/add the** ``MAILER_URL`` **variable.**
 
 .. code-block:: text
 

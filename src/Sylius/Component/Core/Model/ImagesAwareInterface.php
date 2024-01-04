@@ -18,16 +18,12 @@ use Doctrine\Common\Collections\Collection;
 interface ImagesAwareInterface
 {
     /**
-     * @return Collection|ImageInterface[]
-     *
-     * @psalm-return Collection<array-key, ImageInterface>
+     * @return Collection<array-key, ImageInterface>
      */
     public function getImages(): Collection;
 
     /**
-     * @return Collection|ImageInterface[]
-     *
-     * @psalm-return Collection<array-key, ImageInterface>
+     * @return Collection<array-key, ImageInterface>
      */
     public function getImagesByType(string $type): Collection;
 

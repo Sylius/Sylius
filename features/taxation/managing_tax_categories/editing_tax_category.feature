@@ -8,16 +8,8 @@ Feature: Editing tax category
         Given the store has a tax category "Alcohol" with a code "alcohol"
         And I am logged in as an administrator
 
-    @todo
-    Scenario: Trying to change tax category code
-        When I want to modify a tax category "Alcohol"
-        And I change its code to "beverages"
-        And I save my changes
-        Then I should be notified that code cannot be changed
-        And tax category "Alcohol" should still have code "alcohol"
-
     @ui @api
-    Scenario: Seeing disabled code field when editing tax category
+    Scenario: Inability of changing the code of an existing tax category
         When I want to modify a tax category "Alcohol"
         Then I should not be able to edit its code
 

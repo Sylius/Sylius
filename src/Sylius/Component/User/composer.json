@@ -38,7 +38,7 @@
         "sylius-labs/polyfill-symfony-security": "^1.1",
         "sylius/resource": "^1.10",
         "symfony/polyfill-mbstring": "^1.28",
-        "symfony/security-core": "^6.3.3"
+        "symfony/security-core": "^6.4.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.2"

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -113,7 +113,7 @@ final class ProductContext implements Context
         $this->client->index(Resources::PRODUCTS);
 
         if ($taxon !== null) {
-            $this->client->addFilter('taxon', $this->iriConverter->getIriFromItem($taxon));
+            $this->client->addFilter('taxon', $this->iriConverter->getIriFromResource($taxon));
             $this->client->filter();
         }
     }
@@ -258,7 +258,7 @@ final class ProductContext implements Context
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->sharedStorage->get('product_variant');
 
-        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromItem($productVariant));
+        $variantResponse = $this->client->showByIri($this->iriConverter->getIriFromResource($productVariant));
 
         Assert::false($this->responseChecker->getValue($variantResponse, 'inStock'));
     }
@@ -282,7 +282,7 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $checkedVariant */
         $checkedVariant = $this->sharedStorage->get('product_variant');
-        $variant = $this->fetchItemByIri($this->iriConverter->getIriFromItem($checkedVariant));
+        $variant = $this->fetchItemByIri($this->iriConverter->getIriFromResource($checkedVariant));
 
         Assert::same($variant['price'], $price);
         Assert::same($variant['code'], $checkedVariant->getCode());
@@ -656,7 +656,7 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeTheProductAssociation(ProductAssociationTypeInterface $productAssociationType): void
     {
-        $productAssociationTypeIri = $this->iriConverter->getIriFromItem($productAssociationType);
+        $productAssociationTypeIri = $this->iriConverter->getIriFromResource($productAssociationType);
 
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
@@ -770,7 +770,7 @@ final class ProductContext implements Context
         $productVariants = $this->responseChecker->getCollection(
             $this->client->index(
                 Resources::PRODUCT_VARIANTS,
-                ['product' => $this->iriConverter->getIriFromItem($this->sharedStorage->get('product'))],
+                ['product' => $this->iriConverter->getIriFromResource($this->sharedStorage->get('product'))],
             ),
         );
 
@@ -845,7 +845,7 @@ final class ProductContext implements Context
 
     private function isProductAssociated(ProductInterface $product, array $associatedProducts): bool
     {
-        $productIri = $this->iriConverter->getIriFromItem($product);
+        $productIri = $this->iriConverter->getIriFromResource($product);
 
         return in_array($productIri, $associatedProducts, true);
     }

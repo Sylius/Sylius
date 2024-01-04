@@ -1,0 +1,93 @@
+{
+    "@context": "\/api\/v2\/contexts\/Product",
+    "@id": "\/api\/v2\/admin\/products\/MUG",
+    "@type": "Product",
+    "id": @integer@,
+    "code": "MUG",
+    "variantSelectionMethod": "choice",
+    "enabled": false,
+    "options": [
+        "\/api\/v2\/admin\/product-options\/COLOR"
+    ],
+    "variants": [
+        "\/api\/v2\/admin\/product-variants\/MUG_BLUE",
+        "\/api\/v2\/admin\/product-variants\/MUG_RED"
+    ],
+    "mainTaxon": "\/api\/v2\/admin\/taxons\/CAPS",
+    "productTaxons": [
+        "\/api\/v2\/admin\/product-taxons\/@integer@"
+    ],
+    "channels": [
+        "\/api\/v2\/admin\/channels\/MOBILE"
+    ],
+    "reviews": [
+        "\/api\/v2\/admin\/product-reviews\/@integer@",
+        "\/api\/v2\/admin\/product-reviews\/@integer@"
+    ],
+    "associations": [
+        "\/api\/v2\/admin\/product-associations\/@integer@"
+    ],
+    "attributes": [
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
+            "value": "Cotton",
+            "localeCode": "en_US"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
+            "value": "Bawełna",
+            "localeCode": "pl_PL"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
+            "@type": "ProductAttributeValue",
+            "id": @integer@,
+            "attribute": "\/api\/v2\/admin\/product-attributes\/dishwasher_safe",
+            "value": true,
+            "localeCode": null
+        }
+    ],
+    "averageRating": 0,
+    "images": [
+        {
+            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@type": "ProductImage",
+            "id": @integer@,
+            "type": "thumbnail",
+            "path": "\/media\/image\/product.jpg",
+            "productVariants": []
+        }
+    ],
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@type": "ProductTranslation",
+            "id": @integer@,
+            "name": "Cap",
+            "slug": "caps/cap",
+            "description": "This is a cap",
+            "shortDescription": "Short cap description",
+            "metaKeywords": "cap",
+            "metaDescription": "Cap description"
+        },
+        "pl_PL": {
+            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@type": "ProductTranslation",
+            "id": @integer@,
+            "name": "Czapka",
+            "slug": "czapki/czapka",
+            "description": "To jest czapka",
+            "shortDescription": "Krótki opis czapki",
+            "metaKeywords": "czapka",
+            "metaDescription": "Opis czapki"
+        }
+    },
+    "createdAt": @date@,
+    "updatedAt": @date@
+}

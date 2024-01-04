@@ -35,9 +35,6 @@ final class MoneyType extends AbstractType
         ;
     }
 
-    /**
-     * @psalm-suppress MissingPropertyType
-     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['currency'] = $options['currency'];

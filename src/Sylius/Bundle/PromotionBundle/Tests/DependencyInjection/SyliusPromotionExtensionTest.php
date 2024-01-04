@@ -117,6 +117,42 @@ final class SyliusPromotionExtensionTest extends AbstractExtensionTestCase
         );
     }
 
+    /** @test */
+    public function it_loads_promotion_action_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'promotion_action' => [
+                'validation_groups' => [
+                    'order_percentage_discount' => ['sylius', 'order_percentage_discount'],
+                    'order_fixed_discount' => ['sylius', 'order_fixed_discount'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.promotion_action.validation_groups',
+            ['order_percentage_discount' => ['sylius', 'order_percentage_discount'], 'order_fixed_discount' => ['sylius', 'order_fixed_discount']],
+        );
+    }
+
+    /** @test */
+    public function it_loads_promotion_rule_validation_groups_parameter_value_properly(): void
+    {
+        $this->load([
+            'promotion_rule' => [
+                'validation_groups' => [
+                    'cart_quantity' => ['sylius', 'cart_quantity'],
+                    'nth_order' => ['sylius', 'nth_order'],
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter(
+            'sylius.promotion.promotion_rule.validation_groups',
+            ['cart_quantity' => ['sylius', 'cart_quantity'], 'nth_order' => ['sylius', 'nth_order']],
+        );
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusPromotionExtension()];

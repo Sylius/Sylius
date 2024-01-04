@@ -72,5 +72,34 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="validator.constraint_validator" alias="sylius_channel_code_among_existing_ones" />
         </service>
+
+        <service id="sylius.validator.channel_code_collection" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollectionValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="validator.constraint_validator" alias="sylius_channel_code_collection" />
+        </service>
+
+        <service id="sylius.validator.customer_group_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CustomerGroupCodeExistsValidator">
+            <argument type="service" id="sylius.repository.customer_group" />
+            <tag name="validator.constraint_validator" alias="sylius_customer_group_code_exists" />
+        </service>
+
+        <service id="sylius.validator.country_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExistsValidator">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="validator.constraint_validator" alias="sylius_country_code_exists" />
+        </service>
+
+        <service id="sylius.validator.taxon_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExistsValidator">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="validator.constraint_validator" alias="sylius_taxon_code_exists" />
+        </service>
+
+        <service id="sylius.validator.product_code_exists" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExistsValidator">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="validator.constraint_validator" alias="sylius_product_code_exists" />
+        </service>
+
+        <service id="sylius.validator.product_image_variants_belong_to_owner" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwnerValidator">
+            <tag name="validator.constraint_validator" alias="sylius_product_image_variants_belong_to_owner" />
+        </service>
     </services>
 </container>

@@ -27,40 +27,17 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         private OrderRepositoryInterface $orderRepository,
         private Factory $stateMachineFactory,
         private string $expirationPeriod,
-        private ?LoggerInterface $logger = null,
-        private ?ObjectManager $orderManager = null,
+        private LoggerInterface $logger,
+        private ObjectManager $orderManager,
         private int $batchSize = 100,
     ) {
-        if (null === $logger) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.7',
-                'Not passing a $logger is deprecated and will be prohibited in Sylius 2.0.',
-            );
-        }
-
-        if (null === $orderManager) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing the $orderManager is deprecated as it makes $batchSize useless.',
-            );
-        }
-
-        $this->logger = $logger;
     }
 
     public function cancel(): void
     {
-        $batchSize = null === $this->orderManager ? null : $this->batchSize;
-
-        while ([] !== $expiredUnpaidOrders = $this->findExpiredUnpaidOrders($batchSize)) {
+        while ([] !== $expiredUnpaidOrders = $this->findExpiredUnpaidOrders($this->batchSize)) {
             foreach ($expiredUnpaidOrders as $expiredUnpaidOrder) {
                 $this->cancelOrder($expiredUnpaidOrder);
-            }
-
-            if (null === $this->orderManager) {
-                return;
             }
 
             $this->orderManager->flush();
@@ -68,7 +45,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
         }
     }
 
-    private function findExpiredUnpaidOrders(?int $batchSize): array
+    private function findExpiredUnpaidOrders(int $batchSize): array
     {
         return $this->orderRepository->findOrdersUnpaidSince(
             new \DateTime('-' . $this->expirationPeriod),
@@ -82,7 +59,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
             $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, OrderTransitions::GRAPH);
             $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);
         } catch (SMException $e) {
-            $this->logger?->error(
+            $this->logger->error(
                 sprintf('An error occurred while cancelling unpaid order #%s', $expiredUnpaidOrder->getId()),
                 ['exception' => $e, 'message' => $e->getMessage()],
             );

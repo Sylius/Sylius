@@ -153,7 +153,7 @@ Basing on the **TaxRate** assigned on the Product it will get its calculator typ
 
 You can create your custom calculator for taxes by creating a class that implements
 the `CalculatorInterface <https://github.com/Sylius/Sylius/blob/{current_version}/src/Sylius/Component/Taxation/Calculator/CalculatorInterface.php>`_
-and registering it as a ``sylius.tax_calculator.your_calculator_name`` service.
+and registering it as a ``sylius.tax_calculator.your_calculator_name`` service and tagging it with the `sylius.tax_calculator` tag.
 
 Built-in Calculators
 ''''''''''''''''''''

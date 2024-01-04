@@ -383,7 +383,7 @@ class UserController extends ResourceController
 
     private function getSyliusAttribute(Request $request, string $attribute, $default = null)
     {
-        $attributes = $request->attributes->get('_sylius');
+        $attributes = $request->attributes->get('_sylius', []);
 
         return $attributes[$attribute] ?? $default;
     }

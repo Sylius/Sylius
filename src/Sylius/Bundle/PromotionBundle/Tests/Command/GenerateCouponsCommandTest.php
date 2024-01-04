@@ -24,7 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class GenerateCouponsCommandTest extends KernelTestCase
+final class GenerateCouponsCommandTest extends KernelTestCase
 {
     private Command $command;
 

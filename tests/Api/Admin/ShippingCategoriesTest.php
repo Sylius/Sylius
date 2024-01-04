@@ -72,7 +72,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'ultra',
                 'name' => 'Ultra',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(
@@ -98,7 +98,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
             server: $header,
             content: json_encode([
                 'name' => 'Not so default',
-            ], JSON_THROW_ON_ERROR),
+            ], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponse(

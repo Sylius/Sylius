@@ -53,6 +53,12 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
+                official_support:
+                    header: Official support
+                    browse_plugins: Browse plugins
+                    sylius_plus: Sylius Plus
+                    professional_services: Professional services
+                    find_a_partner: Find a partner
     ui:
         add_new_entry: Add a new entry
         catalog_promotion:

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace spec\Sylius\Bundle\ApiBundle\Serializer;
 
-use ApiPlatform\Core\Api\IriConverterInterface;
+use ApiPlatform\Api\IriConverterInterface;
 use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -107,8 +107,8 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
 
         $config->clearTaxonsExcludedFromShowingLowestPrice()->shouldBeCalled();
 
-        $iriConverter->getItemFromIri('/api/v2/taxons/first-new-taxon')->shouldBeCalledTimes(1)->willReturn($firstTaxon);
-        $iriConverter->getItemFromIri('/api/v2/taxons/second-new-taxon')->shouldBeCalledTimes(1)->willReturn($secondTaxon);
+        $iriConverter->getResourceFromIri('/api/v2/taxons/first-new-taxon')->shouldBeCalledTimes(1)->willReturn($firstTaxon);
+        $iriConverter->getResourceFromIri('/api/v2/taxons/second-new-taxon')->shouldBeCalledTimes(1)->willReturn($secondTaxon);
 
         $config->addTaxonExcludedFromShowingLowestPrice($firstTaxon)->shouldBeCalledTimes(1);
         $config->addTaxonExcludedFromShowingLowestPrice($secondTaxon)->shouldBeCalledTimes(1);
@@ -145,7 +145,7 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
 
         $config->clearTaxonsExcludedFromShowingLowestPrice()->shouldBeCalled();
 
-        $iriConverter->getItemFromIri(Argument::cetera())->shouldNotBeCalled();
+        $iriConverter->getResourceFromIri(Argument::cetera())->shouldNotBeCalled();
 
         $config->addTaxonExcludedFromShowingLowestPrice(Argument::any())->shouldNotBeCalled();
 
@@ -186,8 +186,8 @@ final class ChannelPriceHistoryConfigDenormalizerSpec extends ObjectBehavior
 
         $config->clearTaxonsExcludedFromShowingLowestPrice()->shouldBeCalled();
 
-        $iriConverter->getItemFromIri('/api/v2/taxons/first-new-taxon')->shouldBeCalledTimes(1)->willReturn($firstNewTaxon);
-        $iriConverter->getItemFromIri('/api/v2/taxons/second-new-taxon')->shouldBeCalledTimes(1)->willReturn($secondNewTaxon);
+        $iriConverter->getResourceFromIri('/api/v2/taxons/first-new-taxon')->shouldBeCalledTimes(1)->willReturn($firstNewTaxon);
+        $iriConverter->getResourceFromIri('/api/v2/taxons/second-new-taxon')->shouldBeCalledTimes(1)->willReturn($secondNewTaxon);
 
         $config->addTaxonExcludedFromShowingLowestPrice($firstNewTaxon)->shouldBeCalledTimes(1);
         $config->addTaxonExcludedFromShowingLowestPrice($secondNewTaxon)->shouldBeCalledTimes(1);

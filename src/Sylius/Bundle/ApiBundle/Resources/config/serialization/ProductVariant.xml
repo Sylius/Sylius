@@ -27,17 +27,19 @@
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="translations">
-            <group>admin:product_variant:create</group>
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
         </attribute>
         <attribute name="optionValues">
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
             <group>shop:product_variant:read</group>
         </attribute>
         <attribute name="channelPricings">
-            <group>admin:product_variant:create</group>
             <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
         </attribute>
         <attribute name="name">
@@ -47,6 +49,67 @@
             <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
             <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="position">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="tracked">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="onHold">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="onHand">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="weight">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="width">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="height">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="depth">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="taxCategory">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="shippingCategory">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="shippingRequired">
+            <group>admin:product_variant:read</group>
+            <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
+        </attribute>
+        <attribute name="createdAt">
+            <group>admin:product_variant:read</group>
+        </attribute>
+        <attribute name="updatedAt">
+            <group>admin:product_variant:read</group>
         </attribute>
     </class>
 </serializer>

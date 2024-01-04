@@ -33,3 +33,16 @@ Feature: Sign in to the store during checkout
         And I specify the password as "francis"
         And I sign in
         Then I should be notified about bad credentials
+
+    @ui @no-api @javascript
+    Scenario: Successful sign in after omitting fill the email field
+        Given I have product "PHP T-Shirt" in the cart
+        And I am at the checkout addressing step
+        When I specify the billing address for "Jon Snow" from "Ankh Morpork", "Frost Alley", "90210", "United States", "Texas"
+        And I try to complete the addressing step
+        And I specify the email as "francis@underwood.com"
+        And I specify the password as "whitehouse"
+        And I sign in
+        Then I should be notified to resubmit the addressing form
+        And I should not be notified that the form contains extra fields
+        And address "Jon Snow", "Ankh Morpork", "Frost Alley", "90210", "United States", "Texas" should be filled as billing address

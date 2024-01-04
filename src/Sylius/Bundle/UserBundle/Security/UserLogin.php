@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
-class UserLogin implements UserLoginInterface
+readonly class UserLogin implements UserLoginInterface
 {
     public function __construct(
         private TokenStorageInterface $tokenStorage,
@@ -53,21 +53,11 @@ class UserLogin implements UserLoginInterface
     protected function createToken(UserInterface $user, string $firewallName): UsernamePasswordToken
     {
         Assert::isInstanceOf($user, SymfonyUserInterface::class);
-        /** @deprecated parameter credential was deprecated in Symfony 5.4, so in Sylius 1.11 too, in Sylius 2.0 providing 4 arguments will be prohibited. */
-        if (3 === (new \ReflectionClass(UsernamePasswordToken::class))->getConstructor()->getNumberOfParameters()) {
-            return new UsernamePasswordToken(
-                $user,
-                $firewallName,
-                array_map(/** @param object|string $role */ static function ($role): string { return (string) $role; }, $user->getRoles()),
-            );
-        }
 
-        /** @psalm-suppress NullArgument */
         return new UsernamePasswordToken(
             $user,
-            null, // @phpstan-ignore-line continue to support Sf < 6
-            $firewallName, // @phpstan-ignore-line continue to support Sf < 6
-            array_map(/** @param object|string $role */ static fn ($role): string => (string) $role, $user->getRoles()),
+            $firewallName,
+            array_map(static fn (object|string $role): string => $role, $user->getRoles()),
         );
     }
 }

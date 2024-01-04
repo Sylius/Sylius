@@ -1,0 +1,19 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttribute",
+    "@id": "\/api\/v2\/admin\/product-attributes\/pages",
+    "@type": "ProductAttribute",
+    "code": "pages",
+    "configuration": {},
+    "position": 0,
+    "storageType": "integer",
+    "type": "integer",
+    "translatable": false,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-attribute-translations\/@integer@",
+            "@type": "ProductAttributeTranslation",
+            "id": "@integer@",
+            "name": "Pages"
+        }
+    }
+}

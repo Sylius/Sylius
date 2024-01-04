@@ -56,33 +56,33 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I name it :name in :language
+     * @When I name it :name in :localeCode
      * @When I do not name it
      */
-    public function iNameItInLanguage(?string $name = null, ?string $language = 'en_US'): void
+    public function iNameItInLanguage(?string $name = null, ?string $localeCode = 'en_US'): void
     {
-        $data = ['translations' => [$language => ['locale' => $language]]];
+        $data = ['translations' => [$localeCode => []]];
         if ($name !== null) {
-            $data['translations'][$language]['name'] = $name;
+            $data['translations'][$localeCode]['name'] = $name;
         }
 
         $this->client->updateRequestData($data);
     }
 
     /**
-     * @When I rename it to :name in :language
+     * @When I rename it to :name in :localeCode
      */
-    public function iRenameItInLanguage(string $name, string $language): void
+    public function iRenameItInLanguage(string $name, string $localeCode): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => $name, 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
     /**
-     * @When I remove its name from :language translation
+     * @When I remove its name from :localeCode translation
      */
-    public function iRemoveItsNameFromTranslation(string $language): void
+    public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
-        $this->client->updateRequestData(['translations' => [$language => ['name' => '', 'locale' => $language]]]);
+        $this->client->updateRequestData(['translations' => [$localeCode => ['name' => '']]]);
     }
 
     /**
@@ -103,7 +103,7 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->client->addSubResourceData(
             'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value, 'locale' => 'en_US']]],
+            ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
         );
     }
 

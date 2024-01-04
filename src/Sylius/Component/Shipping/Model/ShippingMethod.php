@@ -50,11 +50,7 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
     /** @var mixed[] */
     protected $configuration = [];
 
-    /**
-     * @var Collection|ShippingMethodRuleInterface[]
-     *
-     * @psalm-var Collection<array-key, ShippingMethodRuleInterface>
-     */
+    /** @var Collection<array-key, ShippingMethodRuleInterface> */
     protected $rules;
 
     public function __construct()

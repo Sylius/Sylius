@@ -17,20 +17,27 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
 {
+    function let(ProductVariantRepositoryInterface $productVariantRepository): void
+    {
+        $this->beConstructedWith($productVariantRepository);
+    }
+
     function it_implements_variant_resolver_interface(): void
     {
         $this->shouldImplement(ProductVariantResolverInterface::class);
     }
 
-    function it_returns_first_variant(
+    function it_returns_first_variant_if_product_has_no_id(
         ProductInterface $product,
         ProductVariantInterface $variant,
         Collection $variants,
     ): void {
+        $product->getId()->willReturn(null);
         $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(false);
         $variants->first()->willReturn($variant);
@@ -38,10 +45,58 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product): void
-    {
+    function it_returns_null_if_first_variant_is_not_defined_and_product_has_no_id(
+        ProductInterface $product,
+        Collection $variants,
+    ): void {
+        $product->getId()->willReturn(null);
         $product->getEnabledVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);
+
+        $this->getVariant($product)->shouldReturn(null);
+    }
+
+    function it_returns_first_variant_if_product_variant_repository_is_initialized(
+        ProductVariantRepositoryInterface $productVariantRepository,
+        ProductInterface $product,
+        ProductVariantInterface $variant,
+    ): void {
+        $this->beConstructedWith($productVariantRepository);
+
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findBy(
+            [
+                'product' => $product,
+                'enabled' => true,
+            ],
+            [
+                'position' => 'ASC',
+                'id' => 'ASC',
+            ],
+            1,
+        )->willReturn([$variant]);
+
+        $this->getVariant($product)->shouldReturn($variant);
+    }
+
+    function it_returns_null_if_first_variant_is_not_defined(
+        ProductVariantRepositoryInterface $productVariantRepository,
+        ProductInterface $product,
+    ): void {
+        $this->beConstructedWith($productVariantRepository);
+
+        $product->getId()->willReturn(1);
+        $productVariantRepository->findBy(
+            [
+                'product' => $product,
+                'enabled' => true,
+            ],
+            [
+                'position' => 'ASC',
+                'id' => 'ASC',
+            ],
+            1,
+        )->willReturn([]);
 
         $this->getVariant($product)->shouldReturn(null);
     }

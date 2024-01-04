@@ -20,6 +20,33 @@
         <attribute name="validation_groups">sylius</attribute>
 
         <collectionOperations>
+            <collectionOperation name="admin_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+                <attribute name="filters">
+                    <attribute>sylius.api.customer_group_filter</attribute>
+                </attribute>
+            </collectionOperation>
+
+            <collectionOperation name="admin_post">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/customers</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer:create</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                    <attribute>sylius_user_create</attribute>
+                    <attribute>sylius_api_user_create</attribute>
+                </attribute>
+            </collectionOperation>
+
             <collectionOperation name="shop_post">
                 <attribute name="method">POST</attribute>
                 <attribute name="path">/shop/customers</attribute>
@@ -41,6 +68,30 @@
                 <attribute name="path">/admin/customers/{id}</attribute>
                 <attribute name="normalization_context">
                     <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_statistics_get">
+                <attribute name="method">GET</attribute>
+                <attribute name="path">/admin/customers/{id}/statistics</attribute>
+                <attribute name="controller">Sylius\Bundle\ApiBundle\Controller\GetCustomerStatisticsAction</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:statistics:read</attribute>
+                </attribute>
+            </itemOperation>
+
+            <itemOperation name="admin_put">
+                <attribute name="method">PUT</attribute>
+                <attribute name="path">/admin/customers/{id}</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:customer:update</attribute>
+                </attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">admin:customer:read</attribute>
+                </attribute>
+                <attribute name="validation_groups">
+                    <attribute>sylius</attribute>
+                    <attribute>sylius_api_user_create</attribute>
                 </attribute>
             </itemOperation>
 
@@ -87,6 +138,6 @@
         <property name="fullName" writable="false" />
         <property name="defaultAddress" writable="true" />
         <property name="subscribedToNewsletter" writable="true" />
-        <property name="user" readable="true" iri="true" />
+        <property name="user" readable="true" writable="true" />
     </resource>
 </resources>

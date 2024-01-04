@@ -6,25 +6,23 @@ Feature: Editing a text product attribute
 
     Background:
         Given the store is available in "English (United States)"
+        And the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
         And I am logged in as an administrator
 
-    @ui
+    @ui @api
     Scenario: Editing product attribute name
-        Given the store has a text product attribute "T-Shirt cotton brand"
         When I want to edit this product attribute
         And I change its name to "T-Shirt material" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the text attribute "T-Shirt material" should appear in the store
 
-    @ui
-    Scenario: Seeing disabled code field while editing a product attribute
-        Given the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
+    @ui @api
+    Scenario: Being unable to change code of an existing product attribute
         When I want to edit this product attribute
-        Then the code field should be disabled
+        Then I should not be able to edit its code
 
-    @ui
-    Scenario: Seeing disabled type field while editing a product attribute
-        Given the store has a text product attribute "T-Shirt cotton brand" with code "t_shirt_brand"
+    @ui @api
+    Scenario: Being unable to change type of an existing product attribute
         When I want to edit this product attribute
-        Then the type field should be disabled
+        Then I should not be able to edit its type

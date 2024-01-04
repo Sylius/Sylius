@@ -356,6 +356,22 @@ final class CheckoutAddressingContext implements Context
     }
 
     /**
+     * @Then I should be notified to resubmit the addressing form
+     */
+    public function iShouldBeNotifiedToResubmitTheAddressingForm()
+    {
+        Assert::true($this->addressPage->checkFormValidationMessage('Please resubmit complete form.'), 'Unable to find "Please resubmit complete form." validation message');
+    }
+
+    /**
+     * @Then I should not be notified that the form contains extra fields
+     */
+    public function iShouldNotBeNotifiedTheFormContainsExtraFields()
+    {
+        Assert::false($this->addressPage->checkFormValidationMessage('This form should not contain extra fields.'), 'Found "This form should not contains extra fields." validation message');
+    }
+
+    /**
      * @Then I should be redirected to the addressing step
      * @Then I should be on the checkout addressing step
      */

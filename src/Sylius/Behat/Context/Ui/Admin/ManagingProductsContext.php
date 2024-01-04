@@ -33,6 +33,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
@@ -309,6 +310,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the first product on the list should have :field :value
+     * @Then the first product on the list within this taxon should have :field :value
      */
     public function theFirstProductOnTheListShouldHave($field, $value)
     {
@@ -365,6 +367,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the last product on the list should have :field :value
+     * @Then the last product on the list within this taxon should have :field :value
      */
     public function theLastProductOnTheListShouldHave($field, $value)
     {
@@ -397,6 +400,17 @@ final class ManagingProductsContext implements Context
     public function iSortProductsBy(string $field): void
     {
         $this->indexPage->sortBy($field);
+    }
+
+    /**
+     * @When I sort this taxon's products :sortType by :field
+     */
+    public function iSortThisTaxonsProductsBy(string $sortType, string $field): void
+    {
+        $this->indexPerTaxonPage->sortBy(
+            $field,
+            str_starts_with($sortType, 'de') ? 'desc' : 'asc',
+        );
     }
 
     /**
@@ -518,6 +532,7 @@ final class ManagingProductsContext implements Context
     /**
      * @When I save my changes
      * @When I try to save my changes
+     * @When I save my changes to the images
      */
     public function iSaveMyChanges()
     {
@@ -561,14 +576,13 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its :attribute attribute to :value
-     * @When I set its :attribute attribute to :value in :language
-     * @When I do not set its :attribute attribute in :language
-     * @When I add the :attribute attribute
+     * @When I set its :attributeName attribute to :value in :localeCode
+     * @When I do not set its :attributeName attribute in :localeCode
+     * @When I add the :attributeName attribute
      */
-    public function iSetItsAttributeTo($attribute, $value = null, $language = 'en_US')
+    public function iSetItsAttributeTo(string $attributeName, ?string $value = null, $localeCode = 'en_US'): void
     {
-        $this->createSimpleProductPage->addAttribute($attribute, $value ?? '', $language);
+        $this->createSimpleProductPage->addAttribute($attributeName, $value ?? '', $localeCode);
     }
 
     /**
@@ -580,11 +594,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I set its non-translatable :attribute attribute to :value
+     * @When I select :value value for the :attribute attribute
      */
-    public function iSetItsNonTranslatableAttributeTo(string $attribute, string $value): void
+    public function iSelectValueForTheAttribute(string $value, string $attribute): void
     {
-        $this->createSimpleProductPage->addNonTranslatableAttribute($attribute, $value);
+        $this->createSimpleProductPage->selectAttributeValue($attribute, $value, '');
+    }
+
+    /**
+     * @When I set its non-translatable :attributeName attribute to :value
+     */
+    public function iSetItsNonTranslatableAttributeTo(string $attributeName, string $value): void
+    {
+        $this->createSimpleProductPage->addNonTranslatableAttribute($attributeName, $value);
     }
 
     /**
@@ -624,13 +646,18 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then select attribute :attributeName of product :product should be :value in :language
+     * @Then select attribute :attributeName of product :product should be :value in :localeCode
+     * @Then select attribute :attributeName of product :product should be :value
      */
-    public function itsSelectAttributeShouldBe($attributeName, ProductInterface $product, $value, $language = 'en_US')
-    {
+    public function itsSelectAttributeShouldBeIn(
+        string $attributeName,
+        ProductInterface $product,
+        string $value,
+        string $localeCode = '',
+    ): void {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $language), $value);
+        Assert::same($this->updateSimpleProductPage->getAttributeSelectText($attributeName, $localeCode), $value);
     }
 
     /**
@@ -738,9 +765,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the option field should be disabled
+     * @Then I should not be able to edit its options
      */
-    public function theOptionFieldShouldBeDisabled()
+    public function iShouldNotBeAbleToEditItsOptions(): void
     {
         Assert::true($this->updateConfigurableProductPage->isProductOptionsDisabled());
     }
@@ -756,7 +783,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then I should see non-translatable attribute :attribute with value :value
+     * @Then I should see non-translatable attribute :attribute with value :value%
      */
     public function iShouldSeeNonTranslatableAttributeWithValue(string $attribute, string $value): void
     {
@@ -820,12 +847,32 @@ final class ManagingProductsContext implements Context
     /**
      * @When I attach the :path image with :type type
      * @When I attach the :path image
+     * @When I attach the :path image with :type type to this product
+     * @When I attach the :path image to this product
      */
-    public function iAttachImageWithType($path, $type = null)
+    public function iAttachImageWithType(string $path, ?string $type = null): void
     {
         $currentPage = $this->resolveCurrentPage();
 
         $currentPage->attachImage($path, $type);
+    }
+
+    /**
+     * @When I attach the :path image with selected :productVariant variant to this product
+     */
+    public function iAttachImageWithSelectedVariantToThisProduct(
+        string $path,
+        ProductVariantInterface $productVariant,
+    ): void {
+        $this->updateConfigurableProductPage->attachImage(path: $path, productVariant: $productVariant);
+    }
+
+    /**
+     * @When I select :productVariant variant for the first image
+     */
+    public function iSelectVariantForTheFirstImage(ProductVariantInterface $productVariant): void
+    {
+        $this->updateConfigurableProductPage->selectVariantForFirstImage($productVariant);
     }
 
     /**
@@ -885,6 +932,14 @@ final class ManagingProductsContext implements Context
         $currentPage = $this->resolveCurrentPage();
 
         Assert::true($currentPage->isImageWithTypeDisplayed($type));
+    }
+
+    /**
+     * @Then its image should have :productVariant variant selected
+     */
+    public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
+    {
+        Assert::true($this->updateConfigurableProductPage->hasLastImageAVariant($productVariant));
     }
 
     /**
@@ -1080,7 +1135,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I remove its price for ("[^"]+" channel)$/
+     * @When /^I remove its price from ("[^"]+" channel)$/
      */
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
@@ -1088,7 +1143,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should( still) have slug :value in :language
+     * @Then this product should( still) have slug :value in :language (locale)
      */
     public function thisProductElementShouldHaveSlugIn($slug, $language)
     {
@@ -1392,7 +1447,7 @@ final class ManagingProductsContext implements Context
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
 
-    private function resolveCurrentPage(): CreateConfigurableProductPageInterface|CreateSimpleProductPageInterface|\Sylius\Behat\Page\Admin\Product\IndexPageInterface|IndexPerTaxonPageInterface|UpdateConfigurableProductPageInterface|UpdateSimpleProductPageInterface
+    private function resolveCurrentPage(): CreateConfigurableProductPageInterface|CreateSimpleProductPageInterface|IndexPerTaxonPageInterface|\Sylius\Behat\Page\Admin\Product\IndexPageInterface|UpdateConfigurableProductPageInterface|UpdateSimpleProductPageInterface
     {
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->indexPage,

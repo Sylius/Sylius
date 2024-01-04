@@ -38,9 +38,6 @@ final class SyliusOrderBundle extends AbstractResourceBundle
         $container->addCompilerPass(new TagResettableCartContextsPass());
     }
 
-    /**
-     * @psalm-suppress MismatchingDocblockReturnType https://github.com/vimeo/psalm/issues/2345
-     */
     protected function getModelNamespace(): string
     {
         return 'Sylius\Component\Order\Model';

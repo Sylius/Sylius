@@ -91,6 +91,10 @@
             <argument type="service" id="sylius.repository.product_association_type" />
         </service>
 
+        <service id="sylius.behat.context.transform.product_attribute" class="Sylius\Behat\Context\Transform\ProductAttributeContext">
+            <argument type="service" id="sylius.repository.product_attribute_translation" />
+        </service>
+
         <service id="sylius.behat.context.transform.product_option" class="Sylius\Behat\Context\Transform\ProductOptionContext">
             <argument type="service" id="sylius.repository.product_option" />
         </service>

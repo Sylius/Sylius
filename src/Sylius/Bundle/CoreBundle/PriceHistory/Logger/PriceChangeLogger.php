@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\PriceHistory\Logger;
 
 use Doctrine\Persistence\ObjectManager;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
 final class PriceChangeLogger implements PriceChangeLoggerInterface
@@ -24,7 +24,7 @@ final class PriceChangeLogger implements PriceChangeLoggerInterface
     public function __construct(
         private ChannelPricingLogEntryFactoryInterface $logEntryFactory,
         private ObjectManager $logEntryManager,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
     ) {
     }
 
@@ -32,10 +32,9 @@ final class PriceChangeLogger implements PriceChangeLoggerInterface
     {
         Assert::notNull($channelPricing->getPrice());
 
-        /** @psalm-suppress PossiblyNullArgument */
         $logEntry = $this->logEntryFactory->create(
             $channelPricing,
-            $this->dateTimeProvider->now(),
+            $this->clock->now(),
             $channelPricing->getPrice(),
             $channelPricing->getOriginalPrice(),
         );

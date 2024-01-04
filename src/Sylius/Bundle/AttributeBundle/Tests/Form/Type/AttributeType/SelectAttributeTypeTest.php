@@ -46,7 +46,6 @@ final class SelectAttributeTypeTest extends TypeTestCase
     protected function setUp(): void
     {
         $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
-        /** @psalm-suppress TooManyArguments */
         $this->translationProvider->getDefaultLocaleCode()->willReturn('en_GB');
 
         parent::setUp();

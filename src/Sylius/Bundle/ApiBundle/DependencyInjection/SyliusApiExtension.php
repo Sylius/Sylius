@@ -38,6 +38,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
             'sylius_api.filter_eager_loading_extension.restricted_resources',
             $config['filter_eager_loading_extension']['restricted_resources'],
         );
+        $container->setParameter('sylius_api.order_states_to_filter_out', $config['order_states_to_filter_out']);
 
         $loader->load('services.xml');
 

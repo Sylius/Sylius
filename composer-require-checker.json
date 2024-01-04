@@ -3,7 +3,6 @@
     "null", "true", "false",
     "static", "self", "parent",
     "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
-    "Swift_Message",
     "ApiPlatform\\Core\\Api\\FilterInterface",
     "ApiPlatform\\Core\\Bridge\\Doctrine\\Orm\\Util\\QueryNameGeneratorInterface",
     "ApiPlatform\\Core\\Metadata\\Extractor\\ExtractorInterface",
@@ -54,11 +53,12 @@
     "Payum\\Core\\Security\\TokenInterface",
     "Payum\\Core\\Security\\Util\\Random",
     "Payum\\Core\\Storage\\AbstractStorage",
+    "Payum\\Paypal\\ExpressCheckout\\Nvp\\PaypalExpressCheckoutGatewayFactory",
+    "Payum\\Stripe\\StripeCheckoutGatewayFactory",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
-    "Stripe\\Stripe",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
   ],
   "php-core-extensions" : [

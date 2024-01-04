@@ -16,6 +16,7 @@ namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Webmozart\Assert\Assert;
 
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -38,6 +39,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Usage limit', $limit);
     }
 
+    public function isReusableFromCancelledOrders(): bool
+    {
+        return $this->getElement('reusable_from_cancelled_orders')->isChecked();
+    }
+
+    public function toggleReusableFromCancelledOrders(bool $reusable): void
+    {
+        $toggle = $this->getElement('reusable_from_cancelled_orders');
+
+        Assert::notSame($toggle->isChecked(), $reusable);
+
+        $reusable ? $toggle->check() : $toggle->uncheck();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -50,6 +65,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'expires_at' => '#sylius_promotion_coupon_expiresAt',
             'usage_limit' => '#sylius_promotion_coupon_usageLimit',
             'per_customer_usage_limit' => '#sylius_promotion_coupon_perCustomerUsageLimit',
+            'reusable_from_cancelled_orders' => '#sylius_promotion_coupon_reusableFromCancelledOrders',
         ]);
     }
 }
