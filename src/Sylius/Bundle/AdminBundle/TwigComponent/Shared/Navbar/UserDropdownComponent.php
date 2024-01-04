@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\TwigComponent\Shared\Navbar;
 
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 

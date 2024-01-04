@@ -27,7 +27,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function countPlacedOrders(): int;
 
     /**
-     * @return array|OrderInterface[]
+     * @return array|T[]
      */
     public function findLatest(int $count): array;
 
