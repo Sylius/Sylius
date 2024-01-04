@@ -155,10 +155,14 @@ final class ShippingMethodsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'admin/shipping_method/put_shipping_method_with_duplicate_locale_translation',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
+            [
+                [
+                    'propertyPath' => 'translations[en_US].locale',
+                    'message' => 'A translation for the "en_US" locale code already exists.',
+                ],
+            ]
         );
     }
 
@@ -220,11 +224,34 @@ final class ShippingMethodsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'admin/shipping_method/wrong_configuration_for_shipping_method_rule_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+            [
+                [
+                    'propertyPath' => 'rules[0].configuration[weight]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'rules[1].configuration[weight]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'rules[2].configuration[MOBILE][amount]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'rules[2].configuration[WEB][amount]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'rules[3].configuration[MOBILE][amount]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'rules[3].configuration[WEB][amount]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+            ]);
     }
 
     /** @test */
@@ -257,10 +284,14 @@ final class ShippingMethodsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'admin/shipping_method/wrong_type_for_shipping_method_rule_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
+            [
+                [
+                    'propertyPath' => 'rules[0].type',
+                    'message' => 'Invalid rule type. Available rule types are total_weight_greater_than_or_equal, total_weight_less_than_or_equal, order_total_greater_than_or_equal, order_total_less_than_or_equal.',
+                ],
+            ]
         );
     }
 
@@ -360,10 +391,26 @@ final class ShippingMethodsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
+        $this->assertResponseViolations(
             $this->client->getResponse(),
-            'admin/shipping_method/wrong_configuration_for_shipping_method_calculator_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
+            [
+                [
+                    'propertyPath' => 'configuration[WEB][amount]',
+                    'message' => 'This value should be a valid number.',
+                ],
+                [
+                    'propertyPath' => 'configuration[WEB][amount]',
+                    'message' => 'This value should be of type numeric.',
+                ],
+                [
+                    'propertyPath' => 'configuration[MOBILE]',
+                    'message' => 'This field is missing.',
+                ],
+                [
+                    'propertyPath' => 'configuration[WRONG_CODE]',
+                    'message' => 'This field was not expected.',
+                ],
+            ]
         );
     }
 
