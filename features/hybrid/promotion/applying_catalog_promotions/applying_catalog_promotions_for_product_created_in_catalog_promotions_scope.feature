@@ -9,7 +9,6 @@ Feature: Applying catalog promotions for product created in catalog promotions s
         And the store classifies its products as "Clothes" and "Dishes"
         And I am logged in as an administrator
 
-    #TODO: Turned off because it requires a working admin panel
     @todo @ui @mink:chromedriver @no-api
     Scenario: Applying catalog promotion on newly created simple product
         Given there is a catalog promotion "Clothes sale" that reduces price by "30%" and applies on "Clothes" taxon
