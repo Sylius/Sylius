@@ -14,9 +14,9 @@ permissions:
     contents: read
 
 jobs:
-    behat-no-js-unstable-symfony:
+    behat-no-js-unstable-dependencies:
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
+        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}, Resource ${{ matrix.resource }}, Grid ${{ matrix.grid }} (Unstable Dependencies)"
         timeout-minutes: 45
         continue-on-error: true
         strategy:
@@ -25,11 +25,13 @@ jobs:
                 php: [ "8.1" ]
                 symfony: [ "^6.4" ]
                 mysql: [ "8.0" ]
+                resource: ["^1.9"]
                 grid: [ "^1.11" ]
                 include:
                     -   php: "8.1"
                         symfony: "^6.4"
                         mysql: "8.0"
+                        resource: "^1.11@dev"
                         grid: "^1.13@dev"                
 
         env:
@@ -62,6 +64,10 @@ jobs:
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable true
+
+            -   name: Require SyliusResourceBundle version
+                run: |
+                    composer require sylius/resource-bundle:${{ matrix.resource }} --no-update    
                     
             -   name: Require SyliusGridBundle version
                 run: |
