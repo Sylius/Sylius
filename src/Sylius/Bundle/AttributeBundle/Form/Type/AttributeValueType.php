@@ -32,7 +32,7 @@ use Symfony\Component\Form\ReversedTransformer;
 abstract class AttributeValueType extends AbstractResourceType
 {
     /**
-     * @param DataTransformerInterface<LocaleInterface, string>|null $localeToCodeTransformer
+     * @param DataTransformerInterface<LocaleInterface, string|null>|null $localeToCodeTransformer
      */
     public function __construct(
         string $dataClass,

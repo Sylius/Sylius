@@ -17,7 +17,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleCollectionProviderInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /** @phpstan-ignore-next-line */
 final class LocaleToCodeTransformer implements DataTransformerInterface
@@ -26,10 +25,10 @@ final class LocaleToCodeTransformer implements DataTransformerInterface
     {
     }
 
-    public function transform(mixed $value): string
+    public function transform(mixed $value): ?string
     {
         if (!$value instanceof LocaleInterface) {
-            throw new UnexpectedTypeException($value, LocaleInterface::class);
+            return null;
         }
 
         return $value->getCode();
