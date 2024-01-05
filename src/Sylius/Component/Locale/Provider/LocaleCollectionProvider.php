@@ -27,6 +27,12 @@ final class LocaleCollectionProvider implements LocaleCollectionProviderInterfac
 
     public function getAll(): array
     {
-        return $this->localeRepository->findAll();
+        $locales = [];
+
+        foreach ($this->localeRepository->findAll() as $locale) {
+            $locales[$locale->getCode()] = $locale;
+        }
+
+        return $locales;
     }
 }

@@ -37,11 +37,14 @@ final class CachedLocaleCollectionProviderSpec extends ObjectBehavior
         LocaleInterface $someLocale,
         LocaleInterface $anotherLocale
     ): void {
+        $someLocale->getCode()->willReturn('en_US');
+        $anotherLocale->getCode()->willReturn('en_GB');
+
         $cache->get('sylius_locales', Argument::type('callable'))->will(function ($args) {
             return $args[1]();
         });
-        $decorated->getAll()->willReturn([$someLocale, $anotherLocale]);
+        $decorated->getAll()->willReturn(['en_US' => $someLocale, 'en_GB' => $anotherLocale]);
 
-        $this->getAll()->shouldReturn([$someLocale, $anotherLocale]);
+        $this->getAll()->shouldReturn(['en_US' => $someLocale, 'en_GB' => $anotherLocale]);
     }
 }

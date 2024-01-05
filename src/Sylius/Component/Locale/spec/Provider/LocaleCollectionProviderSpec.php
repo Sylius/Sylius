@@ -35,8 +35,10 @@ final class LocaleCollectionProviderSpec extends ObjectBehavior
         LocaleInterface $someLocale,
         LocaleInterface $anotherLocale
     ): void {
+        $someLocale->getCode()->willReturn('en_US');
+        $anotherLocale->getCode()->willReturn('en_GB');
         $localeRepository->findAll()->willReturn([$someLocale, $anotherLocale]);
 
-        $this->getAll()->shouldReturn([$someLocale, $anotherLocale]);
+        $this->getAll()->shouldReturn(['en_US' => $someLocale, 'en_GB' => $anotherLocale]);
     }
 }
