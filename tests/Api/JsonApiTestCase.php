@@ -74,7 +74,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function assertJsonResponseViolations(Response $response, array $expectedViolations): void
     {
         $violations = json_decode($response->getContent(), true)['violations'] ?? [];
-        $this->assertCount(count($expectedViolations), $violations, 'Expected number of violations does not match.');
+        $this->assertCount(count($expectedViolations), $violations, $response->getContent() ?: '');
 
         $violationMap = [];
         foreach ($violations as $violation) {
@@ -83,16 +83,8 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
         foreach ($expectedViolations as $expectedViolation) {
             $propertyPath = $expectedViolation['propertyPath'];
-            $this->assertArrayHasKey(
-                $propertyPath,
-                $violationMap,
-                sprintf('Property path "%s" not found.', $propertyPath)
-            );
-            $this->assertContains(
-                $expectedViolation['message'],
-                $violationMap[$propertyPath],
-                sprintf('Message "%s" not found for property path "%s".', $expectedViolation['message'], $propertyPath)
-            );
+            $this->assertArrayHasKey($propertyPath, $violationMap, $response->getContent() ?: '');
+            $this->assertContains($expectedViolation['message'], $violationMap[$propertyPath], $response->getContent() ?: '');
         }
     }
 }

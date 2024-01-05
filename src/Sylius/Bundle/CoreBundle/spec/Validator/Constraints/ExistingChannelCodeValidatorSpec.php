@@ -85,7 +85,6 @@ final class ExistingChannelCodeValidatorSpec extends ObjectBehavior
         $channelRepository->findOneByCode('channel_code')->willReturn(null);
 
         $constraintViolationBuilder->addViolation()->shouldBeCalled();
-        $constraintViolationBuilder->atPath(Argument::any())->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->setParameter(Argument::cetera())->willReturn($constraintViolationBuilder);
 
         $context->buildViolation((new ExistingChannelCode())->message)->shouldBeCalled()->willReturn($constraintViolationBuilder);

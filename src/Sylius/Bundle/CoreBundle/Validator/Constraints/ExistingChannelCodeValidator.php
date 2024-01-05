@@ -35,7 +35,6 @@ final class ExistingChannelCodeValidator extends ConstraintValidator
 
         if ($this->channelRepository->findOneByCode($value) === null) {
             $this->context->buildViolation($constraint->message)
-                ->atPath('channelPricings')
                 ->setParameter('{{ channelCode }}', $value)
                 ->addViolation()
             ;

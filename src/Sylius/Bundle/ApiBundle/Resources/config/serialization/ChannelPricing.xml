@@ -17,8 +17,8 @@
 >
     <class name="Sylius\Component\Core\Model\ChannelPricing">
         <attribute name="channelCode">
-            <group>admin:product_variant:read</group>
             <group>admin:product_variant:create</group>
+            <group>admin:product_variant:update</group>
         </attribute>
 
         <attribute name="price">

@@ -9,7 +9,6 @@
         "WEB": {
             "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
             "@type": "ChannelPricing",
-            "channelCode": "WEB",
             "price": 4000,
             "originalPrice": null,
             "minimumPrice": 0,

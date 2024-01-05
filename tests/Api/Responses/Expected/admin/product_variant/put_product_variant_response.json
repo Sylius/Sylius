@@ -11,11 +11,19 @@
         "WEB": {
             "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
             "@type": "ChannelPricing",
-            "channelCode": "WEB",
             "price": 3000,
             "originalPrice": 4000,
             "lowestPriceBeforeDiscount": 2000,
             "minimumPrice": 500,
+            "appliedPromotions": []
+        },
+        "MOBILE": {
+            "@id": "\/api\/v2\/admin\/channel-pricings\/@integer@",
+            "@type": "ChannelPricing",
+            "price": 5000,
+            "originalPrice": 5000,
+            "lowestPriceBeforeDiscount": null,
+            "minimumPrice": 1000,
             "appliedPromotions": []
         }
     },
