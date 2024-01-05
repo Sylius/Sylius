@@ -1,0 +1,39 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\ApiBundle\CommandHandler\Customer;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+
+/** @experimental */
+final class RemoveShopUserHandler
+{
+    public function __construct(
+        private UserRepositoryInterface $shopUserRepository,
+    ){
+    }
+
+    public function __invoke(RemoveShopUser $removeShopUser): void
+    {
+        $shopUser = $this->shopUserRepository->find($removeShopUser->getShopUserId());
+
+        if (null === $shopUser) {
+            return;
+        }
+
+        $shopUser->setCustomer(null);
+        $this->shopUserRepository->remove($shopUser);
+    }
+}

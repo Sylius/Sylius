@@ -9,7 +9,7 @@ Feature: Deleting the customer account
         And there is a user "theodore@example.com" identified by "pswd"
         And I am logged in as an administrator
 
-    @ui
+    @api @ui
     Scenario: Deleting account should not delete customer details
         When I delete the account of "theodore@example.com" user
         Then the user account should be deleted

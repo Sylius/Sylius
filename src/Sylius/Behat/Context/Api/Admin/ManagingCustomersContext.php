@@ -20,6 +20,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Webmozart\Assert\Assert;
 
@@ -218,6 +219,14 @@ final class ManagingCustomersContext implements Context
         $this->iWantToEditThisCustomer($customer);
         $this->iSpecifyItsPasswordAs($newPassword);
         $this->client->update();
+    }
+
+    /**
+     * @When I delete the account of :shopUser user
+     */
+    public function iDeleteAccount(ShopUserInterface $shopUser): void
+    {
+        $this->client->delete(sprintf('customer/%s', $shopUser->getCustomer()->getId()), 'user');
     }
 
     /**
