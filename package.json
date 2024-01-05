@@ -59,10 +59,12 @@
     "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js",
     "postinstall": "semantic-ui-css-patch"
   },
+  "homepage": "https://sylius.com/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
-  "author": "Sylius Sp. z o.o.",
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/Sylius/Sylius/issues"
+  }
 }
