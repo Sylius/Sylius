@@ -25,6 +25,12 @@ jobs:
                 php: [ "8.1" ]
                 symfony: [ "^6.4" ]
                 mysql: [ "8.0" ]
+                grid: [ "^1.11" ]
+                include:
+                    -   php: "8.1"
+                        symfony: "^6.4"
+                        mysql: "8.0"
+                        grid: "^1.13@dev"                
 
         env:
             APP_ENV: test_cached
@@ -56,6 +62,10 @@ jobs:
                 run: |
                     composer config minimum-stability dev
                     composer config prefer-stable true
+                    
+            -   name: Require SyliusGridBundle version
+                run: |
+                    composer require sylius/grid-bundle:${{ matrix.grid }} --no-update                    
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v2.2
