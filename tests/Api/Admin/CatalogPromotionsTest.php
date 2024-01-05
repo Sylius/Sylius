@@ -201,6 +201,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             'tax_category.yaml',
             'shipping_category.yaml',
             'product/product_variant.yaml',
+            'taxon_image.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
@@ -239,7 +240,18 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                     ], [
                         'type' => InForVariantsScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'variants' => ['invalid_variant'],
+                            'variants' => [
+                                'MUG',
+                                'MUG',
+                            ],
+                        ],
+                    ], [
+                        'type' => InForVariantsScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'variants' => [
+                                '',
+                                'invalid_variant',
+                            ],
                         ],
                     ], [
                         'type' => InForProductScopeVariantChecker::TYPE,
@@ -249,10 +261,21 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'products' => [],
                         ],
+                    ],  [
+                        'type' => InForProductScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'products' => [
+                                'MUG_SW',
+                                'MUG_SW',
+                            ],
+                        ],
                     ], [
                         'type' => InForProductScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'products' => ['invalid_product'],
+                            'products' => [
+                                '',
+                                'invalid_product',
+                            ],
                         ],
                     ], [
                         'type' => InForTaxonsScopeVariantChecker::TYPE,
@@ -262,10 +285,21 @@ final class CatalogPromotionsTest extends JsonApiTestCase
                         'configuration' => [
                             'taxons' => [],
                         ],
+                    ],  [
+                        'type' => InForTaxonsScopeVariantChecker::TYPE,
+                        'configuration' => [
+                            'taxons' => [
+                                'CATEGORY',
+                                'CATEGORY',
+                            ],
+                        ],
                     ], [
                         'type' => InForTaxonsScopeVariantChecker::TYPE,
                         'configuration' => [
-                            'taxons' => ['invalid_taxon'],
+                            'taxons' => [
+                                '',
+                                'invalid_taxon',
+                            ],
                         ],
                     ],
                 ],
@@ -278,11 +312,72 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/catalog_promotion/post_catalog_promotion_with_invalid_scopes_response',
-            Response::HTTP_UNPROCESSABLE_ENTITY,
-        );
+        $this->assertJsonResponseViolations($this->client->getResponse(), [
+            [
+                'propertyPath' => 'scopes[0].type',
+                'message' => 'Catalog promotion scope type is invalid. Available types are for_products, for_taxons, for_variants.',
+            ],
+            [
+                'propertyPath' => 'scopes[1].configuration[variants]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[2].configuration[variants]',
+                'message' => 'Please add at least 1 variant.',
+            ],
+            [
+                'propertyPath' => 'scopes[3].configuration[variants]',
+                'message' => 'Provided configuration contains errors. Please add only unique variants.',
+            ],
+            [
+                'propertyPath' => 'scopes[4].configuration[variants][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[4].configuration[variants][1]',
+                'message' => 'Product variant with code invalid_variant does not exist.',
+            ],
+            [
+                'propertyPath' => 'scopes[5].configuration[products]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[6].configuration[products]',
+                'message' => 'Provided configuration contains errors. Please add at least 1 product.',
+            ],
+            [
+                'propertyPath' => 'scopes[7].configuration[products]',
+                'message' => 'Provided configuration contains errors. Please add only unique products.',
+            ],
+            [
+                'propertyPath' => 'scopes[8].configuration[products][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[8].configuration[products][1]',
+                'message' => 'Product with code invalid_product does not exist.',
+            ],
+            [
+                'propertyPath' => 'scopes[9].configuration[taxons]',
+                'message' => 'This field is missing.',
+            ],
+            [
+                'propertyPath' => 'scopes[10].configuration[taxons]',
+                'message' => 'Provided configuration contains errors. Please add at least 1 taxon.',
+            ],
+            [
+                'propertyPath' => 'scopes[11].configuration[taxons]',
+                'message' => 'Provided configuration contains errors. Please add only unique taxons.',
+            ],
+            [
+                'propertyPath' => 'scopes[12].configuration[taxons][0]',
+                'message' => 'This value should not be blank.',
+            ],
+            [
+                'propertyPath' => 'scopes[12].configuration[taxons][1]',
+                'message' => 'Taxon with code invalid_taxon does not exist.',
+            ],
+        ]);
     }
 
     /** @test */

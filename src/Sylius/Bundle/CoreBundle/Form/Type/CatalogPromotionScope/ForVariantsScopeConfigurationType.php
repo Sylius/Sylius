@@ -34,9 +34,6 @@ final class ForVariantsScopeConfigurationType extends AbstractType
             'choice_name' => 'descriptor',
             'choice_value' => 'code',
             'resource' => 'sylius.product_variant',
-            'constraints' => [
-                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_variants.not_empty']),
-            ],
         ]);
 
         $builder->get('variants')->addModelTransformer($this->productVariantsToCodesTransformer);

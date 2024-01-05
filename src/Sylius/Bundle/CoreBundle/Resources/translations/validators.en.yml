@@ -26,12 +26,15 @@ sylius:
         for_products:
             invalid_products: Provided configuration contains errors. Please add only existing products.
             not_empty: Provided configuration contains errors. Please add at least 1 product.
+            unique: Provided configuration contains errors. Please add only unique products.
         for_variants:
             invalid_variants: Provided configuration contains errors. Please add only existing variants.
             not_empty: Please add at least 1 variant.
+            unique: Provided configuration contains errors. Please add only unique variants.
         for_taxons:
             invalid_taxons: Provided configuration contains errors. Please add only existing taxons.
             not_empty: Provided configuration contains errors. Please add at least 1 taxon.
+            unique: Provided configuration contains errors. Please add only unique taxons.
     channel:
         base_currency:
             not_blank: Please enter channel base currency.
@@ -114,6 +117,8 @@ sylius:
         taxon:
             not_blank: Please select a taxon.
     product_variant:
+        code:
+            not_exist: Product variant with code {{ code }} does not exist.
         onHand:
             min: On hand must be greater than {{ limit }}.
             not_blank: Please enter on hand.

@@ -33,9 +33,6 @@ final class ForTaxonsScopeConfigurationType extends AbstractType
             'required' => false,
             'choice_value' => 'code',
             'resource' => 'sylius.taxon',
-            'constraints' => [
-                new NotBlank(['groups' => 'sylius', 'message' => 'sylius.catalog_promotion_scope.for_taxons.not_empty']),
-            ],
         ]);
 
         $builder->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer);

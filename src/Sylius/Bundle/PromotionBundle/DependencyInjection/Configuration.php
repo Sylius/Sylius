@@ -76,7 +76,16 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->arrayNode('catalog_promotion_scope')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('validation_groups')
+                            ->useAttributeAsKey('name')
+                            ->variablePrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
             ->end()
         ;
 

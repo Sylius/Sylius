@@ -41,6 +41,16 @@
             <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope" />
         </service>
 
+        <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator">
+            <argument>%sylius.promotion.catalog_promotion_scope.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope_group" />
+        </service>
+
+        <service id="Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeTypeValidator">
+            <argument>%sylius.catalog_promotion.scopes_types%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_catalog_promotion_scope_type_validator" />
+        </service>
+
         <service id="Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator">
             <argument>%sylius.promotion.promotion_action.validation_groups%</argument>
             <tag name="validator.constraint_validator" alias="sylius_promotion_action_group" />

@@ -34,13 +34,6 @@ final class CatalogPromotionScopeValidator extends ConstraintValidator
         /** @var CatalogPromotionScope $constraint */
         Assert::isInstanceOf($constraint, CatalogPromotionScope::class);
 
-        /** @var CatalogPromotionScopeInterface $value */
-        if (!in_array($value->getType(), $this->scopeTypes, true)) {
-            $this->context->buildViolation($constraint->invalidType)->atPath('type')->addViolation();
-
-            return;
-        }
-
         $type = $value->getType();
         if (!array_key_exists($type, $this->scopeValidators)) {
             return;

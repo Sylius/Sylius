@@ -35,6 +35,7 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.promotion.promotion_action.validation_groups', $config['promotion_action']['validation_groups']);
         $container->setParameter('sylius.promotion.promotion_rule.validation_groups', $config['promotion_rule']['validation_groups']);
+        $container->setParameter('sylius.promotion.catalog_promotion_scope.validation_groups', $config['catalog_promotion_scope']['validation_groups']);
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
         $this->registerAutoconfiguration($container);

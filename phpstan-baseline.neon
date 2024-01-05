@@ -4571,6 +4571,11 @@ parameters:
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php
 
 		-
+			message: "#^Property Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:\\$scopeTypes is never read, only written.$#"
+			count: 1
+			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php
+
+		-
 			message: "#^Method Sylius\\\\Bundle\\\\PromotionBundle\\\\Validator\\\\CatalogPromotionScopeValidator\\:\\:__construct\\(\\) has parameter \\$scopeValidators with no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Sylius/Bundle/PromotionBundle/Validator/CatalogPromotionScopeValidator.php

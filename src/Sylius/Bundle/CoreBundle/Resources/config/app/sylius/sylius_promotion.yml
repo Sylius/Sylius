@@ -20,3 +20,15 @@ sylius_promotion:
             classes:
                 model: Sylius\Component\Core\Model\PromotionCoupon
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository
+
+    catalog_promotion_scope:
+        validation_groups:
+            for_products:
+                - 'sylius'
+                - 'sylius_catalog_promotion_scope_for_products'
+            for_variants:
+                - 'sylius'
+                - 'sylius_catalog_promotion_scope_for_variants'
+            for_taxons:
+                - 'sylius'
+                - 'sylius_catalog_promotion_scope_for_taxons'
