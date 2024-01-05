@@ -68,6 +68,7 @@ imports:
     - suites/api/user/managing_administrators.yml
     - suites/api/user/managing_customer_groups.yml
     - suites/api/user/managing_customers.yml
+    - suites/api/user/managing_users.yml
 
     - suites/cli/canceling_unpaid_orders.yml
     - suites/cli/installer.yml

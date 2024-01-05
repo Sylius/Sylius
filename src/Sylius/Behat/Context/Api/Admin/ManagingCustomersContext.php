@@ -211,6 +211,16 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I change the password of user :customer to :newPassword
+     */
+    public function iChangeThePasswordOfUserTo(CustomerInterface $customer, string $newPassword): void
+    {
+        $this->iWantToEditThisCustomer($customer);
+        $this->iSpecifyItsPasswordAs($newPassword);
+        $this->client->update();
+    }
+
+    /**
      * @When I do not specify any information
      * @When I do not choose create account option
      */
