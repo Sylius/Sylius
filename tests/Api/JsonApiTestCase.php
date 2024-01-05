@@ -17,6 +17,7 @@ use ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Sylius\Tests\Api\Utils\HeadersBuilder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class JsonApiTestCase extends BaseJsonApiTestCase
 {
@@ -56,5 +57,42 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->get('sylius.repository.shop_user'),
             self::$kernel->getContainer()->getParameter('sylius.api.authorization_header'),
         );
+    }
+
+    /** @throws \Exception */
+    protected function assertResponseViolations(Response $response, array $expectedViolations): void
+    {
+        if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
+            $this->showErrorInBrowserIfOccurred($response);
+        }
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertJsonHeader($response);
+        $this->assertJsonResponseViolations($response, $expectedViolations);
+    }
+
+    protected function assertJsonResponseViolations(Response $response, array $expectedViolations): void
+    {
+        $violations = json_decode($response->getContent(), true)['violations'] ?? [];
+        $this->assertCount(count($expectedViolations), $violations, 'Expected number of violations does not match.');
+
+        $violationMap = [];
+        foreach ($violations as $violation) {
+            $violationMap[$violation['propertyPath']][] = $violation['message'];
+        }
+
+        foreach ($expectedViolations as $expectedViolation) {
+            $propertyPath = $expectedViolation['propertyPath'];
+            $this->assertArrayHasKey(
+                $propertyPath,
+                $violationMap,
+                sprintf('Property path "%s" not found.', $propertyPath)
+            );
+            $this->assertContains(
+                $expectedViolation['message'],
+                $violationMap[$propertyPath],
+                sprintf('Message "%s" not found for property path "%s".', $expectedViolation['message'], $propertyPath)
+            );
+        }
     }
 }
