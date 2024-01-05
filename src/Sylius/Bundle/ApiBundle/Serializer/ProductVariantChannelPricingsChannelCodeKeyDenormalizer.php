@@ -43,16 +43,16 @@ final class ProductVariantChannelPricingsChannelCodeKeyDenormalizer implements C
         $context[self::ALREADY_CALLED] = true;
 
         if (array_key_exists(self::KEY_CHANNEL_PRICINGS, $data)) {
-            foreach ($data[self::KEY_CHANNEL_PRICINGS] as $key => &$translation) {
-                if (array_key_exists(self::KEY_CHANNEL_CODE, $translation) && $translation[self::KEY_CHANNEL_CODE] !== $key) {
+            foreach ($data[self::KEY_CHANNEL_PRICINGS] as $key => &$channelPricing) {
+                if (array_key_exists(self::KEY_CHANNEL_CODE, $channelPricing) && $channelPricing[self::KEY_CHANNEL_CODE] !== $key) {
                     throw new ChannelPricingChannelCodeMismatchException(sprintf(
                         'The channelCode of channelPricing does not match the key. Key: "%s", channelCode: "%s"',
                         $key,
-                        $translation[self::KEY_CHANNEL_CODE],
+                        $channelPricing[self::KEY_CHANNEL_CODE],
                     ));
                 }
 
-                $translation[self::KEY_CHANNEL_CODE] = $key;
+                $channelPricing[self::KEY_CHANNEL_CODE] = $key;
             }
         }
 
