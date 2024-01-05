@@ -213,6 +213,44 @@ final class ProductVariantsTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_allow_to_create_product_variant_with_empty_channel_code(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel.yaml',
+            'tax_category.yaml',
+            'shipping_category.yaml',
+            'product/product_variant.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-variants',
+            server: $header,
+            content: json_encode([
+                'code' => 'CUP',
+                'product' => '/api/v2/admin/products/MUG_SW',
+                'channelPricings' => [
+                    '' => [
+                        'price' => 4000,
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'channelPricings[].channelCode',
+                    'message' => 'Please set channel code.',
+                ],
+            ],
+        );
+    }
+
+    /** @test */
     public function it_does_not_allow_to_create_product_variant_when_channel_code_differs_from_key(): void
     {
         $this->loadFixturesFromFiles([

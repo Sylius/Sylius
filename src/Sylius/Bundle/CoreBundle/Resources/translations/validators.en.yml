@@ -48,7 +48,7 @@ sylius:
             less_than: 'Value must be less than {{ compared_value }}'
     channel_pricing:
         channel_code:
-            not_null: Please set channel code.
+            not_blank: Please set channel code.
             unique: This channel already has a price for this product variant.
         price:
             min: Price cannot be lower than 0.
