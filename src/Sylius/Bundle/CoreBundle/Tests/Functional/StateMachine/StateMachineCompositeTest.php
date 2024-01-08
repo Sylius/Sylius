@@ -15,7 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use Sylius\Bundle\CoreBundle\Application\Model\BlogPost;
 use Sylius\Bundle\CoreBundle\Application\Model\Comment;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class StateMachineCompositeTest extends KernelTestCase

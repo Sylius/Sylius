@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
+use Sylius\Component\Contracts\StateMachine\TransitionInterface;
+
 final class Transition implements TransitionInterface
 {
     /**

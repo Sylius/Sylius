@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 use Traversable;
 use Webmozart\Assert\Assert;
 

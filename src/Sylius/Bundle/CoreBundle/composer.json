@@ -43,6 +43,7 @@
         "sylius/addressing-bundle": "^1.12",
         "sylius/attribute-bundle": "^1.12",
         "sylius/channel-bundle": "^1.12",
+        "sylius/contracts": "^1.12",
         "sylius/core": "^1.12",
         "sylius/currency-bundle": "^1.12",
         "sylius/customer-bundle": "^1.12",

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\Transition;
+use Sylius\Component\Contracts\StateMachine\Exception\StateMachineExecutionException;
 use Symfony\Component\Workflow\Exception\InvalidArgumentException;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;

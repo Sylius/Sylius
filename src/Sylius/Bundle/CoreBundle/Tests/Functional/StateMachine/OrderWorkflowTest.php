@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Functional\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\Order;

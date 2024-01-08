@@ -17,8 +17,8 @@ use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\SMException;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Bundle\CoreBundle\StateMachine\Transition;
+use Sylius\Component\Contracts\StateMachine\Exception\StateMachineExecutionException;
 
 final class WinzouStateMachineAdapterSpec extends ObjectBehavior
 {

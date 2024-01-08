@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\Shipment;

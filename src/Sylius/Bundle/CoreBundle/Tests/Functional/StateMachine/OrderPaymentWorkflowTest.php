@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Functional\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\Order;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

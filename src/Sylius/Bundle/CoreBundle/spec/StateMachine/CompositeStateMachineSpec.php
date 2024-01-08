@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\CoreBundle\StateMachine;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 
 final class CompositeStateMachineSpec extends ObjectBehavior
 {

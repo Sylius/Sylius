@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\StateMachine;
 
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Component\Contracts\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
+use Sylius\Component\Contracts\StateMachine\TransitionInterface;
 use Symfony\Component\Workflow\Exception\InvalidArgumentException;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;

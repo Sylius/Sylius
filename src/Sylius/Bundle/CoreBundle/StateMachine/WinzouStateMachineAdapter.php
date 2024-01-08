@@ -15,7 +15,8 @@ namespace Sylius\Bundle\CoreBundle\StateMachine;
 
 use SM\Factory\FactoryInterface;
 use SM\SMException;
-use Sylius\Bundle\CoreBundle\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Component\Contracts\StateMachine\Exception\StateMachineExecutionException;
+use Sylius\Component\Contracts\StateMachine\StateMachineInterface;
 
 final class WinzouStateMachineAdapter implements StateMachineInterface
 {
