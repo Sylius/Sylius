@@ -67,6 +67,21 @@
                     <attribute name="groups">shop:order:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_resend_order_confirmation">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/orders/resend-order-confirmation-email</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:resend_order_confirmation_email:create</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends order confirmation email</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
