@@ -151,6 +151,7 @@
         "sylius/attribute-bundle": "self.version",
         "sylius/channel": "self.version",
         "sylius/channel-bundle": "self.version",
+        "sylius/contracts": "self.version",
         "sylius/core": "self.version",
         "sylius/core-bundle": "self.version",
         "sylius/currency": "self.version",

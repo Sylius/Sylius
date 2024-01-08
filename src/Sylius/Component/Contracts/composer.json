@@ -1,0 +1,33 @@
+{
+    "name": "sylius/contracts",
+    "type": "library",
+    "description":"Generic abstractions related to Sylius components.",
+    "keywords":["abstraction", "contracts", "sylius", "interfaces", "decoupling"],
+    "homepage": "http://sylius.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sylius",
+            "homepage": "http://sylius.com"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.12-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Component\\Contracts\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
