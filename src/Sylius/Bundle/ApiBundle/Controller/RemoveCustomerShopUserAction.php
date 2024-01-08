@@ -16,7 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Controller;
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
 use Sylius\Bundle\ApiBundle\Exception\CustomerNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
-use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +26,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 /** @experimental */
 final class RemoveCustomerShopUserAction
 {
+    /**
+     * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
+     */
     public function __construct(
         private MessageBusInterface $commandBus,
-        private CustomerRepositoryInterface $customerRepository,
         private UserRepositoryInterface $shopUserRepository,
     ) {
     }

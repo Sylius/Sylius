@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Customer;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\ApiBundle\Command\Customer\RemoveShopUser;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /** @experimental */
 final class RemoveShopUserHandler
 {
+    /**
+     * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
+     */
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
     ){

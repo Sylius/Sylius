@@ -18,15 +18,15 @@ use Sylius\Bundle\ApiBundle\Command\ShopUserIdAwareInterface;
 /** @experimental */
 class RemoveShopUser implements ShopUserIdAwareInterface
 {
-    public function __construct(private $shopUserId)
+    public function __construct(private mixed $shopUserId)
     {
     }
-    public function getShopUserId()
+    public function getShopUserId(): mixed
     {
         return $this->shopUserId;
     }
 
-    public function setShopUserId($shopUserId): void
+    public function setShopUserId(mixed $shopUserId): void
     {
         $this->shopUserId = $shopUserId;
     }

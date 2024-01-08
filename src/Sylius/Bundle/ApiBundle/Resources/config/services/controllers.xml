@@ -62,7 +62,6 @@
 
         <service id="Sylius\Bundle\ApiBundle\Controller\RemoveCustomerShopUserAction">
             <argument type="service" id="sylius.command_bus" />
-            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.repository.shop_user" />
         </service>
 
