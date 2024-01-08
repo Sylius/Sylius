@@ -1,0 +1,44 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\MessageHandler\Admin;
+
+use Sylius\Bundle\CoreBundle\EmailManager\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Message\Admin\ResendOrderConfirmationEmail;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+
+final class ResendOrderConfirmationEmailHandler implements MessageHandlerInterface
+{
+    /**
+     * @param RepositoryInterface<OrderInterface> $orderRepository
+     */
+    public function __construct(
+        private OrderEmailManagerInterface $orderEmailManager,
+        private RepositoryInterface $orderRepository,
+    ) {
+    }
+
+    public function __invoke(ResendOrderConfirmationEmail $resendOrderConfirmation): void
+    {
+        /** @var OrderInterface|null $order */
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $resendOrderConfirmation->orderToken()]);
+        if ($order === null) {
+            throw new NotFoundHttpException(sprintf('The order with id %s has not been found', $resendOrderConfirmation->orderToken()));
+        }
+
+        $this->orderEmailManager->resendConfirmationEmail($order);
+    }
+}
