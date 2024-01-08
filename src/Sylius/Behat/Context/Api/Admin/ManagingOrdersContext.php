@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -36,6 +37,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
 use Webmozart\Assert\Assert;
@@ -51,6 +53,7 @@ final class ManagingOrdersContext implements Context
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -137,6 +140,22 @@ final class ManagingOrdersContext implements Context
     public function iSpecifyFilterDateToAs(string $dateTime): void
     {
         $this->client->addFilter('checkoutCompletedAt[before]', $dateTime);
+    }
+
+    /**
+     * @When I resend the order confirmation email
+     */
+    public function iResendTheOrderConfirmationEmail(): void
+    {
+        /** @var RequestInterface $request */
+        $request = $this->requestFactory->custom(
+            \sprintf('%s/admin/orders/resend-order-confirmation-email', $this->apiUrlPrefix),
+            HttpRequest::METHOD_POST,
+        );
+
+        $request->setContent(['orderToken' => $this->sharedStorage->get('order')->getTokenValue()]);
+
+        $this->client->executeCustomRequest($request);
     }
 
     /**
@@ -310,6 +329,14 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeASingleOrderInTheList(int $number = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $number);
+    }
+
+    /**
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(string $type): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**
