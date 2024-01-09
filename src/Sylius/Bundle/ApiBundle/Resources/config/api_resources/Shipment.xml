@@ -33,6 +33,21 @@
                     <attribute name="groups">admin:shipment:read</attribute>
                 </attribute>
             </collectionOperation>
+
+            <collectionOperation name="admin_resend_shipment_confirmation">
+                <attribute name="method">POST</attribute>
+                <attribute name="path">/admin/shipments/resend-shipment-confirmation-email</attribute>
+                <attribute name="messenger">input</attribute>
+                <attribute name="input">Sylius\Bundle\CoreBundle\Message\Admin\ResendShipmentConfirmationEmail</attribute>
+                <attribute name="output">false</attribute>
+                <attribute name="status">202</attribute>
+                <attribute name="denormalization_context">
+                    <attribute name="groups">admin:resend_shipment_confirmation_email:create</attribute>
+                </attribute>
+                <attribute name="openapi_context">
+                    <attribute name="summary">Resends shipment confirmation email</attribute>
+                </attribute>
+            </collectionOperation>
         </collectionOperations>
 
         <itemOperations>
