@@ -29,7 +29,7 @@
     "require": {
         "php": "^8.0",
         "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/calendar": "^0.3 || ^0.4",
+        "sylius/calendar": "^0.3 || ^0.4 || ^0.5",
         "sylius/money-bundle": "^1.12",
         "sylius/promotion": "^1.12",
         "sylius/registry": "^1.5",
