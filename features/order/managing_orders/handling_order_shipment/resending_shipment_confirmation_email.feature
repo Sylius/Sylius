@@ -17,14 +17,14 @@ Feature: Resending a shipment confirmation email for a chosen order
         And this order has already been shipped
         And I am logged in as an administrator
 
-    @ui @email
+    @ui @email @api
     Scenario: Resending a shipment confirmation email for a given order
         When I view the summary of the order "#00000666"
         And I resend the shipment confirmation email
         Then I should be notified that the shipment confirmation email has been successfully resent to the customer
         And an email with the shipment's confirmation of the order "#00000666" should be sent to "lucy@teamlucifer.com"
 
-    @ui @email
+    @ui @email @api
     Scenario: Resending a shipment confirmation email after shipping an order in different locale than the default one
         Given the order "#00000666" has been placed in "Polish (Poland)" locale
         When I view the summary of the order "#00000666"

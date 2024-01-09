@@ -17,6 +17,7 @@ use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
+use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
@@ -51,6 +52,7 @@ final class ManagingOrdersContext implements Context
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
         private SectionAwareIriConverterInterface $sectionAwareIriConverter,
+        private string $apiUrlPrefix,
     ) {
     }
 
@@ -163,6 +165,22 @@ final class ManagingOrdersContext implements Context
         }
 
         $this->client->filter();
+    }
+
+    /**
+     * @When I resend the shipment confirmation email
+     */
+    public function iResendTheShipmentConfirmationEmail(): void
+    {
+        /** @var RequestInterface $request */
+        $request = $this->requestFactory->custom(
+            \sprintf('%s/admin/shipments/resend-shipment-confirmation-email', $this->apiUrlPrefix),
+            HttpRequest::METHOD_POST,
+        );
+
+        $request->setContent(['shipmentId' => $this->sharedStorage->get('order')->getShipments()->first()->getId()]);
+
+        $this->client->executeCustomRequest($request);
     }
 
     /**
@@ -305,6 +323,14 @@ final class ManagingOrdersContext implements Context
             ),
             sprintf('There is no order for customer %s', $customer->getEmail()),
         );
+    }
+
+    /**
+     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
+     */
+    public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
+    {
+        $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
     /**
