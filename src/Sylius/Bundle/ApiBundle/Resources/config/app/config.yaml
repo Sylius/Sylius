@@ -57,6 +57,7 @@ api_platform:
         SM\SMException: 422
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ChannelCannotBeRemoved: 422
+        Sylius\Bundle\ApiBundle\Exception\ChannelPricingChannelCodeMismatchException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException: 422
         Sylius\Bundle\ApiBundle\Exception\InvalidRequestArgumentException: 400
         Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 422
