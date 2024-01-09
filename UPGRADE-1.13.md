@@ -75,6 +75,8 @@
 
 1. The name of the second argument of `Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction` is deprecated and will be renamed to `$resendOrderConfirmationEmailDispatcher`.
 
+1. Passing `Sylius\Bundle\AdminBundle\EmailManager\ShipmentEmailManagerInterface` to `Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction` as a second argument is deprecated, use `Sylius\Bundle\CoreBundle\MessageDispatcher\ResendShipmentConfirmationEmailDispatcherInterface` instead.
+
 1. Not passing `Sylius\Bundle\CoreBundle\CatalogPromotion\Announcer\CatalogPromotionRemovalAnnouncerInterface` to `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor`
    as a second argument is deprecated.
 
